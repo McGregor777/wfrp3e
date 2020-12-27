@@ -1,0 +1,81 @@
+{
+	"name": "wfrp3e",
+	"title": "Warhammer Fantasy Roleplay - 3rd Edition",
+	"description": "A game system for Warhammer Fantasy Roleplay - 3rd Edition for Foundry environment.",
+	"version": "0.0.1",
+	"templateVersion": 2,
+	"author": "McGregor777",
+	"scripts":
+	[
+		"scripts/system-script-1.js",
+		"scripts/system-script-2.js"
+	],
+	"esmodules":
+	[
+		"scripts/system-module-1.mjs"
+	],
+	"styles":
+	[
+		"styles/system-styles-1.css",
+		"styles/system-styles-2.css"
+	],
+	"packs":
+	[
+		{
+			"name": "actors",
+			"label": "Actors",
+			"system": "wfrp3e",
+			"module": "wfrp3e",
+			"path": "packs/actors.db",
+			"entity": "Actor"
+		},
+		{
+			"name": "skills",
+			"label": "Skills",
+			"system": "wfrp3e",
+			"module": "wfrp3e",
+			"path": "packs/skills.db",
+			"entity": "Item"
+		},
+		{
+			"name": "talents",
+			"label": "Talents",
+			"system": "wfrp3e",
+			"module": "wfrp3e",
+			"path": "packs/talents.db",
+			"entity": "Item"
+		},
+		{
+			"name": "actions",
+			"label": "Actions",
+			"system": "wfrp3e",
+			"module": "wfrp3e",
+			"path": "packs/actions.db",
+			"entity": "Item"
+		},
+		{
+			"name": "wounds",
+			"label": "Wounds",
+			"system": "wfrp3e",
+			"module": "wfrp3e",
+			"path": "packs/wounds.db",
+			"entity": "Item"
+		}
+	],
+	"languages":
+	[
+		{
+		"lang": "en",
+		"name": "English",
+		"path": "lang/en.json"
+		}
+	],
+	"socket": false,
+	"gridDistance": 1,
+	"gridUnits": "ft",
+	"primaryTokenAttribute": "resources.health",
+	"secondaryTokenAttribute": "resources.attitude",
+	"url": "https://github.com/McGregor777/wfrp3e",
+	"manifest": "https://github.com/McGregor777/wfrp3e/system.json",
+	"download": ""
+}
