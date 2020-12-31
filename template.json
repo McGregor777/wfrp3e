@@ -1,0 +1,156 @@
+{
+	"Actor":
+	{
+		"types": ["character", "creature"],
+		"templates":
+		{
+			"background":
+			{
+				"biography": "",
+				"height": "",
+				"weight": "",
+				"build": "",
+				"hairColour": "",
+				"eyeColour": "",
+				"birthplace": "",
+				"familyMembers": "",
+				"personalGoal": "",
+				"allies": "",
+				"enemies": "",
+				"campaignNotes": ""
+			},
+			"attributes":
+			{
+				"characteritics":
+				{
+					"strength":
+					{
+						"value": 2,
+						"fortune": 0
+					},
+					"toughness":
+					{
+						"value": 2,
+						"fortune": 0
+					},
+					"agility":
+					{
+						"value": 2,
+						"fortune": 0
+					},
+					"intelligence":
+					{
+						"value": 2,
+						"fortune": 0
+					},
+					"willpower":
+					{
+						"value": 2,
+						"fortune": 0
+					},
+					"fellowship":
+					{
+						"value": 2,
+						"fortune": 0
+					}
+				},
+				"wounds":
+				{
+					"threshold": 7,
+					"value": 7
+				},
+				"stance":
+				{
+					"conservative": 0,
+					"reckless": 0,
+					"current": 0
+				},
+				"soak": 0,
+				"defence": 0,
+				"encumbrance": 0
+			}
+		},
+		"hero":
+		{
+			"templates": ["background", "attributes"],
+			"attributes":
+			{
+				"corruption":
+				{
+					"threshold": 5,
+					"value": 5
+				},
+				"fortune":
+				{
+					"maximum": 3,
+					"value": 3
+				}
+			},
+			"impairments":
+			{
+				"fatigue": 0,
+				"stress": 0
+			},
+			"experience":
+			{
+				"current": 0,
+				"spent": 0
+			}
+		},
+		"creature":
+		{
+			"templates": ["background", "attributes"],
+			"threatRating": 1,
+			"category": "",
+			"attributes":
+			{
+				"aggression":
+				{
+					"budget": 0,
+					"current": 0
+				},
+				"cunning":
+				{
+					"budget": 0,
+					"current": 0
+				},
+				"Expertise":
+				{
+					"budget": 0,
+					"current": 0
+				},
+				"damage": 0
+			}
+		}
+	},
+	"Item":
+	{
+		"types": ["skill", "talent", "action", "wound"],
+		"templates":
+		{
+			"description": ""
+		},
+		"skill":
+		{
+			"templates": ["description"],
+			"characteristic": ["strength", "toughness", "agility", "intelligence", "willpower", "fellowship"],
+			"trainingRating": 0,
+			"specialisations": ""
+		},
+		"talent":
+		{
+			"templates": ["description"],
+			"type": ["affinity", "focus", "tactic"]
+		},
+		"action":
+		{
+			"templates": ["description"],
+			"type": ["melee", "ranged", "support", "prayer", "spell"]
+		},
+		"wound":
+		{
+			"templates": ["description"],
+			"gravity": 1
+		}
+	}
+}
