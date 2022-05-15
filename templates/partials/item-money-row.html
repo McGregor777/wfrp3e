@@ -1,0 +1,19 @@
+<tr class="item armour_row" data-item-id="{{ money._id }}">
+	<td class="table_cell_left_aligned">
+		<a class="item_name_link">{{ money.name }}</a>
+	</td>
+
+	<td class="table_cell_center_aligned">
+		<span class="money_value">{{ money.data.value }}</span>
+	</td>
+
+	<td class="table_cell_center_aligned">
+		<span class="money_quantity quantity_link">{{ money.data.quantity }}</span>
+	</td>
+
+	{{# if isOwner }}
+	<td class="table_cell_shrinked">
+		<a class="item_delete_link" title="{{ localize 'Delete Item' }}"><span class="fas fa-trash"></span></a>
+	</td>
+	{{/ if }}
+</tr>

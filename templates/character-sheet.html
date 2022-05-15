@@ -1,0 +1,301 @@
+<form class="{{ cssClass }}" autocomplete="off">
+	<header class="sheet-header">
+		<img class="actor_img" src="{{ actor.img }}" data-edit="img" title="{{ actor.name }}" />
+
+		<input class="name_input" name="name" type="text" value="{{ actor.name }}" placeholder="{{ localize "Name" }}" />
+	</header>
+
+	{{!-- Sheet Navigation Tab --}}
+	<nav class="sheet-tabs tabs" data-group="primary">
+		<a class="tab_link characteristics_tab_link" data-tab="characteristics">{{ localize "Main" }}</a>
+		<a class="tab_link careers_tab_link" data-tab="careers">{{ localize "Careers" }}</a>
+		<a class="tab_link talents_tab_link" data-tab="talents">{{ localize "Talents" }}</a>
+		<a class="tab_link actions_tab_link" data-tab="actions">{{ localize "Actions" }}</a>
+		<a class="tab_link gear_tab_link" data-tab="trappings">{{ localize "Trappings" }}</a>
+		<a class="tab_link bio_tab_link" data-tab="background">{{ localize "Background" }}</a>
+	</nav>
+
+	<section class="sheet-body">
+		<div class="tab_div tab characteristics_tab_div" data-group="primary" data-tab="characteristics">
+			<div class="characteristics_div">
+				<span class="character_sheet_title">{{ localize "Characteristics" }}</span>
+
+				<div class="characteristics_sub_div">
+					<div class="impairments_group">
+						{{> systems/wfrp3e/templates/partials/impairment-partial.html class='fatigue' title='Fatigue' dataPath='data.impairments.fatigue' value=data.data.impairments.fatigue }}
+						{{> systems/wfrp3e/templates/partials/impairment-partial.html class='stress' title='Stress' dataPath='data.impairments.stress' value=data.data.impairments.stress }}
+					</div>
+
+					<div class="characteristics_group">
+						{{> systems/wfrp3e/templates/partials/characteristic-partial.html isOwner=../document.isOwner title='Strength' abbreviation='St' dataPath='data.attributes.characteristics.strength' value=data.data.attributes.characteristics.strength.value fortune=data.data.attributes.characteristics.strength.fortune }}
+						{{> systems/wfrp3e/templates/partials/characteristic-partial.html isOwner=../document.isOwner title='Toughness' abbreviation='To' dataPath='data.attributes.characteristics.toughness' value=data.data.attributes.characteristics.toughness.value fortune=data.data.attributes.characteristics.toughness.fortune }}
+						{{> systems/wfrp3e/templates/partials/characteristic-partial.html isOwner=../document.isOwner title='Agility' abbreviation='Ag' dataPath='data.attributes.characteristics.agility' value=data.data.attributes.characteristics.agility.value fortune=data.data.attributes.characteristics.agility.fortune }}
+						{{> systems/wfrp3e/templates/partials/characteristic-partial.html isOwner=../document.isOwner title='Intelligence' abbreviation='Int' dataPath='data.attributes.characteristics.intelligence' value=data.data.attributes.characteristics.intelligence.value fortune=data.data.attributes.characteristics.intelligence.fortune }}
+						{{> systems/wfrp3e/templates/partials/characteristic-partial.html isOwner=../document.isOwner title='Willpower' abbreviation='WP' dataPath='data.attributes.characteristics.willpower' value=data.data.attributes.characteristics.willpower.value fortune=data.data.attributes.characteristics.willpower.fortune }}
+						{{> systems/wfrp3e/templates/partials/characteristic-partial.html isOwner=../document.isOwner title='Fellowship' abbreviation='Fel' dataPath='data.attributes.characteristics.fellowship' value=data.data.attributes.characteristics.fellowship.value fortune=data.data.attributes.characteristics.fellowship.fortune }}
+					</div>
+				</div>
+			</div>
+
+			<div class="attributes_div">
+				<div class="attributes_sub_div">
+					{{> systems/wfrp3e/templates/partials/attribute-partial.html class='wounds' title='Wounds' maxTitle='Threshold' dataPath='data.attributes.wounds' max=data.data.attributes.wounds.threshold value=data.data.attributes.wounds.value }}
+					{{> systems/wfrp3e/templates/partials/attribute-partial.html class='corruption' title='Corruption' maxTitle='Threshold' dataPath='data.attributes.corruption' max=data.data.attributes.corruption.threshold value=data.data.attributes.corruption.value }}
+					{{> systems/wfrp3e/templates/partials/attribute-partial.html class='fortune' title='Fortune' maxTitle='Maximum' dataPath='data.attributes.fortune' max=data.data.attributes.fortune.maximum value=data.data.attributes.fortune.value }}
+				</div>
+
+				<div class="stance_meter_div">
+					<span class="character_sheet_title">{{ localize "Stances" }}</span>
+
+					<input class="stance_slider" name="data.attributes.stance.current" type="range" min="-{{ totalStanceMeter.conservative }}" max="{{ totalStanceMeter.reckless }}" value="{{ data.data.attributes.stance.current }}" />
+				</div>
+			</div>
+
+			<div class="skills_div">
+				<span class="character_sheet_title">{{ localize "Skills" }}</span>
+				<table class="skills_table">
+					<tbody>
+						{{# each items.skills as |skill sk| }}
+						{{> systems/wfrp3e/templates/partials/item-skill-row.html isOwner=../document.isOwner skill=skill }}
+						{{/ each }}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="tab_div tab careers_tab_div" data-group="primary" data-tab="careers">
+			<div class="item_div">
+				{{# each items.careers as |career ca| }}
+				{{> systems/wfrp3e/templates/partials/item-career-partial.html isOwner=../document.isOwner career=career }}
+				{{/ each }}
+			</div>
+		</div>
+
+		<div class="tab_div tab talents_tab_div" data-group="primary" data-tab="talents">
+			<div class="sub_tab_div">
+				{{# if items.talents.focus }}
+				<a class="item_type_tab focus">{{ localize "Focus" }}</a>
+				{{/ if }}
+				{{# if items.talents.reputation }}
+				<a class="item_type_tab reputation">{{ localize "Reputation" }}</a>
+				{{/ if }}
+				{{# if items.talents.tactic }}
+				<a class="item_type_tab tactic">{{ localize "Tactic" }}</a>
+				{{/ if }}
+				{{# if items.talents.faith }}
+				<a class="item_type_tab faith">{{ localize "Faith" }}</a>
+				{{/ if }}
+				{{# if items.talents.order }}
+				<a class="item_type_tab order">{{ localize "Order" }}</a>
+				{{/ if }}
+				{{# if items.talents.trick }}
+				<a class="item_type_tab trick">{{ localize "Trick" }}</a>
+				{{/ if }}
+			</div>
+
+			{{# if items.talents.focus }}
+			<div class="item_type_div focus active">
+				<div class="item_div">
+					{{# each items.talents.focus as |talent ta| }}
+					{{> systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+
+			{{# if items.talents.reputation }}
+			<div class="item_type_div reputation">
+				<div class="item_div">
+					{{# each items.talents.reputation as |talent ta| }}
+					{{> systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+
+			{{# if items.talents.tactic }}
+			<div class="item_type_div tactic">
+				<div class="item_div">
+					{{# each items.talents.tactic as |talent ta| }}
+					{{> systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+
+			{{# if items.talents.faith }}
+			<div class="item_type_div faith">
+				<div class="item_div">
+					{{# each items.talents.faith as |talent ta| }}
+					{{> systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+
+			{{# if items.talents.order }}
+			<div class="item_type_div order">
+				<div class="item_div">
+					{{# each items.talents.order as |talent ta| }}
+					{{> systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+
+			{{# if items.talents.tricks }}
+			<div class="item_type_div trick">
+				<div class="item_div">
+					{{# each items.talents.tricks as |talent ta| }}
+					{{> systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+		</div>
+
+		<div class="tab_div tab actions_tab_div" data-group="primary" data-tab="actions">
+			<div class="sub_tab_div">
+				{{# if items.actions.melee }}
+				<a class="item_type_tab melee">{{ localize "Melee" }}</a>
+				{{/ if }}
+				{{# if items.actions.ranged }}
+				<a class="item_type_tab ranged">{{ localize "Ranged" }}</a>
+				{{/ if }}
+				{{# if items.actions.support }}
+				<a class="item_type_tab support">{{ localize "Support" }}</a>
+				{{/ if }}
+				{{# if items.actions.blessing }}
+				<a class="item_type_tab blessing">{{ localize "Blessing" }}</a>
+				{{/ if }}
+				{{# if items.actions.spell }}
+				<a class="item_type_tab spell">{{ localize "Spell" }}</a>
+				{{/ if }}
+			</div>
+			{{# if items.actions.melee }}
+			<div class="item_type_div melee active">
+				<div class="item_div">
+					{{# each items.actions.melee as |action act| }}
+					{{> systems/wfrp3e/templates/partials/item-action-card.html isOwner=../document.isOwner action=action }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+			{{# if items.actions.ranged }}
+			<div class="item_type_div ranged">
+				<div class="item_div">
+					{{# each items.actions.ranged as |action act| }}
+					{{> systems/wfrp3e/templates/partials/item-action-card.html isOwner=../document.isOwner action=action }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+			{{# if items.actions.support }}
+			<div class="item_type_div support">
+				<div class="item_div">
+					{{# each items.actions.support as |action act| }}
+					{{> systems/wfrp3e/templates/partials/item-action-card.html isOwner=../document.isOwner action=action }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+			{{# if items.actions.blessing }}
+			<div class="item_type_div blessing">
+				<div class="item_div">
+					{{# each items.actions.blessing as |action act| }}
+					{{> systems/wfrp3e/templates/partials/item-action-card.html isOwner=../document.isOwner action=action }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+			{{# if items.actions.spell }}
+			<div class="item_type_div spell">
+				<div class="item_div">
+					{{# each items.actions.spell as |action act| }}
+					{{> systems/wfrp3e/templates/partials/item-action-card.html isOwner=../document.isOwner action=action }}
+					{{/ each }}
+				</div>
+			</div>
+			{{/ if }}
+		</div>
+
+		<div class="tab_div tab background_tab_div" data-group="primary" data-tab="trappings">
+			<table class="skills_table">
+				<thead>
+					<tr><th colspan="8"><span>{{ localize "Weapons" }}</span></th></tr>
+					<tr>
+						<th class="table_cell_left_aligned"><span>{{ localize "Name" }}</span></th>
+						<th class="table_cell_shrinked"><span>{{ localize "DR" }}</span></th>
+						<th class="table_cell_shrinked"><span>{{ localize "CR" }}</span></th>
+						<th class="table_cell_center_aligned"><span>{{ localize "Range" }}</span></th>
+						<th class="table_cell_center_aligned"><span>{{ localize "Qualities" }}</span></th>
+						<th class="table_cell_center_aligned"><span>{{ localize "Group" }}</span></th>
+						<th class="table_cell_shrinked"><span>{{ localize "Enc" }}</span></th>
+						<th class="table_cell_shrinked"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{# each items.weapons as |weapon wp| }}
+					{{> systems/wfrp3e/templates/partials/item-weapon-row.html isOwner=../document.isOwner weapon=weapon }}
+					{{/ each }}
+				</tbody>
+			</table>
+
+			<table class="skills_table">
+				<thead>
+					<tr><th colspan="8"><span>{{ localize "Armours" }}</span></th></tr>
+					<tr>
+						<th class="table_cell_left_aligned"><span>{{ localize "Name" }}</span></th>
+						<th class="table_cell_center_aligned"><span>{{ localize "Defence" }}</span></th>
+						<th class="table_cell_center_aligned"><span>{{ localize "Soak" }}</span></th>
+						<th class="table_cell_center_aligned"><span>{{ localize "Enc" }}</span></th>
+						<th class="table_cell_shrinked"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{# each items.armours as |armour arm| }}
+					{{> systems/wfrp3e/templates/partials/item-armour-row.html isOwner=../document.isOwner armour=armour }}
+					{{/ each }}
+				</tbody>
+			</table>
+
+			<table class="skills_table">
+				<thead>
+					<tr><th colspan="8"><span>{{ localize "Trappings" }}</span></th></tr>
+					<tr>
+						<th class="table_cell_left_aligned"><span>{{ localize "Name" }}</span></th>
+						<th class="table_cell_left_aligned"><span>{{ localize "Description" }}</span></th>
+						<th class="table_cell_center_aligned"><span>{{ localize "Enc" }}</span></th>
+						<th class="table_cell_shrinked"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{# each items.trappings as |trapping trp| }}
+					{{> systems/wfrp3e/templates/partials/item-trapping-row.html isOwner=../document.isOwner trapping=trapping }}
+					{{/ each }}
+				</tbody>
+			</table>
+
+			<table class="skills_table">
+				<thead>
+					<tr><th colspan="8"><span>{{ localize "Money" }}</span></th></tr>
+					<tr>
+						<th class="table_cell_left_aligned"><span>{{ localize "Name" }}</span></th>
+						<th class="table_cell_center_aligned"><span>{{ localize "Value" }}</span></th>
+						<th class="table_cell_center_aligned"><span>{{ localize "Qu" }}</span></th>
+						<th class="table_cell_shrinked"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{# each items.money as |money mo| }}
+					{{> systems/wfrp3e/templates/partials/item-money-row.html isOwner=../document.isOwner money=money }}
+					{{/ each }}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="tab_div tab background_tab_div" data-group="primary" data-tab="background">
+			{{ editor content=actor.data.data.background.biography target="data.background.biography" button=true owner=owner editable=editable }}
+		</div>
+	</section>
+</form>

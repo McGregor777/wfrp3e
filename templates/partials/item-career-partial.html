@@ -1,0 +1,202 @@
+<div class="item career_partial" data-item-id="{{ career._id }}">
+	<div class="career_sheet_div">
+		<div class="face_div front active">
+			<div class="career_sheet_header">
+				<div class="item_name_link career_sheet_name">{{ career.name }}</div>
+
+				<div class="career_sheet_race_restrictions">
+					{{# if career.data.advanced }}
+					{{ localize "Advanced Career" }}
+					{{ else }}
+					{{ localize "Basic Career" }}
+					{{/ if }}
+					: {{ career.data.race_restrictions }}
+				</div>
+
+				<div class="career_sheet_traits">{{ career.data.traits }}</div>
+			</div>
+
+			<div class="career_sheet_details">
+				<div class="career_sheet_career_aptitudes">
+					<div class="career_sheet_primary_characteristics">
+						<div class="career_sheet_career_aptitudes_title">{{ localize "Primary Characteristics" }}</div>
+
+						<div class="career_sheet_career_aptitudes_content">
+							{{# each career.data.primary_characteristics }}
+							{{ localize this }},
+							{{/ each }}
+						</div>
+					</div>
+
+					<div class="career_sheet_career_skills">
+						<div class="career_sheet_career_aptitudes_title">{{ localize "Career Skills" }}</div>
+						<div class="career_sheet_career_aptitudes_content">{{ career.data.career_skills }}</div>
+					</div>
+
+					<div class="career_sheet_starting_stance">
+						<span style="color: green;">{{ career.data.starting_stance.conservative_segments }}</span>
+						<span style="color: red;">{{ career.data.starting_stance.reckless_segments }}</span>
+					</div>
+				</div>
+
+				<div class="career_sheet_advance_options">
+					<span class="career_sheet_advance_options_header">{{ localize "Advances" }}</span>
+
+					<div class="career_sheet_action_advance_options">
+						<div class="career_sheet_advance_option_title">{{ localize "Action" }}</div>
+						<div class="career_sheet_advance_option_content">{{ career.data.advance_options.action }}</div>
+					</div>
+
+					<div class="career_sheet_talent_advance_options">
+						<div class="career_sheet_advance_option_title">{{ localize "Talent" }}</div>
+						<div class="career_sheet_advance_option_content">{{ career.data.advance_options.talent }}</div>
+					</div>
+
+					<div class="career_sheet_skill_advance_options">
+						<div class="career_sheet_advance_option_title">{{ localize "Skill" }}</div>
+						<div class="career_sheet_advance_option_content">{{ career.data.advance_options.skill }}</div>
+					</div>
+
+					<div class="career_sheet_fortune_advance_options">
+						<div class="career_sheet_advance_option_title">{{ localize "Fortune" }}</div>
+						<div class="career_sheet_advance_option_content">{{ career.data.advance_options.fortune }}</div>
+					</div>
+
+					<div class="career_sheet_conservative_advance_options">
+						<div class="career_sheet_advance_option_title">{{ localize "Conservative" }}</div>
+						<div class="career_sheet_advance_option_content">{{ career.data.advance_options.conservative }}</div>
+					</div>
+
+					<div class="career_sheet_reckless_advance_options">
+						<div class="career_sheet_advance_option_title">{{ localize "Reckless" }}</div>
+						<div class="career_sheet_advance_option_content">{{ career.data.advance_options.reckless }}</div>
+					</div>
+
+					<div class="career_sheet_wound_advance_options">
+						<div class="career_sheet_advance_option_title">{{ localize "Wound" }}</div>
+						<div class="career_sheet_advance_option_content">{{ career.data.advance_options.wound }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="face_div back">
+			<div class="career_sheet_header">
+				<div class="item_name_link career_sheet_name">{{ career.name }}</div>
+
+				<div class="career_sheet_race_restrictions">
+					{{# if career.data.advanced }}
+					{{ localize "Advanced Career" }}
+					{{ else }}
+					{{ localize "Basic Career" }}
+					{{/ if }}
+					: {{ career.data.race_restrictions }}
+				</div>
+
+				<div class="career_sheet_traits">{{ career.data.sommary }}</div>
+			</div>
+
+			<div class="career_sheet_description">{{{ career.data.description }}}</div>
+		</div>
+
+		<div class="bottom_line_div">
+			<a class="flip_link" title="{{ localize 'Flip sheet' }}"><span class="fas fa-undo"></span></a>
+
+			<div class="current_career_div">
+				<label class="current_career_label">{{ localize 'Current Career' }}</label>
+				<input class="current_career_input" name="career.data.current" type="checkbox" value="{{ career.data.current }}" {{# if career.data.current }} checked{{/ if }} />
+			</div>
+
+			{{# if isOwner }}
+			<a class="item_delete_link sheet_delete_link" title="{{ localize 'Delete Item' }}"><span class="fas fa-trash"></span></a>
+			{{/ if }}
+		</div>
+	</div>
+
+	<div class="career_advancement_div">
+		<div class="form_div">
+			<label class="form_select">{{ localize "Action" }}</label>
+			<input class="form_input" name="career.data.advances.action" type="text" value="{{ career.data.advances.action }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Talent" }}</label>
+			<input class="form_input" name="career.data.advances.talent" type="text" value="{{ career.data.advances.talent }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Skill Training or Specialty" }}</label>
+			<input class="form_input" name="career.data.advances.talent" type="text" value="{{ career.data.advances.skill }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Wound Threshold" }}</label>
+			<input class="form_input" name="career.data.advances.talent" type="text" value="{{ career.data.advances.wound }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Open Career Advance" }}</label>
+			<input class="form_input" name="career.data.advances.open.0" type="text" value="{{ career.data.advances.open.[0] }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Open Career Advance" }}</label>
+			<input class="form_input" name="career.data.advances.open.1" type="text" value="{{ career.data.advances.open.[1] }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Open Career Advance" }}</label>
+			<input class="form_input" name="career.data.advances.open.2" type="text" value="{{ career.data.advances.open.[2] }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Open Career Advance" }}</label>
+			<input class="form_input" name="career.data.advances.open.3" type="text" value="{{ career.data.advances.open.[3] }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Open Career Advance" }}</label>
+			<input class="form_input" name="career.data.advances.open.4" type="text" value="{{ career.data.advances.open.[4] }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Open Career Advance" }}</label>
+			<input class="form_input" name="career.data.advances.open.5" type="text" value="{{ career.data.advances.open.[5] }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Career Transition" }}</label>
+			<input class="form_input" name="career.data.advances.career_transition.cost" type="checkbox" value="1" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.career_transition.cost 1) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.career_transition.cost" type="checkbox" value="2" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.career_transition.cost 2) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.career_transition.cost" type="checkbox" value="3" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.career_transition.cost 3) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.career_transition.cost" type="checkbox" value="4" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.career_transition.cost 4) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.career_transition.cost" type="checkbox" value="5" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.career_transition.cost 5) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.career_transition.new_career" type="text" value="{{ career.data.advances.career_transition.new_career }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Dedication Bonus" }}</label>
+			<input class="form_input" name="career.data.advances.dedication_bonus" type="text" value="{{ career.data.advances.dedication_bonus }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Advance Type" }}</label>
+			<input class="form_input" name="career.data.advances.non_career.0.cost" type="checkbox" value="1" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.non_career.[0].cost 1) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.non_career.0.cost" type="checkbox" value="2" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.non_career.[0].cost 2) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.non_career.0.cost" type="checkbox" value="3" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.non_career.[0].cost 3) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.non_career.0.cost" type="checkbox" value="4" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.non_career.[0].cost 4) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.non_career.0.cost" type="checkbox" value="5" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.non_career.[0].cost 5) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.non_career.0.nature" type="text" value="{{ career.data.advances.non_career.0.nature }}" />
+		</div>
+
+		<div class="form_div">
+			<label class="form_select">{{ localize "Advance Type" }}</label>
+			<input class="form_input" name="career.data.advances.non_career.1.cost" type="checkbox" value="1" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.non_career.[1].cost 1) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.non_career.1.cost" type="checkbox" value="2" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.non_career.[1].cost 2) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.non_career.1.cost" type="checkbox" value="3" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.non_career.[1].cost 3) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.non_career.1.cost" type="checkbox" value="4" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.non_career.[1].cost 4) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.non_career.1.cost" type="checkbox" value="5" data-dtype="Number" {{# if (superiorOrEqualTo career.data.advances.non_career.[1].cost 5) }} checked{{/ if }} />
+			<input class="form_input" name="career.data.advances.non_career.1.nature" type="text" value="{{ career.data.advances.non_career.1.nature }}" />
+		</div>
+	</div>
+</div>

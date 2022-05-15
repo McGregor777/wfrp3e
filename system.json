@@ -2,16 +2,44 @@
 	"name": "wfrp3e",
 	"title": "Warhammer Fantasy Roleplay - 3rd Edition",
 	"description": "A game system for Warhammer Fantasy Roleplay - 3rd Edition for Foundry environment.",
-	"version": "0.0.1",
-	"templateVersion": 2,
-	"author": "McGregor777",
+	"author": "Grégory Soupé",
+	"authors":
+	[
+		{
+			"name": "Grégory Soupé",
+			"email": "gregory.soupe@mailo.com"
+		}
+	],
+	"url": "https://github.com/McGregor777/wfrp3e",
+	"flags":
+	{
+	},
+	"version": "0.1",
+	"minimumCoreVersion": "0.8.9",
+	"compatibleCoreVersion": "0.8.9",
+	"scripts":
+	[
+	],
 	"esmodules":
 	[
 		"wfrp3e.js"
 	],
 	"styles":
 	[
-		"./css/wfrp3e.css"
+		"./styles/global.css"
+	],
+	"languages":
+	[
+		{
+			"lang": "en",
+			"name": "English (UK)",
+			"path": "lang/en-EN.json"
+		},
+		{
+			"lang": "fr",
+			"name": "Français (FR)",
+			"path": "lang/fr-FR.json"
+		}
 	],
 	"packs":
 	[
@@ -56,20 +84,19 @@
 			"entity": "Item"
 		}
 	],
-	"languages":
+	"system":
 	[
-		{
-			"lang": "en",
-			"name": "English",
-			"path": "lang/en.json"
-		}
 	],
-	"socket": false,
+	"dependencies":
+	[
+	],
+	"socket": true,
+	"manifest": "https://github.com/McGregor777/wfrp3e/blob/main/system.json",
+	"download": "",
+	"protected": false,
+	"background": "",
 	"gridDistance": 1,
 	"gridUnits": "ft",
 	"primaryTokenAttribute": "attributes.wounds.value",
-	"secondaryTokenAttribute": "attributes.stance.current",
-	"url": "https://github.com/McGregor777/wfrp3e",
-	"manifest": "https://github.com/McGregor777/wfrp3e/blob/main/system.json",
-	"download": ""
+	"secondaryTokenAttribute": "attributes.stance.current"
 }

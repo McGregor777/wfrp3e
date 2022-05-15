@@ -1,0 +1,23 @@
+<form class="{{ cssClass }}" autocomplete="off">
+	<header class="sheet-header">
+		<h1>
+			<input name="name" type="text" value="{{ item.name }}" placeholder="{{ localize 'Name' }}"/>
+		</h1>
+	</header>
+
+	<section class="sheet-body">
+		<div class="sheet_form_div">
+			<label class="sheet_form_label">{{ localize "Characteristic" }}</label>
+			<select class="sheet_form_select" name="data.characteristic" data-dtype="String">
+				{{ selectOptions characteristics selected=data.data.characteristic }}
+			</select>
+		</div>
+
+		<div class="sheet_form_div">
+			<label class="sheet_form_label">{{ localize "Advanced Skill" }}</label>
+			<input class="sheet_form_input" name="data.advanced" type="checkbox" value="{{ data.data.advanced }}" {{# if data.data.advanced }}checked{{/  if }}>
+		</div>
+
+		{{ editor content=item.data.data.description target="data.description" button=true owner=owner editable=editable }}
+	</section>
+</form>

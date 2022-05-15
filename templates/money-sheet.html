@@ -1,0 +1,19 @@
+<form class="{{ cssClass }}" autocomplete="off">
+	<header class="sheet-header">
+		<input class="name_input" name="name" type="text" value="{{ item.name }}" placeholder="Name" />
+	</header>
+
+	<section class="sheet-body">
+		<div class="sheet_form_div">
+			<label class="sheet_form_label">{{ localize "Value" }}</label>
+			<input class="sheet_form_input" name="data.value" type="number" value="{{ data.data.value }}" placeholder="{{ localize "Value" }}" data-dtype="Number" />
+		</div>
+
+		<div class="sheet_form_div">
+			<label class="sheet_form_label">{{ localize "Quantity" }}</label>
+			<input class="sheet_form_input" name="data.quantity" type="number" value="{{ data.data.quantity }}" placeholder="{{ localize "Qu" }}" data-dtype="Number" />
+		</div>
+
+		{{ editor content=item.data.data.description target="data.description" button=true owner=owner editable=editable }}
+	</section>
+</form>

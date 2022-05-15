@@ -1,78 +1,92 @@
 {
 	"Actor":
 	{
-		"types": ["character", "creature"],
+		"types":
+		[
+			"character",
+			"creature"
+		],
 		"templates":
 		{
 			"background":
 			{
-				"biography": "",
-				"height": "",
-				"weight": "",
-				"build": "",
-				"hairColour": "",
-				"eyeColour": "",
-				"birthplace": "",
-				"familyMembers": "",
-				"personalGoal": "",
-				"allies": "",
-				"enemies": "",
-				"campaignNotes": ""
+				"background":
+				{
+					"biography": "",
+					"height": "",
+					"weight": "",
+					"build": "",
+					"hairColour": "",
+					"eyeColour": "",
+					"birthplace": "",
+					"familyMembers": "",
+					"personalGoal": "",
+					"allies": "",
+					"enemies": "",
+					"campaignNotes": ""
+				}
 			},
 			"attributes":
 			{
-				"characteritics":
+				"attributes":
 				{
-					"strength":
+					"characteristics":
 					{
-						"value": 2,
-						"fortune": 0
+						"strength":
+						{
+							"value": 2,
+							"fortune": 0
+						},
+						"toughness":
+						{
+							"value": 2,
+							"fortune": 0
+						},
+						"agility":
+						{
+							"value": 2,
+							"fortune": 0
+						},
+						"intelligence":
+						{
+							"value": 2,
+							"fortune": 0
+						},
+						"willpower":
+						{
+							"value": 2,
+							"fortune": 0
+						},
+						"fellowship":
+						{
+							"value": 2,
+							"fortune": 0
+						}
 					},
-					"toughness":
+					"wounds":
 					{
-						"value": 2,
-						"fortune": 0
+						"threshold": 7,
+						"value": 7
 					},
-					"agility":
+					"stance":
 					{
-						"value": 2,
-						"fortune": 0
+						"conservative": 0,
+						"reckless": 0,
+						"current": 0
 					},
-					"intelligence":
-					{
-						"value": 2,
-						"fortune": 0
-					},
-					"willpower":
-					{
-						"value": 2,
-						"fortune": 0
-					},
-					"fellowship":
-					{
-						"value": 2,
-						"fortune": 0
-					}
-				},
-				"wounds":
-				{
-					"threshold": 7,
-					"value": 7
-				},
-				"stance":
-				{
-					"conservative": 0,
-					"reckless": 0,
-					"current": 0
-				},
-				"soak": 0,
-				"defence": 0,
-				"encumbrance": 0
+					"soak": 0,
+					"defence": 0,
+					"encumbrance": 0
+				}
 			}
 		},
-		"hero":
+		"character":
 		{
-			"templates": ["background", "attributes"],
+			"templates":
+			[
+				"background",
+				"attributes"
+			],
 			"attributes":
 			{
 				"corruption":
@@ -99,58 +113,304 @@
 		},
 		"creature":
 		{
-			"templates": ["background", "attributes"],
+			"templates":
+			[
+				"background",
+				"attributes"
+			],
 			"threatRating": 1,
 			"category": "",
 			"attributes":
 			{
-				"aggression":
+				"attributes":
 				{
-					"budget": 0,
-					"current": 0
-				},
-				"cunning":
-				{
-					"budget": 0,
-					"current": 0
-				},
-				"Expertise":
-				{
-					"budget": 0,
-					"current": 0
-				},
-				"damage": 0
+					"aggression":
+					{
+						"budget": 0,
+						"current": 0
+					},
+					"cunning":
+					{
+						"budget": 0,
+						"current": 0
+					},
+					"expertise":
+					{
+						"budget": 0,
+						"current": 0
+					},
+					"damage": 0
+				}
 			}
 		}
 	},
 	"Item":
 	{
-		"types": ["skill", "talent", "action", "wound"],
+		"types":
+		[
+			"ability",
+			"action",
+			"armour",
+			"career",
+			"condition",
+			"criticalWound",
+			"disease",
+			"insanity",
+			"money",
+			"mutation",
+			"skill",
+			"talent",
+			"trapping",
+			"weapon"
+		],
 		"templates":
 		{
-			"description": ""
+			"basics":
+			{
+				"description": ""
+			},
+			"item":
+			{
+				"cost":
+				{
+					"brass": 0,
+					"silver": 0,
+					"gold": 0
+				},
+				"encumbrance": 0,
+				"rarity": "abundant"
+			}
 		},
-		"skill":
+		"ability":
 		{
-			"templates": ["description"],
-			"characteristic": ["strength", "toughness", "agility", "intelligence", "willpower", "fellowship"],
-			"trainingRating": 0,
-			"specialisations": ""
-		},
-		"talent":
-		{
-			"templates": ["description"],
-			"type": ["affinity", "focus", "tactic"]
+			"templates":
+			[
+				"basics"
+			]
 		},
 		"action":
 		{
-			"templates": ["description"],
-			"type": ["melee", "ranged", "support", "prayer", "spell"]
+			"conservative":
+			{
+				"name": "",
+				"art": "",
+				"type": "melee",
+				"traits":
+				[
+					""
+				],
+				"recharge_rating": 0,
+				"difficulty_modifiers":
+				{
+					"challenge_dice": 0,
+					"misfortune_dice": 0
+				},
+				"check": "",
+				"requirements": "",
+				"effects": ""
+			},
+			"reckless":
+			{
+				"name": "",
+				"art": "",
+				"type": "melee",
+				"traits":
+				[
+					""
+				],
+				"recharge_rating": 0,
+				"difficulty_modifiers":
+				{
+					"challenge_dice": 0,
+					"misfortune_dice": 0
+				},
+				"check": "",
+				"requirements": "",
+				"effects": ""
+			}
 		},
-		"wound":
+		"armour":
 		{
-			"templates": ["description"],
+			"templates":
+			[
+				"basics",
+				"item"
+			],
+			"defence_value": 0,
+			"soak_value": 0
+		},
+		"career":
+		{
+			"templates":
+			[
+				"basics"
+			],
+			"advanced": false,
+			"race_restrictions": "",
+			"traits":
+			[
+				"",
+				"",
+				"",
+				""
+			],
+			"talent_sockets":
+			[
+				"focus",
+				"focus"
+			],
+			"primary_characteristics":
+			[
+				"strength",
+				"strength"
+			],
+			"career_skills":
+			[
+				"",
+				"",
+				"",
+				"",
+				""
+			],
+			"starting_stance":
+			{
+				"conservative_segments": 0,
+				"reckless_segments": 0
+			},
+			"advance_options":
+			{
+				"action": 0,
+				"talent": 0,
+				"skill": 0,
+				"fortune": 0,
+				"conservative": 0,
+				"reckless": 0,
+				"wound": 0
+			},
+			"sommary": "",
+			"advances":
+			{
+				"action": "",
+				"talent": "",
+				"skill": "",
+				"wound": "",
+				"open":
+				[
+					"",
+					"",
+					"",
+					"",
+					"",
+					""
+				],
+				"career_transition":
+				{
+					"cost": 0,
+					"new_career": ""
+				},
+				"dedication_bonus": "",
+				"non_career":
+				[
+					{
+						"cost": 0,
+						"nature": ""
+					},
+					{
+						"cost": 0,
+						"nature": ""
+					}
+				]
+			},
+			"current": false,
+			"completed": false
+		},
+		"condition":
+		{
+			"templates":
+			[
+				"basics"
+			]
+		},
+		"criticalWound":
+		{
+			"templates":
+			[
+				"basics"
+			],
 			"gravity": 1
+		},
+		"disease":
+		{
+			"templates":
+			[
+				"basics"
+			]
+		},
+		"insanity":
+		{
+			"templates":
+			[
+				"basics"
+			]
+		},
+		"money":
+		{
+			"templates":
+			[
+				"basics"
+			],
+			"value": 1,
+			"quantity": 1
+		},
+		"mutation":
+		{
+			"templates":
+			[
+				"basics"
+			]
+		},
+		"skill":
+		{
+			"templates":
+			[
+				"basics"
+			],
+			"characteristic": "strength",
+			"advanced": false,
+			"training_level": 0,
+			"specialisations":
+			[
+			]
+		},
+		"talent":
+		{
+			"templates":
+			[
+				"basics"
+			],
+			"type": "focus"
+		},
+		"trapping":
+		{
+			"templates":
+			[
+				"basics"
+			]
+		},
+		"weapon":
+		{
+			"templates":
+			[
+				"basics",
+				"item"
+			],
+			"damage_rating": 3,
+			"critical_rating": 5,
+			"group": "ordinary",
+			"range": "close",
+			"qualities":
+			[
+			]
 		}
 	}
 }

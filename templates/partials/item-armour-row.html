@@ -1,0 +1,23 @@
+<tr class="item armour_row" data-item-id="{{ armour._id }}">
+	<td class="table_cell_left_aligned">
+		<a class="item_name_link">{{ armour.name }}</a>
+	</td>
+
+	<td class="table_cell_center_aligned">
+		<span class="armour_row_defence_value">{{ armour.data.defence_value }}</span>
+	</td>
+
+	<td class="table_cell_center_aligned">
+		<span class="armour_row_soak_value">{{ armour.data.soak_value }}</span>
+	</td>
+
+	<td class="table_cell_center_aligned">
+		<span class="armour_row_encumbrance">{{ armour.data.encumbrance }}</span>
+	</td>
+
+	{{# if isOwner }}
+	<td class="table_cell_shrinked">
+		<a class="item_delete_link" title="{{ localize 'Delete Item' }}"><span class="fas fa-trash"></span></a>
+	</td>
+	{{/ if }}
+</tr>

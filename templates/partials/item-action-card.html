@@ -1,0 +1,43 @@
+<div class="item action_card_div" data-item-id="{{ action._id }}">
+	<div class="face_div conservative active">
+		<div class="action_card_header">
+			<img class="action_card_type" src="/systems/wfrp3e/assets/icons/{{ action.data.conservative.type }}.webp" />
+			<span class="action_card_difficulty_modifiers"></span>
+			<span class="item_name_link action_card_name">{{ action.data.conservative.name }}</span>
+			<span class="action_card_traits">{{ action.data.conservative.traits }}</span>
+			<span class="action_card_recharge_rating">{{ action.data.conservative.recharge_rating }}</span>
+		</div>
+
+		<div class="action_card_check">{{ action.data.conservative.check }}</div>
+		{{# if action.data.conservative.art }}
+		<img class="action_card_art_image" src="{{ action.data.conservative.art }}" />
+		{{/ if }}
+		<div class="action_card_requirements">{{ action.data.conservative.requirements }}</div>
+		<div class="action_card_effects">{{{ action.data.conservative.effects }}}</div>
+	</div>
+
+	<div class="face_div reckless">
+		<div class="action_card_header">
+			<img class="action_card_type" src="/systems/wfrp3e/assets/icons/{{ action.data.conservative.type }}.webp" />
+			<span class="action_card_difficulty_modifiers"></span>
+			<span class="item_name_link action_card_name">{{ action.data.reckless.name }}</span>
+			<span class="action_card_traits">{{ action.data.reckless.traits }}</span>
+			<span class="action_card_recharge_rating">{{ action.data.reckless.recharge_rating }}</span>
+		</div>
+
+		<div class="action_card_check">{{ action.data.reckless.check }}</div>
+		{{# if action.data.reckless.art }}
+		<img class="action_card_art_image" src="{{ action.data.reckless.art }}" />
+		{{/ if }}
+		<div class="action_card_requirements">{{ action.data.reckless.requirements }}</div>
+		<div class="action_card_effects">{{{ action.data.reckless.effects }}}</div>
+	</div>
+
+	<div class="bottom_line_div">
+		<a class="flip_link" title="{{ localize 'Flip Card' }}"><span class="fas fa-undo"></span></a>
+
+		{{# if isOwner }}
+		<a class="item_delete_link" title="{{ localize 'Delete Item' }}"><span class="fas fa-trash"></span></a>
+		{{/ if }}
+	</div>
+</div>

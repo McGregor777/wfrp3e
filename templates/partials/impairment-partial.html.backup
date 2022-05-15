@@ -1,0 +1,66 @@
+<div class="impairment_div">
+	<div class="impairement_list {{ class }}">
+		<div>
+			<label class="impairment_label">1</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="1" data-dtype="Number" {{# if (superiorOrEqualTo value 1) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">2</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="2" data-dtype="Number" {{# if (superiorOrEqualTo value 2) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">3</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="3" data-dtype="Number" {{# if (superiorOrEqualTo value 3) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">4</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="4" data-dtype="Number" {{# if (superiorOrEqualTo value 4) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">5</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="5" data-dtype="Number" {{# if (superiorOrEqualTo value 5) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">6</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="6" data-dtype="Number" {{# if (superiorOrEqualTo value 6) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">7</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="7" data-dtype="Number" {{# if (superiorOrEqualTo value 7) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">8</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="8" data-dtype="Number" {{# if (superiorOrEqualTo value 8) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">9</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="9" data-dtype="Number" {{# if (superiorOrEqualTo value 9) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">10</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="10" data-dtype="Number" {{# if (superiorOrEqualTo value 10) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">11</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="11" data-dtype="Number" {{# if (superiorOrEqualTo value 11) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">12</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="12" data-dtype="Number" {{# if (superiorOrEqualTo value 12) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">13</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="13" data-dtype="Number" {{# if (superiorOrEqualTo value 13) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">14</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="14" data-dtype="Number" {{# if (superiorOrEqualTo value 14) }}checked{{/ if }} />
+		</div>
+		<div>
+			<label class="impairment_label">15</label>
+			<input class="impairment_checkbox" name={{ dataPath }} type="checkbox" value="15" data-dtype="Number" {{# if (superiorOrEqualTo value 15) }}checked{{/ if }} />
+		</div>
+	</div>
+
+	<span class="impairment_title">{{ localize title }}</span>
+</div>
