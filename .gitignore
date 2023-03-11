@@ -1,2 +1,5 @@
+# JetBrains WebStorm cache/options directory
+.idea/
+
 # Visual Studio cache/options directory
 .vs/
