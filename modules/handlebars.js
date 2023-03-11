@@ -2,22 +2,22 @@ export default function ()
 {
     Hooks.on("init", () =>
 	{
-		Handlebars.registerHelper('equalTo', function(value, compareValue)
+		Handlebars.registerHelper("equalTo", function(value, compareValue)
 		{
 			return value == compareValue;
 		});
 
-        Handlebars.registerHelper('superiorOrEqualTo', function(value, compareValue)
+        Handlebars.registerHelper("superiorOrEqualTo", function(value, compareValue)
 		{
 			return value >= compareValue;
 		});
 
-		Handlebars.registerHelper('inferiorOrEqualTo', function(value, compareValue)
+		Handlebars.registerHelper("inferiorOrEqualTo", function(value, compareValue)
 		{
 			return value <= compareValue;
 		});
 
-		Handlebars.registerHelper('characteristicToAbbreviation', function(value)
+		Handlebars.registerHelper("characteristicToAbbreviation", function(value)
 		{
 			switch(value)
 			{
@@ -36,9 +36,9 @@ export default function ()
 			}
 		});
 
-		Handlebars.registerHelper('times', function(n, block)
+		Handlebars.registerHelper("times", function(n, block)
 		{
-			var accum = '';
+			var accum = "";
 
 			for(let i = 0; i < n; i++)
 				accum += block.fn(i);

@@ -1,28 +1,28 @@
-<form class="{{ cssClass }}" autocomplete="off">
+<form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
-		<input class="name_input" name="name" type="text" value="{{ item.name }}" placeholder="Name" />
+		<input class="name_input" name="name" type="text" value="{{item.name}}" placeholder="Name" />
 	</header>
 
 	<section class="sheet-body">
 		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{ localize "Cost" }}</label>
-			<input class="sheet_form_input" name="data.cost.brass" type="number" value="{{ data.data.cost.brass }}" placeholder="{{ localize "Brass" }}" data-dtype="Number" />
-			<input class="sheet_form_input" name="data.cost.silver" type="number" value="{{ data.data.cost.silver }}" placeholder="{{ localize "Silver" }}" data-dtype="Number" />
-			<input class="sheet_form_input" name="data.cost.gold" type="number" value="{{ data.data.cost.gold }}" placeholder="{{ localize "Gold" }}" data-dtype="Number" />
+			<label class="sheet_form_label">{{localize 'Cost'}}</label>
+			<input class="sheet_form_input" name="data.cost.brass" type="number" value="{{data.data.cost.brass}}" placeholder="{{localize 'Brass'}}" data-dtype="Number" />
+			<input class="sheet_form_input" name="data.cost.silver" type="number" value="{{data.data.cost.silver}}" placeholder="{{localize 'Silver'}}" data-dtype="Number" />
+			<input class="sheet_form_input" name="data.cost.gold" type="number" value="{{data.data.cost.gold}}" placeholder="{{localize 'Gold'}}" data-dtype="Number" />
 		</div>
 
 		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{ localize "Encumbrance" }}</label>
-			<input class="sheet_form_input" name="data.encumbrance" type="number" value="{{ data.data.encumbrance }}" placeholder="{{ localize "Enc" }}" data-dtype="Number" />
+			<label class="sheet_form_label">{{localize 'Encumbrance'}}</label>
+			<input class="sheet_form_input" name="data.encumbrance" type="number" value="{{data.data.encumbrance}}" placeholder="{{localize 'Enc'}}" data-dtype="Number" />
 		</div>
 
 		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{ localize "Rarity" }}</label>
+			<label class="sheet_form_label">{{localize 'Rarity'}}</label>
 			<select class="sheet_form_select" name="data.rarity" data-dtype="String">
-				{{ selectOptions rarities selected=data.data.rarity }}
+				{{selectOptions rarities selected=data.data.rarity}}
 			</select>
 		</div>
 
-		{{ editor content=item.data.data.description target="data.description" button=true owner=owner editable=editable }}
+		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
 	</section>
 </form>

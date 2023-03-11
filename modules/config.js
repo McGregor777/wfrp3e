@@ -151,7 +151,7 @@ WFRP3E.challengeDiceResults =
 		sigmarsComet: 0,
 		chaosStar: 0
 	},
-	5:
+	6:
 	{
 		label: "One Bane",
 		image: `systems/wfrp3e/assets/icons/dice/challenge_onebane.webp`,
@@ -165,7 +165,7 @@ WFRP3E.challengeDiceResults =
 		sigmarsComet: 0,
 		chaosStar: 0
 	},
-	6:
+	7:
 	{
 		label: "Two Banes",
 		image: `systems/wfrp3e/assets/icons/dice/challenge_twobanes.webp`,

@@ -13,24 +13,29 @@ export default class WFRP3ECharacter extends Actor
 	prepareDerivedData()
 	{
 		this.calculateStanceMeter();
+		super.prepareDerivedData();
 	}
 
 	/**
 	 * Calculate stance meter.
-	 *
-	 * @param data {Object}   The Actor data
 	 */
 	calculateStanceMeter()
 	{
-		let currentCareer = this.itemTypes.career.find(career => career.data.data.current);
+		let stanceMeter =
+		{
+			conservative: this.system.attributes.stance.conservative,
+			reckless: this.system.attributes.stance.reckless
+		};
+
+		const currentCareer = this.itemTypes.career.find(career => career.system.current);
 
 		if(currentCareer)
-		{
-			this.data.totalStanceMeter =
+			stanceMeter =
 			{
-				conservative: this.data.data.attributes.stance.conservative + currentCareer.data.data.starting_stance.conservative_segments,
-				reckless: this.data.data.attributes.stance.reckless + currentCareer.data.data.starting_stance.reckless_segments
+				conservative: this.system.attributes.stance.conservative + currentCareer.system.starting_stance.conservative_segments,
+				reckless: this.system.attributes.stance.reckless + currentCareer.system.starting_stance.reckless_segments
 			}
-		}
+
+		this.stanceMeter = stanceMeter
 	}
 }

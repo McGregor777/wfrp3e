@@ -1,19 +1,19 @@
-<tr class="item armour_row" data-item-id="{{ trapping._id }}">
+<tr class="item armour_row" data-item-id="{{trapping._id}}">
 	<td class="table_cell_left_aligned">
-		<a class="item_name_link">{{ trapping.name }}</a>
+		<a class="item_name_link">{{trapping.name}}</a>
 	</td>
 
 	<td class="table_cell_left_aligned">
-		<span class="trapping_row_description">{{{ trapping.data.description }}}</span>
+		<span class="trapping_row_description">{{{trapping.system.description}}}</span>
 	</td>
 
 	<td class="table_cell_center_aligned">
-		<span class="trapping_row_encumbrance">{{ trapping.data.encumbrance }}</span>
+		<span class="trapping_row_encumbrance">{{trapping.system.encumbrance}}</span>
 	</td>
 
-	{{# if isOwner }}
+	{{#if isOwner}}
 	<td class="table_cell_shrinked">
-		<a class="item_delete_link" title="{{ localize 'Delete Item' }}"><span class="fas fa-trash"></span></a>
+		<a class="item_delete_link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
 	</td>
-	{{/ if }}
+	{{/if}}
 </tr>

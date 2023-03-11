@@ -1,4 +1,4 @@
-import { WFRP3E } from "./modules/config.js";
+import {WFRP3E} from "./modules/config.js";
 import WFRP3EActor from "./modules/actors/WFRP3ECharacter.js"
 import WFRP3EItem from "./modules/items/WFRP3EItem.js"
 import WFRP3CharacterSheet from "./modules/sheets/WFRP3CharacterSheet.js";

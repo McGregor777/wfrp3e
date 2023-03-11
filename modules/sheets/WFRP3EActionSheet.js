@@ -8,7 +8,7 @@ export default class WFRP3EActionSheet extends ItemSheet
 			//width: 530,
 			//height: 340,
 			classes: ["wfrp3e", "sheet", "item", "action"],
-			tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "conservative" }]
+			tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "conservative"}]
 		});
 	}
 

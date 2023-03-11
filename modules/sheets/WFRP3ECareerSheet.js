@@ -18,8 +18,6 @@ export default class WFRP3ECareerSheet extends ItemSheet
 		data.characteristics = CONFIG.WFRP3E.characteristics;
 		data.talentTypes = CONFIG.WFRP3E.talentTypes;
 
-		console.log(this);
-
 		return data;
 	}
 
@@ -32,11 +30,11 @@ export default class WFRP3ECareerSheet extends ItemSheet
 	{
 		super.activateListeners(html);
 
-		html.find('.talent_socket_add').click(this._onTalentSocketAdd.bind(this));
+		html.find(".talent_socket_add").click(this._onTalentSocketAdd.bind(this));
 	}
 
 	async _onTalentSocketAdd(event)
 	{
-		this.item.update( { data: { talent_sockets: { [`${Object.keys(this.item.data.data.talent_sockets).length}`]: "" } } });
+		this.item.update(system.talent_sockets = {[`${Object.keys(this.item.system.talent_sockets).length}`]: ""});
 	}
 }

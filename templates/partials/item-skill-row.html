@@ -1,21 +1,21 @@
-<tr class="item skill_row" data-item-id="{{ skill._id }}">
+<tr class="item skill_row" data-item-id="{{skill._id}}">
 	<td class="table_cell_left_aligned">
-		<a class="skill_name">{{ skill.name }}</a>
+		<a class="item_name_link skill">{{skill.name}}</a>
 	</td>
 
 	<td class="table_cell_center_aligned">
-		<span class="skill_characteristic">{{ localize (characteristicToAbbreviation skill.data.characteristic) }}</span>
+		<span class="skill_characteristic">{{localize (characteristicToAbbreviation skill.system.characteristic)}}</span>
 	</td>
 
 	<td class="table_cell_center_aligned">
-		<input class="skill_training_level_input" name="skill.data.training_level" type="checkbox" value="1" data-dtype="Number" {{# if (superiorOrEqualTo skill.data.training_level 1) }}checked{{/ if }} />
-		<input class="skill_training_level_input" name="skill.data.training_level" type="checkbox" value="2" data-dtype="Number" {{# if (superiorOrEqualTo skill.data.training_level 2) }}checked{{/ if }} />
-		<input class="skill_training_level_input" name="skill.data.training_level" type="checkbox" value="3" data-dtype="Number" {{# if (superiorOrEqualTo skill.data.training_level 3) }}checked{{/ if }} />
+		<input class="skill_training_level_input" name="skill.system.training_level" type="checkbox" value="1" data-dtype="Number" {{#if (superiorOrEqualTo skill.system.training_level 1)}}checked{{/if}} />
+		<input class="skill_training_level_input" name="skill.system.training_level" type="checkbox" value="2" data-dtype="Number" {{#if (superiorOrEqualTo skill.system.training_level 2)}}checked{{/if}} />
+		<input class="skill_training_level_input" name="skill.system.training_level" type="checkbox" value="3" data-dtype="Number" {{#if (superiorOrEqualTo skill.system.training_level 3)}}checked{{/if}} />
 	</td>
 
-	{{# if isOwner }}
+	{{#if isOwner}}
 	<td class="table_cell_shrinked">
-		<a class="item_delete_link" title="{{ localize 'Delete Item' }}"><span class="fas fa-trash"></span></a>
+		<a class="item_delete_link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
 	</td>
-	{{/ if }}
+	{{/if}}
 </tr>

@@ -1,15 +1,15 @@
-<form class="{{ cssClass }}" autocomplete="off">
+<form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
-		<input class="name_input" name="name" type="text" value="{{ item.name }}" placeholder="Name" />
+		<input class="name_input" name="name" type="text" value="{{item.name}}" placeholder="Name" />
 	</header>
 
 	<section class="sheet-body">
 		<div class="sheet_form_div">
-			<select class="sheet_form_select" name="data.type" data-dtype="String">
-				{{ selectOptions talentTypes selected=data.data.type }}
+			<select class="sheet_form_select" name="system.type" data-dtype="String">
+				{{selectOptions talentTypes selected=item.system.type}}
 			</select>
 		</div>
 
-		{{ editor content=item.data.data.description target="data.description" button=true owner=owner editable=editable }}
+		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
 	</section>
 </form>
