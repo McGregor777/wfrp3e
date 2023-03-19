@@ -1,0 +1,191 @@
+.career-sheet
+{
+	position: relative;
+	width: 510px;
+	height: 635px;
+	margin: 10px;
+	padding: 20px;
+	background-color: saddlebrown;
+	border: 1px solid black;
+	color: white;
+	text-align: center;
+
+	& .career-sheet-description
+	{
+		padding: 5px 10px 10px;
+		background-color: antiquewhite;
+		color: black;
+		font-size: 10pt;
+		text-shadow: none;
+		column-count: 2;
+		column-fill: auto;
+		column-gap: 20px;
+		column-rule: 1px solid red;
+	}
+
+	& .career-sheet-details
+	{
+		width: 240px;
+	}
+
+	& .career-sheet-header
+	{
+		width: 385px;
+		margin: 0 auto;
+		background-color: dimgrey;
+		text-shadow:
+			-1pt -1pt 0pt black,
+			-1pt 0 0pt black,
+			0 -1pt 0pt black,
+			-1pt 1pt 0pt black,
+			1pt -1pt 0pt black,
+			0 1pt 0pt black,
+			1pt 0 0pt black,
+			1pt 1pt 0pt black;
+	}
+
+	& .career-sheet-name
+	{
+		position: relative;
+		font-size: 16pt;
+		font-weight: bold;
+		font-variant-caps: small-caps;
+	}
+
+	& .career-sheet-traits
+	{
+		font-style: italic;
+		text-align: center;
+	}
+
+	& .career-sheet-advance-options
+	{
+		display: grid;
+		width: 180px;
+		height: 185px;
+		margin: 0 auto;
+		background-color: burlywood;
+		font-variant-caps: small-caps;
+		line-height: 10pt;
+		text-shadow:
+			-1pt -1pt 0pt black,
+			-1pt 0 0pt black,
+			0 -1pt 0pt black,
+			-1pt 1pt 0pt black,
+			1pt -1pt 0pt black,
+			0 1pt 0pt black,
+			1pt 0 0pt black,
+			1pt 1pt 0pt black;
+		grid-template-columns: 90px 90px;
+		grid-template-rows: 20px 40px 40px 40px 1fr;
+		grid-template-areas:
+		'career-sheet-advance-options-header career-sheet-advance-options-header'
+		'career-sheet-action-advance-options career-sheet-talent-advance-options'
+		'career-sheet-skill-advance-options career-sheet-fortune-advance-options'
+		'career-sheet-conservative-advance-options career-sheet-reckless-advance-options'
+		'career-sheet-wound-advance-options career-sheet-wound-advance-options';
+	}
+
+	& .career-sheet-advance-options-header
+	{
+		background-color: dimgrey;
+		color: white;
+		font-size: 14pt;
+		font-weight: bold;
+		line-height: 25px;
+		grid-area: career-sheet-advance-options-header;
+	}
+
+	& .career-sheet-action-advance-options
+	{
+		grid-area: career-sheet-action-advance-options;
+	}
+
+	& .career-sheet-talent-advance-options
+	{
+		grid-area: career-sheet-talent-advance-options;
+	}
+
+	& .career-sheet-skill-advance-options
+	{
+		grid-area: career-sheet-skill-advance-options;
+	}
+
+	& .career-sheet-fortune-advance-options
+	{
+		grid-area: career-sheet-fortune-advance-options;
+	}
+
+	& .career-sheet-conservative-advance-options
+	{
+		grid-area: career-sheet-conservative-advance-options;
+	}
+
+	& .career-sheet-reckless-advance-options
+	{
+		grid-area: career-sheet-reckless-advance-options;
+	}
+
+	& .career-sheet-wound-advance-options
+	{
+		grid-area: career-sheet-wound-advance-options;
+	}
+
+	& .career-sheet-advance-option-content
+	{
+		color: yellow;
+		font-weight: bold;
+		line-height: 20px;
+	}
+
+	& .career-sheet-advance-option-title
+	{
+		font-size: 10pt;
+		font-weight: bold;
+		line-height: 20px;
+	}
+
+	& .career-sheet-career-aptitudes
+	{
+		display: flex;
+		width: 190px;
+		height: 200px;
+		margin: 20px;
+		padding: 10px;
+		background-color: papayawhip;
+		color: black;
+		text-shadow: none;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	& .career-sheet-career-aptitudes-content
+	{
+		font-style: italic;
+	}
+
+	& .career-sheet-career-aptitudes-title
+	{
+		font-size: 14pt;
+		font-variant-caps: small-caps;
+	}
+
+	& .career-sheet-race-restrictions
+	{
+		font-variant-caps: small-caps;
+	}
+
+	& .career-sheet-starting-stance
+	{
+		font-weight: bold;
+		text-shadow:
+			-1pt -1pt 0pt black,
+			-1pt 0 0pt black,
+			0 -1pt 0pt black,
+			-1pt 1pt 0pt black,
+			1pt -1pt 0pt black,
+			0 1pt 0pt black,
+			1pt 0 0pt black,
+			1pt 1pt 0pt black;
+	}
+}

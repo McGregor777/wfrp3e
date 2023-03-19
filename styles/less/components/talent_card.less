@@ -1,0 +1,89 @@
+.talent-card
+{
+	position: relative;
+	display: grid;
+	width: 315px;
+	height: 205px;
+	margin: 10px;
+	border: 1px solid black;
+	border-radius: 10px;
+	grid-template: 60px 1fr / 50px 1fr;
+	grid-template-areas:
+		'talent-card-type talent-card-name'
+		'talent-card-type talent-card-content';
+
+	& .talent-card-content
+	{
+		margin: auto 6px;
+		grid-area: talent-card-content;
+	}
+
+	& .talent-card-name
+	{
+		margin: auto 0;
+		background: padding-box saddlebrown;
+		color: white;
+		font: 20pt @font-title;
+		text-align: center;
+		text-shadow:
+				-1pt -1pt 0pt black,
+				-1pt 0 0pt black,
+				0 -1pt 0pt black,
+				-1pt 1pt 0pt black,
+				1pt -1pt 0pt black,
+				0 1pt 0pt black,
+				1pt 0 0pt black,
+				1pt 1pt 0pt black;
+		grid-area: talent-card-name;
+	}
+
+	& .talent-card-type
+	{
+		display: block;
+		margin: 10px auto;
+		padding: 0 2px 0 4px;
+		background-color: saddlebrown;
+		color: white;
+		font: 14pt @font-primary;
+		font-weight: bold;
+		text-align: center;
+		font-variant-caps: small-caps;
+		text-shadow:
+				-1pt -1pt 0pt black,
+				-1pt 0 0pt black,
+				0 -1pt 0pt black,
+				-1pt 1pt 0pt black,
+				1pt -1pt 0pt black,
+				0 1pt 0pt black,
+				1pt 0 0pt black,
+				1pt 1pt 0pt black;
+		writing-mode: vertical-lr;
+		transform: rotate(180deg);
+		grid-area: talent-card-type;
+
+		&.focus
+		{
+			background-color: blue;
+		}
+
+		&.reputation
+		{
+			background-color: purple;
+		}
+
+		&.tactic
+		{
+			background-color: red;
+		}
+	}
+
+	.item-delete-link
+	{
+		position: absolute;
+		display: block;
+		padding: 2px 3px;
+		bottom: 5px;
+		right: 5px;
+		line-height: 0;
+	}
+}

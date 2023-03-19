@@ -7,7 +7,7 @@ export default class WFRP3ECareerSheet extends ItemSheet
 			template: "systems/wfrp3e/templates/career-sheet.html",
 			//width: 530,
 			//height: 340,
-			classes: ["wfrp3e", "sheet", "item", "career"],
+			classes: ["wfrp3e", "sheet", "item", "career", "career-sheet"],
 		});
 	}
 
@@ -30,7 +30,7 @@ export default class WFRP3ECareerSheet extends ItemSheet
 	{
 		super.activateListeners(html);
 
-		html.find(".talent_socket_add").click(this._onTalentSocketAdd.bind(this));
+		html.find(".talent-socket-add").click(this._onTalentSocketAdd.bind(this));
 	}
 
 	async _onTalentSocketAdd(event)

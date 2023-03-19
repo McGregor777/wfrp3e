@@ -1,35 +1,35 @@
-<tr class="item weapon_row" data-item-id="{{weapon._id}}">
-	<td class="table_cell_left_aligned">
-		<a class="item_name_link">{{weapon.name}}</a>
+<tr class="item weapon-row" data-item-id="{{weapon._id}}">
+	<td class="left-aligned">
+		<a class="item-name-link">{{weapon.name}}</a>
 	</td>
 
-	<td class="table_cell_shrinked">
-		<span class="weapon_row_damage_rating">{{weapon.system.damage_rating}}</span>
+	<td class="shrinked">
+		<span class="weapon-row-damage-rating">{{weapon.system.damage_rating}}</span>
 	</td>
 
-	<td class="table_cell_shrinked">
-		<span class="weapon_row_critical_rating">{{weapon.system.critical_rating}}</span>
+	<td class="shrinked">
+		<span class="weapon-row-critical-rating">{{weapon.system.critical_rating}}</span>
 	</td>
 
-	<td class="table_cell_center_aligned">
-		<span class="weapon_row_range">{{localize weapon.system.range}}</span>
+	<td class="center-aligned">
+		<span class="weapon-row-range">{{localize weapon.system.range}}</span>
 	</td>
 
-	<td class="table_cell_center_aligned">
-		<span class="weapon_row_qualities">{{weapon.system.qualities}}</span>
+	<td class="center-aligned">
+		<span class="weapon-row-qualities">{{weapon.system.qualities}}</span>
 	</td>
 
-	<td class="table_cell_center_aligned">
-		<span class="weapon_row_group">{{localize weapon.system.group}}</span>
+	<td class="center-aligned">
+		<span class="weapon-row-group">{{localize weapon.system.group}}</span>
 	</td>
 
-	<td class="table_cell_shrinked">
-		<span class="weapon_row_encumbrance">{{weapon.system.encumbrance}}</span>
+	<td class="shrinked">
+		<span class="weapon-row-encumbrance">{{weapon.system.encumbrance}}</span>
 	</td>
 
 	{{#if isOwner}}
-	<td class="table_cell_shrinked">
-		<a class="item_delete_link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
+	<td class="shrinked">
+		<a class="item-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
 	</td>
 	{{/if}}
 </tr>

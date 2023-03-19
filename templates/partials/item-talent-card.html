@@ -1,9 +1,9 @@
-<div class="item talent_card_div" data-item-id="{{talent._id}}">
-	<span class="talent_card_type {{talent.system.type}}">{{localize talent.system.type}}</span>
-	<span class="item_name_link talent_card_name">{{talent.name}}</span>
-	<div class="talent_card_content_div">{{{talent.system.description}}}</div>
+<div class="item talent-card" data-item-id="{{talent._id}}">
+	<span class="talent-card-type {{talent.system.type}}">{{localize talent.system.type}}</span>
+	<span class="talent-card-name item-name-link">{{talent.name}}</span>
+	<div class="talent-card-content">{{{talent.system.description}}}</div>
 
 	{{#if isOwner}}
-	<a class="item_delete_link card_delete_link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
+	<a class="item-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
 	{{/if}}
 </div>

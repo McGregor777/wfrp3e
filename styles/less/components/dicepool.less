@@ -1,0 +1,240 @@
+.dice-additional-flavor
+{
+	font-style: oblique;
+	font-size: 12px;
+}
+
+.dice-array
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+
+	& .dice-rolls
+	{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+
+		& .roll
+		{
+			width: 54px;
+			float: left;
+		}
+	}
+}
+
+.dice-pool-dialog
+{
+	& .dice-pool
+	{
+		margin-top: 10px;
+		min-height: 54px;
+		text-align: center;
+	}
+
+	& .pool-value
+	{
+		border: 1px solid black;
+		background-color: #ddd;
+
+		& input
+		{
+			border: 0;
+			font-size: 25px;
+			text-align: center;
+			background: none;
+			width:100%;
+		}
+	}
+
+	& .pool-text
+	{
+		text-align: left;
+
+		& label
+		{
+			margin-left: 1.2em;
+		}
+	}
+
+	& .upgrade-buttons
+	{
+		display: flex;
+
+		& button
+		{
+			line-height: 20px;
+			font-size: 12px;
+			text-align: left;
+		}
+	}
+
+	& .pool-dice-pool
+	{
+		padding: 5px 1px;
+		width: calc(100% - 2px);
+	}
+
+	& .pool-additional-container
+	{
+		padding: 0 1px;
+		width: calc(100% - 2px);
+		min-width: 300px;
+
+		& .pool-additional
+		{
+			text-align: left;
+
+			& input[type="button"]
+			{
+				margin: 0 3px;
+			}
+		}
+	}
+
+	& .pool-roll-options
+	{
+		margin-top: 10px;
+
+		& select, input
+		{
+			margin-top: 1px;
+			margin-right: 1px;
+		}
+	}
+
+	& .roll-button
+	{
+		margin-top: 15px;
+	}
+
+	& table
+	{
+		width: 300px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	& .hide
+	{
+		display: none;
+	}
+
+	& .minimize
+	{
+		max-width: 20%;
+	}
+
+	& .maximize
+	{
+		width: 100%;
+		// max-width: 78%;
+	}
+}
+
+.dice-result
+{
+	& .roll-success
+	{
+		color: darkgreen;
+	}
+	& .roll-failure
+	{
+		color: darkred;
+	}
+}
+
+.dice-tooltip
+{
+	& .dice-rolls
+	{
+		& .roll
+		{
+			& > .special-die
+			{
+				width: 44px;
+			}
+		}
+	}
+}
+
+.item-display
+{
+	margin: 0.5rem 0 0.8rem 0;
+	padding: 0.5rem;
+	border: 1px solid #782e22;
+	background: rgba(255, 255, 255, 0.75);
+
+	& img
+	{
+		height: 50px;
+		width: auto;
+	}
+
+	& h4
+	{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-around;
+
+		& input
+		{
+			width: 70%;
+		}
+	}
+
+	& .item-miss
+	{
+		text-align: center;
+		font-style: italic;
+		color: darkred;
+	}
+
+	& .item-pill
+	{
+		list-style-type: none;
+		padding: 0 5px;
+		background-color: #aaa;
+		border: 1px solid black;
+		border-radius: 12px;
+		display: inline-block;
+		margin: 1px;
+		cursor: pointer;
+		font-size: 12px;
+		line-height: 20px;
+		white-space: nowrap;
+
+		&.adjusted
+		{
+			color: #8b0000;
+		}
+
+		& .rank
+		{
+			padding-right: 15px;
+			&:hover
+			{
+				color: green;
+			}
+		}
+
+		& .item-delete
+		{
+			cursor: pointer;
+
+			&:hover
+			{
+				color: red;
+			}
+		}
+	}
+}
+
+.special-die
+{
+	border: none;
+}

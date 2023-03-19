@@ -1,11 +1,11 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
-		<input class="name_input" name="name" type="text" value="{{item.name}}" placeholder="Name" />
+		<input class="name-input" name="name" type="text" value="{{item.name}}" placeholder="Name" />
 	</header>
 
 	<section class="sheet-body">
-		<div class="sheet_form_div">
-			<select class="sheet_form_select" name="system.type" data-dtype="String">
+		<div class="sheet-form-div">
+			<select class="sheet-form-select" name="system.type" data-dtype="String">
 				{{selectOptions talentTypes selected=item.system.type}}
 			</select>
 		</div>

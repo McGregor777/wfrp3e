@@ -1,0 +1,175 @@
+@import "components/action_card";
+@import "components/career_sheet";
+@import "components/character_sheet";
+@import "components/dicepool";
+@import "components/talent_card";
+@import "components/typography";
+
+body
+{
+	font: 12pt @font-primary;
+}
+
+h1
+{
+	font: 32pt @font-title;
+}
+
+h2
+{
+	font: 24pt @font-title;
+}
+
+h3
+{
+	font: 20pt @font-title;
+
+	&.entity-name, .encounters &, .folder-header &, #players &, #pause &
+	{
+		background: unset;
+		border: unset !important;
+	}
+}
+
+h4
+{
+	margin: auto !important;
+	font: 16pt @font-primary;
+}
+
+h5
+{
+	font: 14pt @font-primary;
+}
+
+h6
+{
+	font: 12pt @font-primary;
+}
+
+input[type="checkbox"]
+{
+	width: 15px;
+	height: 15px;
+}
+
+p
+{
+	text-align: justify;
+}
+
+td
+{
+	padding: 4px;
+
+	&.center-aligned
+	{
+		text-align: center;
+	}
+
+	&.left-aligned
+	{
+		text-align: left;
+	}
+
+	&.right-aligned
+	{
+		text-align: right;
+	}
+
+	&.shrinked
+	{
+		width: 1px;
+		text-align: center;
+	}
+}
+
+th
+{
+	padding: 4px !important;
+
+	&.center-aligned
+	{
+		text-align: center;
+	}
+
+	&.left-aligned
+	{
+		text-align: left;
+	}
+
+	&.right-aligned
+	{
+		text-align: right;
+	}
+
+	&.shrinked
+	{
+		width: 1px;
+		text-align: center;
+	}
+}
+
+.bottom-line
+{
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	bottom: 5px;
+	left: 10px;
+	right: 10px;
+	line-height: 0;
+
+	& > *
+	{
+		display: block;
+	}
+}
+
+.conservative-stance-meter
+{
+	background-color: green;
+}
+
+.editor
+{
+	flex-grow: 1;
+}
+
+& .face
+{
+	display: none;
+	width: 100%;
+	height: 100%;
+
+	&.active
+	{
+		display: block;
+	}
+}
+
+.reckless-stance-meter
+{
+	background-color: red;
+}
+
+.tab
+{
+	&.active
+	{
+		display: flex !important;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+}
+
+.tox.tox-tinymce
+{
+	height: 100% !important;
+}
+
+.tox-edit-area
+{
+	height: fit-content;
+}

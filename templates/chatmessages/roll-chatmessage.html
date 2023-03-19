@@ -1,0 +1,70 @@
+<div class="wfrp3e dice-roll">
+	{{#if data.additionalFlavourText}}
+		<div class="dice-additional-flavor">{{data.additionalFlavourText}}</div>
+	{{/if}}
+
+	{{#if publicRoll }}
+		<div class="dice-result">
+			{{#if hasStandard}}
+				<div class="dice-formula">{{formula}}</div>
+			{{/if}}
+
+			{{#if hasSpecialDice}}
+				<div class="dice-array">
+					<ol class="dice-rolls">
+						{{#each specialDice}}
+							{{#if this.isSpecialDie}}
+								{{#each this.rolls}}
+									<li class="roll">{{{this.result}}}</li>
+								{{/each}}
+							{{/if}}
+						{{/each}}
+					</ol>
+				</div>
+
+				<div>
+					{{#each addedResults}}
+						{{#if (ne this.value 0)}}
+							<div>{{#if this.negative}}-{{else}}+{{/if}}{{this.value}}{{{this.symbol}}}</div>
+						{{/if}}
+					{{/each}}
+				</div>
+			{{/if}}
+
+			{{{tooltip}}}
+
+			{{#if hasStandard}}
+				<h4 class="dice-total">{{total}}</h4>
+			{{/if}}
+
+			{{#if hasSpecialDice}}
+				<ul>
+					{{#if hasSuccess}}
+						{{#if symbols.successes}}
+							<li class="roll-success">{{localize "Roll.Successful"}}</li>
+						{{else}}
+							<li class="roll-failure">{{localize "Roll.Failed"}}</li>
+						{{/if}}
+					{{/if}}
+
+					{{#each symbols as | result key |}}
+						{{#if this}}
+							{{#unless (equalTo key "righteousSuccesses")}}
+								{{#if (equalTo key "successes")}}
+									<li>
+										{{format (lookup ../this.diceResults [key]) nb=result }}
+										{{#if (superiorTo (lookup ../symbols "righteousSuccesses") 0)}}
+											{{format (lookup ../this.diceResults "righteousSuccesses") nb=(lookup ../symbols "righteousSuccesses") }}
+										{{/if}}
+									</li>
+								{{else}}
+									<li>{{format (lookup ../this.diceResults [key]) nb=result }}</li>
+								{{/if}}
+							{{/unless}}
+						{{/if}}
+					{{/each}}
+				</ul>
+			{{/if}}
+		</div>
+	{{/if}}
+</div>

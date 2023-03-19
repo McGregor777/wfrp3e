@@ -1,3 +1,5 @@
+import DiceHelper from "../dice/DiceHelper.js";
+
 /**
  * Provides the data and general interaction with Actor Sheets - Abstract class.
  *
@@ -5,7 +7,7 @@
  *
  * @see WFRP3CharacterSheet - Data and main computation model (this.actor)
  */
-export default class WFRP3CharacterSheet extends ActorSheet
+export default class WFRP3ECharacterSheet extends ActorSheet
 {
 	/** @override */
 	static get defaultOptions()
@@ -13,10 +15,14 @@ export default class WFRP3CharacterSheet extends ActorSheet
 		return mergeObject(super.defaultOptions,
 		{
 			template: "systems/wfrp3e/templates/character-sheet.html",
-			width: 930,
+			width: 932,
 			height: 800,
-			classes: ["wfrp3e", "sheet", "character"],
-			tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "main"}]
+			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
+			tabs: [
+				{group: "primary", navSelector: ".character-sheet-primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
+				{group: "talents", navSelector: ".character-sheet-talent-tabs", contentSelector: ".character-sheet-talents", initial: "focus"},
+				{group: "actions", navSelector: ".character-sheet-action-tabs", contentSelector: ".character-sheet-actions", initial: "melee"}
+			]
 		});
 	}
 
@@ -31,7 +37,6 @@ export default class WFRP3CharacterSheet extends ActorSheet
 	{
 		const data = super.getData();
 
-		data.config = CONFIG.WFRP3E;
 		data.items = this.constructItemLists(data);
 
 		return data;
@@ -54,40 +59,40 @@ export default class WFRP3CharacterSheet extends ActorSheet
 				return 0;
 		});
 
-		const actions = sortedItems.filter(i => i.type == "action");
-		const talents = sortedItems.filter(i => i.type == "talent");
+		const actions = sortedItems.filter(i => i.type === "action");
+		const talents = sortedItems.filter(i => i.type === "talent");
 
 		const items =
 		{
-			skills: sortedItems.filter(i => i.type == "skill"),
-			careers: data.items.filter(i => i.type == "career"),
+			skills: sortedItems.filter(i => i.type === "skill"),
+			careers: data.items.filter(i => i.type === "career"),
 			talents:
 			{
-				focus: talents.filter(i => i.system.type == "focus"),
-				reputation: talents.filter(i => i.system.type == "reputation"),
-				tactic: talents.filter(i => i.system.type == "tactic"),
-				faith: talents.filter(i => i.system.type == "faith"),
-				order: talents.filter(i => i.system.type == "order"),
-				trick: talents.filter(i => i.system.type == "trick")
+				focus: talents.filter(i => i.system.type === "focus"),
+				reputation: talents.filter(i => i.system.type === "reputation"),
+				tactic: talents.filter(i => i.system.type === "tactic"),
+				faith: talents.filter(i => i.system.type === "faith"),
+				order: talents.filter(i => i.system.type === "order"),
+				trick: talents.filter(i => i.system.type === "trick")
 			},
-			abilities: sortedItems.filter(i => i.type == "ability"),
+			abilities: sortedItems.filter(i => i.type === "ability"),
 			actions:
 			{
-				melee: actions.filter(i => i.system.conservative.type == "melee"),
-				ranged: actions.filter(i => i.system.conservative.type == "ranged"),
-				support: actions.filter(i => i.system.conservative.type == "support"),
-				blessing: actions.filter(i => i.system.conservative.type == "blessing"),
-				spell: actions.filter(i => i.system.conservative.type == "spell")
+				melee: actions.filter(i => i.system.conservative.type === "melee"),
+				ranged: actions.filter(i => i.system.conservative.type === "ranged"),
+				support: actions.filter(i => i.system.conservative.type === "support"),
+				blessing: actions.filter(i => i.system.conservative.type === "blessing"),
+				spell: actions.filter(i => i.system.conservative.type === "spell")
 			},
-			conditions: sortedItems.filter(i => i.type == "condition"),
-			diseases: sortedItems.filter(i => i.type == "disease"),
-			insanities: sortedItems.filter(i => i.type == "insanity"),
-			mutations: sortedItems.filter(i => i.type == "mutations"),
-			criticalWounds: sortedItems.filter(i => i.type == "criticalWound"),
-			weapons: sortedItems.filter(i => i.type == "weapon"),
-			armours: sortedItems.filter(i => i.type == "armour"),
-			money: sortedItems.filter(i => i.type == "money"),
-			trappings: sortedItems.filter(i => i.type == "trapping")
+			conditions: sortedItems.filter(i => i.type === "condition"),
+			diseases: sortedItems.filter(i => i.type === "disease"),
+			insanities: sortedItems.filter(i => i.type === "insanity"),
+			mutations: sortedItems.filter(i => i.type === "mutations"),
+			criticalWounds: sortedItems.filter(i => i.type === "criticalWound"),
+			weapons: sortedItems.filter(i => i.type === "weapon"),
+			armours: sortedItems.filter(i => i.type === "armour"),
+			money: sortedItems.filter(i => i.type === "money"),
+			trappings: sortedItems.filter(i => i.type === "trapping")
 		};
 
 		return items;
@@ -102,13 +107,12 @@ export default class WFRP3CharacterSheet extends ActorSheet
 	{
 		super.activateListeners(html);
 
-		html.find(".item_edit_link").click(this._onItemEdit.bind(this));
-		html.find(".item_delete_link").click(this._onItemDelete.bind(this));
-		html.find(".item_name_link").mousedown(this._onItemClick.bind(this));
-		html.find(".skill_training_level_input").change(this._onChangeSkillTrainingLevel.bind(this));
-		html.find(".item_type_tab").mousedown(this._onItemTypeTabClick.bind(this));
-		html.find(".flip_link").mousedown(this._onFlipClick.bind(this));
-		html.find(".quantity_link").mousedown(this._onQuantityClick.bind(this));
+		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
+		html.find(".item-delete-link").click(this._onItemDelete.bind(this));
+		html.find(".item-name-link").mousedown(this._onItemClick.bind(this));
+		html.find(".skill-training-level-input").change(this._onChangeSkillTrainingLevel.bind(this));
+		html.find(".flip-link").mousedown(this._onFlipClick.bind(this));
+		html.find(".quantity-link").mousedown(this._onQuantityClick.bind(this));
 	} 
 
 	_getItemId(event)
@@ -169,9 +173,11 @@ export default class WFRP3CharacterSheet extends ActorSheet
 		{
 			// If left click...
 			case 0:
-				// If clicked Item is a skill or a weapon, start a test
-				if(clickedItem.type == "skill" || clickedItem.type == "weapon")
-					clickedItem.roll();
+				// If clicked Item is a skill or a weapon, prepare a check
+				if(clickedItem.type === "skill")
+					await DiceHelper.prepareSkillCheck(clickedItem);
+				else if(clickedItem.type === "weapon")
+					await DiceHelper.prepareSkillCheck(clickedItem);
 				// Else, open the clicked Item's sheet
 				else
 					clickedItem.sheet.render(true);
@@ -232,24 +238,13 @@ export default class WFRP3CharacterSheet extends ActorSheet
 			clickedItem.update({"system.training_level": Number(event.target.value)});
 	}
 
-	async _onItemTypeTabClick(event)
-	{
-		event.preventDefault();
-
-		const type = event.currentTarget.classList[1];
-		const parent = $(event.currentTarget).parents(".tab_div");
-
-		parent.find(".item_type_div.active").removeClass("active");
-		parent.find(".item_type_div." + type).addClass("active");
-	}
-
 	async _onFlipClick(event)
 	{
 		event.preventDefault();
 
 		const parent = $(event.currentTarget).parents(".item");
-		const activeFace = parent.find(".face_div.active");
-		const inactiveFace = parent.find(".face_div:not(.active)");
+		const activeFace = parent.find(".face.active");
+		const inactiveFace = parent.find(".face:not(.active)");
 
 		activeFace.removeClass("active");
 		inactiveFace.addClass("active");

@@ -1,0 +1,251 @@
+.character-sheet
+{
+	& .character-sheet-body
+	{
+		display: flex;
+		flex-direction: column;
+		height: calc(100% - 104px);
+
+		& .characteristics-tab
+		{
+			flex-flow: row wrap !important;
+
+			& .attributes
+			{
+				flex: 1 1 240px;
+
+				& .attributes-subdivision
+				{
+					display: flex;
+					flex-flow: row wrap;
+
+					& .attribute
+					{
+						flex: 1 0 80px;
+						padding: 5px;
+						text-align: center;
+
+						& .attribute-input
+						{
+							height: 60px !important;
+						}
+
+						& .attribute-input-container
+						{
+							display: flex;
+							flex-direction: column;
+						}
+
+						& .attribute-label
+						{
+							padding-top: 10px;
+						}
+					}
+				}
+			}
+
+			& .characteristics-and-impairments
+			{
+				display: flex;
+				width: auto;
+				flex-direction: column;
+
+				& .characteristics-and-impairments-subdivision
+				{
+					display: flex;
+					flex-direction: row;
+					flex-grow: 1;
+				}
+
+				& .characteristics
+				{
+					display: flex;
+					flex-direction: column;
+					padding: 0 10px;
+					flex: 1 1 auto;
+					justify-content: space-around;
+
+					& .characteristic
+					{
+						width: 130px;
+
+						& .characteristic-fortune-input
+						{
+							width: 25px !important;
+							height: 25px !important;
+							margin-left: 10px !important;
+							padding: 3px !important;
+							font-weight: bold;
+							text-align: center !important;
+						}
+
+						& .characteristic-input-container
+						{
+							display: flex;
+							flex-flow: row wrap;
+							justify-content: flex-end;
+						}
+
+						& .characteristic-title
+						{
+							font: 14pt @font-primary;
+							font-weight: bold;
+							text-align: center;
+							font-variant-caps: small-caps;
+						}
+
+						& .characteristic-value-input
+						{
+							display: block;
+							width: 35px !important;
+							height: 45px !important;
+							padding: 3px !important;
+							font-weight: bold;
+							text-align: center !important;
+						}
+					}
+				}
+
+				& .impairments
+				{
+					display: flex;
+					flex-direction: column;
+
+					.impairment
+					{
+						display: flex;
+						margin: auto;
+						flex: 1 1 auto;
+						flex-direction: row;
+
+						&:first-child
+						{
+							margin-bottom: 10px;
+						}
+
+						&:last-child
+						{
+							margin-top: 10px;
+						}
+
+						& .input
+						{
+							width: 30px !important;
+							height: auto !important;
+							padding: 5px;
+							border: 1px solid;
+							font-weight: bold;
+							text-align: center !important;
+						}
+
+						& .input.fatigue
+						{
+							border-color: red;
+						}
+
+						& .input.stress
+						{
+							border-color: blue;
+						}
+
+						& .title
+						{
+							display: block;
+							padding: 0 2px 0 4px;
+							font: 14pt @font-primary;
+							font-weight: bold;
+							text-align: center;
+							font-variant-caps: small-caps;
+							writing-mode: vertical-lr;
+							transform: rotate(180deg);
+						}
+					}
+				}
+			}
+
+			& .skills
+			{
+				flex: 1 1 auto;
+
+				& .skill-row
+				{
+					font-size: 12pt;
+					font-variant-caps: small-caps;
+				}
+			}
+
+			& .stance-meter .stance-slider::-webkit-slider-runnable-track
+			{
+				-webkit-appearance: none !important;
+				background: linear-gradient(to right, green, white, red) !important;
+			}
+		}
+
+		& .item-container
+		{
+			display: flex;
+			flex-flow: row wrap;
+
+			& .career-partial
+			{
+				display: flex;
+				flex-flow: row wrap;
+
+				& .career-advancement
+				{
+					flex: 1 1 300px;
+				}
+			}
+		}
+
+		& .talent-container, & .action-container
+		{
+			display: none;
+			flex-flow: row wrap;
+
+			&.active
+			{
+				display: flex;
+			}
+		}
+
+		& .character-sheet-talent-tabs, & .character-sheet-action-tabs
+		{
+			display: flex;
+			border-bottom: 1px solid #b5b3a4;
+			flex-flow: row wrap;
+			justify-content: space-around;
+
+			& > *
+			{
+				margin: 0 5px;
+			}
+		}
+	}
+
+	& .character-sheet-primary-tabs
+	{
+		display: flex;
+		height: auto !important;
+		flex-flow: row wrap;
+		justify-content: space-between;
+		font: 14pt @font-primary;
+		font-weight: bold;
+		text-align: center;
+		font-variant-caps: small-caps;
+
+		& > *
+		{
+			margin: 0 5px;
+		}
+	}
+
+	& .character-sheet-title
+	{
+		display: block;
+		font: 14pt @font-primary;
+		font-weight: bold;
+		text-align: center;
+		font-variant-caps: small-caps;
+	}
+}

@@ -1,96 +1,96 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
-		<input class="name_input" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}" />
+		<input class="name-input" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}" />
 	</header>
 
 	<section class="sheet-body">
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Advanced Career'}}</label>
-			<input class="sheet_form_input" name="system.advanced" type="checkbox" value="{{item.system.advanced}}" {{#if item.system.advanced}}checked{{/if}} />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Advanced Career'}}</label>
+			<input class="sheet-form-input" name="system.advanced" type="checkbox" value="{{item.system.advanced}}" {{#if item.system.advanced}}checked{{/if}} />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Race Restrictions'}}</label>
-			<input class="sheet_form_input" name="system.race_restrictions" type="text" value="{{item.system.race_restrictions}}" placeholder="{{localize 'Race Restrictions'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Race Restrictions'}}</label>
+			<input class="sheet-form-input" name="system.race_restrictions" type="text" value="{{item.system.race_restrictions}}" placeholder="{{localize 'Race Restrictions'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Traits'}}</label>
-			<input class="sheet_form_input" name="system.traits" type="text" value="{{item.system.traits}}" placeholder="{{localize 'Traits'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Traits'}}</label>
+			<input class="sheet-form-input" name="system.traits" type="text" value="{{item.system.traits}}" placeholder="{{localize 'Traits'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Talent Sockets'}}</label>
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Talent Sockets'}}</label>
 			{{#each item.system.talent_sockets as | type ty |}}
-			<select class="sheet_form_select" name="system.talent_sockets.{{ty}}" data-dtype="String">
-				{{selectOptions ../talentTypes selected=type}}
-			</select>
-			{{/each}}
-			<a class="talent_socket_add"><span class="fas fa-plus"></span></a>
+				<select class="sheet-form-select" name="system.talent_sockets.{{ty}}" data-dtype="String">
+					{{selectOptions ../talentTypes selected=type}}
+				</select>
+				{{/each}}
+			<a class="talent-socket-add"><span class="fas fa-plus"></span></a>
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Primary Characteristics'}}</label>
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Primary Characteristics'}}</label>
 			{{#each item.system.primary_characteristics as | characteristic char |}}
-			<select name="system.primary_characteristics.{{char}}" data-dtype="String">
-				{{selectOptions ../characteristics selected=characteristic}}
-			</select>
+				<select name="system.primary_characteristics.{{char}}" data-dtype="String">
+					{{selectOptions ../characteristics selected=characteristic}}
+				</select>
 			{{/each}}
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Career Skills'}}</label>
-			<input class="sheet_form_input" name="system.career_skills" type="text" value="{{item.system.career_skills}}" placeholder="{{localize 'Career Skills'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Career Skills'}}</label>
+			<input class="sheet-form-input" name="system.career_skills" type="text" value="{{item.system.career_skills}}" placeholder="{{localize 'Career Skills'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Starting Conservative Segments'}}</label>
-			<input class="sheet_form_input" name="system.starting_stance.conservative_segments" type="number" value="{{item.system.starting_stance.conservative_segments}}" placeholder="{{localize 'Starting Conservative Segments'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Starting Conservative Segments'}}</label>
+			<input class="sheet-form-input" name="system.starting_stance.conservative_segments" type="number" value="{{item.system.starting_stance.conservative_segments}}" placeholder="{{localize 'Starting Conservative Segments'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Starting Reckless Segments'}}</label>
-			<input class="sheet_form_input" name="system.starting_stance.reckless_segments" type="number" value="{{item.system.starting_stance.reckless_segments}}" placeholder="{{localize 'Starting Reckless Segments'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Starting Reckless Segments'}}</label>
+			<input class="sheet-form-input" name="system.starting_stance.reckless_segments" type="number" value="{{item.system.starting_stance.reckless_segments}}" placeholder="{{localize 'Starting Reckless Segments'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Action Advance Options'}}</label>
-			<input class="sheet_form_input" name="system.advance_options.action" type="number" value="{{item.system.advance_options.action}}" placeholder="{{localize 'Action Advance Options'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Action Advance Options'}}</label>
+			<input class="sheet-form-input" name="system.advance_options.action" type="number" value="{{item.system.advance_options.action}}" placeholder="{{localize 'Action Advance Options'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Talent Advance Options'}}</label>
-			<input class="sheet_form_input" name="system.advance_options.talent" type="number" value="{{item.system.advance_options.talent}}" placeholder="{{localize 'Talent Advance Options'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Talent Advance Options'}}</label>
+			<input class="sheet-form-input" name="system.advance_options.talent" type="number" value="{{item.system.advance_options.talent}}" placeholder="{{localize 'Talent Advance Options'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Skill Advance Options'}}</label>
-			<input class="sheet_form_input" name="system.advance_options.skill" type="number" value="{{item.system.advance_options.skill}}" placeholder="{{localize 'Skill Advance Options'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Skill Advance Options'}}</label>
+			<input class="sheet-form-input" name="system.advance_options.skill" type="number" value="{{item.system.advance_options.skill}}" placeholder="{{localize 'Skill Advance Options'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Fortune Advance Options'}}</label>
-			<input class="sheet_form_input" name="system.advance_options.fortune" type="number" value="{{item.system.advance_options.fortune}}" placeholder="{{localize 'Fortune Advance Options'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Fortune Advance Options'}}</label>
+			<input class="sheet-form-input" name="system.advance_options.fortune" type="number" value="{{item.system.advance_options.fortune}}" placeholder="{{localize 'Fortune Advance Options'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Conservative Advance Options'}}</label>
-			<input class="sheet_form_input" name="system.advance_options.conservative" type="number" value="{{item.system.advance_options.conservative}}" placeholder="{{localize 'Conservative Advance Options'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Conservative Advance Options'}}</label>
+			<input class="sheet-form-input" name="system.advance_options.conservative" type="number" value="{{item.system.advance_options.conservative}}" placeholder="{{localize 'Conservative Advance Options'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Reckless Advance Options'}}</label>
-			<input class="sheet_form_input" name="system.advance_options.reckless" type="number" value="{{item.system.advance_options.reckless}}" placeholder="{{localize 'Reckless Advance Options'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Reckless Advance Options'}}</label>
+			<input class="sheet-form-input" name="system.advance_options.reckless" type="number" value="{{item.system.advance_options.reckless}}" placeholder="{{localize 'Reckless Advance Options'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Wounds Advance Options'}}</label>
-			<input class="sheet_form_input" name="system.advance_options.wound" type="number" value="{{item.system.advance_options.wound}}" placeholder="{{localize 'Wounds Advance Options'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Wounds Advance Options'}}</label>
+			<input class="sheet-form-input" name="system.advance_options.wound" type="number" value="{{item.system.advance_options.wound}}" placeholder="{{localize 'Wounds Advance Options'}}" />
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Sommary'}}</label>
-			<input class="sheet_form_input" name="system.sommary" type="text" value="{{item.system.sommary}}" placeholder="{{localize 'Sommary'}}" />
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Sommary'}}</label>
+			<input class="sheet-form-input" name="system.sommary" type="text" value="{{item.system.sommary}}" placeholder="{{localize 'Sommary'}}" />
 		</div>
 
 		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}

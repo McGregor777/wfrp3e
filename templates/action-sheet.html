@@ -1,112 +1,112 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
-		<input class="name_input" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}'" />
+		<input class="name-input" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}'" />
 	</header>
 
 	{{!--Sheet Navigation Tab--}}
-	<nav class="sheet-tabs tabs" data-group="primary">
-		<a class="tab_link conservative_tab_link" data-tab="conservative">{{localize 'Conservative'}}</a>
-		<a class="tab_link reckless_tab_link" data-tab="reckless">{{localize 'Reckless'}}</a>
+	<nav class="action-sheet-tabs sheet-tabs tabs" data-group="primary">
+		<a class="tab-link conservative-tab-link" data-tab="conservative">{{localize 'Conservative'}}</a>
+		<a class="tab-link reckless-tab-link" data-tab="reckless">{{localize 'Reckless'}}</a>
 	</nav>
 
-	<section class="sheet-body">
-		<div class="tab_div tab conservative_tab_link" data-group="primary" data-tab="conservative">
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Conservative'}} - {{localize 'Name'}}</label>
-				<input class="sheet_form_input" name="system.conservative.name" type="text" value="{{item.system.conservative.name}}" placeholder="{{localize 'Name'}}" />
+	<section class="action-sheet-body sheet-body">
+		<div class="tab tab-container conservative-tab-link" data-group="primary" data-tab="conservative">
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Conservative'}} - {{localize 'Name'}}</label>
+				<input class="sheet-form-input" name="system.conservative.name" type="text" value="{{item.system.conservative.name}}" placeholder="{{localize 'Name'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Conservative'}} - {{localize 'Art'}}</label>
-				<input class="sheet_form_input" name="system.conservative.art" type="text" value="{{item.system.conservative.art}}" placeholder="{{localize 'Art'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Conservative'}} - {{localize 'Art'}}</label>
+				<input class="sheet-form-input" name="system.conservative.art" type="text" value="{{item.system.conservative.art}}" placeholder="{{localize 'Art'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Conservative'}} - {{localize 'Type'}}</label>
-				<select class="sheet_form_select" name="system.conservative.type" data-dtype="String">
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Conservative'}} - {{localize 'Type'}}</label>
+				<select class="sheet-form-select" name="system.conservative.type" data-dtype="String">
 					{{selectOptions actionTypes selected=item.system.conservative.type}}
 				</select>
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Conservative'}} - {{localize 'Traits'}}</label>
-				<input class="sheet_form_input" name="system.conservative.traits" type="text" value="{{item.system.conservative.traits}}" placeholder="{{localize 'Traits'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Conservative'}} - {{localize 'Traits'}}</label>
+				<input class="sheet-form-input" name="system.conservative.traits" type="text" value="{{item.system.conservative.traits}}" placeholder="{{localize 'Traits'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Conservative'}} - {{localize 'Recharge Rating'}}</label>
-				<input class="sheet_form_input" name="system.conservative.recharge_rating" type="number" value="{{item.system.conservative.recharge_rating}}" placeholder="{{localize 'Recharge Rating'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Conservative'}} - {{localize 'Recharge Rating'}}</label>
+				<input class="sheet-form-input" name="system.conservative.recharge_rating" type="number" value="{{item.system.conservative.recharge_rating}}" placeholder="{{localize 'Recharge Rating'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Conservative'}} - {{localize 'Challenge Dice'}}</label>
-				<input class="sheet_form_input" name="system.conservative.difficulty_modifiers.challenge_dice" type="number" value="{{item.system.conservative.difficulty_modifiers.challenge_dice}}" placeholder="{{localize 'Challenge Dice'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Conservative'}} - {{localize 'Challenge Dice'}}</label>
+				<input class="sheet-form-input" name="system.conservative.difficulty_modifiers.challenge_dice" type="number" value="{{item.system.conservative.difficulty_modifiers.challenge_dice}}" placeholder="{{localize 'Challenge Dice'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Conservative'}} - {{localize 'Misfortune Dice'}}</label>
-				<input class="sheet_form_input" name="system.conservative.difficulty_modifiers.misfortune_dice" type="number" value="{{item.system.conservative.difficulty_modifiers.misfortune_dice}}" placeholder="{{localize 'Misfortune Dice'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Conservative'}} - {{localize 'Misfortune Dice'}}</label>
+				<input class="sheet-form-input" name="system.conservative.difficulty_modifiers.misfortune_dice" type="number" value="{{item.system.conservative.difficulty_modifiers.misfortune_dice}}" placeholder="{{localize 'Misfortune Dice'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Conservative'}} - {{localize 'Check'}}</label>
-				<input class="sheet_form_input" name="system.conservative.check" type="text" value="{{item.system.conservative.check}}" placeholder="{{localize 'Check'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Conservative'}} - {{localize 'Check'}}</label>
+				<input class="sheet-form-input" name="system.conservative.check" type="text" value="{{item.system.conservative.check}}" placeholder="{{localize 'Check'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Conservative'}} - {{localize 'Requirements'}}</label>
-				<input class="sheet_form_input" name="system.conservative.requirements" type="text" value="{{item.system.conservative.requirements}}" placeholder="{{localize 'Requirements'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Conservative'}} - {{localize 'Requirements'}}</label>
+				<input class="sheet-form-input" name="system.conservative.requirements" type="text" value="{{item.system.conservative.requirements}}" placeholder="{{localize 'Requirements'}}" />
 			</div>
 
 			{{editor item.system.conservative.effects target="system.conservative.effects" button=true owner=owner editable=editable}}
 		</div>
 
-		<div class="tab_div tab reckless_tab_link" data-group="primary" data-tab="reckless">
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Reckless'}} - {{localize 'Name'}}</label>
-				<input class="sheet_form_input" name="system.reckless.name" type="text" value="{{item.system.reckless.name}}" placeholder="{{localize 'Name'}}" />
+		<div class="tab tab-container reckless-tab-link" data-group="primary" data-tab="reckless">
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Reckless'}} - {{localize 'Name'}}</label>
+				<input class="sheet-form-input" name="system.reckless.name" type="text" value="{{item.system.reckless.name}}" placeholder="{{localize 'Name'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Reckless'}} - {{localize "Art"}}</label>
-				<input class="sheet_form_input" name="system.reckless.art" type="text" value="{{item.system.reckless.art}}" placeholder="{{localize 'Art'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Reckless'}} - {{localize "Art"}}</label>
+				<input class="sheet-form-input" name="system.reckless.art" type="text" value="{{item.system.reckless.art}}" placeholder="{{localize 'Art'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Reckless'}} - {{localize 'Type'}}</label>
-				<select class="sheet_form_select" name="system.reckless.type" data-dtype="String">
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Reckless'}} - {{localize 'Type'}}</label>
+				<select class="sheet-form-select" name="system.reckless.type" data-dtype="String">
 					{{selectOptions actionTypes selected=item.system.reckless.type}}
 				</select>
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Reckless'}} - {{localize 'Traits'}}</label>
-				<input class="sheet_form_input" name="system.reckless.traits" type="text" value="{{item.system.reckless.traits}}" placeholder="{{localize 'Traits'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Reckless'}} - {{localize 'Traits'}}</label>
+				<input class="sheet-form-input" name="system.reckless.traits" type="text" value="{{item.system.reckless.traits}}" placeholder="{{localize 'Traits'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Reckless'}} - {{localize 'Recharge Rating'}}</label>
-				<input class="sheet_form_input" name="system.reckless.recharge_rating" type="number" value="{{item.system.reckless.recharge_rating}}" placeholder="{{localize 'Recharge Rating'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Reckless'}} - {{localize 'Recharge Rating'}}</label>
+				<input class="sheet-form-input" name="system.reckless.recharge_rating" type="number" value="{{item.system.reckless.recharge_rating}}" placeholder="{{localize 'Recharge Rating'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Reckless'}} - {{localize 'Challenge Dice'}}</label>
-				<input class="sheet_form_input" name="system.reckless.difficulty_modifiers.challenge_dice" type="number" value="{{item.system.reckless.difficulty_modifiers.challenge_dice}}" placeholder="{{localize 'Challenge Dice'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Reckless'}} - {{localize 'Challenge Dice'}}</label>
+				<input class="sheet-form-input" name="system.reckless.difficulty_modifiers.challenge_dice" type="number" value="{{item.system.reckless.difficulty_modifiers.challenge_dice}}" placeholder="{{localize 'Challenge Dice'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Reckless'}} - {{localize 'Misfortune Dice'}}</label>
-				<input class="sheet_form_input" name="system.reckless.difficulty_modifiers.misfortune_dice" type="number" value="{{item.system.reckless.difficulty_modifiers.misfortune_dice}}" placeholder="{{localize 'Misfortune Dice'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Reckless'}} - {{localize 'Misfortune Dice'}}</label>
+				<input class="sheet-form-input" name="system.reckless.difficulty_modifiers.misfortune_dice" type="number" value="{{item.system.reckless.difficulty_modifiers.misfortune_dice}}" placeholder="{{localize 'Misfortune Dice'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Reckless'}} - {{localize 'Check'}}</label>
-				<input class="sheet_form_input" name="system.reckless.check" type="text" value="{{item.system.reckless.check}}" placeholder="{{localize 'Check'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Reckless'}} - {{localize 'Check'}}</label>
+				<input class="sheet-form-input" name="system.reckless.check" type="text" value="{{item.system.reckless.check}}" placeholder="{{localize 'Check'}}" />
 			</div>
 
-			<div class="sheet_form_div">
-				<label class="sheet_form_label">{{localize 'Reckless'}} - {{localize 'Requirements'}}</label>
-				<input class="sheet_form_input" name="system.reckless.requirements" type="text" value="{{item.system.reckless.requirements}}" placeholder="{{localize 'Requirements'}}" />
+			<div class="sheet-form-div">
+				<label class="sheet-form-label">{{localize 'Reckless'}} - {{localize 'Requirements'}}</label>
+				<input class="sheet-form-input" name="system.reckless.requirements" type="text" value="{{item.system.reckless.requirements}}" placeholder="{{localize 'Requirements'}}" />
 			</div>
 
 			{{editor item.system.reckless.effects target="system.reckless.effects" button=true owner=owner editable=editable}}

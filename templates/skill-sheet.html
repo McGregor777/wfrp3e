@@ -6,16 +6,16 @@
 	</header>
 
 	<section class="sheet-body">
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Characteristic'}}</label>
-			<select class="sheet_form_select" name="system.characteristic" data-dtype="String">
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Characteristic'}}</label>
+			<select class="sheet-form-select" name="system.characteristic" data-dtype="String">
 				{{selectOptions characteristics selected=item.system.characteristic}}
 			</select>
 		</div>
 
-		<div class="sheet_form_div">
-			<label class="sheet_form_label">{{localize 'Advanced Skill'}}</label>
-			<input class="sheet_form_input" name="system.advanced" type="checkbox" value="{{item.system.advanced}}" {{#if item.system.advanced}}checked{{/if}}>
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'Advanced Skill'}}</label>
+			<input class="sheet-form-input" name="system.advanced" type="checkbox" value="{{item.system.advanced}}" {{#if item.system.advanced}}checked{{/if}}>
 		</div>
 
 		{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}

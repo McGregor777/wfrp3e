@@ -1,7 +1,19 @@
-export default function ()
+import PopoutEditor from "./PopoutEditor.js";
+
+export default function()
 {
     Hooks.on("init", () =>
 	{
+		Handlebars.registerHelper("superiorTo", function(value, compareValue)
+		{
+			return value > compareValue;
+		});
+
+		Handlebars.registerHelper("inferiorTo", function(value, compareValue)
+		{
+			return value < compareValue;
+		});
+
 		Handlebars.registerHelper("equalTo", function(value, compareValue)
 		{
 			return value == compareValue;
@@ -36,6 +48,11 @@ export default function ()
 			}
 		});
 
+		Handlebars.registerHelper("diceSymbols", function(text)
+		{
+			return PopoutEditor.renderDiceImages(text);
+		});
+
 		Handlebars.registerHelper("times", function(n, block)
 		{
 			var accum = "";
@@ -44,6 +61,11 @@ export default function ()
 				accum += block.fn(i);
 
 			return accum;
+		});
+
+		Handlebars.registerHelper("format", function(localizationKey, parameters)
+		{
+			return game.i18n.format(localizationKey, parameters.hash);
 		});
 	})
 }

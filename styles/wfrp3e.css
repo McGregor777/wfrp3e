@@ -1,0 +1,738 @@
+.action-card {
+  position: relative;
+  width: 280px;
+  height: 440px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 25px;
+  color: white;
+  text-align: center;
+  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+}
+.action-card .action-card-art-image {
+  width: 100%;
+  height: 100px;
+}
+.action-card .action-card-check {
+  width: 100%;
+  height: 20px;
+  background-color: saddlebrown;
+  color: white;
+  font: 12pt "Caslon Antique";
+  font-weight: bold;
+  text-align: center;
+  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+}
+.action-card .action-card-difficulty-modifiers {
+  text-align: center;
+  grid-area: difficulty-modifiers;
+}
+.action-card .action-card-effects {
+  width: calc(100% - 20px);
+  margin: 10px;
+  color: black;
+  font-size: 10pt;
+  text-shadow: none;
+}
+.action-card .action-card-header {
+  display: grid;
+  width: 100%;
+  height: 70px;
+  border-radius: 25px 25px 0 0;
+  grid-template-columns: 50px 1fr 50px;
+  grid-template-rows: 50px 20px;
+  grid-template-areas: 'action-card-type action-card-name action-card-recharge-rating' 'action-card-difficulty-modifiers action-card-traits action-card-recharge-rating';
+}
+.action-card .action-card-name {
+  margin: auto;
+  font: 16pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  grid-area: action-card-name;
+}
+.action-card .action-card-recharge-rating {
+  width: 30px;
+  height: 30px;
+  margin: 20px 10px 0 0;
+  background-color: cornflowerblue;
+  border-radius: 50%;
+  font: 16pt "Caslon Antique";
+  font-weight: bold;
+  line-height: 30px;
+  grid-area: action-card-recharge-rating;
+}
+.action-card .action-card-requirements {
+  width: 100%;
+  background-color: saddlebrown;
+  color: white;
+  text-align: center;
+  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+}
+.action-card .action-card-traits {
+  height: 20px;
+  font-style: italic;
+  font-stretch: condensed;
+  grid-area: action-card-traits;
+}
+.action-card .action-card-type {
+  margin: 10px 0 0 10px;
+  border: none;
+  grid-area: action-card-type;
+}
+.action-card .face.conservative > .action-card-header {
+  background-color: green;
+}
+.action-card .face.reckless > .action-card-header {
+  background-color: red;
+}
+.career-sheet {
+  position: relative;
+  width: 510px;
+  height: 635px;
+  margin: 10px;
+  padding: 20px;
+  background-color: saddlebrown;
+  border: 1px solid black;
+  color: white;
+  text-align: center;
+}
+.career-sheet .career-sheet-description {
+  padding: 5px 10px 10px;
+  background-color: antiquewhite;
+  color: black;
+  font-size: 10pt;
+  text-shadow: none;
+  -moz-column-count: 2;
+  column-count: 2;
+  -moz-column-fill: auto;
+  column-fill: auto;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
+  -moz-column-rule: 1px solid red;
+  column-rule: 1px solid red;
+}
+.career-sheet .career-sheet-details {
+  width: 240px;
+}
+.career-sheet .career-sheet-header {
+  width: 385px;
+  margin: 0 auto;
+  background-color: dimgrey;
+  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+}
+.career-sheet .career-sheet-name {
+  position: relative;
+  font-size: 16pt;
+  font-weight: bold;
+  font-variant-caps: small-caps;
+}
+.career-sheet .career-sheet-traits {
+  font-style: italic;
+  text-align: center;
+}
+.career-sheet .career-sheet-advance-options {
+  display: grid;
+  width: 180px;
+  height: 185px;
+  margin: 0 auto;
+  background-color: burlywood;
+  font-variant-caps: small-caps;
+  line-height: 10pt;
+  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  grid-template-columns: 90px 90px;
+  grid-template-rows: 20px 40px 40px 40px 1fr;
+  grid-template-areas: 'career-sheet-advance-options-header career-sheet-advance-options-header' 'career-sheet-action-advance-options career-sheet-talent-advance-options' 'career-sheet-skill-advance-options career-sheet-fortune-advance-options' 'career-sheet-conservative-advance-options career-sheet-reckless-advance-options' 'career-sheet-wound-advance-options career-sheet-wound-advance-options';
+}
+.career-sheet .career-sheet-advance-options-header {
+  background-color: dimgrey;
+  color: white;
+  font-size: 14pt;
+  font-weight: bold;
+  line-height: 25px;
+  grid-area: career-sheet-advance-options-header;
+}
+.career-sheet .career-sheet-action-advance-options {
+  grid-area: career-sheet-action-advance-options;
+}
+.career-sheet .career-sheet-talent-advance-options {
+  grid-area: career-sheet-talent-advance-options;
+}
+.career-sheet .career-sheet-skill-advance-options {
+  grid-area: career-sheet-skill-advance-options;
+}
+.career-sheet .career-sheet-fortune-advance-options {
+  grid-area: career-sheet-fortune-advance-options;
+}
+.career-sheet .career-sheet-conservative-advance-options {
+  grid-area: career-sheet-conservative-advance-options;
+}
+.career-sheet .career-sheet-reckless-advance-options {
+  grid-area: career-sheet-reckless-advance-options;
+}
+.career-sheet .career-sheet-wound-advance-options {
+  grid-area: career-sheet-wound-advance-options;
+}
+.career-sheet .career-sheet-advance-option-content {
+  color: yellow;
+  font-weight: bold;
+  line-height: 20px;
+}
+.career-sheet .career-sheet-advance-option-title {
+  font-size: 10pt;
+  font-weight: bold;
+  line-height: 20px;
+}
+.career-sheet .career-sheet-career-aptitudes {
+  display: flex;
+  width: 190px;
+  height: 200px;
+  margin: 20px;
+  padding: 10px;
+  background-color: papayawhip;
+  color: black;
+  text-shadow: none;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.career-sheet .career-sheet-career-aptitudes-content {
+  font-style: italic;
+}
+.career-sheet .career-sheet-career-aptitudes-title {
+  font-size: 14pt;
+  font-variant-caps: small-caps;
+}
+.career-sheet .career-sheet-race-restrictions {
+  font-variant-caps: small-caps;
+}
+.career-sheet .career-sheet-starting-stance {
+  font-weight: bold;
+  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+}
+.character-sheet .character-sheet-body {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 104px);
+}
+.character-sheet .character-sheet-body .characteristics-tab {
+  flex-flow: row wrap !important;
+}
+.character-sheet .character-sheet-body .characteristics-tab .attributes {
+  flex: 1 1 240px;
+}
+.character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision {
+  display: flex;
+  flex-flow: row wrap;
+}
+.character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute {
+  flex: 1 0 80px;
+  padding: 5px;
+  text-align: center;
+}
+.character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute .attribute-input {
+  height: 60px !important;
+}
+.character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute .attribute-input-container {
+  display: flex;
+  flex-direction: column;
+}
+.character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute .attribute-label {
+  padding-top: 10px;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments {
+  display: flex;
+  width: auto;
+  flex-direction: column;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics-and-impairments-subdivision {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  flex: 1 1 auto;
+  justify-content: space-around;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic {
+  width: 130px;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-fortune-input {
+  width: 25px !important;
+  height: 25px !important;
+  margin-left: 10px !important;
+  padding: 3px !important;
+  font-weight: bold;
+  text-align: center !important;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-input-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-title {
+  font: 14pt "ArnoPro";
+  font-weight: bold;
+  text-align: center;
+  font-variant-caps: small-caps;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-value-input {
+  display: block;
+  width: 35px !important;
+  height: 45px !important;
+  padding: 3px !important;
+  font-weight: bold;
+  text-align: center !important;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments {
+  display: flex;
+  flex-direction: column;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment {
+  display: flex;
+  margin: auto;
+  flex: 1 1 auto;
+  flex-direction: row;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment:first-child {
+  margin-bottom: 10px;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment:last-child {
+  margin-top: 10px;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .input {
+  width: 30px !important;
+  height: auto !important;
+  padding: 5px;
+  border: 1px solid;
+  font-weight: bold;
+  text-align: center !important;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .input.fatigue {
+  border-color: red;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .input.stress {
+  border-color: blue;
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .title {
+  display: block;
+  padding: 0 2px 0 4px;
+  font: 14pt "ArnoPro";
+  font-weight: bold;
+  text-align: center;
+  font-variant-caps: small-caps;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+.character-sheet .character-sheet-body .characteristics-tab .skills {
+  flex: 1 1 auto;
+}
+.character-sheet .character-sheet-body .characteristics-tab .skills .skill-row {
+  font-size: 12pt;
+  font-variant-caps: small-caps;
+}
+.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-slider::-webkit-slider-runnable-track {
+  -webkit-appearance: none !important;
+  background: linear-gradient(to right, green, white, red) !important;
+}
+.character-sheet .character-sheet-body .item-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+.character-sheet .character-sheet-body .item-container .career-partial {
+  display: flex;
+  flex-flow: row wrap;
+}
+.character-sheet .character-sheet-body .item-container .career-partial .career-advancement {
+  flex: 1 1 300px;
+}
+.character-sheet .character-sheet-body .talent-container,
+.character-sheet .character-sheet-body .action-container {
+  display: none;
+  flex-flow: row wrap;
+}
+.character-sheet .character-sheet-body .talent-container.active,
+.character-sheet .character-sheet-body .action-container.active {
+  display: flex;
+}
+.character-sheet .character-sheet-body .character-sheet-talent-tabs,
+.character-sheet .character-sheet-body .character-sheet-action-tabs {
+  display: flex;
+  border-bottom: 1px solid #b5b3a4;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.character-sheet .character-sheet-body .character-sheet-talent-tabs > *,
+.character-sheet .character-sheet-body .character-sheet-action-tabs > * {
+  margin: 0 5px;
+}
+.character-sheet .character-sheet-primary-tabs {
+  display: flex;
+  height: auto !important;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  font: 14pt "ArnoPro";
+  font-weight: bold;
+  text-align: center;
+  font-variant-caps: small-caps;
+}
+.character-sheet .character-sheet-primary-tabs > * {
+  margin: 0 5px;
+}
+.character-sheet .character-sheet-title {
+  display: block;
+  font: 14pt "ArnoPro";
+  font-weight: bold;
+  text-align: center;
+  font-variant-caps: small-caps;
+}
+.dice-additional-flavor {
+  font-style: oblique;
+  font-size: 12px;
+}
+.dice-array {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.dice-array .dice-rolls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.dice-array .dice-rolls .roll {
+  width: 54px;
+  float: left;
+}
+.dice-pool-dialog .dice-pool {
+  margin-top: 10px;
+  min-height: 54px;
+  text-align: center;
+}
+.dice-pool-dialog .pool-value {
+  border: 1px solid black;
+  background-color: #ddd;
+}
+.dice-pool-dialog .pool-value input {
+  border: 0;
+  font-size: 25px;
+  text-align: center;
+  background: none;
+  width: 100%;
+}
+.dice-pool-dialog .pool-text {
+  text-align: left;
+}
+.dice-pool-dialog .pool-text label {
+  margin-left: 1.2em;
+}
+.dice-pool-dialog .upgrade-buttons {
+  display: flex;
+}
+.dice-pool-dialog .upgrade-buttons button {
+  line-height: 20px;
+  font-size: 12px;
+  text-align: left;
+}
+.dice-pool-dialog .pool-dice-pool {
+  padding: 5px 1px;
+  width: calc(100% - 2px);
+}
+.dice-pool-dialog .pool-additional-container {
+  padding: 0 1px;
+  width: calc(100% - 2px);
+  min-width: 300px;
+}
+.dice-pool-dialog .pool-additional-container .pool-additional {
+  text-align: left;
+}
+.dice-pool-dialog .pool-additional-container .pool-additional input[type="button"] {
+  margin: 0 3px;
+}
+.dice-pool-dialog .pool-roll-options {
+  margin-top: 10px;
+}
+.dice-pool-dialog .pool-roll-options select,
+.dice-pool-dialog .pool-roll-options input {
+  margin-top: 1px;
+  margin-right: 1px;
+}
+.dice-pool-dialog .roll-button {
+  margin-top: 15px;
+}
+.dice-pool-dialog table {
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.dice-pool-dialog .hide {
+  display: none;
+}
+.dice-pool-dialog .minimize {
+  max-width: 20%;
+}
+.dice-pool-dialog .maximize {
+  width: 100%;
+}
+.dice-result .roll-success {
+  color: darkgreen;
+}
+.dice-result .roll-failure {
+  color: darkred;
+}
+.dice-tooltip .dice-rolls .roll > .special-die {
+  width: 44px;
+}
+.item-display {
+  margin: 0.5rem 0 0.8rem 0;
+  padding: 0.5rem;
+  border: 1px solid #782e22;
+  background: rgba(255, 255, 255, 0.75);
+}
+.item-display img {
+  height: 50px;
+  width: auto;
+}
+.item-display h4 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.item-display h4 input {
+  width: 70%;
+}
+.item-display .item-miss {
+  text-align: center;
+  font-style: italic;
+  color: darkred;
+}
+.item-display .item-pill {
+  list-style-type: none;
+  padding: 0 5px;
+  background-color: #aaa;
+  border: 1px solid black;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 1px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.item-display .item-pill.adjusted {
+  color: #8b0000;
+}
+.item-display .item-pill .rank {
+  padding-right: 15px;
+}
+.item-display .item-pill .rank:hover {
+  color: green;
+}
+.item-display .item-pill .item-delete {
+  cursor: pointer;
+}
+.item-display .item-pill .item-delete:hover {
+  color: red;
+}
+.special-die {
+  border: none;
+}
+.talent-card {
+  position: relative;
+  display: grid;
+  width: 315px;
+  height: 205px;
+  margin: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  grid-template: 60px 1fr / 50px 1fr;
+  grid-template-areas: 'talent-card-type talent-card-name' 'talent-card-type talent-card-content';
+}
+.talent-card .talent-card-content {
+  margin: auto 6px;
+  grid-area: talent-card-content;
+}
+.talent-card .talent-card-name {
+  margin: auto 0;
+  background: padding-box saddlebrown;
+  color: white;
+  font: 20pt "Caslon Antique";
+  text-align: center;
+  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  grid-area: talent-card-name;
+}
+.talent-card .talent-card-type {
+  display: block;
+  margin: 10px auto;
+  padding: 0 2px 0 4px;
+  background-color: saddlebrown;
+  color: white;
+  font: 14pt "ArnoPro";
+  font-weight: bold;
+  text-align: center;
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  grid-area: talent-card-type;
+}
+.talent-card .talent-card-type.focus {
+  background-color: blue;
+}
+.talent-card .talent-card-type.reputation {
+  background-color: purple;
+}
+.talent-card .talent-card-type.tactic {
+  background-color: red;
+}
+.talent-card .item-delete-link {
+  position: absolute;
+  display: block;
+  padding: 2px 3px;
+  bottom: 5px;
+  right: 5px;
+  line-height: 0;
+}
+@font-face {
+  font-family: "ArnoPro";
+  src: url(../assets/fonts/ArnoPro-Regular.otf) format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "ArnoPro";
+  src: url(../assets/fonts/ArnoPro-Bold.otf) format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "ArnoPro";
+  src: url(../assets/fonts/ArnoPro-Italic.otf) format('opentype');
+  font-weight: normal;
+  font-style: italic;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "ArnoPro";
+  src: url(../assets/fonts/ArnoPro-BoldItalic.otf) format('opentype');
+  font-weight: bold;
+  font-style: italic;
+  font-stretch: normal;
+}
+body {
+  font: 12pt "ArnoPro";
+}
+h1 {
+  font: 32pt "Caslon Antique";
+}
+h2 {
+  font: 24pt "Caslon Antique";
+}
+h3 {
+  font: 20pt "Caslon Antique";
+}
+h3.entity-name,
+.encounters h3,
+.folder-header h3,
+#players h3,
+#pause h3 {
+  background: unset;
+  border: unset !important;
+}
+h4 {
+  margin: auto !important;
+  font: 16pt "ArnoPro";
+}
+h5 {
+  font: 14pt "ArnoPro";
+}
+h6 {
+  font: 12pt "ArnoPro";
+}
+input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+}
+p {
+  text-align: justify;
+}
+td {
+  padding: 4px;
+}
+td.center-aligned {
+  text-align: center;
+}
+td.left-aligned {
+  text-align: left;
+}
+td.right-aligned {
+  text-align: right;
+}
+td.shrinked {
+  width: 1px;
+  text-align: center;
+}
+th {
+  padding: 4px !important;
+}
+th.center-aligned {
+  text-align: center;
+}
+th.left-aligned {
+  text-align: left;
+}
+th.right-aligned {
+  text-align: right;
+}
+th.shrinked {
+  width: 1px;
+  text-align: center;
+}
+.bottom-line {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  bottom: 5px;
+  left: 10px;
+  right: 10px;
+  line-height: 0;
+}
+.bottom-line > * {
+  display: block;
+}
+.conservative-stance-meter {
+  background-color: green;
+}
+.editor {
+  flex-grow: 1;
+}
+.face {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.face.active {
+  display: block;
+}
+.reckless-stance-meter {
+  background-color: red;
+}
+.tab.active {
+  display: flex !important;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.tox.tox-tinymce {
+  height: 100% !important;
+}
+.tox-edit-area {
+  height: -moz-fit-content;
+  height: fit-content;
+}

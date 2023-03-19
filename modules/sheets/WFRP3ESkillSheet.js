@@ -7,7 +7,7 @@ export default class WFRP3ESkillSheet extends ItemSheet
 			template: "systems/wfrp3e/templates/skill-sheet.html",
 			//width: 530,
 			height: 340,
-			classes: ["wfrp3e", "sheet", "item", "skill"]
+			classes: ["wfrp3e", "sheet", "item", "skill", "skill-sheet"]
 		});
 	}
 
