@@ -21,7 +21,7 @@
 
 		<div class="sheet-form-div">
 			<label class="sheet-form-label">{{localize 'Talent Sockets'}}</label>
-			{{#each item.system.talent_sockets as | type ty |}}
+			{{#each item.system.talent_sockets as |type ty|}}
 				<select class="sheet-form-select" name="system.talent_sockets.{{ty}}" data-dtype="String">
 					{{selectOptions ../talentTypes selected=type}}
 				</select>
@@ -31,7 +31,7 @@
 
 		<div class="sheet-form-div">
 			<label class="sheet-form-label">{{localize 'Primary Characteristics'}}</label>
-			{{#each item.system.primary_characteristics as | characteristic char |}}
+			{{#each item.system.primary_characteristics as |characteristic char|}}
 				<select name="system.primary_characteristics.{{char}}" data-dtype="String">
 					{{selectOptions ../characteristics selected=characteristic}}
 				</select>

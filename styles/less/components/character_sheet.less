@@ -183,8 +183,13 @@
 
 		& .item-container
 		{
-			display: flex;
+			display: none;
 			flex-flow: row wrap;
+
+			&.active
+			{
+				display: flex;
+			}
 
 			& .career-partial
 			{
@@ -198,18 +203,7 @@
 			}
 		}
 
-		& .talent-container, & .action-container
-		{
-			display: none;
-			flex-flow: row wrap;
-
-			&.active
-			{
-				display: flex;
-			}
-		}
-
-		& .character-sheet-talent-tabs, & .character-sheet-action-tabs
+		& .character-sheet-career-tabs, & .character-sheet-talent-tabs, & .character-sheet-action-tabs
 		{
 			display: flex;
 			border-bottom: 1px solid #b5b3a4;

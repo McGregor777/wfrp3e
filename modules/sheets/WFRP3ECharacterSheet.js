@@ -20,6 +20,7 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
 			tabs: [
 				{group: "primary", navSelector: ".character-sheet-primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
+				{group: "careers", navSelector: ".character-sheet-career-tabs", contentSelector: ".character-sheet-careers"},
 				{group: "talents", navSelector: ".character-sheet-talent-tabs", contentSelector: ".character-sheet-talents", initial: "focus"},
 				{group: "actions", navSelector: ".character-sheet-action-tabs", contentSelector: ".character-sheet-actions", initial: "melee"}
 			]
@@ -38,6 +39,8 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 		const data = super.getData();
 
 		data.items = this.constructItemLists(data);
+
+		this.options.tabs[1].initial = data.items.careers.find(career => career.system.current);
 
 		return data;
 	}

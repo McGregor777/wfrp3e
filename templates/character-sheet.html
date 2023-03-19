@@ -35,7 +35,6 @@
 
 					<div class="characteristics">
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							isOwner=../document.isOwner
 							title='Strength'
 							abbreviation='St'
 							dataPath='system.attributes.characteristics.strength'
@@ -43,7 +42,6 @@
 							fortune=actor.system.attributes.characteristics.strength.fortune}}
 
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							isOwner=../document.isOwner
 							title='Toughness'
 							abbreviation='To'
 							dataPath='system.attributes.characteristics.toughness'
@@ -51,7 +49,6 @@
 							fortune=actor.system.attributes.characteristics.toughness.fortune}}
 
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							isOwner=../document.isOwner
 							title='Agility'
 							abbreviation='Ag'
 							dataPath='system.attributes.characteristics.agility'
@@ -59,7 +56,6 @@
 							fortune=actor.system.attributes.characteristics.agility.fortune}}
 
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							isOwner=../document.isOwner
 							title='Intelligence'
 							abbreviation='Int'
 							dataPath='system.attributes.characteristics.intelligence'
@@ -67,7 +63,6 @@
 							fortune=actor.system.attributes.characteristics.intelligence.fortune}}
 
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							isOwner=../document.isOwner
 							title='Willpower'
 							abbreviation='WP'
 							dataPath='system.attributes.characteristics.willpower'
@@ -75,7 +70,6 @@
 							fortune=actor.system.attributes.characteristics.willpower.fortune}}
 
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							isOwner=../document.isOwner
 							title='Fellowship'
 							abbreviation='Fel'
 							dataPath='system.attributes.characteristics.fellowship'
@@ -123,7 +117,7 @@
 				<table class="skill-table">
 					<tbody>
 						{{#each items.skills as |skill sk|}}
-							{{>systems/wfrp3e/templates/partials/item-skill-row.html isOwner=../document.isOwner skill=skill}}
+							{{>systems/wfrp3e/templates/partials/item-skill-row.html skill=skill}}
 						{{/each}}
 					</tbody>
 				</table>
@@ -131,9 +125,17 @@
 		</section>
 
 		<section class="tab careers-tab" data-group="primary" data-tab="careers">
-			<div class="item-container">
-				{{#each items.careers as |career ca|}}
-					{{>systems/wfrp3e/templates/partials/item-career-partial.html isOwner=../document.isOwner career=career}}
+			<div class="character-sheet-career-tabs sheet-tabs" data-group="careers">
+				{{#each items.careers as |career|}}
+					<a class="tab-link" data-tab="{{career._id}}">{{career.name}}</a>
+				{{/each}}
+			</div>
+
+			<div class="character-sheet-careers">
+				{{#each items.careers as |career|}}
+					<div class="career-container item-container" data-group="careers" data-tab="{{career._id}}">
+						{{>systems/wfrp3e/templates/partials/item-career-partial.html career=career}}
+					</div>
 				{{/each}}
 			</div>
 		</section>
@@ -167,62 +169,51 @@
 
 			<div class="character-sheet-talents">
 				{{#if items.talents.focus}}
-					<div class="talent-container focus" data-group="talents" data-tab="focus">
-						<div class="item-container">
-							{{#each items.talents.focus as |talent ta|}}
-								{{>systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent}}
-							{{/each}}
-						</div>
+					<div class="talent-container focus item-container" data-group="talents" data-tab="focus">
+						{{#each items.talents.focus as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
 					</div>
 				{{/if}}
 
 				{{#if items.talents.reputation}}
-					<div class="talent-container reputation" data-group="talents" data-tab="reputation">
-						<div class="item-container">
-							{{#each items.talents.reputation as |talent ta|}}
-								{{>systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent}}
-							{{/each}}
+					<div class="talent-container reputation item-container" data-group="talents" data-tab="reputation">
+						{{#each items.talents.reputation as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
 						</div>
 					</div>
 				{{/if}}
 
 				{{#if items.talents.tactic}}
-					<div class="talent-container tactic" data-group="talents" data-tab="tactic">
-						<div class="item-container">
-							{{#each items.talents.tactic as |talent ta|}}
-								{{>systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent}}
-							{{/each}}
-						</div>
+					<div class="talent-container tactic item-container" data-group="talents" data-tab="tactic">
+						{{#each items.talents.tactic as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
 					</div>
 				{{/if}}
 
 				{{#if items.talents.faith}}
-					<div class="talent-container faith" data-group="talents" data-tab="faith">
-						<div class="item-container">
-							{{#each items.talents.faith as |talent ta|}}
-								{{>systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent}}
-							{{/each}}
-						</div>
+					<div class="talent-container faith item-container" data-group="talents" data-tab="faith">
+						{{#each items.talents.faith as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
 					</div>
 				{{/if}}
 
 				{{#if items.talents.order}}
-					<div class="talent-container order" data-group="talents" data-tab="order">
-						<div class="item-container">
-							{{#each items.talents.order as |talent ta|}}
-								{{>systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent}}
-							{{/each}}
-						</div>
+					<div class="talent-container order item-container" data-group="talents" data-tab="order">
+						{{#each items.talents.order as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
 					</div>
 				{{/if}}
 
 				{{#if items.talents.tricks}}
-					<div class="talent-container trick" data-group="talents" data-tab="trick">
-						<div class="item-container">
-							{{#each items.talents.tricks as |talent ta|}}
-								{{>systems/wfrp3e/templates/partials/item-talent-card.html isOwner=../document.isOwner talent=talent}}
-							{{/each}}
-						</div>
+					<div class="talent-container trick item-container" data-group="talents" data-tab="trick">
+						{{#each items.talents.tricks as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
 					</div>
 				{{/if}}
 			</div>
@@ -253,52 +244,42 @@
 
 			<div class="character-sheet-actions">
 				{{#if items.actions.melee}}
-					<div class="action-container melee" data-group="actions" data-tab="melee">
-						<div class="item-container">
-							{{#each items.actions.melee as |action act|}}
-								{{>systems/wfrp3e/templates/partials/item-action-card.html isOwner=../document.isOwner action=action}}
-							{{/each}}
-						</div>
+					<div class="action-container melee item-container" data-group="actions" data-tab="melee">
+						{{#each items.actions.melee as |action act|}}
+							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
+						{{/each}}
 					</div>
 				{{/if}}
 
 				{{#if items.actions.ranged}}
-					<div class="action-container ranged" data-group="actions" data-tab="ranged">
-						<div class="item-container">
-							{{#each items.actions.ranged as |action act|}}
-								{{>systems/wfrp3e/templates/partials/item-action-card.html isOwner=../document.isOwner action=action}}
-							{{/each}}
-						</div>
+					<div class="action-container ranged item-container" data-group="actions" data-tab="ranged">
+						{{#each items.actions.ranged as |action act|}}
+							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
+						{{/each}}
 					</div>
 				{{/if}}
 
 				{{#if items.actions.support}}
-					<div class="action-container support" data-group="actions" data-tab="support">
-						<div class="item-container">
-							{{#each items.actions.support as |action act|}}
-								{{>systems/wfrp3e/templates/partials/item-action-card.html isOwner=../document.isOwner action=action}}
-							{{/each}}
-						</div>
+					<div class="action-container support item-container" data-group="actions" data-tab="support">
+						{{#each items.actions.support as |action act|}}
+							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
+						{{/each}}
 					</div>
 				{{/if}}
 
 				{{#if items.actions.blessing}}
-					<div class="action-container blessing" data-group="actions" data-tab="blessing">
-						<div class="item-container">
-							{{#each items.actions.blessing as |action act|}}
-								{{>systems/wfrp3e/templates/partials/item-action-card.html isOwner=../document.isOwner action=action}}
-							{{/each}}
-						</div>
+					<div class="action-container blessing item-container" data-group="actions" data-tab="blessing">
+						{{#each items.actions.blessing as |action act|}}
+							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
+						{{/each}}
 					</div>
 				{{/if}}
 
 				{{#if items.actions.spell}}
-					<div class="action-container spell" data-group="actions" data-tab="spell">
-						<div class="item-container">
-							{{#each items.actions.spell as |action act|}}
-								{{>systems/wfrp3e/templates/partials/item-action-card.html isOwner=../document.isOwner action=action}}
-							{{/each}}
-						</div>
+					<div class="action-container spell item-container" data-group="actions" data-tab="spell">
+						{{#each items.actions.spell as |action act|}}
+							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
+						{{/each}}
 					</div>
 				{{/if}}
 			</div>
@@ -321,7 +302,7 @@
 				</thead>
 				<tbody>
 					{{#each items.weapons as |weapon wp|}}
-						{{>systems/wfrp3e/templates/partials/item-weapon-row.html isOwner=../document.isOwner weapon=weapon}}
+						{{>systems/wfrp3e/templates/partials/item-weapon-row.html weapon=weapon}}
 					{{/each}}
 				</tbody>
 			</table>
@@ -339,7 +320,7 @@
 				</thead>
 				<tbody>
 					{{#each items.armours as |armour arm|}}
-						{{>systems/wfrp3e/templates/partials/item-armour-row.html isOwner=../document.isOwner armour=armour}}
+						{{>systems/wfrp3e/templates/partials/item-armour-row.html armour=armour}}
 					{{/each}}
 				</tbody>
 			</table>
@@ -356,7 +337,7 @@
 				</thead>
 				<tbody>
 					{{#each items.trappings as |trapping trp|}}
-						{{>systems/wfrp3e/templates/partials/item-trapping-row.html isOwner=../document.isOwner trapping=trapping}}
+						{{>systems/wfrp3e/templates/partials/item-trapping-row.html trapping=trapping}}
 					{{/each}}
 				</tbody>
 			</table>
@@ -373,7 +354,7 @@
 				</thead>
 				<tbody>
 					{{#each items.money as |money mo|}}
-						{{>systems/wfrp3e/templates/partials/item-money-row.html isOwner=../document.isOwner money=money}}
+						{{>systems/wfrp3e/templates/partials/item-money-row.html money=money}}
 					{{/each}}
 				</tbody>
 			</table>

@@ -337,8 +337,11 @@
   background: linear-gradient(to right, green, white, red) !important;
 }
 .character-sheet .character-sheet-body .item-container {
-  display: flex;
+  display: none;
   flex-flow: row wrap;
+}
+.character-sheet .character-sheet-body .item-container.active {
+  display: flex;
 }
 .character-sheet .character-sheet-body .item-container .career-partial {
   display: flex;
@@ -347,15 +350,7 @@
 .character-sheet .character-sheet-body .item-container .career-partial .career-advancement {
   flex: 1 1 300px;
 }
-.character-sheet .character-sheet-body .talent-container,
-.character-sheet .character-sheet-body .action-container {
-  display: none;
-  flex-flow: row wrap;
-}
-.character-sheet .character-sheet-body .talent-container.active,
-.character-sheet .character-sheet-body .action-container.active {
-  display: flex;
-}
+.character-sheet .character-sheet-body .character-sheet-career-tabs,
 .character-sheet .character-sheet-body .character-sheet-talent-tabs,
 .character-sheet .character-sheet-body .character-sheet-action-tabs {
   display: flex;
@@ -363,6 +358,7 @@
   flex-flow: row wrap;
   justify-content: space-around;
 }
+.character-sheet .character-sheet-body .character-sheet-career-tabs > *,
 .character-sheet .character-sheet-body .character-sheet-talent-tabs > *,
 .character-sheet .character-sheet-body .character-sheet-action-tabs > * {
   margin: 0 5px;
