@@ -1,35 +1,73 @@
 {
-	"name": "wfrp3e",
 	"title": "Warhammer Fantasy Roleplay - 3rd Edition",
-	"description": "A game system for Warhammer Fantasy Roleplay - 3rd Edition for Foundry environment.",
-	"author": "Grégory Soupé",
-	"authors":
-	[
+	"description": "<p>A game system for <em><strong>Warhammer Fantasy Roleplay - 3rd Edition</strong></em> in the Foundry Virtual Tabletop environment.</p>",
+	"version": "0.2",
+	"compatibility": {
+		"minimum": "10",
+		"verified": "10.287",
+		"maximum": "10"
+	},
+	"authors": [
 		{
 			"name": "Grégory Soupé",
-			"email": "gregory.soupe@mailo.com"
+			"email": "gregory.soupe@mailo.com",
+			"flags": {}
 		}
 	],
-	"url": "https://github.com/McGregor777/wfrp3e",
-	"flags":
-	{
-	},
-	"version": "0.1",
-	"minimumCoreVersion": "0.8.9",
-	"compatibleCoreVersion": "0.8.9",
-	"scripts":
-	[
-	],
-	"esmodules":
-	[
+	"esmodules": [
 		"wfrp3e.js"
 	],
-	"styles":
-	[
+	"styles": [
 		"./styles/wfrp3e.css"
 	],
-	"languages":
-	[
+	"packs": [
+		{
+			"name": "actors",
+			"label": "Actors",
+			"path": "packs/actors.db",
+			"system": "wfrp3e",
+			"private": false,
+			"type": "Actor",
+			"flags": {}
+		},
+		{
+			"name": "skills",
+			"label": "Skills",
+			"path": "packs/skills.db",
+			"system": "wfrp3e",
+			"private": false,
+			"type": "Item",
+			"flags": {}
+		},
+		{
+			"name": "talents",
+			"label": "Talents",
+			"path": "packs/talents.db",
+			"system": "wfrp3e",
+			"private": false,
+			"type": "Item",
+			"flags": {}
+		},
+		{
+			"name": "actions",
+			"label": "Actions",
+			"path": "packs/actions.db",
+			"system": "wfrp3e",
+			"private": false,
+			"type": "Item",
+			"flags": {}
+		},
+		{
+			"name": "wounds",
+			"label": "Wounds",
+			"path": "packs/wounds.db",
+			"system": "wfrp3e",
+			"private": false,
+			"type": "Item",
+			"flags": {}
+		}
+	],
+	"languages": [
 		{
 			"lang": "en",
 			"name": "English (UK)",
@@ -41,62 +79,16 @@
 			"path": "lang/fr-FR.json"
 		}
 	],
-	"packs":
-	[
-		{
-			"name": "actors",
-			"label": "Actors",
-			"system": "wfrp3e",
-			"module": "wfrp3e",
-			"path": "packs/actors.db",
-			"entity": "Actor"
-		},
-		{
-			"name": "skills",
-			"label": "Skills",
-			"system": "wfrp3e",
-			"module": "wfrp3e",
-			"path": "packs/skills.db",
-			"entity": "Item"
-		},
-		{
-			"name": "talents",
-			"label": "Talents",
-			"system": "wfrp3e",
-			"module": "wfrp3e",
-			"path": "packs/talents.db",
-			"entity": "Item"
-		},
-		{
-			"name": "actions",
-			"label": "Actions",
-			"system": "wfrp3e",
-			"module": "wfrp3e",
-			"path": "packs/actions.db",
-			"entity": "Item"
-		},
-		{
-			"name": "wounds",
-			"label": "Wounds",
-			"system": "wfrp3e",
-			"module": "wfrp3e",
-			"path": "packs/wounds.db",
-			"entity": "Item"
-		}
-	],
-	"system":
-	[
-	],
-	"dependencies":
-	[
-	],
 	"socket": true,
-	"manifest": "https://github.com/McGregor777/wfrp3e/blob/main/system.json",
-	"download": "",
-	"protected": false,
-	"background": "",
+	"initiative": "@derived_characteristics.initiative / 10 - 1d100 / 10",
 	"gridDistance": 1,
 	"gridUnits": "ft",
 	"primaryTokenAttribute": "attributes.wounds.value",
-	"secondaryTokenAttribute": "attributes.stance.current"
+	"secondaryTokenAttribute": "attributes.stance.current",
+	"url": "https://github.com/McGregor777/wfrp3e",
+	"manifest": "https://raw.githubusercontent.com/McGregor777/wfrp3e/0.2/system.json",
+	"download": "https://github.com/McGregor777/wfrp3e/archive/refs/tags/0.2.zip",
+	"protected": false,
+	"background": "systems/wfrp3e/assets/background.webp",
+	"id": "wfrp3e"
 }
