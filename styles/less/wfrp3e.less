@@ -154,13 +154,16 @@ th
 	background-color: red;
 }
 
-.tab
+.sheet
 {
-	&.active
+	& .tab
 	{
-		display: flex !important;
-		flex-direction: column;
-		flex-grow: 1;
+		&.active
+		{
+			display: flex !important;
+			flex-direction: column;
+			flex-grow: 1;
+		}
 	}
 }
 

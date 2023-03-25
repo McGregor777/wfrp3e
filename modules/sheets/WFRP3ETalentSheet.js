@@ -7,7 +7,7 @@ export default class WFRP3ETalentSheet extends ItemSheet
 			template: "systems/wfrp3e/templates/talent-sheet.html",
 			//width: 530,
 			height: 250,
-			classes: ["wfrp3e", "sheet", "item", "talent", "talent-sheet"]
+			classes: ["wfrp3e", "sheet", "item", "talent", "talent-item-sheet"]
 		});
 	}
 

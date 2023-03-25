@@ -7,7 +7,7 @@ export default class WFRP3EMoneySheet extends ItemSheet
 			template: "systems/wfrp3e/templates/money-sheet.html",
 			//width: 530,
 			//height: 340,
-			classes: ["wfrp3e", "sheet", "item", "money", "money-sheet"]
+			classes: ["wfrp3e", "sheet", "item", "money", "money-item-sheet"]
 		});
 	}
 

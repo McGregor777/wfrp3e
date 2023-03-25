@@ -720,7 +720,7 @@ th.shrinked {
 .reckless-stance-meter {
   background-color: red;
 }
-.tab.active {
+.sheet .tab.active {
   display: flex !important;
   flex-direction: column;
   flex-grow: 1;
