@@ -107,7 +107,7 @@
 				<input class="current-career-input" name="career.system.current" type="checkbox" value="{{career.system.current}}" {{#if career.system.current}} checked{{/if}} />
 			</div>
 
-			{{#if isOwner}}
+			{{#>if (lookup . document.isOwner)}}
 			<a class="item-delete-link sheet-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
 			{{/if}}
 		</div>

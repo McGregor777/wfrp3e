@@ -11,7 +11,7 @@
 		<span class="money-quantity quantity-link">{{money.system.quantity}}</span>
 	</td>
 
-	{{#if isOwner}}
+	{{#>if (lookup . document.isOwner)}}
 	<td class="shrinked">
 		<a class="item-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
 	</td>

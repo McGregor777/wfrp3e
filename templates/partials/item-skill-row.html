@@ -13,7 +13,7 @@
 		<input class="skill-training-level-input" name="skill.system.training-level" type="checkbox" value="3" data-dtype="Number" {{#if (superiorOrEqualTo skill.system.training_level 3)}}checked{{/if}} />
 	</td>
 
-	{{#if isOwner}}
+	{{#>if (lookup . document.isOwner)}}
 	<td class="shrinked">
 		<a class="item-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
 	</td>

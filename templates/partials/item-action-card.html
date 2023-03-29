@@ -36,7 +36,7 @@
 	<div class="bottom-line">
 		<a class="flip-link" title="{{localize 'Flip Card'}}"><span class="fas fa-undo"></span></a>
 
-		{{#if isOwner}}
+		{{#>if (lookup . document.isOwner)}}
 		<a class="item-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
 		{{/if}}
 	</div>
