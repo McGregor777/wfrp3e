@@ -21,7 +21,7 @@ export default class FortuneDie extends WFRP3EDie
 	roll(options)
 	{
 		const roll = super.roll(options);
-		roll.symbols = CONFIG.WFRP3E.misfortuneDiceResults[roll.result];
+		roll.symbols = CONFIG.WFRP3E.dice.results.fortune[roll.result];
 		return roll;
 	}
 
@@ -32,7 +32,7 @@ export default class FortuneDie extends WFRP3EDie
 	 */
 	getResultLabel(result)
 	{
-		const die = CONFIG.WFRP3E.misfortuneDiceResults[result.result];
+		const die = CONFIG.WFRP3E.dice.results.fortune[result.result];
 		return `<img class="special-die" src="${die.image}" title="${game.i18n.localize(die.label)}" alt=""/>`;
 	}
 }

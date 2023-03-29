@@ -78,7 +78,7 @@ export default class DicePool
 	 */
 	renderDiceExpression()
 	{
-		let dicePool = [this.challengeDice + "dh", this.characteristicDice + "da", this.conservativeDice + "do", this.expertiseDice + "de", this.fortuneDice + "df", this.misfortuneDice + "di", this.recklessDice + "dr"];
+		let dicePool = [this.challengeDice + "dh", this.characteristicDice + "da", this.conservativeDice + "do", this.expertiseDice + "de", this.fortuneDice + "df", this.misfortuneDice + "dm", this.recklessDice + "dr"];
 		let finalPool = dicePool.filter((d) =>
 		{
 			const test = d.split(/([0-9]+)/);

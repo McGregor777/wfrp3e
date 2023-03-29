@@ -338,7 +338,7 @@ export default class WFRP3ERoll extends Roll
 			hasSpecialDice: this.hasSpecialDice,
 			hasStandard: this.hasStandardDice,
 			hasSuccess: this.dice.length > 0,
-			diceResults: CONFIG.WFRP3E.dice.results,
+			diceSymbols: CONFIG.WFRP3E.dice.symbols,
 			data: this.data,
 			addedResults: this.addedResults,
 			publicRoll: !chatOptions.isPrivate,

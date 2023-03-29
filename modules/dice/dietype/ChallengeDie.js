@@ -21,7 +21,7 @@ export default class ChallengeDie extends WFRP3EDie
 	roll(options)
 	{
 		const roll = super.roll(options);
-		roll.symbols = CONFIG.WFRP3E.challengeDiceResults[roll.result];
+		roll.symbols = CONFIG.WFRP3E.dice.results.challenge[roll.result];
 		return roll;
 	}
 
@@ -32,7 +32,7 @@ export default class ChallengeDie extends WFRP3EDie
 	 */
 	getResultLabel(result)
 	{
-		const die = CONFIG.WFRP3E.challengeDiceResults[result.result];
+		const die = CONFIG.WFRP3E.dice.results.challenge[result.result];
 		return `<img class="special-die" src="${die.image}" title="${game.i18n.localize(die.label)}" alt=""/>`;
 	}
 }
