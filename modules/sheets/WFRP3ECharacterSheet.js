@@ -137,7 +137,7 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 		const li = $(event.currentTarget).parents(".item")
 		const itemId = li.attr("data-item-id");
 
-		renderTemplate("systems/lotc/templates/dialogs/delete-item-dialog.html").then(html =>
+		renderTemplate("systems/wfrp3e/templates/dialogs/delete-item-dialog.html").then(html =>
 		{
 			new Dialog(
 			{
