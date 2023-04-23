@@ -23,7 +23,7 @@ export default class DiceHelper
 		let dicePool = new DicePool({
 			characteristicDice: characteristic.value,
 			conservativeDice: stance < 0 ? Math.min(characteristic.value, Math.abs(stance)) : 0,
-			expertiseDice: skill.system.training_level,
+			expertiseDice: skill.system.trainingLevel,
 			fortuneDice: characteristic.fortune,
 			recklessDice: stance > 0 ? Math.min(characteristic.value, stance) : 0,
 		});

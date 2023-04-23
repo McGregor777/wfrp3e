@@ -217,5 +217,18 @@
 	"Exertion": "Effort",
 	"Sigmar's Comet": "Comète de Sigmar",
 	"Chaos Star": "Étoile du Chaos",
-	"Blank": "Vierge"
+	"Blank": "Vierge",
+
+	"DIALOG.RemoveMember": "Êtes-vous sûr de vouloir retirer ce personnage du groupe ?",
+
+	"PARTY.FortunePool": "Réserve de Fortune",
+	"PARTY.RemoveMember": "Retirer le membre du groupe",
+	"PARTY.SpecialAbility.Title": "Nom de l'Aptitude Spéciale",
+	"PARTY.TalentSocket": "Emplacement de Talent",
+	"PARTY.TensionEvent.Effects": "Effets de l'Évènement de Tension",
+	"PARTY.TensionEvent.Threshold": "Seuil de l'Évènement de Tension",
+	"PARTY.TensionMeter.Decrease": "Diminuer la Jauge de Tension",
+	"PARTY.TensionMeter.Increase": "Augmenter la Jauge de Tension",
+	"PARTY.TensionMeter.Title": "Jauge de Tension du Groupe",
+	"PARTY.Traits": "Traits"
 }

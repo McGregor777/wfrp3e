@@ -1,0 +1,79 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<header class="party-sheet-tension-meter">
+		<a class="party-sheet-tension-meter-minus" title="{{localize 'PARTY.TensionMeter.Decrease'}}"><span class="fas fa-minus"></span></a>
+
+		<div class="party-sheet-tension-meter-segment-container">
+			{{#each (array (increment actor.system.tension.maximum 1)) as |number n|}}
+				<a class="party-sheet-tension-meter-segment{{#if (or (equalTo ../actor.system.tension.events.0.threshold number) (equalTo ../actor.system.tension.events.1.threshold number))}} threshold{{/if}}">
+					{{#if (equalTo ../actor.system.tension.value number)}}
+						<img src="systems/wfrp3e/assets/images/token-grey.webp"/>
+					{{else}}
+						{{number}}
+					{{/if}}
+					<input name="system.tension.value" type="radio" value="{{number}}" data-dtype="Number"{{#if (equalTo ../actor.system.tension.value number)}} checked{{/if}} />
+				</a>
+			{{/each}}
+		</div>
+
+		<a class="party-sheet-tension-meter-plus" title="{{localize 'PARTY.TensionMeter.Increase'}}"><span class="fas fa-plus"></span></a>
+	</header>
+
+	<div class="party-sheet-body">
+		<div class="party-sheet-left-side">
+			<div class="party-sheet-header">
+				<input class="party-sheet-name" name="name" type="text" value="{{actor.name}}" placeholder="Name"  title="Name" />
+				<input class="party-sheet-traits" name="system.traits" type="text" value="{{actor.system.traits}}" placeholder="{{localize 'PARTY.Traits'}}" title="{{localize 'PARTY.Traits'}}" />
+			</div>
+
+			<div class="party-sheet-tension">
+				<div class="party-sheet-tension-title">{{localize 'PARTY.TensionMeter.Title'}}</div>
+				<hr>
+				<div class="party-sheet-tension-event">
+					<input class="party-sheet-tension-event-threshold" name="system.tension.events.0.threshold" type="number" value="{{actor.system.tension.events.0.threshold}}" min="0" max="{{actor.system.tension.maximum}}" title="{{localize 'PARTY.TensionEvent.Threshold'}}" />
+					<input class="party-sheet-tension-event-effects" name="system.tension.events.0.effects" type="text" value="{{actor.system.tension.events.0.effects}}" placeholder="{{localize 'PARTY.TensionEvent.Effects'}}" title="{{localize 'PARTY.TensionEvent.Effects'}}" />
+				</div>
+				<hr>
+				<div class="party-sheet-tension-event">
+					<input class="party-sheet-tension-event-threshold" name="system.tension.events.1.threshold" type="number" value="{{actor.system.tension.events.1.threshold}}" min="0" max="{{actor.system.tension.maximum}}" title="{{localize 'PARTY.TensionEvent.Threshold'}}" />
+					<input class="party-sheet-tension-event-effects" name="system.tension.events.1.effects" type="text" value="{{actor.system.tension.events.1.effects}}" placeholder="{{localize 'PARTY.TensionEvent.Effects'}}" title="{{localize 'PARTY.TensionEvent.Effects'}}" />
+				</div>
+			</div>
+
+			<div class="party-sheet-members">
+				{{#each actor.memberActors as |actor act|}}
+					<div class="party-sheet-member" data-actor-id="{{actor.id}}">
+						<a class="party-sheet-member-portrait" title="{{actor.name}}">
+							<img src="{{actor.img}}" width="50" height="50" />
+						</a>
+						<a class="party-sheet-member-remove" title="{{localize 'PARTY.RemoveMember'}}"><span class="fas fa-trash"></span></a>
+					</div>
+				{{/each}}
+			</div>
+		</div>
+
+		<div class="party-sheet-right-side">
+			<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="250"/>
+
+			<div class="party-sheet-fortune-pool">
+				<label>{{localize 'PARTY.FortunePool'}}</label>
+				<input name="system.fortunePool" type="number" value="{{actor.system.fortunePool}}" placeholder="{{localize 'PARTY.FortunePool'}}" title="{{localize 'PARTY.FortunePool'}}">
+			</div>
+		</div>
+	</div>
+
+	<div class="party-sheet-special-ability">
+		<input class="party-sheet-special-ability-title" name="system.specialAbility.title" type="text" value="{{actor.system.specialAbility.title}}" placeholder="{{localize 'PARTY.SpecialAbility.Title'}}" title="{{localize 'PARTY.SpecialAbility.Title'}}" />
+		<div class="party-sheet-special-ability-description">
+			{{editor actor.system.specialAbility.description target='system.specialAbility.description' button=true owner=owner editable=editable}}
+		</div>
+	</div>
+
+	<footer class="sheet-footer">
+		{{#each actor.system.talentSockets as |type ty|}}
+			<select class="sheet-form-select party-sheet-talent-socket" name="system.talentSockets.{{ty}}" data-dtype="String" title="{{localize 'PARTY.TalentSocket'}}">
+				{{selectOptions ../talentTypes selected=type localize=true}}
+			</select>
+		{{/each}}
+		<a class="talent-socket-add"><span class="fas fa-plus"></span></a>
+	</footer>
+</form>

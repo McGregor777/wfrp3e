@@ -2,7 +2,9 @@ import {WFRP3E} from "./modules/config.js";
 import WFRP3EActor from "./modules/actors/WFRP3ECharacter.js"
 import WFRP3EItem from "./modules/items/WFRP3EItem.js"
 import WFRP3ECharacterSheet from "./modules/sheets/WFRP3ECharacterSheet.js";
+import WFRP3EPartySheet from "./modules/sheets/WFRP3EPartySheet.js";
 import WFRP3ECreatureSheet from "./modules/sheets/WFRP3ECreatureSheet.js";
+import WFRP3EGroupSheet from "./modules/sheets/WFRP3EGroupSheet.js";
 import WFRP3EActionSheet from "./modules/sheets/WFRP3EActionSheet.js";
 import WFRP3EArmourSheet from "./modules/sheets/WFRP3EArmourSheet.js";
 import WFRP3ECareerSheet from "./modules/sheets/WFRP3ECareerSheet.js";
@@ -67,7 +69,9 @@ Hooks.once("init", function()
 
 	Actors.unregisterSheet("core", ActorSheet);
 	Actors.registerSheet("WFRP3E", WFRP3ECharacterSheet, {label: "Character Sheet", types: ["character"], makeDefault: true});
+	Actors.registerSheet("WFRP3E", WFRP3EPartySheet, {label: "Party Sheet", types: ["party"], makeDefault: true});
 	Actors.registerSheet("WFRP3E", WFRP3ECreatureSheet, {label: "Creature Sheet", types: ["creature"], makeDefault: true});
+	Actors.registerSheet("WFRP3E", WFRP3EGroupSheet, {label: "Group Sheet", types: ["group"], makeDefault: true});
 	
 	Items.unregisterSheet("core", ItemSheet);
 	Items.registerSheet("WFRP3E", WFRP3EActionSheet, {label: "Action Sheet", types: ["action"], makeDefault: true});

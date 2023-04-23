@@ -42,6 +42,8 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 
 		this.options.tabs[1].initial = data.items.careers.find(career => career.system.current);
 
+		console.log(data);
+
 		return data;
 	}
 
@@ -116,13 +118,23 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 		html.find(".skill-training-level-input").change(this._onChangeSkillTrainingLevel.bind(this));
 		html.find(".flip-link").mousedown(this._onFlipClick.bind(this));
 		html.find(".quantity-link").mousedown(this._onQuantityClick.bind(this));
-	} 
+	}
 
+	/**
+	 * Get an Item's id from a clicked element hierarchy.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
 	_getItemId(event)
 	{
 		return $(event.currentTarget).parents(".item").attr("data-item-id");
 	}
 
+	/**
+	 * Handles clicks on an Item edit button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
 	_onItemEdit(event)
 	{
 		// Get clicked Item
@@ -132,6 +144,11 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 		return clickedItem.sheet.render(true);
 	}
 
+	/**
+	 * Handles clicks on an Item delete button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
 	_onItemDelete(event)
 	{
 		const li = $(event.currentTarget).parents(".item")
@@ -163,9 +180,14 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 				},
 				default: "Yes"
 			}).render(true)
-		})
+		});
 	}
 
+	/**
+	 * Handles clicks on an Item button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
 	async _onItemClick(event)
 	{
 		// Get clicked Item
@@ -192,6 +214,11 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 		}
 	}
 
+	/**
+	 * Handles clicks on a Trapping's quantity button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
 	_onQuantityClick(event)
 	{
 		// Get clicked Item and Item's quantity
@@ -224,9 +251,14 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 				break;
 		}
 
-		clickedItem.update({"data.quantity": quantity});
+		clickedItem.update({"system.quantity": quantity});
 	}
 
+	/**
+	 * Handles clicks on a Skill's training level checkbox.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
 	async _onChangeSkillTrainingLevel(event)
 	{
 		event.preventDefault();
@@ -236,11 +268,16 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 		const clickedItem = this.actor.items.get(clickedItemId);
 
 		if(event.target.defaultChecked)
-			clickedItem.update({"system.training_level": Number(event.target.value - 1)});
+			clickedItem.update({"system.trainingLevel": Number(event.target.value - 1)});
 		else
-			clickedItem.update({"system.training_level": Number(event.target.value)});
+			clickedItem.update({"system.trainingLevel": Number(event.target.value)});
 	}
 
+	/**
+	 * Handles clicks on a sheet's flip button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
 	async _onFlipClick(event)
 	{
 		event.preventDefault();

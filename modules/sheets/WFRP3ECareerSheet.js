@@ -35,6 +35,6 @@ export default class WFRP3ECareerSheet extends ItemSheet
 
 	async _onTalentSocketAdd(event)
 	{
-		this.item.update(system.talent_sockets = {[`${Object.keys(this.item.system.talent_sockets).length}`]: ""});
+		this.item.update(system.talentSockets = {[`${Object.keys(this.item.system.talentSockets).length}`]: ""});
 	}
 }

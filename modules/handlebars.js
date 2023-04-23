@@ -29,6 +29,11 @@ export default function()
 			return value <= compareValue;
 		});
 
+		Handlebars.registerHelper("increment", function(value, valueToAdd)
+		{
+			return value + valueToAdd;
+		});
+
 		Handlebars.registerHelper("characteristicToAbbreviation", function(value)
 		{
 			switch(value)
@@ -53,14 +58,19 @@ export default function()
 			return PopoutEditor.renderDiceImages(text);
 		});
 
-		Handlebars.registerHelper("times", function(n, block)
+		Handlebars.registerHelper("times", function(number, block)
 		{
-			var accum = "";
+			let accum = "";
 
-			for(let i = 0; i < n; i++)
+			for(let i = 0; i < number; i++)
 				accum += block.fn(i);
 
 			return accum;
+		});
+
+		Handlebars.registerHelper("array", function(length)
+		{
+			return Array.from({length: length}, (element, index) => index);
 		});
 
 		Handlebars.registerHelper("format", function(localizationKey, parameters)

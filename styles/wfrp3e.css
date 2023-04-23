@@ -537,6 +537,138 @@
 .special-die {
   border: none;
 }
+.party-sheet .party-sheet-body {
+  display: flex;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side {
+  margin-right: 10px;
+  flex-grow: 1;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-header {
+  width: 385px;
+  margin: 0 auto 10px;
+  background-color: dimgrey;
+  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-header * {
+  color: white;
+  text-align: center;
+  font-variant-caps: small-caps;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-header .party-sheet-name {
+  font-size: 16pt;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-header .party-sheet-traits {
+  font-style: italic;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-members {
+  display: flex;
+  margin-top: 10px;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-members .party-sheet-member {
+  position: relative;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-members .party-sheet-member .party-sheet-member-remove {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-tension .party-sheet-tension-title {
+  text-align: center;
+  font-size: 16pt;
+  font-weight: bold;
+  font-variant-caps: small-caps;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-tension .party-sheet-tension-event {
+  display: flex;
+}
+.party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-tension .party-sheet-tension-event .party-sheet-tension-event-threshold {
+  flex: 0 1 30px;
+  text-align: center;
+}
+.party-sheet .party-sheet-body .party-sheet-right-side {
+  margin: 0 0 10px auto;
+  flex-shrink: 1;
+}
+.party-sheet .party-sheet-body .party-sheet-right-side .party-sheet-fortune-pool {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.party-sheet .party-sheet-body .party-sheet-right-side .party-sheet-fortune-pool > input {
+  width: 30px;
+  margin-left: 10px;
+  text-align: center;
+}
+.party-sheet .party-sheet-special-ability {
+  display: flex;
+  flex-direction: column;
+}
+.party-sheet .party-sheet-special-ability .party-sheet-special-ability-title {
+  text-align: center;
+  font-size: 16pt;
+  font-weight: bold;
+  font-variant-caps: small-caps;
+}
+.party-sheet .party-sheet-special-ability .party-sheet-special-ability-description {
+  min-height: 75px;
+}
+.party-sheet .party-sheet-tension-meter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-minus,
+.party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-plus {
+  display: block;
+  width: 40px;
+  height: 40px;
+  padding-top: 5px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 20pt;
+}
+.party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container {
+  display: flex;
+  justify-content: center;
+}
+.party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container .party-sheet-tension-meter-segment {
+  width: 40px;
+  height: 40px;
+  padding-top: 2px;
+  flex: 0 0 40px;
+  text-align: center;
+  font-size: 24pt;
+  color: white;
+  background-color: #c06030;
+  border: 1px solid #a05040;
+}
+.party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container .party-sheet-tension-meter-segment.threshold,
+.party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container .party-sheet-tension-meter-segment:first-child {
+  background-color: #184080;
+  border-color: #803030;
+}
+.party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container .party-sheet-tension-meter-segment:last-child {
+  background-color: #103040;
+  border-color: #803030;
+}
+.party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container .party-sheet-tension-meter-segment > img {
+  border: none;
+  filter: drop-shadow(0 0 2px black);
+}
+.party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container .party-sheet-tension-meter-segment > input {
+  display: none;
+}
+.party-sheet .sheet-footer > * {
+  flex-grow: 1;
+}
+.party-sheet .sheet-footer .party-sheet-talent-socket:not(:first-child) {
+  margin-left: 10px;
+}
+.party-sheet .sheet-footer .talent-socket-add {
+  flex: 0 1 15px;
+  margin: 0 5px;
+}
 .talent-card {
   position: relative;
   display: grid;

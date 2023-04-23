@@ -217,5 +217,18 @@
 	"Exertion": "Exertion",
 	"Sigmar's Comet": "Sigmar's Comet",
 	"Chaos Star": "Chaos Star",
-	"Blank": "Blank"
+	"Blank": "Blank",
+
+	"DIALOG.RemoveMember": "Do you really wish to remove this character from the party?",
+
+	"PARTY.FortunePool": "Fortune Pool",
+	"PARTY.RemoveMember": "Remove Member from Party",
+	"PARTY.SpecialAbility.Title": "Special Ability's Title",
+	"PARTY.TalentSocket": "Talent Socket",
+	"PARTY.TensionEvent.Effects": "Tension Event Effects",
+	"PARTY.TensionEvent.Threshold": "Tension Event Threshold",
+	"PARTY.TensionMeter.Decrease": "Decrease Tension Meter",
+	"PARTY.TensionMeter.Increase": "Increase Tension Meter",
+	"PARTY.TensionMeter.Title": "Party Tension Meter",
+	"PARTY.Traits": "Traits"
 }
