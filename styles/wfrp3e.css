@@ -600,18 +600,11 @@
   margin-left: 10px;
   text-align: center;
 }
-.party-sheet .party-sheet-special-ability {
-  display: flex;
-  flex-direction: column;
-}
 .party-sheet .party-sheet-special-ability .party-sheet-special-ability-title {
   text-align: center;
   font-size: 16pt;
   font-weight: bold;
   font-variant-caps: small-caps;
-}
-.party-sheet .party-sheet-special-ability .party-sheet-special-ability-description {
-  min-height: 75px;
 }
 .party-sheet .party-sheet-tension-meter {
   display: flex;
@@ -840,6 +833,7 @@ th.shrinked {
 }
 .editor {
   flex-grow: 1;
+  min-height: 75px;
 }
 .face {
   display: none;
@@ -856,11 +850,4 @@ th.shrinked {
   display: flex !important;
   flex-direction: column;
   flex-grow: 1;
-}
-.tox.tox-tinymce {
-  height: 100% !important;
-}
-.tox-edit-area {
-  height: -moz-fit-content;
-  height: fit-content;
 }

@@ -171,7 +171,7 @@
 	"Item":
 	{
 		"types": ["ability", "action", "armour", "career", "condition", "criticalWound", "disease", "insanity",
-			"money", "mutation", "skill", "talent", "trapping", "weapon"],
+			"money", "miscast", "mutation", "skill", "talent", "trapping", "weapon"],
 		"templates":
 		{
 			"basics":
@@ -293,20 +293,26 @@
 		},
 		"condition":
 		{
-			"templates": ["basics"]
+			"templates": ["basics"],
+			"duration": ""
 		},
 		"criticalWound":
 		{
 			"templates": ["basics"],
-			"gravity": 1
+			"severityRating": 1
 		},
 		"disease":
 		{
-			"templates": ["basics"]
+			"templates": ["basics"],
+			"traits": ["", ""],
+			"keyword": "",
+			"severityRating": 1
 		},
 		"insanity":
 		{
-			"templates": ["basics"]
+			"templates": ["basics"],
+			"traits": ["", ""],
+			"severityRating": 1
 		},
 		"money":
 		{
@@ -314,9 +320,15 @@
 			"value": 1,
 			"quantity": 1
 		},
-		"mutation":
+		"miscast":
 		{
 			"templates": ["basics"]
+		},
+		"mutation":
+		{
+			"templates": ["basics"],
+			"traits": ["Chaos"],
+			"severityRating": 1
 		},
 		"skill":
 		{

@@ -226,6 +226,30 @@
 	"TRAPPING.Plentiful": "Très Courant",
 	"TRAPPING.Abundant": "Banal",
 
+	"MONEY.Quantity": "Quantity",
+	"MONEY.Value": "Value",
+
+	"CRITICALWOUND.SeverityRating": "Niveau de Gravité",
+
+	"CONDITION.Brief": "Brève",
+	"CONDITION.Dependent": "Subordonnée",
+	"CONDITION.Lingering": "Prolongée",
+
+	"INSANITY.SeverityRating": "Niveau de Gravité",
+	"INSANITY.Traits": "Traits",
+
+	"MUTATION.SeverityRating": "Niveau de Gravité",
+	"MUTATION.Traits": "Traits",
+
+	"DISEASE.Delirium": "Delirium",
+	"DISEASE.Fever": "Fever",
+	"DISEASE.Infectious": "Infectious",
+	"DISEASE.Lethal": "Lethal",
+	"DISEASE.Painful": "Painful",
+	"DISEASE.Tiring": "Tiring",
+	"DISEASE.Virulent": "Virulent",
+	"DISEASE.Weary": "Weary",
+
 	"exotic": "Exotique",
 	"rare": "Rare",
 	"common": "Courant",

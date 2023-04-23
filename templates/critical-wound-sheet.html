@@ -6,9 +6,8 @@
 
 	<section class="sheet-body">
 		<div class="sheet-form-div">
-			<select class="sheet-form-select" name="system.type" data-dtype="String">
-				{{selectOptions talentTypes selected=item.system.type localize=true}}
-			</select>
+			<label class="sheet-form-label">{{localize 'CRITICALWOUND.SeverityRating'}}</label>
+			<input class="sheet-form-input" name="system.severityRating" type="number" value="{{item.system.severityRating}}" placeholder="{{localize 'CRITICALWOUND.SeverityRating'}}" title="{{localize 'CRITICALWOUND.SeverityRating'}}" data-dtype="Number" />
 		</div>
 
 		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}

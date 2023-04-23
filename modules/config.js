@@ -31,6 +31,25 @@ WFRP3E.talentTypes =
 	"insanity": "TALENT.Insanity"
 }
 
+WFRP3E.conditionDuration =
+{
+	"brief": "CONDITION.Brief",
+	"dependent": "CONDITION.Dependent",
+	"lingering": "CONDITION.Lingering"
+}
+
+WFRP3E.diseaseKeywords =
+{
+	"delirium": "DISEASE.Delirium",
+	"fever": "DISEASE.Fever",
+	"infectious": "DISEASE.Infectious",
+	"lethal": "DISEASE.Lethal",
+	"painful": "DISEASE.Painful",
+	"tiring": "DISEASE.Tiring",
+	"virulent": "DISEASE.Virulent",
+	"weary": "DISEASE.Weary"
+}
+
 WFRP3E.rarities =
 {
 	"abundant": "TRAPPING.Abundant",

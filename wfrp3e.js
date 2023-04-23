@@ -1,18 +1,24 @@
 import {WFRP3E} from "./modules/config.js";
 import WFRP3EActor from "./modules/actors/WFRP3ECharacter.js"
 import WFRP3EItem from "./modules/items/WFRP3EItem.js"
-import WFRP3ECharacterSheet from "./modules/sheets/WFRP3ECharacterSheet.js";
-import WFRP3EPartySheet from "./modules/sheets/WFRP3EPartySheet.js";
-import WFRP3ECreatureSheet from "./modules/sheets/WFRP3ECreatureSheet.js";
-import WFRP3EGroupSheet from "./modules/sheets/WFRP3EGroupSheet.js";
-import WFRP3EActionSheet from "./modules/sheets/WFRP3EActionSheet.js";
-import WFRP3EArmourSheet from "./modules/sheets/WFRP3EArmourSheet.js";
-import WFRP3ECareerSheet from "./modules/sheets/WFRP3ECareerSheet.js";
-import WFRP3EMoneySheet from "./modules/sheets/WFRP3EMoneySheet.js";
-import WFRP3ESkillSheet from "./modules/sheets/WFRP3ESkillSheet.js";
-import WFRP3ETalentSheet from "./modules/sheets/WFRP3ETalentSheet.js";
-import WFRP3EWeaponSheet from "./modules/sheets/WFRP3EWeaponSheet.js";
-import WFRP3ETrappingSheet from "./modules/sheets/WFRP3ETrappingSheet.js";
+import WFRP3ECharacterSheet from "./modules/sheets/actors/WFRP3ECharacterSheet.js";
+import WFRP3ECreatureSheet from "./modules/sheets/actors/WFRP3ECreatureSheet.js";
+import WFRP3EGroupSheet from "./modules/sheets/items/WFRP3EGroupSheet.js";
+import WFRP3EPartySheet from "./modules/sheets/actors/WFRP3EPartySheet.js";
+import WFRP3EActionSheet from "./modules/sheets/items/WFRP3EActionSheet.js";
+import WFRP3EArmourSheet from "./modules/sheets/items/WFRP3EArmourSheet.js";
+import WFRP3ECareerSheet from "./modules/sheets/items/WFRP3ECareerSheet.js";
+import WFRP3EConditionSheet from "./modules/sheets/items/WFRP3EConditionSheet.js";
+import WFRP3ECriticalWoundSheet from "./modules/sheets/items/WFRP3ECriticalWoundSheet.js";
+import WFRP3EDiseaseSheet from "./modules/sheets/items/WFRP3EDiseaseSheet.js";
+import WFRP3EInsanitySheet from "./modules/sheets/items/WFRP3EInsanitySheet.js";
+import WFRP3EMiscastSheet from "./modules/sheets/items/WFRP3EMiscastSheet.js";
+import WFRP3EMoneySheet from "./modules/sheets/items/WFRP3EMoneySheet.js";
+import WFRP3EMutationSheet from "./modules/sheets/items/WFRP3EMutationSheet.js";
+import WFRP3ESkillSheet from "./modules/sheets/items/WFRP3ESkillSheet.js";
+import WFRP3ETalentSheet from "./modules/sheets/items/WFRP3ETalentSheet.js";
+import WFRP3EWeaponSheet from "./modules/sheets/items/WFRP3EWeaponSheet.js";
+import WFRP3ETrappingSheet from "./modules/sheets/items/WFRP3ETrappingSheet.js";
 import ChallengeDie from "./modules/dice/dietype/ChallengeDie.js";
 import CharacteristicDie from "./modules/dice/dietype/CharacteristicDie.js";
 import ConservativeDie from "./modules/dice/dietype/ConservativeDie.js";
@@ -76,8 +82,14 @@ Hooks.once("init", function()
 	Items.unregisterSheet("core", ItemSheet);
 	Items.registerSheet("WFRP3E", WFRP3EActionSheet, {label: "Action Sheet", types: ["action"], makeDefault: true});
 	Items.registerSheet("WFRP3E", WFRP3EArmourSheet, {label: "Armour Sheet", types: ["armour"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3ECareerSheet, {label: "Career Sheet", types: ["career"], makeDefault: true});
+	Items.registerSheet("WFRP3E", WFRP3ECareerSheet, {label: "Career Sheet", types: ["career"], makeDefault: true})
+	Items.registerSheet("WFRP3E", WFRP3EConditionSheet, {label: "Condition Sheet", types: ["condition"], makeDefault: true});
+	Items.registerSheet("WFRP3E", WFRP3ECriticalWoundSheet, {label: "Critical Wound Sheet", types: ["criticalWound"], makeDefault: true});
+	Items.registerSheet("WFRP3E", WFRP3EDiseaseSheet, {label: "Disease Sheet", types: ["disease"], makeDefault: true});
+	Items.registerSheet("WFRP3E", WFRP3EInsanitySheet, {label: "Insanity Sheet", types: ["insanity"], makeDefault: true});
+	Items.registerSheet("WFRP3E", WFRP3EMiscastSheet, {label: "Miscast Sheet", types: ["miscast"], makeDefault: true});
 	Items.registerSheet("WFRP3E", WFRP3EMoneySheet, {label: "Money Sheet", types: ["money"], makeDefault: true});
+	Items.registerSheet("WFRP3E", WFRP3EMutationSheet, {label: "Mutation Sheet", types: ["mutation"], makeDefault: true});
 	Items.registerSheet("WFRP3E", WFRP3ESkillSheet, {label: "Skill Sheet", types: ["skill"], makeDefault: true});
 	Items.registerSheet("WFRP3E", WFRP3ETalentSheet, {label: "Talent Sheet", types: ["talent"], makeDefault: true});
 	Items.registerSheet("WFRP3E", WFRP3EWeaponSheet, {label: "Weapon Sheet", types: ["weapon"], makeDefault: true});
@@ -89,11 +101,11 @@ Hooks.once("init", function()
 // Update chat messages with dice images
 Hooks.on("renderChatMessage", (app, html, messageData) => {
 	const content = html.find(".message-content");
+
 	content[0].innerHTML = PopoutEditor.renderDiceImages(content[0].innerHTML);
 
 	html.on("click", ".special-pool-to-player", () => {
 		const poolData = messageData.message.flags.wfrp3e;
-
 		const dicePool = new DicePool(poolData.dicePool);
 
 		DiceHelpers.displayRollDialog(poolData.roll.data, dicePool, poolData.description, poolData.roll.skillName, poolData.roll.item, poolData.roll.flavor, poolData.roll.sound);

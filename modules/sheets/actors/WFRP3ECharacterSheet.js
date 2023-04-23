@@ -1,4 +1,4 @@
-import DiceHelper from "../dice/DiceHelper.js";
+import DiceHelper from "../../dice/DiceHelper.js";
 
 /**
  * Provides the data and general interaction with Actor Sheets - Abstract class.

@@ -6,8 +6,9 @@
 
 	<section class="sheet-body">
 		<div class="sheet-form-div">
-			<select class="sheet-form-select" name="system.type" data-dtype="String">
-				{{selectOptions talentTypes selected=item.system.type localize=true}}
+			<label class="sheet-form-label">{{localize 'CONDITION.Duration'}}</label>
+			<select class="sheet-form-select" name="system.duration" data-dtype="String">
+				{{selectOptions conditionDuration selected=item.system.duration localize=true}}
 			</select>
 		</div>
 

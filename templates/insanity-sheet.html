@@ -1,0 +1,20 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<header class="sheet-header">
+		<img class="actor-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+		<h1><input class="name-input" name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+	</header>
+
+	<section class="sheet-body">
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'INSANITY.Traits'}}</label>
+			<input class="sheet-form-input" name="system.traits" type="text" value="{{item.system.traits}}" placeholder="{{localize 'Traits'}}" />
+		</div>
+
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'INSANITY.SeverityRating'}}</label>
+			<input class="sheet-form-input" name="system.severityRating" type="number" value="{{item.system.severityRating}}" placeholder="{{localize 'INSANITY.SeverityRating'}}" title="{{localize 'INSANITY.SeverityRating'}}" data-dtype="Number" />
+		</div>
+
+		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
+	</section>
+</form>
