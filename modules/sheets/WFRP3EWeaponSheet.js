@@ -16,8 +16,8 @@ export default class WFRP3EWeaponSheet extends ItemSheet
 		const data = super.getData();
 
 		data.rarities = CONFIG.WFRP3E.rarities;
-		data.weaponGroups = CONFIG.WFRP3E.weaponGroups;
-		data.ranges = CONFIG.WFRP3E.ranges;
+		data.groups = CONFIG.WFRP3E.weapon.groups;
+		data.ranges = CONFIG.WFRP3E.weapon.ranges;
 
 		return data;
 	}

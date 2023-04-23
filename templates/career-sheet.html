@@ -5,12 +5,12 @@
 
 	<section class="sheet-body">
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Advanced Career'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.AdvancedCareer'}}</label>
 			<input class="sheet-form-input" name="system.advanced" type="checkbox" value="{{item.system.advanced}}"{{#if item.system.advanced}} checked{{/if}} />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Race Restrictions'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.RaceRestrictions'}}</label>
 			<input class="sheet-form-input" name="system.raceRestrictions" type="text" value="{{item.system.raceRestrictions}}" placeholder="{{localize 'Race Restrictions'}}" />
 		</div>
 
@@ -20,77 +20,77 @@
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Talent Sockets'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.TalentSockets'}}</label>
 			{{#each item.system.talentSockets as |type ty|}}
 				<select class="sheet-form-select" name="system.talentSockets.{{ty}}" data-dtype="String">
-					{{selectOptions ../talentTypes selected=type}}
+					{{selectOptions ../talentTypes selected=type localize=true}}
 				</select>
 				{{/each}}
 			<a class="talent-socket-add"><span class="fas fa-plus"></span></a>
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Primary Characteristics'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.PrimaryCharacteristics'}}</label>
 			{{#each item.system.primaryCharacteristics as |characteristic char|}}
 				<select name="system.primaryCharacteristics.{{char}}" data-dtype="String">
-					{{selectOptions ../characteristics selected=characteristic}}
+					{{selectOptions ../characteristics selected=characteristic localize=true}}
 				</select>
 			{{/each}}
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Career Skills'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.CareerSkills'}}</label>
 			<input class="sheet-form-input" name="system.careerSkills" type="text" value="{{item.system.careerSkills}}" placeholder="{{localize 'Career Skills'}}" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Starting Conservative Segments'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.StartingConservativeSegments'}}</label>
 			<input class="sheet-form-input" name="system.startingStance.conservativeSegments" type="number" value="{{item.system.startingStance.conservativeSegments}}" placeholder="{{localize 'Starting Conservative Segments'}}" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Starting Reckless Segments'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.StartingRecklessSegments'}}</label>
 			<input class="sheet-form-input" name="system.startingStance.recklessSegments" type="number" value="{{item.system.startingStance.recklessSegments}}" placeholder="{{localize 'Starting Reckless Segments'}}" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Action Advance Options'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.ActionAdvanceOptions'}}</label>
 			<input class="sheet-form-input" name="system.advanceOptions.action" type="number" value="{{item.system.advanceOptions.action}}" placeholder="{{localize 'Action Advance Options'}}" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Talent Advance Options'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.TalentAdvanceOptions'}}</label>
 			<input class="sheet-form-input" name="system.advanceOptions.talent" type="number" value="{{item.system.advanceOptions.talent}}" placeholder="{{localize 'Talent Advance Options'}}" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Skill Advance Options'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.SkillAdvanceOptions'}}</label>
 			<input class="sheet-form-input" name="system.advanceOptions.skill" type="number" value="{{item.system.advanceOptions.skill}}" placeholder="{{localize 'Skill Advance Options'}}" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Fortune Advance Options'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.FortuneAdvanceOptions'}}</label>
 			<input class="sheet-form-input" name="system.advanceOptions.fortune" type="number" value="{{item.system.advanceOptions.fortune}}" placeholder="{{localize 'Fortune Advance Options'}}" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Conservative Advance Options'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.ConservativeAdvanceOptions'}}</label>
 			<input class="sheet-form-input" name="system.advanceOptions.conservative" type="number" value="{{item.system.advanceOptions.conservative}}" placeholder="{{localize 'Conservative Advance Options'}}" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Reckless Advance Options'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.RecklessAdvanceOptions'}}</label>
 			<input class="sheet-form-input" name="system.advanceOptions.reckless" type="number" value="{{item.system.advanceOptions.reckless}}" placeholder="{{localize 'Reckless Advance Options'}}" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Wounds Advance Options'}}</label>
+			<label class="sheet-form-label">{{localize 'CAREER.WoundsAdvanceOptions'}}</label>
 			<input class="sheet-form-input" name="system.advanceOptions.wound" type="number" value="{{item.system.advanceOptions.wound}}" placeholder="{{localize 'Wounds Advance Options'}}" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Sommary'}}</label>
-			<input class="sheet-form-input" name="system.summary" type="text" value="{{item.system.summary}}" placeholder="{{localize 'Sommary'}}" />
+			<label class="sheet-form-label">{{localize 'CAREER.Summary'}}</label>
+			<input class="sheet-form-input" name="system.sommary" type="text" value="{{item.system.sommary}}" placeholder="{{localize 'Sommary'}}" />
 		</div>
 
 		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}

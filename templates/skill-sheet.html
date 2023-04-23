@@ -7,14 +7,14 @@
 
 	<section class="sheet-body">
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Characteristic'}}</label>
+			<label class="sheet-form-label">{{localize 'SKILL.Characteristic'}}</label>
 			<select class="sheet-form-select" name="system.characteristic" data-dtype="String">
-				{{selectOptions characteristics selected=item.system.characteristic}}
+				{{selectOptions characteristics selected=item.system.characteristic localize=true}}
 			</select>
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Advanced Skill'}}</label>
+			<label class="sheet-form-label">{{localize 'SKILL.AdvancedSkill'}}</label>
 			<input class="sheet-form-input" name="system.advanced" type="checkbox" value="{{item.system.advanced}}"{{#if item.system.advanced}} checked{{/if}}>
 		</div>
 

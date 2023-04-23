@@ -161,7 +161,7 @@ export default class CheckBuilder extends FormApplication
 				roll.toMessage({
 					user: game.user.id,
 					speaker: {actor: game.actors.get(this.roll.data?.actor?._id)},
-					flavor: game.i18n.format("Roll.SkillCheck", {skill: this.roll.skillName}),
+					flavor: game.i18n.format("ROLL.SkillCheck", {skill: this.roll.skillName}),
 				});
 
 				if(this.roll?.sound)

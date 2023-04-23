@@ -7,71 +7,71 @@
 
 	{{!--Sheet Navigation Tab--}}
 	<nav class="character-sheet-primary-tabs sheet-tabs tabs" data-group="primary">
-		<a class="tab-link characteristics-tab-link" data-tab="characteristics">{{localize 'Characteristics'}}</a>
-		<a class="tab-link careers-tab-link" data-tab="careers">{{localize 'Careers'}}</a>
-		<a class="tab-link talents-tab-link" data-tab="talents">{{localize 'Talents'}}</a>
-		<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'Actions'}}</a>
-		<a class="tab-link trappings-tab-link" data-tab="trappings">{{localize 'Trappings'}}</a>
-		<a class="tab-link background-tab-link" data-tab="background">{{localize 'Background'}}</a>
+		<a class="tab-link characteristics-tab-link" data-tab="characteristics">{{localize 'CHARACTER.Characteristics'}}</a>
+		<a class="tab-link careers-tab-link" data-tab="careers">{{localize 'CHARACTER.Careers'}}</a>
+		<a class="tab-link talents-tab-link" data-tab="talents">{{localize 'CHARACTER.Talents'}}</a>
+		<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CHARACTER.Actions'}}</a>
+		<a class="tab-link trappings-tab-link" data-tab="trappings">{{localize 'CHARACTER.Trappings'}}</a>
+		<a class="tab-link background-tab-link" data-tab="background">{{localize 'CHARACTER.Background'}}</a>
 	</nav>
 
 	<div class="character-sheet-body sheet-body">
 		<section class="tab characteristics-tab" data-group="primary" data-tab="characteristics">
 			<div class="characteristics-and-impairments">
-				<span class="character-sheet-title">{{localize 'Characteristics'}}</span>
+				<span class="character-sheet-title">{{localize 'CHARACTER.Characteristics'}}</span>
 
 				<div class="characteristics-and-impairments-subdivision">
 					<div class="impairments">
 						{{>systems/wfrp3e/templates/partials/impairment-partial.html
-							class='fatigue' title='Fatigue'
+							class='fatigue' title='CHARACTER.Fatigue'
 							dataPath='system.impairments.fatigue'
 							value=actor.system.impairments.fatigue}}
 
 						{{>systems/wfrp3e/templates/partials/impairment-partial.html
-							class='stress' title='Stress'
+							class='stress' title='CHARACTER.Stress'
 							dataPath='system.impairments.stress'
 							value=actor.system.impairments.stress}}
 					</div>
 
 					<div class="characteristics">
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='Strength'
-							abbreviation='St'
+							title='CHARACTERISTIC.Strength'
+							abbreviation='CHARACTERISTIC.St'
 							dataPath='system.attributes.characteristics.strength'
 							value=actor.system.attributes.characteristics.strength.value
 							fortune=actor.system.attributes.characteristics.strength.fortune}}
 
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='Toughness'
-							abbreviation='To'
+							title='CHARACTERISTIC.Toughness'
+							abbreviation='CHARACTERISTIC.To'
 							dataPath='system.attributes.characteristics.toughness'
 							value=actor.system.attributes.characteristics.toughness.value
 							fortune=actor.system.attributes.characteristics.toughness.fortune}}
 
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='Agility'
-							abbreviation='Ag'
+							title='CHARACTERISTIC.Agility'
+							abbreviation='CHARACTERISTIC.Ag'
 							dataPath='system.attributes.characteristics.agility'
 							value=actor.system.attributes.characteristics.agility.value
 							fortune=actor.system.attributes.characteristics.agility.fortune}}
 
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='Intelligence'
-							abbreviation='Int'
+							title='CHARACTERISTIC.Intelligence'
+							abbreviation='CHARACTERISTIC.Int'
 							dataPath='system.attributes.characteristics.intelligence'
 							value=actor.system.attributes.characteristics.intelligence.value
 							fortune=actor.system.attributes.characteristics.intelligence.fortune}}
 
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='Willpower'
-							abbreviation='WP'
+							title='CHARACTERISTIC.Willpower'
+							abbreviation='CHARACTERISTIC.WP'
 							dataPath='system.attributes.characteristics.willpower'
 							value=actor.system.attributes.characteristics.willpower.value
 							fortune=actor.system.attributes.characteristics.willpower.fortune}}
 
 						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='Fellowship'
-							abbreviation='Fel'
+							title='CHARACTERISTIC.Fellowship'
+							abbreviation='CHARACTERISTIC.Fel'
 							dataPath='system.attributes.characteristics.fellowship'
 							value=actor.system.attributes.characteristics.fellowship.value
 							fortune=actor.system.attributes.characteristics.fellowship.fortune}}
@@ -83,37 +83,37 @@
 				<div class="attributes-subdivision">
 					{{>systems/wfrp3e/templates/partials/attribute-partial.html
 						class='wounds'
-						title='Wounds'
-						maxTitle='Threshold'
+						title='CHARACTER.Wounds'
+						maxTitle='CHARACTER.Threshold'
 						dataPath='system.attributes.wounds'
 						max=actor.system.attributes.wounds.threshold
 						value=actor.system.attributes.wounds.value}}
 
 					{{>systems/wfrp3e/templates/partials/attribute-partial.html
 						class='corruption'
-						title='Corruption'
-						maxTitle='Threshold'
+						title='CHARACTER.Corruption'
+						maxTitle='CHARACTER.Threshold'
 						dataPath='system.attributes.corruption'
 						max=actor.system.attributes.corruption.threshold
 						value=actor.system.attributes.corruption.value}}
 
 					{{>systems/wfrp3e/templates/partials/attribute-partial.html
 						class='fortune'
-						title='Fortune'
-						maxTitle='Maximum'
+						title='CHARACTER.Fortune'
+						maxTitle='CHARACTER.Maximum'
 						dataPath='system.attributes.fortune'
 						max=actor.system.attributes.fortune.maximum
 						value=actor.system.attributes.fortune.value}}
 				</div>
 
 				<div class="stance-meter">
-					<span class="character-sheet-title">{{localize 'Stances'}}</span>
+					<span class="character-sheet-title">{{localize 'CHARACTER.Stances'}}</span>
 					<input class="stance-slider" name="system.attributes.stance.current" type="range" min="-{{actor.stanceMeter.conservative}}" max="{{actor.stanceMeter.reckless}}" step="1" value="{{actor.system.attributes.stance.current}}" />
 				</div>
 			</div>
 
 			<div class="skills">
-				<span class="character-sheet-title">{{localize 'Skills'}}</span>
+				<span class="character-sheet-title">{{localize 'CHARACTER.Skills'}}</span>
 				<table class="skill-table">
 					<tbody>
 						{{#each items.skills as |skill sk|}}
@@ -143,27 +143,27 @@
 		<section class="tab talents-tab" data-group="primary" data-tab="talents">
 			<div class="character-sheet-talent-tabs sheet-tabs" data-group="talents">
 				{{#if items.talents.focus}}
-					<a class="tab-link focus" data-tab="focus">{{localize 'Focus'}}</a>
+					<a class="tab-link focus" data-tab="focus">{{localize 'TALENT.Focus'}}</a>
 				{{/if}}
 
 				{{#if items.talents.reputation}}
-					<a class="tab-link reputation" data-tab="reputation">{{localize 'Reputation'}}</a>
+					<a class="tab-link reputation" data-tab="reputation">{{localize 'TALENT.Reputation'}}</a>
 				{{/if}}
 
 				{{#if items.talents.tactic}}
-					<a class="tab-link tactic" data-tab="tactic">{{localize 'Tactic'}}</a>
+					<a class="tab-link tactic" data-tab="tactic">{{localize 'TALENT.Tactic'}}</a>
 				{{/if}}
 
 				{{#if items.talents.faith}}
-					<a class="tab-link faith" data-tab="faith">{{localize 'Faith'}}</a>
+					<a class="tab-link faith" data-tab="faith">{{localize 'TALENT.Faith'}}</a>
 				{{/if}}
 
 				{{#if items.talents.order}}
-					<a class="tab-link order" data-tab="order">{{localize 'Order'}}</a>
+					<a class="tab-link order" data-tab="order">{{localize 'TALENT.Order'}}</a>
 				{{/if}}
 
 				{{#if items.talents.trick}}
-					<a class="tab-link trick" data-tab="trick">{{localize 'Trick'}}</a>
+					<a class="tab-link trick" data-tab="trick">{{localize 'TALENT.Trick'}}</a>
 				{{/if}}
 			</div>
 
@@ -222,23 +222,23 @@
 		<section class="tab actions-tab" data-group="primary" data-tab="actions">
 			<div class="character-sheet-action-tabs sheet-tabs" data-group="actions">
 				{{#if items.actions.melee}}
-					<a class="tab-link melee" data-tab="melee">{{localize 'Melee'}}</a>
+					<a class="tab-link melee" data-tab="melee">{{localize 'ACTION.Melee'}}</a>
 				{{/if}}
 
 				{{#if items.actions.ranged}}
-					<a class="tab-link ranged" data-tab="ranged">{{localize 'Ranged'}}</a>
+					<a class="tab-link ranged" data-tab="ranged">{{localize 'ACTION.Ranged'}}</a>
 				{{/if}}
 
 				{{#if items.actions.support}}
-					<a class="tab-link support" data-tab="support">{{localize 'Support'}}</a>
+					<a class="tab-link support" data-tab="support">{{localize 'ACTION.Support'}}</a>
 				{{/if}}
 
 				{{#if items.actions.blessing}}
-					<a class="tab-link blessing" data-tab="blessing">{{localize 'Blessing'}}</a>
+					<a class="tab-link blessing" data-tab="blessing">{{localize 'ACTION.Blessing'}}</a>
 				{{/if}}
 
 				{{#if items.actions.spell}}
-					<a class="tab-link spell" data-tab="spell">{{localize 'Spell'}}</a>
+					<a class="tab-link spell" data-tab="spell">{{localize 'ACTION.Spell'}}</a>
 				{{/if}}
 			</div>
 
@@ -288,15 +288,15 @@
 		<section class="tab trappings-tab" data-group="primary" data-tab="trappings">
 			<table class="weapon-table">
 				<thead>
-					<tr><th colspan="8"><span>{{localize 'Weapons'}}</span></th></tr>
+					<tr><th colspan="8"><span>{{localize 'CHARACTER.Weapons'}}</span></th></tr>
 					<tr>
-						<th class="left-aligned"><span>{{localize 'Name'}}</span></th>
-						<th class="shrinked"><span>{{localize 'DR'}}</span></th>
-						<th class="shrinked"><span>{{localize 'CR'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'Range'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'Qualities'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'Group'}}</span></th>
-						<th class="shrinked"><span>{{localize 'Enc'}}</span></th>
+						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
+						<th class="shrinked"><span>{{localize 'WEAPON.DR'}}</span></th>
+						<th class="shrinked"><span>{{localize 'WEAPON.CR'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'WEAPON.Range'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'WEAPON.Qualities'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'WEAPON.Group'}}</span></th>
+						<th class="shrinked"><span>{{localize 'TRAPPING.Enc'}}</span></th>
 						<th class="shrinked"></th>
 					</tr>
 				</thead>
@@ -309,12 +309,12 @@
 
 			<table class="armour-table">
 				<thead>
-					<tr><th colspan="8"><span>{{localize 'Armours'}}</span></th></tr>
+					<tr><th colspan="8"><span>{{localize 'CHARACTER.Armours'}}</span></th></tr>
 					<tr>
-						<th class="left-aligned"><span>{{localize 'Name'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'Defence'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'Soak'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'Enc'}}</span></th>
+						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'ARMOUR.Defence'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'ARMOUR.Soak'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.Enc'}}</span></th>
 						<th class="shrinked"></th>
 					</tr>
 				</thead>
@@ -327,11 +327,11 @@
 
 			<table class="trapping-table">
 				<thead>
-					<tr><th colspan="8"><span>{{localize "Trappings"}}</span></th></tr>
+					<tr><th colspan="8"><span>{{localize 'CHARACTER.Trappings'}}</span></th></tr>
 					<tr>
-						<th class="left-aligned"><span>{{localize 'Name'}}</span></th>
-						<th class="left-aligned"><span>{{localize 'Description'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'Enc'}}</span></th>
+						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
+						<th class="left-aligned"><span>{{localize 'TRAPPING.Description'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.Enc'}}</span></th>
 						<th class="shrinked"></th>
 					</tr>
 				</thead>
@@ -344,11 +344,11 @@
 
 			<table class="money-table">
 				<thead>
-					<tr><th colspan="8"><span>{{localize 'Money'}}</span></th></tr>
+					<tr><th colspan="8"><span>{{localize 'CHARACTER.Money'}}</span></th></tr>
 					<tr>
-						<th class="left-aligned"><span>{{localize 'Name'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'Value'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'Qu'}}</span></th>
+						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.Value'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.Qu'}}</span></th>
 						<th class="shrinked"></th>
 					</tr>
 				</thead>

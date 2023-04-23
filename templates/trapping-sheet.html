@@ -5,21 +5,21 @@
 
 	<section class="sheet-body">
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Cost'}}</label>
-			<input class="sheet-form-input" name="data.cost.brass" type="number" value="{{data.data.cost.brass}}" placeholder="{{localize 'Brass'}}" data-dtype="Number" />
-			<input class="sheet-form-input" name="data.cost.silver" type="number" value="{{data.data.cost.silver}}" placeholder="{{localize 'Silver'}}" data-dtype="Number" />
-			<input class="sheet-form-input" name="data.cost.gold" type="number" value="{{data.data.cost.gold}}" placeholder="{{localize 'Gold'}}" data-dtype="Number" />
+			<label class="sheet-form-label">{{localize 'TRAPPING.Cost'}}</label>
+			<input class="sheet-form-input" name="data.cost.brass" type="number" value="{{data.data.cost.brass}}" placeholder="{{localize 'TRAPPING.Brass'}}" data-dtype="Number" />
+			<input class="sheet-form-input" name="data.cost.silver" type="number" value="{{data.data.cost.silver}}" placeholder="{{localize 'TRAPPING.Silver'}}" data-dtype="Number" />
+			<input class="sheet-form-input" name="data.cost.gold" type="number" value="{{data.data.cost.gold}}" placeholder="{{localize 'TRAPPING.Gold'}}" data-dtype="Number" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Encumbrance'}}</label>
-			<input class="sheet-form-input" name="data.encumbrance" type="number" value="{{data.data.encumbrance}}" placeholder="{{localize 'Enc'}}" data-dtype="Number" />
+			<label class="sheet-form-label">{{localize 'TRAPPING.Encumbrance'}}</label>
+			<input class="sheet-form-input" name="data.encumbrance" type="number" value="{{data.data.encumbrance}}" placeholder="{{localize 'TRAPPING.Enc'}}" data-dtype="Number" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Rarity'}}</label>
+			<label class="sheet-form-label">{{localize 'TRAPPING.Rarity'}}</label>
 			<select class="sheet-form-select" name="data.rarity" data-dtype="String">
-				{{selectOptions rarities selected=data.data.rarity}}
+				{{selectOptions rarities selected=item.system.rarity localize=true}}
 			</select>
 		</div>
 

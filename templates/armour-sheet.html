@@ -5,31 +5,31 @@
 
 	<section class="sheet-body">
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Defence Value'}}</label>
-			<input class="sheet-form-input" name="system.defenceValue" type="number" value="{{item.system.defenceValue}}" placeholder="{{localize 'Defence'}}" data-dtype="Number" />
+			<label class="sheet-form-label">{{localize 'ARMOUR.DefenceValue'}}</label>
+			<input class="sheet-form-input" name="system.defenceValue" type="number" value="{{item.system.defenceValue}}" placeholder="{{localize 'ARMOUR.Defence'}}" data-dtype="Number" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Soak Value'}}</label>
-			<input class="sheet-form-input" name="system.soakValue" type="number" value="{{item.system.soakValue}}" placeholder="{{localize 'Soak'}}" data-dtype="Number" />
+			<label class="sheet-form-label">{{localize 'ARMOUR.SoakValue'}}</label>
+			<input class="sheet-form-input" name="system.soakValue" type="number" value="{{item.system.soakValue}}" placeholder="{{localize 'ARMOUR.Soak'}}" data-dtype="Number" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Cost'}}</label>
-			<input class="sheet-form-input" name="system.cost.brass" type="number" value="{{item.system.cost.brass}}" placeholder="{{localize 'Brass'}}" data-dtype="Number" />
-			<input class="sheet-form-input" name="system.cost.silver" type="number" value="{{item.system.cost.silver}}" placeholder="{{localize 'Silver'}}" data-dtype="Number" />
-			<input class="sheet-form-input" name="system.cost.gold" type="number" value="{{item.system.cost.gold}}" placeholder="{{localize 'Gold'}}" data-dtype="Number" />
+			<label class="sheet-form-label">{{localize 'TRAPPING.Cost'}}</label>
+			<input class="sheet-form-input" name="system.cost.brass" type="number" value="{{item.system.cost.brass}}" placeholder="{{localize 'TRAPPING.Brass'}}" data-dtype="Number" />
+			<input class="sheet-form-input" name="system.cost.silver" type="number" value="{{item.system.cost.silver}}" placeholder="{{localize 'TRAPPING.Silver'}}" data-dtype="Number" />
+			<input class="sheet-form-input" name="system.cost.gold" type="number" value="{{item.system.cost.gold}}" placeholder="{{localize 'TRAPPING.Gold'}}" data-dtype="Number" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Encumbrance'}}</label>
-			<input class="sheet-form-input" name="system.encumbrance" type="number" value="{{item.system.encumbrance}}" placeholder="{{localize 'Enc'}}" data-dtype="Number" />
+			<label class="sheet-form-label">{{localize 'TRAPPING.Encumbrance'}}</label>
+			<input class="sheet-form-input" name="system.encumbrance" type="number" value="{{item.system.encumbrance}}" placeholder="{{localize 'TRAPPING.Enc'}}" data-dtype="Number" />
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'Rarity'}}</label>
+			<label class="sheet-form-label">{{localize 'TRAPPING.Rarity'}}</label>
 			<select class="sheet-form-select" name="system.rarity" data-dtype="String">
-				{{selectOptions rarities selected=item.system.rarity}}
+				{{selectOptions rarities selected=item.system.rarity localize=true}}
 			</select>
 		</div>
 
