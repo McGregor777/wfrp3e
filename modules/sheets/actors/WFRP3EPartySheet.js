@@ -35,6 +35,8 @@ export default class WFRP3EPartySheet extends ActorSheet
 		html.find(".party-sheet-tension-meter .party-sheet-tension-meter-minus").click(this._onPartyTensionMeterMinusClick.bind(this));
 		html.find(".party-sheet-members .party-sheet-member .party-sheet-member-portrait").click(this._onPartyMemberPortraitClick.bind(this));
 		html.find(".party-sheet-members .party-sheet-member .party-sheet-member-remove").click(this._onPartyMemberRemoveClick.bind(this));
+		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .talent-socket-add").click(this._onTalentSocketAdd.bind(this));
+		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container.talent-socket-delete").click(this._onTalentSocketDelete.bind(this));
 	}
 
 	/** @inheritdoc */
@@ -139,5 +141,34 @@ export default class WFRP3EPartySheet extends ActorSheet
 	_onPartyTensionMeterSegmentClick(event)
 	{
 		this.actor.changePartyTensionValue($(event.target).find('input').val());
+	}
+
+	/**
+	 * Handles clicks on a Party talent socket add button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
+	async _onTalentSocketAdd(event)
+	{
+		const updates = {system: {talentSockets: this.actor.system.talentSockets}};
+
+		updates.system.talentSockets.push("");
+
+		this.actor.update(updates);
+	}
+
+
+	/**
+Handles clicks on a Party talent socket delete button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
+	async _onTalentSocketDelete(event)
+	{
+		const updates = {system: {talentSockets: this.actor.system.talentSockets}};
+
+		updates.system.talentSockets.pop();
+
+		this.actor.update(updates);
 	}
 }

@@ -652,15 +652,14 @@
 .party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container .party-sheet-tension-meter-segment > input {
   display: none;
 }
-.party-sheet .sheet-footer > * {
-  flex-grow: 1;
-}
-.party-sheet .sheet-footer .party-sheet-talent-socket:not(:first-child) {
+.party-sheet .party-sheet-footer .party-sheet-talent-socket:not(:first-child) {
   margin-left: 10px;
 }
-.party-sheet .sheet-footer .talent-socket-add {
-  flex: 0 1 15px;
-  margin: 0 5px;
+.party-sheet .party-sheet-footer .party-sheet-talent-socket-button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+  flex: 0 1 35px;
 }
 .talent-card {
   position: relative;

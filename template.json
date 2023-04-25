@@ -103,7 +103,7 @@
 		"party":
 		{
 			"traits": ["Party", "", ""],
-			"talentSockets":  ["focus", "focus"],
+			"talentSockets":  ["focus"],
 			"tension":
 			{
 				"events":
