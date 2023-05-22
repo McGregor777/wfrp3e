@@ -1,0 +1,17 @@
+<div class="item insanity-partial" data-item-id="{{insanity._id}}">
+	<div class="insanity-card card">
+		<div class="insanity-card-header">
+			<a class="insanity-card-name item-name-link">{{insanity.name}}</a>
+			<div class="insanity-card-traits">{{insanity.system.traits}}</div>
+		</div>
+		<div class="insanity-card-content">
+			<div class="insanity-card-effects">{{{insanity.system.effects}}}</div>
+			<blockquote class="insanity-card-description">{{insanity.system.description}}</blockquote>
+			<div class="insanity-card-severity-rating">{{insanity.system.severityRating}}</div>
+		</div>
+
+		{{#>if (lookup . document.isOwner)}}
+			<a class="item-delete-link" title="{{localize 'TITLE.DeleteItem'}}"><span class="fas fa-trash"></span></a>
+		{{/if}}
+	</div>
+</div>

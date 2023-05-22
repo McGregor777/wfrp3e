@@ -41,11 +41,17 @@ async function preloadHandlebarsTemplates()
 		"systems/wfrp3e/templates/partials/item-action-card.html",
 		"systems/wfrp3e/templates/partials/item-armour-row.html",
 		"systems/wfrp3e/templates/partials/item-career-partial.html",
+		"systems/wfrp3e/templates/partials/item-condition-card.html",
+		"systems/wfrp3e/templates/partials/item-disease-card.html",
+		"systems/wfrp3e/templates/partials/item-insanity-card.html",
 		"systems/wfrp3e/templates/partials/item-money-row.html",
+		"systems/wfrp3e/templates/partials/item-mutation-card.html",
+		"systems/wfrp3e/templates/partials/item-miscast-card.html",
 		"systems/wfrp3e/templates/partials/item-skill-row.html",
 		"systems/wfrp3e/templates/partials/item-talent-card.html",
 		"systems/wfrp3e/templates/partials/item-trapping-row.html",
 		"systems/wfrp3e/templates/partials/item-weapon-row.html",
+		"systems/wfrp3e/templates/partials/item-wound-card.html"
 	];
 
 	return loadTemplates(templatePaths);

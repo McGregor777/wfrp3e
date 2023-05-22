@@ -1,6 +1,6 @@
 <div class="item talent-card" data-item-id="{{talent._id}}">
 	<span class="talent-card-type {{talent.system.type}}">{{localize talent.system.type}}</span>
-	<span class="talent-card-name item-name-link">{{talent.name}}</span>
+	<a class="talent-card-name item-name-link">{{talent.name}}</a>
 	<div class="talent-card-content">{{{talent.system.description}}}</div>
 
 	{{#>if (lookup . document.isOwner)}}

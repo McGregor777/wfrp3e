@@ -11,9 +11,9 @@
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'DISEASE.Keyword'}}</label>
-			<select class="sheet-form-select" name="system.keyword" data-dtype="String">
-				{{selectOptions diseaseKeywords selected=item.system.keyword localize=true}}
+			<label class="sheet-form-label">{{localize 'DISEASE.Symptom'}}</label>
+			<select class="sheet-form-select" name="system.symptom" data-dtype="String">
+				{{selectOptions diseaseSymptomsKeywords selected=item.system.symptom localize=true}}
 			</select>
 		</div>
 
@@ -22,6 +22,11 @@
 			<input class="sheet-form-input" name="system.severityRating" type="number" value="{{item.system.severityRating}}" placeholder="{{localize 'DISEASE.SeverityRating'}}" title="{{localize 'DISEASE.SeverityRating'}}" data-dtype="Number" />
 		</div>
 
-		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'DISEASE.Description'}}</label>
+			<input class="sheet-form-input" name="system.description" type="text" value="{{item.system.description}}" placeholder="{{localize 'DISEASE.Description'}}" title="{{localize 'DISEASE.Description'}}" />
+		</div>
+
+		{{editor item.system.effects target='system.effects' button=true owner=owner editable=editable}}
 	</section>
 </form>

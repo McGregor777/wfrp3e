@@ -15,7 +15,7 @@ export default class WFRP3EDiseaseSheet extends ItemSheet
 	{
 		const data = super.getData();
 
-		data.diseaseKeywords = CONFIG.WFRP3E.diseaseKeywords;
+		data.diseaseSymptomsKeywords = CONFIG.WFRP3E.disease.symptoms.keywords;
 
 		return data;
 	}

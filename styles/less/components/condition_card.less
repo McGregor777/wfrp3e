@@ -1,0 +1,79 @@
+.conditions
+{
+	& .condition-card
+	{
+		position: relative;
+		width: 255px;
+		height: 385px;
+		margin: 0 auto;
+		padding: 20px;
+		border-radius: 10px;
+		background-color: #806050;
+		text-align: center;
+
+		& .condition-card-description
+		{
+			text-shadow: 0 0 16px white;
+			background-color: #b0a0a0;
+
+			& p
+			{
+				text-align: center;
+			}
+		}
+
+		& .condition-card-duration
+		{
+			padding: 10px 0 20px;
+			background-color: #c0b0a0;
+			color: white;
+			font-size: 14pt;
+			font-weight: bold;
+			font-variant-caps: small-caps;
+			text-shadow:
+				-1pt -1pt 0 black,
+				-1pt 0 0 black,
+				0 -1pt 0 black,
+				-1pt 1pt 0 black,
+				1pt -1pt 0 black,
+				0 1pt 0 black,
+				1pt 0 0 black,
+				1pt 1pt 0 black,
+				0 0 8px black;
+		}
+
+		& .condition-card-header
+		{
+			padding: 20px 0;
+			background: #903030;
+
+			& .condition-card-name
+			{
+				color: white;
+				font: 16pt "Caslon Antique";
+				font-variant-caps: small-caps;
+				text-shadow:
+					-1pt -1pt 0 black,
+					-1pt 0 0 black,
+					0 -1pt 0 black,
+					-1pt 1pt 0 black,
+					1pt -1pt 0 black,
+					0 1pt 0 black,
+					1pt 0 0 black,
+					1pt 1pt 0 black;
+
+				&:hover
+				{
+					text-shadow: 0 0 8px var(--color-shadow-primary);
+				}
+			}
+		}
+
+		& .item-delete-link
+		{
+			position: absolute;
+			bottom: 5px;
+			right: 10px;
+		}
+	}
+}

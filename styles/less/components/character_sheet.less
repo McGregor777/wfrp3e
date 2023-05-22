@@ -12,7 +12,10 @@
 
 			& .attributes
 			{
+				display: flex;
+				height: 650px;
 				flex: 1 1 240px;
+				flex-direction: column;
 
 				& .attributes-subdivision
 				{
@@ -40,6 +43,16 @@
 						{
 							padding-top: 10px;
 						}
+					}
+				}
+
+				& .cards
+				{
+					overflow-y: scroll;
+
+					& .card
+					{
+						margin-bottom: 20px !important;
 					}
 				}
 			}
@@ -83,6 +96,7 @@
 						{
 							display: flex;
 							flex-flow: row wrap;
+							align-items: center;
 							justify-content: flex-end;
 						}
 

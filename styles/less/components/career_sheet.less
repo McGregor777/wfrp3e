@@ -34,14 +34,14 @@
 		margin: 0 auto;
 		background-color: dimgrey;
 		text-shadow:
-			-1pt -1pt 0pt black,
-			-1pt 0 0pt black,
-			0 -1pt 0pt black,
-			-1pt 1pt 0pt black,
-			1pt -1pt 0pt black,
-			0 1pt 0pt black,
-			1pt 0 0pt black,
-			1pt 1pt 0pt black;
+			-1pt -1pt 0 black,
+			-1pt 0 0 black,
+			0 -1pt 0 black,
+			-1pt 1pt 0 black,
+			1pt -1pt 0 black,
+			0 1pt 0 black,
+			1pt 0 0 black,
+			1pt 1pt 0 black;
 	}
 
 	& .career-sheet-name
@@ -50,6 +50,11 @@
 		font-size: 16pt;
 		font-weight: bold;
 		font-variant-caps: small-caps;
+
+		&:hover
+		{
+			text-shadow: 0 0 8px var(--color-shadow-primary);
+		}
 	}
 
 	& .career-sheet-traits
@@ -68,14 +73,14 @@
 		font-variant-caps: small-caps;
 		line-height: 10pt;
 		text-shadow:
-			-1pt -1pt 0pt black,
-			-1pt 0 0pt black,
-			0 -1pt 0pt black,
-			-1pt 1pt 0pt black,
-			1pt -1pt 0pt black,
-			0 1pt 0pt black,
-			1pt 0 0pt black,
-			1pt 1pt 0pt black;
+			-1pt -1pt 0 black,
+			-1pt 0 0 black,
+			0 -1pt 0 black,
+			-1pt 1pt 0 black,
+			1pt -1pt 0 black,
+			0 1pt 0 black,
+			1pt 0 0 black,
+			1pt 1pt 0 black;
 		grid-template-columns: 90px 90px;
 		grid-template-rows: 20px 40px 40px 40px 1fr;
 		grid-template-areas:
@@ -179,13 +184,13 @@
 	{
 		font-weight: bold;
 		text-shadow:
-			-1pt -1pt 0pt black,
-			-1pt 0 0pt black,
-			0 -1pt 0pt black,
-			-1pt 1pt 0pt black,
-			1pt -1pt 0pt black,
-			0 1pt 0pt black,
-			1pt 0 0pt black,
+			-1pt -1pt 0 black,
+			-1pt 0 0 black,
+			0 -1pt 0 black,
+			-1pt 1pt 0 black,
+			1pt -1pt 0 black,
+			0 1pt 0 black,
+			1pt 0 0 black,
 			1pt 1pt 0pt black;
 	}
 }

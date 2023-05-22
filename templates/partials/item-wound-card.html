@@ -1,0 +1,15 @@
+<div class="item wound-partial" data-item-id="{{wound._id}}">
+	<div class="wound-card card">
+		<div class="wound-card-header">
+			<a class="wound-card-name item-name-link">{{wound.name}}</a>
+		</div>
+		<div class="wound-card-description">
+			{{{wound.system.description}}}
+			<div class="wound-card-severity-rating">{{wound.system.severityRating}}</div>
+		</div>
+
+		{{#>if (lookup . document.isOwner)}}
+			<a class="item-delete-link" title="{{localize 'TITLE.DeleteItem'}}"><span class="fas fa-trash"></span></a>
+		{{/if}}
+	</div>
+</div>

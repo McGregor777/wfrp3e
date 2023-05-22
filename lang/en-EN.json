@@ -103,8 +103,10 @@
 	"CAREER.CareerTransition": "Career Transition",
 	"CAREER.CareerSkills": "Career Skills",
 	"CAREER.Conservative": "Conservative",
+	"CAREER.CurrentCareer": "Current Career",
 	"CAREER.DedicationBonus": "Dedication Bonus",
 	"CAREER.Fortune": "Fortune",
+	"CAREER.LightWoundThreshold": "Light Wound Threshold",
 	"CAREER.OpenCareerAdvance": "Open Career Advance",
 	"CAREER.PrimaryCharacteristics": "Primary Characteristics",
 	"CAREER.SettingInformation": "Setting Information",
@@ -231,9 +233,15 @@
 
 	"CRITICALWOUND.SeverityRating": "Severity Rating",
 
+	"CONDITION.Duration": "Duration",
+
 	"CONDITION.Brief": "Brief",
 	"CONDITION.Dependent": "Dependent",
 	"CONDITION.Lingering": "Lingering",
+
+	"brief": "Brief",
+	"dependent": "Dependent",
+	"lingering": "Lingering",
 
 	"INSANITY.SeverityRating": "Severity Rating",
 	"INSANITY.Traits": "Traits",
@@ -241,14 +249,32 @@
 	"MUTATION.SeverityRating": "Severity Rating",
 	"MUTATION.Traits": "Traits",
 
-	"DISEASE.Delirium": "Delirium",
-	"DISEASE.Fever": "Fever",
-	"DISEASE.Infectious": "Infectious",
-	"DISEASE.Lethal": "Lethal",
-	"DISEASE.Painful": "Painful",
-	"DISEASE.Tiring": "Tiring",
-	"DISEASE.Virulent": "Virulent",
-	"DISEASE.Weary": "Weary",
+	"DISEASE.Description": "Description",
+	"DISEASE.SeverityRating": "Severity Rating",
+	"DISEASE.Symptom": "Symptom",
+	"DISEASE.Traits": "Traits",
+
+	"DISEASE.SYMPTOM.KEYWORD.Delirium": "Delirium",
+	"DISEASE.SYMPTOM.KEYWORD.Fever": "Fever",
+	"DISEASE.SYMPTOM.KEYWORD.Infectious": "Infectious",
+	"DISEASE.SYMPTOM.KEYWORD.Lethal": "Lethal",
+	"DISEASE.SYMPTOM.KEYWORD.Painful": "Painful",
+	"DISEASE.SYMPTOM.KEYWORD.Tiring": "Tiring",
+	"DISEASE.SYMPTOM.KEYWORD.Virulent": "Virulent",
+	"DISEASE.SYMPTOM.KEYWORD.Weary": "Weary",
+
+	"DISEASE.SYMPTOM.DESCRIPTION.Delirium": "Each <strong class=\"symptom-name\">Delirium</strong> symptom counts as 1 stress.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Fever": "Each <strong class=\"symptom-name\">Fever</strong> symptom adds <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> to all mental checks performed by the sufferer.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Infectious": "Each <strong class=\"symptom-name\">Infectious</strong> symptom disables one Party Sheet talent slot. Place a token on the talent slot to show it is unavailable.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Lethal": "Each <strong class=\"symptom-name\">Lethal</strong> symptom increases the severity rating of each other disease or symptom card by +1.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Painful": "Each <strong class=\"symptom-name\">Painful</strong> symptom adds <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> to all physical checks performed by the sufferer.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Tiring": "Each <strong class=\"symptom-name\">Tiring</strong> symptom counts as 1 fatigue.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Virulent": "Each <strong class=\"symptom-name\">Virulent</strong> symptom acts as a copy of each other symptom the target suffers from.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Weary": "Each <strong class=\"symptom-name\">Weary</strong> symptom adds 1 recharge token to actions performed, or adds 1 fewer token to <em>Ongoing</em> actions.",
+
+	"INSANITY.Description": "Description",
+
+	"MUTATION.Description": "Description",
 
 	"exotic": "Exotic",
 	"rare": "Rare",

@@ -109,6 +109,44 @@
 					<span class="character-sheet-title">{{localize 'CHARACTER.Stances'}}</span>
 					<input class="stance-slider" name="system.attributes.stance.current" type="range" min="-{{actor.stanceMeter.conservative}}" max="{{actor.stanceMeter.reckless}}" step="1" value="{{actor.system.attributes.stance.current}}" />
 				</div>
+
+				<div class="cards">
+					<div class="conditions">
+						{{#each items.conditions as |condition cond|}}
+							{{>systems/wfrp3e/templates/partials/item-condition-card.html condition=condition}}
+						{{/each}}
+					</div>
+
+					<div class="wounds">
+						{{#each items.criticalWounds as |wound wnd|}}
+							{{>systems/wfrp3e/templates/partials/item-wound-card.html wound=wound}}
+						{{/each}}
+					</div>
+
+					<div class="diseases">
+						{{#each items.diseases as |disease dis|}}
+							{{>systems/wfrp3e/templates/partials/item-disease-card.html disease=disease}}
+						{{/each}}
+					</div>
+
+					<div class="insanities">
+						{{#each items.insanities as |insanity ins|}}
+							{{>systems/wfrp3e/templates/partials/item-insanity-card.html insanity=insanity}}
+						{{/each}}
+					</div>
+
+					<div class="mutations">
+						{{#each items.mutations as |mutation mut|}}
+							{{>systems/wfrp3e/templates/partials/item-mutation-card.html mutation=mutation}}
+						{{/each}}
+					</div>
+
+					<div class="miscasts">
+						{{#each items.miscasts as |miscast mis|}}
+							{{>systems/wfrp3e/templates/partials/item-miscast-card.html miscast=miscast}}
+						{{/each}}
+					</div>
+				</div>
 			</div>
 
 			<div class="skills">

@@ -6,7 +6,7 @@ export default class WFRP3EMutationSheet extends ItemSheet
 		{
 			template: "systems/wfrp3e/templates/mutation-sheet.html",
 			//width: 530,
-			height: 300,
+			height: 400,
 			classes: ["wfrp3e", "sheet", "item", "mutation", "mutation-item-sheet"]
 		});
 	}

@@ -38,16 +38,33 @@ WFRP3E.conditionDuration =
 	"lingering": "CONDITION.Lingering"
 }
 
-WFRP3E.diseaseKeywords =
+WFRP3E.disease =
 {
-	"delirium": "DISEASE.Delirium",
-	"fever": "DISEASE.Fever",
-	"infectious": "DISEASE.Infectious",
-	"lethal": "DISEASE.Lethal",
-	"painful": "DISEASE.Painful",
-	"tiring": "DISEASE.Tiring",
-	"virulent": "DISEASE.Virulent",
-	"weary": "DISEASE.Weary"
+	symptoms:
+	{
+		keywords:
+		{
+			"delirium": "DISEASE.SYMPTOM.KEYWORD.Delirium",
+			"fever": "DISEASE.SYMPTOM.KEYWORD.Fever",
+			"infectious": "DISEASE.SYMPTOM.KEYWORD.Infectious",
+			"lethal": "DISEASE.SYMPTOM.KEYWORD.Lethal",
+			"painful": "DISEASE.SYMPTOM.KEYWORD.Painful",
+			"tiring": "DISEASE.SYMPTOM.KEYWORD.Tiring",
+			"virulent": "DISEASE.SYMPTOM.KEYWORD.Virulent",
+			"weary": "DISEASE.SYMPTOM.KEYWORD.Weary"
+		},
+		descriptions:
+		{
+			"delirium": "DISEASE.SYMPTOM.DESCRIPTION.Delirium",
+			"fever": "DISEASE.SYMPTOM.DESCRIPTION.Fever",
+			"infectious": "DISEASE.SYMPTOM.DESCRIPTION.Infectious",
+			"lethal": "DISEASE.SYMPTOM.DESCRIPTION.Lethal",
+			"painful": "DISEASE.SYMPTOM.DESCRIPTION.Painful",
+			"tiring": "DISEASE.SYMPTOM.DESCRIPTION.Tiring",
+			"virulent": "DISEASE.SYMPTOM.DESCRIPTION.Virulent",
+			"weary": "DISEASE.SYMPTOM.DESCRIPTION.Weary"
+		}
+	}
 }
 
 WFRP3E.rarities =

@@ -2,13 +2,13 @@
 	<div class="career-sheet">
 		<div class="face front active">
 			<div class="career-sheet-header">
-				<div class="career-sheet-name item-name-link">{{career.name}}</div>
+				<a class="career-sheet-name item-name-link">{{career.name}}</a>
 
 				<div class="career-sheet-race-restrictions">
 					{{#if career.system.advanced}}
-					{{localize "CAREER.AdvancedCareer"}}
+						{{localize "CAREER.AdvancedCareer"}}
 					{{else}}
-					{{localize "CAREER.BasicCareer"}}
+						{{localize "CAREER.BasicCareer"}}
 					{{/if}}
 					: {{career.system.raceRestrictions}}
 				</div>
@@ -23,7 +23,7 @@
 
 						<div class="career-sheet-career-aptitudes-content">
 							{{#each career.system.primaryCharacteristics}}
-							{{localize this}},
+								{{localize this}}{{#unless @last}},{{/unless}}
 							{{/each}}
 						</div>
 					</div>
@@ -82,7 +82,7 @@
 
 		<div class="face back">
 			<div class="career-sheet-header">
-				<div class="career-sheet-name item-name-link">{{career.name}}</div>
+				<a class="career-sheet-name item-name-link">{{career.name}}</a>
 
 				<div class="career-sheet-race-restrictions">
 					{{#if career.system.advanced}}
@@ -130,7 +130,7 @@
 		</div>
 
 		<div class="form-div">
-			<label class="form-select">{{localize "CAREER.WoundThreshold"}}</label>
+			<label class="form-select">{{localize "CAREER.LightWoundThreshold"}}</label>
 			<input class="form-input" name="career.system.advances.talent" type="text" value="{{career.system.advances.wound}}" />
 		</div>
 

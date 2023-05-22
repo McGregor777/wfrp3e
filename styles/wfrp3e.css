@@ -7,7 +7,7 @@
   border-radius: 25px;
   color: white;
   text-align: center;
-  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
 .action-card .action-card-art-image {
   width: 100%;
@@ -16,12 +16,12 @@
 .action-card .action-card-check {
   width: 100%;
   height: 20px;
-  background-color: saddlebrown;
+  background-color: #201008;
   color: white;
   font: 12pt "Caslon Antique";
   font-weight: bold;
   text-align: center;
-  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
 .action-card .action-card-difficulty-modifiers {
   text-align: center;
@@ -47,8 +47,11 @@
   margin: auto;
   font: 16pt "Caslon Antique";
   font-variant-caps: small-caps;
-  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   grid-area: action-card-name;
+}
+.action-card .action-card-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
 }
 .action-card .action-card-recharge-rating {
   width: 30px;
@@ -63,10 +66,10 @@
 }
 .action-card .action-card-requirements {
   width: 100%;
-  background-color: saddlebrown;
+  background-color: #503820;
   color: white;
   text-align: center;
-  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
 .action-card .action-card-traits {
   height: 20px;
@@ -79,11 +82,19 @@
   border: none;
   grid-area: action-card-type;
 }
+.action-card .face.conservative {
+  background-color: #d8b880;
+  border-radius: 25px;
+}
 .action-card .face.conservative > .action-card-header {
-  background-color: green;
+  background-color: #388840;
+}
+.action-card .face.reckless {
+  background-color: #e0e0e0;
+  border-radius: 25px;
 }
 .action-card .face.reckless > .action-card-header {
-  background-color: red;
+  background-color: #c02030;
 }
 .career-sheet {
   position: relative;
@@ -118,13 +129,16 @@
   width: 385px;
   margin: 0 auto;
   background-color: dimgrey;
-  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
 .career-sheet .career-sheet-name {
   position: relative;
   font-size: 16pt;
   font-weight: bold;
   font-variant-caps: small-caps;
+}
+.career-sheet .career-sheet-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
 }
 .career-sheet .career-sheet-traits {
   font-style: italic;
@@ -138,7 +152,7 @@
   background-color: burlywood;
   font-variant-caps: small-caps;
   line-height: 10pt;
-  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   grid-template-columns: 90px 90px;
   grid-template-rows: 20px 40px 40px 40px 1fr;
   grid-template-areas: 'career-sheet-advance-options-header career-sheet-advance-options-header' 'career-sheet-action-advance-options career-sheet-talent-advance-options' 'career-sheet-skill-advance-options career-sheet-fortune-advance-options' 'career-sheet-conservative-advance-options career-sheet-reckless-advance-options' 'career-sheet-wound-advance-options career-sheet-wound-advance-options';
@@ -206,7 +220,51 @@
 }
 .career-sheet .career-sheet-starting-stance {
   font-weight: bold;
-  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0pt black;
+}
+.conditions .condition-card {
+  position: relative;
+  width: 255px;
+  height: 385px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #806050;
+  text-align: center;
+}
+.conditions .condition-card .condition-card-description {
+  text-shadow: 0 0 16px white;
+  background-color: #b0a0a0;
+}
+.conditions .condition-card .condition-card-description p {
+  text-align: center;
+}
+.conditions .condition-card .condition-card-duration {
+  padding: 10px 0 20px;
+  background-color: #c0b0a0;
+  color: white;
+  font-size: 14pt;
+  font-weight: bold;
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black, 0 0 8px black;
+}
+.conditions .condition-card .condition-card-header {
+  padding: 20px 0;
+  background: #903030;
+}
+.conditions .condition-card .condition-card-header .condition-card-name {
+  color: white;
+  font: 16pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.conditions .condition-card .condition-card-header .condition-card-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.conditions .condition-card .item-delete-link {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
 }
 .character-sheet .character-sheet-body {
   display: flex;
@@ -217,7 +275,10 @@
   flex-flow: row wrap !important;
 }
 .character-sheet .character-sheet-body .characteristics-tab .attributes {
+  display: flex;
+  height: 650px;
   flex: 1 1 240px;
+  flex-direction: column;
 }
 .character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision {
   display: flex;
@@ -237,6 +298,12 @@
 }
 .character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute .attribute-label {
   padding-top: 10px;
+}
+.character-sheet .character-sheet-body .characteristics-tab .attributes .cards {
+  overflow-y: scroll;
+}
+.character-sheet .character-sheet-body .characteristics-tab .attributes .cards .card {
+  margin-bottom: 20px !important;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments {
   display: flex;
@@ -269,6 +336,7 @@
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-input-container {
   display: flex;
   flex-flow: row wrap;
+  align-items: center;
   justify-content: flex-end;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-title {
@@ -382,6 +450,77 @@
   font-weight: bold;
   text-align: center;
   font-variant-caps: small-caps;
+}
+.diseases .disease-card {
+  position: relative;
+  width: 255px;
+  height: 385px;
+  margin: 0 auto;
+  border: 10px solid #104020;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #e8f0e0;
+}
+.diseases .disease-card .disease-card-content {
+  padding: 0 5px;
+}
+.diseases .disease-card .disease-card-content .disease-card-description {
+  text-align: left;
+  margin-left: 0;
+  padding: 0;
+  border: 0;
+}
+.diseases .disease-card .disease-card-content .disease-card-severity-rating {
+  width: 31px;
+  height: 31px;
+  background-color: #405848;
+  float: left;
+  color: white;
+  font: 20pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.diseases .disease-card .disease-card-content .disease-card-symptom {
+  text-align: left;
+}
+.diseases .disease-card .disease-card-content .disease-card-symptom .symptom-name {
+  text-transform: uppercase;
+}
+.diseases .disease-card .disease-card-content .disease-card-symptom .symptom-name::first-letter {
+  font-size: 16pt;
+}
+.diseases .disease-card .disease-card-header {
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  margin-bottom: 5px;
+}
+.diseases .disease-card .disease-card-header .disease-card-name {
+  margin: auto 0;
+  padding: 0 5px;
+  color: white;
+  font: 16pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+  vertical-align: middle;
+}
+.diseases .disease-card .disease-card-header .disease-card-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.diseases .disease-card .disease-card-header .disease-card-traits {
+  height: 20px;
+  padding: 3px 5px;
+  background-color: #383830;
+  color: white;
+  font-size: 10pt;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.diseases .disease-card .item-delete-link {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
 }
 .dice-additional-flavor {
   font-style: oblique;
@@ -537,6 +676,202 @@
 .special-die {
   border: none;
 }
+.insanities .insanity-card {
+  position: relative;
+  width: 255px;
+  height: 385px;
+  margin: 0 auto;
+  border: 10px solid #602018;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #d0d8e0;
+}
+.insanities .insanity-card .insanity-card-content {
+  padding: 0 5px;
+}
+.insanities .insanity-card .insanity-card-content .insanity-card-description {
+  text-align: left;
+  margin-left: 0;
+  padding: 0;
+  border: 0;
+}
+.insanities .insanity-card .insanity-card-content .insanity-card-severity-rating {
+  width: 31px;
+  height: 31px;
+  background-color: #202020;
+  float: right;
+  color: white;
+  font: 20pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.insanities .insanity-card .insanity-card-content .insanity-card-symptom {
+  text-align: left;
+}
+.insanities .insanity-card .insanity-card-content .insanity-card-symptom .symptom-name {
+  text-transform: uppercase;
+}
+.insanities .insanity-card .insanity-card-content .insanity-card-symptom .symptom-name::first-letter {
+  font-size: 16pt;
+}
+.insanities .insanity-card .insanity-card-header {
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  margin-bottom: 5px;
+}
+.insanities .insanity-card .insanity-card-header .insanity-card-name {
+  margin: auto 0;
+  padding: 0 5px;
+  color: white;
+  font: 16pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+  vertical-align: middle;
+}
+.insanities .insanity-card .insanity-card-header .insanity-card-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.insanities .insanity-card .insanity-card-header .insanity-card-traits {
+  height: 20px;
+  padding: 3px 5px;
+  background-color: #303030;
+  color: white;
+  font-size: 10pt;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.insanities .insanity-card .item-delete-link {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+}
+.miscasts .miscast-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 255px;
+  height: 385px;
+  margin: 0 auto;
+  border: 10px solid #385060;
+  border-width: 10px 0;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #e8f0f8;
+}
+.miscasts .miscast-card .miscast-card-description {
+  flex-grow: 1;
+  padding: 10px;
+}
+.miscasts .miscast-card .miscast-card-description p {
+  text-align: left;
+}
+.miscasts .miscast-card .miscast-card-header {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  margin-bottom: 5px;
+  background-color: #e8e8e0;
+}
+.miscasts .miscast-card .miscast-card-header .miscast-card-name {
+  margin: auto 0;
+  color: white;
+  font: 16pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.miscasts .miscast-card .miscast-card-header .miscast-card-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.miscasts .miscast-card .miscast-card-severity-rating {
+  position: absolute;
+  width: 31px;
+  height: 31px;
+  bottom: 15px;
+  right: 15px;
+  background-color: #703818;
+  color: white;
+  font: 20pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.miscasts .miscast-card .item-delete-link {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+}
+.mutations .mutation-card {
+  position: relative;
+  width: 255px;
+  height: 385px;
+  margin: 0 auto;
+  border: 10px solid #987060;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #f0e8e0;
+}
+.mutations .mutation-card .mutation-card-content {
+  padding: 0 5px;
+}
+.mutations .mutation-card .mutation-card-content .mutation-card-description {
+  text-align: left;
+  margin-left: 0;
+  padding: 0;
+  border: 0;
+}
+.mutations .mutation-card .mutation-card-content .mutation-card-severity-rating {
+  width: 31px;
+  height: 31px;
+  background-color: #e8e8e8;
+  float: left;
+  color: white;
+  font: 20pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.mutations .mutation-card .mutation-card-content .mutation-card-symptom {
+  text-align: left;
+}
+.mutations .mutation-card .mutation-card-content .mutation-card-symptom .symptom-name {
+  text-transform: uppercase;
+}
+.mutations .mutation-card .mutation-card-content .mutation-card-symptom .symptom-name::first-letter {
+  font-size: 16pt;
+}
+.mutations .mutation-card .mutation-card-header {
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  margin-bottom: 5px;
+}
+.mutations .mutation-card .mutation-card-header .mutation-card-name {
+  margin: auto 0;
+  padding: 0 5px;
+  color: white;
+  font: 16pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+  vertical-align: middle;
+}
+.mutations .mutation-card .mutation-card-header .mutation-card-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.mutations .mutation-card .mutation-card-header .mutation-card-traits {
+  height: 20px;
+  padding: 3px 5px;
+  background-color: #383830;
+  color: white;
+  font-size: 10pt;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.mutations .mutation-card .item-delete-link {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+}
 .party-sheet .party-sheet-body {
   display: flex;
 }
@@ -548,7 +883,7 @@
   width: 385px;
   margin: 0 auto 10px;
   background-color: dimgrey;
-  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
 .party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-header * {
   color: white;
@@ -664,8 +999,8 @@
 .talent-card {
   position: relative;
   display: grid;
-  width: 315px;
-  height: 205px;
+  width: 385px;
+  height: 255px;
   margin: 10px;
   border: 1px solid black;
   border-radius: 10px;
@@ -682,8 +1017,11 @@
   color: white;
   font: 20pt "Caslon Antique";
   text-align: center;
-  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   grid-area: talent-card-name;
+}
+.talent-card .talent-card-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
 }
 .talent-card .talent-card-type {
   display: block;
@@ -695,7 +1033,7 @@
   font-weight: bold;
   text-align: center;
   font-variant-caps: small-caps;
-  text-shadow: -1pt -1pt 0pt black, -1pt 0 0pt black, 0 -1pt 0pt black, -1pt 1pt 0pt black, 1pt -1pt 0pt black, 0 1pt 0pt black, 1pt 0 0pt black, 1pt 1pt 0pt black;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   writing-mode: vertical-lr;
   transform: rotate(180deg);
   grid-area: talent-card-type;
@@ -744,6 +1082,59 @@
   font-weight: bold;
   font-style: italic;
   font-stretch: normal;
+}
+.wounds .wound-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 255px;
+  height: 385px;
+  margin: 0 auto;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #f4e0c0;
+}
+.wounds .wound-card .wound-card-description {
+  flex-grow: 1;
+  padding: 10px;
+  border: 10px solid #803020;
+  border-top: 0;
+}
+.wounds .wound-card .wound-card-description p {
+  text-align: left;
+}
+.wounds .wound-card .wound-card-header {
+  border-bottom: 10px solid #503010;
+}
+.wounds .wound-card .wound-card-header .wound-card-name {
+  display: block;
+  margin: auto 0;
+  border: 10px solid #2e231f;
+  background-color: #e0c0b0;
+  color: white;
+  font: 16pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.wounds .wound-card .wound-card-header .wound-card-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.wounds .wound-card .wound-card-severity-rating {
+  position: absolute;
+  width: 31px;
+  height: 31px;
+  bottom: 15px;
+  right: 15px;
+  background-color: #703818;
+  color: white;
+  font: 20pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.wounds .wound-card .item-delete-link {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
 }
 body {
   font: 12pt "ArnoPro";

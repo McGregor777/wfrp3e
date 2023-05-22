@@ -47,7 +47,7 @@
 	"CHARACTER.Main": "Principal",
 	"CHARACTER.Maximum": "Maximum",
 	"CHARACTER.Skills": "Compétences",
-	"CHARACTER.Stances": "Attitudes",
+	"CHARACTER.Stances": "Attitude",
 	"CHARACTER.Stress": "Stress",
 	"CHARACTER.Talents": "Talents",
 	"CHARACTER.Threshold": "Plafond",
@@ -103,8 +103,10 @@
 	"CAREER.CareerTransition": "Transition de Carrière",
 	"CAREER.CareerSkills": "Compétences de Carrière",
 	"CAREER.Conservative": "Prudence",
+	"CAREER.CurrentCareer": "Carrière en cours",
 	"CAREER.DedicationBonus": "Bonus de fin de Carrière",
 	"CAREER.Fortune": "Fortune",
+	"CAREER.LightWoundThreshold": "Plafond de Blessure",
 	"CAREER.OpenCareerAdvance": "Amélioration Libre de Carrière",
 	"CAREER.PrimaryCharacteristics": "Caractéristiques Primaires",
 	"CAREER.SettingInformation": "Description",
@@ -231,9 +233,15 @@
 
 	"CRITICALWOUND.SeverityRating": "Niveau de Gravité",
 
+	"CONDITION.Duration": "Durée",
+
 	"CONDITION.Brief": "Brève",
 	"CONDITION.Dependent": "Subordonnée",
 	"CONDITION.Lingering": "Prolongée",
+
+	"brief": "Brève",
+	"dependent": "Subordonnée",
+	"lingering": "Prolongée",
 
 	"INSANITY.SeverityRating": "Niveau de Gravité",
 	"INSANITY.Traits": "Traits",
@@ -241,14 +249,32 @@
 	"MUTATION.SeverityRating": "Niveau de Gravité",
 	"MUTATION.Traits": "Traits",
 
-	"DISEASE.Delirium": "Delirium",
-	"DISEASE.Fever": "Fever",
-	"DISEASE.Infectious": "Infectious",
-	"DISEASE.Lethal": "Lethal",
-	"DISEASE.Painful": "Painful",
-	"DISEASE.Tiring": "Tiring",
-	"DISEASE.Virulent": "Virulent",
-	"DISEASE.Weary": "Weary",
+	"DISEASE.Description": "Description",
+	"DISEASE.SeverityRating": "Niveau de Gravité",
+	"DISEASE.Symptom": "Symptôme",
+	"DISEASE.Traits": "Traits",
+
+	"DISEASE.SYMPTOM.KEYWORD.Delirium": "Délire",
+	"DISEASE.SYMPTOM.KEYWORD.Fever": "Fièvre",
+	"DISEASE.SYMPTOM.KEYWORD.Infectious": "Infectieux",
+	"DISEASE.SYMPTOM.KEYWORD.Lethal": "Létal",
+	"DISEASE.SYMPTOM.KEYWORD.Painful": "Douloureux",
+	"DISEASE.SYMPTOM.KEYWORD.Tiring": "Épuisant",
+	"DISEASE.SYMPTOM.KEYWORD.Virulent": "Virulent",
+	"DISEASE.SYMPTOM.KEYWORD.Weary": "Fatigué",
+
+	"DISEASE.SYMPTOM.DESCRIPTION.Delirium": "Chaque symptôme <strong class=\"symptom-name\">Délire</strong> compte comme 1 stress.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Fever": "Chaque symptôme <strong class=\"symptom-name\">Fièvre</strong> ajoute <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> à tous les tests mentaux effectués par le souffrant.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Infectious": "Chaque symptôme <strong class=\"symptom-name\">Infectieux</strong> désactive un emplacement de talent de la fiche de groupe. Placez un jeton sur l'emplacement de talent pour montrer qu'il est occupé.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Lethal": "Chaque symptôme <strong class=\"symptom-name\">Létal</strong> augmente le niveau de gravité de chaque autre carte de maladie ou de symptôme de +1.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Painful": "Chaque symptôme <strong class=\"symptom-name\">Douloureux</strong> ajoute <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> à tous les tests physiques effectués par le souffrant.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Tiring": "Chaque symptôme <strong class=\"symptom-name\">Épuisant</strong> compte comme 1 fatigue.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Virulent": "Chaque symptôme <strong class=\"symptom-name\">Virulent</strong> agit comme une copie de chaque autre symptôme dont la cible souffre.",
+	"DISEASE.SYMPTOM.DESCRIPTION.Weary": "Chaque symptôme <strong class=\"symptom-name\">Fatigué</strong> ajoute 1 jeton de recharge aux actions effectuées, ou ajoute 1 jeton de moins aux actions <em>Ongoing</em>.",
+
+	"INSANITY.Description": "Description",
+
+	"MUTATION.Description": "Description",
 
 	"exotic": "Exotique",
 	"rare": "Rare",

@@ -1,0 +1,87 @@
+.wounds
+{
+	& .wound-card
+	{
+		display: flex;
+		flex-direction: column;
+		position: relative;
+		width: 255px;
+		height: 385px;
+		margin: 0 auto;
+		border-radius: 10px;
+		text-align: center;
+		background-color: #f4e0c0;
+
+		& .wound-card-description
+		{
+			flex-grow: 1;
+			padding: 10px;
+			border: 10px solid #803020;
+			border-top: 0;
+
+			& p
+			{
+				text-align: left;
+			}
+		}
+
+		& .wound-card-header
+		{
+			border-bottom: 10px solid #503010;
+
+			& .wound-card-name
+			{
+				display: block;
+				margin: auto 0;
+				border: 10px solid #2e231f;
+				background-color: #e0c0b0;
+				color: white;
+				font: 16pt "Caslon Antique";
+				font-variant-caps: small-caps;
+				text-shadow:
+					-1pt -1pt 0 black,
+					-1pt 0 0 black,
+					0 -1pt 0 black,
+					-1pt 1pt 0 black,
+					1pt -1pt 0 black,
+					0 1pt 0 black,
+					1pt 0 0 black,
+					1pt 1pt 0 black;
+
+				&:hover
+				{
+					text-shadow: 0 0 8px var(--color-shadow-primary);
+				}
+			}
+		}
+
+		& .wound-card-severity-rating
+		{
+			position: absolute;
+			width: 31px;
+			height: 31px;
+			bottom: 15px;
+			right: 15px;
+			background-color: #703818;
+			color: white;
+			font: 20pt "Caslon Antique";
+			font-variant-caps: small-caps;
+			text-shadow:
+				-1pt -1pt 0 black,
+				-1pt 0 0 black,
+				0 -1pt 0 black,
+				-1pt 1pt 0 black,
+				1pt -1pt 0 black,
+				0 1pt 0 black,
+				1pt 0 0 black,
+				1pt 1pt 0 black;
+		}
+
+		& .item-delete-link
+		{
+			position: absolute;
+			bottom: 10px;
+			left: 15px;
+		}
+	}
+}

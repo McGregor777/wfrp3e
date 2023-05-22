@@ -192,10 +192,7 @@
 		},
 		"ability":
 		{
-			"templates":
-			[
-				"basics"
-			]
+			"templates": ["basics"]
 		},
 		"action":
 		{
@@ -305,14 +302,16 @@
 		{
 			"templates": ["basics"],
 			"traits": ["", ""],
-			"keyword": "",
-			"severityRating": 1
+			"symptom": "",
+			"severityRating": 1,
+			"effects": ""
 		},
 		"insanity":
 		{
 			"templates": ["basics"],
 			"traits": ["", ""],
-			"severityRating": 1
+			"severityRating": 1,
+			"effects": ""
 		},
 		"money":
 		{
@@ -328,7 +327,8 @@
 		{
 			"templates": ["basics"],
 			"traits": ["Chaos"],
-			"severityRating": 1
+			"severityRating": 1,
+			"effects": ""
 		},
 		"skill":
 		{

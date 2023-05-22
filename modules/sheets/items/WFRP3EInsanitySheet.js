@@ -6,7 +6,7 @@ export default class WFRP3EInsanitySheet extends ItemSheet
 		{
 			template: "systems/wfrp3e/templates/insanity-sheet.html",
 			//width: 530,
-			height: 300,
+			height: 400,
 			classes: ["wfrp3e", "sheet", "item", "insanity", "insanity-item-sheet"]
 		});
 	}

@@ -2,9 +2,7 @@ import DiceHelper from "../../dice/DiceHelper.js";
 
 /**
  * Provides the data and general interaction with Actor Sheets - Abstract class.
- *
- * WFRP3CharacterSheet provides the general interaction and data organization shared among all actor sheets, as this is an abstract class, inherited by either Character or NPC specific actor sheet classes. When rendering an actor sheet, getData() is called, which is a large and key that prepares the actor data for display, processing the raw data and items and compiling them into data to display on the sheet. Additionally, this class contains all the main events that respond to sheet interaction in activateListeners().
- *
+ * WFRP3CharacterSheet provides the general interaction and data organization shared among all actor sheets, as this is an abstract class, inherited by either Character or NPC specific actor sheet classes. When rendering an actor sheet, getData() is called, which is a large and key that prepares the actor data for display, processing the raw data and items and compiling them into data to display on the sheet. Additionally, this class contains all the main events that respond to sheet interaction in activateListeners()
  * @see WFRP3CharacterSheet - Data and main computation model (this.actor)
  */
 export default class WFRP3ECharacterSheet extends ActorSheet
@@ -18,7 +16,8 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 			width: 932,
 			height: 800,
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
-			tabs: [
+			tabs:
+			[
 				{group: "primary", navSelector: ".character-sheet-primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
 				{group: "careers", navSelector: ".character-sheet-career-tabs", contentSelector: ".character-sheet-careers"},
 				{group: "talents", navSelector: ".character-sheet-talent-tabs", contentSelector: ".character-sheet-talents", initial: "focus"},
@@ -29,10 +28,8 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 
 	/**
 	* Provides the data to the template when rendering the actor sheet
-	*
 	* This is called when rendering the sheet, where it calls the base actor class to organize, process, and prepare all actor data for display.
-	*
-	* @returns {Object} data    Data given to the template when rendering
+	* @returns {Object} data Data given to the template when rendering
 	*/
 	getData()
 	{
@@ -42,15 +39,16 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 
 		this.options.tabs[1].initial = data.items.careers.find(career => career.system.current);
 
-		console.log(data);
+		data.items["diseases"].forEach((disease) => disease.symptomDescription = game.i18n.localize(CONFIG.WFRP3E.disease.symptoms.descriptions[disease.system.symptom]));
+
+		console.log(this)
 
 		return data;
 	}
 
 	/**
 	 * Returns items sorted by type.
-	 *
-	 * @param data {Object}   The Actor data
+	 * @param data {Object} The Actor data
 	 */
 	constructItemLists(data)
 	{
@@ -64,49 +62,49 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 				return 0;
 		});
 
-		const actions = sortedItems.filter(i => i.type === "action");
-		const talents = sortedItems.filter(i => i.type === "talent");
+		const actions = sortedItems.filter(item => item.type === "action");
+		const talents = sortedItems.filter(item => item.type === "talent");
 
 		const items =
 		{
-			skills: sortedItems.filter(i => i.type === "skill"),
-			careers: data.items.filter(i => i.type === "career"),
+			skills: sortedItems.filter(item => item.type === "skill"),
+			careers: data.items.filter(item => item.type === "career"),
 			talents:
 			{
-				focus: talents.filter(i => i.system.type === "focus"),
-				reputation: talents.filter(i => i.system.type === "reputation"),
-				tactic: talents.filter(i => i.system.type === "tactic"),
-				faith: talents.filter(i => i.system.type === "faith"),
-				order: talents.filter(i => i.system.type === "order"),
-				trick: talents.filter(i => i.system.type === "trick")
+				focus: talents.filter(item => item.system.type === "focus"),
+				reputation: talents.filter(item => item.system.type === "reputation"),
+				tactic: talents.filter(item => item.system.type === "tactic"),
+				faith: talents.filter(item => item.system.type === "faith"),
+				order: talents.filter(item => item.system.type === "order"),
+				trick: talents.filter(item => item.system.type === "trick")
 			},
-			abilities: sortedItems.filter(i => i.type === "ability"),
+			abilities: sortedItems.filter(item => item.type === "ability"),
 			actions:
 			{
-				melee: actions.filter(i => i.system.conservative.type === "melee"),
-				ranged: actions.filter(i => i.system.conservative.type === "ranged"),
-				support: actions.filter(i => i.system.conservative.type === "support"),
-				blessing: actions.filter(i => i.system.conservative.type === "blessing"),
-				spell: actions.filter(i => i.system.conservative.type === "spell")
+				melee: actions.filter(item => item.system.conservative.type === "melee"),
+				ranged: actions.filter(item => item.system.conservative.type === "ranged"),
+				support: actions.filter(item => item.system.conservative.type === "support"),
+				blessing: actions.filter(item => item.system.conservative.type === "blessing"),
+				spell: actions.filter(item => item.system.conservative.type === "spell")
 			},
-			conditions: sortedItems.filter(i => i.type === "condition"),
-			diseases: sortedItems.filter(i => i.type === "disease"),
-			insanities: sortedItems.filter(i => i.type === "insanity"),
-			mutations: sortedItems.filter(i => i.type === "mutations"),
-			criticalWounds: sortedItems.filter(i => i.type === "criticalWound"),
-			weapons: sortedItems.filter(i => i.type === "weapon"),
-			armours: sortedItems.filter(i => i.type === "armour"),
-			money: sortedItems.filter(i => i.type === "money"),
-			trappings: sortedItems.filter(i => i.type === "trapping")
+			conditions: sortedItems.filter(item => item.type === "condition"),
+			diseases: sortedItems.filter(item => item.type === "disease"),
+			insanities: sortedItems.filter(item => item.type === "insanity"),
+			miscasts: sortedItems.filter(item => item.type === "miscast"),
+			mutations: sortedItems.filter(item => item.type === "mutation"),
+			criticalWounds: sortedItems.filter(item => item.type === "criticalWound"),
+			weapons: sortedItems.filter(item => item.type === "weapon"),
+			armours: sortedItems.filter(item => item.type === "armour"),
+			money: sortedItems.filter(item => item.type === "money"),
+			trappings: sortedItems.filter(item => item.type === "trapping")
 		};
 
 		return items;
 	}
 
 	/**
-	 * Activate event listeners using the prepared sheet HTML
-	 *
-	 * @param html {HTML} The prepared HTML object ready to be rendered into the DOM
+	 * Activate event listeners using the prepared sheet HTML.
+	 * @param html {HTML} The prepared HTML object ready to be rendered into the DOM.
 	 */
 	activateListeners(html)
 	{

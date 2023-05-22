@@ -21,6 +21,8 @@ export default class WFRP3EItem extends Item
 			this.prepareAction();
 		else if(this.type === "armour")
 			this.prepareArmour();
+		else if(this.type === "disease")
+			this.prepareDisease();
 		else if(this.type === "career")
 			this.prepareCareer();
 		else if(this.type === "criticalWound")
@@ -34,16 +36,12 @@ export default class WFRP3EItem extends Item
 	/**
 	 * Prepare Action's data.
 	 */
-	prepareAction()
-	{
-	}
+	prepareAction() {}
 
 	/**
 	 * Prepare Armour's data.
 	 */
-	prepareArmour()
-	{
-	}
+	prepareArmour() {}
 
 	/**
 	 * Prepare Career's data.
@@ -57,23 +55,22 @@ export default class WFRP3EItem extends Item
 	/**
 	 * Prepare CriticalWound's data.
 	 */
-	prepareCriticalWound()
-	{
-	}
+	prepareCriticalWound() {}
+
+	/**
+	 * Prepare Disease's data.
+	 */
+	prepareDisease() {}
 
 	/**
 	 * Prepare Skill's data.
 	 */
-	prepareSkill()
-	{
-	}
+	prepareSkill() {}
 
 	/**
 	 * Prepare Weapon's data.
 	 */
-	prepareWeapon()
-	{
-	}
+	prepareWeapon() {}
 
 	/**
 	 * Converts the Item's talent sockets to Array.
