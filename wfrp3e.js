@@ -5,6 +5,7 @@ import WFRP3ECharacterSheet from "./modules/sheets/actors/WFRP3ECharacterSheet.j
 import WFRP3ECreatureSheet from "./modules/sheets/actors/WFRP3ECreatureSheet.js";
 import WFRP3EGroupSheet from "./modules/sheets/items/WFRP3EGroupSheet.js";
 import WFRP3EPartySheet from "./modules/sheets/actors/WFRP3EPartySheet.js";
+import WFRP3EAbilitySheet from "./modules/sheets/items/WFRP3EAbilitySheet.js";
 import WFRP3EActionSheet from "./modules/sheets/items/WFRP3EActionSheet.js";
 import WFRP3EArmourSheet from "./modules/sheets/items/WFRP3EArmourSheet.js";
 import WFRP3ECareerSheet from "./modules/sheets/items/WFRP3ECareerSheet.js";
@@ -38,6 +39,7 @@ async function preloadHandlebarsTemplates()
 		"systems/wfrp3e/templates/partials/attribute-partial.html",
 		"systems/wfrp3e/templates/partials/characteristic-partial.html",
 		"systems/wfrp3e/templates/partials/impairment-partial.html",
+		"systems/wfrp3e/templates/partials/item-ability-card.html",
 		"systems/wfrp3e/templates/partials/item-action-card.html",
 		"systems/wfrp3e/templates/partials/item-armour-row.html",
 		"systems/wfrp3e/templates/partials/item-career-partial.html",
@@ -86,6 +88,7 @@ Hooks.once("init", function()
 	Actors.registerSheet("WFRP3E", WFRP3EGroupSheet, {label: "Group Sheet", types: ["group"], makeDefault: true});
 	
 	Items.unregisterSheet("core", ItemSheet);
+	Items.registerSheet("WFRP3E", WFRP3EAbilitySheet, {label: "Ability Sheet", types: ["ability"], makeDefault: true});
 	Items.registerSheet("WFRP3E", WFRP3EActionSheet, {label: "Action Sheet", types: ["action"], makeDefault: true});
 	Items.registerSheet("WFRP3E", WFRP3EArmourSheet, {label: "Armour Sheet", types: ["armour"], makeDefault: true});
 	Items.registerSheet("WFRP3E", WFRP3ECareerSheet, {label: "Career Sheet", types: ["career"], makeDefault: true})

@@ -1,0 +1,12 @@
+<div class="item ability-partial" data-item-id="{{ability._id}}">
+	<div class="ability-card card">
+		<div class="ability-card-header">
+			<a class="ability-card-name item-name-link">{{ability.name}}</a>
+		</div>
+		<div class="ability-card-description">{{{ability.system.description}}}</div>
+
+		{{#>if (lookup . document.isOwner)}}
+			<a class="item-delete-link" title="{{localize 'TITLE.DeleteItem'}}"><span class="fas fa-trash"></span></a>
+		{{/if}}
+	</div>
+</div>
