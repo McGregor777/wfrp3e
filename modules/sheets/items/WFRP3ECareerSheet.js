@@ -31,10 +31,26 @@ export default class WFRP3ECareerSheet extends ItemSheet
 		super.activateListeners(html);
 
 		html.find(".talent-socket-add").click(this._onTalentSocketAdd.bind(this));
+		html.find(".talent-socket-remove").click(this._onTalentSocketDelete.bind(this));
 	}
 
 	async _onTalentSocketAdd(event)
 	{
-		this.item.update(system.talentSockets = {[`${Object.keys(this.item.system.talentSockets).length}`]: ""});
+		const data = this.item.system.talentSockets;
+
+		data.push("focus");
+
+		this.item.update({"system.talentSockets": data});
+	}
+
+	async _onTalentSocketDelete(event)
+	{
+		const data = this.item.system.talentSockets;
+
+		data.pop();
+
+		console.log(data);
+
+		this.item.update({"system.talentSockets": data});
 	}
 }

@@ -60,7 +60,7 @@
 	"PARTY.FortunePool": "Fortune Pool",
 	"PARTY.RemoveMember": "Remove Member from Party",
 	"PARTY.SpecialAbility.Title": "Special Ability's Title",
-	"PARTY.TalentSocket": "Talent Socket",
+	"PARTY.TalentSockets": "Talent Sockets",
 	"PARTY.TensionEvent.Effects": "Tension Event Effects",
 	"PARTY.TensionEvent.Threshold": "Tension Event Threshold",
 	"PARTY.TensionMeter.Decrease": "Decrease Tension Meter",
@@ -115,6 +115,7 @@
 	"CAREER.SkillTrainingOrSpecialty": "Skill Training or Specialty",
 	"CAREER.Summary": "Summary",
 	"CAREER.Talent": "Talent",
+	"CAREER.TalentSockets": "Talent Sockets",
 	"CAREER.Wound": "Wound",
 
 	"TALENT.Focus": "Focus",

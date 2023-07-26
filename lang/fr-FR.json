@@ -60,7 +60,7 @@
 	"PARTY.FortunePool": "Réserve de Fortune",
 	"PARTY.RemoveMember": "Retirer le membre du groupe",
 	"PARTY.SpecialAbility.Title": "Nom de l'Aptitude Spéciale",
-	"PARTY.TalentSocket": "Emplacement de Talent",
+	"PARTY.TalentSockets": "Emplacements de Talent",
 	"PARTY.TensionEvent.Effects": "Effets de l'Évènement de Tension",
 	"PARTY.TensionEvent.Threshold": "Seuil de l'Évènement de Tension",
 	"PARTY.TensionMeter.Decrease": "Diminuer la Jauge de Tension",
@@ -115,6 +115,7 @@
 	"CAREER.SkillTrainingOrSpecialty": "Formation ou Spécialisation",
 	"CAREER.Summary": "Résumé",
 	"CAREER.Talent": "Talent",
+	"CAREER.TalentSockets": "Emplacements de Talent",
 	"CAREER.Wound": "Point de Blessure",
 
 	"TALENT.Focus": "Affinité",

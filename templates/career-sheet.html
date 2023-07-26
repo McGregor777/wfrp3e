@@ -22,16 +22,20 @@
 
 		<div class="sheet-form-div">
 			<label class="sheet-form-label">{{localize 'CAREER.TalentSockets'}}</label>
+
 			{{#each item.system.talentSockets as |type ty|}}
-				<select class="sheet-form-select" name="system.talentSockets.{{ty}}" data-dtype="String">
+				<select class="career-sheet-talent-socket-select sheet-form-select" name="system.talentSockets.{{ty}}" data-dtype="String">
 					{{selectOptions ../talentTypes selected=type localize=true}}
 				</select>
-				{{/each}}
+			{{/each}}
+
+			<a class="talent-socket-remove"><span class="fas fa-minus"></span></a>
 			<a class="talent-socket-add"><span class="fas fa-plus"></span></a>
 		</div>
 
 		<div class="sheet-form-div">
 			<label class="sheet-form-label">{{localize 'CAREER.PrimaryCharacteristics'}}</label>
+
 			{{#each item.system.primaryCharacteristics as |characteristic char|}}
 				<select name="system.primaryCharacteristics.{{char}}" data-dtype="String">
 					{{selectOptions ../characteristics selected=characteristic localize=true}}
