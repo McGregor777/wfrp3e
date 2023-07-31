@@ -37,11 +37,9 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 
 		data.items = this.constructItemLists(data);
 
-		this.options.tabs[1].initial = data.items.careers.find(career => career.system.current);
+		this.options.tabs[1].initial = data.items.careers.find(career => career.system.current)._id;
 
 		data.items["diseases"].forEach((disease) => disease.symptomDescription = game.i18n.localize(CONFIG.WFRP3E.disease.symptoms.descriptions[disease.system.symptom]));
-
-		console.log(this)
 
 		return data;
 	}

@@ -409,7 +409,7 @@
   flex-flow: row wrap;
 }
 .character-sheet .character-sheet-body .item-container.active {
-  display: flex;
+  flex-direction: row;
 }
 .character-sheet .character-sheet-body .item-container .career-partial {
   display: flex;

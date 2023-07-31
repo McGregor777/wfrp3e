@@ -170,7 +170,7 @@
 
 			<div class="character-sheet-careers">
 				{{#each items.careers as |career|}}
-					<div class="career-container item-container" data-group="careers" data-tab="{{career._id}}">
+					<div class="career-container tab item-container" data-group="careers" data-tab="{{career._id}}">
 						{{>systems/wfrp3e/templates/partials/item-career-partial.html career=career}}
 					</div>
 				{{/each}}
@@ -206,7 +206,7 @@
 
 			<div class="character-sheet-talents">
 				{{#if items.talents.focus}}
-					<div class="talent-container focus item-container" data-group="talents" data-tab="focus">
+					<div class="talent-container tab focus item-container" data-group="talents" data-tab="focus">
 						{{#each items.talents.focus as |talent ta|}}
 							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
 						{{/each}}
@@ -214,7 +214,7 @@
 				{{/if}}
 
 				{{#if items.talents.reputation}}
-					<div class="talent-container reputation item-container" data-group="talents" data-tab="reputation">
+					<div class="talent-container tab reputation item-container" data-group="talents" data-tab="reputation">
 						{{#each items.talents.reputation as |talent ta|}}
 							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
 						{{/each}}
@@ -223,7 +223,7 @@
 				{{/if}}
 
 				{{#if items.talents.tactic}}
-					<div class="talent-container tactic item-container" data-group="talents" data-tab="tactic">
+					<div class="talent-container tab tactic item-container" data-group="talents" data-tab="tactic">
 						{{#each items.talents.tactic as |talent ta|}}
 							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
 						{{/each}}
@@ -231,7 +231,7 @@
 				{{/if}}
 
 				{{#if items.talents.faith}}
-					<div class="talent-container faith item-container" data-group="talents" data-tab="faith">
+					<div class="talent-container tab faith item-container" data-group="talents" data-tab="faith">
 						{{#each items.talents.faith as |talent ta|}}
 							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
 						{{/each}}
@@ -239,7 +239,7 @@
 				{{/if}}
 
 				{{#if items.talents.order}}
-					<div class="talent-container order item-container" data-group="talents" data-tab="order">
+					<div class="talent-container tab order item-container" data-group="talents" data-tab="order">
 						{{#each items.talents.order as |talent ta|}}
 							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
 						{{/each}}
@@ -247,7 +247,7 @@
 				{{/if}}
 
 				{{#if items.talents.tricks}}
-					<div class="talent-container trick item-container" data-group="talents" data-tab="trick">
+					<div class="talent-container tab trick item-container" data-group="talents" data-tab="trick">
 						{{#each items.talents.tricks as |talent ta|}}
 							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
 						{{/each}}
@@ -281,7 +281,7 @@
 
 			<div class="character-sheet-actions">
 				{{#if items.actions.melee}}
-					<div class="action-container melee item-container" data-group="actions" data-tab="melee">
+					<div class="action-container tab melee item-container" data-group="actions" data-tab="melee">
 						{{#each items.actions.melee as |action act|}}
 							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
 						{{/each}}
@@ -289,7 +289,7 @@
 				{{/if}}
 
 				{{#if items.actions.ranged}}
-					<div class="action-container ranged item-container" data-group="actions" data-tab="ranged">
+					<div class="action-container tab ranged item-container" data-group="actions" data-tab="ranged">
 						{{#each items.actions.ranged as |action act|}}
 							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
 						{{/each}}
@@ -297,7 +297,7 @@
 				{{/if}}
 
 				{{#if items.actions.support}}
-					<div class="action-container support item-container" data-group="actions" data-tab="support">
+					<div class="action-container tab support item-container" data-group="actions" data-tab="support">
 						{{#each items.actions.support as |action act|}}
 							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
 						{{/each}}
@@ -305,7 +305,7 @@
 				{{/if}}
 
 				{{#if items.actions.blessing}}
-					<div class="action-container blessing item-container" data-group="actions" data-tab="blessing">
+					<div class="action-container tab blessing item-container" data-group="actions" data-tab="blessing">
 						{{#each items.actions.blessing as |action act|}}
 							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
 						{{/each}}
@@ -313,7 +313,7 @@
 				{{/if}}
 
 				{{#if items.actions.spell}}
-					<div class="action-container spell item-container" data-group="actions" data-tab="spell">
+					<div class="action-container tab spell item-container" data-group="actions" data-tab="spell">
 						{{#each items.actions.spell as |action act|}}
 							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
 						{{/each}}
