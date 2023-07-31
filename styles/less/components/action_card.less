@@ -139,7 +139,7 @@
 		grid-area: action-card-type;
 	}
 
-	.face
+	& .face
 	{
 		&.conservative
 		{
@@ -159,6 +159,31 @@
 			& > .action-card-header
 			{
 				background-color: #c02030;
+			}
+		}
+	}
+
+	& .bottom-line
+	{
+		align-items: end;
+
+		& .recharge-token
+		{
+			position: relative;
+
+			& > img
+			{
+				height: 3rem;
+				opacity: 75%;
+			}
+
+			& > .recharge-token-counter
+			{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 2rem
 			}
 		}
 	}

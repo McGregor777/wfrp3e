@@ -36,7 +36,12 @@ export default class WFRP3EItem extends Item
 	/**
 	 * Prepare Action's data.
 	 */
-	prepareAction() {}
+	prepareAction()
+	{
+		if(this.system.rechargeTokens === undefined || this.system.rechargeTokens === null) {
+			this.update({system: {rechargeTokens: 0}});
+		}
+	}
 
 	/**
 	 * Prepare Armour's data.

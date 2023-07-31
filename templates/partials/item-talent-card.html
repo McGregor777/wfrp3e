@@ -3,7 +3,14 @@
 	<a class="talent-card-name item-name-link">{{talent.name}}</a>
 	<div class="talent-card-content">{{{talent.system.description}}}</div>
 
+	<div class="recharge-token-container">
+		<a class="recharge-token">
+			<img src="systems/wfrp3e/assets/images/token-grey.webp" alt="Recharge Token" />
+			<span class="recharge-token-counter">{{{talent.system.rechargeTokens}}}</span>
+		</a>
+	</div>
+
 	{{#>if (lookup . document.isOwner)}}
-	<a class="item-delete-link" title="{{localize 'TITLE.DeleteItem'}}"><span class="fas fa-trash"></span></a>
+		<a class="item-delete-link" title="{{localize 'TITLE.DeleteItem'}}"><span class="fas fa-trash"></span></a>
 	{{/if}}
 </div>

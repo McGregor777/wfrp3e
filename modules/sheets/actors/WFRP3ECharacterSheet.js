@@ -113,6 +113,7 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 		html.find(".item-name-link").mousedown(this._onItemClick.bind(this));
 		html.find(".skill-training-level-input").change(this._onChangeSkillTrainingLevel.bind(this));
 		html.find(".flip-link").mousedown(this._onFlipClick.bind(this));
+		html.find(".recharge-token").mousedown(this._onRechargeTokenClick.bind(this));
 		html.find(".quantity-link").mousedown(this._onQuantityClick.bind(this));
 	}
 
@@ -208,6 +209,36 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 				clickedItem.sheet.render(true);
 				break;
 		}
+	}
+
+	/**
+	 * Handles clicks on a Card's recharge token button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
+	_onRechargeTokenClick(event)
+	{
+		// Get clicked Item and Item's recharge tokens
+		const clickedItemId = this._getItemId(event);
+		const clickedItem = this.actor.items.get(clickedItemId);
+		let rechargeTokens = clickedItem.system.rechargeTokens;
+
+		switch(event.button)
+		{
+			// If left click...
+			case 0:
+				rechargeTokens++;
+				break;
+			// If right click...
+			case 2:
+				rechargeTokens--;
+				// Floor recharge tokens to 0
+				if(rechargeTokens < 0)
+					rechargeTokens = 0;
+				break;
+		}
+
+		clickedItem.update({"system.rechargeTokens": rechargeTokens});
 	}
 
 	/**

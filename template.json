@@ -227,7 +227,8 @@
 				"check": "",
 				"requirements": "",
 				"effects": ""
-			}
+			},
+			"rechargeTokens": 0
 		},
 		"armour":
 		{
@@ -341,6 +342,7 @@
 		"talent":
 		{
 			"templates": ["basics"],
+			"rechargeTokens": 0,
 			"type": "focus"
 		},
 		"trapping":

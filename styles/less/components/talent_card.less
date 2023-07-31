@@ -82,7 +82,7 @@
 		}
 	}
 
-	.item-delete-link
+	& .item-delete-link
 	{
 		position: absolute;
 		display: block;
@@ -90,5 +90,42 @@
 		bottom: 5px;
 		right: 5px;
 		line-height: 0;
+	}
+
+	& .recharge-token-container
+	{
+		position: absolute;
+		bottom: 0;
+		left: 50px;
+
+		& .recharge-token
+		{
+			display: block;
+			position: relative;
+
+			& > img
+			{
+				height: 3rem;
+				opacity: 75%;
+			}
+
+			& > .recharge-token-counter
+			{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 2rem;
+				text-shadow:
+					-1pt -1pt 0 white,
+					-1pt 0 0 white,
+					0 -1pt 0 white,
+					-1pt 1pt 0 white,
+					1pt -1pt 0 white,
+					0 1pt 0 white,
+					1pt 0 0 white,
+					1pt 1pt 0 white;
+			}
+		}
 	}
 }
