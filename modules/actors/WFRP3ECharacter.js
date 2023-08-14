@@ -23,12 +23,48 @@ export default class WFRP3ECharacter extends Actor
 			console.error(`Something went wrong when preparing actor item ${this.name}: ${e}`);
 		}*/
 
-		if(this.type === "character")
-			this.calculateStanceMeter();
-		else if(this.type === "party")
-			this.prepareParty();
+		switch(this.type)
+		{
+			case "character":
+				this.prepareCharacter();
+				break;
+			case "party":
+				this.prepareParty();
+				break;
+		}
 
 		super.prepareDerivedData();
+	}
+
+	/**
+	 * Prepares Character's data.
+	 */
+	prepareCharacter()
+	{
+		this.getCurrentCareer();
+
+		if(this.system.party !== null) {
+			this.getCurrentParty();
+		}
+
+		this.calculateStanceMeter();
+		this.buildTalentSocketLists();
+	}
+
+	/**
+	 * Get the Character's current Career.
+	 */
+	getCurrentCareer()
+	{
+		this.currentCareer = this.itemTypes.career.find(career => career.system.current);
+	}
+
+	/**
+	 * Get the Character's current Career.
+	 */
+	getCurrentParty()
+	{
+		this.currentParty = game.actors.contents.find(actor => actor.id === this.system.party);
 	}
 
 	/**
@@ -37,21 +73,19 @@ export default class WFRP3ECharacter extends Actor
 	calculateStanceMeter()
 	{
 		let stanceMeter =
-		{
-			conservative: this.system.attributes.stance.conservative,
-			reckless: this.system.attributes.stance.reckless
-		};
-
-		const currentCareer = this.itemTypes.career.find(career => career.system.current);
-
-		if(currentCareer)
-			stanceMeter =
 			{
-				conservative: this.system.attributes.stance.conservative + currentCareer.system.startingStance.conservativeSegments,
-				reckless: this.system.attributes.stance.reckless + currentCareer.system.startingStance.recklessSegments
-			}
+				conservative: this.system.attributes.stance.conservative,
+				reckless: this.system.attributes.stance.reckless
+			};
 
-		this.stanceMeter = stanceMeter
+		if(this.currentCareer)
+			stanceMeter =
+				{
+					conservative: this.system.attributes.stance.conservative + this.currentCareer.system.startingStance.conservativeSegments,
+					reckless: this.system.attributes.stance.reckless + this.currentCareer.system.startingStance.recklessSegments
+				};
+
+		this.stanceMeter = stanceMeter;
 	}
 
 	/**
@@ -59,25 +93,31 @@ export default class WFRP3ECharacter extends Actor
 	 */
 	prepareParty()
 	{
-		this.prepareTensionEvents();
-		this.prepareTalentSockets();
+		if(!(this.system.tension.events instanceof Array)) {
+			this.convertTensionEventsToArray();
+		}
+
+		if(!(this.system.talentSockets instanceof Array)) {
+			this.convertTalentSocketsToArray();
+		}
+
 		this.getMembers();
 	}
 
 	/**
 	 * Converts the Party's tension events to Array.
 	 */
-	prepareTensionEvents()
+	convertTensionEventsToArray()
 	{
-		this.system.tension.events = Object.values(this.system.tension.events);
+		this.update({"system.tension.events": Object.values(this.system.tension.events)});
 	}
 
 	/**
 	 * Converts the Actor's talent sockets to Array.
 	 */
-	prepareTalentSockets()
+	convertTalentSocketsToArray()
 	{
-		this.system.talentSockets = Object.values(this.system.talentSockets);
+		this.update({"system.talentSockets": Object.values(this.system.talentSockets)});
 	}
 
 	/**
@@ -86,15 +126,11 @@ export default class WFRP3ECharacter extends Actor
 	getMembers()
 	{
 		this.memberActors = this.system.members.map(memberId => game.actors.contents.find(actor => actor.id === memberId));
-	}
 
-	/**
-	 * Changes the Party Tension value.
-	 * @param newValue {Number}
-	 */
-	changePartyTensionValue(newValue)
-	{
-		this.update({"system.tension.value": newValue})
+		this.memberActors.forEach((actor) => {
+			if(actor.system.party !== this._id)
+				actor.update({"system.party": this._id});
+		});
 	}
 
 	/**
@@ -108,7 +144,9 @@ export default class WFRP3ECharacter extends Actor
 		if(!members.includes(newMember.id)) {
 			members.push(newMember.id);
 
-			this.update({"system.members": members})
+			this.update({"system.members": members});
+
+			newMember.update({"system.party": this._id});
 		}
 	}
 
@@ -126,7 +164,16 @@ export default class WFRP3ECharacter extends Actor
 			console.log(members);
 			members.splice(members.indexOf(quittingMember), 1);
 
-			this.update({"system.members": members})
+			this.update({"system.members": members});
 		}
+	}
+
+	/**
+	 * Changes the Party Tension value.
+	 * @param newValue {Number}
+	 */
+	changePartyTensionValue(newValue)
+	{
+		this.update({"system.tension.value": newValue});
 	}
 }
