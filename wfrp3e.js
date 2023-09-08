@@ -27,6 +27,7 @@ import ExpertiseDie from "./modules/dice/dietype/ExpertiseDie.js";
 import FortuneDie from "./modules/dice/dietype/FortuneDie.js";
 import MisfortuneDie from "./modules/dice/dietype/MisfortuneDie.js";
 import RecklessDie from "./modules/dice/dietype/RecklessDie.js";
+import DiceHelper from "./modules/dice/DiceHelper.js";
 import DicePool from "./modules/dice/DicePool.js";
 import WFRP3ERoll from "./modules/dice/WFRP3ERoll.js";
 import PopoutEditor from "./modules/PopoutEditor.js";
@@ -105,6 +106,17 @@ Hooks.once("init", function()
 	Items.registerSheet("WFRP3E", WFRP3ETrappingSheet, {label: "Trapping Sheet", types: ["trapping"], makeDefault: true});
 
 	preloadHandlebarsTemplates();
+});
+
+Hooks.on('renderSidebarTab', (app, html, data) => {
+	const chatControls = html.find("#chat-controls > .control-buttons");
+
+	if(chatControls.length > 0) {
+		chatControls.prepend('<a class="wfrp3e-dice-roller" role="button" data-tooltip="WFRP3E Dice Roller"><img src="systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp"></a>');
+		html.find("#chat-controls > .control-buttons > .wfrp3e-dice-roller").click(() => {
+			DiceHelper.displayCheckDialog(null, new DicePool(), `${game.i18n.localize("WFRP3E.Checking")}`, `${game.i18n.localize("WFRP3E.FreeCheck")}`, null, null);
+		});
+	}
 });
 
 // Update chat messages with dice images
