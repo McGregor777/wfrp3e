@@ -28,74 +28,53 @@
 
 .dice-pool-dialog
 {
+	& .convert-buttons
+	{
+		display: flex;
+		margin-bottom: 1rem;
+
+		& button
+		{
+			font-size: 12px;	
+			line-height: 20px;
+			text-align: center;
+		}
+	}
+
 	& .dice-pool
 	{
-		margin-top: 10px;
+		margin-top: 8px;
 		min-height: 54px;
 		text-align: center;
 	}
 
-	& .pool-value
-	{
-		border: 1px solid black;
-		background-color: #ddd;
-
-		& input
-		{
-			border: 0;
-			font-size: 25px;
-			text-align: center;
-			background: none;
-			width:100%;
-		}
-	}
-
-	& .pool-text
-	{
-		text-align: left;
-
-		& label
-		{
-			margin-left: 1.2em;
-		}
-	}
-
-	& .upgrade-buttons
-	{
-		display: flex;
-
-		& button
-		{
-			line-height: 20px;
-			font-size: 12px;
-			text-align: left;
-		}
-	}
-
-	& .pool-dice-pool
+	& .dice-pool-table
 	{
 		padding: 5px 1px;
-		width: calc(100% - 2px);
-	}
 
-	& .pool-additional-container
-	{
-		padding: 0 1px;
-		width: calc(100% - 2px);
-		min-width: 300px;
-
-		& .pool-additional
+		& .pool-container > td > *
 		{
-			text-align: left;
+			display: inline-block;
+			vertical-align: middle;
+		}
 
-			& input[type="button"]
-			{
-				margin: 0 3px;
-			}
+		& .pool-value
+		{
+			background-color: #ddd;
+			border: 1px solid black;
+			font: 20pt "ArnoPro";
+			padding-top: 8px;
+			text-align: center;
+			width: 3.5rem;
 		}
 	}
 
-	& .pool-roll-options
+	& .dice-pool-hint
+	{
+		margin: 10px 1px 5px 1px;
+	}
+
+	& .dice-pool-roll-options
 	{
 		margin-top: 10px;
 
@@ -106,21 +85,14 @@
 		}
 	}
 
-	& .roll-button
-	{
-		margin-top: 15px;
-	}
-
-	& table
-	{
-		width: 300px;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
 	& .hide
 	{
 		display: none;
+	}
+
+	& .maximize
+	{
+		width: 100%;
 	}
 
 	& .minimize
@@ -128,10 +100,44 @@
 		max-width: 20%;
 	}
 
-	& .maximize
+	& .pool-text
 	{
-		width: 100%;
-		// max-width: 78%;
+		text-align: left;
+		margin-left: 0.5rem;
+	}
+
+	& .roll-button
+	{
+		margin-top: 15px;
+	}
+
+	& .symbols-pool
+	{
+		margin-top: 10px;
+		min-height: 54px;
+		text-align: center;
+	}
+
+	& .symbols-pool-container
+	{
+		padding: 0 1px;
+		min-width: 320px;
+
+		& .pool-value
+		{
+			background-color: #ddd;
+			border: 1px solid black;
+			font: 16pt "ArnoPro";
+			padding-top: 8px;
+			text-align: center;
+			width: 3rem;
+		}
+
+		& .wfrp3e.picture
+		{
+			display: inline-block;
+			width: 20px;
+		}
 	}
 }
 

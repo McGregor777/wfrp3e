@@ -7,18 +7,18 @@ export default class CheckBuilder extends FormApplication
 	 * @param rollData
 	 * @param {DicePool} dicePool
 	 * @param {string} [dialogTitle]
-	 * @param {string} [rollSkillName]
+	 * @param {string} [name]
 	 * @param {string} [flavor]
 	 * @param {string} [rollSound]
 	 */
-	constructor(rollData, dicePool, dialogTitle = game.i18n.localize("WFRP3E.RollingDefaultTitle"), rollSkillName, flavor, rollSound)
+	constructor(rollData, dicePool, dialogTitle = game.i18n.localize("ROLL.FreeCheck"), name, flavor, rollSound)
 	{
 		super();
 
 		this.roll =
 		{
 			data: rollData,
-			skillName: rollSkillName,
+			name: name,
 			sound: rollSound,
 			flavor: flavor,
 		};
@@ -40,6 +40,7 @@ export default class CheckBuilder extends FormApplication
 		{
 			classes: ["wfrp3e", "roll-dialog"],
 			template: "systems/wfrp3e/templates/dialogs/check-dialog.html",
+			width: 400
 		});
 	}
 
@@ -161,7 +162,7 @@ export default class CheckBuilder extends FormApplication
 				roll.toMessage({
 					user: game.user.id,
 					speaker: {actor: game.actors.get(this.roll.data?.actor?._id)},
-					flavor: game.i18n.format("ROLL.SkillCheck", {skill: this.roll.skillName}),
+					flavor: this.roll.name,
 				});
 
 				if(this.roll?.sound)
@@ -189,20 +190,22 @@ export default class CheckBuilder extends FormApplication
 
 	_updatePreview(html)
 	{
-		const poolDiv = html.find(".dice-pool-dialog .dice-pool")[0];
-		poolDiv.innerHTML = "";
-		this.dicePool.renderPreview(poolDiv);
+		const dicePoolDiv = html.find(".dice-pool-dialog .dice-pool")[0];
+		const symbolsPoolDiv = html.find(".dice-pool-dialog .symbols-pool")[0];
+
+		dicePoolDiv.innerHTML = "";
+		this.dicePool.renderDicePoolPreview(dicePoolDiv);
 	}
 
 	_initializeInputs(html)
 	{
-		html.find(".pool-value input").each((key, value) =>
+		html.find(".dice-pool-table input").each((key, value) =>
 		{
 			const name = $(value).attr("name");
 			value.value = this.dicePool[name];
 		});
 
-		html.find(".pool-additional input").each((key, value) =>
+		html.find(".symbols-pool-container input").each((key, value) =>
 		{
 			const name = $(value).attr("name");
 			value.value = this.dicePool[name];
@@ -214,83 +217,100 @@ export default class CheckBuilder extends FormApplication
 
 	_activateInputs(html)
 	{
-		html.find(".upgrade-buttons button").on("click", (event) =>
-		{
-			event.preventDefault();
-			event.stopPropagation();
-
-			const id = $(event.currentTarget).attr("id");
-
-			switch(id.toLowerCase())
+		const poolContainers = html.find(".pool-container");
+		const convertButtons = html.find(".convert-buttons button");
+		
+		poolContainers
+			.on("click", (event) =>
 			{
-				case "upgrade-ability":
+				let input;
+
+				if($(event.currentTarget).hasClass(".pool-container"))
+					input = $(event.currentTarget).find(".pool-value input")[0];
+				else
 				{
-					this.dicePool.upgrade(1);
-					break;
+					input = $(event.currentTarget).find("input")[0];
+
+					if(!input)
+						input = $(event.currentTarget.nextElementSibling).find("input")[0];
 				}
-				case "downgrade-ability":
-				{
-					this.dicePool.upgrade(-1);
-					break;
-				}
-				case "upgrade-difficulty":
-				{
-					this.dicePool.upgradeDifficulty(1);
-					break;
-				}
-				case "downgrade-difficulty":
-				{
-					this.dicePool.upgradeDifficulty(-1);
-					break;
-				}
-			}
 
-			this._initializeInputs(html);
-		});
+				input.value++;
 
-		html.find(".pool-container, .pool-additional").on("click", (event) =>
-		{
-			let input;
-
-			if($(event.currentTarget).hasClass(".pool-container"))
-				input = $(event.currentTarget).find(".pool-value input")[0];
-			else
-			{
-				input = $(event.currentTarget).find("input")[0];
-
-				if(!input)
-					input = $(event.currentTarget.nextElementSibling).find("input")[0];
-			}
-
-			input.value++;
-
-			this.dicePool[input.name] = parseInt(input.value);
-			this._updatePreview(html);
-		});
-
-		html.find(".pool-container, .pool-additional").on("contextmenu", (event) =>
-		{
-			let input;
-
-			if($(event.currentTarget).hasClass(".pool-container"))
-				input = $(event.currentTarget).find(".pool-value input")[0];
-			else
-			{
-				input = $(event.currentTarget).find("input")[0];
-
-				if(!input)
-					input = $(event.currentTarget.nextElementSibling).find("input")[0];
-			}
-
-			const allowNegative = $(input).attr("allowNegative");
-
-			if(input.value > 0 || allowNegative)
-			{
-				input.value--;
 				this.dicePool[input.name] = parseInt(input.value);
 				this._updatePreview(html);
-			}
-		});
+			})
+			.on("contextmenu", (event) =>
+			{
+				let input;
+
+				if($(event.currentTarget).hasClass(".pool-container"))
+					input = $(event.currentTarget).find(".pool-value input")[0];
+				else
+				{
+					input = $(event.currentTarget).find("input")[0];
+
+					if(!input)
+						input = $(event.currentTarget.nextElementSibling).find("input")[0];
+				}
+
+				const allowNegative = $(input).attr("allowNegative");
+
+				if(input.value > 0 || allowNegative)
+				{
+					input.value--;
+					this.dicePool[input.name] = parseInt(input.value);
+					this._updatePreview(html);
+				}
+			});
+
+		convertButtons
+			.on("click", (event) =>
+			{
+				event.preventDefault();
+				event.stopPropagation();
+
+				const id = $(event.currentTarget).attr("id");
+
+				switch(id.toLowerCase())
+				{
+					case "convert-conservative":
+					{
+						this.dicePool.convertCharacteristicDie("conservative");
+						break;
+					}
+					case "convert-reckless":
+					{
+						this.dicePool.convertCharacteristicDie("reckless");
+						break;
+					}
+				}
+
+				this._initializeInputs(html);
+			})
+			.on("contextmenu", (event) =>
+			{
+				event.preventDefault();
+				event.stopPropagation();
+
+				const id = $(event.currentTarget).attr("id");
+
+				switch(id.toLowerCase())
+				{
+					case "convert-conservative":
+					{
+						this.dicePool.convertCharacteristicDie("conservative", -1);
+						break;
+					}
+					case "convert-reckless":
+					{
+						this.dicePool.convertCharacteristicDie("reckless", -1);
+						break;
+					}
+				}
+
+				this._initializeInputs(html);
+			});
 	}
 
 	_updateObject() {}

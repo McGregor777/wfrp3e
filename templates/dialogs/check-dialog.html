@@ -1,159 +1,184 @@
 <form style="overflow-y: scroll; scrollbar-width: thin;">
-  <div class="dice-pool-dialog">
-    <div class="dice-pool"></div>
-    <div class="upgrade-buttons">
-      <button id="upgrade-ability">{{localize 'WFRP3E.UpgradeAbility'}}</button>
-      <button id="upgrade-difficulty">{{localize 'WFRP3E.UpgradeDifficulty'}}</button>
-    </div>
-    <div class="upgrade-buttons">
-      <button id="downgrade-ability">{{localize 'WFRP3E.DowngradeAbility'}}</button>
-      <button id="downgrade-difficulty">{{localize 'WFRP3E.DowngradeDifficulty'}}</button>
-    </div>
-    <div style="margin: 10px 1px 5px 1px;">
-      <span><em>{{localize 'WFRP3E.DicePoolAddsHint'}}</em></span>
-    </div>
-    <details>
-    <summary>Fixed Results</summary>
-    <table class="pool-additional-container">
-      <tr>
-        <td class="pool-additional">{{{diceSymbols '[SU]'}}}</td>
-        <td class="pool-additional"><input type="button" name="successes" min="0" /></td>
-        <td class="pool-additional"><label for="successes">{{localize 'WFRP3E.Success'}}</label></td>
+	<div class="dice-pool-dialog">
+		<div class="dice-pool"></div>
+		
+		<p class="dice-pool-hint">
+			<em>{{localize 'ROLL.Hint'}}</em>
+		</p>
 
-        <td class="pool-additional">{{{diceSymbols '[CHAL]'}}}</td>
-        <td class="pool-additional"><input type="button" name="challenges" min="0" /></td>
-        <td class="pool-additional"><label for="challenges">{{localize 'WFRP3E.Challenge'}}</label></td>
-      </tr>
-      <tr>
-        <td class="pool-additional">{{{diceSymbols '[BO]'}}}</td>
-        <td class="pool-additional"><input type="button" name="boons" min="0" /></td>
-        <td class="pool-additional"><label for="boons">{{localize 'WFRP3E.Boon'}}</label></td>
+		<table class="dice-pool-table">
+			<tr class="pool-container flex-group-center">
+				<td>
+					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/characteristic.webp" width="43" height="43" />
+					<input class="pool-value" type="button" name="characteristicDice" min="0" />
+					<label class="pool-text" for="characteristicDice">{{localize 'ROLL.CharacteristicDice'}}</label>
+				</td>
+			</tr>
 
-        <td class="pool-additional">{{{diceSymbols '[BA]'}}}</td>
-        <td class="pool-additional"><input type="button" name="banes" min="0" /></td>
-        <td class="pool-additional"><label for="banes">{{localize 'WFRP3E.Bane'}}</label></td>
-      </tr>
-      <tr>
-        <td class="pool-additional">{{{diceSymbols '[SI]'}}}</td>
-        <td class="pool-additional"><input type="button" name="sigmarsComets" min="0" /></td>
-        <td class="pool-additional"><label for="sigmarsComets">{{localize 'WFRP3E.SigmarsComet'}}</label></td>
+			<tr class="pool-container flex-group-center">
+				<td>
+					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/fortune.webp" width="43" height="43" />
+					<input class="pool-value" type="button" name="fortuneDice" min="0" />
+					<label class="pool-text" for="fortuneDice">{{localize 'ROLL.FortuneDice'}}</label>
+				</td>
+			</tr>
 
-        <td class="pool-additional">{{{diceSymbols '[CHAO]'}}}</td>
-        <td class="pool-additional"><input type="button" name="chaosStars" min="0" /></td>
-        <td class="pool-additional"><label for="chaosStars">{{localize 'WFRP3E.ChaosStar'}}</label></td>
-      </tr>
-    </table>
-    </details>
-    <table class="pool-dice-pool">
-      <tr class="pool-container flex-group-center">
-        <td><img src="systems/wfrp3e/assets/icons/dice/conservative.webp" width="30" height="30" /></td>
-        <td>
-          <div class="pool-value">
-            <input type="button" name="conservativeDice" min="0" />
-          </div>
-        </td>
-        <td class="pool-text">
-          <label for="conservativeDice">{{localize 'WFRP3E.ConservativeDie'}}</label>
-        </td>
-      </tr>
-      <tr class="pool-container flex-group-center">
-        <td><img class="special-die" src="systems/wfrp3e/assets/icons/dice/reckless.webp" width="30" height="30" /></td>
-        <td>
-          <div class="pool-value">
-            <input type="button" name="recklessDice" min="0" />
-          </div>
-        </td>
-        <td class="pool-text">
-          <label for="recklessDice">{{localize 'WFRP3E.RecklessDie'}}</label>
-        </td>
-      </tr>
-      <tr class="pool-container flex-group-center">
-        <td><img class="special-die" src="systems/wfrp3e/assets/icons/dice/expertise.webp" width="30" height="30" /></td>
-        <td>
-          <div class="pool-value">
-            <input type="button" name="expertiseDice" min="0" />
-          </div>
-        </td>
-        <td class="pool-text">
-          <label for="expertiseDice">{{localize 'WFRP3E.ExpertiseDie'}}</label>
-        </td>
-      </tr>
-      <tr class="pool-container flex-group-center">
-        <td><img class="special-die" src="systems/wfrp3e/assets/icons/dice/characteristic.webp" width="30" height="30" /></td>
-        <td>
-          <div class="pool-value">
-            <input type="button" name="characteristicDice" min="0" />
-          </div>
-        </td>
-        <td class="pool-text">
-          <label for="characteristicDice">{{localize 'WFRP3E.CharacteristicDie'}}</label>
-        </td>
-      </tr>
-      <tr class="pool-container flex-group-center">
-        <td><img class="special-die" src="systems/wfrp3e/assets/icons/dice/fortune.webp" width="30" height="30" /></td>
-        <td>
-          <div class="pool-value">
-            <input type="button" name="fortuneDice" min="0" />
-          </div>
-        </td>
-        <td class="pool-text">
-          <label for="fortuneDice">{{localize 'WFRP3E.FortuneDie'}}</label>
-        </td>
-      </tr>
-      <tr class="pool-container flex-group-center">
-        <td><img class="special-die" src="systems/wfrp3e/assets/icons/dice/misfortune.webp" width="30" height="30" /></td>
-        <td>
-          <div class="pool-value">
-            <input type="button" name="misfortuneDice" min="0" />
-          </div>
-        </td>
-        <td class="pool-text">
-          <label for="misfortuneDice">{{localize 'WFRP3E.MisfortuneDie'}}</label>
-        </td>
-      </tr>
-      <tr class="pool-container flex-group-center">
-        <td><img class="special-die" src="systems/wfrp3e/assets/icons/dice/challenge.webp" width="30" height="30" /></td>
-        <td>
-          <div class="pool-value">
-            <input type="button" name="challengeDice" min="0" />
-          </div>
-        </td>
-        <td class="pool-text">
-          <label for="challengeDice">{{localize 'WFRP3E.ChallengeDie'}}</label>
-        </td>
-      </tr>
-    </table>
-    <details>
-    <summary>Options</summary>
-    <div class="pool-roll-options">
-      {{#if (or (eq isGM true) (eq canUserAddAudio true)) }}
-      <div class="flexrow">
-        <button id="add-sound" class="extend-button"><i class="fas fa-volume-up"></i></button>
-        <select class="sound-selection hide">
-          <option></option>
-          {{#each sounds}} <option value="{{this.path}}" {{#if this.selected}}selected{{/if}}>{{this.name}} {{/each}}
-        </select>
-      </div>
-      {{/if}}
-      <div class="flexrow">
-        <button id="add-flavor" class="extend-button"><i class="far fa-comment-dots"></i></button>
-        <input type="text" class="flavor-text hide" placeholder="flavor Text" value="{{flavor}}" />
-      </div>
-      {{#if isGM}}
-      <div class="flexrow">
-        <button id="send-to-player" class="extend-button"><i class="fas fa-share"></i></button>
-        <select class="user-selection hide">
-          <option></option>
-          {{#each users}}
-          <option value="{{this.id}}">{{this.name}}</option>
-          {{/each}}
-        </select>
-      </div>
-      {{/if}}
-    </div>
-    </details>
-    <div class="roll-button flexrow">
-      <button class="btn">{{localize 'WFRP3E.RollCheck'}}</button>
-    </div>
-  </div>
+			<tr class="pool-container flex-group-center">
+				<td>
+					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/expertise.webp" width="43" height="43" />
+					<input class="pool-value" type="button" name="expertiseDice" min="0" />
+					<label class="pool-text" for="expertiseDice">{{localize 'ROLL.ExpertiseDice'}}</label>
+				</td>
+			</tr>
+
+			<tr class="pool-container flex-group-center">
+				<td>
+					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/conservative.webp" width="43" height="43" />
+					<input class="pool-value" type="button" name="conservativeDice" min="0" />
+					<label class="pool-text" for="conservativeDice">{{localize 'ROLL.ConservativeDice'}}</label>
+				</td>
+			</tr>
+
+			<tr class="pool-container flex-group-center">
+				<td>
+					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/reckless.webp" width="43" height="43" />
+					<input class="pool-value" type="button" name="recklessDice" min="0" />
+					<label class="pool-text" for="recklessDice">{{localize 'ROLL.RecklessDice'}}</label>
+				</td>
+			</tr>
+
+			<tr class="pool-container flex-group-center">
+				<td>
+					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/challenge.webp" width="43" height="43" />
+					<input class="pool-value" type="button" name="challengeDice" min="0" />
+					<label class="pool-text" for="challengeDice">{{localize 'ROLL.ChallengeDice'}}</label>
+				</td>
+			</tr>
+
+			<tr class="pool-container flex-group-center">
+				<td>
+					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/misfortune.webp" width="43" height="43" />
+					<input class="pool-value" type="button" name="misfortuneDice" min="0" />
+					<label class="pool-text" for="misfortuneDice">{{localize 'ROLL.MisfortuneDice'}}</label>
+				</td>
+			</tr>
+		</table>
+
+		<div class="convert-buttons">
+			<button id="convert-conservative">{{localize 'ROLL.ConvertConservative'}}</button>
+			<button id="convert-reckless">{{localize 'ROLL.ConvertReckless'}}</button>
+		</div>
+
+		<details>
+			<summary>{{localize 'ROLL.StartingResults'}}</summary>
+
+			<table class="symbols-pool-container">
+				<tr>
+					<td>
+						<div class="pool-container">
+							{{{renderImage '[SU]'}}}
+							<input class="pool-value" type="button" name="successes" min="0" />
+							<label class="pool-text" for="successes">{{localize 'ROLL.Successes'}}</label>
+						</div>
+					</td>
+					
+					<td>
+						<div class="pool-container">
+							{{{renderImage '[CHAL]'}}}
+							<input class="pool-value" type="button" name="challenges" min="0" />
+							<label class="pool-text" for="challenges">{{localize 'ROLL.Challenges'}}</label>
+						</div>
+					</td>
+				</tr>
+				<tr>					
+					<td>
+						<div class="pool-container">
+							{{{renderImage '[BO]'}}}
+							<input class="pool-value" type="button" name="boons" min="0" />
+							<label class="pool-text" for="boons">{{localize 'ROLL.Boons'}}</label>
+						</div>
+					</td>
+					
+					<td>
+						<div class="pool-container">
+							{{{renderImage '[BA]'}}}
+							<input class="pool-value" type="button" name="banes" min="0" />
+							<label class="pool-text" for="banes">{{localize 'ROLL.Banes'}}</label>
+						</div>
+					</td>
+				</tr>
+				<tr>					
+					<td>
+						<div class="pool-container">
+							{{{renderImage '[D]'}}}
+							<input class="pool-value" type="button" name="delays" min="0" />
+							<label class="pool-text" for="delays">{{localize 'ROLL.Delays'}}</label>
+						</div>
+					</td>
+					
+					<td>
+						<div class="pool-container">
+							{{{renderImage '[EXE]'}}}
+							<input class="pool-value" type="button" name="exertions" min="0" />
+							<label class="pool-text" for="exertions">{{localize 'ROLL.Exertions'}}</label>
+						</div>
+					</td>
+				</tr>
+				<tr>					
+					<td>
+						<div class="pool-container">
+							{{{renderImage '[SI]'}}}
+							<input class="pool-value" type="button" name="sigmarsComets" min="0" />
+							<label class="pool-text" for="sigmarsComets">{{localize 'ROLL.SigmarsComets'}}</label>
+						</div>
+					</td>
+					
+					<td>
+						<div class="pool-container">
+							{{{renderImage '[CHAO]'}}}
+							<input class="pool-value" type="button" name="chaosStars" min="0" />
+							<label class="pool-text" for="chaosStars">{{localize 'ROLL.ChaosStars'}}</label>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</details>
+
+		<details>
+			<summary>{{localize 'ROLL.Options'}}</summary>
+
+			<div class="dice-pool-roll-options">
+				{{#if (or (eq isGM true) (eq canUserAddAudio true)) }}
+				<div class="flexrow">
+					<button id="add-sound" class="extend-button"><i class="fas fa-volume-up"></i></button>
+					<select class="sound-selection hide">
+						<option></option>
+						{{#each sounds}} <option value="{{this.path}}" {{#if this.selected}}selected{{/if}}>{{this.name}} {{/each}}
+					</select>
+				</div>
+				{{/if}}
+
+				<div class="flexrow">
+					<button id="add-flavor" class="extend-button"><i class="far fa-comment-dots"></i></button>
+					<input class="flavor-text hide" placeholder="Flavor Text" value="{{flavor}}" type="text" />
+				</div>
+
+				{{#if isGM}}
+				<div class="flexrow">
+					<button id="send-to-player" class="extend-button"><i class="fas fa-share"></i></button>
+					<select class="user-selection hide">
+						<option></option>
+						{{#each users}}
+						<option value="{{this.id}}">{{this.name}}</option>
+						{{/each}}
+					</select>
+				</div>
+				{{/if}}
+			</div>
+		</details>
+
+		<div class="roll-button flexrow">
+			<button class="btn">{{localize 'ROLL.RollCheck'}}</button>
+		</div>
+	</div>
 </form>

@@ -7,6 +7,21 @@ import DicePool from "./DicePool.js";
 export default class DiceHelper
 {
 	/**
+	 * Displays a check dialog.
+	 * @param rollData
+	 * @param {DicePool} dicePool
+	 * @param {string} [title]
+	 * @param {string} [rollName]
+	 * @param {string} [flavor]
+	 * @param {string} [rollSound]
+	 * @returns {Promise<void>}
+	 */
+	static async displayCheckDialog(rollData, dicePool, title, rollName, flavor, rollSound)
+	{
+		new CheckBuilder(rollData, dicePool, title, rollName, flavor, rollSound).render(true);
+	}
+
+	/**
 	 * Roll a Skill check.
 	 * @param {WFRP3EItem} skill The Skill check has been triggered.
 	 * @param {Event} event The Event which triggered the Skill check.
@@ -28,22 +43,7 @@ export default class DiceHelper
 			recklessDice: stance > 0 ? Math.min(characteristic.value, stance) : 0,
 		});
 
-		this.displayCheckDialog(skill, dicePool, `${game.i18n.localize("WFRP3E.Checking")} ${skill.name}`, skill.name, flavor, rollSound);
-	}
-
-	/**
-	 * Displays a check dialog.
-	 * @param rollData
-	 * @param {DicePool} dicePool
-	 * @param {string} [title]
-	 * @param {string} [rollSkillName]
-	 * @param {string} [flavor]
-	 * @param {string} [rollSound]
-	 * @returns {Promise<void>}
-	 */
-	static async displayCheckDialog(rollData, dicePool, title, rollSkillName, flavor, rollSound)
-	{
-		new CheckBuilder(rollData, dicePool, title, rollSkillName, flavor, rollSound).render(true);
+		this.displayCheckDialog(skill, dicePool, game.i18n.format("ROLL.DicePool"), game.i18n.format("ROLL.SkillCheck", {skill: skill.name}), flavor, rollSound);
 	}
 
 	static async addSkillDicePool(obj, elem)
@@ -121,7 +121,7 @@ export default class DiceHelper
 
 		dicePool = new DicePool(await this.getModifiers(dicePool, item));
 
-		this.displayCheckDialog(actorSheet, dicePool, `${game.i18n.localize("WFRP3E.Rolling")} ${skill.label}`, skill.label, item, flavorText, sound);
+		this.displayCheckDialog(actorSheet, dicePool, game.i18n.localize("ROLL.FreeCheck"), skill.label, item, flavorText, sound);
 	}
 
 	// Takes a skill object, characteristic object, difficulty number and WFRP3ECharacterSheet.getData() object and creates the appropriate roll dialog.
@@ -146,7 +146,7 @@ export default class DiceHelper
 
 		dicePool.upgrade(Math.min(characteristic.value, skill.rank));
 
-		this.displayCheckDialog(sheet, dicePool, `${game.i18n.localize("WFRP3E.Rolling")} ${skill.label}`, skill.label, null, flavorText, sound);
+		this.displayCheckDialog(sheet, dicePool, game.i18n.localize("ROLL.FreeCheck"), skill.label, null, flavorText, sound);
 	}
 
 	static getWeaponStatus(item)
