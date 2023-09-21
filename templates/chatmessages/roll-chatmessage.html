@@ -52,13 +52,13 @@
 							{{#unless (equalTo key "righteousSuccesses")}}
 								{{#if (equalTo key "successes")}}
 									<li>
-										{{format (lookup ../this.diceSymbols [key]) nb=result }}
+										{{localize (concat (lookup ../this.diceSymbols [key]) "Amount") nb=result }}
 										{{#if (superiorTo (lookup ../symbols "righteousSuccesses") 0)}}
-											{{format (lookup ../this.diceSymbols "righteousSuccesses") nb=(lookup ../symbols "righteousSuccesses") }}
+											{{localize (concat (lookup ../this.diceSymbols "righteousSuccesses") "Amount")  nb=(lookup ../symbols "righteousSuccesses") }}
 										{{/if}}
 									</li>
 								{{else}}
-									<li>{{format (lookup ../this.diceSymbols [key]) nb=result }}</li>
+									<li>{{localize (concat (lookup ../this.diceSymbols [key]) "Amount") nb=result }}</li>
 								{{/if}}
 							{{/unless}}
 						{{/if}}

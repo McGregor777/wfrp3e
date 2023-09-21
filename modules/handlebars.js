@@ -53,9 +53,9 @@ export default function()
 			}
 		});
 
-		Handlebars.registerHelper("diceSymbols", function(text)
+		Handlebars.registerHelper("renderImage", function(text)
 		{
-			return PopoutEditor.renderDiceImages(text);
+			return PopoutEditor.renderImage(text);
 		});
 
 		Handlebars.registerHelper("times", function(number, block)

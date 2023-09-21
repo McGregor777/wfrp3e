@@ -33,41 +33,41 @@ export default class DicePool
 	}
 
 	/**
-	 * Upgrade the dialogs pool, converting any remaining ability dialogs into proficiency dialogs or adding an ability die if none remain.
-	 * @param times the number of times to perform this operation, defaults to 1
+	 * Converts any remaining Characteristic Die from the Dice Pool into a Conservative/Reckless Die. If no Characteristic Die remains, adds a Conservative/Reckless Die instead.
+	 * @param {string} type The type of die the Characteristic Die must be converted to.
+	 * @param {number} times The amount of conversion to perform(defaults to 1).
 	 */
-	upgrade(times)
+	convertCharacteristicDie(type, times = 1)
 	{
-		if(times === undefined)
-			times = 1;
-
-		let downgrade = false;
+		let revert = false;
 
 		if(times < 0)
 		{
-			downgrade = true;
+			revert = true;
 			times = Math.abs(times);
 		}
 
 		for(let i = 0; i < times; i++)
 		{
-			if(downgrade)
+			if(revert)
 			{
-				if(this.proficiency > 0)
+				if(this[type + "Dice"] > 0)
 				{
-					this.proficiency--;
-					this.ability++;
+					this[type + "Dice"]--;
+					this.characteristicDice++;
 				}
+				else
+					ui.notifications.warn("There is no " + type + " die left to convert back.");
 			}
 			else
 			{
-				if(this.ability > 0)
+				if(this.characteristicDice > 0)
 				{
-					this.ability--;
-					this.proficiency++;
+					this.characteristicDice--;
+					this[type + "Dice"]++;
 				}
 				else
-					this.ability++;
+					ui.notifications.warn("There is no characteristic die left to convert.");
 			}
 		}
 	}
@@ -89,49 +89,45 @@ export default class DicePool
 	}
 
 	/**
-	 * Create a preview of the dialogs pool using images
-	 * @param container {HTMLElement} where to place the preview. A container will be generated if this is undefined
+	 * Renders a preview of the dice pool.
+	 * @param {HTMLElement} container The dice pool preview container.
 	 * @returns {HTMLElement}
 	 */
-	renderPreview(container)
+	renderDicePoolPreview(container)
 	{
-		if(container === undefined)
-		{
-			container = document.createElement("div");
-			container.classList.add("dialogs-pool");
-		}
+		const totalDice = +this.characteristicDice + +this.fortuneDice + +this.expertiseDice + +this.conservativeDice + +this.recklessDice + +this.challengeDice + +this.misfortuneDice;
 
-		const totalDice = +this.challengeDice + +this.characteristicDice + +this.conservativeDice + +this.expertiseDice + +this.fortuneDice + +this.misfortuneDice + +this.recklessDice;
+		let height = 48;
+		let width = 48;
 
-		let height = 36;
-		let width = 36;
-
-		if(totalDice > 8)
-		{
-			height = 24;
-			width = 24;
-		}
-
-		if(totalDice > 24)
+		if(totalDice > 15)
 		{
 			height = 12;
 			width = 12;
 		}
+		else if(totalDice > 10) 
+		{
+			height = 24;
+			width = 24;
+		}
+		else if(totalDice > 7)
+		{
+			height = 36;
+			width = 36;
+		}
 
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.challenge, this.challenges, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.characteristic, this.characteristic, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.conservative, this.conservative, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.expertise, this.expertise, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.fortune, this.fortune, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.misfortune, this.misfortune, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.reckless, this.reckless, height, width);
-
-		this._addSourceToolTip(container);
+		this._addIcons(container, CONFIG.WFRP3E.dice.icons.characteristic, this.characteristicDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3E.dice.icons.fortune, this.fortuneDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3E.dice.icons.expertise, this.expertiseDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3E.dice.icons.conservative, this.conservativeDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3E.dice.icons.reckless, this.recklessDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3E.dice.icons.challenge, this.challengeDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3E.dice.icons.misfortune, this.misfortuneDice, height, width);
 
 		return container;
 	}
 
-	renderAdvancedPreview(container)
+	renderSymbolsPoolPreview(container)
 	{
 		let advanceContainer = this.renderPreview(container);
 		let additionalSymbols = [];
@@ -198,48 +194,17 @@ export default class DicePool
 		return advanceContainer;
 	}
 
-	_addIcons(container, icon, times, height = 36, width = 36)
+	_addIcons(container, icon, times, height = 45, width = 45)
 	{
 		for(let i = 0; i < times; i++)
 		{
 			const img = document.createElement("img");
+
 			img.src = icon;
 			img.width = width;
 			img.height = height;
+
 			container.appendChild(img);
-		}
-	}
-
-	_addSourceToolTip(container)
-	{
-		const createToolTip = this.source?.skill?.length || this.source?.boost?.length || this.source?.remsetback?.length || this.source?.setback?.length;
-
-		if(createToolTip)
-		{
-			const mapDataToString = (values) =>
-			{
-				const item = document.createElement("div");
-				item.innerHTML = values.map((i) => `<li class="">${i}</li>`).join("");
-				tooltip.append(item);
-			};
-
-			const tooltip = document.createElement("div");
-			tooltip.classList.add("tooltip2");
-
-			if(this.source?.skill?.length)
-				mapDataToString(this.source.skill);
-
-			if(this.source?.boost?.length)
-				mapDataToString(this.source.boost);
-
-			if(this.source?.remsetback?.length)
-				mapDataToString(this.source.remsetback);
-
-			if(this.source?.setback?.length)
-				mapDataToString(this.source.setback);
-
-			container.classList.add("hover");
-			container.append(tooltip);
 		}
 	}
 
@@ -252,11 +217,10 @@ export default class DicePool
 	{
 		return new DicePool(
 		{
-			challengeDice: container.querySelector('[name="challengeDice"]')?.value ? container.querySelector('[name="challengeDice"]').value : 0,
 			characteristicDice: container.querySelector('[name="characteristicDice"]')?.value ? container.querySelector('[name="characteristicDice"]').value : 0,
+			challengeDice: container.querySelector('[name="challengeDice"]')?.value ? container.querySelector('[name="challengeDice"]').value : 0,
 			conservativeDice: container.querySelector('[name="conservativeDice"]')?.value ? container.querySelector('[name="conservativeDice"]').value : 0,
 			expertiseDice: container.querySelector('[name="expertiseDice"]')?.value ? container.querySelector('[name="expertiseDice"]').value : 0,
-			fortuneDice: container.querySelector('[name="fortuneDice"]')?.value ? container.querySelector('[name="fortuneDice"]').value : 0,
 			misfortuneDice: container.querySelector('[name="misfortuneDice"]')?.value ? container.querySelector('[name="misfortuneDice"]').value : 0,
 			recklessDice: container.querySelector('[name="recklessDice"]')?.value ? container.querySelector('[name="recklessDice"]').value : 0,
 			success: container.querySelector('[name="successes"]')?.value ? container.querySelector('[name="successes"]').value : 0,

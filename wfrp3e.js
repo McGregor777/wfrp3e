@@ -112,9 +112,9 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
 	const chatControls = html.find("#chat-controls > .control-buttons");
 
 	if(chatControls.length > 0) {
-		chatControls.prepend('<a class="wfrp3e-dice-roller" role="button" data-tooltip="WFRP3E Dice Roller"><img src="systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp"></a>');
+		chatControls.prepend('<a class="wfrp3e-dice-roller" role="button" data-tooltip="' + game.i18n.localize("ROLL.FreeCheck") +' "><img src="systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp"></a>');
 		html.find("#chat-controls > .control-buttons > .wfrp3e-dice-roller").click(() => {
-			DiceHelper.displayCheckDialog(null, new DicePool(), `${game.i18n.localize("WFRP3E.Checking")}`, `${game.i18n.localize("WFRP3E.FreeCheck")}`, null, null);
+			DiceHelper.displayCheckDialog(null, new DicePool(), game.i18n.localize("ROLL.DicePool"), game.i18n.localize("ROLL.FreeCheck"), null, null);
 		});
 	}
 });

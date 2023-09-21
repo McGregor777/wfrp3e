@@ -55,120 +55,121 @@ export default class PopoutEditor extends FormApplication
 	}
 
 	/**
-	 * Renders the dice symbols based on strings
-	 * @param  {String} string
+	 * Renders a specific die or symbol picture based on a string.
+	 * @param {string} string The name of the die or symbol to render.
 	 */
-	static renderDiceImages(str, actorData)
+	static renderImage(str, actorData)
 	{
 		let html = str || "";
 
 		html = this.replaceRollTags(html, actorData);
 		try {
 			html = TextEditor.enrichHTML(html, { secrets: true, documents: true, async: false });
-		} catch (err) {
+		}
+		catch(error) {
 			// ignore the message below, it means that we already created an entity link (this could be part of an editor text)
-			if (err.message !== "An Entity subclass must configure the EntityCollection it belongs to.") {
-				CONFIG.logger.error(err);
+			if(error.message !== "An Entity subclass must configure the EntityCollection it belongs to.") {
+				CONFIG.logger.error(error);
 			}
 		}
 
-		const replaceValues =
+		const replacementValues =
 		[
 			{
 				type: "boon",
 				character: "bo",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(boon):|\[(BO)(ON)?\]/gim,
 			},
 			{
 				type: "bane",
 				character: "ba",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(bane):|\[(BA)(NE)?\]/gim,
 			},
 			{
 				type: "challenge",
 				character: "chal",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(challenge):|\[(CHAL)(LENGE)?\]/gim,
 			},
 			{
 				type: "chaosStar",
 				character: "chao",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(chaosStar):|\[(CHAO)(SSTAR)?\]/gim,
 			},
 			{
 				type: "characteristic",
 				character: "char",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(characteristic):|\[(CHAR)(ACTERISTIC)?\]/gim,
 			},
 			{
 				type: "conservative",
 				character: "con",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(conservative):|\[(CON)(SERVATIVE)?\]/gim,
 			},
 			{
 				type: "delay",
-				character: "de",
-				class: "wfrp",
-				pattern: /:(delay):|\[(DE)(ELAY)?\]/gim,
+				character: "d",
+				class: "wfrp3e",
+				pattern: /:(delay):|\[(D)(ELAY)?\]/gim,
 			},
 			{
 				type: "exertion",
 				character: "exe",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(exertion):|\[(EXE)(RTION)?\]/gim,
 			},
 			{
 				type: "expertise",
 				character: "exp",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(expertise):|\[(EXP)(ERTISE)?\]/gim,
 			},
 			{
 				type: "fortune",
 				character: "f",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(fortune):|\[(F)(ORTUNE)?\]/gim,
 			},
 			{
 				type: "misfortune",
 				character: "m",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(misfortune):|\[(M)(ISFORTUNE)\]/gim,
 			},
 			{
 				type: "reckless",
 				character: "re",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(reckless):|\[(RE)(CKLESS)?\]/gim,
 			},
 			{
 				type: "righteousSuccess",
 				character: "ri",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(righteousSuccess):|\[(RI)(TEOUSSUCCESS)?\]/gim,
 			},
 			{
 				type: "sigmarsComet",
 				character: "si",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(sigmarsComet):|\[(SI)(GMARSCOMET)?\]/gim,
 			},
 			{
 				type: "success",
 				character: "su",
-				class: "wfrp",
+				class: "wfrp3e",
 				pattern: /:(success):|\[(SU)(CCESS)?\]/gim,
 			}
 		];
 
-		replaceValues.forEach((item) =>
+		replacementValues.forEach((item) =>
 		{
-			html = html.toString().replace(item.pattern, `<span class='dietype ${item.class} ${item.type}'>${item.character}</span>`);
+			html = html.toString().replace(item.pattern, `<span class='${item.class} picture ${item.type}'>${item.character}</span>`);
 		});
 
 		const regex = /:([\w]*)-(\d):/gim;
@@ -209,9 +210,9 @@ export default class PopoutEditor extends FormApplication
 			for(let i = 0; i < symbolCount; i += 1)
 			{
 				if(i + 1 <= parseInt(m[2], 10))
-					replaceString += `<span class='dietype wfrp3e challenge'>c</span>`;
+					replaceString += `<span class='wfrp3e dietype challenge'>c</span>`;
 				else
-					replaceString += `<span class='dietype wfrp3e difficulty'>d</span>`;
+					replaceString += `<span class='wfrp3e dietype difficulty'>d</span>`;
 			}
 
 			html = html.toString().replace(m[0], replaceString);
@@ -274,11 +275,12 @@ export default class PopoutEditor extends FormApplication
 		const rollTag = /(\[ROLL\])(.[^\[]*)\[\/ROLL\]/gm;
 		const formula = html.toString().replace(rollTag, function (content) {
 			content = content.replace(rollTag, `$2`);
-			const args = content.split(",").map(function (arg) {
+			const args = content.split(",").map(function(arg) {
 				return arg.trim();
 			});
 			const di = "[DI]";
 			let difficulty = "";
+
 			switch (args[1]) {
 				case "0":
 					difficulty = "Simple";
