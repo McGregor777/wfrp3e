@@ -58,13 +58,13 @@ export default class DiceHelper
 
 			const dicePool = new DicePool(
 			{
-				challenge: skill.challenge,
 				characteristic: skill.characteristic,
-				conservative: skill.conservative,
-				expertise: skill.expertise,
 				fortune: skill.fortune,
-				misfortune: skill.misfortune,
+				expertise: skill.expertise,
+				conservative: skill.conservative,
 				reckless: skill.reckless,
+				challenge: skill.challenge,
+				misfortune: skill.misfortune,
 				source:
 				{
 					skill: skill?.ranksource?.length ? skill.ranksource : [],

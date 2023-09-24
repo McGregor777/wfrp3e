@@ -11,13 +11,13 @@ export default class DicePool
 		if(typeof dicePool === "string")
 			dicePool = JSON.parse(dicePool);
 
-		this.challengeDice = dicePool.challengeDice || 0;
 		this.characteristicDice = dicePool.characteristicDice || 0;
-		this.conservativeDice = dicePool.conservativeDice || 0;
-		this.expertiseDice = dicePool.expertiseDice || 0;
 		this.fortuneDice = dicePool.fortuneDice || 0;
-		this.misfortuneDice = dicePool.misfortuneDice || 0;
+		this.expertiseDice = dicePool.expertiseDice || 0;
+		this.conservativeDice = dicePool.conservativeDice || 0;
 		this.recklessDice = dicePool.recklessDice || 0;
+		this.challengeDice = dicePool.challengeDice || 0;
+		this.misfortuneDice = dicePool.misfortuneDice || 0;
 
 		this.successes = dicePool.successes || 0;
 		this.righteousSuccesses = dicePool.righteousSuccesses || 0;
@@ -78,7 +78,7 @@ export default class DicePool
 	 */
 	renderDiceExpression()
 	{
-		let dicePool = [this.challengeDice + "dh", this.characteristicDice + "da", this.conservativeDice + "do", this.expertiseDice + "de", this.fortuneDice + "df", this.misfortuneDice + "dm", this.recklessDice + "dr"];
+		let dicePool = [this.characteristicDice + "da", this.fortuneDice + "df", this.expertiseDice + "de", this.conservativeDice + "do", this.recklessDice + "dr", this.challengeDice + "dh", this.misfortuneDice + "dm"];
 		let finalPool = dicePool.filter((d) =>
 		{
 			const test = d.split(/([0-9]+)/);
@@ -218,11 +218,12 @@ export default class DicePool
 		return new DicePool(
 		{
 			characteristicDice: container.querySelector('[name="characteristicDice"]')?.value ? container.querySelector('[name="characteristicDice"]').value : 0,
-			challengeDice: container.querySelector('[name="challengeDice"]')?.value ? container.querySelector('[name="challengeDice"]').value : 0,
-			conservativeDice: container.querySelector('[name="conservativeDice"]')?.value ? container.querySelector('[name="conservativeDice"]').value : 0,
+			fortuneDice: container.querySelector('[name="fortuneDice"]')?.value ? container.querySelector('[name="fortuneDice"]').value : 0,
 			expertiseDice: container.querySelector('[name="expertiseDice"]')?.value ? container.querySelector('[name="expertiseDice"]').value : 0,
-			misfortuneDice: container.querySelector('[name="misfortuneDice"]')?.value ? container.querySelector('[name="misfortuneDice"]').value : 0,
+			conservativeDice: container.querySelector('[name="conservativeDice"]')?.value ? container.querySelector('[name="conservativeDice"]').value : 0,
 			recklessDice: container.querySelector('[name="recklessDice"]')?.value ? container.querySelector('[name="recklessDice"]').value : 0,
+			challengeDice: container.querySelector('[name="challengeDice"]')?.value ? container.querySelector('[name="challengeDice"]').value : 0,
+			misfortuneDice: container.querySelector('[name="misfortuneDice"]')?.value ? container.querySelector('[name="misfortuneDice"]').value : 0,
 			success: container.querySelector('[name="successes"]')?.value ? container.querySelector('[name="successes"]').value : 0,
 			righteousSuccess: container.querySelector('[name="righteousSuccesses"]')?.value ? container.querySelector('[name="righteousSuccesses"]').value : 0,
 			challenge: container.querySelector('[name="challenges"]')?.value ? container.querySelector('[name="challenges"]').value : 0,
