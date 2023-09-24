@@ -7,7 +7,7 @@ import DiceHelper from "../../dice/DiceHelper.js";
  */
 export default class WFRP3ECharacterSheet extends ActorSheet
 {
-	/** @override */
+	/** @inheritdoc */
 	static get defaultOptions()
 	{
 		return mergeObject(super.defaultOptions,
@@ -26,19 +26,48 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 		});
 	}
 
-	/**
-	* Provides the data to the template when rendering the actor sheet
-	* This is called when rendering the sheet, where it calls the base actor class to organize, process, and prepare all actor data for display.
-	* @returns {Object} data Data given to the template when rendering
-	*/
+	/** @inheritdoc */
 	getData()
 	{
 		const data = super.getData();
+		const actor = this.actor;
 
 		this.options.tabs[1].initial = this.actor.currentCareer?._id;
 
 		data.items = this.constructItemLists(data);
 		data.items["diseases"].forEach((disease) => disease.symptomDescription = game.i18n.localize(CONFIG.WFRP3E.disease.symptoms.descriptions[disease.system.symptom]));
+
+		// Add basic skills to the Character.
+		if(actor.type === "character" && data.items.skills.length === 0)
+		{
+			new Dialog(
+			{
+				title: game.i18n.localize("DIALOG.TITLE.BasicSkillsAdding"),
+				content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.BasicSkillsAdding", {actor: actor.name}) + "</p>",
+				buttons:
+				{
+					confirm:
+					{
+						icon: '<span class="fa fa-check"></span>',
+						label: game.i18n.localize("DIALOG.BUTTON.AddBasicSkills"),
+						callback: async dlg =>
+						{
+							const basicSkills = await game.packs.get("wfrp3e.skills").getDocuments().then(skills => {
+								return skills.filter(skill => !skill.system.advanced);
+							});
+
+							await Item.createDocuments(basicSkills, {parent: actor});
+						}
+					},
+					cancel:
+					{
+						icon: '<span class="fas fa-times"></span>',
+						label: game.i18n.localize("DIALOG.BUTTON.Ignore")
+					},
+				},
+				default: 'confirm'
+			}).render(true);
+		}
 
 		return data;
 	}
@@ -149,34 +178,32 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 	{
 		const li = $(event.currentTarget).parents(".item")
 		const itemId = li.attr("data-item-id");
+		const itemName = this.actor.items.get(itemId).name;
 
-		renderTemplate("systems/wfrp3e/templates/dialogs/delete-item-dialog.html").then(html =>
+		new Dialog(
 		{
-			new Dialog(
+			title: game.i18n.localize("DIALOG.TITLE.DeleteItemConfirmation"),
+			content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.DeleteItemConfirmation", {item: itemName}) + "</p>",
+			buttons:
 			{
-				title: "Delete Confirmation",
-				content: html,
-				buttons:
+				Yes:
 				{
-					Yes:
+					icon: '<span class="fa fa-check"></span>',
+					label: "Yes",
+					callback: async dlg =>
 					{
-						icon: '<span class="fa fa-check"></span>',
-						label: "Yes",
-						callback: async dlg =>
-						{
-							await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
-							li.slideUp(200, () => this.render(false));
-						}
-					},
-					cancel:
-					{
-						icon: '<span class="fas fa-times"></span>',
-						label: "Cancel"
-					},
+						await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+						li.slideUp(200, () => this.render(false));
+					}
 				},
-				default: "Yes"
-			}).render(true)
-		});
+				cancel:
+				{
+					icon: '<span class="fas fa-times"></span>',
+					label: "Cancel"
+				},
+			},
+			default: "Yes"
+		}).render(true);
 	}
 
 	/**
