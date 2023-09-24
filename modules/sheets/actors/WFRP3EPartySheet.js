@@ -107,30 +107,28 @@ export default class WFRP3EPartySheet extends ActorSheet
 	_onPartyMemberRemoveClick(event)
 	{
 		const actorId = $(event.currentTarget).parent(".party-sheet-member").data("actorId");
+		const actorName = game.actors.get(actorId).name;
 
-		renderTemplate("systems/wfrp3e/templates/dialogs/remove-member-dialog.html").then(html =>
+		new Dialog(
 		{
-			new Dialog(
+			title: game.i18n.localize("DIALOG.TITLE.MemberRemovalConfirmation"),
+			content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.MemberRemovalConfirmation", {actor: actorName}) + "</p>",
+			buttons:
 			{
-				title: "Member Removal Confirmation",
-				content: html,
-				buttons:
+				confirm:
 				{
-					Yes:
-					{
-						icon: '<span class="fa fa-check"></span>',
-						label: "Yes",
-						callback: async dlg => this.actor.removeMember(actorId)
-					},
-					cancel:
-					{
-						icon: '<span class="fas fa-times"></span>',
-						label: "Cancel"
-					}
+					icon: '<span class="fa fa-check"></span>',
+					label: game.i18n.localize("DIALOG.BUTTON.Confirm"),
+					callback: async dlg => this.actor.removeMember(actorId)
 				},
-				default: "Yes"
-			}).render(true)
-		});
+				cancel:
+				{
+					icon: '<span class="fas fa-times"></span>',
+					label: game.i18n.localize("DIALOG.BUTTON.Cancel")
+				}
+			},
+			default: "confirm"
+		}).render(true);
 	}
 
 	/**
