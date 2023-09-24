@@ -1,4 +1,4 @@
-# wfrp3e
+# Warhammer Fantasy Roleplay - 3rd Edition's Game System for Foundry VTT
 
 A Foundry VTT game system for Warhammer Fantasy Roleplay - 3rd Edition.
 
