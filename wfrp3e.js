@@ -123,7 +123,7 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
 Hooks.on("renderChatMessage", (app, html, messageData) => {
 	const content = html.find(".message-content");
 
-	content[0].innerHTML = PopoutEditor.renderDiceImages(content[0].innerHTML);
+	content[0].innerHTML = PopoutEditor.renderImages(content[0].innerHTML);
 
 	html.on("click", ".special-pool-to-player", () => {
 		const poolData = messageData.message.flags.wfrp3e;

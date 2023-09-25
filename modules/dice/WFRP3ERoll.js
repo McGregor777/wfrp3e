@@ -27,7 +27,7 @@ export default class WFRP3ERoll extends Roll
 			this.addedResults.push(
 			{
 				type: "Successes",
-				symbol: PopoutEditor.renderDiceImages("[SU]"),
+				symbol: PopoutEditor.renderImages("[SU]"),
 				value: Math.abs(+dicePool.successes),
 				negative: +dicePool.successes < 0,
 			});
@@ -39,7 +39,7 @@ export default class WFRP3ERoll extends Roll
 			this.addedResults.push(
 			{
 				type: "Righteous Successes",
-				symbol: PopoutEditor.renderDiceImages("[RI]"),
+				symbol: PopoutEditor.renderImages("[RI]"),
 				value: Math.abs(+dicePool.righteousSuccesses),
 				negative: +dicePool.righteousSuccesses < 0,
 			});
@@ -51,7 +51,7 @@ export default class WFRP3ERoll extends Roll
 			this.addedResults.push(
 			{
 				type: "Challenges",
-				symbol: PopoutEditor.renderDiceImages("[CHAL]"),
+				symbol: PopoutEditor.renderImages("[CHAL]"),
 				value: Math.abs(+dicePool.challenges),
 				negative: +dicePool.challenges < 0,
 			});
@@ -63,7 +63,7 @@ export default class WFRP3ERoll extends Roll
 			this.addedResults.push(
 			{
 				type: "Boons",
-				symbol: PopoutEditor.renderDiceImages("[BO]"),
+				symbol: PopoutEditor.renderImages("[BO]"),
 				value: Math.abs(+dicePool.boons),
 				negative: +dicePool.boons < 0,
 			});
@@ -75,7 +75,7 @@ export default class WFRP3ERoll extends Roll
 			this.addedResults.push(
 			{
 				type: "Banes",
-				symbol: PopoutEditor.renderDiceImages("[BA]"),
+				symbol: PopoutEditor.renderImages("[BA]"),
 				value: Math.abs(+dicePool.banes),
 				negative: +dicePool.banes < 0,
 			});
@@ -87,7 +87,7 @@ export default class WFRP3ERoll extends Roll
 			this.addedResults.push(
 			{
 				type: "Delays",
-				symbol: PopoutEditor.renderDiceImages("[DE]"),
+				symbol: PopoutEditor.renderImages("[DE]"),
 				value: Math.abs(+dicePool.delays),
 				negative: +dicePool.delays < 0,
 			});
@@ -99,7 +99,7 @@ export default class WFRP3ERoll extends Roll
 			this.addedResults.push(
 			{
 				type: "Exertions",
-				symbol: PopoutEditor.renderDiceImages("[EXE]"),
+				symbol: PopoutEditor.renderImages("[EXE]"),
 				value: Math.abs(+dicePool.exertions),
 				negative: +dicePool.exertions < 0,
 			});
@@ -111,7 +111,7 @@ export default class WFRP3ERoll extends Roll
 			this.addedResults.push(
 			{
 				type: "Sigmar's Comets",
-				symbol: PopoutEditor.renderDiceImages("[SI]"),
+				symbol: PopoutEditor.renderImages("[SI]"),
 				value: Math.abs(+dicePool.sigmarsComets),
 				negative: +dicePool.sigmarsComets < 0,
 			});
@@ -123,7 +123,7 @@ export default class WFRP3ERoll extends Roll
 			this.addedResults.push(
 			{
 				type: "Chaos Stars",
-				symbol: PopoutEditor.renderDiceImages("[CHAO]"),
+				symbol: PopoutEditor.renderImages("[CHAO]"),
 				value: Math.abs(+dicePool.chaosStars),
 				negative: +dicePool.chaosStars < 0,
 			});

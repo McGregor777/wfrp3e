@@ -53,9 +53,9 @@ export default function()
 			}
 		});
 
-		Handlebars.registerHelper("renderImage", function(text)
+		Handlebars.registerHelper("renderImages", function(text)
 		{
-			return PopoutEditor.renderImage(text);
+			return PopoutEditor.renderImages(text);
 		});
 
 		Handlebars.registerHelper("for", function(startingNumber, goalNumber, increment, block)
@@ -83,11 +83,6 @@ export default function()
 		Handlebars.registerHelper("array", function(length)
 		{
 			return Array.from({length: length}, (element, index) => index);
-		});
-
-		Handlebars.registerHelper("format", function(localizationKey, parameters)
-		{
-			return game.i18n.format(localizationKey, parameters.hash);
 		});
 	})
 }

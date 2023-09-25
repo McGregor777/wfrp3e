@@ -58,7 +58,7 @@ export default class PopoutEditor extends FormApplication
 	 * Renders a specific die or symbol picture based on a string.
 	 * @param {string} string The name of the die or symbol to render.
 	 */
-	static renderImage(str, actorData)
+	static renderImages(str, actorData)
 	{
 		let html = str || "";
 
