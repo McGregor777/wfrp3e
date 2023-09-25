@@ -58,12 +58,24 @@ export default function()
 			return PopoutEditor.renderImage(text);
 		});
 
-		Handlebars.registerHelper("times", function(number, block)
+		Handlebars.registerHelper("for", function(startingNumber, goalNumber, increment, block)
 		{
 			let accum = "";
 
-			for(let i = 0; i < number; i++)
-				accum += block.fn(i);
+			if(startingNumber <= goalNumber) {
+				if(increment < 1)
+					throw new Error("Increment cannot be inferior to 1 if the starting number is inferior or equal to the goal number");
+
+				for(let i = startingNumber; i <= goalNumber; i += increment)
+					accum += block.fn(i);
+			}
+			else {
+				if(increment > -1)
+					throw new Error("Increment cannot be superior to -1 if the starting number is superior to the goal number");
+
+				for(let i = startingNumber; i >= goalNumber; i += increment)
+					accum += block.fn(i);
+			}
 
 			return accum;
 		});

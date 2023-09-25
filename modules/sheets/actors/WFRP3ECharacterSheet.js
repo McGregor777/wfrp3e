@@ -136,13 +136,31 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 	{
 		super.activateListeners(html);
 
+		html.find(".flip-link").mousedown(this._onFlipClick.bind(this));
+		html.find(".quantity-link").mousedown(this._onQuantityClick.bind(this));
 		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
 		html.find(".item-delete-link").click(this._onItemDelete.bind(this));
 		html.find(".item-name-link").mousedown(this._onItemClick.bind(this));
-		html.find(".skill-training-level-input").change(this._onChangeSkillTrainingLevel.bind(this));
-		html.find(".flip-link").mousedown(this._onFlipClick.bind(this));
 		html.find(".recharge-token").mousedown(this._onRechargeTokenClick.bind(this));
-		html.find(".quantity-link").mousedown(this._onQuantityClick.bind(this));
+		html.find(".skill-training-level-input").change(this._onSkillTrainingLevelChange.bind(this));
+		html.find(".stance-meter-segment").click(this._onStanceMeterSegmentClick.bind(this));
+	}
+
+	/**
+	 * Handles clicks on a sheet's flip button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
+	async _onFlipClick(event)
+	{
+		event.preventDefault();
+
+		const parent = $(event.currentTarget).parents(".item");
+		const activeFace = parent.find(".face.active");
+		const inactiveFace = parent.find(".face:not(.active)");
+
+		activeFace.removeClass("active");
+		inactiveFace.addClass("active");
 	}
 
 	/**
@@ -238,36 +256,6 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 	}
 
 	/**
-	 * Handles clicks on a Card's recharge token button.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	_onRechargeTokenClick(event)
-	{
-		// Get clicked Item and Item's recharge tokens
-		const clickedItemId = this._getItemId(event);
-		const clickedItem = this.actor.items.get(clickedItemId);
-		let rechargeTokens = clickedItem.system.rechargeTokens;
-
-		switch(event.button)
-		{
-			// If left click...
-			case 0:
-				rechargeTokens++;
-				break;
-			// If right click...
-			case 2:
-				rechargeTokens--;
-				// Floor recharge tokens to 0
-				if(rechargeTokens < 0)
-					rechargeTokens = 0;
-				break;
-		}
-
-		clickedItem.update({"system.rechargeTokens": rechargeTokens});
-	}
-
-	/**
 	 * Handles clicks on a Trapping's quantity button.
 	 * @param event {MouseEvent}
 	 * @private
@@ -308,11 +296,41 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 	}
 
 	/**
+	 * Handles clicks on a Card's recharge token button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
+	_onRechargeTokenClick(event)
+	{
+		// Get clicked Item and Item's recharge tokens
+		const clickedItemId = this._getItemId(event);
+		const clickedItem = this.actor.items.get(clickedItemId);
+		let rechargeTokens = clickedItem.system.rechargeTokens;
+
+		switch(event.button)
+		{
+			// If left click...
+			case 0:
+				rechargeTokens++;
+				break;
+			// If right click...
+			case 2:
+				rechargeTokens--;
+				// Floor recharge tokens to 0
+				if(rechargeTokens < 0)
+					rechargeTokens = 0;
+				break;
+		}
+
+		clickedItem.update({"system.rechargeTokens": rechargeTokens});
+	}
+
+	/**
 	 * Handles clicks on a Skill's training level checkbox.
 	 * @param event {MouseEvent}
 	 * @private
 	 */
-	async _onChangeSkillTrainingLevel(event)
+	async _onSkillTrainingLevelChange(event)
 	{
 		event.preventDefault();
 
@@ -327,19 +345,16 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 	}
 
 	/**
-	 * Handles clicks on a sheet's flip button.
+	 * Handles clicks on a Stance Meter's segment.
 	 * @param event {MouseEvent}
 	 * @private
 	 */
-	async _onFlipClick(event)
+	async _onStanceMeterSegmentClick(event)
 	{
 		event.preventDefault();
 
-		const parent = $(event.currentTarget).parents(".item");
-		const activeFace = parent.find(".face.active");
-		const inactiveFace = parent.find(".face:not(.active)");
+		const newStanceValue = parseInt($(event.currentTarget).find("input")[0].value);
 
-		activeFace.removeClass("active");
-		inactiveFace.addClass("active");
+		this.actor.update({"system.attributes.stance.current": newStanceValue});
 	}
 }

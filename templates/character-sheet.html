@@ -107,7 +107,20 @@
 
 				<div class="stance-meter">
 					<span class="character-sheet-title">{{localize 'CHARACTER.Stances'}}</span>
-					<input class="stance-slider" name="system.attributes.stance.current" type="range" min="-{{actor.stanceMeter.conservative}}" max="{{actor.stanceMeter.reckless}}" step="1" value="{{actor.system.attributes.stance.current}}" />
+
+					<div class="stance-meter-segments">
+						{{#for actor.stanceMeter.reckless actor.stanceMeter.conservative 1}}
+							<a class="stance-meter-segment {{#if (equalTo @root.actor.system.attributes.stance.current this)}}active{{/if}}">
+								<img class="stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}"
+									 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
+								<input name="system.attributes.stance.current"
+									   type="radio"
+									   value="{{this}}"
+									   data-dtype="Number"
+									   {{#if (equalTo @root.actor.system.attributes.stance.current this)}}checked{{/if}}/>
+							</a>
+						{{/for}}
+					</div>
 				</div>
 
 				<div class="cards">

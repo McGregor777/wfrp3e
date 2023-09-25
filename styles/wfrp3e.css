@@ -319,7 +319,7 @@
 .character-sheet .character-sheet-body .characteristics-tab .attributes .cards {
   overflow-y: scroll;
 }
-.character-sheet .character-sheet-body .characteristics-tab .attributes .cards .card {
+.character-sheet .character-sheet-body .characteristics-tab .attributes .cards > div:not(:last-child) .card {
   margin-bottom: 20px !important;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments {
@@ -417,9 +417,29 @@
   font-size: 12pt;
   font-variant-caps: small-caps;
 }
-.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-slider::-webkit-slider-runnable-track {
-  -webkit-appearance: none !important;
-  background: linear-gradient(to right, green, white, red) !important;
+.character-sheet .character-sheet-body .characteristics-tab .stance-meter {
+  margin-bottom: 0.5rem;
+}
+.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments {
+  display: flex;
+  justify-content: center;
+}
+.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment {
+  display: block;
+  height: 27px;
+}
+.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment.active {
+  filter: drop-shadow(gold 0px 0px 4px);
+}
+.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment > img {
+  border: none;
+  width: 32px;
+}
+.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment > img.stance-neutral {
+  width: 38px;
+}
+.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment > input {
+  display: none;
 }
 .character-sheet .character-sheet-body .item-container {
   display: none;

@@ -50,7 +50,7 @@
 				{
 					overflow-y: scroll;
 
-					& .card
+					& > div:not(:last-child) .card
 					{
 						margin-bottom: 20px !important;
 					}
@@ -188,10 +188,42 @@
 				}
 			}
 
-			& .stance-meter .stance-slider::-webkit-slider-runnable-track
+			& .stance-meter
 			{
-				-webkit-appearance: none !important;
-				background: linear-gradient(to right, green, white, red) !important;
+				margin-bottom: 0.5rem;
+
+				& .stance-meter-segments
+				{
+					display: flex;
+					justify-content: center;
+
+					& .stance-meter-segment
+					{
+						display: block;
+						height: 27px;
+
+						&.active
+						{
+							filter: drop-shadow(gold 0px 0px 4px);
+						}
+
+						& > img
+						{
+							border: none;
+							width: 32px;
+
+							&.stance-neutral
+							{
+								width: 38px;
+							}
+						}
+
+						& > input
+						{
+							display: none;
+						}
+					}
+				}
 			}
 		}
 

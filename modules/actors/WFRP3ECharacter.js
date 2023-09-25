@@ -73,17 +73,17 @@ export default class WFRP3ECharacter extends Actor
 	calculateStanceMeter()
 	{
 		let stanceMeter =
-			{
-				conservative: this.system.attributes.stance.conservative,
-				reckless: this.system.attributes.stance.reckless
-			};
+		{
+			conservative: this.system.attributes.stance.conservative,
+			reckless: -this.system.attributes.stance.reckless
+		};
 
 		if(this.currentCareer)
 			stanceMeter =
-				{
-					conservative: this.system.attributes.stance.conservative + this.currentCareer.system.startingStance.conservativeSegments,
-					reckless: this.system.attributes.stance.reckless + this.currentCareer.system.startingStance.recklessSegments
-				};
+			{
+				conservative: this.system.attributes.stance.conservative + this.currentCareer.system.startingStance.conservativeSegments,
+				reckless: -this.system.attributes.stance.reckless - this.currentCareer.system.startingStance.recklessSegments
+			};
 
 		this.stanceMeter = stanceMeter;
 	}
