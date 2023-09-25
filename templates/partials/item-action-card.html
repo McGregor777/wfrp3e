@@ -1,5 +1,5 @@
 <div class="item action-card" data-item-id="{{action._id}}">
-	<div class="face conservative active">
+	<div class="face conservative{{#if (equalTo @root.actor.defaultStance 'conservative')}} active{{/if}}">
 		<div class="action-card-header">
 			<img class="action-card-type" src="systems/wfrp3e/assets/icons/{{action.system.conservative.type}}.webp" />
 			<span class="action-card-difficulty-modifiers"></span>
@@ -18,7 +18,7 @@
 		<div class="action-card-effects">{{{action.system.conservative.effects}}}</div>
 	</div>
 
-	<div class="face reckless">
+	<div class="face reckless{{#if (equalTo @root.actor.defaultStance 'reckless')}} active{{/if}}">
 		<div class="action-card-header">
 			<img class="action-card-type" src="systems/wfrp3e/assets/icons/{{action.system.conservative.type}}.webp" />
 			<span class="action-card-difficulty-modifiers"></span>
