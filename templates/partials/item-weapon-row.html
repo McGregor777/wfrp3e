@@ -12,7 +12,7 @@
 	</td>
 
 	<td class="center-aligned">
-		<span class="weapon-row-range">{{localize weapon.system.range}}</span>
+		<span class="weapon-row-range">{{localize (lookup @root.weaponRanges weapon.system.range)}}</span>
 	</td>
 
 	<td class="center-aligned">
@@ -20,7 +20,7 @@
 	</td>
 
 	<td class="center-aligned">
-		<span class="weapon-row-group">{{localize weapon.system.group}}</span>
+		<span class="weapon-row-group">{{localize (lookup @root.weaponGroups weapon.system.group)}}</span>
 	</td>
 
 	<td class="shrinked">
@@ -28,8 +28,8 @@
 	</td>
 
 	{{#>if (lookup . document.isOwner)}}
-	<td class="shrinked">
-		<a class="item-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
-	</td>
+		<td class="shrinked">
+			<a class="item-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
+		</td>
 	{{/if}}
 </tr>

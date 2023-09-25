@@ -36,6 +36,10 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 
 		data.items = this.constructItemLists(data);
 		data.items["diseases"].forEach((disease) => disease.symptomDescription = game.i18n.localize(CONFIG.WFRP3E.disease.symptoms.descriptions[disease.system.symptom]));
+		data.characteristics = CONFIG.WFRP3E.characteristics;
+		data.conditionDurations = CONFIG.WFRP3E.conditionDurations;
+		data.weaponGroups = CONFIG.WFRP3E.weapon.groups;
+		data.weaponRanges = CONFIG.WFRP3E.weapon.ranges;
 
 		// Add basic skills to the Character.
 		if(actor.type === "character" && data.items.skills.length === 0)
@@ -68,6 +72,8 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 				default: 'confirm'
 			}).render(true);
 		}
+
+		console.log(data)
 
 		return data;
 	}

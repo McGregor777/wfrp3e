@@ -23,7 +23,7 @@
 
 						<div class="career-sheet-career-aptitudes-content">
 							{{#each career.system.primaryCharacteristics}}
-								{{localize this}}{{#unless @last}},{{/unless}}
+								{{localize (lookup @root.characteristics this)}}{{#unless @last}},{{/unless}}
 							{{/each}}
 						</div>
 					</div>
@@ -86,9 +86,9 @@
 
 				<div class="career-sheet-race-restrictions">
 					{{#if career.system.advanced}}
-					{{localize "CAREER.AdvancedCareer"}}
+						{{localize "CAREER.AdvancedCareer"}}
 					{{else}}
-					{{localize "CAREER.BasicCareer"}}
+						{{localize "CAREER.BasicCareer"}}
 					{{/if}}
 					: {{career.system.raceRestrictions}}
 				</div>

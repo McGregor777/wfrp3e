@@ -31,7 +31,7 @@ WFRP3E.talentTypes =
 	"insanity": "TALENT.Insanity"
 }
 
-WFRP3E.conditionDuration =
+WFRP3E.conditionDurations =
 {
 	"brief": "CONDITION.Brief",
 	"dependent": "CONDITION.Dependent",

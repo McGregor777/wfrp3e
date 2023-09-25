@@ -15,7 +15,7 @@ export default class WFRP3EConditionSheet extends ItemSheet
 	{
 		const data = super.getData();
 
-		data.conditionDuration = CONFIG.WFRP3E.conditionDuration;
+		data.conditionDurations = CONFIG.WFRP3E.conditionDurations;
 
 		return data;
 	}

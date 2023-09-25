@@ -3,7 +3,7 @@
 		<div class="condition-card-header">
 			<a class="condition-card-name item-name-link">{{condition.name}}</a>
 		</div>
-		<div class="condition-card-duration">{{localize condition.system.duration}}</div>
+		<div class="condition-card-duration">{{localize (lookup @root.conditionDurations condition.system.duration)}}</div>
 		<div class="condition-card-description">{{{condition.system.description}}}</div>
 
 		{{#>if (lookup . document.isOwner)}}

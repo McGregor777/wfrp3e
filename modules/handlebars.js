@@ -34,30 +34,6 @@ export default function()
 			return value + valueToAdd;
 		});
 
-		Handlebars.registerHelper("characteristicToAbbreviation", function(value)
-		{
-			switch(value)
-			{
-				case "strength":
-					return "St";
-				case "toughness":
-					return "To";
-				case "agility":
-					return "Ag";
-				case "intelligence":
-					return "Int";
-				case "willpower":
-					return "WP";
-				case "fellowship":
-					return "Fel";
-			}
-		});
-
-		Handlebars.registerHelper("renderImages", function(text)
-		{
-			return PopoutEditor.renderImages(text);
-		});
-
 		Handlebars.registerHelper("for", function(startingNumber, goalNumber, increment, block)
 		{
 			let accum = "";
@@ -80,9 +56,28 @@ export default function()
 			return accum;
 		});
 
-		Handlebars.registerHelper("array", function(length)
+		Handlebars.registerHelper("abbreviateCharacteristic", function(value)
 		{
-			return Array.from({length: length}, (element, index) => index);
+			switch(value)
+			{
+				case "strength":
+					return "CHARACTERISTIC.St";
+				case "toughness":
+					return "CHARACTERISTIC.To";
+				case "agility":
+					return "CHARACTERISTIC.Ag";
+				case "intelligence":
+					return "CHARACTERISTIC.Int";
+				case "willpower":
+					return "CHARACTERISTIC.WP";
+				case "fellowship":
+					return "CHARACTERISTIC.Fel";
+			}
+		});
+
+		Handlebars.registerHelper("renderImages", function(text)
+		{
+			return PopoutEditor.renderImages(text);
 		});
 	})
 }
