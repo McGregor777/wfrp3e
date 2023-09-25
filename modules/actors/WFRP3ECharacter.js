@@ -48,6 +48,7 @@ export default class WFRP3ECharacter extends Actor
 		}
 
 		this.calculateStanceMeter();
+		this.getDefaultStance();
 		this.buildTalentSocketLists();
 	}
 
@@ -86,6 +87,24 @@ export default class WFRP3ECharacter extends Actor
 			};
 
 		this.stanceMeter = stanceMeter;
+	}
+
+	/**
+	 * Get the default stance of the Character.
+	 */
+	getDefaultStance()
+	{
+		if(this.system.attributes.stance.current > 0)
+			this.defaultStance = "conservative";
+		else if(this.system.attributes.stance.current < 0)
+			this.defaultStance = "reckless";
+		else
+		{
+			if(this.stanceMeter.conservative >= this.stanceMeter.reckless)
+				this.defaultStance = "conservative";
+			else
+				this.defaultStance = "reckless";
+		}
 	}
 
 	/**
