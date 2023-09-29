@@ -182,7 +182,9 @@
 
 	& .career-sheet-starting-stance
 	{
+		display: flex;
 		font-weight: bold;
+		justify-content: center;
 		text-shadow:
 			-1pt -1pt 0 black,
 			-1pt 0 0 black,
@@ -192,5 +194,18 @@
 			0 1pt 0 black,
 			1pt 0 0 black,
 			1pt 1pt 0pt black;
+
+		& img
+		{
+			border: none;
+			display: block;
+			height: 27px;
+			width: 32px;
+
+			&.stance-neutral
+			{
+				width: 38px;
+			}
+		}
 	}
 }

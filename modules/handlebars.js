@@ -31,7 +31,12 @@ export default function()
 
 		Handlebars.registerHelper("increment", function(value, valueToAdd)
 		{
-			return value + valueToAdd;
+			return value + parseInt(valueToAdd);
+		});
+
+		Handlebars.registerHelper("multiply", function(value, multiplier)
+		{
+			return value * multiplier;
 		});
 
 		Handlebars.registerHelper("for", function(startingNumber, goalNumber, increment, block)
