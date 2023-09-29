@@ -3,13 +3,14 @@
 		<a class="party-sheet-tension-meter-minus" title="{{localize 'PARTY.TensionMeter.Decrease'}}"><span class="fas fa-minus"></span></a>
 
 		<div class="party-sheet-tension-meter-segment-container">
-			{{#for 0 actor.system.tension.maximum 1}}
+			{{#for 0 (increment actor.system.tension.maximum 1) 1}}
 				<a class="party-sheet-tension-meter-segment{{#if (or (equalTo ../actor.system.tension.events.0.threshold this) (equalTo ../actor.system.tension.events.1.threshold this))}} threshold{{/if}}">
 					{{#if (equalTo ../actor.system.tension.value this)}}
 						<img src="systems/wfrp3e/assets/images/token-grey.webp"/>
 					{{else}}
 						{{this}}
 					{{/if}}
+
 					<input name="system.tension.value" type="radio" value="{{this}}" data-dtype="Number"{{#if (equalTo ../actor.system.tension.value this)}} checked{{/if}} />
 				</a>
 			{{/for}}

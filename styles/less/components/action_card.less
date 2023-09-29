@@ -48,8 +48,17 @@
 
 	& .action-card-difficulty-modifiers
 	{
+		font-size: 8pt;
+		grid-area: action-card-difficulty-modifiers;
+		line-height: 8pt;
+		margin: auto auto auto 5px;
 		text-align: center;
-		grid-area: difficulty-modifiers;
+
+		& > *
+		{
+			display: inline-block;
+			margin: auto;
+		}
 	}
 
 	& .action-card-effects

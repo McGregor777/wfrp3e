@@ -176,6 +176,90 @@ th
 	}
 }
 
+.wfrp3e
+{
+	&.dice
+	{
+		font-family: var(--fa-style-family, "Font Awesome 6 Pro");
+		font-weight: var(--fa-style,900);
+		text-shadow:
+				-1px -1px 0 black,
+				-1px 0 0 black,
+				0 -1px 0 black,
+				-1px 1px 0 black,
+				1px -1px 0 black,
+				0 1px 0 black,
+				1px 0 0 black,
+				1px 1px 0 black;
+
+		&.challenge
+		{
+			color: purple;
+
+			&:before {
+				content: "\f219";
+			}
+		}
+
+		&.characteristic
+		{
+			color: blue;
+
+			&:before {
+				content: "\f219";
+			}
+		}
+
+		&.conservative
+		{
+			color: green;
+
+			&:before {
+			content: "\f111";
+		}
+		}
+
+		&.expertise
+		{
+			color: yellow;
+
+			&:before
+			{
+				content: "\f0c8";
+			}
+		}
+
+		&.fortune
+		{
+			color: white;
+
+			&:before
+			{
+				content: "\f0c8";
+			}
+		}
+
+		&.reckless
+		{
+			color: red;
+
+			&:before {
+				content: "\f111";
+			}
+		}
+
+		&.misfortune
+		{
+			color: black;
+
+			&:before
+			{
+				content: "\f0c8";
+			}
+		}
+	}
+}
+
 #chat-controls .control-buttons
 {
 	flex-basis: 67px;

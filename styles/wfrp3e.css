@@ -26,8 +26,15 @@
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
 .action-card .action-card-difficulty-modifiers {
+  font-size: 8pt;
+  grid-area: action-card-difficulty-modifiers;
+  line-height: 8pt;
+  margin: auto auto auto 5px;
   text-align: center;
-  grid-area: difficulty-modifiers;
+}
+.action-card .action-card-difficulty-modifiers > * {
+  display: inline-block;
+  margin: auto;
 }
 .action-card .action-card-effects {
   width: calc(100% - 20px);
@@ -1320,6 +1327,53 @@ th.shrinked {
   display: flex !important;
   flex-direction: column;
   flex-grow: 1;
+}
+.wfrp3e.dice {
+  font-family: var(--fa-style-family, "Font Awesome 6 Pro");
+  font-weight: var(--fa-style, 900);
+  text-shadow: -1px -1px 0 black, -1px 0 0 black, 0 -1px 0 black, -1px 1px 0 black, 1px -1px 0 black, 0 1px 0 black, 1px 0 0 black, 1px 1px 0 black;
+}
+.wfrp3e.dice.challenge {
+  color: purple;
+}
+.wfrp3e.dice.challenge:before {
+  content: "\f219";
+}
+.wfrp3e.dice.characteristic {
+  color: blue;
+}
+.wfrp3e.dice.characteristic:before {
+  content: "\f219";
+}
+.wfrp3e.dice.conservative {
+  color: green;
+}
+.wfrp3e.dice.conservative:before {
+  content: "\f111";
+}
+.wfrp3e.dice.expertise {
+  color: yellow;
+}
+.wfrp3e.dice.expertise:before {
+  content: "\f0c8";
+}
+.wfrp3e.dice.fortune {
+  color: white;
+}
+.wfrp3e.dice.fortune:before {
+  content: "\f0c8";
+}
+.wfrp3e.dice.reckless {
+  color: red;
+}
+.wfrp3e.dice.reckless:before {
+  content: "\f111";
+}
+.wfrp3e.dice.misfortune {
+  color: black;
+}
+.wfrp3e.dice.misfortune:before {
+  content: "\f0c8";
 }
 #chat-controls .control-buttons {
   flex-basis: 67px;

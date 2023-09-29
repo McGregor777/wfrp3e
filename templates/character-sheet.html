@@ -109,7 +109,7 @@
 					<span class="character-sheet-title">{{localize 'CHARACTER.Stances'}}</span>
 
 					<div class="stance-meter-segments">
-						{{#for actor.stanceMeter.reckless actor.stanceMeter.conservative 1}}
+						{{#for actor.stanceMeter.reckless (increment actor.stanceMeter.conservative 1) 1}}
 							<a class="stance-meter-segment {{#if (equalTo @root.actor.system.attributes.stance.current this)}}active{{/if}}">
 								<img class="stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}"
 									 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}.webp" height="27" />

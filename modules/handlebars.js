@@ -42,14 +42,14 @@ export default function()
 				if(increment < 1)
 					throw new Error("Increment cannot be inferior to 1 if the starting number is inferior or equal to the goal number");
 
-				for(let i = startingNumber; i <= goalNumber; i += increment)
+				for(let i = startingNumber; i < goalNumber; i += increment)
 					accum += block.fn(i);
 			}
 			else {
 				if(increment > -1)
 					throw new Error("Increment cannot be superior to -1 if the starting number is superior to the goal number");
 
-				for(let i = startingNumber; i >= goalNumber; i += increment)
+				for(let i = startingNumber; i > goalNumber; i += increment)
 					accum += block.fn(i);
 			}
 
