@@ -1,9 +1,9 @@
 export default class WFRP3EPartySheet extends ActorSheet
 {
+	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return mergeObject(super.defaultOptions, {
 			template: "systems/wfrp3e/templates/party-sheet.html",
 			width: 800,
 			height: 540,
@@ -11,6 +11,7 @@ export default class WFRP3EPartySheet extends ActorSheet
 		});
 	}
 
+	/** @inheritDoc */
 	getData()
 	{
 		const data = super.getData();
@@ -22,10 +23,7 @@ export default class WFRP3EPartySheet extends ActorSheet
 		return data;
 	}
 
-	/**
-	 * Activate event listeners using the prepared sheet HTML.
-	 * @param html {HTML} The prepared HTML object ready to be rendered into the DOM
-	 */
+	/** @inheritDoc */
 	activateListeners(html)
 	{
 		super.activateListeners(html);
@@ -36,10 +34,10 @@ export default class WFRP3EPartySheet extends ActorSheet
 		html.find(".party-sheet-members .party-sheet-member .party-sheet-member-portrait").click(this._onPartyMemberPortraitClick.bind(this));
 		html.find(".party-sheet-members .party-sheet-member .party-sheet-member-remove").click(this._onPartyMemberRemoveClick.bind(this));
 		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .talent-socket-add").click(this._onTalentSocketAdd.bind(this));
-		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container.talent-socket-delete").click(this._onTalentSocketDelete.bind(this));
+		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .talent-socket-delete").click(this._onTalentSocketDelete.bind(this));
 	}
 
-	/** @inheritdoc */
+	/** @inheritDoc */
 	async _onDrop(event)
 	{
 		super._onDrop(event);
@@ -51,88 +49,7 @@ export default class WFRP3EPartySheet extends ActorSheet
 	}
 
 	/**
-	 * Handles clicks on a Party tension meter's increase button.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	_onPartyTensionMeterPlusClick(event)
-	{
-		this.actor.update({"system.tension.maximum": this.actor.system.tension.maximum + 1});
-	}
-
-	/**
-	 * Handles clicks on a Party tension meter's decrease button.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	_onPartyTensionMeterMinusClick(event)
-	{
-		const newMaximumTensionValue = this.actor.system.tension.maximum - 1;
-		const updates =
-		{
-			system:
-			{
-				tension:
-				{
-					maximum: newMaximumTensionValue,
-					events: this.actor.system.tension.events
-				}
-			}
-		};
-
-		updates.system.tension.events.forEach((event) =>
-		{
-			if(event.threshold >= this.actor.system.tension.maximum)
-				event.threshold = newMaximumTensionValue;
-		})
-
-		this.actor.update(updates);
-	}
-
-	/**
-	 * Handles clicks on a Party member's portrait.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	_onPartyMemberPortraitClick(event)
-	{
-		game.actors.contents.find(actor => actor.id === $(event.currentTarget).parent(".party-sheet-member").data("actorId")).sheet.render(true);
-	}
-
-	/**
-	 * Handles clicks on a Party member's removal button.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	_onPartyMemberRemoveClick(event)
-	{
-		const actorId = $(event.currentTarget).parent(".party-sheet-member").data("actorId");
-		const actorName = game.actors.get(actorId).name;
-
-		new Dialog(
-		{
-			title: game.i18n.localize("DIALOG.TITLE.MemberRemovalConfirmation"),
-			content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.MemberRemovalConfirmation", {actor: actorName}) + "</p>",
-			buttons:
-			{
-				confirm:
-				{
-					icon: '<span class="fa fa-check"></span>',
-					label: game.i18n.localize("DIALOG.BUTTON.Confirm"),
-					callback: async dlg => this.actor.removeMember(actorId)
-				},
-				cancel:
-				{
-					icon: '<span class="fas fa-times"></span>',
-					label: game.i18n.localize("DIALOG.BUTTON.Cancel")
-				}
-			},
-			default: "confirm"
-		}).render(true);
-	}
-
-	/**
-	 * Handles clicks on a Party tension segment.
+	 * Performs follow-up operations clicks on a Party tension segment.
 	 * @param event {MouseEvent}
 	 * @private
 	 */
@@ -142,31 +59,91 @@ export default class WFRP3EPartySheet extends ActorSheet
 	}
 
 	/**
-	 * Handles clicks on a Party talent socket add button.
+	 * Performs follow-up operations clicks on a Party tension meter's increase button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
+	_onPartyTensionMeterPlusClick(event)
+	{
+		this.actor.update({"system.tension.maximum": this.actor.system.tension.maximum + 1});
+	}
+
+	/**
+	 * Performs follow-up operations clicks on a Party tension meter's decrease button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
+	_onPartyTensionMeterMinusClick(event)
+	{
+		const newMaximumTensionValue = this.actor.system.tension.maximum - 1;
+		const tension = {
+			maximum: newMaximumTensionValue,
+			events: this.actor.system.tension.events
+		};
+
+		tension.events.forEach((event) => {
+			if(event.threshold >= this.actor.system.tension.maximum)
+				event.threshold = newMaximumTensionValue;
+		});
+
+		this.actor.update({"system.tension": tension});
+	}
+
+	/**
+	 * Performs follow-up operations clicks on a Party member's portrait.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
+	_onPartyMemberPortraitClick(event)
+	{
+		game.actors.contents.find(actor => actor.id === $(event.currentTarget).parent(".party-sheet-member").data("actorId")).sheet.render(true);
+	}
+
+	/**
+	 * Performs follow-up operations clicks on a Party member's removal button.
+	 * @param event {MouseEvent}
+	 * @private
+	 */
+	_onPartyMemberRemoveClick(event)
+	{
+		const actorId = $(event.currentTarget).parent(".party-sheet-member").data("actorId");
+		const actorName = game.actors.get(actorId).name;
+
+		new Dialog({
+			title: game.i18n.localize("DIALOG.TITLE.MemberRemovalConfirmation"),
+			content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.MemberRemovalConfirmation", {actor: actorName}) + "</p>",
+			buttons: {
+				confirm: {
+					icon: '<span class="fa fa-check"></span>',
+					label: game.i18n.localize("DIALOG.BUTTON.Confirm"),
+					callback: async dlg => this.actor.removeMember(actorId)
+				},
+				cancel: {
+					icon: '<span class="fas fa-times"></span>',
+					label: game.i18n.localize("DIALOG.BUTTON.Cancel")
+				}
+			},
+			default: "confirm"
+		}).render(true);
+	}
+
+	/**
+	 * Performs follow-up operations clicks on a Party talent socket add button.
 	 * @param event {MouseEvent}
 	 * @private
 	 */
 	async _onTalentSocketAdd(event)
 	{
-		const updates = {system: {talentSockets: this.actor.system.talentSockets}};
-
-		updates.system.talentSockets.push("");
-
-		this.actor.update(updates);
+		this.actor.addTalentSocket();
 	}
 
-
 	/**
-Handles clicks on a Party talent socket delete button.
+	 * Performs follow-up operations clicks on a Party talent socket delete button.
 	 * @param event {MouseEvent}
 	 * @private
 	 */
 	async _onTalentSocketDelete(event)
 	{
-		const updates = {system: {talentSockets: this.actor.system.talentSockets}};
-
-		updates.system.talentSockets.pop();
-
-		this.actor.update(updates);
+		this.actor.deleteTalentSocket();
 	}
 }

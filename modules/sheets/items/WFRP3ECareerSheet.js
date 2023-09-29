@@ -34,23 +34,33 @@ export default class WFRP3ECareerSheet extends ItemSheet
 		html.find(".talent-socket-remove").click(this._onTalentSocketDelete.bind(this));
 	}
 
+	/**
+	 * Performs follow-up operations after clicks on a Talent socket add icon.
+	 * @param event {Event}
+	 * @returns {Promise<void>}
+	 * @private
+	 */
 	async _onTalentSocketAdd(event)
 	{
-		const data = this.item.system.talentSockets;
+		const talentSockets = this.item.system.talentSockets;
 
-		data.push("focus");
+		talentSockets.push("focus");
 
-		this.item.update({"system.talentSockets": data});
+		this.item.update({"system.talentSockets": talentSockets});
 	}
 
+	/**
+	 * Performs follow-up operations after clicks on a Talent socket delete icon.
+	 * @param event {Event}
+	 * @returns {Promise<void>}
+	 * @private
+	 */
 	async _onTalentSocketDelete(event)
 	{
-		const data = this.item.system.talentSockets;
+		const talentSockets = this.item.system.talentSockets;
 
-		data.pop();
+		talentSockets.pop();
 
-		console.log(data);
-
-		this.item.update({"system.talentSockets": data});
+		this.item.update({"system.talentSockets": talentSockets});
 	}
 }

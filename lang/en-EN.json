@@ -232,6 +232,8 @@
 	"TALENT.Order": "Order",
 	"TALENT.Tricks": "Tricks",
 	"TALENT.Insanity": "Insanity",
+	"TALENT.NoSocket": "No Socket",
+	"TALENT.FreeSocket": "Free Socket",
 
 	"TRAPPING.Brass": "Brass",
 	"TRAPPING.Cost": "Cost",

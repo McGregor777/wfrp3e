@@ -3,14 +3,20 @@
 	<a class="talent-card-name item-name-link">{{talent.name}}</a>
 	<div class="talent-card-content">{{{talent.system.description}}}</div>
 
-	<div class="recharge-token-container">
+	<div class="talent-card-bottom">
 		<a class="recharge-token">
 			<img src="systems/wfrp3e/assets/images/token-grey.webp" alt="Recharge Token" />
 			<span class="recharge-token-counter">{{{talent.system.rechargeTokens}}}</span>
 		</a>
+
+		{{#>if (lookup . document.isOwner)}}
+			<a class="item-delete-link" title="{{localize 'DIALOG.TITLE.DeleteItem'}}">
+				<span class="fas fa-trash"></span>
+			</a>
+		{{/if}}
 	</div>
 
-	{{#>if (lookup . document.isOwner)}}
-		<a class="item-delete-link" title="{{localize 'DIALOG.TITLE.DeleteItem'}}"><span class="fas fa-trash"></span></a>
-	{{/if}}
+	<select class="sheet-form-select item-input talent-card-socket-select" name="system.talentSocket" data-dtype="String">
+		{{selectOptions (lookup @root.talentSocketsByType talent.system.type) selected=talent.system.talentSocket blank=(localize "TALENT.NoSocket")}}
+	</select>
 </div>
