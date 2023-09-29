@@ -74,16 +74,6 @@
 					"value": 3
 				}
 			},
-			"impairments":
-			{
-				"fatigue": 0,
-				"stress": 0
-			},
-			"experience":
-			{
-				"current": 0,
-				"spent": 0
-			},
 			"background":
 			{
 				"biography": "",
@@ -98,7 +88,18 @@
 				"allies": "",
 				"enemies": "",
 				"campaignNotes": ""
-			}
+			},
+			"experience":
+			{
+				"current": 0,
+				"spent": 0
+			},
+			"impairments":
+			{
+				"fatigue": 0,
+				"stress": 0
+			},
+			"party": null
 		},
 		"party":
 		{
@@ -343,6 +344,7 @@
 		{
 			"templates": ["basics"],
 			"rechargeTokens": 0,
+			"talentSocket": null,
 			"type": "focus"
 		},
 		"trapping":

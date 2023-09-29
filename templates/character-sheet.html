@@ -177,7 +177,13 @@
 		<section class="tab careers-tab" data-group="primary" data-tab="careers">
 			<div class="character-sheet-career-tabs sheet-tabs" data-group="careers">
 				{{#each items.careers as |career|}}
-					<a class="tab-link" data-tab="{{career._id}}">{{career.name}}</a>
+					<a class="tab-link" data-tab="{{career._id}}">
+						{{career.name}}
+
+						{{#if career.system.current}}
+							<span class="fa fa-check"></span>
+						{{/if}}
+					</a>
 				{{/each}}
 			</div>
 
@@ -231,7 +237,6 @@
 						{{#each items.talents.reputation as |talent ta|}}
 							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
 						{{/each}}
-						</div>
 					</div>
 				{{/if}}
 

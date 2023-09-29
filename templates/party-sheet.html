@@ -27,16 +27,13 @@
 
 			<div class="party-sheet-tension">
 				<div class="party-sheet-tension-title">{{localize 'PARTY.TensionMeter.Title'}}</div>
-				<hr>
-				<div class="party-sheet-tension-event">
-					<input class="party-sheet-tension-event-threshold" name="system.tension.events.0.threshold" type="number" value="{{actor.system.tension.events.0.threshold}}" min="0" max="{{actor.system.tension.maximum}}" title="{{localize 'PARTY.TensionEvent.Threshold'}}" />
-					<input class="party-sheet-tension-event-effects" name="system.tension.events.0.effects" type="text" value="{{actor.system.tension.events.0.effects}}" placeholder="{{localize 'PARTY.TensionEvent.Effects'}}" title="{{localize 'PARTY.TensionEvent.Effects'}}" />
-				</div>
-				<hr>
-				<div class="party-sheet-tension-event">
-					<input class="party-sheet-tension-event-threshold" name="system.tension.events.1.threshold" type="number" value="{{actor.system.tension.events.1.threshold}}" min="0" max="{{actor.system.tension.maximum}}" title="{{localize 'PARTY.TensionEvent.Threshold'}}" />
-					<input class="party-sheet-tension-event-effects" name="system.tension.events.1.effects" type="text" value="{{actor.system.tension.events.1.effects}}" placeholder="{{localize 'PARTY.TensionEvent.Effects'}}" title="{{localize 'PARTY.TensionEvent.Effects'}}" />
-				</div>
+				{{#each actor.system.tension.events as |event ev|}}
+					<hr>
+					<div class="party-sheet-tension-event">
+						<input class="party-sheet-tension-event-threshold" name="system.tension.events.{{ev}}.threshold" type="number" value="{{event.threshold}}" min="0" max="{{actor.system.tension.maximum}}" title="{{localize 'PARTY.TensionEvent.Threshold'}}" />
+						<input class="party-sheet-tension-event-effects" name="system.tension.events.{{ev}}.effects" type="text" value="{{event.effects}}" placeholder="{{localize 'PARTY.TensionEvent.Effects'}}" title="{{localize 'PARTY.TensionEvent.Effects'}}" />
+					</div>
+				{{/each}}
 			</div>
 
 			<div class="party-sheet-members">

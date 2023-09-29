@@ -232,6 +232,8 @@
 	"TALENT.Order": "Ordre",
 	"TALENT.Tricks": "Familier",
 	"TALENT.Insanity": "Folie",
+	"TALENT.NoSocket": "Aucun emplacement",
+	"TALENT.FreeSocket": "Emplacement libre",
 
 	"TRAPPING.Brass": "Cuivre",
 	"TRAPPING.Cost": "Coût",

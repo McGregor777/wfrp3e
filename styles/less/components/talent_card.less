@@ -4,13 +4,65 @@
 	display: grid;
 	width: 385px;
 	height: 255px;
-	margin: 10px;
+	margin: 0.5rem 0.5rem 2rem;
 	border: 1px solid black;
 	border-radius: 10px;
 	grid-template: 60px 1fr / 50px 1fr;
 	grid-template-areas:
 		'talent-card-type talent-card-name'
-		'talent-card-type talent-card-content';
+		'talent-card-type talent-card-content'
+		'talent-card-type talent-card-bottom';
+
+	& .talent-card-bottom
+	{
+		display: flex;
+
+		& .item-delete-link
+		{
+			position: absolute;
+			display: block;
+			padding: 2px 3px;
+			bottom: 5px;
+			right: 5px;
+			line-height: 0;
+		}
+
+		& .recharge-token
+		{
+			position: relative;
+
+			& > img
+			{
+				height: 3rem;
+				opacity: 75%;
+			}
+
+			& > .recharge-token-counter
+			{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 2rem;
+				text-shadow:
+					-1pt -1pt 0 white,
+					-1pt 0 0 white,
+					0 -1pt 0 white,
+					-1pt 1pt 0 white,
+					1pt -1pt 0 white,
+					0 1pt 0 white,
+					1pt 0 0 white,
+					1pt 1pt 0 white;
+			}
+		}
+	}
+
+	& .talent-card-socket-select
+	{
+		position: absolute;
+		top: 100%;
+		width: 100%;
+	}
 
 	& .talent-card-content
 	{
@@ -26,14 +78,14 @@
 		font: 20pt @font-title;
 		text-align: center;
 		text-shadow:
-			-1pt -1pt 0 black,
-			-1pt 0 0 black,
-			0 -1pt 0 black,
-			-1pt 1pt 0 black,
-			1pt -1pt 0 black,
-			0 1pt 0 black,
-			1pt 0 0 black,
-			1pt 1pt 0 black;
+							-1pt -1pt 0 black,
+						-1pt 0 0 black,
+							0 -1pt 0 black,
+						-1pt 1pt 0 black,
+							1pt -1pt 0 black,
+						0 1pt 0 black,
+						1pt 0 0 black,
+						1pt 1pt 0 black;
 		grid-area: talent-card-name;
 
 		&:hover
@@ -79,53 +131,6 @@
 		&.tactic
 		{
 			background-color: red;
-		}
-	}
-
-	& .item-delete-link
-	{
-		position: absolute;
-		display: block;
-		padding: 2px 3px;
-		bottom: 5px;
-		right: 5px;
-		line-height: 0;
-	}
-
-	& .recharge-token-container
-	{
-		position: absolute;
-		bottom: 0;
-		left: 50px;
-
-		& .recharge-token
-		{
-			display: block;
-			position: relative;
-
-			& > img
-			{
-				height: 3rem;
-				opacity: 75%;
-			}
-
-			& > .recharge-token-counter
-			{
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				font-size: 2rem;
-				text-shadow:
-					-1pt -1pt 0 white,
-					-1pt 0 0 white,
-					0 -1pt 0 white,
-					-1pt 1pt 0 white,
-					1pt -1pt 0 white,
-					0 1pt 0 white,
-					1pt 0 0 white,
-					1pt 1pt 0 white;
-			}
 		}
 	}
 }

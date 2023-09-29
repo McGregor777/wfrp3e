@@ -5,91 +5,168 @@ export default class WFRP3EItem extends Item
 	{
 		super.prepareData();
 
-		/*try
-		{
-			let functionName = `prepare${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`;
+		try {
+			const functionName = `_prepare${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`;
 
 			if(this[`${functionName}`])
 				this[`${functionName}`]();
 		}
-		catch(exception)
-		{
-			console.error(`Something went wrong when preparing the Item ${this.name} of type ${this.type}: ${exception}`);
-		}*/
-
-		if(this.type === "action")
-			this.prepareAction();
-		else if(this.type === "armour")
-			this.prepareArmour();
-		else if(this.type === "disease")
-			this.prepareDisease();
-		else if(this.type === "career")
-			this.prepareCareer();
-		else if(this.type === "criticalWound")
-			this.prepareCriticalWound();
-		else if(this.type === "skill")
-			this.prepareSkill();
-		else if(this.type === "weapon")
-			this.prepareWeapon();
-	}
-
-	/**
-	 * Prepare Action's data.
-	 */
-	prepareAction()
-	{
-		if(this.system.rechargeTokens === undefined || this.system.rechargeTokens === null) {
-			this.update({system: {rechargeTokens: 0}});
+		catch(error) {
+			console.error(`Something went wrong when preparing the Item ${this.name} of type ${this.type}: ${error}`);
 		}
 	}
 
 	/**
-	 * Prepare Armour's data.
+	 * Prepare Action's data.
+	 * @private
 	 */
-	prepareArmour() {}
+	_prepareAction() {}
+
+	/**
+	 * Prepare Armour's data.
+	 * @private
+	 */
+	_prepareArmour() {}
 
 	/**
 	 * Prepare Career's data.
+	 * @private
 	 */
-	prepareCareer()
+	_prepareCareer()
 	{
-		this.prepareTalentSockets();
-		this.preparePrimaryCharacteristics();
+		if(!(this.system.talentSockets instanceof Array))
+			this._convertTalentSocketsToArray();
+
+		if(!(this.system.primaryCharacteristics instanceof Array))
+			this._convertPrimaryCharacteristicsToArray();
 	}
 
 	/**
 	 * Prepare CriticalWound's data.
+	 * @private
 	 */
-	prepareCriticalWound() {}
+	_prepareCriticalWound() {}
 
 	/**
 	 * Prepare Disease's data.
+	 * @private
 	 */
-	prepareDisease() {}
+	_prepareDisease() {}
 
 	/**
 	 * Prepare Skill's data.
+	 * @private
 	 */
-	prepareSkill() {}
+	_prepareSkill() {}
+
+	/**
+	 * Prepare Talent's data.
+	 * @private
+	 */
+	_prepareTalent() {}
 
 	/**
 	 * Prepare Weapon's data.
+	 * @private
 	 */
-	prepareWeapon() {}
+	_prepareWeapon() {}
 
 	/**
 	 * Converts the Item's talent sockets to Array.
+	 * @private
 	 */
-	prepareTalentSockets()
+	_convertTalentSocketsToArray()
 	{
-		this.system.talentSockets = Object.values(this.system.talentSockets);
+		this.update({"system.talentSockets": Object.values(this.system.talentSockets)});
 	}
 
 	/**
 	 * Converts the Career's primary characteristics to Array.
+	 * @private
 	 */
-	preparePrimaryCharacteristics()
+	_convertPrimaryCharacteristicsToArray()
 	{
-		this.system.primaryCharacteristics = Object.values(this.system.primaryCharacteristics);
+		this.update({"system.primaryCharacteristics": Object.values(this.system.primaryCharacteristics)});
+	}
+
+	/** @inheritDoc */
+	_onUpdate(changed, options, userId)
+	{
+		super._onUpdate(changed, options, userId);
+
+		try {
+			const functionName = `_on${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}Update`;
+
+			if(this[`${functionName}`])
+				this[`${functionName}`](changed, options, userId);
+		}
+		catch(exception) {
+			console.error(`Something went wrong when updating the Item ${this.name} of type ${this.type}: ${exception}`);
+		}
+	}
+
+	/**
+	 * Perform follow-up operations after a Career is updated. Post-update operations occur for all clients after the update is broadcast.
+	 * @param changed {any} The differential data that was changed relative to the documents prior values
+	 * @param options {any} Additional options which modify the update request
+	 * @param userId {string} The id of the User requesting the document update
+	 * @private
+	 */
+	_onCareerUpdate(changed, options, userId)
+	{
+		if(changed.system?.current)
+			this._onCurrentCareerChange();
+
+		if(changed.system?.talentSockets)
+			this._onCareerTalentSocketsChange();
+	}
+
+	/**
+	 * Perform follow-up operations after a Talent is updated. Post-update operations occur for all clients after the update is broadcast.
+	 * @param changed {any} The differential data that was changed relative to the documents prior values
+	 * @param options {any} Additional options which modify the update request
+	 * @param userId {string} The id of the User requesting the document update
+	 * @private
+	 */
+	_onTalentUpdate(changed, options, userId)
+	{
+		if(changed.system?.talentSocket)
+			this._onTalentSocketChange(changed.system?.talentSocket);
+	}
+
+	/**
+	 * Performs check-ups following up a Career's Talent sockets change.
+	 * @private
+	 */
+	_onCurrentCareerChange()
+	{
+		if(this.actor) {
+			this.actor.itemTypes.career.filter(career => career !== this).forEach((otherCareer, index) => {
+				otherCareer.update({"system.current": false});
+			});
+			this.actor.resetTalentsSocket("career");
+		}
+	}
+
+	/**
+	 * Performs check-ups following up a Career's Talent sockets change.
+	 * @private
+	 */
+	_onCareerTalentSocketsChange()
+	{
+		if(this.actor)
+			this.actor.resetTalentsSocket("career");
+	}
+
+	/**
+	 * Performs check-ups following up a Talent socket change to a non-null value.
+	 * @param talent {WFRP3EItem} The Talent that has been changed
+	 * @param newTalentSocket {string}
+	 * @private
+	 */
+	_onTalentSocketChange(talent, newTalentSocket)
+	{
+		if(this.actor)
+			this.actor.checkForDuplicateTalentSockets(newTalentSocket);
 	}
 }

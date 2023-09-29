@@ -104,7 +104,7 @@
 
 			<div class="current-career-div">
 				<label class="current-career-label">{{localize 'CAREER.CurrentCareer'}}</label>
-				<input class="current-career-input" name="career.system.current" type="checkbox" value="{{career.system.current}}"{{#if career.system.current}} checked{{/if}} />
+				<input class="current-career-input" name="system.current" type="radio" {{#if career.system.current}} checked{{/if}} data-dtype="boolean" />
 			</div>
 
 			{{#>if (lookup . document.isOwner)}}
