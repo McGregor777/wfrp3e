@@ -1,0 +1,28 @@
+{
+  "_id": "U8uwLINO60xm3sps",
+  "name": "Resilience",
+  "type": "skill",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": "<p>A character&rsquo;s fitness, vigour, and ability to bounce back from strain and damage. Also covers use of a shield to bear the brunt of an attack and absorb the punishment. Resilience is often used to recover from wounds or fatigue over time, such as after bed rest. Recovering from wounds is covered in detail on page 87.</p>\n<p><em>Specialisation options:</em> block, recover fatigue, resist disease, resist poison, resist starvation</p>",
+    "characteristic": "toughness",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": []
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.2.2a",
+    "coreVersion": "10.291",
+    "createdTime": null,
+    "modifiedTime": 1682261631280,
+    "lastModifiedBy": "wfrp3ebuilder000"
+  }
+}

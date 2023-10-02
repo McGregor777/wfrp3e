@@ -4,33 +4,21 @@
   "version": "0.4.4-alpha",
   "compatibility": {
     "minimum": "11",
-    "verified": "11.309",
+    "verified": "11.311",
     "maximum": "11"
   },
-  "authors": [
-    {
+  "authors": [{
       "name": "Grégory Soupé",
       "email": "gregory.soupe@mailo.com",
       "flags": {}
-    }
-  ],
+  }],
   "esmodules": [
     "wfrp3e.js"
   ],
   "styles": [
     "styles/wfrp3e.css"
   ],
-  "packs": [
-    {
-      "name": "actors",
-      "label": "Actors",
-      "path": "packs/actors.db",
-      "system": "wfrp3e",
-      "private": false,
-      "type": "Actor",
-      "flags": {}
-    },
-    {
+  "packs": [{
       "name": "skills",
       "label": "Skills",
       "path": "packs/skills.db",
@@ -38,49 +26,18 @@
       "private": false,
       "type": "Item",
       "flags": {}
-    },
-    {
-      "name": "talents",
-      "label": "Talents",
-      "path": "packs/talents.db",
-      "system": "wfrp3e",
-      "private": false,
-      "type": "Item",
-      "flags": {}
-    },
-    {
-      "name": "actions",
-      "label": "Actions",
-      "path": "packs/actions.db",
-      "system": "wfrp3e",
-      "private": false,
-      "type": "Item",
-      "flags": {}
-    },
-    {
-      "name": "wounds",
-      "label": "Wounds",
-      "path": "packs/wounds.db",
-      "system": "wfrp3e",
-      "private": false,
-      "type": "Item",
-      "flags": {}
-    }
-  ],
-  "languages": [
-    {
+  }],
+  "languages": [{
       "lang": "en",
       "name": "English (UK)",
       "path": "lang/en-EN.json",
       "flags": {}
-    },
-    {
+  }, {
       "lang": "fr",
       "name": "Français (FR)",
       "path": "lang/fr-FR.json",
       "flags": {}
-    }
-  ],
+  }],
   "socket": true,
   "initiative": "@attributes.characteristics.ability.valueda + @attributes.characteristics.ability.fortunedf",
   "gridDistance": 1,

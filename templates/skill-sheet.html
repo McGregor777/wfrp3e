@@ -14,7 +14,7 @@
 
 		<div class="sheet-form-div">
 			<label class="sheet-form-label">{{localize 'SKILL.AdvancedSkill'}}</label>
-			<input class="sheet-form-input" name="system.advanced" type="checkbox" {{#if item.system.advanced}} checked{{/if}}>
+			<input class="sheet-form-input" name="system.advanced" type="checkbox" {{#if item.system.advanced}} checked{{/if}} data-dtype="boolean" />
 		</div>
 
 		{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}

@@ -1,53 +1,40 @@
 {
-	"Actor":
-	{
+	"Actor": {
 		"types": ["character", "party", "creature", "group"],
-		"templates":
-		{
-			"attributes":
-			{
-				"attributes":
-				{
-					"characteristics":
-					{
-						"strength":
-						{
+		"templates": {
+			"attributes": {
+				"attributes": {
+					"characteristics": {
+						"strength": {
 							"value": 2,
 							"fortune": 0
 						},
-						"toughness":
-						{
+						"toughness": {
 							"value": 2,
 							"fortune": 0
 						},
-						"agility":
-						{
+						"agility": {
 							"value": 2,
 							"fortune": 0
 						},
-						"intelligence":
-						{
+						"intelligence": {
 							"value": 2,
 							"fortune": 0
 						},
-						"willpower":
-						{
+						"willpower": {
 							"value": 2,
 							"fortune": 0
 						},
-						"fellowship":
-						{
+						"fellowship": {
 							"value": 2,
 							"fortune": 0
 						}
 					},
-					"wounds":
-					{
+					"wounds": {
 						"threshold": 7,
 						"value": 7
 					},
-					"stance":
-					{
+					"stance": {
 						"conservative": 0,
 						"reckless": 0,
 						"current": 0
@@ -58,24 +45,19 @@
 				}
 			}
 		},
-		"character":
-		{
+		"character": {
 			"templates": ["attributes"],
-			"attributes":
-			{
-				"corruption":
-				{
+			"attributes": {
+				"corruption": {
 					"threshold": 5,
 					"value": 5
 				},
-				"fortune":
-				{
+				"fortune": {
 					"maximum": 3,
 					"value": 3
 				}
 			},
-			"background":
-			{
+			"background": {
 				"biography": "",
 				"height": "",
 				"weight": "",
@@ -89,67 +71,52 @@
 				"enemies": "",
 				"campaignNotes": ""
 			},
-			"experience":
-			{
+			"experience": {
 				"current": 0,
 				"spent": 0
 			},
-			"impairments":
-			{
+			"impairments": {
 				"fatigue": 0,
 				"stress": 0
 			},
 			"party": null
 		},
-		"party":
-		{
+		"party": {
 			"traits": ["Party", "", ""],
 			"talentSockets":  ["focus"],
-			"tension":
-			{
-				"events":
-				[
-					{
-						"threshold": 4,
-						"effects": ""
-					},
-					{
-						"threshold": 8,
-						"effects": ""
-					}
-				],
+			"tension": {
+				"events": [{
+					"threshold": 4,
+					"effects": ""
+				}, {
+					"threshold": 8,
+					"effects": ""
+				}],
 				"maximum": 8,
 				"value": 0
 			},
-			"specialAbility":
-			{
+			"specialAbility": {
 				"title": "",
 				"description": ""
 			},
 			"fortunePool": 0,
 			"members": []
 		},
-		"creature":
-		{
+		"creature": {
 			"templates": ["attributes"],
 			"threatRating": 1,
 			"category": "",
-			"attributes":
-			{
-				"attributes":
-				{
-					"aggression":
-					{
+			"attributes": {
+				"attributes": {
+					"aggression": {
 						"budget": 0,
 						"current": 0
 					},
-					"cunning":
-					{
+					"cunning": {
 						"budget": 0,
 						"current": 0
 					},
-					"expertise":
-					{
+					"expertise": {
 						"budget": 0,
 						"current": 0
 					},
@@ -158,31 +125,24 @@
 			},
 			"description": ""
 		},
-		"group":
-		{
+		"group": {
 			"traits": [""],
-			"specialAbilities":
-			[{
+			"specialAbilities": [{
 				"name": "",
 				"value": 0
 			}],
 			"talentSockets":  ["focus", "focus"]
 		}
 	},
-	"Item":
-	{
+	"Item": {
 		"types": ["ability", "action", "armour", "career", "condition", "criticalWound", "disease", "insanity",
 			"money", "miscast", "mutation", "skill", "talent", "trapping", "weapon"],
-		"templates":
-		{
-			"basics":
-			{
+		"templates": {
+			"basics": {
 				"description": ""
 			},
-			"item":
-			{
-				"cost":
-				{
+			"item": {
+				"cost": {
 					"brass": 0,
 					"silver": 0,
 					"gold": 0
@@ -191,21 +151,17 @@
 				"rarity": "abundant"
 			}
 		},
-		"ability":
-		{
+		"ability": {
 			"templates": ["basics"]
 		},
-		"action":
-		{
-			"conservative":
-			{
+		"action": {
+			"conservative": {
 				"name": "",
 				"art": "",
 				"type": "melee",
 				"traits": [""],
 				"rechargeRating": 0,
-				"difficultyModifiers":
-				{
+				"difficultyModifiers": {
 					"challengeDice": 0,
 					"misfortuneDice": 0
 				},
@@ -213,15 +169,13 @@
 				"requirements": "",
 				"effects": ""
 			},
-			"reckless":
-			{
+			"reckless": {
 				"name": "",
 				"art": "",
 				"type": "melee",
 				"traits": [""],
 				"rechargeRating": 0,
-				"difficultyModifiers":
-				{
+				"difficultyModifiers": {
 					"challengeDice": 0,
 					"misfortuneDice": 0
 				},
@@ -231,14 +185,12 @@
 			},
 			"rechargeTokens": 0
 		},
-		"armour":
-		{
+		"armour": {
 			"templates": ["basics", "item"],
 			"defenceValue": 0,
 			"soakValue": 0
 		},
-		"career":
-		{
+		"career": {
 			"templates": ["basics"],
 			"advanced": false,
 			"raceRestrictions": "",
@@ -246,13 +198,11 @@
 			"talentSockets": ["focus", "focus"],
 			"primaryCharacteristics": ["strength", "ability"],
 			"careerSkills": ["", "", "", "", ""],
-			"startingStance":
-			{
+			"startingStance": {
 				"conservativeSegments": 0,
 				"recklessSegments": 0
 			},
-			"advanceOptions":
-			{
+			"advanceOptions": {
 				"action": 0,
 				"talent": 0,
 				"skill": 0,
@@ -262,30 +212,24 @@
 				"wound": 0
 			},
 			"summary": "",
-			"advances":
-			{
+			"advances": {
 				"action": "",
 				"talent": "",
 				"skill": "",
 				"wound": "",
 				"open": ["", "", "", "", "", ""],
-				"careerTransition":
-				{
+				"careerTransition": {
 					"cost": 0,
 					"newCareer": ""
 				},
 				"dedicationBonus": "",
-				"nonCareer":
-				[
-					{
-						"cost": 0,
-						"nature": ""
-					},
-					{
-						"cost": 0,
-						"nature": ""
-					}
-				]
+				"nonCareer": [{
+					"cost": 0,
+					"nature": ""
+				}, {
+					"cost": 0,
+					"nature": ""
+				}]
 			},
 			"current": false,
 			"completed": false

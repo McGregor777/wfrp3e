@@ -94,6 +94,8 @@ export default class WFRP3EItem extends Item
 	{
 		super._onUpdate(changed, options, userId);
 
+		console.log(changed)
+
 		try {
 			const functionName = `_on${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}Update`;
 

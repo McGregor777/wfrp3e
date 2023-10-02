@@ -1,3 +1,6 @@
+# NeDB database cache directories
+/packs/skills/
+
 # JetBrains WebStorm cache/options directory
 .idea/
 

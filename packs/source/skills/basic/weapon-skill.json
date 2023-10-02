@@ -1,0 +1,28 @@
+{
+  "_id": "UdyEgcde6vGl0oUt",
+  "name": "Weapon Skill",
+  "type": "skill",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": "<p>Covers the basic use, care and maintenance of a variety of melee weapons. Weapon skill is a broad category and governs fighting unarmed to using small weapons like knives or clubs to larger weapons like two-handed swords, great axes or halberds. The ability to parry with an equipped melee weapon is also based on a character&rsquo;s Weapon Skill.</p>\n<p><em>Specialisation options:</em>&nbsp;hand weapons, great weapons, polearms, parry with hand weapon, parry with great weapon</p>",
+    "characteristic": "strength",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": []
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.2.2a",
+    "coreVersion": "10.291",
+    "createdTime": null,
+    "modifiedTime": 1682261631280,
+    "lastModifiedBy": "wfrp3ebuilder000"
+  }
+}

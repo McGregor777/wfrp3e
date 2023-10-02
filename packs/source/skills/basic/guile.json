@@ -1,0 +1,28 @@
+{
+  "_id": "6oivXuzTeePuznmq",
+  "name": "Guile",
+  "type": "skill",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": "<p>Sneaky, cunning, and surreptitious social interaction. Use this skill to deceive, lie, confuse, or sow seeds of doubt. Also covers using non-verbal innuendo and cues. Guile checks that involve duping, misleading, or fooling someone are generally opposed by the target&rsquo;s Intuition. Guile checks aimed at rattling, deceiving, or distracting someone are generally opposed by the target&rsquo;s Discipline.</p>\n<p><em>Specialisation options:</em> deception, blather, con games, innuendo, appear innocent</p>",
+    "characteristic": "fellowship",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": []
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.2.2a",
+    "coreVersion": "10.291",
+    "createdTime": null,
+    "modifiedTime": 1682261631280,
+    "lastModifiedBy": "wfrp3ebuilder000"
+  }
+}

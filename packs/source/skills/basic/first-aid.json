@@ -1,0 +1,28 @@
+{
+  "_id": "TAEPv4hkVW1jwpqi",
+  "name": "First Aid",
+  "type": "skill",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "flags": {},
+  "system": {
+    "description": "<p>Covers the basics in rendering care,&nbsp;tending to injury, splinting, and helping someone survive until&nbsp;better care is available, as well as evaluating the severity of wounds&nbsp;or trying to identify infections or sources of injuries. The more seriously&nbsp;injured the target is, the more challenging it is to treat them.&nbsp;Treating injured characters is covered in detail on page 88.</p>\n<p><em>Specialisation options:</em>&nbsp;combat surgery, long term care, tending critical&nbsp;wounds, tending normal wounds</p>",
+    "characteristic": "intelligence",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": []
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.2.2a",
+    "coreVersion": "10.291",
+    "createdTime": null,
+    "modifiedTime": 1682261631280,
+    "lastModifiedBy": "wfrp3ebuilder000"
+  }
+}
