@@ -29,6 +29,11 @@ export default function()
 			return value <= compareValue;
 		});
 
+		Handlebars.registerHelper("in", function(value, array)
+		{
+			return array.includes(value);
+		});
+
 		Handlebars.registerHelper("increment", function(value, valueToAdd)
 		{
 			return value + parseInt(valueToAdd);

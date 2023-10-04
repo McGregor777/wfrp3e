@@ -69,10 +69,51 @@ export default class WFRP3EItem extends Item
 	 * Prepare Weapon's data.
 	 * @private
 	 */
-	_prepareWeapon() {}
+	_prepareWeapon()
+	{
+		if(!(this.system.qualities instanceof Array))
+			this._convertQualitiesToArray();
+	}
 
 	/**
-	 * Converts the Item's talent sockets to Array.
+	/**
+	 * Adds a new Quality to the Weapon's list of Qualities.
+	 */
+	addNewQuality()
+	{
+		const qualities = this.system.qualities;
+
+		qualities.push({
+			name: "attuned",
+			rating: 1
+		});
+
+		this.update({"system.qualities": qualities});
+	}
+
+	/**
+	 * Removes the last Quality from the Weapon's list of Qualities.
+	 */
+	removeLastQuality()
+	{
+		const qualities = this.system.qualities;
+
+		qualities.pop();
+
+		this.update({"system.qualities": qualities});
+	}
+
+	/**
+	 * Converts the Item's Qualities to Array.
+	 * @private
+	 */
+	_convertQualitiesToArray()
+	{
+		this.update({"system.qualities": Object.values(this.system.qualities)});
+	}
+
+	/**
+	 * Converts the Item's Talent sockets to Array.
 	 * @private
 	 */
 	_convertTalentSocketsToArray()

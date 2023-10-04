@@ -24,7 +24,20 @@
 
 		<div class="sheet-form-div">
 			<label class="sheet-form-label">{{localize 'WEAPON.Qualities'}}</label>
-			<input class="sheet-form-input" name="system.qualities" type="text" value="{{item.system.qualities}}" placeholder="{{localize 'WEAPON.Qualities'}}" />
+			<a class="quality-remove"><span class="fas fa-minus"></span></a>
+			<a class="quality-add"><span class="fas fa-plus"></span></a>
+
+			{{#each item.system.qualities as |quality qu|}}
+				<div>
+					<select class="weapon-sheet-quality-select sheet-form-select" name="system.qualities.{{qu}}.name" data-dtype="String">
+						{{selectOptions @root.qualities selected=quality.name localize=true}}
+					</select>
+
+					{{#if (in quality.name @root.qualitiesWithRating) }}
+						<input class="sheet-form-input" name="system.qualities.{{qu}}.rating" type="number" value="{{quality.rating}}" min="1" placeholder="{{localize 'WEAPON.QualityRating'}}" data-dtype="Number" />
+					{{/if}}
+				</div>
+			{{/each}}
 		</div>
 
 		<div class="sheet-form-div">
