@@ -13,113 +13,88 @@
 @import "components/typography";
 @import "components/wound_card";
 
-body
-{
+body {
 	font: 12pt @font-primary;
 }
 
-h1
-{
+h1 {
 	font: 32pt @font-title;
 }
 
-h2
-{
+h2 {
 	font: 24pt @font-title;
 }
 
-h3
-{
+h3 {
 	font: 20pt @font-title;
 
-	&.entity-name, .encounters &, .folder-header &, #players &, #pause &
-	{
+	&.entity-name, .encounters &, .folder-header &, #players &, #pause & {
 		background: unset;
 		border: unset !important;
 	}
 }
 
-h4
-{
+h4 {
 	margin: auto !important;
 	font: 16pt @font-primary;
 }
 
-h5
-{
+h5 {
 	font: 14pt @font-primary;
 }
 
-h6
-{
+h6 {
 	font: 12pt @font-primary;
 }
 
-input[type="checkbox"]
-{
+input[type="checkbox"] {
 	width: 15px;
 	height: 15px;
 }
 
-p
-{
-	text-align: justify;
-}
-
-td
-{
+td {
 	padding: 4px;
 
-	&.center-aligned
-	{
+	&.center-aligned {
 		text-align: center;
 	}
 
-	&.left-aligned
-	{
+	&.left-aligned {
 		text-align: left;
 	}
 
-	&.right-aligned
-	{
+	&.right-aligned {
 		text-align: right;
 	}
 
-	&.shrinked
-	{
+	&.shrinked {
 		width: 1px;
 		text-align: center;
 	}
 }
 
-th
-{
+th {
 	padding: 4px !important;
 
-	&.center-aligned
-	{
+	&.center-aligned {
 		text-align: center;
 	}
 
-	&.left-aligned
-	{
+	&.left-aligned {
 		text-align: left;
 	}
 
-	&.right-aligned
-	{
+	&.right-aligned {
 		text-align: right;
 	}
 
-	&.shrinked
-	{
+	&.shrinked {
 		width: 1px;
 		text-align: center;
 	}
 }
 
-.bottom-line
-{
+.bottom-line {
 	position: absolute;
 	display: flex;
 	flex-direction: row;
@@ -129,71 +104,70 @@ th
 	right: 10px;
 	line-height: 0;
 
-	& > *
-	{
+	& > * {
 		display: block;
 	}
 }
 
-.conservative-stance-meter
-{
+.conservative-stance-meter {
 	background-color: green;
 }
 
-.editor
-{
+.editor {
 	flex-grow: 1;
 	min-height: 75px;
 }
 
-& .face
-{
+& .face {
 	display: none;
 	width: 100%;
 	height: 100%;
 
-	&.active
-	{
+	&.active {
 		display: block;
 	}
 }
 
-.reckless-stance-meter
-{
+.reckless-stance-meter {
 	background-color: red;
 }
 
-.sheet
-{
-	& .tab
-	{
-		&.active
-		{
-			display: flex !important;
-			flex-direction: column;
-			flex-grow: 1;
-		}
+.sheet {
+	& .tab.active {
+		display: flex !important;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	& .tab-link.active {
+		color: white;
+		text-shadow:
+			-1px -1px 0 black,
+			-1px 0 0 black,
+			0 -1px 0 black,
+			-1px 1px 0 black,
+			1px -1px 0 black,
+			0 1px 0 black,
+			1px 0 0 black,
+			1px 1px 0 black;
 	}
 }
 
-.wfrp3e
-{
-	&.dice
-	{
+.wfrp3e {
+	&.dice {
 		font-family: var(--fa-style-family, "Font Awesome 6 Pro");
 		font-weight: var(--fa-style,900);
 		text-shadow:
-				-1px -1px 0 black,
-				-1px 0 0 black,
-				0 -1px 0 black,
-				-1px 1px 0 black,
-				1px -1px 0 black,
-				0 1px 0 black,
-				1px 0 0 black,
-				1px 1px 0 black;
+			-1px -1px 0 black,
+			-1px 0 0 black,
+			0 -1px 0 black,
+			-1px 1px 0 black,
+			1px -1px 0 black,
+			0 1px 0 black,
+			1px 0 0 black,
+			1px 1px 0 black;
 
-		&.challenge
-		{
+		&.challenge {
 			color: purple;
 
 			&:before {
@@ -201,8 +175,7 @@ th
 			}
 		}
 
-		&.characteristic
-		{
+		&.characteristic {
 			color: blue;
 
 			&:before {
@@ -210,37 +183,31 @@ th
 			}
 		}
 
-		&.conservative
-		{
+		&.conservative {
 			color: green;
 
 			&:before {
-			content: "\f111";
-		}
+				content: "\f111";
+			}
 		}
 
-		&.expertise
-		{
+		&.expertise {
 			color: yellow;
 
-			&:before
-			{
+			&:before {
 				content: "\f0c8";
 			}
 		}
 
-		&.fortune
-		{
+		&.fortune {
 			color: white;
 
-			&:before
-			{
+			&:before {
 				content: "\f0c8";
 			}
 		}
 
-		&.reckless
-		{
+		&.reckless {
 			color: red;
 
 			&:before {
@@ -248,19 +215,16 @@ th
 			}
 		}
 
-		&.misfortune
-		{
+		&.misfortune {
 			color: black;
 
-			&:before
-			{
+			&:before {
 				content: "\f0c8";
 			}
 		}
 	}
 }
 
-#chat-controls .control-buttons
-{
+#chat-controls .control-buttons {
 	flex-basis: 67px;
 }
