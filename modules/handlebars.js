@@ -39,6 +39,14 @@ export default function()
 			return value * multiplier;
 		});
 
+		Handlebars.registerHelper("replace", function(value, match, replacement)
+		{
+			if(value.includes(match))
+				return value.replace(match, replacement);
+			else
+				throw new Error("Unable to find match in the value.");
+		});
+
 		Handlebars.registerHelper("for", function(startingNumber, goalNumber, increment, block)
 		{
 			let accum = "";
@@ -66,17 +74,17 @@ export default function()
 			switch(value)
 			{
 				case "strength":
-					return "CHARACTERISTIC.St";
+					return "CHARACTERISTIC.ABBREVIATION.Strength";
 				case "toughness":
-					return "CHARACTERISTIC.To";
+					return "CHARACTERISTIC.ABBREVIATION.Toughness";
 				case "agility":
-					return "CHARACTERISTIC.Ag";
+					return "CHARACTERISTIC.ABBREVIATION.Agility";
 				case "intelligence":
-					return "CHARACTERISTIC.Int";
+					return "CHARACTERISTIC.ABBREVIATION.Intelligence";
 				case "willpower":
-					return "CHARACTERISTIC.WP";
+					return "CHARACTERISTIC.ABBREVIATION.Willpower";
 				case "fellowship":
-					return "CHARACTERISTIC.Fel";
+					return "CHARACTERISTIC.ABBREVIATION.Fellowship";
 			}
 		});
 

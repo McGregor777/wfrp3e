@@ -1,22 +1,27 @@
-.action-item-sheet
-{
-	& .sheet-form-div
-	{
+.action-item-sheet {
+	& .sheet-form-div {
 		margin: 0.25rem 0;
 
-		&.action-art-selector
-		{
-			& > *
-			{
+		&.action-art-selector {
+			& > * {
 				display: block;
 			}
 
-			& > img
-			{
+			& > img {
 				border: none;
 				height: 80px;
 				width: 278px;
 			}
+		}
+	}
+
+	& .tab-link.active {
+		&.conservative-tab-link {
+			color: lightgreen;
+		}
+
+		&.reckless-tab-link {
+			color: lightcoral;
 		}
 	}
 }

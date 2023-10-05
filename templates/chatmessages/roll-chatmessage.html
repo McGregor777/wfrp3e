@@ -41,9 +41,9 @@
 				<ul>
 					{{#if hasSuccess}}
 						{{#if symbols.successes}}
-							<li class="roll-success">{{localize "ROLL.Successful"}}</li>
+							<li class="roll-success">{{localize "ROLL.OUTCOME.Successful"}}</li>
 						{{else}}
-							<li class="roll-failure">{{localize "ROLL.Failed"}}</li>
+							<li class="roll-failure">{{localize "ROLL.OUTCOME.Failed"}}</li>
 						{{/if}}
 					{{/if}}
 
@@ -52,13 +52,14 @@
 							{{#unless (equalTo key "righteousSuccesses")}}
 								{{#if (equalTo key "successes")}}
 									<li>
-										{{localize (concat (lookup ../this.diceSymbols [key]) "Amount") nb=result }}
+										{{localize (replace (lookup ../this.diceSymbols [key]) "ROLL." "ROLL.AMOUNT.") nb=result }}
+
 										{{#if (superiorTo (lookup ../symbols "righteousSuccesses") 0)}}
-											{{localize (concat (lookup ../this.diceSymbols "righteousSuccesses") "Amount")  nb=(lookup ../symbols "righteousSuccesses") }}
+											{{localize (replace (lookup ../this.diceSymbols "righteousSuccesses") "ROLL." "ROLL.AMOUNT.")  nb=(lookup ../symbols "righteousSuccesses") }}
 										{{/if}}
 									</li>
 								{{else}}
-									<li>{{localize (concat (lookup ../this.diceSymbols [key]) "Amount") nb=result }}</li>
+									<li>{{localize (replace (lookup ../this.diceSymbols [key]) "ROLL." "ROLL.AMOUNT.") nb=result }}</li>
 								{{/if}}
 							{{/unless}}
 						{{/if}}
