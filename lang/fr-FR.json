@@ -8,6 +8,7 @@
 	"ACTION.MisfortuneDice": "Dés d'Infortune",
 	"ACTION.Check": "Test d'Action",
 	"ACTION.Requirements": "Conditions",
+	"ACTION.RechargeTokens": "Jetons de recharge",
 	"ACTION.FACE.Conservative": "Prudence",
 	"ACTION.FACE.Reckless": "Téméraire",
 	"ACTION.TYPE.Melee": "Mêlée",
@@ -163,6 +164,7 @@
 	"MUTATION.Description": "Description",
 
 	"PARTY.FortunePool": "Réserve de Fortune",
+	"PARTY.FortuneToken": "Jeton de Fortune",
 	"PARTY.RemoveMember": "Retirer le membre du groupe",
 	"PARTY.SpecialAbility.Title": "Nom de l'Aptitude Spéciale",
 	"PARTY.TalentSockets": "Emplacements de Talent",
@@ -246,6 +248,7 @@
 
 	"TALENT.FreeSocket": "Emplacement libre",
 	"TALENT.NoSocket": "Aucun emplacement",
+	"TALENT.RechargeTokens": "Jetons de recharge",
 	"TALENT.TYPE.Focus": "Affinité",
 	"TALENT.TYPE.Reputation": "Réputation",
 	"TALENT.TYPE.Tactic": "Tactique",

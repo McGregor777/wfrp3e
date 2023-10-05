@@ -986,19 +986,19 @@
   display: flex;
 }
 .party-sheet .party-sheet-body .party-sheet-left-side {
-  margin-right: 10px;
   flex-grow: 1;
+  margin-right: 0.5rem;
 }
 .party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-header {
-  width: 385px;
-  margin: 0 auto 10px;
   background-color: dimgrey;
+  margin: 0 auto 0.5rem;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+  width: 385px;
 }
 .party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-header * {
   color: white;
-  text-align: center;
   font-variant-caps: small-caps;
+  text-align: center;
 }
 .party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-header .party-sheet-name {
   font-size: 16pt;
@@ -1014,15 +1014,15 @@
   position: relative;
 }
 .party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-members .party-sheet-member .party-sheet-member-remove {
+  bottom: 5px;
   position: absolute;
   right: 5px;
-  bottom: 5px;
 }
 .party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-tension .party-sheet-tension-title {
-  text-align: center;
   font-size: 16pt;
-  font-weight: bold;
   font-variant-caps: small-caps;
+  font-weight: bold;
+  text-align: center;
 }
 .party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-tension .party-sheet-tension-event {
   display: flex;
@@ -1032,24 +1032,37 @@
   text-align: center;
 }
 .party-sheet .party-sheet-body .party-sheet-right-side {
-  margin: 0 0 10px auto;
   flex-shrink: 1;
+  margin: 0 0 10px auto;
+  position: relative;
 }
-.party-sheet .party-sheet-body .party-sheet-right-side .party-sheet-fortune-pool {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.party-sheet .party-sheet-body .party-sheet-right-side .fortune-token {
+  bottom: 0.5rem;
+  position: absolute;
+  right: 50%;
+  transform: translate(50%);
 }
-.party-sheet .party-sheet-body .party-sheet-right-side .party-sheet-fortune-pool > input {
-  width: 30px;
-  margin-left: 10px;
-  text-align: center;
+.party-sheet .party-sheet-body .party-sheet-right-side .fortune-token > img {
+  border: none;
+  height: 3rem;
+}
+.party-sheet .party-sheet-body .party-sheet-right-side .fortune-token > .fortune-counter {
+  color: white;
+  font-size: 24pt;
+  left: 50%;
+  position: absolute;
+  bottom: 2.5%;
+  text-shadow: -1px -1px 0 black, -1px 0 0 black, 0 -1px 0 black, -1px 1px 0 black, 1px -1px 0 black, 0 1px 0 black, 1px 0 0 black, 1px 1px 0 black;
+  transform: translate(-50%);
+}
+.party-sheet .party-sheet-body .party-sheet-right-side .fortune-token:hover > .fortune-counter {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
 }
 .party-sheet .party-sheet-special-ability .party-sheet-special-ability-title {
-  text-align: center;
   font-size: 16pt;
-  font-weight: bold;
   font-variant-caps: small-caps;
+  font-weight: bold;
+  text-align: center;
 }
 .party-sheet .party-sheet-tension-meter {
   display: flex;
@@ -1059,27 +1072,27 @@
 .party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-minus,
 .party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-plus {
   display: block;
-  width: 40px;
-  height: 40px;
-  padding-top: 5px;
+  height: 2.5rem;
+  font-size: 20pt;
+  padding-top: 0.25rem;
   text-align: center;
   vertical-align: middle;
-  font-size: 20pt;
+  width: 2.5rem;
 }
 .party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container {
   display: flex;
   justify-content: center;
 }
 .party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container .party-sheet-tension-meter-segment {
-  width: 40px;
-  height: 40px;
-  padding-top: 2px;
-  flex: 0 0 40px;
-  text-align: center;
-  font-size: 24pt;
-  color: white;
   background-color: #c06030;
   border: 1px solid #a05040;
+  color: white;
+  height: 2.5rem;
+  flex: 0 0 40px;
+  font-size: 24pt;
+  padding-top: 2px;
+  text-align: center;
+  width: 2.5rem;
 }
 .party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container .party-sheet-tension-meter-segment.threshold,
 .party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-segment-container .party-sheet-tension-meter-segment:first-child {
@@ -1098,35 +1111,35 @@
   display: none;
 }
 .party-sheet .party-sheet-footer .party-sheet-talent-socket:not(:first-child) {
-  margin-left: 10px;
+  margin-left: 0.5rem;
 }
 .party-sheet .party-sheet-footer .party-sheet-talent-socket-button-container {
   display: flex;
+  flex: 0 1 2rem;
   justify-content: space-between;
-  margin-left: 10px;
-  flex: 0 1 35px;
+  margin-left: 0.5rem;
 }
 .talent-card {
-  position: relative;
-  display: grid;
-  width: 385px;
-  height: 255px;
-  margin: 0.5rem 0.5rem 2rem;
   border: 1px solid black;
   border-radius: 10px;
+  display: grid;
   grid-template: 60px 1fr / 50px 1fr;
   grid-template-areas: 'talent-card-type talent-card-name' 'talent-card-type talent-card-content' 'talent-card-type talent-card-bottom';
+  height: 255px;
+  margin: 0.5rem 0.5rem 2rem;
+  position: relative;
+  width: 385px;
 }
 .talent-card .talent-card-bottom {
   display: flex;
 }
 .talent-card .talent-card-bottom .item-delete-link {
-  position: absolute;
-  display: block;
-  padding: 2px 3px;
   bottom: 5px;
-  right: 5px;
+  display: block;
   line-height: 0;
+  padding: 2px 3px;
+  position: absolute;
+  right: 5px;
 }
 .talent-card .talent-card-bottom .recharge-token {
   position: relative;
@@ -1137,12 +1150,16 @@
   opacity: 75%;
 }
 .talent-card .talent-card-bottom .recharge-token > .recharge-token-counter {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   font-size: 2rem;
+  left: 50%;
+  position: absolute;
   text-shadow: -1pt -1pt 0 white, -1pt 0 0 white, 0 -1pt 0 white, -1pt 1pt 0 white, 1pt -1pt 0 white, 0 1pt 0 white, 1pt 0 0 white, 1pt 1pt 0 white;
+  top: 60%;
+  transform: translate(-50%, -50%);
+}
+.talent-card .talent-card-bottom .recharge-token:hover > .recharge-token-counter {
+  color: white;
+  text-shadow: 0 0 8px var(--color-shadow-primary);
 }
 .talent-card .talent-card-socket-select {
   position: absolute;
@@ -1150,35 +1167,35 @@
   width: 100%;
 }
 .talent-card .talent-card-content {
-  margin: auto 6px;
   grid-area: talent-card-content;
+  margin: auto 6px;
 }
 .talent-card .talent-card-name {
-  margin: auto 0;
   background: padding-box saddlebrown;
   color: white;
   font: 20pt "Caslon Antique";
+  grid-area: talent-card-name;
+  margin: auto 0;
   text-align: center;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
-  grid-area: talent-card-name;
 }
 .talent-card .talent-card-name:hover {
   text-shadow: 0 0 8px var(--color-shadow-primary);
 }
 .talent-card .talent-card-type {
-  display: block;
-  margin: 10px auto;
-  padding: 0 2px 0 4px;
   background-color: saddlebrown;
   color: white;
+  display: block;
   font: 14pt "ArnoPro";
-  font-weight: bold;
-  text-align: center;
   font-variant-caps: small-caps;
-  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
-  writing-mode: vertical-lr;
-  transform: rotate(180deg);
+  font-weight: bold;
   grid-area: talent-card-type;
+  margin: 10px auto;
+  padding: 0 2px 0 4px;
+  text-align: center;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+  transform: rotate(180deg);
+  writing-mode: vertical-lr;
 }
 .talent-card .talent-card-type.focus {
   background-color: blue;

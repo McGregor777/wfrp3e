@@ -8,6 +8,7 @@
 	"ACTION.MisfortuneDice": "Misfortune Dice",
 	"ACTION.Check": "Action Check",
 	"ACTION.Requirements": "Requirements",
+	"ACTION.RechargeTokens": "Recharge Tokens",
 	"ACTION.FACE.Conservative": "Conservative",
 	"ACTION.FACE.Reckless": "Reckless",
 	"ACTION.TYPE.Melee": "Melee",
@@ -163,6 +164,7 @@
 	"MUTATION.Description": "Description",
 
 	"PARTY.FortunePool": "Fortune Pool",
+	"PARTY.FortuneToken": "Fortune Token",
 	"PARTY.RemoveMember": "Remove Member from Party",
 	"PARTY.SpecialAbility.Title": "Special Ability's Title",
 	"PARTY.TalentSockets": "Talent Sockets",
@@ -246,6 +248,7 @@
 
 	"TALENT.FreeSocket": "Free Socket",
 	"TALENT.NoSocket": "No Socket",
+	"TALENT.RechargeTokens": "Recharge Tokens",
 	"TALENT.TYPE.Focus": "Focus",
 	"TALENT.TYPE.Reputation": "Reputation",
 	"TALENT.TYPE.Tactic": "Tactic",

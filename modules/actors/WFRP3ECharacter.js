@@ -96,7 +96,7 @@ export default class WFRP3ECharacter extends Actor
 	/**
 	 * Adds a new Talent socket to the Party's list of Talent sockets.
 	 */
-	addTalentSocket()
+	addNewTalentSocket()
 	{
 		const talentSockets = this.system.talentSockets;
 
@@ -106,9 +106,9 @@ export default class WFRP3ECharacter extends Actor
 	}
 
 	/**
-	 * Deletes the last Talent socket from the Party's list of Talent sockets.
+	 * Removes the last Talent socket from the Party's list of Talent sockets.
 	 */
-	deleteTalentSocket()
+	removeLastTalentSocket()
 	{
 		const talentSockets = this.system.talentSockets;
 
