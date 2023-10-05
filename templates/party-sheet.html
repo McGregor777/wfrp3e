@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="party-sheet-tension-meter">
-		<a class="party-sheet-tension-meter-minus" title="{{localize 'PARTY.TensionMeter.Decrease'}}"><span class="fas fa-minus"></span></a>
+		<a class="party-sheet-tension-meter-minus" title="{{localize 'PARTY.TENSIONMETER.Decrease'}}"><span class="fas fa-minus"></span></a>
 
 		<div class="party-sheet-tension-meter-segment-container">
 			{{#for 0 (increment actor.system.tension.maximum 1) 1}}
@@ -16,7 +16,7 @@
 			{{/for}}
 		</div>
 
-		<a class="party-sheet-tension-meter-plus" title="{{localize 'PARTY.TensionMeter.Increase'}}"><span class="fas fa-plus"></span></a>
+		<a class="party-sheet-tension-meter-plus" title="{{localize 'PARTY.TENSIONMETER.Increase'}}"><span class="fas fa-plus"></span></a>
 	</header>
 
 	<div class="party-sheet-body">
@@ -27,12 +27,12 @@
 			</div>
 
 			<div class="party-sheet-tension">
-				<div class="party-sheet-tension-title">{{localize 'PARTY.TensionMeter.Title'}}</div>
+				<div class="party-sheet-tension-title">{{localize 'PARTY.TENSIONMETER.Title'}}</div>
 				{{#each actor.system.tension.events as |event ev|}}
 					<hr>
 					<div class="party-sheet-tension-event">
-						<input class="party-sheet-tension-event-threshold" name="system.tension.events.{{ev}}.threshold" type="number" value="{{event.threshold}}" min="0" max="{{actor.system.tension.maximum}}" title="{{localize 'PARTY.TensionEvent.Threshold'}}" />
-						<input class="party-sheet-tension-event-effects" name="system.tension.events.{{ev}}.effects" type="text" value="{{event.effects}}" placeholder="{{localize 'PARTY.TensionEvent.Effects'}}" title="{{localize 'PARTY.TensionEvent.Effects'}}" />
+						<input class="party-sheet-tension-event-threshold" name="system.tension.events.{{ev}}.threshold" type="number" value="{{event.threshold}}" min="0" max="{{actor.system.tension.maximum}}" title="{{localize 'PARTY.TENSIONEVENT.Threshold'}}" />
+						<input class="party-sheet-tension-event-effects" name="system.tension.events.{{ev}}.effects" type="text" value="{{event.effects}}" placeholder="{{localize 'PARTY.TENSIONEVENT.Effects'}}" title="{{localize 'PARTY.TENSIONEVENT.Effects'}}" />
 					</div>
 				{{/each}}
 			</div>

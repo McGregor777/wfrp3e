@@ -199,27 +199,27 @@
 		<section class="tab talents-tab" data-group="primary" data-tab="talents">
 			<div class="character-sheet-talent-tabs sheet-tabs" data-group="talents">
 				{{#if items.talents.focus}}
-					<a class="tab-link focus" data-tab="focus">{{localize 'TALENT.Focus'}}</a>
+					<a class="tab-link focus" data-tab="focus">{{localize 'TALENT.TYPE.Focus'}}</a>
 				{{/if}}
 
 				{{#if items.talents.reputation}}
-					<a class="tab-link reputation" data-tab="reputation">{{localize 'TALENT.Reputation'}}</a>
+					<a class="tab-link reputation" data-tab="reputation">{{localize 'TALENT.TYPE.Reputation'}}</a>
 				{{/if}}
 
 				{{#if items.talents.tactic}}
-					<a class="tab-link tactic" data-tab="tactic">{{localize 'TALENT.Tactic'}}</a>
+					<a class="tab-link tactic" data-tab="tactic">{{localize 'TALENT.TYPE.Tactic'}}</a>
 				{{/if}}
 
 				{{#if items.talents.faith}}
-					<a class="tab-link faith" data-tab="faith">{{localize 'TALENT.Faith'}}</a>
+					<a class="tab-link faith" data-tab="faith">{{localize 'TALENT.TYPE.Faith'}}</a>
 				{{/if}}
 
 				{{#if items.talents.order}}
-					<a class="tab-link order" data-tab="order">{{localize 'TALENT.Order'}}</a>
+					<a class="tab-link order" data-tab="order">{{localize 'TALENT.TYPE.Order'}}</a>
 				{{/if}}
 
 				{{#if items.talents.trick}}
-					<a class="tab-link trick" data-tab="trick">{{localize 'TALENT.Trick'}}</a>
+					<a class="tab-link trick" data-tab="trick">{{localize 'TALENT.TYPE.Trick'}}</a>
 				{{/if}}
 			</div>
 
@@ -277,23 +277,23 @@
 		<section class="tab actions-tab" data-group="primary" data-tab="actions">
 			<div class="character-sheet-action-tabs sheet-tabs" data-group="actions">
 				{{#if items.actions.melee}}
-					<a class="tab-link melee" data-tab="melee">{{localize 'ACTION.Melee'}}</a>
+					<a class="tab-link melee" data-tab="melee">{{localize 'ACTION.TYPE.Melee'}}</a>
 				{{/if}}
 
 				{{#if items.actions.ranged}}
-					<a class="tab-link ranged" data-tab="ranged">{{localize 'ACTION.Ranged'}}</a>
+					<a class="tab-link ranged" data-tab="ranged">{{localize 'ACTION.TYPE.Ranged'}}</a>
 				{{/if}}
 
 				{{#if items.actions.support}}
-					<a class="tab-link support" data-tab="support">{{localize 'ACTION.Support'}}</a>
+					<a class="tab-link support" data-tab="support">{{localize 'ACTION.TYPE.Support'}}</a>
 				{{/if}}
 
 				{{#if items.actions.blessing}}
-					<a class="tab-link blessing" data-tab="blessing">{{localize 'ACTION.Blessing'}}</a>
+					<a class="tab-link blessing" data-tab="blessing">{{localize 'ACTION.TYPE.Blessing'}}</a>
 				{{/if}}
 
 				{{#if items.actions.spell}}
-					<a class="tab-link spell" data-tab="spell">{{localize 'ACTION.Spell'}}</a>
+					<a class="tab-link spell" data-tab="spell">{{localize 'ACTION.TYPE.Spell'}}</a>
 				{{/if}}
 			</div>
 
@@ -346,12 +346,12 @@
 					<tr><th colspan="8"><span>{{localize 'CHARACTER.Weapons'}}</span></th></tr>
 					<tr>
 						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
-						<th class="shrinked"><span>{{localize 'WEAPON.DR'}}</span></th>
-						<th class="shrinked"><span>{{localize 'WEAPON.CR'}}</span></th>
+						<th class="shrinked"><span>{{localize 'WEAPON.ABBREVIATION.DamageRating'}}</span></th>
+						<th class="shrinked"><span>{{localize 'WEAPON.ABBREVIATION.CriticalRating'}}</span></th>
 						<th class="center-aligned"><span>{{localize 'WEAPON.Range'}}</span></th>
 						<th class="center-aligned"><span>{{localize 'WEAPON.Qualities'}}</span></th>
 						<th class="center-aligned"><span>{{localize 'WEAPON.Group'}}</span></th>
-						<th class="shrinked"><span>{{localize 'TRAPPING.Enc'}}</span></th>
+						<th class="shrinked"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
 						<th class="shrinked"></th>
 					</tr>
 				</thead>
@@ -369,7 +369,7 @@
 						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
 						<th class="center-aligned"><span>{{localize 'ARMOUR.Defence'}}</span></th>
 						<th class="center-aligned"><span>{{localize 'ARMOUR.Soak'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.Enc'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
 						<th class="shrinked"></th>
 					</tr>
 				</thead>
@@ -386,7 +386,7 @@
 					<tr>
 						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
 						<th class="left-aligned"><span>{{localize 'TRAPPING.Description'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.Enc'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
 						<th class="shrinked"></th>
 					</tr>
 				</thead>
@@ -403,7 +403,7 @@
 					<tr>
 						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
 						<th class="center-aligned"><span>{{localize 'TRAPPING.Value'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.Qu'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Quantity'}}</span></th>
 						<th class="shrinked"></th>
 					</tr>
 				</thead>

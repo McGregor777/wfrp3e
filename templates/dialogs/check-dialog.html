@@ -11,7 +11,7 @@
 				<td>
 					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/characteristic.webp" width="43" height="43" />
 					<input class="pool-value" type="button" name="characteristicDice" min="0" />
-					<label class="pool-text" for="characteristicDice">{{localize 'ROLL.CharacteristicDice'}}</label>
+					<label class="pool-text" for="characteristicDice">{{localize 'ROLL.DIE.CharacteristicDice'}}</label>
 				</td>
 			</tr>
 
@@ -19,7 +19,7 @@
 				<td>
 					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/fortune.webp" width="43" height="43" />
 					<input class="pool-value" type="button" name="fortuneDice" min="0" />
-					<label class="pool-text" for="fortuneDice">{{localize 'ROLL.FortuneDice'}}</label>
+					<label class="pool-text" for="fortuneDice">{{localize 'ROLL.DIE.FortuneDice'}}</label>
 				</td>
 			</tr>
 
@@ -27,7 +27,7 @@
 				<td>
 					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/expertise.webp" width="43" height="43" />
 					<input class="pool-value" type="button" name="expertiseDice" min="0" />
-					<label class="pool-text" for="expertiseDice">{{localize 'ROLL.ExpertiseDice'}}</label>
+					<label class="pool-text" for="expertiseDice">{{localize 'ROLL.DIE.ExpertiseDice'}}</label>
 				</td>
 			</tr>
 
@@ -35,7 +35,7 @@
 				<td>
 					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/conservative.webp" width="43" height="43" />
 					<input class="pool-value" type="button" name="conservativeDice" min="0" />
-					<label class="pool-text" for="conservativeDice">{{localize 'ROLL.ConservativeDice'}}</label>
+					<label class="pool-text" for="conservativeDice">{{localize 'ROLL.DIE.ConservativeDice'}}</label>
 				</td>
 			</tr>
 
@@ -43,7 +43,7 @@
 				<td>
 					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/reckless.webp" width="43" height="43" />
 					<input class="pool-value" type="button" name="recklessDice" min="0" />
-					<label class="pool-text" for="recklessDice">{{localize 'ROLL.RecklessDice'}}</label>
+					<label class="pool-text" for="recklessDice">{{localize 'ROLL.DIE.RecklessDice'}}</label>
 				</td>
 			</tr>
 
@@ -51,7 +51,7 @@
 				<td>
 					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/challenge.webp" width="43" height="43" />
 					<input class="pool-value" type="button" name="challengeDice" min="0" />
-					<label class="pool-text" for="challengeDice">{{localize 'ROLL.ChallengeDice'}}</label>
+					<label class="pool-text" for="challengeDice">{{localize 'ROLL.DIE.ChallengeDice'}}</label>
 				</td>
 			</tr>
 
@@ -59,7 +59,7 @@
 				<td>
 					<img class="pool-picture special-die" src="systems/wfrp3e/assets/icons/dice/misfortune.webp" width="43" height="43" />
 					<input class="pool-value" type="button" name="misfortuneDice" min="0" />
-					<label class="pool-text" for="misfortuneDice">{{localize 'ROLL.MisfortuneDice'}}</label>
+					<label class="pool-text" for="misfortuneDice">{{localize 'ROLL.DIE.MisfortuneDice'}}</label>
 				</td>
 			</tr>
 		</table>
@@ -78,7 +78,7 @@
 						<div class="pool-container">
 							{{{renderImages '[SU]'}}}
 							<input class="pool-value" type="button" name="successes" min="0" />
-							<label class="pool-text" for="successes">{{localize 'ROLL.Successes'}}</label>
+							<label class="pool-text" for="successes">{{localize 'ROLL.SYMBOL.Successes'}}</label>
 						</div>
 					</td>
 					
@@ -86,7 +86,7 @@
 						<div class="pool-container">
 							{{{renderImages '[CHAL]'}}}
 							<input class="pool-value" type="button" name="challenges" min="0" />
-							<label class="pool-text" for="challenges">{{localize 'ROLL.Challenges'}}</label>
+							<label class="pool-text" for="challenges">{{localize 'ROLL.SYMBOL.Challenges'}}</label>
 						</div>
 					</td>
 				</tr>
@@ -95,7 +95,7 @@
 						<div class="pool-container">
 							{{{renderImages '[BO]'}}}
 							<input class="pool-value" type="button" name="boons" min="0" />
-							<label class="pool-text" for="boons">{{localize 'ROLL.Boons'}}</label>
+							<label class="pool-text" for="boons">{{localize 'ROLL.SYMBOL.Boons'}}</label>
 						</div>
 					</td>
 					
@@ -103,7 +103,7 @@
 						<div class="pool-container">
 							{{{renderImages '[BA]'}}}
 							<input class="pool-value" type="button" name="banes" min="0" />
-							<label class="pool-text" for="banes">{{localize 'ROLL.Banes'}}</label>
+							<label class="pool-text" for="banes">{{localize 'ROLL.SYMBOL.Banes'}}</label>
 						</div>
 					</td>
 				</tr>
@@ -112,7 +112,7 @@
 						<div class="pool-container">
 							{{{renderImages '[D]'}}}
 							<input class="pool-value" type="button" name="delays" min="0" />
-							<label class="pool-text" for="delays">{{localize 'ROLL.Delays'}}</label>
+							<label class="pool-text" for="delays">{{localize 'ROLL.SYMBOL.Delays'}}</label>
 						</div>
 					</td>
 					
@@ -120,7 +120,7 @@
 						<div class="pool-container">
 							{{{renderImages '[EXE]'}}}
 							<input class="pool-value" type="button" name="exertions" min="0" />
-							<label class="pool-text" for="exertions">{{localize 'ROLL.Exertions'}}</label>
+							<label class="pool-text" for="exertions">{{localize 'ROLL.SYMBOL.Exertions'}}</label>
 						</div>
 					</td>
 				</tr>
@@ -129,7 +129,7 @@
 						<div class="pool-container">
 							{{{renderImages '[SI]'}}}
 							<input class="pool-value" type="button" name="sigmarsComets" min="0" />
-							<label class="pool-text" for="sigmarsComets">{{localize 'ROLL.SigmarsComets'}}</label>
+							<label class="pool-text" for="sigmarsComets">{{localize 'ROLL.SYMBOL.SigmarsComets'}}</label>
 						</div>
 					</td>
 					
@@ -137,7 +137,7 @@
 						<div class="pool-container">
 							{{{renderImages '[CHAO]'}}}
 							<input class="pool-value" type="button" name="chaosStars" min="0" />
-							<label class="pool-text" for="chaosStars">{{localize 'ROLL.ChaosStars'}}</label>
+							<label class="pool-text" for="chaosStars">{{localize 'ROLL.SYMBOL.ChaosStars'}}</label>
 						</div>
 					</td>
 				</tr>

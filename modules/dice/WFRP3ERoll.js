@@ -263,9 +263,10 @@ export default class WFRP3ERoll extends Roll
 			if(game.symbols.diceterms.includes(cls))
 				isSpecial = "isSpecial";
 
-			let countText = game.i18n.format("ROLL." + cls.name.replace("Die", "DiceAmount"), {nb: die.results.length});
+			let countText = game.i18n.format("ROLL.AMOUNT." + cls.name, {nb: die.results.length});
+			
 			if(die.results.length > die.number)
-				countText += " " + game.i18n.format("ROLL.ExplodedDiceAmount", {nb: die.results.length - die.number});
+				countText += " " + game.i18n.format("ROLL.AMOUNT.ExplodedDice", {nb: die.results.length - die.number});
 
 			return {
 				formula: die.formula,
