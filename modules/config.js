@@ -796,26 +796,40 @@ export const WFRP3E = {
 	},
 	weapon: {
 		groups: {
-			"blackpowder": "WEAPON.Blackpowder",
-			"bow": "WEAPON.Bow",
-			"cavalry": "WEAPON.Cavalry",
-			"crossbow": "WEAPON.Crossbow",
-			"fencing": "WEAPON.Fencing",
-			"flail": "WEAPON.Flail",
-			"great_weapon": "WEAPON.Great Weapon",
-			"ordinary": "WEAPON.Ordinary",
-			"polearm": "WEAPON.Polearm",
-			"sling": "WEAPON.Sling",
-			"spear": "WEAPON.Spear",
-			"staff": "WEAPON.Staff",
-			"thrown": "WEAPON.Thrown",
-			"unarmed": "WEAPON.Unarmed"
+			blackpowder: "WEAPON.GROUP.Blackpowder",
+			bow: "WEAPON.GROUP.Bow",
+			cavalry: "WEAPON.GROUP.Cavalry",
+			crossbow: "WEAPON.GROUP.Crossbow",
+			fencing: "WEAPON.GROUP.Fencing",
+			flail: "WEAPON.GROUP.Flail",
+			greatWeapon: "WEAPON.GROUP.Great Weapon",
+			ordinary: "WEAPON.GROUP.Ordinary",
+			polearm: "WEAPON.GROUP.Polearm",
+			sling: "WEAPON.GROUP.Sling",
+			spear: "WEAPON.GROUP.Spear",
+			staff: "WEAPON.GROUP.Staff",
+			thrown: "WEAPON.GROUP.Thrown",
+			unarmed: "WEAPON.GROUP.Unarmed"
+		},
+		qualities: {
+			attuned: "WEAPON.QUALITY.Attuned",
+			blast: "WEAPON.QUALITY.Blast",
+			defensive: "WEAPON.QUALITY.Defensive",
+			entangling: "WEAPON.QUALITY.Entangling",
+			fast: "WEAPON.QUALITY.Fast",
+			pierce: "WEAPON.QUALITY.Pierce",
+			reload: "WEAPON.QUALITY.Reload",
+			slow: "WEAPON.QUALITY.Slow",
+			thrown: "WEAPON.QUALITY.Thrown",
+			twohanded: "WEAPON.QUALITY.TwoHanded",
+			unreliable: "WEAPON.QUALITY.Unreliable",
+			vicious: "WEAPON.QUALITY.Vicious",
 		},
 		ranges: {
-			"close": "WEAPON.Close",
-			"medium": "WEAPON.Medium",
-			"long": "WEAPON.Long",
-			"extreme": "WEAPON.Extreme"
+			close: "WEAPON.RANGE.Close",
+			medium: "WEAPON.RANGE.Medium",
+			long: "WEAPON.RANGE.Long",
+			extreme: "WEAPON.RANGE.Extreme"
 		}
 	}
 };
