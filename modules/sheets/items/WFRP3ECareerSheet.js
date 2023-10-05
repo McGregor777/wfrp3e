@@ -6,8 +6,9 @@ export default class WFRP3ECareerSheet extends ItemSheet
 		{
 			template: "systems/wfrp3e/templates/career-sheet.html",
 			//width: 530,
-			//height: 340,
+			height: 820,
 			classes: ["wfrp3e", "sheet", "item", "career", "career-item-sheet"],
+			tabs: [{group: "primary", navSelector: ".career-sheet-tabs", contentSelector: ".career-sheet-body", initial: "header"}]
 		});
 	}
 
@@ -21,46 +22,34 @@ export default class WFRP3ECareerSheet extends ItemSheet
 		return data;
 	}
 
-	/*
-	 * Activate event listeners using the prepared sheet HTML
-	 *
-	 * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
-	 */
+	/** @inheritDoc */
 	activateListeners(html)
 	{
 		super.activateListeners(html);
 
-		html.find(".talent-socket-add").click(this._onTalentSocketAdd.bind(this));
-		html.find(".talent-socket-remove").click(this._onTalentSocketDelete.bind(this));
+		html.find(".talent-socket-add").click(this._onTalentSocketAddClick.bind(this));
+		html.find(".talent-socket-remove").click(this._onTalentSocketRemoveClick.bind(this));
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Talent socket add icon.
+	 * Performs follow-up operations after clicks on a Talent socket addition icon.
 	 * @param event {Event}
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onTalentSocketAdd(event)
+	async _onTalentSocketAddClick(event)
 	{
-		const talentSockets = this.item.system.talentSockets;
-
-		talentSockets.push("focus");
-
-		this.item.update({"system.talentSockets": talentSockets});
+		this.item.addNewTalentSocket();
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Talent socket delete icon.
+	 * Performs follow-up operations after clicks on a Talent socket removal icon.
 	 * @param event {Event}
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onTalentSocketDelete(event)
+	async _onTalentSocketRemoveClick(event)
 	{
-		const talentSockets = this.item.system.talentSockets;
-
-		talentSockets.pop();
-
-		this.item.update({"system.talentSockets": talentSockets});
+		this.item.removeLastTalentSocket();
 	}
 }

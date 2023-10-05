@@ -23,10 +23,13 @@
 
 	"CAREER.ActionAdvanceOptions": "Action Advance Options",
 	"CAREER.AdvancedCareer": "Advanced Career",
+	"CAREER.AdvanceOptions": "Advance Options",
+	"CAREER.CareerAptitudes": "Career Aptitudes",
 	"CAREER.CareerSkills": "Career Skills",
 	"CAREER.ConservativeAdvanceOptions": "Conservative Advance Options",
 	"CAREER.CurrentCareer": "Current Career",
 	"CAREER.FortuneAdvanceOptions": "Fortune Advance Options",
+	"CAREER.Header": "Header",
 	"CAREER.PrimaryCharacteristics": "Primary Characteristics",
 	"CAREER.RaceRestrictions": "Race Restrictions",
 	"CAREER.RecklessAdvanceOptions": "Reckless Advance Options",

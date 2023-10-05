@@ -32,14 +32,7 @@ export default class WFRP3EItem extends Item
 	 * Prepare Career's data.
 	 * @private
 	 */
-	_prepareCareer()
-	{
-		if(!(this.system.talentSockets instanceof Array))
-			this._convertTalentSocketsToArray();
-
-		if(!(this.system.primaryCharacteristics instanceof Array))
-			this._convertPrimaryCharacteristicsToArray();
-	}
+	_prepareCareer() {}
 
 	/**
 	 * Prepare CriticalWound's data.
@@ -72,29 +65,33 @@ export default class WFRP3EItem extends Item
 	_prepareWeapon() {}
 
 	/**
-	 * Converts the Item's talent sockets to Array.
-	 * @private
+	 * Adds a new Talent socket to the Career's list of Talent sockets.
 	 */
-	_convertTalentSocketsToArray()
+	addNewTalentSocket()
 	{
-		this.update({"system.talentSockets": Object.values(this.system.talentSockets)});
+		const talentSockets = this.system.talentSockets;
+
+		talentSockets.push("focus");
+
+		this.update({"system.talentSockets": talentSockets});
 	}
 
 	/**
-	 * Converts the Career's primary characteristics to Array.
-	 * @private
+	 * Removes the last Talent socket from the Career's list of Talent sockets.
 	 */
-	_convertPrimaryCharacteristicsToArray()
+	removeLastTalentSocket()
 	{
-		this.update({"system.primaryCharacteristics": Object.values(this.system.primaryCharacteristics)});
+		const talentSockets = this.system.talentSockets;
+
+		talentSockets.pop();
+
+		this.update({"system.talentSockets": talentSockets});
 	}
 
 	/** @inheritDoc */
 	_onUpdate(changed, options, userId)
 	{
 		super._onUpdate(changed, options, userId);
-
-		console.log(changed)
 
 		try {
 			const functionName = `_on${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}Update`;
