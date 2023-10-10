@@ -1,4 +1,4 @@
-export default class WFRP3EArmourSheet extends ItemSheet
+export default class WFRP3eArmourSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
@@ -15,7 +15,7 @@ export default class WFRP3EArmourSheet extends ItemSheet
 	{
 		const data = super.getData();
 
-		data.rarities = CONFIG.WFRP3E.rarities;
+		data.rarities = CONFIG.WFRP3e.rarities;
 
 		return data;
 	}

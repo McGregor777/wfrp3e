@@ -1,18 +1,15 @@
-.dice-additional-flavor
-{
+.dice-additional-flavor {
 	font-style: oblique;
-	font-size: 12px;
+	font-size: 10pt;
 }
 
-.dice-array
-{
+.dice-array {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 
-	& .dice-rolls
-	{
+	& .dice-rolls {
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -20,63 +17,58 @@
 
 		& .roll
 		{
-			width: 54px;
+			width: 3.5rem;
 			float: left;
 		}
 	}
 }
 
-.dice-pool-dialog
-{
-	& .convert-buttons
-	{
+.dice-pool-dialog {
+	& .convert-buttons {
 		display: flex;
 		margin-bottom: 1rem;
 
-		& button
-		{
-			font-size: 12px;	
-			line-height: 20px;
+		& button {
+			font-size: 10pt;
+			line-height: 1.5rem;
 			text-align: center;
 		}
 	}
 
-	& .dice-pool
-	{
-		margin-top: 8px;
-		min-height: 54px;
+	& .dice-pool {
+		margin-top: 0.5rem;
+		min-height: 3.5rem;
 		text-align: center;
 	}
 
-	& .dice-pool-table
-	{
-		padding: 5px 1px;
+	& .dice-pool-table {
+		padding: 0.25rem 1px;
 
-		& .pool-container > td > *
-		{
-			display: inline-block;
-			vertical-align: middle;
+		& .pool-container {
+			align-items: baseline;
+			display: flex;
+
+			& > span {
+				flex-basis: 1.5rem;
+			}
 		}
 
-		& .pool-value
-		{
+		& .pool-value {
 			background-color: #ddd;
 			border: 1px solid black;
 			font: 20pt "ArnoPro";
-			padding-top: 8px;
+			padding-top: 0.5rem;
 			text-align: center;
 			width: 3.5rem;
 		}
 	}
 
-	& .dice-pool-hint
-	{
-		margin: 10px 1px 5px 1px;
+	& .dice-pool-hint {
+		margin: 0.5rem 1px 0.25rem 1px;
 	}
 
-	& .dice-pool-roll-options
-	{
-		margin-top: 10px;
+	& .dice-pool-roll-options {
+		margin-top: 0.5rem;
 
 		& select, input
 		{
@@ -85,162 +77,145 @@
 		}
 	}
 
-	& .hide
-	{
+	& .hide {
 		display: none;
 	}
 
-	& .maximize
-	{
+	& .maximize {
 		width: 100%;
 	}
 
-	& .minimize
-	{
+	& .minimize {
 		max-width: 20%;
 	}
 
-	& .pool-text
-	{
+	& .pool-text {
 		text-align: left;
 		margin-left: 0.5rem;
 	}
 
-	& .roll-button
-	{
-		margin-top: 15px;
+	& .roll-button {
+		margin-top: 1rem;
 	}
 
-	& .symbols-pool
-	{
-		margin-top: 10px;
-		min-height: 54px;
+	& .symbols-pool {
+		margin-top: 0.5rem;
+		min-height: 3.5rem;
 		text-align: center;
 	}
 
-	& .symbols-pool-container
-	{
+	& .symbols-pool-container {
 		padding: 0 1px;
 		min-width: 320px;
 
-		& .pool-value
-		{
+		& .pool-value {
 			background-color: #ddd;
 			border: 1px solid black;
 			font: 16pt "ArnoPro";
-			padding-top: 8px;
+			padding-top: 0.5rem;
 			text-align: center;
 			width: 3rem;
 		}
 
-		& .wfrp3e.picture
-		{
+		& .wfrp3e.picture {
 			display: inline-block;
-			width: 20px;
+			width: 1.25rem;
 		}
 	}
 }
 
-.dice-result
-{
-	& .roll-success
-	{
+.dice-result {
+	& .roll-success {
 		color: darkgreen;
 	}
-	& .roll-failure
-	{
+
+	& .roll-failure {
 		color: darkred;
 	}
 }
 
-.dice-tooltip
-{
-	& .dice-rolls
-	{
-		& .roll
-		{
-			& > .special-die
-			{
+.dice-tooltip {
+	& .dice-rolls {
+		& .roll {
+			& > .special-die {
 				width: 44px;
 			}
 		}
 	}
 }
 
-.item-display
-{
+.item-display {
 	margin: 0.5rem 0 0.8rem 0;
 	padding: 0.5rem;
 	border: 1px solid #782e22;
 	background: rgba(255, 255, 255, 0.75);
 
-	& img
-	{
+	& img {
 		height: 50px;
 		width: auto;
 	}
 
-	& h4
-	{
+	& h4 {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-around;
 
-		& input
-		{
+		& input {
 			width: 70%;
 		}
 	}
 
-	& .item-miss
-	{
+	& .item-miss {
 		text-align: center;
 		font-style: italic;
 		color: darkred;
 	}
 
-	& .item-pill
-	{
+	& .item-pill {
 		list-style-type: none;
-		padding: 0 5px;
+		padding: 0 0.25rem;
 		background-color: #aaa;
 		border: 1px solid black;
-		border-radius: 12px;
+		border-radius: 0.75rem;
 		display: inline-block;
 		margin: 1px;
 		cursor: pointer;
-		font-size: 12px;
-		line-height: 20px;
+		font-size: 10pt;
+		line-height: 1.5rem;
 		white-space: nowrap;
 
-		&.adjusted
-		{
+		&.adjusted {
 			color: #8b0000;
 		}
 
-		& .rank
-		{
+		& .rank {
 			padding-right: 15px;
-			&:hover
-			{
+
+			&:hover {
 				color: green;
 			}
 		}
 
-		& .item-delete
-		{
+		& .item-delete {
 			cursor: pointer;
 
-			&:hover
-			{
+			&:hover {
 				color: red;
 			}
 		}
 	}
 }
 
-.special-die
-{
+.roll-dialog .symbols-pool-container .pool-container {
+	align-items: baseline;
+	display: flex;
+
+	& > span {
+		flex-basis: 1rem;
+	}
+}
+
+.special-die {
 	border: none;
 }

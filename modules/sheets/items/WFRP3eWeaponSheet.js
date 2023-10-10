@@ -1,4 +1,4 @@
-export default class WFRP3EWeaponSheet extends ItemSheet
+export default class WFRP3eWeaponSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
@@ -15,9 +15,9 @@ export default class WFRP3EWeaponSheet extends ItemSheet
 	{
 		const data = super.getData();
 
-		data.rarities = CONFIG.WFRP3E.rarities;
-		data.groups = CONFIG.WFRP3E.weapon.groups;
-		data.ranges = CONFIG.WFRP3E.weapon.ranges;
+		data.rarities = CONFIG.WFRP3e.rarities;
+		data.groups = CONFIG.WFRP3e.weapon.groups;
+		data.ranges = CONFIG.WFRP3e.weapon.ranges;
 
 		return data;
 	}

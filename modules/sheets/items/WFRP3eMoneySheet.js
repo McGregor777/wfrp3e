@@ -1,4 +1,4 @@
-export default class WFRP3EMoneySheet extends ItemSheet
+export default class WFRP3eMoneySheet extends ItemSheet
 {
 	static get defaultOptions()
 	{

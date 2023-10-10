@@ -1,4 +1,4 @@
-export default class WFRP3EItem extends Item
+export default class WFRP3eItem extends Item
 {
 	/** @inheritDoc */
 	prepareData()

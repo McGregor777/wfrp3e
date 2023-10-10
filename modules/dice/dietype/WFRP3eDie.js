@@ -1,9 +1,7 @@
-/**
- * WFRP3E Base Die
- */
-export default class WFRP3EDie extends Die
+/** @inheritDoc */
+export default class WFRP3eDie extends Die
 {
-	/** @override */
+	/** @inheritDoc */
 	constructor(termData)
 	{
 		super(termData);
@@ -12,7 +10,7 @@ export default class WFRP3EDie extends Die
 	/**
 	 * A string representation of the formula expression for this RollTerm, prior to evaluation.
 	 * @type {string}
-	 * @override
+	 * @inheritDoc
 	 */
 	get expression()
 	{
@@ -22,7 +20,7 @@ export default class WFRP3EDie extends Die
 	/**
 	 * Return a standardized representation for the displayed formula associated with this DiceTerm
 	 * @return {string}
-	 * @override
+	 * @inheritDoc
 	 */
 	get formula()
 	{
@@ -34,8 +32,8 @@ export default class WFRP3EDie extends Die
 	 * @param  {boolean} minimize Minimize the result, obtaining the smallest possible value.
 	 * @param  {boolean} maximize Maximize the result, obtaining the largest possible value.
 	 * @param  {boolean} async Evaluate the term asynchronously, receiving a Promise as the returned value. This will become the default behavior in version 10.x
-	 * @return {WFRP3EDie} The evaluated RollTerm
-	 * @override
+	 * @return {WFRP3eDie} The evaluated RollTerm
+	 * @inheritDoc
 	 */
 	evaluate({minimize = false, maximize = false, async = true} = {})
 	{

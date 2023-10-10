@@ -1,4 +1,4 @@
-export default class WFRP3ECriticalWoundSheet extends ItemSheet
+export default class WFRP3eCriticalWoundSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{

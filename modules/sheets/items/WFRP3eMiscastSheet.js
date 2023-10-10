@@ -1,4 +1,4 @@
-export default class WFRP3EMiscastSheet extends ItemSheet
+export default class WFRP3eMiscastSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{

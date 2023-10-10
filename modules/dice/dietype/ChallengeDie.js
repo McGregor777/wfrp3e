@@ -1,27 +1,27 @@
-import WFRP3EDie from "./WFRP3EDie.js";
+import WFRP3eDie from "./WFRP3eDie.js";
 
-export default class ChallengeDie extends WFRP3EDie
+export default class ChallengeDie extends WFRP3eDie
 {
-	/** @override */
+	/** @inheritDoc */
 	constructor(termData)
 	{
 		termData.faces = 8;
 		super(termData);
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	static DENOMINATION = "h";
 
 	/**
 	 * Roll the DiceTerm by mapping a random uniform draw against the faces of the dice term
 	 * @param {Object} options
 	 * @return {DiceTermResult}
-	 * @override
+	 * @inheritDoc
 	 */
 	roll(options)
 	{
 		const roll = super.roll(options);
-		roll.symbols = CONFIG.WFRP3E.dice.results.challenge[roll.result];
+		roll.symbols = CONFIG.WFRP3e.dice.results.challenge[roll.result];
 		return roll;
 	}
 
@@ -32,7 +32,7 @@ export default class ChallengeDie extends WFRP3EDie
 	 */
 	getResultLabel(result)
 	{
-		const die = CONFIG.WFRP3E.dice.results.challenge[result.result];
+		const die = CONFIG.WFRP3e.dice.results.challenge[result.result];
 		return `<img class="special-die" src="${die.image}" title="${game.i18n.localize(die.label)}" alt=""/>`;
 	}
 }

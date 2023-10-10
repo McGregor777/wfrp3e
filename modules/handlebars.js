@@ -1,54 +1,39 @@
-import PopoutEditor from "./PopoutEditor.js";
-
 export default function()
 {
-    Hooks.on("init", () =>
-	{
-		Handlebars.registerHelper("superiorTo", function(value, compareValue)
-		{
+    Hooks.on("init", () => {
+		Handlebars.registerHelper("superiorTo", (value, compareValue) => {
 			return value > compareValue;
 		});
 
-		Handlebars.registerHelper("inferiorTo", function(value, compareValue)
-		{
+		Handlebars.registerHelper("inferiorTo", (value, compareValue) => {
 			return value < compareValue;
 		});
 
-		Handlebars.registerHelper("equalTo", function(value, compareValue)
-		{
+		Handlebars.registerHelper("equalTo", (value, compareValue) => {
 			return value == compareValue;
 		});
 
-        Handlebars.registerHelper("superiorOrEqualTo", function(value, compareValue)
-		{
+        Handlebars.registerHelper("superiorOrEqualTo", (value, compareValue) => {
 			return value >= compareValue;
 		});
 
-		Handlebars.registerHelper("inferiorOrEqualTo", function(value, compareValue)
-		{
+		Handlebars.registerHelper("inferiorOrEqualTo", (value, compareValue) => {
 			return value <= compareValue;
 		});
 
-		Handlebars.registerHelper("increment", function(value, valueToAdd)
-		{
+		Handlebars.registerHelper("increment", (value, valueToAdd) => {
 			return value + parseInt(valueToAdd);
 		});
 
-		Handlebars.registerHelper("multiply", function(value, multiplier)
-		{
+		Handlebars.registerHelper("multiply", (value, multiplier) => {
 			return value * multiplier;
 		});
 
-		Handlebars.registerHelper("replace", function(value, match, replacement)
-		{
-			if(value.includes(match))
-				return value.replace(match, replacement);
-			else
-				throw new Error("Unable to find match in the value.");
+		Handlebars.registerHelper("concat", (value, otherValue) => {
+			return value.toString() + otherValue.toString();
 		});
 
-		Handlebars.registerHelper("for", function(startingNumber, goalNumber, increment, block)
-		{
+		Handlebars.registerHelper("for", (startingNumber, goalNumber, increment, block) => {
 			let accum = "";
 
 			if(startingNumber <= goalNumber) {
@@ -69,10 +54,24 @@ export default function()
 			return accum;
 		});
 
-		Handlebars.registerHelper("abbreviateCharacteristic", function(value)
-		{
-			switch(value)
-			{
+		Handlebars.registerHelper("replace", (string, match, replacement) => {
+			if(string.includes(match))
+				return string.replace(match, replacement);
+			else
+				throw new Error("Unable to find match in the string.");
+		});
+
+		Handlebars.registerHelper("striptags", (value, tag) => {
+			const matches = [...value.matchAll(new RegExp("(<" + tag + "*.>).*(</" + tag + ">)", "g"))];
+
+			for(let i = 1; i < matches[0]?.length; i++)
+				value = value.replace(matches[0][i], "");
+
+			return value;
+		});
+
+		Handlebars.registerHelper("abbreviateCharacteristic", (value) => {
+			switch(value) {
 				case "strength":
 					return "CHARACTERISTIC.ABBREVIATION.Strength";
 				case "toughness":
@@ -87,10 +86,5 @@ export default function()
 					return "CHARACTERISTIC.ABBREVIATION.Fellowship";
 			}
 		});
-
-		Handlebars.registerHelper("renderImages", function(text)
-		{
-			return PopoutEditor.renderImages(text);
-		});
-	})
+	});
 }

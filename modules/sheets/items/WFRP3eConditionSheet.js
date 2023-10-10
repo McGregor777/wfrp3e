@@ -1,4 +1,4 @@
-export default class WFRP3EConditionSheet extends ItemSheet
+export default class WFRP3eConditionSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
@@ -15,7 +15,7 @@ export default class WFRP3EConditionSheet extends ItemSheet
 	{
 		const data = super.getData();
 
-		data.conditionDurations = CONFIG.WFRP3E.conditionDurations;
+		data.conditionDurations = CONFIG.WFRP3e.conditionDurations;
 
 		return data;
 	}

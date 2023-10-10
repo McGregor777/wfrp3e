@@ -1,4 +1,4 @@
-export default class WFRP3EGroupSheet extends ActorSheet
+export default class WFRP3eGroupSheet extends ActorSheet
 {
 	static get defaultOptions()
 	{

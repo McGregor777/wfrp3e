@@ -1,4 +1,4 @@
-export default class WFRP3EInsanitySheet extends ItemSheet
+export default class WFRP3eInsanitySheet extends ItemSheet
 {
 	static get defaultOptions()
 	{

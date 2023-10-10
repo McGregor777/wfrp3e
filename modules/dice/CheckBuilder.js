@@ -1,4 +1,4 @@
-import WFRP3ERoll from "./WFRP3ERoll.js";
+import WFRP3eRoll from "./WFRP3eRoll.js";
 
 export default class CheckBuilder extends FormApplication
 {
@@ -6,55 +6,49 @@ export default class CheckBuilder extends FormApplication
 	 * CheckBuilder constructor.
 	 * @param rollData
 	 * @param {DicePool} dicePool
-	 * @param {string} [dialogTitle]
-	 * @param {string} [name]
-	 * @param {string} [flavor]
+	 * @param {string} [rollName]
+	 * @param {string} [rollFlavor]
 	 * @param {string} [rollSound]
 	 */
-	constructor(rollData, dicePool, dialogTitle = game.i18n.localize("ROLL.FreeCheck"), name, flavor, rollSound)
+	constructor(rollData, dicePool, rollName = game.i18n.localize("ROLL.FreeCheck"), rollFlavor, rollSound)
 	{
 		super();
 
-		this.roll =
-		{
+		this.roll = {
 			data: rollData,
-			name: name,
+			name: rollName,
 			sound: rollSound,
-			flavor: flavor,
+			flavor: rollFlavor,
 		};
 
 		this.dicePool = dicePool;
-		this.dialogTitle = dialogTitle;
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	get title()
 	{
-		return this.dialogTitle;
+		return game.i18n.format("ROLL.DicePool");
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return mergeObject(super.defaultOptions, {
 			classes: ["wfrp3e", "roll-dialog"],
 			template: "systems/wfrp3e/templates/dialogs/check-dialog.html",
-			width: 400
+			width: 420
 		});
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	async getData()
 	{
 		// Get all possible sounds
 		let sounds = [];
 		let users = [{name: "Send To All", id: "all"}];
 
-		if(game.user.isGM)
-		{
-			game.users.contents.forEach((user) =>
-			{
+		if(game.user.isGM) {
+			game.users.contents.forEach((user) => {
 				if(user.visible && user.id !== game.user.id)
 					users.push({name: user.name, id: user.id});
 			});
@@ -68,7 +62,7 @@ export default class CheckBuilder extends FormApplication
 		};
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	activateListeners(html)
 	{
 		super.activateListeners(html);
@@ -76,29 +70,23 @@ export default class CheckBuilder extends FormApplication
 		this._initializeInputs(html);
 		this._activateInputs(html);
 
-		html.find(".btn").click((event) =>
-		{
+		html.find(".btn").click((event) => {
 			// if sound was not passed search for sound dropdown value
-			if(!this.roll.sound)
-			{
+			if(!this.roll.sound) {
 				const sound = html.find(".sound-selection")?.[0]?.value;
 
-				if(sound)
-				{
+				if(sound) {
 					this.roll.sound = sound;
 
-					if(this?.roll?.item)
-					{
+					if(this?.roll?.item) {
 						let entity;
 						let entityData;
 
-						if(!this?.roll?.item?.flags?.uuid)
-						{
+						if(!this?.roll?.item?.flags?.uuid) {
 							entity = CONFIG["Actor"].documentClass.collection.get(this.roll.data.actor.id);
 							entityData = {_id: this.roll.item.id};
 						}
-						else
-						{
+						else {
 							const parts = this.roll.item.flags.uuid.split(".");
 							const [entityName, entityId, embeddedName, embeddedId] = parts;
 							entity = CONFIG[entityName].documentClass.collection.get(entityId);
@@ -113,8 +101,7 @@ export default class CheckBuilder extends FormApplication
 				}
 			}
 
-			if(!this.roll.flavor)
-			{
+			if(!this.roll.flavor) {
 				const flavor = html.find(".flavor-text")?.[0]?.value;
 
 				if(flavor)
@@ -123,26 +110,21 @@ export default class CheckBuilder extends FormApplication
 
 			const sentToPlayer = html.find(".user-selection")?.[0]?.value;
 
-			if(sentToPlayer)
-			{
+			if(sentToPlayer) {
 				let container = $(`<div class="dice-pool"></div>`)[0];
 				this.dicePool.renderAdvancedPreview(container);
 
-				const messageText =
-				`<div>
-					<div>${game.i18n.localize("WFRP3E.SentDicePoolRollHint")}</div>
+				const messageText = `<div>
+					<div>${game.i18n.localize("WFRP3e.SentDicePoolRollHint")}</div>
 					${$(container).html()}
-					<button class="special-pool-to-player">${game.i18n.localize("WFRP3E.SentDicePoolRoll")}</button>
+					<button class="special-pool-to-player">${game.i18n.localize("WFRP3e.SentDicePoolRoll")}</button>
 				</div>`;
 
-				let chatOptions =
-				{
+				let chatOptions = {
 					user: game.user.id,
 					content: messageText,
-					flags:
-					{
-						specialDice:
-						{
+					flags: {
+						specialDice: {
 							roll: this.roll,
 							dicePool: this.dicePool,
 							description: this.description,
@@ -155,9 +137,8 @@ export default class CheckBuilder extends FormApplication
 
 				ChatMessage.create(chatOptions);
 			}
-			else
-			{
-				const roll = new WFRP3ERoll(this.dicePool.renderDiceExpression(), this.dicePool, {flavor: this.roll.flavor});
+			else {
+				const roll = new WFRP3eRoll(this.dicePool.renderDiceExpression(), this.dicePool, {flavor: this.roll.flavor});
 
 				roll.toMessage({
 					user: game.user.id,
@@ -172,8 +153,7 @@ export default class CheckBuilder extends FormApplication
 			}
 		});
 
-		html.find(".extend-button").on("click", (event) =>
-		{
+		html.find(".extend-button").on("click", (event) => {
 			event.preventDefault();
 			event.stopPropagation();
 
@@ -199,14 +179,12 @@ export default class CheckBuilder extends FormApplication
 
 	_initializeInputs(html)
 	{
-		html.find(".dice-pool-table input").each((key, value) =>
-		{
+		html.find(".dice-pool-table input").each((key, value) => {
 			const name = $(value).attr("name");
 			value.value = this.dicePool[name];
 		});
 
-		html.find(".symbols-pool-container input").each((key, value) =>
-		{
+		html.find(".symbols-pool-container input").each((key, value) => {
 			const name = $(value).attr("name");
 			value.value = this.dicePool[name];
 			$(value).attr("allowNegative", true);
@@ -219,16 +197,14 @@ export default class CheckBuilder extends FormApplication
 	{
 		const poolContainers = html.find(".pool-container");
 		const convertButtons = html.find(".convert-buttons button");
-		
+
 		poolContainers
-			.on("click", (event) =>
-			{
+			.on("click", (event) => {
 				let input;
 
 				if($(event.currentTarget).hasClass(".pool-container"))
 					input = $(event.currentTarget).find(".pool-value input")[0];
-				else
-				{
+				else {
 					input = $(event.currentTarget).find("input")[0];
 
 					if(!input)
@@ -240,14 +216,12 @@ export default class CheckBuilder extends FormApplication
 				this.dicePool[input.name] = parseInt(input.value);
 				this._updatePreview(html);
 			})
-			.on("contextmenu", (event) =>
-			{
+			.on("contextmenu", (event) => {
 				let input;
 
 				if($(event.currentTarget).hasClass(".pool-container"))
 					input = $(event.currentTarget).find(".pool-value input")[0];
-				else
-				{
+				else {
 					input = $(event.currentTarget).find("input")[0];
 
 					if(!input)
@@ -256,8 +230,7 @@ export default class CheckBuilder extends FormApplication
 
 				const allowNegative = $(input).attr("allowNegative");
 
-				if(input.value > 0 || allowNegative)
-				{
+				if(input.value > 0 || allowNegative) {
 					input.value--;
 					this.dicePool[input.name] = parseInt(input.value);
 					this._updatePreview(html);
@@ -265,22 +238,18 @@ export default class CheckBuilder extends FormApplication
 			});
 
 		convertButtons
-			.on("click", (event) =>
-			{
+			.on("click", (event) => {
 				event.preventDefault();
 				event.stopPropagation();
 
 				const id = $(event.currentTarget).attr("id");
 
-				switch(id.toLowerCase())
-				{
-					case "convert-conservative":
-					{
+				switch(id.toLowerCase()) {
+					case "convert-conservative": {
 						this.dicePool.convertCharacteristicDie("conservative");
 						break;
 					}
-					case "convert-reckless":
-					{
+					case "convert-reckless": {
 						this.dicePool.convertCharacteristicDie("reckless");
 						break;
 					}
@@ -288,22 +257,18 @@ export default class CheckBuilder extends FormApplication
 
 				this._initializeInputs(html);
 			})
-			.on("contextmenu", (event) =>
-			{
+			.on("contextmenu", (event) => {
 				event.preventDefault();
 				event.stopPropagation();
 
 				const id = $(event.currentTarget).attr("id");
 
-				switch(id.toLowerCase())
-				{
-					case "convert-conservative":
-					{
+				switch(id.toLowerCase()) {
+					case "convert-conservative": {
 						this.dicePool.convertCharacteristicDie("conservative", -1);
 						break;
 					}
-					case "convert-reckless":
-					{
+					case "convert-reckless": {
 						this.dicePool.convertCharacteristicDie("reckless", -1);
 						break;
 					}

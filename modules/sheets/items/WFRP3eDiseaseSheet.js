@@ -1,4 +1,4 @@
-export default class WFRP3EDiseaseSheet extends ItemSheet
+export default class WFRP3eDiseaseSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
@@ -15,7 +15,7 @@ export default class WFRP3EDiseaseSheet extends ItemSheet
 	{
 		const data = super.getData();
 
-		data.diseaseSymptomsKeywords = CONFIG.WFRP3E.disease.symptoms.keywords;
+		data.diseaseSymptomsKeywords = CONFIG.WFRP3e.disease.symptoms.keywords;
 
 		return data;
 	}

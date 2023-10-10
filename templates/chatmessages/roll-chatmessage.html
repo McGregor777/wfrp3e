@@ -50,17 +50,19 @@
 					{{#each symbols as |result key|}}
 						{{#if this}}
 							{{#unless (equalTo key "righteousSuccesses")}}
-								{{#if (equalTo key "successes")}}
-									<li>
-										{{localize (replace (lookup ../this.diceSymbols [key]) "ROLL." "ROLL.AMOUNT.") nb=result }}
+								<li class="roll-symbols">
+									{{#for 0 result 1}}
+										<span class="wfrp3e-font symbol {{lookup (lookup @root.data.symbols key) 'cssClass'}}"></span>
+									{{/for}}
 
-										{{#if (superiorTo (lookup ../symbols "righteousSuccesses") 0)}}
-											{{localize (replace (lookup ../this.diceSymbols "righteousSuccesses") "ROLL." "ROLL.AMOUNT.")  nb=(lookup ../symbols "righteousSuccesses") }}
-										{{/if}}
-									</li>
-								{{else}}
-									<li>{{localize (replace (lookup ../this.diceSymbols [key]) "ROLL." "ROLL.AMOUNT.") nb=result }}</li>
-								{{/if}}
+									{{localize (lookup (lookup @root.data.symbols key) "result") nb=result }}
+
+									{{#if (equalTo key "successes")}}
+									{{#if (superiorTo @root.symbols.righteousSuccesses 0)}}
+										{{localize @root.data.symbols.righteousSuccesses.result nb=@root.symbols.righteousSuccesses}}
+									{{/if}}
+									{{/if}}
+								</li>
 							{{/unless}}
 						{{/if}}
 					{{/each}}

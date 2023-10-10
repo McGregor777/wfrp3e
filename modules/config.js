@@ -1,4 +1,4 @@
-export const WFRP3E = {
+export const WFRP3e = {
 	actionTypes: {
 		melee: "ACTION.TYPE.Melee",
 		ranged: "ACTION.TYPE.Ranged",
@@ -31,15 +31,51 @@ export const WFRP3E = {
 			reckless: "systems/wfrp3e/assets/icons/dice/reckless.webp"
 		},
 		symbols: {
-			banes: "ROLL.SYMBOL.Banes",
-			boons: "ROLL.SYMBOL.Boons",
-			challenges: "ROLL.SYMBOL.Challenges",
-			chaosStars: "ROLL.SYMBOL.ChaosStars",
-			delays: "ROLL.SYMBOL.Delays",
-			exertions: "ROLL.SYMBOL.Exertions",
-			righteousSuccesses: "ROLL.SYMBOL.RighteousSuccesses",
-			successes: "ROLL.SYMBOL.Successes",
-			sigmarsComets: "ROLL.SYMBOL.SigmarsComets"
+			successes: {
+				name: "ROLL.SYMBOL.Successes",
+				result: "ROLL.AMOUNT.Successes",
+				cssClass: "success",
+			},
+			righteousSuccesses: {
+				name: "ROLL.SYMBOL.RighteousSuccesses",
+				result: "ROLL.AMOUNT.RighteousSuccesses",
+				cssClass: "righteous-success"
+			},
+			boons: {
+				name: "ROLL.SYMBOL.Boons",
+				result: "ROLL.AMOUNT.Boons",
+				cssClass: "boon"
+			},
+			sigmarsComets: {
+				name: "ROLL.SYMBOL.SigmarsComets",
+				result: "ROLL.AMOUNT.SigmarsComets",
+				cssClass: "sigmars-comet"
+			},
+			challenges: {
+				name: "ROLL.SYMBOL.Challenges",
+				result: "ROLL.AMOUNT.Challenges",
+				cssClass: "challenge"
+			},
+			banes: {
+				name: "ROLL.SYMBOL.Banes",
+				result: "ROLL.AMOUNT.Banes",
+				cssClass: "bane"
+			},
+			chaosStars: {
+				name: "ROLL.SYMBOL.ChaosStars",
+				result: "ROLL.AMOUNT.ChaosStars",
+				cssClass: "chaos-star"
+			},
+			delays: {
+				name: "ROLL.SYMBOL.Delays",
+				result: "ROLL.AMOUNT.Delays",
+				cssClass: "delay"
+			},
+			exertions: {
+				name: "ROLL.SYMBOL.Exertions",
+				result: "ROLL.AMOUNT.Exertions",
+				cssClass: "exertion"
+			}
 		},
 		results: {
 			challenge: {

@@ -1,4 +1,4 @@
-export default class WFRP3EAbilitySheet extends ItemSheet
+export default class WFRP3eAbilitySheet extends ItemSheet
 {
 	static get defaultOptions()
 	{

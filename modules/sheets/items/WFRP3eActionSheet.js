@@ -1,4 +1,4 @@
-export default class WFRP3EActionSheet extends ItemSheet
+export default class WFRP3eActionSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
@@ -16,7 +16,9 @@ export default class WFRP3EActionSheet extends ItemSheet
 	{
 		const data = super.getData();
 
-		data.actionTypes = CONFIG.WFRP3E.actionTypes;
+		data.actionTypes = CONFIG.WFRP3e.actionTypes;
+		data.effectSymbols = CONFIG.WFRP3e.effectSymbols;
+		data.stances = CONFIG.WFRP3e.stances;
 
 		return data;
 	}

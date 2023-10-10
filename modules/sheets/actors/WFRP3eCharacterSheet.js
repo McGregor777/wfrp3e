@@ -2,10 +2,10 @@ import DiceHelper from "../../dice/DiceHelper.js";
 
 /**
  * Provides the data and general interaction with Actor Sheets - Abstract class.
- * WFRP3CharacterSheet provides the general interaction and data organization shared among all actor sheets, as this is an abstract class, inherited by either Character or NPC specific actor sheet classes. When rendering an actor sheet, getData() is called, which is a large and key that prepares the actor data for display, processing the raw data and items and compiling them into data to display on the sheet. Additionally, this class contains all the main events that respond to sheet interaction in activateListeners()
- * @see WFRP3CharacterSheet - Data and main computation model (this.actor)
+ * WFRP3CharacterSheet provides the general interaction and data organization shared among all actors sheets, as this is an abstract class, inherited by either Character or NPC specific actors sheet classes. When rendering an actors sheet, getData() is called, which is a large and key that prepares the actors data for display, processing the raw data and items and compiling them into data to display on the sheet. Additionally, this class contains all the main events that respond to sheet interaction in activateListeners()
+ * @see WFRP3CharacterSheet - Data and main computation model (this.actors)
  */
-export default class WFRP3ECharacterSheet extends ActorSheet
+export default class WFRP3eCharacterSheet extends ActorSheet
 {
 	/** @inheritDoc */
 	static get defaultOptions()
@@ -33,13 +33,13 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 
 		this.options.tabs[1].initial = this.actor.currentCareer?._id;
 
+		data.conditionDurations = CONFIG.WFRP3e.conditionDurations;
+		data.characteristics = CONFIG.WFRP3e.characteristics;
 		data.items = this._buildItemLists(data);
-		data.items["diseases"].forEach((disease) => disease.symptomDescription = game.i18n.localize(CONFIG.WFRP3E.disease.symptoms.descriptions[disease.system.symptom]));
+		data.items["diseases"].forEach((disease) => disease.symptomDescription = game.i18n.localize(CONFIG.WFRP3e.disease.symptoms.descriptions[disease.system.symptom]));
 		data.talentSocketsByType = this._buildTalentSocketsList();
-		data.characteristics = CONFIG.WFRP3E.characteristics;
-		data.conditionDurations = CONFIG.WFRP3E.conditionDurations;
-		data.weaponGroups = CONFIG.WFRP3E.weapon.groups;
-		data.weaponRanges = CONFIG.WFRP3E.weapon.ranges;
+		data.weaponGroups = CONFIG.WFRP3e.weapon.groups;
+		data.weaponRanges = CONFIG.WFRP3e.weapon.ranges;
 
 		// Add basic skills to the Character.
 		if(actor.type === "character" && data.items.skills.length === 0) {
@@ -149,7 +149,7 @@ export default class WFRP3ECharacterSheet extends ActorSheet
 	{
 		let talentSocketsByType = {};
 
-		for(const talentType of Object.keys(CONFIG.WFRP3E.talentTypes)) {
+		for(const talentType of Object.keys(CONFIG.WFRP3e.talentTypes)) {
 			talentSocketsByType[talentType] = {};
 		}
 

@@ -1,11 +1,9 @@
 /**
- * Provides the main Actor data computation and organization.
- *
- * WFRP3Character contains all the preparation data and methods used for preparing an actor: going through each Owned Item, preparing them for display based on characteristics.
- *
- * @see   WFRP3CharacterSheet - Character sheet class
+ * Provides the main Actor data computation and organization.=
+ * WFRP3eActor contains all the preparation data and methods used for preparing an actors: going through each Owned Item, preparing them for display based on characteristics.
+ * @see WFRP3eCharacterSheet - Character sheet class
  */
-export default class WFRP3ECharacter extends Actor
+export default class WFRP3eActor extends Actor
 {
 	/** @inheritDoc */
 	prepareDerivedData()
@@ -25,8 +23,8 @@ export default class WFRP3ECharacter extends Actor
 	}
 
 	/**
-	 * Adds a WFRP3ECharacter as a new member of the Party.
-	 * @param newMember {WFRP3ECharacter}
+	 * Adds a WFRP3eActor as a new member of the Party.
+	 * @param newMember {WFRP3eActor}
 	 */
 	addNewMember(newMember)
 	{
@@ -42,7 +40,7 @@ export default class WFRP3ECharacter extends Actor
 	}
 
 	/**
-	 * Removes a WFRP3ECharacter from the Party.
+	 * Removes a WFRP3eActor from the Party.
 	 * @param quittingMemberId {string} The Actor ID of the quitting member.
 	 */
 	removeMember(quittingMemberId)

@@ -1,4 +1,4 @@
-export default class WFRP3EPartySheet extends ActorSheet
+export default class WFRP3ePartySheet extends ActorSheet
 {
 	/** @inheritDoc */
 	static get defaultOptions()
@@ -16,7 +16,7 @@ export default class WFRP3EPartySheet extends ActorSheet
 	{
 		const data = super.getData();
 
-		data.talentTypes = CONFIG.WFRP3E.talentTypes;
+		data.talentTypes = CONFIG.WFRP3e.talentTypes;
 
 		console.log(data);
 

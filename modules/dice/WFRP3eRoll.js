@@ -1,9 +1,7 @@
-import PopoutEditor from "../PopoutEditor.js";
-
 /**
  * New extension of the core DicePool class for evaluating rolls with the WFRP3E's DiceTerms
  */
-export default class WFRP3ERoll extends Roll
+export default class WFRP3eRoll extends Roll
 {
 	/**
 	 * @param {string} formula
@@ -14,120 +12,17 @@ export default class WFRP3ERoll extends Roll
 	{
 		super(formula);
 
-		this.symbols = {successes: 0, righteousSuccesses: 0, challenges: 0, boons: 0, banes: 0, delays: 0, exertions: 0, sigmarsComets: 0, chaosStars: 0};
+		this.symbols = {
+			...Object.keys(CONFIG.WFRP3e.dice.symbols).reduce((object, symbol) => {
+				object[symbol] = +dicePool[symbol] ?? 0;
+				return object;
+			}, {})
+		};
 		this.hasSpecialDice = false;
 		this.hasStandardDice = false;
 		this.addedResults = [];
 
 		this.terms = this.parseShortHand(this.terms);
-
-		if(dicePool.successes)
-		{
-			this.symbols.successes = +dicePool.successes;
-			this.addedResults.push(
-			{
-				type: "Successes",
-				symbol: PopoutEditor.renderImages("[SU]"),
-				value: Math.abs(+dicePool.successes),
-				negative: +dicePool.successes < 0,
-			});
-		}
-
-		if(dicePool.righteousSuccesses)
-		{
-			this.symbols.righteousSuccesses = +dicePool.righteousSuccesses;
-			this.addedResults.push(
-			{
-				type: "Righteous Successes",
-				symbol: PopoutEditor.renderImages("[RI]"),
-				value: Math.abs(+dicePool.righteousSuccesses),
-				negative: +dicePool.righteousSuccesses < 0,
-			});
-		}
-
-		if(dicePool.challenges)
-		{
-			this.symbols.challenges = +dicePool.challenges;
-			this.addedResults.push(
-			{
-				type: "Challenges",
-				symbol: PopoutEditor.renderImages("[CHAL]"),
-				value: Math.abs(+dicePool.challenges),
-				negative: +dicePool.challenges < 0,
-			});
-		}
-
-		if(dicePool.boons)
-		{
-			this.symbols.boons = +dicePool.boons;
-			this.addedResults.push(
-			{
-				type: "Boons",
-				symbol: PopoutEditor.renderImages("[BO]"),
-				value: Math.abs(+dicePool.boons),
-				negative: +dicePool.boons < 0,
-			});
-		}
-
-		if(dicePool.banes)
-		{
-			this.symbols.banes = +dicePool.banes;
-			this.addedResults.push(
-			{
-				type: "Banes",
-				symbol: PopoutEditor.renderImages("[BA]"),
-				value: Math.abs(+dicePool.banes),
-				negative: +dicePool.banes < 0,
-			});
-		}
-
-		if(dicePool.delays)
-		{
-			this.symbols.delays = +dicePool.delays;
-			this.addedResults.push(
-			{
-				type: "Delays",
-				symbol: PopoutEditor.renderImages("[DE]"),
-				value: Math.abs(+dicePool.delays),
-				negative: +dicePool.delays < 0,
-			});
-		}
-
-		if(dicePool.exertions)
-		{
-			this.symbols.exertions = +dicePool.exertions;
-			this.addedResults.push(
-			{
-				type: "Exertions",
-				symbol: PopoutEditor.renderImages("[EXE]"),
-				value: Math.abs(+dicePool.exertions),
-				negative: +dicePool.exertions < 0,
-			});
-		}
-
-		if(dicePool.sigmarsComets)
-		{
-			this.symbols.sigmarsComets = +dicePool.sigmarsComets;
-			this.addedResults.push(
-			{
-				type: "Sigmar's Comets",
-				symbol: PopoutEditor.renderImages("[SI]"),
-				value: Math.abs(+dicePool.sigmarsComets),
-				negative: +dicePool.sigmarsComets < 0,
-			});
-		}
-
-		if(dicePool.chaosStars)
-		{
-			this.symbols.chaosStars = +dicePool.chaosStars;
-			this.addedResults.push(
-			{
-				type: "Chaos Stars",
-				symbol: PopoutEditor.renderImages("[CHAO]"),
-				value: Math.abs(+dicePool.chaosStars),
-				negative: +dicePool.chaosStars < 0,
-			});
-		}
 
 		if(Object.hasOwn(options, 'flavor'))
 			this.flavor = options.flavor;
@@ -136,7 +31,7 @@ export default class WFRP3ERoll extends Roll
 	static CHAT_TEMPLATE = "systems/wfrp3e/templates/chatmessages/roll-chatmessage.html";
 	static TOOLTIP_TEMPLATE = "systems/wfrp3e/templates/chatmessages/roll-tooltip-chatmessage.html";
 
-	/** @override */
+	/** @inheritDoc */
 	evaluate({minimize = false, maximize = false} = {})
 	{
 		if(this._evaluated) throw new Error("This Roll object has already been rolled.");
@@ -144,10 +39,8 @@ export default class WFRP3ERoll extends Roll
 		// Step 1 - evaluate any inner Rolls and recompile the formula
 		let hasInner = false;
 
-		this.terms = this.terms.map((term) =>
-		{
-			if(term instanceof WFRP3ERoll)
-			{
+		this.terms = this.terms.map((term) => {
+			if(term instanceof WFRP3eRoll) {
 				hasInner = true;
 				term.evaluate({minimize, maximize});
 				this._dice = this._dice.concat(term.dice);
@@ -158,19 +51,15 @@ export default class WFRP3ERoll extends Roll
 		});
 
 		// Step 2 - if inner rolls occurred, re-compile the formula and re-identify terms
-		if(hasInner)
-		{
+		if(hasInner) {
 			const formula = this.constructor.cleanFormula(this.terms);
 			this.terms = this._identifyTerms(formula);
 		}
 
 		// Step 3 - evaluate any remaining terms and return any non-FFG dialogs to the total.
-		this.results = this.terms.map((term) =>
-		{
-			if(!game.symbols.diceterms.includes(term.constructor))
-			{
-				if(term.evaluate)
-				{
+		this.results = this.terms.map((term) => {
+			if(!game.symbols.diceterms.includes(term.constructor)) {
+				if(term.evaluate) {
 					if(!(term instanceof OperatorTerm))
 						this.hasStandardDice = true;
 
@@ -179,8 +68,7 @@ export default class WFRP3ERoll extends Roll
 				else
 					return term;
 			}
-			else
-			{
+			else {
 				if(term.evaluate)
 					term.evaluate({minimize, maximize});
 
@@ -197,12 +85,9 @@ export default class WFRP3ERoll extends Roll
 			throw new Error(game.i18n.format("DICE.ErrorNonNumeric", {formula: this.formula}));
 
 		// Step 5 - Retrieve all FFG results and combine into a single total.
-		if(this.hasSpecialDice)
-		{
-			this.terms.forEach((term) =>
-			{
-				if(game.symbols.diceterms.includes(term.constructor))
-				{
+		if(this.hasSpecialDice) {
+			this.terms.forEach((term) => {
+				if(game.symbols.diceterms.includes(term.constructor)) {
 					this.symbols.successes += parseInt(term.symbols.successes) + parseInt(term.symbols.righteousSuccesses);
 					this.symbols.righteousSuccesses += parseInt(term.symbols.righteousSuccesses);
 					this.symbols.challenges += parseInt(term.symbols.challenges);
@@ -216,24 +101,20 @@ export default class WFRP3ERoll extends Roll
 			});
 
 			// Step 6 - Calculate actual results by cancelling out successes with challenges, boons with banes, etc.
-			if(this.symbols.successes < this.symbols.challenges)
-			{
+			if(this.symbols.successes < this.symbols.challenges) {
 				this.symbols.challenges -= parseInt(this.symbols.successes);
 				this.symbols.successes = 0;
 			}
-			else
-			{
+			else {
 				this.symbols.successes -= parseInt(this.symbols.challenges);
 				this.symbols.challenges = 0;
 			}
 
-			if(this.symbols.boons < this.symbols.banes)
-			{
+			if(this.symbols.boons < this.symbols.banes) {
 				this.symbols.banes -= parseInt(this.symbols.boons);
 				this.symbols.boons = 0;
 			}
-			else
-			{
+			else {
 				this.symbols.boons -= parseInt(this.symbols.banes);
 				this.symbols.banes = 0;
 			}
@@ -246,17 +127,16 @@ export default class WFRP3ERoll extends Roll
 		return this;
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	roll()
 	{
 		return this.evaluate();
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	getTooltip()
 	{
-		const parts = this.dice.map((die) =>
-		{
+		const parts = this.dice.map((die) => {
 			const cls = die.constructor;
 			let isSpecial = "notSpecial";
 
@@ -264,9 +144,9 @@ export default class WFRP3ERoll extends Roll
 				isSpecial = "isSpecial";
 
 			let countText = game.i18n.format("ROLL.AMOUNT." + cls.name, {nb: die.results.length});
-			
+
 			if(die.results.length > die.number)
-				countText += " " + game.i18n.format("ROLL.AMOUNT.ExplodedDice", {nb: die.results.length - die.number});
+				countText += " " + game.i18n.format("ROLL.AMOUNT.ExplodedDie", {nb: die.results.length - die.number});
 
 			return {
 				formula: die.formula,
@@ -276,8 +156,7 @@ export default class WFRP3ERoll extends Roll
 				countText: countText,
 				isSpecial: game.symbols.diceterms.includes(cls),
 				notSpecial: !game.symbols.diceterms.includes(cls),
-				rolls: die.results.map((roll) =>
-				{
+				rolls: die.results.map((roll) => {
 					return {
 						result: die.getResultLabel(roll),
 						classes: [cls.name.toLowerCase(), isSpecial, "d" + die.faces, roll.rerolled ? "rerolled" : null, roll.exploded ? "exploded" : null, roll.discarded ? "discarded" : null].filterJoin(" ")
@@ -294,11 +173,10 @@ export default class WFRP3ERoll extends Roll
 		return renderTemplate(this.constructor.TOOLTIP_TEMPLATE, {parts});
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	async render(chatOptions = {})
 	{
-		chatOptions = mergeObject(
-		{
+		chatOptions = mergeObject({
 			user: game.user.id,
 			flavor: null,
 			template: this.constructor.CHAT_TEMPLATE,
@@ -312,21 +190,24 @@ export default class WFRP3ERoll extends Roll
 			this.roll();
 
 		// Define chat data
-		if(this?.data)
+		if(this.data) {
 			this.data.additionalFlavorText = this.flavor;
+			this.data.symbols = CONFIG.WFRP3e.dice.symbols;
+		}
 		else
-			this.data = {additionalFlavorText: this.flavor};
+			this.data = {
+			additionalFlavorText: this.flavor,
+			symbolClasses: CONFIG.WFRP3e.dice.symbols
+		};
 
-		const chatData =
-		{
+		const chatData = {
 			formula: isPrivate ? "???" : this._formula,
 			flavor: isPrivate ? null : chatOptions.flavor,
 			user: chatOptions.user,
 			tooltip: isPrivate ? "" : await this.getTooltip(),
 			total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
 			symbols: isPrivate ? {} : this.symbols,
-			specialDice: isPrivate ? {} : this.dice.map((die) =>
-			{
+			specialDice: isPrivate ? {} : this.dice.map((die) => {
 				const cls = die.constructor;
 
 				return {
@@ -337,7 +218,7 @@ export default class WFRP3ERoll extends Roll
 			hasSpecialDice: this.hasSpecialDice,
 			hasStandard: this.hasStandardDice,
 			hasSuccess: this.dice.length > 0,
-			diceSymbols: CONFIG.WFRP3E.dice.symbols,
+			diceSymbols: CONFIG.WFRP3e.dice.symbols,
 			data: this.data,
 			addedResults: this.addedResults,
 			publicRoll: !chatOptions.isPrivate,
@@ -347,7 +228,7 @@ export default class WFRP3ERoll extends Roll
 		return renderTemplate(chatOptions.template, chatData);
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	toMessage(messageData = {}, {rollMode = null, create = true} = {})
 	{
 		// Perform the roll, if it has not yet been rolled
@@ -367,8 +248,7 @@ export default class WFRP3ERoll extends Roll
 			messageData.whisper = [game.user.id];
 
 		// Prepare chat data
-		messageData = mergeObject(
-		{
+		messageData = mergeObject({
 			user: game.user.id,
 			type: template,
 			content: this.total,
@@ -389,54 +269,55 @@ export default class WFRP3ERoll extends Roll
 		return create ? cls.create(msg) : msg;
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	toJSON()
 	{
 		const json = super.toJSON();
+
 		json.symbols = this.symbols;
 		json.hasSpecialDice = this.hasSpecialDice;
 		json.hasStandard = this.hasStandardDice;
 		json.data = this.data;
 		json.addedResults = this.addedResults;
 		json.flavor = this.flavor;
+
 		return json;
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	static fromData(data)
 	{
 		const roll = super.fromData(data);
+
 		roll.symbols = data.symbols;
 		roll.hasSpecialDice = data.hasSpecialDice;
 		roll.hasStandardDice = data.hasStandardDice;
 		roll.data = data.data;
 		roll.addedResults = data.addedResults;
 		roll.flavor = data.flavor;
+
 		return roll;
 	}
 
 	// If the main parser hands back a StringTerm attempt to turn it into a die.
 	parseShortHand(terms)
 	{
-		return terms.flatMap(term =>
-		{
+		return terms.flatMap(term => {
 			if(!(term instanceof StringTerm) || /\d/.test(term.term))
 				return term;
 
-			return term.term.split('').reduce((acc, next) =>
-			{
-				if(next in CONFIG.Dice.terms)
-				{
+			return term.term.split('').reduce((acc, next) => {
+				if(next in CONFIG.Dice.terms) {
 					let cls = CONFIG.Dice.terms[next];
+
 					acc.push(new cls(1));
 				}
-				else throw new Error(`Unknown die type '${next}'`)
+				else
+					throw new Error(`Unknown die type '${next}'`)
 
 				return acc;
 			}, [])
 		//Put addition operators between each die.
-		}).flatMap((value, index, array) => array.length - 1 !== index
-			? [value, new OperatorTerm({operator: '+'})]
-			: value)
+		}).flatMap((value, index, array) => array.length - 1 !== index ? [value, new OperatorTerm({operator: '+'})] : value)
 	}
 }

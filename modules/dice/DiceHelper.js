@@ -23,11 +23,9 @@ export default class DiceHelper
 
 	/**
 	 * Roll a Skill check.
-	 * @param {WFRP3EItem} skill The Skill check has been triggered.
-	 * @param {Event} event The Event which triggered the Skill check.
-	 * @param {string} [type] The type of Skill check.
-	 * @param {string} [flavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {string} [rollSound] Some sound to play after the Skill check completion.
+	 * @param {WFRP3eItem} skill The Skill check has been triggered.
+	 * @param {?string} [flavor] Some flavor text to add to the Skill check's outcome description.
+	 * @param {?string} [rollSound] Some sound to play after the Skill check completion.
 	 * @returns {Promise<void>}
 	 */
 	static async prepareSkillCheck(skill, event, type = null, flavor = null, rollSound = null)

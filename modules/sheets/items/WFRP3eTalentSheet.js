@@ -1,4 +1,4 @@
-export default class WFRP3ETalentSheet extends ItemSheet
+export default class WFRP3eTalentSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
@@ -15,7 +15,7 @@ export default class WFRP3ETalentSheet extends ItemSheet
 	{
 		const data = super.getData();
 
-		data.talentTypes = CONFIG.WFRP3E.talentTypes;
+		data.talentTypes = CONFIG.WFRP3e.talentTypes;
 
 		return data;
 	}

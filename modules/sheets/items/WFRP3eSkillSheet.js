@@ -1,4 +1,4 @@
-export default class WFRP3ESkillSheet extends ItemSheet
+export default class WFRP3eSkillSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
@@ -15,7 +15,7 @@ export default class WFRP3ESkillSheet extends ItemSheet
 	{
 		const data = super.getData();
 
-		data.characteristics = CONFIG.WFRP3E.characteristics;
+		data.characteristics = CONFIG.WFRP3e.characteristics;
 
 		return data;
 	}

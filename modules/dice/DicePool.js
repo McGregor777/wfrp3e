@@ -1,5 +1,5 @@
 /**
- * Dice pool utility specializing in WFRP3E's special dialogs
+ * Dice pool utility specializing in WFRP3e's special dialogs
  */
 export default class DicePool
 {
@@ -41,28 +41,22 @@ export default class DicePool
 	{
 		let revert = false;
 
-		if(times < 0)
-		{
+		if(times < 0) {
 			revert = true;
 			times = Math.abs(times);
 		}
 
-		for(let i = 0; i < times; i++)
-		{
-			if(revert)
-			{
-				if(this[type + "Dice"] > 0)
-				{
+		for(let i = 0; i < times; i++) {
+			if(revert) {
+				if(this[type + "Dice"] > 0) {
 					this[type + "Dice"]--;
 					this.characteristicDice++;
 				}
 				else
 					ui.notifications.warn("There is no " + type + " die left to convert back.");
 			}
-			else
-			{
-				if(this.characteristicDice > 0)
-				{
+			else {
+				if(this.characteristicDice > 0) {
 					this.characteristicDice--;
 					this[type + "Dice"]++;
 				}
@@ -79,8 +73,7 @@ export default class DicePool
 	renderDiceExpression()
 	{
 		let dicePool = [this.characteristicDice + "da", this.fortuneDice + "df", this.expertiseDice + "de", this.conservativeDice + "do", this.recklessDice + "dr", this.challengeDice + "dh", this.misfortuneDice + "dm"];
-		let finalPool = dicePool.filter((d) =>
-		{
+		let finalPool = dicePool.filter((d) => {
 			const test = d.split(/([0-9]+)/);
 			return test[1] > 0;
 		});
@@ -100,29 +93,26 @@ export default class DicePool
 		let height = 48;
 		let width = 48;
 
-		if(totalDice > 15)
-		{
+		if(totalDice > 15) {
 			height = 12;
 			width = 12;
 		}
-		else if(totalDice > 10) 
-		{
+		else if(totalDice > 10) {
 			height = 24;
 			width = 24;
 		}
-		else if(totalDice > 7)
-		{
+		else if(totalDice > 7) {
 			height = 36;
 			width = 36;
 		}
 
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.characteristic, this.characteristicDice, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.fortune, this.fortuneDice, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.expertise, this.expertiseDice, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.conservative, this.conservativeDice, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.reckless, this.recklessDice, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.challenge, this.challengeDice, height, width);
-		this._addIcons(container, CONFIG.WFRP3E.dice.icons.misfortune, this.misfortuneDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3e.dice.icons.characteristic, this.characteristicDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3e.dice.icons.fortune, this.fortuneDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3e.dice.icons.expertise, this.expertiseDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3e.dice.icons.conservative, this.conservativeDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3e.dice.icons.reckless, this.recklessDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3e.dice.icons.challenge, this.challengeDice, height, width);
+		this._addIcons(container, CONFIG.WFRP3e.dice.icons.misfortune, this.misfortuneDice, height, width);
 
 		return container;
 	}
@@ -132,55 +122,44 @@ export default class DicePool
 		let advanceContainer = this.renderPreview(container);
 		let additionalSymbols = [];
 
-		["successes", "righteousSuccesses", "challenges", "boons", "banes", "delays", "exertions", "sigmarsComets", "chaosStars"].forEach((symbol) =>
-		{
+		Object.keys(CONFIG.WFRP3e.dice.symbols).forEach((symbol) => {
 			let diceSymbol = "";
 
-			switch(symbol)
-			{
-				case "successes":
-				{
-					diceSymbol = "[SU]";
+			switch(symbol) {
+				case "banes": {
+					diceSymbol = '<span class="wfrp3e-font symbol bane"></span>';
 					break;
 				}
-				case "righteousSuccesses":
-				{
-					diceSymbol = "[RI]";
+				case "boons": {
+					diceSymbol = '<span class="wfrp3e-font symbol boon"></span>';
 					break;
 				}
-				case "challenges":
-				{
-					diceSymbol = "[CHAL]";
+				case "challenges": {
+					diceSymbol = '<span class="wfrp3e-font symbol challenge"></span>';
 					break;
 				}
-				case "boons":
-				{
-					diceSymbol = "[BO]";
+				case "chaosStars": {
+					diceSymbol = '<span class="wfrp3e-font symbol chaos-star"></span>';
 					break;
 				}
-				case "banes":
-				{
-					diceSymbol = "[BA]";
+				case "delays": {
+					diceSymbol = '<span class="wfrp3e-font symbol delay"></span>';
 					break;
 				}
-				case "delays":
-				{
-					diceSymbol = "[DE]";
+				case "exertions": {
+					diceSymbol = '<span class="wfrp3e-font symbol exertion"></span>';
 					break;
 				}
-				case "exertions":
-				{
-					diceSymbol = "[EX]";
+				case "righteousSuccesses": {
+					diceSymbol = '<span class="wfrp3e-font symbol righteous-success"></span>';
 					break;
 				}
-				case "sigmarsComets":
-				{
-					diceSymbol = "[SI]";
+				case "successes": {
+					diceSymbol = '<span class="wfrp3e-font symbol success"></span>';
 					break;
 				}
-				case "chaosStars":
-				{
-					diceSymbol = "[CHAO]";
+				case "sigmarsComets": {
+					diceSymbol = '<span class="wfrp3e-font symbol sigmars-comet"></span>';
 					break;
 				}
 			}
@@ -196,8 +175,7 @@ export default class DicePool
 
 	_addIcons(container, icon, times, height = 45, width = 45)
 	{
-		for(let i = 0; i < times; i++)
-		{
+		for(let i = 0; i < times; i++) {
 			const img = document.createElement("img");
 
 			img.src = icon;
@@ -215,8 +193,7 @@ export default class DicePool
 	 */
 	static fromContainer(container)
 	{
-		return new DicePool(
-		{
+		return new DicePool({
 			characteristicDice: container.querySelector('[name="characteristicDice"]')?.value ? container.querySelector('[name="characteristicDice"]').value : 0,
 			fortuneDice: container.querySelector('[name="fortuneDice"]')?.value ? container.querySelector('[name="fortuneDice"]').value : 0,
 			expertiseDice: container.querySelector('[name="expertiseDice"]')?.value ? container.querySelector('[name="expertiseDice"]').value : 0,
