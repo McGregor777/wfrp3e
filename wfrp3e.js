@@ -1,5 +1,6 @@
 import {WFRP3e} from "./modules/config.js";
 import WFRP3eActor from "./modules/actors/WFRP3eActor.js"
+import WFRP3eActionDataModel from "./modules/data/items/WFRP3eActionDataModel.js";
 import ChallengeDie from "./modules/dice/dietype/ChallengeDie.js";
 import CharacteristicDie from "./modules/dice/dietype/CharacteristicDie.js";
 import ConservativeDie from "./modules/dice/dietype/ConservativeDie.js";
@@ -66,6 +67,8 @@ Hooks.once("init", () => {
 	CONFIG.WFRP3e = WFRP3e;
 
 	CONFIG.Actor.documentClass = WFRP3eActor;
+
+	CONFIG.Item.dataModels.action = WFRP3eActionDataModel;
 	CONFIG.Item.documentClass = WFRP3eItem;
 
 	CONFIG.Dice.rolls.push(CONFIG.Dice.rolls[0]);

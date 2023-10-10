@@ -35,8 +35,10 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 		data.conditionDurations = CONFIG.WFRP3e.conditionDurations;
 		data.characteristics = CONFIG.WFRP3e.characteristics;
+		data.effectSymbols = CONFIG.WFRP3e.effectSymbols;
 		data.items = this._buildItemLists(data);
 		data.items["diseases"].forEach((disease) => disease.symptomDescription = game.i18n.localize(CONFIG.WFRP3e.disease.symptoms.descriptions[disease.system.symptom]));
+		data.stances = CONFIG.WFRP3e.stances;
 		data.talentSocketsByType = this._buildTalentSocketsList();
 		data.weaponGroups = CONFIG.WFRP3e.weapon.groups;
 		data.weaponRanges = CONFIG.WFRP3e.weapon.ranges;
@@ -343,7 +345,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	_onItemInput(event)
 	{
 		const item = this.actor.items.get(this._getItemId(event));
-		const property = event.currentTarget.name;
+		const property = event.currentTarget.dataset.path;
 		let value = event.target.value;
 
 		if(value === "on")

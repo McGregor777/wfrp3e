@@ -5,15 +5,47 @@ export default class WFRP3eItem extends Item
 	{
 		super.prepareData();
 
-		try {
-			const functionName = `_prepare${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`;
+		const functionName = `_prepare${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`;
 
-			if(this[`${functionName}`])
-				this[`${functionName}`]();
-		}
-		catch(error) {
-			console.error(`Something went wrong when preparing the Item ${this.name} of type ${this.type}: ${error}`);
-		}
+		if(this[`${functionName}`])
+			this[`${functionName}`]();
+	}
+
+	/**
+	 * Adds a new effect to the Action.
+	 * @param face {string} The Action's face which receives the new effect.
+	 * @param symbol {string} The symbol used by the new effect.
+	 */
+	addNewEffect(face, symbol)
+	{
+		const effects = this.system[face].effects[symbol];
+		const updates = {system: {}};
+		updates.system[face] = {effects: {}};
+
+		effects.push({"symbolAmount": 1, "description": ""});
+
+		updates.system[face].effects[symbol] = effects;
+
+		this.update(updates);
+
+	}
+
+	/**
+	 * Removes an effect from the Action.
+	 * @param face {string} The Action's face of the effect to remove.
+	 * @param symbol {string} The symbol used by the effect to remove.
+	 * @param index {string} The index to the effect to remove.
+	 */
+	removeEffect(face, symbol, index)
+	{
+		const effects = this.system[face].effects[symbol];
+		const updates = {system: {}};
+		updates.system[face] = {effects: {}};
+
+		effects.splice(index, 1)
+		updates.system[face].effects[symbol] = effects;
+
+		this.update(updates);
 	}
 
 	/**
@@ -159,7 +191,7 @@ export default class WFRP3eItem extends Item
 
 	/**
 	 * Performs check-ups following up a Talent socket change to a non-null value.
-	 * @param talent {WFRP3EItem} The Talent that has been changed
+	 * @param talent {WFRP3eItem} The Talent that has been changed
 	 * @param newTalentSocket {string}
 	 * @private
 	 */

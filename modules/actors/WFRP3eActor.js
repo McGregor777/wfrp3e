@@ -120,8 +120,7 @@ export default class WFRP3eActor extends Actor
 	{
 		super._onDelete(options, userId);
 
-		switch(this.type)
-		{
+		switch(this.type) {
 			case "party":
 				this._onPartyDelete(options, userId);
 				break;
@@ -133,8 +132,7 @@ export default class WFRP3eActor extends Actor
 	{
 		super._onUpdate(changed, options, userId);
 
-		switch(this.type)
-		{
+		switch(this.type) {
 			case "party":
 				this._onPartyUpdate(changed, options, userId);
 				break;
@@ -180,15 +178,13 @@ export default class WFRP3eActor extends Actor
 	 */
 	_calculateStanceMeter()
 	{
-		let stanceMeter =
-		{
+		let stanceMeter = {
 			conservative: this.system.attributes.stance.conservative,
 			reckless: -this.system.attributes.stance.reckless
 		};
 
 		if(this.currentCareer)
-			stanceMeter =
-			{
+			stanceMeter = {
 				conservative: this.system.attributes.stance.conservative + this.currentCareer.system.startingStance.conservativeSegments,
 				reckless: -this.system.attributes.stance.reckless - this.currentCareer.system.startingStance.recklessSegments
 			};

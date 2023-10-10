@@ -16,7 +16,7 @@
 		{{/if}}
 	</div>
 
-	<select class="sheet-form-select item-input talent-card-socket-select" name="system.talentSocket" data-dtype="String">
+	<select class="sheet-form-select item-input talent-card-socket-select" data-path="system.talentSocket" data-dtype="String">
 		{{selectOptions (lookup @root.talentSocketsByType talent.system.type) selected=talent.system.talentSocket blank=(localize "TALENT.NoSocket")}}
 	</select>
 </div>

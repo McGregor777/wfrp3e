@@ -814,12 +814,17 @@ export const WFRP3e = {
 			}
 		}
 	},
+	effectSymbols: ["success", "boon", "sigmarsComet", "bane", "chaosStar"],
 	rarities: {
 		abundant: "TRAPPING.RARITY.Abundant",
 		plentiful: "TRAPPING.RARITY.Plentiful",
 		common: "TRAPPING.RARITY.Common",
 		rare: "TRAPPING.RARITY.Rare",
 		exotic: "TRAPPING.RARITY.Exotic"
+	},
+	stances: {
+		"conservative": "ACTION.FACE.Conservative",
+		"reckless": "ACTION.FACE.Reckless"
 	},
 	talentTypes: {
 		focus: "TALENT.TYPE.Focus",

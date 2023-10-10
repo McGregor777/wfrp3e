@@ -23,6 +23,43 @@
 		width: 100%;
 	}
 
+	& .action-card-bottom-line {
+		align-items: end;
+		color: white;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		line-height: 0;
+		padding: 0 0.25rem 0.25rem;
+		text-shadow:
+			-1pt -1pt 0 black,
+			-1pt 0 0 black,
+			0 -1pt 0 black,
+			-1pt 1pt 0 black,
+			1pt -1pt 0 black,
+			0 1pt 0 black,
+			1pt 0 0 black,
+			1pt 1pt 0 black;
+
+		& .recharge-token {
+			position: relative;
+
+			& > img {
+				border: none;
+				height: 3rem;
+				opacity: 75%;
+			}
+
+			& > .recharge-token-counter {
+				font-size: 2rem;
+				left: 50%;
+				position: absolute;
+				top: 70%;
+				transform: translate(-50%, -50%);
+			}
+		}
+	}
+
 	& .action-card-check {
 		background-color: #201008;
 		color: white;
@@ -48,6 +85,7 @@
 		line-height: 8pt;
 		margin: auto auto auto 0.25rem;
 		text-align: center;
+		width: 100%;
 
 		& > * {
 			display: inline-block;
@@ -56,11 +94,22 @@
 	}
 
 	& .action-card-effects {
-		margin: 10px;
+		border: calc(0.5rem + 3px) solid;
+		border-radius: 0 0 1.5rem 1.5rem;
+		border-top: none;
 		color: black;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
 		font-size: 10pt;
 		text-shadow: none;
-		width: calc(100% - 1.25rem);
+
+		& > table {
+			border-top: none;
+			border-bottom: none;
+			flex-grow: 1;
+			overflow-y: auto;
+		}
 	}
 
 	& .action-card-header {
@@ -76,9 +125,10 @@
 	}
 
 	& .action-card-name {
-		margin: auto;
 		font: 16pt @font-title;
 		font-variant-caps: small-caps;
+		grid-area: action-card-name;
+		margin: auto;
 		text-align: center;
 		text-shadow:
 			-1pt -1pt 0 black,
@@ -89,10 +139,9 @@
 			0 1pt 0 black,
 			1pt 0 0 black,
 			1pt 1pt 0 black;
-		grid-area: action-card-name;
 
 		&:hover {
-			text-shadow: 0 0 8px var(--color-shadow-primary);
+			text-shadow: 0 0 0.5rem var(--color-shadow-primary);
 		}
 	}
 
@@ -104,7 +153,7 @@
 		grid-area: action-card-recharge-rating;
 		height: 2rem;
 		line-height: 2rem;
-		margin: 20px 10px 0 0;
+		margin: 0.5rem 0.5rem 0 0;
 		text-align: center;
 		width: 2rem;
 	}
@@ -123,6 +172,11 @@
 			1pt 0 0 black,
 			1pt 1pt 0 black;
 		width: 100%;
+
+		& > p {
+			margin: 0;
+			padding-top: 0.25rem;
+		}
 	}
 
 	& .action-card-traits {
@@ -134,15 +188,26 @@
 	}
 
 	& .action-card-type {
+		background-color: lightgrey;
 		border: none;
+		border-radius: 100%;
 		grid-area: action-card-type;
 		margin: 0.5rem 0 0 0.5rem;
 	}
 
 	& .face {
+		&.active {
+			display: flex;
+			flex-direction: column;
+		}
+
 		&.conservative {
 			background-color: #d8b880;
-			border-radius: 25px;
+			border-radius: 1.5rem;
+
+			& > .action-card-effects {
+				border-color: sienna;
+			}
 
 			& > .action-card-header {
 				background-color: #388840;
@@ -151,32 +216,14 @@
 
 		&.reckless {
 			background-color: #e0e0e0;
-			border-radius: 25px;
+			border-radius: 1.5rem;
+
+			& > .action-card-effects {
+				border-color: darkgrey;
+			}
 
 			& > .action-card-header {
 				background-color: #c02030;
-			}
-		}
-	}
-
-	& .bottom-line {
-		align-items: end;
-
-		& .recharge-token {
-			position: relative;
-
-			& > img {
-				border: none;
-				height: 3rem;
-				opacity: 75%;
-			}
-
-			& > .recharge-token-counter {
-				font-size: 2rem;
-				left: 50%;
-				position: absolute;
-				transform: translate(-50%, -50%);
-				top: 70%;
 			}
 		}
 	}

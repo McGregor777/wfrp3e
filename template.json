@@ -154,37 +154,7 @@
 		"ability": {
 			"templates": ["basics"]
 		},
-		"action": {
-			"conservative": {
-				"name": "",
-				"art": "",
-				"type": "melee",
-				"traits": [""],
-				"rechargeRating": 0,
-				"difficultyModifiers": {
-					"challengeDice": 0,
-					"misfortuneDice": 0
-				},
-				"check": "",
-				"requirements": "",
-				"effects": ""
-			},
-			"reckless": {
-				"name": "",
-				"art": "",
-				"type": "melee",
-				"traits": [""],
-				"rechargeRating": 0,
-				"difficultyModifiers": {
-					"challengeDice": 0,
-					"misfortuneDice": 0
-				},
-				"check": "",
-				"requirements": "",
-				"effects": ""
-			},
-			"rechargeTokens": 0
-		},
+		"action": {},
 		"armour": {
 			"templates": ["basics", "item"],
 			"defenceValue": 0,
