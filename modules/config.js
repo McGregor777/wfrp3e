@@ -21,67 +21,198 @@ export const WFRP3e = {
 		lingering: "CONDITION.DURATION.Lingering"
 	},
 	dice: {
-		icons: {
-			challenge: "systems/wfrp3e/assets/icons/dice/challenge.webp",
-			characteristic: "systems/wfrp3e/assets/icons/dice/characteristic.webp",
-			conservative: "systems/wfrp3e/assets/icons/dice/conservative.webp",
-			expertise: "systems/wfrp3e/assets/icons/dice/expertise.webp",
-			fortune: "systems/wfrp3e/assets/icons/dice/fortune.webp",
-			misfortune: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
-			reckless: "systems/wfrp3e/assets/icons/dice/reckless.webp"
-		},
-		symbols: {
-			successes: {
-				name: "ROLL.SYMBOL.Successes",
-				result: "ROLL.AMOUNT.Successes",
-				cssClass: "success",
-			},
-			righteousSuccesses: {
-				name: "ROLL.SYMBOL.RighteousSuccesses",
-				result: "ROLL.AMOUNT.RighteousSuccesses",
-				cssClass: "righteous-success"
-			},
-			boons: {
-				name: "ROLL.SYMBOL.Boons",
-				result: "ROLL.AMOUNT.Boons",
-				cssClass: "boon"
-			},
-			sigmarsComets: {
-				name: "ROLL.SYMBOL.SigmarsComets",
-				result: "ROLL.AMOUNT.SigmarsComets",
-				cssClass: "sigmars-comet"
-			},
-			challenges: {
-				name: "ROLL.SYMBOL.Challenges",
-				result: "ROLL.AMOUNT.Challenges",
-				cssClass: "challenge"
-			},
-			banes: {
-				name: "ROLL.SYMBOL.Banes",
-				result: "ROLL.AMOUNT.Banes",
-				cssClass: "bane"
-			},
-			chaosStars: {
-				name: "ROLL.SYMBOL.ChaosStars",
-				result: "ROLL.AMOUNT.ChaosStars",
-				cssClass: "chaos-star"
-			},
-			delays: {
-				name: "ROLL.SYMBOL.Delays",
-				result: "ROLL.AMOUNT.Delays",
-				cssClass: "delay"
-			},
-			exertions: {
-				name: "ROLL.SYMBOL.Exertions",
-				result: "ROLL.AMOUNT.Exertions",
-				cssClass: "exertion"
+		characteristic: {
+			icon: "systems/wfrp3e/assets/icons/dice/characteristic.webp",
+			results: {
+				1: {
+					label: "ROLL.RESULT.Blank",
+					image: "systems/wfrp3e/assets/icons/dice/characteristic.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				2: {
+					label: "ROLL.RESULT.Blank",
+					image: "systems/wfrp3e/assets/icons/dice/characteristic.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				3: {
+					label: "ROLL.RESULT.OneSuccess",
+					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
+					successes: 1,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				4: {
+					label: "ROLL.RESULT.OneSuccess",
+					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
+					successes: 1,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				5: {
+					label: "ROLL.RESULT.OneSuccess",
+					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
+					successes: 1,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				6: {
+					label: "ROLL.RESULT.OneSuccess",
+					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
+					successes: 1,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				7: {
+					label: "ROLL.RESULT.OneBoon",
+					image: "systems/wfrp3e/assets/icons/dice/characteristic_oneboon.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 1,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				8: {
+					label: "ROLL.RESULT.OneBoon",
+					image: "systems/wfrp3e/assets/icons/dice/characteristic_oneboon.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 1,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				}
 			}
 		},
-		results: {
-			challenge: {
+		fortune: {
+			icon: "systems/wfrp3e/assets/icons/dice/fortune.webp",
+			results: {
 				1: {
 					label: "ROLL.RESULT.Blank",
-					image: "systems/wfrp3e/assets/icons/dice/challenge.webp",
+					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				}, 2: {
+					label: "ROLL.RESULT.Blank",
+					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				}, 3: {
+					label: "ROLL.RESULT.Blank",
+					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				}, 4: {
+					label: "ROLL.RESULT.OneSuccess",
+					image: "systems/wfrp3e/assets/icons/dice/fortune_onesuccess.webp",
+					successes: 1,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				}, 5: {
+					label: "ROLL.RESULT.OneSuccess",
+					image: "systems/wfrp3e/assets/icons/dice/fortune_onesuccess.webp",
+					successes: 1,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				}, 6: {
+					label: "ROLL.RESULT.OneBoon",
+					image: "systems/wfrp3e/assets/icons/dice/fortune_oneboon.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 1,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				}
+			},
+		},
+		expertise: {
+			icon: "systems/wfrp3e/assets/icons/dice/expertise.webp",
+			results: {
+				1: {
+					label: "ROLL.RESULT.Blank",
+					image: "systems/wfrp3e/assets/icons/dice/expertise.webp",
 					successes: 0,
 					righteousSuccesses: 0,
 					challenges: 0,
@@ -93,115 +224,9 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				2: {
-					label: "ROLL.RESULT.OneChallenge",
-					image: "systems/wfrp3e/assets/icons/dice/challenge_onechallenge.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 1,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				3: {
-					label: "ROLL.RESULT.OneChallenge",
-					image: "systems/wfrp3e/assets/icons/dice/challenge_onechallenge.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 1,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				4: {
-					label: "ROLL.RESULT.TwoChallenges",
-					image: "systems/wfrp3e/assets/icons/dice/challenge_twochallenges.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 2,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				5: {
-					label: "ROLL.RESULT.TwoChallenges",
-					image: "systems/wfrp3e/assets/icons/dice/challenge_twochallenges.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 2,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				6: {
-					label: "ROLL.RESULT.OneBane",
-					image: "systems/wfrp3e/assets/icons/dice/challenge_onebane.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 1,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				7: {
-					label: "ROLL.RESULT.TwoBanes",
-					image: "systems/wfrp3e/assets/icons/dice/challenge_twobanes.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 2,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				8: {
-					label: "ROLL.RESULT.OneChaosStar",
-					image: "systems/wfrp3e/assets/icons/dice/challenge_onechaosstar.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 1
-				}
-			},
-			characteristic: {
-				1: {
-					label: "ROLL.RESULT.Blank",
-					image: "systems/wfrp3e/assets/icons/dice/characteristic.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				2: {
-					label: "ROLL.RESULT.Blank",
-					image: "systems/wfrp3e/assets/icons/dice/characteristic.webp",
-					successes: 0,
+					label: "ROLL.RESULT.OneSuccess",
+					image: "systems/wfrp3e/assets/icons/dice/expertise_onesuccess.webp",
+					successes: 1,
 					righteousSuccesses: 0,
 					challenges: 0,
 					boons: 0,
@@ -212,10 +237,10 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				3: {
-					label: "ROLL.RESULT.OneSuccess",
-					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
-					successes: 1,
-					righteousSuccesses: 0,
+					label: "ROLL.RESULT.OneRighteousSuccess",
+					image: "systems/wfrp3e/assets/icons/dice/expertise_onerighteoussuccess.webp",
+					successes: 0,
+					righteousSuccesses: 1,
 					challenges: 0,
 					boons: 0,
 					banes: 0,
@@ -225,12 +250,12 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				4: {
-					label: "ROLL.RESULT.OneSuccess",
-					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
-					successes: 1,
+					label: "ROLL.RESULT.OneBoon",
+					image: "systems/wfrp3e/assets/icons/dice/expertise_oneboon.webp",
+					successes: 0,
 					righteousSuccesses: 0,
 					challenges: 0,
-					boons: 0,
+					boons: 1,
 					banes: 0,
 					delays: 0,
 					exertions: 0,
@@ -238,12 +263,12 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				5: {
-					label: "ROLL.RESULT.OneSuccess",
-					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
-					successes: 1,
+					label: "ROLL.RESULT.OneBoon",
+					image: "systems/wfrp3e/assets/icons/dice/expertise_oneboon.webp",
+					successes: 0,
 					righteousSuccesses: 0,
 					challenges: 0,
-					boons: 0,
+					boons: 1,
 					banes: 0,
 					delays: 0,
 					exertions: 0,
@@ -251,46 +276,23 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				6: {
-					label: "ROLL.RESULT.OneSuccess",
-					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
-					successes: 1,
+					label: "ROLL.RESULT.OneSigmarsComet",
+					image: "systems/wfrp3e/assets/icons/dice/expertise_onesigmarscomet.webp",
+					successes: 0,
 					righteousSuccesses: 0,
 					challenges: 0,
 					boons: 0,
 					banes: 0,
 					delays: 0,
 					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				7: {
-					label: "ROLL.RESULT.OneBoon",
-					image: "systems/wfrp3e/assets/icons/dice/characteristic_oneboon.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 1,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				8: {
-					label: "ROLL.RESULT.OneBoon",
-					image: "systems/wfrp3e/assets/icons/dice/characteristic_oneboon.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 1,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
+					sigmarsComets: 1,
 					chaosStars: 0
 				}
 			},
-			conservative: {
+		},
+		conservative: {
+			icon: "systems/wfrp3e/assets/icons/dice/conservative.webp",
+			results: {
 				1: {
 					label: "ROLL.RESULT.Blank",
 					image: "systems/wfrp3e/assets/icons/dice/conservative.webp",
@@ -422,241 +424,10 @@ export const WFRP3e = {
 					chaosStars: 0
 				}
 			},
-			expertise: {
-				1: {
-					label: "ROLL.RESULT.Blank",
-					image: "systems/wfrp3e/assets/icons/dice/expertise.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				2: {
-					label: "ROLL.RESULT.OneSuccess",
-					image: "systems/wfrp3e/assets/icons/dice/expertise_onesuccess.webp",
-					successes: 1,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				3: {
-					label: "ROLL.RESULT.OneRighteousSuccess",
-					image: "systems/wfrp3e/assets/icons/dice/expertise_onerighteoussuccess.webp",
-					successes: 0,
-					righteousSuccesses: 1,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				4: {
-					label: "ROLL.RESULT.OneBoon",
-					image: "systems/wfrp3e/assets/icons/dice/expertise_oneboon.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 1,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				5: {
-					label: "ROLL.RESULT.OneBoon",
-					image: "systems/wfrp3e/assets/icons/dice/expertise_oneboon.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 1,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				6: {
-					label: "ROLL.RESULT.OneSigmarsComet",
-					image: "systems/wfrp3e/assets/icons/dice/expertise_onesigmarscomet.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 1,
-					chaosStars: 0
-				}
-			},
-			fortune: {
-				1: {
-					label: "ROLL.RESULT.Blank",
-					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				}, 2: {
-					label: "ROLL.RESULT.Blank",
-					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				}, 3: {
-					label: "ROLL.RESULT.Blank",
-					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				}, 4: {
-					label: "ROLL.RESULT.OneSuccess",
-					image: "systems/wfrp3e/assets/icons/dice/fortune_onesuccess.webp",
-					successes: 1,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				}, 5: {
-					label: "ROLL.RESULT.OneSuccess",
-					image: "systems/wfrp3e/assets/icons/dice/fortune_onesuccess.webp",
-					successes: 1,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				}, 6: {
-					label: "ROLL.RESULT.OneBoon",
-					image: "systems/wfrp3e/assets/icons/dice/fortune_oneboon.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 1,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				}
-			},
-			misfortune: {
-				1: {
-					label: "ROLL.RESULT.Blank",
-					image: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				2: {
-					label: "ROLL.RESULT.Blank",
-					image: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				3: {
-					label: "ROLL.RESULT.Blank",
-					image: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				4: {
-					label: "ROLL.RESULT.OneChallenge",
-					image: "systems/wfrp3e/assets/icons/dice/misfortune_onechallenge.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 1,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				5: {
-					label: "ROLL.RESULT.OneChallenge",
-					image: "systems/wfrp3e/assets/icons/dice/misfortune_onechallenge.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 1,
-					boons: 0,
-					banes: 0,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				},
-				6: {
-					label: "ROLL.RESULT.OneBane",
-					image: "systems/wfrp3e/assets/icons/dice/misfortune_onebane.webp",
-					successes: 0,
-					righteousSuccesses: 0,
-					challenges: 0,
-					boons: 0,
-					banes: 1,
-					delays: 0,
-					exertions: 0,
-					sigmarsComets: 0,
-					chaosStars: 0
-				}
-			},
-			reckless: {
+		},
+		reckless: {
+			icon: "systems/wfrp3e/assets/icons/dice/reckless.webp",
+			results: {
 				1: {
 					label: "ROLL.RESULT.Blank",
 					image: "systems/wfrp3e/assets/icons/dice/reckless.webp",
@@ -788,7 +559,199 @@ export const WFRP3e = {
 					chaosStars: 0
 				}
 			}
-		}
+		},
+		challenge: {
+			icon: "systems/wfrp3e/assets/icons/dice/challenge.webp",
+			results: {
+				1: {
+					label: "ROLL.RESULT.Blank",
+					image: "systems/wfrp3e/assets/icons/dice/challenge.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				2: {
+					label: "ROLL.RESULT.OneChallenge",
+					image: "systems/wfrp3e/assets/icons/dice/challenge_onechallenge.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 1,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				3: {
+					label: "ROLL.RESULT.OneChallenge",
+					image: "systems/wfrp3e/assets/icons/dice/challenge_onechallenge.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 1,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				4: {
+					label: "ROLL.RESULT.TwoChallenges",
+					image: "systems/wfrp3e/assets/icons/dice/challenge_twochallenges.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 2,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				5: {
+					label: "ROLL.RESULT.TwoChallenges",
+					image: "systems/wfrp3e/assets/icons/dice/challenge_twochallenges.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 2,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				6: {
+					label: "ROLL.RESULT.OneBane",
+					image: "systems/wfrp3e/assets/icons/dice/challenge_onebane.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 1,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				7: {
+					label: "ROLL.RESULT.TwoBanes",
+					image: "systems/wfrp3e/assets/icons/dice/challenge_twobanes.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 2,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				8: {
+					label: "ROLL.RESULT.OneChaosStar",
+					image: "systems/wfrp3e/assets/icons/dice/challenge_onechaosstar.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 1
+				}
+			}
+		},
+		misfortune: {
+			icon: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
+			results: {
+				1: {
+					label: "ROLL.RESULT.Blank",
+					image: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				2: {
+					label: "ROLL.RESULT.Blank",
+					image: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				3: {
+					label: "ROLL.RESULT.Blank",
+					image: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				4: {
+					label: "ROLL.RESULT.OneChallenge",
+					image: "systems/wfrp3e/assets/icons/dice/misfortune_onechallenge.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 1,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				5: {
+					label: "ROLL.RESULT.OneChallenge",
+					image: "systems/wfrp3e/assets/icons/dice/misfortune_onechallenge.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 1,
+					boons: 0,
+					banes: 0,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				},
+				6: {
+					label: "ROLL.RESULT.OneBane",
+					image: "systems/wfrp3e/assets/icons/dice/misfortune_onebane.webp",
+					successes: 0,
+					righteousSuccesses: 0,
+					challenges: 0,
+					boons: 0,
+					banes: 1,
+					delays: 0,
+					exertions: 0,
+					sigmarsComets: 0,
+					chaosStars: 0
+				}
+			},
+		},
 	},
 	disease: {
 		symptoms: {
@@ -825,6 +788,53 @@ export const WFRP3e = {
 	stances: {
 		"conservative": "ACTION.FACE.Conservative",
 		"reckless": "ACTION.FACE.Reckless"
+	},
+	symbols: {
+		successes: {
+			cssClass: "success",
+			name: "ROLL.SYMBOL.Successes",
+			result: "ROLL.AMOUNT.Successes",
+		},
+		righteousSuccesses: {
+			cssClass: "righteous-success",
+			name: "ROLL.SYMBOL.RighteousSuccesses",
+			result: "ROLL.AMOUNT.RighteousSuccesses",
+		},
+		boons: {
+			cssClass: "boon",
+			name: "ROLL.SYMBOL.Boons",
+			result: "ROLL.AMOUNT.Boons",
+		},
+		sigmarsComets: {
+			cssClass: "sigmars-comet",
+			name: "ROLL.SYMBOL.SigmarsComets",
+			result: "ROLL.AMOUNT.SigmarsComets",
+		},
+		challenges: {
+			cssClass: "challenge",
+			name: "ROLL.SYMBOL.Challenges",
+			result: "ROLL.AMOUNT.Challenges",
+		},
+		banes: {
+			cssClass: "bane",
+			name: "ROLL.SYMBOL.Banes",
+			result: "ROLL.AMOUNT.Banes",
+		},
+		chaosStars: {
+			cssClass: "chaos-star",
+			name: "ROLL.SYMBOL.ChaosStars",
+			result: "ROLL.AMOUNT.ChaosStars",
+		},
+		delays: {
+			cssClass: "delay",
+			name: "ROLL.SYMBOL.Delays",
+			result: "ROLL.AMOUNT.Delays",
+		},
+		exertions: {
+			cssClass: "exertion",
+			name: "ROLL.SYMBOL.Exertions",
+			result: "ROLL.AMOUNT.Exertions",
+		}
 	},
 	talentTypes: {
 		focus: "TALENT.TYPE.Focus",

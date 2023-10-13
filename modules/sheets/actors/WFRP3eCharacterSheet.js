@@ -1,4 +1,4 @@
-import DiceHelper from "../../dice/DiceHelper.js";
+import CheckHelper from "../../dice/CheckHelper.js";
 
 /**
  * Provides the data and general interaction with Actor Sheets - Abstract class.
@@ -323,9 +323,9 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			case 0:
 				// If clicked Item is a skill or a weapon, prepare a check
 				if(clickedItem.type === "skill")
-					await DiceHelper.prepareSkillCheck(clickedItem);
+					await CheckHelper.prepareSkillCheck(clickedItem);
 				else if(clickedItem.type === "weapon")
-					await DiceHelper.prepareSkillCheck(clickedItem);
+					await CheckHelper.prepareSkillCheck(clickedItem);
 				// Else, open the clicked Item's sheet
 				else
 					clickedItem.sheet.render(true);

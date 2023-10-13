@@ -21,7 +21,7 @@ export default class RecklessDie extends WFRP3eDie
 	roll(options)
 	{
 		const roll = super.roll(options);
-		roll.symbols = CONFIG.WFRP3e.dice.results.reckless[roll.result];
+		roll.symbols = CONFIG.WFRP3e.dice.reckless.results[roll.result];
 		return roll;
 	}
 
@@ -32,7 +32,7 @@ export default class RecklessDie extends WFRP3eDie
 	 */
 	getResultLabel(result)
 	{
-		const die = CONFIG.WFRP3e.dice.results.reckless[result.result];
+		const die = CONFIG.WFRP3e.dice.reckless.results[result.result];
 		return `<img class="special-die" src="${die.image}" title="${game.i18n.localize(die.label)}" alt=""/>`;
 	}
 }

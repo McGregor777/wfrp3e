@@ -1,6 +1,4 @@
-/**
- * New extension of the core DicePool class for evaluating rolls with the WFRP3E's DiceTerms
- */
+/** @inheritDoc */
 export default class WFRP3eRoll extends Roll
 {
 	/**
@@ -13,7 +11,7 @@ export default class WFRP3eRoll extends Roll
 		super(formula);
 
 		this.symbols = {
-			...Object.keys(CONFIG.WFRP3e.dice.symbols).reduce((object, symbol) => {
+			...Object.keys(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
 				object[symbol] = +dicePool[symbol] ?? 0;
 				return object;
 			}, {})
@@ -21,8 +19,6 @@ export default class WFRP3eRoll extends Roll
 		this.hasSpecialDice = false;
 		this.hasStandardDice = false;
 		this.addedResults = [];
-
-		this.terms = this.parseShortHand(this.terms);
 
 		if(Object.hasOwn(options, 'flavor'))
 			this.flavor = options.flavor;
@@ -88,15 +84,12 @@ export default class WFRP3eRoll extends Roll
 		if(this.hasSpecialDice) {
 			this.terms.forEach((term) => {
 				if(game.symbols.diceterms.includes(term.constructor)) {
-					this.symbols.successes += parseInt(term.symbols.successes) + parseInt(term.symbols.righteousSuccesses);
-					this.symbols.righteousSuccesses += parseInt(term.symbols.righteousSuccesses);
-					this.symbols.challenges += parseInt(term.symbols.challenges);
-					this.symbols.boons += parseInt(term.symbols.boons);
-					this.symbols.banes += parseInt(term.symbols.banes);
-					this.symbols.delays += parseInt(term.symbols.delays);
-					this.symbols.exertions += parseInt(term.symbols.exertions);
-					this.symbols.sigmarsComets += parseInt(term.symbols.sigmarsComets);
-					this.symbols.chaosStars += parseInt(term.symbols.chaosStars);
+					Object.keys(CONFIG.WFRP3e.symbols).forEach((symbolName, index) => {
+						this.symbols[symbolName] += parseInt(term.symbols[symbolName]);
+
+						if(symbolName === "successes")
+							this.symbols[symbolName] += parseInt(term.symbols.righteousSuccesses);
+					});
 				}
 			});
 
@@ -168,8 +161,6 @@ export default class WFRP3eRoll extends Roll
 		parts.addedResults = this.addedResults;
 		parts.flavor = this.flavor;
 
-		console.log(parts);
-
 		return renderTemplate(this.constructor.TOOLTIP_TEMPLATE, {parts});
 	}
 
@@ -192,12 +183,12 @@ export default class WFRP3eRoll extends Roll
 		// Define chat data
 		if(this.data) {
 			this.data.additionalFlavorText = this.flavor;
-			this.data.symbols = CONFIG.WFRP3e.dice.symbols;
+			this.data.symbols = CONFIG.WFRP3e.symbols;
 		}
 		else
 			this.data = {
 			additionalFlavorText: this.flavor,
-			symbolClasses: CONFIG.WFRP3e.dice.symbols
+			symbols: CONFIG.WFRP3e.symbols
 		};
 
 		const chatData = {
@@ -218,7 +209,6 @@ export default class WFRP3eRoll extends Roll
 			hasSpecialDice: this.hasSpecialDice,
 			hasStandard: this.hasStandardDice,
 			hasSuccess: this.dice.length > 0,
-			diceSymbols: CONFIG.WFRP3e.dice.symbols,
 			data: this.data,
 			addedResults: this.addedResults,
 			publicRoll: !chatOptions.isPrivate,
@@ -297,27 +287,5 @@ export default class WFRP3eRoll extends Roll
 		roll.flavor = data.flavor;
 
 		return roll;
-	}
-
-	// If the main parser hands back a StringTerm attempt to turn it into a die.
-	parseShortHand(terms)
-	{
-		return terms.flatMap(term => {
-			if(!(term instanceof StringTerm) || /\d/.test(term.term))
-				return term;
-
-			return term.term.split('').reduce((acc, next) => {
-				if(next in CONFIG.Dice.terms) {
-					let cls = CONFIG.Dice.terms[next];
-
-					acc.push(new cls(1));
-				}
-				else
-					throw new Error(`Unknown die type '${next}'`)
-
-				return acc;
-			}, [])
-		//Put addition operators between each die.
-		}).flatMap((value, index, array) => array.length - 1 !== index ? [value, new OperatorTerm({operator: '+'})] : value)
 	}
 }

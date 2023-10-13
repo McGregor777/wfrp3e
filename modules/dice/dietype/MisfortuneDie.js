@@ -21,7 +21,7 @@ export default class MisfortuneDie extends WFRP3eDie
 	roll(options)
 	{
 		const roll = super.roll(options);
-		roll.symbols = CONFIG.WFRP3e.dice.results.misfortune[roll.result];
+		roll.symbols = CONFIG.WFRP3e.dice.misfortune.results[roll.result];
 		return roll;
 	}
 
@@ -32,7 +32,7 @@ export default class MisfortuneDie extends WFRP3eDie
 	 */
 	getResultLabel(result)
 	{
-		const die = CONFIG.WFRP3e.dice.results.misfortune[result.result];
+		const die = CONFIG.WFRP3e.dice.misfortune.results[result.result];
 		return `<img class="special-die" src="${die.image}" title="${game.i18n.localize(die.label)}" alt=""/>`;
 	}
 }

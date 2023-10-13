@@ -1,0 +1,232 @@
+.check-builder {
+	& .convert-buttons {
+		display: flex;
+		margin-bottom: 1rem;
+
+		& button {
+			font-size: 10pt;
+			line-height: 1.5rem;
+			text-align: center;
+		}
+	}
+
+	& .dice-pool {
+		margin-top: 0.5rem;
+		min-height: 3.5rem;
+		text-align: center;
+	}
+
+	& .dice-pool-table {
+		background-color: rgba(0, 0, 0, 0.05);
+		border: 1px solid var(--color-border-light-tertiary) none;
+		margin: 0.25rem;
+
+		& .pool-container {
+			align-items: baseline;
+			display: flex;
+			padding: 0.5rem;
+
+			&:nth-child(even) {
+				background-color: rgba(255, 255, 255, 0.2);
+			}
+
+			& > img {
+				align-self: center;
+			}
+
+			& > .pool-value {
+				background-color: #ddd;
+				border: 1px solid black;
+				font: 20pt "ArnoPro";
+				margin: 0 1rem;
+				padding-top: 0.5rem;
+				text-align: center;
+				width: 3.5rem;
+			}
+		}
+	}
+
+	& .dice-pool-hint {
+		margin: 0.5rem 1px 0.25rem 1px;
+	}
+
+	& .dice-pool-roll-options {
+		margin-top: 0.5rem;
+
+		& select, input
+		{
+			margin-top: 1px;
+			margin-right: 1px;
+		}
+	}
+
+	& .dice-pool-table {
+
+	}
+
+	& .hide {
+		display: none;
+	}
+
+	& .maximize {
+		width: 100%;
+	}
+
+	& .minimize {
+		max-width: 20%;
+	}
+
+	& .pool-text {
+		text-align: left;
+	}
+
+	& .roll-button {
+		margin-top: 1rem;
+	}
+
+	& .symbols-pool {
+		text-align: center;
+	}
+
+	& .symbols-pool-container {
+		padding: 0 1px;
+		min-width: 320px;
+
+		& .pool-value {
+			background-color: #ddd;
+			border: 1px solid black;
+			font: 16pt "ArnoPro";
+			margin: 0 0.25rem;
+			padding-top: 0.5rem;
+			text-align: center;
+			width: 3rem;
+		}
+
+		& .wfrp3e.picture {
+			display: inline-block;
+			width: 1.25rem;
+		}
+	}
+
+	.item-display {
+		margin: 0.5rem 0 0.8rem 0;
+		padding: 0.5rem;
+		border: 1px solid #782e22;
+		background: rgba(255, 255, 255, 0.75);
+
+		& img {
+			height: 50px;
+			width: auto;
+		}
+
+		& h4 {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-around;
+
+			& input {
+				width: 70%;
+			}
+		}
+
+		& .item-miss {
+			text-align: center;
+			font-style: italic;
+			color: darkred;
+		}
+
+		& .item-pill {
+			list-style-type: none;
+			padding: 0 0.25rem;
+			background-color: #aaa;
+			border: 1px solid black;
+			border-radius: 0.75rem;
+			display: inline-block;
+			margin: 1px;
+			cursor: pointer;
+			font-size: 10pt;
+			line-height: 1.5rem;
+			white-space: nowrap;
+
+			&.adjusted {
+				color: #8b0000;
+			}
+
+			& .rank {
+				padding-right: 15px;
+
+				&:hover {
+					color: green;
+				}
+			}
+
+			& .item-delete {
+				cursor: pointer;
+
+				&:hover {
+					color: red;
+				}
+			}
+		}
+	}
+
+	& .symbols-pool-container .pool-container {
+		align-items: baseline;
+		display: flex;
+
+		& > span {
+			flex-basis: 1.5rem;
+			text-align: center;
+		}
+	}
+}
+
+.dice-additional-flavor {
+	font-style: oblique;
+	font-size: 10pt;
+}
+
+.dice-array {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+
+	& .dice-rolls {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+
+		& .roll
+		{
+			width: 3.25rem;
+			float: left;
+		}
+	}
+}
+
+.dice-result {
+	& .roll-success {
+		color: darkgreen;
+	}
+
+	& .roll-failure {
+		color: darkred;
+	}
+}
+
+.dice-tooltip {
+	& .dice-rolls {
+		& .roll {
+			& > .special-die {
+				width: 44px;
+			}
+		}
+	}
+}
+
+.special-die {
+	border: none;
+}

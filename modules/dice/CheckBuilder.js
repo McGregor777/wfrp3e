@@ -1,16 +1,17 @@
+import DicePool from "./DicePool.js";
 import WFRP3eRoll from "./WFRP3eRoll.js";
 
+/** @inheritDoc */
 export default class CheckBuilder extends FormApplication
 {
 	/**
-	 * CheckBuilder constructor.
-	 * @param rollData
-	 * @param {DicePool} dicePool
+	 * @param {DicePool} [dicePool]
 	 * @param {string} [rollName]
-	 * @param {string} [rollFlavor]
-	 * @param {string} [rollSound]
+	 * @param {Object} [rollData]
+	 * @param {?string} [rollFlavor]
+	 * @param {?string} [rollSound]
 	 */
-	constructor(rollData, dicePool, rollName = game.i18n.localize("ROLL.FreeCheck"), rollFlavor, rollSound)
+	constructor(dicePool= new DicePool(), rollName = game.i18n.localize("ROLL.FreeCheck"), rollData = null, rollFlavor= null, rollSound= null)
 	{
 		super();
 
@@ -27,15 +28,22 @@ export default class CheckBuilder extends FormApplication
 	/** @inheritDoc */
 	get title()
 	{
-		return game.i18n.format("ROLL.DicePool");
+		switch(this.roll.data?.type) {
+			case "action":
+				return game.i18n.format("ROLL.ActionCheckBuilder", {action: this.roll.data.name});
+			case "skill":
+				return game.i18n.format("ROLL.SkillCheckBuilder", {skill: this.roll.data.name});
+			default:
+				return game.i18n.localize("ROLL.CheckBuilder");
+		}
 	}
 
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
 		return mergeObject(super.defaultOptions, {
-			classes: ["wfrp3e", "roll-dialog"],
-			template: "systems/wfrp3e/templates/dialogs/check-dialog.html",
+			classes: ["wfrp3e", "check-builder"],
+			template: "systems/wfrp3e/templates/applications/check-builder.hbs",
 			width: 420
 		});
 	}
@@ -55,9 +63,15 @@ export default class CheckBuilder extends FormApplication
 		}
 
 		return {
-			sounds,
-			isGM: game.user.isGM,
+			diceIcons: {
+				...Object.entries(CONFIG.WFRP3e.dice).reduce((object, dieType) => {
+					object[dieType[0]] = dieType[1].icon;
+					return object;
+				}, {})
+			},
 			flavor: this.roll.flavor,
+			isGM: game.user.isGM,
+			sounds,
 			users
 		};
 	}
@@ -168,15 +182,6 @@ export default class CheckBuilder extends FormApplication
 		});
 	}
 
-	_updatePreview(html)
-	{
-		const dicePoolDiv = html.find(".dice-pool-dialog .dice-pool")[0];
-		const symbolsPoolDiv = html.find(".dice-pool-dialog .symbols-pool")[0];
-
-		dicePoolDiv.innerHTML = "";
-		this.dicePool.renderDicePoolPreview(dicePoolDiv);
-	}
-
 	_initializeInputs(html)
 	{
 		html.find(".dice-pool-table input").each((key, value) => {
@@ -279,4 +284,87 @@ export default class CheckBuilder extends FormApplication
 	}
 
 	_updateObject() {}
+
+	/**
+	 * Updates the dice pool and symbol pool previews.
+	 * @param html
+	 * @private
+	 */
+	_updatePreview(html)
+	{
+		const dicePoolDiv = html.find(".dice-pool")[0];
+		const symbolsPoolDiv = html.find(".symbols-pool")[0];
+
+		this._renderDicePoolPreview(dicePoolDiv);
+		this._renderSymbolsPoolPreview(symbolsPoolDiv);
+	}
+
+	/**
+	 * Renders a preview of the dice pool.
+	 * @param {HTMLElement} container The dice pool preview container.
+	 * @returns {HTMLElement}
+	 */
+	_renderDicePoolPreview(container)
+	{
+		container.innerHTML = "";
+
+		const totalDice = Object.keys(CONFIG.WFRP3e.dice).reduce((accumulator, diceName) => accumulator + +this.dicePool[diceName + "Dice"], 0);
+
+		// Adjust dice icons' size.
+		let height = 48;
+		let width = 48;
+
+		if(totalDice > 15) {
+			height = 12;
+			width = 12;
+		}
+		else if(totalDice > 10) {
+			height = 24;
+			width = 24;
+		}
+		else if(totalDice > 7) {
+			height = 36;
+			width = 36;
+		}
+
+		// Add as many dice icons as needed.
+		Object.entries(CONFIG.WFRP3e.dice).forEach((dieType, index) => {
+			for(let i = 0; i < this.dicePool[dieType[0] + "Dice"]; i++) {
+				const img = document.createElement("img");
+
+				img.classList.add("special-die");
+				img.src = dieType[1].icon;
+				img.width = width;
+				img.height = height;
+
+				container.appendChild(img);
+			}
+		});
+
+		return container;
+	}
+
+	/**
+	 * Renders a preview of the symbol pool.
+	 * @param {HTMLElement} container The symbol pool preview container.
+	 * @returns {HTMLElement}
+	 */
+	_renderSymbolsPoolPreview(container)
+	{
+		container.innerHTML = "";
+
+		Object.entries(CONFIG.WFRP3e.symbols).forEach((symbol, index) => {
+			for(let i = 0; i < this.dicePool[symbol[0]]; i++) {
+				const span = document.createElement("span");
+
+				span.classList.add("wfrp3e-font");
+				span.classList.add("symbol");
+				span.classList.add(symbol[1].cssClass);
+
+				container.appendChild(span);
+			}
+		});
+
+		return container;
+	}
 }

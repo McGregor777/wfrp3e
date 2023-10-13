@@ -694,6 +694,151 @@
   bottom: 0;
   right: 5px;
 }
+.check-builder .convert-buttons {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.check-builder .convert-buttons button {
+  font-size: 10pt;
+  line-height: 1.5rem;
+  text-align: center;
+}
+.check-builder .dice-pool {
+  margin-top: 0.5rem;
+  min-height: 3.5rem;
+  text-align: center;
+}
+.check-builder .dice-pool-table {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-border-light-tertiary) none;
+  margin: 0.25rem;
+}
+.check-builder .dice-pool-table .pool-container {
+  align-items: baseline;
+  display: flex;
+  padding: 0.5rem;
+}
+.check-builder .dice-pool-table .pool-container:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.check-builder .dice-pool-table .pool-container > img {
+  align-self: center;
+}
+.check-builder .dice-pool-table .pool-container > .pool-value {
+  background-color: #ddd;
+  border: 1px solid black;
+  font: 20pt "ArnoPro";
+  margin: 0 1rem;
+  padding-top: 0.5rem;
+  text-align: center;
+  width: 3.5rem;
+}
+.check-builder .dice-pool-hint {
+  margin: 0.5rem 1px 0.25rem 1px;
+}
+.check-builder .dice-pool-roll-options {
+  margin-top: 0.5rem;
+}
+.check-builder .dice-pool-roll-options select,
+.check-builder .dice-pool-roll-options input {
+  margin-top: 1px;
+  margin-right: 1px;
+}
+.check-builder .hide {
+  display: none;
+}
+.check-builder .maximize {
+  width: 100%;
+}
+.check-builder .minimize {
+  max-width: 20%;
+}
+.check-builder .pool-text {
+  text-align: left;
+}
+.check-builder .roll-button {
+  margin-top: 1rem;
+}
+.check-builder .symbols-pool {
+  text-align: center;
+}
+.check-builder .symbols-pool-container {
+  padding: 0 1px;
+  min-width: 320px;
+}
+.check-builder .symbols-pool-container .pool-value {
+  background-color: #ddd;
+  border: 1px solid black;
+  font: 16pt "ArnoPro";
+  margin: 0 0.25rem;
+  padding-top: 0.5rem;
+  text-align: center;
+  width: 3rem;
+}
+.check-builder .symbols-pool-container .wfrp3e.picture {
+  display: inline-block;
+  width: 1.25rem;
+}
+.check-builder .item-display {
+  margin: 0.5rem 0 0.8rem 0;
+  padding: 0.5rem;
+  border: 1px solid #782e22;
+  background: rgba(255, 255, 255, 0.75);
+}
+.check-builder .item-display img {
+  height: 50px;
+  width: auto;
+}
+.check-builder .item-display h4 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.check-builder .item-display h4 input {
+  width: 70%;
+}
+.check-builder .item-display .item-miss {
+  text-align: center;
+  font-style: italic;
+  color: darkred;
+}
+.check-builder .item-display .item-pill {
+  list-style-type: none;
+  padding: 0 0.25rem;
+  background-color: #aaa;
+  border: 1px solid black;
+  border-radius: 0.75rem;
+  display: inline-block;
+  margin: 1px;
+  cursor: pointer;
+  font-size: 10pt;
+  line-height: 1.5rem;
+  white-space: nowrap;
+}
+.check-builder .item-display .item-pill.adjusted {
+  color: #8b0000;
+}
+.check-builder .item-display .item-pill .rank {
+  padding-right: 15px;
+}
+.check-builder .item-display .item-pill .rank:hover {
+  color: green;
+}
+.check-builder .item-display .item-pill .item-delete {
+  cursor: pointer;
+}
+.check-builder .item-display .item-pill .item-delete:hover {
+  color: red;
+}
+.check-builder .symbols-pool-container .pool-container {
+  align-items: baseline;
+  display: flex;
+}
+.check-builder .symbols-pool-container .pool-container > span {
+  flex-basis: 1.5rem;
+  text-align: center;
+}
 .dice-additional-flavor {
   font-style: oblique;
   font-size: 10pt;
@@ -711,88 +856,8 @@
   overflow: hidden;
 }
 .dice-array .dice-rolls .roll {
-  width: 3.5rem;
+  width: 3.25rem;
   float: left;
-}
-.dice-pool-dialog .convert-buttons {
-  display: flex;
-  margin-bottom: 1rem;
-}
-.dice-pool-dialog .convert-buttons button {
-  font-size: 10pt;
-  line-height: 1.5rem;
-  text-align: center;
-}
-.dice-pool-dialog .dice-pool {
-  margin-top: 0.5rem;
-  min-height: 3.5rem;
-  text-align: center;
-}
-.dice-pool-dialog .dice-pool-table {
-  padding: 0.25rem 1px;
-}
-.dice-pool-dialog .dice-pool-table .pool-container {
-  align-items: baseline;
-  display: flex;
-}
-.dice-pool-dialog .dice-pool-table .pool-container > span {
-  flex-basis: 1.5rem;
-}
-.dice-pool-dialog .dice-pool-table .pool-value {
-  background-color: #ddd;
-  border: 1px solid black;
-  font: 20pt "ArnoPro";
-  padding-top: 0.5rem;
-  text-align: center;
-  width: 3.5rem;
-}
-.dice-pool-dialog .dice-pool-hint {
-  margin: 0.5rem 1px 0.25rem 1px;
-}
-.dice-pool-dialog .dice-pool-roll-options {
-  margin-top: 0.5rem;
-}
-.dice-pool-dialog .dice-pool-roll-options select,
-.dice-pool-dialog .dice-pool-roll-options input {
-  margin-top: 1px;
-  margin-right: 1px;
-}
-.dice-pool-dialog .hide {
-  display: none;
-}
-.dice-pool-dialog .maximize {
-  width: 100%;
-}
-.dice-pool-dialog .minimize {
-  max-width: 20%;
-}
-.dice-pool-dialog .pool-text {
-  text-align: left;
-  margin-left: 0.5rem;
-}
-.dice-pool-dialog .roll-button {
-  margin-top: 1rem;
-}
-.dice-pool-dialog .symbols-pool {
-  margin-top: 0.5rem;
-  min-height: 3.5rem;
-  text-align: center;
-}
-.dice-pool-dialog .symbols-pool-container {
-  padding: 0 1px;
-  min-width: 320px;
-}
-.dice-pool-dialog .symbols-pool-container .pool-value {
-  background-color: #ddd;
-  border: 1px solid black;
-  font: 16pt "ArnoPro";
-  padding-top: 0.5rem;
-  text-align: center;
-  width: 3rem;
-}
-.dice-pool-dialog .symbols-pool-container .wfrp3e.picture {
-  display: inline-block;
-  width: 1.25rem;
 }
 .dice-result .roll-success {
   color: darkgreen;
@@ -802,65 +867,6 @@
 }
 .dice-tooltip .dice-rolls .roll > .special-die {
   width: 44px;
-}
-.item-display {
-  margin: 0.5rem 0 0.8rem 0;
-  padding: 0.5rem;
-  border: 1px solid #782e22;
-  background: rgba(255, 255, 255, 0.75);
-}
-.item-display img {
-  height: 50px;
-  width: auto;
-}
-.item-display h4 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-}
-.item-display h4 input {
-  width: 70%;
-}
-.item-display .item-miss {
-  text-align: center;
-  font-style: italic;
-  color: darkred;
-}
-.item-display .item-pill {
-  list-style-type: none;
-  padding: 0 0.25rem;
-  background-color: #aaa;
-  border: 1px solid black;
-  border-radius: 0.75rem;
-  display: inline-block;
-  margin: 1px;
-  cursor: pointer;
-  font-size: 10pt;
-  line-height: 1.5rem;
-  white-space: nowrap;
-}
-.item-display .item-pill.adjusted {
-  color: #8b0000;
-}
-.item-display .item-pill .rank {
-  padding-right: 15px;
-}
-.item-display .item-pill .rank:hover {
-  color: green;
-}
-.item-display .item-pill .item-delete {
-  cursor: pointer;
-}
-.item-display .item-pill .item-delete:hover {
-  color: red;
-}
-.roll-dialog .symbols-pool-container .pool-container {
-  align-items: baseline;
-  display: flex;
-}
-.roll-dialog .symbols-pool-container .pool-container > span {
-  flex-basis: 1rem;
 }
 .special-die {
   border: none;

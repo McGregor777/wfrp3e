@@ -182,6 +182,9 @@
 	"PARTY.TENSIONMETER.Increase": "Increase Tension Meter",
 	"PARTY.TENSIONMETER.Title": "Party Tension Meter",
 
+	"ROLL.CheckBuilder": "Check Builder",
+	"ROLL.ActionCheckBuilder": "{action} Check Builder",
+	"ROLL.SkillCheckBuilder": "{skill} Check Builder",
 	"ROLL.DicePool": "Dice pool",
 	"ROLL.FreeCheck": "Free check",
 	"ROLL.SkillCheck": "{skill} check",

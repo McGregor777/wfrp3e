@@ -182,6 +182,9 @@
 	"PARTY.TENSIONMETER.Increase": "Augmenter la Jauge de Tension",
 	"PARTY.TENSIONMETER.Title": "Jauge de Tension du Groupe",
 
+	"ROLL.CheckBuilder": "Préparateur de test",
+	"ROLL.ActionCheckBuilder": "Préparateur du test de {action}",
+	"ROLL.SkillCheckBuilder": "Préparateur du test de {skill}",
 	"ROLL.DicePool": "Réserve de dés",
 	"ROLL.FreeCheck": "Test libre",
 	"ROLL.SkillCheck": "Test de {skill}",
