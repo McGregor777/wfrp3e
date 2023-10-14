@@ -374,50 +374,6 @@
 .career-item-sheet .sheet-form-div.career-advance-options > *:last-child {
   margin-left: 1rem;
 }
-.conditions .condition-card {
-  position: relative;
-  width: 255px;
-  height: 385px;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #806050;
-  text-align: center;
-}
-.conditions .condition-card .condition-card-description {
-  text-shadow: 0 0 16px white;
-  background-color: #b0a0a0;
-}
-.conditions .condition-card .condition-card-description p {
-  text-align: center;
-}
-.conditions .condition-card .condition-card-duration {
-  padding: 10px 0 20px;
-  background-color: #c0b0a0;
-  color: white;
-  font-size: 14pt;
-  font-weight: bold;
-  font-variant-caps: small-caps;
-  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black, 0 0 8px black;
-}
-.conditions .condition-card .condition-card-header {
-  padding: 20px 0;
-  background: #903030;
-}
-.conditions .condition-card .condition-card-header .condition-card-name {
-  color: white;
-  font: 16pt "Caslon Antique";
-  font-variant-caps: small-caps;
-  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
-}
-.conditions .condition-card .condition-card-header .condition-card-name:hover {
-  text-shadow: 0 0 8px var(--color-shadow-primary);
-}
-.conditions .condition-card .item-delete-link {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
-}
 .character-sheet .character-sheet-body {
   display: flex;
   flex-direction: column;
@@ -623,6 +579,214 @@
   text-align: center;
   font-variant-caps: small-caps;
 }
+.check-builder form {
+  display: flex;
+}
+.check-builder form .main-options {
+  flex: 1 0 420px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+.check-builder form .main-options .convert-buttons {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.check-builder form .main-options .convert-buttons button {
+  font-size: 10pt;
+  line-height: 1.5rem;
+  text-align: center;
+}
+.check-builder form .main-options .dice-pool {
+  margin-top: 0.5rem;
+  min-height: 3.5rem;
+  text-align: center;
+}
+.check-builder form .main-options .dice-pool-table {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-border-light-tertiary) none;
+  margin: 0.25rem;
+}
+.check-builder form .main-options .dice-pool-table .pool-container {
+  align-items: baseline;
+  display: flex;
+  padding: 0.5rem;
+}
+.check-builder form .main-options .dice-pool-table .pool-container:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.check-builder form .main-options .dice-pool-table .pool-container > img {
+  align-self: center;
+}
+.check-builder form .main-options .dice-pool-table .pool-container > .pool-value {
+  background-color: #ddd;
+  border: 1px solid black;
+  font: 20pt "ArnoPro";
+  margin: 0 1rem;
+  padding-top: 0.5rem;
+  text-align: center;
+  width: 3.5rem;
+}
+.check-builder form .main-options .dice-pool-hint {
+  margin: 0.5rem 1px 0.25rem 1px;
+}
+.check-builder form .main-options .dice-pool-roll-options {
+  margin-top: 0.5rem;
+}
+.check-builder form .main-options .dice-pool-roll-options select,
+.check-builder form .main-options .dice-pool-roll-options input {
+  margin-top: 1px;
+  margin-right: 1px;
+}
+.check-builder form .main-options .hide {
+  display: none;
+}
+.check-builder form .main-options .maximize {
+  width: 100%;
+}
+.check-builder form .main-options .minimize {
+  max-width: 20%;
+}
+.check-builder form .main-options .pool-text {
+  text-align: left;
+}
+.check-builder form .main-options .roll-button {
+  margin-top: 1rem;
+}
+.check-builder form .main-options .symbols-pool {
+  font-size: 20pt;
+  text-align: center;
+}
+.check-builder form .main-options .symbols-pool-container {
+  min-width: 320px;
+  padding: 0 1px;
+}
+.check-builder form .main-options .symbols-pool-container .pool-value {
+  background-color: #ddd;
+  border: 1px solid black;
+  font: 16pt "ArnoPro";
+  margin: 0 0.25rem;
+  padding-top: 0.5rem;
+  text-align: center;
+  width: 3rem;
+}
+.check-builder form .main-options .symbols-pool-container .wfrp3e.picture {
+  display: inline-block;
+  width: 1.25rem;
+}
+.check-builder form .main-options .item-display {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid #782e22;
+  margin: 0.5rem 0 0.8rem 0;
+  padding: 0.5rem;
+}
+.check-builder form .main-options .item-display img {
+  height: 50px;
+  width: auto;
+}
+.check-builder form .main-options .item-display h4 {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.check-builder form .main-options .item-display h4 input {
+  width: 70%;
+}
+.check-builder form .main-options .item-display .item-miss {
+  color: darkred;
+  font-style: italic;
+  text-align: center;
+}
+.check-builder form .main-options .item-display .item-pill {
+  background-color: #aaa;
+  border: 1px solid black;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 10pt;
+  line-height: 1.5rem;
+  list-style-type: none;
+  margin: 1px;
+  padding: 0 0.25rem;
+  white-space: nowrap;
+}
+.check-builder form .main-options .item-display .item-pill.adjusted {
+  color: #8b0000;
+}
+.check-builder form .main-options .item-display .item-pill .rank {
+  padding-right: 15px;
+}
+.check-builder form .main-options .item-display .item-pill .rank:hover {
+  color: green;
+}
+.check-builder form .main-options .item-display .item-pill .item-delete {
+  cursor: pointer;
+}
+.check-builder form .main-options .item-display .item-pill .item-delete:hover {
+  color: red;
+}
+.check-builder form .main-options .symbols-pool-container .pool-container {
+  align-items: baseline;
+  display: flex;
+}
+.check-builder form .main-options .symbols-pool-container .pool-container > span {
+  flex-basis: 1.5rem;
+  text-align: center;
+}
+.check-builder form .quick-settings {
+  flex: 1 1 200px;
+}
+.check-builder form .quick-settings > div {
+  margin-bottom: 0.5rem;
+}
+.check-builder form .quick-settings > div > * {
+  display: block;
+  width: 100%;
+}
+.conditions .condition-card {
+  position: relative;
+  width: 255px;
+  height: 385px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #806050;
+  text-align: center;
+}
+.conditions .condition-card .condition-card-description {
+  text-shadow: 0 0 16px white;
+  background-color: #b0a0a0;
+}
+.conditions .condition-card .condition-card-description p {
+  text-align: center;
+}
+.conditions .condition-card .condition-card-duration {
+  padding: 10px 0 20px;
+  background-color: #c0b0a0;
+  color: white;
+  font-size: 14pt;
+  font-weight: bold;
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black, 0 0 8px black;
+}
+.conditions .condition-card .condition-card-header {
+  padding: 20px 0;
+  background: #903030;
+}
+.conditions .condition-card .condition-card-header .condition-card-name {
+  color: white;
+  font: 16pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.conditions .condition-card .condition-card-header .condition-card-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.conditions .condition-card .item-delete-link {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
 .diseases .disease-card {
   position: relative;
   width: 255px;
@@ -693,183 +857,6 @@
   position: absolute;
   bottom: 0;
   right: 5px;
-}
-.check-builder .convert-buttons {
-  display: flex;
-  margin-bottom: 1rem;
-}
-.check-builder .convert-buttons button {
-  font-size: 10pt;
-  line-height: 1.5rem;
-  text-align: center;
-}
-.check-builder .dice-pool {
-  margin-top: 0.5rem;
-  min-height: 3.5rem;
-  text-align: center;
-}
-.check-builder .dice-pool-table {
-  background-color: rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--color-border-light-tertiary) none;
-  margin: 0.25rem;
-}
-.check-builder .dice-pool-table .pool-container {
-  align-items: baseline;
-  display: flex;
-  padding: 0.5rem;
-}
-.check-builder .dice-pool-table .pool-container:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-.check-builder .dice-pool-table .pool-container > img {
-  align-self: center;
-}
-.check-builder .dice-pool-table .pool-container > .pool-value {
-  background-color: #ddd;
-  border: 1px solid black;
-  font: 20pt "ArnoPro";
-  margin: 0 1rem;
-  padding-top: 0.5rem;
-  text-align: center;
-  width: 3.5rem;
-}
-.check-builder .dice-pool-hint {
-  margin: 0.5rem 1px 0.25rem 1px;
-}
-.check-builder .dice-pool-roll-options {
-  margin-top: 0.5rem;
-}
-.check-builder .dice-pool-roll-options select,
-.check-builder .dice-pool-roll-options input {
-  margin-top: 1px;
-  margin-right: 1px;
-}
-.check-builder .hide {
-  display: none;
-}
-.check-builder .maximize {
-  width: 100%;
-}
-.check-builder .minimize {
-  max-width: 20%;
-}
-.check-builder .pool-text {
-  text-align: left;
-}
-.check-builder .roll-button {
-  margin-top: 1rem;
-}
-.check-builder .symbols-pool {
-  text-align: center;
-}
-.check-builder .symbols-pool-container {
-  padding: 0 1px;
-  min-width: 320px;
-}
-.check-builder .symbols-pool-container .pool-value {
-  background-color: #ddd;
-  border: 1px solid black;
-  font: 16pt "ArnoPro";
-  margin: 0 0.25rem;
-  padding-top: 0.5rem;
-  text-align: center;
-  width: 3rem;
-}
-.check-builder .symbols-pool-container .wfrp3e.picture {
-  display: inline-block;
-  width: 1.25rem;
-}
-.check-builder .item-display {
-  margin: 0.5rem 0 0.8rem 0;
-  padding: 0.5rem;
-  border: 1px solid #782e22;
-  background: rgba(255, 255, 255, 0.75);
-}
-.check-builder .item-display img {
-  height: 50px;
-  width: auto;
-}
-.check-builder .item-display h4 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-}
-.check-builder .item-display h4 input {
-  width: 70%;
-}
-.check-builder .item-display .item-miss {
-  text-align: center;
-  font-style: italic;
-  color: darkred;
-}
-.check-builder .item-display .item-pill {
-  list-style-type: none;
-  padding: 0 0.25rem;
-  background-color: #aaa;
-  border: 1px solid black;
-  border-radius: 0.75rem;
-  display: inline-block;
-  margin: 1px;
-  cursor: pointer;
-  font-size: 10pt;
-  line-height: 1.5rem;
-  white-space: nowrap;
-}
-.check-builder .item-display .item-pill.adjusted {
-  color: #8b0000;
-}
-.check-builder .item-display .item-pill .rank {
-  padding-right: 15px;
-}
-.check-builder .item-display .item-pill .rank:hover {
-  color: green;
-}
-.check-builder .item-display .item-pill .item-delete {
-  cursor: pointer;
-}
-.check-builder .item-display .item-pill .item-delete:hover {
-  color: red;
-}
-.check-builder .symbols-pool-container .pool-container {
-  align-items: baseline;
-  display: flex;
-}
-.check-builder .symbols-pool-container .pool-container > span {
-  flex-basis: 1.5rem;
-  text-align: center;
-}
-.dice-additional-flavor {
-  font-style: oblique;
-  font-size: 10pt;
-}
-.dice-array {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-.dice-array .dice-rolls {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-.dice-array .dice-rolls .roll {
-  width: 3.25rem;
-  float: left;
-}
-.dice-result .roll-success {
-  color: darkgreen;
-}
-.dice-result .roll-failure {
-  color: darkred;
-}
-.dice-tooltip .dice-rolls .roll > .special-die {
-  width: 44px;
-}
-.special-die {
-  border: none;
 }
 .insanities .insanity-card {
   position: relative;
@@ -1204,6 +1191,38 @@
   justify-content: space-between;
   margin-left: 0.5rem;
 }
+.dice-additional-flavor {
+  font-size: 10pt;
+  font-style: oblique;
+}
+.dice-array {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.dice-array .dice-rolls {
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+.dice-array .dice-rolls .roll {
+  float: left;
+  width: 3.25rem;
+}
+.dice-result .roll-success {
+  color: darkgreen;
+}
+.dice-result .roll-failure {
+  color: darkred;
+}
+.dice-tooltip .dice-rolls .roll > .special-die {
+  width: 44px;
+}
+.roll-effects > h5 {
+  margin: 0;
+}
 .talent-card {
   border: 1px solid black;
   border-radius: 10px;
@@ -1488,6 +1507,9 @@ th.shrinked {
   display: flex !important;
   flex-direction: column;
   flex-grow: 1;
+}
+.special-die {
+  border: none;
 }
 .tab-link.active {
   color: white;

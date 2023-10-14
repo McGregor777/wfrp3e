@@ -75,17 +75,17 @@
 						<div class="sheet-form-div">
 							<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Effects'}}</label>
 
-							{{#each @root.effectSymbols}}
+							{{#each @root.symbols as |symbol sym|}}
 								<div class="action-sheet-effect-group">
-									{{this}}
-									<a class="action-sheet-effect-add" data-face="{{st}}" data-symbol="{{this}}"><span class="fas fa-plus"></span></a>
+									<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+									<a class="action-sheet-effect-add" data-face="{{st}}" data-symbol="{{sym}}"><span class="fas fa-plus"></span></a>
 
-									{{#each (lookup (lookup (lookup @root.item.system st) 'effects') this) as |effect ef|}}
+									{{#each (lookup (lookup (lookup @root.item.system st) 'effects') sym) as |effect ef|}}
 										<div class="action-sheet-effect">
-											<input class="sheet-form-input action-sheet-effect-symbol-amount" name="system.{{st}}.effects.{{../this}}.{{ef}}.symbolAmount" type="number" value="{{effect.symbolAmount}}" min="0" placeholder="{{localize 'ACTION.EFFECT.SymbolAmount'}}" data-dtype="Number"/>
-											{{editor effect.description target=(concat (concat (concat (concat (concat (concat "system." st) ".effects.") ../this) ".") ef) ".description") button=true owner=@root.owner editable=@root.editable}}
-											<input class="sheet-form-input action-sheet-effect-description" name="system.{{st}}.effects.{{../this}}.{{ef}}.description" type="text" value="{{effect.description}}" placeholder="{{localize 'ACTION.EFFECT.Description'}}" data-dtype="String" />
-											<a class="action-sheet-effect-remove fa fa-eraser" data-face="{{st}}" data-symbol="{{../this}}" data-index="{{ef}}"></a>
+											<input class="sheet-form-input action-sheet-effect-symbol-amount" name="system.{{st}}.effects.{{sym}}.{{ef}}.symbolAmount" type="number" value="{{effect.symbolAmount}}" min="0" placeholder="{{localize 'ACTION.EFFECT.SymbolAmount'}}" data-dtype="Number"/>
+											{{editor effect.description target=(concat (concat (concat (concat (concat (concat "system." st) ".effects.") sym) ".") ef) ".description") button=true owner=@root.owner editable=@root.editable}}
+											<input class="sheet-form-input action-sheet-effect-description" name="system.{{st}}.effects.{{sym}}.{{ef}}.description" type="text" value="{{effect.description}}" placeholder="{{localize 'ACTION.EFFECT.Description'}}" data-dtype="String" />
+											<a class="action-sheet-effect-remove fa fa-eraser" data-face="{{st}}" data-symbol="{{sym}}" data-index="{{ef}}"></a>
 										</div>
 									{{/each}}
 								</div>

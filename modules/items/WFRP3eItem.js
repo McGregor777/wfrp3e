@@ -1,3 +1,5 @@
+import CheckHelper from "../dice/CheckHelper.js";
+
 export default class WFRP3eItem extends Item
 {
 	/** @inheritDoc */
@@ -9,6 +11,72 @@ export default class WFRP3eItem extends Item
 
 		if(this[`${functionName}`])
 			this[`${functionName}`]();
+	}
+
+	/**
+	 * @param {Object} [options]
+	 */
+	useItem(options = {})
+	{
+		const functionName = `use${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`;
+
+		if(this[`${functionName}`])
+			this[`${functionName}`](options);
+		else
+			this.sheet.render(true);
+	}
+
+	/**
+	 * @param {Object} [options]
+	 */
+	async useAction(options = {})
+	{
+		if(!options.face)
+			throw new Error("Knowing which face of the Action to use is needed.");
+
+		if(CheckHelper.doesRequireNoCheck(this.system[options.face].check))
+			await new Dialog({
+				title: game.i18n.localize("DIALOG.TITLE.ActionUsageConfirmation"),
+				content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.ActionUsageConfirmation", {action: this.system[options.face].name}) + "</p>",
+				buttons: {
+					confirm: {
+						icon: '<span class="fa fa-check"></span>',
+						label: "Yes",
+						callback: async dlg => {
+							this.exhaustAction(options.face);
+
+							return ChatMessage.create({
+								content: await renderTemplate("systems/wfrp3e/templates/chatmessages/action-effects.hbs", {
+									action: this,
+									face: options.face,
+									symbols: CONFIG.WFRP3e.symbols,
+									effects: this.system[options.face].effects
+								}),
+								flavor: game.i18n.format("ACTION.UsageMessage", {
+									actor: this.actor.name,
+									action: this.system[options.face].name
+								}),
+								speaker: ChatMessage.getSpeaker({actor: this.actor})
+							});
+						}
+					},
+					cancel: {
+						icon: '<span class="fas fa-xmark"></span>',
+						label: "Cancel"
+					},
+				},
+				default: "confirm"
+			}).render(true);
+		else
+			await CheckHelper.prepareActionCheck(this, options.face);
+	}
+
+	/**
+	 * @param {Object} [options]
+	 */
+	async useSkill(options = {})
+	{
+		await CheckHelper.prepareSkillCheck(this);
 	}
 
 	/**

@@ -23,6 +23,20 @@ export default class WFRP3eActor extends Actor
 	}
 
 	/**
+	 * Gets the name of Character's current stance.
+	 * @returns {string}
+	 */
+	getCurrentStanceName()
+	{
+		if(this.system.attributes.stance.current > 0)
+			return "conservative";
+		else if(this.system.attributes.stance.current < 0)
+			return "reckless";
+
+		return this.system.defaultStance;
+	}
+
+	/**
 	 * Adds a WFRP3eActor as a new member of the Party.
 	 * @param newMember {WFRP3eActor}
 	 */

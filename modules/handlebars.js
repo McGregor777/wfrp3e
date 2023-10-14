@@ -47,22 +47,5 @@ export default function()
 
 			return value;
 		});
-
-		Handlebars.registerHelper("abbreviateCharacteristic", (value) => {
-			switch(value) {
-				case "strength":
-					return "CHARACTERISTIC.ABBREVIATION.Strength";
-				case "toughness":
-					return "CHARACTERISTIC.ABBREVIATION.Toughness";
-				case "agility":
-					return "CHARACTERISTIC.ABBREVIATION.Agility";
-				case "intelligence":
-					return "CHARACTERISTIC.ABBREVIATION.Intelligence";
-				case "willpower":
-					return "CHARACTERISTIC.ABBREVIATION.Willpower";
-				case "fellowship":
-					return "CHARACTERISTIC.ABBREVIATION.Fellowship";
-			}
-		});
 	});
 }

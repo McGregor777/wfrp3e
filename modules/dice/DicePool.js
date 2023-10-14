@@ -16,12 +16,12 @@ export default class DicePool
 	 */
 	constructor(dicePool = {})
 	{
-		Object.keys(CONFIG.WFRP3e.dice).forEach((diceName, index) => {
+		Object.keys(CONFIG.WFRP3e.dice).forEach((diceName) => {
 			this[diceName + "Dice"] = dicePool[diceName + "Dice"] ?? 0;
 		});
 
-		Object.keys(CONFIG.WFRP3e.symbols).forEach((symbol, index) => {
-			this[symbol] = dicePool[symbol] ?? 0;
+		Object.values(CONFIG.WFRP3e.symbols).forEach((symbol) => {
+			this[symbol.plural] = dicePool[symbol.plural] ?? 0;
 		});
 
 		this.source = {};

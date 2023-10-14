@@ -20,14 +20,14 @@
 	</td>
 
 	<td class="center-aligned">
-		<span class="weapon-row-group">{{localize (lookup @root.weaponGroups weapon.system.group)}}</span>
+		<span class="weapon-row-group">{{localize (lookup (lookup @root.weaponGroups weapon.system.group) "name")}}</span>
 	</td>
 
 	<td class="shrinked">
 		<span class="weapon-row-encumbrance">{{weapon.system.encumbrance}}</span>
 	</td>
 
-	{{#>if (lookup . document.isOwner)}}
+	{{#>if @root.document.isOwner}}
 		<td class="shrinked">
 			<a class="item-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
 		</td>

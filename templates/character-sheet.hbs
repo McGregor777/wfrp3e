@@ -33,47 +33,9 @@
 					</div>
 
 					<div class="characteristics">
-						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='CHARACTERISTIC.Strength'
-							abbreviation='CHARACTERISTIC.St'
-							dataPath='system.attributes.characteristics.strength'
-							value=actor.system.attributes.characteristics.strength.value
-							fortune=actor.system.attributes.characteristics.strength.fortune}}
-
-						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='CHARACTERISTIC.Toughness'
-							abbreviation='CHARACTERISTIC.To'
-							dataPath='system.attributes.characteristics.toughness'
-							value=actor.system.attributes.characteristics.toughness.value
-							fortune=actor.system.attributes.characteristics.toughness.fortune}}
-
-						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='CHARACTERISTIC.Agility'
-							abbreviation='CHARACTERISTIC.Ag'
-							dataPath='system.attributes.characteristics.agility'
-							value=actor.system.attributes.characteristics.agility.value
-							fortune=actor.system.attributes.characteristics.agility.fortune}}
-
-						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='CHARACTERISTIC.Intelligence'
-							abbreviation='CHARACTERISTIC.Int'
-							dataPath='system.attributes.characteristics.intelligence'
-							value=actor.system.attributes.characteristics.intelligence.value
-							fortune=actor.system.attributes.characteristics.intelligence.fortune}}
-
-						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='CHARACTERISTIC.Willpower'
-							abbreviation='CHARACTERISTIC.WP'
-							dataPath='system.attributes.characteristics.willpower'
-							value=actor.system.attributes.characteristics.willpower.value
-							fortune=actor.system.attributes.characteristics.willpower.fortune}}
-
-						{{>systems/wfrp3e/templates/partials/characteristic-partial.html
-							title='CHARACTERISTIC.Fellowship'
-							abbreviation='CHARACTERISTIC.Fel'
-							dataPath='system.attributes.characteristics.fellowship'
-							value=actor.system.attributes.characteristics.fellowship.value
-							fortune=actor.system.attributes.characteristics.fellowship.fortune}}
+						{{#each characteristics as |characteristic char|}}
+							{{>systems/wfrp3e/templates/partials/characteristic-partial.hbs characteristic=characteristic char=char}}
+						{{/each}}
 					</div>
 				</div>
 			</div>
@@ -109,8 +71,8 @@
 					<span class="character-sheet-title">{{localize 'CHARACTER.Stances'}}</span>
 
 					<div class="stance-meter-segments">
-						{{#for actor.stanceMeter.reckless (increment actor.stanceMeter.conservative 1) 1}}
-							<a class="stance-meter-segment {{#if (equalTo @root.actor.system.attributes.stance.current this)}}active{{/if}}">
+						{{#for actor.system.stanceMeter.reckless (increment actor.system.stanceMeter.conservative 1) 1}}
+							<a class="stance-meter-segment{{#if (equalTo @root.actor.system.attributes.stance.current this)}} active{{/if}}">
 								<img class="stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}"
 									 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
 								<input name="system.attributes.stance.current"
@@ -167,7 +129,7 @@
 				<table class="skill-table">
 					<tbody>
 						{{#each items.skills as |skill sk|}}
-							{{>systems/wfrp3e/templates/partials/item-skill-row.html skill=skill}}
+							{{>systems/wfrp3e/templates/partials/item-skill-row.hbs skill=skill}}
 						{{/each}}
 					</tbody>
 				</table>
@@ -190,7 +152,7 @@
 			<div class="character-sheet-careers">
 				{{#each items.careers as |career|}}
 					<div class="career-container tab item-container" data-group="careers" data-tab="{{career._id}}">
-						{{>systems/wfrp3e/templates/partials/item-career-partial.html career=career}}
+						{{>systems/wfrp3e/templates/partials/item-career-partial.hbs career=career}}
 					</div>
 				{{/each}}
 			</div>
@@ -276,67 +238,23 @@
 
 		<section class="tab actions-tab" data-group="primary" data-tab="actions">
 			<div class="character-sheet-action-tabs sheet-tabs" data-group="actions">
-				{{#if items.actions.melee}}
-					<a class="tab-link melee" data-tab="melee">{{localize 'ACTION.TYPE.Melee'}}</a>
-				{{/if}}
-
-				{{#if items.actions.ranged}}
-					<a class="tab-link ranged" data-tab="ranged">{{localize 'ACTION.TYPE.Ranged'}}</a>
-				{{/if}}
-
-				{{#if items.actions.support}}
-					<a class="tab-link support" data-tab="support">{{localize 'ACTION.TYPE.Support'}}</a>
-				{{/if}}
-
-				{{#if items.actions.blessing}}
-					<a class="tab-link blessing" data-tab="blessing">{{localize 'ACTION.TYPE.Blessing'}}</a>
-				{{/if}}
-
-				{{#if items.actions.spell}}
-					<a class="tab-link spell" data-tab="spell">{{localize 'ACTION.TYPE.Spell'}}</a>
-				{{/if}}
+				{{#each actionTypes as |type ty|}}
+					{{#if (lookup @root.items.actions ty)}}
+						<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
+					{{/if}}
+				{{/each}}
 			</div>
 
 			<div class="character-sheet-actions">
-				{{#if items.actions.melee}}
-					<div class="action-container tab melee item-container" data-group="actions" data-tab="melee">
-						{{#each items.actions.melee as |action act|}}
-							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.actions.ranged}}
-					<div class="action-container tab ranged item-container" data-group="actions" data-tab="ranged">
-						{{#each items.actions.ranged as |action act|}}
-							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.actions.support}}
-					<div class="action-container tab support item-container" data-group="actions" data-tab="support">
-						{{#each items.actions.support as |action act|}}
-							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.actions.blessing}}
-					<div class="action-container tab blessing item-container" data-group="actions" data-tab="blessing">
-						{{#each items.actions.blessing as |action act|}}
-							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.actions.spell}}
-					<div class="action-container tab spell item-container" data-group="actions" data-tab="spell">
-						{{#each items.actions.spell as |action act|}}
-							{{>systems/wfrp3e/templates/partials/item-action-card.html action=action}}
-						{{/each}}
-					</div>
-				{{/if}}
+			    {{#each actionTypes as |type ty|}}
+                    {{#if (lookup @root.items.actions ty)}}
+                        <div class="action-container tab {{ty}} item-container" data-group="actions" data-tab="{{ty}}">
+                            {{#each (lookup @root.items.actions ty) as |action act|}}
+                                {{>systems/wfrp3e/templates/partials/item-action-card.hbs action=action}}
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                {{/each}}
 			</div>
 		</section>
 
@@ -357,7 +275,7 @@
 				</thead>
 				<tbody>
 					{{#each items.weapons as |weapon wp|}}
-						{{>systems/wfrp3e/templates/partials/item-weapon-row.html weapon=weapon}}
+						{{>systems/wfrp3e/templates/partials/item-weapon-row.hbs weapon=weapon}}
 					{{/each}}
 				</tbody>
 			</table>

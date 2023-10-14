@@ -1,5 +1,3 @@
-import CheckHelper from "../../dice/CheckHelper.js";
-
 /**
  * Provides the data and general interaction with Actor Sheets - Abstract class.
  * WFRP3CharacterSheet provides the general interaction and data organization shared among all actors sheets, as this is an abstract class, inherited by either Character or NPC specific actors sheet classes. When rendering an actors sheet, getData() is called, which is a large and key that prepares the actors data for display, processing the raw data and items and compiling them into data to display on the sheet. Additionally, this class contains all the main events that respond to sheet interaction in activateListeners()
@@ -12,7 +10,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		return mergeObject(super.defaultOptions,
 		{
-			template: "systems/wfrp3e/templates/character-sheet.html",
+			template: "systems/wfrp3e/templates/character-sheet.hbs",
 			width: 932,
 			height: 800,
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
@@ -33,15 +31,17 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 		this.options.tabs[1].initial = this.actor.currentCareer?._id;
 
+		data.actionTypes = CONFIG.WFRP3e.actionTypes;
 		data.conditionDurations = CONFIG.WFRP3e.conditionDurations;
 		data.characteristics = CONFIG.WFRP3e.characteristics;
-		data.effectSymbols = CONFIG.WFRP3e.effectSymbols;
-		data.items = this._buildItemLists(data);
-		data.items["diseases"].forEach((disease) => disease.symptomDescription = game.i18n.localize(CONFIG.WFRP3e.disease.symptoms.descriptions[disease.system.symptom]));
 		data.stances = CONFIG.WFRP3e.stances;
-		data.talentSocketsByType = this._buildTalentSocketsList();
+		data.symbols = CONFIG.WFRP3e.symbols;
 		data.weaponGroups = CONFIG.WFRP3e.weapon.groups;
 		data.weaponRanges = CONFIG.WFRP3e.weapon.ranges;
+
+		data.items = this._buildItemLists(data);
+		data.items["diseases"].forEach((disease) => disease.symptomDescription = game.i18n.localize(CONFIG.WFRP3e.disease.symptoms.descriptions[disease.system.symptom]));
+		data.talentSocketsByType = this._buildTalentSocketsList();
 
 		// Add basic skills to the Character.
 		if(actor.type === "character" && data.items.skills.length === 0) {
@@ -309,28 +309,25 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Performs follow-up operations after clicks on an Item button.
-	 * @param event {MouseEvent}
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	async _onItemClick(event)
 	{
-		// Get clicked Item
-		const clickedItemId = this._getItemId(event);
-		const clickedItem = this.actor.items.get(clickedItemId);
+		const clickedItem = this.actor.items.get(this._getItemId(event));
 
 		switch(event.button) {
-			// If left click...
+			// If left click, prepare a skill, action or weapon check.
 			case 0:
-				// If clicked Item is a skill or a weapon, prepare a check
-				if(clickedItem.type === "skill")
-					await CheckHelper.prepareSkillCheck(clickedItem);
-				else if(clickedItem.type === "weapon")
-					await CheckHelper.prepareSkillCheck(clickedItem);
-				// Else, open the clicked Item's sheet
-				else
-					clickedItem.sheet.render(true);
+				const options = {};
+				const face = $(event.currentTarget).parents(".face").data("face");
+
+				if(face)
+					options.face = face;
+
+				clickedItem.useItem(options);
 				break;
-			// If right click, open the clicked Item's sheet
+			// If right click, open the clicked Item's sheet.
 			case 2:
 				clickedItem.sheet.render(true);
 				break;

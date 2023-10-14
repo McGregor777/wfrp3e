@@ -47,26 +47,34 @@
 						{{/if}}
 					{{/if}}
 
-					{{#each symbols as |result key|}}
-						{{#if this}}
-							{{#unless (equalTo key "righteousSuccesses")}}
+					{{#each @root.data.symbols as |symbol sym|}}
+						{{#if (lookup @root.symbols symbol.plural)}}
+							{{#unless (equalTo sym "righteousSuccess")}}
 								<li class="roll-symbols">
-									{{#for 0 result 1}}
-										<span class="wfrp3e-font symbol {{lookup (lookup @root.data.symbols key) 'cssClass'}}"></span>
+									{{#for 0 (lookup @root.symbols symbol.plural) 1}}
+										<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
 									{{/for}}
 
-									{{localize (lookup (lookup @root.data.symbols key) "result") nb=result }}
+									{{localize symbol.result nb=(lookup @root.symbols symbol.plural)}}
 
-									{{#if (equalTo key "successes")}}
-									{{#if (superiorTo @root.symbols.righteousSuccesses 0)}}
-										{{localize @root.data.symbols.righteousSuccesses.result nb=@root.symbols.righteousSuccesses}}
-									{{/if}}
+									{{#if (equalTo sym "success")}}
+										{{#if (superiorTo @root.symbols.righteousSuccesses 0)}}
+											{{localize @root.data.symbols.righteousSuccess.result nb=@root.symbols.righteousSuccesses}}
+										{{/if}}
 									{{/if}}
 								</li>
 							{{/unless}}
 						{{/if}}
 					{{/each}}
 				</ul>
+
+				{{#if data.effects}}
+					{{>systems/wfrp3e/templates/chatmessages/action-effects.hbs
+							action=data.action
+							face=data.face
+							symbols=data.symbols
+							effects=data.effects}}
+				{{/if}}
 			{{/if}}
 		</div>
 	{{/if}}

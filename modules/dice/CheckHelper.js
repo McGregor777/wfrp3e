@@ -6,7 +6,6 @@ import DicePool from "./DicePool.js";
  */
 export default class CheckHelper
 {
-
 	/**
 	 * Rolls a Skill check.
 	 * @param {WFRP3eItem} skill The Skill check has been triggered.
@@ -18,100 +17,119 @@ export default class CheckHelper
 	{
 		const characteristic = skill.actor.system.attributes.characteristics[skill.system.characteristic];
 		const stance = skill.actor.system.attributes.stance.current;
-		const dicePool = new DicePool({
-			characteristicDice: characteristic.value - Math.abs(stance),
-			fortuneDice: characteristic.fortune,
-			expertiseDice: skill.system.trainingLevel,
-			conservativeDice: stance > 0 ? stance : 0,
-			recklessDice: stance < 0 ? Math.abs(stance) : 0
-		});
 
 		await new CheckBuilder(
-			dicePool,
+			new DicePool({
+				characteristicDice: characteristic.value - Math.abs(stance),
+				fortuneDice: characteristic.fortune,
+				expertiseDice: skill.system.trainingLevel,
+				conservativeDice: stance > 0 ? stance : 0,
+				recklessDice: stance < 0 ? Math.abs(stance) : 0
+			}),
 			game.i18n.format("ROLL.SkillCheck", {skill: skill.name}),
-			skill,
+			{actor: skill.actor, skill: skill, characteristic: skill.system.characteristic},
 			rollFlavor,
 			rollSound
 		).render(true);
 	}
 
-	// Takes a skill object, characteristic object, difficulty number and WFRP3ECharacterSheet.getData() object and creates the appropriate roll dialog.
-	static async rollSkillDirect(skill, characteristic, difficulty, sheet, flavorText, sound)
+	/**
+	 * Rolls an Action check.
+	 * @param {WFRP3eItem} action The Action check has been triggered.
+	 * @param {string} face The Action face.
+	 * @param {string} [rollFlavor] Some flavor text to add to the Skill check's outcome description.
+	 * @param {string} [rollSound] Some sound to play after the Skill check completion.
+	 * @returns {Promise<void>}
+	 */
+	static async prepareActionCheck(action, face, rollFlavor = "", rollSound = null)
 	{
-		const dicePool = new DicePool(
-		{
-			ability: Math.max(characteristic.value, skill.rank),
-			boost: skill.boost,
-			setback: skill.setback,
-			force: skill.force,
-			difficulty: difficulty,
-			advantage: skill.advantage,
-			dark: skill.dark,
-			light: skill.light,
-			failure: skill.failure,
-			threat: skill.threat,
-			success: skill.success,
-			triumph: skill?.triumph ? skill.triumph : 0,
-			despair: skill?.despair ? skill.despair : 0,
-		});
+		const match = action.system[face].check.match(new RegExp(/(([\w\s]+) \((\w+)\))( vs\.? ([\w\s]+))?/));
+		let skill = action.actor.itemTypes.skill[0];
+		let characteristicName = skill.system.characteristic;
 
-		dicePool.upgrade(Math.min(characteristic.value, skill.rank));
-
-		this.displayCheckDialog(sheet, dicePool, game.i18n.localize("ROLL.FreeCheck"), skill.label, null, flavorText, sound);
-	}
-
-	static getWeaponStatus(item)
-	{
-		let setback = 0;
-		let difficulty = 0;
-
-		if(item.type === "weapon" && item?.data?.status && item.data.status !== "None")
-		{
-			const status = CONFIG.WFRP3e.itemstatus[item.data.status].attributes.find((i) => i.mod === "Setback");
-
-			if(status.value < 99)
-			{
-				if(status.value === 1)
-					setback = status.value;
-				else
-					difficulty = 1;
-			}
-			else
-			{
-				ui.notifications.error(`${item.name} ${game.i18n.localize("WFRP3E.ItemTooDamagedToUse")} (${game.i18n.localize(CONFIG.WFRP3E.itemstatus[item.data.status].label)}).`);
-				return;
-			}
+		if(match) {
+			skill = action.actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
+			// Either get the Characteristic specified on the Action's check, or use the Characteristic used by the Skill.
+			characteristicName = Object.entries(CONFIG.WFRP3e.characteristics).find((characteristic) => {
+				return game.i18n.localize(characteristic[1].abbreviation) === match[3];
+			})[0] ?? characteristicName;
 		}
 
-		return {setback, difficulty};
+		const characteristic = action.actor.system.attributes.characteristics[characteristicName];
+		const stance = action.actor.system.attributes.stance.current;
+
+		await new CheckBuilder(
+			new DicePool({
+				characteristicDice: characteristic?.value - Math.abs(stance) ?? 0,
+				fortuneDice: characteristic?.fortune ?? 0,
+				expertiseDice: skill?.system.trainingLevel ?? 0,
+				conservativeDice: stance > 0 ? stance : 0,
+				recklessDice: stance < 0 ? Math.abs(stance) : 0,
+				challengeDice: action.system[face].difficultyModifiers.challengeDice +
+					(["melee", "ranged"].includes(action.system[face].type)
+						? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
+						: 0),
+				misfortuneDice: action.system[face].difficultyModifiers.misfortuneDice +
+					((match ? match[5] === game.i18n.localize("ACTION.CHECK.TargetDefence") : false)
+						? [...game.user.targets][0]?.actor.system.totalDefence ?? 0
+						: 0)
+			}),
+			game.i18n.format("ROLL.ActionCheck", {action: action.name}),
+			{actor: action.actor, action: action, face: face, skill: skill, characteristic: characteristicName},
+			rollFlavor,
+			rollSound
+		).render(true);
 	}
 
-	static async getModifiers(dicePool, item)
+	/**
+	 * Determines if an Action requires no check.
+	 * @param {string} check
+	 * @returns {boolean}
+	 */
+	static doesRequireNoCheck(check)
 	{
-		if(item.type === "weapon")
-		{
-			dicePool = await ModifierHelpers.getDicePoolModifiers(dicePool, item, []);
+		return [game.i18n.localize("ACTION.CHECK.NoCheckRequired"),
+			game.i18n.localize("ACTION.CHECK.GenerallyNoCheckRequired")].includes(check);
+	}
 
-			if(item?.data?.itemattachment)
-			{
-				await ImportHelpers.asyncForEach(item.data.itemattachment, async (attachment) =>
-				{
-					//get base mods and additional mods totals
-					const activeModifiers = attachment.data.itemmodifier.filter((i) => i.data?.active);
+	/**
+	 * Get the universal boon effect.
+	 * @param {boolean} isMental Whether the check is based upon a mental characteristic.
+	 */
+	static getUniversalBoonEffect(isMental)
+	{
+		return isMental ? {
+			symbolAmount: 2,
+			description: game.i18n.localize("ROLL.UNIVERSAL.MentalBoon")
+		} : {
+			symbolAmount: 2,
+			description: game.i18n.localize("ROLL.UNIVERSAL.PhysicalBoon")
+		};
+	}
 
-					dicePool = await ModifierHelpers.getDicePoolModifiers(dicePool, attachment, activeModifiers);
-				});
-			}
+	/**
+	 * Get the universal boon effect.
+	 * @param {boolean} isMental Whether the check is based upon a mental characteristic.
+	 */
+	static getUniversalBaneEffect(isMental)
+	{
+		return isMental ? {
+			symbolAmount: 2,
+			description: game.i18n.localize("ROLL.UNIVERSAL.MentalBane")
+			} : {
+			symbolAmount: 2,
+			description: game.i18n.localize("ROLL.UNIVERSAL.PhysicalBane")
+		};
+	}
 
-			if(item?.data?.itemmodifier)
-			{
-				await ImportHelpers.asyncForEach(item.data.itemmodifier, async (modifier) =>
-				{
-					dicePool = await ModifierHelpers.getDicePoolModifiers(dicePool, modifier, []);
-				});
-			}
-		}
-
-		return dicePool;
+	/**
+	 * Get the universal Sigmar's comet effect.
+	 */
+	static getUniversalSigmarsCometEffect(isMental)
+	{
+		return {
+			symbolAmount: 1,
+			description: game.i18n.localize("ROLL.UNIVERSAL.SigmarsComet")
+		};
 	}
 }

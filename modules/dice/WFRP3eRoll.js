@@ -1,6 +1,11 @@
+import CheckHelper from "./CheckHelper.js";
+
 /** @inheritDoc */
 export default class WFRP3eRoll extends Roll
 {
+	static CHAT_TEMPLATE = "systems/wfrp3e/templates/chatmessages/roll.hbs";
+	static TOOLTIP_TEMPLATE = "systems/wfrp3e/templates/chatmessages/roll-tooltip.hbs";
+
 	/**
 	 * @param {string} formula
 	 * @param {DicePool} dicePool
@@ -11,21 +16,33 @@ export default class WFRP3eRoll extends Roll
 		super(formula);
 
 		this.symbols = {
-			...Object.keys(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
-				object[symbol] = +dicePool[symbol] ?? 0;
+			...Object.values(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
+				object[symbol.plural] = +dicePool[symbol.plural] ?? 0;
 				return object;
 			}, {})
 		};
+
 		this.hasSpecialDice = false;
 		this.hasStandardDice = false;
 		this.addedResults = [];
+		this.data.symbols = CONFIG.WFRP3e.symbols;
+
+		if(options.data) {
+			this.data = mergeObject(this.data, options.data);
+
+			if(this.data.action) {
+				this.data.effects = this.data.action.system[this.data.face].effects;
+				this.data.effects.boon.push(CheckHelper.getUniversalBoonEffect(CONFIG.WFRP3e.characteristics[this.data.characteristic].type === "mental"));
+				this.data.effects.bane.push(CheckHelper.getUniversalBaneEffect(CONFIG.WFRP3e.characteristics[this.data.characteristic].type === "mental"));
+
+				if(["melee", "ranged"].includes(this.data.action.system[this.data.face].type))
+					this.data.effects.sigmarsComet.push(CheckHelper.getUniversalSigmarsCometEffect());
+			}
+		}
 
 		if(Object.hasOwn(options, 'flavor'))
 			this.flavor = options.flavor;
 	}
-
-	static CHAT_TEMPLATE = "systems/wfrp3e/templates/chatmessages/roll-chatmessage.html";
-	static TOOLTIP_TEMPLATE = "systems/wfrp3e/templates/chatmessages/roll-tooltip-chatmessage.html";
 
 	/** @inheritDoc */
 	evaluate({minimize = false, maximize = false} = {})
@@ -84,11 +101,11 @@ export default class WFRP3eRoll extends Roll
 		if(this.hasSpecialDice) {
 			this.terms.forEach((term) => {
 				if(game.symbols.diceterms.includes(term.constructor)) {
-					Object.keys(CONFIG.WFRP3e.symbols).forEach((symbolName, index) => {
-						this.symbols[symbolName] += parseInt(term.symbols[symbolName]);
+					Object.values(CONFIG.WFRP3e.symbols).forEach((symbol) => {
+						this.symbols[symbol.plural] += parseInt(term.symbols[symbol.plural]);
 
-						if(symbolName === "successes")
-							this.symbols[symbolName] += parseInt(term.symbols.righteousSuccesses);
+						if(symbol.plural === "successes")
+							this.symbols[symbol.plural] += parseInt(term.symbols.righteousSuccesses);
 					});
 				}
 			});
@@ -226,8 +243,7 @@ export default class WFRP3eRoll extends Roll
 			this.evaluate();
 
 		const rMode = rollMode || messageData.rollMode || game.settings.get("core", "rollMode");
-
-		let template = CONST.CHAT_MESSAGE_TYPES.ROLL;
+		const template = CONST.CHAT_MESSAGE_TYPES.ROLL;
 
 		if(["gmroll", "blindroll"].includes(rMode))
 			messageData.whisper = ChatMessage.getWhisperRecipients("GM");
@@ -241,9 +257,9 @@ export default class WFRP3eRoll extends Roll
 		messageData = mergeObject({
 			user: game.user.id,
 			type: template,
-			content: this.total,
-			sound: CONFIG.sounds.dice,
-		}, messageData);
+			content: this.total
+		}, messageData, messageData.data);
+
 		messageData.roll = this;
 
 		Hooks.call("specialDiceMessage", this);

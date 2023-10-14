@@ -1,6 +1,6 @@
 <div class="item action-card" data-item-id="{{action._id}}">
 	{{#each @root.stances as |stance st|}}
-		<div class="face {{st}}{{#if (equalTo @root.actor.defaultStance st)}} active{{/if}}" data-face="{{st}}">
+		<div class="face {{st}}{{#if (equalTo @root.actor.system.defaultStance st)}} active{{/if}}" data-face="{{st}}">
 			<div class="action-card-header">
 				<img class="action-card-type" src="systems/wfrp3e/assets/icons/{{lookup (lookup ../action.system st) 'type'}}.webp" />
 
@@ -38,13 +38,13 @@
 							<tr><td>{{{striptags (lookup (lookup ../action.system st) 'uniqueEffect') 'p'}}}</td></tr>
 						{{/if}}
 
-						{{#each @root.effectSymbols}}
-							{{#if (lookup (lookup (lookup ../../action.system st) 'effects') this)}}
+						{{#each @root.symbols as |symbol sym|}}
+							{{#if (lookup (lookup (lookup ../../action.system st) 'effects') sym)}}
 								<tr><td>
-									{{#each (lookup (lookup (lookup ../../action.system st) 'effects') this) as |effect ef|}}
+									{{#each (lookup (lookup (lookup ../../action.system st) 'effects') sym) as |effect ef|}}
 										<div>
 											{{#for 0 effect.symbolAmount 1}}
-												<span class="wfrp3e-font symbol {{../../this}}"></span>
+												<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
 											{{/for}}
 
 											{{{striptags effect.description 'p'}}}
@@ -64,7 +64,7 @@
 						<span class="recharge-token-counter">{{../action.system.rechargeTokens}}</span>
 					</a>
 
-					{{#>if (lookup . document.isOwner)}}
+					{{#>if @root.document.isOwner}}
 						<a class="item-delete-link" title="{{localize 'DIALOG.TITLE.DeleteItem'}}"><span class="fas fa-trash"></span></a>
 					{{/if}}
 				</div>

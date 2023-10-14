@@ -1,0 +1,207 @@
+.check-builder {
+	form {
+		display: flex;
+		
+		.main-options {
+			flex: 1 0 420px;
+			overflow-y: scroll;
+			scrollbar-width: thin;
+
+			& .convert-buttons {
+				display: flex;
+				margin-bottom: 1rem;
+
+				& button {
+					font-size: 10pt;
+					line-height: 1.5rem;
+					text-align: center;
+				}
+			}
+
+			& .dice-pool {
+				margin-top: 0.5rem;
+				min-height: 3.5rem;
+				text-align: center;
+			}
+
+			& .dice-pool-table {
+				background-color: rgba(0, 0, 0, 0.05);
+				border: 1px solid var(--color-border-light-tertiary) none;
+				margin: 0.25rem;
+
+				& .pool-container {
+					align-items: baseline;
+					display: flex;
+					padding: 0.5rem;
+
+					&:nth-child(even) {
+						background-color: rgba(255, 255, 255, 0.2);
+					}
+
+					& > img {
+						align-self: center;
+					}
+
+					& > .pool-value {
+						background-color: #ddd;
+						border: 1px solid black;
+						font: 20pt "ArnoPro";
+						margin: 0 1rem;
+						padding-top: 0.5rem;
+						text-align: center;
+						width: 3.5rem;
+					}
+				}
+			}
+
+			& .dice-pool-hint {
+				margin: 0.5rem 1px 0.25rem 1px;
+			}
+
+			& .dice-pool-roll-options {
+				margin-top: 0.5rem;
+
+				& select, input
+				{
+					margin-top: 1px;
+					margin-right: 1px;
+				}
+			}
+
+			& .dice-pool-table {
+
+			}
+
+			& .hide {
+				display: none;
+			}
+
+			& .maximize {
+				width: 100%;
+			}
+
+			& .minimize {
+				max-width: 20%;
+			}
+
+			& .pool-text {
+				text-align: left;
+			}
+
+			& .roll-button {
+				margin-top: 1rem;
+			}
+
+			& .symbols-pool {
+				font-size: 20pt;
+				text-align: center;
+			}
+
+			& .symbols-pool-container {
+				min-width: 320px;
+				padding: 0 1px;
+
+				& .pool-value {
+					background-color: #ddd;
+					border: 1px solid black;
+					font: 16pt "ArnoPro";
+					margin: 0 0.25rem;
+					padding-top: 0.5rem;
+					text-align: center;
+					width: 3rem;
+				}
+
+				& .wfrp3e.picture {
+					display: inline-block;
+					width: 1.25rem;
+				}
+			}
+
+			.item-display {
+				background: rgba(255, 255, 255, 0.75);
+				border: 1px solid #782e22;
+				margin: 0.5rem 0 0.8rem 0;
+				padding: 0.5rem;
+
+				& img {
+					height: 50px;
+					width: auto;
+				}
+
+				& h4 {
+					align-items: center;
+					display: flex;
+					flex-direction: row;
+					justify-content: space-around;
+
+					& input {
+						width: 70%;
+					}
+				}
+
+				& .item-miss {
+					color: darkred;
+					font-style: italic;
+					text-align: center;
+				}
+
+				& .item-pill {
+					background-color: #aaa;
+					border: 1px solid black;
+					border-radius: 0.75rem;
+					cursor: pointer;
+					display: inline-block;
+					font-size: 10pt;
+					line-height: 1.5rem;
+					list-style-type: none;
+					margin: 1px;
+					padding: 0 0.25rem;
+					white-space: nowrap;
+
+					&.adjusted {
+						color: #8b0000;
+					}
+
+					& .rank {
+						padding-right: 15px;
+
+						&:hover {
+							color: green;
+						}
+					}
+
+					& .item-delete {
+						cursor: pointer;
+
+						&:hover {
+							color: red;
+						}
+					}
+				}
+			}
+
+			& .symbols-pool-container .pool-container {
+				align-items: baseline;
+				display: flex;
+
+				& > span {
+					flex-basis: 1.5rem;
+					text-align: center;
+				}
+			}
+		}
+
+		& .quick-settings {
+			flex: 1 1 200px;
+
+			& > div {
+				margin-bottom: 0.5rem;
+
+				& > * {
+					display: block;
+					width: 100%;
+				}
+			}
+		}
+	}
+}

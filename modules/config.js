@@ -7,13 +7,62 @@ export const WFRP3e = {
 		spell: "ACTION.TYPE.Spell"
 	},
 	characteristics: {
-		strength: "CHARACTERISTIC.Strength",
-		toughness: "CHARACTERISTIC.Toughness",
-		agility: "CHARACTERISTIC.Agility",
-		intelligence: "CHARACTERISTIC.Intelligence",
-		willpower: "CHARACTERISTIC.Willpower",
-		fellowship: "CHARACTERISTIC.Fellowship",
-		varies: "CHARACTERISTIC.Varies"
+		strength: {
+			name: "CHARACTERISTIC.Strength",
+			abbreviation: "CHARACTERISTIC.ABBREVIATION.Strength",
+			type: "physical"
+		},
+		toughness: {
+			name: "CHARACTERISTIC.Toughness",
+			abbreviation: "CHARACTERISTIC.ABBREVIATION.Toughness",
+			type: "physical"
+		},
+		agility: {
+			name: "CHARACTERISTIC.Agility",
+			abbreviation: "CHARACTERISTIC.ABBREVIATION.Agility",
+			type: "physical"
+		},
+		intelligence: {
+			name: "CHARACTERISTIC.Intelligence",
+			abbreviation: "CHARACTERISTIC.ABBREVIATION.Intelligence",
+			type: "mental"
+		},
+		willpower: {
+			name: "CHARACTERISTIC.Willpower",
+			abbreviation: "CHARACTERISTIC.ABBREVIATION.Willpower",
+			type: "mental"
+		},
+		fellowship: {
+			name: "CHARACTERISTIC.Fellowship",
+			abbreviation: "CHARACTERISTIC.ABBREVIATION.Fellowship",
+			type: "mental"
+		},
+		varies: {
+			name: "CHARACTERISTIC.Varies",
+			abbreviation: "CHARACTERISTIC.ABBREVIATION.Varies"
+		},
+	},
+	challengeLevels: {
+		simple: {
+			challengeDice: 0,
+			name: "ROLL.CHALLENGELEVEL.Simple"
+		},
+		easy: {
+			challengeDice: 1,
+			name: "ROLL.CHALLENGELEVEL.Easy"
+		},
+		average: {
+			challengeDice: 2,
+			name: "ROLL.CHALLENGELEVEL.Average"
+		},
+		hard: {
+			challengeDice: 3,
+			name: "ROLL.CHALLENGELEVEL.Hard"
+		},
+		daunting: {
+			challengeDice: 4,
+			name: "ROLL.CHALLENGELEVEL.Daunting"
+		}
 	},
 	conditionDurations: {
 		brief: "CONDITION.DURATION.Brief",
@@ -777,7 +826,6 @@ export const WFRP3e = {
 			}
 		}
 	},
-	effectSymbols: ["success", "boon", "sigmarsComet", "bane", "chaosStar"],
 	rarities: {
 		abundant: "TRAPPING.RARITY.Abundant",
 		plentiful: "TRAPPING.RARITY.Plentiful",
@@ -790,49 +838,58 @@ export const WFRP3e = {
 		"reckless": "ACTION.FACE.Reckless"
 	},
 	symbols: {
-		successes: {
+		success: {
 			cssClass: "success",
 			name: "ROLL.SYMBOL.Successes",
+			plural: "successes",
 			result: "ROLL.AMOUNT.Successes",
 		},
-		righteousSuccesses: {
+		righteousSuccess: {
 			cssClass: "righteous-success",
 			name: "ROLL.SYMBOL.RighteousSuccesses",
+			plural: "righteousSuccesses",
 			result: "ROLL.AMOUNT.RighteousSuccesses",
 		},
-		boons: {
+		boon: {
 			cssClass: "boon",
 			name: "ROLL.SYMBOL.Boons",
+			plural: "boons",
 			result: "ROLL.AMOUNT.Boons",
 		},
-		sigmarsComets: {
+		sigmarsComet: {
 			cssClass: "sigmars-comet",
 			name: "ROLL.SYMBOL.SigmarsComets",
+			plural: "sigmarsComets",
 			result: "ROLL.AMOUNT.SigmarsComets",
 		},
-		challenges: {
+		challenge: {
 			cssClass: "challenge",
 			name: "ROLL.SYMBOL.Challenges",
+			plural: "challenges",
 			result: "ROLL.AMOUNT.Challenges",
 		},
-		banes: {
+		bane: {
 			cssClass: "bane",
 			name: "ROLL.SYMBOL.Banes",
+			plural: "banes",
 			result: "ROLL.AMOUNT.Banes",
 		},
-		chaosStars: {
+		chaosStar: {
 			cssClass: "chaos-star",
 			name: "ROLL.SYMBOL.ChaosStars",
+			plural: "chaosStars",
 			result: "ROLL.AMOUNT.ChaosStars",
 		},
-		delays: {
+		delay: {
 			cssClass: "delay",
 			name: "ROLL.SYMBOL.Delays",
+			plural: "delays",
 			result: "ROLL.AMOUNT.Delays",
 		},
-		exertions: {
+		exertion: {
 			cssClass: "exertion",
 			name: "ROLL.SYMBOL.Exertions",
+			plural: "exertions",
 			result: "ROLL.AMOUNT.Exertions",
 		}
 	},
@@ -847,26 +904,68 @@ export const WFRP3e = {
 	},
 	weapon: {
 		groups: {
-			"blackpowder": "WEAPON.GROUP.Blackpowder",
-			"bow": "WEAPON.GROUP.Bow",
-			"cavalry": "WEAPON.GROUP.Cavalry",
-			"crossbow": "WEAPON.GROUP.Crossbow",
-			"fencing": "WEAPON.GROUP.Fencing",
-			"flail": "WEAPON.GROUP.Flail",
-			"great_weapon": "WEAPON.GROUP.GreatWeapon",
-			"ordinary": "WEAPON.GROUP.Ordinary",
-			"polearm": "WEAPON.GROUP.Polearm",
-			"sling": "WEAPON.GROUP.Sling",
-			"spear": "WEAPON.GROUP.Spear",
-			"staff": "WEAPON.GROUP.Staff",
-			"thrown": "WEAPON.GROUP.Thrown",
-			"unarmed": "WEAPON.GROUP.Unarmed"
+			blackpowder: {
+				name: "WEAPON.GROUP.Blackpowder",
+				type: "ranged"
+			},
+			bow: {
+				name: "WEAPON.GROUP.Bow",
+				type: "ranged"
+			},
+			cavalry: {
+				name: "WEAPON.GROUP.Cavalry",
+				type: "melee"
+			},
+			crossbow: {
+				name: "WEAPON.GROUP.Crossbow",
+				type: "ranged"
+			},
+			fencing: {
+				name: "WEAPON.GROUP.Fencing",
+				type: "melee"
+			},
+			flail: {
+				name: "WEAPON.GROUP.Flail",
+				type: "melee"
+			},
+			greatWeapon: {
+				name: "WEAPON.GROUP.GreatWeapon",
+				type: "melee"
+			},
+			ordinary: {
+				name: "WEAPON.GROUP.Ordinary",
+				type: "melee"
+			},
+			polearm: {
+				name: "WEAPON.GROUP.Polearm",
+				type: "melee"
+			},
+			sling: {
+				name: "WEAPON.GROUP.Sling",
+				type: "ranged"
+			},
+			spear: {
+				name: "WEAPON.GROUP.Spear",
+				type: "melee"
+			},
+			staff: {
+				name: "WEAPON.GROUP.Staff",
+				type: "melee"
+			},
+			thrown: {
+				name: "WEAPON.GROUP.Thrown",
+				type: "ranged"
+			},
+			unarmed: {
+				name: "WEAPON.GROUP.Unarmed",
+				type: "melee"
+			}
 		},
 		ranges: {
-			"close": "WEAPON.RANGE.Close",
-			"medium": "WEAPON.RANGE.Medium",
-			"long": "WEAPON.RANGE.Long",
-			"extreme": "WEAPON.RANGE.Extreme"
+			close: "WEAPON.RANGE.Close",
+			medium: "WEAPON.RANGE.Medium",
+			long: "WEAPON.RANGE.Long",
+			extreme: "WEAPON.RANGE.Extreme"
 		}
 	}
 };

@@ -1,0 +1,47 @@
+.dice-additional-flavor {
+	font-size: 10pt;
+	font-style: oblique;
+}
+
+.dice-array {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+
+	& .dice-rolls {
+		list-style: none;
+		margin: 0;
+		overflow: hidden;
+		padding: 0;
+
+		& .roll {
+			float: left;
+			width: 3.25rem;
+		}
+	}
+}
+
+.dice-result {
+	& .roll-success {
+		color: darkgreen;
+	}
+
+	& .roll-failure {
+		color: darkred;
+	}
+}
+
+.dice-tooltip {
+	& .dice-rolls {
+		& .roll {
+			& > .special-die {
+				width: 44px;
+			}
+		}
+	}
+}
+
+.roll-effects > h5 {
+	margin: 0;
+}

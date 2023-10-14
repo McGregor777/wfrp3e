@@ -25,16 +25,18 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
                     requirements: new fields.StringField(),
                     special: new fields.StringField(),
                     uniqueEffect: new fields.StringField(),
-                    effects: new fields.SchemaField(CONFIG.WFRP3e.effectSymbols.reduce((object, symbol) => {
-                        object[symbol] = new fields.ArrayField(
-                            new fields.SchemaField({
-                                symbolAmount: new fields.NumberField({...requiredInteger, initial: 1, min: 1}),
-                                description: new fields.HTMLField({required: true})
-                            })
-                        );
+                    effects: new fields.SchemaField({
+                        ...Object.keys(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
+                            object[symbol] = new fields.ArrayField(
+                                new fields.SchemaField({
+                                    symbolAmount: new fields.NumberField({...requiredInteger, initial: 1, min: 1}),
+                                    description: new fields.HTMLField({required: true})
+                                })
+                            );
 
-                        return object;
-                    }, {}))
+                            return object;
+                        }, {})
+                    })
                 })
                 return object;
             }, {}),
@@ -59,7 +61,7 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
         const changes = {
             ...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
                 object[stance] = {
-                    effects: CONFIG.WFRP3e.effectSymbols.reduce((object, symbol) => {
+                    effects: Object.keys(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
                         object[symbol] = this[stance].effects[symbol];
                         return object;
                     }, {})
@@ -83,8 +85,7 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
                     changes[stance].uniqueEffect = newDescription;
             }
 
-            CONFIG.WFRP3e.effectSymbols.forEach((symbol, index) => {
-                changes[stance]
+            Object.keys(CONFIG.WFRP3e.symbols).forEach((symbol, index) => {
                 this[stance].effects[symbol].forEach((effect, index) => {
                     const newDescription = this._getCleanedupDescription(effect.description);
 

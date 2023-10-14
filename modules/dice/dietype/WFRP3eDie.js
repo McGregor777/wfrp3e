@@ -44,8 +44,8 @@ export default class WFRP3eDie extends Die
 			this.roll({minimize, maximize});
 
 		this.symbols = {
-			...Object.keys(CONFIG.WFRP3e.symbols).reduce((object, symbolName) => {
-				object[symbolName] = 0;
+			...Object.values(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
+				object[symbol.plural] = 0;
 				return object;
 			}, {})
 		};

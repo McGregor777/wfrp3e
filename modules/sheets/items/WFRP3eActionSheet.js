@@ -4,7 +4,7 @@ export default class WFRP3eActionSheet extends ItemSheet
 	{
 		return mergeObject(super.defaultOptions,
 		{
-			template: "systems/wfrp3e/templates/action-sheet.html",
+			template: "systems/wfrp3e/templates/action-sheet.hbs",
 			width: 530,
 			//height: 340,
 			classes: ["wfrp3e", "sheet", "item", "action", "action-item-sheet"],
@@ -21,8 +21,8 @@ export default class WFRP3eActionSheet extends ItemSheet
 		const data = super.getData();
 
 		data.actionTypes = CONFIG.WFRP3e.actionTypes;
-		data.effectSymbols = CONFIG.WFRP3e.effectSymbols;
 		data.stances = CONFIG.WFRP3e.stances;
+		data.symbols = CONFIG.WFRP3e.symbols;
 
 		return data;
 	}
