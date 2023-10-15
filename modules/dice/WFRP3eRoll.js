@@ -134,6 +134,9 @@ export default class WFRP3eRoll extends Roll
 		this._total = total;
 		this._evaluated = true;
 
+		if(this.symbols.successes && this.data?.action)
+			this.data.action.exhaustAction(this.data.face);
+
 		return this;
 	}
 

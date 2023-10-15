@@ -8,6 +8,7 @@
 	"ACTION.Name": "Title",
 	"ACTION.RechargeRating": "Recharge Rating",
 	"ACTION.RechargeTokens": "Recharge Tokens",
+	"ACTION.Recharging": "You cannot use an Action that is recharging.",
 	"ACTION.Requirements": "Requirements",
 	"ACTION.Special": "Special",
 	"ACTION.Traits": "Traits",

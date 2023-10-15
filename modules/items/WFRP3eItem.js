@@ -34,41 +34,45 @@ export default class WFRP3eItem extends Item
 		if(!options.face)
 			throw new Error("Knowing which face of the Action to use is needed.");
 
-		if(CheckHelper.doesRequireNoCheck(this.system[options.face].check))
-			await new Dialog({
-				title: game.i18n.localize("DIALOG.TITLE.ActionUsageConfirmation"),
-				content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.ActionUsageConfirmation", {action: this.system[options.face].name}) + "</p>",
-				buttons: {
-					confirm: {
-						icon: '<span class="fa fa-check"></span>',
-						label: "Yes",
-						callback: async dlg => {
-							this.exhaustAction(options.face);
+		if(this.system.rechargeTokens > 0)
+			ui.notifications.warn(game.i18n.localize("ACTION.Recharging"));
+		else {
+			if (CheckHelper.doesRequireNoCheck(this.system[options.face].check))
+				await new Dialog({
+					title: game.i18n.localize("DIALOG.TITLE.ActionUsageConfirmation"),
+					content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.ActionUsageConfirmation", {action: this.system[options.face].name}) + "</p>",
+					buttons: {
+						confirm: {
+							icon: '<span class="fa fa-check"></span>',
+							label: "Yes",
+							callback: async dlg => {
+								this.exhaustAction(options.face);
 
-							return ChatMessage.create({
-								content: await renderTemplate("systems/wfrp3e/templates/chatmessages/action-effects.hbs", {
-									action: this,
-									face: options.face,
-									symbols: CONFIG.WFRP3e.symbols,
-									effects: this.system[options.face].effects
-								}),
-								flavor: game.i18n.format("ACTION.UsageMessage", {
-									actor: this.actor.name,
-									action: this.system[options.face].name
-								}),
-								speaker: ChatMessage.getSpeaker({actor: this.actor})
-							});
-						}
+								return ChatMessage.create({
+									content: await renderTemplate("systems/wfrp3e/templates/chatmessages/action-effects.hbs", {
+										action: this,
+										face: options.face,
+										symbols: CONFIG.WFRP3e.symbols,
+										effects: this.system[options.face].effects
+									}),
+									flavor: game.i18n.format("ACTION.UsageMessage", {
+										actor: this.actor.name,
+										action: this.system[options.face].name
+									}),
+									speaker: ChatMessage.getSpeaker({actor: this.actor})
+								});
+							}
+						},
+						cancel: {
+							icon: '<span class="fas fa-xmark"></span>',
+							label: "Cancel"
+						},
 					},
-					cancel: {
-						icon: '<span class="fas fa-xmark"></span>',
-						label: "Cancel"
-					},
-				},
-				default: "confirm"
-			}).render(true);
-		else
-			await CheckHelper.prepareActionCheck(this, options.face);
+					default: "confirm"
+				}).render(true);
+			else
+				await CheckHelper.prepareActionCheck(this, options.face);
+		}
 	}
 
 	/**
@@ -77,6 +81,15 @@ export default class WFRP3eItem extends Item
 	async useSkill(options = {})
 	{
 		await CheckHelper.prepareSkillCheck(this);
+	}
+
+	/**
+	 * Adds recharge tokens to an Action equal to its recharge rating.
+	 * @param {string} face
+	 */
+	exhaustAction(face)
+	{
+		this.update({"system.rechargeTokens": this.system[face].rechargeRating});
 	}
 
 	/**

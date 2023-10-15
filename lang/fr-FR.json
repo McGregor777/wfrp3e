@@ -8,6 +8,7 @@
 	"ACTION.Name": "Titre",
 	"ACTION.RechargeRating": "Recharge Rating",
 	"ACTION.RechargeTokens": "Jetons de recharge",
+	"ACTION.Recharging": "Vous ne pouvez pas utiliser une Action en cours de rechargement.",
 	"ACTION.Requirements": "Conditions",
 	"ACTION.Special": "Spécial",
 	"ACTION.Traits": "Traits",
