@@ -16,7 +16,11 @@
 	</td>
 
 	<td class="center-aligned">
-		<span class="weapon-row-qualities">{{weapon.system.qualities}}</span>
+		<span class="weapon-row-qualities">
+			{{#each weapon.system.qualities}}
+				{{localize (lookup @root.weaponQualities this.name) "name"}}{{#unless @last}}, {{/unless}}
+			{{/each}}
+		</span>
 	</td>
 
 	<td class="center-aligned">

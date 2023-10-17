@@ -15,6 +15,8 @@
 	"ACTION.Type": "Action Type",
 	"ACTION.UniqueEffect": "Unique Effect",
 	"ACTION.UsageMessage": "uses {action}",
+	"ACTION.MeleeStrike": "Melee Strike",
+	"ACTION.RangedShot": "Ranged Shot",
 	"ACTION.CHECK.GenerallyNoCheckRequired": "Generally No Check Required",
 	"ACTION.CHECK.NoCheckRequired": "No Check Required",
 	"ACTION.CHECK.TargetDefence": "Target Defence",

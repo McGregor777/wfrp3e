@@ -71,8 +71,8 @@
 					<span class="character-sheet-title">{{localize 'CHARACTER.Stances'}}</span>
 
 					<div class="stance-meter-segments">
-						{{#for actor.system.stanceMeter.reckless (increment actor.system.stanceMeter.conservative 1) 1}}
-							<a class="stance-meter-segment{{#if (equalTo @root.actor.system.attributes.stance.current this)}} active{{/if}}">
+						{{#for actor.stanceMeter.reckless (increment actor.stanceMeter.conservative 1) 1}}
+							<a class="stance-meter-segment{{#if (equalTo @root.actor.attributes.stance.current this)}} active{{/if}}">
 								<img class="stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}"
 									 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
 								<input name="system.attributes.stance.current"
@@ -246,15 +246,15 @@
 			</div>
 
 			<div class="character-sheet-actions">
-			    {{#each actionTypes as |type ty|}}
-                    {{#if (lookup @root.items.actions ty)}}
-                        <div class="action-container tab {{ty}} item-container" data-group="actions" data-tab="{{ty}}">
-                            {{#each (lookup @root.items.actions ty) as |action act|}}
-                                {{>systems/wfrp3e/templates/partials/item-action-card.hbs action=action}}
-                            {{/each}}
-                        </div>
-                    {{/if}}
-                {{/each}}
+				{{#each actionTypes as |type ty|}}
+					{{#if (lookup @root.items.actions ty)}}
+						<div class="action-container tab {{ty}} item-container" data-group="actions" data-tab="{{ty}}">
+							{{#each (lookup @root.items.actions ty) as |action act|}}
+								{{>systems/wfrp3e/templates/partials/item-action-card.hbs action=action}}
+							{{/each}}
+						</div>
+					{{/if}}
+				{{/each}}
 			</div>
 		</section>
 

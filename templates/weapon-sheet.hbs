@@ -7,12 +7,12 @@
 	<section class="sheet-body">
 		<div class="sheet-form-div">
 			<label class="sheet-form-label">{{localize 'WEAPON.DamageRating'}}</label>
-			<input class="sheet-form-input" name="system.damageRating" type="number" value="{{item.system.damageRating}}" placeholder="{{localize 'WEAPON.DR'}}" data-dtype="Number" />
+			<input class="sheet-form-input" name="system.damageRating" type="number" value="{{item.system.damageRating}}" placeholder="{{localize 'WEAPON.ABBREVIATION.DamageRating'}}" data-dtype="Number" />
 		</div>
 
 		<div class="sheet-form-div">
 			<label class="sheet-form-label">{{localize 'WEAPON.CriticalRating'}}</label>
-			<input class="sheet-form-input" name="system.criticalRating" type="number" value="{{item.system.criticalRating}}" placeholder="{{localize 'WEAPON.CR'}}" data-dtype="Number" />
+			<input class="sheet-form-input" name="system.criticalRating" type="number" value="{{item.system.criticalRating}}" placeholder="{{localize 'WEAPON.ABBREVIATION.CriticalRating'}}" data-dtype="Number" />
 		</div>
 
 		<div class="sheet-form-div">
@@ -43,14 +43,17 @@
 		<div class="sheet-form-div">
 			<label class="sheet-form-label">{{localize 'WEAPON.Group'}}</label>
 			<select class="sheet-form-select" name="system.group" data-dtype="String">
-				{{selectOptions groups selected=item.system.group localize=true}}
+				{{selectOptions groups selected=item.system.group labelAttr="name" localize=true}}
 			</select>
 		</div>
 
 		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'TRAPPING.Cost'}}</label>
+			<span class="sheet-form-label">{{localize 'TRAPPING.Cost'}}</span>
+			<span class="sheet-form-label">{{localize 'TRAPPING.MONEY.Brass'}}</span>
 			<input class="sheet-form-input" name="system.cost.brass" type="number" value="{{item.system.cost.brass}}" placeholder="{{localize 'TRAPPING.Brass'}}" data-dtype="Number" />
+			<span class="sheet-form-label">{{localize 'TRAPPING.MONEY.Silver'}}</span>
 			<input class="sheet-form-input" name="system.cost.silver" type="number" value="{{item.system.cost.silver}}" placeholder="{{localize 'TRAPPING.Silver'}}" data-dtype="Number" />
+			<span class="sheet-form-label">{{localize 'TRAPPING.MONEY.Gold'}}</span>
 			<input class="sheet-form-input" name="system.cost.gold" type="number" value="{{item.system.cost.gold}}" placeholder="{{localize 'TRAPPING.Gold'}}" data-dtype="Number" />
 		</div>
 
