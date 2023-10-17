@@ -1,6 +1,6 @@
 <div class="item action-card" data-item-id="{{action._id}}">
 	{{#each @root.stances as |stance st|}}
-		<div class="face {{st}}{{#if (equalTo @root.actor.defaultStance st)}} active{{/if}}" data-face="{{st}}">
+		<div class="face {{st}}{{#if (equalTo @root.actor.system.defaultStance st)}} active{{/if}}" data-face="{{st}}">
 			<div class="action-card-header">
 				<img class="action-card-type" src="systems/wfrp3e/assets/icons/{{lookup (lookup ../action.system st) 'type'}}.webp" />
 

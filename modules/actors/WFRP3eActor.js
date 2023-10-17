@@ -51,7 +51,7 @@ export default class WFRP3eActor extends Actor
 
 	/**
 	 * Adds a WFRP3eActor as a new member of the Party.
-	 * @param newMember {WFRP3eActor}
+	 * @param {WFRP3eActor} newMember
 	 */
 	addNewMember(newMember)
 	{
@@ -68,7 +68,7 @@ export default class WFRP3eActor extends Actor
 
 	/**
 	 * Removes a WFRP3eActor from the Party.
-	 * @param quittingMemberId {string} The Actor ID of the quitting member.
+	 * @param {string} quittingMemberId The Actor ID of the quitting member.
 	 */
 	removeMember(quittingMemberId)
 	{
@@ -83,7 +83,7 @@ export default class WFRP3eActor extends Actor
 
 	/**
 	 * Changes the Party Tension value.
-	 * @param newValue {Number}
+	 * @param {Number} newValue
 	 */
 	changePartyTensionValue(newValue)
 	{
@@ -92,14 +92,14 @@ export default class WFRP3eActor extends Actor
 
 	/**
 	 * Checks for Talents sharing the same socket as the current Talent then remove them from this socket.
-	 * @param newTalentSocket {string}
+	 * @param {string} newTalentSocket
 	 */
 	checkForDuplicateTalentSockets(newTalentSocket)
 	{
-		this.currentParty.memberActors.forEach((member, index) => {
+		this.system.currentParty.memberActors.forEach((member) => {
 			member.itemTypes.talent
 				.filter(talent => talent !== this && talent.system.talentSocket === newTalentSocket)
-				.forEach((talent, index) => {
+				.forEach((talent) => {
 					talent.update({"system.talentSocket": null});
 				});
 		});
@@ -107,13 +107,13 @@ export default class WFRP3eActor extends Actor
 
 	/**
 	 * Resets the socket of every Actor's Talents which socket matches a string.
-	 * @param match {string} The string the Talent socket must match.
+	 * @param {string} match The string the Talent socket must match.
 	 */
 	resetTalentsSocket(match)
 	{
 		this.itemTypes.talent
 			.filter(talent => talent.system.talentSocket?.startsWith(match))
-			.forEach((talent, index) => {
+			.forEach((talent) => {
 				talent.update({"system.talentSocket": null});
 			});
 	}
@@ -167,77 +167,6 @@ export default class WFRP3eActor extends Actor
 	}
 
 	/**
-	 * Prepares Character's data.
-	 * @private
-	 */
-	_prepareCharacter()
-	{
-		this._getCurrentCareer();
-
-		if(this.system.party !== null)
-			this._getCurrentParty();
-
-		this._calculateStanceMeter();
-		this._getDefaultStance();
-	}
-
-	/**
-	 * Get the Character's current Career.
-	 * @private
-	 */
-	_getCurrentCareer()
-	{
-		this.currentCareer = this.itemTypes.career.find(career => career.system.current === true);
-	}
-
-	/**
-	 * Get the Character's current Career.
-	 * @private
-	 */
-	_getCurrentParty()
-	{
-		this.currentParty = game.actors.contents.find(actor => actor.id === this.system.party);
-	}
-
-	/**
-	 * Calculates stance meter.
-	 * @private
-	 */
-	_calculateStanceMeter()
-	{
-		let stanceMeter = {
-			conservative: this.system.attributes.stance.conservative,
-			reckless: -this.system.attributes.stance.reckless
-		};
-
-		if(this.currentCareer)
-			stanceMeter = {
-				conservative: this.system.attributes.stance.conservative + this.currentCareer.system.startingStance.conservativeSegments,
-				reckless: -this.system.attributes.stance.reckless - this.currentCareer.system.startingStance.recklessSegments
-			};
-
-		this.stanceMeter = stanceMeter;
-	}
-
-	/**
-	 * Get the default stance of the Character.
-	 * @private
-	 */
-	_getDefaultStance()
-	{
-		if(this.system.attributes.stance.current > 0)
-			this.defaultStance = "conservative";
-		else if(this.system.attributes.stance.current < 0)
-			this.defaultStance = "reckless";
-		else {
-			if(this.stanceMeter.conservative >= this.stanceMeter.reckless)
-				this.defaultStance = "conservative";
-			else
-				this.defaultStance = "reckless";
-		}
-	}
-
-	/**
 	 * Prepares Party's data.
 	 * @private
 	 */
@@ -286,23 +215,23 @@ export default class WFRP3eActor extends Actor
 
 	/**
 	 * Perform follow-up operations after a Party is deleted. Post-deletion operations occur for all clients after the deletion is broadcast.
-	 * @param options {any} Additional options which modify the deletion request
-	 * @param userId {string} The id of the User requesting the document update
+	 * @param {any} options Additional options which modify the deletion request
+	 * @param {string} userId The id of the User requesting the document update
 	 * @private
 	 */
 	_onPartyDelete(options, userId)
 	{
 		if(Array.isArray(this.memberActors) && this.memberActors.length > 0)
-			this.memberActors.forEach((member, index) => {
+			this.memberActors.forEach((member) => {
 				member.resetTalentsSocket("party");
 			});
 	}
 
 	/**
 	 * Perform follow-up operations after a Party is updated. Post-update operations occur for all clients after the update is broadcast.
-	 * @param changed {any} The differential data that was changed relative to the documents prior values
-	 * @param options {any} Additional options which modify the update request
-	 * @param userId {string} The id of the User requesting the document update
+	 * @param {any} changed The differential data that was changed relative to the documents prior values
+	 * @param {any} options Additional options which modify the update request
+	 * @param {string} userId The id of the User requesting the document update
 	 * @private
 	 */
 	_onPartyUpdate(changed, options, userId)
@@ -316,7 +245,7 @@ export default class WFRP3eActor extends Actor
 
 	/**
 	 * Performs preliminary operations before a Party's members change.
-	 * @param newMemberIdList {Array} The new Party's member list.
+	 * @param {Array} newMemberIdList The new Party's member list.
 	 * @private
 	 */
 	_onPartyMembersChange(newMemberIdList)
@@ -325,12 +254,12 @@ export default class WFRP3eActor extends Actor
 		{
 			const missingMembers = [];
 
-			this.memberActors.forEach((currentMember, index) => {
+			this.memberActors.forEach((currentMember) => {
 				if(!newMemberIdList.find(newMemberId => newMemberId === currentMember._id))
 					missingMembers.push(currentMember);
 			});
 
-			missingMembers.forEach((member, index) => {
+			missingMembers.forEach((member) => {
 				member.resetTalentsSocket("party");
 			});
 		}
@@ -343,7 +272,7 @@ export default class WFRP3eActor extends Actor
 	_onPartyTalentSocketsChange()
 	{
 		if(Array.isArray(this.memberActors) && this.memberActors.length > 0) {
-			this.memberActors.forEach((member, index) => {
+			this.memberActors.forEach((member) => {
 				member.resetTalentsSocket("party")
 			});
 		}

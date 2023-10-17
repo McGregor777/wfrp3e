@@ -29,7 +29,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		const data = super.getData();
 		const actor = this.actor;
 
-		this.options.tabs[1].initial = this.actor.currentCareer?._id;
+		this.options.tabs[1].initial = this.actor.system.currentCareer?._id;
 
 		data.actionTypes = CONFIG.WFRP3e.actionTypes;
 		data.conditionDurations = CONFIG.WFRP3e.conditionDurations;
@@ -62,7 +62,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 						}
 					},
 					cancel: {
-						icon: '<span class="fas fa-times"></span>',
+						icon: '<span class="fas fa-xmark"></span>',
 						label: game.i18n.localize("DIALOG.BUTTON.Ignore")
 					},
 				},
@@ -99,7 +99,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Returns items sorted by type.
-	 * @param data {Object} The Actor data
+	 * @param {Object} data The Actor data
 	 */
 	_buildItemLists(data)
 	{
@@ -161,27 +161,27 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			talentSocketsByType[talentType] = {};
 		}
 
-		if(this.actor.currentCareer) {
-			this.actor.currentCareer.system.talentSockets.forEach((talentSocket, index) => {
-				const talent = this.actor.itemTypes.talent.find(talent => talent.system.talentSocket === "career_" + this.actor.currentCareer._id + "_" + index);
+		if(this.actor.system.currentCareer) {
+			this.actor.system.currentCareer.system.talentSockets.forEach((talentSocket, index) => {
+				const talent = this.actor.itemTypes.talent.find(talent => talent.system.talentSocket === "career_" + this.actor.system.currentCareer._id + "_" + index);
 
-				talentSocketsByType[talentSocket]["career_" + this.actor.currentCareer._id + "_" + index] = this.actor.currentCareer.name +
+				talentSocketsByType[talentSocket]["career_" + this.actor.system.currentCareer._id + "_" + index] = this.actor.system.currentCareer.name +
 					(talent ? " (" + talent.name + ")" : " (" + game.i18n.localize("TALENT.FreeSocket") + ")");
 			});
 		}
 
-		if(this.actor.currentParty) {
-			this.actor.currentParty.system.talentSockets.forEach((talentSocket, index) => {
+		if(this.actor.system.currentParty) {
+			this.actor.system.currentParty.system.talentSockets.forEach((talentSocket, index) => {
 				let talent = null;
 
-				for(const member of this.actor.currentParty.memberActors) {
-					talent = member.itemTypes.talent.find(talent => talent.system.talentSocket === "party_" + this.actor.currentParty._id + "_" + index);
+				for(const member of this.actor.system.currentParty.memberActors) {
+					talent = member.itemTypes.talent.find(talent => talent.system.talentSocket === "party_" + this.actor.system.currentParty._id + "_" + index);
 
 					if(talent)
 						break;
 				}
 
-				talentSocketsByType[talentSocket]["party_" + this.actor.currentParty._id + "_" + index] = this.actor.currentParty.name +
+				talentSocketsByType[talentSocket]["party_" + this.actor.system.currentParty._id + "_" + index] = this.actor.system.currentParty.name +
 					(talent ? " (" + (talent.actor ? talent.actor.name + " - " : "") + talent.name + ")" : " (" + game.i18n.localize("TALENT.FreeSocket") + ")");
 			});
 		}
@@ -191,7 +191,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Get an Item's id from a clicked element hierarchy.
-	 * @param event {MouseEvent}
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	_getItemId(event)
@@ -201,12 +201,13 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Performs follow-up operations after clicks on a Career sheet's current radiobox.
-	 * @param event {MouseEvent}
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	_onCurrentCareerInput(event)
 	{
-		const career = this.actor.items.get(this._getItemId(event));
+		this.actor.items.get(this._getItemId(event)).update({"system.current": true});
+	}
 
 	/**
 	 * Performs follow-up operations after left-clicks on an impairment token.
@@ -230,7 +231,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Performs follow-up operations after clicks on a sheet's flip button.
-	 * @param event {MouseEvent}
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	async _onFlipClick(event)
@@ -247,14 +248,12 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Performs follow-up operations after clicks on a Trapping's quantity button.
-	 * @param event {MouseEvent}
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	_onQuantityClick(event)
 	{
-		// Get clicked Item and Item's quantity
-		const clickedItemId = this._getItemId(event);
-		const clickedItem = this.actor.items.get(clickedItemId);
+		const clickedItem = this.actor.items.get(this._getItemId(event));
 		let quantity = clickedItem.data.data.quantity;
 
 		switch(event.button) {
@@ -286,47 +285,41 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Performs follow-up operations after clicks on an Item edit button.
-	 * @param event {MouseEvent}
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	_onItemEdit(event)
 	{
-		// Get clicked Item
-		const clickedItemId = this._getItemId(event);
-		const clickedItem = this.actor.items.get(clickedItemId);
-
-		return clickedItem.sheet.render(true);
+		return this.actor.items.get(this._getItemId(event)).sheet.render(true);
 	}
 
 	/**
 	 * Performs follow-up operations after clicks on an Item delete button.
-	 * @param event {MouseEvent}
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	_onItemDelete(event)
 	{
-		const li = $(event.currentTarget).parents(".item")
-		const itemId = li.attr("data-item-id");
-		const itemName = this.actor.items.get(itemId).name;
+		const clickedItem = this.actor.items.get(this._getItemId(event));
 
 		new Dialog({
 			title: game.i18n.localize("DIALOG.TITLE.DeleteItemConfirmation"),
-			content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.DeleteItemConfirmation", {item: itemName}) + "</p>",
+			content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.DeleteItemConfirmation", {item: clickedItem.name}) + "</p>",
 			buttons: {
-				Yes: {
+				confirm: {
 					icon: '<span class="fa fa-check"></span>',
 					label: "Yes",
 					callback: async dlg => {
-						await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+						await this.actor.deleteEmbeddedDocuments("Item", [clickedItem._id]);
 						li.slideUp(200, () => this.render(false));
 					}
 				},
 				cancel: {
-					icon: '<span class="fas fa-times"></span>',
+					icon: '<span class="fas fa-xmark"></span>',
 					label: "Cancel"
 				},
 			},
-			default: "Yes"
+			default: "confirm"
 		}).render(true);
 	}
 
@@ -359,7 +352,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Performs follow-up operations after inputs on an Item.
-	 * @param event {Event}
+	 * @param {Event} event
 	 * @private
 	 */
 	_onItemInput(event)
@@ -376,14 +369,12 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Performs follow-up operations after clicks on a Card's recharge token button.
-	 * @param event {MouseEvent}
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	_onRechargeTokenClick(event)
 	{
-		// Get clicked Item and Item's recharge tokens
-		const clickedItemId = this._getItemId(event);
-		const clickedItem = this.actor.items.get(clickedItemId);
+		const clickedItem = this.actor.items.get(this._getItemId(event));
 		let rechargeTokens = clickedItem.system.rechargeTokens;
 
 		switch(event.button) {
@@ -405,16 +396,14 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Performs follow-up operations after clicks on a Skill's training level checkbox.
-	 * @param event {Event}
+	 * @param {Event} event
 	 * @private
 	 */
 	async _onSkillTrainingLevelChange(event)
 	{
 		event.preventDefault();
 
-		// Get clicked Item
-		const clickedItemId = $(event.currentTarget).parents("tr").attr("data-item-id");
-		const clickedItem = this.actor.items.get(clickedItemId);
+		const clickedItem = this.actor.items.get($(event.currentTarget).parents("tr").attr("data-item-id"));
 
 		if(event.target.defaultChecked)
 			clickedItem.update({"system.trainingLevel": Number(event.target.value - 1)});
@@ -424,15 +413,13 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Performs follow-up operations after clicks on a Stance meter's segment.
-	 * @param event {MouseEvent}
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	async _onStanceMeterSegmentClick(event)
 	{
 		event.preventDefault();
 
-		const newStanceValue = parseInt($(event.currentTarget).find("input")[0].value);
-
-		this.actor.update({"system.attributes.stance.current": newStanceValue});
+		this.actor.update({"system.attributes.stance.current": parseInt($(event.currentTarget).find("input")[0].value)});
 	}
 }

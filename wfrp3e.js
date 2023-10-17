@@ -1,5 +1,6 @@
 import {WFRP3e} from "./modules/config.js";
 import WFRP3eActor from "./modules/actors/WFRP3eActor.js"
+import WFRP3eCharacterDataModel from "./modules/data/actors/WFRP3eCharacterDataModel.js";
 import WFRP3eActionDataModel from "./modules/data/items/WFRP3eActionDataModel.js";
 import ChallengeDie from "./modules/dice/dietype/ChallengeDie.js";
 import CharacteristicDie from "./modules/dice/dietype/CharacteristicDie.js";
@@ -68,6 +69,7 @@ Hooks.once("init", () => {
 
 	CONFIG.WFRP3e = WFRP3e;
 
+	CONFIG.Actor.dataModels.character = WFRP3eCharacterDataModel;
 	CONFIG.Actor.documentClass = WFRP3eActor;
 
 	CONFIG.Item.dataModels.action = WFRP3eActionDataModel;

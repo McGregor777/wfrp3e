@@ -45,42 +45,7 @@
 				}
 			}
 		},
-		"character": {
-			"templates": ["attributes"],
-			"attributes": {
-				"corruption": {
-					"threshold": 5,
-					"value": 5
-				},
-				"fortune": {
-					"maximum": 3,
-					"value": 3
-				}
-			},
-			"background": {
-				"biography": "",
-				"height": "",
-				"weight": "",
-				"build": "",
-				"hairColour": "",
-				"eyeColour": "",
-				"birthplace": "",
-				"familyMembers": "",
-				"personalGoal": "",
-				"allies": "",
-				"enemies": "",
-				"campaignNotes": ""
-			},
-			"experience": {
-				"current": 0,
-				"spent": 0
-			},
-			"impairments": {
-				"fatigue": 0,
-				"stress": 0
-			},
-			"party": null
-		},
+		"character": {},
 		"party": {
 			"traits": ["Party", "", ""],
 			"talentSockets":  ["focus"],
