@@ -172,8 +172,8 @@
 	"ITEM.Money": "Money",
 	"ITEM.Wound": "Wound",
 
-	"MONEY.Quantity": "Quantité",
-	"MONEY.Value": "Valeur",
+	"MONEY.Quantity": "Quantity",
+	"MONEY.Value": "Value",
 
 	"MUTATION.SeverityRating": "Severity Rating",
 	"MUTATION.Traits": "Traits",
