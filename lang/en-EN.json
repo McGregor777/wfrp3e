@@ -235,6 +235,8 @@
 	"ROLL.CHECKBUILDER.Characteristic": "Characteristic",
 	"ROLL.CHECKBUILDER.ConvertConservative": "Convert to conservative die",
 	"ROLL.CHECKBUILDER.ConvertReckless": "Convert to reckless die",
+	"ROLL.CHECKBUILDER.ConvertWarning": "There is no {type} die left to convert.",
+	"ROLL.CHECKBUILDER.ConvertBackWarning": "There is no {type} die left to convert back.",
 	"ROLL.CHECKBUILDER.Hint": "Left click to increase dice, right click to decrease.",
 	"ROLL.CHECKBUILDER.Options": "Options",
 	"ROLL.CHECKBUILDER.RollCheck": "Roll check",

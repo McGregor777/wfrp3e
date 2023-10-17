@@ -235,6 +235,8 @@
 	"ROLL.CHECKBUILDER.Characteristic": "Caractéristique",
 	"ROLL.CHECKBUILDER.ConvertConservative": "Convertir en dé de prudence",
 	"ROLL.CHECKBUILDER.ConvertReckless": "Convertir en dé de témérité",
+	"ROLL.CHECKBUILDER.ConvertWarning": "Il n'y a plus de dé de {type} à convertir.",
+	"ROLL.CHECKBUILDER.ConvertBackWarning": "Il n'y a plus de dé de {type} à reconvertir.",
 	"ROLL.CHECKBUILDER.Hint": "Clic gauche pour ajouter des dés, clic droit pour en retirer.",
 	"ROLL.CHECKBUILDER.Options": "Options",
 	"ROLL.CHECKBUILDER.RollCheck": "Lancer le test",
