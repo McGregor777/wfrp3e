@@ -194,7 +194,8 @@ export const WFRP3e = {
 					exertions: 0,
 					sigmarsComets: 0,
 					chaosStars: 0
-				}, 2: {
+				},
+				2: {
 					label: "ROLL.RESULT.Blank",
 					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
 					successes: 0,
@@ -206,7 +207,8 @@ export const WFRP3e = {
 					exertions: 0,
 					sigmarsComets: 0,
 					chaosStars: 0
-				}, 3: {
+				},
+				3: {
 					label: "ROLL.RESULT.Blank",
 					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
 					successes: 0,
@@ -218,7 +220,8 @@ export const WFRP3e = {
 					exertions: 0,
 					sigmarsComets: 0,
 					chaosStars: 0
-				}, 4: {
+				},
+				4: {
 					label: "ROLL.RESULT.OneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/fortune_onesuccess.webp",
 					successes: 1,
@@ -230,7 +233,8 @@ export const WFRP3e = {
 					exertions: 0,
 					sigmarsComets: 0,
 					chaosStars: 0
-				}, 5: {
+				},
+				5: {
 					label: "ROLL.RESULT.OneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/fortune_onesuccess.webp",
 					successes: 1,
@@ -242,13 +246,15 @@ export const WFRP3e = {
 					exertions: 0,
 					sigmarsComets: 0,
 					chaosStars: 0
-				}, 6: {
+				},
+				6: {
 					label: "ROLL.RESULT.OneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/fortune_oneboon.webp",
 					successes: 0,
 					righteousSuccesses: 0,
 					challenges: 0,
 					boons: 1,
+					banes: 0,
 					delays: 0,
 					exertions: 0,
 					sigmarsComets: 0,
