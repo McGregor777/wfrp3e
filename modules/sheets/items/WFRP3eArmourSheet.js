@@ -4,7 +4,7 @@ export default class WFRP3eArmourSheet extends ItemSheet
 	{
 		return mergeObject(super.defaultOptions,
 		{
-			template: "systems/wfrp3e/templates/armour-sheet.html",
+			template: "systems/wfrp3e/templates/armour-sheet.hbs",
 			//width: 530,
 			//height: 340,
 			classes: ["wfrp3e", "sheet", "item", "armour", "armour-item-sheet"]
