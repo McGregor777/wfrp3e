@@ -4,7 +4,7 @@ export default class WFRP3eCriticalWoundSheet extends ItemSheet
 	{
 		return mergeObject(super.defaultOptions,
 		{
-			template: "systems/wfrp3e/templates/critical-wound-sheet.html",
+			template: "systems/wfrp3e/templates/critical-wound-sheet.hbs",
 			//width: 530,
 			height: 300,
 			classes: ["wfrp3e", "sheet", "item", "critical-wound", "critical-wound-item-sheet"]

@@ -4,7 +4,7 @@ export default class WFRP3ePartySheet extends ActorSheet
 	static get defaultOptions()
 	{
 		return mergeObject(super.defaultOptions, {
-			template: "systems/wfrp3e/templates/party-sheet.html",
+			template: "systems/wfrp3e/templates/party-sheet.hbs",
 			width: 800,
 			height: 540,
 			classes: ["wfrp3e", "sheet", "actor", "party", "party-sheet"]

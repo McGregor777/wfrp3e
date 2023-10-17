@@ -172,31 +172,7 @@ export default class WFRP3eActor extends Actor
 	 */
 	_prepareParty()
 	{
-		if(!Array.isArray(this.system.tension.events))
-			this._convertTensionEventsToArray();
-
-		if(!Array.isArray(this.system.talentSockets))
-			this._convertTalentSocketsToArray();
-
 		this._getMembers();
-	}
-
-	/**
-	 * Converts the Party's tension events to Array.
-	 * @private
-	 */
-	_convertTensionEventsToArray()
-	{
-		this.update({"system.tension.events": Object.values(this.system.tension.events)});
-	}
-
-	/**
-	 * Converts the Actor's talent sockets to Array.
-	 * @private
-	 */
-	_convertTalentSocketsToArray()
-	{
-		this.update({"system.talentSockets": Object.values(this.system.talentSockets)});
 	}
 
 	/**

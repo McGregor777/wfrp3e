@@ -1,7 +1,22 @@
 import {WFRP3e} from "./modules/config.js";
 import WFRP3eActor from "./modules/actors/WFRP3eActor.js"
 import WFRP3eCharacterDataModel from "./modules/data/actors/WFRP3eCharacterDataModel.js";
+import WFRP3ePartyDataModel from "./modules/data/actors/WFRP3ePartyDataModel.js";
+import WFRP3eAbilityDataModel from "./modules/data/items/WFRP3eAbilityDataModel.js";
 import WFRP3eActionDataModel from "./modules/data/items/WFRP3eActionDataModel.js";
+import WFRP3eArmourDataModel from "./modules/data/items/WFRP3eArmourDataModel.js";
+import WFRP3eCareerDataModel from "./modules/data/items/WFRP3eCareerDataModel.js";
+import WFRP3eConditionDataModel from "./modules/data/items/WFRP3eConditionDataModel.js";
+import WFRP3eCriticalWoundDataModel from "./modules/data/items/WFRP3eCriticalWoundDataModel.js";
+import WFRP3eDiseaseDataModel from "./modules/data/items/WFRP3eDiseaseDataModel.js";
+import WFRP3eInsanityDataModel from "./modules/data/items/WFRP3eInsanityDataModel.js";
+import WFRP3eMiscastDataModel from "./modules/data/items/WFRP3eMiscastDataModel.js";
+import WFRP3eMutationDataModel from "./modules/data/items/WFRP3eMutationDataModel.js";
+import WFRP3eMoneyDataModel from "./modules/data/items/WFRP3eMoneyDataModel.js";
+import WFRP3eSkillDataModel from "./modules/data/items/WFRP3eSkillDataModel.js";
+import WFRP3eTalentDataModel from "./modules/data/items/WFRP3eTalentDataModel.js";
+import WFRP3eTrappingDataModel from "./modules/data/items/WFRP3eTrappingDataModel.js";
+import WFRP3eWeaponDataModel from "./modules/data/items/WFRP3eWeaponDataModel.js";
 import ChallengeDie from "./modules/dice/dietype/ChallengeDie.js";
 import CharacteristicDie from "./modules/dice/dietype/CharacteristicDie.js";
 import ConservativeDie from "./modules/dice/dietype/ConservativeDie.js";
@@ -42,21 +57,21 @@ async function preloadHandlebarsTemplates()
 		"systems/wfrp3e/templates/partials/attribute-partial.html",
 		"systems/wfrp3e/templates/partials/characteristic-partial.hbs",
 		"systems/wfrp3e/templates/partials/impairment-partial.hbs",
-		"systems/wfrp3e/templates/partials/item-ability-card.html",
+		"systems/wfrp3e/templates/partials/item-ability-card.hbs",
 		"systems/wfrp3e/templates/partials/item-action-card.hbs",
-		"systems/wfrp3e/templates/partials/item-armour-row.html",
+		"systems/wfrp3e/templates/partials/item-armour-row.hbs",
 		"systems/wfrp3e/templates/partials/item-career-partial.hbs",
-		"systems/wfrp3e/templates/partials/item-condition-card.html",
-		"systems/wfrp3e/templates/partials/item-disease-card.html",
-		"systems/wfrp3e/templates/partials/item-insanity-card.html",
-		"systems/wfrp3e/templates/partials/item-money-row.html",
-		"systems/wfrp3e/templates/partials/item-mutation-card.html",
-		"systems/wfrp3e/templates/partials/item-miscast-card.html",
+		"systems/wfrp3e/templates/partials/item-condition-card.hbs",
+		"systems/wfrp3e/templates/partials/item-disease-card.hbs",
+		"systems/wfrp3e/templates/partials/item-insanity-card.hbs",
+		"systems/wfrp3e/templates/partials/item-money-row.hbs",
+		"systems/wfrp3e/templates/partials/item-mutation-card.hbs",
+		"systems/wfrp3e/templates/partials/item-miscast-card.hbs",
 		"systems/wfrp3e/templates/partials/item-skill-row.hbs",
 		"systems/wfrp3e/templates/partials/item-talent-card.hbs",
-		"systems/wfrp3e/templates/partials/item-trapping-row.html",
+		"systems/wfrp3e/templates/partials/item-trapping-row.hbs",
 		"systems/wfrp3e/templates/partials/item-weapon-row.hbs",
-		"systems/wfrp3e/templates/partials/item-wound-card.html"
+		"systems/wfrp3e/templates/partials/item-wound-card.hbs"
 	];
 
 	return loadTemplates(templatePaths);
@@ -70,9 +85,24 @@ Hooks.once("init", () => {
 	CONFIG.WFRP3e = WFRP3e;
 
 	CONFIG.Actor.dataModels.character = WFRP3eCharacterDataModel;
+	CONFIG.Actor.dataModels.party = WFRP3ePartyDataModel;
 	CONFIG.Actor.documentClass = WFRP3eActor;
 
+	CONFIG.Item.dataModels.ability = WFRP3eAbilityDataModel;
 	CONFIG.Item.dataModels.action = WFRP3eActionDataModel;
+	CONFIG.Item.dataModels.armour = WFRP3eArmourDataModel;
+	CONFIG.Item.dataModels.career = WFRP3eCareerDataModel;
+	CONFIG.Item.dataModels.condition = WFRP3eConditionDataModel;
+	CONFIG.Item.dataModels.criticalWound = WFRP3eCriticalWoundDataModel;
+	CONFIG.Item.dataModels.disease = WFRP3eDiseaseDataModel;
+	CONFIG.Item.dataModels.insanity = WFRP3eInsanityDataModel;
+	CONFIG.Item.dataModels.miscast = WFRP3eMiscastDataModel;
+	CONFIG.Item.dataModels.money = WFRP3eMoneyDataModel;
+	CONFIG.Item.dataModels.mutation = WFRP3eMutationDataModel;
+	CONFIG.Item.dataModels.skill = WFRP3eSkillDataModel;
+	CONFIG.Item.dataModels.talent = WFRP3eTalentDataModel;
+	CONFIG.Item.dataModels.trapping = WFRP3eTrappingDataModel;
+	CONFIG.Item.dataModels.weapon = WFRP3eWeaponDataModel;
 	CONFIG.Item.documentClass = WFRP3eItem;
 
 	CONFIG.Dice.rolls.push(CONFIG.Dice.rolls[0]);

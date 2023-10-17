@@ -34,6 +34,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		data.actionTypes = CONFIG.WFRP3e.actionTypes;
 		data.conditionDurations = CONFIG.WFRP3e.conditionDurations;
 		data.characteristics = CONFIG.WFRP3e.characteristics;
+		data.diseaseSymptoms = CONFIG.WFRP3e.disease.symptoms;
 		data.stances = CONFIG.WFRP3e.stances;
 		data.symbols = CONFIG.WFRP3e.symbols;
 		data.weaponGroups = CONFIG.WFRP3e.weapon.groups;
@@ -41,7 +42,6 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		data.weaponRanges = CONFIG.WFRP3e.weapon.ranges;
 
 		data.items = this._buildItemLists(data);
-		data.items["diseases"].forEach((disease) => disease.symptomDescription = game.i18n.localize(CONFIG.WFRP3e.disease.symptoms.descriptions[disease.system.symptom]));
 		data.talentSocketsByType = this._buildTalentSocketsList();
 
 		// Add basic skills to the Character.

@@ -46,27 +46,7 @@
 			}
 		},
 		"character": {},
-		"party": {
-			"traits": ["Party", "", ""],
-			"talentSockets":  ["focus"],
-			"tension": {
-				"events": [{
-					"threshold": 4,
-					"effects": ""
-				}, {
-					"threshold": 8,
-					"effects": ""
-				}],
-				"maximum": 8,
-				"value": 0
-			},
-			"specialAbility": {
-				"title": "",
-				"description": ""
-			},
-			"fortunePool": 0,
-			"members": []
-		},
+		"party": {},
 		"creature": {
 			"templates": ["attributes"],
 			"threatRating": 1,
@@ -102,142 +82,20 @@
 	"Item": {
 		"types": ["ability", "action", "armour", "career", "condition", "criticalWound", "disease", "insanity",
 			"money", "miscast", "mutation", "skill", "talent", "trapping", "weapon"],
-		"templates": {
-			"basics": {
-				"description": ""
-			},
-			"item": {
-				"cost": {
-					"brass": 0,
-					"silver": 0,
-					"gold": 0
-				},
-				"encumbrance": 0,
-				"rarity": "abundant"
-			}
-		},
-		"ability": {
-			"templates": ["basics"]
-		},
+		"ability": {},
 		"action": {},
-		"armour": {
-			"templates": ["basics", "item"],
-			"defenceValue": 0,
-			"soakValue": 0
-		},
-		"career": {
-			"templates": ["basics"],
-			"advanced": false,
-			"raceRestrictions": "",
-			"traits": ["", "", "", ""],
-			"talentSockets": ["focus", "focus"],
-			"primaryCharacteristics": ["strength", "ability"],
-			"careerSkills": ["", "", "", "", ""],
-			"startingStance": {
-				"conservativeSegments": 0,
-				"recklessSegments": 0
-			},
-			"advanceOptions": {
-				"action": 0,
-				"talent": 0,
-				"skill": 0,
-				"fortune": 0,
-				"conservative": 0,
-				"reckless": 0,
-				"wound": 0
-			},
-			"summary": "",
-			"advances": {
-				"action": "",
-				"talent": "",
-				"skill": "",
-				"wound": "",
-				"open": ["", "", "", "", "", ""],
-				"careerTransition": {
-					"cost": 0,
-					"newCareer": ""
-				},
-				"dedicationBonus": "",
-				"nonCareer": [{
-					"cost": 0,
-					"nature": ""
-				}, {
-					"cost": 0,
-					"nature": ""
-				}]
-			},
-			"current": false,
-			"completed": false
-		},
-		"condition":
-		{
-			"templates": ["basics"],
-			"duration": ""
-		},
-		"criticalWound":
-		{
-			"templates": ["basics"],
-			"severityRating": 1
-		},
-		"disease":
-		{
-			"templates": ["basics"],
-			"traits": ["", ""],
-			"symptom": "",
-			"severityRating": 1,
-			"effects": ""
-		},
-		"insanity":
-		{
-			"templates": ["basics"],
-			"traits": ["", ""],
-			"severityRating": 1,
-			"effects": ""
-		},
-		"money":
-		{
-			"templates": ["basics"],
-			"value": 1,
-			"quantity": 1
-		},
-		"miscast":
-		{
-			"templates": ["basics"]
-		},
-		"mutation":
-		{
-			"templates": ["basics"],
-			"traits": ["Chaos"],
-			"severityRating": 1,
-			"effects": ""
-		},
-		"skill":
-		{
-			"templates": ["basics"],
-			"characteristic": "strength",
-			"advanced": false,
-			"trainingLevel": 0,
-			"specialisations": []
-		},
-		"talent":
-		{
-			"templates": ["basics"],
-			"rechargeTokens": 0,
-			"talentSocket": null,
-			"type": "focus"
-		},
-		"trapping":
-		{
-			"templates": ["basics"]
-		},
-		"weapon":
-		{
-			"templates": ["basics", "item"],
-			"damageRating": 3,
-			"criticalRating": 5,
-			"group": "ordinary",
-			"range": "close",
-			"qualities": []
-		}
+		"armour": {},
+		"career": {},
+		"condition": {},
+		"criticalWound": {},
+		"disease": {},
+		"insanity": {},
+		"money": {},
+		"miscast": {},
+		"mutation": {},
+		"skill": {},
+		"talent": {},
+		"trapping": {},
+		"weapon": {}
 	}
 }

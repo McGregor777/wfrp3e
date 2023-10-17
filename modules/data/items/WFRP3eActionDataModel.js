@@ -1,6 +1,4 @@
-/**
- * This class defines data schema, methods, and properties of WFRP3e Actions.
- */
+/** @inheritDoc */
 export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataModel
 {
     /** @inheritDoc */

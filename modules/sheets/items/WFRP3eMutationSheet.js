@@ -4,7 +4,7 @@ export default class WFRP3eMutationSheet extends ItemSheet
 	{
 		return mergeObject(super.defaultOptions,
 		{
-			template: "systems/wfrp3e/templates/mutation-sheet.html",
+			template: "systems/wfrp3e/templates/mutation-sheet.hbs",
 			//width: 530,
 			height: 400,
 			classes: ["wfrp3e", "sheet", "item", "mutation", "mutation-item-sheet"]

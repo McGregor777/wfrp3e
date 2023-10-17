@@ -85,37 +85,37 @@
 				<div class="cards">
 					<div class="conditions">
 						{{#each items.conditions as |condition cond|}}
-							{{>systems/wfrp3e/templates/partials/item-condition-card.html condition=condition}}
+							{{>systems/wfrp3e/templates/partials/item-condition-card.hbs condition=condition}}
 						{{/each}}
 					</div>
 
 					<div class="wounds">
 						{{#each items.criticalWounds as |wound wnd|}}
-							{{>systems/wfrp3e/templates/partials/item-wound-card.html wound=wound}}
+							{{>systems/wfrp3e/templates/partials/item-wound-card.hbs wound=wound}}
 						{{/each}}
 					</div>
 
 					<div class="diseases">
 						{{#each items.diseases as |disease dis|}}
-							{{>systems/wfrp3e/templates/partials/item-disease-card.html disease=disease}}
+							{{>systems/wfrp3e/templates/partials/item-disease-card.hbs disease=disease}}
 						{{/each}}
 					</div>
 
 					<div class="insanities">
 						{{#each items.insanities as |insanity ins|}}
-							{{>systems/wfrp3e/templates/partials/item-insanity-card.html insanity=insanity}}
+							{{>systems/wfrp3e/templates/partials/item-insanity-card.hbs insanity=insanity}}
 						{{/each}}
 					</div>
 
 					<div class="mutations">
 						{{#each items.mutations as |mutation mut|}}
-							{{>systems/wfrp3e/templates/partials/item-mutation-card.html mutation=mutation}}
+							{{>systems/wfrp3e/templates/partials/item-mutation-card.hbs mutation=mutation}}
 						{{/each}}
 					</div>
 
 					<div class="miscasts">
 						{{#each items.miscasts as |miscast mis|}}
-							{{>systems/wfrp3e/templates/partials/item-miscast-card.html miscast=miscast}}
+							{{>systems/wfrp3e/templates/partials/item-miscast-card.hbs miscast=miscast}}
 						{{/each}}
 					</div>
 				</div>
@@ -290,7 +290,7 @@
 				</thead>
 				<tbody>
 					{{#each items.armours as |armour arm|}}
-						{{>systems/wfrp3e/templates/partials/item-armour-row.html armour=armour}}
+						{{>systems/wfrp3e/templates/partials/item-armour-row.hbs armour=armour}}
 					{{/each}}
 				</tbody>
 			</table>
@@ -307,7 +307,7 @@
 				</thead>
 				<tbody>
 					{{#each items.trappings as |trapping trp|}}
-						{{>systems/wfrp3e/templates/partials/item-trapping-row.html trapping=trapping}}
+						{{>systems/wfrp3e/templates/partials/item-trapping-row.hbs trapping=trapping}}
 					{{/each}}
 				</tbody>
 			</table>
@@ -324,7 +324,7 @@
 				</thead>
 				<tbody>
 					{{#each items.money as |money mo|}}
-						{{>systems/wfrp3e/templates/partials/item-money-row.html money=money}}
+						{{>systems/wfrp3e/templates/partials/item-money-row.hbs money=money}}
 					{{/each}}
 				</tbody>
 			</table>

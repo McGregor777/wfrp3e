@@ -4,7 +4,7 @@ export default class WFRP3eDiseaseSheet extends ItemSheet
 	{
 		return mergeObject(super.defaultOptions,
 		{
-			template: "systems/wfrp3e/templates/disease-sheet.html",
+			template: "systems/wfrp3e/templates/disease-sheet.hbs",
 			//width: 530,
 			height: 400,
 			classes: ["wfrp3e", "sheet", "item", "disease", "disease-item-sheet"]
@@ -15,7 +15,7 @@ export default class WFRP3eDiseaseSheet extends ItemSheet
 	{
 		const data = super.getData();
 
-		data.diseaseSymptomsKeywords = CONFIG.WFRP3e.disease.symptoms.keywords;
+		data.diseaseSymptoms = CONFIG.WFRP3e.disease.symptoms;
 
 		return data;
 	}
