@@ -961,6 +961,20 @@ export const WFRP3e = {
 				type: "melee"
 			}
 		},
+		qualities: {
+			attuned: "WEAPON.QUALITY.Attuned",
+			blast: "WEAPON.QUALITY.Blast",
+			defensive: "WEAPON.QUALITY.Defensive",
+			entangling: "WEAPON.QUALITY.Entangling",
+			fast: "WEAPON.QUALITY.Fast",
+			pierce: "WEAPON.QUALITY.Pierce",
+			reload: "WEAPON.QUALITY.Reload",
+			slow: "WEAPON.QUALITY.Slow",
+			thrown: "WEAPON.QUALITY.Thrown",
+			twohanded: "WEAPON.QUALITY.TwoHanded",
+			unreliable: "WEAPON.QUALITY.Unreliable",
+			vicious: "WEAPON.QUALITY.Vicious",
+		},
 		ranges: {
 			close: "WEAPON.RANGE.Close",
 			medium: "WEAPON.RANGE.Medium",
