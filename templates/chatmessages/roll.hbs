@@ -1,0 +1,81 @@
+<div class="wfrp3e dice-roll">
+	{{#if data.additionalFlavourText}}
+		<div class="dice-additional-flavor">{{data.additionalFlavourText}}</div>
+	{{/if}}
+
+	{{#if publicRoll }}
+		<div class="dice-result">
+			{{#if hasStandard}}
+				<div class="dice-formula">{{formula}}</div>
+			{{/if}}
+
+			{{#if hasSpecialDice}}
+				<div class="dice-array">
+					<ol class="dice-rolls">
+						{{#each specialDice}}
+							{{#if this.isSpecialDie}}
+								{{#each this.rolls}}
+									<li class="roll">{{{this.result}}}</li>
+								{{/each}}
+							{{/if}}
+						{{/each}}
+					</ol>
+				</div>
+
+				<div>
+					{{#each addedResults}}
+						{{#if (ne this.value 0)}}
+							<div>{{#if this.negative}}-{{else}}+{{/if}}{{this.value}}{{{this.symbol}}}</div>
+						{{/if}}
+					{{/each}}
+				</div>
+			{{/if}}
+
+			{{{tooltip}}}
+
+			{{#if hasStandard}}
+				<h4 class="dice-total">{{total}}</h4>
+			{{/if}}
+
+			{{#if hasSpecialDice}}
+				<ul>
+					{{#if hasSuccess}}
+						{{#if symbols.successes}}
+							<li class="roll-success">{{localize "ROLL.OUTCOME.Successful"}}</li>
+						{{else}}
+							<li class="roll-failure">{{localize "ROLL.OUTCOME.Failed"}}</li>
+						{{/if}}
+					{{/if}}
+
+					{{#each @root.data.symbols as |symbol sym|}}
+						{{#if (lookup @root.symbols symbol.plural)}}
+							{{#unless (equalTo sym "righteousSuccess")}}
+								<li class="roll-symbols">
+									{{localize symbol.result nb=(lookup @root.symbols symbol.plural)}}
+
+									{{#if (equalTo sym "success")}}
+										{{#if (superiorTo @root.symbols.righteousSuccesses 0)}}
+											{{localize @root.data.symbols.righteousSuccess.result nb=@root.symbols.righteousSuccesses}}
+										{{/if}}
+									{{/if}}
+
+                                    {{#for 0 (lookup @root.data.remainingSymbols symbol.plural) 1}}
+                                        <span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+                                    {{/for}}
+                                </li>
+							{{/unless}}
+						{{/if}}
+					{{/each}}
+				</ul>
+
+				{{#if data.effects}}
+					{{>systems/wfrp3e/templates/chatmessages/action-effects.hbs
+							action=data.action
+							face=data.face
+							symbols=data.symbols
+							effects=data.effects}}
+				{{/if}}
+			{{/if}}
+		</div>
+	{{/if}}
+</div>

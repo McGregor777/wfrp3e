@@ -1,0 +1,19 @@
+<div class="characteristic">
+	<span class="characteristic-title">{{localize characteristic.name}}</span>
+		
+	<div class="characteristic-input-container">
+		<input class="characteristic-value-input"
+			   name="system.attributes.characteristics.{{char}}.value"
+			   type="text"
+			   value="{{lookup (lookup @root.actor.system.attributes.characteristics char) 'value'}}"
+			   placeholder="{{localize characteristic.abbreviation}}"
+			   data-dtype="Number" />
+
+		<input class="characteristic-fortune-input"
+			   name="system.attributes.characteristics.{{char}}.fortune"
+			   type="text"
+			   value="{{lookup (lookup @root.actor.system.attributes.characteristics char) 'fortune'}}"
+			   placeholder="{{localize 'CHARACTER.Fortune'}}"
+			   data-dtype="Number" />
+	</div>
+</div>

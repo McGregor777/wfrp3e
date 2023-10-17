@@ -1,174 +1,152 @@
 @import "components/action_card";
 @import "components/action_sheet";
 @import "components/career_sheet";
-@import "components/condition_card";
+@import "components/career_edit_sheet";
 @import "components/character_sheet";
+@import "components/check_builder";
+@import "components/condition_card";
 @import "components/disease_card";
-@import "components/dicepool";
 @import "components/insanity_card";
 @import "components/miscast_card";
 @import "components/mutation_card";
 @import "components/party_sheet";
+@import "components/roll_message";
 @import "components/talent_card";
 @import "components/typography";
 @import "components/wound_card";
 
-body
-{
+body {
 	font: 12pt @font-primary;
 }
 
-h1
-{
+h1 {
 	font: 32pt @font-title;
 }
 
-h2
-{
+h2 {
 	font: 24pt @font-title;
 }
 
-h3
-{
+h3 {
 	font: 20pt @font-title;
 
-	&.entity-name, .encounters &, .folder-header &, #players &, #pause &
-	{
+	&.entity-name, .encounters &, .folder-header &, #players &, #pause & {
 		background: unset;
 		border: unset !important;
 	}
 }
 
-h4
-{
-	margin: auto !important;
+h4 {
 	font: 16pt @font-primary;
+	margin: auto !important;
 }
 
-h5
-{
+h5 {
 	font: 14pt @font-primary;
 }
 
-h6
-{
+h6 {
 	font: 12pt @font-primary;
 }
 
-input[type="checkbox"]
-{
-	width: 15px;
-	height: 15px;
+input[type="checkbox"] {
+	height: 1rem;
+	width: 1rem;
 }
 
-p
-{
-	text-align: justify;
+li.folder > .folder-header h3 {
+	font-size: 16pt;
 }
 
-td
-{
-	padding: 4px;
+td {
+	padding: 0.25rem;
 
-	&.center-aligned
-	{
+	&.center-aligned {
 		text-align: center;
 	}
 
-	&.left-aligned
-	{
+	&.left-aligned{
 		text-align: left;
 	}
 
-	&.right-aligned
-	{
+	&.right-aligned {
 		text-align: right;
 	}
 
-	&.shrinked
-	{
+	&.shrinked {
 		width: 1px;
 		text-align: center;
 	}
 }
 
-th
-{
-	padding: 4px !important;
+th {
+	padding: 0.25rem !important;
 
-	&.center-aligned
-	{
+	&.center-aligned {
 		text-align: center;
 	}
 
-	&.left-aligned
-	{
+	&.left-aligned {
 		text-align: left;
 	}
 
-	&.right-aligned
-	{
+	&.right-aligned {
 		text-align: right;
 	}
 
-	&.shrinked
-	{
+	&.shrinked {
 		width: 1px;
 		text-align: center;
 	}
 }
 
-.bottom-line
-{
-	position: absolute;
+.bottom-line {
+	bottom: 0.25rem;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	bottom: 5px;
-	left: 10px;
-	right: 10px;
+	left: 0.5rem;
 	line-height: 0;
+	position: absolute;
+	right: 0.5rem;
 
-	& > *
-	{
+	& > * {
 		display: block;
 	}
 }
 
-.conservative-stance-meter
-{
+.conservative-stance-meter {
 	background-color: green;
 }
 
-.editor
-{
+.editor {
+	background: rgba(250, 240, 230, 0.5);
+	border-radius: 0.5rem;
 	flex-grow: 1;
 	min-height: 75px;
 }
 
-& .face
-{
+& .face {
 	display: none;
-	width: 100%;
 	height: 100%;
+	width: 100%;
 
-	&.active
-	{
+	&.active {
 		display: block;
 	}
 }
 
-.reckless-stance-meter
-{
+.playlists-sidebar h4 {
+	height: auto;
+}
+
+.reckless-stance-meter {
 	background-color: red;
 }
 
-.sheet
-{
-	& .tab
-	{
-		&.active
-		{
+.sheet {
+	& .tab {
+		&.active {
 			display: flex !important;
 			flex-direction: column;
 			flex-grow: 1;
@@ -176,91 +154,127 @@ th
 	}
 }
 
-.wfrp3e
-{
-	&.dice
-	{
-		font-family: var(--fa-style-family, "Font Awesome 6 Pro");
-		font-weight: var(--fa-style,900);
-		text-shadow:
-				-1px -1px 0 black,
-				-1px 0 0 black,
-				0 -1px 0 black,
-				-1px 1px 0 black,
-				1px -1px 0 black,
-				0 1px 0 black,
-				1px 0 0 black,
-				1px 1px 0 black;
+.special-die {
+	border: none;
+}
 
-		&.challenge
-		{
+.tab-link.active {
+	color: white;
+	text-shadow:
+		-1px -1px 0 black,
+		-1px 0 0 black,
+		0 -1px 0 black,
+		-1px 1px 0 black,
+		1px -1px 0 black,
+		0 1px 0 black,
+		1px 0 0 black,
+		1px 1px 0 black;
+}
+
+.wfrp3e-font {
+	font-family: @font-symbols;
+
+	&.dice {
+		text-shadow: none;
+		-webkit-text-stroke: 1px black;
+
+		&.challenge {
 			color: purple;
 
 			&:before {
-				content: "\f219";
+				content: "8";
 			}
 		}
 
-		&.characteristic
-		{
+		&.characteristic {
 			color: blue;
 
 			&:before {
-				content: "\f219";
+				content: "8";
 			}
 		}
 
-		&.conservative
-		{
+		&.conservative {
 			color: green;
 
 			&:before {
-			content: "\f111";
-		}
+				content: "0";
+			}
 		}
 
-		&.expertise
-		{
+		&.expertise {
 			color: yellow;
 
-			&:before
-			{
-				content: "\f0c8";
+			&:before {
+				content: "6";
 			}
 		}
 
-		&.fortune
-		{
+		&.fortune {
 			color: white;
 
-			&:before
-			{
-				content: "\f0c8";
+			&:before {
+				content: "6";
 			}
 		}
 
-		&.reckless
-		{
+		&.reckless {
 			color: red;
 
 			&:before {
-				content: "\f111";
+				content: "0";
 			}
 		}
 
-		&.misfortune
-		{
+		&.misfortune {
 			color: black;
+			-webkit-text-stroke-width: 0;
 
-			&:before
-			{
-				content: "\f0c8";
+			&:before {
+				content: "6";
 			}
+		}
+	}
+
+	&.symbol {
+		&.bane:before {
+			content: "b";
+		}
+
+		&.boon:before {
+			content: "B";
+		}
+
+		&.challenge:before {
+			content: "c";
+		}
+
+		&.chaos-star:before {
+			content: "C";
+		}
+
+		&.delay:before {
+			content: "d";
+		}
+
+		&.exertion:before {
+			content: "e";
+		}
+
+		&.righteous-success:before {
+			content: "r";
+		}
+
+		&.sigmars-comet:before {
+			content: "S";
+		}
+
+		&.success:before {
+			content: "s";
 		}
 	}
 }
 
-#chat-controls .control-buttons
-{
+#chat-controls .control-buttons {
 	flex-basis: 67px;
 }

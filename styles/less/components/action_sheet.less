@@ -1,22 +1,69 @@
-.action-item-sheet
-{
-	& .sheet-form-div
-	{
+.action-item-sheet {
+	& .sheet-form-div {
 		margin: 0.25rem 0;
 
-		&.action-art-selector
-		{
-			& > *
-			{
+		&.action-art-selector {
+			& > * {
 				display: block;
 			}
 
-			& > img
-			{
+			& > img {
 				border: none;
 				height: 80px;
 				width: 278px;
 			}
+		}
+
+		&.action-difficulty-modifiers, &.action-header-details {
+			display: flex;
+
+			& > *:first-child {
+				margin-right: 1rem;
+			}
+
+			& > *:last-child {
+				margin-left: 1rem;
+			}
+		}
+
+		& .action-sheet-effect-group {
+			margin-bottom: 0.5rem;
+
+			& .action-sheet-effect {
+				align-items: center;
+				display: flex;
+				margin-bottom: 0.5rem;
+
+				& > * {
+					margin: 0 0.25rem;
+
+					&:first-child {
+						margin-left: 0;
+					}
+
+					&:last-child {
+						margin-right: 0;
+					}
+
+					&.action-sheet-effect-symbol-amount {
+						width: 2rem;
+					}
+
+					&.action-sheet-effect-description {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+
+	& .tab-link.active {
+		&.conservative-tab-link {
+			color: lightgreen;
+		}
+
+		&.reckless-tab-link {
+			color: lightcoral;
 		}
 	}
 }

@@ -1,0 +1,171 @@
+<form>
+	<div class="main-options">
+		<div class="dice-pool"></div>
+		<div class="symbols-pool"></div>
+	
+		<p class="dice-pool-hint">
+			<em>{{localize 'ROLL.CHECKBUILDER.Hint'}}</em>
+		</p>
+	
+		<div class="dice-pool-table">
+			{{#each diceIcons as |die d|}}
+				<div class="pool-container">
+					<img class="pool-picture special-die" src="{{die}}" width="43" height="43" alt="{{capitalize d}} die"/>
+					<input class="pool-value" type="button" name="{{d}}Dice" min="0" />
+					<label class="pool-text" for="{{d}}Dice">{{localize (concat (concat 'ROLL.DIE.' (capitalize d)) 'Dice')}}</label>
+				</div>
+			{{/each}}
+		</div>
+	
+		<div class="convert-buttons">
+			<button class="convert-conservative">{{localize 'ROLL.CHECKBUILDER.ConvertConservative'}}</button>
+			<button class="convert-reckless">{{localize 'ROLL.CHECKBUILDER.ConvertReckless'}}</button>
+		</div>
+	
+		<details>
+			<summary>{{localize 'ROLL.CHECKBUILDER.StartingResults'}}</summary>
+	
+			<table class="symbols-pool-container">
+				<tr>
+					<td>
+						<div class="pool-container">
+							<span class="wfrp3e-font symbol success"></span>
+							<input class="pool-value" type="button" name="successes" min="0" />
+							<label class="pool-text" for="successes">{{localize 'ROLL.SYMBOL.Successes'}}</label>
+						</div>
+					</td>
+	
+					<td>
+						<div class="pool-container">
+							<span class="wfrp3e-font symbol challenge"></span>
+							<input class="pool-value" type="button" name="challenges" min="0" />
+							<label class="pool-text" for="challenges">{{localize 'ROLL.SYMBOL.Challenges'}}</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="pool-container">
+							<span class="wfrp3e-font symbol boon"></span>
+							<input class="pool-value" type="button" name="boons" min="0" />
+							<label class="pool-text" for="boons">{{localize 'ROLL.SYMBOL.Boons'}}</label>
+						</div>
+					</td>
+	
+					<td>
+						<div class="pool-container">
+							<span class="wfrp3e-font symbol bane"></span>
+							<input class="pool-value" type="button" name="banes" min="0" />
+							<label class="pool-text" for="banes">{{localize 'ROLL.SYMBOL.Banes'}}</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="pool-container">
+							<span class="wfrp3e-font symbol delay"></span>
+							<input class="pool-value" type="button" name="delays" min="0" />
+							<label class="pool-text" for="delays">{{localize 'ROLL.SYMBOL.Delays'}}</label>
+						</div>
+					</td>
+	
+					<td>
+						<div class="pool-container">
+							<span class="wfrp3e-font symbol exertion"></span>
+							<input class="pool-value" type="button" name="exertions" min="0" />
+							<label class="pool-text" for="exertions">{{localize 'ROLL.SYMBOL.Exertions'}}</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="pool-container">
+							<span class="wfrp3e-font symbol sigmars-comet"></span>
+							<input class="pool-value" type="button" name="sigmarsComets" min="0" />
+							<label class="pool-text" for="sigmarsComets">{{localize 'ROLL.SYMBOL.SigmarsComets'}}</label>
+						</div>
+					</td>
+	
+					<td>
+						<div class="pool-container">
+							<span class="wfrp3e-font symbol chaos-star"></span>
+							<input class="pool-value" type="button" name="chaosStars" min="0" />
+							<label class="pool-text" for="chaosStars">{{localize 'ROLL.SYMBOL.ChaosStars'}}</label>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</details>
+	
+		<details>
+			<summary>{{localize 'ROLL.CHECKBUILDER.Options'}}</summary>
+	
+			<div class="dice-pool-roll-options">
+				{{#if (or (eq isGM true) (eq canUserAddAudio true)) }}
+				<div class="flexrow">
+					<button id="add-sound" class="extend-button"><i class="fas fa-volume-up"></i></button>
+					<select class="sound-selection hide">
+						<option></option>
+						{{#each sounds}} <option value="{{this.path}}" {{#if this.selected}}selected{{/if}}>{{this.name}} {{/each}}
+					</select>
+				</div>
+				{{/if}}
+	
+				<div class="flexrow">
+					<button id="add-flavor" class="extend-button"><i class="far fa-comment-dots"></i></button>
+					<input class="flavor-text hide" placeholder="Flavor Text" value="{{flavor}}" type="text" />
+				</div>
+	
+				{{#if isGM}}
+				<div class="flexrow">
+					<button id="send-to-player" class="extend-button"><i class="fas fa-share"></i></button>
+					<select class="user-selection hide">
+						<option></option>
+						{{#each users}}
+						<option value="{{this.id}}">{{this.name}}</option>
+						{{/each}}
+					</select>
+				</div>
+				{{/if}}
+			</div>
+		</details>
+	
+		<div class="roll-button flexrow">
+			<button class="roll-check-button">{{localize 'ROLL.CHECKBUILDER.RollCheck'}}</button>
+		</div>
+	</div>
+
+	{{#if skill}}
+		<div class="quick-settings">
+			<div>
+				<label>{{localize "ROLL.CHECKBUILDER.Skill"}}</label>
+				<select class="skill-select" name="skill" data-dtype="String">
+					{{selectOptions @root.skills selected=@root.skill._id nameAttr="_id" labelAttr="name"}}
+				</select>
+			</div>
+
+			<div>
+				<label>{{localize "ROLL.CHECKBUILDER.Characteristic"}}</label>
+				<select class="characteristic-select" name="characteristic" data-dtype="String">
+					{{selectOptions @root.characteristics selected=@root.characteristic localize=true}}
+				</select>
+			</div>
+
+			<div>
+				<label>{{localize "ROLL.CHECKBUILDER.ChallengeLevel"}}</label>
+				<select class="challenge-level-select" name="challengeLevel" data-dtype="String">
+	                {{selectOptions @root.challengeLevels selected=@root.challengeLevel labelAttr="name" localize=true}}
+                </select>
+            </div>
+
+			{{#if availableWeapons}}
+				<div>
+					 <label>{{localize "ROLL.CHECKBUILDER.Weapon"}}</label>
+					<select class="weapon-select" name="weapon" data-dtype="String">
+						{{selectOptions @root.availableWeapons selected=@root.weapon._id nameAttr="_id" labelAttr="name"}}
+					</select>
+				</div>
+			{{/if}}
+		</div>
+	{{/if}}
+</form>

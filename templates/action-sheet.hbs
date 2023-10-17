@@ -1,0 +1,109 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<header class="sheet-header">
+		<img class="actor-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+		<h1><input class="name-input" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}'" /></h1>
+	</header>
+
+	<nav class="sheet-tabs tabs action-sheet-face-tabs" data-group="face">
+		<a class="tab-link conservative-tab-link" data-tab="conservative">{{localize 'ACTION.FACE.Conservative'}}</a>
+		<a class="tab-link reckless-tab-link" data-tab="reckless">{{localize 'ACTION.FACE.Reckless'}}</a>
+	</nav>
+
+	<div class="sheet-body action-sheet-body">
+		{{#each @root.stances as |stance st|}}
+			<section class="tab action-sheet-{{st}}-tab" data-group="face" data-tab="{{st}}">
+				<nav class="sheet-tabs tabs action-sheet-{{st}}-tabs" data-group="{{st}}">
+					<a class="tab-link main-tab-link" data-tab="main">{{localize 'ACTION.Main'}}</a>
+					<a class="tab-link effects-tab-link" data-tab="effects">{{localize 'ACTION.Effects'}}</a>
+				</nav>
+
+				<div class="action-sheet-{{st}}">
+					<div class="tab action-sheet-{{st}}-main-tab" data-group="{{st}}" data-tab="main">
+						<div class="sheet-form-div">
+							<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Name'}}</label>
+							<input class="sheet-form-input" name="system.{{st}}.name" type="text" value="{{lookup (lookup @root.item.system st) 'name'}}" placeholder="{{localize 'ACTION.Name'}}" />
+						</div>
+
+						<div class="sheet-form-div action-art-selector">
+							<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Art'}}</label>
+							<img class="sheet-form-input" src="{{lookup (lookup @root.item.system st) 'art'}}" data-edit="system.{{st}}.art" />
+						</div>
+
+						<div class="sheet-form-div">
+							<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Type'}}</label>
+							<select class="sheet-form-select" name="system.{{st}}.type" data-dtype="String">
+								{{selectOptions @root.actionTypes selected=(lookup (lookup @root.item.system st) 'type') localize=true}}
+							</select>
+						</div>
+
+						<div class="sheet-form-div action-header-details">
+							<div>
+								<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Traits'}}</label>
+								<input class="sheet-form-input" name="system.{{st}}.traits" type="text" value="{{lookup (lookup @root.item.system st) 'traits'}}" placeholder="{{localize 'ACTION.Traits'}}" />
+							</div>
+
+							<div>
+								<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.RechargeRating'}}</label>
+								<input class="sheet-form-input" name="system.{{st}}.rechargeRating" type="number" value="{{lookup (lookup @root.item.system st) 'rechargeRating'}}" min="0" placeholder="{{localize 'ACTION.RechargeRating'}}" />
+							</div>
+						</div>
+
+						<div class="sheet-form-div action-difficulty-modifiers">
+							<div>
+								<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.ChallengeDice'}}</label>
+								<input class="sheet-form-input" name="system.{{st}}.difficultyModifiers.challengeDice" type="number" value="{{lookup (lookup (lookup @root.item.system st) 'difficultyModifiers') 'challengeDice'}}" min="0" placeholder="{{localize 'ACTION.ChallengeDice'}}" />
+							</div>
+
+							<div>
+								<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.MisfortuneDice'}}</label>
+								<input class="sheet-form-input" name="system.{{st}}.difficultyModifiers.misfortuneDice" type="number" value="{{lookup (lookup (lookup @root.item.system st) 'difficultyModifiers') 'misfortuneDice'}}" min="0" placeholder="{{localize 'ACTION.MisfortuneDice'}}" />
+							</div>
+						</div>
+
+						<div class="sheet-form-div">
+							<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Check'}}</label>
+							<input class="sheet-form-input" name="system.{{st}}.check" type="text" value="{{lookup (lookup @root.item.system st) 'check'}}" placeholder="{{localize 'ACTION.Check'}}" />
+						</div>
+
+						<div class="sheet-form-div">
+							<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Requirements'}}</label>
+							{{editor (lookup (lookup @root.item.system st) 'requirements') target=(concat (concat "system." st) ".requirements") button=true owner=owner editable=@root.editable}}
+						</div>
+					</div>
+
+					<div class="tab action-sheet-{{st}}-effects-tab" data-group="{{st}}" data-tab="effects">
+						<div class="sheet-form-div">
+							<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Effects'}}</label>
+
+							{{#each @root.symbols as |symbol sym|}}
+								<div class="action-sheet-effect-group">
+									<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+									<a class="action-sheet-effect-add" data-face="{{st}}" data-symbol="{{sym}}"><span class="fas fa-plus"></span></a>
+
+									{{#each (lookup (lookup (lookup @root.item.system st) 'effects') sym) as |effect ef|}}
+										<div class="action-sheet-effect">
+											<input class="sheet-form-input action-sheet-effect-symbol-amount" name="system.{{st}}.effects.{{sym}}.{{ef}}.symbolAmount" type="number" value="{{effect.symbolAmount}}" min="0" placeholder="{{localize 'ACTION.EFFECT.SymbolAmount'}}" data-dtype="Number"/>
+											{{editor effect.description target=(concat (concat (concat (concat (concat (concat "system." st) ".effects.") sym) ".") ef) ".description") button=true owner=@root.owner editable=@root.editable}}
+											<input class="sheet-form-input action-sheet-effect-description" name="system.{{st}}.effects.{{sym}}.{{ef}}.description" type="text" value="{{effect.description}}" placeholder="{{localize 'ACTION.EFFECT.Description'}}" data-dtype="String" />
+											<a class="action-sheet-effect-remove fa fa-eraser" data-face="{{st}}" data-symbol="{{sym}}" data-index="{{ef}}"></a>
+										</div>
+									{{/each}}
+								</div>
+							{{/each}}
+						</div>
+
+						<details class="sheet-form-div"{{#if (lookup (lookup @root.item.system st) 'special')}} open{{/if}}>
+							<summary><label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Special'}}</label></summary>
+							{{editor (lookup (lookup @root.item.system st) 'special') target=(concat (concat "system." st) ".special") button=true owner=owner editable=@root.editable}}
+						</details>
+
+						<details class="sheet-form-div"{{#if (lookup (lookup @root.item.system st) 'uniqueEffect')}} open{{/if}}>
+							<summary><label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.UniqueEffect'}}</label></summary>
+							{{editor (lookup (lookup @root.item.system st) 'uniqueEffect') target=(concat (concat "system." st) ".uniqueEffect") button=true owner=@root.owner editable=@root.editable}}
+						</details>
+					</div>
+				</div>
+			</section>
+		{{/each}}
+	</div>
+</form>

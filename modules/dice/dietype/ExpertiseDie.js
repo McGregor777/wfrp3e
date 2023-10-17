@@ -1,8 +1,8 @@
-import WFRP3EDie from "./WFRP3EDie.js";
+import WFRP3eDie from "./WFRP3eDie.js";
 
-export default class ExpertiseDie extends WFRP3EDie
+export default class ExpertiseDie extends WFRP3eDie
 {
-	/** @override */
+	/** @inheritDoc */
 	constructor(termData)
 	{
 		termData.faces = 6;
@@ -10,13 +10,13 @@ export default class ExpertiseDie extends WFRP3EDie
 		super(termData);
 	}
 
-	/** @override */
+	/** @inheritDoc */
 	static DENOMINATION = "e";
 
 	/**
 	 * A string representation of the formula expression for this RollTerm, prior to evaluation.
 	 * @type {string}
-	 * @override
+	 * @inheritDoc
 	 */
 	get expression()
 	{
@@ -27,12 +27,12 @@ export default class ExpertiseDie extends WFRP3EDie
 	 * Roll the DiceTerm by mapping a random uniform draw against the faces of the dice term
 	 * @param {Object} options
 	 * @return {DiceTermResult}
-	 * @override
+	 * @inheritDoc
 	 */
 	roll(options)
 	{
 		const roll = super.roll(options);
-		roll.symbols = CONFIG.WFRP3E.dice.results.expertise[roll.result];
+		roll.symbols = CONFIG.WFRP3e.dice.expertise.results[roll.result];
 		return roll;
 	}
 
@@ -43,7 +43,7 @@ export default class ExpertiseDie extends WFRP3EDie
 	 */
 	getResultLabel(result)
 	{
-		const die = CONFIG.WFRP3E.dice.results.expertise[result.result];
+		const die = CONFIG.WFRP3e.dice.expertise.results[result.result];
 		return `<img class="special-die" src="${die.image}" title="${game.i18n.localize(die.label)}" alt=""/>`;
 	}
 }

@@ -1,0 +1,340 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<header class="character-sheet-header sheet-header">
+		<img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+		<h1><input class="name-input" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}" /></h1>
+	</header>
+
+	{{!--Sheet Navigation Tab--}}
+	<nav class="character-sheet-primary-tabs sheet-tabs tabs" data-group="primary">
+		<a class="tab-link characteristics-tab-link" data-tab="characteristics">{{localize 'CHARACTER.Characteristics'}}</a>
+		<a class="tab-link careers-tab-link" data-tab="careers">{{localize 'CHARACTER.Careers'}}</a>
+		<a class="tab-link talents-tab-link" data-tab="talents">{{localize 'CHARACTER.Talents'}}</a>
+		<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CHARACTER.Actions'}}</a>
+		<a class="tab-link trappings-tab-link" data-tab="trappings">{{localize 'CHARACTER.Trappings'}}</a>
+		<a class="tab-link background-tab-link" data-tab="background">{{localize 'CHARACTER.Background'}}</a>
+	</nav>
+
+	<div class="character-sheet-body sheet-body">
+		<section class="tab characteristics-tab" data-group="primary" data-tab="characteristics">
+			<div class="characteristics-and-impairments">
+				<span class="character-sheet-title">{{localize 'CHARACTER.Characteristics'}}</span>
+
+				<div class="characteristics-and-impairments-subdivision">
+					<div class="impairments">
+						{{>systems/wfrp3e/templates/partials/impairment-partial.html
+							class='fatigue' title='CHARACTER.Fatigue'
+							dataPath='system.impairments.fatigue'
+							value=actor.system.impairments.fatigue}}
+
+						{{>systems/wfrp3e/templates/partials/impairment-partial.html
+							class='stress' title='CHARACTER.Stress'
+							dataPath='system.impairments.stress'
+							value=actor.system.impairments.stress}}
+					</div>
+
+					<div class="characteristics">
+						{{#each characteristics as |characteristic char|}}
+							{{>systems/wfrp3e/templates/partials/characteristic-partial.hbs characteristic=characteristic char=char}}
+						{{/each}}
+					</div>
+				</div>
+			</div>
+
+			<div class="attributes">
+				<div class="attributes-subdivision">
+					{{>systems/wfrp3e/templates/partials/attribute-partial.html
+						class='wounds'
+						title='CHARACTER.Wounds'
+						maxTitle='CHARACTER.Threshold'
+						dataPath='system.attributes.wounds'
+						max=actor.system.attributes.wounds.threshold
+						value=actor.system.attributes.wounds.value}}
+
+					{{>systems/wfrp3e/templates/partials/attribute-partial.html
+						class='corruption'
+						title='CHARACTER.Corruption'
+						maxTitle='CHARACTER.Threshold'
+						dataPath='system.attributes.corruption'
+						max=actor.system.attributes.corruption.threshold
+						value=actor.system.attributes.corruption.value}}
+
+					{{>systems/wfrp3e/templates/partials/attribute-partial.html
+						class='fortune'
+						title='CHARACTER.Fortune'
+						maxTitle='CHARACTER.Maximum'
+						dataPath='system.attributes.fortune'
+						max=actor.system.attributes.fortune.maximum
+						value=actor.system.attributes.fortune.value}}
+				</div>
+
+				<div class="stance-meter">
+					<span class="character-sheet-title">{{localize 'CHARACTER.Stances'}}</span>
+
+					<div class="stance-meter-segments">
+						{{#for actor.system.stanceMeter.reckless (increment actor.system.stanceMeter.conservative 1) 1}}
+							<a class="stance-meter-segment{{#if (equalTo @root.actor.system.attributes.stance.current this)}} active{{/if}}">
+								<img class="stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}"
+									 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
+								<input name="system.attributes.stance.current"
+									   type="radio"
+									   value="{{this}}"
+									   data-dtype="Number"
+									   {{#if (equalTo @root.actor.system.attributes.stance.current this)}}checked{{/if}}/>
+							</a>
+						{{/for}}
+					</div>
+				</div>
+
+				<div class="cards">
+					<div class="conditions">
+						{{#each items.conditions as |condition cond|}}
+							{{>systems/wfrp3e/templates/partials/item-condition-card.html condition=condition}}
+						{{/each}}
+					</div>
+
+					<div class="wounds">
+						{{#each items.criticalWounds as |wound wnd|}}
+							{{>systems/wfrp3e/templates/partials/item-wound-card.html wound=wound}}
+						{{/each}}
+					</div>
+
+					<div class="diseases">
+						{{#each items.diseases as |disease dis|}}
+							{{>systems/wfrp3e/templates/partials/item-disease-card.html disease=disease}}
+						{{/each}}
+					</div>
+
+					<div class="insanities">
+						{{#each items.insanities as |insanity ins|}}
+							{{>systems/wfrp3e/templates/partials/item-insanity-card.html insanity=insanity}}
+						{{/each}}
+					</div>
+
+					<div class="mutations">
+						{{#each items.mutations as |mutation mut|}}
+							{{>systems/wfrp3e/templates/partials/item-mutation-card.html mutation=mutation}}
+						{{/each}}
+					</div>
+
+					<div class="miscasts">
+						{{#each items.miscasts as |miscast mis|}}
+							{{>systems/wfrp3e/templates/partials/item-miscast-card.html miscast=miscast}}
+						{{/each}}
+					</div>
+				</div>
+			</div>
+
+			<div class="skills">
+				<span class="character-sheet-title">{{localize 'CHARACTER.Skills'}}</span>
+				<table class="skill-table">
+					<tbody>
+						{{#each items.skills as |skill sk|}}
+							{{>systems/wfrp3e/templates/partials/item-skill-row.hbs skill=skill}}
+						{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<section class="tab careers-tab" data-group="primary" data-tab="careers">
+			<div class="character-sheet-career-tabs sheet-tabs" data-group="careers">
+				{{#each items.careers as |career|}}
+					<a class="tab-link" data-tab="{{career._id}}">
+						{{career.name}}
+
+						{{#if career.system.current}}
+							&nbsp;<span class="fa fa-check"></span>
+						{{/if}}
+					</a>
+				{{/each}}
+			</div>
+
+			<div class="character-sheet-careers">
+				{{#each items.careers as |career|}}
+					<div class="career-container tab item-container" data-group="careers" data-tab="{{career._id}}">
+						{{>systems/wfrp3e/templates/partials/item-career-partial.hbs career=career}}
+					</div>
+				{{/each}}
+			</div>
+		</section>
+
+		<section class="tab talents-tab" data-group="primary" data-tab="talents">
+			<div class="character-sheet-talent-tabs sheet-tabs" data-group="talents">
+				{{#if items.talents.focus}}
+					<a class="tab-link focus" data-tab="focus">{{localize 'TALENT.TYPE.Focus'}}</a>
+				{{/if}}
+
+				{{#if items.talents.reputation}}
+					<a class="tab-link reputation" data-tab="reputation">{{localize 'TALENT.TYPE.Reputation'}}</a>
+				{{/if}}
+
+				{{#if items.talents.tactic}}
+					<a class="tab-link tactic" data-tab="tactic">{{localize 'TALENT.TYPE.Tactic'}}</a>
+				{{/if}}
+
+				{{#if items.talents.faith}}
+					<a class="tab-link faith" data-tab="faith">{{localize 'TALENT.TYPE.Faith'}}</a>
+				{{/if}}
+
+				{{#if items.talents.order}}
+					<a class="tab-link order" data-tab="order">{{localize 'TALENT.TYPE.Order'}}</a>
+				{{/if}}
+
+				{{#if items.talents.trick}}
+					<a class="tab-link trick" data-tab="trick">{{localize 'TALENT.TYPE.Trick'}}</a>
+				{{/if}}
+			</div>
+
+			<div class="character-sheet-talents">
+				{{#if items.talents.focus}}
+					<div class="talent-container tab focus item-container" data-group="talents" data-tab="focus">
+						{{#each items.talents.focus as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if items.talents.reputation}}
+					<div class="talent-container tab reputation item-container" data-group="talents" data-tab="reputation">
+						{{#each items.talents.reputation as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if items.talents.tactic}}
+					<div class="talent-container tab tactic item-container" data-group="talents" data-tab="tactic">
+						{{#each items.talents.tactic as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if items.talents.faith}}
+					<div class="talent-container tab faith item-container" data-group="talents" data-tab="faith">
+						{{#each items.talents.faith as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if items.talents.order}}
+					<div class="talent-container tab order item-container" data-group="talents" data-tab="order">
+						{{#each items.talents.order as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if items.talents.tricks}}
+					<div class="talent-container tab trick item-container" data-group="talents" data-tab="trick">
+						{{#each items.talents.tricks as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+			</div>
+		</section>
+
+		<section class="tab actions-tab" data-group="primary" data-tab="actions">
+			<div class="character-sheet-action-tabs sheet-tabs" data-group="actions">
+				{{#each actionTypes as |type ty|}}
+					{{#if (lookup @root.items.actions ty)}}
+						<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
+					{{/if}}
+				{{/each}}
+			</div>
+
+			<div class="character-sheet-actions">
+			    {{#each actionTypes as |type ty|}}
+                    {{#if (lookup @root.items.actions ty)}}
+                        <div class="action-container tab {{ty}} item-container" data-group="actions" data-tab="{{ty}}">
+                            {{#each (lookup @root.items.actions ty) as |action act|}}
+                                {{>systems/wfrp3e/templates/partials/item-action-card.hbs action=action}}
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                {{/each}}
+			</div>
+		</section>
+
+		<section class="tab trappings-tab" data-group="primary" data-tab="trappings">
+			<table class="weapon-table">
+				<thead>
+					<tr><th colspan="8"><span>{{localize 'CHARACTER.Weapons'}}</span></th></tr>
+					<tr>
+						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
+						<th class="shrinked"><span>{{localize 'WEAPON.ABBREVIATION.DamageRating'}}</span></th>
+						<th class="shrinked"><span>{{localize 'WEAPON.ABBREVIATION.CriticalRating'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'WEAPON.Range'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'WEAPON.Qualities'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'WEAPON.Group'}}</span></th>
+						<th class="shrinked"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
+						<th class="shrinked"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each items.weapons as |weapon wp|}}
+						{{>systems/wfrp3e/templates/partials/item-weapon-row.hbs weapon=weapon}}
+					{{/each}}
+				</tbody>
+			</table>
+
+			<table class="armour-table">
+				<thead>
+					<tr><th colspan="8"><span>{{localize 'CHARACTER.Armours'}}</span></th></tr>
+					<tr>
+						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'ARMOUR.Defence'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'ARMOUR.Soak'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
+						<th class="shrinked"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each items.armours as |armour arm|}}
+						{{>systems/wfrp3e/templates/partials/item-armour-row.html armour=armour}}
+					{{/each}}
+				</tbody>
+			</table>
+
+			<table class="trapping-table">
+				<thead>
+					<tr><th colspan="8"><span>{{localize 'CHARACTER.Trappings'}}</span></th></tr>
+					<tr>
+						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
+						<th class="left-aligned"><span>{{localize 'TRAPPING.Description'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
+						<th class="shrinked"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each items.trappings as |trapping trp|}}
+						{{>systems/wfrp3e/templates/partials/item-trapping-row.html trapping=trapping}}
+					{{/each}}
+				</tbody>
+			</table>
+
+			<table class="money-table">
+				<thead>
+					<tr><th colspan="8"><span>{{localize 'CHARACTER.Money'}}</span></th></tr>
+					<tr>
+						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.Value'}}</span></th>
+						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Quantity'}}</span></th>
+						<th class="shrinked"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each items.money as |money mo|}}
+						{{>systems/wfrp3e/templates/partials/item-money-row.html money=money}}
+					{{/each}}
+				</tbody>
+			</table>
+		</section>
+
+		<section class="tab background-tab" data-group="primary" data-tab="background">
+			{{editor actor.system.background.biography target='system.background.biography' button=true owner=owner editable=editable}}
+		</section>
+	</div>
+</form>

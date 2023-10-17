@@ -1,50 +1,42 @@
-.talent-card
-{
-	position: relative;
-	display: grid;
-	width: 385px;
-	height: 255px;
-	margin: 0.5rem 0.5rem 2rem;
+.talent-card {
 	border: 1px solid black;
 	border-radius: 10px;
+	display: grid;
 	grid-template: 60px 1fr / 50px 1fr;
 	grid-template-areas:
 		'talent-card-type talent-card-name'
 		'talent-card-type talent-card-content'
 		'talent-card-type talent-card-bottom';
+	height: 255px;
+	margin: 0.5rem 0.5rem 2rem;
+	position: relative;
+	width: 385px;
 
-	& .talent-card-bottom
-	{
+	& .talent-card-bottom {
 		display: flex;
 
-		& .item-delete-link
-		{
-			position: absolute;
-			display: block;
-			padding: 2px 3px;
+		& .item-delete-link {
 			bottom: 5px;
-			right: 5px;
+			display: block;
 			line-height: 0;
+			padding: 2px 3px;
+			position: absolute;
+			right: 5px;
 		}
 
-		& .recharge-token
-		{
+		& .recharge-token {
 			position: relative;
 
-			& > img
-			{
+			& > img {
 				border: none;
 				height: 3rem;
 				opacity: 75%;
 			}
 
-			& > .recharge-token-counter
-			{
-				position: absolute;
-				top: 60%;
-				left: 50%;
-				transform: translate(-50%, -50%);
+			& > .recharge-token-counter {
 				font-size: 2rem;
+				left: 50%;
+				position: absolute;
 				text-shadow:
 					-1pt -1pt 0 white,
 					-1pt 0 0 white,
@@ -54,58 +46,35 @@
 					0 1pt 0 white,
 					1pt 0 0 white,
 					1pt 1pt 0 white;
+				top: 60%;
+				transform: translate(-50%, -50%);
+			}
+
+			&:hover > .recharge-token-counter {
+				color: white;
+				text-shadow: 0 0 8px var(--color-shadow-primary);
 			}
 		}
 	}
 
-	& .talent-card-socket-select
-	{
+	& .talent-card-socket-select {
 		position: absolute;
 		top: 100%;
 		width: 100%;
 	}
 
-	& .talent-card-content
-	{
-		margin: auto 6px;
+	& .talent-card-content {
 		grid-area: talent-card-content;
+		margin: auto 6px;
 	}
 
-	& .talent-card-name
-	{
-		margin: auto 0;
+	& .talent-card-name {
 		background: padding-box saddlebrown;
 		color: white;
 		font: 20pt @font-title;
-		text-align: center;
-		text-shadow:
-							-1pt -1pt 0 black,
-						-1pt 0 0 black,
-							0 -1pt 0 black,
-						-1pt 1pt 0 black,
-							1pt -1pt 0 black,
-						0 1pt 0 black,
-						1pt 0 0 black,
-						1pt 1pt 0 black;
 		grid-area: talent-card-name;
-
-		&:hover
-		{
-			text-shadow: 0 0 8px var(--color-shadow-primary);
-		}
-	}
-
-	& .talent-card-type
-	{
-		display: block;
-		margin: 10px auto;
-		padding: 0 2px 0 4px;
-		background-color: saddlebrown;
-		color: white;
-		font: 14pt @font-primary;
-		font-weight: bold;
+		margin: auto 0;
 		text-align: center;
-		font-variant-caps: small-caps;
 		text-shadow:
 			-1pt -1pt 0 black,
 			-1pt 0 0 black,
@@ -115,22 +84,44 @@
 			0 1pt 0 black,
 			1pt 0 0 black,
 			1pt 1pt 0 black;
-		writing-mode: vertical-lr;
-		transform: rotate(180deg);
-		grid-area: talent-card-type;
 
-		&.focus
-		{
+		&:hover {
+			text-shadow: 0 0 8px var(--color-shadow-primary);
+		}
+	}
+
+	& .talent-card-type {
+		background-color: saddlebrown;
+		color: white;
+		display: block;
+		font: 14pt @font-primary;
+		font-variant-caps: small-caps;
+		font-weight: bold;
+		grid-area: talent-card-type;
+		margin: 10px auto;
+		padding: 0 2px 0 4px;
+		text-align: center;
+		text-shadow:
+			-1pt -1pt 0 black,
+			-1pt 0 0 black,
+			0 -1pt 0 black,
+			-1pt 1pt 0 black,
+			1pt -1pt 0 black,
+			0 1pt 0 black,
+			1pt 0 0 black,
+			1pt 1pt 0 black;
+		transform: rotate(180deg);
+		writing-mode: vertical-lr;
+
+		&.focus {
 			background-color: blue;
 		}
 
-		&.reputation
-		{
+		&.reputation {
 			background-color: purple;
 		}
 
-		&.tactic
-		{
+		&.tactic {
 			background-color: red;
 		}
 	}

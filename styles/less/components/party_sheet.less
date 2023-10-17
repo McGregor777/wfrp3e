@@ -1,19 +1,14 @@
-.party-sheet
-{
-	& .party-sheet-body
-	{
+.party-sheet{
+	& .party-sheet-body {
 		display: flex;
 
-		& .party-sheet-left-side
-		{
-			margin-right: 10px;
+		& .party-sheet-left-side {
 			flex-grow: 1;
+			margin-right: 0.5rem;
 
-			& .party-sheet-header
-			{
-				width: 385px;
-				margin: 0 auto 10px;
+			& .party-sheet-header {
 				background-color: dimgrey;
+				margin: 0 auto 0.5rem;
 				text-shadow:
 					-1pt -1pt 0 black,
 					-1pt 0 0 black,
@@ -23,63 +18,50 @@
 					0 1pt 0 black,
 					1pt 0 0 black,
 					1pt 1pt 0 black;
+				width: 385px;
 
-				& *
-				{
+				& * {
 					color: white;
-					text-align: center;
 					font-variant-caps: small-caps;
+					text-align: center;
 				}
 
-				& .party-sheet-name
-				{
+				& .party-sheet-name {
 					font-size: 16pt;
 				}
 
-				& .party-sheet-traits
-				{
+				& .party-sheet-traits {
 					font-style: italic;
 				}
 			}
 
-			& .party-sheet-members
-			{
+			& .party-sheet-members {
 				display: flex;
 				margin-top: 10px;
 
-				& .party-sheet-member
-				{
+				& .party-sheet-member {
 					position: relative;
 
-					& .party-sheet-member-portrait
-					{
-					}
-
-					& .party-sheet-member-remove
-					{
+					& .party-sheet-member-remove {
+						bottom: 5px;
 						position: absolute;
 						right: 5px;
-						bottom: 5px;
 					}
 				}
 			}
 
-			& .party-sheet-tension
-			{
-				& .party-sheet-tension-title
-				{
-					text-align: center;
+			& .party-sheet-tension {
+				& .party-sheet-tension-title {
 					font-size: 16pt;
-					font-weight: bold;
 					font-variant-caps: small-caps;
+					font-weight: bold;
+					text-align: center;
 				}
 
-				& .party-sheet-tension-event
-				{
+				& .party-sheet-tension-event {
 					display: flex;
 
-					& .party-sheet-tension-event-threshold
-					{
+					& .party-sheet-tension-event-threshold {
 						flex: 0 1 30px;
 						text-align: center;
 					}
@@ -87,111 +69,118 @@
 			}
 		}
 
-		& .party-sheet-right-side
-		{
-			margin: 0 0 10px auto;
+		& .party-sheet-right-side {
 			flex-shrink: 1;
+			margin: 0 0 10px auto;
+			position: relative;
 
-			& .party-sheet-fortune-pool
-			{
-				display: flex;
-				align-items: center;
-				justify-content: center;
+			& .fortune-token {
+				bottom: 0.5rem;
+				position: absolute;
+				right: 50%;
+				transform: translate(50%);
 
-				& > input
-				{
-					width: 30px;
-					margin-left: 10px;
-					text-align: center;
+				& > img {
+					border: none;
+					height: 3rem;
+				}
+
+				& > .fortune-counter {
+					color: white;
+					font-size: 24pt;
+					left: 50%;
+					position: absolute;
+					bottom: 2.5%;
+					text-shadow:
+						-1px -1px 0 black,
+						-1px 0 0 black,
+						0 -1px 0 black,
+						-1px 1px 0 black,
+						1px -1px 0 black,
+						0 1px 0 black,
+						1px 0 0 black,
+						1px 1px 0 black;
+					transform: translate(-50%);
+				}
+
+				&:hover > .fortune-counter {
+					text-shadow: 0 0 8px var(--color-shadow-primary);
 				}
 			}
 		}
 	}
 
-	& .party-sheet-special-ability
-	{
-		& .party-sheet-special-ability-title
-		{
-			text-align: center;
+	& .party-sheet-special-ability {
+		& .party-sheet-special-ability-title {
 			font-size: 16pt;
-			font-weight: bold;
 			font-variant-caps: small-caps;
+			font-weight: bold;
+			text-align: center;
 		}
 	}
 
-	& .party-sheet-tension-meter
-	{
+	& .party-sheet-tension-meter {
 		display: flex;
 		justify-content: center;
 		margin-bottom: 10px;
 
-		& .party-sheet-tension-meter-minus, & .party-sheet-tension-meter-plus
-		{
+		& .party-sheet-tension-meter-minus, & .party-sheet-tension-meter-plus {
 			display: block;
-			width: 40px;
-			height: 40px;
-			padding-top: 5px;
+			height: 2.5rem;
+			font-size: 20pt;
+			padding-top: 0.25rem;
 			text-align: center;
 			vertical-align: middle;
-			font-size: 20pt;
+			width: 2.5rem;
 		}
 
-		& .party-sheet-tension-meter-segment-container
-		{
+		& .party-sheet-tension-meter-segment-container {
 			display: flex;
 			justify-content: center;
 
-			& .party-sheet-tension-meter-segment
-			{
-				width: 40px;
-				height: 40px;
-				padding-top: 2px;
-				flex: 0 0 40px;
-				text-align: center;
-				font-size: 24pt;
-				color: white;
+			& .party-sheet-tension-meter-segment {
 				background-color: #c06030;
 				border: 1px solid #a05040;
+				color: white;
+				height: 2.5rem;
+				flex: 0 0 40px;
+				font-size: 24pt;
+				padding-top: 2px;
+				text-align: center;
+				width: 2.5rem;
 
-				&.threshold, &:first-child
-				{
+				&.threshold, &:first-child {
 					background-color: #184080;
 					border-color: #803030
 				}
 
-				&:last-child
-				{
+				&:last-child {
 					background-color: #103040;
 					border-color: #803030
 				}
 
-				& > img
-				{
+				& > img {
 					border: none;
 					filter: drop-shadow(0 0 2px black);
 				}
 
-				& > input
-				{
+				& > input {
 					display: none;
 				}
 			}
 		}
 	}
 
-	& .party-sheet-footer
-	{
-		& .party-sheet-talent-socket:not(:first-child)
-		{
-			margin-left: 10px;
+	& .party-sheet-footer {
+		& .party-sheet-talent-socket:not(:first-child) {
+			margin-left: 0.5rem;
 		}
 
-		& .party-sheet-talent-socket-button-container
-		{
+		& .party-sheet-talent-socket-button-container {
 			display: flex;
+			flex: 0 1 2rem;
 			justify-content: space-between;
-			margin-left: 10px;
-			flex: 0 1 35px;
+			margin-left: 0.5rem;
 		}
 	}
 }
