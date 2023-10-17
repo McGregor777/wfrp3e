@@ -40,7 +40,7 @@ async function preloadHandlebarsTemplates()
 		"systems/wfrp3e/templates/chatmessages/action-effects.hbs",
 		"systems/wfrp3e/templates/partials/attribute-partial.html",
 		"systems/wfrp3e/templates/partials/characteristic-partial.hbs",
-		"systems/wfrp3e/templates/partials/impairment-partial.html",
+		"systems/wfrp3e/templates/partials/impairment-partial.hbs",
 		"systems/wfrp3e/templates/partials/item-ability-card.html",
 		"systems/wfrp3e/templates/partials/item-action-card.hbs",
 		"systems/wfrp3e/templates/partials/item-armour-row.html",
@@ -52,7 +52,7 @@ async function preloadHandlebarsTemplates()
 		"systems/wfrp3e/templates/partials/item-mutation-card.html",
 		"systems/wfrp3e/templates/partials/item-miscast-card.html",
 		"systems/wfrp3e/templates/partials/item-skill-row.hbs",
-		"systems/wfrp3e/templates/partials/item-talent-card.html",
+		"systems/wfrp3e/templates/partials/item-talent-card.hbs",
 		"systems/wfrp3e/templates/partials/item-trapping-row.html",
 		"systems/wfrp3e/templates/partials/item-weapon-row.hbs",
 		"systems/wfrp3e/templates/partials/item-wound-card.html"

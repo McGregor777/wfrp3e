@@ -415,8 +415,8 @@
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments {
   display: flex;
-  width: auto;
   flex-direction: column;
+  width: auto;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics-and-impairments-subdivision {
   display: flex;
@@ -425,41 +425,41 @@
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics {
   display: flex;
-  flex-direction: column;
-  padding: 0 10px;
   flex: 1 1 auto;
+  flex-direction: column;
   justify-content: space-around;
+  padding: 0 10px;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic {
   width: 130px;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-fortune-input {
-  width: 25px !important;
+  font-weight: bold;
   height: 25px !important;
   margin-left: 10px !important;
   padding: 3px !important;
-  font-weight: bold;
   text-align: center !important;
+  width: 25px !important;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-input-container {
+  align-items: center;
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
   justify-content: flex-end;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-title {
   font: 14pt "ArnoPro";
+  font-variant-caps: small-caps;
   font-weight: bold;
   text-align: center;
-  font-variant-caps: small-caps;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-value-input {
   display: block;
-  width: 35px !important;
+  font-weight: bold;
   height: 45px !important;
   padding: 3px !important;
-  font-weight: bold;
   text-align: center !important;
+  width: 35px !important;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments {
   display: flex;
@@ -477,28 +477,34 @@
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment:last-child {
   margin-top: 10px;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .input {
-  width: 30px !important;
-  height: auto !important;
-  padding: 5px;
-  border: 1px solid;
-  font-weight: bold;
-  text-align: center !important;
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token {
+  position: relative;
+  width: 4rem;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .input.fatigue {
-  border-color: red;
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > * {
+  position: absolute;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .input.stress {
-  border-color: blue;
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > img {
+  border: none;
+  opacity: 75%;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > .token-counter {
+  color: white;
+  font-size: 24pt;
+  left: 38%;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+  top: 47%;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .title {
   display: block;
-  padding: 0 2px 0 4px;
   font: 14pt "ArnoPro";
-  font-weight: bold;
-  text-align: center;
   font-variant-caps: small-caps;
+  font-weight: bold;
+  padding: 0 2px 0 4px;
   writing-mode: vertical-lr;
+  text-align: center;
   transform: rotate(180deg);
 }
 .character-sheet .character-sheet-body .characteristics-tab .skills {
@@ -549,8 +555,8 @@
 .character-sheet .character-sheet-body .character-sheet-career-tabs,
 .character-sheet .character-sheet-body .character-sheet-talent-tabs,
 .character-sheet .character-sheet-body .character-sheet-action-tabs {
-  display: flex;
   border-bottom: 1px solid #b5b3a4;
+  display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
 }
@@ -561,13 +567,13 @@
 }
 .character-sheet .character-sheet-primary-tabs {
   display: flex;
-  height: auto !important;
   flex-flow: row wrap;
-  justify-content: space-between;
   font: 14pt "ArnoPro";
-  font-weight: bold;
-  text-align: center;
   font-variant-caps: small-caps;
+  font-weight: bold;
+  height: auto !important;
+  justify-content: space-between;
+  text-align: center;
 }
 .character-sheet .character-sheet-primary-tabs > * {
   margin: 0 5px;
@@ -575,9 +581,9 @@
 .character-sheet .character-sheet-title {
   display: block;
   font: 14pt "ArnoPro";
+  font-variant-caps: small-caps;
   font-weight: bold;
   text-align: center;
-  font-variant-caps: small-caps;
 }
 .check-builder form {
   display: flex;
@@ -1516,6 +1522,9 @@ th.shrinked {
 }
 .reckless-stance-meter {
   background-color: red;
+}
+.sheet .editor-content {
+  margin: 0 0.5rem;
 }
 .sheet .tab.active {
   display: flex !important;

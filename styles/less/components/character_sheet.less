@@ -1,225 +1,205 @@
-.character-sheet
-{
-	& .character-sheet-body
-	{
+.character-sheet {
+	& .character-sheet-body {
 		display: flex;
 		flex-direction: column;
 		height: calc(100% - 104px);
 
-		& .characteristics-tab
-		{
+		& .characteristics-tab {
 			flex-flow: row wrap !important;
 
-			& .attributes
-			{
+			& .attributes {
 				display: flex;
 				height: 650px;
 				flex: 1 1 240px;
 				flex-direction: column;
 
-				& .attributes-subdivision
-				{
+				& .attributes-subdivision {
 					display: flex;
 					flex-flow: row wrap;
 
-					& .attribute
-					{
+					& .attribute {
 						flex: 1 0 80px;
 						padding: 5px;
 						text-align: center;
 
-						& .attribute-input
-						{
+						& .attribute-input {
 							height: 60px !important;
 						}
 
-						& .attribute-input-container
-						{
+						& .attribute-input-container {
 							display: flex;
 							flex-direction: column;
 						}
 
-						& .attribute-label
-						{
+						& .attribute-label {
 							padding-top: 10px;
 						}
 					}
 				}
 
-				& .cards
-				{
+				& .cards {
 					overflow-y: scroll;
 
-					& > div:not(:last-child) .card
-					{
+					& > div:not(:last-child) .card {
 						margin-bottom: 20px !important;
 					}
 				}
 			}
 
-			& .characteristics-and-impairments
-			{
+			& .characteristics-and-impairments {
 				display: flex;
-				width: auto;
 				flex-direction: column;
+				width: auto;
 
-				& .characteristics-and-impairments-subdivision
-				{
+				& .characteristics-and-impairments-subdivision {
 					display: flex;
 					flex-direction: row;
 					flex-grow: 1;
 				}
 
-				& .characteristics
-				{
+				& .characteristics {
 					display: flex;
-					flex-direction: column;
-					padding: 0 10px;
 					flex: 1 1 auto;
+					flex-direction: column;
 					justify-content: space-around;
+					padding: 0 10px;
 
-					& .characteristic
-					{
+					& .characteristic {
 						width: 130px;
 
-						& .characteristic-fortune-input
-						{
-							width: 25px !important;
+						& .characteristic-fortune-input {
+							font-weight: bold;
 							height: 25px !important;
 							margin-left: 10px !important;
 							padding: 3px !important;
-							font-weight: bold;
 							text-align: center !important;
+							width: 25px !important;
 						}
 
-						& .characteristic-input-container
-						{
+						& .characteristic-input-container {
+							align-items: center;
 							display: flex;
 							flex-flow: row wrap;
-							align-items: center;
 							justify-content: flex-end;
 						}
 
-						& .characteristic-title
-						{
+						& .characteristic-title {
 							font: 14pt @font-primary;
+							font-variant-caps: small-caps;
 							font-weight: bold;
 							text-align: center;
-							font-variant-caps: small-caps;
 						}
 
-						& .characteristic-value-input
-						{
+						& .characteristic-value-input {
 							display: block;
-							width: 35px !important;
+							font-weight: bold;
 							height: 45px !important;
 							padding: 3px !important;
-							font-weight: bold;
 							text-align: center !important;
+							width: 35px !important;
 						}
 					}
 				}
 
-				& .impairments
-				{
+				& .impairments {
 					display: flex;
 					flex-direction: column;
 
-					.impairment
-					{
+					.impairment {
 						display: flex;
 						margin: auto;
 						flex: 1 1 auto;
 						flex-direction: row;
 
-						&:first-child
-						{
+						&:first-child {
 							margin-bottom: 10px;
 						}
 
-						&:last-child
-						{
+						&:last-child {
 							margin-top: 10px;
 						}
 
-						& .input
-						{
-							width: 30px !important;
-							height: auto !important;
-							padding: 5px;
-							border: 1px solid;
-							font-weight: bold;
-							text-align: center !important;
+						& > .token {
+							position: relative;
+							width: 4rem;
+
+							& > * {
+								position: absolute;
+							}
+
+
+							& > img {
+								border: none;
+								opacity: 75%;
+								top: 50%;
+								transform: translate(0, -50%);
+							}
+
+							& > .token-counter {
+								color: white;
+								font-size: 24pt;
+								left: 38%;
+								text-shadow:
+									-1pt -1pt 0 black,
+									-1pt 0 0 black,
+									0 -1pt 0 black,
+									-1pt 1pt 0 black,
+									1pt -1pt 0 black,
+									0 1pt 0 black,
+									1pt 0 0 black,
+									1pt 1pt 0 black;
+								top: 47%;
+							}
 						}
 
-						& .input.fatigue
-						{
-							border-color: red;
-						}
-
-						& .input.stress
-						{
-							border-color: blue;
-						}
-
-						& .title
-						{
+						& .title {
 							display: block;
-							padding: 0 2px 0 4px;
 							font: 14pt @font-primary;
-							font-weight: bold;
-							text-align: center;
 							font-variant-caps: small-caps;
+							font-weight: bold;
+							padding: 0 2px 0 4px;
 							writing-mode: vertical-lr;
+							text-align: center;
 							transform: rotate(180deg);
 						}
 					}
 				}
 			}
 
-			& .skills
-			{
+			& .skills {
 				flex: 1 1 auto;
 
-				& .skill-row
-				{
+				& .skill-row {
 					font-size: 12pt;
 					font-variant-caps: small-caps;
 				}
 			}
 
-			& .stance-meter
-			{
+			& .stance-meter {
 				margin-bottom: 0.5rem;
 
-				& .stance-meter-segments
-				{
+				& .stance-meter-segments {
 					display: flex;
 					justify-content: center;
 
-					& .stance-meter-segment
-					{
+					& .stance-meter-segment {
 						display: block;
 						height: 27px;
 
-						&.active
-						{
+						&.active {
 							filter: drop-shadow(gold 0px 0px 4px);
 						}
 
-						& > img
-						{
+						& > img {
 							border: none;
 							width: 32px;
 
-							&.stance-neutral
-							{
+							&.stance-neutral {
 								width: 38px;
 							}
 						}
 
-						& > input
-						{
+						& > input {
 							display: none;
 						}
 					}
@@ -227,65 +207,56 @@
 			}
 		}
 
-		& .item-container
-		{
+		& .item-container {
 			display: none;
 			flex-flow: row wrap;
 
-			&.active
-			{
+			&.active {
 				flex-direction: row;
 			}
 
-			& .career-partial
-			{
+			& .career-partial {
 				display: flex;
 				flex-flow: row wrap;
 
-				& .career-advancement
-				{
+				& .career-advancement {
 					flex: 1 1 300px;
 				}
 			}
 		}
 
-		& .character-sheet-career-tabs, & .character-sheet-talent-tabs, & .character-sheet-action-tabs
-		{
-			display: flex;
+		& .character-sheet-career-tabs, & .character-sheet-talent-tabs, & .character-sheet-action-tabs {
 			border-bottom: 1px solid #b5b3a4;
+			display: flex;
 			flex-flow: row wrap;
 			justify-content: space-around;
 
-			& > *
-			{
+			& > * {
 				margin: 0 5px;
 			}
 		}
 	}
 
-	& .character-sheet-primary-tabs
-	{
+	& .character-sheet-primary-tabs {
 		display: flex;
-		height: auto !important;
 		flex-flow: row wrap;
-		justify-content: space-between;
 		font: 14pt @font-primary;
-		font-weight: bold;
-		text-align: center;
 		font-variant-caps: small-caps;
+		font-weight: bold;
+		height: auto !important;
+		justify-content: space-between;
+		text-align: center;
 
-		& > *
-		{
+		& > * {
 			margin: 0 5px;
 		}
 	}
 
-	& .character-sheet-title
-	{
+	& .character-sheet-title {
 		display: block;
 		font: 14pt @font-primary;
+		font-variant-caps: small-caps;
 		font-weight: bold;
 		text-align: center;
-		font-variant-caps: small-caps;
 	}
 }

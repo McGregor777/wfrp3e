@@ -37,6 +37,19 @@ export default class WFRP3eActor extends Actor
 	}
 
 	/**
+	 * Updates one of the Character impairment value.
+	 * @param {String} impairment The impairment to update.
+	 * @param {Number} value The value to add to the impairment.
+	 */
+	changeImpairment(impairment, value)
+	{
+		const changes = {system: {impairments: {}}};
+		changes.system.impairments[impairment] = this.system.impairments[impairment] + value;
+
+		this.update(changes);
+	}
+
+	/**
 	 * Adds a WFRP3eActor as a new member of the Party.
 	 * @param newMember {WFRP3eActor}
 	 */

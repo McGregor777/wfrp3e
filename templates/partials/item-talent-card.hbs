@@ -4,12 +4,12 @@
 	<div class="talent-card-content">{{{talent.system.description}}}</div>
 
 	<div class="talent-card-bottom">
-		<a class="recharge-token" title="{{TALENT.RechargeTokens}}">
-			<img src="systems/wfrp3e/assets/images/token-grey.webp" alt="{{TALENT.RechargeTokens}}" />
+		<a class="recharge-token" title="{{localize "TALENT.RechargeTokens"}}">
+			<img src="systems/wfrp3e/assets/images/token-grey.webp" alt="{{localize "TALENT.RechargeTokens"}}" />
 			<span class="recharge-token-counter">{{{talent.system.rechargeTokens}}}</span>
 		</a>
 
-		{{#>if (lookup . document.isOwner)}}
+		{{#if @root.document.isOwner}}
 			<a class="item-delete-link" title="{{localize 'DIALOG.TITLE.DeleteItem'}}">
 				<span class="fas fa-trash"></span>
 			</a>

@@ -81,6 +81,11 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		super.activateListeners(html);
 
 		html.find(".current-career-input").click(this._onCurrentCareerInput.bind(this));
+
+		html.find(".impairment .token")
+			.click(this._onImpairmentTokenLeftClick.bind(this))
+			.contextmenu(this._onImpairmentTokenRightClick.bind(this));
+
 		html.find(".flip-link").mousedown(this._onFlipClick.bind(this));
 		html.find(".quantity-link").mousedown(this._onQuantityClick.bind(this));
 		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
@@ -203,7 +208,24 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		const career = this.actor.items.get(this._getItemId(event));
 
-		career.update({"system.current": true});
+	/**
+	 * Performs follow-up operations after left-clicks on an impairment token.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onImpairmentTokenLeftClick(event)
+	{
+		this.actor.changeImpairment(event.currentTarget.dataset.impairment, 1);
+	}
+
+	/**
+	 * Performs follow-up operations after right-clicks on an impairment token.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onImpairmentTokenRightClick(event)
+	{
+		this.actor.changeImpairment(event.currentTarget.dataset.impairment, -1);
 	}
 
 	/**

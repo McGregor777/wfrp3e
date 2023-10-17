@@ -4,9 +4,8 @@
 		<h1><input class="name-input" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}" /></h1>
 	</header>
 
-	{{!--Sheet Navigation Tab--}}
 	<nav class="character-sheet-primary-tabs sheet-tabs tabs" data-group="primary">
-		<a class="tab-link characteristics-tab-link" data-tab="characteristics">{{localize 'CHARACTER.Characteristics'}}</a>
+		<a class="tab-link characteristics-tab-link" data-tab="characteristics">{{localize 'CHARACTER.Attributes'}}</a>
 		<a class="tab-link careers-tab-link" data-tab="careers">{{localize 'CHARACTER.Careers'}}</a>
 		<a class="tab-link talents-tab-link" data-tab="talents">{{localize 'CHARACTER.Talents'}}</a>
 		<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CHARACTER.Actions'}}</a>
@@ -21,15 +20,13 @@
 
 				<div class="characteristics-and-impairments-subdivision">
 					<div class="impairments">
-						{{>systems/wfrp3e/templates/partials/impairment-partial.html
-							class='fatigue' title='CHARACTER.Fatigue'
-							dataPath='system.impairments.fatigue'
-							value=actor.system.impairments.fatigue}}
+						{{>systems/wfrp3e/templates/partials/impairment-partial.hbs
+								impairment='fatigue'
+								tokenPath="systems/wfrp3e/assets/images/token-red.webp"}}
 
-						{{>systems/wfrp3e/templates/partials/impairment-partial.html
-							class='stress' title='CHARACTER.Stress'
-							dataPath='system.impairments.stress'
-							value=actor.system.impairments.stress}}
+						{{>systems/wfrp3e/templates/partials/impairment-partial.hbs
+								impairment='stress'
+								tokenPath="systems/wfrp3e/assets/images/token-blue.webp"}}
 					</div>
 
 					<div class="characteristics">
@@ -189,7 +186,7 @@
 				{{#if items.talents.focus}}
 					<div class="talent-container tab focus item-container" data-group="talents" data-tab="focus">
 						{{#each items.talents.focus as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -197,7 +194,7 @@
 				{{#if items.talents.reputation}}
 					<div class="talent-container tab reputation item-container" data-group="talents" data-tab="reputation">
 						{{#each items.talents.reputation as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -205,7 +202,7 @@
 				{{#if items.talents.tactic}}
 					<div class="talent-container tab tactic item-container" data-group="talents" data-tab="tactic">
 						{{#each items.talents.tactic as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -213,7 +210,7 @@
 				{{#if items.talents.faith}}
 					<div class="talent-container tab faith item-container" data-group="talents" data-tab="faith">
 						{{#each items.talents.faith as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -221,7 +218,7 @@
 				{{#if items.talents.order}}
 					<div class="talent-container tab order item-container" data-group="talents" data-tab="order">
 						{{#each items.talents.order as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -229,7 +226,7 @@
 				{{#if items.talents.tricks}}
 					<div class="talent-container tab trick item-container" data-group="talents" data-tab="trick">
 						{{#each items.talents.tricks as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
