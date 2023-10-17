@@ -39,11 +39,10 @@ export default class CheckHelper
 	 * @param {WFRP3eActor} actor The Character using the Action.
 	 * @param {WFRP3eItem} action The Action that is used.
 	 * @param {string} face The Action face.
-	 * @param {string} [rollFlavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {string} [rollSound] Some sound to play after the Skill check completion.
+	 * @param {Object} [options].
 	 * @returns {Promise<void>}
 	 */
-	static async prepareActionCheck(actor, action, face, rollFlavor = "", rollSound = null)
+	static async prepareActionCheck(actor, action, face, options = {})
 	{
 		const match = action.system[face].check.match(new RegExp(/(([\w\s]+) \((\w+)\))( vs\.? ([\w\s]+))?/));
 		let skill = actor.itemTypes.skill[0];
@@ -59,6 +58,10 @@ export default class CheckHelper
 
 		const characteristic = actor.system.attributes.characteristics[characteristicName];
 		const stance = actor.system.attributes.stance.current;
+		const rollData = {actor: actor, action: action, face: face, skill: skill, characteristic: characteristicName};
+
+		if(options.weapon)
+			rollData.weapon = options.weapon;
 
 		await new CheckBuilder(
 			new DicePool({
@@ -77,9 +80,9 @@ export default class CheckHelper
 						: 0)
 			}),
 			game.i18n.format("ROLL.ActionCheck", {action: action.name}),
-			{actor: actor, action: action, face: face, skill: skill, characteristic: characteristicName},
-			rollFlavor,
-			rollSound
+			rollData,
+			options.rollFlavor,
+			options.rollSound
 		).render(true);
 	}
 

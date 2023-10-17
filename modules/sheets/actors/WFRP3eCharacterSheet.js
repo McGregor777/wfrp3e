@@ -37,6 +37,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		data.stances = CONFIG.WFRP3e.stances;
 		data.symbols = CONFIG.WFRP3e.symbols;
 		data.weaponGroups = CONFIG.WFRP3e.weapon.groups;
+		data.weaponQualities = CONFIG.WFRP3e.weapon.qualities;
 		data.weaponRanges = CONFIG.WFRP3e.weapon.ranges;
 
 		data.items = this._buildItemLists(data);

@@ -104,7 +104,7 @@ export default class CheckBuilder extends FormApplication
 						}, []).includes(weapon.system.group);
 					});
 
-					data.weapon = Object.values(data.availableWeapons)[0];
+					data.weapon = this.roll.data.weapon ?? Object.values(data.availableWeapons)[0];
 					this.roll.data.weapon = Object.values(data.availableWeapons)[0];
 				}
 			}

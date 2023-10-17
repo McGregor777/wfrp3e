@@ -84,6 +84,24 @@ export default class WFRP3eItem extends Item
 	}
 
 	/**
+	 * @param {Object} [options]
+	 */
+	async useWeapon(options = {})
+	{
+		const weaponType = CONFIG.WFRP3e.weapon.groups[this.system.group].type;
+		let action = null;
+
+		if(weaponType === "melee")
+			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.MeleeStrike"));
+		else if(weaponType === "ranged")
+			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.RangedShot"));
+		else
+			throw new Error("Unable to define the weapon type.")
+
+		await CheckHelper.prepareActionCheck(this.actor, action, this.actor.defaultStance, {weapon: this});
+	}
+
+	/**
 	 * Adds recharge tokens to an Action equal to its recharge rating.
 	 * @param {string} face
 	 */
@@ -175,7 +193,48 @@ export default class WFRP3eItem extends Item
 	 * Prepare Weapon's data.
 	 * @private
 	 */
-	_prepareWeapon() {}
+	_prepareWeapon()
+	{
+		if(!(this.system.qualities instanceof Array))
+			this._convertQualitiesToArray();
+	}
+
+	/**
+	/**
+	 * Adds a new Quality to the Weapon's list of Qualities.
+	 */
+	addNewQuality()
+	{
+		const qualities = this.system.qualities;
+
+		qualities.push({
+			name: "attuned",
+			rating: 1
+		});
+
+		this.update({"system.qualities": qualities});
+	}
+
+	/**
+	 * Removes the last Quality from the Weapon's list of Qualities.
+	 */
+	removeLastQuality()
+	{
+		const qualities = this.system.qualities;
+
+		qualities.pop();
+
+		this.update({"system.qualities": qualities});
+	}
+
+	/**
+	 * Converts the Item's Qualities to Array.
+	 * @private
+	 */
+	_convertQualitiesToArray()
+	{
+		this.update({"system.qualities": Object.values(this.system.qualities)});
+	}
 
 	/**
 	 * Adds a new Talent socket to the Career's list of Talent sockets.

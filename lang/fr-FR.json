@@ -15,6 +15,8 @@
 	"ACTION.Type": "Type d'Action",
 	"ACTION.UniqueEffect": "Effet seul",
 	"ACTION.UsageMessage": "utilise {action}",
+	"ACTION.MeleeStrike": "Attaque au corps-à-corps",
+	"ACTION.RangedShot": "Tir à distance",
 	"ACTION.CHECK.GenerallyNoCheckRequired": "Generally No Check Required",
 	"ACTION.CHECK.NoCheckRequired": "No Check Required",
 	"ACTION.CHECK.TargetDefence": "Target Defence",
