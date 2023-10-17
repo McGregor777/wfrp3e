@@ -1223,6 +1223,20 @@
 .roll-effects > h5 {
   margin: 0;
 }
+.roll-effects .effect-toggle {
+  display: block;
+}
+.roll-effects .effect-toggle.active {
+  margin-right: 1rem;
+  position: relative;
+}
+.roll-effects .effect-toggle.active:after {
+  content: "\f00c";
+  display: inline-block;
+  font-family: var(--fa-style-family, "Font Awesome 6 Pro");
+  left: 100%;
+  position: absolute;
+}
 .talent-card {
   border: 1px solid black;
   border-radius: 10px;

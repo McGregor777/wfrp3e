@@ -42,6 +42,25 @@
 	}
 }
 
-.roll-effects > h5 {
-	margin: 0;
+.roll-effects {
+	& > h5 {
+		margin: 0;
+	}
+
+	& .effect-toggle {
+		display: block;
+
+		&.active {
+			margin-right: 1rem;
+			position: relative;
+
+			&:after {
+				content: "\f00c";
+				display: inline-block;
+				font-family: var(--fa-style-family,"Font Awesome 6 Pro");
+				left: 100%;
+				position: absolute;
+			}
+		}
+	}
 }

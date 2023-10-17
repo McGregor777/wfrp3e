@@ -9,6 +9,7 @@ import FortuneDie from "./modules/dice/dietype/FortuneDie.js";
 import MisfortuneDie from "./modules/dice/dietype/MisfortuneDie.js";
 import RecklessDie from "./modules/dice/dietype/RecklessDie.js";
 import CheckBuilder from "./modules/dice/CheckBuilder.js";
+import CheckHelper from "./modules/dice/CheckHelper.js";
 import DicePool from "./modules/dice/DicePool.js";
 import WFRP3eRoll from "./modules/dice/WFRP3eRoll.js";
 import WFRP3eItem from "./modules/items/WFRP3eItem.js"
@@ -152,6 +153,16 @@ Hooks.on("renderChatMessage", (app, html, messageData) => {
 		const [entityName, entityId, embeddedName, embeddedId] = parts;
 
 		await EmbeddedItemHelpers.displayOwnedItemItemModifiersAsJournal(embeddedId, modifierType, modifierId, entityId);
+	});
+
+	html.find(".roll-effects .effect-toggle").click((event) => {
+		event.stopPropagation();
+
+		CheckHelper.toggleEffect(
+			$(event.currentTarget).parents(".chat-message").data("messageId"),
+			event.currentTarget.dataset.symbol,
+			event.currentTarget.dataset.index
+		);
 	});
 });
 

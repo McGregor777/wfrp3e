@@ -71,7 +71,7 @@ export default class WFRP3eItem extends Item
 					default: "confirm"
 				}).render(true);
 			else
-				await CheckHelper.prepareActionCheck(this, options.face);
+				await CheckHelper.prepareActionCheck(this.actor, this, options.face);
 		}
 	}
 
@@ -80,7 +80,7 @@ export default class WFRP3eItem extends Item
 	 */
 	async useSkill(options = {})
 	{
-		await CheckHelper.prepareSkillCheck(this);
+		await CheckHelper.prepareSkillCheck(this.actor, this);
 	}
 
 	/**

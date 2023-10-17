@@ -51,10 +51,6 @@
 						{{#if (lookup @root.symbols symbol.plural)}}
 							{{#unless (equalTo sym "righteousSuccess")}}
 								<li class="roll-symbols">
-									{{#for 0 (lookup @root.symbols symbol.plural) 1}}
-										<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
-									{{/for}}
-
 									{{localize symbol.result nb=(lookup @root.symbols symbol.plural)}}
 
 									{{#if (equalTo sym "success")}}
@@ -62,7 +58,11 @@
 											{{localize @root.data.symbols.righteousSuccess.result nb=@root.symbols.righteousSuccesses}}
 										{{/if}}
 									{{/if}}
-								</li>
+
+                                    {{#for 0 (lookup @root.data.remainingSymbols symbol.plural) 1}}
+                                        <span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+                                    {{/for}}
+                                </li>
 							{{/unless}}
 						{{/if}}
 					{{/each}}

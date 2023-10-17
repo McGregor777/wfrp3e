@@ -205,6 +205,7 @@
 	"ROLL.Exertion": "Effort",
 	"ROLL.SigmarsComet": "Comète de Sigmar",
 	"ROLL.ChaosStar": "Étoile du Chaos",
+	"ROLL.NotEnoughSymbolToTriggerEffect": "Vous manquez de {symbol} pour activer cet effect.",
 	"ROLL.AMOUNT.ChallengeDie": "{nb} dés de défi",
 	"ROLL.AMOUNT.CharacteristicDie": "{nb} dés de caractéristique",
 	"ROLL.AMOUNT.ConservativeDie": "{nb} dés de prudence",

@@ -31,7 +31,17 @@ export default class WFRP3eRoll extends Roll
 			this.data = mergeObject(this.data, options.data);
 
 			if(this.data.action) {
-				this.data.effects = this.data.action.system[this.data.face].effects;
+				this.data.effects = {
+					...Object.entries(this.data.action.system[this.data.face].effects).reduce((object, effectArray) => {
+						object[effectArray[0]] = effectArray[1].reduce((array, effect) => {
+							effect.active = false;
+							array.push(effect);
+							return array;
+						}, []);
+
+						return object;
+					}, {})
+				};
 				this.data.effects.boon.push(CheckHelper.getUniversalBoonEffect(CONFIG.WFRP3e.characteristics[this.data.characteristic].type === "mental"));
 				this.data.effects.bane.push(CheckHelper.getUniversalBaneEffect(CONFIG.WFRP3e.characteristics[this.data.characteristic].type === "mental"));
 
@@ -133,6 +143,8 @@ export default class WFRP3eRoll extends Roll
 		// Store final outputs
 		this._total = total;
 		this._evaluated = true;
+
+		this.data.remainingSymbols = this.symbols;
 
 		if(this.symbols.successes && this.data?.action)
 			this.data.action.exhaustAction(this.data.face);
@@ -267,15 +279,13 @@ export default class WFRP3eRoll extends Roll
 
 		Hooks.call("specialDiceMessage", this);
 
-		// Either create the message or just return the chat data
-		const cls = getDocumentClass("ChatMessage");
-		const msg = new cls(messageData);
+		const message = new ChatMessage(messageData);
 
 		if(rMode)
-			msg.applyRollMode(rollMode);
+			message.applyRollMode(rollMode);
 
 		// Either create or return the data
-		return create ? cls.create(msg) : msg;
+		return create ? ChatMessage.create(message) : message;
 	}
 
 	/** @inheritDoc */

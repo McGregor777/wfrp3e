@@ -8,15 +8,16 @@ export default class CheckHelper
 {
 	/**
 	 * Rolls a Skill check.
+	 * @param {WFRP3eActor} actor The Character using the Action.
 	 * @param {WFRP3eItem} skill The Skill check has been triggered.
-	 * @param {?string} [rollFlavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {?string} [rollSound] Some sound to play after the Skill check completion.
+	 * @param {string} [rollFlavor] Some flavor text to add to the Skill check's outcome description.
+	 * @param {string} [rollSound] Some sound to play after the Skill check completion.
 	 * @returns {Promise<void>}
 	 */
-	static async prepareSkillCheck(skill, rollFlavor = null, rollSound = null)
+	static async prepareSkillCheck(actor, skill, rollFlavor = null, rollSound = null)
 	{
-		const characteristic = skill.actor.system.attributes.characteristics[skill.system.characteristic];
-		const stance = skill.actor.system.attributes.stance.current;
+		const characteristic = actor.system.attributes.characteristics[skill.system.characteristic];
+		const stance = actor.system.attributes.stance.current;
 
 		await new CheckBuilder(
 			new DicePool({
@@ -27,7 +28,7 @@ export default class CheckHelper
 				recklessDice: stance < 0 ? Math.abs(stance) : 0
 			}),
 			game.i18n.format("ROLL.SkillCheck", {skill: skill.name}),
-			{actor: skill.actor, skill: skill, characteristic: skill.system.characteristic},
+			{actor: actor, skill: skill, characteristic: skill.system.characteristic},
 			rollFlavor,
 			rollSound
 		).render(true);
@@ -35,28 +36,29 @@ export default class CheckHelper
 
 	/**
 	 * Rolls an Action check.
-	 * @param {WFRP3eItem} action The Action check has been triggered.
+	 * @param {WFRP3eActor} actor The Character using the Action.
+	 * @param {WFRP3eItem} action The Action that is used.
 	 * @param {string} face The Action face.
 	 * @param {string} [rollFlavor] Some flavor text to add to the Skill check's outcome description.
 	 * @param {string} [rollSound] Some sound to play after the Skill check completion.
 	 * @returns {Promise<void>}
 	 */
-	static async prepareActionCheck(action, face, rollFlavor = "", rollSound = null)
+	static async prepareActionCheck(actor, action, face, rollFlavor = "", rollSound = null)
 	{
 		const match = action.system[face].check.match(new RegExp(/(([\w\s]+) \((\w+)\))( vs\.? ([\w\s]+))?/));
-		let skill = action.actor.itemTypes.skill[0];
+		let skill = actor.itemTypes.skill[0];
 		let characteristicName = skill.system.characteristic;
 
 		if(match) {
-			skill = action.actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
+			skill = actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
 			// Either get the Characteristic specified on the Action's check, or use the Characteristic used by the Skill.
 			characteristicName = Object.entries(CONFIG.WFRP3e.characteristics).find((characteristic) => {
 				return game.i18n.localize(characteristic[1].abbreviation) === match[3];
 			})[0] ?? characteristicName;
 		}
 
-		const characteristic = action.actor.system.attributes.characteristics[characteristicName];
-		const stance = action.actor.system.attributes.stance.current;
+		const characteristic = actor.system.attributes.characteristics[characteristicName];
+		const stance = actor.system.attributes.stance.current;
 
 		await new CheckBuilder(
 			new DicePool({
@@ -75,7 +77,7 @@ export default class CheckHelper
 						: 0)
 			}),
 			game.i18n.format("ROLL.ActionCheck", {action: action.name}),
-			{actor: action.actor, action: action, face: face, skill: skill, characteristic: characteristicName},
+			{actor: actor, action: action, face: face, skill: skill, characteristic: characteristicName},
 			rollFlavor,
 			rollSound
 		).render(true);
@@ -131,5 +133,32 @@ export default class CheckHelper
 			symbolAmount: 1,
 			description: game.i18n.localize("ROLL.UNIVERSAL.SigmarsComet")
 		};
+	}
+
+	/**
+	 * Toggles effects from a Roll, depending on the symbols remaining.
+	 * @param chatMessageId The id of the ChatMessage containing the Roll.
+	 * @param symbol The symbol of the effect to toggle.
+	 * @param index The index of the effect to toggle.
+	 */
+	static toggleEffect(chatMessageId, symbol, index)
+	{
+		const chatMessage = game.messages.get(chatMessageId);
+		const changes = {rolls: chatMessage.rolls};
+
+		if(changes.rolls[0].data.effects[symbol][index].active === true)
+			changes.rolls[0].data.effects[symbol][index].active = false;
+		else if(changes.rolls[0].data.remainingSymbols[CONFIG.WFRP3e.symbols[symbol].plural] >= changes.rolls[0].data.effects[symbol][index].symbolAmount)
+			changes.rolls[0].data.effects[symbol][index].active = true;
+		else
+			ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)}));
+
+		changes.rolls[0].data.remainingSymbols[CONFIG.WFRP3e.symbols[symbol].plural] = changes.rolls[0].data.effects[symbol].reduce((accumulator, effect) => {
+			if(effect.active)
+				accumulator -= effect.symbolAmount;
+			return accumulator;
+		}, changes.rolls[0].symbols[CONFIG.WFRP3e.symbols[symbol].plural]);
+
+		chatMessage.update(changes);
 	}
 }

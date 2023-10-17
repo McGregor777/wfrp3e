@@ -205,6 +205,7 @@
 	"ROLL.Exertion": "Exertion",
 	"ROLL.SigmarsComet": "Sigmar's Comet",
 	"ROLL.ChaosStar": "Chaos Star",
+	"ROLL.NotEnoughSymbolToTriggerEffect": "You have not enough {symbol} to trigger this effect.",
 	"ROLL.AMOUNT.ChallengeDie": "{nb} challenge dice",
 	"ROLL.AMOUNT.CharacteristicDie": "{nb} characteristic dice",
 	"ROLL.AMOUNT.ConservativeDie": "{nb} conservative dice",
