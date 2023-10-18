@@ -31,7 +31,9 @@
 
 					<div class="characteristics">
 						{{#each characteristics as |characteristic char|}}
-							{{>systems/wfrp3e/templates/partials/characteristic-partial.hbs characteristic=characteristic char=char}}
+							{{#unless (equalTo char "varies")}}
+								{{>systems/wfrp3e/templates/partials/characteristic-partial.hbs characteristic=characteristic char=char}}
+							{{/unless}}
 						{{/each}}
 					</div>
 				</div>
