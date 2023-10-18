@@ -30,10 +30,8 @@
 					</div>
 
 					<div class="characteristics">
-						{{#each characteristics as |characteristic char|}}
-							{{#unless (equalTo char "varies")}}
-								{{>systems/wfrp3e/templates/partials/characteristic-partial.hbs characteristic=characteristic char=char}}
-							{{/unless}}
+						{{#each actor.system.attributes.characteristics as |characteristic char|}}
+                            {{>systems/wfrp3e/templates/partials/characteristic-partial.hbs characteristic=characteristic char=char}}
 						{{/each}}
 					</div>
 				</div>
