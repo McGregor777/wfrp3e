@@ -51,7 +51,7 @@
 				<div>
 					{{#each item.system.primaryCharacteristics as |characteristic char|}}
 						<select name="system.primaryCharacteristics" data-dtype="String">
-							{{selectOptions ../characteristics selected=characteristic localize=true}}
+							{{selectOptions ../characteristics selected=characteristic labelAttr="name" localize=true}}
 						</select>
 					{{/each}}
 				</div>

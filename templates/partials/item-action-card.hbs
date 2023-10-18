@@ -1,6 +1,6 @@
 <div class="item action-card" data-item-id="{{action._id}}">
 	{{#each @root.stances as |stance st|}}
-		<div class="face {{st}}{{#if (equalTo @root.actor.defaultStance st)}} active{{/if}}" data-face="{{st}}">
+		<div class="face {{st}}{{#if (equalTo @root.actor.system.defaultStance st)}} active{{/if}}" data-face="{{st}}">
 			<div class="action-card-header">
 				<img class="action-card-type" src="systems/wfrp3e/assets/icons/{{lookup (lookup ../action.system st) 'type'}}.webp" />
 
@@ -59,12 +59,12 @@
 				<div class="action-card-bottom-line">
 					<a class="flip-link" title="{{localize 'Flip Card'}}"><span class="fas fa-undo"></span></a>
 
-					<a class="recharge-token" title="{{ACTION.RechargeTokens}}">
-						<img src="systems/wfrp3e/assets/images/token-black.webp" alt="{{ACTION.RechargeTokens}}" />
+					<a class="recharge-token" title="{{localize "ACTION.RechargeTokens"}}">
+						<img src="systems/wfrp3e/assets/images/token-black.webp" alt="{{localize "ACTION.RechargeTokens"}}" />
 						<span class="recharge-token-counter">{{../action.system.rechargeTokens}}</span>
 					</a>
 
-					{{#>if @root.document.isOwner}}
+					{{#if @root.document.isOwner}}
 						<a class="item-delete-link" title="{{localize 'DIALOG.TITLE.DeleteItem'}}"><span class="fas fa-trash"></span></a>
 					{{/if}}
 				</div>

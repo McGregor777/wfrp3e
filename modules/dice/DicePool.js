@@ -48,7 +48,7 @@ export default class DicePool
 					this.characteristicDice++;
 				}
 				else
-					ui.notifications.warn("There is no " + type + " die left to convert back.");
+					ui.notifications.warn(game.i18n.localize("ROLL.CHECKBUILDER.ConvertBackWarning"));
 			}
 			else {
 				if(this.characteristicDice > 0) {
@@ -56,7 +56,7 @@ export default class DicePool
 					this[type + "Dice"]++;
 				}
 				else
-					ui.notifications.warn("There is no characteristic die left to convert.");
+					ui.notifications.warn(game.i18n.localize("ROLL.CHECKBUILDER.ConvertWarning"));
 			}
 		}
 	}

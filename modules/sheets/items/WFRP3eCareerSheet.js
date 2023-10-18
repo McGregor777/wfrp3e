@@ -4,7 +4,7 @@ export default class WFRP3eCareerSheet extends ItemSheet
 	{
 		return mergeObject(super.defaultOptions,
 		{
-			template: "systems/wfrp3e/templates/career-sheet.html",
+			template: "systems/wfrp3e/templates/career-sheet.hbs",
 			//width: 530,
 			height: 820,
 			classes: ["wfrp3e", "sheet", "item", "career", "career-item-sheet"],

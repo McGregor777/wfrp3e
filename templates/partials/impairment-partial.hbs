@@ -1,0 +1,8 @@
+<div class="impairment">
+    <a class="token" title="{{localize (concat (concat "CHARACTER.IMPAIRMENT." (capitalize impairment)) "Tokens")}}" data-impairment="{{impairment}}">
+        <img src="{{tokenPath}}" alt="{{localize (concat (concat "CHARACTER.IMPAIRMENT." (capitalize impairment)) "Tokens")}}" />
+        <span class="token-counter">{{lookup actor.system.impairments impairment}}</span>
+    </a>
+
+	<span class="title">{{localize (concat "CHARACTER.IMPAIRMENT." (capitalize impairment))}}</span>
+</div>

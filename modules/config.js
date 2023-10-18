@@ -194,7 +194,8 @@ export const WFRP3e = {
 					exertions: 0,
 					sigmarsComets: 0,
 					chaosStars: 0
-				}, 2: {
+				},
+				2: {
 					label: "ROLL.RESULT.Blank",
 					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
 					successes: 0,
@@ -206,7 +207,8 @@ export const WFRP3e = {
 					exertions: 0,
 					sigmarsComets: 0,
 					chaosStars: 0
-				}, 3: {
+				},
+				3: {
 					label: "ROLL.RESULT.Blank",
 					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
 					successes: 0,
@@ -218,7 +220,8 @@ export const WFRP3e = {
 					exertions: 0,
 					sigmarsComets: 0,
 					chaosStars: 0
-				}, 4: {
+				},
+				4: {
 					label: "ROLL.RESULT.OneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/fortune_onesuccess.webp",
 					successes: 1,
@@ -230,7 +233,8 @@ export const WFRP3e = {
 					exertions: 0,
 					sigmarsComets: 0,
 					chaosStars: 0
-				}, 5: {
+				},
+				5: {
 					label: "ROLL.RESULT.OneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/fortune_onesuccess.webp",
 					successes: 1,
@@ -242,13 +246,15 @@ export const WFRP3e = {
 					exertions: 0,
 					sigmarsComets: 0,
 					chaosStars: 0
-				}, 6: {
+				},
+				6: {
 					label: "ROLL.RESULT.OneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/fortune_oneboon.webp",
 					successes: 0,
 					righteousSuccesses: 0,
 					challenges: 0,
 					boons: 1,
+					banes: 0,
 					delays: 0,
 					exertions: 0,
 					sigmarsComets: 0,
@@ -804,25 +810,37 @@ export const WFRP3e = {
 	},
 	disease: {
 		symptoms: {
-			keywords: {
-				delirium: "DISEASE.SYMPTOM.KEYWORD.Delirium",
-				fever: "DISEASE.SYMPTOM.KEYWORD.Fever",
-				infectious: "DISEASE.SYMPTOM.KEYWORD.Infectious",
-				lethal: "DISEASE.SYMPTOM.KEYWORD.Lethal",
-				painful: "DISEASE.SYMPTOM.KEYWORD.Painful",
-				tiring: "DISEASE.SYMPTOM.KEYWORD.Tiring",
-				virulent: "DISEASE.SYMPTOM.KEYWORD.Virulent",
-				weary: "DISEASE.SYMPTOM.KEYWORD.Weary"
+			delirium: {
+				description: "DISEASE.SYMPTOM.DESCRIPTION.Delirium",
+				name: "DISEASE.SYMPTOM.Delirium"
 			},
-			descriptions: {
-				delirium: "DISEASE.SYMPTOM.DESCRIPTION.Delirium",
-				fever: "DISEASE.SYMPTOM.DESCRIPTION.Fever",
-				infectious: "DISEASE.SYMPTOM.DESCRIPTION.Infectious",
-				lethal: "DISEASE.SYMPTOM.DESCRIPTION.Lethal",
-				painful: "DISEASE.SYMPTOM.DESCRIPTION.Painful",
-				tiring: "DISEASE.SYMPTOM.DESCRIPTION.Tiring",
-				virulent: "DISEASE.SYMPTOM.DESCRIPTION.Virulent",
-				weary: "DISEASE.SYMPTOM.DESCRIPTION.Weary"
+			fever: {
+				description: "DISEASE.SYMPTOM.DESCRIPTION.Fever",
+				name: "DISEASE.SYMPTOM.Fever"
+			},
+			infectious: {
+				description: "DISEASE.SYMPTOM.DESCRIPTION.Infectious",
+				name: "DISEASE.SYMPTOM.Infectious"
+			},
+			lethal: {
+				description: "DISEASE.SYMPTOM.DESCRIPTION.Lethal",
+				name: "DISEASE.SYMPTOM.Lethal"
+			},
+			painful: {
+				description: "DISEASE.SYMPTOM.DESCRIPTION.Painful",
+				name: "DISEASE.SYMPTOM.Painful"
+			},
+			tiring: {
+				description: "DISEASE.SYMPTOM.DESCRIPTION.Tiring",
+				name: "DISEASE.SYMPTOM.Tiring"
+			},
+			virulent: {
+				description: "DISEASE.SYMPTOM.DESCRIPTION.Virulent",
+				name: "DISEASE.SYMPTOM.Virulent"
+			},
+			weary: {
+				description: "DISEASE.SYMPTOM.DESCRIPTION.Weary",
+				name: "DISEASE.SYMPTOM.Weary"
 			}
 		}
 	},

@@ -4,9 +4,8 @@
 		<h1><input class="name-input" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}" /></h1>
 	</header>
 
-	{{!--Sheet Navigation Tab--}}
 	<nav class="character-sheet-primary-tabs sheet-tabs tabs" data-group="primary">
-		<a class="tab-link characteristics-tab-link" data-tab="characteristics">{{localize 'CHARACTER.Characteristics'}}</a>
+		<a class="tab-link characteristics-tab-link" data-tab="characteristics">{{localize 'CHARACTER.Attributes'}}</a>
 		<a class="tab-link careers-tab-link" data-tab="careers">{{localize 'CHARACTER.Careers'}}</a>
 		<a class="tab-link talents-tab-link" data-tab="talents">{{localize 'CHARACTER.Talents'}}</a>
 		<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CHARACTER.Actions'}}</a>
@@ -21,20 +20,20 @@
 
 				<div class="characteristics-and-impairments-subdivision">
 					<div class="impairments">
-						{{>systems/wfrp3e/templates/partials/impairment-partial.html
-							class='fatigue' title='CHARACTER.Fatigue'
-							dataPath='system.impairments.fatigue'
-							value=actor.system.impairments.fatigue}}
+						{{>systems/wfrp3e/templates/partials/impairment-partial.hbs
+								impairment='fatigue'
+								tokenPath="systems/wfrp3e/assets/images/token-red.webp"}}
 
-						{{>systems/wfrp3e/templates/partials/impairment-partial.html
-							class='stress' title='CHARACTER.Stress'
-							dataPath='system.impairments.stress'
-							value=actor.system.impairments.stress}}
+						{{>systems/wfrp3e/templates/partials/impairment-partial.hbs
+								impairment='stress'
+								tokenPath="systems/wfrp3e/assets/images/token-blue.webp"}}
 					</div>
 
 					<div class="characteristics">
 						{{#each characteristics as |characteristic char|}}
-							{{>systems/wfrp3e/templates/partials/characteristic-partial.hbs characteristic=characteristic char=char}}
+							{{#unless (equalTo char "varies")}}
+								{{>systems/wfrp3e/templates/partials/characteristic-partial.hbs characteristic=characteristic char=char}}
+							{{/unless}}
 						{{/each}}
 					</div>
 				</div>
@@ -71,8 +70,8 @@
 					<span class="character-sheet-title">{{localize 'CHARACTER.Stances'}}</span>
 
 					<div class="stance-meter-segments">
-						{{#for actor.stanceMeter.reckless (increment actor.stanceMeter.conservative 1) 1}}
-							<a class="stance-meter-segment{{#if (equalTo @root.actor.attributes.stance.current this)}} active{{/if}}">
+						{{#for actor.system.stanceMeter.reckless (increment actor.system.stanceMeter.conservative 1) 1}}
+							<a class="stance-meter-segment{{#if (equalTo @root.actor.system.attributes.stance.current this)}} active{{/if}}">
 								<img class="stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}"
 									 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
 								<input name="system.attributes.stance.current"
@@ -88,37 +87,37 @@
 				<div class="cards">
 					<div class="conditions">
 						{{#each items.conditions as |condition cond|}}
-							{{>systems/wfrp3e/templates/partials/item-condition-card.html condition=condition}}
+							{{>systems/wfrp3e/templates/partials/item-condition-card.hbs condition=condition}}
 						{{/each}}
 					</div>
 
 					<div class="wounds">
 						{{#each items.criticalWounds as |wound wnd|}}
-							{{>systems/wfrp3e/templates/partials/item-wound-card.html wound=wound}}
+							{{>systems/wfrp3e/templates/partials/item-wound-card.hbs wound=wound}}
 						{{/each}}
 					</div>
 
 					<div class="diseases">
 						{{#each items.diseases as |disease dis|}}
-							{{>systems/wfrp3e/templates/partials/item-disease-card.html disease=disease}}
+							{{>systems/wfrp3e/templates/partials/item-disease-card.hbs disease=disease}}
 						{{/each}}
 					</div>
 
 					<div class="insanities">
 						{{#each items.insanities as |insanity ins|}}
-							{{>systems/wfrp3e/templates/partials/item-insanity-card.html insanity=insanity}}
+							{{>systems/wfrp3e/templates/partials/item-insanity-card.hbs insanity=insanity}}
 						{{/each}}
 					</div>
 
 					<div class="mutations">
 						{{#each items.mutations as |mutation mut|}}
-							{{>systems/wfrp3e/templates/partials/item-mutation-card.html mutation=mutation}}
+							{{>systems/wfrp3e/templates/partials/item-mutation-card.hbs mutation=mutation}}
 						{{/each}}
 					</div>
 
 					<div class="miscasts">
 						{{#each items.miscasts as |miscast mis|}}
-							{{>systems/wfrp3e/templates/partials/item-miscast-card.html miscast=miscast}}
+							{{>systems/wfrp3e/templates/partials/item-miscast-card.hbs miscast=miscast}}
 						{{/each}}
 					</div>
 				</div>
@@ -189,7 +188,7 @@
 				{{#if items.talents.focus}}
 					<div class="talent-container tab focus item-container" data-group="talents" data-tab="focus">
 						{{#each items.talents.focus as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -197,7 +196,7 @@
 				{{#if items.talents.reputation}}
 					<div class="talent-container tab reputation item-container" data-group="talents" data-tab="reputation">
 						{{#each items.talents.reputation as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -205,7 +204,7 @@
 				{{#if items.talents.tactic}}
 					<div class="talent-container tab tactic item-container" data-group="talents" data-tab="tactic">
 						{{#each items.talents.tactic as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -213,7 +212,7 @@
 				{{#if items.talents.faith}}
 					<div class="talent-container tab faith item-container" data-group="talents" data-tab="faith">
 						{{#each items.talents.faith as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -221,7 +220,7 @@
 				{{#if items.talents.order}}
 					<div class="talent-container tab order item-container" data-group="talents" data-tab="order">
 						{{#each items.talents.order as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -229,7 +228,7 @@
 				{{#if items.talents.tricks}}
 					<div class="talent-container tab trick item-container" data-group="talents" data-tab="trick">
 						{{#each items.talents.tricks as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.html talent=talent}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 						{{/each}}
 					</div>
 				{{/if}}
@@ -293,7 +292,7 @@
 				</thead>
 				<tbody>
 					{{#each items.armours as |armour arm|}}
-						{{>systems/wfrp3e/templates/partials/item-armour-row.html armour=armour}}
+						{{>systems/wfrp3e/templates/partials/item-armour-row.hbs armour=armour}}
 					{{/each}}
 				</tbody>
 			</table>
@@ -310,7 +309,7 @@
 				</thead>
 				<tbody>
 					{{#each items.trappings as |trapping trp|}}
-						{{>systems/wfrp3e/templates/partials/item-trapping-row.html trapping=trapping}}
+						{{>systems/wfrp3e/templates/partials/item-trapping-row.hbs trapping=trapping}}
 					{{/each}}
 				</tbody>
 			</table>
@@ -327,7 +326,7 @@
 				</thead>
 				<tbody>
 					{{#each items.money as |money mo|}}
-						{{>systems/wfrp3e/templates/partials/item-money-row.html money=money}}
+						{{>systems/wfrp3e/templates/partials/item-money-row.hbs money=money}}
 					{{/each}}
 				</tbody>
 			</table>
