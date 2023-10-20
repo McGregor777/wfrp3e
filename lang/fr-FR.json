@@ -33,6 +33,13 @@
 	"ARMOUR.Defence": "Défense",
 	"ARMOUR.Soak": "Encaissement",
 
+	"ATTRIBUTE.Aggression": "Agressivité",
+	"ATTRIBUTE.Cunning": "Ruse",
+	"ATTRIBUTE.Expertise": "Expertise",
+	"ATTRIBUTE.ABBREVIATION.Aggression": "A",
+	"ATTRIBUTE.ABBREVIATION.Cunning": "R",
+	"ATTRIBUTE.ABBREVIATION.Expertise": "E",
+
 	"CAREER.ActionAdvanceOptions": "Promotions d'Action possibles",
 	"CAREER.AdvancedCareer": "Carrière Avancée",
 	"CAREER.AdvanceOptions": "Advance Options",
@@ -119,6 +126,20 @@
 	"CONDITION.DURATION.Brief": "Brève",
 	"CONDITION.DURATION.Dependent": "Subordonnée",
 	"CONDITION.DURATION.Lingering": "Prolongée",
+
+	"CREATURE.Actions": "Actions",
+	"CREATURE.DamageRating": "Damage Rating",
+	"CREATURE.DefenceValue": "Defence Value",
+	"CREATURE.Details": "Details",
+	"CREATURE.Main": "Main",
+	"CREATURE.SoakValue": "Soak Value",
+	"CREATURE.Stance": "Stance",
+	"CREATURE.ThreatRating": "Threat Rating",
+	"CREATURE.WoundsThreshold": "Wounds Threshold",
+	"CREATURE.WoundsValue": "Wounds Value",
+	"CREATURE.ABBREVIATION.DamageRating": "DR",
+	"CREATURE.ABBREVIATION.DefenceValue": "Defence",
+	"CREATURE.ABBREVIATION.SoakValue": "Soak",
 
 	"CRITICALWOUND.SeverityRating": "Niveau de Gravité",
 

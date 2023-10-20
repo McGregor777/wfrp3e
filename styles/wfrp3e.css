@@ -793,6 +793,192 @@
   bottom: 5px;
   right: 10px;
 }
+.creature-sheet .window-content {
+  padding: 0;
+}
+.creature-sheet .window-content form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.creature-sheet .window-content form .creature-sheet-body {
+  flex-grow: 1;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div {
+  display: flex;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes {
+  background-color: #884832;
+  border: solid dimgray;
+  border-radius: 0;
+  border-width: 4px 1rem 0;
+  color: white;
+  padding: 0.25rem 0 0.5rem;
+  text-align: center;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute {
+  flex-grow: 1;
+  margin: 0 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute .attribute-title {
+  font-size: 14pt;
+  font-variant: small-caps;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute .attribute-input-container input {
+  color: white;
+  font-size: 18pt;
+  font-style: italic;
+  padding-top: 0.5rem;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+  width: 2rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute.expertise {
+  color: yellow;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute.expertise input {
+  color: yellow;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics {
+  flex: 1 1 20%;
+  padding: 0 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics > div {
+  align-items: center;
+  display: flex;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics > div > .characteristic-title {
+  margin-right: auto;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics > div .characteristic-value-input {
+  background: lightcyan;
+  border-color: lightsteelblue;
+  border-width: 2px;
+  padding-top: 0.25rem;
+  font-weight: bold;
+  text-align: center;
+  width: 2rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics > div .characteristic-fortune-input {
+  background: white;
+  border-color: dimgray;
+  font-size: 10pt;
+  font-weight: bold;
+  height: 1.25rem;
+  padding-top: 0.25rem;
+  text-align: center;
+  width: 1.25rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-image {
+  flex-basis: 60%;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-ratings {
+  flex: 1 1 20%;
+  padding-left: 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-ratings > div {
+  align-items: center;
+  background-color: #240000;
+  border: solid dimgrey;
+  border-radius: 2rem 0 0 2rem;
+  border-width: 2px 0;
+  display: flex;
+  margin-bottom: 0.25rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-ratings > div > img {
+  border: none;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-ratings > div > input {
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.25rem 0 0 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-ratings > div > input:focus {
+  box-shadow: none;
+  text-shadow: 0 0 5px var(--color-shadow-primary);
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos {
+  flex-grow: 1;
+  padding: 0 1rem 1rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-special-rule-summary {
+  flex-grow: 1;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-special-rule-summary > .editor {
+  height: 100%;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-stance {
+  font-size: 16pt;
+  margin: auto 1rem 1rem 0;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-stance.conservative {
+  color: green;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-stance.reckless {
+  color: red;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-action-tabs {
+  border-bottom: 1px solid #b5b3a4;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-action-tabs > * {
+  margin: 0 5px;
+}
+.creature-sheet .window-content form .creature-sheet-body .action-container {
+  align-items: center;
+}
+.creature-sheet .window-content form .creature-sheet-category {
+  background-color: #240000;
+  border: solid dimgray;
+  border-radius: 0;
+  border-width: 2px 0;
+  color: white;
+  font-style: italic;
+  padding-top: 0.25rem;
+  text-align: center;
+  width: 100%;
+}
+.creature-sheet .window-content form .creature-sheet-header {
+  background: url(../assets/images/creature-sheet-header.webp) center / 100% 100% no-repeat;
+  flex-wrap: nowrap !important;
+  padding: 0 0.5rem;
+  text-align: center;
+}
+.creature-sheet .window-content form .creature-sheet-header input {
+  background: none;
+  border: none;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.creature-sheet .window-content form .creature-sheet-header input:focus {
+  box-shadow: none;
+  text-shadow: 0 0 5px var(--color-shadow-primary);
+}
+.creature-sheet .window-content form .creature-sheet-header input.creature-sheet-threat-rating {
+  color: white;
+  flex: 0 0 3rem;
+  font-size: 24pt;
+  padding-top: 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-header .creature-sheet-name > input {
+  color: bisque;
+  text-shadow: -1pt -1pt 2pt black, -1pt 0 2pt black, 0 -1pt 2pt black, -1pt 1pt 2pt black, 1pt -1pt 2pt black, 0 1pt 2pt black, 1pt 0 2pt black, 1pt 1pt 2pt black;
+}
+.creature-sheet .window-content form .creature-sheet-header .creature-sheet-wounds {
+  flex: 0 0 3rem;
+}
+.creature-sheet .window-content form .creature-sheet-header .creature-sheet-wounds hr {
+  margin: 0 0 2px;
+}
+.creature-sheet .window-content form .creature-sheet-header .creature-sheet-wounds input {
+  color: white;
+  font-size: 24pt;
+  padding-top: 0.5rem;
+}
 .diseases .disease-card {
   position: relative;
   width: 255px;
@@ -1529,7 +1715,7 @@ th.shrinked {
 .sheet .tab.active {
   display: flex !important;
   flex-direction: column;
-  flex-grow: 1;
+  height: 100%;
 }
 .special-die {
   border: none;

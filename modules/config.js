@@ -6,6 +6,20 @@ export const WFRP3e = {
 		blessing: "ACTION.TYPE.Blessing",
 		spell: "ACTION.TYPE.Spell"
 	},
+	attributes: {
+		aggression: {
+			name: "ATTRIBUTE.Aggression",
+			abbreviation: "ATTRIBUTE.ABBREVIATION.Aggression"
+		},
+		cunning: {
+			name: "ATTRIBUTE.Cunning",
+			abbreviation: "ATTRIBUTE.ABBREVIATION.Cunning"
+		},
+		expertise: {
+			name: "ATTRIBUTE.Expertise",
+			abbreviation: "ATTRIBUTE.ABBREVIATION.Expertise"
+		}
+	},
 	characteristics: {
 		strength: {
 			name: "CHARACTERISTIC.Strength",
@@ -40,7 +54,7 @@ export const WFRP3e = {
 		varies: {
 			name: "CHARACTERISTIC.Varies",
 			abbreviation: "CHARACTERISTIC.ABBREVIATION.Varies"
-		},
+		}
 	},
 	challengeLevels: {
 		simple: {
@@ -860,55 +874,55 @@ export const WFRP3e = {
 			cssClass: "success",
 			name: "ROLL.SYMBOL.Successes",
 			plural: "successes",
-			result: "ROLL.AMOUNT.Successes",
+			result: "ROLL.AMOUNT.Successes"
 		},
 		righteousSuccess: {
 			cssClass: "righteous-success",
 			name: "ROLL.SYMBOL.RighteousSuccesses",
 			plural: "righteousSuccesses",
-			result: "ROLL.AMOUNT.RighteousSuccesses",
+			result: "ROLL.AMOUNT.RighteousSuccesses"
 		},
 		boon: {
 			cssClass: "boon",
 			name: "ROLL.SYMBOL.Boons",
 			plural: "boons",
-			result: "ROLL.AMOUNT.Boons",
+			result: "ROLL.AMOUNT.Boons"
 		},
 		sigmarsComet: {
 			cssClass: "sigmars-comet",
 			name: "ROLL.SYMBOL.SigmarsComets",
 			plural: "sigmarsComets",
-			result: "ROLL.AMOUNT.SigmarsComets",
+			result: "ROLL.AMOUNT.SigmarsComets"
 		},
 		challenge: {
 			cssClass: "challenge",
 			name: "ROLL.SYMBOL.Challenges",
 			plural: "challenges",
-			result: "ROLL.AMOUNT.Challenges",
+			result: "ROLL.AMOUNT.Challenges"
 		},
 		bane: {
 			cssClass: "bane",
 			name: "ROLL.SYMBOL.Banes",
 			plural: "banes",
-			result: "ROLL.AMOUNT.Banes",
+			result: "ROLL.AMOUNT.Banes"
 		},
 		chaosStar: {
 			cssClass: "chaos-star",
 			name: "ROLL.SYMBOL.ChaosStars",
 			plural: "chaosStars",
-			result: "ROLL.AMOUNT.ChaosStars",
+			result: "ROLL.AMOUNT.ChaosStars"
 		},
 		delay: {
 			cssClass: "delay",
 			name: "ROLL.SYMBOL.Delays",
 			plural: "delays",
-			result: "ROLL.AMOUNT.Delays",
+			result: "ROLL.AMOUNT.Delays"
 		},
 		exertion: {
 			cssClass: "exertion",
 			name: "ROLL.SYMBOL.Exertions",
 			plural: "exertions",
-			result: "ROLL.AMOUNT.Exertions",
+			result: "ROLL.AMOUNT.Exertions"
 		}
 	},
 	talentTypes: {
@@ -991,7 +1005,7 @@ export const WFRP3e = {
 			thrown: "WEAPON.QUALITY.Thrown",
 			twohanded: "WEAPON.QUALITY.TwoHanded",
 			unreliable: "WEAPON.QUALITY.Unreliable",
-			vicious: "WEAPON.QUALITY.Vicious",
+			vicious: "WEAPON.QUALITY.Vicious"
 		},
 		ranges: {
 			close: "WEAPON.RANGE.Close",

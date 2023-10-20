@@ -33,6 +33,13 @@
 	"ARMOUR.Defence": "Defence",
 	"ARMOUR.Soak": "Soak",
 
+	"ATTRIBUTE.Aggression": "Aggression",
+	"ATTRIBUTE.Cunning": "Cunning",
+	"ATTRIBUTE.Expertise": "Expertise",
+	"ATTRIBUTE.ABBREVIATION.Aggression": "A",
+	"ATTRIBUTE.ABBREVIATION.Cunning": "C",
+	"ATTRIBUTE.ABBREVIATION.Expertise": "E",
+
 	"CAREER.ActionAdvanceOptions": "Action Advance Options",
 	"CAREER.AdvancedCareer": "Advanced Career",
 	"CAREER.AdvanceOptions": "Advance Options",
@@ -119,6 +126,20 @@
 	"CONDITION.DURATION.Brief": "Brief",
 	"CONDITION.DURATION.Dependent": "Dependent",
 	"CONDITION.DURATION.Lingering": "Lingering",
+
+	"CREATURE.Actions": "Actions",
+	"CREATURE.DamageRating": "Damage Rating",
+	"CREATURE.DefenceValue": "Defence Value",
+	"CREATURE.Details": "Details",
+	"CREATURE.Main": "Main",
+	"CREATURE.SoakValue": "Soak Value",
+	"CREATURE.Stance": "Stance",
+	"CREATURE.ThreatRating": "Threat Rating",
+	"CREATURE.WoundsThreshold": "Wounds Threshold",
+	"CREATURE.WoundsValue": "Wounds Value",
+	"CREATURE.ABBREVIATION.DamageRating": "DR",
+	"CREATURE.ABBREVIATION.DefenceValue": "Defence",
+	"CREATURE.ABBREVIATION.SoakValue": "Soak",
 
 	"CRITICALWOUND.SeverityRating": "Severity Rating",
 
