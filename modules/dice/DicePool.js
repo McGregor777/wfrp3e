@@ -52,7 +52,7 @@ export default class DicePool
 					this.characteristicDice++;
 				}
 				else
-					ui.notifications.warn(game.i18n.localize("ROLL.CHECKBUILDER.ConvertBackWarning"));
+					ui.notifications.warn(game.i18n.format("ROLL.CHECKBUILDER.ConvertBackWarning", {type: type}));
 			}
 			else {
 				if(this.characteristicDice > 0) {
@@ -60,7 +60,7 @@ export default class DicePool
 					this[type + "Dice"]++;
 				}
 				else
-					ui.notifications.warn(game.i18n.localize("ROLL.CHECKBUILDER.ConvertWarning"));
+					ui.notifications.warn(game.i18n.format("ROLL.CHECKBUILDER.ConvertWarning", {type: "characteristic"}));
 			}
 		}
 	}
