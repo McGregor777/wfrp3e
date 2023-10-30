@@ -1,7 +1,7 @@
 {
   "title": "Warhammer Fantasy Roleplay - 3rd Edition",
   "description": "<p>A game system for <em><strong>Warhammer Fantasy Roleplay - 3rd Edition</strong></em> in the Foundry Virtual Tabletop environment.</p>",
-  "version": "0.5.2-alpha",
+  "version": "0.5.3-alpha",
   "compatibility": {
     "minimum": "11",
     "verified": "11.311",
@@ -39,14 +39,14 @@
       "flags": {}
   }],
   "socket": true,
-  "initiative": "@attributes.characteristics.ability.valueda + @attributes.characteristics.ability.fortunedf",
+  "initiative": "@characteristics.ability.valueda + @characteristics.ability.fortunedf",
   "gridDistance": 1,
   "gridUnits": "ft",
-  "primaryTokenAttribute": "attributes.wounds.value",
-  "secondaryTokenAttribute": "attributes.stance.current",
+  "primaryTokenAttribute": "wounds",
+  "secondaryTokenAttribute": "fortune",
   "url": "https://github.com/McGregor777/wfrp3e",
-  "manifest": "https://raw.githubusercontent.com/McGregor777/wfrp3e/0.5.2-alpha/system.json",
-  "download": "https://github.com/McGregor777/wfrp3e/archive/refs/tags/0.5.2-alpha.zip",
+  "manifest": "https://raw.githubusercontent.com/McGregor777/wfrp3e/0.5.3-alpha/system.json",
+  "download": "https://github.com/McGregor777/wfrp3e/archive/refs/tags/0.5.3-alpha.zip",
   "background": "systems/wfrp3e/assets/background.jpg",
   "id": "wfrp3e"
 }

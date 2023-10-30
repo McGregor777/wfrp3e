@@ -83,7 +83,10 @@ export default class CheckBuilder extends FormApplication
 					if(characteristic[0] !== "varies")
 						object[characteristic[0]] = characteristic[1].name;
 					return object;
-				}, {})
+				}, {});
+
+				if(this.roll.data.actor.type === "creature")
+					data.attributes = this.roll.data.actor.system.attributes;
 			}
 
 			if(this.roll.data.skill)
@@ -127,6 +130,8 @@ export default class CheckBuilder extends FormApplication
 		html.find(".convert-buttons button")
 			.click(this._onConversionButtonLeftClick.bind(this, html))
 			.contextmenu(this._onConversionButtonRightClick.bind(this, html));
+
+		html.find(".attribute-dice input").change(this._onAttributeDiceChange.bind(this, html));
 
 		html.find(".challenge-level-select").change(this._onChallengeLevelSelectChange.bind(this, html));
 		html.find(".characteristic-select").change(this._onCharacteristicSelectChange.bind(this, html));
@@ -251,6 +256,21 @@ export default class CheckBuilder extends FormApplication
 	}
 
 	/**
+	 * Performs follow-up operations after changes on an attribute dice.
+	 * @param {Event} event
+	 * @param {any} html
+	 * @private
+	 */
+	_onAttributeDiceChange(html, event)
+	{
+		const input = event.currentTarget;
+
+		this.dicePool[input.name] = parseInt(input.value);
+
+		this._updatePreview(html);
+	}
+
+	/**
 	 * Updates the dice pool and symbol pool previews.
 	 * @param {any} html
 	 * @private
@@ -294,7 +314,14 @@ export default class CheckBuilder extends FormApplication
 
 		// Add as many dice icons as needed.
 		Object.entries(CONFIG.WFRP3e.dice).forEach((dieType, index) => {
-			for(let i = 0; i < this.dicePool[dieType[0] + "Dice"]; i++) {
+			let diceAmount = this.dicePool[dieType[0] + "Dice"];
+
+			if(dieType[0] === "fortune")
+				diceAmount += this.dicePool.creaturesAggressionDice + this.dicePool.creaturesCunningDice;
+			else if(dieType[0] === "expertise")
+				diceAmount += this.dicePool.creaturesExpertiseDice;
+
+			for(let i = 0; i < diceAmount; i++) {
 				const img = document.createElement("img");
 
 				img.classList.add("special-die");
@@ -324,7 +351,7 @@ export default class CheckBuilder extends FormApplication
 
 				span.classList.add("wfrp3e-font");
 				span.classList.add("symbol");
-				span.classList.add(symbol[1].cssClass);
+				span.classList.add(symbol.cssClass);
 
 				container.appendChild(span);
 			}
@@ -359,8 +386,8 @@ export default class CheckBuilder extends FormApplication
 	 */
 	_onCharacteristicSelectChange(html, event)
 	{
-		const characteristic = this.roll.data.actor.system.attributes.characteristics[event.currentTarget.value];
-		const stance = this.roll.data.actor.system.attributes.stance.current;
+		const characteristic = this.roll.data.actor.system.characteristics[event.currentTarget.value];
+		const stance = this.roll.data.actor.system.stance.current;
 
 		this.roll.data.skill = event.currentTarget.value;
 		this.dicePool.characteristicDice = characteristic.value - Math.abs(stance);
@@ -510,6 +537,20 @@ export default class CheckBuilder extends FormApplication
 
 			if(this.roll?.sound)
 				AudioHelper.play({src: this.roll.sound}, true);
+
+			if(this.roll.data.actor.type === "creature")
+				Object.keys(CONFIG.WFRP3e.attributes).forEach((attribute) => {
+					const attributeDiceAmount = this.dicePool["creatures" + (attribute[0].toUpperCase() + attribute.slice(1, attribute.length)) + "Dice"];
+
+					if(attributeDiceAmount > 0) {
+						const changes = {system: {attributes: {}}};
+						changes.system.attributes[attribute] = {current: this.roll.data.actor.system.attributes[attribute].current - attributeDiceAmount};
+
+						console.log(changes)
+
+						this.roll.data.actor.update(changes);
+					}
+				});
 
 			return roll;
 		}

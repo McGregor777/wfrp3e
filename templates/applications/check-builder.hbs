@@ -21,6 +21,23 @@
 			<button class="convert-conservative">{{localize 'ROLL.CHECKBUILDER.ConvertConservative'}}</button>
 			<button class="convert-reckless">{{localize 'ROLL.CHECKBUILDER.ConvertReckless'}}</button>
 		</div>
+
+        <div class="attributes">
+            <div class="attribute-dice">
+                <input type="number" name="creaturesAggressionDice" value="0" min="0" max="{{attributes.aggression.budget}}" />
+                <label>{{localize "ROLL.CHECKBUILDER.AggressionDice"}}</label>
+            </div>
+
+            <div class="attribute-dice">
+                <input type="number" name="creaturesCunningDice" value="0" min="0" max="{{attributes.cunning.budget}}" />
+                <label>{{localize "ROLL.CHECKBUILDER.CunningDice"}}</label>
+            </div>
+
+            <div class="attribute-dice">
+                <input type="number" name="creaturesExpertiseDice" value="0" min="0" max="{{attributes.expertise.budget}}" />
+                <label>{{localize "ROLL.CHECKBUILDER.ExpertiseDice"}}</label>
+            </div>
+        </div>
 	
 		<details>
 			<summary>{{localize 'ROLL.CHECKBUILDER.StartingResults'}}</summary>

@@ -1,6 +1,7 @@
 import {WFRP3e} from "./modules/config.js";
 import WFRP3eActor from "./modules/actors/WFRP3eActor.js"
 import WFRP3eCharacterDataModel from "./modules/data/actors/WFRP3eCharacterDataModel.js";
+import WFRP3eCreatureDataModel from "./modules/data/actors/WFRP3eCreatureDataModel.js";
 import WFRP3ePartyDataModel from "./modules/data/actors/WFRP3ePartyDataModel.js";
 import WFRP3eAbilityDataModel from "./modules/data/items/WFRP3eAbilityDataModel.js";
 import WFRP3eActionDataModel from "./modules/data/items/WFRP3eActionDataModel.js";
@@ -54,7 +55,7 @@ async function preloadHandlebarsTemplates()
 {
 	const templatePaths = [
 		"systems/wfrp3e/templates/chatmessages/action-effects.hbs",
-		"systems/wfrp3e/templates/partials/attribute-partial.html",
+		"systems/wfrp3e/templates/partials/attribute-partial.hbs",
 		"systems/wfrp3e/templates/partials/characteristic-partial.hbs",
 		"systems/wfrp3e/templates/partials/impairment-partial.hbs",
 		"systems/wfrp3e/templates/partials/item-ability-card.hbs",
@@ -85,6 +86,7 @@ Hooks.once("init", () => {
 	CONFIG.WFRP3e = WFRP3e;
 
 	CONFIG.Actor.dataModels.character = WFRP3eCharacterDataModel;
+	CONFIG.Actor.dataModels.creature = WFRP3eCreatureDataModel;
 	CONFIG.Actor.dataModels.party = WFRP3ePartyDataModel;
 	CONFIG.Actor.documentClass = WFRP3eActor;
 

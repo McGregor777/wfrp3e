@@ -10,6 +10,7 @@ export default function()
 		Handlebars.registerHelper("multiply", (value, multiplier) => value * multiplier);
 		Handlebars.registerHelper("concat", (value, otherValue) => value.toString() + otherValue.toString());
 		Handlebars.registerHelper("capitalize", (string) => string[0].toUpperCase() + string.slice(1));
+		Handlebars.registerHelper("abs", (number) => Math.abs(number));
 		Handlebars.registerHelper("in", (value, array) => array.includes(value));
 
 		Handlebars.registerHelper("for", (startingNumber, goalNumber, increment, block) => {
