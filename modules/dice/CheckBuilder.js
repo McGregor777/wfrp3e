@@ -351,7 +351,7 @@ export default class CheckBuilder extends FormApplication
 
 				span.classList.add("wfrp3e-font");
 				span.classList.add("symbol");
-				span.classList.add(symbol[1].cssClass);
+				span.classList.add(symbol.cssClass);
 
 				container.appendChild(span);
 			}
