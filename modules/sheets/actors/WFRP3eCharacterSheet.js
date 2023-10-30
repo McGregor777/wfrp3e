@@ -420,6 +420,6 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		event.preventDefault();
 
-		this.actor.update({"system.attributes.stance.current": parseInt($(event.currentTarget).find("input")[0].value)});
+		this.actor.update({"system.stance.current": parseInt($(event.currentTarget).find("input")[0].value)});
 	}
 }

@@ -16,8 +16,8 @@ export default class CheckHelper
 	 */
 	static async prepareSkillCheck(actor, skill, rollFlavor = null, rollSound = null)
 	{
-		const characteristic = actor.system.attributes.characteristics[skill.system.characteristic];
-		const stance = actor.system.attributes.stance.current;
+		const characteristic = actor.system.characteristics[skill.system.characteristic];
+		const stance = actor.system.stance.current;
 
 		await new CheckBuilder(
 			new DicePool({
@@ -45,8 +45,8 @@ export default class CheckHelper
 	static async prepareActionCheck(actor, action, face, options = {})
 	{
 		const match = action.system[face].check.match(new RegExp(/(([\w\s]+) \((\w+)\))( vs\.? ([\w\s]+))?/));
-		let skill = actor.itemTypes.skill[0];
-		let characteristicName = skill.system.characteristic;
+		let skill = actor.itemTypes.skill[0] ?? null;
+		let characteristicName = skill ? skill.system.characteristic : "Strength";
 
 		if(match) {
 			skill = actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
@@ -56,9 +56,14 @@ export default class CheckHelper
 			})[0] ?? characteristicName;
 		}
 
-		const characteristic = actor.system.attributes.characteristics[characteristicName];
-		const stance = actor.system.attributes.stance.current;
+		const characteristic = actor.system.characteristics[characteristicName];
 		const rollData = {actor: actor, action: action, face: face, skill: skill, characteristic: characteristicName};
+		let stance = 0;
+
+		if(actor.type === "character")
+			stance = actor.system.stance.current
+		else if(actor.type === "creature")
+			stance = actor.system.stance
 
 		if(options.weapon)
 			rollData.weapon = options.weapon;

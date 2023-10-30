@@ -55,7 +55,7 @@
   line-height: 8pt;
   margin: auto auto auto 0.25rem;
   text-align: center;
-  width: 100%;
+  width: calc(100% - 0.25rem);
 }
 .action-card .action-card-difficulty-modifiers > * {
   display: inline-block;
@@ -593,6 +593,21 @@
   overflow-y: scroll;
   scrollbar-width: thin;
 }
+.check-builder form .main-options .attributes {
+  display: flex;
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+}
+.check-builder form .main-options .attributes .attribute-dice {
+  align-items: center;
+  display: flex;
+}
+.check-builder form .main-options .attributes .attribute-dice > input {
+  width: 3rem;
+}
+.check-builder form .main-options .attributes .attribute-dice > label {
+  margin: 0 0.25rem;
+}
 .check-builder form .main-options .convert-buttons {
   display: flex;
   margin-bottom: 1rem;
@@ -800,9 +815,11 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  height: 100%;
 }
 .creature-sheet .window-content form .creature-sheet-body {
   flex-grow: 1;
+  overflow: auto;
 }
 .creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div {
   display: flex;
@@ -920,16 +937,19 @@
 .creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-stance.reckless {
   color: red;
 }
-.creature-sheet .window-content form .creature-sheet-body .creature-sheet-action-tabs {
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-actions {
+  overflow: auto;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-action-tabs {
   border-bottom: 1px solid #b5b3a4;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
 }
-.creature-sheet .window-content form .creature-sheet-body .creature-sheet-action-tabs > * {
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-action-tabs > * {
   margin: 0 5px;
 }
-.creature-sheet .window-content form .creature-sheet-body .action-container {
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .action-container {
   align-items: center;
 }
 .creature-sheet .window-content form .creature-sheet-category {

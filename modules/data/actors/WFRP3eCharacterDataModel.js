@@ -18,17 +18,14 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 
                     return object;
                 }, {})),
-
                 corruption: new fields.SchemaField({
                     threshold: new fields.NumberField({...requiredInteger, initial: 5, min: 0}),
                     value: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
                 }),
-
                 fortune: new fields.SchemaField({
                     maximum: new fields.NumberField({...requiredInteger, initial: 3, min: 0}),
                     value: new fields.NumberField({...requiredInteger, initial: 3, min: 0})
                 }),
-
                 stance: new fields.SchemaField({
                     ...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
                         object[stance] = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
@@ -36,13 +33,11 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
                     }, {}),
                     current: new fields.NumberField({...requiredInteger, initial: 0})
                 }),
-
                 wounds: new fields.SchemaField({
                     threshold: new fields.NumberField({...requiredInteger, initial: 7, min: 0}),
                     value: new fields.NumberField({...requiredInteger, initial: 7, min: 0})
                 })
             }),
-
             background: new fields.SchemaField({
                 biography: new fields.HTMLField(),
                 height: new fields.StringField(),
@@ -57,18 +52,43 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
                 enemies: new fields.StringField(),
                 campaignNotes: new fields.StringField()
             }),
+            characteristics: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
+                if(characteristic !== "varies")
+                    object[characteristic] = new fields.SchemaField({
+                        value: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true}),
+                        fortune: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
+                    }, {label: characteristic});
 
+                return object;
+            }, {})),
+            corruption: new fields.SchemaField({
+                max: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true}),
+                value: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
+            }),
             experience: new fields.SchemaField({
-                current: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-                spent: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
+                current: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true}),
+                spent: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
             }),
-
+            fortune: new fields.SchemaField({
+                max: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true}),
+                value: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
+            }),
             impairments: new fields.SchemaField({
-                fatigue: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-                stress: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
+                fatigue: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true}),
+                stress: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
             }),
-
-            party: new fields.DocumentIdField()
+            party: new fields.DocumentIdField(),
+            stance: new fields.SchemaField({
+                ...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
+                    object[stance] = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
+                    return object;
+                }, {}),
+                current: new fields.NumberField({...requiredInteger, initial: 0})
+            }),
+            wounds: new fields.SchemaField({
+                max: new fields.NumberField({...requiredInteger, initial: 7, min: 0}),
+                value: new fields.NumberField({...requiredInteger, initial: 7, min: 0})
+            })
         };
     }
 
@@ -84,6 +104,47 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
         this._prepareStanceMeter();
 
         this._prepareDefaultStance();
+    }
+
+    /** @inheritDoc */
+    static migrateData(source)
+    {
+        Object.keys(CONFIG.WFRP3e.characteristics).forEach((characteristic) => {
+            if(!source.characteristics[characteristic].value)
+                source.characteristics[characteristic].value = source.attributes.characteristics[characteristic].value;
+
+            if(!source.characteristics[characteristic].fortune)
+                source.characteristics[characteristic].fortune = source.attributes.characteristics[characteristic].fortune;
+        });
+
+        if(!source.corruption.max)
+            source.corruption.max = source.attributes.corruption.threshold;
+
+        if(!source.corruption.value)
+            source.corruption.value = source.attributes.corruption.value;
+
+        if(!source.fortune.max)
+            source.fortune.max = source.attributes.fortune.maximum;
+
+        if(!source.fortune.value)
+            source.fortune.value = source.attributes.fortune.value;
+
+        if(!source.stance.conservative)
+            source.stance.conservative = source.attributes.stance.conservative;
+
+        if(!source.stance.reckless)
+            source.stance.reckless = source.attributes.stance.reckless;
+
+        if(!source.stance.current)
+            source.stance.current = source.attributes.stance.current;
+
+        if(!source.wounds.max)
+            source.wounds.max = source.attributes.wounds.threshold;
+
+        if(!source.wounds.value)
+            source.wounds.value = source.attributes.wounds.value;
+
+        return super.migrateData(source);
     }
 
     /**
@@ -140,8 +201,8 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
     _prepareStanceMeter()
     {
         this.stanceMeter = {
-            conservative: this.attributes.stance.conservative + (this.parent.system.currentCareer?.system.startingStance.conservativeSegments ?? 0),
-            reckless: -this.attributes.stance.reckless - (this.parent.system.currentCareer?.system.startingStance.recklessSegments ?? 0)
+            conservative: this.stance.conservative + (this.parent.system.currentCareer?.system.startingStance.conservativeSegments ?? 0),
+            reckless: -this.stance.reckless - (this.parent.system.currentCareer?.system.startingStance.recklessSegments ?? 0)
         };
     }
 
@@ -153,8 +214,8 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
     {
         this.defaultStance = "conservative";
 
-        if(this.attributes.stance.current < 0 ||
-            this.attributes.stance.current === 0 && this.stanceMeter.conservative < this.stanceMeter.reckless) {
+        if(this.stance.current < 0 ||
+            this.stance.current === 0 && this.stanceMeter.conservative < this.stanceMeter.reckless) {
             this.defaultStance = "reckless";
         }
     }

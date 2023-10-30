@@ -128,6 +128,7 @@
 	"CONDITION.DURATION.Lingering": "Prolongée",
 
 	"CREATURE.Actions": "Actions",
+	"CREATURE.Category": "Category",
 	"CREATURE.DamageRating": "Damage Rating",
 	"CREATURE.DefenceValue": "Defence Value",
 	"CREATURE.Details": "Details",
@@ -259,6 +260,9 @@
 	"ROLL.CHECKBUILDER.ConvertWarning": "Il n'y a plus de dé de {type} à convertir.",
 	"ROLL.CHECKBUILDER.ConvertBackWarning": "Il n'y a plus de dé de {type} à reconvertir.",
 	"ROLL.CHECKBUILDER.Hint": "Clic gauche pour ajouter des dés, clic droit pour en retirer.",
+	"ROLL.CHECKBUILDER.AggressionDice": "Aggression Dice",
+	"ROLL.CHECKBUILDER.CunningDice": "Cunning Dice",
+	"ROLL.CHECKBUILDER.ExpertiseDice": "Expertise Dice",
 	"ROLL.CHECKBUILDER.Options": "Options",
 	"ROLL.CHECKBUILDER.RollCheck": "Lancer le test",
 	"ROLL.CHECKBUILDER.Skill": "Skill",

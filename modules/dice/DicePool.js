@@ -24,7 +24,11 @@ export default class DicePool
 			this[symbol.plural] = dicePool[symbol.plural] ?? 0;
 		});
 
-		this.source = {};
+		Object.keys(CONFIG.WFRP3e.attributes).forEach((attribute) => {
+			const attributeName = attribute[0].toUpperCase() + attribute.slice(1, attribute.length);
+
+			this["creatures" + attributeName + "Dice"] = dicePool["creatures" + attributeName + "Dice"] ?? 0;
+		});
 	}
 
 	/**
@@ -69,8 +73,8 @@ export default class DicePool
 	{
 		return [
 			this.characteristicDice + "d" + CharacteristicDie.DENOMINATION,
-			this.fortuneDice + "d" + FortuneDie.DENOMINATION,
-			this.expertiseDice + "d" + ExpertiseDie.DENOMINATION,
+			(this.fortuneDice + this.creaturesAggressionDice + this.creaturesCunningDice) + "d" + FortuneDie.DENOMINATION,
+			(this.expertiseDice + this.creaturesExpertiseDice) + "d" + ExpertiseDie.DENOMINATION,
 			this.conservativeDice + "d" + ConservativeDie.DENOMINATION,
 			this.recklessDice + "d" + RecklessDie.DENOMINATION,
 			this.challengeDice + "d" + ChallengeDie.DENOMINATION,

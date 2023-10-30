@@ -128,6 +128,7 @@
 	"CONDITION.DURATION.Lingering": "Lingering",
 
 	"CREATURE.Actions": "Actions",
+	"CREATURE.Category": "Category",
 	"CREATURE.DamageRating": "Damage Rating",
 	"CREATURE.DefenceValue": "Defence Value",
 	"CREATURE.Details": "Details",
@@ -259,6 +260,9 @@
 	"ROLL.CHECKBUILDER.ConvertWarning": "There is no {type} die left to convert.",
 	"ROLL.CHECKBUILDER.ConvertBackWarning": "There is no {type} die left to convert back.",
 	"ROLL.CHECKBUILDER.Hint": "Left click to increase dice, right click to decrease.",
+	"ROLL.CHECKBUILDER.AggressionDice": "Aggression Dice",
+	"ROLL.CHECKBUILDER.CunningDice": "Cunning Dice",
+	"ROLL.CHECKBUILDER.ExpertiseDice": "Expertise Dice",
 	"ROLL.CHECKBUILDER.Options": "Options",
 	"ROLL.CHECKBUILDER.RollCheck": "Roll check",
 	"ROLL.CHECKBUILDER.Skill": "Skill",

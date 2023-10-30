@@ -30,7 +30,7 @@
 					</div>
 
 					<div class="characteristics">
-						{{#each actor.system.attributes.characteristics as |characteristic char|}}
+						{{#each actor.system.characteristics as |characteristic char|}}
                             {{>systems/wfrp3e/templates/partials/characteristic-partial.hbs characteristic=characteristic char=char}}
 						{{/each}}
 					</div>
@@ -39,29 +39,29 @@
 
 			<div class="attributes">
 				<div class="attributes-subdivision">
-					{{>systems/wfrp3e/templates/partials/attribute-partial.html
+					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
 						class='wounds'
 						title='CHARACTER.Wounds'
 						maxTitle='CHARACTER.Threshold'
-						dataPath='system.attributes.wounds'
-						max=actor.system.attributes.wounds.threshold
-						value=actor.system.attributes.wounds.value}}
+						dataPath='system.wounds'
+						max=actor.system.wounds.max
+						value=actor.system.wounds.value}}
 
-					{{>systems/wfrp3e/templates/partials/attribute-partial.html
+					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
 						class='corruption'
 						title='CHARACTER.Corruption'
 						maxTitle='CHARACTER.Threshold'
-						dataPath='system.attributes.corruption'
-						max=actor.system.attributes.corruption.threshold
-						value=actor.system.attributes.corruption.value}}
+						dataPath='system.corruption'
+						max=actor.system.corruption.max
+						value=actor.system.corruption.value}}
 
-					{{>systems/wfrp3e/templates/partials/attribute-partial.html
+					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
 						class='fortune'
 						title='CHARACTER.Fortune'
 						maxTitle='CHARACTER.Maximum'
-						dataPath='system.attributes.fortune'
-						max=actor.system.attributes.fortune.maximum
-						value=actor.system.attributes.fortune.value}}
+						dataPath='system.fortune'
+						max=actor.system.fortune.max
+						value=actor.system.fortune.value}}
 				</div>
 
 				<div class="stance-meter">
@@ -69,14 +69,14 @@
 
 					<div class="stance-meter-segments">
 						{{#for actor.system.stanceMeter.reckless (increment actor.system.stanceMeter.conservative 1) 1}}
-							<a class="stance-meter-segment{{#if (equalTo @root.actor.system.attributes.stance.current this)}} active{{/if}}">
+							<a class="stance-meter-segment{{#if (equalTo @root.actor.system.stance.current this)}} active{{/if}}">
 								<img class="stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}"
 									 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
-								<input name="system.attributes.stance.current"
+								<input name="system.stance.current"
 									   type="radio"
 									   value="{{this}}"
 									   data-dtype="Number"
-									   {{#if (equalTo @root.actor.system.attributes.stance.current this)}}checked{{/if}}/>
+									   {{#if (equalTo @root.actor.system.stance.current this)}}checked{{/if}}/>
 							</a>
 						{{/for}}
 					</div>

@@ -36,7 +36,7 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 			stance: new fields.NumberField({...requiredInteger, initial: 0}),
 			threatRating: new fields.NumberField({...requiredInteger, initial: 1, min: 1}),
 			wounds: new fields.SchemaField({
-				threshold: new fields.NumberField({...requiredInteger, initial: 7, min: 0}),
+				max: new fields.NumberField({...requiredInteger, initial: 7, min: 0}),
 				value: new fields.NumberField({...requiredInteger, initial: 7, min: 0})
 			})
 		};

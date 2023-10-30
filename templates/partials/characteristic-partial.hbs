@@ -3,14 +3,14 @@
 		
 	<div class="characteristic-input-container">
 		<input class="characteristic-value-input"
-			   name="system.attributes.characteristics.{{char}}.value"
+			   name="system.characteristics.{{char}}.value"
 			   type="text"
 			   value="{{characteristic.value}}"
 			   placeholder="{{localize (lookup (lookup @root.characteristics char) "abbreviation")}}"
 			   data-dtype="Number" />
 
 		<input class="characteristic-fortune-input"
-			   name="system.attributes.characteristics.{{char}}.fortune"
+			   name="system.characteristics.{{char}}.fortune"
 			   type="text"
 			   value="{{characteristic.fortune}}"
 			   placeholder="{{localize 'CHARACTER.Fortune'}}"
