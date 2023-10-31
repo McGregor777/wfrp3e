@@ -118,6 +118,17 @@ Hooks.once("init", () => {
 	CONFIG.Dice.terms["m"] = MisfortuneDie;
 	CONFIG.Dice.terms["r"] = RecklessDie;
 
+	CONFIG.fontDefinitions["ArnoPro"] = {
+		editor: true,
+		fonts: [
+			{urls: ["systems/wfrp3e/assets/fonts/ArnoPro-Regular.otf"]},
+			{urls: ["systems/wfrp3e/assets/fonts/ArnoPro-Bold.otf"], weight: 700},
+			{urls: ["systems/wfrp3e/assets/fonts/ArnoPro-Italic.otf"], style: "italic"},
+			{urls: ["systems/wfrp3e/assets/fonts/ArnoPro-BoldItalic.otf"], style: "italic", weight: 700}
+		]
+	};
+	CONFIG.fontDefinitions["Caslon Antique"] = {editor: true, fonts: []};
+
 	Actors.unregisterSheet("core", ActorSheet);
 	Actors.registerSheet("wfrp3e", WFRP3eCharacterSheet, {label: "Character Sheet", types: ["character"], makeDefault: true});
 	Actors.registerSheet("wfrp3e", WFRP3ePartySheet, {label: "Party Sheet", types: ["party"], makeDefault: true});
