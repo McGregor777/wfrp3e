@@ -22,22 +22,16 @@
 			<button class="convert-reckless">{{localize 'ROLL.CHECKBUILDER.ConvertReckless'}}</button>
 		</div>
 
-        <div class="attributes">
-            <div class="attribute-dice">
-                <input type="number" name="creaturesAggressionDice" value="0" min="0" max="{{attributes.aggression.budget}}" />
-                <label>{{localize "ROLL.CHECKBUILDER.AggressionDice"}}</label>
-            </div>
-
-            <div class="attribute-dice">
-                <input type="number" name="creaturesCunningDice" value="0" min="0" max="{{attributes.cunning.budget}}" />
-                <label>{{localize "ROLL.CHECKBUILDER.CunningDice"}}</label>
-            </div>
-
-            <div class="attribute-dice">
-                <input type="number" name="creaturesExpertiseDice" value="0" min="0" max="{{attributes.expertise.budget}}" />
-                <label>{{localize "ROLL.CHECKBUILDER.ExpertiseDice"}}</label>
-            </div>
-        </div>
+		{{#if attributes}}
+			<div class="attributes">
+				{{#each attributes as |attribute attr|}}
+					<div class="attribute-dice">
+						<input type="number" name="creatures{{capitalize attr}}Dice" value="0" min="0" max="{{attribute.budget}}" />
+						<label>{{localize (concat (concat "ROLL.CHECKBUILDER." (capitalize attr)) "Dice")}}</label>
+					</div>
+				{{/each}}
+			</div>
+		{{/if}}
 	
 		<details>
 			<summary>{{localize 'ROLL.CHECKBUILDER.StartingResults'}}</summary>
@@ -171,9 +165,9 @@
 			<div>
 				<label>{{localize "ROLL.CHECKBUILDER.ChallengeLevel"}}</label>
 				<select class="challenge-level-select" name="challengeLevel" data-dtype="String">
-	                {{selectOptions @root.challengeLevels selected=@root.challengeLevel labelAttr="name" localize=true}}
-                </select>
-            </div>
+					{{selectOptions @root.challengeLevels selected=@root.challengeLevel labelAttr="name" localize=true}}
+				</select>
+			</div>
 
 			{{#if availableWeapons}}
 				<div>
