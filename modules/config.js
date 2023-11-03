@@ -858,6 +858,10 @@ export const WFRP3e = {
 			}
 		}
 	},
+	encounterTypes: {
+		combat: "ENCOUNTER.Combat",
+		social: "ENCOUNTER.Social"
+	},
 	rarities: {
 		abundant: "TRAPPING.RARITY.Abundant",
 		plentiful: "TRAPPING.RARITY.Plentiful",

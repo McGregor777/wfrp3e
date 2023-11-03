@@ -100,7 +100,7 @@ export default class CheckHelper
 	static async prepareInitiativeCheck(actor, characteristicName)
 	{
 		const characteristic = actor.system.characteristics[characteristicName];
-		const stance = actor.system.stance.current;
+		const stance = actor.system.stance.current ?? actor.system.stance;
 
 		return new DicePool({
 			characteristicDice: characteristic.value - Math.abs(stance),

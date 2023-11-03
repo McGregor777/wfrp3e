@@ -48,6 +48,7 @@ import CheckHelper from "./modules/CheckHelper.js";
 import DicePool from "./modules/DicePool.js";
 import WFRP3eRoll from "./modules/WFRP3eRoll.js";
 import WFRP3eActor from "./modules/documents/WFRP3eActor.js"
+import WFRP3eCombat from "./modules/documents/WFRP3eCombat.js";
 import WFRP3eItem from "./modules/documents/WFRP3eItem.js"
 import * as handlebarsHelpers from "./modules/handlebars.js";
 
@@ -106,6 +107,8 @@ Hooks.once("init", () => {
 	CONFIG.Item.dataModels.trapping = WFRP3eTrappingDataModel;
 	CONFIG.Item.dataModels.weapon = WFRP3eWeaponDataModel;
 	CONFIG.Item.documentClass = WFRP3eItem;
+
+	CONFIG.Combat.documentClass = WFRP3eCombat;
 
 	CONFIG.Dice.rolls.push(CONFIG.Dice.rolls[0]);
 	CONFIG.Dice.rolls[0] = WFRP3eRoll;

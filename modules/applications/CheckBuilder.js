@@ -1,3 +1,4 @@
+import CheckHelper from "../CheckHelper.js";
 import DicePool from "../DicePool.js";
 import WFRP3eRoll from "../WFRP3eRoll.js";
 
@@ -33,6 +34,8 @@ export default class CheckBuilder extends FormApplication
 				return game.i18n.format("ROLL.ActionCheckBuilder", {action: this.roll.data.action.name});
 			else if(this.roll.data.skill)
 				return game.i18n.format("ROLL.SkillCheckBuilder", {skill: this.roll.data.skill.name});
+			else if(this.roll.data.combat)
+				return game.i18n.localize("ROLL.InitiativeCheckBuilder");
 		}
 
 		return game.i18n.localize("ROLL.CheckBuilder");
@@ -111,6 +114,9 @@ export default class CheckBuilder extends FormApplication
 					this.roll.data.weapon = Object.values(data.availableWeapons)[0];
 				}
 			}
+
+			if(this.roll.data.combat)
+				data.encounterTypes = CONFIG.WFRP3e.encounterTypes;
 		}
 
 		return data;
@@ -455,7 +461,7 @@ export default class CheckBuilder extends FormApplication
 	 * @returns {WFRP3eRoll}
 	 * @private
 	 */
-	_onRollCheckButtonClick(html, event)
+	async _onRollCheckButtonClick(html, event)
 	{
 		// if sound was not passed search for sound dropdown value
 		if(!this.roll.sound) {
@@ -522,6 +528,85 @@ export default class CheckBuilder extends FormApplication
 				chatOptions.whisper = [sentToPlayer];
 
 			ChatMessage.create(chatOptions);
+		}
+		else if(this.roll.data.combat) {
+			const currentCombatantId = this.roll.data.combat.combatant?.id;
+			const encounterType = html.find('.encounter-type input:checked').val();
+			const initiativeCharacteristic = encounterType === "social" ? "fellowship" : "agility";
+
+			// Iterate over Combatants, performing an initiative roll for each.
+			const [updates, messages] = await this.roll.data.combatantIds.reduce(async(results, id, i) => {
+				const [updates, messages] = await results;
+
+				// Get Combatant data
+				const combatant = this.roll.data.combat.getCombatantByToken(
+					this.roll.data.combat.combatants
+						.map(combatant => combatant)
+						.filter(combatantData => combatantData._id === id)[0].tokenId
+				);
+
+				if(!combatant || !combatant.isOwner)
+					return results;
+
+				// Determine formula.
+				this.dicePool.addDicePool(await CheckHelper.prepareInitiativeCheck(combatant.actor, initiativeCharacteristic));
+				const initiativeRoll = new WFRP3eRoll(
+					this.dicePool.renderDiceExpression(),
+					this.dicePool,
+					{data: combatant.actor ? combatant.actor.getRollData() : {}}
+				).roll();
+
+				const totalInitiative = initiativeRoll.symbols.successes;
+
+				initiativeRoll._result = totalInitiative;
+				initiativeRoll._total = totalInitiative;
+
+				// Roll initiative
+				updates.push({_id: id, initiative: initiativeRoll.total});
+
+				// Determine the roll mode
+				let rollMode = this.roll.data.messageOptions.rollMode || game.settings.get("core", "rollMode");
+				if((combatant.token.hidden || combatant.hidden) && rollMode === "roll")
+					rollMode = "gmroll";
+
+				// Construct chat message data
+				const messageData = mergeObject({
+					speaker: {
+						scene: canvas.scene.id,
+						actor: combatant.actor ? combatant.actor.id : null,
+						token: combatant.token.id,
+						alias: combatant.token.name,
+					},
+					flavor: game.i18n.localize("ROLL." + (encounterType[0].toUpperCase() + encounterType.slice(1)) + "EncounterInitiativeCheck"),
+					flags: { "core.initiativeRoll": true },
+				}, this.roll.data.messageOptions);
+
+				const chatData = await initiativeRoll.toMessage(messageData, {create: false, rollMode});
+
+				// Play 1 sound for the whole rolled set
+				if(i > 0)
+					chatData.sound = null;
+
+				messages.push(chatData);
+
+				// Return the Roll and the chat data
+				return results;
+			}, [[], []]);
+
+			if(!updates.length)
+				return this.roll.data.combat;
+
+			// Update multiple combatants
+			await this.roll.data.combat.updateEmbeddedDocuments("Combatant", updates);
+
+			// Ensure the turn order remains with the same combatant if there was one active
+			if(this.roll.data.updateTurn && !!currentCombatantId)
+				await this.roll.data.combat.update({turn: this.roll.data.combat.turns.findIndex((turn) => turn.id === currentCombatantId)});
+
+			// Create multiple chat messages
+			await CONFIG.ChatMessage.documentClass.create(messages);
+
+			return this.roll.data.combat;
 		}
 		else {
 			const roll = new WFRP3eRoll(this.dicePool.renderDiceExpression(), this.dicePool, {

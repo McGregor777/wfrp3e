@@ -2,13 +2,13 @@
 	<div class="main-options">
 		{{#if encounterTypes}}
 			<div class="encounter-type-select">
-				<span>{{localize "ROLL.CHECKBUILDER.EncounterType"}}</span>
+				<h4>{{localize "ROLL.CHECKBUILDER.EncounterType"}}</h4>
 
 				{{#each encounterTypes as |encounter enc|}}
 					<div class="encounter-type">
 						<label>
 							{{localize (concat "ENCOUNTER." (capitalize enc))}}
-							<input name="encounterType" value="enc" type="radio" />
+							<input name="encounterType" value="{{enc}}" type="radio" {{#if @first}}checked{{/if}}/>
 						</label>
 					</div>
 				{{/each}}
@@ -17,11 +17,16 @@
 		
 		<div class="dice-pool"></div>
 		<div class="symbols-pool"></div>
-	
+
+		{{#if encounterTypes}}
+			<details>
+				<summary>{{localize "ROLL.CHECKBUILDER.DicePool"}}</summary>
+		{{/if}}
+
 		<p class="dice-pool-hint">
 			<em>{{localize "ROLL.CHECKBUILDER.Hint"}}</em>
 		</p>
-	
+
 		<div class="dice-pool-table">
 			{{#each diceIcons as |die d|}}
 				<div class="pool-container">
@@ -31,11 +36,15 @@
 				</div>
 			{{/each}}
 		</div>
-	
+
 		<div class="convert-buttons">
 			<button class="convert-conservative">{{localize "ROLL.CHECKBUILDER.ConvertConservative"}}</button>
 			<button class="convert-reckless">{{localize "ROLL.CHECKBUILDER.ConvertReckless"}}</button>
 		</div>
+
+		{{#if encounterTypes}}
+			</details>
+		{{/if}}
 
 		{{#if attributes}}
 			<div class="attributes">

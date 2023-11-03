@@ -66,6 +66,27 @@ export default class DicePool
 	}
 
 	/**
+	 * Adds another DicePool to the current one.
+	 * @param {DicePool} [otherDicePool]
+	 */
+	addDicePool(otherDicePool)
+	{
+		Object.keys(CONFIG.WFRP3e.dice).forEach((diceName) => {
+			this[diceName + "Dice"] += otherDicePool[diceName + "Dice"] ?? 0;
+		});
+
+		Object.values(CONFIG.WFRP3e.symbols).forEach((symbol) => {
+			this[symbol.plural] += otherDicePool[symbol.plural] ?? 0;
+		});
+
+		Object.keys(CONFIG.WFRP3e.attributes).forEach((attribute) => {
+			const attributeName = attribute[0].toUpperCase() + attribute.slice(1, attribute.length);
+
+			this["creatures" + attributeName + "Dice"] += otherDicePool["creatures" + attributeName + "Dice"] ?? 0;
+		});
+	}
+
+	/**
 	 * Transforms the DicePool into a rollable expression.
 	 * @returns {string} a applications expression that can be used to roll the applications pool
 	 */

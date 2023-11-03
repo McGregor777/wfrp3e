@@ -617,6 +617,24 @@
   line-height: 1.5rem;
   text-align: center;
 }
+.check-builder form .main-options .encounter-type-select {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.check-builder form .main-options .encounter-type-select > h4 {
+  flex-basis: 100%;
+  font-size: 16pt;
+  margin-bottom: 0.5rem;
+}
+.check-builder form .main-options .encounter-type-select .encounter-type {
+  font-size: 14pt;
+}
+.check-builder form .main-options .encounter-type-select .encounter-type input {
+  display: block;
+  margin: auto;
+}
 .check-builder form .main-options .dice-pool {
   margin-top: 0.5rem;
   min-height: 3.5rem;
