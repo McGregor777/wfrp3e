@@ -14,6 +14,31 @@
   height: 5rem;
   width: 100%;
 }
+.action-card .action-card-bottom-line {
+  align-items: end;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  line-height: 0;
+  padding: 0 0.25rem 0.25rem;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.action-card .action-card-bottom-line .recharge-token {
+  position: relative;
+}
+.action-card .action-card-bottom-line .recharge-token > img {
+  border: none;
+  height: 3rem;
+  opacity: 75%;
+}
+.action-card .action-card-bottom-line .recharge-token > .recharge-token-counter {
+  font-size: 2rem;
+  left: 50%;
+  position: absolute;
+  top: 70%;
+  transform: translate(-50%, -50%);
+}
 .action-card .action-card-check {
   background-color: #201008;
   color: white;
@@ -30,17 +55,28 @@
   line-height: 8pt;
   margin: auto auto auto 0.25rem;
   text-align: center;
+  width: calc(100% - 0.25rem);
 }
 .action-card .action-card-difficulty-modifiers > * {
   display: inline-block;
   margin: auto;
 }
 .action-card .action-card-effects {
-  margin: 10px;
+  border: calc(0.5rem + 3px) solid;
+  border-radius: 0 0 1.5rem 1.5rem;
+  border-top: none;
   color: black;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   font-size: 10pt;
   text-shadow: none;
-  width: calc(100% - 1.25rem);
+}
+.action-card .action-card-effects > table {
+  border-top: none;
+  border-bottom: none;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 .action-card .action-card-header {
   border-radius: 1.5rem 1.5rem 0 0;
@@ -52,15 +88,15 @@
   width: 100%;
 }
 .action-card .action-card-name {
-  margin: auto;
   font: 16pt "Caslon Antique";
   font-variant-caps: small-caps;
+  grid-area: action-card-name;
+  margin: auto;
   text-align: center;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
-  grid-area: action-card-name;
 }
 .action-card .action-card-name:hover {
-  text-shadow: 0 0 8px var(--color-shadow-primary);
+  text-shadow: 0 0 0.5rem var(--color-shadow-primary);
 }
 .action-card .action-card-recharge-rating {
   background-color: cornflowerblue;
@@ -70,7 +106,7 @@
   grid-area: action-card-recharge-rating;
   height: 2rem;
   line-height: 2rem;
-  margin: 20px 10px 0 0;
+  margin: 0.5rem 0.5rem 0 0;
   text-align: center;
   width: 2rem;
 }
@@ -81,6 +117,10 @@
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   width: 100%;
 }
+.action-card .action-card-requirements > p {
+  margin: 0;
+  padding-top: 0.25rem;
+}
 .action-card .action-card-traits {
   height: 1.25rem;
   font-style: italic;
@@ -89,41 +129,35 @@
   text-align: center;
 }
 .action-card .action-card-type {
+  background-color: lightgrey;
   border: none;
+  border-radius: 100%;
   grid-area: action-card-type;
   margin: 0.5rem 0 0 0.5rem;
 }
+.action-card .face.active {
+  display: flex;
+  flex-direction: column;
+}
 .action-card .face.conservative {
   background-color: #d8b880;
-  border-radius: 25px;
+  border-radius: 1.5rem;
+}
+.action-card .face.conservative > .action-card-effects {
+  border-color: sienna;
 }
 .action-card .face.conservative > .action-card-header {
   background-color: #388840;
 }
 .action-card .face.reckless {
   background-color: #e0e0e0;
-  border-radius: 25px;
+  border-radius: 1.5rem;
+}
+.action-card .face.reckless > .action-card-effects {
+  border-color: darkgrey;
 }
 .action-card .face.reckless > .action-card-header {
   background-color: #c02030;
-}
-.action-card .bottom-line {
-  align-items: end;
-}
-.action-card .bottom-line .recharge-token {
-  position: relative;
-}
-.action-card .bottom-line .recharge-token > img {
-  border: none;
-  height: 3rem;
-  opacity: 75%;
-}
-.action-card .bottom-line .recharge-token > .recharge-token-counter {
-  font-size: 2rem;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 70%;
 }
 .action-item-sheet .sheet-form-div {
   margin: 0.25rem 0;
@@ -135,6 +169,41 @@
   border: none;
   height: 80px;
   width: 278px;
+}
+.action-item-sheet .sheet-form-div.action-difficulty-modifiers,
+.action-item-sheet .sheet-form-div.action-header-details {
+  display: flex;
+}
+.action-item-sheet .sheet-form-div.action-difficulty-modifiers > *:first-child,
+.action-item-sheet .sheet-form-div.action-header-details > *:first-child {
+  margin-right: 1rem;
+}
+.action-item-sheet .sheet-form-div.action-difficulty-modifiers > *:last-child,
+.action-item-sheet .sheet-form-div.action-header-details > *:last-child {
+  margin-left: 1rem;
+}
+.action-item-sheet .sheet-form-div .action-sheet-effect-group {
+  margin-bottom: 0.5rem;
+}
+.action-item-sheet .sheet-form-div .action-sheet-effect-group .action-sheet-effect {
+  align-items: center;
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+.action-item-sheet .sheet-form-div .action-sheet-effect-group .action-sheet-effect > * {
+  margin: 0 0.25rem;
+}
+.action-item-sheet .sheet-form-div .action-sheet-effect-group .action-sheet-effect > *:first-child {
+  margin-left: 0;
+}
+.action-item-sheet .sheet-form-div .action-sheet-effect-group .action-sheet-effect > *:last-child {
+  margin-right: 0;
+}
+.action-item-sheet .sheet-form-div .action-sheet-effect-group .action-sheet-effect > *.action-sheet-effect-symbol-amount {
+  width: 2rem;
+}
+.action-item-sheet .sheet-form-div .action-sheet-effect-group .action-sheet-effect > *.action-sheet-effect-description {
+  display: none;
 }
 .action-item-sheet .tab-link.active.conservative-tab-link {
   color: lightgreen;
@@ -305,50 +374,6 @@
 .career-item-sheet .sheet-form-div.career-advance-options > *:last-child {
   margin-left: 1rem;
 }
-.conditions .condition-card {
-  position: relative;
-  width: 255px;
-  height: 385px;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #806050;
-  text-align: center;
-}
-.conditions .condition-card .condition-card-description {
-  text-shadow: 0 0 16px white;
-  background-color: #b0a0a0;
-}
-.conditions .condition-card .condition-card-description p {
-  text-align: center;
-}
-.conditions .condition-card .condition-card-duration {
-  padding: 10px 0 20px;
-  background-color: #c0b0a0;
-  color: white;
-  font-size: 14pt;
-  font-weight: bold;
-  font-variant-caps: small-caps;
-  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black, 0 0 8px black;
-}
-.conditions .condition-card .condition-card-header {
-  padding: 20px 0;
-  background: #903030;
-}
-.conditions .condition-card .condition-card-header .condition-card-name {
-  color: white;
-  font: 16pt "Caslon Antique";
-  font-variant-caps: small-caps;
-  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
-}
-.conditions .condition-card .condition-card-header .condition-card-name:hover {
-  text-shadow: 0 0 8px var(--color-shadow-primary);
-}
-.conditions .condition-card .item-delete-link {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
-}
 .character-sheet .character-sheet-body {
   display: flex;
   flex-direction: column;
@@ -390,8 +415,8 @@
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments {
   display: flex;
-  width: auto;
   flex-direction: column;
+  width: auto;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics-and-impairments-subdivision {
   display: flex;
@@ -400,41 +425,41 @@
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics {
   display: flex;
-  flex-direction: column;
-  padding: 0 10px;
   flex: 1 1 auto;
+  flex-direction: column;
   justify-content: space-around;
+  padding: 0 10px;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic {
   width: 130px;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-fortune-input {
-  width: 25px !important;
+  font-weight: bold;
   height: 25px !important;
   margin-left: 10px !important;
   padding: 3px !important;
-  font-weight: bold;
   text-align: center !important;
+  width: 25px !important;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-input-container {
+  align-items: center;
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
   justify-content: flex-end;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-title {
   font: 14pt "ArnoPro";
+  font-variant-caps: small-caps;
   font-weight: bold;
   text-align: center;
-  font-variant-caps: small-caps;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-value-input {
   display: block;
-  width: 35px !important;
+  font-weight: bold;
   height: 45px !important;
   padding: 3px !important;
-  font-weight: bold;
   text-align: center !important;
+  width: 35px !important;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments {
   display: flex;
@@ -452,28 +477,34 @@
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment:last-child {
   margin-top: 10px;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .input {
-  width: 30px !important;
-  height: auto !important;
-  padding: 5px;
-  border: 1px solid;
-  font-weight: bold;
-  text-align: center !important;
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token {
+  position: relative;
+  width: 4rem;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .input.fatigue {
-  border-color: red;
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > * {
+  position: absolute;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .input.stress {
-  border-color: blue;
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > img {
+  border: none;
+  opacity: 75%;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > .token-counter {
+  color: white;
+  font-size: 24pt;
+  left: 38%;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+  top: 47%;
 }
 .character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .title {
   display: block;
-  padding: 0 2px 0 4px;
   font: 14pt "ArnoPro";
-  font-weight: bold;
-  text-align: center;
   font-variant-caps: small-caps;
+  font-weight: bold;
+  padding: 0 2px 0 4px;
   writing-mode: vertical-lr;
+  text-align: center;
   transform: rotate(180deg);
 }
 .character-sheet .character-sheet-body .characteristics-tab .skills {
@@ -524,8 +555,8 @@
 .character-sheet .character-sheet-body .character-sheet-career-tabs,
 .character-sheet .character-sheet-body .character-sheet-talent-tabs,
 .character-sheet .character-sheet-body .character-sheet-action-tabs {
-  display: flex;
   border-bottom: 1px solid #b5b3a4;
+  display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
 }
@@ -536,13 +567,13 @@
 }
 .character-sheet .character-sheet-primary-tabs {
   display: flex;
-  height: auto !important;
   flex-flow: row wrap;
-  justify-content: space-between;
   font: 14pt "ArnoPro";
-  font-weight: bold;
-  text-align: center;
   font-variant-caps: small-caps;
+  font-weight: bold;
+  height: auto !important;
+  justify-content: space-between;
+  text-align: center;
 }
 .character-sheet .character-sheet-primary-tabs > * {
   margin: 0 5px;
@@ -550,9 +581,441 @@
 .character-sheet .character-sheet-title {
   display: block;
   font: 14pt "ArnoPro";
+  font-variant-caps: small-caps;
   font-weight: bold;
   text-align: center;
+}
+.check-builder form {
+  display: flex;
+}
+.check-builder form .main-options {
+  flex: 1 0 420px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+.check-builder form .main-options .attributes {
+  display: flex;
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+}
+.check-builder form .main-options .attributes .attribute-dice {
+  align-items: center;
+  display: flex;
+}
+.check-builder form .main-options .attributes .attribute-dice > input {
+  width: 3rem;
+}
+.check-builder form .main-options .attributes .attribute-dice > label {
+  margin: 0 0.25rem;
+}
+.check-builder form .main-options .convert-buttons {
+  display: flex;
+  margin-bottom: 1rem;
+}
+.check-builder form .main-options .convert-buttons button {
+  font-size: 10pt;
+  line-height: 1.5rem;
+  text-align: center;
+}
+.check-builder form .main-options .encounter-type-select {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.check-builder form .main-options .encounter-type-select > h4 {
+  flex-basis: 100%;
+  font-size: 16pt;
+  margin-bottom: 0.5rem;
+}
+.check-builder form .main-options .encounter-type-select .encounter-type {
+  font-size: 14pt;
+}
+.check-builder form .main-options .encounter-type-select .encounter-type input {
+  display: block;
+  margin: auto;
+}
+.check-builder form .main-options .dice-pool {
+  margin-top: 0.5rem;
+  min-height: 3.5rem;
+  text-align: center;
+}
+.check-builder form .main-options .dice-pool-table {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-border-light-tertiary) none;
+  margin: 0.25rem;
+}
+.check-builder form .main-options .dice-pool-table .pool-container {
+  align-items: baseline;
+  display: flex;
+  padding: 0.5rem;
+}
+.check-builder form .main-options .dice-pool-table .pool-container:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.check-builder form .main-options .dice-pool-table .pool-container > img {
+  align-self: center;
+}
+.check-builder form .main-options .dice-pool-table .pool-container > .pool-value {
+  background-color: #ddd;
+  border: 1px solid black;
+  font: 20pt "ArnoPro";
+  margin: 0 1rem;
+  padding-top: 0.5rem;
+  text-align: center;
+  width: 3.5rem;
+}
+.check-builder form .main-options .dice-pool-hint {
+  margin: 0.5rem 1px 0.25rem 1px;
+}
+.check-builder form .main-options .dice-pool-roll-options {
+  margin-top: 0.5rem;
+}
+.check-builder form .main-options .dice-pool-roll-options select,
+.check-builder form .main-options .dice-pool-roll-options input {
+  margin-top: 1px;
+  margin-right: 1px;
+}
+.check-builder form .main-options .hide {
+  display: none;
+}
+.check-builder form .main-options .maximize {
+  width: 100%;
+}
+.check-builder form .main-options .minimize {
+  max-width: 20%;
+}
+.check-builder form .main-options .pool-text {
+  text-align: left;
+}
+.check-builder form .main-options .roll-button {
+  margin-top: 1rem;
+}
+.check-builder form .main-options .symbols-pool {
+  font-size: 20pt;
+  text-align: center;
+}
+.check-builder form .main-options .symbols-pool-container {
+  min-width: 320px;
+  padding: 0 1px;
+}
+.check-builder form .main-options .symbols-pool-container .pool-value {
+  background-color: #ddd;
+  border: 1px solid black;
+  font: 16pt "ArnoPro";
+  margin: 0 0.25rem;
+  padding-top: 0.5rem;
+  text-align: center;
+  width: 3rem;
+}
+.check-builder form .main-options .symbols-pool-container .wfrp3e.picture {
+  display: inline-block;
+  width: 1.25rem;
+}
+.check-builder form .main-options .item-display {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid #782e22;
+  margin: 0.5rem 0 0.8rem 0;
+  padding: 0.5rem;
+}
+.check-builder form .main-options .item-display img {
+  height: 50px;
+  width: auto;
+}
+.check-builder form .main-options .item-display h4 {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.check-builder form .main-options .item-display h4 input {
+  width: 70%;
+}
+.check-builder form .main-options .item-display .item-miss {
+  color: darkred;
+  font-style: italic;
+  text-align: center;
+}
+.check-builder form .main-options .item-display .item-pill {
+  background-color: #aaa;
+  border: 1px solid black;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 10pt;
+  line-height: 1.5rem;
+  list-style-type: none;
+  margin: 1px;
+  padding: 0 0.25rem;
+  white-space: nowrap;
+}
+.check-builder form .main-options .item-display .item-pill.adjusted {
+  color: #8b0000;
+}
+.check-builder form .main-options .item-display .item-pill .rank {
+  padding-right: 15px;
+}
+.check-builder form .main-options .item-display .item-pill .rank:hover {
+  color: green;
+}
+.check-builder form .main-options .item-display .item-pill .item-delete {
+  cursor: pointer;
+}
+.check-builder form .main-options .item-display .item-pill .item-delete:hover {
+  color: red;
+}
+.check-builder form .main-options .symbols-pool-container .pool-container {
+  align-items: baseline;
+  display: flex;
+}
+.check-builder form .main-options .symbols-pool-container .pool-container > span {
+  flex-basis: 1.5rem;
+  text-align: center;
+}
+.check-builder form .quick-settings {
+  flex: 1 1 200px;
+}
+.check-builder form .quick-settings > div {
+  margin-bottom: 0.5rem;
+}
+.check-builder form .quick-settings > div > * {
+  display: block;
+  width: 100%;
+}
+.conditions .condition-card {
+  position: relative;
+  width: 255px;
+  height: 385px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #806050;
+  text-align: center;
+}
+.conditions .condition-card .condition-card-description {
+  text-shadow: 0 0 16px white;
+  background-color: #b0a0a0;
+}
+.conditions .condition-card .condition-card-description p {
+  text-align: center;
+}
+.conditions .condition-card .condition-card-duration {
+  padding: 10px 0 20px;
+  background-color: #c0b0a0;
+  color: white;
+  font-size: 14pt;
+  font-weight: bold;
   font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black, 0 0 8px black;
+}
+.conditions .condition-card .condition-card-header {
+  padding: 20px 0;
+  background: #903030;
+}
+.conditions .condition-card .condition-card-header .condition-card-name {
+  color: white;
+  font: 16pt "Caslon Antique";
+  font-variant-caps: small-caps;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.conditions .condition-card .condition-card-header .condition-card-name:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.conditions .condition-card .item-delete-link {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+.creature-sheet .window-content {
+  padding: 0;
+}
+.creature-sheet .window-content form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+}
+.creature-sheet .window-content form .creature-sheet-body {
+  flex-grow: 1;
+  overflow: auto;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div {
+  display: flex;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes {
+  background-color: #884832;
+  border: solid dimgray;
+  border-radius: 0;
+  border-width: 4px 1rem 0;
+  color: white;
+  padding: 0.25rem 0 0.5rem;
+  text-align: center;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute {
+  flex-grow: 1;
+  margin: 0 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute .attribute-title {
+  font-size: 14pt;
+  font-variant: small-caps;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute .attribute-input-container input {
+  color: white;
+  font-size: 18pt;
+  font-style: italic;
+  padding-top: 0.5rem;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+  width: 2rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute.expertise {
+  color: yellow;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute.expertise input {
+  color: yellow;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics {
+  flex: 1 1 20%;
+  padding: 0 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics > div {
+  align-items: center;
+  display: flex;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics > div > .characteristic-title {
+  margin-right: auto;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics > div .characteristic-value-input {
+  background: lightcyan;
+  border-color: lightsteelblue;
+  border-width: 2px;
+  padding-top: 0.25rem;
+  font-weight: bold;
+  text-align: center;
+  width: 2rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics > div .characteristic-fortune-input {
+  background: white;
+  border-color: dimgray;
+  font-size: 10pt;
+  font-weight: bold;
+  height: 1.25rem;
+  padding-top: 0.25rem;
+  text-align: center;
+  width: 1.25rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-image {
+  flex-basis: 60%;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-ratings {
+  flex: 1 1 20%;
+  padding-left: 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-ratings > div {
+  align-items: center;
+  background-color: #240000;
+  border: solid dimgrey;
+  border-radius: 2rem 0 0 2rem;
+  border-width: 2px 0;
+  display: flex;
+  margin-bottom: 0.25rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-ratings > div > img {
+  border: none;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-ratings > div > input {
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.25rem 0 0 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-ratings > div > input:focus {
+  box-shadow: none;
+  text-shadow: 0 0 5px var(--color-shadow-primary);
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos {
+  flex-grow: 1;
+  padding: 0 1rem 1rem;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-special-rule-summary {
+  flex-grow: 1;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-special-rule-summary > .editor {
+  height: 100%;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-stance {
+  font-size: 16pt;
+  margin: auto 1rem 1rem 0;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-stance.conservative {
+  color: green;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-stance.reckless {
+  color: red;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-actions {
+  overflow: auto;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-action-tabs {
+  border-bottom: 1px solid #b5b3a4;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-action-tabs > * {
+  margin: 0 5px;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .action-container {
+  align-items: center;
+}
+.creature-sheet .window-content form .creature-sheet-category {
+  background-color: #240000;
+  border: solid dimgray;
+  border-radius: 0;
+  border-width: 2px 0;
+  color: white;
+  font-style: italic;
+  padding-top: 0.25rem;
+  text-align: center;
+  width: 100%;
+}
+.creature-sheet .window-content form .creature-sheet-header {
+  background: url(../assets/images/creature-sheet-header.webp) center / 100% 100% no-repeat;
+  flex-wrap: nowrap !important;
+  padding: 0 0.5rem;
+  text-align: center;
+}
+.creature-sheet .window-content form .creature-sheet-header input {
+  background: none;
+  border: none;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.creature-sheet .window-content form .creature-sheet-header input:focus {
+  box-shadow: none;
+  text-shadow: 0 0 5px var(--color-shadow-primary);
+}
+.creature-sheet .window-content form .creature-sheet-header input.creature-sheet-threat-rating {
+  color: white;
+  flex: 0 0 3rem;
+  font-size: 24pt;
+  padding-top: 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-header .creature-sheet-name > input {
+  color: bisque;
+  text-shadow: -1pt -1pt 2pt black, -1pt 0 2pt black, 0 -1pt 2pt black, -1pt 1pt 2pt black, 1pt -1pt 2pt black, 0 1pt 2pt black, 1pt 0 2pt black, 1pt 1pt 2pt black;
+}
+.creature-sheet .window-content form .creature-sheet-header .creature-sheet-wounds {
+  flex: 0 0 3rem;
+}
+.creature-sheet .window-content form .creature-sheet-header .creature-sheet-wounds hr {
+  margin: 0 0 2px;
+}
+.creature-sheet .window-content form .creature-sheet-header .creature-sheet-wounds input {
+  color: white;
+  font-size: 24pt;
+  padding-top: 0.5rem;
 }
 .diseases .disease-card {
   position: relative;
@@ -624,167 +1087,6 @@
   position: absolute;
   bottom: 0;
   right: 5px;
-}
-.dice-additional-flavor {
-  font-style: oblique;
-  font-size: 12px;
-}
-.dice-array {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-.dice-array .dice-rolls {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-.dice-array .dice-rolls .roll {
-  width: 54px;
-  float: left;
-}
-.dice-pool-dialog .convert-buttons {
-  display: flex;
-  margin-bottom: 1rem;
-}
-.dice-pool-dialog .convert-buttons button {
-  font-size: 12px;
-  line-height: 20px;
-  text-align: center;
-}
-.dice-pool-dialog .dice-pool {
-  margin-top: 8px;
-  min-height: 54px;
-  text-align: center;
-}
-.dice-pool-dialog .dice-pool-table {
-  padding: 5px 1px;
-}
-.dice-pool-dialog .dice-pool-table .pool-container > td > * {
-  display: inline-block;
-  vertical-align: middle;
-}
-.dice-pool-dialog .dice-pool-table .pool-value {
-  background-color: #ddd;
-  border: 1px solid black;
-  font: 20pt "ArnoPro";
-  padding-top: 8px;
-  text-align: center;
-  width: 3.5rem;
-}
-.dice-pool-dialog .dice-pool-hint {
-  margin: 10px 1px 5px 1px;
-}
-.dice-pool-dialog .dice-pool-roll-options {
-  margin-top: 10px;
-}
-.dice-pool-dialog .dice-pool-roll-options select,
-.dice-pool-dialog .dice-pool-roll-options input {
-  margin-top: 1px;
-  margin-right: 1px;
-}
-.dice-pool-dialog .hide {
-  display: none;
-}
-.dice-pool-dialog .maximize {
-  width: 100%;
-}
-.dice-pool-dialog .minimize {
-  max-width: 20%;
-}
-.dice-pool-dialog .pool-text {
-  text-align: left;
-  margin-left: 0.5rem;
-}
-.dice-pool-dialog .roll-button {
-  margin-top: 15px;
-}
-.dice-pool-dialog .symbols-pool {
-  margin-top: 10px;
-  min-height: 54px;
-  text-align: center;
-}
-.dice-pool-dialog .symbols-pool-container {
-  padding: 0 1px;
-  min-width: 320px;
-}
-.dice-pool-dialog .symbols-pool-container .pool-value {
-  background-color: #ddd;
-  border: 1px solid black;
-  font: 16pt "ArnoPro";
-  padding-top: 8px;
-  text-align: center;
-  width: 3rem;
-}
-.dice-pool-dialog .symbols-pool-container .wfrp3e.picture {
-  display: inline-block;
-  width: 20px;
-}
-.dice-result .roll-success {
-  color: darkgreen;
-}
-.dice-result .roll-failure {
-  color: darkred;
-}
-.dice-tooltip .dice-rolls .roll > .special-die {
-  width: 44px;
-}
-.item-display {
-  margin: 0.5rem 0 0.8rem 0;
-  padding: 0.5rem;
-  border: 1px solid #782e22;
-  background: rgba(255, 255, 255, 0.75);
-}
-.item-display img {
-  height: 50px;
-  width: auto;
-}
-.item-display h4 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-}
-.item-display h4 input {
-  width: 70%;
-}
-.item-display .item-miss {
-  text-align: center;
-  font-style: italic;
-  color: darkred;
-}
-.item-display .item-pill {
-  list-style-type: none;
-  padding: 0 5px;
-  background-color: #aaa;
-  border: 1px solid black;
-  border-radius: 12px;
-  display: inline-block;
-  margin: 1px;
-  cursor: pointer;
-  font-size: 12px;
-  line-height: 20px;
-  white-space: nowrap;
-}
-.item-display .item-pill.adjusted {
-  color: #8b0000;
-}
-.item-display .item-pill .rank {
-  padding-right: 15px;
-}
-.item-display .item-pill .rank:hover {
-  color: green;
-}
-.item-display .item-pill .item-delete {
-  cursor: pointer;
-}
-.item-display .item-pill .item-delete:hover {
-  color: red;
-}
-.special-die {
-  border: none;
 }
 .insanities .insanity-card {
   position: relative;
@@ -1119,6 +1421,52 @@
   justify-content: space-between;
   margin-left: 0.5rem;
 }
+.dice-additional-flavor {
+  font-size: 10pt;
+  font-style: oblique;
+}
+.dice-array {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.dice-array .dice-rolls {
+  list-style: none;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+.dice-array .dice-rolls .roll {
+  float: left;
+  width: 3.25rem;
+}
+.dice-result .roll-success {
+  color: darkgreen;
+}
+.dice-result .roll-failure {
+  color: darkred;
+}
+.dice-tooltip .dice-rolls .roll > .special-die {
+  width: 44px;
+}
+.roll-effects > h5 {
+  margin: 0;
+}
+.roll-effects .effect-toggle {
+  display: block;
+}
+.roll-effects .effect-toggle.active {
+  margin-right: 1rem;
+  position: relative;
+}
+.roll-effects .effect-toggle.active:after {
+  content: "\f00c";
+  display: inline-block;
+  font-family: var(--fa-style-family, "Font Awesome 6 Pro");
+  left: 100%;
+  position: absolute;
+}
 .talent-card {
   border: 1px solid black;
   border-radius: 10px;
@@ -1208,31 +1556,38 @@
 }
 @font-face {
   font-family: "ArnoPro";
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: normal;
   src: url(../assets/fonts/ArnoPro-Regular.otf) format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
 }
 @font-face {
   font-family: "ArnoPro";
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: bold;
   src: url(../assets/fonts/ArnoPro-Bold.otf) format('opentype');
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
 }
 @font-face {
   font-family: "ArnoPro";
-  src: url(../assets/fonts/ArnoPro-Italic.otf) format('opentype');
+  font-stretch: normal;
+  font-style: italic;
   font-weight: normal;
-  font-style: italic;
-  font-stretch: normal;
+  src: url(../assets/fonts/ArnoPro-Italic.otf) format('opentype');
 }
 @font-face {
   font-family: "ArnoPro";
-  src: url(../assets/fonts/ArnoPro-BoldItalic.otf) format('opentype');
-  font-weight: bold;
-  font-style: italic;
   font-stretch: normal;
+  font-style: italic;
+  font-weight: bold;
+  src: url(../assets/fonts/ArnoPro-BoldItalic.otf) format('opentype');
+}
+@font-face {
+  font-family: "WFRP3eSymbols";
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: normal;
+  src: url(../assets/fonts/WFRP3eSymbols.otf) format('opentype');
 }
 .wounds .wound-card {
   display: flex;
@@ -1308,8 +1663,8 @@ h3.entity-name,
   border: unset !important;
 }
 h4 {
-  margin: auto !important;
   font: 16pt "ArnoPro";
+  margin: auto !important;
 }
 h5 {
   font: 14pt "ArnoPro";
@@ -1318,11 +1673,14 @@ h6 {
   font: 12pt "ArnoPro";
 }
 input[type="checkbox"] {
-  width: 15px;
-  height: 15px;
+  height: 1rem;
+  width: 1rem;
+}
+li.folder > .folder-header h3 {
+  font-size: 16pt;
 }
 td {
-  padding: 4px;
+  padding: 0.25rem;
 }
 td.center-aligned {
   text-align: center;
@@ -1338,7 +1696,7 @@ td.shrinked {
   text-align: center;
 }
 th {
-  padding: 4px !important;
+  padding: 0.25rem !important;
 }
 th.center-aligned {
   text-align: center;
@@ -1354,14 +1712,14 @@ th.shrinked {
   text-align: center;
 }
 .bottom-line {
-  position: absolute;
+  bottom: 0.25rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  bottom: 5px;
-  left: 10px;
-  right: 10px;
+  left: 0.5rem;
   line-height: 0;
+  position: absolute;
+  right: 0.5rem;
 }
 .bottom-line > * {
   display: block;
@@ -1370,75 +1728,116 @@ th.shrinked {
   background-color: green;
 }
 .editor {
+  background: rgba(250, 240, 230, 0.5);
+  border-radius: 0.5rem;
   flex-grow: 1;
   min-height: 75px;
 }
 .face {
   display: none;
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 .face.active {
   display: block;
 }
+.playlists-sidebar h4 {
+  height: auto;
+}
 .reckless-stance-meter {
   background-color: red;
+}
+.sheet .editor-content {
+  margin: 0 0.5rem;
 }
 .sheet .tab.active {
   display: flex !important;
   flex-direction: column;
-  flex-grow: 1;
+  height: 100%;
 }
-.sheet .tab-link.active {
+.special-die {
+  border: none;
+}
+.tab-link.active {
   color: white;
   text-shadow: -1px -1px 0 black, -1px 0 0 black, 0 -1px 0 black, -1px 1px 0 black, 1px -1px 0 black, 0 1px 0 black, 1px 0 0 black, 1px 1px 0 black;
 }
-.wfrp3e.dice {
-  font-family: var(--fa-style-family, "Font Awesome 6 Pro");
-  font-weight: var(--fa-style, 900);
-  text-shadow: -1px -1px 0 black, -1px 0 0 black, 0 -1px 0 black, -1px 1px 0 black, 1px -1px 0 black, 0 1px 0 black, 1px 0 0 black, 1px 1px 0 black;
+.wfrp3e-font {
+  font-family: "WFRP3eSymbols";
 }
-.wfrp3e.dice.challenge {
+.wfrp3e-font.dice {
+  text-shadow: none;
+  -webkit-text-stroke: 1px black;
+}
+.wfrp3e-font.dice.challenge {
   color: purple;
 }
-.wfrp3e.dice.challenge:before {
-  content: "\f219";
+.wfrp3e-font.dice.challenge:before {
+  content: "8";
 }
-.wfrp3e.dice.characteristic {
+.wfrp3e-font.dice.characteristic {
   color: blue;
 }
-.wfrp3e.dice.characteristic:before {
-  content: "\f219";
+.wfrp3e-font.dice.characteristic:before {
+  content: "8";
 }
-.wfrp3e.dice.conservative {
+.wfrp3e-font.dice.conservative {
   color: green;
 }
-.wfrp3e.dice.conservative:before {
-  content: "\f111";
+.wfrp3e-font.dice.conservative:before {
+  content: "0";
 }
-.wfrp3e.dice.expertise {
+.wfrp3e-font.dice.expertise {
   color: yellow;
 }
-.wfrp3e.dice.expertise:before {
-  content: "\f0c8";
+.wfrp3e-font.dice.expertise:before {
+  content: "6";
 }
-.wfrp3e.dice.fortune {
+.wfrp3e-font.dice.fortune {
   color: white;
 }
-.wfrp3e.dice.fortune:before {
-  content: "\f0c8";
+.wfrp3e-font.dice.fortune:before {
+  content: "6";
 }
-.wfrp3e.dice.reckless {
+.wfrp3e-font.dice.reckless {
   color: red;
 }
-.wfrp3e.dice.reckless:before {
-  content: "\f111";
+.wfrp3e-font.dice.reckless:before {
+  content: "0";
 }
-.wfrp3e.dice.misfortune {
+.wfrp3e-font.dice.misfortune {
   color: black;
+  -webkit-text-stroke-width: 0;
 }
-.wfrp3e.dice.misfortune:before {
-  content: "\f0c8";
+.wfrp3e-font.dice.misfortune:before {
+  content: "6";
+}
+.wfrp3e-font.symbol.bane:before {
+  content: "b";
+}
+.wfrp3e-font.symbol.boon:before {
+  content: "B";
+}
+.wfrp3e-font.symbol.challenge:before {
+  content: "c";
+}
+.wfrp3e-font.symbol.chaos-star:before {
+  content: "C";
+}
+.wfrp3e-font.symbol.delay:before {
+  content: "d";
+}
+.wfrp3e-font.symbol.exertion:before {
+  content: "e";
+}
+.wfrp3e-font.symbol.righteous-success:before {
+  content: "r";
+}
+.wfrp3e-font.symbol.sigmars-comet:before {
+  content: "S";
+}
+.wfrp3e-font.symbol.success:before {
+  content: "s";
 }
 #chat-controls .control-buttons {
   flex-basis: 67px;

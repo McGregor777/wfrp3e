@@ -1,0 +1,31 @@
+<div class="roll-effects">
+	<h5>{{localize "ROLL.AvailableEffects"}}</h5>
+
+	<table>
+		<tbody>
+			{{#if (lookup (lookup action.system face) 'special')}}
+				<tr><td>{{{striptags (lookup (lookup action.system face) 'special') 'p'}}}</td></tr>
+			{{/if}}
+			
+			{{#if (lookup (lookup action.system face) 'uniqueEffect')}}
+				<tr><td>{{{striptags (lookup (lookup action.system face) 'uniqueEffect') 'p'}}}</td></tr>
+			{{/if}}
+	
+			{{#each symbols as |symbol sym|}}
+				{{#if (lookup ../effects sym)}}
+					<tr><td>
+						{{#each (lookup ../effects sym) as |effect ef|}}
+							<a class="effect-toggle{{#if effect.active}} active{{/if}}" data-symbol="{{sym}}" data-index="{{@index}}">
+								{{#for 0 effect.symbolAmount 1}}
+									<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+								{{/for}}
+	
+								{{{striptags effect.description 'p'}}}
+							</a>
+						{{/each}}
+					</td></tr>
+				{{/if}}
+			{{/each}}
+		</tbody>
+	</table>
+</div>

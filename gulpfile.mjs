@@ -107,8 +107,8 @@ function cleanPackEntry(data, {clearSourceId= true} = {})
 			}]
 		};
 
-	if(data.system?.attributes?.stance?.current !== undefined)
-		data.system.attributes.stance.current = 0;
+	if(data.system?.stance?.current !== undefined)
+		data.system.stance.current = 0;
 
 	if(data.system?.completed !== undefined)
 		data.system.completed = false;

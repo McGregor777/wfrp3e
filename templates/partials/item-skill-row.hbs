@@ -1,0 +1,21 @@
+<tr class="item skill-row" data-item-id="{{skill._id}}">
+	<td class="left-aligned">
+		<a class="item-name-link skill">{{skill.name}}</a>
+	</td>
+
+	<td class="center-aligned">
+		<span class="skill-characteristic">{{localize (lookup (lookup @root.characteristics skill.system.characteristic) "abbreviation")}}</span>
+	</td>
+
+	<td class="center-aligned">
+		<input class="skill-training-level-input" name="skill.system.training-level" type="checkbox" value="1" data-dtype="Number"{{#if (superiorOrEqualTo skill.system.trainingLevel 1)}} checked{{/if}} />
+		<input class="skill-training-level-input" name="skill.system.training-level" type="checkbox" value="2" data-dtype="Number"{{#if (superiorOrEqualTo skill.system.trainingLevel 2)}} checked{{/if}} />
+		<input class="skill-training-level-input" name="skill.system.training-level" type="checkbox" value="3" data-dtype="Number"{{#if (superiorOrEqualTo skill.system.trainingLevel 3)}} checked{{/if}} />
+	</td>
+
+	{{#if @root.document.isOwner}}
+		<td class="shrinked">
+			<a class="item-delete-link" title="{{localize 'DIALOG.TITLE.DeleteItem'}}"><span class="fas fa-trash"></span></a>
+		</td>
+	{{/if}}
+</tr>

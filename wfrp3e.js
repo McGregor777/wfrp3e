@@ -1,79 +1,118 @@
-import {WFRP3E} from "./modules/config.js";
-import WFRP3EActor from "./modules/actors/WFRP3ECharacter.js"
-import WFRP3EItem from "./modules/items/WFRP3EItem.js"
-import WFRP3ECharacterSheet from "./modules/sheets/actors/WFRP3ECharacterSheet.js";
-import WFRP3ECreatureSheet from "./modules/sheets/actors/WFRP3ECreatureSheet.js";
-import WFRP3EGroupSheet from "./modules/sheets/items/WFRP3EGroupSheet.js";
-import WFRP3EPartySheet from "./modules/sheets/actors/WFRP3EPartySheet.js";
-import WFRP3EAbilitySheet from "./modules/sheets/items/WFRP3EAbilitySheet.js";
-import WFRP3EActionSheet from "./modules/sheets/items/WFRP3EActionSheet.js";
-import WFRP3EArmourSheet from "./modules/sheets/items/WFRP3EArmourSheet.js";
-import WFRP3ECareerSheet from "./modules/sheets/items/WFRP3ECareerSheet.js";
-import WFRP3EConditionSheet from "./modules/sheets/items/WFRP3EConditionSheet.js";
-import WFRP3ECriticalWoundSheet from "./modules/sheets/items/WFRP3ECriticalWoundSheet.js";
-import WFRP3EDiseaseSheet from "./modules/sheets/items/WFRP3EDiseaseSheet.js";
-import WFRP3EInsanitySheet from "./modules/sheets/items/WFRP3EInsanitySheet.js";
-import WFRP3EMiscastSheet from "./modules/sheets/items/WFRP3EMiscastSheet.js";
-import WFRP3EMoneySheet from "./modules/sheets/items/WFRP3EMoneySheet.js";
-import WFRP3EMutationSheet from "./modules/sheets/items/WFRP3EMutationSheet.js";
-import WFRP3ESkillSheet from "./modules/sheets/items/WFRP3ESkillSheet.js";
-import WFRP3ETalentSheet from "./modules/sheets/items/WFRP3ETalentSheet.js";
-import WFRP3EWeaponSheet from "./modules/sheets/items/WFRP3EWeaponSheet.js";
-import WFRP3ETrappingSheet from "./modules/sheets/items/WFRP3ETrappingSheet.js";
-import ChallengeDie from "./modules/dice/dietype/ChallengeDie.js";
-import CharacteristicDie from "./modules/dice/dietype/CharacteristicDie.js";
-import ConservativeDie from "./modules/dice/dietype/ConservativeDie.js";
-import ExpertiseDie from "./modules/dice/dietype/ExpertiseDie.js";
-import FortuneDie from "./modules/dice/dietype/FortuneDie.js";
-import MisfortuneDie from "./modules/dice/dietype/MisfortuneDie.js";
-import RecklessDie from "./modules/dice/dietype/RecklessDie.js";
-import DiceHelper from "./modules/dice/DiceHelper.js";
-import DicePool from "./modules/dice/DicePool.js";
-import WFRP3ERoll from "./modules/dice/WFRP3ERoll.js";
-import PopoutEditor from "./modules/PopoutEditor.js";
+import {WFRP3e} from "./modules/config.js";
+import CheckBuilder from "./modules/applications/CheckBuilder.js";
+import WFRP3eCharacterSheet from "./modules/applications/actors/WFRP3eCharacterSheet.js";
+import WFRP3eCreatureSheet from "./modules/applications/actors/WFRP3eCreatureSheet.js";
+import WFRP3eGroupSheet from "./modules/applications/actors/WFRP3eGroupSheet.js";
+import WFRP3ePartySheet from "./modules/applications/actors/WFRP3ePartySheet.js";
+import WFRP3eAbilitySheet from "./modules/applications/items/WFRP3eAbilitySheet.js";
+import WFRP3eActionSheet from "./modules/applications/items/WFRP3eActionSheet.js";
+import WFRP3eArmourSheet from "./modules/applications/items/WFRP3eArmourSheet.js";
+import WFRP3eCareerSheet from "./modules/applications/items/WFRP3eCareerSheet.js";
+import WFRP3eConditionSheet from "./modules/applications/items/WFRP3eConditionSheet.js";
+import WFRP3eCriticalWoundSheet from "./modules/applications/items/WFRP3eCriticalWoundSheet.js";
+import WFRP3eDiseaseSheet from "./modules/applications/items/WFRP3eDiseaseSheet.js";
+import WFRP3eInsanitySheet from "./modules/applications/items/WFRP3eInsanitySheet.js";
+import WFRP3eMiscastSheet from "./modules/applications/items/WFRP3eMiscastSheet.js";
+import WFRP3eMoneySheet from "./modules/applications/items/WFRP3eMoneySheet.js";
+import WFRP3eMutationSheet from "./modules/applications/items/WFRP3eMutationSheet.js";
+import WFRP3eSkillSheet from "./modules/applications/items/WFRP3eSkillSheet.js";
+import WFRP3eTalentSheet from "./modules/applications/items/WFRP3eTalentSheet.js";
+import WFRP3eTrappingSheet from "./modules/applications/items/WFRP3eTrappingSheet.js";
+import WFRP3eWeaponSheet from "./modules/applications/items/WFRP3eWeaponSheet.js";
+import WFRP3eCharacterDataModel from "./modules/data/actors/WFRP3eCharacterDataModel.js";
+import WFRP3eCreatureDataModel from "./modules/data/actors/WFRP3eCreatureDataModel.js";
+import WFRP3ePartyDataModel from "./modules/data/actors/WFRP3ePartyDataModel.js";
+import WFRP3eAbilityDataModel from "./modules/data/items/WFRP3eAbilityDataModel.js";
+import WFRP3eActionDataModel from "./modules/data/items/WFRP3eActionDataModel.js";
+import WFRP3eArmourDataModel from "./modules/data/items/WFRP3eArmourDataModel.js";
+import WFRP3eCareerDataModel from "./modules/data/items/WFRP3eCareerDataModel.js";
+import WFRP3eConditionDataModel from "./modules/data/items/WFRP3eConditionDataModel.js";
+import WFRP3eCriticalWoundDataModel from "./modules/data/items/WFRP3eCriticalWoundDataModel.js";
+import WFRP3eDiseaseDataModel from "./modules/data/items/WFRP3eDiseaseDataModel.js";
+import WFRP3eInsanityDataModel from "./modules/data/items/WFRP3eInsanityDataModel.js";
+import WFRP3eMiscastDataModel from "./modules/data/items/WFRP3eMiscastDataModel.js";
+import WFRP3eMutationDataModel from "./modules/data/items/WFRP3eMutationDataModel.js";
+import WFRP3eMoneyDataModel from "./modules/data/items/WFRP3eMoneyDataModel.js";
+import WFRP3eSkillDataModel from "./modules/data/items/WFRP3eSkillDataModel.js";
+import WFRP3eTalentDataModel from "./modules/data/items/WFRP3eTalentDataModel.js";
+import WFRP3eTrappingDataModel from "./modules/data/items/WFRP3eTrappingDataModel.js";
+import WFRP3eWeaponDataModel from "./modules/data/items/WFRP3eWeaponDataModel.js";
+import ChallengeDie from "./modules/dice/ChallengeDie.js";
+import CharacteristicDie from "./modules/dice/CharacteristicDie.js";
+import ConservativeDie from "./modules/dice/ConservativeDie.js";
+import ExpertiseDie from "./modules/dice/ExpertiseDie.js";
+import FortuneDie from "./modules/dice/FortuneDie.js";
+import MisfortuneDie from "./modules/dice/MisfortuneDie.js";
+import RecklessDie from "./modules/dice/RecklessDie.js";
+import CheckHelper from "./modules/CheckHelper.js";
+import DicePool from "./modules/DicePool.js";
+import WFRP3eRoll from "./modules/WFRP3eRoll.js";
+import WFRP3eActor from "./modules/documents/WFRP3eActor.js"
+import WFRP3eCombat from "./modules/documents/WFRP3eCombat.js";
+import WFRP3eItem from "./modules/documents/WFRP3eItem.js"
 import * as handlebarsHelpers from "./modules/handlebars.js";
 
 async function preloadHandlebarsTemplates()
 {
-	const templatePaths =
-	[
-		"systems/wfrp3e/templates/partials/attribute-partial.html",
-		"systems/wfrp3e/templates/partials/characteristic-partial.html",
-		"systems/wfrp3e/templates/partials/impairment-partial.html",
-		"systems/wfrp3e/templates/partials/item-ability-card.html",
-		"systems/wfrp3e/templates/partials/item-action-card.html",
-		"systems/wfrp3e/templates/partials/item-armour-row.html",
-		"systems/wfrp3e/templates/partials/item-career-partial.html",
-		"systems/wfrp3e/templates/partials/item-condition-card.html",
-		"systems/wfrp3e/templates/partials/item-disease-card.html",
-		"systems/wfrp3e/templates/partials/item-insanity-card.html",
-		"systems/wfrp3e/templates/partials/item-money-row.html",
-		"systems/wfrp3e/templates/partials/item-mutation-card.html",
-		"systems/wfrp3e/templates/partials/item-miscast-card.html",
-		"systems/wfrp3e/templates/partials/item-skill-row.html",
-		"systems/wfrp3e/templates/partials/item-talent-card.html",
-		"systems/wfrp3e/templates/partials/item-trapping-row.html",
-		"systems/wfrp3e/templates/partials/item-weapon-row.html",
-		"systems/wfrp3e/templates/partials/item-wound-card.html"
+	const templatePaths = [
+		"systems/wfrp3e/templates/chatmessages/action-effects.hbs",
+		"systems/wfrp3e/templates/partials/attribute-partial.hbs",
+		"systems/wfrp3e/templates/partials/characteristic-partial.hbs",
+		"systems/wfrp3e/templates/partials/impairment-partial.hbs",
+		"systems/wfrp3e/templates/partials/item-ability-card.hbs",
+		"systems/wfrp3e/templates/partials/item-action-card.hbs",
+		"systems/wfrp3e/templates/partials/item-armour-row.hbs",
+		"systems/wfrp3e/templates/partials/item-career-partial.hbs",
+		"systems/wfrp3e/templates/partials/item-condition-card.hbs",
+		"systems/wfrp3e/templates/partials/item-disease-card.hbs",
+		"systems/wfrp3e/templates/partials/item-insanity-card.hbs",
+		"systems/wfrp3e/templates/partials/item-money-row.hbs",
+		"systems/wfrp3e/templates/partials/item-mutation-card.hbs",
+		"systems/wfrp3e/templates/partials/item-miscast-card.hbs",
+		"systems/wfrp3e/templates/partials/item-skill-row.hbs",
+		"systems/wfrp3e/templates/partials/item-talent-card.hbs",
+		"systems/wfrp3e/templates/partials/item-trapping-row.hbs",
+		"systems/wfrp3e/templates/partials/item-weapon-row.hbs",
+		"systems/wfrp3e/templates/partials/item-wound-card.hbs"
 	];
 
 	return loadTemplates(templatePaths);
 }
 
-Hooks.once("init", function()
-{
-	console.log("WFRP3E | Initialising Warhammer Fantasy Roleplay - 3rd Edition System");
+Hooks.once("init", () => {
+	console.log("WFRP3e | Initialising Warhammer Fantasy Roleplay - 3rd Edition System");
 
-	game.symbols =
-	{
-		diceterms: [ChallengeDie, CharacteristicDie, ConservativeDie, ExpertiseDie, FortuneDie, MisfortuneDie, RecklessDie],
-	};
+	game.symbols = {diceterms: [ChallengeDie, CharacteristicDie, ConservativeDie, ExpertiseDie, FortuneDie, MisfortuneDie, RecklessDie]};
 
-	CONFIG.WFRP3E = WFRP3E;
-	CONFIG.Actor.documentClass = WFRP3EActor;
-	CONFIG.Item.documentClass = WFRP3EItem;
+	CONFIG.WFRP3e = WFRP3e;
+
+	CONFIG.Actor.dataModels.character = WFRP3eCharacterDataModel;
+	CONFIG.Actor.dataModels.creature = WFRP3eCreatureDataModel;
+	CONFIG.Actor.dataModels.party = WFRP3ePartyDataModel;
+	CONFIG.Actor.documentClass = WFRP3eActor;
+
+	CONFIG.Item.dataModels.ability = WFRP3eAbilityDataModel;
+	CONFIG.Item.dataModels.action = WFRP3eActionDataModel;
+	CONFIG.Item.dataModels.armour = WFRP3eArmourDataModel;
+	CONFIG.Item.dataModels.career = WFRP3eCareerDataModel;
+	CONFIG.Item.dataModels.condition = WFRP3eConditionDataModel;
+	CONFIG.Item.dataModels.criticalWound = WFRP3eCriticalWoundDataModel;
+	CONFIG.Item.dataModels.disease = WFRP3eDiseaseDataModel;
+	CONFIG.Item.dataModels.insanity = WFRP3eInsanityDataModel;
+	CONFIG.Item.dataModels.miscast = WFRP3eMiscastDataModel;
+	CONFIG.Item.dataModels.money = WFRP3eMoneyDataModel;
+	CONFIG.Item.dataModels.mutation = WFRP3eMutationDataModel;
+	CONFIG.Item.dataModels.skill = WFRP3eSkillDataModel;
+	CONFIG.Item.dataModels.talent = WFRP3eTalentDataModel;
+	CONFIG.Item.dataModels.trapping = WFRP3eTrappingDataModel;
+	CONFIG.Item.dataModels.weapon = WFRP3eWeaponDataModel;
+	CONFIG.Item.documentClass = WFRP3eItem;
+
+	CONFIG.Combat.documentClass = WFRP3eCombat;
+
 	CONFIG.Dice.rolls.push(CONFIG.Dice.rolls[0]);
-	CONFIG.Dice.rolls[0] = WFRP3ERoll;
+	CONFIG.Dice.rolls[0] = WFRP3eRoll;
+
 	CONFIG.Dice.terms["h"] = ChallengeDie;
 	CONFIG.Dice.terms["a"] = CharacteristicDie;
 	CONFIG.Dice.terms["o"] = ConservativeDie;
@@ -82,28 +121,39 @@ Hooks.once("init", function()
 	CONFIG.Dice.terms["m"] = MisfortuneDie;
 	CONFIG.Dice.terms["r"] = RecklessDie;
 
+	CONFIG.fontDefinitions["ArnoPro"] = {
+		editor: true,
+		fonts: [
+			{urls: ["systems/wfrp3e/assets/fonts/ArnoPro-Regular.otf"]},
+			{urls: ["systems/wfrp3e/assets/fonts/ArnoPro-Bold.otf"], weight: 700},
+			{urls: ["systems/wfrp3e/assets/fonts/ArnoPro-Italic.otf"], style: "italic"},
+			{urls: ["systems/wfrp3e/assets/fonts/ArnoPro-BoldItalic.otf"], style: "italic", weight: 700}
+		]
+	};
+	CONFIG.fontDefinitions["Caslon Antique"] = {editor: true, fonts: []};
+
 	Actors.unregisterSheet("core", ActorSheet);
-	Actors.registerSheet("WFRP3E", WFRP3ECharacterSheet, {label: "Character Sheet", types: ["character"], makeDefault: true});
-	Actors.registerSheet("WFRP3E", WFRP3EPartySheet, {label: "Party Sheet", types: ["party"], makeDefault: true});
-	Actors.registerSheet("WFRP3E", WFRP3ECreatureSheet, {label: "Creature Sheet", types: ["creature"], makeDefault: true});
-	Actors.registerSheet("WFRP3E", WFRP3EGroupSheet, {label: "Group Sheet", types: ["group"], makeDefault: true});
-	
+	Actors.registerSheet("wfrp3e", WFRP3eCharacterSheet, {label: "Character Sheet", types: ["character"], makeDefault: true});
+	Actors.registerSheet("wfrp3e", WFRP3ePartySheet, {label: "Party Sheet", types: ["party"], makeDefault: true});
+	Actors.registerSheet("wfrp3e", WFRP3eCreatureSheet, {label: "Creature Sheet", types: ["creature"], makeDefault: true});
+	Actors.registerSheet("wfrp3e", WFRP3eGroupSheet, {label: "Group Sheet", types: ["group"], makeDefault: true});
+
 	Items.unregisterSheet("core", ItemSheet);
-	Items.registerSheet("WFRP3E", WFRP3EAbilitySheet, {label: "Ability Sheet", types: ["ability"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3EActionSheet, {label: "Action Sheet", types: ["action"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3EArmourSheet, {label: "Armour Sheet", types: ["armour"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3ECareerSheet, {label: "Career Sheet", types: ["career"], makeDefault: true})
-	Items.registerSheet("WFRP3E", WFRP3EConditionSheet, {label: "Condition Sheet", types: ["condition"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3ECriticalWoundSheet, {label: "Critical Wound Sheet", types: ["criticalWound"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3EDiseaseSheet, {label: "Disease Sheet", types: ["disease"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3EInsanitySheet, {label: "Insanity Sheet", types: ["insanity"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3EMiscastSheet, {label: "Miscast Sheet", types: ["miscast"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3EMoneySheet, {label: "Money Sheet", types: ["money"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3EMutationSheet, {label: "Mutation Sheet", types: ["mutation"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3ESkillSheet, {label: "Skill Sheet", types: ["skill"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3ETalentSheet, {label: "Talent Sheet", types: ["talent"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3EWeaponSheet, {label: "Weapon Sheet", types: ["weapon"], makeDefault: true});
-	Items.registerSheet("WFRP3E", WFRP3ETrappingSheet, {label: "Trapping Sheet", types: ["trapping"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eAbilitySheet, {label: "Ability Sheet", types: ["ability"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eActionSheet, {label: "Action Sheet", types: ["action"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eArmourSheet, {label: "Armour Sheet", types: ["armour"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eCareerSheet, {label: "Career Sheet", types: ["career"], makeDefault: true})
+	Items.registerSheet("wfrp3e", WFRP3eConditionSheet, {label: "Condition Sheet", types: ["condition"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eCriticalWoundSheet, {label: "Critical Wound Sheet", types: ["criticalWound"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eDiseaseSheet, {label: "Disease Sheet", types: ["disease"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eInsanitySheet, {label: "Insanity Sheet", types: ["insanity"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eMiscastSheet, {label: "Miscast Sheet", types: ["miscast"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eMoneySheet, {label: "Money Sheet", types: ["money"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eMutationSheet, {label: "Mutation Sheet", types: ["mutation"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eSkillSheet, {label: "Skill Sheet", types: ["skill"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eTalentSheet, {label: "Talent Sheet", types: ["talent"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eWeaponSheet, {label: "Weapon Sheet", types: ["weapon"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eTrappingSheet, {label: "Trapping Sheet", types: ["trapping"], makeDefault: true});
 
 	preloadHandlebarsTemplates();
 });
@@ -112,9 +162,14 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
 	const chatControls = html.find("#chat-controls > .control-buttons");
 
 	if(chatControls.length > 0) {
-		chatControls.prepend('<a class="wfrp3e-dice-roller" role="button" data-tooltip="' + game.i18n.localize("ROLL.FreeCheck") +' "><img src="systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp"></a>');
-		html.find("#chat-controls > .control-buttons > .wfrp3e-dice-roller").click(() => {
-			DiceHelper.displayCheckDialog(null, new DicePool(), game.i18n.localize("ROLL.DicePool"), game.i18n.localize("ROLL.FreeCheck"), null, null);
+		chatControls.prepend(
+			'<a class="wfrp3e-dice-roller" role="button" data-tooltip="' + game.i18n.localize("ROLL.FreeCheck") +' ">' +
+			'	<img src="systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp" alt="' + game.i18n.localize("ROLL.FreeCheck") + '"/>' +
+			'</a>'
+		);
+
+		html.find("#chat-controls > .control-buttons > .wfrp3e-dice-roller").click(async () => {
+			await new CheckBuilder().render(true);
 		});
 	}
 });
@@ -122,8 +177,6 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
 // Update chat messages with dice images
 Hooks.on("renderChatMessage", (app, html, messageData) => {
 	const content = html.find(".message-content");
-
-	content[0].innerHTML = PopoutEditor.renderImages(content[0].innerHTML);
 
 	html.on("click", ".special-pool-to-player", () => {
 		const poolData = messageData.message.flags.wfrp3e;
@@ -135,21 +188,168 @@ Hooks.on("renderChatMessage", (app, html, messageData) => {
 	html.find(".item-display .item-pill, .item-properties .item-pill").on("click", async (event) => {
 		event.preventDefault();
 		event.stopPropagation();
+
 		const li = event.currentTarget;
 		let uuid = li.dataset.itemId;
 		let modifierId = li.dataset.modifierId;
 		let modifierType = li.dataset.modifierType;
 
-		if (li.dataset.uuid) {
+		if(li.dataset.uuid)
 			uuid = li.dataset.uuid;
-		}
 
 		const parts = uuid.split(".");
-
 		const [entityName, entityId, embeddedName, embeddedId] = parts;
 
 		await EmbeddedItemHelpers.displayOwnedItemItemModifiersAsJournal(embeddedId, modifierType, modifierId, entityId);
 	});
+
+	html.find(".roll-effects .effect-toggle").click((event) => {
+		event.stopPropagation();
+
+		CheckHelper.toggleEffect(
+			$(event.currentTarget).parents(".chat-message").data("messageId"),
+			event.currentTarget.dataset.symbol,
+			event.currentTarget.dataset.index
+		);
+	});
+});
+
+// Register all WFRP3e special dice for Dice So Nice! support.
+Hooks.once('diceSoNiceReady', (dice3d) => {
+	dice3d.addSystem({id: "wfrp3e", name: "Warhammer Fantasy Roleplay - 3rd Edition"}, "preferred");
+
+	// Characteristic Dice.
+	dice3d.addDicePreset({
+		type: "da",
+		labels: ["", "", "s", "s", "s", "s", "B", "B"],
+		system: "wfrp3e",
+		colorset: "characteristic"
+	}, "d10");
+	dice3d.addColorset({
+		name: "characteristic",
+		description: "WFRP3e/Characteristic Dice",
+		category: "Warhammer Fantasy Roleplay - 3rd Edition",
+		foreground: "#FFFFFF",
+		background: "#4040FF",
+		outline: "#000000",
+		material: "plastic",
+		font: "WFRP3eSymbols",
+		visibility: 'hidden'
+	}, "preferred");
+
+	// Fortune Dice.
+	dice3d.addDicePreset({
+		type: "df",
+		labels: ["", "", "", "s", "s", "B"],
+		system: "wfrp3e",
+		colorset: "fortune"
+	}, "d6");
+	dice3d.addColorset({
+		name: "fortune",
+		description: "WFRP3e/Fortune Dice",
+		category: "Warhammer Fantasy Roleplay - 3rd Edition",
+		foreground: "#000000",
+		background: "#FFFFFF",
+		outline: "#FFFFFF",
+		material: "plastic",
+		font: "WFRP3eSymbols",
+		visibility: 'hidden'
+	}, "preferred");
+
+	// Expertise Dice.
+	dice3d.addDicePreset({
+		type: "de",
+		labels: ["", "s", "r", "B", "B", "S"],
+		system: "wfrp3e",
+		colorset: "expertise",
+	}, "d6");
+	dice3d.addColorset({
+		name: "expertise",
+		description: "WFRP3e/Expertise Dice",
+		category: "Warhammer Fantasy Roleplay - 3rd Edition",
+		foreground: "#000000",
+		background: "#FFFF00",
+		outline: "#FFFFFF",
+		material: "plastic",
+		font: "WFRP3eSymbols",
+		visibility: 'hidden'
+	}, "preferred");
+
+	// Conservative Dice.
+	dice3d.addDicePreset({
+		type: "do",
+		labels: ["", "s", "s", "s", "s", "B", "B", "s\nB", "s\nd", "s\nd"],
+		system: "wfrp3e",
+		colorset: "conservative"
+	}, "d10");
+	dice3d.addColorset({
+		name: "conservative",
+		description: "WFRP3e/Conservative Dice",
+		category: "Warhammer Fantasy Roleplay - 3rd Edition",
+		foreground: "#FFFFFF",
+		background: "#008000",
+		outline: "#000000",
+		material: "plastic",
+		font: "WFRP3eSymbols",
+		visibility: 'hidden'
+	}, "preferred");
+
+	// Reckless Dice.
+	dice3d.addDicePreset({
+		type: "dr",
+		labels: ["", "", "s\ns", "s\ns", "s\nB", "B\nB", "b", "b", "s\ne", "s\ne"],
+		system: "wfrp3e",
+		colorset: "reckless"
+	}, "d10");
+	dice3d.addColorset({
+		name: "reckless",
+		description: "WFRP3e/Reckless Dice",
+		category: "Warhammer Fantasy Roleplay - 3rd Edition",
+		foreground: "#FFFFFF",
+		background: "#C00000",
+		outline: "#000000",
+		material: "plastic",
+		font: "WFRP3eSymbols",
+		visibility: 'hidden'
+	}, "preferred");
+
+	// Challenge Dice.
+	dice3d.addDicePreset({
+		type: "dh",
+		labels: ["", "c", "c", "c\nc", "c\nc", "b", "b\nb", "C"],
+		system: "wfrp3e",
+		colorset: "challenge"
+	}, "d10");
+	dice3d.addColorset({
+		name: "challenge",
+		description: "WFRP3e/Challenge Dice",
+		category: "Warhammer Fantasy Roleplay - 3rd Edition",
+		foreground: "#FFFFFF",
+		background: "#800080",
+		outline: "#000000",
+		material: "plastic",
+		font: "WFRP3eSymbols",
+		visibility: 'hidden'
+	}, "preferred");
+
+	// Misfortune Dice.
+	dice3d.addDicePreset({
+		type: "dm",
+		labels: ["", "", "", "c", "c", "b"],
+		system: "wfrp3e",
+		colorset: "misfortune",
+	}, "d6");
+	dice3d.addColorset({
+		name: "misfortune",
+		description: "WFRP3e/Misfortune Dice",
+		category: "Warhammer Fantasy Roleplay - 3rd Edition",
+		foreground: "#FFFFFF",
+		background: "#000000",
+		outline: "#000000",
+		material: "plastic",
+		font: "WFRP3eSymbols",
+		visibility: 'hidden'
+	}, "preferred");
 });
 
 handlebarsHelpers.default();

@@ -2,14 +2,16 @@
 @import "components/action_sheet";
 @import "components/career_sheet";
 @import "components/career_edit_sheet";
-@import "components/condition_card";
 @import "components/character_sheet";
+@import "components/check_builder";
+@import "components/condition_card";
+@import "components/creature_sheet";
 @import "components/disease_card";
-@import "components/dicepool";
 @import "components/insanity_card";
 @import "components/miscast_card";
 @import "components/mutation_card";
 @import "components/party_sheet";
+@import "components/roll_message";
 @import "components/talent_card";
 @import "components/typography";
 @import "components/wound_card";
@@ -36,8 +38,8 @@ h3 {
 }
 
 h4 {
-	margin: auto !important;
 	font: 16pt @font-primary;
+	margin: auto !important;
 }
 
 h5 {
@@ -49,18 +51,22 @@ h6 {
 }
 
 input[type="checkbox"] {
-	width: 15px;
-	height: 15px;
+	height: 1rem;
+	width: 1rem;
+}
+
+li.folder > .folder-header h3 {
+	font-size: 16pt;
 }
 
 td {
-	padding: 4px;
+	padding: 0.25rem;
 
 	&.center-aligned {
 		text-align: center;
 	}
 
-	&.left-aligned {
+	&.left-aligned{
 		text-align: left;
 	}
 
@@ -75,7 +81,7 @@ td {
 }
 
 th {
-	padding: 4px !important;
+	padding: 0.25rem !important;
 
 	&.center-aligned {
 		text-align: center;
@@ -96,14 +102,14 @@ th {
 }
 
 .bottom-line {
-	position: absolute;
+	bottom: 0.25rem;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	bottom: 5px;
-	left: 10px;
-	right: 10px;
+	left: 0.5rem;
 	line-height: 0;
+	position: absolute;
+	right: 0.5rem;
 
 	& > * {
 		display: block;
@@ -115,18 +121,24 @@ th {
 }
 
 .editor {
+	background: rgba(250, 240, 230, 0.5);
+	border-radius: 0.5rem;
 	flex-grow: 1;
 	min-height: 75px;
 }
 
 & .face {
 	display: none;
-	width: 100%;
 	height: 100%;
+	width: 100%;
 
 	&.active {
 		display: block;
 	}
+}
+
+.playlists-sidebar h4 {
+	height: auto;
 }
 
 .reckless-stance-meter {
@@ -134,45 +146,48 @@ th {
 }
 
 .sheet {
-	& .tab.active {
-		display: flex !important;
-		flex-direction: column;
-		flex-grow: 1;
+	& .editor-content {
+		margin: 0 0.5rem;
 	}
 
-	& .tab-link.active {
-		color: white;
-		text-shadow:
-			-1px -1px 0 black,
-			-1px 0 0 black,
-			0 -1px 0 black,
-			-1px 1px 0 black,
-			1px -1px 0 black,
-			0 1px 0 black,
-			1px 0 0 black,
-			1px 1px 0 black;
+	& .tab {
+		&.active {
+			display: flex !important;
+			flex-direction: column;
+			height: 100%;
+		}
 	}
 }
 
-.wfrp3e {
+.special-die {
+	border: none;
+}
+
+.tab-link.active {
+	color: white;
+	text-shadow:
+		-1px -1px 0 black,
+		-1px 0 0 black,
+		0 -1px 0 black,
+		-1px 1px 0 black,
+		1px -1px 0 black,
+		0 1px 0 black,
+		1px 0 0 black,
+		1px 1px 0 black;
+}
+
+.wfrp3e-font {
+	font-family: @font-symbols;
+
 	&.dice {
-		font-family: var(--fa-style-family, "Font Awesome 6 Pro");
-		font-weight: var(--fa-style,900);
-		text-shadow:
-			-1px -1px 0 black,
-			-1px 0 0 black,
-			0 -1px 0 black,
-			-1px 1px 0 black,
-			1px -1px 0 black,
-			0 1px 0 black,
-			1px 0 0 black,
-			1px 1px 0 black;
+		text-shadow: none;
+		-webkit-text-stroke: 1px black;
 
 		&.challenge {
 			color: purple;
 
 			&:before {
-				content: "\f219";
+				content: "8";
 			}
 		}
 
@@ -180,7 +195,7 @@ th {
 			color: blue;
 
 			&:before {
-				content: "\f219";
+				content: "8";
 			}
 		}
 
@@ -188,7 +203,7 @@ th {
 			color: green;
 
 			&:before {
-				content: "\f111";
+				content: "0";
 			}
 		}
 
@@ -196,7 +211,7 @@ th {
 			color: yellow;
 
 			&:before {
-				content: "\f0c8";
+				content: "6";
 			}
 		}
 
@@ -204,7 +219,7 @@ th {
 			color: white;
 
 			&:before {
-				content: "\f0c8";
+				content: "6";
 			}
 		}
 
@@ -212,16 +227,55 @@ th {
 			color: red;
 
 			&:before {
-				content: "\f111";
+				content: "0";
 			}
 		}
 
 		&.misfortune {
 			color: black;
+			-webkit-text-stroke-width: 0;
 
 			&:before {
-				content: "\f0c8";
+				content: "6";
 			}
+		}
+	}
+
+	&.symbol {
+		&.bane:before {
+			content: "b";
+		}
+
+		&.boon:before {
+			content: "B";
+		}
+
+		&.challenge:before {
+			content: "c";
+		}
+
+		&.chaos-star:before {
+			content: "C";
+		}
+
+		&.delay:before {
+			content: "d";
+		}
+
+		&.exertion:before {
+			content: "e";
+		}
+
+		&.righteous-success:before {
+			content: "r";
+		}
+
+		&.sigmars-comet:before {
+			content: "S";
+		}
+
+		&.success:before {
+			content: "s";
 		}
 	}
 }

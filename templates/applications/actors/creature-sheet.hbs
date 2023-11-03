@@ -1,0 +1,169 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<header class="creature-sheet-header sheet-header">
+		<input class="creature-sheet-threat-rating" name="system.threatRating" type="number" value="{{actor.system.threatRating}}" placeholder="{{localize 'CREATURE.ThreatRating'}}" />
+
+		<h1 class="creature-sheet-name">
+			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'CREATURE.Name'}}"/>
+		</h1>
+
+		<div class="creature-sheet-wounds">
+			<input name="system.wounds.value" type="number" value="{{actor.system.wounds.value}}" placeholder="{{localize 'CREATURE.WoundsValue'}}" />
+			<hr />
+			<input name="system.wounds.max" type="number" value="{{actor.system.wounds.max}}" placeholder="{{localize 'CREATURE.WoundsThreshold'}}" />
+		</div>
+	</header>
+
+	<input class="creature-sheet-category" name="system.category" type="text" value="{{actor.system.category}}" placeholder="{{localize 'CREATURE.Category'}}" />
+
+	<nav class="creature-sheet-tabs sheet-tabs tabs" data-group="primary">
+		<a class="tab-link main-tab-link" data-tab="main">{{localize 'CREATURE.Main'}}</a>
+		<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CREATURE.Actions'}}</a>
+		<a class="tab-link details-tab-link" data-tab="details">{{localize 'CREATURE.Details'}}</a>
+	</nav>
+
+	<div class="creature-sheet-body">
+		<section class="creature-sheet-main-tab tab" data-group="primary" data-tab="main">
+			<div class="creature-sheet-main-infos">
+				<div class="creature-sheet-characteristics">
+					{{#each actor.system.characteristics as |characteristic char|}}
+						<div class="characteristic">
+							<span class="characteristic-title" title="{{localize (lookup (lookup @root.characteristics char) "name")}}">
+								{{localize (lookup (lookup @root.characteristics char) "abbreviation")}}
+							</span>
+
+							<input class="characteristic-value-input"
+								   name="system.characteristics.{{char}}.value"
+								   type="number"
+								   value="{{characteristic.value}}"
+								   placeholder="{{localize (lookup (lookup @root.characteristics char) 'abbreviation')}}"
+								   data-dtype="Number" />
+
+							<input class="characteristic-fortune-input"
+								   name="system.characteristics.{{char}}.fortune"
+								   type="number"
+								   value="{{characteristic.fortune}}"
+								   placeholder="{{localize 'CHARACTER.Fortune'}}"
+								   data-dtype="Number" />
+						</div>
+					{{/each}}
+				</div>
+
+				<div class="creature-sheet-image">
+					<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+				</div>
+
+				<div class="creature-sheet-ratings">
+					<div class="damage-rating">
+						<img class="damage-rating-icon"
+							 src="systems/wfrp3e/assets/images/damage-rating.webp"
+							 title="{{localize 'CREATURE.DamageRating'}}"
+							 alt="{{localize 'CREATURE.ABBREVIATION.DamageRating'}}"/>
+
+						<input class="damage-rating-input"
+							   name="system.damageRating"
+							   type="number"
+							   value="{{actor.system.damageRating}}"
+							   placeholder="{{localize 'CREATURE.ABBREVIATION.DamageRating'}}"
+							   data-dtype="Number" />
+					</div>
+
+					<div class="soak-value">
+						<img class="soak-value-icon"
+							 src="systems/wfrp3e/assets/images/soak-value.webp"
+							 title="{{localize 'CREATURE.SoakValue'}}"
+							 alt="{{localize 'CREATURE.ABBREVIATION.SoakValue'}}"/>
+
+						<input class="soak-value-input"
+							   name="system.soakValue"
+							   type="number"
+							   value="{{actor.system.soakValue}}"
+							   placeholder="{{localize 'CREATURE.ABBREVIATION.SoakValue'}}"
+							   data-dtype="Number" />
+					</div>
+
+					<div class="defence-value">
+						<img class="defence-value-icon"
+							 src="systems/wfrp3e/assets/images/defence-value.webp"
+							 title="{{localize 'CREATURE.DefenceValue'}}"
+							 alt="{{localize 'CREATURE.ABBREVIATION.DefenceValue'}}"/>
+
+						<input class="defence-value-input"
+							   name="system.defenceValue"
+							   type="number"
+							   value="{{actor.system.defenceValue}}"
+							   placeholder="{{localize 'CREATURE.ABBREVIATION.DefenceValue'}}"
+							   data-dtype="Number" />
+					</div>
+				</div>
+			</div>
+
+			<div class="creature-sheet-secondary-infos">
+				<a title="{{localize 'CREATURE.Stance'}}" class="creature-sheet-stance
+					{{#if (inferiorTo actor.system.stance 0)}}
+						reckless">R{{abs actor.system.stance}}
+					{{else}}
+						{{#if (superiorTo actor.system.stance 0)}}
+							conservative">C{{actor.system.stance}}
+						{{else}}
+							">N/A
+						{{/if}}
+					{{/if}}
+				</a>
+
+				<div class="creature-sheet-special-rule-summary">
+				{{editor actor.system.specialRuleSummary target="system.specialRuleSummary" button=true owner=owner editable=editable}}
+			</div>
+			</div>
+
+			<div class="creature-sheet-attributes">
+				{{#each actor.system.attributes as |attribute attr|}}
+					<div class="attribute {{attr}}">
+						<span class="attribute-title">{{localize (lookup (lookup @root.attributes attr) "name")}}</span>
+
+						<div class="attribute-input-container">
+							<input class="attribute-budget-input"
+								   name="system.attributes.{{attr}}.current"
+								   type="number"
+								   value="{{attribute.current}}"
+								   placeholder="{{localize 'CREATURE.Current'}}"
+								   data-dtype="Number" />
+							<span>/</span>
+							<input class="attribute-budget-input"
+								   name="system.attributes.{{attr}}.budget"
+								   type="number"
+								   value="{{attribute.budget}}"
+								   placeholder="{{localize (lookup (lookup @root.attributes attr) 'abbreviation')}}"
+								   data-dtype="Number" />
+						</div>
+					</div>
+				{{/each}}
+			</div>
+		</section>
+
+		<section class="creature-sheet-actions-tab tab" data-group="primary" data-tab="actions">
+			<div class="creature-sheet-action-tabs sheet-tabs" data-group="actions">
+				{{#each actionTypes as |type ty|}}
+					{{#if (lookup @root.items.actions ty)}}
+						<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
+					{{/if}}
+				{{/each}}
+			</div>
+
+			<div class="creature-sheet-actions">
+				{{#each actionTypes as |type ty|}}
+					{{#if (lookup @root.items.actions ty)}}
+						<div class="action-container tab {{ty}} item-container" data-group="actions" data-tab="{{ty}}">
+							{{#each (lookup @root.items.actions ty) as |action act|}}
+								{{>systems/wfrp3e/templates/partials/item-action-card.hbs action=action}}
+							{{/each}}
+						</div>
+					{{/if}}
+				{{/each}}
+			</div>
+		</section>
+
+		<section class="creature-sheet-detail-tab tab" data-group="primary" data-tab="details">
+			{{editor actor.system.description target="system.description" button=true owner=owner editable=editable}}
+		</section>
+	</div>
+</form>

@@ -1,0 +1,39 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<header class="sheet-header">
+		<img class="actor-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+		<h1><input class="name-input" name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+	</header>
+
+	<section class="sheet-body">
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'ARMOUR.Defence'}}</label>
+			<input class="sheet-form-input" name="system.defenceValue" type="number" value="{{item.system.defenceValue}}" placeholder="{{localize 'ARMOUR.Defence'}}" data-dtype="Number" />
+		</div>
+
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'ARMOUR.Soak'}}</label>
+			<input class="sheet-form-input" name="system.soakValue" type="number" value="{{item.system.soakValue}}" placeholder="{{localize 'ARMOUR.Soak'}}" data-dtype="Number" />
+		</div>
+
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'TRAPPING.Cost'}}</label>
+			<input class="sheet-form-input" name="system.cost.brass" type="number" value="{{item.system.cost.brass}}" placeholder="{{localize 'TRAPPING.Brass'}}" data-dtype="Number" />
+			<input class="sheet-form-input" name="system.cost.silver" type="number" value="{{item.system.cost.silver}}" placeholder="{{localize 'TRAPPING.Silver'}}" data-dtype="Number" />
+			<input class="sheet-form-input" name="system.cost.gold" type="number" value="{{item.system.cost.gold}}" placeholder="{{localize 'TRAPPING.Gold'}}" data-dtype="Number" />
+		</div>
+
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'TRAPPING.Encumbrance'}}</label>
+			<input class="sheet-form-input" name="system.encumbrance" type="number" value="{{item.system.encumbrance}}" placeholder="{{localize 'TRAPPING.Enc'}}" data-dtype="Number" />
+		</div>
+
+		<div class="sheet-form-div">
+			<label class="sheet-form-label">{{localize 'TRAPPING.Rarity'}}</label>
+			<select class="sheet-form-select" name="system.rarity" data-dtype="String">
+				{{selectOptions rarities selected=item.system.rarity localize=true}}
+			</select>
+		</div>
+
+		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
+	</section>
+</form>
