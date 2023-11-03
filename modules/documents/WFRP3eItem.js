@@ -1,4 +1,4 @@
-import CheckHelper from "../dice/CheckHelper.js";
+import CheckHelper from "../CheckHelper.js";
 
 export default class WFRP3eItem extends Item
 {

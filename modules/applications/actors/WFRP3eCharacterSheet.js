@@ -10,7 +10,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		return mergeObject(super.defaultOptions,
 		{
-			template: "systems/wfrp3e/templates/character-sheet.hbs",
+			template: "systems/wfrp3e/templates/applications/actors/character-sheet.hbs",
 			width: 932,
 			height: 800,
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],

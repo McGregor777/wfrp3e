@@ -59,10 +59,10 @@
 										{{/if}}
 									{{/if}}
 
-                                    {{#for 0 (lookup @root.data.remainingSymbols symbol.plural) 1}}
-                                        <span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
-                                    {{/for}}
-                                </li>
+									{{#for 0 (lookup @root.data.remainingSymbols symbol.plural) 1}}
+										<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+									{{/for}}
+								</li>
 							{{/unless}}
 						{{/if}}
 					{{/each}}

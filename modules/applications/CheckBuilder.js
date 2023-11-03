@@ -1,5 +1,5 @@
-import DicePool from "./DicePool.js";
-import WFRP3eRoll from "./WFRP3eRoll.js";
+import DicePool from "../DicePool.js";
+import WFRP3eRoll from "../WFRP3eRoll.js";
 
 /** @inheritDoc */
 export default class CheckBuilder extends FormApplication

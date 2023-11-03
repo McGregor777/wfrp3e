@@ -4,7 +4,7 @@ export default class WFRP3eAbilitySheet extends ItemSheet
 	{
 		return mergeObject(super.defaultOptions,
 		{
-			template: "systems/wfrp3e/templates/ability-sheet.hbs",
+			template: "systems/wfrp3e/templates/applications/items/ability-sheet.hbs",
 			//width: 530,
 			height: 300,
 			classes: ["wfrp3e", "sheet", "item", "ability", "ability-item-sheet"]

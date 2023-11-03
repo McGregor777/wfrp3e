@@ -1,13 +1,13 @@
-export default class WFRP3eArmourSheet extends ItemSheet
+export default class WFRP3eTrappingSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
 		return mergeObject(super.defaultOptions,
 		{
-			template: "systems/wfrp3e/templates/armour-sheet.hbs",
+			template: "systems/wfrp3e/templates/applications/items/trapping-sheet.hbs",
 			//width: 530,
 			//height: 340,
-			classes: ["wfrp3e", "sheet", "item", "armour", "armour-item-sheet"]
+			classes: ["wfrp3e", "sheet", "item", "trapping", "trapping-item-sheet"]
 		});
 	}
 

@@ -1,4 +1,4 @@
-import CheckBuilder from "./CheckBuilder.js";
+import CheckBuilder from "./applications/CheckBuilder.js";
 import DicePool from "./DicePool.js";
 
 /**
@@ -7,7 +7,7 @@ import DicePool from "./DicePool.js";
 export default class CheckHelper
 {
 	/**
-	 * Rolls a Skill check.
+	 * Prepares a Skill check then opens the CheckBuilder dialog afterwards.
 	 * @param {WFRP3eActor} actor The Character using the Action.
 	 * @param {WFRP3eItem} skill The Skill check has been triggered.
 	 * @param {string} [rollFlavor] Some flavor text to add to the Skill check's outcome description.
@@ -35,7 +35,7 @@ export default class CheckHelper
 	}
 
 	/**
-	 * Rolls an Action check.
+	 * Prepares an Action check then opens the CheckBuilder dialog afterwards.
 	 * @param {WFRP3eActor} actor The Character using the Action.
 	 * @param {WFRP3eItem} action The Action that is used.
 	 * @param {string} face The Action face.
@@ -89,6 +89,25 @@ export default class CheckHelper
 			options.rollFlavor,
 			options.rollSound
 		).render(true);
+	}
+
+	/**
+	 * Prepares an initiative check.
+	 * @param {WFRP3eActor} actor The Character making the initiative check.
+	 * @param {string} characteristicName The Characteristic used for the initiative check.
+	 * @returns {Promise<DicePool>}
+	 */
+	static async prepareInitiativeCheck(actor, characteristicName)
+	{
+		const characteristic = actor.system.characteristics[characteristicName];
+		const stance = actor.system.stance.current;
+
+		return new DicePool({
+			characteristicDice: characteristic.value - Math.abs(stance),
+			fortuneDice: characteristic.fortune,
+			conservativeDice: stance > 0 ? stance : 0,
+			recklessDice: stance < 0 ? Math.abs(stance) : 0
+		});
 	}
 
 	/**

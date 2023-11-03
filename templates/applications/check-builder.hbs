@@ -1,10 +1,25 @@
 <form>
 	<div class="main-options">
+		{{#if encounterTypes}}
+			<div class="encounter-type-select">
+				<span>{{localize "ROLL.CHECKBUILDER.EncounterType"}}</span>
+
+				{{#each encounterTypes as |encounter enc|}}
+					<div class="encounter-type">
+						<label>
+							{{localize (concat "ENCOUNTER." (capitalize enc))}}
+							<input name="encounterType" value="enc" type="radio" />
+						</label>
+					</div>
+				{{/each}}
+			</div>
+		{{/if}}
+		
 		<div class="dice-pool"></div>
 		<div class="symbols-pool"></div>
 	
 		<p class="dice-pool-hint">
-			<em>{{localize 'ROLL.CHECKBUILDER.Hint'}}</em>
+			<em>{{localize "ROLL.CHECKBUILDER.Hint"}}</em>
 		</p>
 	
 		<div class="dice-pool-table">
@@ -12,14 +27,14 @@
 				<div class="pool-container">
 					<img class="pool-picture special-die" src="{{die}}" width="43" height="43" alt="{{capitalize d}} die"/>
 					<input class="pool-value" type="button" name="{{d}}Dice" min="0" />
-					<label class="pool-text" for="{{d}}Dice">{{localize (concat (concat 'ROLL.DIE.' (capitalize d)) 'Dice')}}</label>
+					<label class="pool-text" for="{{d}}Dice">{{localize (concat (concat "ROLL.DIE." (capitalize d)) "Dice")}}</label>
 				</div>
 			{{/each}}
 		</div>
 	
 		<div class="convert-buttons">
-			<button class="convert-conservative">{{localize 'ROLL.CHECKBUILDER.ConvertConservative'}}</button>
-			<button class="convert-reckless">{{localize 'ROLL.CHECKBUILDER.ConvertReckless'}}</button>
+			<button class="convert-conservative">{{localize "ROLL.CHECKBUILDER.ConvertConservative"}}</button>
+			<button class="convert-reckless">{{localize "ROLL.CHECKBUILDER.ConvertReckless"}}</button>
 		</div>
 
 		{{#if attributes}}
@@ -34,7 +49,7 @@
 		{{/if}}
 	
 		<details>
-			<summary>{{localize 'ROLL.CHECKBUILDER.StartingResults'}}</summary>
+			<summary>{{localize "ROLL.CHECKBUILDER.StartingResults"}}</summary>
 	
 			<table class="symbols-pool-container">
 				<tr>
@@ -42,7 +57,7 @@
 						<div class="pool-container">
 							<span class="wfrp3e-font symbol success"></span>
 							<input class="pool-value" type="button" name="successes" min="0" />
-							<label class="pool-text" for="successes">{{localize 'ROLL.SYMBOL.Successes'}}</label>
+							<label class="pool-text" for="successes">{{localize "ROLL.SYMBOL.Successes"}}</label>
 						</div>
 					</td>
 	
@@ -50,7 +65,7 @@
 						<div class="pool-container">
 							<span class="wfrp3e-font symbol challenge"></span>
 							<input class="pool-value" type="button" name="challenges" min="0" />
-							<label class="pool-text" for="challenges">{{localize 'ROLL.SYMBOL.Challenges'}}</label>
+							<label class="pool-text" for="challenges">{{localize "ROLL.SYMBOL.Challenges"}}</label>
 						</div>
 					</td>
 				</tr>
@@ -59,7 +74,7 @@
 						<div class="pool-container">
 							<span class="wfrp3e-font symbol boon"></span>
 							<input class="pool-value" type="button" name="boons" min="0" />
-							<label class="pool-text" for="boons">{{localize 'ROLL.SYMBOL.Boons'}}</label>
+							<label class="pool-text" for="boons">{{localize "ROLL.SYMBOL.Boons"}}</label>
 						</div>
 					</td>
 	
@@ -67,7 +82,7 @@
 						<div class="pool-container">
 							<span class="wfrp3e-font symbol bane"></span>
 							<input class="pool-value" type="button" name="banes" min="0" />
-							<label class="pool-text" for="banes">{{localize 'ROLL.SYMBOL.Banes'}}</label>
+							<label class="pool-text" for="banes">{{localize "ROLL.SYMBOL.Banes"}}</label>
 						</div>
 					</td>
 				</tr>
@@ -76,7 +91,7 @@
 						<div class="pool-container">
 							<span class="wfrp3e-font symbol delay"></span>
 							<input class="pool-value" type="button" name="delays" min="0" />
-							<label class="pool-text" for="delays">{{localize 'ROLL.SYMBOL.Delays'}}</label>
+							<label class="pool-text" for="delays">{{localize "ROLL.SYMBOL.Delays"}}</label>
 						</div>
 					</td>
 	
@@ -84,7 +99,7 @@
 						<div class="pool-container">
 							<span class="wfrp3e-font symbol exertion"></span>
 							<input class="pool-value" type="button" name="exertions" min="0" />
-							<label class="pool-text" for="exertions">{{localize 'ROLL.SYMBOL.Exertions'}}</label>
+							<label class="pool-text" for="exertions">{{localize "ROLL.SYMBOL.Exertions"}}</label>
 						</div>
 					</td>
 				</tr>
@@ -93,7 +108,7 @@
 						<div class="pool-container">
 							<span class="wfrp3e-font symbol sigmars-comet"></span>
 							<input class="pool-value" type="button" name="sigmarsComets" min="0" />
-							<label class="pool-text" for="sigmarsComets">{{localize 'ROLL.SYMBOL.SigmarsComets'}}</label>
+							<label class="pool-text" for="sigmarsComets">{{localize "ROLL.SYMBOL.SigmarsComets"}}</label>
 						</div>
 					</td>
 	
@@ -101,7 +116,7 @@
 						<div class="pool-container">
 							<span class="wfrp3e-font symbol chaos-star"></span>
 							<input class="pool-value" type="button" name="chaosStars" min="0" />
-							<label class="pool-text" for="chaosStars">{{localize 'ROLL.SYMBOL.ChaosStars'}}</label>
+							<label class="pool-text" for="chaosStars">{{localize "ROLL.SYMBOL.ChaosStars"}}</label>
 						</div>
 					</td>
 				</tr>
@@ -109,7 +124,7 @@
 		</details>
 	
 		<details>
-			<summary>{{localize 'ROLL.CHECKBUILDER.Options'}}</summary>
+			<summary>{{localize "ROLL.CHECKBUILDER.Options"}}</summary>
 	
 			<div class="dice-pool-roll-options">
 				{{#if (or (eq isGM true) (eq canUserAddAudio true)) }}
@@ -142,7 +157,7 @@
 		</details>
 	
 		<div class="roll-button flexrow">
-			<button class="roll-check-button">{{localize 'ROLL.CHECKBUILDER.RollCheck'}}</button>
+			<button class="roll-check-button">{{localize "ROLL.CHECKBUILDER.RollCheck"}}</button>
 		</div>
 	</div>
 

@@ -1,10 +1,10 @@
-import ChallengeDie from "./dietype/ChallengeDie.js";
-import CharacteristicDie from "./dietype/CharacteristicDie.js";
-import ConservativeDie from "./dietype/ConservativeDie.js";
-import ExpertiseDie from "./dietype/ExpertiseDie.js";
-import FortuneDie from "./dietype/FortuneDie.js";
-import MisfortuneDie from "./dietype/MisfortuneDie.js";
-import RecklessDie from "./dietype/RecklessDie.js";
+import ChallengeDie from "./dice/ChallengeDie.js";
+import CharacteristicDie from "./dice/CharacteristicDie.js";
+import ConservativeDie from "./dice/ConservativeDie.js";
+import ExpertiseDie from "./dice/ExpertiseDie.js";
+import FortuneDie from "./dice/FortuneDie.js";
+import MisfortuneDie from "./dice/MisfortuneDie.js";
+import RecklessDie from "./dice/RecklessDie.js";
 
 /**
  * DicePool utility helps prepare WFRP3e's special dice pools.

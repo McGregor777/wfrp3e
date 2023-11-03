@@ -10,7 +10,7 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 				{group: "primary", navSelector: ".creature-sheet-tabs", contentSelector: ".creature-sheet-body", initial: "main"},
 				{group: "actions", navSelector: ".creature-sheet-action-tabs", contentSelector: ".creature-sheet-actions", initial: "melee"}
 			],
-			template: "systems/wfrp3e/templates/creature-sheet.hbs",
+			template: "systems/wfrp3e/templates/applications/actors/creature-sheet.hbs",
 			width: 420
 		});
 	}
