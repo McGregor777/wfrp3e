@@ -529,7 +529,7 @@ export default class CheckBuilder extends FormApplication
 
 			ChatMessage.create(chatOptions);
 		}
-		else if(this.roll.data.combat) {
+		else if(this.roll.data?.combat) {
 			const currentCombatantId = this.roll.data.combat.combatant?.id;
 			const encounterType = html.find('.encounter-type input:checked').val();
 			const initiativeCharacteristic = encounterType === "social" ? "fellowship" : "agility";
@@ -623,7 +623,7 @@ export default class CheckBuilder extends FormApplication
 			if(this.roll?.sound)
 				AudioHelper.play({src: this.roll.sound}, true);
 
-			if(this.roll.data.actor.type === "creature")
+			if(this.roll.data?.actor.type === "creature")
 				Object.keys(CONFIG.WFRP3e.attributes).forEach((attribute) => {
 					const attributeDiceAmount = this.dicePool["creatures" + (attribute[0].toUpperCase() + attribute.slice(1, attribute.length)) + "Dice"];
 
