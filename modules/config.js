@@ -76,6 +76,10 @@ export const WFRP3e = {
 		daunting: {
 			challengeDice: 4,
 			name: "ROLL.CHALLENGELEVEL.Daunting"
+		},
+		heroic: {
+			challengeDice: 5,
+			name: "ROLL.CHALLENGELEVEL.Heroic"
 		}
 	},
 	conditionDurations: {
