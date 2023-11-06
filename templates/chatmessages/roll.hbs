@@ -3,10 +3,14 @@
 		<div class="dice-additional-flavor">{{data.additionalFlavourText}}</div>
 	{{/if}}
 
-	{{#if publicRoll }}
+	{{#if publicRoll}}
 		<div class="dice-result">
-			{{#if hasStandard}}
+			{{#if hasStandardDice}}
 				<div class="dice-formula">{{formula}}</div>
+			{{/if}}
+
+			{{#if hasStandardDice}}
+				<h4 class="dice-total">{{total}}</h4>
 			{{/if}}
 
 			{{#if hasSpecialDice}}
@@ -32,10 +36,6 @@
 			{{/if}}
 
 			{{{tooltip}}}
-
-			{{#if hasStandard}}
-				<h4 class="dice-total">{{total}}</h4>
-			{{/if}}
 
 			{{#if hasSpecialDice}}
 				<ul>

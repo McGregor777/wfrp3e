@@ -1450,6 +1450,9 @@
 .dice-tooltip .dice-rolls .roll > .special-die {
   width: 44px;
 }
+.dice-total:not(:last-child) {
+  margin-bottom: 0.25rem;
+}
 .roll-effects > h5 {
   margin: 0;
 }
