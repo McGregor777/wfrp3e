@@ -5,12 +5,49 @@
 		form {
 			display: flex;
 			flex-direction: column;
-			flex-wrap: nowrap;
-			height: 100%;
 
 			& .creature-sheet-body {
-				flex-grow: 1;
-				overflow: auto;
+				flex: 1 1 0;
+				min-height: 0;
+
+				& > .tab.active {
+					display: flex;
+					flex-flow: column nowrap;
+					height: 100%;
+					overflow: auto;
+				}
+
+				& .creature-sheet-actions-tab {
+					overflow: unset;
+
+					&.action-card {
+						margin: 0.5rem auto;
+					}
+
+					& .creature-sheet-actions {
+						min-height: 0;
+						overflow: auto;
+					}
+
+					& .creature-sheet-action-tabs {
+						border-bottom: 1px solid #b5b3a4;
+						display: flex;
+						flex-flow: row wrap;
+						justify-content: space-around;
+
+						& > * {
+							margin: 0 5px;
+						}
+					}
+
+					& .action-container {
+						&.active {
+							align-items: center;
+							display: flex !important;
+							flex-direction: column;
+						}
+					}
+				}
 
 				& .creature-sheet-main-tab {
 					& > div {
@@ -171,27 +208,6 @@
 						}
 					}
 				}
-
-				& .creature-sheet-actions-tab {
-					& .creature-sheet-actions {
-						overflow: auto;
-					}
-
-					& .creature-sheet-action-tabs {
-						border-bottom: 1px solid #b5b3a4;
-						display: flex;
-						flex-flow: row wrap;
-						justify-content: space-around;
-
-						& > * {
-							margin: 0 5px;
-						}
-					}
-
-					& .action-container {
-						align-items: center;
-					}
-				}
 			}
 
 			& .creature-sheet-category {
@@ -264,6 +280,10 @@
 						padding-top: 0.5rem;
 					}
 				}
+			}
+
+			& .creature-sheet-tabs {
+				border-top: none;
 			}
 		}
 	}
