@@ -14,6 +14,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			width: 932,
 			height: 800,
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
+			dragDrop: [{dragSelector: ".item", dropSelector: null}],
 			tabs: [
 				{group: "primary", navSelector: ".character-sheet-primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
 				{group: "careers", navSelector: ".character-sheet-career-tabs", contentSelector: ".character-sheet-careers"},

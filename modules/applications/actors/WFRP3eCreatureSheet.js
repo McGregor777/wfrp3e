@@ -5,6 +5,7 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 		return mergeObject(super.defaultOptions,
 		{
 			classes: ["wfrp3e", "sheet", "actor", "creature", "creature-sheet"],
+			dragDrop: [{dragSelector: ".item", dropSelector: null}],
 			height: 660,
 			tabs: [
 				{group: "primary", navSelector: ".creature-sheet-tabs", contentSelector: ".creature-sheet-body", initial: "main"},
