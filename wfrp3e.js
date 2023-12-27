@@ -1,4 +1,5 @@
 import {WFRP3e} from "./modules/config.js";
+import CharacterGenerator from "./modules/applications/CharacterGenerator.js";
 import CheckBuilder from "./modules/applications/CheckBuilder.js";
 import WFRP3eCharacterSheet from "./modules/applications/actors/WFRP3eCharacterSheet.js";
 import WFRP3eCreatureSheet from "./modules/applications/actors/WFRP3eCreatureSheet.js";
@@ -55,6 +56,10 @@ import * as handlebarsHelpers from "./modules/handlebars.js";
 async function preloadHandlebarsTemplates()
 {
 	const templatePaths = [
+		"systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs",
+		"systems/wfrp3e/templates/applications/partials/character-generator-career-sheet.hbs",
+		"systems/wfrp3e/templates/applications/partials/character-generator-race-description.hbs",
+		"systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs",
 		"systems/wfrp3e/templates/chatmessages/action-effects.hbs",
 		"systems/wfrp3e/templates/partials/attribute-partial.hbs",
 		"systems/wfrp3e/templates/partials/characteristic-partial.hbs",
@@ -211,6 +216,20 @@ Hooks.on("renderChatMessage", (app, html, messageData) => {
 			event.currentTarget.dataset.symbol,
 			event.currentTarget.dataset.index
 		);
+	});
+});
+
+Hooks.on("renderActorDirectory", (app, html, data) => {
+	// Add a button to start the Character Generator.
+	html.find(".directory-header .header-actions").append(
+		'<button class="character-generator">' +
+		' <span class="fas fa-user"></span> ' + game.i18n.localize("ACTOR.GenerateACharacter") +
+		'</button>'
+	);
+
+	html.find(".character-generator").click(async(event) => {
+		event.preventDefault();
+		new CharacterGenerator().render(true);
 	});
 });
 

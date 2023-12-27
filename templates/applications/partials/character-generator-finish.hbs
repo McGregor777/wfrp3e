@@ -1,0 +1,119 @@
+<div>
+	<h5>{{localize "CHARACTERGENERATOR.Race"}}</h5>
+
+	<div class="race">
+		<div>
+			<img src="{{race.art}}" alt="{{localize race.name}}" />
+			<h6>{{localize race.name}}</h6>
+		</div>
+
+		<ul>
+			{{#each race.racialAbilities}}
+				{{#with (lookup @root.racialAbilities this)}}
+					<li data-ability="{{_id}}">
+						<strong>{{name}}:</strong> <span>{{{striptags system.description "p"}}}</span>
+					</li>
+				{{/with}}
+			{{/each}}
+			<li class="wound-threshold">
+				<strong>{{localize "CHARACTERGENERATOR.WoundThreshold"}}</strong> <span>{{localize "CHARACTERGENERATOR.PlusToughnessRating" value=race.wound}}</span>
+			</li>
+			<li class="corruption-threshold">
+				<strong>{{localize "CHARACTERGENERATOR.CorruptionThreshold"}}</strong> <span>{{localize "CHARACTERGENERATOR.PlusToughnessRating" value=race.corruption}}</span>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div>
+	<h5>{{localize "CHARACTERGENERATOR.Career"}}</h5>
+
+	{{>systems/wfrp3e/templates/applications/partials/character-generator-career-sheet.hbs career=career}}
+</div>
+
+<div>
+	<h5>{{localize "CHARACTERGENERATOR.Characteristics"}}</h5>
+
+	<div class="characteristics">
+		{{#each characteristics as |characteristic char|}}
+			{{#unless (equalTo char "varies")}}
+				<div>
+					<h6>{{localize characteristic.name}}</h6>
+
+					<div>{{lookup @root.characteristicValues char}}</div>
+				</div>
+			{{/unless}}
+		{{/each}}
+	</div>
+</div>
+
+<div>
+	<h5>{{localize "CHARACTERGENERATOR.Skills"}}</h5>
+
+	<table class="skills">
+		<thead>
+			<tr>
+				<th class="left-aligned skill-acquired">{{localize "CHARACTERGENERATOR.Acquired"}}</th>
+				<th class="center-aligned skill-characteristic">{{localize "CHARACTERGENERATOR.Characteristic"}}</th>
+				<th class="center-aligned skill-training-level">{{localize "CHARACTERGENERATOR.TrainingLevel"}}</th>
+				<th class="left-aligned skill-specialisations">{{localize "CHARACTERGENERATOR.Specialisations"}}</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{{#each careerSkills}}
+				<tr data-skill-id="{{this._id}}">
+					<td class="left-aligned skill-acquired">
+						<label>
+							<input name="{{this._id}}_acquisition" type="checkbox"
+								{{#unless this.system.advanced}}
+									checked
+								{{else}}
+									{{#if (lookup (lookup @root.skills this._id) "acquired")}}
+										checked
+									{{/if}}
+								{{/unless}} disabled />
+							{{this.name}}
+						</label>
+					</td>
+					<td class="center-aligned shrinked skill-characteristic">
+						{{localize (lookup (lookup @root.characteristics this.system.characteristic) "name")}}
+					</td>
+					<td class="center-aligned skill-training-level">
+						<input name="{{this._id}}_trainingLevel" type="checkbox" value="1"
+							{{#if (superiorOrEqualTo (lookup (lookup @root.skills this._id) "trainingLevel") 1)}}
+								checked
+							{{/if}} disabled />
+						<input name="{{this._id}}_trainingLevel" type="checkbox" value="2" disabled />
+						<input name="{{this._id}}_trainingLevel" type="checkbox" value="3" disabled />
+					</td>
+					<td class="left-aligned skill-specialisations">
+						<input name="{{this._id}}_specialisations" type="text" value="{{lookup (lookup @root.skills this._id) 'specialisations'}}" disabled />
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>
+
+{{#if talents}}
+	<div>
+		<h5>{{localize "CHARACTERGENERATOR.Talents"}}</h5>
+
+		<div class="talents">
+			{{#each talents}}
+				{{>systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs talent=this}}
+			{{/each}}
+		</div>
+	</div>
+{{/if}}
+
+<div>
+	<h5>{{localize "CHARACTERGENERATOR.Actions"}}</h5>
+
+	<div class="actions">
+		{{#each actions}}
+			{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+		{{/each}}
+	</div>
+</div>

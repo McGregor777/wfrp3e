@@ -374,66 +374,460 @@
 .career-item-sheet .sheet-form-div.career-advance-options > *:last-child {
   margin-left: 1rem;
 }
-.character-sheet .character-sheet-body {
+.character-generator form {
   display: flex;
   flex-direction: column;
-  height: calc(100% - 104px);
+  min-height: 0;
 }
-.character-sheet .character-sheet-body .characteristics-tab {
-  flex-flow: row wrap !important;
+.character-generator form .step {
+  display: none;
+  flex-grow: 1;
 }
-.character-sheet .character-sheet-body .characteristics-tab .attributes {
+.character-generator form .step.active {
   display: flex;
-  height: 650px;
+  flex-direction: column;
+  min-height: 0;
+}
+.character-generator form .step > h4 {
+  border-color: var(--color-border-light-primary);
+  border-style: solid;
+  border-width: 0 0 1px;
+}
+.character-generator form .step .tabs {
+  border-color: #b4b3a4;
+  border-style: solid;
+  border-width: 0 0 1px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-top: 0.25rem;
+}
+.character-generator form .step[data-step=action-selection] > p {
+  text-align: center;
+}
+.character-generator form .step[data-step=action-selection] > p > .remaining-actions {
+  font-style: italic;
+  font-weight: bold;
+}
+.character-generator form .step[data-step=action-selection] .action-selection {
+  border-bottom: 1px solid #b4b3a4;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.character-generator form .step[data-step=action-selection] .action-selection .actions {
+  min-height: 0;
+  overflow-y: auto;
+}
+.character-generator form .step[data-step=action-selection] .action-selection .actions > .tab.active {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: auto;
+}
+.character-generator form .step[data-step=action-selection] .action-selection .actions > .tab.active label {
+  cursor: pointer;
+}
+.character-generator form .step[data-step=action-selection] .action-selection .actions > .tab.active label.active > div {
+  box-shadow: 0 0 0.5rem orange;
+}
+.character-generator form .step[data-step=action-selection] .action-selection .actions > .tab.active label:hover > div {
+  box-shadow: 0 0 0.5rem var(--color-shadow-primary);
+}
+.character-generator form .step[data-step=action-selection] .action-selection .actions > .tab.active label > input {
+  display: none;
+}
+.character-generator form .step[data-step=career-selection] {
+  text-align: center;
+}
+.character-generator form .step[data-step=career-selection] > p > .selected-career {
+  font-style: italic;
+  font-weight: bold;
+}
+.character-generator form .step[data-step=career-selection] > .careers {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  overflow-x: auto;
+  padding: 0 130px;
+}
+.character-generator form .step[data-step=career-selection] > .careers > label {
+  cursor: pointer;
+  margin: 0 0.5rem;
+}
+.character-generator form .step[data-step=career-selection] > .careers > label.active {
+  filter: drop-shadow(0 0 0.5rem orange);
+}
+.character-generator form .step[data-step=career-selection] > .careers > label:hover {
+  filter: drop-shadow(0 0 0.5rem var(--color-shadow-primary));
+}
+.character-generator form .step[data-step=career-selection] > .careers > label > input {
+  display: none;
+}
+.character-generator form .step[data-step=creation-point-investment] {
+  text-align: center;
+}
+.character-generator form .step[data-step=creation-point-investment] > p {
+  font-size: var(--font-size-16);
+}
+.character-generator form .step[data-step=creation-point-investment] > p > .remaining-creation-points {
+  font-weight: bold;
+}
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div {
+  flex: 1 1 100%;
+  min-height: 250px;
+}
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div label {
+  background: rgba(255, 255, 240, 0.8);
+  border: 1px solid var(--color-border-light-primary);
+  border-radius: 3px;
+  cursor: pointer;
+  display: block;
+  line-height: 28px;
+  margin: 0.5rem;
+}
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div label.active {
+  box-shadow: 0 0 0.5rem orange;
+}
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div label:hover,
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div label:focus {
+  outline: none;
+  box-shadow: 0 0 5px var(--color-shadow-primary);
+}
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div label > input {
+  display: none;
+}
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div.characteristics > div > div {
+  display: flex;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div.characteristics > div > div > button {
+  background: no-repeat;
+  border: none;
+  width: 3rem;
+}
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div.characteristics > div > div > button:hover,
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div.characteristics > div > div > button:focus {
+  box-shadow: none;
+  text-shadow: 0 0 5px var(--color-shadow-primary);
+}
+.character-generator form .step[data-step=creation-point-investment] > .creation-point-investment > div.characteristics > div > div > input {
+  height: auto;
+  padding-top: 6px;
+  width: 3rem;
+}
+.character-generator form .step[data-step=finish] .finish {
+  min-height: 0;
+  overflow-y: auto;
+}
+.character-generator form .step[data-step=finish] .finish > div:not(:first-child) {
+  margin-top: 2rem;
+}
+.character-generator form .step[data-step=finish] .finish h5 {
+  border-color: var(--color-border-light-primary);
+  border-style: solid;
+  border-width: 0 0 1px;
+}
+.character-generator form .step[data-step=finish] .finish .actions,
+.character-generator form .step[data-step=finish] .finish .talents {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.character-generator form .step[data-step=finish] .finish .career-sheet {
+  margin: auto;
+}
+.character-generator form .step[data-step=finish] .finish .characteristics {
+  display: flex;
+  justify-content: space-around;
+}
+.character-generator form .step[data-step=finish] .finish .characteristics > div {
+  text-align: center;
+}
+.character-generator form .step[data-step=finish] .finish .characteristics > div > div {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  color: var(--color-text-dark-primary);
+  height: auto;
+  margin: auto;
+  min-width: 20px;
+  padding: 6px 1px 3px;
+  width: 3rem;
+}
+.character-generator form .step[data-step=finish] .finish .race {
+  display: flex;
+  align-items: center;
+}
+.character-generator form .step[data-step=finish] .finish .race img {
+  border: none;
+}
+.character-generator form .step[data-step=race-selection] > p {
+  text-align: center;
+}
+.character-generator form .step[data-step=race-selection] > p > .selected-race {
+  font-style: italic;
+  font-weight: bold;
+}
+.character-generator form .step[data-step=race-selection] > .races {
+  align-items: center;
+  display: flex;
+  flex: 0 1 400px;
+  justify-content: center;
+  text-align: center;
+}
+.character-generator form .step[data-step=race-selection] > .races > label {
+  cursor: pointer;
+  flex: 0 1 180px;
+  margin: 0 0.5rem;
+}
+.character-generator form .step[data-step=race-selection] > .races > label.active {
+  filter: drop-shadow(0 0 0.5rem orange);
+}
+.character-generator form .step[data-step=race-selection] > .races > label.active > img {
+  filter: none;
+}
+.character-generator form .step[data-step=race-selection] > .races > label:hover {
+  filter: drop-shadow(0 0 0.5rem var(--color-shadow-primary));
+}
+.character-generator form .step[data-step=race-selection] > .races > label:hover > img {
+  filter: none;
+}
+.character-generator form .step[data-step=race-selection] > .races > label > img {
+  border: none;
+  display: block;
+  filter: drop-shadow(0 0 0.25rem black);
+  height: 180px;
+  margin: 0 auto;
+}
+.character-generator form .step[data-step=race-selection] > .races > label > input {
+  display: none;
+}
+.character-generator form .step[data-step=race-selection] > .races > label > .race-name {
+  height: 40px;
+  line-height: 40px;
+}
+.character-generator form .step[data-step=race-selection] > .races > label > .race-name > * {
+  display: inline-block;
+  line-height: 12pt;
+  vertical-align: middle;
+}
+.character-generator form .step[data-step=race-selection] > .race-description {
+  flex: 1 1 auto;
+  margin: 0 4rem;
+}
+.character-generator form .step[data-step=skill-training] > p {
+  text-align: center;
+}
+.character-generator form .step[data-step=skill-training] > p > .remaining-skill-trainings,
+.character-generator form .step[data-step=skill-training] > p > .remaining-specialisations {
+  font-weight: bold;
+}
+.character-generator form .step[data-step=skill-training] > .skill-training {
+  display: flex;
+  flex-grow: 1;
+}
+.character-generator form .step[data-step=skill-training] > .skill-training table {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.character-generator form .step[data-step=skill-training] > .skill-training table thead {
+  font-variant-caps: small-caps;
+}
+.character-generator form .step[data-step=skill-training] > .skill-training table tbody .skill-acquired,
+.character-generator form .step[data-step=skill-training] > .skill-training table tbody .skill-characteristic {
+  font-variant-caps: small-caps;
+}
+.character-generator form .step[data-step=talent-selection] > p {
+  text-align: center;
+}
+.character-generator form .step[data-step=talent-selection] > p > .remaining-talents,
+.character-generator form .step[data-step=talent-selection] > p > .remaining-focus-talents,
+.character-generator form .step[data-step=talent-selection] > p > .remaining-faith-talents,
+.character-generator form .step[data-step=talent-selection] > p > .remaining-order-talents,
+.character-generator form .step[data-step=talent-selection] > p > .remaining-insanities {
+  font-style: italic;
+  font-weight: bold;
+}
+.character-generator form .step[data-step=talent-selection] .talent-selection {
+  border-bottom: 1px solid #b4b3a4;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.character-generator form .step[data-step=talent-selection] .talent-selection .talents {
+  min-height: 0;
+  overflow-y: auto;
+}
+.character-generator form .step[data-step=talent-selection] .talent-selection .talents > .tab.active {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: auto;
+}
+.character-generator form .step[data-step=talent-selection] .talent-selection .talents > .tab.active label {
+  cursor: pointer;
+}
+.character-generator form .step[data-step=talent-selection] .talent-selection .talents > .tab.active label.active > div {
+  box-shadow: 0 0 0.5rem orange;
+}
+.character-generator form .step[data-step=talent-selection] .talent-selection .talents > .tab.active label:hover > div {
+  box-shadow: 0 0 0.5rem var(--color-shadow-primary);
+}
+.character-generator form .step[data-step=talent-selection] .talent-selection .talents > .tab.active label > input {
+  display: none;
+}
+.character-generator form .step h4 {
+  font-variant-caps: small-caps;
+  font-weight: bold;
+  margin: 0.5rem 0 0 !important;
+  text-align: center;
+}
+.character-generator form .step h5 {
+  font-variant-caps: small-caps;
+  font-weight: bold;
+  margin: 0.5rem auto !important;
+  text-align: center;
+}
+.character-generator form .step h6 {
+  font-variant-caps: small-caps;
+  font-weight: bold;
+  margin: 0.5rem auto !important;
+  text-align: center;
+}
+.character-generator form .step .buttons {
+  display: flex;
+}
+.character-generator .character-creation-steps {
+  border-bottom: 1px solid var(--color-border-light-primary);
+  flex-grow: 0;
+  margin-bottom: 0.25rem;
+}
+.character-generator .character-creation-steps .step-names {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+.character-generator .character-creation-steps .step-names > span {
+  flex-basis: 6rem;
+}
+.character-generator .character-creation-steps .step-names > span.active {
+  color: white;
+  text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
+}
+.character-generator .character-creation-steps .step-gauge {
+  height: 0.25rem;
+  margin: auto;
+  width: 86%;
+}
+.character-generator .character-creation-steps .step-gauge .step-gauge-fill {
+  background-color: darkred;
+  display: block;
+  height: 100%;
+  width: 0;
+}
+.character-sheet form {
+  display: flex;
+  flex-direction: column;
+}
+.character-sheet form .character-sheet-body {
+  flex: 1 1 0;
+  min-height: 0;
+}
+.character-sheet form .character-sheet-body > .tab.active {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+  overflow: auto;
+}
+.character-sheet form .character-sheet-body .actions-tab {
+  overflow: unset;
+}
+.character-sheet form .character-sheet-body .actions-tab .character-sheet-actions {
+  min-height: 0;
+}
+.character-sheet form .character-sheet-body .actions-tab .character-sheet-action-tabs {
+  border-bottom: 1px solid #b5b3a4;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.character-sheet form .character-sheet-body .actions-tab .character-sheet-action-tabs > * {
+  margin: 0 5px;
+}
+.character-sheet form .character-sheet-body .careers-tab {
+  overflow: unset;
+}
+.character-sheet form .character-sheet-body .careers-tab .character-sheet-careers {
+  min-height: 0;
+}
+.character-sheet form .character-sheet-body .careers-tab .character-sheet-career-tabs {
+  border-bottom: 1px solid #b5b3a4;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.character-sheet form .character-sheet-body .careers-tab .character-sheet-career-tabs > * {
+  margin: 0 5px;
+}
+.character-sheet form .character-sheet-body .characteristics-tab.active {
+  flex-direction: row !important;
+}
+.character-sheet form .character-sheet-body .characteristics-tab .attributes {
+  display: flex;
   flex: 1 1 240px;
   flex-direction: column;
 }
-.character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision {
+.character-sheet form .character-sheet-body .characteristics-tab .attributes .attributes-subdivision {
   display: flex;
   flex-flow: row wrap;
 }
-.character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute {
+.character-sheet form .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute {
   flex: 1 0 80px;
   padding: 5px;
   text-align: center;
 }
-.character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute .attribute-input {
+.character-sheet form .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute .attribute-input {
   height: 60px !important;
 }
-.character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute .attribute-input-container {
+.character-sheet form .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute .attribute-input-container {
   display: flex;
   flex-direction: column;
 }
-.character-sheet .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute .attribute-label {
+.character-sheet form .character-sheet-body .characteristics-tab .attributes .attributes-subdivision .attribute .attribute-label {
   padding-top: 10px;
 }
-.character-sheet .character-sheet-body .characteristics-tab .attributes .cards {
+.character-sheet form .character-sheet-body .characteristics-tab .attributes .cards {
   overflow-y: scroll;
 }
-.character-sheet .character-sheet-body .characteristics-tab .attributes .cards > div:not(:last-child) .card {
+.character-sheet form .character-sheet-body .characteristics-tab .attributes .cards > div:not(:last-child) .card {
   margin-bottom: 20px !important;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments {
   display: flex;
   flex-direction: column;
   width: auto;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics-and-impairments-subdivision {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics-and-impairments-subdivision {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
   justify-content: space-around;
   padding: 0 10px;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic {
   width: 130px;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-fortune-input {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-fortune-input {
   font-weight: bold;
   height: 25px !important;
   margin-left: 10px !important;
@@ -441,19 +835,19 @@
   text-align: center !important;
   width: 25px !important;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-input-container {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-input-container {
   align-items: center;
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-title {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-title {
   font: 14pt "ArnoPro";
   font-variant-caps: small-caps;
   font-weight: bold;
   text-align: center;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-value-input {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-value-input {
   display: block;
   font-weight: bold;
   height: 45px !important;
@@ -461,43 +855,43 @@
   text-align: center !important;
   width: 35px !important;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments {
   display: flex;
   flex-direction: column;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment {
   display: flex;
   margin: auto;
   flex: 1 1 auto;
   flex-direction: row;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment:first-child {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment:first-child {
   margin-bottom: 10px;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment:last-child {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment:last-child {
   margin-top: 10px;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token {
   position: relative;
   width: 4rem;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > * {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > * {
   position: absolute;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > img {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > img {
   border: none;
   opacity: 75%;
   top: 50%;
   transform: translate(0, -50%);
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > .token-counter {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment > .token > .token-counter {
   color: white;
   font-size: 24pt;
   left: 38%;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   top: 47%;
 }
-.character-sheet .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .title {
+.character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .title {
   display: block;
   font: 14pt "ArnoPro";
   font-variant-caps: small-caps;
@@ -507,65 +901,70 @@
   text-align: center;
   transform: rotate(180deg);
 }
-.character-sheet .character-sheet-body .characteristics-tab .skills {
+.character-sheet form .character-sheet-body .characteristics-tab .skills {
   flex: 1 1 auto;
+  overflow: auto;
 }
-.character-sheet .character-sheet-body .characteristics-tab .skills .skill-row {
+.character-sheet form .character-sheet-body .characteristics-tab .skills .skill-row {
   font-size: 12pt;
   font-variant-caps: small-caps;
 }
-.character-sheet .character-sheet-body .characteristics-tab .stance-meter {
+.character-sheet form .character-sheet-body .characteristics-tab .stance-meter {
   margin-bottom: 0.5rem;
 }
-.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments {
+.character-sheet form .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments {
   display: flex;
   justify-content: center;
 }
-.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment {
+.character-sheet form .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment {
   display: block;
   height: 27px;
 }
-.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment.active {
+.character-sheet form .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment.active {
   filter: drop-shadow(gold 0px 0px 4px);
 }
-.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment > img {
+.character-sheet form .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment > img {
   border: none;
   width: 32px;
 }
-.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment > img.stance-neutral {
+.character-sheet form .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment > img.stance-neutral {
   width: 38px;
 }
-.character-sheet .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment > input {
+.character-sheet form .character-sheet-body .characteristics-tab .stance-meter .stance-meter-segments .stance-meter-segment > input {
   display: none;
 }
-.character-sheet .character-sheet-body .item-container {
-  display: none;
-  flex-flow: row wrap;
+.character-sheet form .character-sheet-body .talents-tab {
+  overflow: unset;
 }
-.character-sheet .character-sheet-body .item-container.active {
-  flex-direction: row;
+.character-sheet form .character-sheet-body .talents-tab .character-sheet-talents {
+  min-height: 0;
 }
-.character-sheet .character-sheet-body .item-container .career-partial {
-  display: flex;
-  flex-flow: row wrap;
-}
-.character-sheet .character-sheet-body .item-container .career-partial .career-advancement {
-  flex: 1 1 300px;
-}
-.character-sheet .character-sheet-body .character-sheet-career-tabs,
-.character-sheet .character-sheet-body .character-sheet-talent-tabs,
-.character-sheet .character-sheet-body .character-sheet-action-tabs {
+.character-sheet form .character-sheet-body .talents-tab .character-sheet-talent-tabs {
   border-bottom: 1px solid #b5b3a4;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
 }
-.character-sheet .character-sheet-body .character-sheet-career-tabs > *,
-.character-sheet .character-sheet-body .character-sheet-talent-tabs > *,
-.character-sheet .character-sheet-body .character-sheet-action-tabs > * {
+.character-sheet form .character-sheet-body .talents-tab .character-sheet-talent-tabs > * {
   margin: 0 5px;
 }
-.character-sheet .character-sheet-primary-tabs {
+.character-sheet form .character-sheet-body .item-container {
+  display: none;
+  flex-flow: row wrap;
+  height: 100%;
+  overflow: auto;
+}
+.character-sheet form .character-sheet-body .item-container.active {
+  display: flex !important;
+}
+.character-sheet form .character-sheet-body .item-container .career-partial {
+  display: flex;
+  flex-flow: row wrap;
+}
+.character-sheet form .character-sheet-body .item-container .career-partial .career-advancement {
+  flex: 1 1 300px;
+}
+.character-sheet form .character-sheet-primary-tabs {
   display: flex;
   flex-flow: row wrap;
   font: 14pt "ArnoPro";
@@ -575,10 +974,10 @@
   justify-content: space-between;
   text-align: center;
 }
-.character-sheet .character-sheet-primary-tabs > * {
+.character-sheet form .character-sheet-primary-tabs > * {
   margin: 0 5px;
 }
-.character-sheet .character-sheet-title {
+.character-sheet form .character-sheet-title {
   display: block;
   font: 14pt "ArnoPro";
   font-variant-caps: small-caps;
@@ -832,12 +1231,40 @@
 .creature-sheet .window-content form {
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
-  height: 100%;
 }
 .creature-sheet .window-content form .creature-sheet-body {
-  flex-grow: 1;
+  flex: 1 1 0;
+  min-height: 0;
+}
+.creature-sheet .window-content form .creature-sheet-body > .tab.active {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
   overflow: auto;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab {
+  overflow: unset;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab.action-card {
+  margin: 0.5rem auto;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-actions {
+  min-height: 0;
+  overflow: auto;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-action-tabs {
+  border-bottom: 1px solid #b5b3a4;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-action-tabs > * {
+  margin: 0 5px;
+}
+.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .action-container.active {
+  align-items: center;
+  display: flex !important;
+  flex-direction: column;
 }
 .creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div {
   display: flex;
@@ -955,21 +1382,6 @@
 .creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-stance.reckless {
   color: red;
 }
-.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-actions {
-  overflow: auto;
-}
-.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-action-tabs {
-  border-bottom: 1px solid #b5b3a4;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-}
-.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .creature-sheet-action-tabs > * {
-  margin: 0 5px;
-}
-.creature-sheet .window-content form .creature-sheet-body .creature-sheet-actions-tab .action-container {
-  align-items: center;
-}
 .creature-sheet .window-content form .creature-sheet-category {
   background-color: #240000;
   border: solid dimgray;
@@ -1016,6 +1428,9 @@
   color: white;
   font-size: 24pt;
   padding-top: 0.5rem;
+}
+.creature-sheet .window-content form .creature-sheet-tabs {
+  border-top: none;
 }
 .diseases .disease-card {
   position: relative;
@@ -1450,6 +1865,9 @@
 .dice-tooltip .dice-rolls .roll > .special-die {
   width: 44px;
 }
+.dice-total:not(:last-child) {
+  margin-bottom: 0.25rem;
+}
 .roll-effects > h5 {
   margin: 0;
 }
@@ -1750,11 +2168,6 @@ th.shrinked {
 .sheet .editor-content {
   margin: 0 0.5rem;
 }
-.sheet .tab.active {
-  display: flex !important;
-  flex-direction: column;
-  height: 100%;
-}
 .special-die {
   border: none;
 }
@@ -1841,4 +2254,8 @@ th.shrinked {
 }
 #chat-controls .control-buttons {
   flex-basis: 67px;
+}
+#logo {
+  content: url('../assets/images/logo.webp');
+  height: 34px;
 }

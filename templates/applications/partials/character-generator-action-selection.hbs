@@ -1,0 +1,64 @@
+<div class="action-tabs tabs" data-group="actions">
+	<a class="tab-link active" data-tab="melee">{{localize 'ACTION.TYPE.Melee'}}</a>
+	<a class="tab-link" data-tab="ranged">{{localize 'ACTION.TYPE.Ranged'}}</a>
+	<a class="tab-link" data-tab="support">{{localize 'ACTION.TYPE.Support'}}</a>
+
+	{{#if priest}}
+		<a class="tab-link" data-tab="blessing">{{localize 'ACTION.TYPE.Blessing'}}</a>
+	{{/if}}
+
+	{{#if wizard}}
+		<a class="tab-link" data-tab="spell">{{localize 'ACTION.TYPE.Spell'}}</a>
+	{{/if}}
+</div>
+
+<div class="actions">
+	<div class="tab active" data-group="actions" data-tab="melee">
+		{{#each actions.melee}}
+			<label>
+				{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+				<input name="action" value="{{this._id}}" type="checkbox" />
+			</label>
+		{{/each}}
+	</div>
+
+	<div class="tab" data-group="actions" data-tab="ranged">
+		{{#each actions.ranged}}
+			<label>
+				{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+				<input name="action" value="{{this._id}}" type="checkbox" />
+			</label>
+		{{/each}}
+	</div>
+
+	<div class="tab" data-group="actions" data-tab="support">
+		{{#each actions.support}}
+			<label>
+				{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+				<input name="action" value="{{this._id}}" type="checkbox" />
+			</label>
+		{{/each}}
+	</div>
+
+	{{#if priest}}
+		<div class="tab" data-group="actions" data-tab="blessing">
+			{{#each actions.blessing}}
+				<label>
+					{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+					<input name="action" value="{{this._id}}" type="checkbox" />
+				</label>
+			{{/each}}
+		</div>
+	{{/if}}
+
+	{{#if wizard}}
+		<div class="tab" data-group="actions" data-tab="spell">
+			{{#each actions.spell}}
+				<label>
+					{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+					<input name="action" value="{{this._id}}" type="checkbox" />
+				</label>
+			{{/each}}
+		</div>
+	{{/if}}
+</div>

@@ -14,6 +14,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			width: 932,
 			height: 800,
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
+			dragDrop: [{dragSelector: ".item", dropSelector: null}],
 			tabs: [
 				{group: "primary", navSelector: ".character-sheet-primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
 				{group: "careers", navSelector: ".character-sheet-career-tabs", contentSelector: ".character-sheet-careers"},
@@ -47,23 +48,21 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		// Add basic skills to the Character.
 		if(actor.type === "character" && data.items.skills.length === 0) {
 			new Dialog({
-				title: game.i18n.localize("DIALOG.TITLE.BasicSkillsAdding"),
-				content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.BasicSkillsAdding", {actor: actor.name}) + "</p>",
+				title: game.i18n.localize("APPLICATION.TITLE.BasicSkillsAdding"),
+				content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.BasicSkillsAdding", {actor: actor.name}) + "</p>",
 				buttons: {
 					confirm: {
 						icon: '<span class="fa fa-check"></span>',
-						label: game.i18n.localize("DIALOG.BUTTON.AddBasicSkills"),
+						label: game.i18n.localize("APPLICATION.BUTTON.AddBasicSkills"),
 						callback: async dlg => {
-							const basicSkills = await game.packs.get("wfrp3e.skills").getDocuments().then(skills => {
-								return skills.filter(skill => !skill.system.advanced);
-							});
+							const basicSkills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill", system: {advanced: false}});
 
 							await Item.createDocuments(basicSkills, {parent: actor});
 						}
 					},
 					cancel: {
 						icon: '<span class="fas fa-xmark"></span>',
-						label: game.i18n.localize("DIALOG.BUTTON.Ignore")
+						label: game.i18n.localize("Ignore")
 					},
 				},
 				default: 'confirm'
@@ -118,11 +117,11 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		const items = {
 			abilities: sortedItems.filter(item => item.type === "ability"),
 			actions: {
-				melee: actions.filter(item => item.system.conservative.type === "melee"),
-				ranged: actions.filter(item => item.system.conservative.type === "ranged"),
-				support: actions.filter(item => item.system.conservative.type === "support"),
-				blessing: actions.filter(item => item.system.conservative.type === "blessing"),
-				spell: actions.filter(item => item.system.conservative.type === "spell")
+				melee: actions.filter(item => item.system.type === "melee"),
+				ranged: actions.filter(item => item.system.type === "ranged"),
+				support: actions.filter(item => item.system.type === "support"),
+				blessing: actions.filter(item => item.system.type === "blessing"),
+				spell: actions.filter(item => item.system.type === "spell")
 			},
 			armours: sortedItems.filter(item => item.type === "armour"),
 			careers: sortedItems.filter(item => item.type === "career"),
@@ -303,12 +302,12 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		const clickedItem = this.actor.items.get(this._getItemId(event));
 
 		new Dialog({
-			title: game.i18n.localize("DIALOG.TITLE.DeleteItemConfirmation"),
-			content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.DeleteItemConfirmation", {item: clickedItem.name}) + "</p>",
+			title: game.i18n.localize("APPLICATION.TITLE.DeleteItemConfirmation"),
+			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItemConfirmation", {item: clickedItem.name}) + "</p>",
 			buttons: {
 				confirm: {
 					icon: '<span class="fa fa-check"></span>',
-					label: "Yes",
+					label: game.i18n.localize("Yes"),
 					callback: async dlg => {
 						await this.actor.deleteEmbeddedDocuments("Item", [clickedItem._id]);
 						li.slideUp(200, () => this.render(false));
@@ -316,7 +315,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 				},
 				cancel: {
 					icon: '<span class="fas fa-xmark"></span>',
-					label: "Cancel"
+					label: game.i18n.localize("Cancel")
 				},
 			},
 			default: "confirm"

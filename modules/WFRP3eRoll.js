@@ -17,7 +17,7 @@ export default class WFRP3eRoll extends Roll
 
 		this.symbols = {
 			...Object.values(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
-				object[symbol.plural] = +dicePool[symbol.plural] ?? 0;
+				object[symbol.plural] = isNaN(dicePool[symbol.plural]) ? 0 : +dicePool[symbol.plural];
 				return object;
 			}, {})
 		};
@@ -45,7 +45,7 @@ export default class WFRP3eRoll extends Roll
 				this.data.effects.boon.push(CheckHelper.getUniversalBoonEffect(CONFIG.WFRP3e.characteristics[this.data.characteristic].type === "mental"));
 				this.data.effects.bane.push(CheckHelper.getUniversalBaneEffect(CONFIG.WFRP3e.characteristics[this.data.characteristic].type === "mental"));
 
-				if(["melee", "ranged"].includes(this.data.action.system[this.data.face].type))
+				if(["melee", "ranged"].includes(this.data.action.system.type))
 					this.data.effects.sigmarsComet.push(CheckHelper.getUniversalSigmarsCometEffect());
 			}
 		}
@@ -57,7 +57,8 @@ export default class WFRP3eRoll extends Roll
 	/** @inheritDoc */
 	evaluate({minimize = false, maximize = false} = {})
 	{
-		if(this._evaluated) throw new Error("This Roll object has already been rolled.");
+		if(this._evaluated)
+			throw new Error("This Roll object has already been rolled.");
 
 		// Step 1 - evaluate any inner Rolls and recompile the formula
 		let hasInner = false;
@@ -79,9 +80,17 @@ export default class WFRP3eRoll extends Roll
 			this.terms = this._identifyTerms(formula);
 		}
 
-		// Step 3 - evaluate any remaining terms and return any non-FFG dialogs to the total.
+		// Step 3 - evaluate any remaining terms and return any non-special dialogs to the total.
 		this.results = this.terms.map((term) => {
-			if(!game.symbols.diceterms.includes(term.constructor)) {
+			if(game.symbols.diceterms.includes(term.constructor)) {
+				if(term.evaluate)
+					term.evaluate({minimize, maximize});
+
+				this.hasSpecialDice = true;
+
+				return 0;
+			}
+			else {
 				if(term.evaluate) {
 					if(!(term instanceof OperatorTerm))
 						this.hasStandardDice = true;
@@ -90,14 +99,6 @@ export default class WFRP3eRoll extends Roll
 				}
 				else
 					return term;
-			}
-			else {
-				if(term.evaluate)
-					term.evaluate({minimize, maximize});
-
-				this.hasSpecialDice = true;
-
-				return 0;
 			}
 		});
 
@@ -239,7 +240,7 @@ export default class WFRP3eRoll extends Roll
 				};
 			}),
 			hasSpecialDice: this.hasSpecialDice,
-			hasStandard: this.hasStandardDice,
+			hasStandardDice: this.hasStandardDice,
 			hasSuccess: this.dice.length > 0,
 			data: this.data,
 			addedResults: this.addedResults,
@@ -262,7 +263,6 @@ export default class WFRP3eRoll extends Roll
 
 		if(["gmroll", "blindroll"].includes(rMode))
 			messageData.whisper = ChatMessage.getWhisperRecipients("GM");
-
 		if(rMode === "blindroll")
 			messageData.blind = true;
 		if(rMode === "selfroll")
@@ -295,7 +295,7 @@ export default class WFRP3eRoll extends Roll
 
 		json.symbols = this.symbols;
 		json.hasSpecialDice = this.hasSpecialDice;
-		json.hasStandard = this.hasStandardDice;
+		json.hasStandardDice = this.hasStandardDice;
 		json.data = this.data;
 		json.addedResults = this.addedResults;
 		json.flavor = this.flavor;

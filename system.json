@@ -1,7 +1,7 @@
 {
   "title": "Warhammer Fantasy Roleplay - 3rd Edition",
   "description": "<p>A game system for <em><strong>Warhammer Fantasy Roleplay - 3rd Edition</strong></em> in the Foundry Virtual Tabletop environment.</p>",
-  "version": "0.5",
+  "version": "0.6.1-alpha",
   "compatibility": {
     "minimum": "11",
     "verified": "11.314",
@@ -19,13 +19,21 @@
     "styles/wfrp3e.css"
   ],
   "packs": [{
-      "name": "skills",
-      "label": "Skills",
-      "path": "packs/skills.db",
-      "system": "wfrp3e",
-      "private": false,
-      "type": "Item",
-      "flags": {}
+    "label": "Items",
+    "type": "Item",
+    "name": "items",
+    "path": "packs/items",
+    "private": false,
+    "system": "wfrp3e",
+    "flags": {}
+  }, {
+    "label": "RollTables",
+    "type": "RollTable",
+    "name": "roll-tables",
+    "path": "packs/roll-tables",
+    "private": false,
+    "system": "wfrp3e",
+    "flags": {}
   }],
   "languages": [{
       "lang": "en",
@@ -44,8 +52,8 @@
   "primaryTokenAttribute": "wounds",
   "secondaryTokenAttribute": "fortune",
   "url": "https://github.com/McGregor777/wfrp3e",
-  "manifest": "https://raw.githubusercontent.com/McGregor777/wfrp3e/0.5/system.json",
-  "download": "https://github.com/McGregor777/wfrp3e/archive/refs/tags/0.5.zip",
+  "manifest": "https://raw.githubusercontent.com/McGregor777/wfrp3e/0.6.1-alpha/system.json",
+  "download": "https://github.com/McGregor777/wfrp3e/archive/refs/tags/0.6.1-alpha.zip",
   "background": "systems/wfrp3e/assets/background.jpg",
   "id": "wfrp3e"
 }

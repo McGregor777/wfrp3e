@@ -76,7 +76,7 @@ export default class CheckHelper
 				conservativeDice: stance > 0 ? stance : 0,
 				recklessDice: stance < 0 ? Math.abs(stance) : 0,
 				challengeDice: action.system[face].difficultyModifiers.challengeDice +
-					(["melee", "ranged"].includes(action.system[face].type)
+					(["melee", "ranged"].includes(action.system.type)
 						? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
 						: 0),
 				misfortuneDice: action.system[face].difficultyModifiers.misfortuneDice +
