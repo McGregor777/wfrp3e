@@ -34,9 +34,9 @@
 					</div>
 
 					<div class="career-sheet-starting-stance">
-						{{#for (multiply career.system.startingStance.recklessSegments -1) (increment career.system.startingStance.conservativeSegments 1) 1}}
-							<img class="stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}"
-								 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}reckless{{else}}{{#if (superiorTo this 0)}}conservative{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
+						{{#for (multiply career.system.startingStance.conservativeSegments -1) (increment career.system.startingStance.recklessSegments 1) 1}}
+							<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}"
+								 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
 						{{/for}}
 					</div>
 				</div>

@@ -202,8 +202,8 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
     _prepareStanceMeter()
     {
         this.stanceMeter = {
-            conservative: this.stance.conservative + (this.parent.system.currentCareer?.system.startingStance.conservativeSegments ?? 0),
-            reckless: -this.stance.reckless - (this.parent.system.currentCareer?.system.startingStance.recklessSegments ?? 0)
+            conservative: -this.stance.conservative - (this.parent.system.currentCareer?.system.startingStance.conservativeSegments ?? 0),
+            reckless: this.stance.reckless + (this.parent.system.currentCareer?.system.startingStance.recklessSegments ?? 0)
         };
     }
 
@@ -215,8 +215,8 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
     {
         this.defaultStance = "conservative";
 
-        if(this.stance.current < 0 ||
-            this.stance.current === 0 && this.stanceMeter.conservative < this.stanceMeter.reckless) {
+        if(this.stance.current > 0 ||
+            this.stance.current === 0 && Math.abs(this.stanceMeter.conservative) < this.stanceMeter.reckless) {
             this.defaultStance = "reckless";
         }
     }
