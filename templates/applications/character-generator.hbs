@@ -1,0 +1,126 @@
+<div class="character-creation-steps">
+	<div class="step-names">
+		<span class="race-selection active">{{localize "CHARACTERGENERATOR.Race"}}</span>
+		<span class="career-selection">{{localize "CHARACTERGENERATOR.Career"}}</span>
+		<span class="creation-point-investment">{{localize "CHARACTERGENERATOR.CreationPoints"}}</span>
+		<span class="skill-training">{{localize "CHARACTERGENERATOR.Skills"}}</span>
+		<span class="talent-selection">{{localize "CHARACTERGENERATOR.Talents"}}</span>
+		<span class="action-selection">{{localize "CHARACTERGENERATOR.Actions"}}</span>
+		<span class="finish">{{localize "Finish"}}</span>
+	</div>
+
+	<div class="step-gauge">
+		<span class="step-gauge-fill"></span>
+	</div>
+</div>
+
+<form>
+	<div class="step active" data-step="race-selection">
+		<h4>{{localize "CHARACTERGENERATOR.STEP.RaceSelection"}}</h4>
+
+		<div class="races">
+			{{#each availableRaces as |race r|}}
+				<label {{#if @first}}class="active"{{/if}}>
+					<img src="{{race.art}}" alt="{{localize race.name}}"/>
+
+					<div class="race-name">
+						<span>{{localize race.name}}</span>
+					</div>
+
+					<input name="race" value="{{r}}" type="radio" {{#if @first}}checked{{/if}}/>
+				</label>
+			{{/each}}
+		</div>
+
+		<p>{{localize "CHARACTERGENERATOR.CurrentlySelectedRace"}}<span class="selected-race">{{localize availableRaces.reiklander.name}}</span></p>
+
+		<div class="race-description">
+			{{>systems/wfrp3e/templates/applications/partials/character-generator-race-description.hbs race=availableRaces.reiklander racialAbilities=racialAbilities}}
+		</div>
+
+		<div class="buttons">
+			<button class="next">{{localize "Next"}}</button>
+		</div>
+	</div>
+
+	<div class="step" data-step="career-selection">
+		<h4>{{localize "CHARACTERGENERATOR.STEP.CareerSelection"}}</h4>
+
+		<div class="careers"></div>
+
+		<p>{{localize "CHARACTERGENERATOR.CurrentlySelectedCareer"}}<span class="selected-career">None</span></p>
+
+		<div class="buttons">
+			<button class="previous">{{localize "Previous"}}</button>
+			<button class="next">{{localize "Next"}}</button>
+		</div>
+	</div>
+
+	<div class="step" data-step="creation-point-investment">
+		<h4>{{localize "CHARACTERGENERATOR.STEP.CreationPointsInvestment"}}</h4>
+
+		<div class="creation-point-investment"></div>
+
+		<p>{{localize "CHARACTERGENERATOR.RemainingCreationPoints"}}<span class="remaining-creation-points">0</span></p>
+
+		<div class="buttons">
+			<button class="previous">{{localize "Previous"}}</button>
+			<button class="next">{{localize "Next"}}</button>
+		</div>
+	</div>
+
+	<div class="step" data-step="skill-training">
+		<h4>{{localize "CHARACTERGENERATOR.STEP.SkillTraining"}}</h4>
+
+		<div class="skill-training"></div>
+
+		<p>{{localize "CHARACTERGENERATOR.RemainingSkillTrainings"}}<span class="remaining-skill-trainings">0</span></p>
+		<p>{{localize "CHARACTERGENERATOR.RemainingSpecialisations"}}<span class="remaining-specialisations">0</span></p>
+
+		<div class="buttons">
+			<button class="previous">{{localize "Previous"}}</button>
+			<button class="next">{{localize "Next"}}</button>
+		</div>
+	</div>
+
+	<div class="step" data-step="talent-selection">
+		<h4>{{localize "CHARACTERGENERATOR.STEP.TalentSelection"}}</h4>
+
+		<div class="talent-selection"></div>
+
+		<p>{{localize "CHARACTERGENERATOR.RemainingTalents"}}<span class="remaining-talents">0</span></p>
+		<p>{{localize "CHARACTERGENERATOR.RemainingFocusTalents"}}<span class="remaining-focus-talents">0</span></p>
+		<p>{{localize "CHARACTERGENERATOR.RemainingFaithTalents"}}<span class="remaining-faith-talents">0</span></p>
+		<p>{{localize "CHARACTERGENERATOR.RemainingOrderTalents"}}<span class="remaining-order-talents">0</span></p>
+		<p>{{localize "CHARACTERGENERATOR.RemainingInsanities"}}<span class="remaining-insanities">0</span></p>
+
+		<div class="buttons">
+			<button class="previous">{{localize "Previous"}}</button>
+			<button class="next">{{localize "Next"}}</button>
+		</div>
+	</div>
+
+	<div class="step" data-step="action-selection">
+		<h4>{{localize "CHARACTERGENERATOR.STEP.ActionsSelection"}}</h4>
+
+		<div class="action-selection"></div>
+
+		<p>{{localize "CHARACTERGENERATOR.RemainingActions"}}<span class="remaining-actions">0</span></p>
+
+		<div class="buttons">
+			<button class="previous">{{localize "Previous"}}</button>
+			<button class="next">{{localize "Next"}}</button>
+		</div>
+	</div>
+
+	<div class="step" data-step="finish">
+		<h4>{{localize "CHARACTERGENERATOR.STEP.Confirm"}}</h4>
+
+		<div class="finish"></div>
+
+		<div class="buttons">
+			<button class="previous">{{localize "Previous"}}</button>
+			<button class="submit">{{localize "Finish"}}</button>
+		</div>
+	</div>
+</form>

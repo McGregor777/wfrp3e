@@ -78,6 +78,7 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
                 stress: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
             }),
             party: new fields.DocumentIdField(),
+            race: new fields.StringField({initial: "none", nullable: false, required: true}),
             stance: new fields.SchemaField({
                 ...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
                     object[stance] = new fields.NumberField({...requiredInteger, initial: 0, min: 0});

@@ -155,12 +155,12 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 		const clickedItem = this.actor.items.get(this._getItemId(event));
 
 		new Dialog({
-			title: game.i18n.localize("DIALOG.TITLE.DeleteItemConfirmation"),
-			content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.DeleteItemConfirmation", {item: clickedItem.name}) + "</p>",
+			title: game.i18n.localize("APPLICATION.TITLE.DeleteItemConfirmation"),
+			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItemConfirmation", {item: clickedItem.name}) + "</p>",
 			buttons: {
 				confirm: {
 					icon: '<span class="fa fa-check"></span>',
-					label: "Yes",
+					label: game.i18n.localize("Yes"),
 					callback: async dlg => {
 						await this.actor.deleteEmbeddedDocuments("Item", [clickedItem._id]);
 						li.slideUp(200, () => this.render(false));
@@ -168,7 +168,7 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 				},
 				cancel: {
 					icon: '<span class="fas fa-xmark"></span>',
-					label: "Cancel"
+					label: game.i18n.localize("Cancel")
 				},
 			},
 			default: "confirm"

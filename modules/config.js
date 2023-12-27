@@ -6,6 +6,80 @@ export const WFRP3e = {
 		blessing: "ACTION.TYPE.Blessing",
 		spell: "ACTION.TYPE.Spell"
 	},
+	availableRaces: {
+		reiklander: {
+			racialAbilities: ["Adaptable", "Diversity", "Favoured by Fate"],
+			wound: 9,
+			corruption: 5,
+			creationPoints: 25,
+			defaultRatings: {
+				strength: 2,
+				toughness: 2,
+				agility: 2,
+				intelligence: 2,
+				willpower: 2,
+				fellowship: 2
+			},
+			name: "RACE.Reiklander",
+			introduction: "RACE.INTRODUCTION.Reiklander",
+			startingCareerRollTableId: "PoY76It3s6IkTr3g",
+			art: "systems/wfrp3e/assets/images/races/empire.webp"
+		},
+		azgarazDwarf: {
+			racialAbilities: ["Children of Grungni", "Grudge", "Sturdy", "Night Vision"],
+			wound: 10,
+			corruption: 10,
+			creationPoints: 20,
+			defaultRatings: {
+				strength: 3,
+				toughness: 3,
+				agility: 2,
+				intelligence: 2,
+				willpower: 2,
+				fellowship: 2
+			},
+			name: "RACE.AzgarazDwarf",
+			introduction: "RACE.INTRODUCTION.AzgarazDwarf",
+			startingCareerRollTableId: "Clr8Gwsfs7VkMFjd",
+			art: "systems/wfrp3e/assets/images/races/dwarf.webp"
+		},
+		highElf: {
+			racialAbilities: ["Composure", "Erudite", "Isha's Chosen", "Night Vision"],
+			wound: 8,
+			corruption: 10,
+			creationPoints: 20,
+			defaultRatings: {
+				strength: 2,
+				toughness: 2,
+				agility: 3,
+				intelligence: 3,
+				willpower: 2,
+				fellowship: 2
+			},
+			name: "RACE.HighElf",
+			introduction: "RACE.INTRODUCTION.HighElf",
+			startingCareerRollTableId: "tJU9IvQGkcIIBPce",
+			art: "systems/wfrp3e/assets/images/races/high_elf.webp"
+		},
+		woodElf: {
+			racialAbilities: ["Forest Walk", "Nature Bond", "Orion's Favoured", "Night Vision"],
+			wound: 8,
+			corruption: 10,
+			creationPoints: 20,
+			defaultRatings: {
+				strength: 2,
+				toughness: 2,
+				agility: 3,
+				intelligence: 2,
+				willpower: 3,
+				fellowship: 2
+			},
+			name: "RACE.WoodElf",
+			introduction: "RACE.INTRODUCTION.WoodElf",
+			startingCareerRollTableId: "DuENZYjzQuelc4Yl",
+			art: "systems/wfrp3e/assets/images/races/wood_elf.webp"
+		}
+	},
 	attributes: {
 		aggression: {
 			name: "ATTRIBUTE.Aggression",

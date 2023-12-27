@@ -45,7 +45,7 @@ export default class WFRP3eRoll extends Roll
 				this.data.effects.boon.push(CheckHelper.getUniversalBoonEffect(CONFIG.WFRP3e.characteristics[this.data.characteristic].type === "mental"));
 				this.data.effects.bane.push(CheckHelper.getUniversalBaneEffect(CONFIG.WFRP3e.characteristics[this.data.characteristic].type === "mental"));
 
-				if(["melee", "ranged"].includes(this.data.action.system[this.data.face].type))
+				if(["melee", "ranged"].includes(this.data.action.system.type))
 					this.data.effects.sigmarsComet.push(CheckHelper.getUniversalSigmarsCometEffect());
 			}
 		}

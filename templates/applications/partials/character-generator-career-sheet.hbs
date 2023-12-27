@@ -1,0 +1,108 @@
+<div class="career-sheet">
+	<div class="face front active">
+		<div class="career-sheet-header">
+			<span class="career-sheet-name">{{career.name}}</span>
+
+			<div class="career-sheet-race-restrictions">
+				{{#if career.system.advanced}}
+					{{localize "CAREER.SHEET.AdvancedCareer"}}
+				{{else}}
+					{{localize "CAREER.SHEET.BasicCareer"}}
+				{{/if}}
+				: {{career.system.raceRestrictions}}
+			</div>
+
+			<div class="career-sheet-traits">{{career.system.traits}}</div>
+		</div>
+
+		<div class="career-sheet-details">
+			<div class="career-sheet-career-aptitudes">
+				<div class="career-sheet-primary-characteristics">
+					<div class="career-sheet-career-aptitudes-title">{{localize "CAREER.SHEET.PrimaryCharacteristics"}}</div>
+
+					<div class="career-sheet-career-aptitudes-content">
+						{{#each career.system.primaryCharacteristics}}
+							{{localize (lookup (lookup @root.characteristics this) 'name')}}{{#unless @last}},{{/unless}}
+						{{/each}}
+					</div>
+				</div>
+
+				<div class="career-sheet-career-skills">
+					<div class="career-sheet-career-aptitudes-title">{{localize "CAREER.SHEET.CareerSkills"}}</div>
+					<div class="career-sheet-career-aptitudes-content">{{career.system.careerSkills}}</div>
+				</div>
+
+				<div class="career-sheet-starting-stance">
+					{{#for (multiply career.system.startingStance.conservativeSegments -1) (increment career.system.startingStance.recklessSegments 1) 1}}
+						<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}"
+							 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
+					{{/for}}
+				</div>
+			</div>
+
+			<div class="career-sheet-advance-options">
+				<span class="career-sheet-advance-options-header">{{localize "CAREER.SHEET.Advances"}}</span>
+
+				<div class="career-sheet-advance-option action">
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Action"}}</div>
+					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.action}}</div>
+				</div>
+
+				<div class="career-sheet-advance-option talent">
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Talent"}}</div>
+					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.talent}}</div>
+				</div>
+
+				<div class="career-sheet-advance-option skill">
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Skill"}}</div>
+					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.skill}}</div>
+				</div>
+
+				<div class="career-sheet-advance-option fortune">
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Fortune"}}</div>
+					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.fortune}}</div>
+				</div>
+
+				<div class="career-sheet-advance-option conservative">
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Conservative"}}</div>
+					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.conservative}}</div>
+				</div>
+
+				<div class="career-sheet-advance-option reckless">
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Reckless"}}</div>
+					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.reckless}}</div>
+				</div>
+
+				<div class="career-sheet-advance-option wound">
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Wound"}}</div>
+					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.wound}}</div>
+				</div>
+			</div>
+		</div>
+
+		<img class="career-sheet-art" src="{{career.img}}" />
+	</div>
+
+	<div class="face back">
+		<div class="career-sheet-header">
+			<span class="career-sheet-name">{{career.name}}</span>
+
+			<div class="career-sheet-race-restrictions">
+				{{#if career.system.advanced}}
+					{{localize "CAREER.SHEET.AdvancedCareer"}}
+				{{else}}
+					{{localize "CAREER.SHEET.BasicCareer"}}
+				{{/if}}
+				: {{career.system.raceRestrictions}}
+			</div>
+
+			<div class="career-sheet-traits">{{career.system.summary}}</div>
+		</div>
+
+		<div class="career-sheet-description">{{{career.system.description}}}</div>
+	</div>
+
+	<div class="bottom-line">
+		<a class="flip-link" title="{{localize 'Flip sheet'}}"><span class="fas fa-undo"></span></a>
+	</div>
+</div>

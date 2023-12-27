@@ -1,0 +1,17 @@
+<p class="race-introduction">{{localize race.introduction}}</p>
+
+<ul>
+	{{#each race.racialAbilities}}
+		{{#with (lookup @root.racialAbilities this)}}
+			<li data-ability="{{_id}}">
+				<strong>{{name}}:</strong> <span>{{{striptags system.description "p"}}}</span>
+			</li>
+		{{/with}}
+	{{/each}}
+	<li class="wound-threshold">
+		<strong>{{localize "CHARACTERGENERATOR.WoundThreshold"}}</strong> <span>{{localize "CHARACTERGENERATOR.PlusToughnessRating" value=race.wound}}</span>
+	</li>
+	<li class="corruption-threshold">
+		<strong>{{localize "CHARACTERGENERATOR.CorruptionThreshold"}}</strong> <span>{{localize "CHARACTERGENERATOR.PlusToughnessRating" value=race.corruption}}</span>
+	</li>
+</ul>
