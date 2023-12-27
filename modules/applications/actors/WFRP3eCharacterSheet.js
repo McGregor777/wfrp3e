@@ -103,14 +103,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	_buildItemLists(data)
 	{
-		const sortedItems = data.items.sort(function(a, b) {
-			if(a.name < b.name)
-				return -1;
-			else if(a.name > b.name)
-				return 1;
-			else
-				return 0;
-		});
+		const sortedItems = data.items.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
 
 		const actions = sortedItems.filter(item => item.type === "action");
 		const talents = sortedItems.filter(item => item.type === "talent");
