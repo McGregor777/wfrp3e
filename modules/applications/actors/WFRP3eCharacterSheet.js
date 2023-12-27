@@ -89,7 +89,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		html.find(".quantity-link").mousedown(this._onQuantityClick.bind(this));
 		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
 		html.find(".item-delete-link").click(this._onItemDelete.bind(this));
-		html.find(".item-name-link").mousedown(this._onItemClick.bind(this));
+		html.find(".item-name-link").click(this._onItemLeftClick.bind(this));
+		html.find(".item-name-link").contextmenu(this._onItemRightClick.bind(this));
 		html.find(".item-input").change(this._onItemInput.bind(this));
 		html.find(".recharge-token").mousedown(this._onRechargeTokenClick.bind(this));
 		html.find(".skill-training-level-input").change(this._onSkillTrainingLevelChange.bind(this));
@@ -323,30 +324,29 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on an Item button.
+	 * Performs follow-up operations after left-clicks on an Item button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	async _onItemClick(event)
+	async _onItemLeftClick(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
+		const options = {};
+		const face = $(event.currentTarget).parents(".face").data("face");
 
-		switch(event.button) {
-			// If left click, prepare a skill, action or weapon check.
-			case 0:
-				const options = {};
-				const face = $(event.currentTarget).parents(".face").data("face");
+		if(face)
+			options.face = face;
 
-				if(face)
-					options.face = face;
+		this.actor.items.get(this._getItemId(event)).useItem(options);
+	}
 
-				clickedItem.useItem(options);
-				break;
-			// If right click, open the clicked Item's sheet.
-			case 2:
-				clickedItem.sheet.render(true);
-				break;
-		}
+	/**
+	 * Performs follow-up operations after right-clicks on an Item button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	async _onItemRightClick(event)
+	{
+		this.actor.items.get(this._getItemId(event)).sheet.render(true);
 	}
 
 	/**
