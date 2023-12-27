@@ -133,7 +133,7 @@
 							}
 
 							& .characteristic-title {
-								font: 14pt @font-primary;
+								font: var(--font-size-18) var(--font-primary);
 								font-variant-caps: small-caps;
 								font-weight: bold;
 								text-align: center;
@@ -189,11 +189,11 @@
 									font-size: 24pt;
 									left: 38%;
 									text-shadow:
-												-1pt -1pt 0 black,
+											-1pt -1pt 0 black,
 											-1pt 0 0 black,
-												0 -1pt 0 black,
+											0 -1pt 0 black,
 											-1pt 1pt 0 black,
-												1pt -1pt 0 black,
+											1pt -1pt 0 black,
 											0 1pt 0 black,
 											1pt 0 0 black,
 											1pt 1pt 0 black;
@@ -203,7 +203,7 @@
 
 							& .title {
 								display: block;
-								font: 14pt @font-primary;
+								font: var(--font-size-18) var(--font-primary);
 								font-variant-caps: small-caps;
 								font-weight: bold;
 								padding: 0 2px 0 4px;
@@ -220,7 +220,6 @@
 					overflow: auto;
 
 					& .skill-row {
-						font-size: 12pt;
 						font-variant-caps: small-caps;
 					}
 				}
@@ -294,13 +293,17 @@
 						flex: 1 1 300px;
 					}
 				}
+
+				& .talent-card {
+					margin-bottom: 2rem;
+				}
 			}
 		}
 
 		& .character-sheet-primary-tabs {
 			display: flex;
 			flex-flow: row wrap;
-			font: 14pt @font-primary;
+			font: var(--font-size-18) var(--font-primary);
 			font-variant-caps: small-caps;
 			font-weight: bold;
 			height: auto !important;
@@ -314,7 +317,7 @@
 
 		& .character-sheet-title {
 			display: block;
-			font: 14pt @font-primary;
+			font: var(--font-size-18) var(--font-primary);
 			font-variant-caps: small-caps;
 			font-weight: bold;
 			text-align: center;

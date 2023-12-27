@@ -1,9 +1,9 @@
 .action-card {
   border: 1px solid black;
-  border-radius: 1.5rem;
+  border-radius: 24px;
   color: white;
   height: 440px;
-  margin: 0.5rem;
+  margin: 8px;
   position: relative;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   width: 280px;
@@ -11,7 +11,7 @@
 .action-card .action-card-art-image {
   border: none;
   display: block;
-  height: 5rem;
+  height: 80px;
   width: 100%;
 }
 .action-card .action-card-bottom-line {
@@ -21,7 +21,7 @@
   flex-direction: row;
   justify-content: space-between;
   line-height: 0;
-  padding: 0 0.25rem 0.25rem;
+  padding: 0 4px 4px;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
 .action-card .action-card-bottom-line .recharge-token {
@@ -29,11 +29,11 @@
 }
 .action-card .action-card-bottom-line .recharge-token > img {
   border: none;
-  height: 3rem;
+  height: 48px;
   opacity: 75%;
 }
 .action-card .action-card-bottom-line .recharge-token > .recharge-token-counter {
-  font-size: 2rem;
+  font-size: 32px;
   left: 50%;
   position: absolute;
   top: 70%;
@@ -44,7 +44,7 @@
   color: white;
   font: 12pt "Caslon Antique";
   font-weight: bold;
-  height: 1.25rem;
+  height: 20px;
   text-align: center;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   width: 100%;
@@ -53,23 +53,25 @@
   font-size: 8pt;
   grid-area: action-card-difficulty-modifiers;
   line-height: 8pt;
-  margin: auto auto auto 0.25rem;
+  margin: auto auto auto 4px;
   text-align: center;
-  width: calc(100% - 0.25rem);
+  width: calc(100% - 4px);
 }
 .action-card .action-card-difficulty-modifiers > * {
   display: inline-block;
   margin: auto;
 }
 .action-card .action-card-effects {
-  border: calc(0.5rem + 3px) solid;
-  border-radius: 0 0 1.5rem 1.5rem;
+  border: calc(8px + 3px) solid;
+  border-radius: 0 0 24px 24px;
   border-top: none;
   color: black;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   font-size: 10pt;
+  min-height: 232px;
+  overflow-y: auto;
   text-shadow: none;
 }
 .action-card .action-card-effects > table {
@@ -79,7 +81,7 @@
   overflow-y: auto;
 }
 .action-card .action-card-header {
-  border-radius: 1.5rem 1.5rem 0 0;
+  border-radius: 24px 24px 0 0;
   display: grid;
   height: 70px;
   grid-template-areas: 'action-card-type action-card-name action-card-recharge-rating' 'action-card-difficulty-modifiers action-card-traits action-card-recharge-rating';
@@ -95,34 +97,33 @@
   text-align: center;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
-.action-card .action-card-name:hover {
-  text-shadow: 0 0 0.5rem var(--color-shadow-primary);
-}
 .action-card .action-card-recharge-rating {
   background-color: cornflowerblue;
   border-radius: 50%;
-  font: 16pt "Caslon Antique";
+  font: 16pt var(--font-title);
   font-weight: bold;
   grid-area: action-card-recharge-rating;
-  height: 2rem;
-  line-height: 2rem;
-  margin: 0.5rem 0.5rem 0 0;
+  height: 32px;
+  line-height: 32px;
+  margin: 8px 8px 0 0;
   text-align: center;
-  width: 2rem;
+  width: 32px;
 }
 .action-card .action-card-requirements {
   background-color: #503820;
   color: white;
+  font-size: 12pt;
   text-align: center;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   width: 100%;
 }
 .action-card .action-card-requirements > p {
   margin: 0;
-  padding-top: 0.25rem;
+  padding-top: 4px;
 }
 .action-card .action-card-traits {
-  height: 1.25rem;
+  height: 20px;
+  font-size: 12pt;
   font-style: italic;
   font-stretch: condensed;
   grid-area: action-card-traits;
@@ -133,7 +134,7 @@
   border: none;
   border-radius: 100%;
   grid-area: action-card-type;
-  margin: 0.5rem 0 0 0.5rem;
+  margin: 8px 0 0 8px;
 }
 .action-card .face.active {
   display: flex;
@@ -141,7 +142,7 @@
 }
 .action-card .face.conservative {
   background-color: #d8b880;
-  border-radius: 1.5rem;
+  border-radius: 24px;
 }
 .action-card .face.conservative > .action-card-effects {
   border-color: sienna;
@@ -151,7 +152,7 @@
 }
 .action-card .face.reckless {
   background-color: #e0e0e0;
-  border-radius: 1.5rem;
+  border-radius: 24px;
 }
 .action-card .face.reckless > .action-card-effects {
   border-color: darkgrey;
@@ -215,19 +216,20 @@
   color: white;
   background-color: saddlebrown;
   border: 1px solid black;
+  font-size: 12pt;
   height: 635px;
-  margin: 0.5rem;
-  padding: 1.25rem;
+  margin: 8px;
+  padding: 20px;
   position: relative;
   width: 510px;
 }
 .career-sheet .career-sheet-art {
   border: none;
-  bottom: 2rem;
+  bottom: 32px;
   max-height: 490px;
   max-width: 260px;
   position: absolute;
-  right: 2rem;
+  right: 32px;
 }
 .career-sheet .career-sheet-description {
   background-color: antiquewhite;
@@ -236,13 +238,14 @@
   column-count: 2;
   -moz-column-fill: auto;
   column-fill: auto;
-  -moz-column-gap: 1.25rem;
-  column-gap: 1.25rem;
+  -moz-column-gap: 20px;
+  column-gap: 20px;
   -moz-column-rule: 1px solid red;
   column-rule: 1px solid red;
-  font-size: 10pt;
-  height: calc(100% - 6rem);
-  padding: 0.25rem 0.5rem 0.5rem;
+  font-size: 12pt;
+  height: calc(100% - 96px);
+  line-height: 11pt;
+  padding: 4px 8px 8px;
   text-align: justify;
   text-shadow: none;
 }
@@ -262,9 +265,6 @@
   font-weight: bold;
   position: relative;
 }
-.career-sheet .career-sheet-name:hover {
-  text-shadow: 0 0 8px var(--color-shadow-primary);
-}
 .career-sheet .career-sheet-traits {
   font-style: italic;
 }
@@ -274,7 +274,7 @@
   font-variant-caps: small-caps;
   grid-template-areas: 'career-sheet-advance-options-header career-sheet-advance-options-header' 'career-sheet-action-advance-options career-sheet-talent-advance-options' 'career-sheet-skill-advance-options career-sheet-fortune-advance-options' 'career-sheet-conservative-advance-options career-sheet-reckless-advance-options' 'career-sheet-wound-advance-options career-sheet-wound-advance-options';
   grid-template-columns: 90px 90px;
-  grid-template-rows: 1.25rem 2.5rem 2.5rem 2.5rem 1fr;
+  grid-template-rows: 20px 36px 36px 36px 1fr;
   height: 185px;
   line-height: 10pt;
   margin: 0 auto;
@@ -288,38 +288,41 @@
   font-size: 14pt;
   font-weight: bold;
   grid-area: career-sheet-advance-options-header;
-  line-height: 1.5rem;
+  line-height: 24px;
 }
-.career-sheet .career-sheet-action-advance-options {
+.career-sheet .career-sheet-advance-option {
+  margin-top: 4px;
+}
+.career-sheet .career-sheet-advance-option.action {
   grid-area: career-sheet-action-advance-options;
 }
-.career-sheet .career-sheet-talent-advance-options {
+.career-sheet .career-sheet-advance-option.talent {
   grid-area: career-sheet-talent-advance-options;
 }
-.career-sheet .career-sheet-skill-advance-options {
+.career-sheet .career-sheet-advance-option.skill {
   grid-area: career-sheet-skill-advance-options;
 }
-.career-sheet .career-sheet-fortune-advance-options {
+.career-sheet .career-sheet-advance-option.fortune {
   grid-area: career-sheet-fortune-advance-options;
 }
-.career-sheet .career-sheet-conservative-advance-options {
+.career-sheet .career-sheet-advance-option.conservative {
   grid-area: career-sheet-conservative-advance-options;
 }
-.career-sheet .career-sheet-reckless-advance-options {
+.career-sheet .career-sheet-advance-option.reckless {
   grid-area: career-sheet-reckless-advance-options;
 }
-.career-sheet .career-sheet-wound-advance-options {
+.career-sheet .career-sheet-advance-option.wound {
   grid-area: career-sheet-wound-advance-options;
 }
-.career-sheet .career-sheet-advance-option-content {
+.career-sheet .career-sheet-advance-option .career-sheet-advance-option-content {
   color: yellow;
   font-weight: bold;
-  line-height: 1.25rem;
+  line-height: 16px;
 }
-.career-sheet .career-sheet-advance-option-title {
+.career-sheet .career-sheet-advance-option .career-sheet-advance-option-title {
   font-size: 10pt;
   font-weight: bold;
-  line-height: 1.25rem;
+  line-height: 16px;
 }
 .career-sheet .career-sheet-career-aptitudes {
   background-color: papayawhip;
@@ -328,8 +331,8 @@
   flex-direction: column;
   justify-content: space-between;
   height: 200px;
-  margin: 1.25rem;
-  padding: 0.5rem;
+  margin: 20px;
+  padding: 8px;
   text-align: center;
   text-shadow: none;
   width: 190px;
@@ -340,8 +343,10 @@
 .career-sheet .career-sheet-career-aptitudes-title {
   font-size: 14pt;
   font-variant-caps: small-caps;
+  line-height: 14pt;
 }
 .career-sheet .career-sheet-race-restrictions {
+  font-size: 11pt;
   font-variant-caps: small-caps;
 }
 .career-sheet .career-sheet-starting-stance {
@@ -842,7 +847,7 @@
   justify-content: flex-end;
 }
 .character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .characteristics .characteristic .characteristic-title {
-  font: 14pt "ArnoPro";
+  font: var(--font-size-18) var(--font-primary);
   font-variant-caps: small-caps;
   font-weight: bold;
   text-align: center;
@@ -893,7 +898,7 @@
 }
 .character-sheet form .character-sheet-body .characteristics-tab .characteristics-and-impairments .impairments .impairment .title {
   display: block;
-  font: 14pt "ArnoPro";
+  font: var(--font-size-18) var(--font-primary);
   font-variant-caps: small-caps;
   font-weight: bold;
   padding: 0 2px 0 4px;
@@ -906,7 +911,6 @@
   overflow: auto;
 }
 .character-sheet form .character-sheet-body .characteristics-tab .skills .skill-row {
-  font-size: 12pt;
   font-variant-caps: small-caps;
 }
 .character-sheet form .character-sheet-body .characteristics-tab .stance-meter {
@@ -964,10 +968,13 @@
 .character-sheet form .character-sheet-body .item-container .career-partial .career-advancement {
   flex: 1 1 300px;
 }
+.character-sheet form .character-sheet-body .item-container .talent-card {
+  margin-bottom: 2rem;
+}
 .character-sheet form .character-sheet-primary-tabs {
   display: flex;
   flex-flow: row wrap;
-  font: 14pt "ArnoPro";
+  font: var(--font-size-18) var(--font-primary);
   font-variant-caps: small-caps;
   font-weight: bold;
   height: auto !important;
@@ -979,7 +986,7 @@
 }
 .character-sheet form .character-sheet-title {
   display: block;
-  font: 14pt "ArnoPro";
+  font: var(--font-size-18) var(--font-primary);
   font-variant-caps: small-caps;
   font-weight: bold;
   text-align: center;
@@ -1012,7 +1019,7 @@
   margin-bottom: 1rem;
 }
 .check-builder form .main-options .convert-buttons button {
-  font-size: 10pt;
+  font-size: var(--font-size-10);
   line-height: 1.5rem;
   text-align: center;
 }
@@ -1024,11 +1031,11 @@
 }
 .check-builder form .main-options .encounter-type-select > h4 {
   flex-basis: 100%;
-  font-size: 16pt;
+  font-size: var(--font-size-16);
   margin-bottom: 0.5rem;
 }
 .check-builder form .main-options .encounter-type-select .encounter-type {
-  font-size: 14pt;
+  font-size: var(--font-size-14);
 }
 .check-builder form .main-options .encounter-type-select .encounter-type input {
   display: block;
@@ -1058,7 +1065,7 @@
 .check-builder form .main-options .dice-pool-table .pool-container > .pool-value {
   background-color: #ddd;
   border: 1px solid black;
-  font: 20pt "ArnoPro";
+  font: var(--font-size-20) var(--font-primary);
   margin: 0 1rem;
   padding-top: 0.5rem;
   text-align: center;
@@ -1091,7 +1098,7 @@
   margin-top: 1rem;
 }
 .check-builder form .main-options .symbols-pool {
-  font-size: 20pt;
+  font-size: var(--font-size-20);
   text-align: center;
 }
 .check-builder form .main-options .symbols-pool-container {
@@ -1101,7 +1108,7 @@
 .check-builder form .main-options .symbols-pool-container .pool-value {
   background-color: #ddd;
   border: 1px solid black;
-  font: 16pt "ArnoPro";
+  font: var(--font-size-16) var(--font-primary);
   margin: 0 0.25rem;
   padding-top: 0.5rem;
   text-align: center;
@@ -1141,7 +1148,7 @@
   border-radius: 0.75rem;
   cursor: pointer;
   display: inline-block;
-  font-size: 10pt;
+  font-size: var(--font-size-10);
   line-height: 1.5rem;
   list-style-type: none;
   margin: 1px;
@@ -1213,7 +1220,7 @@
 }
 .conditions .condition-card .condition-card-header .condition-card-name {
   color: white;
-  font: 16pt "Caslon Antique";
+  font: 16pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
@@ -1284,12 +1291,12 @@
   margin: 0 0.5rem;
 }
 .creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute .attribute-title {
-  font-size: 14pt;
+  font-size: var(--font-size-18);
   font-variant: small-caps;
 }
 .creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-attributes .attribute .attribute-input-container input {
   color: white;
-  font-size: 18pt;
+  font-size: var(--font-size-22);
   font-style: italic;
   padding-top: 0.5rem;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
@@ -1326,7 +1333,7 @@
 .creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-main-infos .creature-sheet-characteristics > div .characteristic-fortune-input {
   background: white;
   border-color: dimgray;
-  font-size: 10pt;
+  font-size: var(--font-size-14);
   font-weight: bold;
   height: 1.25rem;
   padding-top: 0.25rem;
@@ -1373,7 +1380,7 @@
   height: 100%;
 }
 .creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-stance {
-  font-size: 16pt;
+  font-size: var(--font-size-18);
   margin: auto 1rem 1rem 0;
 }
 .creature-sheet .window-content form .creature-sheet-body .creature-sheet-main-tab > div.creature-sheet-secondary-infos .creature-sheet-stance.conservative {
@@ -1411,7 +1418,7 @@
 .creature-sheet .window-content form .creature-sheet-header input.creature-sheet-threat-rating {
   color: white;
   flex: 0 0 3rem;
-  font-size: 24pt;
+  font-size: var(--font-size-28);
   padding-top: 0.5rem;
 }
 .creature-sheet .window-content form .creature-sheet-header .creature-sheet-name > input {
@@ -1426,7 +1433,7 @@
 }
 .creature-sheet .window-content form .creature-sheet-header .creature-sheet-wounds input {
   color: white;
-  font-size: 24pt;
+  font-size: var(--font-size-28);
   padding-top: 0.5rem;
 }
 .creature-sheet .window-content form .creature-sheet-tabs {
@@ -1457,7 +1464,7 @@
   background-color: #405848;
   float: left;
   color: white;
-  font: 20pt "Caslon Antique";
+  font: 20pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
@@ -1480,7 +1487,7 @@
   margin: auto 0;
   padding: 0 5px;
   color: white;
-  font: 16pt "Caslon Antique";
+  font: 16pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   vertical-align: middle;
@@ -1503,7 +1510,7 @@
   bottom: 0;
   right: 5px;
 }
-.insanities .insanity-card {
+.insanity-card {
   position: relative;
   width: 255px;
   height: 385px;
@@ -1513,53 +1520,53 @@
   text-align: center;
   background-color: #d0d8e0;
 }
-.insanities .insanity-card .insanity-card-content {
+.insanity-card .insanity-card-content {
   padding: 0 5px;
 }
-.insanities .insanity-card .insanity-card-content .insanity-card-description {
+.insanity-card .insanity-card-content .insanity-card-description {
   text-align: left;
   margin-left: 0;
   padding: 0;
   border: 0;
 }
-.insanities .insanity-card .insanity-card-content .insanity-card-severity-rating {
+.insanity-card .insanity-card-content .insanity-card-severity-rating {
   width: 31px;
   height: 31px;
   background-color: #202020;
   float: right;
   color: white;
-  font: 20pt "Caslon Antique";
+  font: 20pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
-.insanities .insanity-card .insanity-card-content .insanity-card-symptom {
+.insanity-card .insanity-card-content .insanity-card-symptom {
   text-align: left;
 }
-.insanities .insanity-card .insanity-card-content .insanity-card-symptom .symptom-name {
+.insanity-card .insanity-card-content .insanity-card-symptom .symptom-name {
   text-transform: uppercase;
 }
-.insanities .insanity-card .insanity-card-content .insanity-card-symptom .symptom-name::first-letter {
+.insanity-card .insanity-card-content .insanity-card-symptom .symptom-name::first-letter {
   font-size: 16pt;
 }
-.insanities .insanity-card .insanity-card-header {
+.insanity-card .insanity-card-header {
   display: flex;
   flex-direction: column;
   height: 70px;
   margin-bottom: 5px;
 }
-.insanities .insanity-card .insanity-card-header .insanity-card-name {
+.insanity-card .insanity-card-header .insanity-card-name {
   margin: auto 0;
   padding: 0 5px;
   color: white;
-  font: 16pt "Caslon Antique";
+  font: 16pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   vertical-align: middle;
 }
-.insanities .insanity-card .insanity-card-header .insanity-card-name:hover {
+.insanity-card .insanity-card-header .insanity-card-name:hover {
   text-shadow: 0 0 8px var(--color-shadow-primary);
 }
-.insanities .insanity-card .insanity-card-header .insanity-card-traits {
+.insanity-card .insanity-card-header .insanity-card-traits {
   height: 20px;
   padding: 3px 5px;
   background-color: #303030;
@@ -1569,7 +1576,7 @@
   font-weight: bold;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
-.insanities .insanity-card .item-delete-link {
+.insanity-card .item-delete-link {
   position: absolute;
   bottom: 0;
   right: 5px;
@@ -1604,7 +1611,7 @@
 .miscasts .miscast-card .miscast-card-header .miscast-card-name {
   margin: auto 0;
   color: white;
-  font: 16pt "Caslon Antique";
+  font: 16pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
@@ -1619,7 +1626,7 @@
   right: 15px;
   background-color: #703818;
   color: white;
-  font: 20pt "Caslon Antique";
+  font: 20pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
@@ -1653,7 +1660,7 @@
   background-color: #e8e8e8;
   float: left;
   color: white;
-  font: 20pt "Caslon Antique";
+  font: 20pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
@@ -1676,7 +1683,7 @@
   margin: auto 0;
   padding: 0 5px;
   color: white;
-  font: 16pt "Caslon Antique";
+  font: 16pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
   vertical-align: middle;
@@ -1718,7 +1725,7 @@
   text-align: center;
 }
 .party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-header .party-sheet-name {
-  font-size: 16pt;
+  font-size: var(--font-size-20);
 }
 .party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-header .party-sheet-traits {
   font-style: italic;
@@ -1736,7 +1743,7 @@
   right: 5px;
 }
 .party-sheet .party-sheet-body .party-sheet-left-side .party-sheet-tension .party-sheet-tension-title {
-  font-size: 16pt;
+  font-size: var(--font-size-20);
   font-variant-caps: small-caps;
   font-weight: bold;
   text-align: center;
@@ -1765,7 +1772,7 @@
 }
 .party-sheet .party-sheet-body .party-sheet-right-side .fortune-token > .fortune-counter {
   color: white;
-  font-size: 24pt;
+  font-size: var(--font-size-28);
   left: 50%;
   position: absolute;
   bottom: 2.5%;
@@ -1776,7 +1783,7 @@
   text-shadow: 0 0 8px var(--color-shadow-primary);
 }
 .party-sheet .party-sheet-special-ability .party-sheet-special-ability-title {
-  font-size: 16pt;
+  font-size: var(--font-size-20);
   font-variant-caps: small-caps;
   font-weight: bold;
   text-align: center;
@@ -1790,7 +1797,7 @@
 .party-sheet .party-sheet-tension-meter .party-sheet-tension-meter-plus {
   display: block;
   height: 2.5rem;
-  font-size: 20pt;
+  font-size: var(--font-size-24);
   padding-top: 0.25rem;
   text-align: center;
   vertical-align: middle;
@@ -1806,7 +1813,7 @@
   color: white;
   height: 2.5rem;
   flex: 0 0 40px;
-  font-size: 24pt;
+  font-size: var(--font-size-28);
   padding-top: 2px;
   text-align: center;
   width: 2.5rem;
@@ -1837,7 +1844,7 @@
   margin-left: 0.5rem;
 }
 .dice-additional-flavor {
-  font-size: 10pt;
+  font-size: var(--font-size-10);
   font-style: oblique;
 }
 .dice-array {
@@ -1892,7 +1899,7 @@
   grid-template: 60px 1fr / 50px 1fr;
   grid-template-areas: 'talent-card-type talent-card-name' 'talent-card-type talent-card-content' 'talent-card-type talent-card-bottom';
   height: 255px;
-  margin: 0.5rem 0.5rem 2rem;
+  margin: 8px;
   position: relative;
   width: 385px;
 }
@@ -1912,11 +1919,11 @@
 }
 .talent-card .talent-card-bottom .recharge-token > img {
   border: none;
-  height: 3rem;
+  height: 48px;
   opacity: 75%;
 }
 .talent-card .talent-card-bottom .recharge-token > .recharge-token-counter {
-  font-size: 2rem;
+  font-size: 32px;
   left: 50%;
   position: absolute;
   text-shadow: -1pt -1pt 0 white, -1pt 0 0 white, 0 -1pt 0 white, -1pt 1pt 0 white, 1pt -1pt 0 white, 0 1pt 0 white, 1pt 0 0 white, 1pt 1pt 0 white;
@@ -1933,26 +1940,24 @@
   width: 100%;
 }
 .talent-card .talent-card-content {
+  font-size: 12pt;
   grid-area: talent-card-content;
   margin: auto 6px;
 }
 .talent-card .talent-card-name {
   background: padding-box saddlebrown;
   color: white;
-  font: 20pt "Caslon Antique";
+  font: 20pt var(--font-title);
   grid-area: talent-card-name;
   margin: auto 0;
   text-align: center;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
-.talent-card .talent-card-name:hover {
-  text-shadow: 0 0 8px var(--color-shadow-primary);
-}
 .talent-card .talent-card-type {
   background-color: saddlebrown;
   color: white;
   display: block;
-  font: 14pt "ArnoPro";
+  font: 14pt var(--font-primary);
   font-variant-caps: small-caps;
   font-weight: bold;
   grid-area: talent-card-type;
@@ -2007,6 +2012,12 @@
   font-weight: normal;
   src: url(../assets/fonts/WFRP3eSymbols.otf) format('opentype');
 }
+:root {
+  --font-primary: "ArnoPro";
+  --font-title: "Caslon Antique";
+  --font-symbols: "WFRP3eSymbols";
+  --font-size-10: 0,625rem;
+}
 .wounds .wound-card {
   display: flex;
   flex-direction: column;
@@ -2036,7 +2047,7 @@
   border: 10px solid #2e231f;
   background-color: #e0c0b0;
   color: white;
-  font: 16pt "Caslon Antique";
+  font: 16pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
@@ -2051,7 +2062,7 @@
   right: 15px;
   background-color: #703818;
   color: white;
-  font: 20pt "Caslon Antique";
+  font: 20pt var(--font-title);
   font-variant-caps: small-caps;
   text-shadow: -1pt -1pt 0 black, -1pt 0 0 black, 0 -1pt 0 black, -1pt 1pt 0 black, 1pt -1pt 0 black, 0 1pt 0 black, 1pt 0 0 black, 1pt 1pt 0 black;
 }
@@ -2061,16 +2072,19 @@
   left: 15px;
 }
 body {
-  font: 12pt "ArnoPro";
+  font-size: var(--font-size-16);
+}
+button {
+  font-size: var(--font-size-16);
 }
 h1 {
-  font: 32pt "Caslon Antique";
+  font: var(--font-size-32) var(--font-title);
 }
 h2 {
-  font: 24pt "Caslon Antique";
+  font: var(--font-size-24) var(--font-title);
 }
 h3 {
-  font: 20pt "Caslon Antique";
+  font: var(--font-size-20) var(--font-title);
 }
 h3.entity-name,
 .encounters h3,
@@ -2081,21 +2095,21 @@ h3.entity-name,
   border: unset !important;
 }
 h4 {
-  font: 16pt "ArnoPro";
+  font-size: var(--font-size-18);
   margin: auto !important;
 }
 h5 {
-  font: 14pt "ArnoPro";
+  font-size: var(--font-size-16);
 }
 h6 {
-  font: 12pt "ArnoPro";
+  font-size: var(--font-size-14);
 }
 input[type="checkbox"] {
   height: 1rem;
   width: 1rem;
 }
 li.folder > .folder-header h3 {
-  font-size: 16pt;
+  font-size: var(--font-size-20);
 }
 td {
   padding: 0.25rem;
@@ -2165,6 +2179,9 @@ th.shrinked {
 .reckless-stance-meter {
   background-color: red;
 }
+.settings-sidebar h2 {
+  font-size: var(--font-size-24);
+}
 .sheet .editor-content {
   margin: 0 0.5rem;
 }
@@ -2176,7 +2193,7 @@ th.shrinked {
   text-shadow: -1px -1px 0 black, -1px 0 0 black, 0 -1px 0 black, -1px 1px 0 black, 1px -1px 0 black, 0 1px 0 black, 1px 0 0 black, 1px 1px 0 black;
 }
 .wfrp3e-font {
-  font-family: "WFRP3eSymbols";
+  font-family: var(--font-symbols);
 }
 .wfrp3e-font.dice {
   text-shadow: none;
