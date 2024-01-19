@@ -1,0 +1,30 @@
+{
+  "folder": "Ei5KZX1hAFFuIy5z",
+  "name": "Stealth",
+  "type": "skill",
+  "_id": "J7ySozk1SB3VwGxl",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>The ability to keep from being seen or heard, this skill combines hiding with being quiet. Use this skill to move quietly or remain silent and unobserved. Often, Stealth is opposed by an opponent&rsquo;s Observation skill. When trying to remain silent and hidden, performing manoeuvres costs 1 stress in addition to any other costs.</p>\n<p><em>Specialisation options:</em> silent movement: rural, silent movement: wilderness, hide, ambush, disappear in a crowd</p>",
+    "characteristic": "agility",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317302885,
+    "modifiedTime": 1699628061290,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!J7ySozk1SB3VwGxl"
+}

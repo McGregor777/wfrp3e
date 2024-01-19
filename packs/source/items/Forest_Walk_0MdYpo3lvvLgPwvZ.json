@@ -1,0 +1,26 @@
+{
+  "folder": "7KxNPEqXRUaBjezJ",
+  "name": "Forest Walk",
+  "type": "ability",
+  "_id": "0MdYpo3lvvLgPwvZ",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Wood elves may ignore terrain-based manoeuvre penalties and up to [[DM]][[DM]] misfortune penalties to movement and actions performed while in woodland terrain.</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1700165848378,
+    "modifiedTime": 1701256084054,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!0MdYpo3lvvLgPwvZ"
+}

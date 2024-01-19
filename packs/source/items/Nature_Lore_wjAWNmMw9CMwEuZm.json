@@ -1,0 +1,30 @@
+{
+  "folder": "Ei5KZX1hAFFuIy5z",
+  "name": "Nature Lore",
+  "type": "skill",
+  "_id": "wjAWNmMw9CMwEuZm",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Wilderness savvy and the ability to withstand the rigours of nature and interpret its subtle clues. This skill also covers subsisting in the wild. It includes such activities as fishing, locating potable water, finding edible food, or identifying animal tracks. This skill also covers familiarity with plants, animals, weather patterns, and life outside the civilised areas.</p>\n<p><em>Specialisation options:</em> locate shelter, locate food, locate water, identify&nbsp;animal, identify plant</p>",
+    "characteristic": "intelligence",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317207042,
+    "modifiedTime": 1699628061290,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!wjAWNmMw9CMwEuZm"
+}

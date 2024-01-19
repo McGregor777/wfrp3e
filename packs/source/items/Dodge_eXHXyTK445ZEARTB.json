@@ -1,0 +1,87 @@
+{
+  "name": "Dodge",
+  "type": "action",
+  "img": "systems/wfrp3e/assets/images/actions/dodge.jpg",
+  "effects": [],
+  "folder": "ivXOnATwCKlIm1Tl",
+  "flags": {
+    "core": {},
+    "exportSource": {
+      "world": "warhammer-3e",
+      "system": "wfrp3e",
+      "coreVersion": "11.311",
+      "systemVersion": "0.5.2-alpha"
+    }
+  },
+  "system": {
+    "conservative": {
+      "name": "Dodge",
+      "art": "systems/wfrp3e/assets/images/actions/dodge.jpg",
+      "type": "support",
+      "traits": "Basic, Active Defence",
+      "rechargeRating": 2,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "check": "No Check Required",
+      "requirements": "<p>Agility 3+, not encumbered</p>",
+      "special": "<p><strong>Special:</strong> If you have Coordination trained, add an additional <span class=\"wfrp3e-font dice misfortune\"></span> to the action&rsquo;s dice pool</p>",
+      "uniqueEffect": "<p><strong>Effect:</strong> After you have been declared the target of a <em>Melee Attack</em> or <em>Ranged Attack</em>, or a <em>Spell</em> or <em>Blessing</em> that targets you defence, add two recharge tokens to this card to add <span class=\"wfrp3e-font dice misfortune\"></span> to the action&rsquo;s dice pool</p>",
+      "effects": {
+        "success": [],
+        "boon": [],
+        "sigmarsComet": [],
+        "bane": [],
+        "chaosStar": [],
+        "righteousSuccess": [],
+        "challenge": [],
+        "delay": [],
+        "exertion": []
+      }
+    },
+    "reckless": {
+      "name": "Dodge",
+      "art": "systems/wfrp3e/assets/images/actions/dodge.jpg",
+      "type": "support",
+      "traits": "Basic, Active Defence",
+      "rechargeRating": 2,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "check": "No Check Required",
+      "requirements": "<p>Agility 3+, not encumbered</p>",
+      "special": "<p><strong>Special:</strong> If you have Coordination trained, add an additional <span class=\"wfrp3e-font dice misfortune\"></span> to the action&rsquo;s dice pool</p>",
+      "uniqueEffect": "<p><strong>Effect:</strong> After you have been declared the target of a <em>Melee Attack</em> or <em>Ranged Attack</em>, or a <em>Spell</em> or <em>Blessing</em> that targets you defence, add two recharge tokens to this card to add <span class=\"wfrp3e-font dice misfortune\"></span> to the action&rsquo;s dice pool</p>",
+      "effects": {
+        "success": [],
+        "boon": [],
+        "sigmarsComet": [],
+        "bane": [],
+        "chaosStar": [],
+        "righteousSuccess": [],
+        "challenge": [],
+        "delay": [],
+        "exertion": []
+      }
+    },
+    "rechargeTokens": 0,
+    "type": "support"
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1696334694650,
+    "modifiedTime": 1701883821920,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "eXHXyTK445ZEARTB",
+  "sort": 1100000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!eXHXyTK445ZEARTB"
+}

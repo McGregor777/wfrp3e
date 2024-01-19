@@ -1,0 +1,85 @@
+{
+  "name": "Bounty Hunter",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/bounty_hunter.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>In the heart of the Empire, institutions such as the Cult of Verena, the watchmen, the fearsome judges, and the road wardens attempt to enforce the law and bring criminals to justice. Despite their efforts great stretches of the Empire remain largely lawless. Fugitives hide in the rookeries of poor quarters of cities, while gangs of outlaws and highway robbers operate with effective impunity in the vast tracts of wilderness. Often the most expedient way to see a fugitive brought in is to place a price on his head and hope someone else does the job. In areas of the Empire under threat from raiding greenskins or beastmen, rewards are also offered to anyone who provides evidence of a kill &ndash; goblin ears are accepted as proof, as are the hands of beastmen.</p>\n<p>Some people become full-time bounty hunters, living by tracking down bandits, highwaymen, river pirates and other outlaws. The rewards can be good for bringing wanted men back dead, but greater remuneration is usually offered for living fugitives. This is because most noble rulers follow the maxim that justice must be seen in order to be done (unless the criminal is from the aristocracy), and the populace just love a good hanging. Unscrupulous bounty hunters exist, and they have even been known to kill innocent victims unlucky enough to resemble a genuine fugitive. As a result, the peasantry view a known bounty hunter with trepidation. Their employers see them as a necessary evil, treating them with a curious mixture of gratitude and disgust.</p>\n<p>Bounty hunters live a life of adventure day to day. Sometimes they join parties of adventurers when work is short, or when having a little back-up might help in bringing in a particularly dangerous criminal.</p>\n<p><strong>Typical Trappings:</strong> Bounty hunters typically favour the crossbow and net to bring down their quarry. They carry a quiver with about a dozen bolts. They wear sturdy leather armour on their body and head. To restrain prisoners, bounty hunters make use of manacles and rope.</p>\n<p><strong>Career Ability:</strong> Once per session, you may name one adversary as your quarry. Add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to all Observation, Intuition, Melee Attack and Ranged Attack checks targeting your quarry for the remainder of the encounter</p>",
+    "advanced": false,
+    "raceRestrictions": "Human, Dwarf, High Elf, or Wood Elf",
+    "traits": "Basic, Combat, Rural, Urban",
+    "talentSockets": [
+      "reputation",
+      "tactic"
+    ],
+    "primaryCharacteristics": [
+      "agility",
+      "intelligence"
+    ],
+    "careerSkills": "Ballistic Skill, Intuition, Observation, Ride, Stealth",
+    "startingStance": {
+      "conservativeSegments": 2,
+      "recklessSegments": 2
+    },
+    "advanceOptions": {
+      "action": 2,
+      "talent": 2,
+      "skill": 1,
+      "fortune": 1,
+      "conservative": 1,
+      "reckless": 1,
+      "wound": 2
+    },
+    "summary": "Determined, focused individual good at tracking down others",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549815229,
+    "modifiedTime": 1699628613340,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "lRH45pBO6rGyq5PU",
+  "sort": 300000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!lRH45pBO6rGyq5PU"
+}

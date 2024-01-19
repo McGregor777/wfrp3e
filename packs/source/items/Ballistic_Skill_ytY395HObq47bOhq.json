@@ -1,0 +1,30 @@
+{
+  "folder": "Ei5KZX1hAFFuIy5z",
+  "name": "Ballistic Skill",
+  "type": "skill",
+  "_id": "ytY395HObq47bOhq",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Covers the basic use, care and&nbsp;maintenance of ranged weapons. This includes thrown weapons,&nbsp;like balanced knives and javelins, as well as bows, crossbows, and&nbsp;slings. Also covers the basics of blackpowder weapon care and&nbsp;operation. It is a combination of hand-eye coordination, accuracy,&nbsp;and training with ranged items.</p>\n<p><em>Specialisation options:</em>&nbsp;bow, crossbow, thrown weapons, blackpowder&nbsp;weapons</p>",
+    "characteristic": "agility",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317018941,
+    "modifiedTime": 1699628061290,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!ytY395HObq47bOhq"
+}

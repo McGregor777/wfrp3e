@@ -1,0 +1,26 @@
+{
+  "folder": "7KxNPEqXRUaBjezJ",
+  "name": "Night Vision",
+  "type": "ability",
+  "_id": "VHiON3EQ7VMe41jT",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Two fewer [[DM]][[DM]] misfortune dice are added to your dice pool for any effects from darkness or lack of sufficient light.</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1700165750479,
+    "modifiedTime": 1701256153198,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!VHiON3EQ7VMe41jT"
+}

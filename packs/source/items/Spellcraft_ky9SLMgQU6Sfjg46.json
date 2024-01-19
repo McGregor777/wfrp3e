@@ -1,0 +1,30 @@
+{
+  "folder": "XhX735J1TWTpv8es",
+  "name": "Spellcraft",
+  "type": "skill",
+  "_id": "ky9SLMgQU6Sfjg46",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Covers knowledge and understanding of basic magical principles and history, as well as the fundamental concepts of the Winds of Magic. Also used to take arcane power and convert it into a spell effect, thus Spellcraft is used for the casting portion of arcane magic. The arcane equivalent of the divine skill Invocation.</p>\n<p><em>Specialisation options:</em> history of Magic, Colleges of Magic, Rank 1 spells, Rank 2 spells, Rank 3 spells, Rank 4 spells, Rank 5 spells</p>",
+    "characteristic": "intelligence",
+    "advanced": true,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317538329,
+    "modifiedTime": 1699628063201,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!ky9SLMgQU6Sfjg46"
+}

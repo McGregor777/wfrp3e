@@ -1,0 +1,30 @@
+{
+  "folder": "Ei5KZX1hAFFuIy5z",
+  "name": "Coordination",
+  "type": "skill",
+  "_id": "aitoSSccLApc6wJg",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Applying one&rsquo;s manual dexterity and fine motor skills to specific tasks. Use this skill to perform feats of acrobatics, balance along narrow surfaces, or slip from bonds. It also reflects delicacy and precision while manipulating objects.</p>\n<p><em>Specialisation options:</em>&nbsp;dodge, balance, acrobatics, juggling, dance,&nbsp;knots &amp; ropework</p>",
+    "characteristic": "agility",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317056615,
+    "modifiedTime": 1699628061290,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!aitoSSccLApc6wJg"
+}

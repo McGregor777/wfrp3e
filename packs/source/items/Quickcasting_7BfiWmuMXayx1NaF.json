@@ -1,0 +1,77 @@
+{
+  "folder": "ivXOnATwCKlIm1Tl",
+  "name": "Quickcasting",
+  "type": "action",
+  "img": "icons/magic/control/sihouette-hold-beam-green.webp",
+  "system": {
+    "conservative": {
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [],
+        "righteousSuccess": [],
+        "boon": [],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Quickcasting",
+      "art": null,
+      "traits": "Basic",
+      "check": "No Check Required",
+      "requirements": "<p>This special ability is available to all wizards and does not need to be acquired specially</p>",
+      "special": "<p><strong>Special:</strong> Normally, a character can only perform the action listed on one action card during his turn. However, spellcasters can attempt to both channel power and cast a spell on the same turn, if they are willing to accept more risk. For a character to cast a spell during the same turn the character channels, the player must add one extra challenge die [[DChal]] to the check to cast the spell</p>"
+    },
+    "reckless": {
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [],
+        "righteousSuccess": [],
+        "boon": [],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Quickcasting",
+      "art": null,
+      "traits": "Basic",
+      "check": "No Check Required",
+      "requirements": "<p>This special ability is available to all wizards and does not need to be acquired specially</p>",
+      "special": "<p><strong>Special:</strong> Normally, a character can only perform the action listed on one action card during his turn. However, spellcasters can attempt to both channel power and cast a spell on the same turn, if they are willing to accept more risk. For a character to cast a spell during the same turn the character channels, the player must add one extra challenge die [[DChal]] to the check to cast the spell</p>"
+    },
+    "rechargeTokens": 0,
+    "type": "spell"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1701868149808,
+    "modifiedTime": 1703178529087,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "7BfiWmuMXayx1NaF",
+  "sort": 300000,
+  "_key": "!items!7BfiWmuMXayx1NaF"
+}

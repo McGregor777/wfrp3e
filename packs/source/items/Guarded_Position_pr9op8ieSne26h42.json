@@ -1,0 +1,125 @@
+{
+  "name": "Guarded Position",
+  "type": "action",
+  "img": "icons/skills/melee/shield-block-gray-orange.webp",
+  "effects": [],
+  "folder": "ivXOnATwCKlIm1Tl",
+  "flags": {
+    "core": {},
+    "exportSource": {
+      "world": "warhammer-3e",
+      "system": "wfrp3e",
+      "coreVersion": "11.311",
+      "systemVersion": "0.5.2-alpha"
+    }
+  },
+  "system": {
+    "conservative": {
+      "name": "Guarded Position",
+      "art": null,
+      "type": "support",
+      "traits": "Basic, Defence",
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "check": "Discipline (WP)",
+      "requirements": "<p>None</p>",
+      "special": "",
+      "uniqueEffect": "",
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+          },
+          {
+            "symbolAmount": 3,
+            "description": "<p>Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span><span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+          }
+        ],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>An engaged ally may remove one recharge token from any of his currently recharging cards</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "bane": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Suffer 1 stress</p>"
+          }
+        ],
+        "chaosStar": [],
+        "righteousSuccess": [],
+        "challenge": [],
+        "delay": [],
+        "exertion": []
+      }
+    },
+    "reckless": {
+      "name": "Guarded Position",
+      "art": null,
+      "type": "support",
+      "traits": "Basic, Defence",
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "check": "Discipline (WP)",
+      "requirements": "<p>None</p>",
+      "special": "",
+      "uniqueEffect": "",
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+          },
+          {
+            "symbolAmount": 3,
+            "description": "<p>Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span><span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+          }
+        ],
+        "boon": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>An engaged ally may remove one recharge token from any of his currently recharging cards</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "bane": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Suffer 1 stress</p>"
+          }
+        ],
+        "chaosStar": [],
+        "righteousSuccess": [],
+        "challenge": [],
+        "delay": [],
+        "exertion": []
+      }
+    },
+    "rechargeTokens": 0,
+    "type": "support"
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1696334694650,
+    "modifiedTime": 1701883626467,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "pr9op8ieSne26h42",
+  "sort": 800000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!pr9op8ieSne26h42"
+}

@@ -1,0 +1,85 @@
+{
+  "name": "Gambler",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/gambler.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>Games of chance are a popular pastime in throughout the Empire. Some of these diversions are considered serious and tactical games, such as the tense play of Find the Empress or Five Knives, whilst others are merely knockabout fun, such as popular dice games like Daemon&rsquo;s Eyes and Cripple My Pig.</p>\n<p>It is common for a small sum to be staked, even on quick informal games held in taverns. In larger towns and cities, there are always gambling dens where hardened gamblers pit their skills against each other and the house itself. Some gamblers become so adept at playing their favourite games that they do little else and are able to live off their winnings (most of the time).</p>\n<p>A few of these gamblers are simply great players with mathematical intuitions, able to keep cool and play the probabilities to their advantage. Most gamblers adopt some degree of chicanery though. Some play a deliberately poor game for the first few hands in order to gull their opponents into raising the stakes. Other gamblers go so far as to employ loaded dice or spare aces in order to cheat.</p>\n<p>Gamblers usually live an itinerant lifestyle. They move from place to place to avoid bad debts and sore losers. They may travel in order to take advantage of local events or festivals, such as jousting matches, or to take part in the dicing league held annually in Altdorf &rsquo;s Street of a Hundred Taverns.</p>\n<p>A desperate gambler may need to find money, or escape from those he owes it to, at short notice. Such gamblers may take up the adventuring life, and can find that it offers them the same thrills, near misses, and rewards that they enjoy so much at the gaming table.</p>\n<p><strong>Typical Trappings:</strong> A gambler will always carry a pair of dice and a deck of cards. An unscrupulous gambler will also possess a weighted set of dice, or spare high value cards, such as emperors and aces.</p>\n<p><strong>Career Ability:</strong> Once per session, you may re-roll the entire dice pool for any single check. Dice cannot be changed or added to the pool. You must accept the new result</p>",
+    "advanced": false,
+    "raceRestrictions": "Human, Dwarf, or High Elf",
+    "traits": "Basic, Rogue, Social, Urban",
+    "talentSockets": [
+      "focus",
+      "reputation"
+    ],
+    "primaryCharacteristics": [
+      "agility",
+      "fellowship"
+    ],
+    "careerSkills": "Guile, Intuition, Observation, Skulduggery, Stealth",
+    "startingStance": {
+      "conservativeSegments": 1,
+      "recklessSegments": 3
+    },
+    "advanceOptions": {
+      "action": 2,
+      "talent": 3,
+      "skill": 2,
+      "fortune": 2,
+      "conservative": 0,
+      "reckless": 1,
+      "wound": 0
+    },
+    "summary": "Resourceful person who always has a trick (or card) up his sleeve",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549831643,
+    "modifiedTime": 1699628657391,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "y6OPVrR8MTRuYOV3",
+  "sort": 1400000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!y6OPVrR8MTRuYOV3"
+}

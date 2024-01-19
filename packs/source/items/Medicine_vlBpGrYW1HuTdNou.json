@@ -1,0 +1,30 @@
+{
+  "folder": "XhX735J1TWTpv8es",
+  "name": "Medicine",
+  "type": "skill",
+  "_id": "vlBpGrYW1HuTdNou",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>The knowledge of the mortal body and how to care for it when seriously injured. This skill takes healing and treatment beyond the scope of First Aid, and can produce more dramatic results. Also covers rudiments of surgery, amputations, cauterisation, treating poisons and disease, suturing and long-term medical care.</p>\n<p><em>Specialisation options:</em> critical wounds, poison, disease, long-term care, surgery</p>",
+    "characteristic": "intelligence",
+    "advanced": true,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317514953,
+    "modifiedTime": 1699628063201,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!vlBpGrYW1HuTdNou"
+}

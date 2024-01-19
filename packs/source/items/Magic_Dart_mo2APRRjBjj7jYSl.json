@@ -1,0 +1,115 @@
+{
+  "folder": "ivXOnATwCKlIm1Tl",
+  "name": "Magic Dart",
+  "type": "action",
+  "img": "icons/magic/lightning/strike-arrow-spear-red.webp",
+  "system": {
+    "conservative": {
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>A glimmering magical bolt of a style appropriate to your order flies through the air and strikes your target for 3+Int damage</p>"
+          }
+        ],
+        "righteousSuccess": [],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Ignore your target&rsquo;s armour soak value for this attack</p>"
+          }
+        ],
+        "sigmarsComet": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>+1 critical</p>"
+          }
+        ],
+        "challenge": [],
+        "bane": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Suffer 1 fatigue and 1 stress</p>"
+          }
+        ],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Magic Dart",
+      "art": null,
+      "traits": "Petty Magic, Basic",
+      "check": "Spellcraft (Int)",
+      "requirements": "<p>3 power, target within medium range. If you are engaged with an enemy, add [[dchal]] to your dice pool</p>"
+    },
+    "reckless": {
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>A glimmering magical bolt of a style appropriate to your order flies through the air and strikes your target for 3+Int damage</p>"
+          }
+        ],
+        "righteousSuccess": [],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Ignore your target&rsquo;s armour soak value for this attack</p>"
+          }
+        ],
+        "sigmarsComet": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>+1 critical</p>"
+          }
+        ],
+        "challenge": [],
+        "bane": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Suffer 1 fatigue and 1 stress</p>"
+          }
+        ],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Magic Dart",
+      "art": null,
+      "traits": "Petty Magic, Basic",
+      "check": "Spellcraft (Int)",
+      "requirements": "<p>3 power, target within medium range. If you are engaged with an enemy, add [[dchal]] to your dice pool</p>"
+    },
+    "rechargeTokens": 0,
+    "type": "spell"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1701867885135,
+    "modifiedTime": 1701868776710,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "mo2APRRjBjj7jYSl",
+  "sort": 600000,
+  "_key": "!items!mo2APRRjBjj7jYSl"
+}

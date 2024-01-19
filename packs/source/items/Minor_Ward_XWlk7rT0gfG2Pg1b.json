@@ -1,0 +1,115 @@
+{
+  "folder": "ivXOnATwCKlIm1Tl",
+  "name": "Minor Ward",
+  "type": "action",
+  "img": "icons/magic/defensive/barrier-shield-dome-blue-purple.webp",
+  "system": {
+    "conservative": {
+      "rechargeRating": 3,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 1
+      },
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>The blessing is invoked</p>"
+          },
+          {
+            "symbolAmount": 2,
+            "description": "<p>The blessing is invoked, and add 1 Recharge token to it</p>"
+          }
+        ],
+        "righteousSuccess": [],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>The target may recover 1 wound</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Suffer 1 fatigue</p>"
+          }
+        ],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Minor Ward",
+      "art": null,
+      "traits": "Basic, Minor, Ongoing, Rank 0",
+      "check": "Invocation (Fel)",
+      "requirements": "<p>3 favour, target within close range (you may target yourself). Add [[DChal]] to your dice pool if you are engaged with an enemy</p>",
+      "uniqueEffect": "<p><strong>Effect:</strong> Your target is protected by a radiant glow. While this card is recharging, his soak value is increased by 1</p>"
+    },
+    "reckless": {
+      "rechargeRating": 3,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 1
+      },
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>The blessing is invoked</p>"
+          },
+          {
+            "symbolAmount": 2,
+            "description": "<p>The blessing is invoked, and add 1 Recharge token to it</p>"
+          }
+        ],
+        "righteousSuccess": [],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>The target may recover 1 wound</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Suffer 1 fatigue</p>"
+          }
+        ],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Minor Ward",
+      "art": null,
+      "traits": "Basic, Minor, Ongoing, Rank 0",
+      "check": "Invocation (Fel)",
+      "requirements": "<p>3 favour, target within close range (you may target yourself). Add [[DChal]] to your dice pool if you are engaged with an enemy</p>",
+      "uniqueEffect": "<p><strong>Effect:</strong> Your target is protected by a radiant glow. While this card is recharging, his soak value is increased by 1</p>"
+    },
+    "rechargeTokens": 0,
+    "type": "blessing"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1701907222210,
+    "modifiedTime": 1701907565580,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "XWlk7rT0gfG2Pg1b",
+  "sort": 0,
+  "_key": "!items!XWlk7rT0gfG2Pg1b"
+}

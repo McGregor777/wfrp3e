@@ -1,0 +1,131 @@
+{
+  "folder": "ivXOnATwCKlIm1Tl",
+  "name": "Channel Power",
+  "type": "action",
+  "img": "icons/magic/control/silhouette-hold-beam-blue.webp",
+  "system": {
+    "conservative": {
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 1,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Gain 2 power</p>"
+          },
+          {
+            "symbolAmount": 2,
+            "description": "<p>Gain 3 power</p>"
+          },
+          {
+            "symbolAmount": 3,
+            "description": "<p>Gain 4 power</p>"
+          }
+        ],
+        "righteousSuccess": [],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Gain 1 power</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Suffer 1 stress. If, after resolving this action, you have more power than twice your Willpower, suffer 1 additional stress</p>"
+          }
+        ],
+        "chaosStar": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>After resolving this action, lose all power in excess of twice your Willpower and suffer 1 stress per power lost this way</p>"
+          }
+        ],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Channel Power",
+      "traits": "Basic, Rally",
+      "check": "Channelling (WP)",
+      "art": null,
+      "requirements": "<p>Your current power is less than twice your Willpower. If you are engaged with an<br>enemy, add [[DM]] to your dice pool</p>"
+    },
+    "reckless": {
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 1,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Gain 2 power</p>"
+          },
+          {
+            "symbolAmount": 1,
+            "description": "<p>Gain 4 power</p>"
+          },
+          {
+            "symbolAmount": 1,
+            "description": "<p>Gain 6 power</p>"
+          }
+        ],
+        "righteousSuccess": [],
+        "boon": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Gain 1 power</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Suffer 1 wound. If, after resolving this action, you have more power than twice your Willpower, suffer 1 additional stress</p>"
+          }
+        ],
+        "chaosStar": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>At the end of your turn, lose all power in excess of your Willpower and suffer 1 stress per power lost this way</p>"
+          }
+        ],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Channel Power",
+      "traits": "Basic, Rally",
+      "check": "Channelling (WP)",
+      "art": null,
+      "requirements": "<p>Your current power is less than twice your Willpower. If you are engaged with an enemy, add [[DM]] to your dice pool</p>"
+    },
+    "rechargeTokens": 0,
+    "type": "spell"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1701863029100,
+    "modifiedTime": 1703178590171,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "giHevQUMljrNDYsb",
+  "sort": 400000,
+  "_key": "!items!giHevQUMljrNDYsb"
+}

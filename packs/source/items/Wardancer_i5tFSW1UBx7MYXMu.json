@@ -1,0 +1,85 @@
+{
+  "name": "Wardancer",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/wardancer.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>The deities of the elven pantheon are contradictory figures, none more so than the god Loec. He is known as the Dancer of the Shadows, and is personified by laughter and trickery. Such acts are sacred to him, and lift the hearts of believers from the grasp of Chaos and despair. Loec has a darker side, associated with revenge, deception, and darkness. Most elves honour their gods equally, but the wardancers esteem Loec in particular.</p>\n<p>The wardancers are an elite wood elf warrior caste. They practice a style of close quarters fighting that relies on athleticism to provide protection, rather than cumbersome suits of armour. Such is their speed and grace that they cavort about their foes, darting in to strike blows and then pirouetting out of reach. To an outside observer a wardancer&rsquo;s assault may seem random, but their acrobatics are a rigorously controlled violent art. The training needed to achieve such prowess is long and arduous. Only youthful elves are normally accepted as novice wardancers. In peaceful times wardancers spend their time learning and performing ritual dances. Wardancers travel in troupes, journeying through the secret and dangerous tracks of Athel Loren. They visit the sacred cairns and meet with different wood elf kinbands to provide information, pass along wood elf lore through their complex dances, and provide entertaining distractions.</p>\n<p>Given their mercurial and almost nomadic nature, it is not unusual for wardancers to travel far and wide in their lifetime. Those that do so may have been sent on a mission for their highborn leaders, seeking to prove themselves or atone for a mistake. Some wardancers may even feel compelled to wander after receiving a vision from Loec. Such travelling companions are powerful fighters, but unnerving company.</p>\n<p><strong>Typical Trappings:</strong> A wardancer fights with a pair of finely crafted blades. They wear no armour, some leather strapping at most. Wardancers often decorate their bodies with swirling designs, symbols sacred to the god Loec, which are stained onto their skins with woad.</p>\n<p><strong>Career Ability:</strong> When one of your <em>Melee Attacks</em> inflicts at least one critical wound, you may immediately flip one of your currently recharging action cards so the opposite stance side is revealed. The number of recharge tokens on the card remains the same</p>",
+    "advanced": false,
+    "raceRestrictions": "Wood Elf Only",
+    "traits": "Basic, Combat, Ritual Dancer, Rural",
+    "talentSockets": [
+      "tactic",
+      "tactic"
+    ],
+    "primaryCharacteristics": [
+      "agility",
+      "willpower"
+    ],
+    "careerSkills": "Athletics, Coordination, Discipline, Nature Lore, Weapon Skill",
+    "startingStance": {
+      "conservativeSegments": 2,
+      "recklessSegments": 2
+    },
+    "advanceOptions": {
+      "action": 3,
+      "talent": 2,
+      "skill": 1,
+      "fortune": 1,
+      "conservative": 1,
+      "reckless": 1,
+      "wound": 1
+    },
+    "summary": "A lightly armoured but incredibly athletic and graceful warrior",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549882401,
+    "modifiedTime": 1699628795799,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "i5tFSW1UBx7MYXMu",
+  "sort": 3600000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!i5tFSW1UBx7MYXMu"
+}

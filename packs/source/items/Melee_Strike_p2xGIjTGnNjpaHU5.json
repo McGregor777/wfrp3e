@@ -1,0 +1,125 @@
+{
+  "name": "Melee Strike",
+  "type": "action",
+  "img": "systems/wfrp3e/assets/images/actions/melee_strike.jpg",
+  "effects": [],
+  "folder": "ivXOnATwCKlIm1Tl",
+  "flags": {
+    "core": {},
+    "exportSource": {
+      "world": "warhammer-3e",
+      "system": "wfrp3e",
+      "coreVersion": "11.311",
+      "systemVersion": "0.5.2-alpha"
+    }
+  },
+  "system": {
+    "conservative": {
+      "name": "Melee Strike",
+      "art": "systems/wfrp3e/assets/images/actions/melee_strike.jpg",
+      "type": "melee",
+      "traits": "Basic",
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "check": "Weapon Skill (St) vs. Target Defence",
+      "requirements": "<p>Melee weapon, engaged with target</p>",
+      "special": "",
+      "uniqueEffect": "",
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>You hit the target for normal damage</p>"
+          },
+          {
+            "symbolAmount": 3,
+            "description": "<p>You hit the target for +2 damage</p>"
+          }
+        ],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Perform a manoeuvre for free</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "bane": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Your target may disengage from you for free</p>"
+          }
+        ],
+        "chaosStar": [],
+        "righteousSuccess": [],
+        "challenge": [],
+        "delay": [],
+        "exertion": []
+      }
+    },
+    "reckless": {
+      "name": "Melee Strike",
+      "art": "systems/wfrp3e/assets/images/actions/melee_strike.jpg",
+      "type": "melee",
+      "traits": "Basic",
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "check": "Weapon Skill (St) vs. Target Defence",
+      "requirements": "<p>Melee weapon, engaged with target</p>",
+      "special": "",
+      "uniqueEffect": "",
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>You hit the target for normal damage</p>"
+          },
+          {
+            "symbolAmount": 3,
+            "description": "<p>You hit the target for +2 damage</p>"
+          }
+        ],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Perform a manoeuvre for free</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "bane": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Your target may disengage from you for free</p>"
+          }
+        ],
+        "chaosStar": [],
+        "righteousSuccess": [],
+        "challenge": [],
+        "delay": [],
+        "exertion": []
+      }
+    },
+    "rechargeTokens": 0,
+    "type": "melee"
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1696334694650,
+    "modifiedTime": 1701883837306,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "p2xGIjTGnNjpaHU5",
+  "sort": 900000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!p2xGIjTGnNjpaHU5"
+}

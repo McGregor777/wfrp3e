@@ -1,0 +1,91 @@
+{
+  "name": "Agent",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/agent.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "exportSource": {
+      "world": "warhammer-3e",
+      "system": "wfrp3e",
+      "coreVersion": "0.8.9",
+      "systemVersion": "0.0.1"
+    },
+    "core": {}
+  },
+  "system": {
+    "description": "<p>There are so many demands on the time of powerful people and organisations that they struggle to look after all their interests, especially those that may be in geographically remote places, politically sensitive, or strictly confidential. As a consequence, many powerful people and organisations make use of agents: skilled individuals who act on behalf of their &gt;employer.</p>\n<p>Most agents work exclusively for a single employer over the long term. Their day-to-day responsibilities may change, but their loyalty remains fixed. These agents proudly wear the badge of the noble house, Imperial cult, or guild that employs them, and use it as a means of getting ahead in the world.</p>\n<p>Agents are tasked with a broad variety of assignments. Whether negotiating a new trade agreement, evaluating prospective members of a guild, or recovering missing relics, the agent is trusted to oversee his employer&rsquo;s interests&hellip; sometimes by any means necessary. A smaller number of agents, particularly in cosmopolitan places such as Altdorf, perform a more restricted set of tasks on a contracted basis for whoever hires them. They may act as go-betweens for ship captains and merchant houses, or specialise in finding missing people, or acquiring rare works of art.</p>\n<p>For every type of agent, the line between adventuring and discharging their normal duties may become blurred. Some set off on an adventure on behalf of their patron, whereas others grow tired of their responsibilities and put their skills to use for their own ends after becoming disillusioned with a patron or getting a taste for the adventuring life.</p>\n<p><strong>Typical Trappings:</strong> An agent travels with two sets of clothing, one formal and one nondescript for travelling incognito. He often bears a badge, seal, or letter authorising him to act on his employer&rsquo;s behalf (though an agent employed in clandestine work will forego this item). He carries an easily concealed weapon such as a dagger, and perhaps a less subtle weapon, such as a blackpowder pistol.</p>\n<p><strong>Career Ability:</strong> Once per session, you may suffer one stress and one fatigue to add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to any skill check</p>",
+    "advanced": false,
+    "raceRestrictions": "Human or Dwarf",
+    "traits": "Basic, Bureaucrat, Social, Urban",
+    "talentSockets": [
+      "focus",
+      "reputation"
+    ],
+    "primaryCharacteristics": [
+      "intelligence",
+      "fellowship"
+    ],
+    "careerSkills": "Charm, Education, Folklore, Guile, Intuition",
+    "startingStance": {
+      "conservativeSegments": 2,
+      "recklessSegments": 2
+    },
+    "advanceOptions": {
+      "action": 2,
+      "talent": 2,
+      "skill": 3,
+      "fortune": 1,
+      "conservative": 1,
+      "reckless": 1,
+      "wound": 0
+    },
+    "summary": "Resourceful and slightly dangerous, he excels at getting jobs done",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549805099,
+    "modifiedTime": 1699628570268,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "P3ASRqDrGu4jxyxG",
+  "sort": 2600000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!P3ASRqDrGu4jxyxG"
+}

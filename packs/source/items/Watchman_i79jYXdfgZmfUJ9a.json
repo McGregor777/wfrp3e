@@ -1,0 +1,85 @@
+{
+  "name": "Watchman",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/watchman.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>Law and order is hard won in the settlements of the Old World. Crime and corruption are endemic throughout the Empire, and in the cities, fires regularly break out as a result of accidents or acts of malicious intent. In the wilds, gangs of outlaws or goblin warbands raid any target that looks vulnerable and profitable.</p>\n<p>To guard against such threats, electors and local nobles raise forces of guards to patrol streets or man fortifications. Even the smallest of villages arrange a guard detail to man the gates, and watchmen are also employed to protect isolated buildings such as coaching inns, country manors, and farmsteads. These guards also answer cries of distress, break up brawls and riots, arrest criminals, repel invaders, and, when fires break out, organise bucket chains to extinguish the flames. In most towns and cities in the Empire, watchmen are actually part of the army, effectively regiments of troops trained to garrison a town and keep the Emperor&rsquo;s peace. They typically deal with petty crimes by levying spot fines, administering punitive beatings, or placing offenders in the pillory for a while. If watchmen arrest someone suspected of a more serious crime, they will usually confine him to the cells of a nearby watch station until an official, such as a local noble, a member of the Cult of Verena, or the feared Imperial judges can take a look at his case.</p>\n<p>Some watchmen become disillusioned by the corruption in their own ranks. Others tire of the dangers of the job or the lack of support they receive from nobles and councillors. Such watchmen sometimes take up a life of adventure, providing parties of adventurers with strong sword arms and a useful knowledge of the law of the land.</p>\n<p><strong>Typical Trappings:</strong> Most watchmen carry a lantern on a pole and some lamp oil. They wear a leather jack for protection and a set of manacles to restrain prisoners. All watchmen wear a uniform, and in the Reikland are issued a copper badge stamped with an identifying number. Some cities pay for watchmen to be equipped with halberds and plate armour breastplates.</p>\n<p><strong>Career Ability:</strong> During a Rally Step, you may remove 1 recharge token from any one of your currently recharging action cards, or from an action of any character engaged with you</p>",
+    "advanced": false,
+    "raceRestrictions": "Human or Dwarf",
+    "traits": "Basic, Bureaucrat, Combat, Urban",
+    "talentSockets": [
+      "tactic",
+      "reputation"
+    ],
+    "primaryCharacteristics": [
+      "toughness",
+      "fellowship"
+    ],
+    "careerSkills": "Discipline, Intuition, Leadership, Observation, Resilience",
+    "startingStance": {
+      "conservativeSegments": 2,
+      "recklessSegments": 2
+    },
+    "advanceOptions": {
+      "action": 2,
+      "talent": 1,
+      "skill": 2,
+      "fortune": 2,
+      "conservative": 1,
+      "reckless": 1,
+      "wound": 1
+    },
+    "summary": "A keeper of the peace with some useful urban skills",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549884186,
+    "modifiedTime": 1699628800330,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "i79jYXdfgZmfUJ9a",
+  "sort": 3700000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!i79jYXdfgZmfUJ9a"
+}

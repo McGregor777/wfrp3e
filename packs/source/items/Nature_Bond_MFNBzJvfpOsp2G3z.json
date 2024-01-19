@@ -1,0 +1,26 @@
+{
+  "folder": "7KxNPEqXRUaBjezJ",
+  "name": "Nature Bond",
+  "type": "ability",
+  "_id": "MFNBzJvfpOsp2G3z",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Wood elves gain a [[DF]] fortune die to combat initiative, as well as to Observation and Stealth checks while they are in woodland terrain.</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1700165874097,
+    "modifiedTime": 1701195772590,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!MFNBzJvfpOsp2G3z"
+}

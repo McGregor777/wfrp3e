@@ -1,0 +1,77 @@
+{
+  "folder": "ivXOnATwCKlIm1Tl",
+  "name": "Counterspell",
+  "type": "action",
+  "img": "icons/magic/defensive/barrier-shield-dome-deflect-teal.webp",
+  "system": {
+    "conservative": {
+      "rechargeRating": 2,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [],
+        "righteousSuccess": [],
+        "boon": [],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Counterspell",
+      "traits": "Petty Magic, Basic, Reaction, Rank 0",
+      "check": "No Check Required",
+      "art": null,
+      "requirements": "<p>Willpower 3+, sufficient power (see below)</p>",
+      "special": "<p><strong>Special:</strong> After you are declared as a target of a <em>Supernatural</em> or <em>Spell</em> action, you may place 2 recharge tokens on this card to add [[DM]] to that action&rsquo;s dice pool If you have Channelling trained, you may add an additional [[DM]] to the dice pool</p>\n<p>You must spend 1 power per [[DM]] added to the pool in this way</p>"
+    },
+    "reckless": {
+      "rechargeRating": 2,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [],
+        "righteousSuccess": [],
+        "boon": [],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Counterspell",
+      "traits": "Petty Magic, Basic, Reaction, Rank 0",
+      "check": "No Check Required",
+      "art": null,
+      "requirements": "<p>Willpower 3+, sufficient power (see below)</p>",
+      "special": "<p><strong>Special:</strong> After you are declared as a target of a <em>Supernatural</em> or <em>Spell</em> action, you may place 2 recharge tokens on this card to add [[DM]] to that action&rsquo;s dice pool If you have Channelling trained, you may add an additional [[DM]] to the dice pool</p>\n<p>You must spend 1 power per [[DM]] added to the pool in this way</p>"
+    },
+    "rechargeTokens": 0,
+    "type": "spell"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1701863221839,
+    "modifiedTime": 1703178366920,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "5OfDWCYOblylfUpH",
+  "sort": 500000,
+  "_key": "!items!5OfDWCYOblylfUpH"
+}

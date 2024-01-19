@@ -1,0 +1,30 @@
+{
+  "folder": "XhX735J1TWTpv8es",
+  "name": "Piety",
+  "type": "skill",
+  "_id": "ud3VIku7SIKfHljT",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A blend of knowledge and intuition on what will be pleasing and appropriate to the gods. Also reflects a character&rsquo;s ability to successfully curry favour with his chosen god, generating the favour needed to fuel divine blessings. The divine equivalent of the arcane skill channelling.</p>\n<p><em>Specialisation options:</em> below capacity, conservative, reckless, In Dire Need, traditions, tenets</p>",
+    "characteristic": "willpower",
+    "advanced": true,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317520116,
+    "modifiedTime": 1699628063201,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!ud3VIku7SIKfHljT"
+}

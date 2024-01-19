@@ -1,0 +1,30 @@
+{
+  "folder": "XhX735J1TWTpv8es",
+  "name": "Tradecraft",
+  "type": "skill",
+  "_id": "HsMklA839gjALez8",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Unlike most skills that are fairly narrow in focus or apply to a specific set of related aptitudes, Tradecraft is a collection of skills related to professional dedication and learning of an applied trade. General training covers evaluation and understanding of the basics of trade as a business and component of Empire life. Specialisation introduces focus on one particular type of trade or livelihood.</p>\n<p>Tradecraft covers both hands-on, practical applications of trades and handicrafts and the commerce and business acumen necessary to earn a living. The characteristic used depends on the demands of the trade, as determined by the GM.</p>\n<p><em>Specialisation options:</em> smithing, carpentry, jewellery making, brewing, engineering, performance</p>",
+    "characteristic": "varies",
+    "advanced": true,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317544547,
+    "modifiedTime": 1699628063201,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!HsMklA839gjALez8"
+}

@@ -1,0 +1,85 @@
+{
+  "name": "Thug",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/thug.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>The rulers of the Empire proudly declare it the greatest nation in the Old World, bravely defying the dark forces arrayed against it. To be a citizen of the Empire, they claim, is to be superior to foreigners by dint of nationality alone. In reality, life in the Empire is typically nasty, brutish, and short. In prosperous cities such as Altdorf and Nuln, most people live in crowded, reeking rookeries where crime and violence are endemic. In the taverns of busy city waterfronts and the streets of the slums, crime lords are the true rulers. They ensure that they wield more might than their rivals by hiring brutal henchmen.</p>\n<p>In the ranks of criminal organisations, the strength and viciousness of thugs are prized as virtues. They collect protection money from local shop owners and innkeepers, and administer punitive beatings to those unable to pay. They intimidate any watchmen, agitators, or reformers from the Cult of Verena who seek to expose corruption or clean up the streets. They fight turf wars with the henchmen of rival crime lords, and threaten illicit dealers, bawds, pickpockets or burglars who work independently of their own organisation. Other thugs prefer to work on a freelance basis, hiring themselves out to third parties who wish to see someone hurt or humiliated. These brutes seek to provoke their mark into a fight over such trifles as spilt drinks or imagined insults, before beating them senseless. They can then collect their money and supplement their earnings by robbing their victims. Such thugs usually leave outright murder to assassins, but particularly immoral exceptions can be found for the right price.</p>\n<p>Thugs can fall out of favour with their employers, or draw too much attention from the law. Such individuals will be wise to leave their home city quickly, and some thugs even find themselves lending muchneeded muscle to parties of adventurers.</p>\n<p><strong>Typical Trappings:</strong> Thugs typically protect themselves well, wearing leather jacks. They often wield cudgels or knuckledusters.</p>\n<p><strong>Career Ability:</strong> You inflict +1 damage against henchmen and against any target with a lower Strength than yours</p>",
+    "advanced": false,
+    "raceRestrictions": "Human or Dwarf",
+    "traits": "Basic, Combat, Menial, Rogue",
+    "talentSockets": [
+      "tactic",
+      "tactic"
+    ],
+    "primaryCharacteristics": [
+      "strength",
+      "agility"
+    ],
+    "careerSkills": "Athletics, Guile, Intimidate, Skulduggery, Weapon Skill",
+    "startingStance": {
+      "conservativeSegments": 1,
+      "recklessSegments": 3
+    },
+    "advanceOptions": {
+      "action": 2,
+      "talent": 1,
+      "skill": 2,
+      "fortune": 1,
+      "conservative": 0,
+      "reckless": 2,
+      "wound": 2
+    },
+    "summary": "Strong and tough, with streetwise savvy and little else",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549879961,
+    "modifiedTime": 1699628787156,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "a2Gdbwtk8NsAshKL",
+  "sort": 3400000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!a2Gdbwtk8NsAshKL"
+}

@@ -1,0 +1,26 @@
+{
+  "folder": "7KxNPEqXRUaBjezJ",
+  "name": "Orion's Favoured",
+  "type": "ability",
+  "_id": "djj9tirxRkjnPrBp",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Before investing any creation points, a wood elf may train one of the following skills &ndash; Ballistic Skill, Nature Lore, Observation, or Stealth.</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1700165892766,
+    "modifiedTime": 1701203790406,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!djj9tirxRkjnPrBp"
+}

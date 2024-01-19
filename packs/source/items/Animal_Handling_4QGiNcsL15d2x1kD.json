@@ -1,0 +1,30 @@
+{
+  "folder": "XhX735J1TWTpv8es",
+  "name": "Animal Handling",
+  "type": "skill",
+  "_id": "4QGiNcsL15d2x1kD",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Covers the ability to handle and care for domesticated animals, as well as get them to respond to training and commands. Animal handling can also be used to try and calm an aggressive animal, or get a sense of an animal&rsquo;s disposition.</p>\n<p><em>Specialisation options:</em> command, train, sense disposition, calm animal, recover obedience</p>",
+    "characteristic": "fellowship",
+    "advanced": true,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317461013,
+    "modifiedTime": 1699628063201,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!4QGiNcsL15d2x1kD"
+}

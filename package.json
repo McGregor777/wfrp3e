@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
-    "build:clean": "gulp clean",
     "build:css": "gulp css",
     "build:db": "gulp compile",
     "build:json": "gulp extract",
@@ -14,14 +13,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@foundryvtt/foundryvtt-cli": "^1.0.2",
     "fancy-log": "^2.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-less": "^5.0.0",
-    "merge-stream": "^2.0.0",
-    "nedb": "^1.8.0",
     "path": "^0.12.7",
-    "through2": "^4.0.2",
     "yargs": "^17.5.1"
   }
 }
