@@ -1,0 +1,85 @@
+{
+  "name": "Commoner",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/commoner.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>The social structure of the Empire is strict and rigid. At the top of the social order are the nobles, families of aristocrats who can often trace their lineage back to the time of Sigmar and the founding of the nation. The priests of the Empire interpret the will of the gods, and the increasingly powerful burghers manage trade and wealth. Commoners tend to be the largest but least influential of the social groups. They are rustic farmers, labourers, and herdsmen in the main, though many commoners also take on other tasks if the opportunity presents itself. They may gather leeches for physicians or learn a skill such as thatching. What meagre money is made from their work is quickly used up to pay taxes, rent, and other expenses. In years when the harvest is good, commoners enjoy a small surplus, and life is bearable for a short while. When the harvest is poor, they face a long cold winter and the risk of starvation.</p>\n<p>Whilst commoners generally receive no formal military training, at times a retired soldier will cover the most basic combat techniques. These drills are usually held at a weekly muster organised by local priests of Ulric, Myrmidia, or Sigmar. These practises are in order to help them form some kind of effective defence should their village or farmstead be attacked by raiding beastmen or goblins. In times of war, commoners are mustered into ragtag groups of militia who march alongside professional soldiers in order to bulk up the armies. Most commoners nurse a healthy aversion to violence, but some of them get a taste for fighting. The lot of a commoner is hard and unrewarding, and a few brave souls migh decide to leave their lives of drudgery for adventure, hoping to find fame and fortune.</p>\n<p><strong>Typical Trappings:</strong> A commoner will carry a stout quarterstaff for protection, or rely on a farming implement such as a pitchfork or rake (these count as improvised weapons). He might also have a sling with a dozens pieces of shot for keeping predators away from his animals. He will carry a leather flask to drink from whilst at work in the fields.</p>\n<p><strong>Career Ability:</strong> Whenever fortune refreshes, recover one fatigue</p>",
+    "advanced": false,
+    "raceRestrictions": "Human or Dwarf",
+    "traits": "Basic, Menial, Rural, Social",
+    "talentSockets": [
+      "focus",
+      "reputation"
+    ],
+    "primaryCharacteristics": [
+      "toughness",
+      "willpower"
+    ],
+    "careerSkills": "Animal Handling, Athletics, Folklore, Nature Lore, Resilience",
+    "startingStance": {
+      "conservativeSegments": 3,
+      "recklessSegments": 1
+    },
+    "advanceOptions": {
+      "action": 1,
+      "talent": 1,
+      "skill": 1,
+      "fortune": 3,
+      "conservative": 2,
+      "reckless": 1,
+      "wound": 1
+    },
+    "summary": "Self sufficient jack of all trades with an assortment of skills",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1699549825016,
+    "modifiedTime": 1701274136133,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "RGdH1TiDYcMBbGCY",
+  "sort": 1800000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!RGdH1TiDYcMBbGCY"
+}

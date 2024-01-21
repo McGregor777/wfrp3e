@@ -1,9 +1,9 @@
 .action-card {
 	border: 1px solid black;
-	border-radius: 1.5rem;
+	border-radius: 24px;
 	color: white;
 	height: 440px;
-	margin: 0.5rem;
+	margin: 8px;
 	position: relative;
 	text-shadow:
 		-1pt -1pt 0 black,
@@ -19,7 +19,7 @@
 	& .action-card-art-image {
 		border: none;
 		display: block;
-		height: 5rem;
+		height: 80px;
 		width: 100%;
 	}
 
@@ -30,7 +30,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		line-height: 0;
-		padding: 0 0.25rem 0.25rem;
+		padding: 0 4px 4px;
 		text-shadow:
 			-1pt -1pt 0 black,
 			-1pt 0 0 black,
@@ -46,12 +46,12 @@
 
 			& > img {
 				border: none;
-				height: 3rem;
+				height: 48px;
 				opacity: 75%;
 			}
 
 			& > .recharge-token-counter {
-				font-size: 2rem;
+				font-size: 32px;
 				left: 50%;
 				position: absolute;
 				top: 70%;
@@ -65,7 +65,7 @@
 		color: white;
 		font: 12pt @font-title;
 		font-weight: bold;
-		height: 1.25rem;
+		height: 20px;
 		text-align: center;
 		text-shadow:
 			-1pt -1pt 0 black,
@@ -83,9 +83,9 @@
 		font-size: 8pt;
 		grid-area: action-card-difficulty-modifiers;
 		line-height: 8pt;
-		margin: auto auto auto 0.25rem;
+		margin: auto auto auto 4px;
 		text-align: center;
-		width: calc(100% - 0.25rem);
+		width: calc(100% - 4px);
 
 		& > * {
 			display: inline-block;
@@ -94,14 +94,16 @@
 	}
 
 	& .action-card-effects {
-		border: calc(0.5rem + 3px) solid;
-		border-radius: 0 0 1.5rem 1.5rem;
+		border: calc(8px + 3px) solid;
+		border-radius: 0 0 24px 24px;
 		border-top: none;
 		color: black;
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
 		font-size: 10pt;
+		min-height: 232px;
+		overflow-y: auto;
 		text-shadow: none;
 
 		& > table {
@@ -113,7 +115,7 @@
 	}
 
 	& .action-card-header {
-		border-radius: 1.5rem 1.5rem 0 0;
+		border-radius: 24px 24px 0 0;
 		display: grid;
 		height: 70px;
 		grid-template-areas:
@@ -139,28 +141,25 @@
 			0 1pt 0 black,
 			1pt 0 0 black,
 			1pt 1pt 0 black;
-
-		&:hover {
-			text-shadow: 0 0 0.5rem var(--color-shadow-primary);
-		}
 	}
 
 	& .action-card-recharge-rating {
 		background-color: cornflowerblue;
 		border-radius: 50%;
-		font: 16pt @font-title;
+		font: 16pt var(--font-title);
 		font-weight: bold;
 		grid-area: action-card-recharge-rating;
-		height: 2rem;
-		line-height: 2rem;
-		margin: 0.5rem 0.5rem 0 0;
+		height: 32px;
+		line-height: 32px;
+		margin: 8px 8px 0 0;
 		text-align: center;
-		width: 2rem;
+		width: 32px;
 	}
 
 	& .action-card-requirements {
 		background-color: #503820;
 		color: white;
+		font-size: 12pt;
 		text-align: center;
 		text-shadow:
 			-1pt -1pt 0 black,
@@ -175,12 +174,13 @@
 
 		& > p {
 			margin: 0;
-			padding-top: 0.25rem;
+			padding-top: 4px;
 		}
 	}
 
 	& .action-card-traits {
-		height: 1.25rem;
+		height: 20px;
+		font-size: 12pt;
 		font-style: italic;
 		font-stretch: condensed;
 		grid-area: action-card-traits;
@@ -192,7 +192,7 @@
 		border: none;
 		border-radius: 100%;
 		grid-area: action-card-type;
-		margin: 0.5rem 0 0 0.5rem;
+		margin: 8px 0 0 8px;
 	}
 
 	& .face {
@@ -203,7 +203,7 @@
 
 		&.conservative {
 			background-color: #d8b880;
-			border-radius: 1.5rem;
+			border-radius: 24px;
 
 			& > .action-card-effects {
 				border-color: sienna;
@@ -216,7 +216,7 @@
 
 		&.reckless {
 			background-color: #e0e0e0;
-			border-radius: 1.5rem;
+			border-radius: 24px;
 
 			& > .action-card-effects {
 				border-color: darkgrey;

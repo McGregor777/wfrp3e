@@ -1,0 +1,77 @@
+{
+  "folder": "ivXOnATwCKlIm1Tl",
+  "name": "Cantrip",
+  "type": "action",
+  "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
+  "system": {
+    "conservative": {
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [],
+        "righteousSuccess": [],
+        "boon": [],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Cantrip",
+      "traits": "Petty Magic, Basic, Rank 0",
+      "check": "Generally No Check Required",
+      "art": null,
+      "requirements": "<p>1 power. May require a prop, manoeuvre, or other requirement at the GM&rsquo;s discretion</p>",
+      "uniqueEffect": "<p><strong>Effect:</strong> You create a small magical effect so trivial as to be almost effortless. You might conjure a light or flame about equivalent to a lit candle, move an object about the size of a wine glass a few feet, briefly change the colour of your eyes, move a coin from one hand to another, or perform other tricks and tasks appropriate to your Order.</p>\n<p><strong>Cantrip</strong> is unable to cause damage, duplicate the effects of a manoeuvre or action card, or inflict stress or fatigue. If the GM agrees, you may use <strong>Cantrip</strong> similarly to the <strong>Perform a Stunt</strong> action to make a <strong>Spellcraft (Int)</strong> check and generate a minor magical effect not covered by the rules. The GM will set the difficulty and determine the results, which may include influencing a target or other effects</p>"
+    },
+    "reckless": {
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [],
+        "righteousSuccess": [],
+        "boon": [],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Cantrip",
+      "traits": "Petty Magic, Basic, Rank 0",
+      "check": "Generally No Check Required",
+      "art": null,
+      "requirements": "<p>1 power. May require a prop, manoeuvre, or other requirement at the GM&rsquo;s discretion</p>",
+      "uniqueEffect": "<p><strong>Effect:</strong> You create a small magical effect so trivial as to be almost effortless. You might conjure a light or flame about equivalent to a lit candle, move an object about the size of a wine glass a few feet, briefly change the colour of your eyes, move a coin from one hand to another, or perform other tricks and tasks appropriate to your Order.</p>\n<p><strong>Cantrip</strong> is unable to cause damage, duplicate the effects of a manoeuvre or action card, or inflict stress or fatigue. If the GM agrees, you may use&nbsp;<strong>Cantrip</strong> similarly to the <strong>Perform a Stunt</strong> action to make a <strong>Spellcraft (Int) check</strong> and generate a minor magical effect not covered by the rules. The GM will set the difficulty and determine the results, which may include influencing a target or other effects</p>"
+    },
+    "rechargeTokens": 0,
+    "type": "spell"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1701862804731,
+    "modifiedTime": 1701884574181,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "QWFJ7Arr8jBwmnlG",
+  "sort": 200000,
+  "_key": "!items!QWFJ7Arr8jBwmnlG"
+}

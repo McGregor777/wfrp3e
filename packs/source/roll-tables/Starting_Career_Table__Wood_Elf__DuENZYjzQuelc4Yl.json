@@ -1,0 +1,315 @@
+{
+  "name": "Starting Career Table (Wood Elf)",
+  "img": "systems/wfrp3e/assets/images/races/wood_elf.webp",
+  "description": "<p>To determine a character’s starting career, you may either draw a sheet from a basic career deck, or roll percentile dice (d00) and consult the following table. Cross reference your character’s race with the d00 result to determine the character’s starting career.</p>",
+  "results": [
+    {
+      "type": 2,
+      "weight": 1,
+      "range": [
+        1,
+        5
+      ],
+      "drawn": false,
+      "_id": "PLO7mpDJMCjCwBwB",
+      "text": "Apothecary",
+      "documentId": "ALT8NL6UYUx9zwOl",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/apothecary.webp",
+      "documentCollection": "wfrp3e.items",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.PLO7mpDJMCjCwBwB"
+    },
+    {
+      "type": 2,
+      "weight": 1,
+      "range": [
+        6,
+        12
+      ],
+      "drawn": false,
+      "_id": "4EaiLZc0dsap09Ml",
+      "text": "Bounty Hunter",
+      "documentId": "lRH45pBO6rGyq5PU",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/bounty_hunter.webp",
+      "documentCollection": "wfrp3e.items",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.4EaiLZc0dsap09Ml"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        13,
+        17
+      ],
+      "drawn": false,
+      "_id": "heGIXtQX76LTkwfk",
+      "text": "Envoy",
+      "documentId": "vPUwxHMXKnHmAzTH",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/envoy.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.heGIXtQX76LTkwfk"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        19,
+        24
+      ],
+      "drawn": false,
+      "_id": "eLGp9tuaavBa1TUE",
+      "text": "Hunter",
+      "documentId": "jO9J1H4BeaZvSGpR",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/hunter.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.eLGp9tuaavBa1TUE"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        25,
+        31
+      ],
+      "drawn": false,
+      "_id": "keygesbkXNbhSeQc",
+      "text": "Mercenary",
+      "documentId": "gEwfpE9KtyCloYF7",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/mercenary.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.keygesbkXNbhSeQc"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        32,
+        36
+      ],
+      "drawn": false,
+      "_id": "7ICLclgAaMTRPQM5",
+      "text": "Messenger",
+      "documentId": "VbGtkcp2dCjqVg6d",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/messenger.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.7ICLclgAaMTRPQM5"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        42,
+        46
+      ],
+      "drawn": false,
+      "_id": "ZR5iiK3u71fpybjN",
+      "text": "Navigator",
+      "documentId": "Uv3Zc1fNWlFhZoU5",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/navigator.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.ZR5iiK3u71fpybjN"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        37,
+        41
+      ],
+      "drawn": false,
+      "_id": "0eaXKQ9IQn8vqVJs",
+      "text": "Mystic",
+      "documentId": "lMbdEc9qiqSUVxje",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/mystic.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.0eaXKQ9IQn8vqVJs"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        47,
+        51
+      ],
+      "drawn": false,
+      "_id": "vxB5cw9rqYdnXWaq",
+      "text": "Performer",
+      "documentId": "iQWkAtG4zmsMzbuj",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/performer.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.vxB5cw9rqYdnXWaq"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        57,
+        61
+      ],
+      "drawn": false,
+      "_id": "VxxSeMthjDQ35ekq",
+      "text": "Scribe",
+      "documentId": "MnzIFCIPiHFE6AJO",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/scribe.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.VxxSeMthjDQ35ekq"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        62,
+        66
+      ],
+      "drawn": false,
+      "_id": "sRbevTkOMbIt9tb6",
+      "text": "Servant",
+      "documentId": "DxwUlfhH62Sj2RxH",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/servant.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.sRbevTkOMbIt9tb6"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        84,
+        90
+      ],
+      "drawn": false,
+      "_id": "8n4XavLy3DgGS1JS",
+      "text": "Waywatcher",
+      "documentId": "X78U8bxkc9wJzclF",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/waywatcher.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.8n4XavLy3DgGS1JS"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        67,
+        71
+      ],
+      "drawn": false,
+      "_id": "n9ntGnxpm6allIos",
+      "text": "Soldier",
+      "documentId": "XAdlB98RkG09FRoH",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/soldier.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.n9ntGnxpm6allIos"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        79,
+        83
+      ],
+      "drawn": false,
+      "_id": "0fyM9pGSLqJsO1Uh",
+      "text": "Wardancer",
+      "documentId": "i5tFSW1UBx7MYXMu",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/wardancer.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.0fyM9pGSLqJsO1Uh"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        72,
+        78
+      ],
+      "drawn": false,
+      "_id": "qrMod29sGmK1l7dx",
+      "text": "Thief",
+      "documentId": "lWdiVGfhuSTsom56",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/thief.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.qrMod29sGmK1l7dx"
+    },
+    {
+      "type": 2,
+      "documentCollection": "wfrp3e.items",
+      "weight": 1,
+      "range": [
+        52,
+        56
+      ],
+      "drawn": false,
+      "_id": "gsy0EAJYePAaPrKy",
+      "text": "Pit Fighter",
+      "documentId": "dYrCt5JU85qNp5nr",
+      "flags": {},
+      "img": "systems/wfrp3e/assets/images/careers/pit_fighter.webp",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.gsy0EAJYePAaPrKy"
+    },
+    {
+      "type": 0,
+      "documentCollection": "world.wfrp3e-items",
+      "weight": 1,
+      "range": [
+        91,
+        99
+      ],
+      "drawn": false,
+      "_id": "1m2icEh2oxtYMHdo",
+      "text": "Roll twice and choose one career",
+      "documentId": null,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.1m2icEh2oxtYMHdo"
+    },
+    {
+      "type": 0,
+      "documentCollection": "world.wfrp3e-items",
+      "weight": 1,
+      "range": [
+        100,
+        100
+      ],
+      "drawn": false,
+      "_id": "TaiL0bpK5qXS2YwA",
+      "text": "Choose any career you are eligible for",
+      "documentId": null,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "_key": "!tables.results!DuENZYjzQuelc4Yl.TaiL0bpK5qXS2YwA"
+    }
+  ],
+  "replacement": true,
+  "displayRoll": true,
+  "folder": "GGWmOAItSjZHydKl",
+  "sort": 400000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1699554936217,
+    "modifiedTime": 1703687297614,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "formula": "1d100",
+  "_id": "DuENZYjzQuelc4Yl",
+  "_key": "!tables!DuENZYjzQuelc4Yl"
+}

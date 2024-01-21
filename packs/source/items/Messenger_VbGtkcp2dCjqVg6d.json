@@ -1,0 +1,85 @@
+{
+  "name": "Messenger",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/messenger.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>In the Empire, written correspondences and small parcels are usually carried from city to city by coach or barge. This method of delivery is neither particularly reliable nor is it expedient. It can take many weeks to receive a reply. The delivery of precious items or important missives is also best kept away from gossiping coachmen or light-fingered stevedores. For this reason, rich individuals and important institutions often employ expert messengers who are personally accountable for making safe and speedy deliveries.</p>\n<p>The job of a messenger can be dangerous, as they often have to ride unaccompanied across tracts of wilderness. Bad weather and the often appalling condition of the Empire&rsquo;s roads mean that riding a horse at speed can lead to terrible accidents, and lone messengers make tempting targets for outlaw bands and goblin raiders. Messengers are sometimes given signs of authority by their clients to show to roadwardens in order to requisition them as temporary guards. That&rsquo;s the theory, but in practice roadwardens are reluctant to accompany messengers, particularly if their journey takes them outside the roadwardens&rsquo; jurisdiction. Even messengers who complete the journey are not always safe. Late messengers are rarely given a warm reception, recipients of bad news are sometimes known to take their frustrations out on the bearer, and woe betide the messenger who loses or damages his deliverables. Given the many perils of their task, it is not surprising that many messengers seek other forms of employment. Some even join parties of adventurers, where their skills in navigation and outdoor survival are often appreciated.</p>\n<p><strong>Typical Trappings:</strong> A messenger will be equipped with a hand weapon and leather armour for protection, and has a swift riding horse, saddled and harnessed. He might carry a variety of maps, marked with major roads and landmarks to a varying degree of accuracy. He will also carry the identifying seal of the noble family or merchant house he is working for.</p>\n<p><strong>Career Ability:</strong> Each time fortune refreshes, you may immediately perform a free manoeuvre</p>",
+    "advanced": false,
+    "raceRestrictions": "Human, Dwarf, High Elf, or Wood Elf",
+    "traits": "Basic, Bureaucrat, Social, Urban",
+    "talentSockets": [
+      "focus",
+      "reputation"
+    ],
+    "primaryCharacteristics": [
+      "agility",
+      "fellowship"
+    ],
+    "careerSkills": "Charm, Folklore, Intuition, Ride, Stealth",
+    "startingStance": {
+      "conservativeSegments": 3,
+      "recklessSegments": 1
+    },
+    "advanceOptions": {
+      "action": 1,
+      "talent": 3,
+      "skill": 2,
+      "fortune": 2,
+      "conservative": 2,
+      "reckless": 0,
+      "wound": 0
+    },
+    "summary": "A resourceful and well-traveled courier, skilled at riding",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549847744,
+    "modifiedTime": 1699628696051,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "VbGtkcp2dCjqVg6d",
+  "sort": 1000000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!VbGtkcp2dCjqVg6d"
+}

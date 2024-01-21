@@ -1,0 +1,26 @@
+{
+  "folder": "7KxNPEqXRUaBjezJ",
+  "name": "Children of Grungni",
+  "type": "ability",
+  "_id": "1LsUZDU1mnADiZyh",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Before investing any creation points, an Azgaraz dwarf may train one of the following skills for free &ndash; Discipline, Resilience, or Weapon Skill.</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1700165677494,
+    "modifiedTime": 1701195739683,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!1LsUZDU1mnADiZyh"
+}

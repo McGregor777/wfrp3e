@@ -4,6 +4,13 @@
 		<h1><input class="name-input" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}'" /></h1>
 	</header>
 
+	<div>
+		<label class="sheet-form-label">{{localize 'ACTION.Type'}}</label>
+		<select class="sheet-form-select" name="system.type" data-dtype="String">
+			{{selectOptions @root.actionTypes selected=@root.item.system.type localize=true}}
+		</select>
+	</div>
+
 	<nav class="sheet-tabs tabs action-sheet-face-tabs" data-group="face">
 		<a class="tab-link conservative-tab-link" data-tab="conservative">{{localize 'ACTION.FACE.Conservative'}}</a>
 		<a class="tab-link reckless-tab-link" data-tab="reckless">{{localize 'ACTION.FACE.Reckless'}}</a>
@@ -27,13 +34,6 @@
 						<div class="sheet-form-div action-art-selector">
 							<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Art'}}</label>
 							<img class="sheet-form-input" src="{{lookup (lookup @root.item.system st) 'art'}}" data-edit="system.{{st}}.art" />
-						</div>
-
-						<div class="sheet-form-div">
-							<label class="sheet-form-label">{{localize stance}} - {{localize 'ACTION.Type'}}</label>
-							<select class="sheet-form-select" name="system.{{st}}.type" data-dtype="String">
-								{{selectOptions @root.actionTypes selected=(lookup (lookup @root.item.system st) 'type') localize=true}}
-							</select>
 						</div>
 
 						<div class="sheet-form-div action-header-details">

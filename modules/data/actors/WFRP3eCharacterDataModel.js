@@ -55,39 +55,40 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
             characteristics: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
                 if(characteristic !== "varies")
                     object[characteristic] = new fields.SchemaField({
-                        value: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true}),
-                        fortune: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
+                        value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+                        fortune: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
                     }, {label: characteristic});
 
                 return object;
             }, {})),
             corruption: new fields.SchemaField({
-                max: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true}),
-                value: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
+                max: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+                value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
             }),
             experience: new fields.SchemaField({
-                current: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true}),
-                spent: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
+                current: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+                spent: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
             }),
             fortune: new fields.SchemaField({
-                max: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true}),
-                value: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
+                max: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+                value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
             }),
             impairments: new fields.SchemaField({
-                fatigue: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true}),
-                stress: new fields.NumberField({initial: null, integer: true, min: 0, nullable: true, required: true})
+                fatigue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+                stress: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
             }),
             party: new fields.DocumentIdField(),
+            race: new fields.StringField({initial: "none", nullable: false, required: true}),
             stance: new fields.SchemaField({
                 ...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
-                    object[stance] = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
+                    object[stance] = new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true});
                     return object;
                 }, {}),
-                current: new fields.NumberField({...requiredInteger, initial: 0})
+                current: new fields.NumberField({initial: 0, integer: true, nullable: false, required: true})
             }),
             wounds: new fields.SchemaField({
-                max: new fields.NumberField({...requiredInteger, initial: 7, min: 0}),
-                value: new fields.NumberField({...requiredInteger, initial: 7, min: 0})
+                max: new fields.NumberField({initial: 7, integer: true, min: 0, nullable: false, required: true}),
+                value: new fields.NumberField({initial: 7, integer: true, min: 0, nullable: false, required: true})
             })
         };
     }
@@ -201,8 +202,8 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
     _prepareStanceMeter()
     {
         this.stanceMeter = {
-            conservative: this.stance.conservative + (this.parent.system.currentCareer?.system.startingStance.conservativeSegments ?? 0),
-            reckless: -this.stance.reckless - (this.parent.system.currentCareer?.system.startingStance.recklessSegments ?? 0)
+            conservative: -this.stance.conservative - (this.parent.system.currentCareer?.system.startingStance.conservativeSegments ?? 0),
+            reckless: this.stance.reckless + (this.parent.system.currentCareer?.system.startingStance.recklessSegments ?? 0)
         };
     }
 
@@ -214,8 +215,8 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
     {
         this.defaultStance = "conservative";
 
-        if(this.stance.current < 0 ||
-            this.stance.current === 0 && this.stanceMeter.conservative < this.stanceMeter.reckless) {
+        if(this.stance.current > 0 ||
+            this.stance.current === 0 && Math.abs(this.stanceMeter.conservative) < this.stanceMeter.reckless) {
             this.defaultStance = "reckless";
         }
     }

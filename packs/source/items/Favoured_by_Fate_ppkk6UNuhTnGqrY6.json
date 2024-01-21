@@ -1,0 +1,26 @@
+{
+  "folder": "7KxNPEqXRUaBjezJ",
+  "name": "Favoured by Fate",
+  "type": "ability",
+  "_id": "ppkk6UNuhTnGqrY6",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Once per session, a Reiklander may add two fortune dice [[DF]][[DF]] to any single check.</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1700158755958,
+    "modifiedTime": 1701195755161,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!ppkk6UNuhTnGqrY6"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Starting Career Tables",
+  "sorting": "a",
+  "folder": null,
+  "type": "RollTable",
+  "_id": "GGWmOAItSjZHydKl",
+  "sort": 100000,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699563216826,
+    "modifiedTime": 1699563270169,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!folders!GGWmOAItSjZHydKl"
+}

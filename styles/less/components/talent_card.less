@@ -8,7 +8,7 @@
 		'talent-card-type talent-card-content'
 		'talent-card-type talent-card-bottom';
 	height: 255px;
-	margin: 0.5rem 0.5rem 2rem;
+	margin: 8px;
 	position: relative;
 	width: 385px;
 
@@ -29,12 +29,12 @@
 
 			& > img {
 				border: none;
-				height: 3rem;
+				height: 48px;
 				opacity: 75%;
 			}
 
 			& > .recharge-token-counter {
-				font-size: 2rem;
+				font-size: 32px;
 				left: 50%;
 				position: absolute;
 				text-shadow:
@@ -64,6 +64,7 @@
 	}
 
 	& .talent-card-content {
+		font-size: 12pt;
 		grid-area: talent-card-content;
 		margin: auto 6px;
 	}
@@ -71,7 +72,7 @@
 	& .talent-card-name {
 		background: padding-box saddlebrown;
 		color: white;
-		font: 20pt @font-title;
+		font: 20pt var(--font-title);
 		grid-area: talent-card-name;
 		margin: auto 0;
 		text-align: center;
@@ -84,17 +85,13 @@
 			0 1pt 0 black,
 			1pt 0 0 black,
 			1pt 1pt 0 black;
-
-		&:hover {
-			text-shadow: 0 0 8px var(--color-shadow-primary);
-		}
 	}
 
 	& .talent-card-type {
 		background-color: saddlebrown;
 		color: white;
 		display: block;
-		font: 14pt @font-primary;
+		font: 14pt var(--font-primary);
 		font-variant-caps: small-caps;
 		font-weight: bold;
 		grid-area: talent-card-type;

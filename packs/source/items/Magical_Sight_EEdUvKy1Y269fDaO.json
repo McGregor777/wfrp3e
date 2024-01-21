@@ -1,0 +1,30 @@
+{
+  "folder": "XhX735J1TWTpv8es",
+  "name": "Magical Sight",
+  "type": "skill",
+  "_id": "EEdUvKy1Y269fDaO",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Magical sight is a skill possessed by nearly all wizards and very few other people. It allows characters to observe the winds of magic by a focused act of will.</p>\n<p><em>Specialisation options:</em> observe specific wind, identify spell, locate aura, dark magic, gauge strength</p>",
+    "characteristic": "intelligence",
+    "advanced": true,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317509859,
+    "modifiedTime": 1699628063201,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!EEdUvKy1Y269fDaO"
+}

@@ -5,12 +5,49 @@
 		form {
 			display: flex;
 			flex-direction: column;
-			flex-wrap: nowrap;
-			height: 100%;
 
 			& .creature-sheet-body {
-				flex-grow: 1;
-				overflow: auto;
+				flex: 1 1 0;
+				min-height: 0;
+
+				& > .tab.active {
+					display: flex;
+					flex-flow: column nowrap;
+					height: 100%;
+					overflow: auto;
+				}
+
+				& .creature-sheet-actions-tab {
+					overflow: unset;
+
+					&.action-card {
+						margin: 0.5rem auto;
+					}
+
+					& .creature-sheet-actions {
+						min-height: 0;
+						overflow: auto;
+					}
+
+					& .creature-sheet-action-tabs {
+						border-bottom: 1px solid #b5b3a4;
+						display: flex;
+						flex-flow: row wrap;
+						justify-content: space-around;
+
+						& > * {
+							margin: 0 5px;
+						}
+					}
+
+					& .action-container {
+						&.active {
+							align-items: center;
+							display: flex !important;
+							flex-direction: column;
+						}
+					}
+				}
 
 				& .creature-sheet-main-tab {
 					& > div {
@@ -39,13 +76,13 @@
 								margin: 0 0.5rem;
 
 								& .attribute-title {
-									font-size: 14pt;
+									font-size: var(--font-size-18);
 									font-variant: small-caps;
 								}
 
 								& .attribute-input-container input {
 									color: white;
-									font-size: 18pt;
+									font-size: var(--font-size-22);
 									font-style: italic;
 									padding-top: 0.5rem;
 									text-shadow:
@@ -98,7 +135,7 @@
 									& .characteristic-fortune-input {
 										background: white;
 										border-color: dimgray;
-										font-size: 10pt;
+										font-size: var(--font-size-14);
 										font-weight: bold;
 										height: 1.25rem;
 										padding-top: 0.25rem;
@@ -157,7 +194,7 @@
 							}
 
 							& .creature-sheet-stance {
-								font-size: 16pt;
+								font-size: var(--font-size-18);
 								margin: auto 1rem 1rem 0;
 
 								&.conservative {
@@ -169,27 +206,6 @@
 								}
 							}
 						}
-					}
-				}
-
-				& .creature-sheet-actions-tab {
-					& .creature-sheet-actions {
-						overflow: auto;
-					}
-
-					& .creature-sheet-action-tabs {
-						border-bottom: 1px solid #b5b3a4;
-						display: flex;
-						flex-flow: row wrap;
-						justify-content: space-around;
-
-						& > * {
-							margin: 0 5px;
-						}
-					}
-
-					& .action-container {
-						align-items: center;
 					}
 				}
 			}
@@ -233,7 +249,7 @@
 					&.creature-sheet-threat-rating {
 						color: white;
 						flex: 0 0 3rem;
-						font-size: 24pt;
+						font-size: var(--font-size-28);
 						padding-top: 0.5rem;
 					}
 				}
@@ -260,10 +276,14 @@
 
 					& input {
 						color: white;
-						font-size: 24pt;
+						font-size: var(--font-size-28);
 						padding-top: 0.5rem;
 					}
 				}
+			}
+
+			& .creature-sheet-tabs {
+				border-top: none;
 			}
 		}
 	}

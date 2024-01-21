@@ -1,262 +1,326 @@
 .character-sheet {
-	& .character-sheet-body {
+	& form {
 		display: flex;
 		flex-direction: column;
-		height: calc(100% - 104px);
 
-		& .characteristics-tab {
-			flex-flow: row wrap !important;
+		& .character-sheet-body {
+			flex: 1 1 0;
+			min-height: 0;
 
-			& .attributes {
+			& > .tab.active {
 				display: flex;
-				height: 650px;
-				flex: 1 1 240px;
-				flex-direction: column;
+				flex-flow: column nowrap;
+				height: 100%;
+				overflow: auto;
+			}
 
-				& .attributes-subdivision {
-					display: flex;
-					flex-flow: row wrap;
+			& .actions-tab {
+				overflow: unset;
 
-					& .attribute {
-						flex: 1 0 80px;
-						padding: 5px;
-						text-align: center;
-
-						& .attribute-input {
-							height: 60px !important;
-						}
-
-						& .attribute-input-container {
-							display: flex;
-							flex-direction: column;
-						}
-
-						& .attribute-label {
-							padding-top: 10px;
-						}
-					}
+				& .character-sheet-actions {
+					min-height: 0;
 				}
 
-				& .cards {
-					overflow-y: scroll;
+				& .character-sheet-action-tabs {
+					border-bottom: 1px solid #b5b3a4;
+					display: flex;
+					flex-flow: row wrap;
+					justify-content: space-around;
 
-					& > div:not(:last-child) .card {
-						margin-bottom: 20px !important;
+					& > * {
+						margin: 0 5px;
 					}
 				}
 			}
 
-			& .characteristics-and-impairments {
-				display: flex;
-				flex-direction: column;
-				width: auto;
+			& .careers-tab {
+				overflow: unset;
 
-				& .characteristics-and-impairments-subdivision {
-					display: flex;
-					flex-direction: row;
-					flex-grow: 1;
+				& .character-sheet-careers {
+					min-height: 0;
 				}
 
-				& .characteristics {
+				& .character-sheet-career-tabs {
+					border-bottom: 1px solid #b5b3a4;
 					display: flex;
-					flex: 1 1 auto;
-					flex-direction: column;
+					flex-flow: row wrap;
 					justify-content: space-around;
-					padding: 0 10px;
 
-					& .characteristic {
-						width: 130px;
+					& > * {
+						margin: 0 5px;
+					}
+				}
+			}
 
-						& .characteristic-fortune-input {
-							font-weight: bold;
-							height: 25px !important;
-							margin-left: 10px !important;
-							padding: 3px !important;
-							text-align: center !important;
-							width: 25px !important;
-						}
+			& .characteristics-tab {
+				&.active {
+					flex-direction: row !important;
+				}
 
-						& .characteristic-input-container {
-							align-items: center;
-							display: flex;
-							flex-flow: row wrap;
-							justify-content: flex-end;
-						}
+				& .attributes {
+					display: flex;
+					flex: 1 1 240px;
+					flex-direction: column;
 
-						& .characteristic-title {
-							font: 14pt @font-primary;
-							font-variant-caps: small-caps;
-							font-weight: bold;
+					& .attributes-subdivision {
+						display: flex;
+						flex-flow: row wrap;
+
+						& .attribute {
+							flex: 1 0 80px;
+							padding: 5px;
 							text-align: center;
-						}
 
-						& .characteristic-value-input {
-							display: block;
-							font-weight: bold;
-							height: 45px !important;
-							padding: 3px !important;
-							text-align: center !important;
-							width: 35px !important;
+							& .attribute-input {
+								height: 60px !important;
+							}
+
+							& .attribute-input-container {
+								display: flex;
+								flex-direction: column;
+							}
+
+							& .attribute-label {
+								padding-top: 10px;
+							}
+						}
+					}
+
+					& .cards {
+						overflow-y: scroll;
+
+						& > div:not(:last-child) .card {
+							margin-bottom: 20px !important;
 						}
 					}
 				}
 
-				& .impairments {
+				& .characteristics-and-impairments {
 					display: flex;
 					flex-direction: column;
+					width: auto;
 
-					.impairment {
+					& .characteristics-and-impairments-subdivision {
 						display: flex;
-						margin: auto;
-						flex: 1 1 auto;
 						flex-direction: row;
+						flex-grow: 1;
+					}
 
-						&:first-child {
-							margin-bottom: 10px;
-						}
+					& .characteristics {
+						display: flex;
+						flex: 1 1 auto;
+						flex-direction: column;
+						justify-content: space-around;
+						padding: 0 10px;
 
-						&:last-child {
-							margin-top: 10px;
-						}
+						& .characteristic {
+							width: 130px;
 
-						& > .token {
-							position: relative;
-							width: 4rem;
-
-							& > * {
-								position: absolute;
+							& .characteristic-fortune-input {
+								font-weight: bold;
+								height: 25px !important;
+								margin-left: 10px !important;
+								padding: 3px !important;
+								text-align: center !important;
+								width: 25px !important;
 							}
 
+							& .characteristic-input-container {
+								align-items: center;
+								display: flex;
+								flex-flow: row wrap;
+								justify-content: flex-end;
+							}
+
+							& .characteristic-title {
+								font: var(--font-size-18) var(--font-primary);
+								font-variant-caps: small-caps;
+								font-weight: bold;
+								text-align: center;
+							}
+
+							& .characteristic-value-input {
+								display: block;
+								font-weight: bold;
+								height: 45px !important;
+								padding: 3px !important;
+								text-align: center !important;
+								width: 35px !important;
+							}
+						}
+					}
+
+					& .impairments {
+						display: flex;
+						flex-direction: column;
+
+						.impairment {
+							display: flex;
+							margin: auto;
+							flex: 1 1 auto;
+							flex-direction: row;
+
+							&:first-child {
+								margin-bottom: 10px;
+							}
+
+							&:last-child {
+								margin-top: 10px;
+							}
+
+							& > .token {
+								position: relative;
+								width: 4rem;
+
+								& > * {
+									position: absolute;
+								}
+
+
+								& > img {
+									border: none;
+									opacity: 75%;
+									top: 50%;
+									transform: translate(0, -50%);
+								}
+
+								& > .token-counter {
+									color: white;
+									font-size: 24pt;
+									left: 38%;
+									text-shadow:
+											-1pt -1pt 0 black,
+											-1pt 0 0 black,
+											0 -1pt 0 black,
+											-1pt 1pt 0 black,
+											1pt -1pt 0 black,
+											0 1pt 0 black,
+											1pt 0 0 black,
+											1pt 1pt 0 black;
+									top: 47%;
+								}
+							}
+
+							& .title {
+								display: block;
+								font: var(--font-size-18) var(--font-primary);
+								font-variant-caps: small-caps;
+								font-weight: bold;
+								padding: 0 2px 0 4px;
+								writing-mode: vertical-lr;
+								text-align: center;
+								transform: rotate(180deg);
+							}
+						}
+					}
+				}
+
+				& .skills {
+					flex: 1 1 auto;
+					overflow: auto;
+
+					& .skill-row {
+						font-variant-caps: small-caps;
+					}
+				}
+
+				& .stance-meter {
+					margin-bottom: 0.5rem;
+
+					& .stance-meter-segments {
+						display: flex;
+						justify-content: center;
+
+						& .stance-meter-segment {
+							display: block;
+							height: 27px;
+
+							&.active {
+								filter: drop-shadow(gold 0px 0px 4px);
+							}
 
 							& > img {
 								border: none;
-								opacity: 75%;
-								top: 50%;
-								transform: translate(0, -50%);
+								width: 32px;
+
+								&.stance-neutral {
+									width: 38px;
+								}
 							}
 
-							& > .token-counter {
-								color: white;
-								font-size: 24pt;
-								left: 38%;
-								text-shadow:
-									-1pt -1pt 0 black,
-									-1pt 0 0 black,
-									0 -1pt 0 black,
-									-1pt 1pt 0 black,
-									1pt -1pt 0 black,
-									0 1pt 0 black,
-									1pt 0 0 black,
-									1pt 1pt 0 black;
-								top: 47%;
+							& > input {
+								display: none;
 							}
-						}
-
-						& .title {
-							display: block;
-							font: 14pt @font-primary;
-							font-variant-caps: small-caps;
-							font-weight: bold;
-							padding: 0 2px 0 4px;
-							writing-mode: vertical-lr;
-							text-align: center;
-							transform: rotate(180deg);
 						}
 					}
 				}
 			}
 
-			& .skills {
-				flex: 1 1 auto;
+			& .talents-tab {
+				overflow: unset;
 
-				& .skill-row {
-					font-size: 12pt;
-					font-variant-caps: small-caps;
+				& .character-sheet-talents {
+					min-height: 0;
 				}
-			}
 
-			& .stance-meter {
-				margin-bottom: 0.5rem;
-
-				& .stance-meter-segments {
+				& .character-sheet-talent-tabs {
+					border-bottom: 1px solid #b5b3a4;
 					display: flex;
-					justify-content: center;
+					flex-flow: row wrap;
+					justify-content: space-around;
 
-					& .stance-meter-segment {
-						display: block;
-						height: 27px;
-
-						&.active {
-							filter: drop-shadow(gold 0px 0px 4px);
-						}
-
-						& > img {
-							border: none;
-							width: 32px;
-
-							&.stance-neutral {
-								width: 38px;
-							}
-						}
-
-						& > input {
-							display: none;
-						}
+					& > * {
+						margin: 0 5px;
 					}
 				}
 			}
-		}
 
-		& .item-container {
-			display: none;
-			flex-flow: row wrap;
-
-			&.active {
-				flex-direction: row;
-			}
-
-			& .career-partial {
-				display: flex;
+			& .item-container {
+				display: none;
 				flex-flow: row wrap;
+				height: 100%;
+				overflow: auto;
 
-				& .career-advancement {
-					flex: 1 1 300px;
+				&.active {
+					display: flex !important;
+				}
+
+				& .career-partial {
+					display: flex;
+					flex-flow: row wrap;
+
+					& .career-advancement {
+						flex: 1 1 300px;
+					}
+				}
+
+				& .talent-card {
+					margin-bottom: 2rem;
 				}
 			}
 		}
 
-		& .character-sheet-career-tabs, & .character-sheet-talent-tabs, & .character-sheet-action-tabs {
-			border-bottom: 1px solid #b5b3a4;
+		& .character-sheet-primary-tabs {
 			display: flex;
 			flex-flow: row wrap;
-			justify-content: space-around;
+			font: var(--font-size-18) var(--font-primary);
+			font-variant-caps: small-caps;
+			font-weight: bold;
+			height: auto !important;
+			justify-content: space-between;
+			text-align: center;
 
 			& > * {
 				margin: 0 5px;
 			}
 		}
-	}
 
-	& .character-sheet-primary-tabs {
-		display: flex;
-		flex-flow: row wrap;
-		font: 14pt @font-primary;
-		font-variant-caps: small-caps;
-		font-weight: bold;
-		height: auto !important;
-		justify-content: space-between;
-		text-align: center;
-
-		& > * {
-			margin: 0 5px;
+		& .character-sheet-title {
+			display: block;
+			font: var(--font-size-18) var(--font-primary);
+			font-variant-caps: small-caps;
+			font-weight: bold;
+			text-align: center;
 		}
-	}
-
-	& .character-sheet-title {
-		display: block;
-		font: 14pt @font-primary;
-		font-variant-caps: small-caps;
-		font-weight: bold;
-		text-align: center;
 	}
 }

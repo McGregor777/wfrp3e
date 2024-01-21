@@ -1,0 +1,452 @@
+.character-generator {
+	& form {
+		display: flex;
+		flex-direction: column;
+		min-height: 0;
+
+		.step {
+			display: none;
+			flex-grow: 1;
+
+			&.active {
+				display: flex;
+				flex-direction: column;
+				min-height: 0;
+			}
+
+			& > h4 {
+				border-color: var(--color-border-light-primary);
+				border-style: solid;
+				border-width: 0 0 1px;
+			}
+
+			& .tabs {
+				border-color: #b4b3a4;
+				border-style: solid;
+				border-width: 0 0 1px;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-around;
+				padding-top: 0.25rem;
+			}
+
+			&[data-step=action-selection] {
+				& > p {
+					text-align: center;
+
+					& > .remaining-actions {
+						font-style: italic;
+						font-weight: bold;
+					}
+				}
+
+				& .action-selection {
+					border-bottom: 1px solid #b4b3a4;
+					display: flex;
+					flex-direction: column;
+					min-height: 0;
+
+					& .actions {
+						min-height: 0;
+						overflow-y: auto;
+
+						& > .tab.active {
+							display: flex;
+							flex-wrap: wrap;
+							overflow-y: auto;
+
+							& label {
+								cursor: pointer;
+
+								&.active > div {
+									box-shadow: 0 0 0.5rem orange;
+								}
+
+								&:hover > div {
+									box-shadow: 0 0 0.5rem var(--color-shadow-primary);
+								}
+
+
+								& > input {
+									display: none;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			&[data-step=career-selection] {
+				text-align: center;
+
+				& > p > .selected-career {
+					font-style: italic;
+					font-weight: bold;
+				}
+
+				& > .careers {
+					align-items: center;
+					display: flex;
+					flex-grow: 1;
+					overflow-x: auto;
+					padding: 0 130px;
+
+					& > label {
+						cursor: pointer;
+						margin: 0 0.5rem;
+
+						&.active {
+							filter: drop-shadow(0 0 0.5rem orange);
+						}
+
+						&:hover {
+							filter: drop-shadow(0 0 0.5rem var(--color-shadow-primary));
+						}
+
+						& > input {
+							display: none;
+						}
+					}
+				}
+			}
+
+			&[data-step=creation-point-investment] {
+				text-align: center;
+
+				& > p {
+					font-size: var(--font-size-16);
+
+					& > .remaining-creation-points {
+						font-weight: bold;
+					}
+				}
+
+				& > .creation-point-investment {
+					display: flex;
+					flex-grow: 1;
+					justify-content: space-between;
+
+					& > div {
+						flex: 1 1 100%;
+						min-height: 250px;
+
+						& label {
+							background: rgba(255, 255, 240, 0.8);
+							border: 1px solid var(--color-border-light-primary);
+							border-radius: 3px;
+							cursor: pointer;
+							display: block;
+							line-height: 28px;
+							margin: 0.5rem;
+
+							&.active {
+								box-shadow: 0 0 0.5rem orange;
+							}
+
+							&:hover, &:focus {
+								outline: none;
+								box-shadow: 0 0 5px var(--color-shadow-primary);
+							}
+
+							& > input {
+								display: none;
+							}
+						}
+
+						&.characteristics > div > div {
+							display: flex;
+							margin-bottom: 2rem;
+							justify-content: center;
+
+							& > button {
+								background: no-repeat;
+								border: none;
+								width: 3rem;
+
+								&:hover, &:focus {
+									box-shadow: none;
+									text-shadow: 0 0 5px var(--color-shadow-primary);
+								}
+							}
+
+							& > input {
+								height: auto;
+								padding-top: 6px;
+								width: 3rem;
+							}
+						}
+					}
+				}
+			}
+
+			&[data-step=finish] .finish {
+				min-height: 0;
+				overflow-y: auto;
+
+				& > div:not(:first-child) {
+					margin-top: 2rem;
+				}
+
+				& h5 {
+					border-color: var(--color-border-light-primary);
+					border-style: solid;
+					border-width: 0 0 1px;
+				}
+
+				& .actions, & .talents {
+					display: flex;
+					flex-wrap: wrap;
+					justify-content: center;
+				}
+
+				& .career-sheet {
+					margin: auto;
+				}
+
+				& .characteristics {
+					display: flex;
+					justify-content: space-around;
+
+					& > div {
+						text-align: center;
+
+						& > div {
+							background: rgba(0, 0, 0, 0.05);
+							border-radius: 3px;
+							color: var(--color-text-dark-primary);
+							height: auto;
+							margin: auto;
+							min-width: 20px;
+							padding: 6px 1px 3px;
+							width: 3rem;
+						}
+					}
+				}
+
+				& .race {
+					display: flex;
+					align-items: center;
+
+					& img {
+						border: none;
+					}
+				}
+			}
+
+			&[data-step=race-selection] {
+				& > p {
+					text-align: center;
+
+					& > .selected-race {
+						font-style: italic;
+						font-weight: bold;
+					}
+				}
+
+				& > .races {
+					align-items: center;
+					display: flex;
+					flex: 0 1 400px;
+					justify-content: center;
+					text-align: center;
+
+					& > label {
+						cursor: pointer;
+						flex: 0 1 180px;
+						margin: 0 0.5rem;
+
+						&.active {
+							filter: drop-shadow(0 0 0.5rem orange);
+
+							& > img {
+								filter: none;
+							}
+						}
+
+						&:hover {
+							filter: drop-shadow(0 0 0.5rem var(--color-shadow-primary));
+
+							& > img {
+								filter: none;
+							}
+						}
+
+						& > img {
+							border: none;
+							display: block;
+							filter: drop-shadow(0 0 0.25rem black);
+							height: 180px;
+							margin: 0 auto;
+						}
+
+						& > input {
+							display: none;
+						}
+
+						& > .race-name {
+							height: 40px;
+							line-height: 40px;
+
+							& > * {
+								display: inline-block;
+								line-height: 12pt;
+								vertical-align: middle;
+							}
+						}
+					}
+				}
+
+				& > .race-description {
+					flex: 1 1 auto;
+					margin: 0 4rem;
+				}
+			}
+
+			&[data-step=skill-training] {
+				& > p {
+					text-align: center;
+
+					& > .remaining-skill-trainings, & > .remaining-specialisations {
+						font-weight: bold;
+					}
+				}
+
+				& > .skill-training {
+					display: flex;
+					flex-grow: 1;
+
+					& table {
+						height: fit-content;
+
+						& thead {
+							font-variant-caps: small-caps;
+						}
+
+						& tbody {
+							& .skill-acquired, & .skill-characteristic {
+								font-variant-caps: small-caps;
+							}
+						}
+					}
+				}
+			}
+
+			&[data-step=talent-selection] {
+				& > p {
+					text-align: center;
+
+					& > .remaining-talents,
+					& > .remaining-focus-talents,
+					& > .remaining-faith-talents,
+					& > .remaining-order-talents,
+					& > .remaining-insanities {
+						font-style: italic;
+						font-weight: bold;
+					}
+				}
+
+				& .talent-selection {
+					border-bottom: 1px solid #b4b3a4;
+					display: flex;
+					flex-direction: column;
+					min-height: 0;
+
+					& .talents {
+						min-height: 0;
+						overflow-y: auto;
+
+						& > .tab.active {
+							display: flex;
+							flex-wrap: wrap;
+							justify-content: center;
+							overflow-y: auto;
+
+							& label {
+								cursor: pointer;
+
+								&.active > div {
+									box-shadow: 0 0 0.5rem orange;
+								}
+
+								&:hover > div {
+									box-shadow: 0 0 0.5rem var(--color-shadow-primary);
+								}
+
+								& > input {
+									display: none;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			& h4 {
+				font-variant-caps: small-caps;
+				font-weight: bold;
+				margin: 0.5rem 0 0 !important;
+				text-align: center;
+			}
+
+			& h5 {
+				font-variant-caps: small-caps;
+				font-weight: bold;
+				margin: 0.5rem auto !important;
+				text-align: center;
+			}
+
+			& h6 {
+				font-variant-caps: small-caps;
+				font-weight: bold;
+				margin: 0.5rem auto !important;
+				text-align: center;
+			}
+
+			& .buttons {
+				display: flex;
+			}
+		}
+	}
+
+	& .character-creation-steps {
+		border-bottom: 1px solid var(--color-border-light-primary);
+		flex-grow: 0;
+		margin-bottom: 0.25rem;
+
+		& .step-names {
+			display: flex;
+			justify-content: space-between;
+			text-align: center;
+
+			& > span {
+				flex-basis: 6rem;
+
+				&.active {
+					color: white;
+					text-shadow:
+							-1pt -1pt 0 black,
+							-1pt 0 0 black,
+							0 -1pt 0 black,
+							-1pt 1pt 0 black,
+							1pt -1pt 0 black,
+							0 1pt 0 black,
+							1pt 0 0 black,
+							1pt 1pt 0 black;
+				}
+			}
+		}
+
+		& .step-gauge {
+			height: 0.25rem;
+			margin: auto;
+			width: 86%;
+
+			& .step-gauge-fill {
+				background-color: darkred;
+				display: block;
+				height: 100%;
+				width: 0;
+			}
+		}
+	}
+}

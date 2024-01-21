@@ -1,0 +1,125 @@
+{
+  "name": "Perform a Stunt",
+  "type": "action",
+  "img": "icons/skills/movement/figure-running-gray.webp",
+  "effects": [],
+  "folder": "ivXOnATwCKlIm1Tl",
+  "flags": {
+    "core": {},
+    "exportSource": {
+      "world": "warhammer-3e",
+      "system": "wfrp3e",
+      "coreVersion": "11.311",
+      "systemVersion": "0.5.2-alpha"
+    }
+  },
+  "system": {
+    "conservative": {
+      "name": "Perform a Stunt",
+      "art": null,
+      "type": "support",
+      "traits": "Basic",
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "check": "Varies based on stunt attempted",
+      "requirements": "<p>GM discretion</p>",
+      "special": "<p><strong>Special:</strong> Use this action to apply a skill in an unusual way, or to attempt a dramatic or story-driven activity not covered by a specific action card</p>",
+      "uniqueEffect": "",
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Perform the action as intended</p>"
+          },
+          {
+            "symbolAmount": 3,
+            "description": "<p>You perform the action incredibly well, and may perform a free manoeuvre</p>"
+          }
+        ],
+        "boon": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>If the check relied on a physical characteristic, recover 1 fatigue. If the check relied on a mental characteristic, recover 1 stress</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "bane": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>If the check relied on a physical characteristic, suffer 1 fatigue. If the check relied on a mental characteristic, suffer 1 stress</p>"
+          }
+        ],
+        "chaosStar": [],
+        "righteousSuccess": [],
+        "challenge": [],
+        "delay": [],
+        "exertion": []
+      }
+    },
+    "reckless": {
+      "name": "Perform a Stunt",
+      "art": null,
+      "type": "support",
+      "traits": "Basic",
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "check": "Varies based on stunt attempted",
+      "requirements": "<p>GM discretion</p>",
+      "special": "<p><strong>Special:</strong> Use this action to apply a skill in an unusual way, or to attempt a dramatic or story-driven activity not covered by a specific action card</p>",
+      "uniqueEffect": "",
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Perform the action as intended</p>"
+          },
+          {
+            "symbolAmount": 3,
+            "description": "<p>You perform the action incredibly well, and may perform a free manoeuvre</p>"
+          }
+        ],
+        "boon": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>If the check relied on a physical characteristic, recover 1 fatigue. If the check relied on a mental characteristic, recover 1 stress</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "bane": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>If the check relied on a physical characteristic, suffer 1 fatigue. If the check relied on a mental characteristic, suffer 1 stress</p>"
+          }
+        ],
+        "chaosStar": [],
+        "righteousSuccess": [],
+        "challenge": [],
+        "delay": [],
+        "exertion": []
+      }
+    },
+    "rechargeTokens": 0,
+    "type": "support"
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1696334694650,
+    "modifiedTime": 1701868776710,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "DmcrtHlC0xb4ivsc",
+  "sort": 700000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!DmcrtHlC0xb4ivsc"
+}

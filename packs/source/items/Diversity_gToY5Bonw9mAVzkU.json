@@ -1,0 +1,26 @@
+{
+  "folder": "7KxNPEqXRUaBjezJ",
+  "name": "Diversity",
+  "type": "ability",
+  "_id": "gToY5Bonw9mAVzkU",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>At character creation, Reiklanders begin with 25 creation points.</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1700158723322,
+    "modifiedTime": 1701195818213,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!gToY5Bonw9mAVzkU"
+}

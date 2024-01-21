@@ -1,0 +1,30 @@
+{
+  "folder": "Ei5KZX1hAFFuIy5z",
+  "name": "Intuition",
+  "type": "skill",
+  "_id": "QKcgRzxydB0cE22I",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>The ability to trust instincts about people, places, and things. The gut feeling that lets a character know if someone is lying, or if there&rsquo;s a subtle threat implied in someone&rsquo;s tone or posture. Also covers the ability to make reasonably accurate estimations and evaluate an item&rsquo;s worth or purpose. Can be used to size up an opponent and get a general sense of their abilities or intentions, in which case it is opposed by the target&rsquo;s Discipline.</p>\n<p><em>Specialisation options:</em> detect lies, estimate sums, evaluation, gauge opponent</p>",
+    "characteristic": "intelligence",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317173616,
+    "modifiedTime": 1699628061290,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!QKcgRzxydB0cE22I"
+}

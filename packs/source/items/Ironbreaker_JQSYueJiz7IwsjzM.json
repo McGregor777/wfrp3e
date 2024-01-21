@@ -1,0 +1,85 @@
+{
+  "name": "Ironbreaker",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/ironbreaker.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>The dwarf holds can be largely found in the great mountain ranges that border the Empire. They are vibrant underground cities housing thousands of dwarfs and what remains of dwarf culture &ndash; their temples, forges, and drinking halls. They are also mighty fortresses, protected by vast gatehouses, battlements, and trapped passageways. Unfortunately, their enemies have proved numerous and relentless; many of their holds have been overrun by hordes of orcs and goblins and some dwarfs stubbornly maintain that their cities have been infiltrated from below by ratmen.</p>\n<p>In order to help protect their remaining holds, the dwarfs have trained regiments of elite warrior brotherhoods who are specially trained in tunnel fighting. These Ironbreakers patrol the passageways beneath their hold on the lookout for any enemies foolhardy enough to try and infiltrate its defences. Ironbreakers often swear oaths to protect their hold from underground attack and to stand fast alongside their brothers no matter the odds. For should the Ironbreakers fail in their duty, the defence of the entire Dwarf hold will be jeopardised from an unexpected quarter. Even when such an Ironbreaker is far from his hold, he still lives by his oath, fighting against impossible odds and protecting his fellow adventurers. Their duties often tie Ironbreakers to their hold. They very rarely travel the lands of the Empire, although sometimes an Ironbreaker is sent abroad by a thane to undertake a mission vital to the safekeeping of his hold. Occasionally, Ironbreakers whose holds have been overrun join bands of adventurers, seeking to secure aid in reclaiming their ancestral home.</p>\n<p><strong>Typical Trappings:</strong> Ironbreakers carry a stout hand weapon, often an axe or hammer, and most also bear a sturdy shield. Ironbreakers often have to traverse mountains and cavern complexes, so many carry a grappling hook and a length of rope, as well as a water skin (usually filled with something stronger than water). Every Ironbreaker&rsquo;s most prized posession, however, is his full suit of gromril armour.</p>\n<p><strong>Career Ability:</strong> You have a set of Gromril Plate Armour. Take the Gromil Plate Armour item card. You cannot give away, sell, lend, or trade this armour</p>",
+    "advanced": false,
+    "raceRestrictions": "Dwarf Only",
+    "traits": "Basic, Combat, Ironbreaker, Specialist",
+    "talentSockets": [
+      "focus",
+      "tactic"
+    ],
+    "primaryCharacteristics": [
+      "toughness",
+      "willpower"
+    ],
+    "careerSkills": "Athletics, Discipline, Leadership, Resilience, Weapon Skill",
+    "startingStance": {
+      "conservativeSegments": 2,
+      "recklessSegments": 2
+    },
+    "advanceOptions": {
+      "action": 2,
+      "talent": 1,
+      "skill": 1,
+      "fortune": 1,
+      "conservative": 1,
+      "reckless": 1,
+      "wound": 3
+    },
+    "summary": "Sturdy dwarf warrior protected by strong gromril armour",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549843109,
+    "modifiedTime": 1699628684835,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "JQSYueJiz7IwsjzM",
+  "sort": 400000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!JQSYueJiz7IwsjzM"
+}

@@ -1,0 +1,30 @@
+{
+  "folder": "XhX735J1TWTpv8es",
+  "name": "Channelling",
+  "type": "skill",
+  "_id": "6hyilRndUzF1D6EF",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Reflects a character&rsquo;s ability to successfully harness the Winds of Magic to glean power to fuel arcane spells. The arcane equivalent of the divine skill Piety.</p>\n<p><em>Specialisation options:</em> below capacity, overchannelling, conservative, reckless, by college order</p>",
+    "characteristic": "willpower",
+    "advanced": true,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317482502,
+    "modifiedTime": 1699628063201,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!6hyilRndUzF1D6EF"
+}

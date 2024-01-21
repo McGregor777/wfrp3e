@@ -1,0 +1,117 @@
+{
+  "name": "Assess The Situation",
+  "type": "action",
+  "img": "systems/wfrp3e/assets/images/actions/assess_the_situation.jpg",
+  "effects": [],
+  "folder": "ivXOnATwCKlIm1Tl",
+  "flags": {
+    "core": {},
+    "exportSource": {
+      "world": "warhammer-3e",
+      "system": "wfrp3e",
+      "coreVersion": "11.311",
+      "systemVersion": "0.5.2-alpha"
+    }
+  },
+  "system": {
+    "conservative": {
+      "name": "Assess The Situation",
+      "art": "systems/wfrp3e/assets/images/actions/assess_the_situation.jpg",
+      "type": "support",
+      "traits": "Basic, Defense",
+      "rechargeRating": 2,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "check": "Intuition (Int)",
+      "requirements": "<p>None</p>",
+      "special": "<p><strong>Special:</strong> Add <span class=\"wfrp3e-font dice challenge\"></span> to this action&rsquo;s dice pool if you are engaged with an enemy</p>",
+      "uniqueEffect": "",
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>"
+          }
+        ],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Remove 1 recharge token from one of your cards</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "bane": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>The GM may add 1 recharge token to one of your cards</p>"
+          }
+        ],
+        "chaosStar": [],
+        "righteousSuccess": [],
+        "challenge": [],
+        "delay": [],
+        "exertion": []
+      }
+    },
+    "reckless": {
+      "name": "Assess The Situation",
+      "art": "systems/wfrp3e/assets/images/actions/assess_the_situation.jpg",
+      "type": "support",
+      "traits": "Basic, Defense",
+      "rechargeRating": 2,
+      "difficultyModifiers": {
+        "challengeDice": 0,
+        "misfortuneDice": 0
+      },
+      "check": "Intuition (Int)",
+      "requirements": "<p>None</p>",
+      "special": "<p><strong>Special:</strong> Add <span class=\"wfrp3e-font dice challenge\"></span> to this action&rsquo;s dice pool if you are engaged with an enemy</p>",
+      "uniqueEffect": "",
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>"
+          }
+        ],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Remove 1 recharge token from one of your cards</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "bane": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>The GM may add 1 recharge token to one of your cards</p>"
+          }
+        ],
+        "chaosStar": [],
+        "righteousSuccess": [],
+        "challenge": [],
+        "delay": [],
+        "exertion": []
+      }
+    },
+    "rechargeTokens": 0,
+    "type": "support"
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1696334694650,
+    "modifiedTime": 1701883793736,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "qQrjbMZeH4WjniK6",
+  "sort": 1200000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!qQrjbMZeH4WjniK6"
+}

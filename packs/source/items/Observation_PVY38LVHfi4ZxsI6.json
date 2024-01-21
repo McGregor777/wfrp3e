@@ -1,0 +1,30 @@
+{
+  "folder": "Ei5KZX1hAFFuIy5z",
+  "name": "Observation",
+  "type": "skill",
+  "_id": "PVY38LVHfi4ZxsI6",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Using your senses to perceive your surroundings. Use this skill to notice small details that others might miss and to pick up on subtle clues. It can also be used to spot traps, pitfalls, and other physical dangers. Observation opposes other characters&rsquo; attempts at Stealth, or to otherwise avoid detection.</p>\n<p><em>Specialisation options:</em> eavesdropping, tracking, keen vision, minute details</p>",
+    "characteristic": "intelligence",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317225910,
+    "modifiedTime": 1699628061290,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!PVY38LVHfi4ZxsI6"
+}

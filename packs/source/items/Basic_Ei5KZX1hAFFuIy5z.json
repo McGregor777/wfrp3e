@@ -1,0 +1,19 @@
+{
+  "name": "Basic",
+  "sorting": "a",
+  "folder": "dLM3SSj4fPcCsnad",
+  "type": "Item",
+  "_id": "Ei5KZX1hAFFuIy5z",
+  "sort": -100000,
+  "color": null,
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695316979527,
+    "modifiedTime": 1699628061314,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!folders!Ei5KZX1hAFFuIy5z"
+}

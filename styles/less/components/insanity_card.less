@@ -1,121 +1,118 @@
-.insanities
+.insanity-card
 {
-	& .insanity-card
+	position: relative;
+	width: 255px;
+	height: 385px;
+	margin: 0 auto;
+	border: 10px solid #602018;
+	border-radius: 10px;
+	text-align: center;
+	background-color: #d0d8e0;
+
+	& .insanity-card-content
 	{
-		position: relative;
-		width: 255px;
-		height: 385px;
-		margin: 0 auto;
-		border: 10px solid #602018;
-		border-radius: 10px;
-		text-align: center;
-		background-color: #d0d8e0;
+		padding: 0 5px;
 
-		& .insanity-card-content
+		& .insanity-card-description
 		{
+			text-align: left;
+			margin-left: 0;
+			padding: 0;
+			border: 0;
+		}
+
+		& .insanity-card-severity-rating
+		{
+			width: 31px;
+			height: 31px;
+			background-color: #202020;
+			float: right;
+			color: white;
+			font: 20pt var(--font-title);
+			font-variant-caps: small-caps;
+			text-shadow:
+				-1pt -1pt 0 black,
+				-1pt 0 0 black,
+				0 -1pt 0 black,
+				-1pt 1pt 0 black,
+				1pt -1pt 0 black,
+				0 1pt 0 black,
+				1pt 0 0 black,
+				1pt 1pt 0 black;
+		}
+
+		& .insanity-card-symptom
+		{
+			text-align: left;
+
+			& .symptom-name
+			{
+				text-transform: uppercase;
+
+				&::first-letter
+				{
+					font-size: 16pt;
+				}
+			}
+		}
+	}
+
+	& .insanity-card-header
+	{
+		display: flex;
+		flex-direction: column;
+		height: 70px;
+		margin-bottom: 5px;
+
+		& .insanity-card-name
+		{
+			margin: auto 0;
 			padding: 0 5px;
+			color: white;
+			font: 16pt var(--font-title);
+			font-variant-caps: small-caps;
+			text-shadow:
+				-1pt -1pt 0 black,
+				-1pt 0 0 black,
+				0 -1pt 0 black,
+				-1pt 1pt 0 black,
+				1pt -1pt 0 black,
+				0 1pt 0 black,
+				1pt 0 0 black,
+				1pt 1pt 0 black;
+			vertical-align: middle;
 
-			& .insanity-card-description
+			&:hover
 			{
-				text-align: left;
-				margin-left: 0;
-				padding: 0;
-				border: 0;
-			}
-
-			& .insanity-card-severity-rating
-			{
-				width: 31px;
-				height: 31px;
-				background-color: #202020;
-				float: right;
-				color: white;
-				font: 20pt "Caslon Antique";
-				font-variant-caps: small-caps;
-				text-shadow:
-					-1pt -1pt 0 black,
-					-1pt 0 0 black,
-					0 -1pt 0 black,
-					-1pt 1pt 0 black,
-					1pt -1pt 0 black,
-					0 1pt 0 black,
-					1pt 0 0 black,
-					1pt 1pt 0 black;
-			}
-
-			& .insanity-card-symptom
-			{
-				text-align: left;
-
-				& .symptom-name
-				{
-					text-transform: uppercase;
-
-					&::first-letter
-					{
-						font-size: 16pt;
-					}
-				}
+				text-shadow: 0 0 8px var(--color-shadow-primary);
 			}
 		}
 
-		& .insanity-card-header
+		& .insanity-card-traits
 		{
-			display: flex;
-			flex-direction: column;
-			height: 70px;
-			margin-bottom: 5px;
-
-			& .insanity-card-name
-			{
-				margin: auto 0;
-				padding: 0 5px;
-				color: white;
-				font: 16pt "Caslon Antique";
-				font-variant-caps: small-caps;
-				text-shadow:
-					-1pt -1pt 0 black,
-					-1pt 0 0 black,
-					0 -1pt 0 black,
-					-1pt 1pt 0 black,
-					1pt -1pt 0 black,
-					0 1pt 0 black,
-					1pt 0 0 black,
-					1pt 1pt 0 black;
-				vertical-align: middle;
-
-				&:hover
-				{
-					text-shadow: 0 0 8px var(--color-shadow-primary);
-				}
-			}
-
-			& .insanity-card-traits
-			{
-				height: 20px;
-				padding: 3px 5px;
-				background-color: #303030;
-				color: white;
-				font-size: 10pt;
-				font-style: italic;
-				font-weight: bold;
-				text-shadow:
-					-1pt -1pt 0 black,
-					-1pt 0 0 black,
-					0 -1pt 0 black,
-					-1pt 1pt 0 black,
-					1pt -1pt 0 black,
-					0 1pt 0 black,
-					1pt 0 0 black,
-					1pt 1pt 0 black;
-			}
+			height: 20px;
+			padding: 3px 5px;
+			background-color: #303030;
+			color: white;
+			font-size: 10pt;
+			font-style: italic;
+			font-weight: bold;
+			text-shadow:
+				-1pt -1pt 0 black,
+				-1pt 0 0 black,
+				0 -1pt 0 black,
+				-1pt 1pt 0 black,
+				1pt -1pt 0 black,
+				0 1pt 0 black,
+				1pt 0 0 black,
+				1pt 1pt 0 black;
 		}
+	}
 
-		& .item-delete-link
-		{
-			position: absolute;
-			bottom: 0;
-			right: 5px;
-		}
+	& .item-delete-link
+	{
+		position: absolute;
+		bottom: 0;
+		right: 5px;
 	}
 }

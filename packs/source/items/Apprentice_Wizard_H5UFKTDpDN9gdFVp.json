@@ -1,0 +1,85 @@
+{
+  "name": "Apprentice Wizard",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/apprentice_wizard.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>Those who can perceive and manipulate the Winds of Magic are treated with fear and suspicion by most folk, and wayward magic users are persecuted. Should a person develop some awareness of magical potential, they are required by Imperial law to apply to join one of the eight Colleges of Magic devoted to the study of arcane lore in Altdorf. The alternative for not doing so usually culminates in a fiery end at the hands of a witch hunter.</p>\n<p>The life of an apprentice is one of hard work with a little learning thrown in. He spends most of his time serving his master &ndash; cleaning and preparing ingredients or ritual equipment. The remaining time is spent in lectures or solitary study in the College library.</p>\n<p>Towards the end of this apprenticeship, an aspirant wizard may be allowed to leave the College for some time. After a long period of study closeted away from the world outside, the masters of the Colleges deem it wise to allow their apprentices to rediscover what life is like outside. However, the apprentice wizard is not free to do simply as he pleases during this time. His master will typically set him some sort of task, such as searching out arcane lore or finding a magical artefact. The apprentice will also be given a deadline, by which time he must return to the College and complete his training. Given the nature of these tasks, it is not uncommon for these apprentices to join parties of adventurers. Such companions usually tolerate arcane abilities, and sometimes even appreciate them.</p>\n<p><strong>Special:</strong> If you are playing an apprentice wizard, you must choose one College of Magic to belong to when starting this career.</p>\n<p><strong>Typical Trappings:</strong> An apprentice wizard is given a talismanic item by his master, usually a staff to help him attune to the Winds of Magic. He wears the robes of his College to identify him, and carries a letter from his master granting him permission to travel. An apprentice wizard will also carry a book filled with essays and study-notes on spell casting.</p>\n<p><strong>Career Ability:</strong> Spellcraft checks for Rank 1 or lower spells gain <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼</span></p>",
+    "advanced": false,
+    "raceRestrictions": "Human only",
+    "traits": "Academic, Arcane, Basic, Wizard",
+    "talentSockets": [
+      "focus",
+      "order"
+    ],
+    "primaryCharacteristics": [
+      "intelligence",
+      "toughness"
+    ],
+    "careerSkills": "Channelling, Discipline, Education, Intuition, Magical Sight, Observation, Spellcraft",
+    "startingStance": {
+      "conservativeSegments": 2,
+      "recklessSegments": 2
+    },
+    "advanceOptions": {
+      "action": 2,
+      "talent": 1,
+      "skill": 3,
+      "fortune": 2,
+      "conservative": 1,
+      "reckless": 1,
+      "wound": 0
+    },
+    "summary": "Intelligent and wilful, with burgeoning magical powers",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1699549807472,
+    "modifiedTime": 1702035885616,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "H5UFKTDpDN9gdFVp",
+  "sort": 2300000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!H5UFKTDpDN9gdFVp"
+}

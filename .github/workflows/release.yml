@@ -1,0 +1,66 @@
+name: System Release Build
+
+env:
+  node_version: 18
+  release_manifest_url: "https://github.com/${{github.repository}}/releases//download/${{github.event.release.tag_name}}/system.json"
+  release_download_url: "https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/system.zip"
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build
+        run: |
+          npm install
+          gulp build
+
+      # Modify system.json with values specific to the release.
+      - name: Modify System Manifest
+        id: sub_manifest_link_version
+        uses: cschleiden/replace-tokens@v1
+        with:
+          files: 'system.json'
+        env:
+          MANIFEST: ${{ env.release_manifest_url }}
+          DOWNLOAD: ${{ env.release_download_url }}
+
+      # Create a "system.zip" archive containing all the system's required files.
+      - name: Create System Archive
+        run: |
+          zip --recurse-paths ./system.zip  \
+            system.json                     \
+            template.json                   \
+            wfrp3e.js                       \
+            assets/                         \
+            lang/                           \
+            modules/                        \
+            packs/                          \
+            styles/                         \
+            templates/
+
+      # Update the GitHub release with the manifest and system archive files.
+      - name: Update Release With Files
+        id: create_version_release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          name: ${{ github.event.release.name }}
+          draft: ${{ github.event.release.unpublished }}
+          prerelease: ${{ github.event.release.prerelease }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: './system.json, ./system.zip'
+          tag: ${{ github.event.release.tag_name }}
+          body: ${{ github.event.release.body }}

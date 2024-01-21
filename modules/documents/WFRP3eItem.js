@@ -39,12 +39,12 @@ export default class WFRP3eItem extends Item
 		else {
 			if (CheckHelper.doesRequireNoCheck(this.system[options.face].check))
 				await new Dialog({
-					title: game.i18n.localize("DIALOG.TITLE.ActionUsageConfirmation"),
-					content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.ActionUsageConfirmation", {action: this.system[options.face].name}) + "</p>",
+					title: game.i18n.localize("APPLICATION.TITLE.ActionUsageConfirmation"),
+					content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.ActionUsageConfirmation", {action: this.system[options.face].name}) + "</p>",
 					buttons: {
 						confirm: {
 							icon: '<span class="fa fa-check"></span>',
-							label: "Yes",
+							label: game.i18n.localize("Yes"),
 							callback: async dlg => {
 								this.exhaustAction(options.face);
 
@@ -65,7 +65,7 @@ export default class WFRP3eItem extends Item
 						},
 						cancel: {
 							icon: '<span class="fas fa-xmark"></span>',
-							label: "Cancel"
+							label: game.i18n.localize("Cancel")
 						},
 					},
 					default: "confirm"

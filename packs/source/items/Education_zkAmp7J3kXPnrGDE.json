@@ -1,0 +1,30 @@
+{
+  "folder": "XhX735J1TWTpv8es",
+  "name": "Education",
+  "type": "skill",
+  "_id": "zkAmp7J3kXPnrGDE",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>This skill is a broad category covering a variety of knowledges and disciplines. Training in education confers basic literacy. This skill is used to recall facts about specific topics, rely on book-learned knowledge, or show appreciation and understanding of various schools of thought or philosophies.</p>\n<p><em>Specialisation options:</em> history, geography, reason, language skills, philosophy</p>",
+    "characteristic": "intelligence",
+    "advanced": true,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317493415,
+    "modifiedTime": 1699628063201,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!zkAmp7J3kXPnrGDE"
+}

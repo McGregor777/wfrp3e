@@ -6,15 +6,17 @@ import WFRP3eRoll from "../WFRP3eRoll.js";
 export default class CheckBuilder extends FormApplication
 {
 	/**
-	 * @param {DicePool} [dicePool]
+	 * @param {DicePool} [object]
 	 * @param {string} [rollName]
 	 * @param {Object} [rollData]
 	 * @param {?string} [rollFlavor]
 	 * @param {?string} [rollSound]
 	 */
-	constructor(dicePool = new DicePool(), rollName = game.i18n.localize("ROLL.FreeCheck"), rollData = null, rollFlavor= null, rollSound= null)
+	constructor(object = new DicePool(), rollName = game.i18n.localize("ROLL.FreeCheck"), rollData = null, rollFlavor= null, rollSound= null)
 	{
 		super();
+
+		this.object = object;
 
 		this.roll = {
 			data: rollData,
@@ -22,8 +24,6 @@ export default class CheckBuilder extends FormApplication
 			sound: rollSound,
 			flavor: rollFlavor,
 		};
-
-		this.dicePool = dicePool;
 	}
 
 	/** @inheritDoc */
@@ -55,7 +55,7 @@ export default class CheckBuilder extends FormApplication
 	async getData()
 	{
 		const data = {
-			challengeLevel: ["melee", "ranged"].includes(this.roll.data?.action?.system[this.roll.data.face].type) ? "easy" : "simple",
+			challengeLevel: ["melee", "ranged"].includes(this.roll.data?.action?.system.type) ? "easy" : "simple",
 			challengeLevels: CONFIG.WFRP3e.challengeLevels,
 			diceIcons: {
 				...Object.entries(CONFIG.WFRP3e.dice).reduce((object, dieType) => {
@@ -101,10 +101,10 @@ export default class CheckBuilder extends FormApplication
 			if(this.roll.data.action) {
 				data.action = this.roll.data.action
 
-				if(["melee", "ranged"].includes(data.action.system[this.roll.data.face].type)) {
+				if(["melee", "ranged"].includes(data.action.system.type)) {
 					data.availableWeapons = data.action.actor.itemTypes.weapon.filter(weapon => {
 						return Object.entries(CONFIG.WFRP3e.weapon.groups).reduce((array, weaponGroup) => {
-							if (weaponGroup[1].type === data.action.system[this.roll.data.face].type)
+							if(weaponGroup[1].type === data.action.system.type)
 								array.push(weaponGroup[0]);
 							return array;
 						}, []).includes(weapon.system.group);
@@ -156,11 +156,11 @@ export default class CheckBuilder extends FormApplication
 	_synchronizeInputs(html)
 	{
 		html.find(".dice-pool-table input").each((key, value) => {
-			value.value = this.dicePool[value.name];
+			value.value = this.object[value.name];
 		});
 
 		html.find(".symbols-pool-container input").each((key, value) => {
-			value.value = this.dicePool[value.name];
+			value.value = this.object[value.name];
 		});
 
 		this._updatePreview(html);
@@ -202,7 +202,7 @@ export default class CheckBuilder extends FormApplication
 
 		input.value++;
 
-		this.dicePool[input.name] = parseInt(input.value);
+		this.object[input.name] = parseInt(input.value);
 		this._updatePreview(html);
 	}
 
@@ -218,7 +218,7 @@ export default class CheckBuilder extends FormApplication
 
 		if(input.value > 0) {
 			input.value--;
-			this.dicePool[input.name] = parseInt(input.value);
+			this.object[input.name] = parseInt(input.value);
 			this._updatePreview(html);
 		}
 	}
@@ -235,9 +235,9 @@ export default class CheckBuilder extends FormApplication
 		event.stopPropagation();
 
 		if(event.currentTarget.classList.contains("convert-conservative"))
-			this.dicePool.convertCharacteristicDie("conservative");
+			this.object.convertCharacteristicDie("conservative");
 		else if(event.currentTarget.classList.contains("convert-reckless"))
-			this.dicePool.convertCharacteristicDie("reckless");
+			this.object.convertCharacteristicDie("reckless");
 
 		this._synchronizeInputs(html);
 	}
@@ -254,9 +254,9 @@ export default class CheckBuilder extends FormApplication
 		event.stopPropagation();
 
 		if(event.currentTarget.classList.contains("convert-conservative"))
-			this.dicePool.convertCharacteristicDie("conservative", -1);
+			this.object.convertCharacteristicDie("conservative", -1);
 		else if(event.currentTarget.classList.contains("convert-reckless"))
-			this.dicePool.convertCharacteristicDie("reckless", -1);
+			this.object.convertCharacteristicDie("reckless", -1);
 
 		this._synchronizeInputs(html);
 	}
@@ -271,7 +271,7 @@ export default class CheckBuilder extends FormApplication
 	{
 		const input = event.currentTarget;
 
-		this.dicePool[input.name] = parseInt(input.value);
+		this.object[input.name] = parseInt(input.value);
 
 		this._updatePreview(html);
 	}
@@ -299,7 +299,7 @@ export default class CheckBuilder extends FormApplication
 	{
 		container.innerHTML = "";
 
-		const totalDice = Object.keys(CONFIG.WFRP3e.dice).reduce((accumulator, diceName) => accumulator + +this.dicePool[diceName + "Dice"], 0);
+		const totalDice = Object.keys(CONFIG.WFRP3e.dice).reduce((accumulator, diceName) => accumulator + +this.object[diceName + "Dice"], 0);
 
 		// Adjust dice icons' size.
 		let height = 48;
@@ -320,12 +320,12 @@ export default class CheckBuilder extends FormApplication
 
 		// Add as many dice icons as needed.
 		Object.entries(CONFIG.WFRP3e.dice).forEach((dieType, index) => {
-			let diceAmount = this.dicePool[dieType[0] + "Dice"];
+			let diceAmount = this.object[dieType[0] + "Dice"];
 
 			if(dieType[0] === "fortune")
-				diceAmount += this.dicePool.creaturesAggressionDice + this.dicePool.creaturesCunningDice;
+				diceAmount += this.object.creaturesAggressionDice + this.object.creaturesCunningDice;
 			else if(dieType[0] === "expertise")
-				diceAmount += this.dicePool.creaturesExpertiseDice;
+				diceAmount += this.object.creaturesExpertiseDice;
 
 			for(let i = 0; i < diceAmount; i++) {
 				const img = document.createElement("img");
@@ -352,7 +352,7 @@ export default class CheckBuilder extends FormApplication
 		container.innerHTML = "";
 
 		Object.values(CONFIG.WFRP3e.symbols).forEach((symbol) => {
-			for(let i = 0; i < this.dicePool[symbol.plural]; i++) {
+			for(let i = 0; i < this.object[symbol.plural]; i++) {
 				const span = document.createElement("span");
 
 				span.classList.add("wfrp3e-font");
@@ -377,8 +377,8 @@ export default class CheckBuilder extends FormApplication
 		const challengeLevel = CONFIG.WFRP3e.challengeLevels[event.currentTarget.value];
 
 		this.roll.data.challengeLevel = event.currentTarget.value;
-		this.dicePool.challengeDice = this.roll.action?.system[this.roll.face].difficultyModifiers.challengeDice ?? 0 +
-			(["melee", "ranged"].includes(this.roll.action?.system[this.roll.face].type) ? 1 : 0) +
+		this.object.challengeDice = this.roll.action?.system[this.roll.face].difficultyModifiers.challengeDice ?? 0 +
+			(["melee", "ranged"].includes(this.roll.action?.system.type) ? 1 : 0) +
 			challengeLevel.challengeDice;
 
 		this._synchronizeInputs(html, html);
@@ -396,10 +396,10 @@ export default class CheckBuilder extends FormApplication
 		const stance = this.roll.data.actor.system.stance.current;
 
 		this.roll.data.skill = event.currentTarget.value;
-		this.dicePool.characteristicDice = characteristic.value - Math.abs(stance);
-		this.dicePool.fortuneDice = characteristic.fortune;
-		this.dicePool.conservativeDice = stance > 0 ? stance : 0;
-		this.dicePool.recklessDice = stance < 0 ? Math.abs(stance) : 0;
+		this.object.characteristicDice = characteristic.value - Math.abs(stance);
+		this.object.fortuneDice = characteristic.fortune;
+		this.object.conservativeDice = stance > 0 ? stance : 0;
+		this.object.recklessDice = stance < 0 ? Math.abs(stance) : 0;
 
 		this._synchronizeInputs(html);
 	}
@@ -415,7 +415,7 @@ export default class CheckBuilder extends FormApplication
 		const skill = this.roll.data.actor.itemTypes.skill.find(skill => skill._id === event.currentTarget.value)
 
 		this.roll.data.skill = skill;
-		this.dicePool.expertiseDice = skill.system.trainingLevel;
+		this.object.expertiseDice = skill.system.trainingLevel;
 
 		html.find(".characteristic-select")
 			.val(skill.system.characteristic)
@@ -504,7 +504,7 @@ export default class CheckBuilder extends FormApplication
 
 		if(sentToPlayer) {
 			let container = $(`<div class="dice-pool"></div>`)[0];
-			this.dicePool.renderAdvancedPreview(container);
+			this.object.renderAdvancedPreview(container);
 
 			const messageText = `<div>
 					<div>${game.i18n.localize("WFRP3e.SentDicePoolRollHint")}</div>
@@ -518,7 +518,7 @@ export default class CheckBuilder extends FormApplication
 				flags: {
 					specialDice: {
 						roll: this.roll,
-						dicePool: this.dicePool,
+						dicePool: this.object,
 						description: this.description,
 					},
 				},
@@ -549,10 +549,10 @@ export default class CheckBuilder extends FormApplication
 					return results;
 
 				// Determine formula.
-				this.dicePool.addDicePool(await CheckHelper.prepareInitiativeCheck(combatant.actor, initiativeCharacteristic));
+				this.object.addDicePool(await CheckHelper.prepareInitiativeCheck(combatant.actor, initiativeCharacteristic));
 				const initiativeRoll = new WFRP3eRoll(
-					this.dicePool.renderDiceExpression(),
-					this.dicePool,
+					this.object.renderDiceExpression(),
+					this.object,
 					{data: combatant.actor ? combatant.actor.getRollData() : {}}
 				).roll();
 
@@ -609,7 +609,7 @@ export default class CheckBuilder extends FormApplication
 			return this.roll.data.combat;
 		}
 		else {
-			const roll = new WFRP3eRoll(this.dicePool.renderDiceExpression(), this.dicePool, {
+			const roll = new WFRP3eRoll(this.object.renderDiceExpression(), this.object, {
 				data: this.roll.data,
 				flavor: this.roll.flavor
 			});
@@ -625,7 +625,7 @@ export default class CheckBuilder extends FormApplication
 
 			if(this.roll.data?.actor.type === "creature")
 				Object.keys(CONFIG.WFRP3e.attributes).forEach((attribute) => {
-					const attributeDiceAmount = this.dicePool["creatures" + (attribute[0].toUpperCase() + attribute.slice(1, attribute.length)) + "Dice"];
+					const attributeDiceAmount = this.object["creatures" + (attribute[0].toUpperCase() + attribute.slice(1, attribute.length)) + "Dice"];
 
 					if(attributeDiceAmount > 0) {
 						const changes = {system: {attributes: {}}};

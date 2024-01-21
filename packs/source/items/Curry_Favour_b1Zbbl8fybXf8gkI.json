@@ -1,0 +1,126 @@
+{
+  "folder": "ivXOnATwCKlIm1Tl",
+  "name": "Curry Favour",
+  "type": "action",
+  "img": "icons/magic/holy/prayer-hands-glowing-yellow.webp",
+  "system": {
+    "conservative": {
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 1,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>You pray to your god. Gain 2 favour</p>"
+          },
+          {
+            "symbolAmount": 2,
+            "description": "<p>As above, but gain 3 favour</p>"
+          },
+          {
+            "symbolAmount": 3,
+            "description": "<p>As above, but gain 4 favour</p>"
+          }
+        ],
+        "righteousSuccess": [],
+        "boon": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Gain 1 favour</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Suffer 1 stress. If, after completing this action, you have more favour than twice your Willpower score, suffer 1 additional stress</p>"
+          }
+        ],
+        "chaosStar": [],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Curry Favour",
+      "art": null,
+      "traits": "Basic, Divine, Rally",
+      "check": "Piety (WP)",
+      "requirements": "<p>You have successfully invoked a blessing, but have less favour than the blessing requires. If you are engaged with an enemy, add [[DM]] to your dice pool</p>"
+    },
+    "reckless": {
+      "rechargeRating": 0,
+      "difficultyModifiers": {
+        "challengeDice": 1,
+        "misfortuneDice": 0
+      },
+      "effects": {
+        "success": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>You pray to your god. Gain 2 favour</p>"
+          },
+          {
+            "symbolAmount": 2,
+            "description": "<p>As above, but gain 4 favour</p>"
+          },
+          {
+            "symbolAmount": 3,
+            "description": "<p>As above, but gain 6 favour</p>"
+          }
+        ],
+        "righteousSuccess": [],
+        "boon": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>Gain 1 favour</p>"
+          }
+        ],
+        "sigmarsComet": [],
+        "challenge": [],
+        "bane": [
+          {
+            "symbolAmount": 2,
+            "description": "<p>Suffer 1 stress. If, after completing this action, you have more favour than twice your Willpower score, suffer 1 additional stress</p>"
+          }
+        ],
+        "chaosStar": [
+          {
+            "symbolAmount": 1,
+            "description": "<p>If, after completing this action, you have more favour than twice your Willpower score, you incur the wrath of the gods! You are Staggered for 2 rounds</p>"
+          }
+        ],
+        "delay": [],
+        "exertion": []
+      },
+      "name": "Curry Favour",
+      "art": null,
+      "traits": "Basic, Divine, Rally",
+      "check": "Piety (WP)",
+      "requirements": "<p>You have successfully invoked a blessing, but have less favour than the blessing requires. If you are engaged with an enemy, add [[DM]] to your dice pool</p>"
+    },
+    "rechargeTokens": 0,
+    "type": "blessing"
+  },
+  "effects": [],
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "core": {}
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.6.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1701899722323,
+    "modifiedTime": 1703182653359,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "b1Zbbl8fybXf8gkI",
+  "sort": 0,
+  "_key": "!items!b1Zbbl8fybXf8gkI"
+}

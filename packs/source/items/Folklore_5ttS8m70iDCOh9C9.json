@@ -1,0 +1,30 @@
+{
+  "folder": "Ei5KZX1hAFFuIy5z",
+  "name": "Folklore",
+  "type": "skill",
+  "_id": "5ttS8m70iDCOh9C9",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>General knowledge and information, common sense, and an understanding of the way the Empire and its society operate, and related topics. Folklore relies on experience, savvy, and second-hand knowledge more than refined education or information gleaned from books. It also encompasses knowledge of regional customs, colourful local myths and superstitions and the opinions of the common man.</p>\n<p><em>Specialisation options:</em>&nbsp;creature lore, Reikland lore, geography,&nbsp;superstitions, local customs</p>",
+    "characteristic": "intelligence",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317110889,
+    "modifiedTime": 1699628061290,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!5ttS8m70iDCOh9C9"
+}

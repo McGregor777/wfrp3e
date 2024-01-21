@@ -5,7 +5,7 @@ export default class WFRP3eActionSheet extends ItemSheet
 		return mergeObject(super.defaultOptions,
 		{
 			template: "systems/wfrp3e/templates/applications/items/action-sheet.hbs",
-			width: 530,
+			width: 540,
 			//height: 340,
 			classes: ["wfrp3e", "sheet", "item", "action", "action-item-sheet"],
 			tabs: [

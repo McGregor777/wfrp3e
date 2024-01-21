@@ -1,0 +1,85 @@
+{
+  "name": "Dilettante",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/dilettante.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>Few people in the Empire benefit from a formal education. Those lucky enough to be able to study usually try diligently to become an expert in their chosen field, knowing the sacrifices their parents made in order to pay their fees. Some students, usually those from wealthy families, are not so disciplined. They flit from one area of study to another. They show an interest in sciences for a term or two, before becoming bored and taking up landscape painting, theology, acting, or some other vain pursuit.</p>\n<p>These dilettantes like to think of themselves as cosmopolitan, flexible enough to take up any discipline they choose. They pride themselves on their broad set of skills and knowledge. However, to their exasperated tutors, dilettantes are undisciplined dabblers and irredeemable amateurs who would be thrown out of the halls of learning were it not for the handsome fees that they bring in. Dilettantes love to join various academic and professional institutions in order to justify their assortment of skills and gain a measure of prestige. Established members of such guilds and clubs tend to look down on dilettantes as mercurial time-wasters and bar their entry. The more wealthy and enthusiastic dilettantes do not let this stop them however. They simply set up their own clubs with impressive sounding titles.</p>\n<p>Because of their insatiable curiosity and drive to find new experiences, dilettantes often take up a life of adventure. They do so in order to find some novel new discovery that they can share with their peers, or to practice skills and techniques they could not learn about in the dusty halls of academia. Some wealthier dilettantes even organise expeditions, hoping to uncover exciting archaeological or zoological finds, and become renowned and respected as a result.</p>\n<p><strong>Typical Trappings:</strong> A dilettante might carry a few books on various subjects that interest him. He might also have a pen, ink, and sheaves of paper to take notes on. He will also carry whatever items he needs to pursue his latest hobby.</p>\n<p><strong>Career Ability:</strong> Once per session, you may treat any one untrained basic skill as if it were trained, or you may attempt one advanced skill as if you had acquired it</p>",
+    "advanced": false,
+    "raceRestrictions": "Human, Dwarf, or High Elf",
+    "traits": "Academic, Basic, Social, Specialist",
+    "talentSockets": [
+      "focus",
+      "reputation"
+    ],
+    "primaryCharacteristics": [
+      "intelligence",
+      "fellowship"
+    ],
+    "careerSkills": "Charm, Education, Folklore, Guile, Ride",
+    "startingStance": {
+      "conservativeSegments": 2,
+      "recklessSegments": 2
+    },
+    "advanceOptions": {
+      "action": 1,
+      "talent": 3,
+      "skill": 3,
+      "fortune": 1,
+      "conservative": 1,
+      "reckless": 1,
+      "wound": 0
+    },
+    "summary": "Socially mobile, with a variety of different skills and interests",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549826386,
+    "modifiedTime": 1699628635305,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "sqH3Q9JNOGAgUVQK",
+  "sort": 1900000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!sqH3Q9JNOGAgUVQK"
+}

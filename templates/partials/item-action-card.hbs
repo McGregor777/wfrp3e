@@ -2,7 +2,7 @@
 	{{#each @root.stances as |stance st|}}
 		<div class="face {{st}}{{#if (equalTo @root.actor.system.defaultStance st)}} active{{/if}}" data-face="{{st}}">
 			<div class="action-card-header">
-				<img class="action-card-type" src="systems/wfrp3e/assets/icons/{{lookup (lookup ../action.system st) 'type'}}.webp" />
+				<img class="action-card-type" src="systems/wfrp3e/assets/icons/{{../action.system.type}}.webp" />
 
 				<div class="action-card-difficulty-modifiers">
 					{{#for 0 (lookup (lookup (lookup ../action.system st) 'difficultyModifiers') 'challengeDice') 1}}
@@ -65,7 +65,7 @@
 					</a>
 
 					{{#if @root.document.isOwner}}
-						<a class="item-delete-link" title="{{localize 'DIALOG.TITLE.DeleteItem'}}"><span class="fas fa-trash"></span></a>
+						<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItemConfirmation'}}"><span class="fas fa-trash"></span></a>
 					{{/if}}
 				</div>
 			</div>

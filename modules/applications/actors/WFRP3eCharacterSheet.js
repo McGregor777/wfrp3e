@@ -14,6 +14,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			width: 932,
 			height: 800,
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
+			dragDrop: [{dragSelector: ".item", dropSelector: null}],
 			tabs: [
 				{group: "primary", navSelector: ".character-sheet-primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
 				{group: "careers", navSelector: ".character-sheet-career-tabs", contentSelector: ".character-sheet-careers"},
@@ -47,23 +48,21 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		// Add basic skills to the Character.
 		if(actor.type === "character" && data.items.skills.length === 0) {
 			new Dialog({
-				title: game.i18n.localize("DIALOG.TITLE.BasicSkillsAdding"),
-				content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.BasicSkillsAdding", {actor: actor.name}) + "</p>",
+				title: game.i18n.localize("APPLICATION.TITLE.BasicSkillsAdding"),
+				content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.BasicSkillsAdding", {actor: actor.name}) + "</p>",
 				buttons: {
 					confirm: {
 						icon: '<span class="fa fa-check"></span>',
-						label: game.i18n.localize("DIALOG.BUTTON.AddBasicSkills"),
+						label: game.i18n.localize("APPLICATION.BUTTON.AddBasicSkills"),
 						callback: async dlg => {
-							const basicSkills = await game.packs.get("wfrp3e.skills").getDocuments().then(skills => {
-								return skills.filter(skill => !skill.system.advanced);
-							});
+							const basicSkills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill", system: {advanced: false}});
 
 							await Item.createDocuments(basicSkills, {parent: actor});
 						}
 					},
 					cancel: {
 						icon: '<span class="fas fa-xmark"></span>',
-						label: game.i18n.localize("DIALOG.BUTTON.Ignore")
+						label: game.i18n.localize("Ignore")
 					},
 				},
 				default: 'confirm'
@@ -90,7 +89,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		html.find(".quantity-link").mousedown(this._onQuantityClick.bind(this));
 		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
 		html.find(".item-delete-link").click(this._onItemDelete.bind(this));
-		html.find(".item-name-link").mousedown(this._onItemClick.bind(this));
+		html.find(".item-name-link").click(this._onItemLeftClick.bind(this));
+		html.find(".item-name-link").contextmenu(this._onItemRightClick.bind(this));
 		html.find(".item-input").change(this._onItemInput.bind(this));
 		html.find(".recharge-token").mousedown(this._onRechargeTokenClick.bind(this));
 		html.find(".skill-training-level-input").change(this._onSkillTrainingLevelChange.bind(this));
@@ -103,14 +103,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	_buildItemLists(data)
 	{
-		const sortedItems = data.items.sort(function(a, b) {
-			if(a.name < b.name)
-				return -1;
-			else if(a.name > b.name)
-				return 1;
-			else
-				return 0;
-		});
+		const sortedItems = data.items.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
 
 		const actions = sortedItems.filter(item => item.type === "action");
 		const talents = sortedItems.filter(item => item.type === "talent");
@@ -118,11 +111,11 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		const items = {
 			abilities: sortedItems.filter(item => item.type === "ability"),
 			actions: {
-				melee: actions.filter(item => item.system.conservative.type === "melee"),
-				ranged: actions.filter(item => item.system.conservative.type === "ranged"),
-				support: actions.filter(item => item.system.conservative.type === "support"),
-				blessing: actions.filter(item => item.system.conservative.type === "blessing"),
-				spell: actions.filter(item => item.system.conservative.type === "spell")
+				melee: actions.filter(item => item.system.type === "melee"),
+				ranged: actions.filter(item => item.system.type === "ranged"),
+				support: actions.filter(item => item.system.type === "support"),
+				blessing: actions.filter(item => item.system.type === "blessing"),
+				spell: actions.filter(item => item.system.type === "spell")
 			},
 			armours: sortedItems.filter(item => item.type === "armour"),
 			careers: sortedItems.filter(item => item.type === "career"),
@@ -303,12 +296,12 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		const clickedItem = this.actor.items.get(this._getItemId(event));
 
 		new Dialog({
-			title: game.i18n.localize("DIALOG.TITLE.DeleteItemConfirmation"),
-			content: "<p>" + game.i18n.format("DIALOG.DESCRIPTION.DeleteItemConfirmation", {item: clickedItem.name}) + "</p>",
+			title: game.i18n.localize("APPLICATION.TITLE.DeleteItemConfirmation"),
+			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItemConfirmation", {item: clickedItem.name}) + "</p>",
 			buttons: {
 				confirm: {
 					icon: '<span class="fa fa-check"></span>',
-					label: "Yes",
+					label: game.i18n.localize("Yes"),
 					callback: async dlg => {
 						await this.actor.deleteEmbeddedDocuments("Item", [clickedItem._id]);
 						li.slideUp(200, () => this.render(false));
@@ -316,7 +309,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 				},
 				cancel: {
 					icon: '<span class="fas fa-xmark"></span>',
-					label: "Cancel"
+					label: game.i18n.localize("Cancel")
 				},
 			},
 			default: "confirm"
@@ -324,30 +317,29 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on an Item button.
+	 * Performs follow-up operations after left-clicks on an Item button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	async _onItemClick(event)
+	async _onItemLeftClick(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
+		const options = {};
+		const face = $(event.currentTarget).parents(".face").data("face");
 
-		switch(event.button) {
-			// If left click, prepare a skill, action or weapon check.
-			case 0:
-				const options = {};
-				const face = $(event.currentTarget).parents(".face").data("face");
+		if(face)
+			options.face = face;
 
-				if(face)
-					options.face = face;
+		this.actor.items.get(this._getItemId(event)).useItem(options);
+	}
 
-				clickedItem.useItem(options);
-				break;
-			// If right click, open the clicked Item's sheet.
-			case 2:
-				clickedItem.sheet.render(true);
-				break;
-		}
+	/**
+	 * Performs follow-up operations after right-clicks on an Item button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	async _onItemRightClick(event)
+	{
+		this.actor.items.get(this._getItemId(event)).sheet.render(true);
 	}
 
 	/**

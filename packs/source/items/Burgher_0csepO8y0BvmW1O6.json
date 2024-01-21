@@ -1,0 +1,85 @@
+{
+  "name": "Burgher",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/burgher.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>For most of the Empire&rsquo;s history, there has been a clear distinction between the noble rulers and pretty much everyone else. The aristocracy of the Empire has traditionally been a tiny minority of interrelated families who, for centuries, have enjoyed prestige and privilege. Until quite recently, few commoners could hope to attain the wealth, education, and freedoms enjoyed by the nobility.</p>\n<p>However, over the last few centuries, the old traditions of distinction between noble and commoner have not been so stringently observed. Whilst the nobility still enjoy lives of hereditary privilege and authority, a new class of merchants and businessmen has emerged. These burghers command wealth, learning and political influence that many reactionary elements of the nobility would have rather kept for themselves. Unlike certain dissolute nobles, burghers have to work hard for their position. They must keep their labourers happy and well trained, and they have to provide detailed accounts to the bailiffs. Most of all, they have to please their customers. To support each other, burghers often form guilds or brotherhoods. These organisations protect their members, offering such perks as widows&rsquo; pensions and support in times of crisis. The guilds also regulate their members by setting recognised standards of weights, measures, pay scales, and prices. Abiding by all these stringencies is difficult work, but the rewards for a successful burgher are fair pay and the chance to make a name for himself as a rich merchant or influential politician.</p>\n<p>In times of unrest or plague, the burghers of a town can find themselves facing ruin. It is not unknown for such citizens to take up the adventuring life. Alternatively, a burgher might leave behind the tedium and toil of his old job in order to seek fame and fortune.</p>\n<p><strong>Typical Trappings:</strong> A burgher will dress well, and usually owns at least one set of good quality clothing. He might carry an abacus to help keep his accounts, and a lantern to inspect dark storerooms or light his premises after dark.</p>\n<p><strong>Career Ability:</strong> Once per session, you may add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to any Charm or Leadership check</p>",
+    "advanced": false,
+    "raceRestrictions": "Human, Dwarf, or High Elf",
+    "traits": "Basic, Bureaucrat, Social, Urban",
+    "talentSockets": [
+      "reputation",
+      "reputation"
+    ],
+    "primaryCharacteristics": [
+      "intelligence",
+      "fellowship"
+    ],
+    "careerSkills": "Charm, Discipline, Education, Folklore, Tradecraft",
+    "startingStance": {
+      "conservativeSegments": 3,
+      "recklessSegments": 1
+    },
+    "advanceOptions": {
+      "action": 1,
+      "talent": 3,
+      "skill": 3,
+      "fortune": 10,
+      "conservative": 2,
+      "reckless": 0,
+      "wound": 0
+    },
+    "summary": "An intelligent, industrious, and ambitious member of the citizenry",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549816112,
+    "modifiedTime": 1699628618767,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "0csepO8y0BvmW1O6",
+  "sort": 2100000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!0csepO8y0BvmW1O6"
+}

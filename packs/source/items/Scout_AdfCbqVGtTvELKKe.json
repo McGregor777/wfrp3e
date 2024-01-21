@@ -1,0 +1,85 @@
+{
+  "name": "Scout",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/scout.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>The Empire is a hazardous place. Travelling parties and merchant caravans who venture into the wilds can meet with all manner of accidents. Many lose their way on unmarked paths or have to turn back after encountering an impassable object or bad weather. Other parties become the victims of bandits or ravening beasts. Even armies on the march can find themselves lost or at risk of ambush if they do not take pains to reconnoitre their surroundings.</p>\n<p>Those who organise any sort of overland expedition have these risks in mind and hire scouts to help explore the paths ahead. Many scouts are expert horsemen with skills in living outdoors and following trails. Most of them work within an area that they are familiar with, but some scouts specialise in exploration. They ride into dangerous and unknown territory, a risky task for which they receive a handsome wage.</p>\n<p>The task of a scout is to report back about any dangers ahead rather than tackle them himself. However, all scouts learn to become good shots and develop combat skills to deal with ambushes or enemy scouts.</p>\n<p>They also become experts in judging the lay of the land, navigating around ravines or swollen rivers. Scouts also become highly adept at finding farmsteads and isolated villages which can provide a convenient source of provisions.</p>\n<p>In several regards, the life of a scout is not very different to the life of an adventurer. When they cannot find work with a merchant caravan or an army on the march, scouts sometimes join parties of adventurers, where their self-sufficiency and familiarity with the outdoors often prove useful.</p>\n<p><strong>Typical Trappings:</strong> A scout will arm himself with a hand weapon and a bow or crossbow, with ammunition for a dozen shots. He will wear leather armour for protection. Some scouts have a riding horse, saddled and harnessed, others prefer to scout on foot.</p>\n<p><strong>Career Ability:</strong> Once per session, you may add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to any Observation or Stealth check</p>",
+    "advanced": false,
+    "raceRestrictions": "Human, High Elf, or Wood Elf",
+    "traits": "Basic, Menial, Rogue, Rural",
+    "talentSockets": [
+      "focus",
+      "tactic"
+    ],
+    "primaryCharacteristics": [
+      "agility",
+      "intelligence"
+    ],
+    "careerSkills": "Ballistic Skill, Nature Lore, Observation, Ride, Stealth",
+    "startingStance": {
+      "conservativeSegments": 3,
+      "recklessSegments": 1
+    },
+    "advanceOptions": {
+      "action": 2,
+      "talent": 2,
+      "skill": 3,
+      "fortune": 2,
+      "conservative": 1,
+      "reckless": 0,
+      "wound": 0
+    },
+    "summary": "An observant, resourceful outdoorsman with keen senses",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549866793,
+    "modifiedTime": 1699628745381,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "AdfCbqVGtTvELKKe",
+  "sort": 575000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!AdfCbqVGtTvELKKe"
+}

@@ -1,0 +1,30 @@
+{
+  "folder": "Ei5KZX1hAFFuIy5z",
+  "name": "Skulduggery",
+  "type": "skill",
+  "_id": "GDjSXa3zzmdcWSrG",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Covers thieving and a variety of illicit, underhanded skills. Use this skill to subtly pry open a door, pick a lock, set or disable a trap, pick someone&rsquo;s pocket, or perform some comparable act of thievery or burglary. Depending on the application, Skullduggery checks may be opposed by a target&rsquo;s Observation or Intuition.</p>\n<p><em>Specialisation options:</em> pick pockets, pick locks, set traps, disable traps, palm objects</p>",
+    "characteristic": "agility",
+    "advanced": false,
+    "trainingLevel": 0,
+    "specialisations": ""
+  },
+  "effects": [],
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1695317288560,
+    "modifiedTime": 1699628061290,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!GDjSXa3zzmdcWSrG"
+}

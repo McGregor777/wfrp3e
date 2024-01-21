@@ -1,0 +1,85 @@
+{
+  "name": "Servant",
+  "type": "career",
+  "img": "systems/wfrp3e/assets/images/careers/servant.webp",
+  "effects": [],
+  "folder": "m8G9zWMGUYpKI5Hg",
+  "flags": {
+    "core": {}
+  },
+  "system": {
+    "description": "<p>Running a great house, or a business, or a university is no easy task. Whilst the Empire is a centre for innovations both magical and mechanical, menial chores are performed largely by hand.</p>\n<p>Every institution of any size therefore employs a cadre of servants to cook food, clean rooms and attend to the wishes of their masters. Servants perform a seemingly unending number of laborious tasks for their employers, whether they be nobles, innkeepers or merchants. In the universities servants clean the corridors and lecture rooms.</p>\n<p>Some servants work closely with particular scholars, and can become learned in a particular subject. They help set up equipment and demonstrate the more straightforward theories, techniques or experiments.</p>\n<p>In the Colleges of Magic many of the tasks normally performed by servants are undertaken by apprentice wizards, though some roles in the colleges require more permanent staff. Likewise, the great temples and facilities of the Empire&rsquo;s Cult&rsquo;s also require tending, maintenance, and care. Areas such as the kitchens and the purser&rsquo;s office employ servants of their own.</p>\n<p>Unlike an apprentice a servant is considered to have no valuable skills. Servants receive very little in the way of payment, and whilst most are treated decently by their employers they occupy a social rank little better than that of a slave. If a servant performs years of loyal service, and works hard and well, they may be promoted to the position of valet, or even steward.</p>\n<p>However, to the scullion, serving wench or stable boy a life of adventure might seem like the only dream they can hope to fulfil, and many of them leave their master&rsquo;s service and seek out more exciting lives.</p>\n<p><strong>Typical Trappings:</strong> Servants have few possessions, though those with a rich employer may wear a good set of clothing decorated with the livery of the noble family or merchant house they work for.</p>\n<p><strong>Career Ability:</strong> You may choose to socket a Focus talent in your Reputation slot</p>",
+    "advanced": false,
+    "raceRestrictions": "Any Race",
+    "traits": "Basic, Menial, Rural, Urban",
+    "talentSockets": [
+      "focus",
+      "reputation"
+    ],
+    "primaryCharacteristics": [
+      "toughness",
+      "willpower"
+    ],
+    "careerSkills": "Athletics, Coordination, Folklore, Intuition, Resilience",
+    "startingStance": {
+      "conservativeSegments": 2,
+      "recklessSegments": 2
+    },
+    "advanceOptions": {
+      "action": 2,
+      "talent": 2,
+      "skill": 1,
+      "fortune": 2,
+      "conservative": 1,
+      "reckless": 1,
+      "wound": 1
+    },
+    "summary": "Hard working and reliable, with dreams of a better life",
+    "advances": {
+      "action": "",
+      "talent": "",
+      "skill": "",
+      "wound": "",
+      "open": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "careerTransition": {
+        "cost": 0,
+        "newCareer": ""
+      },
+      "dedicationBonus": "",
+      "nonCareer": [
+        {
+          "cost": 0,
+          "nature": ""
+        },
+        {
+          "cost": 0,
+          "nature": ""
+        }
+      ]
+    },
+    "current": false,
+    "completed": false
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.5.1",
+    "coreVersion": "11.315",
+    "createdTime": 1699549872149,
+    "modifiedTime": 1699628758788,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "DxwUlfhH62Sj2RxH",
+  "sort": 2800000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!DxwUlfhH62Sj2RxH"
+}
