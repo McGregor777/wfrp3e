@@ -52,8 +52,8 @@
   "primaryTokenAttribute": "wounds",
   "secondaryTokenAttribute": "fortune",
   "url": "https://github.com/McGregor777/wfrp3e",
-  "manifest": "https://raw.githubusercontent.com/McGregor777/wfrp3e/0.6.1-alpha/system.json",
-  "download": "https://github.com/McGregor777/wfrp3e/archive/refs/tags/0.6.1-alpha.zip",
+  "manifest": "#{MANIFEST}#",
+  "download": "#{DOWNLOAD}#",
   "background": "systems/wfrp3e/assets/background.jpg",
   "id": "wfrp3e"
 }
