@@ -1,59 +1,59 @@
 {
-  "title": "Warhammer Fantasy Roleplay - 3rd Edition",
-  "description": "<p>A game system for <em><strong>Warhammer Fantasy Roleplay - 3rd Edition</strong></em> in the Foundry Virtual Tabletop environment.</p>",
-  "version": "0.6.1-alpha",
-  "compatibility": {
-    "minimum": "11",
-    "verified": "11.315",
-    "maximum": "11"
-  },
-  "authors": [{
-      "name": "Grégory Soupé",
-      "email": "gregory.soupe@mailo.com",
-      "flags": {}
-  }],
-  "esmodules": [
-    "wfrp3e.js"
-  ],
-  "styles": [
-    "styles/wfrp3e.css"
-  ],
-  "packs": [{
-    "label": "Items",
-    "type": "Item",
-    "name": "items",
-    "path": "packs/items",
-    "private": false,
-    "system": "wfrp3e",
-    "flags": {}
-  }, {
-    "label": "RollTables",
-    "type": "RollTable",
-    "name": "roll-tables",
-    "path": "packs/roll-tables",
-    "private": false,
-    "system": "wfrp3e",
-    "flags": {}
-  }],
-  "languages": [{
-      "lang": "en",
-      "name": "English (UK)",
-      "path": "lang/en-EN.json",
-      "flags": {}
-  }, {
-      "lang": "fr",
-      "name": "Français (FR)",
-      "path": "lang/fr-FR.json",
-      "flags": {}
-  }],
-  "socket": true,
-  "gridDistance": 1,
-  "gridUnits": "ft",
-  "primaryTokenAttribute": "wounds",
-  "secondaryTokenAttribute": "fortune",
-  "url": "https://github.com/McGregor777/wfrp3e",
-  "manifest": "#{MANIFEST}#",
-  "download": "#{DOWNLOAD}#",
-  "background": "systems/wfrp3e/assets/background.jpg",
-  "id": "wfrp3e"
+	"title": "Warhammer Fantasy Roleplay - 3rd Edition",
+	"description": "<p>A game system for <em><strong>Warhammer Fantasy Roleplay - 3rd Edition</strong></em> in the Foundry Virtual Tabletop environment.</p>",
+	"version": "#{VERSION}#",
+	"compatibility": {
+		"minimum": "11",
+		"verified": "11.315",
+		"maximum": "11"
+	},
+	"authors": [{
+		"name": "Grégory Soupé",
+		"email": "gregory.soupe@mailo.com",
+		"flags": {}
+	}],
+	"esmodules": [
+		"wfrp3e.js"
+	],
+	"styles": [
+		"styles/wfrp3e.css"
+	],
+	"packs": [{
+		"label": "Items",
+		"type": "Item",
+		"name": "items",
+		"path": "packs/items",
+		"private": false,
+		"system": "wfrp3e",
+		"flags": {}
+	}, {
+		"label": "RollTables",
+		"type": "RollTable",
+		"name": "roll-tables",
+		"path": "packs/roll-tables",
+		"private": false,
+		"system": "wfrp3e",
+		"flags": {}
+	}],
+	"languages": [{
+		"lang": "en",
+		"name": "English (UK)",
+		"path": "lang/en-EN.json",
+		"flags": {}
+	}, {
+		"lang": "fr",
+		"name": "Français (FR)",
+		"path": "lang/fr-FR.json",
+		"flags": {}
+	}],
+	"socket": true,
+	"gridDistance": 1,
+	"gridUnits": "ft",
+	"primaryTokenAttribute": "wounds",
+	"secondaryTokenAttribute": "fortune",
+	"url": "https://github.com/McGregor777/wfrp3e",
+	"manifest": "#{MANIFEST}#",
+	"download": "#{DOWNLOAD}#",
+	"background": "systems/wfrp3e/assets/background.jpg",
+	"id": "wfrp3e"
 }

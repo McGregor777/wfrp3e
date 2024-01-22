@@ -2,6 +2,7 @@ name: System Release Build
 
 env:
   node_version: 18
+  version: ${{ github.event.release.tag_name }}
   release_manifest_url: "https://github.com/${{github.repository}}/releases//download/${{github.event.release.tag_name}}/system.json"
   release_download_url: "https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/system.zip"
 
@@ -34,6 +35,7 @@ jobs:
         with:
           files: 'system.json'
         env:
+          VERSION: ${{ env.version }}
           MANIFEST: ${{ env.release_manifest_url }}
           DOWNLOAD: ${{ env.release_download_url }}
 
