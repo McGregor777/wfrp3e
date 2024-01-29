@@ -186,7 +186,17 @@
 				{{#if items.talents.focus}}
 					<div class="talent-container tab focus item-container" data-group="talents" data-tab="focus">
 						{{#each items.talents.focus as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+                            <div>
+                                {{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+
+                                <select class="sheet-form-select item-input talent-card-socket-select"
+                                        data-path="system.talentSocket">
+                                    {{selectOptions
+                                            (lookup @root.talentSocketsByType talent.system.type)
+                                            selected=talent.system.talentSocket
+                                            blank=(localize "TALENT.NoSocket")}}
+                                </select>
+                            </div>
 						{{/each}}
 					</div>
 				{{/if}}
@@ -194,7 +204,17 @@
 				{{#if items.talents.reputation}}
 					<div class="talent-container tab reputation item-container" data-group="talents" data-tab="reputation">
 						{{#each items.talents.reputation as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+                            <div>
+                                {{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+
+                                <select class="sheet-form-select item-input talent-card-socket-select"
+                                        data-path="system.talentSocket">
+                                    {{selectOptions
+                                            (lookup @root.talentSocketsByType talent.system.type)
+                                            selected=talent.system.talentSocket
+                                            blank=(localize "TALENT.NoSocket")}}
+                                </select>
+                            </div>
 						{{/each}}
 					</div>
 				{{/if}}
@@ -202,7 +222,17 @@
 				{{#if items.talents.tactic}}
 					<div class="talent-container tab tactic item-container" data-group="talents" data-tab="tactic">
 						{{#each items.talents.tactic as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+                            <div>
+                                {{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+
+                                <select class="sheet-form-select item-input talent-card-socket-select"
+                                        data-path="system.talentSocket">
+                                    {{selectOptions
+                                            (lookup @root.talentSocketsByType talent.system.type)
+                                            selected=talent.system.talentSocket
+                                            blank=(localize "TALENT.NoSocket")}}
+                                </select>
+                            </div>
 						{{/each}}
 					</div>
 				{{/if}}
@@ -210,7 +240,17 @@
 				{{#if items.talents.faith}}
 					<div class="talent-container tab faith item-container" data-group="talents" data-tab="faith">
 						{{#each items.talents.faith as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+                            <div>
+                                {{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+
+                                <select class="sheet-form-select item-input talent-card-socket-select"
+                                        data-path="system.talentSocket">
+                                    {{selectOptions
+                                            (lookup @root.talentSocketsByType talent.system.type)
+                                            selected=talent.system.talentSocket
+                                            blank=(localize "TALENT.NoSocket")}}
+                                </select>
+                            </div>
 						{{/each}}
 					</div>
 				{{/if}}
@@ -218,7 +258,17 @@
 				{{#if items.talents.order}}
 					<div class="talent-container tab order item-container" data-group="talents" data-tab="order">
 						{{#each items.talents.order as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+                            <div>
+                                {{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+
+                                <select class="sheet-form-select item-input talent-card-socket-select"
+                                        data-path="system.talentSocket">
+                                    {{selectOptions
+                                            (lookup @root.talentSocketsByType talent.system.type)
+                                            selected=talent.system.talentSocket
+                                            blank=(localize "TALENT.NoSocket")}}
+                                </select>
+                            </div>
 						{{/each}}
 					</div>
 				{{/if}}
@@ -226,7 +276,17 @@
 				{{#if items.talents.tricks}}
 					<div class="talent-container tab trick item-container" data-group="talents" data-tab="trick">
 						{{#each items.talents.tricks as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+                            <div>
+                                {{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+
+                                <select class="sheet-form-select item-input talent-card-socket-select"
+                                        data-path="system.talentSocket">
+                                    {{selectOptions
+                                            (lookup @root.talentSocketsByType talent.system.type)
+                                            selected=talent.system.talentSocket
+                                            blank=(localize "TALENT.NoSocket")}}
+                                </select>
+                            </div>
 						{{/each}}
 					</div>
 				{{/if}}

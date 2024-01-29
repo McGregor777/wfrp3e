@@ -230,6 +230,17 @@
 	"ENCOUNTER.Combat": "Combat",
 	"ENCOUNTER.Social": "Social",
 
+	"GROUP.Main": "Main",
+	"GROUP.Talents": "Talents",
+	"GROUP.TalentSockets": "Talent Sockets",
+	"GROUP.SPECIALABILITY.Title": "Special Ability Title",
+	"GROUP.SPECIALABILITY.Description": "Special Ability Description",
+	"GROUP.SPECIALABILITY.Edit": "Edit Ability Track",
+	"GROUP.SPECIALABILITY.Decrease": "Decrease Ability Track",
+	"GROUP.SPECIALABILITY.Increase": "Increase Ability Track",
+	"GROUP.SPECIALABILITY.Content": "Content",
+	"GROUP.SPECIALABILITY.Trigger": "Trigger",
+
 	"INSANITY.SeverityRating": "Severity Rating",
 	"INSANITY.Traits": "Traits",
 	"INSANITY.Description": "Description",

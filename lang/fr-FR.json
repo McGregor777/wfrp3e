@@ -230,6 +230,17 @@
 	"ENCOUNTER.Combat": "Combat",
 	"ENCOUNTER.Social": "Social",
 
+	"GROUP.Main": "Principal",
+	"GROUP.Talents": "Talents",
+	"GROUP.TalentSockets": "Emplacements de talents",
+	"GROUP.SPECIALABILITY.Title": "Nom de la capacité spéciale",
+	"GROUP.SPECIALABILITY.Description": "Description de la capacité spéciale",
+	"GROUP.SPECIALABILITY.Edit": "Modifier la jauge de capacité",
+	"GROUP.SPECIALABILITY.Decrease": "Diminuer la jauge de capacité",
+	"GROUP.SPECIALABILITY.Increase": "Augmenter la jauge de capacité",
+	"GROUP.SPECIALABILITY.Content": "Contenu",
+	"GROUP.SPECIALABILITY.Trigger": "Déclencheur",
+
 	"INSANITY.SeverityRating": "Niveau de Gravité",
 	"INSANITY.Traits": "Traits",
 	"INSANITY.Description": "Description",

@@ -1,6 +1,8 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="party-sheet-tension-meter">
-		<a class="party-sheet-tension-meter-minus" title="{{localize 'PARTY.TENSIONMETER.Decrease'}}"><span class="fas fa-minus"></span></a>
+		<a class="party-sheet-tension-meter-minus" title="{{localize 'PARTY.TENSIONMETER.Decrease'}}">
+			<span class="fas fa-minus"></span>
+		</a>
 
 		<div class="party-sheet-tension-meter-segment-container">
 			{{#for 0 (increment actor.system.tension.maximum 1) 1}}
@@ -11,12 +13,17 @@
 						{{this}}
 					{{/if}}
 
-					<input name="system.tension.value" type="radio" value="{{this}}" data-dtype="Number"{{#if (equalTo ../actor.system.tension.value this)}} checked{{/if}} />
+					<input name="system.tension.value"
+					       type="radio"
+					       value="{{this}}"
+						{{#if (equalTo ../actor.system.tension.value this)}} checked{{/if}} />
 				</a>
 			{{/for}}
 		</div>
 
-		<a class="party-sheet-tension-meter-plus" title="{{localize 'PARTY.TENSIONMETER.Increase'}}"><span class="fas fa-plus"></span></a>
+		<a class="party-sheet-tension-meter-plus" title="{{localize 'PARTY.TENSIONMETER.Increase'}}">
+			<span class="fas fa-plus"></span>
+		</a>
 	</header>
 
 	<div class="party-sheet-body">

@@ -1,9 +1,10 @@
 {
 	"Actor": {
-		"types": ["character", "party", "creature", "group"],
+		"types": ["character", "creature", "group", "party"],
 		"character": {},
-		"party": {},
-		"creature": {}
+		"creature": {},
+		"group": {},
+		"party": {}
 	},
 	"Item": {
 		"types": ["ability", "action", "armour", "career", "condition", "criticalWound", "disease", "insanity",

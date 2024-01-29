@@ -11,7 +11,7 @@ export default class DataHelper
 	 */
 	static _getCleanedupDescription(description)
 	{
-		const matches = [...description.matchAll(new RegExp(/\[\[(\w*)]]/, "g"))].reverse();
+		const matches = [...description.matchAll(new RegExp(/\[\[([\w\d]*)]]/, "g"))].reverse();
 		let cleanedUpDescription = description;
 
 		matches.forEach((match, index) => {
@@ -56,9 +56,6 @@ export default class DataHelper
 				cleanedUpDescription.slice(match.index + match[0].length, cleanedUpDescription.length);
 		});
 
-		if(cleanedUpDescription === description)
-			return false;
-
-		return cleanedUpDescription;
+		return cleanedUpDescription === description ? description : cleanedUpDescription;
 	}
 }

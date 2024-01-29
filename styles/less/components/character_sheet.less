@@ -261,6 +261,21 @@
 
 				& .character-sheet-talents {
 					min-height: 0;
+
+					& .talent-container {
+						& > div {
+							margin-bottom: 2rem;
+
+							& > select {
+								margin: 0 0.5rem;
+								width: calc(100% - 1rem);
+							}
+
+							& > .talent-card {
+								margin-bottom: 0;
+							}
+						}
+					}
 				}
 
 				& .character-sheet-talent-tabs {
@@ -292,10 +307,6 @@
 					& .career-advancement {
 						flex: 1 1 300px;
 					}
-				}
-
-				& .talent-card {
-					margin-bottom: 2rem;
 				}
 			}
 		}
