@@ -57,13 +57,13 @@ import * as handlebarsHelpers from "./modules/handlebars.js";
 async function preloadHandlebarsTemplates()
 {
 	const templatePaths = [
-		"systems/wfrp3e/templates/applications/partials/ability-track-editor-segment.hbs",
-		"systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs",
-		"systems/wfrp3e/templates/applications/partials/character-generator-career-sheet.hbs",
-		"systems/wfrp3e/templates/applications/partials/character-generator-race-description.hbs",
-		"systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs",
-		"systems/wfrp3e/templates/chatmessages/action-effects.hbs",
+		"systems/wfrp3e/templates/partials/ability-track-editor-segment.hbs",
+		"systems/wfrp3e/templates/partials/action-effects.hbs",
 		"systems/wfrp3e/templates/partials/attribute-partial.hbs",
+		"systems/wfrp3e/templates/partials/character-generator-action-card.hbs",
+		"systems/wfrp3e/templates/partials/character-generator-career-sheet.hbs",
+		"systems/wfrp3e/templates/partials/character-generator-race-description.hbs",
+		"systems/wfrp3e/templates/partials/character-generator-talent-card.hbs",
 		"systems/wfrp3e/templates/partials/characteristic-partial.hbs",
 		"systems/wfrp3e/templates/partials/impairment-partial.hbs",
 		"systems/wfrp3e/templates/partials/item-ability-card.hbs",
