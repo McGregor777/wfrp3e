@@ -38,6 +38,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		data.diseaseSymptoms = CONFIG.WFRP3e.disease.symptoms;
 		data.stances = CONFIG.WFRP3e.stances;
 		data.symbols = CONFIG.WFRP3e.symbols;
+		data.talentTypes = CONFIG.WFRP3e.talentTypes;
 		data.weaponGroups = CONFIG.WFRP3e.weapon.groups;
 		data.weaponQualities = CONFIG.WFRP3e.weapon.qualities;
 		data.weaponRanges = CONFIG.WFRP3e.weapon.ranges;

@@ -169,101 +169,56 @@
 
 		<section class="tab talents-tab" data-group="primary" data-tab="talents">
 			<div class="talent-tabs sheet-tabs" data-group="talents">
-				{{#if items.talents.focus}}
-					<a class="tab-link focus" data-tab="focus">{{localize 'TALENT.TYPE.Focus'}}</a>
-				{{/if}}
-
-				{{#if items.talents.reputation}}
-					<a class="tab-link reputation" data-tab="reputation">{{localize 'TALENT.TYPE.Reputation'}}</a>
-				{{/if}}
-
-				{{#if items.talents.tactic}}
-					<a class="tab-link tactic" data-tab="tactic">{{localize 'TALENT.TYPE.Tactic'}}</a>
-				{{/if}}
-
-				{{#if items.talents.faith}}
-					<a class="tab-link faith" data-tab="faith">{{localize 'TALENT.TYPE.Faith'}}</a>
-				{{/if}}
-
-				{{#if items.talents.order}}
-					<a class="tab-link order" data-tab="order">{{localize 'TALENT.TYPE.Order'}}</a>
-				{{/if}}
-
-				{{#if items.talents.trick}}
-					<a class="tab-link trick" data-tab="trick">{{localize 'TALENT.TYPE.Trick'}}</a>
-				{{/if}}
+				{{#each talentTypes as |type ty|}}
+					{{#if (lookup @root.items.talents ty)}}
+						<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
+					{{/if}}
+				{{/each}}
 			</div>
 
 			<div class="talents">
-				{{#if items.talents.focus}}
-					<div class="talent-container tab focus item-container" data-group="talents" data-tab="focus">
-						{{#each items.talents.focus as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
+				{{#each talentTypes as |type ty|}}
+					{{#if (lookup @root.items.talents ty)}}
+						<div class="talent-container tab {{ty}} item-container" data-group="talents" data-tab="{{ty}}">
+							{{#each (lookup @root.items.talents ty) as |talent ta|}}
+								<div>
+									{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 
-				{{#if items.talents.reputation}}
-					<div class="talent-container tab reputation item-container" data-group="talents" data-tab="reputation">
-						{{#each items.talents.reputation as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.talents.tactic}}
-					<div class="talent-container tab tactic item-container" data-group="talents" data-tab="tactic">
-						{{#each items.talents.tactic as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.talents.faith}}
-					<div class="talent-container tab faith item-container" data-group="talents" data-tab="faith">
-						{{#each items.talents.faith as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.talents.order}}
-					<div class="talent-container tab order item-container" data-group="talents" data-tab="order">
-						{{#each items.talents.order as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.talents.tricks}}
-					<div class="talent-container tab trick item-container" data-group="talents" data-tab="trick">
-						{{#each items.talents.tricks as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
+									<select class="sheet-form-select item-input talent-card-socket-select"
+									        data-item-id="{{talent._id}}"
+									        data-path="system.talentSocket">
+										{{selectOptions
+												(lookup @root.talentSocketsByType talent.system.type)
+												selected=talent.system.talentSocket
+												blank=(localize "TALENT.NoSocket")}}
+									</select>
+								</div>
+							{{/each}}
+						</div>
+					{{/if}}
+				{{/each}}
 			</div>
 
 			<div class="talent-sockets">
 				<h4>{{localize "GROUP.TalentSockets"}}</h4>
 
-                <div class="talent-socket-button-container">
-                    {{#each actor.system.talentSockets as |type ty|}}
-                        <select class="sheet-form-select talent-socket"
-                                name="system.talentSockets"
-                                title="{{localize 'GROUP.TalentSocket'}}">
-                            {{selectOptions @root.talentTypes selected=type localize=true}}
-                        </select>
-                    {{/each}}
+				<div class="talent-socket-button-container">
+					{{#each actor.system.talentSockets as |type ty|}}
+						<select class="sheet-form-select talent-socket"
+						        name="system.talentSockets"
+						        title="{{localize 'GROUP.TalentSocket'}}">
+							{{selectOptions @root.talentTypes selected=type localize=true}}
+						</select>
+					{{/each}}
 
-                    <a class="talent-socket-delete">
-                        <span class="fas fa-trash"></span>
-                    </a>
+					<a class="talent-socket-delete">
+						<span class="fas fa-trash"></span>
+					</a>
 
-                    <a class="talent-socket-add">
-                        <span class="fas fa-plus"></span>
-                    </a>
-                </div>
+					<a class="talent-socket-add">
+						<span class="fas fa-plus"></span>
+					</a>
+				</div>
 			</div>
 		</section>
 	</div>
