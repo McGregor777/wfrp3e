@@ -77,10 +77,11 @@ export default class WFRP3ePartySheet extends ActorSheet
 	_onTensionMeterMinusClick(event)
 	{
 		const newMaximumTensionValue = this.actor.system.tension.maximum - 1;
-		const tension = {
-			maximum: newMaximumTensionValue,
-			events: this.actor.system.tension.events
-		};
+		const tension = this.actor.system.tension;
+
+		tension.maximum--;
+		if(tension.value > tension.maximum)
+			tension.value = tension.maximum;
 
 		tension.events.forEach((event) => {
 			if(event.threshold >= this.actor.system.tension.maximum)
