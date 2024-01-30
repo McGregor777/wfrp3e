@@ -387,7 +387,8 @@
 	"SKILL.Characteristic": "Characteristic",
 	"SKILL.AdvancedSkill": "Advanced Skill",
 
-	"TALENT.FreeSocket": "Free Socket",
+	"TALENT.AvailableSocket": "Available {type} Socket",
+	"TALENT.TakenSocket": "{type} Socket taken by {talent}",
 	"TALENT.NoSocket": "No Socket",
 	"TALENT.RechargeTokens": "Recharge Tokens",
 	"TALENT.TYPE.Focus": "Focus",
@@ -397,6 +398,7 @@
 	"TALENT.TYPE.Order": "Order",
 	"TALENT.TYPE.Tricks": "Tricks",
 	"TALENT.TYPE.Insanity": "Insanity",
+	"TALENT.TYPE.Any": "Any",
 
 	"TRAPPING.Cost": "Cost",
 	"TRAPPING.Encumbrance": "Encumbrance",

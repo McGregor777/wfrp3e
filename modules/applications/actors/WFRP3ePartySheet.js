@@ -16,7 +16,7 @@ export default class WFRP3ePartySheet extends ActorSheet
 	{
 		const data = super.getData();
 
-		data.talentTypes = CONFIG.WFRP3e.talentTypes;
+		data.talentTypes = Object.assign(CONFIG.WFRP3e.talentTypes, {any: "TALENT.TYPE.Any"});
 
 		console.log(data);
 

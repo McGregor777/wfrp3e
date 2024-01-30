@@ -17,7 +17,7 @@ export default class WFRP3eCareerSheet extends ItemSheet
 		const data = super.getData();
 
 		data.characteristics = CONFIG.WFRP3e.characteristics;
-		data.talentTypes = CONFIG.WFRP3e.talentTypes;
+		data.talentTypes = Object.assign(CONFIG.WFRP3e.talentTypes, {any: "TALENT.TYPE.Any"});
 
 		return data;
 	}

@@ -161,16 +161,23 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		let talentSocketsByType = {};
 
-		for(const talentType of Object.keys(CONFIG.WFRP3e.talentTypes)) {
+		for(const talentType of Object.keys(Object.assign(CONFIG.WFRP3e.talentTypes, {any: "TALENT.TYPE.Any"})))
 			talentSocketsByType[talentType] = {};
-		}
 
 		if(this.actor.system.currentCareer) {
 			this.actor.system.currentCareer.system.talentSockets.forEach((talentSocket, index) => {
+				// Find a potential Talent that would be socketed in that Talent Socket.
 				const talent = this.actor.itemTypes.talent.find(talent => talent.system.talentSocket === "career_" + this.actor.system.currentCareer._id + "_" + index);
 
-				talentSocketsByType[talentSocket]["career_" + this.actor.system.currentCareer._id + "_" + index] = this.actor.system.currentCareer.name +
-					(talent ? " (" + talent.name + ")" : " (" + game.i18n.localize("TALENT.FreeSocket") + ")");
+				talentSocketsByType[talentSocket]["career_" + this.actor.system.currentCareer._id + "_" + index] =
+					this.actor.system.currentCareer.name + (talent
+						? " - " + game.i18n.format("TALENT.TakenSocket", {
+								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`),
+								talent: talent.name
+							})
+						: " - " + game.i18n.format("TALENT.AvailableSocket", {
+								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`)
+							}));
 			});
 		}
 
@@ -179,16 +186,27 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 				let talent = null;
 
 				for(const member of this.actor.system.currentParty.memberActors) {
+					// Find a potential Talent that would be socketed in that Talent Socket.
 					talent = member.itemTypes.talent.find(talent => talent.system.talentSocket === "party_" + this.actor.system.currentParty._id + "_" + index);
 
 					if(talent)
 						break;
 				}
 
-				talentSocketsByType[talentSocket]["party_" + this.actor.system.currentParty._id + "_" + index] = this.actor.system.currentParty.name +
-					(talent ? " (" + (talent.actor ? talent.actor.name + " - " : "") + talent.name + ")" : " (" + game.i18n.localize("TALENT.FreeSocket") + ")");
+				talentSocketsByType[talentSocket]["party_" + this.actor.system.currentParty._id + "_" + index] =
+					this.actor.system.currentParty.name + (talent
+						? " - " + game.i18n.format("TALENT.TakenSocket", {
+								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`),
+								talent: talent.name
+							})
+						: " - " + game.i18n.format("TALENT.AvailableSocket", {
+								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`)
+							}));
 			});
 		}
+
+		for(const talentType of Object.keys(CONFIG.WFRP3e.talentTypes))
+			Object.assign(talentSocketsByType[talentType], talentSocketsByType["any"]);
 
 		return talentSocketsByType;
 	}
@@ -200,7 +218,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	_getItemId(event)
 	{
-		return $(event.currentTarget).parents(".item").attr("data-item-id");
+		return $(event.currentTarget).parents(".item").data("itemId");
 	}
 
 	/**
@@ -352,7 +370,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	_onItemInput(event)
 	{
-		const item = this.actor.items.get(this._getItemId(event));
+		const item = this.actor.items.get(event.currentTarget.dataset.itemId ?? this._getItemId(event));
 		const property = event.currentTarget.dataset.path;
 		let value = event.target.value;
 
