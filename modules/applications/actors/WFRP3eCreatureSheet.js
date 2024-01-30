@@ -129,6 +129,23 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	}
 
 	/**
+	 * Performs follow-up operations after clicks on a sheet's flip button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	async _onFlipClick(event)
+	{
+		event.preventDefault();
+
+		const parent = $(event.currentTarget).parents(".item");
+		const activeFace = parent.find(".face.active");
+		const inactiveFace = parent.find(".face:not(.active)");
+
+		activeFace.removeClass("active");
+		inactiveFace.addClass("active");
+	}
+
+	/**
 	 * Performs follow-up operations after clicks on an Item edit button.
 	 * @param {MouseEvent} event
 	 * @private
