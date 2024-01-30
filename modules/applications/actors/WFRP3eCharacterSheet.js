@@ -85,14 +85,25 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			.click(this._onImpairmentTokenLeftClick.bind(this))
 			.contextmenu(this._onImpairmentTokenRightClick.bind(this));
 
-		html.find(".flip-link").mousedown(this._onFlipClick.bind(this));
-		html.find(".quantity-link").mousedown(this._onQuantityClick.bind(this));
+		html.find(".flip-link").click(this._onFlipClick.bind(this));
+
+		html.find(".quantity-link")
+			.click(this._onQuantityLeftClick.bind(this))
+			.contextmenu(this._onQuantityRightClick.bind(this));
+
 		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
 		html.find(".item-delete-link").click(this._onItemDelete.bind(this));
-		html.find(".item-name-link").click(this._onItemLeftClick.bind(this));
-		html.find(".item-name-link").contextmenu(this._onItemRightClick.bind(this));
+
+		html.find(".item-name-link")
+			.click(this._onItemLeftClick.bind(this))
+			.contextmenu(this._onItemRightClick.bind(this));
+
 		html.find(".item-input").change(this._onItemInput.bind(this));
-		html.find(".recharge-token").mousedown(this._onRechargeTokenClick.bind(this));
+
+		html.find(".recharge-token")
+			.click(this._onRechargeTokenLeftClick.bind(this))
+			.contextmenu(this._onRechargeTokenRightClick.bind(this));
+
 		html.find(".skill-training-level-input").change(this._onSkillTrainingLevelChange.bind(this));
 		html.find(".stance-meter-segment").click(this._onStanceMeterSegmentClick.bind(this));
 	}
@@ -240,38 +251,30 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Trapping's quantity button.
+	 * Performs follow-up operations after left-clicks on a Trapping's quantity button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onQuantityClick(event)
+	_onQuantityLeftClick(event)
 	{
 		const clickedItem = this.actor.items.get(this._getItemId(event));
-		let quantity = clickedItem.data.data.quantity;
 
-		switch(event.button) {
-			// If left click...
-			case 0:
-				// If ctrl key is pushed, add 10
-				if(event.ctrlKey)
-					quantity += 10;
-				// Else, add 1
-				else
-					quantity++;
-				break;
-			// If right click...
-			case 2:
-				// If ctrl key is pushed, remove 10
-				if(event.ctrlKey)
-					quantity -= 10;
-				// Else, remove 1
-				else
-					quantity--;
-				// Floor quantity to 0
-				if(quantity < 0)
-					quantity = 0;
-				break;
-		}
+		clickedItem.update({"system.quantity": clickedItem.system.quantity + (event.ctrlKey ? 10 : 1)});
+	}
+
+	/**
+	 * Performs follow-up operations after right-clicks on a Trapping's quantity button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onQuantityRightClick(event)
+	{
+		const clickedItem = this.actor.items.get(this._getItemId(event));
+		let quantity = clickedItem.system.quantity - (event.ctrlKey ? 10 : 1);
+
+		// Floor quantity to 0
+		if(quantity < 0)
+			quantity = 0;
 
 		clickedItem.update({"system.quantity": quantity});
 	}
@@ -360,28 +363,30 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Card's recharge token button.
+	 * Performs follow-up operations after left-clicks on a Card's recharge token button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onRechargeTokenClick(event)
+	_onRechargeTokenLeftClick(event)
 	{
 		const clickedItem = this.actor.items.get(this._getItemId(event));
-		let rechargeTokens = clickedItem.system.rechargeTokens;
 
-		switch(event.button) {
-			// If left click...
-			case 0:
-				rechargeTokens++;
-				break;
-			// If right click...
-			case 2:
-				rechargeTokens--;
-				// Floor recharge tokens to 0
-				if(rechargeTokens < 0)
-					rechargeTokens = 0;
-				break;
-		}
+		clickedItem.update({"system.rechargeTokens": clickedItem.system.rechargeTokens + 1});
+	}
+
+	/**
+	 * Performs follow-up operations after righ-clicks on a Card's recharge token button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onRechargeTokenRightClick(event)
+	{
+		const clickedItem = this.actor.items.get(this._getItemId(event));
+		let rechargeTokens = clickedItem.system.rechargeTokens - 1;
+
+		// Floor recharge tokens to 0
+		if(rechargeTokens < 0)
+			rechargeTokens = 0;
 
 		clickedItem.update({"system.rechargeTokens": rechargeTokens});
 	}
