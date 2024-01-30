@@ -51,6 +51,10 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 		html.find(".item-name-link")
 			.click(this._onItemLeftClick.bind(this))
 			.contextmenu(this._onItemRightClick.bind(this));
+
+		html.find(".recharge-token")
+			.click(this._onRechargeTokenLeftClick.bind(this))
+			.contextmenu(this._onRechargeTokenRightClick.bind(this));
 	}
 
 	/**
@@ -213,19 +217,31 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a sheet's flip button.
+	 * Performs follow-up operations after left-clicks on a Card's recharge token button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	async _onFlipClick(event)
+	_onRechargeTokenLeftClick(event)
 	{
-		event.preventDefault();
+		const clickedItem = this.actor.items.get(this._getItemId(event));
 
-		const parent = $(event.currentTarget).parents(".item");
-		const activeFace = parent.find(".face.active");
-		const inactiveFace = parent.find(".face:not(.active)");
+		clickedItem.update({"system.rechargeTokens": clickedItem.system.rechargeTokens + 1});
+	}
 
-		activeFace.removeClass("active");
-		inactiveFace.addClass("active");
+	/**
+	 * Performs follow-up operations after right-clicks on a Card's recharge token button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onRechargeTokenRightClick(event)
+	{
+		const clickedItem = this.actor.items.get(this._getItemId(event));
+		let rechargeTokens = clickedItem.system.rechargeTokens - 1;
+
+		// Floor recharge tokens to 0.
+		if(rechargeTokens < 0)
+			rechargeTokens = 0;
+
+		clickedItem.update({"system.rechargeTokens": rechargeTokens});
 	}
 }
