@@ -18,6 +18,31 @@
 	"styles": [
 		"styles/wfrp3e.css"
 	],
+	"documentTypes": {
+		"Actor": {
+			"character": {},
+			"creature": {},
+			"group": {},
+			"party": {}
+		},
+		"Item": {
+			"ability": {},
+			"action": {},
+			"armour": {},
+			"career": {},
+			"condition": {},
+			"criticalWound": {},
+			"disease": {},
+			"insanity": {},
+			"money": {},
+			"miscast": {},
+			"mutation": {},
+			"skill": {},
+			"talent": {},
+			"trapping": {},
+			"weapon": {}
+		}
+	},
 	"packs": [{
 		"label": "Items",
 		"type": "Item",

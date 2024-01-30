@@ -1,0 +1,230 @@
+.group-sheet form {
+	display: flex;
+	flex-direction: column;
+
+	& .sheet-body {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 0;
+		overflow: hidden;
+
+		& > .tab {
+			flex: 1 1 0;
+			flex-direction: column;
+
+			&.active {
+				display: flex;
+			}
+		}
+
+		.ability-track {
+			display: flex;
+			justify-content: center;
+			min-height: 30px;
+			position: relative;
+
+			& .ability-track-edit {
+				display: none;
+				position: absolute;
+				right: 0;
+			}
+
+			&:hover .ability-track-edit {
+				display: block;
+			}
+
+			& > .ability-track-editor {
+				display: none;
+
+				& > div:first-child {
+					display: flex;
+					justify-content: center;
+
+					& .ability-track-editor-minus,
+					& .ability-track-editor-plus {
+						height: 2.5rem;
+						font-size: var(--font-size-24);
+						padding-top: 0.5rem;
+						text-align: center;
+						vertical-align: middle;
+						width: 2.5rem;
+					}
+
+					& .ability-track-editor-submit {
+						background: none;
+						border: none;
+						font-size: 12pt;
+						position: absolute;
+						right: 0;
+						width: unset;
+
+						&:hover {
+							box-shadow: none;
+							text-shadow: 0 0 8px var(--color-shadow-primary);
+						}
+					}
+
+					& .ability-track-editor-segment-container {
+						display: flex;
+
+						& > div {
+							display: flex;
+							justify-content: center;
+							position: relative;
+
+							& > input {
+								position: absolute;
+								top: 100%;
+							}
+
+							& .ability-track-editor-segment {
+								& > input {
+									background-color: #b0b0b8;
+									border: 1px solid #646468;
+									color: white;
+									height: 2.5rem;
+									flex: 0 0 40px;
+									font-size: var(--font-size-28);
+									padding-top: 2px;
+									text-align: center;
+									width: 2.5rem;
+								}
+
+								&.trigger > input {
+									background-color: #006898;
+									border-color: #725664;
+								}
+							}
+						}
+					}
+				}
+
+				& > div:not(:first-child) {
+					margin-top: 0.25rem;
+				}
+			}
+
+			.ability-track-segment-container {
+				display: flex;
+				justify-content: center;
+
+				.ability-track-segment {
+					background-color: #b0b0b8;
+					border: 1px solid #646468;
+					color: white;
+					height: 2.5rem;
+					flex: 0 0 40px;
+					font-size: var(--font-size-28);
+					padding-top: 2px;
+					text-align: center;
+					width: 2.5rem;
+
+					&.trigger {
+						background-color: #006898;
+						border-color: #725664;
+					}
+
+					& > img {
+						border: none;
+						filter: drop-shadow(0 0 2px black);
+					}
+
+					& > input {
+						display: none;
+					}
+				}
+			}
+		}
+
+		.middle {
+			display: flex;
+			margin: auto 0;
+
+			.portrait {
+				flex: 0 0 200px;
+				margin: auto;
+			}
+
+			.center {
+				flex-grow: 1;
+
+				.name {
+					border-bottom: none;
+					margin: 0;
+					text-align: center;
+
+					& > * {
+						height: auto;
+						color: white;
+						font-variant-caps: small-caps;
+						text-shadow:
+									-1px -1px 0 black,
+								-1px 0 0 black,
+									0 -1px 0 black,
+								-1px 1px 0 black,
+									1px -1px 0 black,
+								0 1px 0 black,
+								1px 0 0 black,
+								1px 1px 0 black;
+					}
+				}
+
+				.special-ability {
+					.special-ability-title {
+						font-size: var(--font-size-20);
+						font-variant-caps: small-caps;
+						font-weight: bold;
+						text-align: center;
+					}
+
+					.special-ability-description > input {
+						display: none;
+					}
+				}
+			}
+		}
+
+		& .talents-tab {
+			& .talents {
+				flex: 1 1 0;
+				min-height: 0;
+
+				& .talent-container {
+					display: flex;
+					flex-wrap: wrap;
+					height: 100%;
+					overflow-y: scroll;
+				}
+			}
+
+			& .talent-tabs {
+				border-bottom: 1px solid #b5b3a4;
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: space-around;
+
+				& > * {
+					margin: 0 5px;
+				}
+			}
+
+			& .talent-sockets {
+				border-top: 1px solid #b4b3a4;
+				text-align: center;
+
+				& .talent-socket-button-container {
+					display: flex;
+					justify-content: center;
+
+					& > *:not(:first-child) {
+						margin-left: 0.5rem;
+					}
+
+					& > a {
+						padding-top: 0.25rem;
+					}
+				}
+			}
+		}
+	}
+}

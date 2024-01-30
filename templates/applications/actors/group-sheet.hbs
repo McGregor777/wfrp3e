@@ -1,7 +1,270 @@
 <form class="{{cssClass}}" autocomplete="off">
-	<header class="sheet-header">
-		<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64" width="64"/>
+	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
+		<a class="tab-link main-tab" data-tab="main">{{localize 'GROUP.Main'}}</a>
+		<a class="tab-link talents-tab" data-tab="talents">{{localize 'GROUP.Talents'}}</a>
+	</nav>
 
-		<h1><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-	</header>
+	<div class="sheet-body">
+		<section class="tab main-tab" data-group="primary" data-tab="main">
+			<div class="ability-track" data-special-ability-index="0">
+				<div class="ability-track-segment-container">
+					{{#each actor.system.specialAbilities.0.values}}
+						<label class="ability-track-segment{{#if this.trigger}} trigger{{/if}}">
+							{{#if (equalTo @root.actor.system.specialAbilities.0.current @index)}}
+								<img src="systems/wfrp3e/assets/images/token-black.webp" />
+							{{else}}
+								{{{this.content}}}
+							{{/if}}
+
+							<input name="system.specialAbilities.0.current"
+							       type="radio"
+							       value="{{@index}}"
+								{{#if (equalTo @root.actor.system.specialAbilities.0.current @index)}} checked{{/if}} />
+						</label>
+					{{/each}}
+
+					{{#if document.isOwner}}
+						<a class="ability-track-edit" title="{{localize 'GROUP.SPECIALABILITY.Edit'}}">
+							<span class="fas fa-edit"></span>
+						</a>
+					{{/if}}
+				</div>
+
+				<div class="ability-track-editor">
+					<div>
+						<a class="ability-track-editor-minus" title="{{localize 'GROUP.SPECIALABILITY.Decrease'}}">
+							<span class="fas fa-minus"></span>
+						</a>
+
+						<div class="ability-track-editor-segment-container">
+							{{#each actor.system.specialAbilities.0.values}}
+								{{>systems/wfrp3e/templates/applications/partials/ability-track-editor-segment.hbs
+										value=this
+										index=@index
+										specialAbilityIndex=0}}
+							{{/each}}
+						</div>
+
+						<a class="ability-track-editor-plus" title="{{localize 'GROUP.SPECIALABILITY.Increase'}}">
+							<span class="fas fa-plus"></span>
+						</a>
+
+						<button class="ability-track-editor-submit" type="submit" title="{{localize 'Confirm'}}">
+							<span class="fas fa-check"></span>
+						</button>
+					</div>
+
+					<div>{{localize 'GROUP.SPECIALABILITY.Trigger'}}</div>
+				</div>
+			</div>
+
+			<div class="middle">
+				<div class="portrait">
+					<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="250"/>
+				</div>
+
+				<div class="center">
+					<div class="special-ability">
+						<input class="special-ability-title"
+						       name="system.specialAbilities.0.title"
+						       type="text"
+						       value="{{actor.system.specialAbilities.0.title}}"
+						       placeholder="{{localize 'GROUP.SPECIALABILITY.Title'}}"
+						       title="{{localize 'GROUP.SPECIALABILITY.Title'}}" />
+
+						<div class="special-ability-description">
+							{{editor actor.system.specialAbilities.0.description
+									 target="system.specialAbilities.0.description"
+									 button=true
+									 owner=owner
+									 editable=editable}}
+
+							<input name="system.specialAbilities.0.description"
+							       type="text"
+							       value="{{actor.system.specialAbilities.0.description}}"
+							       placeholder="{{localize 'GROUP.SPECIALABILITY.Description'}}" />
+						</div>
+					</div>
+
+					<h1 class="name">
+						<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'GROUP.Name'}}"/>
+					</h1>
+
+					<div class="special-ability">
+						<input class="special-ability-title"
+						       name="system.specialAbilities.1.title"
+						       type="text"
+						       value="{{actor.system.specialAbilities.1.title}}"
+						       placeholder="{{localize 'GROUP.SPECIALABILITY.Title'}}"
+						       title="{{localize 'GROUP.SPECIALABILITY.Title'}}" />
+
+						<div class="special-ability-description">
+							{{editor actor.system.specialAbilities.1.description
+									 target="system.specialAbilities.1.description"
+									 button=true
+									 owner=owner
+									 editable=editable}}
+
+							<input name="system.specialAbilities.1.description"
+							       type="text"
+							       value="{{actor.system.specialAbilities.1.description}}"
+							       placeholder="{{localize 'GROUP.SPECIALABILITY.Description'}}" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="ability-track" data-special-ability-index="1">
+				<div class="ability-track-segment-container">
+					{{#each actor.system.specialAbilities.1.values}}
+						<label class="ability-track-segment{{#if this.trigger}} trigger{{/if}}">
+							{{#if (equalTo @root.actor.system.specialAbilities.1.current @index)}}
+								<img src="systems/wfrp3e/assets/images/token-black.webp" />
+							{{else}}
+								{{{this.content}}}
+							{{/if}}
+
+							<input name="system.specialAbilities.1.current"
+							       type="radio"
+							       value="{{@index}}"
+								{{#if (equalTo @root.actor.system.specialAbilities.1.current @index)}} checked{{/if}} />
+						</label>
+					{{/each}}
+
+					{{#if document.isOwner}}
+						<a class="ability-track-edit" title="{{localize 'GROUP.SPECIALABILITY.Edit'}}">
+							<span class="fas fa-edit"></span>
+						</a>
+					{{/if}}
+				</div>
+
+				<div class="ability-track-editor">
+					<div>
+						<a class="ability-track-editor-minus" title="{{localize 'GROUP.SPECIALABILITY.Decrease'}}">
+							<span class="fas fa-minus"></span>
+						</a>
+
+						<div class="ability-track-editor-segment-container">
+							{{#each actor.system.specialAbilities.1.values}}
+								{{>systems/wfrp3e/templates/applications/partials/ability-track-editor-segment.hbs
+										value=this
+										index=@index
+										specialAbilityIndex=1}}
+							{{/each}}
+						</div>
+
+						<a class="ability-track-editor-plus" title="{{localize 'GROUP.SPECIALABILITY.Increase'}}">
+							<span class="fas fa-plus"></span>
+						</a>
+
+						<button class="ability-track-editor-submit" type="submit" title="{{localize 'Confirm'}}">
+							<span class="fas fa-check"></span>
+						</button>
+					</div>
+
+					<div>{{localize "GROUP.SPECIALABILITY.Trigger"}}</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="tab talents-tab" data-group="primary" data-tab="talents">
+			<div class="talent-tabs sheet-tabs" data-group="talents">
+				{{#if items.talents.focus}}
+					<a class="tab-link focus" data-tab="focus">{{localize 'TALENT.TYPE.Focus'}}</a>
+				{{/if}}
+
+				{{#if items.talents.reputation}}
+					<a class="tab-link reputation" data-tab="reputation">{{localize 'TALENT.TYPE.Reputation'}}</a>
+				{{/if}}
+
+				{{#if items.talents.tactic}}
+					<a class="tab-link tactic" data-tab="tactic">{{localize 'TALENT.TYPE.Tactic'}}</a>
+				{{/if}}
+
+				{{#if items.talents.faith}}
+					<a class="tab-link faith" data-tab="faith">{{localize 'TALENT.TYPE.Faith'}}</a>
+				{{/if}}
+
+				{{#if items.talents.order}}
+					<a class="tab-link order" data-tab="order">{{localize 'TALENT.TYPE.Order'}}</a>
+				{{/if}}
+
+				{{#if items.talents.trick}}
+					<a class="tab-link trick" data-tab="trick">{{localize 'TALENT.TYPE.Trick'}}</a>
+				{{/if}}
+			</div>
+
+			<div class="talents">
+				{{#if items.talents.focus}}
+					<div class="talent-container tab focus item-container" data-group="talents" data-tab="focus">
+						{{#each items.talents.focus as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if items.talents.reputation}}
+					<div class="talent-container tab reputation item-container" data-group="talents" data-tab="reputation">
+						{{#each items.talents.reputation as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if items.talents.tactic}}
+					<div class="talent-container tab tactic item-container" data-group="talents" data-tab="tactic">
+						{{#each items.talents.tactic as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if items.talents.faith}}
+					<div class="talent-container tab faith item-container" data-group="talents" data-tab="faith">
+						{{#each items.talents.faith as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if items.talents.order}}
+					<div class="talent-container tab order item-container" data-group="talents" data-tab="order">
+						{{#each items.talents.order as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if items.talents.tricks}}
+					<div class="talent-container tab trick item-container" data-group="talents" data-tab="trick">
+						{{#each items.talents.tricks as |talent ta|}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+						{{/each}}
+					</div>
+				{{/if}}
+			</div>
+
+			<div class="talent-sockets">
+				<h4>{{localize "GROUP.TalentSockets"}}</h4>
+
+                <div class="talent-socket-button-container">
+                    {{#each actor.system.talentSockets as |type ty|}}
+                        <select class="sheet-form-select talent-socket"
+                                name="system.talentSockets"
+                                title="{{localize 'GROUP.TalentSocket'}}">
+                            {{selectOptions @root.talentTypes selected=type localize=true}}
+                        </select>
+                    {{/each}}
+
+                    <a class="talent-socket-delete">
+                        <span class="fas fa-trash"></span>
+                    </a>
+
+                    <a class="talent-socket-add">
+                        <span class="fas fa-plus"></span>
+                    </a>
+                </div>
+			</div>
+		</section>
+	</div>
 </form>

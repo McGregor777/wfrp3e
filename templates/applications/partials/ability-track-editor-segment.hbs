@@ -1,0 +1,14 @@
+<div>
+	<label class="ability-track-editor-segment{{#if value.trigger}} trigger{{/if}}">
+		<input name="system.specialAbilities.{{specialAbilityIndex}}.values.{{index}}.content"
+		       type="text"
+		       value="{{value.content}}"
+               title="{{localize 'GROUP.SPECIALABILITY.Content'}}" />
+	</label>
+
+	<input class="ability-track-editor-trigger"
+	       name="system.specialAbilities.{{specialAbilityIndex}}.values.{{index}}.trigger"
+	       type="checkbox"
+           title="{{localize 'GROUP.SPECIALABILITY.Trigger'}}"
+		{{#if value.trigger}} checked{{/if}} />
+</div>

@@ -22,6 +22,7 @@ import WFRP3eTrappingSheet from "./modules/applications/items/WFRP3eTrappingShee
 import WFRP3eWeaponSheet from "./modules/applications/items/WFRP3eWeaponSheet.js";
 import WFRP3eCharacterDataModel from "./modules/data/actors/WFRP3eCharacterDataModel.js";
 import WFRP3eCreatureDataModel from "./modules/data/actors/WFRP3eCreatureDataModel.js";
+import WFRP3eGroupDataModel from "./modules/data/actors/WFRP3eGroupDataModel.js";
 import WFRP3ePartyDataModel from "./modules/data/actors/WFRP3ePartyDataModel.js";
 import WFRP3eAbilityDataModel from "./modules/data/items/WFRP3eAbilityDataModel.js";
 import WFRP3eActionDataModel from "./modules/data/items/WFRP3eActionDataModel.js";
@@ -56,6 +57,7 @@ import * as handlebarsHelpers from "./modules/handlebars.js";
 async function preloadHandlebarsTemplates()
 {
 	const templatePaths = [
+		"systems/wfrp3e/templates/applications/partials/ability-track-editor-segment.hbs",
 		"systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/character-generator-career-sheet.hbs",
 		"systems/wfrp3e/templates/applications/partials/character-generator-race-description.hbs",
@@ -91,26 +93,31 @@ Hooks.once("init", () => {
 
 	CONFIG.WFRP3e = WFRP3e;
 
-	CONFIG.Actor.dataModels.character = WFRP3eCharacterDataModel;
-	CONFIG.Actor.dataModels.creature = WFRP3eCreatureDataModel;
-	CONFIG.Actor.dataModels.party = WFRP3ePartyDataModel;
+	Object.assign(CONFIG.Actor.dataModels, {
+		"character": WFRP3eCharacterDataModel,
+		"creature": WFRP3eCreatureDataModel,
+		"group": WFRP3eGroupDataModel,
+		"party": WFRP3ePartyDataModel
+	});
 	CONFIG.Actor.documentClass = WFRP3eActor;
 
-	CONFIG.Item.dataModels.ability = WFRP3eAbilityDataModel;
-	CONFIG.Item.dataModels.action = WFRP3eActionDataModel;
-	CONFIG.Item.dataModels.armour = WFRP3eArmourDataModel;
-	CONFIG.Item.dataModels.career = WFRP3eCareerDataModel;
-	CONFIG.Item.dataModels.condition = WFRP3eConditionDataModel;
-	CONFIG.Item.dataModels.criticalWound = WFRP3eCriticalWoundDataModel;
-	CONFIG.Item.dataModels.disease = WFRP3eDiseaseDataModel;
-	CONFIG.Item.dataModels.insanity = WFRP3eInsanityDataModel;
-	CONFIG.Item.dataModels.miscast = WFRP3eMiscastDataModel;
-	CONFIG.Item.dataModels.money = WFRP3eMoneyDataModel;
-	CONFIG.Item.dataModels.mutation = WFRP3eMutationDataModel;
-	CONFIG.Item.dataModels.skill = WFRP3eSkillDataModel;
-	CONFIG.Item.dataModels.talent = WFRP3eTalentDataModel;
-	CONFIG.Item.dataModels.trapping = WFRP3eTrappingDataModel;
-	CONFIG.Item.dataModels.weapon = WFRP3eWeaponDataModel;
+	Object.assign(CONFIG.Item.dataModels, {
+		"ability": WFRP3eAbilityDataModel,
+		"action": WFRP3eActionDataModel,
+		"armour": WFRP3eArmourDataModel,
+		"career": WFRP3eCareerDataModel,
+		"condition": WFRP3eConditionDataModel,
+		"criticalWound": WFRP3eCriticalWoundDataModel,
+		"disease": WFRP3eDiseaseDataModel,
+		"insanity": WFRP3eInsanityDataModel,
+		"miscast": WFRP3eMiscastDataModel,
+		"money": WFRP3eMoneyDataModel,
+		"mutation": WFRP3eMutationDataModel,
+		"skill": WFRP3eSkillDataModel,
+		"talent": WFRP3eTalentDataModel,
+		"trapping": WFRP3eTrappingDataModel,
+		"weapon": WFRP3eWeaponDataModel
+	});
 	CONFIG.Item.documentClass = WFRP3eItem;
 
 	CONFIG.Combat.documentClass = WFRP3eCombat;
