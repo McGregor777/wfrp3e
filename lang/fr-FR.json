@@ -387,7 +387,8 @@
 	"SKILL.Characteristic": "Caractéristique",
 	"SKILL.AdvancedSkill": "Compétence Avancée",
 
-	"TALENT.FreeSocket": "Emplacement libre",
+	"TALENT.AvailableSocket": "Emplacement {type} libre",
+	"TALENT.TakenSocket": "Emplacement {type} occupé par {talent}",
 	"TALENT.NoSocket": "Aucun emplacement",
 	"TALENT.RechargeTokens": "Jetons de recharge",
 	"TALENT.TYPE.Focus": "Affinité",
@@ -397,6 +398,7 @@
 	"TALENT.TYPE.Order": "Ordre",
 	"TALENT.TYPE.Tricks": "Familier",
 	"TALENT.TYPE.Insanity": "Folie",
+	"TALENT.TYPE.Any": "Au choix",
 
 	"TRAPPING.Cost": "Coût",
 	"TRAPPING.Encumbrance": "Encombrement",

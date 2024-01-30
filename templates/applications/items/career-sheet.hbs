@@ -39,7 +39,7 @@
 				<div>
 					{{#each item.system.talentSockets as |type ty|}}
 						<select class="career-sheet-talent-socket-select sheet-form-select" name="system.talentSockets" data-dtype="String">
-							{{selectOptions ../talentTypes selected=type localize=true}}
+							{{selectOptions @root.talentTypes selected=type localize=true}}
 						</select>
 					{{/each}}
 				</div>
