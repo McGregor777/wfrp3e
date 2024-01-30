@@ -24,8 +24,8 @@ export default class CheckHelper
 				characteristicDice: characteristic.value - Math.abs(stance),
 				fortuneDice: characteristic.fortune,
 				expertiseDice: skill.system.trainingLevel,
-				conservativeDice: stance > 0 ? stance : 0,
-				recklessDice: stance < 0 ? Math.abs(stance) : 0
+				conservativeDice: stance < 0 ? Math.abs(stance) : 0,
+				recklessDice: stance > 0 ? stance : 0
 			}),
 			game.i18n.format("ROLL.SkillCheck", {skill: skill.name}),
 			{actor: actor, skill: skill, characteristic: skill.system.characteristic},
@@ -73,8 +73,8 @@ export default class CheckHelper
 				characteristicDice: characteristic?.value - Math.abs(stance) ?? 0,
 				fortuneDice: characteristic?.fortune ?? 0,
 				expertiseDice: skill?.system.trainingLevel ?? 0,
-				conservativeDice: stance > 0 ? stance : 0,
-				recklessDice: stance < 0 ? Math.abs(stance) : 0,
+				conservativeDice: stance < 0 ? Math.abs(stance) : 0,
+				recklessDice: stance > 0 ? stance : 0,
 				challengeDice: action.system[face].difficultyModifiers.challengeDice +
 					(["melee", "ranged"].includes(action.system.type)
 						? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
@@ -105,8 +105,8 @@ export default class CheckHelper
 		return new DicePool({
 			characteristicDice: characteristic.value - Math.abs(stance),
 			fortuneDice: characteristic.fortune,
-			conservativeDice: stance > 0 ? stance : 0,
-			recklessDice: stance < 0 ? Math.abs(stance) : 0
+			conservativeDice: stance < 0 ? Math.abs(stance) : 0,
+			recklessDice: stance > 0 ? stance : 0
 		});
 	}
 
