@@ -7,7 +7,7 @@ export default class WFRP3eAbilitySheet extends ItemSheet
 			template: "systems/wfrp3e/templates/applications/items/ability-sheet.hbs",
 			//width: 530,
 			height: 300,
-			classes: ["wfrp3e", "sheet", "item", "ability", "ability-item-sheet"]
+			classes: ["wfrp3e", "sheet", "item", "ability"]
 		});
 	}
 

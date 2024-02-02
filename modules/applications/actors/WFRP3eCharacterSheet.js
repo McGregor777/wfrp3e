@@ -16,7 +16,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
 			dragDrop: [{dragSelector: ".item", dropSelector: null}],
 			tabs: [
-				{group: "primary", navSelector: ".character-sheet-primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
+				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
 				{group: "careers", navSelector: ".character-sheet-career-tabs", contentSelector: ".character-sheet-careers"},
 				{group: "talents", navSelector: ".character-sheet-talent-tabs", contentSelector: ".character-sheet-talents", initial: "focus"},
 				{group: "actions", navSelector: ".character-sheet-action-tabs", contentSelector: ".character-sheet-actions", initial: "melee"}

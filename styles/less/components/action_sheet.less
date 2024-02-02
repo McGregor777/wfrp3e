@@ -1,69 +1,51 @@
-.action-item-sheet {
-	& .sheet-form-div {
-		margin: 0.25rem 0;
+.sheet.action {
+	& nav.face-tabs {
+		font: var(--font-size-18) var(--font-primary);
+		font-variant-caps: small-caps;
+		font-weight: bold;
 
-		&.action-art-selector {
-			& > * {
-				display: block;
+		& .tab-link.active {
+			&.conservative-tab-link {
+				color: lightgreen;
 			}
 
-			& > img {
-				border: none;
-				height: 80px;
-				width: 278px;
-			}
-		}
-
-		&.action-difficulty-modifiers, &.action-header-details {
-			display: flex;
-
-			& > *:first-child {
-				margin-right: 1rem;
-			}
-
-			& > *:last-child {
-				margin-left: 1rem;
-			}
-		}
-
-		& .action-sheet-effect-group {
-			margin-bottom: 0.5rem;
-
-			& .action-sheet-effect {
-				align-items: center;
-				display: flex;
-				margin-bottom: 0.5rem;
-
-				& > * {
-					margin: 0 0.25rem;
-
-					&:first-child {
-						margin-left: 0;
-					}
-
-					&:last-child {
-						margin-right: 0;
-					}
-
-					&.action-sheet-effect-symbol-amount {
-						width: 2rem;
-					}
-
-					&.action-sheet-effect-description {
-						display: none;
-					}
-				}
+			&.reckless-tab-link {
+				color: lightcoral;
 			}
 		}
 	}
 
-	& .tab-link.active {
-		&.conservative-tab-link {
-			color: lightgreen;
+	& .art-selector {
+		& > * {
+			display: block;
 		}
 
-		&.reckless-tab-link {
-			color: lightcoral;
+		& > img {
+			border: none;
+			height: 80px;
+			width: 278px;
+		}
+	}
+
+	& .effect-group {
+		margin-bottom: 0.5rem;
+
+		& .effect {
+			align-items: center;
+			display: flex;
+			margin-bottom: 0.5rem;
+
+			& > * {
+				gap: 0.25rem;
+
+				&.effect-symbol-amount {
+					width: 2rem;
+				}
+
+				&.effect-description {
+					display: none;
+				}
+			}
 		}
 	}
 }

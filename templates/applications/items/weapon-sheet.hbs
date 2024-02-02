@@ -1,74 +1,112 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
-		<img class="actor-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-		<h1><input class="name-input" name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+		<img class="actor-img" src="{{item.img}}" title="{{item.name}}" alt="{{item.name}}" data-edit="img" />
+
+		<h1>
+			<input class="name-input" name="name" value="{{item.name}}" type="text" placeholder="Name" />
+		</h1>
 	</header>
 
-	<section class="sheet-body">
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'WEAPON.DamageRating'}}</label>
-			<input class="sheet-form-input" name="system.damageRating" type="number" value="{{item.system.damageRating}}" placeholder="{{localize 'WEAPON.ABBREVIATION.DamageRating'}}" data-dtype="Number" />
-		</div>
+	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
+		<a class="tab-link main-tab-link" data-tab="main">{{localize "Main"}}</a>
+		<a class="tab-link details-tab-link" data-tab="details">{{localize "Details"}}</a>
+	</nav>
 
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'WEAPON.CriticalRating'}}</label>
-			<input class="sheet-form-input" name="system.criticalRating" type="number" value="{{item.system.criticalRating}}" placeholder="{{localize 'WEAPON.ABBREVIATION.CriticalRating'}}" data-dtype="Number" />
-		</div>
+	<div class="sheet-body">
+		<section class="tab main-tab" data-group="primary" data-tab="main">
+			{{>systems/wfrp3e/templates/partials/trapping-cost-informations.hbs}}
 
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'WEAPON.Range'}}</label>
-			<select class="sheet-form-select" name="system.range" data-dtype="String">
-				{{selectOptions ranges selected=item.system.range localize=true}}
-			</select>
-		</div>
+			<hr />
 
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'WEAPON.Qualities'}}</label>
-			<a class="quality-remove"><span class="fas fa-minus"></span></a>
-			<a class="quality-add"><span class="fas fa-plus"></span></a>
+			<div class="form-div">
+				<label>
+					{{localize 'WEAPON.DamageRating'}}:
 
-			{{#each item.system.qualities as |quality qu|}}
-				<div>
-					<select class="weapon-sheet-quality-select sheet-form-select" name="system.qualities.{{qu}}.name" data-dtype="String">
-						{{selectOptions @root.qualities selected=quality.name localize=true}}
+					<input name="system.damageRating"
+					       value="{{item.system.damageRating}}"
+					       type="number"
+					       placeholder="{{localize 'WEAPON.ABBREVIATION.DamageRating'}}" />
+				</label>
+
+				<label>
+					{{localize 'WEAPON.CriticalRating'}}:
+
+					<input name="system.criticalRating"
+					       value="{{item.system.criticalRating}}"
+					       type="number"
+					       placeholder="{{localize 'WEAPON.ABBREVIATION.CriticalRating'}}" />
+				</label>
+
+				<label>
+					{{localize 'WEAPON.Range'}}:
+
+					<select name="system.range">
+						{{selectOptions ranges selected=item.system.range localize=true}}
 					</select>
+				</label>
 
-					{{#if (in quality.name @root.qualitiesWithRating) }}
-						<input class="sheet-form-input" name="system.qualities.{{qu}}.rating" type="number" value="{{quality.rating}}" min="1" placeholder="{{localize 'WEAPON.QualityRating'}}" data-dtype="Number" />
-					{{/if}}
+				<label>
+					{{localize 'WEAPON.Group'}}:
+
+					<select name="system.group">
+						{{selectOptions groups selected=item.system.group labelAttr="name" localize=true}}
+					</select>
+				</label>
+			</div>
+
+			<hr />
+
+			<div class="qualities">
+				{{localize 'WEAPON.Qualities'}}
+
+				<a class="quality-add">
+					<span class="fas fa-plus"></span>
+				</a>
+
+				<div class="qualities-container">
+					{{#each item.system.qualities as |quality qu|}}
+						<div class="quality-container">
+							<label class="quality-label">
+								<select class="quality-select" name="system.qualities.{{qu}}.name">
+									{{selectOptions @root.qualities selected=quality.name localize=true}}
+								</select>
+							</label>
+
+							{{#if (in quality.name @root.qualitiesWithRating) }}
+								<label class="quality-rating-label">
+									<span>{{localize "WEAPON.Rating"}}: </span>
+
+									<input name="system.qualities.{{qu}}.rating"
+									       value="{{quality.rating}}"
+									       type="number"
+									       min="1"
+									       placeholder="{{localize 'WEAPON.QualityRating'}}" />
+								</label>
+							{{/if}}
+
+							<a class="quality-remove">
+								<span class="fas fa-trash"></span>
+							</a>
+						</div>
+
+						<hr />
+					{{/each}}
 				</div>
-			{{/each}}
-		</div>
+			</div>
 
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'WEAPON.Group'}}</label>
-			<select class="sheet-form-select" name="system.group" data-dtype="String">
-				{{selectOptions groups selected=item.system.group labelAttr="name" localize=true}}
-			</select>
-		</div>
+			<label>
+				{{localize "WEAPON.QUALITY.Special"}}
 
-		<div class="sheet-form-div">
-			<span class="sheet-form-label">{{localize 'TRAPPING.Cost'}}</span>
-			<span class="sheet-form-label">{{localize 'TRAPPING.MONEY.Brass'}}</span>
-			<input class="sheet-form-input" name="system.cost.brass" type="number" value="{{item.system.cost.brass}}" placeholder="{{localize 'TRAPPING.Brass'}}" data-dtype="Number" />
-			<span class="sheet-form-label">{{localize 'TRAPPING.MONEY.Silver'}}</span>
-			<input class="sheet-form-input" name="system.cost.silver" type="number" value="{{item.system.cost.silver}}" placeholder="{{localize 'TRAPPING.Silver'}}" data-dtype="Number" />
-			<span class="sheet-form-label">{{localize 'TRAPPING.MONEY.Gold'}}</span>
-			<input class="sheet-form-input" name="system.cost.gold" type="number" value="{{item.system.cost.gold}}" placeholder="{{localize 'TRAPPING.Gold'}}" data-dtype="Number" />
-		</div>
+				{{editor item.system.special target="system.special" button=true owner=owner editable=editable}}
+			</label>
+		</section>
 
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'TRAPPING.Encumbrance'}}</label>
-			<input class="sheet-form-input" name="system.encumbrance" type="number" value="{{item.system.encumbrance}}" placeholder="{{localize 'TRAPPING.Enc'}}" data-dtype="Number" />
-		</div>
+		<section class="tab main-tab" data-group="primary" data-tab="details">
+			{{localize "TRAPPING.Description"}}
 
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'TRAPPING.Rarity'}}</label>
-			<select class="sheet-form-select" name="system.rarity" data-dtype="String">
-				{{selectOptions rarities selected=item.system.rarity localize=true}}
-			</select>
-		</div>
-
-		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
-	</section>
+			<label>
+				{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
+			</label>
+		</section>
+	</div>
 </form>

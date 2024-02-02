@@ -6,12 +6,12 @@ export default class WFRP3eActionSheet extends ItemSheet
 		{
 			template: "systems/wfrp3e/templates/applications/items/action-sheet.hbs",
 			width: 540,
-			//height: 340,
-			classes: ["wfrp3e", "sheet", "item", "action", "action-item-sheet"],
+			height: 680,
+			classes: ["wfrp3e", "sheet", "item", "action"],
 			tabs: [
-				{group: "face", navSelector: ".action-sheet-face-tabs", contentSelector: ".action-sheet-body", initial: "conservative"},
-				{group: "conservative", navSelector: ".action-sheet-conservative-tabs", contentSelector: ".action-sheet-conservative", initial: "main"},
-				{group: "reckless", navSelector: ".action-sheet-reckless-tabs", contentSelector: ".action-sheet-reckless", initial: "main"}
+				{group: "face", navSelector: ".face-tabs", contentSelector: ".sheet-body", initial: "conservative-tab"},
+				{group: "conservative", navSelector: ".conservative-tabs", contentSelector: ".conservative-tab", initial: "main"},
+				{group: "reckless", navSelector: ".reckless-tabs", contentSelector: ".reckless-tab", initial: "main"}
 			]
 		});
 	}
@@ -32,8 +32,8 @@ export default class WFRP3eActionSheet extends ItemSheet
 	{
 		super.activateListeners(html);
 
-		html.find(".action-sheet-effect-add").click(this._onAddEffectButtonClick.bind(this));
-		html.find(".action-sheet-effect-remove").click(this._onRemoveEffectButtonClick.bind(this));
+		html.find(".effect-add").click(this._onAddEffectButtonClick.bind(this));
+		html.find(".effect-remove").click(this._onRemoveEffectButtonClick.bind(this));
 	}
 
 	/**

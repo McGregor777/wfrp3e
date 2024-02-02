@@ -7,7 +7,7 @@ export default class WFRP3eCriticalWoundSheet extends ItemSheet
 			template: "systems/wfrp3e/templates/applications/items/critical-wound-sheet.hbs",
 			//width: 530,
 			height: 300,
-			classes: ["wfrp3e", "sheet", "item", "critical-wound", "critical-wound-item-sheet"]
+			classes: ["wfrp3e", "sheet", "item", "critical-wound"]
 		});
 	}
 
