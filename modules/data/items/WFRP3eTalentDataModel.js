@@ -1,3 +1,5 @@
+import DataHelper from "../DataHelper.js";
+
 /** @inheritDoc */
 export default class WFRP3eTalentDataModel extends foundry.abstract.TypeDataModel
 {
@@ -12,5 +14,25 @@ export default class WFRP3eTalentDataModel extends foundry.abstract.TypeDataMode
             talentSocket: new fields.StringField(),
             type: new fields.StringField()
         };
+    }
+
+    /** @inheritDoc */
+    prepareBaseData()
+    {
+        super.prepareBaseData();
+
+        this._prepareDescription();
+    }
+
+    /**
+     * Prepares the description of the Talent's description.
+     * @private
+     */
+    _prepareDescription()
+    {
+        const cleanedUpDescription = DataHelper._getCleanedupDescription(this.description);
+
+        if(cleanedUpDescription)
+            this.updateSource({description: cleanedUpDescription});
     }
 }
