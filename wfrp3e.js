@@ -80,7 +80,8 @@ async function preloadHandlebarsTemplates()
 		"systems/wfrp3e/templates/partials/item-talent-card.hbs",
 		"systems/wfrp3e/templates/partials/item-trapping-row.hbs",
 		"systems/wfrp3e/templates/partials/item-weapon-row.hbs",
-		"systems/wfrp3e/templates/partials/item-wound-card.hbs"
+		"systems/wfrp3e/templates/partials/item-wound-card.hbs",
+		"systems/wfrp3e/templates/partials/trapping-cost-informations.hbs"
 	];
 
 	return loadTemplates(templatePaths);

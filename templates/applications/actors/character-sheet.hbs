@@ -4,7 +4,7 @@
 		<h1><input class="name-input" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}" /></h1>
 	</header>
 
-	<nav class="character-sheet-primary-tabs sheet-tabs tabs" data-group="primary">
+	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
 		<a class="tab-link characteristics-tab-link" data-tab="characteristics">{{localize 'CHARACTER.Attributes'}}</a>
 		<a class="tab-link careers-tab-link" data-tab="careers">{{localize 'CHARACTER.Careers'}}</a>
 		<a class="tab-link talents-tab-link" data-tab="talents">{{localize 'CHARACTER.Talents'}}</a>
@@ -211,26 +211,47 @@
 		</section>
 
 		<section class="tab trappings-tab" data-group="primary" data-tab="trappings">
-			<table class="weapon-table">
-				<thead>
-					<tr><th colspan="8"><span>{{localize 'CHARACTER.Weapons'}}</span></th></tr>
-					<tr>
-						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
-						<th class="shrinked"><span>{{localize 'WEAPON.ABBREVIATION.DamageRating'}}</span></th>
-						<th class="shrinked"><span>{{localize 'WEAPON.ABBREVIATION.CriticalRating'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'WEAPON.Range'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'WEAPON.Qualities'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'WEAPON.Group'}}</span></th>
-						<th class="shrinked"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
-						<th class="shrinked"></th>
-					</tr>
-				</thead>
-				<tbody>
-					{{#each items.weapons as |weapon wp|}}
-						{{>systems/wfrp3e/templates/partials/item-weapon-row.hbs weapon=weapon}}
-					{{/each}}
-				</tbody>
-			</table>
+			<div class="weapon-table">
+				<div class="weapon-table-header title">{{localize 'CHARACTER.Weapons'}}</div>
+
+				<div class="weapon-table-header">
+					<span class="weapon-name">{{localize 'TRAPPING.Name'}}</span>
+
+					<hr />
+
+					<span class="weapon-damage-rating">{{localize 'WEAPON.ABBREVIATION.DamageRating'}}</span>
+
+					<hr />
+
+					<span class="weapon-critical-rating">{{localize 'WEAPON.ABBREVIATION.CriticalRating'}}</span>
+
+					<hr />
+
+					<span class="weapon-range">{{localize 'WEAPON.Range'}}</span>
+
+					<hr />
+
+					<span class="weapon-qualities">{{localize 'WEAPON.Qualities'}}</span>
+
+					<hr />
+
+					<span class="weapon-group">{{localize 'WEAPON.Group'}}</span>
+
+					<hr />
+
+					<span class="weapon-encumbrance">{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span>
+
+					<hr />
+
+					<span class="weapon-buttons"></span>
+				</div>
+
+				{{#each items.weapons as |weapon wp|}}
+					{{>systems/wfrp3e/templates/partials/item-weapon-row.hbs weapon=weapon}}
+
+					{{#unless @last}}<hr />{{/unless}}
+				{{/each}}
+			</div>
 
 			<table class="armour-table">
 				<thead>
