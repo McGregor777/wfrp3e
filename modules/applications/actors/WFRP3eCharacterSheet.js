@@ -371,6 +371,9 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	_onItemInput(event)
 	{
+		event.preventDefault();
+		event.stopPropagation();
+
 		const item = this.actor.items.get(event.currentTarget.dataset.itemId ?? this._getItemId(event));
 		const property = event.currentTarget.dataset.path;
 		let value = event.target.value;
