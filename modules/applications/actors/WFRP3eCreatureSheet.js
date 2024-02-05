@@ -107,9 +107,9 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_getItemId(event)
+	_getItemById(event)
 	{
-		return $(event.currentTarget).parents(".item").attr("data-item-id");
+		return this.actor.items.get(event.currentTarget.dataset.itemId ?? $(event.currentTarget).parents(".item").data("itemId"));
 	}
 
 	/**
@@ -156,7 +156,7 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 */
 	_onItemEdit(event)
 	{
-		return this.actor.items.get(this._getItemId(event)).sheet.render(true);
+		return this._getItemById(event).sheet.render(true);
 	}
 
 	/**
@@ -166,17 +166,17 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 */
 	_onItemDelete(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
+		const item = this._getItemById(event);
 
 		new Dialog({
-			title: game.i18n.localize("APPLICATION.TITLE.DeleteItemConfirmation"),
-			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItemConfirmation", {item: clickedItem.name}) + "</p>",
+			title: game.i18n.localize("APPLICATION.TITLE.DeleteItem"),
+			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: item.name}) + "</p>",
 			buttons: {
 				confirm: {
 					icon: '<span class="fa fa-check"></span>',
 					label: game.i18n.localize("Yes"),
 					callback: async dlg => {
-						await this.actor.deleteEmbeddedDocuments("Item", [clickedItem._id]);
+						await this.actor.deleteEmbeddedDocuments("Item", [item._id]);
 						li.slideUp(200, () => this.render(false));
 					}
 				},
@@ -196,14 +196,14 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 */
 	async _onItemLeftClick(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
+		const item = this._getItemById(event);
 		const options = {};
 		const face = $(event.currentTarget).parents(".face").data("face");
 
 		if(face)
 			options.face = face;
 
-		clickedItem.useItem(options);
+		item.useItem(options);
 	}
 
 	/**
@@ -213,7 +213,7 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 */
 	async _onItemRightClick(event)
 	{
-		this.actor.items.get(this._getItemId(event)).sheet.render(true);
+		this._getItemById(event).sheet.render(true);
 	}
 
 	/**
@@ -223,9 +223,9 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 */
 	_onRechargeTokenLeftClick(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
+		const item =this._getItemById(event);
 
-		clickedItem.update({"system.rechargeTokens": clickedItem.system.rechargeTokens + 1});
+		item.update({"system.rechargeTokens": item.system.rechargeTokens + 1});
 	}
 
 	/**
@@ -235,13 +235,13 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 */
 	_onRechargeTokenRightClick(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
-		let rechargeTokens = clickedItem.system.rechargeTokens - 1;
+		const item = this._getItemById(event);
+		let rechargeTokens = item.system.rechargeTokens - 1;
 
 		// Floor recharge tokens to 0.
 		if(rechargeTokens < 0)
 			rechargeTokens = 0;
 
-		clickedItem.update({"system.rechargeTokens": rechargeTokens});
+		item.update({"system.rechargeTokens": rechargeTokens});
 	}
 }

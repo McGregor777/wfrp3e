@@ -310,7 +310,8 @@
 				}
 			}
 
-			& .weapon-table {
+			& .table {
+				margin-bottom: 1rem;
 				& hr {
 					margin: 0;
 				}
@@ -323,40 +324,19 @@
 					width: 1px;
 				}
 
-				& .weapon-buttons {
+				& .buttons {
 					width: 5%;
 				}
 
-				& .weapon-critical-rating {
+				& .encumbrance {
 					width: 5%;
 				}
 
-				& .weapon-damage-rating {
-					width: 5%;
-				}
-
-				& .weapon-encumbrance {
-					width: 5%;
-				}
-
-				& .weapon-group {
-					width: 15%;
-				}
-
-				& .weapon-name {
-					text-align: initial;
-					width: 20%;
-				}
-
-				& .weapon-qualities {
-					width: 40%;
-				}
-
-				& .weapon-range {
+				& .quantity {
 					width: 10%;
 				}
 
-				& .weapon-row {
+				& .row {
 					background: #D8CFC0;
 					padding: 0.25rem;
 
@@ -364,14 +344,14 @@
 						background: #E9E2DB;
 					}
 
-					& > *:first-child {
+					& .content:first-child {
 						align-items: center;
 						display: flex;
 						text-align: center;
 					}
 				}
 
-				& .weapon-table-header {
+				& .table-header {
 					background: #7E1518;
 					color: var(--color-text-light-highlight);
 					display: flex;
@@ -387,6 +367,67 @@
 
 					& hr {
 						border-right: 1px solid var(--color-border-light-primary);
+					}
+				}
+
+				&.armour {
+					& .armour-defence-value {
+						width: 10%;
+					}
+
+					& .armour-soak-value {
+						width: 10%;
+					}
+
+					& .armour-name {
+						text-align: initial;
+						width: 70%;
+					}
+				}
+
+				&.money {
+					& .money-value {
+						width: 10%;
+					}
+
+					& .money-name {
+						text-align: initial;
+						width: 70%;
+					}
+				}
+
+				&.trapping {
+
+					& .trapping-name {
+						text-align: initial;
+						width: 90%;
+					}
+				}
+
+				&.weapon {
+					& .weapon-critical-rating {
+						width: 5%;
+					}
+
+					& .weapon-damage-rating {
+						width: 5%;
+					}
+
+					& .weapon-group {
+						width: 15%;
+					}
+
+					& .weapon-name {
+						text-align: initial;
+						width: 20%;
+					}
+
+					& .weapon-qualities {
+						width: 40%;
+					}
+
+					& .weapon-range {
+						width: 10%;
 					}
 				}
 			}

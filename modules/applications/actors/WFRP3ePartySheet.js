@@ -112,8 +112,8 @@ export default class WFRP3ePartySheet extends ActorSheet
 		const actorName = game.actors.get(actorId).name;
 
 		new Dialog({
-			title: game.i18n.localize("APPLICATION.TITLE.MemberRemovalConfirmation"),
-			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.MemberRemovalConfirmation", {actor: actorName}) + "</p>",
+			title: game.i18n.localize("APPLICATION.TITLE.MemberRemoval"),
+			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.MemberRemoval", {actor: actorName}) + "</p>",
 			buttons: {
 				confirm: {
 					icon: '<span class="fa fa-check"></span>',

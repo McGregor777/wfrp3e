@@ -1,5 +1,5 @@
-<details class="item weapon-row" data-item-id="{{weapon._id}}">
-	<summary>
+<div class="item weapon row" data-item-id="{{weapon._id}}">
+	<div class="content">
 		<a class="weapon-name item-name-link">{{weapon.name}}</a>
 
 		<hr />
@@ -32,16 +32,28 @@
 
 		<hr />
 
-		<span class="weapon-encumbrance">{{weapon.system.encumbrance}}</span>
+		<span class="encumbrance">{{weapon.system.encumbrance}}</span>
 
 		<hr />
 
-		<span class="weapon-buttons">
-			{{#>if @root.document.isOwner}}
-				<a class="item-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
-			{{/if}}
-		</span>
-	</summary>
+		<div class="buttons">
+			<a class="item-roll-link" title="{{localize 'APPLICATION.BUTTON.RollItem'}}">
+				<span class="fas fa-dice-d20"></span>
+			</a>
 
-	{{{weapon.system.description}}} {{{weapon.system.special}}}
-</details>
+			<a class="item-expand-link" title="{{localize 'APPLICATION.BUTTON.Expand'}}">
+				<span class="fas fa-chevron-down"></span>
+			</a>
+
+			{{#>if @root.document.isOwner}}
+				<a class="item-edit-link" title="{{localize 'APPLICATION.BUTTON.EditItem'}}">
+					<span class="fas fa-pen-to-square"></span>
+				</a>
+
+				<a class="item-delete-link" title="{{localize 'APPLICATION.BUTTON.DeleteItem'}}">
+					<span class="fas fa-trash"></span>
+				</a>
+			{{/if}}
+		</div>
+	</div>
+</div>

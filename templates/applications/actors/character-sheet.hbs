@@ -211,39 +211,39 @@
 		</section>
 
 		<section class="tab trappings-tab" data-group="primary" data-tab="trappings">
-			<div class="weapon-table">
-				<div class="weapon-table-header title">{{localize 'CHARACTER.Weapons'}}</div>
+			<div class="weapon table">
+				<div class="weapon table-header title">{{localize "CHARACTER.Weapons"}}</div>
 
-				<div class="weapon-table-header">
-					<span class="weapon-name">{{localize 'TRAPPING.Name'}}</span>
-
-					<hr />
-
-					<span class="weapon-damage-rating">{{localize 'WEAPON.ABBREVIATION.DamageRating'}}</span>
+				<div class="weapon table-header">
+					<span class="weapon-name">{{localize "TRAPPING.Name"}}</span>
 
 					<hr />
 
-					<span class="weapon-critical-rating">{{localize 'WEAPON.ABBREVIATION.CriticalRating'}}</span>
+					<span class="weapon-damage-rating">{{localize "WEAPON.ABBREVIATION.DamageRating"}}</span>
 
 					<hr />
 
-					<span class="weapon-range">{{localize 'WEAPON.Range'}}</span>
+					<span class="weapon-critical-rating">{{localize "WEAPON.ABBREVIATION.CriticalRating"}}</span>
 
 					<hr />
 
-					<span class="weapon-qualities">{{localize 'WEAPON.Qualities'}}</span>
+					<span class="weapon-range">{{localize "WEAPON.Range"}}</span>
 
 					<hr />
 
-					<span class="weapon-group">{{localize 'WEAPON.Group'}}</span>
+					<span class="weapon-qualities">{{localize "WEAPON.Qualities"}}</span>
 
 					<hr />
 
-					<span class="weapon-encumbrance">{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span>
+					<span class="weapon-group">{{localize "WEAPON.Group"}}</span>
 
 					<hr />
 
-					<span class="weapon-buttons"></span>
+					<span class="encumbrance">{{localize "TRAPPING.ABBREVIATION.Encumbrance"}}</span>
+
+					<hr />
+
+					<span class="buttons"></span>
 				</div>
 
 				{{#each items.weapons as |weapon wp|}}
@@ -253,57 +253,88 @@
 				{{/each}}
 			</div>
 
-			<table class="armour-table">
-				<thead>
-					<tr><th colspan="8"><span>{{localize 'CHARACTER.Armours'}}</span></th></tr>
-					<tr>
-						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'ARMOUR.Defence'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'ARMOUR.Soak'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
-						<th class="shrinked"></th>
-					</tr>
-				</thead>
-				<tbody>
-					{{#each items.armours as |armour arm|}}
-						{{>systems/wfrp3e/templates/partials/item-armour-row.hbs armour=armour}}
-					{{/each}}
-				</tbody>
-			</table>
 
-			<table class="trapping-table">
-				<thead>
-					<tr><th colspan="8"><span>{{localize 'CHARACTER.Trappings'}}</span></th></tr>
-					<tr>
-						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
-						<th class="left-aligned"><span>{{localize 'TRAPPING.Description'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
-						<th class="shrinked"></th>
-					</tr>
-				</thead>
-				<tbody>
-					{{#each items.trappings as |trapping trp|}}
-						{{>systems/wfrp3e/templates/partials/item-trapping-row.hbs trapping=trapping}}
-					{{/each}}
-				</tbody>
-			</table>
+			<div class="armour table">
+				<div class="armour table-header title">{{localize "CHARACTER.Armours"}}</div>
 
-			<table class="money-table">
-				<thead>
-					<tr><th colspan="8"><span>{{localize 'CHARACTER.Money'}}</span></th></tr>
-					<tr>
-						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.Value'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Quantity'}}</span></th>
-						<th class="shrinked"></th>
-					</tr>
-				</thead>
-				<tbody>
-					{{#each items.money as |money mo|}}
-						{{>systems/wfrp3e/templates/partials/item-money-row.hbs money=money}}
-					{{/each}}
-				</tbody>
-			</table>
+				<div class="armour table-header">
+					<span class="armour-name">{{localize "TRAPPING.Name"}}</span>
+
+					<hr />
+
+					<span class="armour-defence-value">{{localize "ARMOUR.Defence"}}</span>
+
+					<hr />
+
+					<span class="armour-soak-value">{{localize "ARMOUR.Soak"}}</span>
+
+					<hr />
+
+					<span class="encumbrance">{{localize "TRAPPING.ABBREVIATION.Encumbrance"}}</span>
+
+					<hr />
+
+					<span class="buttons"></span>
+				</div>
+
+				{{#each items.armours as |armour arm|}}
+					{{>systems/wfrp3e/templates/partials/item-armour-row.hbs armour=armour}}
+
+					{{#unless @last}}<hr />{{/unless}}
+				{{/each}}
+			</div>
+
+			<div class="trapping table">
+				<div class="trapping table-header title">{{localize "CHARACTER.Trappings"}}</div>
+
+				<div class="trapping table-header">
+					<span class="trapping-name">{{localize "TRAPPING.Name"}}</span>
+
+					<hr />
+
+					<span class="encumbrance">{{localize "TRAPPING.ABBREVIATION.Encumbrance"}}</span>
+
+					<hr />
+
+					<span class="buttons"></span>
+				</div>
+
+				{{#each items.trappings as |trapping trp|}}
+					{{>systems/wfrp3e/templates/partials/item-trapping-row.hbs trapping=trapping}}
+
+					{{#unless @last}}<hr />{{/unless}}
+				{{/each}}
+			</div>
+
+			<div class="money table">
+				<div class="money table-header title">{{localize "CHARACTER.Money"}}</div>
+
+				<div class="money table-header">
+					<span class="money-name">{{localize "TRAPPING.Name"}}</span>
+
+					<hr />
+
+					<span class="money-value">{{localize "MONEY.Value"}}</span>
+
+					<hr />
+
+					<span class="quantity">{{localize "TRAPPING.ABBREVIATION.Quantity"}}</span>
+
+					<hr />
+
+					<span class="encumbrance">{{localize "TRAPPING.ABBREVIATION.Encumbrance"}}</span>
+
+					<hr />
+
+					<span class="buttons"></span>
+				</div>
+
+				{{#each items.money as |money mo|}}
+					{{>systems/wfrp3e/templates/partials/item-money-row.hbs money=money}}
+
+					{{#unless @last}}<hr />{{/unless}}
+				{{/each}}
+			</div>
 		</section>
 
 		<section class="tab background-tab" data-group="primary" data-tab="background">

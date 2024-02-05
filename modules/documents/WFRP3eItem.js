@@ -39,8 +39,8 @@ export default class WFRP3eItem extends Item
 		else {
 			if (CheckHelper.doesRequireNoCheck(this.system[options.face].check))
 				await new Dialog({
-					title: game.i18n.localize("APPLICATION.TITLE.ActionUsageConfirmation"),
-					content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.ActionUsageConfirmation", {action: this.system[options.face].name}) + "</p>",
+					title: game.i18n.localize("APPLICATION.TITLE.ActionUsage"),
+					content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.ActionUsage", {action: this.system[options.face].name}) + "</p>",
 					buttons: {
 						confirm: {
 							icon: '<span class="fa fa-check"></span>',

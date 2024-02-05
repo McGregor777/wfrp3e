@@ -57,7 +57,9 @@
 				</table>
 
 				<div class="action-card-bottom-line">
-					<a class="flip-link" title="{{localize 'Flip Card'}}"><span class="fas fa-undo"></span></a>
+					<a class="flip-link" title="{{localize 'Flip Card'}}">
+						<span class="fas fa-undo"></span>
+					</a>
 
 					<a class="recharge-token" title="{{localize "ACTION.RechargeTokens"}}">
 						<img src="systems/wfrp3e/assets/images/token-black.webp" alt="{{localize "ACTION.RechargeTokens"}}" />
@@ -65,7 +67,9 @@
 					</a>
 
 					{{#if @root.document.isOwner}}
-						<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItemConfirmation'}}"><span class="fas fa-trash"></span></a>
+						<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
+							<span class="fas fa-trash"></span>
+						</a>
 					{{/if}}
 				</div>
 			</div>
