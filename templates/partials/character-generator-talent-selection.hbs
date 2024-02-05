@@ -28,7 +28,7 @@
 		<div class="tab active" data-group="talents" data-tab="focus">
 			{{#each talents.focus}}
 				<label>
-					{{>systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs talent=this}}
+					{{>systems/wfrp3e/templates/partials/character-generator-talent-card.hbs talent=this}}
 					<input name="talent" value="{{this._id}}" type="checkbox" />
 				</label>
 			{{/each}}
@@ -37,7 +37,7 @@
 		<div class="tab" data-group="talents" data-tab="reputation">
 			{{#each talents.reputation}}
 				<label>
-					{{>systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs talent=this}}
+					{{>systems/wfrp3e/templates/partials/character-generator-talent-card.hbs talent=this}}
 					<input name="talent" value="{{this._id}}" type="checkbox" />
 				</label>
 			{{/each}}
@@ -46,7 +46,7 @@
 		<div class="tab" data-group="talents" data-tab="tactic">
 			{{#each talents.tactic}}
 				<label>
-					{{>systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs talent=this}}
+					{{>systems/wfrp3e/templates/partials/character-generator-talent-card.hbs talent=this}}
 					<input name="talent" value="{{this._id}}" type="checkbox" />
 				</label>
 			{{/each}}
@@ -55,7 +55,7 @@
 		<div class="tab" data-group="talents" data-tab="trick">
 			{{#each talents.tricks}}
 				<label>
-					{{>systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs talent=this}}
+					{{>systems/wfrp3e/templates/partials/character-generator-talent-card.hbs talent=this}}
 					<input name="talent" value="{{this._id}}" type="checkbox" />
 				</label>
 			{{/each}}
@@ -65,7 +65,7 @@
 			<div class="tab active" data-group="talents" data-tab="focus">
 				{{#each talents.focus}}
 					<label>
-						{{>systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs talent=this}}
+						{{>systems/wfrp3e/templates/partials/character-generator-talent-card.hbs talent=this}}
 						<input name="talent" value="{{this._id}}" type="checkbox" />
 					</label>
 				{{/each}}
@@ -77,7 +77,7 @@
 		<div class="tab{{#unless talentInvestment}} active{{/unless}}" data-group="talents" data-tab="faith">
 			{{#each talents.faith}}
 				<label>
-					{{>systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs talent=this}}
+					{{>systems/wfrp3e/templates/partials/character-generator-talent-card.hbs talent=this}}
 					<input name="talent" value="{{this._id}}" type="checkbox" />
 				</label>
 			{{/each}}
@@ -88,7 +88,7 @@
 		<div class="tab{{#unless talentInvestment}} active{{/unless}}" data-group="talents" data-tab="order">
 			{{#each talents.order}}
 				<label>
-					{{>systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs talent=this}}
+					{{>systems/wfrp3e/templates/partials/character-generator-talent-card.hbs talent=this}}
 					<input name="talent" value="{{this._id}}" type="checkbox" />
 				</label>
 			{{/each}}

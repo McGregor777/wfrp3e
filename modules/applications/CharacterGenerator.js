@@ -232,7 +232,7 @@ export default class CharacterGenerator extends FormApplication
 
 		rootElement.find(".selected-race").html(game.i18n.localize(this.selectedRace.name));
 		rootElement.find(".race-description").html(
-			await renderTemplate("systems/wfrp3e/templates/applications/partials/character-generator-race-description.hbs", {
+			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-race-description.hbs", {
 				race: this.selectedRace,
 				racialAbilities: Object.fromEntries(this.racialAbilities)
 			})
@@ -313,7 +313,7 @@ export default class CharacterGenerator extends FormApplication
 		this.selectedCareer = this.drawnCareers[0];
 
 		html.find(".careers").html(
-			await renderTemplate("systems/wfrp3e/templates/applications/partials/character-generator-career-selection.hbs", {
+			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-career-selection.hbs", {
 				drawnCareers: this.drawnCareers,
 				characteristics: CONFIG.WFRP3e.characteristics
 			})
@@ -364,7 +364,7 @@ export default class CharacterGenerator extends FormApplication
 		const rootElement = html.find('.step[data-step="creation-point-investment"] .creation-point-investment');
 
 		rootElement.html(
-			await renderTemplate("systems/wfrp3e/templates/applications/partials/character-generator-creation-point-investment.hbs", {
+			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-creation-point-investment.hbs", {
 				characteristics: CONFIG.WFRP3e.characteristics,
 				defaultRatings: this.selectedRace.defaultRatings
 			})
@@ -529,7 +529,7 @@ export default class CharacterGenerator extends FormApplication
 		const rootElement = html.find('.step[data-step="skill-training"] .skill-training');
 
 		rootElement.html(
-			await renderTemplate("systems/wfrp3e/templates/applications/partials/character-generator-skill-training.hbs", {
+			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-skill-training.hbs", {
 				careerSkills: this.careerSkills,
 				skills: this.chosenTrainingsAndSpecialisations,
 				characteristics: CONFIG.WFRP3e.characteristics
@@ -699,7 +699,7 @@ export default class CharacterGenerator extends FormApplication
 			const rootElement = html.find('.step[data-step="talent-selection"] .talent-selection');
 
 			rootElement.html(
-				await renderTemplate("systems/wfrp3e/templates/applications/partials/character-generator-talent-selection.hbs", {
+				await renderTemplate("systems/wfrp3e/templates/partials/character-generator-talent-selection.hbs", {
 					talents: talents,
 					insanities: this.insanities,
 					talentsInvestment: this.talentsInvestment >= 1,
@@ -905,7 +905,7 @@ export default class CharacterGenerator extends FormApplication
 		}
 
 		rootElement.html(
-			await renderTemplate("systems/wfrp3e/templates/applications/partials/character-generator-action-selection.hbs", {
+			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-action-selection.hbs", {
 				actions: actions,
 				stances: CONFIG.WFRP3e.stances,
 				symbols: CONFIG.WFRP3e.symbols,
@@ -1006,7 +1006,7 @@ export default class CharacterGenerator extends FormApplication
 		const rootElement = html.find('.step[data-step="finish"] .finish');
 
 		rootElement.html(
-			await renderTemplate("systems/wfrp3e/templates/applications/partials/character-generator-finish.hbs", {
+			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-finish.hbs", {
 				race: this.selectedRace,
 				racialAbilities: Object.fromEntries(this.racialAbilities),
 				career: this.selectedCareer,

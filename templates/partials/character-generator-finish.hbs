@@ -28,7 +28,7 @@
 <div>
 	<h5>{{localize "CHARACTERGENERATOR.Career"}}</h5>
 
-	{{>systems/wfrp3e/templates/applications/partials/character-generator-career-sheet.hbs career=career}}
+	{{>systems/wfrp3e/templates/partials/character-generator-career-sheet.hbs career=career}}
 </div>
 
 <div>
@@ -102,7 +102,7 @@
 
 		<div class="talents">
 			{{#each talents}}
-				{{>systems/wfrp3e/templates/applications/partials/character-generator-talent-card.hbs talent=this}}
+				{{>systems/wfrp3e/templates/partials/character-generator-talent-card.hbs talent=this}}
 			{{/each}}
 		</div>
 	</div>
@@ -113,7 +113,7 @@
 
 	<div class="actions">
 		{{#each actions}}
-			{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+			{{>systems/wfrp3e/templates/partials/character-generator-action-card.hbs action=this}}
 		{{/each}}
 	</div>
 </div>

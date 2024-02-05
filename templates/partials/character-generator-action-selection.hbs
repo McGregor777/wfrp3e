@@ -16,7 +16,7 @@
 	<div class="tab active" data-group="actions" data-tab="melee">
 		{{#each actions.melee}}
 			<label>
-				{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+				{{>systems/wfrp3e/templates/partials/character-generator-action-card.hbs action=this}}
 				<input name="action" value="{{this._id}}" type="checkbox" />
 			</label>
 		{{/each}}
@@ -25,7 +25,7 @@
 	<div class="tab" data-group="actions" data-tab="ranged">
 		{{#each actions.ranged}}
 			<label>
-				{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+				{{>systems/wfrp3e/templates/partials/character-generator-action-card.hbs action=this}}
 				<input name="action" value="{{this._id}}" type="checkbox" />
 			</label>
 		{{/each}}
@@ -34,7 +34,7 @@
 	<div class="tab" data-group="actions" data-tab="support">
 		{{#each actions.support}}
 			<label>
-				{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+				{{>systems/wfrp3e/templates/partials/character-generator-action-card.hbs action=this}}
 				<input name="action" value="{{this._id}}" type="checkbox" />
 			</label>
 		{{/each}}
@@ -44,7 +44,7 @@
 		<div class="tab" data-group="actions" data-tab="blessing">
 			{{#each actions.blessing}}
 				<label>
-					{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+					{{>systems/wfrp3e/templates/partials/character-generator-action-card.hbs action=this}}
 					<input name="action" value="{{this._id}}" type="checkbox" />
 				</label>
 			{{/each}}
@@ -55,7 +55,7 @@
 		<div class="tab" data-group="actions" data-tab="spell">
 			{{#each actions.spell}}
 				<label>
-					{{>systems/wfrp3e/templates/applications/partials/character-generator-action-card.hbs action=this}}
+					{{>systems/wfrp3e/templates/partials/character-generator-action-card.hbs action=this}}
 					<input name="action" value="{{this._id}}" type="checkbox" />
 				</label>
 			{{/each}}
