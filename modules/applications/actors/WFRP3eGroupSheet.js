@@ -87,7 +87,7 @@ export default class WFRP3eGroupSheet extends ActorSheet
 	{
 		const segmentContainer = $(event.currentTarget).siblings(".ability-track-editor-segment-container");
 		const newSegment = segmentContainer.append(
-			await renderTemplate("systems/wfrp3e/templates/applications/partials/ability-track-editor-segment.hbs", {
+			await renderTemplate("systems/wfrp3e/templates/partials/ability-track-editor-segment.hbs", {
 				value: {
 					content: segmentContainer.children().length,
 					trigger: false

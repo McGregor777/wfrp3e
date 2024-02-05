@@ -38,7 +38,7 @@
 
 						<div class="ability-track-editor-segment-container">
 							{{#each actor.system.specialAbilities.0.values}}
-								{{>systems/wfrp3e/templates/applications/partials/ability-track-editor-segment.hbs
+								{{>systems/wfrp3e/templates/partials/ability-track-editor-segment.hbs
 										value=this
 										index=@index
 										specialAbilityIndex=0}}
@@ -146,7 +146,7 @@
 
 						<div class="ability-track-editor-segment-container">
 							{{#each actor.system.specialAbilities.1.values}}
-								{{>systems/wfrp3e/templates/applications/partials/ability-track-editor-segment.hbs
+								{{>systems/wfrp3e/templates/partials/ability-track-editor-segment.hbs
 										value=this
 										index=@index
 										specialAbilityIndex=1}}
@@ -181,18 +181,7 @@
 					{{#if (lookup @root.items.talents ty)}}
 						<div class="talent-container tab {{ty}} item-container" data-group="talents" data-tab="{{ty}}">
 							{{#each (lookup @root.items.talents ty) as |talent ta|}}
-								<div>
-									{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-
-									<select class="sheet-form-select item-input talent-card-socket-select"
-									        data-item-id="{{talent._id}}"
-									        data-path="system.talentSocket">
-										{{selectOptions
-												(lookup @root.talentSocketsByType talent.system.type)
-												selected=talent.system.talentSocket
-												blank=(localize "TALENT.NoSocket")}}
-									</select>
-								</div>
+                                {{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 							{{/each}}
 						</div>
 					{{/if}}
