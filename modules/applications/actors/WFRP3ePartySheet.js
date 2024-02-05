@@ -16,7 +16,7 @@ export default class WFRP3ePartySheet extends ActorSheet
 	{
 		const data = super.getData();
 
-		data.talentTypes = CONFIG.WFRP3e.talentTypes;
+		data.talentTypes = Object.assign(CONFIG.WFRP3e.talentTypes, {any: "TALENT.TYPE.Any"});
 
 		console.log(data);
 
@@ -77,10 +77,11 @@ export default class WFRP3ePartySheet extends ActorSheet
 	_onTensionMeterMinusClick(event)
 	{
 		const newMaximumTensionValue = this.actor.system.tension.maximum - 1;
-		const tension = {
-			maximum: newMaximumTensionValue,
-			events: this.actor.system.tension.events
-		};
+		const tension = this.actor.system.tension;
+
+		tension.maximum--;
+		if(tension.value > tension.maximum)
+			tension.value = tension.maximum;
 
 		tension.events.forEach((event) => {
 			if(event.threshold >= this.actor.system.tension.maximum)
@@ -111,8 +112,8 @@ export default class WFRP3ePartySheet extends ActorSheet
 		const actorName = game.actors.get(actorId).name;
 
 		new Dialog({
-			title: game.i18n.localize("APPLICATION.TITLE.MemberRemovalConfirmation"),
-			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.MemberRemovalConfirmation", {actor: actorName}) + "</p>",
+			title: game.i18n.localize("APPLICATION.TITLE.MemberRemoval"),
+			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.MemberRemoval", {actor: actorName}) + "</p>",
 			buttons: {
 				confirm: {
 					icon: '<span class="fa fa-check"></span>',

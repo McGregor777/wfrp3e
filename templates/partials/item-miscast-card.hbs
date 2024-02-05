@@ -6,7 +6,9 @@
 		<div class="miscast-card-description">{{{miscast.system.description}}}</div>
 
 		{{#>if @root.document.isOwner}}
-			<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItemConfirmation'}}"><span class="fas fa-trash"></span></a>
+			<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
+				<span class="fas fa-trash"></span>
+			</a>
 		{{/if}}
 	</div>
 </div>

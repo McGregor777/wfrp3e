@@ -1,39 +1,59 @@
-<tr class="item weapon-row" data-item-id="{{weapon._id}}">
-	<td class="left-aligned">
-		<a class="item-name-link">{{weapon.name}}</a>
-	</td>
+<div class="item weapon row" data-item-id="{{weapon._id}}">
+	<div class="content">
+		<a class="weapon-name item-name-link">{{weapon.name}}</a>
 
-	<td class="shrinked">
-		<span class="weapon-row-damage-rating">{{weapon.system.damageRating}}</span>
-	</td>
+		<hr />
 
-	<td class="shrinked">
-		<span class="weapon-row-critical-rating">{{weapon.system.criticalRating}}</span>
-	</td>
+		<span class="weapon-damage-rating">{{weapon.system.damageRating}}</span>
 
-	<td class="center-aligned">
-		<span class="weapon-row-range">{{localize (lookup @root.weaponRanges weapon.system.range)}}</span>
-	</td>
+		<hr />
 
-	<td class="center-aligned">
-		<span class="weapon-row-qualities">
+		<span class="weapon-critical-rating">{{weapon.system.criticalRating}}</span>
+
+		<hr />
+
+		<span class="weapon-range">{{localize (lookup @root.weaponRanges weapon.system.range)}}</span>
+
+		<hr />
+
+		<span class="weapon-qualities">
 			{{#each weapon.system.qualities}}
-				{{localize (lookup @root.weaponQualities this.name) "name"}}{{#unless @last}}, {{/unless}}
+				{{localize (lookup @root.weaponQualities this.name) "name"}}{{#unless @last}}, {{else}}{{#if ../weapon.system.special}}, {{/if}}{{/unless}}
 			{{/each}}
+
+			{{#if weapon.system.special}}
+				{{localize "WEAPON.QUALITY.Special"}}
+			{{/if}}
 		</span>
-	</td>
 
-	<td class="center-aligned">
-		<span class="weapon-row-group">{{localize (lookup (lookup @root.weaponGroups weapon.system.group) "name")}}</span>
-	</td>
+		<hr />
 
-	<td class="shrinked">
-		<span class="weapon-row-encumbrance">{{weapon.system.encumbrance}}</span>
-	</td>
+		<span class="weapon-group">{{localize (lookup (lookup @root.weaponGroups weapon.system.group) "name")}}</span>
 
-	{{#>if @root.document.isOwner}}
-		<td class="shrinked">
-			<a class="item-delete-link" title="{{localize 'Delete Item'}}"><span class="fas fa-trash"></span></a>
-		</td>
-	{{/if}}
-</tr>
+		<hr />
+
+		<span class="encumbrance">{{weapon.system.encumbrance}}</span>
+
+		<hr />
+
+		<div class="buttons">
+			<a class="item-roll-link" title="{{localize 'APPLICATION.BUTTON.RollItem'}}">
+				<span class="fas fa-dice-d20"></span>
+			</a>
+
+			<a class="item-expand-link" title="{{localize 'APPLICATION.BUTTON.Expand'}}">
+				<span class="fas fa-chevron-down"></span>
+			</a>
+
+			{{#>if @root.document.isOwner}}
+				<a class="item-edit-link" title="{{localize 'APPLICATION.BUTTON.EditItem'}}">
+					<span class="fas fa-pen-to-square"></span>
+				</a>
+
+				<a class="item-delete-link" title="{{localize 'APPLICATION.BUTTON.DeleteItem'}}">
+					<span class="fas fa-trash"></span>
+				</a>
+			{{/if}}
+		</div>
+	</div>
+</div>

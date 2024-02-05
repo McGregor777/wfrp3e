@@ -8,13 +8,17 @@
 @import "components/condition_card";
 @import "components/creature_sheet";
 @import "components/disease_card";
+@import "components/group_sheet";
 @import "components/insanity_card";
+@import "components/trapping_sheet";
 @import "components/miscast_card";
 @import "components/mutation_card";
 @import "components/party_sheet";
 @import "components/roll_message";
+@import "components/sheet";
 @import "components/talent_card";
 @import "components/typography";
+@import "components/weapon_sheet";
 @import "components/wound_card";
 
 body {
@@ -146,27 +150,8 @@ th {
 	background-color: red;
 }
 
-.sheet {
-	& .editor-content {
-		margin: 0 0.5rem;
-	}
-}
-
 .special-die {
 	border: none;
-}
-
-.tab-link.active {
-	color: white;
-	text-shadow:
-		-1px -1px 0 black,
-		-1px 0 0 black,
-		0 -1px 0 black,
-		-1px 1px 0 black,
-		1px -1px 0 black,
-		0 1px 0 black,
-		1px 0 0 black,
-		1px 1px 0 black;
 }
 
 .wfrp3e-font {

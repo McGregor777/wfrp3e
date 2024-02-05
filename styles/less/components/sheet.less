@@ -1,0 +1,42 @@
+.sheet {
+	& nav.primary-tabs {
+		font: var(--font-size-18) var(--font-primary);
+		font-variant-caps: small-caps;
+		font-weight: bold;
+	}
+
+	& section > nav {
+		border-top: none !important;
+	}
+
+	& .editor-content {
+		margin: 0 0.5rem;
+	}
+
+	& .form-div {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+
+		& > * {
+			flex: 1 1 auto;
+		}
+
+		& input[type=number] {
+			width: 2rem;
+		}
+	}
+
+	& .tab-link.active {
+		color: white;
+		text-shadow:
+				-1px -1px 0 black,
+				-1px 0 0 black,
+				0 -1px 0 black,
+				-1px 1px 0 black,
+				1px -1px 0 black,
+				0 1px 0 black,
+				1px 0 0 black,
+				1px 1px 0 black;
+	}
+}

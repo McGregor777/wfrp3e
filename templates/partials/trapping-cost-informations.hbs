@@ -1,0 +1,59 @@
+<div class="trapping-cost">
+	{{localize 'TRAPPING.Cost'}}
+
+	<div class="form-div">
+		<label class="brass">
+			<span>{{localize "MONEY.Brass"}}: </span>
+
+			<input name="system.cost.brass"
+			       value="{{item.system.cost.brass}}"
+			       placeholder="{{localize 'MONEY.Brass'}}"
+			       type="number" />
+
+			<span>{{localize "MONEY.ABBREVIATION.BrassCoins"}}</span>
+		</label>
+
+		<label class="silver">
+			<span>{{localize "MONEY.Silver"}}: </span>
+
+			<input name="system.cost.silver"
+			       value="{{item.system.cost.silver}}"
+			       type="number"
+			       placeholder="{{localize 'MONEY.Silver'}}" />
+
+			<span>{{localize "MONEY.ABBREVIATION.SilverShillings"}}</span>
+		</label>
+
+		<label class="gold">
+			<span>{{localize "MONEY.Gold"}}: </span>
+
+			<input name="system.cost.gold"
+			       value="{{item.system.cost.gold}}"
+			       type="number"
+			       placeholder="{{localize 'MONEY.Gold'}}" />
+
+			<span>{{localize "MONEY.ABBREVIATION.GoldCrowns"}}</span>
+		</label>
+	</div>
+</div>
+
+<hr />
+
+<div class="form-div">
+	<label>
+		{{localize 'TRAPPING.Encumbrance'}}:
+
+		<input name="system.encumbrance"
+		       value="{{item.system.encumbrance}}"
+		       type="number"
+		       placeholder="{{localize 'TRAPPING.Enc'}}" />
+	</label>
+
+	<label>
+		{{localize 'TRAPPING.Rarity'}}:
+
+		<select name="system.rarity">
+			{{selectOptions rarities selected=item.system.rarity localize=true}}
+		</select>
+	</label>
+</div>

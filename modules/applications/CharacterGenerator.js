@@ -8,7 +8,7 @@ export default class CharacterGenerator extends FormApplication
 	 */
 	constructor(object = {})
 	{
-		super();
+		super(object);
 
 		this.object = this.object instanceof WFRP3eActor ? object : new WFRP3eActor({
 			name: "New Character",
@@ -20,7 +20,7 @@ export default class CharacterGenerator extends FormApplication
 	/** @inheritDoc */
 	get title()
 	{
-		return game.i18n.localize("CHARACTERGENERATOR.TITLE");
+		return game.i18n.localize("CHARACTERGENERATOR.Title");
 	}
 
 	/** @inheritDoc */

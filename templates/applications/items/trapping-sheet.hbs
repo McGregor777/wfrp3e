@@ -1,32 +1,28 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
-		<img class="actor-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-		<h1><input class="name-input" name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
+		<img class="actor-img" src="{{item.img}}" title="{{item.name}}" alt="{{item.name}}" data-edit="img" />
+
+		<h1>
+			<input class="name-input" name="name" value="{{item.name}}" type="text" placeholder="Name" />
+		</h1>
 	</header>
 
-	<section class="sheet-body">
-		<div class="sheet-form-div">
-			<span class="sheet-form-label">{{localize 'TRAPPING.Cost'}}</span>
-			<span class="sheet-form-label">{{localize 'TRAPPING.MONEY.Brass'}}</span>
-			<input class="sheet-form-input" name="system.cost.brass" type="number" value="{{item.system.cost.brass}}" placeholder="{{localize 'TRAPPING.Brass'}}" data-dtype="Number" />
-			<span class="sheet-form-label">{{localize 'TRAPPING.MONEY.Silver'}}</span>
-			<input class="sheet-form-input" name="system.cost.silver" type="number" value="{{item.system.cost.silver}}" placeholder="{{localize 'TRAPPING.Silver'}}" data-dtype="Number" />
-			<span class="sheet-form-label">{{localize 'TRAPPING.MONEY.Gold'}}</span>
-			<input class="sheet-form-input" name="system.cost.gold" type="number" value="{{item.system.cost.gold}}" placeholder="{{localize 'TRAPPING.Gold'}}" data-dtype="Number" />
-		</div>
+	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
+		<a class="tab-link main-tab-link" data-tab="main">{{localize "Main"}}</a>
+		<a class="tab-link details-tab-link" data-tab="details">{{localize "Details"}}</a>
+	</nav>
 
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'TRAPPING.Encumbrance'}}</label>
-			<input class="sheet-form-input" name="system.encumbrance" type="number" value="{{item.system.encumbrance}}" placeholder="{{localize 'TRAPPING.Enc'}}" data-dtype="Number" />
-		</div>
+	<div class="sheet-body">
+		<section class="tab main-tab" data-group="primary" data-tab="main">
+			{{>systems/wfrp3e/templates/partials/trapping-cost-informations.hbs}}
+		</section>
 
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'TRAPPING.Rarity'}}</label>
-			<select class="sheet-form-select" name="system.rarity" data-dtype="String">
-				{{selectOptions rarities selected=item.system.rarity localize=true}}
-			</select>
-		</div>
+		<section class="tab main-tab" data-group="primary" data-tab="details">
+			{{localize "TRAPPING.Description"}}
 
-		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
-	</section>
+			<label>
+				{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
+			</label>
+		</section>
+	</div>
 </form>

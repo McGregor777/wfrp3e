@@ -6,8 +6,11 @@ export default class WFRP3eWeaponSheet extends ItemSheet
 		{
 			template: "systems/wfrp3e/templates/applications/items/weapon-sheet.hbs",
 			//width: 530,
-			//height: 340,
-			classes: ["wfrp3e", "sheet", "item", "weapon", "weapon-item-sheet"]
+			//height: 560,
+			classes: ["wfrp3e", "sheet", "item", "trapping", "weapon"],
+			tabs: [
+				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"},
+			]
 		});
 	}
 

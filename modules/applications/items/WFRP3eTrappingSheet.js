@@ -6,8 +6,11 @@ export default class WFRP3eTrappingSheet extends ItemSheet
 		{
 			template: "systems/wfrp3e/templates/applications/items/trapping-sheet.hbs",
 			//width: 530,
-			//height: 340,
-			classes: ["wfrp3e", "sheet", "item", "trapping", "trapping-item-sheet"]
+			height: 400,
+			classes: ["wfrp3e", "sheet", "item", "trapping"],
+			tabs: [
+				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"},
+			]
 		});
 	}
 

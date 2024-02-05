@@ -16,7 +16,7 @@
 	<input class="creature-sheet-category" name="system.category" type="text" value="{{actor.system.category}}" placeholder="{{localize 'CREATURE.Category'}}" />
 
 	<nav class="creature-sheet-tabs sheet-tabs tabs" data-group="primary">
-		<a class="tab-link main-tab-link" data-tab="main">{{localize 'CREATURE.Main'}}</a>
+		<a class="tab-link main-tab-link" data-tab="main">{{localize 'Main'}}</a>
 		<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CREATURE.Actions'}}</a>
 		<a class="tab-link details-tab-link" data-tab="details">{{localize 'CREATURE.Details'}}</a>
 	</nav>
@@ -32,18 +32,16 @@
 							</span>
 
 							<input class="characteristic-value-input"
-								   name="system.characteristics.{{char}}.value"
-								   type="number"
-								   value="{{characteristic.value}}"
-								   placeholder="{{localize (lookup (lookup @root.characteristics char) 'abbreviation')}}"
-								   data-dtype="Number" />
+							       name="system.characteristics.{{char}}.value"
+							       value="{{characteristic.value}}"
+							       type="number"
+							       placeholder="{{localize (lookup (lookup @root.characteristics char) 'abbreviation')}}" />
 
 							<input class="characteristic-fortune-input"
-								   name="system.characteristics.{{char}}.fortune"
-								   type="number"
-								   value="{{characteristic.fortune}}"
-								   placeholder="{{localize 'CHARACTER.Fortune'}}"
-								   data-dtype="Number" />
+							       name="system.characteristics.{{char}}.fortune"
+							       type="number"
+							       value="{{characteristic.fortune}}"
+							       placeholder="{{localize 'CHARACTER.Fortune'}}" />
 						</div>
 					{{/each}}
 				</div>
@@ -55,44 +53,41 @@
 				<div class="creature-sheet-ratings">
 					<div class="damage-rating">
 						<img class="damage-rating-icon"
-							 src="systems/wfrp3e/assets/images/damage-rating.webp"
-							 title="{{localize 'CREATURE.DamageRating'}}"
-							 alt="{{localize 'CREATURE.ABBREVIATION.DamageRating'}}"/>
+						     src="systems/wfrp3e/assets/images/damage-rating.webp"
+						     title="{{localize 'CREATURE.DamageRating'}}"
+						     alt="{{localize 'CREATURE.ABBREVIATION.DamageRating'}}"/>
 
 						<input class="damage-rating-input"
-							   name="system.damageRating"
-							   type="number"
-							   value="{{actor.system.damageRating}}"
-							   placeholder="{{localize 'CREATURE.ABBREVIATION.DamageRating'}}"
-							   data-dtype="Number" />
+						       name="system.damageRating"
+						       value="{{actor.system.damageRating}}"
+						       type="number"
+						       placeholder="{{localize 'CREATURE.ABBREVIATION.DamageRating'}}" />
 					</div>
 
 					<div class="soak-value">
 						<img class="soak-value-icon"
-							 src="systems/wfrp3e/assets/images/soak-value.webp"
-							 title="{{localize 'CREATURE.SoakValue'}}"
-							 alt="{{localize 'CREATURE.ABBREVIATION.SoakValue'}}"/>
+						     src="systems/wfrp3e/assets/images/soak-value.webp"
+						     title="{{localize 'CREATURE.SoakValue'}}"
+						     alt="{{localize 'CREATURE.ABBREVIATION.SoakValue'}}"/>
 
 						<input class="soak-value-input"
-							   name="system.soakValue"
-							   type="number"
-							   value="{{actor.system.soakValue}}"
-							   placeholder="{{localize 'CREATURE.ABBREVIATION.SoakValue'}}"
-							   data-dtype="Number" />
+						       name="system.soakValue"
+						       value="{{actor.system.soakValue}}"
+						       type="number"
+						       placeholder="{{localize 'CREATURE.ABBREVIATION.SoakValue'}}" />
 					</div>
 
 					<div class="defence-value">
 						<img class="defence-value-icon"
-							 src="systems/wfrp3e/assets/images/defence-value.webp"
-							 title="{{localize 'CREATURE.DefenceValue'}}"
-							 alt="{{localize 'CREATURE.ABBREVIATION.DefenceValue'}}"/>
+						     src="systems/wfrp3e/assets/images/defence-value.webp"
+						     title="{{localize 'CREATURE.DefenceValue'}}"
+						     alt="{{localize 'CREATURE.ABBREVIATION.DefenceValue'}}"/>
 
 						<input class="defence-value-input"
-							   name="system.defenceValue"
-							   type="number"
-							   value="{{actor.system.defenceValue}}"
-							   placeholder="{{localize 'CREATURE.ABBREVIATION.DefenceValue'}}"
-							   data-dtype="Number" />
+						       name="system.defenceValue"
+						       value="{{actor.system.defenceValue}}"
+						       type="number"
+						       placeholder="{{localize 'CREATURE.ABBREVIATION.DefenceValue'}}" />
 					</div>
 				</div>
 			</div>
@@ -122,18 +117,18 @@
 
 						<div class="attribute-input-container">
 							<input class="attribute-budget-input"
-								   name="system.attributes.{{attr}}.current"
-								   type="number"
-								   value="{{attribute.current}}"
-								   placeholder="{{localize 'CREATURE.Current'}}"
-								   data-dtype="Number" />
+							       name="system.attributes.{{attr}}.current"
+							       value="{{attribute.current}}"
+							       type="number"
+							       placeholder="{{localize 'CREATURE.Current'}}"  />
+
 							<span>/</span>
+
 							<input class="attribute-budget-input"
-								   name="system.attributes.{{attr}}.budget"
-								   type="number"
-								   value="{{attribute.budget}}"
-								   placeholder="{{localize (lookup (lookup @root.attributes attr) 'abbreviation')}}"
-								   data-dtype="Number" />
+							       name="system.attributes.{{attr}}.budget"
+							       value="{{attribute.budget}}"
+							       type="number"
+							       placeholder="{{localize (lookup (lookup @root.attributes attr) 'abbreviation')}}"  />
 						</div>
 					</div>
 				{{/each}}

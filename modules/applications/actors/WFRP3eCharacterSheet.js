@@ -16,7 +16,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
 			dragDrop: [{dragSelector: ".item", dropSelector: null}],
 			tabs: [
-				{group: "primary", navSelector: ".character-sheet-primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
+				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
 				{group: "careers", navSelector: ".character-sheet-career-tabs", contentSelector: ".character-sheet-careers"},
 				{group: "talents", navSelector: ".character-sheet-talent-tabs", contentSelector: ".character-sheet-talents", initial: "focus"},
 				{group: "actions", navSelector: ".character-sheet-action-tabs", contentSelector: ".character-sheet-actions", initial: "melee"}
@@ -38,6 +38,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		data.diseaseSymptoms = CONFIG.WFRP3e.disease.symptoms;
 		data.stances = CONFIG.WFRP3e.stances;
 		data.symbols = CONFIG.WFRP3e.symbols;
+		data.talentTypes = CONFIG.WFRP3e.talentTypes;
 		data.weaponGroups = CONFIG.WFRP3e.weapon.groups;
 		data.weaponQualities = CONFIG.WFRP3e.weapon.qualities;
 		data.weaponRanges = CONFIG.WFRP3e.weapon.ranges;
@@ -53,7 +54,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 				buttons: {
 					confirm: {
 						icon: '<span class="fa fa-check"></span>',
-						label: game.i18n.localize("APPLICATION.BUTTON.AddBasicSkills"),
+						label: game.i18n.localize("APPLICATION.BUTTON.BasicSkillsAdding"),
 						callback: async dlg => {
 							const basicSkills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill", system: {advanced: false}});
 
@@ -85,14 +86,27 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			.click(this._onImpairmentTokenLeftClick.bind(this))
 			.contextmenu(this._onImpairmentTokenRightClick.bind(this));
 
-		html.find(".flip-link").mousedown(this._onFlipClick.bind(this));
-		html.find(".quantity-link").mousedown(this._onQuantityClick.bind(this));
+		html.find(".flip-link").click(this._onFlipClick.bind(this));
+
+		html.find(".quantity-link")
+			.click(this._onQuantityLeftClick.bind(this))
+			.contextmenu(this._onQuantityRightClick.bind(this));
+
+		html.find(".item-roll-link").click(this._onItemRoll.bind(this));
+		html.find(".item-expand-link").click(this._onItemExpandClickClick.bind(this));
 		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
 		html.find(".item-delete-link").click(this._onItemDelete.bind(this));
-		html.find(".item-name-link").click(this._onItemLeftClick.bind(this));
-		html.find(".item-name-link").contextmenu(this._onItemRightClick.bind(this));
+
+		html.find(".item-name-link")
+			.click(this._onItemLeftClick.bind(this))
+			.contextmenu(this._onItemRightClick.bind(this));
+
 		html.find(".item-input").change(this._onItemInput.bind(this));
-		html.find(".recharge-token").mousedown(this._onRechargeTokenClick.bind(this));
+
+		html.find(".recharge-token")
+			.click(this._onRechargeTokenLeftClick.bind(this))
+			.contextmenu(this._onRechargeTokenRightClick.bind(this));
+
 		html.find(".skill-training-level-input").change(this._onSkillTrainingLevelChange.bind(this));
 		html.find(".stance-meter-segment").click(this._onStanceMeterSegmentClick.bind(this));
 	}
@@ -150,16 +164,23 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		let talentSocketsByType = {};
 
-		for(const talentType of Object.keys(CONFIG.WFRP3e.talentTypes)) {
+		for(const talentType of Object.keys(Object.assign(CONFIG.WFRP3e.talentTypes, {any: "TALENT.TYPE.Any"})))
 			talentSocketsByType[talentType] = {};
-		}
 
 		if(this.actor.system.currentCareer) {
 			this.actor.system.currentCareer.system.talentSockets.forEach((talentSocket, index) => {
+				// Find a potential Talent that would be socketed in that Talent Socket.
 				const talent = this.actor.itemTypes.talent.find(talent => talent.system.talentSocket === "career_" + this.actor.system.currentCareer._id + "_" + index);
 
-				talentSocketsByType[talentSocket]["career_" + this.actor.system.currentCareer._id + "_" + index] = this.actor.system.currentCareer.name +
-					(talent ? " (" + talent.name + ")" : " (" + game.i18n.localize("TALENT.FreeSocket") + ")");
+				talentSocketsByType[talentSocket]["career_" + this.actor.system.currentCareer._id + "_" + index] =
+					this.actor.system.currentCareer.name + (talent
+						? " - " + game.i18n.format("TALENT.TakenSocket", {
+								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`),
+								talent: talent.name
+							})
+						: " - " + game.i18n.format("TALENT.AvailableSocket", {
+								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`)
+							}));
 			});
 		}
 
@@ -168,16 +189,27 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 				let talent = null;
 
 				for(const member of this.actor.system.currentParty.memberActors) {
+					// Find a potential Talent that would be socketed in that Talent Socket.
 					talent = member.itemTypes.talent.find(talent => talent.system.talentSocket === "party_" + this.actor.system.currentParty._id + "_" + index);
 
 					if(talent)
 						break;
 				}
 
-				talentSocketsByType[talentSocket]["party_" + this.actor.system.currentParty._id + "_" + index] = this.actor.system.currentParty.name +
-					(talent ? " (" + (talent.actor ? talent.actor.name + " - " : "") + talent.name + ")" : " (" + game.i18n.localize("TALENT.FreeSocket") + ")");
+				talentSocketsByType[talentSocket]["party_" + this.actor.system.currentParty._id + "_" + index] =
+					this.actor.system.currentParty.name + (talent
+						? " - " + game.i18n.format("TALENT.TakenSocket", {
+								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`),
+								talent: talent.name
+							})
+						: " - " + game.i18n.format("TALENT.AvailableSocket", {
+								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`)
+							}));
 			});
 		}
+
+		for(const talentType of Object.keys(CONFIG.WFRP3e.talentTypes))
+			Object.assign(talentSocketsByType[talentType], talentSocketsByType["any"]);
 
 		return talentSocketsByType;
 	}
@@ -187,9 +219,9 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_getItemId(event)
+	_getItemById(event)
 	{
-		return $(event.currentTarget).parents(".item").attr("data-item-id");
+		return this.actor.items.get(event.currentTarget.dataset.itemId ?? $(event.currentTarget).parents(".item").data("itemId"));
 	}
 
 	/**
@@ -199,7 +231,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	_onCurrentCareerInput(event)
 	{
-		this.actor.items.get(this._getItemId(event)).update({"system.current": true});
+		this._getItemById(event).update({"system.current": true});
 	}
 
 	/**
@@ -240,50 +272,58 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Trapping's quantity button.
+	 * Performs follow-up operations after left-clicks on a Trapping's quantity button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onQuantityClick(event)
+	_onQuantityLeftClick(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
-		let quantity = clickedItem.data.data.quantity;
+		const item = this._getItemById(event);
 
-		switch(event.button) {
-			// If left click...
-			case 0:
-				// If ctrl key is pushed, add 10
-				if(event.ctrlKey)
-					quantity += 10;
-				// Else, add 1
-				else
-					quantity++;
-				break;
-			// If right click...
-			case 2:
-				// If ctrl key is pushed, remove 10
-				if(event.ctrlKey)
-					quantity -= 10;
-				// Else, remove 1
-				else
-					quantity--;
-				// Floor quantity to 0
-				if(quantity < 0)
-					quantity = 0;
-				break;
-		}
-
-		clickedItem.update({"system.quantity": quantity});
+		item.update({"system.quantity": item.system.quantity + (event.ctrlKey ? 10 : 1)});
 	}
 
 	/**
+	 * Performs follow-up operations after right-clicks on a Trapping's quantity button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onQuantityRightClick(event)
+	{
+		const item = this._getItemById(event);
+		let quantity = item.system.quantity - (event.ctrlKey ? 10 : 1);
+
+		// Floor quantity to 0
+		if(quantity < 0)
+			quantity = 0;
+
+		item.update({"system.quantity": quantity});
+	}
+
+	/**
+	 * Performs follow-up operations after clicks on an Item roll button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onItemRoll(event)
+	{
+		const options = {};
+		const face = $(event.currentTarget).parents(".face").data("face");
+
+		if(face)
+			options.face = face;
+
+		this._getItemById(event).useItem(options);
+	}
+
+	/**²
 	 * Performs follow-up operations after clicks on an Item edit button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
 	_onItemEdit(event)
 	{
-		return this.actor.items.get(this._getItemId(event)).sheet.render(true);
+		return this._getItemById(event).sheet.render(true);
 	}
 
 	/**
@@ -293,11 +333,11 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	_onItemDelete(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
+		const clickedItem = this._getItemById(event);
 
 		new Dialog({
-			title: game.i18n.localize("APPLICATION.TITLE.DeleteItemConfirmation"),
-			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItemConfirmation", {item: clickedItem.name}) + "</p>",
+			title: game.i18n.localize("APPLICATION.TITLE.DeleteItem"),
+			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: clickedItem.name}) + "</p>",
 			buttons: {
 				confirm: {
 					icon: '<span class="fa fa-check"></span>',
@@ -329,7 +369,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		if(face)
 			options.face = face;
 
-		this.actor.items.get(this._getItemId(event)).useItem(options);
+		this._getItemById(event).useItem(options);
 	}
 
 	/**
@@ -339,7 +379,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	async _onItemRightClick(event)
 	{
-		this.actor.items.get(this._getItemId(event)).sheet.render(true);
+		this._getItemById(event).sheet.render(true);
 	}
 
 	/**
@@ -349,41 +389,82 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	_onItemInput(event)
 	{
-		const item = this.actor.items.get(this._getItemId(event));
+		event.preventDefault();
+		event.stopPropagation();
+
 		const property = event.currentTarget.dataset.path;
 		let value = event.target.value;
 
 		if(value === "on")
 			value = true;
 
-		item.update({[property]: value});
+		this._getItemById(event).update({[property]: value});
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Card's recharge token button.
+	 * Performs follow-up operations after left-clicks on a Card's recharge token button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onRechargeTokenClick(event)
+	_onRechargeTokenLeftClick(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
-		let rechargeTokens = clickedItem.system.rechargeTokens;
+		const item = this._getItemById(event);
 
-		switch(event.button) {
-			// If left click...
-			case 0:
-				rechargeTokens++;
-				break;
-			// If right click...
-			case 2:
-				rechargeTokens--;
-				// Floor recharge tokens to 0
-				if(rechargeTokens < 0)
-					rechargeTokens = 0;
-				break;
+		item.update({"system.rechargeTokens": item.system.rechargeTokens + 1});
+	}
+
+	/**
+	 * Performs follow-up operations after right-clicks on a Card's recharge token button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onRechargeTokenRightClick(event)
+	{
+		const item = this._getItemById(event);
+		let rechargeTokens = item.system.rechargeTokens - 1;
+
+		// Floor recharge tokens to 0
+		if(rechargeTokens < 0)
+			rechargeTokens = 0;
+
+		item.update({"system.rechargeTokens": rechargeTokens});
+	}
+
+	/**
+	 * Performs follow-up operations after clicks on an item's expand button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onItemExpandClickClick(event)
+	{
+		event.preventDefault();
+
+		const itemElement = $(event.currentTarget).parents(".item");
+		const item = this._getItemById(event);
+
+		if(itemElement.hasClass("expanded")) {
+			// Toggle expansion for an item
+			const details = itemElement.children(".details");
+
+			details.slideUp(200, () => details.remove());
+
+			$(event.currentTarget).find(".fas").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+		}
+		else {
+			// Add a div with the item's details below the row.
+			const detailsElement = $(`<div class="details">${item.system.description}</div>`);
+
+			if(item.type === "weapon" && item.system.special)
+				detailsElement.append(item.system.special);
+
+			itemElement.append(detailsElement.hide());
+			detailsElement.slideDown(200);
+
+			$(event.currentTarget).find(".fas").removeClass("fa-chevron-down").addClass("fa-chevron-up");
+
 		}
 
-		clickedItem.update({"system.rechargeTokens": rechargeTokens});
+		itemElement.toggleClass("expanded");
 	}
 
 	/**

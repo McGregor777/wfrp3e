@@ -1,23 +1,33 @@
-<tr class="item armour-row" data-item-id="{{armour._id}}">
-	<td class="left-aligned">
-		<a class="item-name-link">{{armour.name}}</a>
-	</td>
+<div class="item armour row" data-item-id="{{armour._id}}">
+	<div class="content">
+		<a class="armour-name item-name-link">{{armour.name}}</a>
 
-	<td class="center-aligned">
-		<span class="armour-row-defence-value">{{armour.system.defenceValue}}</span>
-	</td>
+		<span class="armour-defence-value">{{armour.system.defenceValue}}</span>
 
-	<td class="center-aligned">
-		<span class="armour-row-soak-value">{{armour.system.soakValue}}</span>
-	</td>
+		<hr />
 
-	<td class="center-aligned">
-		<span class="armour-row-encumbrance">{{armour.system.encumbrance}}</span>
-	</td>
+		<span class="armour-soak-value">{{armour.system.soakValue}}</span>
 
-	{{#>if @root.document.isOwner}}
-	<td class="shrinked">
-		<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItemConfirmation'}}"><span class="fas fa-trash"></span></a>
-	</td>
-	{{/if}}
-</tr>
+		<hr />
+
+		<span class="encumbrance">{{armour.system.encumbrance}}</span>
+
+		<hr />
+
+		<div class="buttons">
+			<a class="item-expand-link" title="{{localize 'APPLICATION.BUTTON.Expand'}}">
+				<span class="fas fa-chevron-down"></span>
+			</a>
+			
+			{{#>if @root.document.isOwner}}
+				<a class="item-edit-link" title="{{localize 'APPLICATION.TITLE.EditItem'}}">
+					<span class="fas fa-pen-to-square"></span>
+				</a>
+
+				<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
+					<span class="fas fa-trash"></span>
+				</a>
+			{{/if}}
+		</div>
+	</div>
+</div>

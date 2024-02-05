@@ -4,7 +4,7 @@
 		<h1><input class="name-input" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}" /></h1>
 	</header>
 
-	<nav class="character-sheet-primary-tabs sheet-tabs tabs" data-group="primary">
+	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
 		<a class="tab-link characteristics-tab-link" data-tab="characteristics">{{localize 'CHARACTER.Attributes'}}</a>
 		<a class="tab-link careers-tab-link" data-tab="careers">{{localize 'CHARACTER.Careers'}}</a>
 		<a class="tab-link talents-tab-link" data-tab="talents">{{localize 'CHARACTER.Talents'}}</a>
@@ -157,79 +157,34 @@
 
 		<section class="tab talents-tab" data-group="primary" data-tab="talents">
 			<div class="character-sheet-talent-tabs sheet-tabs" data-group="talents">
-				{{#if items.talents.focus}}
-					<a class="tab-link focus" data-tab="focus">{{localize 'TALENT.TYPE.Focus'}}</a>
-				{{/if}}
-
-				{{#if items.talents.reputation}}
-					<a class="tab-link reputation" data-tab="reputation">{{localize 'TALENT.TYPE.Reputation'}}</a>
-				{{/if}}
-
-				{{#if items.talents.tactic}}
-					<a class="tab-link tactic" data-tab="tactic">{{localize 'TALENT.TYPE.Tactic'}}</a>
-				{{/if}}
-
-				{{#if items.talents.faith}}
-					<a class="tab-link faith" data-tab="faith">{{localize 'TALENT.TYPE.Faith'}}</a>
-				{{/if}}
-
-				{{#if items.talents.order}}
-					<a class="tab-link order" data-tab="order">{{localize 'TALENT.TYPE.Order'}}</a>
-				{{/if}}
-
-				{{#if items.talents.trick}}
-					<a class="tab-link trick" data-tab="trick">{{localize 'TALENT.TYPE.Trick'}}</a>
-				{{/if}}
+				{{#each talentTypes as |type ty|}}
+					{{#if (lookup @root.items.talents ty)}}
+						<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
+					{{/if}}
+				{{/each}}
 			</div>
 
 			<div class="character-sheet-talents">
-				{{#if items.talents.focus}}
-					<div class="talent-container tab focus item-container" data-group="talents" data-tab="focus">
-						{{#each items.talents.focus as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
+				{{#each talentTypes as |type ty|}}
+					{{#if (lookup @root.items.talents ty)}}
+						<div class="talent-container tab {{ty}} item-container" data-group="talents" data-tab="{{ty}}">
+							{{#each (lookup @root.items.talents ty) as |talent ta|}}
+								<div>
+									{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 
-				{{#if items.talents.reputation}}
-					<div class="talent-container tab reputation item-container" data-group="talents" data-tab="reputation">
-						{{#each items.talents.reputation as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.talents.tactic}}
-					<div class="talent-container tab tactic item-container" data-group="talents" data-tab="tactic">
-						{{#each items.talents.tactic as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.talents.faith}}
-					<div class="talent-container tab faith item-container" data-group="talents" data-tab="faith">
-						{{#each items.talents.faith as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.talents.order}}
-					<div class="talent-container tab order item-container" data-group="talents" data-tab="order">
-						{{#each items.talents.order as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
-
-				{{#if items.talents.tricks}}
-					<div class="talent-container tab trick item-container" data-group="talents" data-tab="trick">
-						{{#each items.talents.tricks as |talent ta|}}
-							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
-						{{/each}}
-					</div>
-				{{/if}}
+									<select class="sheet-form-select item-input talent-card-socket-select"
+									        data-item-id="{{talent._id}}"
+									        data-path="system.talentSocket">
+										{{selectOptions
+												(lookup @root.talentSocketsByType talent.system.type)
+												selected=talent.system.talentSocket
+												blank=(localize "TALENT.NoSocket")}}
+									</select>
+								</div>
+							{{/each}}
+						</div>
+					{{/if}}
+				{{/each}}
 			</div>
 		</section>
 
@@ -256,78 +211,130 @@
 		</section>
 
 		<section class="tab trappings-tab" data-group="primary" data-tab="trappings">
-			<table class="weapon-table">
-				<thead>
-					<tr><th colspan="8"><span>{{localize 'CHARACTER.Weapons'}}</span></th></tr>
-					<tr>
-						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
-						<th class="shrinked"><span>{{localize 'WEAPON.ABBREVIATION.DamageRating'}}</span></th>
-						<th class="shrinked"><span>{{localize 'WEAPON.ABBREVIATION.CriticalRating'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'WEAPON.Range'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'WEAPON.Qualities'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'WEAPON.Group'}}</span></th>
-						<th class="shrinked"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
-						<th class="shrinked"></th>
-					</tr>
-				</thead>
-				<tbody>
-					{{#each items.weapons as |weapon wp|}}
-						{{>systems/wfrp3e/templates/partials/item-weapon-row.hbs weapon=weapon}}
-					{{/each}}
-				</tbody>
-			</table>
+			<div class="weapon table">
+				<div class="weapon table-header title">{{localize "CHARACTER.Weapons"}}</div>
 
-			<table class="armour-table">
-				<thead>
-					<tr><th colspan="8"><span>{{localize 'CHARACTER.Armours'}}</span></th></tr>
-					<tr>
-						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'ARMOUR.Defence'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'ARMOUR.Soak'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
-						<th class="shrinked"></th>
-					</tr>
-				</thead>
-				<tbody>
-					{{#each items.armours as |armour arm|}}
-						{{>systems/wfrp3e/templates/partials/item-armour-row.hbs armour=armour}}
-					{{/each}}
-				</tbody>
-			</table>
+				<div class="weapon table-header">
+					<span class="weapon-name">{{localize "TRAPPING.Name"}}</span>
 
-			<table class="trapping-table">
-				<thead>
-					<tr><th colspan="8"><span>{{localize 'CHARACTER.Trappings'}}</span></th></tr>
-					<tr>
-						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
-						<th class="left-aligned"><span>{{localize 'TRAPPING.Description'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Encumbrance'}}</span></th>
-						<th class="shrinked"></th>
-					</tr>
-				</thead>
-				<tbody>
-					{{#each items.trappings as |trapping trp|}}
-						{{>systems/wfrp3e/templates/partials/item-trapping-row.hbs trapping=trapping}}
-					{{/each}}
-				</tbody>
-			</table>
+					<hr />
 
-			<table class="money-table">
-				<thead>
-					<tr><th colspan="8"><span>{{localize 'CHARACTER.Money'}}</span></th></tr>
-					<tr>
-						<th class="left-aligned"><span>{{localize 'TRAPPING.Name'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.Value'}}</span></th>
-						<th class="center-aligned"><span>{{localize 'TRAPPING.ABBREVIATION.Quantity'}}</span></th>
-						<th class="shrinked"></th>
-					</tr>
-				</thead>
-				<tbody>
-					{{#each items.money as |money mo|}}
-						{{>systems/wfrp3e/templates/partials/item-money-row.hbs money=money}}
-					{{/each}}
-				</tbody>
-			</table>
+					<span class="weapon-damage-rating">{{localize "WEAPON.ABBREVIATION.DamageRating"}}</span>
+
+					<hr />
+
+					<span class="weapon-critical-rating">{{localize "WEAPON.ABBREVIATION.CriticalRating"}}</span>
+
+					<hr />
+
+					<span class="weapon-range">{{localize "WEAPON.Range"}}</span>
+
+					<hr />
+
+					<span class="weapon-qualities">{{localize "WEAPON.Qualities"}}</span>
+
+					<hr />
+
+					<span class="weapon-group">{{localize "WEAPON.Group"}}</span>
+
+					<hr />
+
+					<span class="encumbrance">{{localize "TRAPPING.ABBREVIATION.Encumbrance"}}</span>
+
+					<hr />
+
+					<span class="buttons"></span>
+				</div>
+
+				{{#each items.weapons as |weapon wp|}}
+					{{>systems/wfrp3e/templates/partials/item-weapon-row.hbs weapon=weapon}}
+
+					{{#unless @last}}<hr />{{/unless}}
+				{{/each}}
+			</div>
+
+
+			<div class="armour table">
+				<div class="armour table-header title">{{localize "CHARACTER.Armours"}}</div>
+
+				<div class="armour table-header">
+					<span class="armour-name">{{localize "TRAPPING.Name"}}</span>
+
+					<hr />
+
+					<span class="armour-defence-value">{{localize "ARMOUR.Defence"}}</span>
+
+					<hr />
+
+					<span class="armour-soak-value">{{localize "ARMOUR.Soak"}}</span>
+
+					<hr />
+
+					<span class="encumbrance">{{localize "TRAPPING.ABBREVIATION.Encumbrance"}}</span>
+
+					<hr />
+
+					<span class="buttons"></span>
+				</div>
+
+				{{#each items.armours as |armour arm|}}
+					{{>systems/wfrp3e/templates/partials/item-armour-row.hbs armour=armour}}
+
+					{{#unless @last}}<hr />{{/unless}}
+				{{/each}}
+			</div>
+
+			<div class="trapping table">
+				<div class="trapping table-header title">{{localize "CHARACTER.Trappings"}}</div>
+
+				<div class="trapping table-header">
+					<span class="trapping-name">{{localize "TRAPPING.Name"}}</span>
+
+					<hr />
+
+					<span class="encumbrance">{{localize "TRAPPING.ABBREVIATION.Encumbrance"}}</span>
+
+					<hr />
+
+					<span class="buttons"></span>
+				</div>
+
+				{{#each items.trappings as |trapping trp|}}
+					{{>systems/wfrp3e/templates/partials/item-trapping-row.hbs trapping=trapping}}
+
+					{{#unless @last}}<hr />{{/unless}}
+				{{/each}}
+			</div>
+
+			<div class="money table">
+				<div class="money table-header title">{{localize "CHARACTER.Money"}}</div>
+
+				<div class="money table-header">
+					<span class="money-name">{{localize "TRAPPING.Name"}}</span>
+
+					<hr />
+
+					<span class="money-value">{{localize "MONEY.Value"}}</span>
+
+					<hr />
+
+					<span class="quantity">{{localize "TRAPPING.ABBREVIATION.Quantity"}}</span>
+
+					<hr />
+
+					<span class="encumbrance">{{localize "TRAPPING.ABBREVIATION.Encumbrance"}}</span>
+
+					<hr />
+
+					<span class="buttons"></span>
+				</div>
+
+				{{#each items.money as |money mo|}}
+					{{>systems/wfrp3e/templates/partials/item-money-row.hbs money=money}}
+
+					{{#unless @last}}<hr />{{/unless}}
+				{{/each}}
+			</div>
 		</section>
 
 		<section class="tab background-tab" data-group="primary" data-tab="background">

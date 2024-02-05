@@ -51,6 +51,10 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 		html.find(".item-name-link")
 			.click(this._onItemLeftClick.bind(this))
 			.contextmenu(this._onItemRightClick.bind(this));
+
+		html.find(".recharge-token")
+			.click(this._onRechargeTokenLeftClick.bind(this))
+			.contextmenu(this._onRechargeTokenRightClick.bind(this));
 	}
 
 	/**
@@ -103,9 +107,9 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_getItemId(event)
+	_getItemById(event)
 	{
-		return $(event.currentTarget).parents(".item").attr("data-item-id");
+		return this.actor.items.get(event.currentTarget.dataset.itemId ?? $(event.currentTarget).parents(".item").data("itemId"));
 	}
 
 	/**
@@ -129,13 +133,30 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	}
 
 	/**
+	 * Performs follow-up operations after clicks on a sheet's flip button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	async _onFlipClick(event)
+	{
+		event.preventDefault();
+
+		const parent = $(event.currentTarget).parents(".item");
+		const activeFace = parent.find(".face.active");
+		const inactiveFace = parent.find(".face:not(.active)");
+
+		activeFace.removeClass("active");
+		inactiveFace.addClass("active");
+	}
+
+	/**
 	 * Performs follow-up operations after clicks on an Item edit button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
 	_onItemEdit(event)
 	{
-		return this.actor.items.get(this._getItemId(event)).sheet.render(true);
+		return this._getItemById(event).sheet.render(true);
 	}
 
 	/**
@@ -145,17 +166,17 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 */
 	_onItemDelete(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
+		const item = this._getItemById(event);
 
 		new Dialog({
-			title: game.i18n.localize("APPLICATION.TITLE.DeleteItemConfirmation"),
-			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItemConfirmation", {item: clickedItem.name}) + "</p>",
+			title: game.i18n.localize("APPLICATION.TITLE.DeleteItem"),
+			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: item.name}) + "</p>",
 			buttons: {
 				confirm: {
 					icon: '<span class="fa fa-check"></span>',
 					label: game.i18n.localize("Yes"),
 					callback: async dlg => {
-						await this.actor.deleteEmbeddedDocuments("Item", [clickedItem._id]);
+						await this.actor.deleteEmbeddedDocuments("Item", [item._id]);
 						li.slideUp(200, () => this.render(false));
 					}
 				},
@@ -175,14 +196,14 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 */
 	async _onItemLeftClick(event)
 	{
-		const clickedItem = this.actor.items.get(this._getItemId(event));
+		const item = this._getItemById(event);
 		const options = {};
 		const face = $(event.currentTarget).parents(".face").data("face");
 
 		if(face)
 			options.face = face;
 
-		clickedItem.useItem(options);
+		item.useItem(options);
 	}
 
 	/**
@@ -192,23 +213,35 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 */
 	async _onItemRightClick(event)
 	{
-		this.actor.items.get(this._getItemId(event)).sheet.render(true);
+		this._getItemById(event).sheet.render(true);
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a sheet's flip button.
+	 * Performs follow-up operations after left-clicks on a Card's recharge token button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	async _onFlipClick(event)
+	_onRechargeTokenLeftClick(event)
 	{
-		event.preventDefault();
+		const item =this._getItemById(event);
 
-		const parent = $(event.currentTarget).parents(".item");
-		const activeFace = parent.find(".face.active");
-		const inactiveFace = parent.find(".face:not(.active)");
+		item.update({"system.rechargeTokens": item.system.rechargeTokens + 1});
+	}
 
-		activeFace.removeClass("active");
-		inactiveFace.addClass("active");
+	/**
+	 * Performs follow-up operations after right-clicks on a Card's recharge token button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onRechargeTokenRightClick(event)
+	{
+		const item = this._getItemById(event);
+		let rechargeTokens = item.system.rechargeTokens - 1;
+
+		// Floor recharge tokens to 0.
+		if(rechargeTokens < 0)
+			rechargeTokens = 0;
+
+		item.update({"system.rechargeTokens": rechargeTokens});
 	}
 }

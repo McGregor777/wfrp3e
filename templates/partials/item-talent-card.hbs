@@ -10,13 +10,9 @@
 		</a>
 
 		{{#if @root.document.isOwner}}
-			<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItemConfirmation'}}">
+			<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
 				<span class="fas fa-trash"></span>
 			</a>
 		{{/if}}
 	</div>
-
-	<select class="sheet-form-select item-input talent-card-socket-select" data-path="system.talentSocket" data-dtype="String">
-		{{selectOptions (lookup @root.talentSocketsByType talent.system.type) selected=talent.system.talentSocket blank=(localize "TALENT.NoSocket")}}
-	</select>
 </div>
