@@ -96,9 +96,12 @@ export default class WFRP3eItem extends Item
 		else if(weaponType === "ranged")
 			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.RangedShot"));
 		else
-			throw new Error("Unable to define the weapon type.")
+			throw new Error("Unable to define the weapon type.");
 
-		await CheckHelper.prepareActionCheck(this.actor, action, this.actor.defaultStance, {weapon: this});
+		if(!action)
+			throw new Error("Unable to find the relevant basic Action.");
+
+		await CheckHelper.prepareActionCheck(this.actor, action, this.actor.getCurrentStanceName(), {weapon: this});
 	}
 
 	/**

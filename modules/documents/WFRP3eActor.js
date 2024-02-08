@@ -28,9 +28,9 @@ export default class WFRP3eActor extends Actor
 	 */
 	getCurrentStanceName()
 	{
-		if(this.system.stance.current > 0)
+		if(this.system.stance.current < 0)
 			return "conservative";
-		else if(this.system.stance.current < 0)
+		else if(this.system.stance.current > 0)
 			return "reckless";
 
 		return this.system.defaultStance;
