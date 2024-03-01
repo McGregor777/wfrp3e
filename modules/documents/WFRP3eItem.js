@@ -49,7 +49,7 @@ export default class WFRP3eItem extends Item
 								this.exhaustAction(options.face);
 
 								return ChatMessage.create({
-									content: await renderTemplate("systems/wfrp3e/templates/chatmessages/action-effects.hbs", {
+									content: await renderTemplate("systems/wfrp3e/templates/partials/action-effects.hbs", {
 										action: this,
 										face: options.face,
 										symbols: CONFIG.WFRP3e.symbols,
