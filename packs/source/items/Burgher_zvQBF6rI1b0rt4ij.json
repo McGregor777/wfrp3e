@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Burgher",
+  "type": "ability",
+  "_id": "zvQBF6rI1b0rt4ij",
+  "img": "systems/wfrp3e/assets/images/careers/burgher.webp",
+  "system": {
+    "description": "<p>Once per session, you may add [[DE]] to any Charm or Leadership check</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869379832,
+    "modifiedTime": 1710871098210,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!zvQBF6rI1b0rt4ij"
+}

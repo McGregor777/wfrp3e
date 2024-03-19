@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Boatman",
+  "type": "ability",
+  "_id": "MW0nNFfpYzt1NpND",
+  "img": "systems/wfrp3e/assets/images/careers/boatman.webp",
+  "system": {
+    "description": "<p>You may remove [[DM]] from your dice pool when attempting Athletics, Coordination, Stealth, or Discipline checks while on a boat, ship, or unstable surface</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869319429,
+    "modifiedTime": 1710871085022,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!MW0nNFfpYzt1NpND"
+}

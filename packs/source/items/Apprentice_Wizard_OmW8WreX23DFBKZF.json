@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Apprentice Wizard",
+  "type": "ability",
+  "_id": "OmW8WreX23DFBKZF",
+  "img": "systems/wfrp3e/assets/images/careers/apprentice_wizard.webp",
+  "system": {
+    "description": "<p>Spellcraft checks for Rank 1 or lower spells gain [[DF]]</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869228579,
+    "modifiedTime": 1710870998005,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!OmW8WreX23DFBKZF"
+}

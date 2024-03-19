@@ -22,6 +22,11 @@
 				overflow: auto;
 			}
 
+			& .abilities-tab .character-sheet-abilities {
+				display: flex;
+				flex-wrap: wrap;
+			}
+
 			& .actions-tab {
 				overflow: unset;
 
@@ -312,9 +317,52 @@
 				& .career-partial {
 					display: flex;
 					flex-flow: row wrap;
+					flex-grow: 1;
 
 					& .career-advancement {
 						flex: 1 1 300px;
+
+						& h4 {
+							color: white;
+							text-align: center;
+							text-shadow:
+									-1pt -1pt 0 black,
+									-1pt 0 0 black,
+									0 -1pt 0 black,
+									-1pt 1pt 0 black,
+									1pt -1pt 0 black,
+									0 1pt 0 black,
+									1pt 0 0 black,
+									1pt 1pt 0 black;
+							font-variant-caps: small-caps;
+						}
+
+						& > div {
+							&:first-child {
+								margin-top: 0.5rem;
+							}
+
+							&:not(:last-child) {
+								margin-bottom: 1rem;
+							}
+
+							& > *:not(:last-child) {
+								margin-bottom: 0.5rem;
+							}
+						}
+
+						& .career-form-div {
+							display: flex;
+
+							& > input[type=checkbox] {
+								flex: 0 1;
+								margin: 0.25rem;
+							}
+
+							& > label {
+								flex: 1 1;
+							}
+						}
 					}
 				}
 			}

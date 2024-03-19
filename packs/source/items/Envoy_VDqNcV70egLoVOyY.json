@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Envoy",
+  "type": "ability",
+  "_id": "VDqNcV70egLoVOyY",
+  "img": "systems/wfrp3e/assets/images/careers/envoy.webp",
+  "system": {
+    "description": "<p>Once per session, you may treat your Fellowship characteristic as if it were one point higher</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869555996,
+    "modifiedTime": 1710871132024,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!VDqNcV70egLoVOyY"
+}

@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Smuggler",
+  "type": "ability",
+  "_id": "vjFtMkfnCP6pTNm7",
+  "img": "systems/wfrp3e/assets/images/careers/smuggler.webp",
+  "system": {
+    "description": "<p><strong>Career Ability:</strong> Your Skulduggery checks gain:</p>\n<ul>\n<li>♢♢ Add 1 fortune to the party fortune pool</li>\n</ul>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710870260563,
+    "modifiedTime": 1710871271156,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!vjFtMkfnCP6pTNm7"
+}

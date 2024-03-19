@@ -1,5 +1,11 @@
+import ActionSelector from "../applications/ActionSelector.js";
+import CareerSelector from "../applications/CareerSelector.js";
+import CharacteristicUpgrader from "../applications/CharacteristicUpgrader.js";
+import TalentSelector from "../applications/TalentSelector.js";
+import TrainingSelector from "../applications/TrainingSelector.js";
+
 /**
- * Provides the main Actor data computation and organization.=
+ * Provides the main Actor data computation and organization.
  * WFRP3eActor contains all the preparation data and methods used for preparing an actors: going through each Owned Item, preparing them for display based on characteristics.
  * @see WFRP3eCharacterSheet - Character sheet class
  */
@@ -34,6 +40,126 @@ export default class WFRP3eActor extends Actor
 			return "reckless";
 
 		return this.system.defaultStance;
+	}
+
+	/**
+	 * Buys a new Advance for the WFRP3eCharacter.
+	 * @param {WFRP3eItem} career The Career containg the new Advance.
+	 * @param {String} type The type of the new Advance.
+	 */
+	async buyAdvance(career, type)
+	{
+		switch(type) {
+			case "action":
+				await new ActionSelector(this, career).render(true);
+				break;
+
+			case "talent":
+				await new TalentSelector(this, career).render(true);
+				break;
+
+			case "skill":
+				await new TrainingSelector(this, career).render(true);
+				break;
+
+			case "careerTransition":
+				await new CareerSelector(this, career).render(true);
+				break;
+
+			case "wound":
+				this.update({
+					system: {
+						wounds: {
+							max: this.system.wounds.max + 1,
+							value: this.system.wounds.value + 1
+						}
+					}
+				});
+				career.update({"system.advances.wound": game.i18n.localize("CHARACTER.WoundThreshold")});
+				break;
+
+			case "dedicationBonus":
+				for(const pack of [...game.packs.values()].filter(pack => pack.documentName === "Item")) {
+					const careerAbility = await pack.getDocuments({name: career.name, type: "ability"})
+						.then(abilities => abilities[0]);
+
+					if(careerAbility) {
+						await Item.createDocuments([careerAbility], {parent: this});
+						career.update({"system.advances.dedicationBonus": careerAbility.name});
+						break;
+					}
+				}
+				break;
+
+			case "nonCareer":
+				await new Dialog({
+					title: game.i18n.localize("NEWNONCAREERADVANCESELECTION.Title"),
+					content: "<p>" + game.i18n.format("NEWNONCAREERADVANCESELECTION.Content") + "</p>",
+					buttons: {
+						characteristic: {
+							label: game.i18n.localize("NEWNONCAREERADVANCESELECTION.BUTTONS.Characteristic"),
+							callback: async dlg => new CharacteristicUpgrader(this, career, true).render(true)
+						},
+						skill: {
+							label: game.i18n.localize("NEWNONCAREERADVANCESELECTION.BUTTONS.Skill"),
+							callback: async dlg => new TrainingSelector(this, career, true).render(true)
+						},
+						talent: {
+							label: game.i18n.localize("NEWNONCAREERADVANCESELECTION.BUTTONS.Talent"),
+							callback: async dlg => new TalentSelector(this, career, true).render(true)
+						}
+					}
+				}, {classes: ["new-non-career-advance-selection"]}).render(true);
+				break;
+
+			default:
+				await new Dialog({
+					title: game.i18n.localize("NEWCAREERADVANCESELECTION.Title"),
+					content: "<p>" + game.i18n.format("NEWCAREERADVANCESELECTION.Content") + "</p>",
+					buttons: {
+						characteristic: {
+							label: game.i18n.localize("NEWCAREERADVANCESELECTION.BUTTONS.Characteristic"),
+							callback: async dlg => new CharacteristicUpgrader(this, career).render(true)
+						},
+						action: {
+							label: game.i18n.localize("NEWCAREERADVANCESELECTION.BUTTONS.Action"),
+							callback: async dlg => new ActionSelector(this, career).render(true)
+						},
+						skill: {
+							label: game.i18n.localize("NEWCAREERADVANCESELECTION.BUTTONS.Skill"),
+							callback: async dlg => new TrainingSelector(this, career).render(true)
+						},
+						talent: {
+							label: game.i18n.localize("NEWCAREERADVANCESELECTION.BUTTONS.Talent"),
+							callback: async dlg => new TalentSelector(this, career).render(true)
+						},
+						wound: {
+							label: game.i18n.localize("NEWCAREERADVANCESELECTION.BUTTONS.Wound"),
+							callback: async dlg => {
+								this.update({
+									system: {
+										wounds: {
+											max: this.system.wounds.max + 1,
+											value: this.system.wounds.value + 1
+										}
+									}
+								});
+
+								career.update({"system.advances.wound": game.i18n.localize("CHARACTER.WoundThreshold")});
+							}
+						},
+						conservative: {
+							label: game.i18n.localize("NEWCAREERADVANCESELECTION.BUTTONS.Conservative"),
+							callback: async dlg => this.update({"system.stance.conservative": this.system.stance.conservative + 1})
+						},
+						reckless: {
+							label: game.i18n.localize("NEWCAREERADVANCESELECTION.BUTTONS.Reckless"),
+							callback: async dlg => this.update({"system.stance.reckless": this.system.stance.reckless + 1})
+						}
+					}
+				}, {classes: ["new-career-advance-selection"]}).render(true);
+				break;
+		}
 	}
 
 	/**

@@ -27,16 +27,14 @@
 		}
 	}
 
-	& .tab-link.active {
-		color: white;
-		text-shadow:
-				-1px -1px 0 black,
-				-1px 0 0 black,
-				0 -1px 0 black,
-				-1px 1px 0 black,
-				1px -1px 0 black,
-				0 1px 0 black,
-				1px 0 0 black,
-				1px 1px 0 black;
+	& .form-label {
+		align-items: center;
+		display: flex;
+		gap: 0.5rem;
+
+		& > input {
+			flex-grow: 1;
+			width: unset;
+		}
 	}
 }

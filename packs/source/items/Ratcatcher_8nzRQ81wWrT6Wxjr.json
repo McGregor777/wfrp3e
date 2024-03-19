@@ -34,7 +34,7 @@
       "reckless": 0,
       "wound": 0
     },
-    "summary": "Willing to do the dirty work others won’t, with a faithful f",
+    "summary": "Willing to do the dirty work others won’t, with a faithful follower",
     "advances": {
       "action": null,
       "talent": null,
@@ -68,10 +68,10 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.5.1",
+    "systemVersion": "0.8.1-alpha",
     "coreVersion": "11.315",
     "createdTime": 1699549862849,
-    "modifiedTime": 1699628730970,
+    "modifiedTime": 1710870083436,
     "lastModifiedBy": "Bq3CTOvANoOneedB"
   },
   "_id": "8nzRQ81wWrT6Wxjr",

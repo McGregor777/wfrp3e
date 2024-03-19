@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Ironbreaker",
+  "type": "ability",
+  "_id": "mqV5XtpznobBdkXR",
+  "img": "systems/wfrp3e/assets/images/careers/ironbreaker.webp",
+  "system": {
+    "description": "<p>You have a set of Gromril Plate Armour. Take the Gromil Plate Armour item card. You cannot give away, sell, lend, or trade this armour</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869756162,
+    "modifiedTime": 1710871171396,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!mqV5XtpznobBdkXR"
+}

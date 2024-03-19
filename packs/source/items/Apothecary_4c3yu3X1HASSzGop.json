@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Apothecary",
+  "type": "ability",
+  "_id": "4c3yu3X1HASSzGop",
+  "img": "systems/wfrp3e/assets/images/careers/apothecary.webp",
+  "system": {
+    "description": "<p>Add [[DF]] to determine the effects of any healing draught you imbibe or administer to another character</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869194442,
+    "modifiedTime": 1710870981281,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!4c3yu3X1HASSzGop"
+}

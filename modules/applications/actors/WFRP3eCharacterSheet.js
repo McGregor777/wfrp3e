@@ -82,6 +82,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		super.activateListeners(html);
 
+		html.find(".advance-checkbox").change(this._onAdvanceCheckboxChange.bind(this));
+
 		html.find(".current-career-input").click(this._onCurrentCareerInput.bind(this));
 
 		html.find(".impairment .token")
@@ -224,6 +226,37 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	_getItemById(event)
 	{
 		return this.actor.items.get(event.currentTarget.dataset.itemId ?? $(event.currentTarget).parents(".item").data("itemId"));
+	}
+
+	/**
+	 * Performs follow-up operations after changes on Advance checkbox.
+	 * @param {Event} event
+	 * @private
+	 */
+	_onAdvanceCheckboxChange(event)
+	{
+		if(this.actor.system.experience.current > 0) {
+			const career = this._getItemById(event);
+
+			if(event.currentTarget.checked) {
+				event.currentTarget.checked = false;
+				this.actor.buyAdvance(career, event.currentTarget.dataset.type);
+			}
+			else {
+				const updates = {system: {advances: career.system.advances}};
+
+				if(isNaN(event.currentTarget.dataset.type))
+					updates.system.advances[event.currentTarget.dataset.type] = "";
+				else
+					updates.system.advances.open[event.currentTarget.dataset.type] = "";
+
+				career.update(updates);
+			}
+		}
+		else {
+			event.currentTarget.checked = false;
+			ui.notifications.warn(game.i18n.localize("CHARACTER.SHEET.NoExperienceLeft"));
+		}
 	}
 
 	/**
@@ -394,13 +427,30 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		event.preventDefault();
 		event.stopPropagation();
 
-		const property = event.currentTarget.dataset.path;
+		const item = this._getItemById(event);
+		const propertyPath = event.currentTarget.dataset.path;
 		let value = event.target.value;
 
+		if(event.currentTarget.type === "checkbox" && !event.currentTarget.checked)
+			value = false;
 		if(value === "on")
 			value = true;
 
-		this._getItemById(event).update({[property]: value});
+		// Additional process needed for updates on Arrays.
+		let itemProperty = item;
+		for(let i = 0, path = propertyPath.split('.'), length = path.length; i < length; i++)
+			itemProperty = itemProperty[path[i]];
+
+		if(itemProperty instanceof Array) {
+			const index = event.currentTarget.dataset.index;
+			const subProperty = event.currentTarget.dataset.property;
+
+			subProperty ? itemProperty[index][subProperty] = value : itemProperty[index] = value;
+
+			item.update({[propertyPath]: itemProperty});
+		}
+		else
+			item.update({[propertyPath]: value});
 	}
 
 	/**

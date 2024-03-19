@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Agitator",
+  "type": "ability",
+  "_id": "sUnyBttWEM0I0v9R",
+  "img": "systems/wfrp3e/assets/images/careers/agitator.webp",
+  "system": {
+    "description": "<p>Your social initiative checks gain [[DF]][[DF]]</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869150609,
+    "modifiedTime": 1710870968892,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!sUnyBttWEM0I0v9R"
+}

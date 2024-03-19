@@ -1,7 +1,7 @@
 {
   "name": "Bailiff",
   "type": "career",
-  "img": "systems/wfrp3e/assets/images/careers/bailif.webp",
+  "img": "systems/wfrp3e/assets/images/careers/bailiff.webp",
   "effects": [],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {
@@ -68,10 +68,10 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.5.1",
+    "systemVersion": "0.8.1-alpha",
     "coreVersion": "11.315",
     "createdTime": 1699549809236,
-    "modifiedTime": 1699628596810,
+    "modifiedTime": 1710871031094,
     "lastModifiedBy": "Bq3CTOvANoOneedB"
   },
   "_id": "z0dHr2zJITKWHQWH",
