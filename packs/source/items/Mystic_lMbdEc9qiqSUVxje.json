@@ -10,7 +10,7 @@
   "system": {
     "description": "<p>Many people in the Empire are superstitious and fatalistic, believing the future to be already determined by the will of the gods. Some seek easy answers to explain their purpose, and a gifted mystic can easily make a living catering to their hopes and fears.</p>\n<p>Mystics tread a fine line. Some rashly claim to have a personal relationship with the gods, and if they aren&rsquo;t careful, those with a real knack for the art may be seen as witches. Many have been burned at the stake over the years having been declared heretics. Some mystics insist that they are able to read the future through studying the casting of runes, the turning of cards, or the appearance of an animal&rsquo;s spilt guts.</p>\n<p>These fortune tellers insist that they take an academic approach to their work, though most are simple entertainers who are better at reading people than the future. They are nevertheless perceptive and intuitive, able to quickly gauge their patrons&rsquo; feelings, fears, and desires. A few mystics may be genuinely touched with a gift for premonition. Such sensitive people may be the recipients of disturbing dreams, or are perhaps able to perceive shifts in the Winds of Magic in an unusual manner.</p>\n<p>Elves are less credulous than humans, and more at home with the existence of magic. They still take premonitions and oracles seriously, however, so there is sometimes a place in their society for a true mystic, though they won&rsquo;t tolerate charlatans for long.</p>\n<p><strong>Special:</strong> Upon entering this career, choose Charm or Guile. The chosen skill becomes a career skill; the other skill remains a non-career skill.</p>\n<p><strong>Typical Trappings:</strong> Mystics typically cultivate a somewhat casual or rustic appearance and employ equipment such as a crystal ball, tarot cards, or a set of bones carved with runes.</p>\n<p><strong>Career Ability:</strong> You may spend your fortune points to add <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼</span> to the dice pool of any ally within close range</p>",
     "advanced": false,
-    "raceRestrictions": "Human, Wood Elf, or High Elf",
+    "raceRestrictions": ["human", "woodElf", "highElf"],
     "traits": "Arcane, Basic, Rural, Social",
     "talentSockets": [
       "focus",
@@ -36,36 +36,35 @@
     },
     "summary": "A sociable individual with an eerie talent for premonition",
     "advances": {
-      "action": "",
-      "talent": "",
-      "skill": "",
-      "wound": "",
+      "action": null,
+      "talent": null,
+      "skill": null,
+      "wound": null,
       "open": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": ""
+        "newCareer": null
       },
-      "dedicationBonus": "",
+      "dedicationBonus": null,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         },
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         }
       ]
     },
-    "current": false,
-    "completed": false
+    "current": false
   },
   "_stats": {
     "systemId": "wfrp3e",

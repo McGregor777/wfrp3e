@@ -54,7 +54,7 @@ export default class CheckBuilder extends FormApplication
 	/** @inheritDoc */
 	async getData()
 	{
-		const data = {
+		const data = mergeObject(super.getData(), {
 			challengeLevel: ["melee", "ranged"].includes(this.roll.data?.action?.system.type) ? "easy" : "simple",
 			challengeLevels: CONFIG.WFRP3e.challengeLevels,
 			diceIcons: {
@@ -67,7 +67,7 @@ export default class CheckBuilder extends FormApplication
 			isGM: game.user.isGM,
 			sounds: [],
 			users: [{name: "Send To All", id: "all"}]
-		};
+		});
 
 		if(game.user.isGM) {
 			game.users.contents.forEach((user) => {
@@ -628,7 +628,7 @@ export default class CheckBuilder extends FormApplication
 					const attributeDiceAmount = this.object["creatures" + (attribute[0].toUpperCase() + attribute.slice(1, attribute.length)) + "Dice"];
 
 					if(attributeDiceAmount > 0) {
-						const changes = {system: {attributes: {}}};
+						const changes = {"system.attributes": {}};
 						changes.system.attributes[attribute] = {current: this.roll.data.actor.system.attributes[attribute].current - attributeDiceAmount};
 
 						console.log(changes)

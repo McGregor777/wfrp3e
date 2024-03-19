@@ -240,6 +240,30 @@ export default class WFRP3eItem extends Item
 	}
 
 	/**
+	 * Adds a new Race restriction to the Career's list of Race restrictions.
+	 */
+	addNewRaceRestriction()
+	{
+		const raceRestrictions = this.system.raceRestrictions;
+
+		raceRestrictions.push("human");
+
+		this.update({"system.raceRestrictions": raceRestrictions});
+	}
+
+	/**
+	 * Removes the last Race restriction from the Career's list of Race restrictions.
+	 */
+	removeLastRaceRestriction()
+	{
+		const raceRestrictions = this.system.raceRestrictions;
+
+		raceRestrictions.pop();
+
+		this.update({"system.raceRestrictions": raceRestrictions});
+	}
+
+	/**
 	 * Adds a new Talent socket to the Career's list of Talent sockets.
 	 */
 	addNewTalentSocket()

@@ -5,7 +5,7 @@
 		<a class="tab-link" data-tab="tactic">{{localize 'TALENT.TYPE.Tactic'}}</a>
 		<a class="tab-link" data-tab="trick">{{localize 'TALENT.TYPE.Tricks'}}</a>
 	{{else}}
-		{{#if highElf}}
+		{{#if erudite}}
 			<a class="tab-link active" data-tab="focus">{{localize 'TALENT.TYPE.Focus'}}</a>
 		{{/if}}
 	{{/if}}
@@ -61,7 +61,7 @@
 			{{/each}}
 		</div>
 	{{else}}
-		{{#if highElf}}
+		{{#if erudite}}
 			<div class="tab active" data-group="talents" data-tab="focus">
 				{{#each talents.focus}}
 					<label>

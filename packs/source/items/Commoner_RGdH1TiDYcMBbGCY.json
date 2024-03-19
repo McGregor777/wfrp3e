@@ -10,7 +10,7 @@
   "system": {
     "description": "<p>The social structure of the Empire is strict and rigid. At the top of the social order are the nobles, families of aristocrats who can often trace their lineage back to the time of Sigmar and the founding of the nation. The priests of the Empire interpret the will of the gods, and the increasingly powerful burghers manage trade and wealth. Commoners tend to be the largest but least influential of the social groups. They are rustic farmers, labourers, and herdsmen in the main, though many commoners also take on other tasks if the opportunity presents itself. They may gather leeches for physicians or learn a skill such as thatching. What meagre money is made from their work is quickly used up to pay taxes, rent, and other expenses. In years when the harvest is good, commoners enjoy a small surplus, and life is bearable for a short while. When the harvest is poor, they face a long cold winter and the risk of starvation.</p>\n<p>Whilst commoners generally receive no formal military training, at times a retired soldier will cover the most basic combat techniques. These drills are usually held at a weekly muster organised by local priests of Ulric, Myrmidia, or Sigmar. These practises are in order to help them form some kind of effective defence should their village or farmstead be attacked by raiding beastmen or goblins. In times of war, commoners are mustered into ragtag groups of militia who march alongside professional soldiers in order to bulk up the armies. Most commoners nurse a healthy aversion to violence, but some of them get a taste for fighting. The lot of a commoner is hard and unrewarding, and a few brave souls migh decide to leave their lives of drudgery for adventure, hoping to find fame and fortune.</p>\n<p><strong>Typical Trappings:</strong> A commoner will carry a stout quarterstaff for protection, or rely on a farming implement such as a pitchfork or rake (these count as improvised weapons). He might also have a sling with a dozens pieces of shot for keeping predators away from his animals. He will carry a leather flask to drink from whilst at work in the fields.</p>\n<p><strong>Career Ability:</strong> Whenever fortune refreshes, recover one fatigue</p>",
     "advanced": false,
-    "raceRestrictions": "Human or Dwarf",
+    "raceRestrictions": ["human", "dwarf"],
     "traits": "Basic, Menial, Rural, Social",
     "talentSockets": [
       "focus",
@@ -36,36 +36,35 @@
     },
     "summary": "Self sufficient jack of all trades with an assortment of skills",
     "advances": {
-      "action": "",
-      "talent": "",
-      "skill": "",
-      "wound": "",
+      "action": null,
+      "talent": null,
+      "skill": null,
+      "wound": null,
       "open": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": ""
+        "newCareer": null
       },
-      "dedicationBonus": "",
+      "dedicationBonus": null,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         },
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         }
       ]
     },
-    "current": false,
-    "completed": false
+    "current": false
   },
   "_stats": {
     "systemId": "wfrp3e",

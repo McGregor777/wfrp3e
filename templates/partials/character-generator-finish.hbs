@@ -1,15 +1,15 @@
 <div>
-	<h5>{{localize "CHARACTERGENERATOR.Race"}}</h5>
+	<h5>{{localize "CHARACTERGENERATOR.Origin"}}</h5>
 
-	<div class="race">
+	<div class="origin">
 		<div>
-			<img src="{{race.art}}" alt="{{localize race.name}}" />
-			<h6>{{localize race.name}}</h6>
+			<img src="{{origin.art}}" alt="{{localize origin.name}}" />
+			<h6>{{localize origin.name}}</h6>
 		</div>
 
 		<ul>
-			{{#each race.racialAbilities}}
-				{{#with (lookup @root.racialAbilities this)}}
+			{{#each origin.abilities}}
+				{{#with (lookup @root.originAbilities this)}}
 					<li data-ability="{{_id}}">
 						<strong>{{name}}:</strong> <span>{{{striptags system.description "p"}}}</span>
 					</li>
@@ -28,21 +28,21 @@
 <div>
 	<h5>{{localize "CHARACTERGENERATOR.Career"}}</h5>
 
-	{{>systems/wfrp3e/templates/partials/character-generator-career-sheet.hbs career=career}}
+	{{>systems/wfrp3e/templates/partials/item-career-sheet.hbs career=career}}
 </div>
 
 <div>
 	<h5>{{localize "CHARACTERGENERATOR.Characteristics"}}</h5>
 
 	<div class="characteristics">
-		{{#each characteristics as |characteristic char|}}
-			{{#unless (equalTo char "varies")}}
+		{{#each characteristicRatings as |rating char|}}
+			{{#with (lookup @root.characteristics char) as |characteristic|}}
 				<div>
 					<h6>{{localize characteristic.name}}</h6>
 
-					<div>{{lookup @root.characteristicValues char}}</div>
+					<div>{{rating}}</div>
 				</div>
-			{{/unless}}
+			{{/with}}
 		{{/each}}
 	</div>
 </div>

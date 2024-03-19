@@ -1,7 +1,31 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="character-sheet-header sheet-header">
 		<img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
-		<h1><input class="name-input" name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'Name'}}" /></h1>
+
+		<label class="name">
+			<input class="name-input" name="name" value="{{actor.name}}" type="text" placeholder="{{localize 'Name'}}" />
+		</label>
+
+		<label class="origin">
+			<span class="character-sheet-title">{{localize "CHARACTER.Origin"}}</span>
+
+			<select name="system.origin">
+				{{selectOptions origins selected=actor.system.origin labelAttr="name" localize=true}}
+			</select>
+		</label>
+
+		<label class="experience">
+			<span class="character-sheet-title">{{localize "CHARACTER.Experience"}}</span>
+
+			<div class="input-container">
+				<span title="{{localize 'CHARACTER.CurrentExperience'}}">{{actor.system.experience.current}}</span>
+				/
+				<input name="system.experience.total"
+				       value="{{actor.system.experience.total}}"
+				       type="number"
+				       title="{{localize 'CHARACTER.TotalExperience'}}" />
+			</div>
+		</label>
 	</header>
 
 	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">

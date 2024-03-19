@@ -10,7 +10,7 @@
   "system": {
     "description": "<p>The noble rulers of the Empire literally own the land of the nation. The heads of the noble houses possess an estate consisting of their own manors and castles, and the villages and wild areas surrounding them. Commoners who live in the surrounding settlements pay rent to their noble lords. Even those few burghers who grow rich enough to afford their own plot of land must owe taxes to the local authorities to pay for the upkeep of public areas such as roads, wharfs, and places of worship.</p>\n<p>Of course, the nobles and burgomeisters do not collect these taxes themselves. Instead they employ bailiffs to gather the tithes. Although they are members of noble households, or representatives of burgomeisters, bailiffs are often little more than bully boys who break into people&rsquo;s houses when they are unable or unwilling to pay. As well as their tax collecting duties, bailiffs attached to noble households are expected to manage the upkeep of the land and the resources of their master&rsquo;s manor. In towns and cities, their duties include making sure that measures and prices of goods, such as ale, cuts of meat, and loaves of bread, are correctly observed in all the shops and markets. Successful urban bailiffs can become very influential.</p>\n<p>Bailiffs tread a fine line between the nobility and the peasantry. They are too lowly to be accepted as the peers of their employers. However, their duties make them unpopular with the common folk, and they are the first to suffer during peasant revolts. Bailiffs who fail to please their employers tend to move on rather than risk finding another role in a community that views them with contempt. Some of them take up a new life as adventurers, where their ability to work with people from different backgrounds and social standing can prove valuable.</p>\n<p><strong>Typical Trappings:</strong> Bailiffs are typically given a good set of quality clothing by their lords, though they also wear a leather jack and skullcap to protect themselves from irate peasants. Bailiffs have to travel, and often have access to a riding horse with a saddle and harness.</p>\n<p><strong>Career Ability:</strong> Add 1 fortune point to the party&rsquo;s fortune pool the first time you suffer stress during an encounter</p>",
     "advanced": false,
-    "raceRestrictions": "Human or Dwarf",
+    "raceRestrictions": ["human", "dwarf"],
     "traits": "Basic, Bureaucrat, Social, Urban",
     "talentSockets": [
       "focus",
@@ -36,36 +36,35 @@
     },
     "summary": "A strong, diligent, socially mobile individual",
     "advances": {
-      "action": "",
-      "talent": "",
-      "skill": "",
-      "wound": "",
+      "action": null,
+      "talent": null,
+      "skill": null,
+      "wound": null,
       "open": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": ""
+        "newCareer": null
       },
-      "dedicationBonus": "",
+      "dedicationBonus": null,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         },
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         }
       ]
     },
-    "current": false,
-    "completed": false
+    "current": false
   },
   "_stats": {
     "systemId": "wfrp3e",

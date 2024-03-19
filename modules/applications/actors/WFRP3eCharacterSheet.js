@@ -12,7 +12,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		{
 			template: "systems/wfrp3e/templates/applications/actors/character-sheet.hbs",
 			width: 932,
-			height: 800,
+			height: 815,
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
 			dragDrop: [{dragSelector: ".item", dropSelector: null}],
 			tabs: [
@@ -27,30 +27,32 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	/** @inheritDoc */
 	getData()
 	{
-		const data = super.getData();
-		const actor = this.actor;
+		const data = mergeObject(super.getData(), {
+			actionTypes: CONFIG.WFRP3e.actionTypes,
+			conditionDurations: CONFIG.WFRP3e.conditionDurations,
+			characteristics: CONFIG.WFRP3e.characteristics,
+			diseaseSymptoms: CONFIG.WFRP3e.disease.symptoms,
+			origins: Object.values(CONFIG.WFRP3e.availableRaces).reduce((origins, race) => {
+				Object.entries(race.origins).forEach(origin => origins[origin[0]] = origin[1]);
+				return origins;
+			}, {}),
+			stances: CONFIG.WFRP3e.stances,
+			symbols: CONFIG.WFRP3e.symbols,
+			talentTypes: CONFIG.WFRP3e.talentTypes,
+			weaponGroups: CONFIG.WFRP3e.weapon.groups,
+			weaponQualities: CONFIG.WFRP3e.weapon.qualities,
+			weaponRanges: CONFIG.WFRP3e.weapon.ranges,
+			talentSocketsByType: this._buildTalentSocketsList()
+		});
+		data.items = this._buildItemLists(data.items);
 
 		this.options.tabs[1].initial = this.actor.system.currentCareer?._id;
 
-		data.actionTypes = CONFIG.WFRP3e.actionTypes;
-		data.conditionDurations = CONFIG.WFRP3e.conditionDurations;
-		data.characteristics = CONFIG.WFRP3e.characteristics;
-		data.diseaseSymptoms = CONFIG.WFRP3e.disease.symptoms;
-		data.stances = CONFIG.WFRP3e.stances;
-		data.symbols = CONFIG.WFRP3e.symbols;
-		data.talentTypes = CONFIG.WFRP3e.talentTypes;
-		data.weaponGroups = CONFIG.WFRP3e.weapon.groups;
-		data.weaponQualities = CONFIG.WFRP3e.weapon.qualities;
-		data.weaponRanges = CONFIG.WFRP3e.weapon.ranges;
-
-		data.items = this._buildItemLists(data);
-		data.talentSocketsByType = this._buildTalentSocketsList();
-
 		// Add basic skills to the Character.
-		if(actor.type === "character" && data.items.skills.length === 0) {
+		if(this.actor.type === "character" && data.items.skills.length === 0) {
 			new Dialog({
 				title: game.i18n.localize("APPLICATION.TITLE.BasicSkillsAdding"),
-				content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.BasicSkillsAdding", {actor: actor.name}) + "</p>",
+				content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.BasicSkillsAdding", {actor: this.actor.name}) + "</p>",
 				buttons: {
 					confirm: {
 						icon: '<span class="fa fa-check"></span>',
@@ -58,7 +60,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 						callback: async dlg => {
 							const basicSkills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill", system: {advanced: false}});
 
-							await Item.createDocuments(basicSkills, {parent: actor});
+							await Item.createDocuments(basicSkills, {parent: this.actor});
 						}
 					},
 					cancel: {

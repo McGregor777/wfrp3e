@@ -10,7 +10,7 @@
   "system": {
     "description": "<p>Life in the Empire is brutal, and rife with tales about supernatural forces and marauding enemies threatening it. These are stories of barbarous greenskins who raid villages for plunder and slaves, or rumours of rat-like men that infest caverns and sewers. In years of poor harvest many people go hungry, and epidemics spread quickly in filthy and crowded city streets. Most upsettingly, each year more children are born bearing the marks of Chaos, hideous mutants who must be put to flame.</p>\n<p>It is unsurprising to learn that many folk faced with such fear and turmoil seek spiritual guidance in order to make sense of the world and give their lives some meaning. However, the gods of the Old World make up a fickle and remote pantheon, and only seem to speak to a few chosen followers. Zealots rove the Empire, desperate in the search for spiritual answers. They call out to the gods for guidance and preach to people they meet about the coming of the end times. They warn against the multifarious dangers assailing the Empire and the terrible wages of sin. These zealots usually live a simple life of asceticism. Some mortify their flesh or undertake lengthy and strange austerities in the hope of garnering the favour of a god or two. Others take a slightly cooler approach to their faith. Instead of harming themselves, they seek out the enemies of civilisation, and join the retinues of witch hunters that scour the Empire for heretics, daemons, warlocks, and mutants.</p>\n<p>Many of these travelling zealots find themselves isolated, whilst others tire of their self-imposed strictures and abstinence. Such zealots sometimes take up a life of adventure, relishing the opportunity to oppose their enemies directly.</p>\n<p><strong>Special:</strong> You may attach an Insanity card to this sheet as if it were a Talent.</p>\n<p><strong>Typical Trappings:</strong> Many zealots eschew possessions and dress humbly. They may bear a whip to scourge themselves with, or go as far as to arm themselves with flails. Others dress a bit more sensibly, wearing a leather jacket and tough travelling clothes.</p>\n<p><strong>Career Ability:</strong> Once per session, you may exhaust your insanity talent to add fortune dice to any check equal to the severity of the insanity. The insanity automatically refreshes at the end of the current act</p>",
     "advanced": false,
-    "raceRestrictions": "Human Only",
+    "raceRestrictions": ["human"],
     "traits": "Basic, Devoted, Fanatic, Religion",
     "talentSockets": [
       "focus",
@@ -36,36 +36,35 @@
     },
     "summary": "An individual whose devotion to the gods borders on fanaticism",
     "advances": {
-      "action": "",
-      "talent": "",
-      "skill": "",
-      "wound": "",
+      "action": null,
+      "talent": null,
+      "skill": null,
+      "wound": null,
       "open": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": ""
+        "newCareer": null
       },
-      "dedicationBonus": "",
+      "dedicationBonus": null,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         },
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         }
       ]
     },
-    "current": false,
-    "completed": false
+    "current": false
   },
   "_stats": {
     "systemId": "wfrp3e",

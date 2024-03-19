@@ -3,6 +3,14 @@
 		display: flex;
 		flex-direction: column;
 
+		& .character-sheet-title {
+			border-bottom: none;
+			display: block;
+			font: small-caps bold var(--font-size-18) var(--font-primary);
+			margin: 0;
+			text-align: center;
+		}
+
 		& .character-sheet-body {
 			flex: 1 1 0;
 			min-height: 0;
@@ -54,7 +62,7 @@
 
 			& .characteristics-tab {
 				&.active {
-					flex-direction: row !important;
+					flex-direction: row;
 				}
 
 				& .attributes {
@@ -72,7 +80,7 @@
 							text-align: center;
 
 							& .attribute-input {
-								height: 60px !important;
+								height: 60px;
 							}
 
 							& .attribute-input-container {
@@ -90,7 +98,7 @@
 						overflow-y: scroll;
 
 						& > div:not(:last-child) .card {
-							margin-bottom: 20px !important;
+							margin-bottom: 20px;
 						}
 					}
 				}
@@ -117,12 +125,14 @@
 							width: 130px;
 
 							& .characteristic-fortune-input {
+								background: white;
+								border-color: dimgray;
 								font-weight: bold;
-								height: 25px !important;
-								margin-left: 10px !important;
-								padding: 3px !important;
-								text-align: center !important;
-								width: 25px !important;
+								height: 25px;
+								margin-left: 10px;
+								padding: 3px;
+								text-align: center;
+								width: 25px;
 							}
 
 							& .characteristic-input-container {
@@ -133,19 +143,20 @@
 							}
 
 							& .characteristic-title {
-								font: var(--font-size-18) var(--font-primary);
-								font-variant-caps: small-caps;
-								font-weight: bold;
+								font: small-caps bold var(--font-size-18) var(--font-primary);
 								text-align: center;
 							}
 
-							& .characteristic-value-input {
+							& .characteristic-rating-input {
+								background: lightcyan;
+								border-color: lightsteelblue;
+								border-width: 2px;
 								display: block;
 								font-weight: bold;
-								height: 45px !important;
-								padding: 3px !important;
-								text-align: center !important;
-								width: 35px !important;
+								height: 45px;
+								padding: 3px;
+								text-align: center;
+								width: 35px;
 							}
 						}
 					}
@@ -203,9 +214,7 @@
 
 							& .title {
 								display: block;
-								font: var(--font-size-18) var(--font-primary);
-								font-variant-caps: small-caps;
-								font-weight: bold;
+								font: small-caps bold var(--font-size-18) var(--font-primary);
 								padding: 0 2px 0 4px;
 								writing-mode: vertical-lr;
 								text-align: center;
@@ -297,7 +306,7 @@
 				overflow: auto;
 
 				&.active {
-					display: flex !important;
+					display: flex;
 				}
 
 				& .career-partial {
@@ -434,24 +443,46 @@
 			}
 		}
 
+		& .character-sheet-header {
+			align-items: flex-start;
+			gap: 0.5rem;
+
+			& .actor-img {
+				margin-right: 0;
+			}
+
+			& > label {
+				flex-grow: 0;
+
+				&.name {
+					flex-grow: 1;
+					font: 32pt "Caslon Antique";
+					height: 100%;
+
+					& > input {
+						height: 100%;
+					}
+				}
+
+				&.experience {
+					& input {
+						width: 2.25rem;
+					}
+
+					& .input-container {
+						text-align: center;
+						width: 100%;
+					}
+				}
+			}
+		}
+
 		& .primary-tabs {
-			display: flex;
-			flex-flow: row wrap;
-			height: auto !important;
 			justify-content: space-between;
-			text-align: center;
 
 			& > * {
 				margin: 0 5px;
 			}
-		}
-
-		& .character-sheet-title {
-			display: block;
-			font: var(--font-size-18) var(--font-primary);
-			font-variant-caps: small-caps;
-			font-weight: bold;
-			text-align: center;
 		}
 	}
 }

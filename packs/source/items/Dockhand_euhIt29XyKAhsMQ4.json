@@ -10,7 +10,7 @@
   "system": {
     "description": "<p>During the day, the docks of the cities of the Empire are hives of activity. The Empire thrives on trade. In every city it is a priority to make sure that imports are unloaded and distributed to warehouses, shops and market stalls. It is equally important to make sure that goods for export are loaded onto customers&rsquo; barges in good time.</p>\n<p>Dockhands are specially trained labourers who pack and unpack cargo holds. They work in claustrophobic conditions securing freight with knotted ropes and wedges of wood. Dockhands are known for working hard and playing hard. They can often be found getting drunk in waterfront taverns and have a reputation for violence. However, most dockhands know the value of working as members of a team &ndash; they have to cooperate in order to do their job. For this reason, most dockhands work as part of a gang, an unofficial union bound together by oaths of loyalty.</p>\n<p>In Altdorf, of the many dock gangs who work the wharfs and warehouse district, it is the Hooks and the Fish who are the most prominent. The two gangs have a long history of rivalry which has often erupted into brutality. Every now and then a member of one of the gangs is found dead, as the result of a perceived slight towards their rivals. This is an ongoing circle of violence referred to by local watchmen as &ldquo;the waterfront war.&rdquo; Members of gangs such as these often cultivate connections with crime lords and smugglers, looking to make a little extra on the side by dealing in contraband.</p>\n<p>Dockhands sometimes seek to escape this life of hard labour, or they may move on to avoid becoming embroiled in the vicious enmity between gangs. They have even been known to join parties of adventurers, lending them a much needed strong arm.</p>\n<p><strong>Typical Trappings:</strong> Dockhands wear a leather jack to protect them during their work. Dockhands usually wear a gang symbol, such as an embroidered badge or watch cap in gang colours. To help them load and secure cargo, dockhands carry a length of rope and iron spikes.</p>\n<p><strong>Career Ability:</strong> Add 5 to your encumbrance limit</p>",
     "advanced": false,
-    "raceRestrictions": "Human or Dwarf",
+    "raceRestrictions": ["human", "dwarf"],
     "traits": "Basic, Menial, Rural, Urban",
     "talentSockets": [
       "focus",
@@ -36,36 +36,35 @@
     },
     "summary": "Strong arms, strong back, sturdy and reliable",
     "advances": {
-      "action": "",
-      "talent": "",
-      "skill": "",
-      "wound": "",
+      "action": null,
+      "talent": null,
+      "skill": null,
+      "wound": null,
       "open": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": ""
+        "newCareer": null
       },
-      "dedicationBonus": "",
+      "dedicationBonus": null,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         },
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         }
       ]
     },
-    "current": false,
-    "completed": false
+    "current": false
   },
   "_stats": {
     "systemId": "wfrp3e",

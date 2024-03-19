@@ -22,6 +22,7 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 				if(characteristic !== "varies")
 					object[characteristic] = new fields.SchemaField({
 						value: new fields.NumberField({...requiredInteger, initial: 2, min: 0}),
+						rating: new fields.NumberField({...requiredInteger, initial: 2, min: 0}),
 						fortune: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
 					}, {label: characteristic});
 
@@ -51,6 +52,17 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 
 		if(this.specialRuleSummary)
 			this._prepareSpecialRuleSummary();
+	}
+
+	/** @inheritDoc */
+	static migrateData(source)
+	{
+		Object.keys(CONFIG.WFRP3e.characteristics).forEach((characteristic) => {
+			if(!source.characteristics[characteristic].rating)
+				source.characteristics[characteristic].rating = source.characteristics[characteristic].value;
+		});
+
+		return super.migrateData(source);
 	}
 
 	/**
