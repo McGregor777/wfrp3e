@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Agent",
+  "type": "ability",
+  "_id": "0AaSfEt9v2foohTE",
+  "img": "systems/wfrp3e/assets/images/careers/agent.webp",
+  "system": {
+    "description": "<p>Once per session, you may suffer one stress and one fatigue to add [[DE]] to any skill check</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869084840,
+    "modifiedTime": 1710870959259,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!0AaSfEt9v2foohTE"
+}

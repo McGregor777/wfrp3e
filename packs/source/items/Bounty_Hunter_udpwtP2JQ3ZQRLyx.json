@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Bounty Hunter",
+  "type": "ability",
+  "_id": "udpwtP2JQ3ZQRLyx",
+  "img": "systems/wfrp3e/assets/images/careers/bounty_hunter.webp",
+  "system": {
+    "description": "<p>Once per session, you may name one adversary as your quarry. Add [[DE]] to all Observation, Intuition, Melee Attack and Ranged Attack checks targeting your quarry for the remainder of the encounter</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869349804,
+    "modifiedTime": 1710871093130,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!udpwtP2JQ3ZQRLyx"
+}

@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Student",
+  "type": "ability",
+  "_id": "eMRunuJbgJSnuO1T",
+  "img": "systems/wfrp3e/assets/images/careers/student.webp",
+  "system": {
+    "description": "<p>Once per session, you may add [[DE]] to any Education or Folklore check</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710870301840,
+    "modifiedTime": 1710871283174,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!eMRunuJbgJSnuO1T"
+}

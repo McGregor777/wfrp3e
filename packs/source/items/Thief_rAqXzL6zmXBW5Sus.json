@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Thief",
+  "type": "ability",
+  "_id": "rAqXzL6zmXBW5Sus",
+  "img": "systems/wfrp3e/assets/images/careers/thief.webp",
+  "system": {
+    "description": "<p>Once per session, you may add [[DE]] to any Guile or Skulduggery check</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710870368139,
+    "modifiedTime": 1710871295070,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!rAqXzL6zmXBW5Sus"
+}

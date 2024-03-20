@@ -44,17 +44,19 @@ export default class CheckBuilder extends FormApplication
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "check-builder"],
 			template: "systems/wfrp3e/templates/applications/check-builder.hbs",
 			width: 640
-		});
+		};
 	}
 
 	/** @inheritDoc */
 	async getData()
 	{
 		const data = {
+			...super.getData(),
 			challengeLevel: ["melee", "ranged"].includes(this.roll.data?.action?.system.type) ? "easy" : "simple",
 			challengeLevels: CONFIG.WFRP3e.challengeLevels,
 			diceIcons: {
@@ -628,7 +630,7 @@ export default class CheckBuilder extends FormApplication
 					const attributeDiceAmount = this.object["creatures" + (attribute[0].toUpperCase() + attribute.slice(1, attribute.length)) + "Dice"];
 
 					if(attributeDiceAmount > 0) {
-						const changes = {system: {attributes: {}}};
+						const changes = {"system.attributes": {}};
 						changes.system.attributes[attribute] = {current: this.roll.data.actor.system.attributes[attribute].current - attributeDiceAmount};
 
 						console.log(changes)

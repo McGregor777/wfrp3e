@@ -7,13 +7,12 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 	static defineSchema()
 	{
 		const fields = foundry.data.fields;
-		const requiredInteger = {required: true, nullable: false, integer: true};
 
 		return {
 			attributes: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.attributes).reduce((object, attribute) => {
 				object[attribute] = new fields.SchemaField({
-					budget: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-					current: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
+					budget: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+					current: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 				}, {label: attribute});
 
 				return object;
@@ -21,23 +20,24 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 			characteristics: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
 				if(characteristic !== "varies")
 					object[characteristic] = new fields.SchemaField({
-						value: new fields.NumberField({...requiredInteger, initial: 2, min: 0}),
-						fortune: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
+						value: new fields.NumberField({initial: 2, integer: true, min: 0, nullable: false, required: true}),
+						rating: new fields.NumberField({initial: 2, integer: true, min: 0, nullable: false, required: true}),
+						fortune: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 					}, {label: characteristic});
 
 				return object;
 			}, {})),
 			category: new fields.StringField(),
-			damageRating: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-			defenceValue: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
+			damageRating: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+			defenceValue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			description: new fields.HTMLField(),
 			specialRuleSummary: new fields.HTMLField(),
-			soakValue: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-			stance: new fields.NumberField({...requiredInteger, initial: 0}),
-			threatRating: new fields.NumberField({...requiredInteger, initial: 1, min: 1}),
+			soakValue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+			stance: new fields.NumberField({initial: 0, integer: true, nullable: false, required: true}),
+			threatRating: new fields.NumberField({initial: 1, integer: true, min: 1, nullable: false, required: true}),
 			wounds: new fields.SchemaField({
-				max: new fields.NumberField({...requiredInteger, initial: 7, min: 0}),
-				value: new fields.NumberField({...requiredInteger, initial: 7, min: 0})
+				max: new fields.NumberField({initial: 7, integer: true, min: 0, nullable: false, required: true}),
+				value: new fields.NumberField({initial: 7, integer: true, min: 0, nullable: false, required: true})
 			})
 		};
 	}
@@ -51,6 +51,17 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 
 		if(this.specialRuleSummary)
 			this._prepareSpecialRuleSummary();
+	}
+
+	/** @inheritDoc */
+	static migrateData(source)
+	{
+		Object.keys(CONFIG.WFRP3e.characteristics).forEach((characteristic) => {
+			if(!source.characteristics[characteristic].rating)
+				source.characteristics[characteristic].rating = source.characteristics[characteristic].value;
+		});
+
+		return super.migrateData(source);
 	}
 
 	/**

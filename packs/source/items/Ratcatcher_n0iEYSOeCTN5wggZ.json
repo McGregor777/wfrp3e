@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Ratcatcher",
+  "type": "ability",
+  "_id": "n0iEYSOeCTN5wggZ",
+  "img": "systems/wfrp3e/assets/images/careers/ratcatcher.webp",
+  "system": {
+    "description": "<p>You have a small but vicious dog. Take the small but vicious dog follower sheet. You can teach your dog Trick talents and attach them to its sheet</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710870058674,
+    "modifiedTime": 1710871242458,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!n0iEYSOeCTN5wggZ"
+}

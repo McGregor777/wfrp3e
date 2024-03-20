@@ -2,8 +2,8 @@ export default class WFRP3eGroupSheet extends ActorSheet
 {
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return {
+			...super.defaultOptions,
 			template: "systems/wfrp3e/templates/applications/actors/group-sheet.hbs",
 			classes: ["wfrp3e", "sheet", "actor", "group", "group-sheet"],
 			width: 830,
@@ -12,18 +12,14 @@ export default class WFRP3eGroupSheet extends ActorSheet
 				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"},
 				{group: "talents", navSelector: ".talent-tabs", contentSelector: ".talents", initial: "focus"}
 			]
-		});
+		};
 	}
 
 	/** @inheritDoc */
 	getData()
 	{
-		const data = super.getData();
-
-		data.items = this._buildItemLists(data);
-		data.talentTypes = CONFIG.WFRP3e.talentTypes;
-
-		console.log(data);
+		const data = {...super.getData(), talentTypes: CONFIG.WFRP3e.talentTypes};
+		data.items = this._buildItemLists(data.items);
 
 		return data;
 	}
@@ -45,13 +41,15 @@ export default class WFRP3eGroupSheet extends ActorSheet
 
 	/**
 	 * Returns items sorted by type.
-	 * @param {Object} data The Actor data
+	 * @param {Array} items The items owned by the Actor.
+	 * @returns {Object} The sorted items owned by the Actor.
+	 * @private
 	 */
-	_buildItemLists(data)
+	_buildItemLists(items)
 	{
-		const talents = data.items
-			.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
-			.filter(item => item.type === "talent");
+		const talents = items
+			.filter(item => item.type === "talent")
+			.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
 
 		return {
 			talents: {

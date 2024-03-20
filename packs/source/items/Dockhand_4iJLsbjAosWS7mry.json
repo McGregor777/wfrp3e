@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Dockhand",
+  "type": "ability",
+  "_id": "4iJLsbjAosWS7mry",
+  "img": "systems/wfrp3e/assets/images/careers/dockhand.webp",
+  "system": {
+    "description": "<p>Add 5 to your encumbrance limit</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869528565,
+    "modifiedTime": 1710871127443,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!4iJLsbjAosWS7mry"
+}

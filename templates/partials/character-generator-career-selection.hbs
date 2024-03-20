@@ -1,6 +1,6 @@
 {{#each drawnCareers}}
-	<label {{#if @first}}class="active"{{/if}}>
-		{{>systems/wfrp3e/templates/partials/character-generator-career-sheet.hbs career=this}}
+	<label class="item{{#if @first}} active{{/if}}">
+		{{>systems/wfrp3e/templates/partials/item-career-sheet.hbs career=this}}
 		<input name="career" value="{{this._id}}" type="radio" {{#if @first}}checked{{/if}}/>
 	</label>
 {{/each}}

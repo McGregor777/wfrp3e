@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Zealot",
+  "type": "ability",
+  "_id": "1wYiFFlRQNGXPpV3",
+  "img": "systems/wfrp3e/assets/images/careers/zealot.webp",
+  "system": {
+    "description": "<p>Once per session, you may exhaust your insanity talent to add fortune dice to any check equal to the severity of the insanity. The insanity automatically refreshes at the end of the current act</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710870522414,
+    "modifiedTime": 1710871336393,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!1wYiFFlRQNGXPpV3"
+}

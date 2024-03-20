@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Dilettante",
+  "type": "ability",
+  "_id": "aZUasAogMF5ZXrP8",
+  "img": "systems/wfrp3e/assets/images/careers/dilettante.webp",
+  "system": {
+    "description": "<p>Once per session, you may treat any one untrained basic skill as if it were trained, or you may attempt one advanced skill as if you had acquired it</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869504621,
+    "modifiedTime": 1710871119197,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!aZUasAogMF5ZXrP8"
+}

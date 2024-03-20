@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Pit Fighter",
+  "type": "ability",
+  "_id": "fcOdf4BaJRAq7edT",
+  "img": "systems/wfrp3e/assets/images/careers/pit_fighter.webp",
+  "system": {
+    "description": "<p>Add [[DF]] to your Melee Attacks whenever you are in an engagement with more than two combatants</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710870015532,
+    "modifiedTime": 1710871236158,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!fcOdf4BaJRAq7edT"
+}

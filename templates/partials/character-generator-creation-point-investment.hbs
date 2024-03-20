@@ -11,7 +11,11 @@
 						<span class="fa fa-minus"></span>
 					</button>
 
-					<input name="{{char}}" type="number" value="{{lookup @root.defaultRatings char}}" min="{{lookup @root.defaultRatings char}}" max="5"/>
+					<input name="{{char}}"
+					       value="{{lookup @root.defaultRatings char}}"
+					       type="number"
+					       min="{{lookup @root.defaultRatings char}}"
+					       max="5" />
 
 					<button class="increment-characteristic">
 						<span class="fa fa-plus"></span>
@@ -42,6 +46,7 @@
 					{{/if}}
 				{{/if}}
 			{{/if}}
+
 			<input name="wealth" value="{{this}}" type="radio" {{#if (equalTo this 0)}}checked{{/if}} />
 		</label>
 	{{/for}}

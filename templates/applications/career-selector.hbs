@@ -1,0 +1,40 @@
+<form>
+	<h1>{{localize "CAREERSELECTOR.ChooseANewCareer"}}</h1>
+
+	<nav class="career-tabs tabs" data-group="careers">
+		{{#each careers as |type ty|}}
+            {{equalTo ty "advanced"}}
+            {{inferiorTo object.system.rank 2}}
+            {{#unless (and (equalTo ty "advanced") (inferiorTo @root.object.system.rank 2))}}
+                <a class="tab-link {{ty}}" data-tab="{{ty}}">
+                    {{localize (concat (concat "CAREER.SHEET." (capitalize ty)) "Career")}}
+                </a>
+            {{else}}
+                <span>
+                    {{localize (concat (concat "CAREER.SHEET." (capitalize ty)) "Career")}}
+                </span>
+            {{/unless}}
+		{{/each}}
+	</nav>
+
+	<div class="careers body">
+		{{#each careers as |type ty|}}
+			<div class="career-container item-container tab {{ty}}" data-group="careers" data-tab="{{ty}}">
+				{{#each type as |career ca|}}
+					<label>
+						{{>systems/wfrp3e/templates/partials/item-career-sheet.hbs career=career}}
+
+						<input name="career" value="{{this._id}}" type="radio" />
+					</label>
+				{{/each}}
+			</div>
+		{{/each}}
+	</div>
+
+    <p>
+        {{localize "CAREERSELECTOR.SelectedCareer"}}
+        <span class="selection">{{localize "CAREERSELECTOR.NoCareerSelected"}}</span>
+    </p>
+
+	<button class="submit">{{localize "Finish"}}</button>
+</form>

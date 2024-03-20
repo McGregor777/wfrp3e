@@ -1,0 +1,32 @@
+<form>
+	<h1>{{localize "TALENTSELECTOR.ChooseANewTalent"}}</h1>
+
+	<nav class="talent-tabs tabs" data-group="talents">
+		{{#each talents as |type ty|}}
+			<a class="tab-link {{ty}}" data-tab="{{ty}}">
+				{{localize (lookup @root.talentTypes ty)}}
+			</a>
+		{{/each}}
+	</nav>
+
+	<div class="talents body">
+		{{#each talents as |type ty|}}
+			<div class="talent-container item-container tab {{ty}}" data-group="talents" data-tab="{{ty}}">
+				{{#each type}}
+					<label>
+						{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=this}}
+
+						<input name="talent" value="{{this._id}}" type="radio" />
+					</label>
+				{{/each}}
+			</div>
+		{{/each}}
+	</div>
+
+	<p>
+		{{localize "TALENTSELECTOR.SelectedTalent"}}
+		<span class="selection">{{localize "TALENTSELECTOR.NoTalentSelected"}}</span>
+	</p>
+
+	<button class="submit">{{localize "Finish"}}</button>
+</form>

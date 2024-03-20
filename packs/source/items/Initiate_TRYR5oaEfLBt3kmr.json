@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Initiate",
+  "type": "ability",
+  "_id": "TRYR5oaEfLBt3kmr",
+  "img": "systems/wfrp3e/assets/images/careers/initiate.webp",
+  "system": {
+    "description": "<p>Invocation checks for Rank 1 or lower blessings gain [[DF]]</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869721619,
+    "modifiedTime": 1710871166180,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!TRYR5oaEfLBt3kmr"
+}

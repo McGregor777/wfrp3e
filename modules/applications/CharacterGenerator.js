@@ -26,35 +26,45 @@ export default class CharacterGenerator extends FormApplication
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "character-generator"],
 			template: "systems/wfrp3e/templates/applications/character-generator.hbs",
 			width: 920,
-			height: 860,
-			tabs: [{group: "talents", navSelector: ".talent-tabs", contentSelector: ".talents", initial: "focus"}]
-		});
+			height: 860
+		};
 	}
 
 	/** @inheritDoc */
 	async getData()
 	{
-		const data = {availableRaces: CONFIG.WFRP3e.availableRaces};
 		const abilities = await game.packs.get("wfrp3e.items").getDocuments({type: "ability"});
+		const data = {
+			...super.getData(),
+			...Object.entries(CONFIG.WFRP3e.availableRaces).reduce((object, race) => {
+				Object.entries(race[1].origins).forEach(origin => {
+						object.origins[origin[0]] = {
+							...origin[1],
+							creationPoints: race[1].creationPoints,
+							defaultRatings: race[1].defaultRatings
+						};
 
-		this.racialAbilities = Object.values(CONFIG.WFRP3e.availableRaces).reduce((racialAbilities, race) => {
-			race.racialAbilities.forEach((racialAbilityName => {
-				if(!racialAbilities.has(racialAbilityName))
-					racialAbilities.set(racialAbilityName, abilities.find(ability => ability.name === racialAbilityName));
-			}));
+						origin[1].abilities.forEach(originAbilityName => {
+							if(!object.originAbilities[originAbilityName])
+								object.originAbilities[originAbilityName] = abilities.find(ability => ability.name === originAbilityName);
+						});
+					});
 
-			return racialAbilities;
-		}, new Map());
+					return object;
+			}, {origins: {}, originAbilities: {}})
+		};
 
 		await this._buildItemLists();
 
-		this.selectedRace = data.availableRaces.reiklander;
-
-		data.racialAbilities = Object.fromEntries(this.racialAbilities);
+		this.origins = data.origins;
+		this.originAbilities = data.originAbilities;
+		this.selectedOrigin = data.origins.reiklander;
+		this.selectedOriginName = "reiklander";
 
 		return data;
 	}
@@ -67,8 +77,8 @@ export default class CharacterGenerator extends FormApplication
 		html.find("button.next").click(this._onNextButtonClick.bind(this, html));
 		html.find("button.previous").click(this._onPreviousButtonClick.bind(this, html));
 
-		html.find(".races input").change(this._onRaceChange.bind(this, html));
-		html.find('.step[data-step="race-selection"] button.next').click(this._onRaceSelectionConfirmation.bind(this, html));
+		html.find(".origins input").change(this._onOriginChange.bind(this, html));
+		html.find('.step[data-step="origin-selection"] button.next').click(this._onOriginSelectionConfirmation.bind(this, html));
 		html.find('.step[data-step="career-selection"] button.next').click(this._onCareerSelectionConfirmation.bind(this, html));
 		html.find('.step[data-step="creation-point-investment"] button.next').click(this._onCreationPointsInvestmentConfirmation.bind(this, html));
 		html.find('.step[data-step="skill-training"] button.next').click(this._onSkillTrainingConfirmation.bind(this, html));
@@ -85,15 +95,15 @@ export default class CharacterGenerator extends FormApplication
 			system: {
 				characteristics: Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
 					if(characteristic !== "varies")
-						object[characteristic] = {value: this.characteristicValues[characteristic]};
+						object[characteristic] = {rating: this.characteristicRatings[characteristic]};
 
 					return object;
 				}, {}),
-				corruption: {max: this.characteristicValues.toughness + this.selectedRace.corruption,},
-				race: game.i18n.localize(this.selectedRace.name),
+				corruption: {max: this.characteristicRatings.toughness + this.selectedOrigin.corruption},
+				origin: this.selectedOriginName,
 				wounds: {
-					max: this.characteristicValues.toughness + this.selectedRace.wound,
-					value: this.characteristicValues.toughness + this.selectedRace.wound
+					max: this.characteristicRatings.toughness + this.selectedOrigin.wound,
+					value: this.characteristicRatings.toughness + this.selectedOrigin.wound
 				}
 			}
 		});
@@ -122,37 +132,37 @@ export default class CharacterGenerator extends FormApplication
 		}, []), {parent: newCharacter});
 
 		await Item.createDocuments([this.selectedCareer], {parent: newCharacter})
-			.then(careerCopy => careerCopy[0].update({system: {current: true}}));
+			.then(careerCopy => careerCopy[0].update({"system.current": true}));
 
 		await Item.createDocuments([...this.selectedTalents.values(), ...this.finalActions], {parent: newCharacter});
 	}
 
 	async _buildItemLists()
 	{
-		this.talents = [];
-		this.insanities = [];
-		this.actions = [];
+		const talents = [];
+		const insanities = [];
+		const actions = [];
 
 		for(const pack of [...game.packs.values()].filter(pack => pack.documentName === "Item")) {
-			pack.getDocuments({type: "talent"}).then(foundTalents => {
+			await pack.getDocuments({type: "talent"}).then(foundTalents => {
 				if(foundTalents.length > 0)
-					this.talents.push(...foundTalents);
+					talents.push(...foundTalents);
 			});
 
-			pack.getDocuments({type: "insanity"}).then(foundInsanities => {
+			await pack.getDocuments({type: "insanity"}).then(foundInsanities => {
 				if(foundInsanities.length > 0)
-					this.insanities.push(...foundInsanities);
+					insanities.push(...foundInsanities);
 			});
 
-			pack.getDocuments({type: "action"}).then(foundActions => {
+			await pack.getDocuments({type: "action"}).then(foundActions => {
 				if(foundActions.length > 0)
-					this.actions.push(...foundActions);
+					actions.push(...foundActions);
 			});
 		}
 
-		this.talents = this.talents.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
-		this.insanities = this.insanities.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
-		this.actions = this.actions.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		this.talents = talents.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		this.insanities = insanities.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		this.actions = actions.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
 	}
 
 	_onNextButtonClick(html, event)
@@ -221,55 +231,49 @@ export default class CharacterGenerator extends FormApplication
 		this._updateGauge($nextStep.data("step"), html.find(".step-gauge .step-gauge-fill")[0]);
 	}
 
-	async _onRaceChange(html, event)
+	async _onOriginChange(html, event)
 	{
-		const rootElement = html.find('.step[data-step="race-selection"]');
+		const rootElement = html.find('.step[data-step="origin-selection"]');
 
-		this.selectedRace = CONFIG.WFRP3e.availableRaces[event.currentTarget.value];
+		this.selectedOriginName = event.currentTarget.value;
+		this.selectedOrigin = this.origins[this.selectedOriginName];
 
-		rootElement.find(".races label.active").removeClass("active");
+		rootElement.find(".origins label.active").removeClass("active");
 		$(event.currentTarget).parents("label").addClass("active");
 
-		rootElement.find(".selected-race").html(game.i18n.localize(this.selectedRace.name));
-		rootElement.find(".race-description").html(
-			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-race-description.hbs", {
-				race: this.selectedRace,
-				racialAbilities: Object.fromEntries(this.racialAbilities)
+		rootElement.find(".selected-origin").html(game.i18n.localize(this.selectedOrigin.name));
+		rootElement.find(".origin-description").html(
+			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-origin-description.hbs", {
+				origin: this.selectedOrigin,
+				originAbilities: this.originAbilities
 			})
 		);
 	}
 
-	async _onRaceSelectionConfirmation(html, event)
+	async _onOriginSelectionConfirmation(html, event)
 	{
 		this.freeTrainedSkill = null;
-		this.highElf = this.selectedRace === CONFIG.WFRP3e.availableRaces.highElf;
 
-		if(this.selectedRace !== CONFIG.WFRP3e.availableRaces.reiklander)
-			await this._displayFreeSkillTrainingDialog(html, event);
-		else
-			await this._startCareerSelectionStep(html, event);
-	}
-
-	async _displayFreeSkillTrainingDialog(html, event)
-	{
-		if(this.selectedRace === CONFIG.WFRP3e.availableRaces.azgarazDwarf)
+		if(this.selectedOrigin.abilities.includes("Children of Grungni"))
 			await new Dialog({
 				title: "Children of Grungni",
 				content: "<p>Before investing any creation points, an Azgaraz dwarf may train one of the following skills – Discipline, Resilience or Weapon Skill.</p>",
 				buttons: await this._prepareFreeSkillTrainingButtons(["0BSYtxTPqR72Tfuq", "LjSfvJxmSzqkU7NV", "xIkIYMUHDtUrqjY8"], html, event)
 			}).render(true);
-		else if(this.highElf)
+		else if(this.selectedOrigin.abilities.includes("Isha's Chosen"))
 			await new Dialog({
 				title: "Isha's Chosen",
 				content: "<p>Before investing any creation points, a high elf may train one of the following skills – Discipline, Intuition or Observation.</p>",
 				buttons: await this._prepareFreeSkillTrainingButtons(["0BSYtxTPqR72Tfuq", "QKcgRzxydB0cE22I", "PVY38LVHfi4ZxsI6"], html, event)
 			}).render(true);
-		else if(this.selectedRace === CONFIG.WFRP3e.availableRaces.woodElf)
+		else if(this.selectedOrigin.abilities.includes("Orion's Favoured"))
 			await new Dialog({
 				title: "Orion's Favoured",
 				content: "<p>Before investing any creation points, a wood elf may train one of the following skills – Ballistic Skill, Nature Lore, Observation or Stealth.</p>",
 				buttons: await this._prepareFreeSkillTrainingButtons(["ytY395HObq47bOhq", "wjAWNmMw9CMwEuZm", "PVY38LVHfi4ZxsI6", "J7ySozk1SB3VwGxl"], html, event)
 			}).render(true);
+		else
+			await this._startCareerSelectionStep(html, event);
 	}
 
 	async _prepareFreeSkillTrainingButtons(skillIds, html, event)
@@ -295,7 +299,7 @@ export default class CharacterGenerator extends FormApplication
 	{
 		this._proceedToNextStep(html, event);
 
-		const startingCareerRollTable = await game.packs.get("wfrp3e.roll-tables").getDocument(this.selectedRace.startingCareerRollTableId);
+		const startingCareerRollTable = await game.packs.get("wfrp3e.roll-tables").getDocument(this.selectedOrigin.startingCareerRollTableId);
 		const drawnCareers = new Map();
 
 		do {
@@ -324,23 +328,6 @@ export default class CharacterGenerator extends FormApplication
 		html.find(".careers input").change(this._onCareerChange.bind(this, html));
 	}
 
-	/**
-	 * Performs follow-up operations after clicks on a sheet's flip button.
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_onFlipClick(event)
-	{
-		event.preventDefault();
-
-		const parent = $(event.currentTarget).parents(".career-sheet");
-		const activeFace = parent.find(".face.active");
-		const inactiveFace = parent.find(".face:not(.active)");
-
-		activeFace.removeClass("active");
-		inactiveFace.addClass("active");
-	}
-
 	_onCareerChange(html, event)
 	{
 		this.selectedCareer = this.drawnCareers.find(career => career._id === event.currentTarget.value);
@@ -366,13 +353,13 @@ export default class CharacterGenerator extends FormApplication
 		rootElement.html(
 			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-creation-point-investment.hbs", {
 				characteristics: CONFIG.WFRP3e.characteristics,
-				defaultRatings: this.selectedRace.defaultRatings
+				defaultRatings: this.selectedOrigin.defaultRatings
 			})
 		);
 
-		this.characteristicValues = Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
+		this.characteristicRatings = Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
 			if(characteristic !== "varies")
-				object[characteristic] = this.selectedRace.defaultRatings[characteristic];
+				object[characteristic] = this.selectedOrigin.defaultRatings[characteristic];
 
 			return object;
 		}, {});
@@ -401,11 +388,11 @@ export default class CharacterGenerator extends FormApplication
 		const newCharacteristicValue = parseInt(characteristicInput.value) + value;
 		let currentInvestment = 0;
 
-		for(let i = this.selectedRace.defaultRatings[characteristicInput.name] + 1; i <= parseInt(characteristicInput.value); i++) {
+		for(let i = this.selectedOrigin.defaultRatings[characteristicInput.name] + 1; i <= parseInt(characteristicInput.value); i++) {
 			currentInvestment += i;
 		}
 
-		if(newCharacteristicValue < this.selectedRace.defaultRatings[characteristicInput.name])
+		if(newCharacteristicValue < this.selectedOrigin.defaultRatings[characteristicInput.name])
 			ui.notifications.warn(game.i18n.format("CHARACTERGENERATOR.WARNING.MinimumRatingReached"));
 		else if(newCharacteristicValue > 5)
 			ui.notifications.warn(game.i18n.format("CHARACTERGENERATOR.WARNING.MaximumRatingReached"));
@@ -414,7 +401,7 @@ export default class CharacterGenerator extends FormApplication
 		else {
 			characteristicInput.value = newCharacteristicValue;
 
-			this.characteristicValues[characteristicInput.name] = newCharacteristicValue;
+			this.characteristicRatings[characteristicInput.name] = newCharacteristicValue;
 
 			this._updateRemainingCreationPointCount(html);
 		}
@@ -422,9 +409,9 @@ export default class CharacterGenerator extends FormApplication
 
 	_onCharacteristicChange(html, event)
 	{
-		event.currentTarget.value = Math.min(Math.max(event.currentTarget.value, this.selectedRace.defaultRatings[event.currentTarget.name]), 5);
+		event.currentTarget.value = Math.min(Math.max(event.currentTarget.value, this.selectedOrigin.defaultRatings[event.currentTarget.name]), 5);
 
-		this.characteristicValues[event.currentTarget.name] = event.currentTarget.value;
+		this.characteristicRatings[event.currentTarget.name] = event.currentTarget.value;
 
 		this._updateRemainingCreationPointCount(html);
 	}
@@ -452,7 +439,7 @@ export default class CharacterGenerator extends FormApplication
 	_updateRemainingCreationPointCount(html)
 	{
 		const rootElement = html.find('.step[data-step="creation-point-investment"]');
-		const characteristicInvestment = Object.entries(this.selectedRace.defaultRatings).reduce((investment, defaultRating) => {
+		const characteristicInvestment = Object.entries(this.selectedOrigin.defaultRatings).reduce((investment, defaultRating) => {
 			for(let i = defaultRating[1] + 1;
 				i <= parseInt(rootElement.find('.creation-point-investment .characteristics input[name="' + defaultRating[0] + '"]')[0].value);
 				i++) {
@@ -462,7 +449,7 @@ export default class CharacterGenerator extends FormApplication
 			return investment;
 		}, 0);
 
-		this.remainingCreationPoints = this.selectedRace.creationPoints
+		this.remainingCreationPoints = this.selectedOrigin.creationPoints
 			- characteristicInvestment
 			- this.wealthInvestment
 			- this.skillsInvestment
@@ -476,12 +463,10 @@ export default class CharacterGenerator extends FormApplication
 	{
 		this._proceedToNextStep(html, event);
 
-		this.careerSkills = this.selectedCareer.system.careerSkills;
-
 		// Get every Career Skills from the Game System compendium.
 		this.careerSkills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill"}).then(skills => {
 			return skills
-				.filter(skill => this.careerSkills.includes(skill.name))
+				.filter(skill => this.selectedCareer.system.careerSkills.includes(skill.name))
 				.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
 		});
 
@@ -511,7 +496,7 @@ export default class CharacterGenerator extends FormApplication
 
 		// If an advanced Skill has already been acquired for free (thanks to a racial ability such as Erudite),
 		// make sure that it is shown and treated as such.
-		if(this.highElf)
+		if(this.selectedOrigin.abilities.includes("Erudite"))
 			this.chosenTrainingsAndSpecialisations.hasOwnProperty("zkAmp7J3kXPnrGDE") ?
 				this.chosenTrainingsAndSpecialisations["zkAmp7J3kXPnrGDE"].acquired = true :
 				this.chosenTrainingsAndSpecialisations["zkAmp7J3kXPnrGDE"] = {
@@ -684,13 +669,30 @@ export default class CharacterGenerator extends FormApplication
 		tabs.filter('[data-tab="' + tabName + '"]').addClass("active");
 	}
 
+	/**
+	 * Performs follow-up operations after clicks on a sheet's flip button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	async _onFlipClick(event)
+	{
+		event.preventDefault();
+
+		const parent = $(event.currentTarget).parents(".item");
+		const activeFace = parent.find(".face.active");
+		const inactiveFace = parent.find(".face:not(.active)");
+
+		activeFace.removeClass("active");
+		inactiveFace.addClass("active");
+	}
+
 	async _onSkillTrainingConfirmation(html, event)
 	{
 		this._proceedToNextStep(html, event);
 
 		this.selectedTalents = new Map();
 
-		if(this.talentsInvestment >= 1 || this.highElf || this.priest || this.wizard || this.zealot) {
+		if(this.talentsInvestment >= 1 || this.selectedOrigin.abilities.includes("Erudite") || this.priest || this.wizard || this.zealot) {
 			const talents = Object.keys(CONFIG.WFRP3e.talentTypes).reduce((everyTalents, talentType) => {
 				everyTalents[talentType] = this.talents.filter(talent => talent.system.type === talentType);
 				return everyTalents;
@@ -703,7 +705,7 @@ export default class CharacterGenerator extends FormApplication
 					talents: talents,
 					insanities: this.insanities,
 					talentsInvestment: this.talentsInvestment >= 1,
-					highElf: this.highElf,
+					erudite: this.selectedOrigin.abilities.includes("Erudite"),
 					priest: this.priest,
 					wizard: this.wizard,
 					zealot: this.zealot
@@ -790,13 +792,15 @@ export default class CharacterGenerator extends FormApplication
 		const remainingOrderTalentsCounter = rootElement.find('.remaining-order-talents');
 		const remainingInsanityTalentsCounter = rootElement.find('.remaining-insanities');
 
-		const selectedTalentCounts = Object.keys(CONFIG.WFRP3e.talentTypes).reduce((types, talentType) => {
-			types[talentType] = rootElement.find('.tab[data-tab="' + talentType + '"] input:checked').length;
-			return types;
-		}, {});
+		const selectedTalentCounts = [...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"].reduce(
+			(types, talentType) => {
+				types[talentType] = rootElement.find('.tab[data-tab="' + talentType + '"] input:checked').length;
+				return types;
+				}, {}
+			);
 
-		// Handle free Focus Talent selection for High Elves.
-		if(this.highElf) {
+		// Handle free Focus Talent selection for characters owning the Composure ability.
+		if(this.selectedOrigin.abilities.includes("Composure")) {
 			this.remainingFreeFocusTalents = Math.max(1 - selectedTalentCounts.focus, 0);
 			selectedTalentCounts.focus = Math.max(selectedTalentCounts.focus - 1, 0);
 
@@ -866,37 +870,39 @@ export default class CharacterGenerator extends FormApplication
 		this._proceedToNextStep(html, event);
 
 		const actions = Object.keys(CONFIG.WFRP3e.actionTypes).reduce((everyActions, actionType) => {
-			everyActions[actionType] = this.actions.filter(action => {
-				return action.system.type === actionType && !action.system.conservative.traits.includes("Basic")
-			});
+			if(!["blessing", "spell"].includes(actionType)
+				|| (actionType === "blessing" && this.priest)
+				|| (actionType === "spell" && this.wizard))
+				everyActions[actionType] = this.actions.filter(action => {
+					return action.system.type === actionType && !action.system.conservative.traits.includes("Basic");
+				});
 
 			return everyActions;
 		}, {});
 
-		actions.basic = this.actions.filter(action => action.system.conservative.traits.includes("Basic"));
-
 		this.selectedActions = new Map();
 
-		const rootElement = html.find('.step[data-step="action-selection"] .action-selection');
+		const rootElement = html.find('.step[data-step="action-selection"] .action-selector');
 
 		if(this.priest) {
 			let faithName = null;
-			const talent = this.talents.find(
+			const faithTalent = this.talents.find(
 				talent => talent._id === html.find('.step[data-step="talent-selection"] .talent-selection .tab[data-tab="faith"] input:checked').val()
 			);
-			const match = talent.name.match(new RegExp(/([\w\s]+),?/));
+			const match = faithTalent.name.match(new RegExp(/([\w\s]+),?/));
 
 			if(match)
 				faithName = match[1];
 
 			actions.blessing = actions.blessing.filter(action => action.system.reckless.traits.includes(faithName));
 		}
-		else if(this.wizard) {
+
+		if(this.wizard) {
 			let orderName = null;
-			const talent = this.talents.find(
+			const orderTalent = this.talents.find(
 				talent => talent._id === html.find('.step[data-step="talent-selection"] .talent-selection .tab[data-tab="order"] input:checked').val()
 			);
-			const match = talent.name.match(new RegExp(/([\w\s]+), ?[\w\s]+, ?([\w\s]+)/));
+			const match = orderTalent.name.match(new RegExp(/([\w\s]+), ?[\w\s]+, ?([\w\s]+)/));
 
 			if(match)
 				orderName = match[2] ?? match[1];
@@ -907,6 +913,7 @@ export default class CharacterGenerator extends FormApplication
 		rootElement.html(
 			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-action-selection.hbs", {
 				actions: actions,
+				actionTypes: CONFIG.WFRP3e.actionTypes,
 				stances: CONFIG.WFRP3e.stances,
 				symbols: CONFIG.WFRP3e.symbols,
 				priest: this.priest,
@@ -915,6 +922,7 @@ export default class CharacterGenerator extends FormApplication
 		);
 
 		rootElement.find(".action-tabs .tab-link").click(this._onTabClick.bind(this, html));
+		rootElement.find(".flip-link").click(this._onFlipClick.bind(this));
 		rootElement.find("input").change(this._onActionChange.bind(this, html));
 
 		this._updateRemainingActions(html);
@@ -978,9 +986,9 @@ export default class CharacterGenerator extends FormApplication
 		this.actions
 			.filter(action => action.system.type === "support" && action.system.conservative.traits.includes("Basic"))
 			.forEach(action => {
-				if((action._id === "gevnvkwHS62NBrpf" && this.characteristicValues.toughness >= 3)
-					|| (action._id === "eXHXyTK445ZEARTB" && this.characteristicValues.agility >= 3)
-					|| (action._id === "mc4fvpsRYGZ3K7Nj" && this.characteristicValues.strength >= 3)
+				if((action._id === "gevnvkwHS62NBrpf" && this.characteristicRatings.toughness >= 3)
+					|| (action._id === "eXHXyTK445ZEARTB" && this.characteristicRatings.agility >= 3)
+					|| (action._id === "mc4fvpsRYGZ3K7Nj" && this.characteristicRatings.strength >= 3)
 					|| !["gevnvkwHS62NBrpf", "eXHXyTK445ZEARTB", "mc4fvpsRYGZ3K7Nj"].includes(action._id))
 					this.finalActions.push(action);
 			});
@@ -1007,15 +1015,15 @@ export default class CharacterGenerator extends FormApplication
 
 		rootElement.html(
 			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-finish.hbs", {
-				race: this.selectedRace,
-				racialAbilities: Object.fromEntries(this.racialAbilities),
+				actions: this.finalActions,
+				origin: this.selectedOrigin,
+				originAbilities: this.originAbilities,
 				career: this.selectedCareer,
-				characteristics: CONFIG.WFRP3e.characteristics,
-				characteristicValues: this.characteristicValues,
 				careerSkills: this.careerSkills,
+				characteristics: CONFIG.WFRP3e.characteristics,
+				characteristicRatings: this.characteristicRatings,
 				skills: this.chosenTrainingsAndSpecialisations,
 				talents: this.selectedTalents ? [...this.selectedTalents.values()] : false,
-				actions: this.finalActions,
 				stances: CONFIG.WFRP3e.stances,
 				symbols: CONFIG.WFRP3e.symbols
 			})

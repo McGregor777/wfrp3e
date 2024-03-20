@@ -1,0 +1,107 @@
+<form>
+    <h1>{{localize "CHARACTERISTICUPGRADER.UpgradeACharacteristic"}}</h1>
+
+    <div class="characteristics body">
+        {{#each characteristics as |characteristic char|}}
+            <div>
+                <h2>
+                    {{localize characteristic.name}}
+
+                    {{#unless @root.nonCareer}}
+                        <span class="fas fa-check"></span>
+                    {{/unless}}
+                </h2>
+
+                <div class="characteristic {{char}}">
+                    <div class="initial">
+                        <div class="rating">
+                            {{characteristic.value}}
+                        </div>
+
+                        <div class="fortune">
+                            {{characteristic.fortune}}
+                        </div>
+                    </div>
+
+                    <div class="buttons">
+                        {{#unless @root.nonCareer}}
+                            {{#with (increment characteristic.rating 1) as |newRating|}}
+                                {{#if (superiorOrEqualTo @root.availableOpenAdvancesAmount newRating)}}
+                                    {{#if (superiorOrEqualTo @root.object.system.experience.current newRating)}}
+                                        <label>
+                                            {{localize "CHARACTERISTICUPGRADER.IncreaseRating"}}
+                                            ({{localize "CHARACTERISTICUPGRADER.ExperienceCost" cost=newRating}})
+
+                                            <input name="upgrade" value="{{char}}_rating" type="radio" />
+                                        </label>
+                                    {{else}}
+                                        <div class="disabled">
+                                            {{localize "CHARACTERISTICUPGRADER.IncreaseRating"}}
+                                            ({{localize "CHARACTERISTICUPGRADER.ExperienceCost" cost=newRating}})
+                                        </div>
+                                    {{/if}}
+                                {{else}}
+                                    <div class="disabled">
+                                        {{localize "CHARACTERISTICUPGRADER.IncreaseRating"}}
+                                        ({{localize "CHARACTERISTICUPGRADER.ExperienceCost" cost=newRating}})
+                                    </div>
+                                {{/if}}
+
+                                <span class="fas fa-arrow-right"></span>
+
+                                <label>
+                                    {{localize "CHARACTERISTICUPGRADER.IncreaseFortune"}}
+                                    ({{localize "CHARACTERISTICUPGRADER.ExperienceCost" cost=1}})
+
+                                    <input name="upgrade" value="{{char}}_fortune" type="radio" />
+                                </label>
+                            {{/with}}
+                        {{else}}
+                            {{#with (increment characteristic.rating 2) as |newRating|}}
+                                {{#if (superiorOrEqualTo @root.availableNonCareerAdvancesAmount 1)}}
+                                    {{#if (superiorOrEqualTo @root.object.system.experience.current newRating)}}
+                                        <label>
+                                            {{localize "CHARACTERISTICUPGRADER.IncreaseRating"}}
+                                            ({{localize "CHARACTERISTICUPGRADER.ExperienceCost" cost=newRating}})
+
+                                            <input name="upgrade" value="{{char}}_rating" type="radio" />
+                                        </label>
+                                    {{else}}
+                                        <div class="disabled">
+                                            {{localize "CHARACTERISTICUPGRADER.IncreaseRating"}}
+                                            ({{localize "CHARACTERISTICUPGRADER.ExperienceCost" cost=newRating}})
+                                        </div>
+                                    {{/if}}
+                                {{else}}
+                                    <div class="disabled">
+                                        {{localize "CHARACTERISTICUPGRADER.IncreaseRating"}}
+                                        ({{localize "CHARACTERISTICUPGRADER.ExperienceCost" cost=newRating}})
+                                    </div>
+                                {{/if}}
+
+                                <span class="fas fa-arrow-right"></span>
+                            {{/with}}
+                        {{/unless}}
+                    </div>
+
+                    <div class="result">
+                        <div class="rating">
+                            {{characteristic.value}}
+                        </div>
+
+                        <div class="fortune">
+                            {{characteristic.fortune}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+    <p>
+        {{localize "CHARACTERISTICUPGRADER.SelectedUpgrade"}}
+        <span class="selection">{{localize "CHARACTERISTICUPGRADER.NoUpgradeSelected"}}</span>
+    </p>
+
+    <button class="submit">{{localize "Finish"}}</button>
+</form>

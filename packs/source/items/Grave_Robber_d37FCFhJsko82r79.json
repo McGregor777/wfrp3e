@@ -8,9 +8,9 @@
     "core": {}
   },
   "system": {
-    "description": "<p>Empire folk regard the corpses of the dead as sacrosanct. Priests of Morr teach that honouring the bones of relatives comforts their spirits in the underworld, and they warn people that corpses which are not properly interred risk being made tools of sorcerers and necromancers. Suspicious folk keep remains of loved ones as treasured relics and tell cautionary tales of shades that haunt the old world due improper funeral rites.</p>\n<p>Members of certain professions ignore the taboos involved in meddling with corpses. They require bodies to further their understanding of life and death. Physicians study books of anatomy to improve their surgical skills or recognise the symptoms of disease, but the best way to learn is hands on. Unsubstantiated rumours suggest that certain faculties of the Amethyst College pay good silver for bodies.</p>\n<p>To satisfy this demand an underworld trade in cadavers has bloomed, and grave robbers provide the goods. They are usually rough folk, used to laborious digging and the occasional bouts of violence required to make a safe getaway. On the other hand they often mix with academics, and some adopt rather eccentric and pretentious airs. Grave robbers usually work in pairs, for bodies are heavy and a digging man cannot provide his own lookout. They have extensive underworld connections, and may well indulge in smuggling or other crimes as a sideline. Even grave robbers are not without ethics, and only the more immoral or desperate would willingly serve a necromancer. To the authorities grave robbers are amongst the lowest of the low, and the penalties for the crime are severe. Should an opportunity for adventure arise many grave robbers would willingly leave their reviled and illegal occupation behind.</p>\n<p><strong>Typical Trappings:</strong> Grave robbers require a lantern and spade to carry out nocturnal exhumations, along with various sacks or bags to carry their findings. They often disguise themselves by wearing dark cloaks and broad-brimmed hats.</p>\n<p><strong>Career Ability:</strong> Illegal activites you perform that require a skill check gain:</p>\n<p>♢ Recover 1 stress</p>",
+    "description": "<p>Empire folk regard the corpses of the dead as sacrosanct. Priests of Morr teach that honouring the bones of relatives comforts their spirits in the underworld, and they warn people that corpses which are not properly interred risk being made tools of sorcerers and necromancers. Suspicious folk keep remains of loved ones as treasured relics and tell cautionary tales of shades that haunt the old world due improper funeral rites.</p>\n<p>Members of certain professions ignore the taboos involved in meddling with corpses. They require bodies to further their understanding of life and death. Physicians study books of anatomy to improve their surgical skills or recognise the symptoms of disease, but the best way to learn is hands on. Unsubstantiated rumours suggest that certain faculties of the Amethyst College pay good silver for bodies.</p>\n<p>To satisfy this demand an underworld trade in cadavers has bloomed, and grave robbers provide the goods. They are usually rough folk, used to laborious digging and the occasional bouts of violence required to make a safe getaway. On the other hand they often mix with academics, and some adopt rather eccentric and pretentious airs. Grave robbers usually work in pairs, for bodies are heavy and a digging man cannot provide his own lookout. They have extensive underworld connections, and may well indulge in smuggling or other crimes as a sideline. Even grave robbers are not without ethics, and only the more immoral or desperate would willingly serve a necromancer. To the authorities grave robbers are amongst the lowest of the low, and the penalties for the crime are severe. Should an opportunity for adventure arise many grave robbers would willingly leave their reviled and illegal occupation behind.</p>\n<p><strong>Typical Trappings:</strong> Grave robbers require a lantern and spade to carry out nocturnal exhumations, along with various sacks or bags to carry their findings. They often disguise themselves by wearing dark cloaks and broad-brimmed hats.</p>\n<p><strong>Career Ability:</strong> Illegal activites you perform that require a skill check gain:</p>\n<ul>\n<li>♢ Recover 1 stress</li>\n</ul>",
     "advanced": false,
-    "raceRestrictions": "Human or Dwarf",
+    "raceRestrictions": ["human", "dwarf"],
     "traits": "Basic, Menial, Rogue, Specialist",
     "talentSockets": [
       "focus",
@@ -36,43 +36,42 @@
     },
     "summary": "A mistrustful soul who loots the dead and sells cadavers",
     "advances": {
-      "action": "",
-      "talent": "",
-      "skill": "",
-      "wound": "",
+      "action": null,
+      "talent": null,
+      "skill": null,
+      "wound": null,
       "open": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": ""
+        "newCareer": null
       },
-      "dedicationBonus": "",
+      "dedicationBonus": null,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         },
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         }
       ]
     },
-    "current": false,
-    "completed": false
+    "current": false
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.5.1",
+    "systemVersion": "0.8.1-alpha",
     "coreVersion": "11.315",
     "createdTime": 1699549832995,
-    "modifiedTime": 1699628666773,
+    "modifiedTime": 1710869651513,
     "lastModifiedBy": "Bq3CTOvANoOneedB"
   },
   "_id": "d37FCFhJsko82r79",

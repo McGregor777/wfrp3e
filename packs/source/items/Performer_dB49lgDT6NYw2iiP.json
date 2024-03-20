@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Performer",
+  "type": "ability",
+  "_id": "dB49lgDT6NYw2iiP",
+  "img": "systems/wfrp3e/assets/images/careers/performer.webp",
+  "system": {
+    "description": "<p>When spending fortune points on an Intuition or Observation check, add [[DE]] instead of [[DF]] for each fortune point spent</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869972737,
+    "modifiedTime": 1710871222863,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!dB49lgDT6NYw2iiP"
+}

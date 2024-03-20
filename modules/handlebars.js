@@ -1,11 +1,14 @@
 export default function()
 {
     Hooks.on("init", () => {
-		Handlebars.registerHelper("superiorTo", (value, compareValue) => value > compareValue);
-		Handlebars.registerHelper("inferiorTo", (value, compareValue) => value < compareValue);
+		Handlebars.registerHelper("and", (firstCondition, secondCondition) => firstCondition === true && secondCondition === true);
+		Handlebars.registerHelper("superiorTo", (value, compareValue) => Number(value) > Number(compareValue));
+		Handlebars.registerHelper("inferiorTo", (value, compareValue) => Number(value) < Number(compareValue));
 		Handlebars.registerHelper("equalTo", (value, compareValue) => value == compareValue);
-        Handlebars.registerHelper("superiorOrEqualTo", (value, compareValue) => value >= compareValue);
-		Handlebars.registerHelper("inferiorOrEqualTo", (value, compareValue) => value <= compareValue);
+		Handlebars.registerHelper("sameAs", (value, compareValue) => value === compareValue);
+		Handlebars.registerHelper("notEqualTo", (value, compareValue) => value != compareValue);
+        Handlebars.registerHelper("superiorOrEqualTo", (value, compareValue) => Number(value) >= Number(compareValue));
+		Handlebars.registerHelper("inferiorOrEqualTo", (value, compareValue) => Number(value) <= Number(compareValue));
 		Handlebars.registerHelper("increment", (value, valueToAdd) => value + parseInt(valueToAdd));
 		Handlebars.registerHelper("multiply", (value, multiplier) => value * multiplier);
 		Handlebars.registerHelper("concat", (value, otherValue) => value.toString() + otherValue.toString());
@@ -32,6 +35,13 @@ export default function()
 			}
 
 			return accumulator;
+		});
+
+		Handlebars.registerHelper("include", (needle, haystack) => {
+			if(haystack instanceof String || haystack instanceof Array)
+				return haystack.includes(needle);
+			else
+				throw new Error("Haystack is not of a valid type.");
 		});
 
 		Handlebars.registerHelper("replace", (string, match, replacement) => {
