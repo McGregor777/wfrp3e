@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Hunter",
+  "type": "ability",
+  "_id": "JKHcdxTTp3hDjRBy",
+  "img": "systems/wfrp3e/assets/images/careers/hunter.webp",
+  "system": {
+    "description": "<p>You gain [[DF]] to Nature Lore checks to track animals and beasts, Observation checks to notice animals and beasts, and Ballistic Skill checks to attack animals and beasts</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869692982,
+    "modifiedTime": 1710871159305,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!JKHcdxTTp3hDjRBy"
+}

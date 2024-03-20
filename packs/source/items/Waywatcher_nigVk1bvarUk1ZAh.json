@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Waywatcher",
+  "type": "ability",
+  "_id": "nigVk1bvarUk1ZAh",
+  "img": "systems/wfrp3e/assets/images/careers/waywatcher.webp",
+  "system": {
+    "description": "<p>Your combat initiative checks gain [[DF]][[DF]]</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710870488635,
+    "modifiedTime": 1710871327689,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!nigVk1bvarUk1ZAh"
+}

@@ -10,7 +10,7 @@
   "system": {
     "description": "<p>The Empire is considered a most cultured nation, at least by those who live within its borders. Citizens of the Empire lead hard lives, and diversions such as a good play, energetic dance, or rousing concert are welcome. Performers seek to earn a living entertaining the public.</p>\n<p>Theatre-going is quite popular at all social tiers, whether it is a mummers&rsquo; show depicting legends of gods and heroes, or sophisticated tragedies performed in sumptuous theatres. Most actors eke out a meagre living on the wages they earn, but they live in hope of winning a starring role to bring them fame and fortune. Playwrights like Detlef Sierck and Jacopo Tarradasch are infamous, and good actors are able to quote their most moving monologues from memory.</p>\n<p>Other performers are buskers, who sit in the streets or taverns of the Empire&rsquo;s towns playing music. Loud, shrill instruments, such as the shawm and hurdygurdy, are popular because the raucous noise they produce cuts easily through the hubbub in market squares and tavern rooms. Successful musicians learn a number of well-known songs, such as &ldquo;The Drakwald Lament&rdquo; or &ldquo;Sigmar&rsquo;s Silver Hammer&rdquo;, and can improvise a quick jig if people are in the mood to dance.</p>\n<p>However, only the luckiest and most talented of performers strike it rich. Performers have even been known to join adventuring parties to make ends meet, or to have unusual experiences that may help them hone their art.</p>\n<p><strong>Typical Trappings:</strong> A performer requires little in the way of equipment outside a costume. Most theatres supply their own costumes and make-up, but an actor is well advised to keep a good set of old fashioned clothing and some make-up at the ready to wear for auditions. A musician just needs an instrument and useful accessories such as spare strings, reeds, or rosin.</p>\n<p><strong>Career Ability:</strong> When spending fortune points on an Intuition or Observation check, add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> instead of <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼</span> for each fortune point spent</p>",
     "advanced": false,
-    "raceRestrictions": "Any Race",
+    "raceRestrictions": ["any"],
     "traits": "Basic, Menial, Social, Urban",
     "talentSockets": [
       "focus",
@@ -36,36 +36,35 @@
     },
     "summary": "A professional entertainer who knows how to please a crowd",
     "advances": {
-      "action": "",
-      "talent": "",
-      "skill": "",
-      "wound": "",
+      "action": null,
+      "talent": null,
+      "skill": null,
+      "wound": null,
       "open": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": ""
+        "newCareer": null
       },
-      "dedicationBonus": "",
+      "dedicationBonus": null,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         },
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         }
       ]
     },
-    "current": false,
-    "completed": false
+    "current": false
   },
   "_stats": {
     "systemId": "wfrp3e",

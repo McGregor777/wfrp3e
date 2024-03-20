@@ -1,0 +1,34 @@
+<form>
+	<h1>{{localize "ACTIONSELECTOR.ChooseANewAction"}}</h1>
+
+	<nav class="action-tabs tabs" data-group="actions">
+		{{#each actions as |type ty|}}
+			<a class="tab-link {{ty}}" data-tab="{{ty}}">
+				{{localize (lookup @root.actionTypes ty)}}
+			</a>
+		{{/each}}
+	</nav>
+
+	<div class="actions body">
+		{{#each actions as |type ty|}}
+			<div class="action-container item-container tab {{ty}}" data-group="actions" data-tab="{{ty}}">
+				{{#each type}}
+					<label>
+						{{>systems/wfrp3e/templates/partials/item-action-card.hbs
+								action=this
+								currentStance="conservative"}}
+	
+						<input name="action" value="{{this._id}}" type="radio" />
+					</label>
+				{{/each}}
+			</div>
+		{{/each}}
+	</div>
+
+	<p>
+		{{localize "ACTIONSELECTOR.SelectedAction"}}
+		<span class="selection">{{localize "ACTIONSELECTOR.NoActionSelected"}}</span>
+	</p>
+
+	<button class="submit">{{localize "Finish"}}</button>
+</form>

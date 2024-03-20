@@ -10,7 +10,7 @@
   "system": {
     "description": "<p>In southern provinces of the Empire and parts of the Reikland, the fertile plains and gently rolling hills provide the perfect terrain on which to grow crops and raise animals. However, most areas of the Empire are inimical to the attempts of foresters and farmers to tame them, such as swamplands, mountainsides, and dark forbidding forests. The people who live in these areas have to supplement their diets with food found by foraging and hunting.</p>\n<p>The hunter is a valuable member of such isolated rural communities. He knows about the habits of the animals in the wilderness around him, how to track them and snare them in traps or bring them down with an expertly aimed arrow.</p>\n<p>Hunters mostly work to provide meat for the table, but they also learn how to skin an animal, and to preserve hides and pelts that they can later trade to tanners and furriers. Some exotic skins can fetch a very high price. Some hunters also provide effective militia for their province, acting as scouts during times of war. Some hunters even gain a measure of respectability by helping to organise hunting parties for nobles. Hunting is a very popular pastime for some members of the aristocracy, who view it more as a sport than a matter of gathering sustenance. Hunters who master the difficult art of falconry can even become cherished members of a noble household.</p>\n<p>During times of plenty, hunters can find themselves sidelined. Should a village have a good harvest, they will have less need for the hunter&rsquo;s talents, and so he may take up a life of adventure. Parties of adventurers often appreciate the skills of a resourceful outdoorsman who knows how to fire a bow and where to find food if rations start to run low.</p>\n<p><strong>Typical Trappings:</strong> A hunter will carry a bow or crossbow (or longbow if he is an elf), and a dozen arrows, as well as a few snares or animal traps. He may also carry a variety of herbs and poultices to help deal with poisoned bites or infected wounds.</p>\n<p><strong>Career Ability:</strong> You gain <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼</span> to Nature Lore checks to track animals and beasts, Observation checks to notice animals and beasts, and Ballistic Skill checks to attack animals and beasts</p>",
     "advanced": false,
-    "raceRestrictions": "Human, Dwarf, High Elf, or Wood Elf",
+    "raceRestrictions": ["human", "dwarf", "highElf", "woodElf"],
     "traits": "Basic, Menial, Rural, Specialist",
     "talentSockets": [
       "focus",
@@ -36,36 +36,35 @@
     },
     "summary": "Tough and instinctive, with a sense for the outdoors and archery",
     "advances": {
-      "action": "",
-      "talent": "",
-      "skill": "",
-      "wound": "",
+      "action": null,
+      "talent": null,
+      "skill": null,
+      "wound": null,
       "open": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": ""
+        "newCareer": null
       },
-      "dedicationBonus": "",
+      "dedicationBonus": null,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         },
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         }
       ]
     },
-    "current": false,
-    "completed": false
+    "current": false
   },
   "_stats": {
     "systemId": "wfrp3e",

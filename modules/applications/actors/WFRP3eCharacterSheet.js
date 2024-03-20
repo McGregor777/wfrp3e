@@ -8,11 +8,11 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return {
+			...super.defaultOptions,
 			template: "systems/wfrp3e/templates/applications/actors/character-sheet.hbs",
 			width: 932,
-			height: 800,
+			height: 815,
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
 			dragDrop: [{dragSelector: ".item", dropSelector: null}],
 			tabs: [
@@ -21,36 +21,39 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 				{group: "talents", navSelector: ".character-sheet-talent-tabs", contentSelector: ".character-sheet-talents", initial: "focus"},
 				{group: "actions", navSelector: ".character-sheet-action-tabs", contentSelector: ".character-sheet-actions", initial: "melee"}
 			]
-		});
+		};
 	}
 
 	/** @inheritDoc */
 	getData()
 	{
-		const data = super.getData();
-		const actor = this.actor;
+		const data = {
+			...super.getData(),
+			actionTypes: CONFIG.WFRP3e.actionTypes,
+			conditionDurations: CONFIG.WFRP3e.conditionDurations,
+			characteristics: CONFIG.WFRP3e.characteristics,
+			diseaseSymptoms: CONFIG.WFRP3e.disease.symptoms,
+			origins: Object.values(CONFIG.WFRP3e.availableRaces).reduce((origins, race) => {
+				Object.entries(race.origins).forEach(origin => origins[origin[0]] = origin[1]);
+				return origins;
+			}, {}),
+			stances: CONFIG.WFRP3e.stances,
+			symbols: CONFIG.WFRP3e.symbols,
+			talentTypes: CONFIG.WFRP3e.talentTypes,
+			weaponGroups: CONFIG.WFRP3e.weapon.groups,
+			weaponQualities: CONFIG.WFRP3e.weapon.qualities,
+			weaponRanges: CONFIG.WFRP3e.weapon.ranges,
+			talentSocketsByType: this._buildTalentSocketsList()
+		};
+		data.items = this._buildItemLists(data.items);
 
 		this.options.tabs[1].initial = this.actor.system.currentCareer?._id;
 
-		data.actionTypes = CONFIG.WFRP3e.actionTypes;
-		data.conditionDurations = CONFIG.WFRP3e.conditionDurations;
-		data.characteristics = CONFIG.WFRP3e.characteristics;
-		data.diseaseSymptoms = CONFIG.WFRP3e.disease.symptoms;
-		data.stances = CONFIG.WFRP3e.stances;
-		data.symbols = CONFIG.WFRP3e.symbols;
-		data.talentTypes = CONFIG.WFRP3e.talentTypes;
-		data.weaponGroups = CONFIG.WFRP3e.weapon.groups;
-		data.weaponQualities = CONFIG.WFRP3e.weapon.qualities;
-		data.weaponRanges = CONFIG.WFRP3e.weapon.ranges;
-
-		data.items = this._buildItemLists(data);
-		data.talentSocketsByType = this._buildTalentSocketsList();
-
 		// Add basic skills to the Character.
-		if(actor.type === "character" && data.items.skills.length === 0) {
+		if(this.actor.type === "character" && data.items.skills.length === 0) {
 			new Dialog({
 				title: game.i18n.localize("APPLICATION.TITLE.BasicSkillsAdding"),
-				content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.BasicSkillsAdding", {actor: actor.name}) + "</p>",
+				content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.BasicSkillsAdding", {actor: this.actor.name}) + "</p>",
 				buttons: {
 					confirm: {
 						icon: '<span class="fa fa-check"></span>',
@@ -58,7 +61,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 						callback: async dlg => {
 							const basicSkills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill", system: {advanced: false}});
 
-							await Item.createDocuments(basicSkills, {parent: actor});
+							await Item.createDocuments(basicSkills, {parent: this.actor});
 						}
 					},
 					cancel: {
@@ -80,6 +83,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		super.activateListeners(html);
 
+		html.find(".advance-checkbox").change(this._onAdvanceCheckboxChange.bind(this));
+
 		html.find(".current-career-input").click(this._onCurrentCareerInput.bind(this));
 
 		html.find(".impairment .token")
@@ -88,12 +93,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 		html.find(".flip-link").click(this._onFlipClick.bind(this));
 
-		html.find(".quantity-link")
-			.click(this._onQuantityLeftClick.bind(this))
-			.contextmenu(this._onQuantityRightClick.bind(this));
-
 		html.find(".item-roll-link").click(this._onItemRoll.bind(this));
-		html.find(".item-expand-link").click(this._onItemExpandClickClick.bind(this));
+		html.find(".item-expand-link").click(this._onItemExpandClick.bind(this));
 		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
 		html.find(".item-delete-link").click(this._onItemDelete.bind(this));
 
@@ -102,6 +103,10 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			.contextmenu(this._onItemRightClick.bind(this));
 
 		html.find(".item-input").change(this._onItemInput.bind(this));
+
+		html.find(".quantity-link")
+			.click(this._onQuantityLeftClick.bind(this))
+			.contextmenu(this._onQuantityRightClick.bind(this));
 
 		html.find(".recharge-token")
 			.click(this._onRechargeTokenLeftClick.bind(this))
@@ -113,24 +118,29 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 	/**
 	 * Returns items sorted by type.
-	 * @param {Object} data The Actor data
+	 * @param {Array} items The items owned by the Actor.
+	 * @returns {Object} The sorted items owned by the Actor.
+	 * @private
 	 */
-	_buildItemLists(data)
+	_buildItemLists(items)
 	{
-		const sortedItems = data.items.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
-
-		const actions = sortedItems.filter(item => item.type === "action");
+		const sortedItems = items.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		const actions = sortedItems.filter(item => item.type === "action").sort((a, b) => {
+			if(a.system.conservative.traits.includes("Basic") && !b.system.conservative.traits.includes("Basic"))
+				return -1;
+			else if(!a.system.conservative.traits.includes("Basic") && b.system.conservative.traits.includes("Basic"))
+				return 1
+			else
+				return 0;
+		});
 		const talents = sortedItems.filter(item => item.type === "talent");
 
-		const items = {
+		return {
 			abilities: sortedItems.filter(item => item.type === "ability"),
-			actions: {
-				melee: actions.filter(item => item.system.type === "melee"),
-				ranged: actions.filter(item => item.system.type === "ranged"),
-				support: actions.filter(item => item.system.type === "support"),
-				blessing: actions.filter(item => item.system.type === "blessing"),
-				spell: actions.filter(item => item.system.type === "spell")
-			},
+			actions: Object.keys(CONFIG.WFRP3e.actionTypes).reduce((sortedActions, actionType) => {
+				sortedActions[actionType] = actions.filter(action => action.system.type === actionType);
+				return sortedActions;
+			}, {}),
 			armours: sortedItems.filter(item => item.type === "armour"),
 			careers: sortedItems.filter(item => item.type === "career"),
 			conditions: sortedItems.filter(item => item.type === "condition"),
@@ -141,19 +151,13 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			money: sortedItems.filter(item => item.type === "money"),
 			mutations: sortedItems.filter(item => item.type === "mutation"),
 			skills: sortedItems.filter(item => item.type === "skill"),
-			talents: {
-				focus: talents.filter(item => item.system.type === "focus"),
-				reputation: talents.filter(item => item.system.type === "reputation"),
-				tactic: talents.filter(item => item.system.type === "tactic"),
-				faith: talents.filter(item => item.system.type === "faith"),
-				order: talents.filter(item => item.system.type === "order"),
-				trick: talents.filter(item => item.system.type === "trick")
-			},
+			talents: Object.keys(CONFIG.WFRP3e.talentTypes).reduce((sortedTalents, talentType) => {
+				sortedTalents[talentType] = talents.filter(talent => talent.system.type === talentType);
+				return sortedTalents;
+			}, {}),
 			trappings: sortedItems.filter(item => item.type === "trapping"),
 			weapons: sortedItems.filter(item => item.type === "weapon")
 		};
-
-		return items;
 	}
 
 	/**
@@ -164,8 +168,9 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		let talentSocketsByType = {};
 
-		for(const talentType of Object.keys(Object.assign(CONFIG.WFRP3e.talentTypes, {any: "TALENT.TYPE.Any"})))
+		["any", ...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"].forEach(talentType => {
 			talentSocketsByType[talentType] = {};
+		});
 
 		if(this.actor.system.currentCareer) {
 			this.actor.system.currentCareer.system.talentSockets.forEach((talentSocket, index) => {
@@ -222,6 +227,37 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	_getItemById(event)
 	{
 		return this.actor.items.get(event.currentTarget.dataset.itemId ?? $(event.currentTarget).parents(".item").data("itemId"));
+	}
+
+	/**
+	 * Performs follow-up operations after changes on Advance checkbox.
+	 * @param {Event} event
+	 * @private
+	 */
+	_onAdvanceCheckboxChange(event)
+	{
+		if(this.actor.system.experience.current > 0) {
+			const career = this._getItemById(event);
+
+			if(event.currentTarget.checked) {
+				event.currentTarget.checked = false;
+				this.actor.buyAdvance(career, event.currentTarget.dataset.type);
+			}
+			else {
+				const updates = {system: {advances: career.system.advances}};
+
+				if(isNaN(event.currentTarget.dataset.type))
+					updates.system.advances[event.currentTarget.dataset.type] = "";
+				else
+					updates.system.advances.open[event.currentTarget.dataset.type] = "";
+
+				career.update(updates);
+			}
+		}
+		else {
+			event.currentTarget.checked = false;
+			ui.notifications.warn(game.i18n.localize("CHARACTER.SHEET.NoExperienceLeft"));
+		}
 	}
 
 	/**
@@ -392,13 +428,30 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		event.preventDefault();
 		event.stopPropagation();
 
-		const property = event.currentTarget.dataset.path;
+		const item = this._getItemById(event);
+		const propertyPath = event.currentTarget.dataset.path;
 		let value = event.target.value;
 
+		if(event.currentTarget.type === "checkbox" && !event.currentTarget.checked)
+			value = false;
 		if(value === "on")
 			value = true;
 
-		this._getItemById(event).update({[property]: value});
+		// Additional process needed for updates on Arrays.
+		let itemProperty = item;
+		for(let i = 0, path = propertyPath.split('.'), length = path.length; i < length; i++)
+			itemProperty = itemProperty[path[i]];
+
+		if(itemProperty instanceof Array) {
+			const index = event.currentTarget.dataset.index;
+			const subProperty = event.currentTarget.dataset.property;
+
+			subProperty ? itemProperty[index][subProperty] = value : itemProperty[index] = value;
+
+			item.update({[propertyPath]: itemProperty});
+		}
+		else
+			item.update({[propertyPath]: value});
 	}
 
 	/**
@@ -435,7 +488,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onItemExpandClickClick(event)
+	_onItemExpandClick(event)
 	{
 		event.preventDefault();
 
@@ -468,7 +521,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Skill's training level checkbox.
+	 * Performs follow-up operations after changes on a Skill's training level checkbox.
 	 * @param {Event} event
 	 * @private
 	 */

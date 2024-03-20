@@ -2,29 +2,28 @@ export default class WFRP3eActionSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return {
+			...super.defaultOptions,
 			template: "systems/wfrp3e/templates/applications/items/action-sheet.hbs",
 			width: 540,
 			height: 680,
 			classes: ["wfrp3e", "sheet", "item", "action"],
 			tabs: [
-				{group: "face", navSelector: ".face-tabs", contentSelector: ".sheet-body", initial: "conservative-tab"},
-				{group: "conservative", navSelector: ".conservative-tabs", contentSelector: ".conservative-tab", initial: "main"},
-				{group: "reckless", navSelector: ".reckless-tabs", contentSelector: ".reckless-tab", initial: "main"}
+				{group: "face", navSelector: ".face-tabs", contentSelector: ".sheet-body", initial: "conservative.tab"},
+				{group: "conservative", navSelector: ".conservative-tabs", contentSelector: ".conservative.tab", initial: "main"},
+				{group: "reckless", navSelector: ".reckless-tabs", contentSelector: ".reckless.tab", initial: "main"}
 			]
-		});
+		};
 	}
 
 	getData()
 	{
-		const data = super.getData();
-
-		data.actionTypes = CONFIG.WFRP3e.actionTypes;
-		data.stances = CONFIG.WFRP3e.stances;
-		data.symbols = CONFIG.WFRP3e.symbols;
-
-		return data;
+		return {
+			...super.getData(),
+			actionTypes: CONFIG.WFRP3e.actionTypes,
+			stances: CONFIG.WFRP3e.stances,
+			symbols: CONFIG.WFRP3e.symbols
+		};
 	}
 
 	/** @inheritDoc */

@@ -17,8 +17,8 @@
 							{{/if}}
 
 							<input name="system.specialAbilities.0.current"
-							       type="radio"
 							       value="{{@index}}"
+							       type="radio"
 								{{#if (equalTo @root.actor.system.specialAbilities.0.current @index)}} checked{{/if}} />
 						</label>
 					{{/each}}
@@ -67,8 +67,8 @@
 					<div class="special-ability">
 						<input class="special-ability-title"
 						       name="system.specialAbilities.0.title"
-						       type="text"
 						       value="{{actor.system.specialAbilities.0.title}}"
+						       type="text"
 						       placeholder="{{localize 'GROUP.SPECIALABILITY.Title'}}"
 						       title="{{localize 'GROUP.SPECIALABILITY.Title'}}" />
 
@@ -80,21 +80,21 @@
 									 editable=editable}}
 
 							<input name="system.specialAbilities.0.description"
-							       type="text"
 							       value="{{actor.system.specialAbilities.0.description}}"
+							       type="text"
 							       placeholder="{{localize 'GROUP.SPECIALABILITY.Description'}}" />
 						</div>
 					</div>
 
 					<h1 class="name">
-						<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'GROUP.Name'}}"/>
+						<input name="name" value="{{actor.name}}" type="text" placeholder="{{localize 'GROUP.Name'}}"/>
 					</h1>
 
 					<div class="special-ability">
 						<input class="special-ability-title"
 						       name="system.specialAbilities.1.title"
+                               value="{{actor.system.specialAbilities.1.title}}"
 						       type="text"
-						       value="{{actor.system.specialAbilities.1.title}}"
 						       placeholder="{{localize 'GROUP.SPECIALABILITY.Title'}}"
 						       title="{{localize 'GROUP.SPECIALABILITY.Title'}}" />
 
@@ -106,8 +106,8 @@
 									 editable=editable}}
 
 							<input name="system.specialAbilities.1.description"
+                                   value="{{actor.system.specialAbilities.1.description}}"
 							       type="text"
-							       value="{{actor.system.specialAbilities.1.description}}"
 							       placeholder="{{localize 'GROUP.SPECIALABILITY.Description'}}" />
 						</div>
 					</div>
@@ -125,8 +125,8 @@
 							{{/if}}
 
 							<input name="system.specialAbilities.1.current"
-							       type="radio"
 							       value="{{@index}}"
+							       type="radio"
 								{{#if (equalTo @root.actor.system.specialAbilities.1.current @index)}} checked{{/if}} />
 						</label>
 					{{/each}}

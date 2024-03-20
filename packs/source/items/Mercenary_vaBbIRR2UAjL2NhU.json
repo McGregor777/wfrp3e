@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Mercenary",
+  "type": "ability",
+  "_id": "vaBbIRR2UAjL2NhU",
+  "img": "systems/wfrp3e/assets/images/careers/mercenary.webp",
+  "system": {
+    "description": "<p>Once per session, you may add [[DE]] to any single Weapon Skill check you make</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869783722,
+    "modifiedTime": 1710871181456,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!vaBbIRR2UAjL2NhU"
+}

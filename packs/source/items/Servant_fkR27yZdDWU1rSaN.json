@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Servant",
+  "type": "ability",
+  "_id": "fkR27yZdDWU1rSaN",
+  "img": "systems/wfrp3e/assets/images/careers/servant.webp",
+  "system": {
+    "description": "<p>You may choose to socket a Focus talent in your Reputation slot</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710870222059,
+    "modifiedTime": 1710871264874,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!fkR27yZdDWU1rSaN"
+}

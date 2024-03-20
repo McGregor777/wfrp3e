@@ -10,7 +10,7 @@
   "system": {
     "description": "<p>In the underworld of the Empire there is never a shortage of people looking to acquire false identification, documents that might provide a handy alibi, or authentic looking fakes with which to dupe a buyer. Production of such items requires the talents of a practised forger. Forgers are the artists of the criminal world, but they imitate rather than create. They meticulously craft, refine, and finesse copies of legitimate documents or artworks and pass them off as originals.</p>\n<p>A talented forger can copy handwriting with expert precision if provided with a sample beforehand, and are familiar with the heraldries of noble families and merchant houses. Good forgers have expert knowledge of documents, seals, writing materials, and professional jargon.</p>\n<p>Depending on his skill and talent, a forger might be required to make such items as fake references from guilds, or seals bearing a noble&rsquo;s heraldry to be placed on letters. Some forgers melt down coins and then create new ones using dies they have carved or cast. Such coins will tend to be thinner than genuine currency, or use a cheap metal alloy in their composition. Successful forgers cultivate few contacts. They usually work with a trusted fence who acts as an agent for their talents. The fence will usually take the details of the job from the customer without letting them know who the forger is.</p>\n<p>Forgers generally need to work in strictest anonymity as the punishment for forgery is harsh. The price of discovery is usually the mutilation of the forger&rsquo;s hands, and a period of torture as the authorities try to learn what jobs he performed in the past.</p>\n<p><strong>Typical Trappings:</strong> A forger often carries with him or has easy access to the tools needed in order to create fake documents, coins, and artwork. These include items such as quills, paper, pots of paint, sets of letters acquired from a print shop, coin dies, metal ingots, and a magnifying glass.</p>\n<p><strong>Career Ability:</strong> You may choose to socket one Reputation talent in one of your Focus talent slots</p>",
     "advanced": false,
-    "raceRestrictions": "Human or Dw",
+    "raceRestrictions": ["human", "dwarf"],
     "traits": "Basic, Rogue, Specialist, Urban",
     "talentSockets": [
       "focus",
@@ -36,36 +36,35 @@
     },
     "summary": "Criminal artist who excels at recreating falsehoods and fakes",
     "advances": {
-      "action": "",
-      "talent": "",
-      "skill": "",
-      "wound": "",
+      "action": null,
+      "talent": null,
+      "skill": null,
+      "wound": null,
       "open": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": ""
+        "newCareer": null
       },
-      "dedicationBonus": "",
+      "dedicationBonus": null,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         },
         {
           "cost": 0,
-          "nature": ""
+          "nature": null
         }
       ]
     },
-    "current": false,
-    "completed": false
+    "current": false
   },
   "_stats": {
     "systemId": "wfrp3e",

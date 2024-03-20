@@ -7,10 +7,7 @@ export const WFRP3e = {
 		spell: "ACTION.TYPE.Spell"
 	},
 	availableRaces: {
-		reiklander: {
-			racialAbilities: ["Adaptable", "Diversity", "Favoured by Fate"],
-			wound: 9,
-			corruption: 5,
+		human: {
 			creationPoints: 25,
 			defaultRatings: {
 				strength: 2,
@@ -20,15 +17,20 @@ export const WFRP3e = {
 				willpower: 2,
 				fellowship: 2
 			},
-			name: "RACE.Reiklander",
-			introduction: "RACE.INTRODUCTION.Reiklander",
-			startingCareerRollTableId: "PoY76It3s6IkTr3g",
-			art: "systems/wfrp3e/assets/images/races/empire.webp"
+			name: "RACE.Human",
+			origins: {
+				reiklander: {
+					abilities: ["Adaptable", "Diversity", "Favoured by Fate"],
+					wound: 9,
+					corruption: 5,
+					name: "ORIGIN.Reiklander",
+					introduction: "ORIGIN.INTRODUCTION.Reiklander",
+					startingCareerRollTableId: "PoY76It3s6IkTr3g",
+					art: "systems/wfrp3e/assets/images/races/empire.webp"
+				}
+			}
 		},
-		azgarazDwarf: {
-			racialAbilities: ["Children of Grungni", "Grudge", "Sturdy", "Night Vision"],
-			wound: 10,
-			corruption: 10,
+		dwarf: {
 			creationPoints: 20,
 			defaultRatings: {
 				strength: 3,
@@ -38,15 +40,20 @@ export const WFRP3e = {
 				willpower: 2,
 				fellowship: 2
 			},
-			name: "RACE.AzgarazDwarf",
-			introduction: "RACE.INTRODUCTION.AzgarazDwarf",
-			startingCareerRollTableId: "Clr8Gwsfs7VkMFjd",
-			art: "systems/wfrp3e/assets/images/races/dwarf.webp"
+			name: "RACE.Dwarf",
+			origins: {
+				karakAzgaraz: {
+					abilities: ["Children of Grungni", "Grudge", "Sturdy", "Night Vision"],
+					wound: 10,
+					corruption: 10,
+					name: "ORIGIN.KarakAzgaraz",
+					introduction: "ORIGIN.INTRODUCTION.KarakAzgaraz",
+					startingCareerRollTableId: "Clr8Gwsfs7VkMFjd",
+					art: "systems/wfrp3e/assets/images/races/dwarf.webp"
+				}
+			}
 		},
 		highElf: {
-			racialAbilities: ["Composure", "Erudite", "Isha's Chosen", "Night Vision"],
-			wound: 8,
-			corruption: 10,
 			creationPoints: 20,
 			defaultRatings: {
 				strength: 2,
@@ -57,14 +64,19 @@ export const WFRP3e = {
 				fellowship: 2
 			},
 			name: "RACE.HighElf",
-			introduction: "RACE.INTRODUCTION.HighElf",
-			startingCareerRollTableId: "tJU9IvQGkcIIBPce",
-			art: "systems/wfrp3e/assets/images/races/high_elf.webp"
+			origins: {
+				ulthuan: {
+					abilities: ["Composure", "Erudite", "Isha's Chosen", "Night Vision"],
+					wound: 8,
+					corruption: 10,
+					name: "ORIGIN.Ulthuan",
+					introduction: "ORIGIN.INTRODUCTION.Ulthuan",
+					startingCareerRollTableId: "tJU9IvQGkcIIBPce",
+					art: "systems/wfrp3e/assets/images/races/high_elf.webp"
+				}
+			}
 		},
 		woodElf: {
-			racialAbilities: ["Forest Walk", "Nature Bond", "Orion's Favoured", "Night Vision"],
-			wound: 8,
-			corruption: 10,
 			creationPoints: 20,
 			defaultRatings: {
 				strength: 2,
@@ -75,9 +87,17 @@ export const WFRP3e = {
 				fellowship: 2
 			},
 			name: "RACE.WoodElf",
-			introduction: "RACE.INTRODUCTION.WoodElf",
-			startingCareerRollTableId: "DuENZYjzQuelc4Yl",
-			art: "systems/wfrp3e/assets/images/races/wood_elf.webp"
+			origins: {
+				athelLoren: {
+					abilities: ["Forest Walk", "Nature Bond", "Orion's Favoured", "Night Vision"],
+					wound: 8,
+					corruption: 10,
+					name: "ORIGIN.AthelLoren",
+					introduction: "ORIGIN.INTRODUCTION.AthelLoren",
+					startingCareerRollTableId: "DuENZYjzQuelc4Yl",
+					art: "systems/wfrp3e/assets/images/races/wood_elf.webp"
+				}
+			}
 		}
 	},
 	attributes: {
@@ -1013,8 +1033,7 @@ export const WFRP3e = {
 		tactic: "TALENT.TYPE.Tactic",
 		faith: "TALENT.TYPE.Faith",
 		order: "TALENT.TYPE.Order",
-		tricks: "TALENT.TYPE.Tricks",
-		insanity: "TALENT.TYPE.Insanity"
+		tricks: "TALENT.TYPE.Tricks"
 	},
 	weapon: {
 		groups: {

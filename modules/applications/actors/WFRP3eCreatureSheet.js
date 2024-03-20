@@ -2,8 +2,8 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 {
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "sheet", "actor", "creature", "creature-sheet"],
 			dragDrop: [{dragSelector: ".item", dropSelector: null}],
 			height: 660,
@@ -13,21 +13,21 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 			],
 			template: "systems/wfrp3e/templates/applications/actors/creature-sheet.hbs",
 			width: 420
-		});
+		};
 	}
 
 	/** @inheritDoc */
 	getData()
 	{
-		const data = super.getData();
-
-		data.actionTypes = CONFIG.WFRP3e.actionTypes;
-		data.attributes = CONFIG.WFRP3e.attributes;
-		data.characteristics = CONFIG.WFRP3e.characteristics;
-		data.stances = CONFIG.WFRP3e.stances;
-		data.symbols = CONFIG.WFRP3e.symbols;
-
-		data.items = this._buildItemLists(data);
+		const data = {
+			...super.getData(),
+			actionTypes: CONFIG.WFRP3e.actionTypes,
+			attributes: CONFIG.WFRP3e.attributes,
+			characteristics: CONFIG.WFRP3e.characteristics,
+			stances: CONFIG.WFRP3e.stances,
+			symbols: CONFIG.WFRP3e.symbols
+		};
+		data.items = this._buildItemLists(data.items);
 
 		console.log(data)
 
@@ -59,24 +59,29 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 
 	/**
 	 * Returns items sorted by type.
-	 * @param {Object} data The items sorted by type.
+	 * @param {Array} items The items owned by the Actor.
+	 * @returns {Object} The sorted items owned by the Actor.
+	 * @private
 	 */
-	_buildItemLists(data)
+	_buildItemLists(items)
 	{
-		const sortedItems = data.items.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
-
-		const actions = sortedItems.filter(item => item.type === "action");
+		const sortedItems = items.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		const actions = sortedItems.filter(item => item.type === "action").sort((a, b) => {
+			if(a.system.conservative.traits.includes("Basic") && !b.system.conservative.traits.includes("Basic"))
+				return -1;
+			else if(!a.system.conservative.traits.includes("Basic") && b.system.conservative.traits.includes("Basic"))
+				return 1
+			else
+				return 0;
+		});
 		const talents = sortedItems.filter(item => item.type === "talent");
 
-		const items = {
+		return {
 			abilities: sortedItems.filter(item => item.type === "ability"),
-			actions: {
-				melee: actions.filter(item => item.system.conservative.type === "melee"),
-				ranged: actions.filter(item => item.system.conservative.type === "ranged"),
-				support: actions.filter(item => item.system.conservative.type === "support"),
-				blessing: actions.filter(item => item.system.conservative.type === "blessing"),
-				spell: actions.filter(item => item.system.conservative.type === "spell")
-			},
+			actions: Object.keys(CONFIG.WFRP3e.actionTypes).reduce((sortedActions, actionType) => {
+				sortedActions[actionType] = actions.filter(action => action.system.type === actionType);
+				return sortedActions;
+			}, {}),
 			armours: sortedItems.filter(item => item.type === "armour"),
 			careers: sortedItems.filter(item => item.type === "career"),
 			conditions: sortedItems.filter(item => item.type === "condition"),
@@ -87,19 +92,13 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 			money: sortedItems.filter(item => item.type === "money"),
 			mutations: sortedItems.filter(item => item.type === "mutation"),
 			skills: sortedItems.filter(item => item.type === "skill"),
-			talents: {
-				focus: talents.filter(item => item.system.type === "focus"),
-				reputation: talents.filter(item => item.system.type === "reputation"),
-				tactic: talents.filter(item => item.system.type === "tactic"),
-				faith: talents.filter(item => item.system.type === "faith"),
-				order: talents.filter(item => item.system.type === "order"),
-				trick: talents.filter(item => item.system.type === "trick")
-			},
+			talents: Object.keys(CONFIG.WFRP3e.talentTypes).reduce((sortedTalents, talentType) => {
+				sortedTalents[talentType] = talents.filter(talent => talent.system.type === talentType);
+				return sortedTalents;
+			}, {}),
 			trappings: sortedItems.filter(item => item.type === "trapping"),
 			weapons: sortedItems.filter(item => item.type === "weapon")
 		};
-
-		return items;
 	}
 
 	/**

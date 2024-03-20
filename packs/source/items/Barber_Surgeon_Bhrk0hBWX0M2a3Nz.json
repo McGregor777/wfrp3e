@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Barber-Surgeon",
+  "type": "ability",
+  "_id": "Bhrk0hBWX0M2a3Nz",
+  "img": "systems/wfrp3e/assets/images/careers/barber_surgeon.webp",
+  "system": {
+    "description": "<p>Once per session, you may add [[DE]] to any First Aid or Medicine check</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869287637,
+    "modifiedTime": 1710871080161,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!Bhrk0hBWX0M2a3Nz"
+}

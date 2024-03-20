@@ -1,3 +1,4 @@
+@import "components/ability_card";
 @import "components/action_card";
 @import "components/action_sheet";
 @import "components/career_sheet";
@@ -15,6 +16,7 @@
 @import "components/mutation_card";
 @import "components/party_sheet";
 @import "components/roll_message";
+@import "components/selector";
 @import "components/sheet";
 @import "components/talent_card";
 @import "components/typography";
@@ -152,6 +154,19 @@ th {
 
 .special-die {
 	border: none;
+}
+
+.tab-link.active {
+	color: white;
+	text-shadow:
+			-1px -1px 0 black,
+			-1px 0 0 black,
+			0 -1px 0 black,
+			-1px 1px 0 black,
+			1px -1px 0 black,
+			0 1px 0 black,
+			1px 0 0 black,
+			1px 1px 0 black;
 }
 
 .wfrp3e-font {

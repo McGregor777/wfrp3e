@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Messenger",
+  "type": "ability",
+  "_id": "vHkoS5unOTyr9kRF",
+  "img": "systems/wfrp3e/assets/images/careers/messenger.webp",
+  "system": {
+    "description": "<p>Each time fortune refreshes, you may immediately perform a free manoeuvre</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869817253,
+    "modifiedTime": 1710871191800,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!vHkoS5unOTyr9kRF"
+}

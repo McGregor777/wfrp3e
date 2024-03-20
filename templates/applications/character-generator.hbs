@@ -1,6 +1,6 @@
 <div class="character-creation-steps">
 	<div class="step-names">
-		<span class="race-selection active">{{localize "CHARACTERGENERATOR.Race"}}</span>
+		<span class="origin-selection active">{{localize "CHARACTERGENERATOR.Origin"}}</span>
 		<span class="career-selection">{{localize "CHARACTERGENERATOR.Career"}}</span>
 		<span class="creation-point-investment">{{localize "CHARACTERGENERATOR.CreationPoints"}}</span>
 		<span class="skill-training">{{localize "CHARACTERGENERATOR.Skills"}}</span>
@@ -15,27 +15,27 @@
 </div>
 
 <form>
-	<div class="step active" data-step="race-selection">
-		<h4>{{localize "CHARACTERGENERATOR.STEP.RaceSelection"}}</h4>
+	<div class="step active" data-step="origin-selection">
+		<h4>{{localize "CHARACTERGENERATOR.STEP.OriginSelection"}}</h4>
 
-		<div class="races">
-			{{#each availableRaces as |race r|}}
+		<div class="origins">
+			{{#each origins as |origin or|}}
 				<label {{#if @first}}class="active"{{/if}}>
-					<img src="{{race.art}}" alt="{{localize race.name}}"/>
+					<img src="{{origin.art}}" alt="{{localize origin.name}}"/>
 
-					<div class="race-name">
-						<span>{{localize race.name}}</span>
+					<div class="origin-name">
+						<span>{{localize origin.name}}</span>
 					</div>
 
-					<input name="race" value="{{r}}" type="radio" {{#if @first}}checked{{/if}}/>
+					<input name="origin" value="{{or}}" type="radio"{{#if @first}} checked{{/if}}/>
 				</label>
 			{{/each}}
 		</div>
 
-		<p>{{localize "CHARACTERGENERATOR.CurrentlySelectedRace"}}<span class="selected-race">{{localize availableRaces.reiklander.name}}</span></p>
+		<p>{{localize "CHARACTERGENERATOR.CurrentlySelectedOrigin"}}<span class="selected-origin">{{localize origins.reiklander.name}}</span></p>
 
-		<div class="race-description">
-			{{>systems/wfrp3e/templates/partials/character-generator-race-description.hbs race=availableRaces.reiklander racialAbilities=racialAbilities}}
+		<div class="origin-description">
+			{{>systems/wfrp3e/templates/partials/character-generator-origin-description.hbs origin=origins.reiklander originAbilities=originAbilities}}
 		</div>
 
 		<div class="buttons">
@@ -103,7 +103,7 @@
 	<div class="step" data-step="action-selection">
 		<h4>{{localize "CHARACTERGENERATOR.STEP.ActionsSelection"}}</h4>
 
-		<div class="action-selection"></div>
+		<div class="action-selector selector"></div>
 
 		<p>{{localize "CHARACTERGENERATOR.RemainingActions"}}<span class="remaining-actions">0</span></p>
 

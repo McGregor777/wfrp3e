@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Coachman",
+  "type": "ability",
+  "_id": "rAcPMtKYO8WVhbJz",
+  "img": "systems/wfrp3e/assets/images/careers/coachman.webp",
+  "system": {
+    "description": "<p>Once per session, you may add [[DE]] to a Ride check or to a Ballistic Skill check made while mounted or while on a moving vehicle</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869445295,
+    "modifiedTime": 1710871104228,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!rAcPMtKYO8WVhbJz"
+}

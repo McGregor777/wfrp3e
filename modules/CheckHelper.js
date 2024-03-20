@@ -21,7 +21,7 @@ export default class CheckHelper
 
 		await new CheckBuilder(
 			new DicePool({
-				characteristicDice: characteristic.value - Math.abs(stance),
+				characteristicDice: characteristic.rating - Math.abs(stance),
 				fortuneDice: characteristic.fortune,
 				expertiseDice: skill.system.trainingLevel,
 				conservativeDice: stance < 0 ? Math.abs(stance) : 0,
@@ -70,7 +70,7 @@ export default class CheckHelper
 
 		await new CheckBuilder(
 			new DicePool({
-				characteristicDice: characteristic?.value - Math.abs(stance) ?? 0,
+				characteristicDice: characteristic?.rating - Math.abs(stance) ?? 0,
 				fortuneDice: characteristic?.fortune ?? 0,
 				expertiseDice: skill?.system.trainingLevel ?? 0,
 				conservativeDice: stance < 0 ? Math.abs(stance) : 0,
@@ -103,7 +103,7 @@ export default class CheckHelper
 		const stance = actor.system.stance.current ?? actor.system.stance;
 
 		return new DicePool({
-			characteristicDice: characteristic.value - Math.abs(stance),
+			characteristicDice: characteristic.rating - Math.abs(stance),
 			fortuneDice: characteristic.fortune,
 			conservativeDice: stance < 0 ? Math.abs(stance) : 0,
 			recklessDice: stance > 0 ? stance : 0

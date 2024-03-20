@@ -2,19 +2,17 @@ export default class WFRP3eMutationSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return {
+			...super.defaultOptions,
 			template: "systems/wfrp3e/templates/applications/items/mutation-sheet.hbs",
 			//width: 530,
 			height: 400,
 			classes: ["wfrp3e", "sheet", "item", "mutation"]
-		});
+		};
 	}
 
 	getData()
 	{
-		const data = super.getData();
-
-		return data;
+		return super.getData();
 	}
 }

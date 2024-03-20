@@ -1,7 +1,10 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
 		<img class="actor-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-		<h1><input class="name-input" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}" /></h1>
+
+		<h1>
+			<input class="name-input" name="name" value="{{item.name}}" type="text" placeholder="{{localize 'Name'}}" />
+		</h1>
 	</header>
 	
 	<nav class="sheet-tabs tabs career-sheet-tabs" data-group="primary">
@@ -14,18 +17,43 @@
 	<section class="sheet-body career-sheet-body">
 		<div class="tab tab-container header-tab-link" data-group="primary" data-tab="header">
 			<div class="sheet-form-div">
-				<label class="sheet-form-label">{{localize 'CAREER.AdvancedCareer'}}</label>
-				<input class="sheet-form-input" name="system.advanced" type="checkbox" value="{{item.system.advanced}}"{{#if item.system.advanced}} checked{{/if}}  data-dtype="boolean" />
+				<label class="sheet-form-label">
+					{{localize 'CAREER.AdvancedCareer'}}
+
+					<input class="sheet-form-input"
+					       name="system.advanced"
+					       value="{{item.system.advanced}}"
+					       type="checkbox"{{#if item.system.advanced}} checked{{/if}} />
+				</label>
 			</div>
 
 			<div class="sheet-form-div">
-				<label class="sheet-form-label">{{localize 'CAREER.RaceRestrictions'}}</label>
-				<input class="sheet-form-input" name="system.raceRestrictions" type="text" value="{{item.system.raceRestrictions}}" placeholder="{{localize 'CAREER.RaceRestrictions'}}" />
+				<label class="sheet-form-label">
+					{{localize 'CAREER.RaceRestrictions'}}
+
+					<a class="race-restriction-remove"><span class="fas fa-minus"></span></a>
+					<a class="race-restriction-add"><span class="fas fa-plus"></span></a>
+
+					<div>
+						{{#each item.system.raceRestrictions}}
+							<select class="career-sheet-race-restriction-select sheet-form-select" name="system.raceRestrictions">
+								{{selectOptions @root.races selected=this labelAttr="name" localize=true}}
+							</select>
+						{{/each}}
+					</div>
+				</label>
 			</div>
 
 			<div class="sheet-form-div">
-				<label class="sheet-form-label">{{localize 'CAREER.Traits'}}</label>
-				<input class="sheet-form-input" name="system.traits" type="text" value="{{item.system.traits}}" placeholder="{{localize 'Traits'}}" />
+				<label class="sheet-form-label">
+					{{localize 'CAREER.Traits'}}
+
+					<input class="sheet-form-input"
+					       name="system.traits"
+					       value="{{item.system.traits}}"
+					       type="text"
+					       placeholder="{{localize 'Traits'}}" />
+				</label>
 			</div>
 		</div>
 
@@ -58,19 +86,40 @@
 			</div>
 
 			<div class="sheet-form-div">
-				<label class="sheet-form-label">{{localize 'CAREER.CareerSkills'}}</label>
-				<input class="sheet-form-input" name="system.careerSkills" type="text" value="{{item.system.careerSkills}}" placeholder="{{localize 'CAREER.CareerSkills'}}" />
+				<label class="sheet-form-label">
+					{{localize 'CAREER.CareerSkills'}}
+
+					<input class="sheet-form-input"
+					       name="system.careerSkills"
+					       value="{{item.system.careerSkills}}"
+					       type="text"
+					       placeholder="{{localize 'CAREER.CareerSkills'}}" />
+				</label>
 			</div>
 
 			<div class="sheet-form-div career-starting-stance-segments">
 				<div>
-					<label class="sheet-form-label">{{localize 'CAREER.StartingConservativeSegments'}}</label>
-					<input class="sheet-form-input" name="system.startingStance.conservativeSegments" type="number" value="{{item.system.startingStance.conservativeSegments}}" placeholder="{{localize 'CAREER.StartingConservativeSegments'}}" />
+					<label class="sheet-form-label">
+						{{localize 'CAREER.StartingConservativeSegments'}}
+
+						<input class="sheet-form-input"
+						       name="system.startingStance.conservativeSegments"
+						       value="{{item.system.startingStance.conservativeSegments}}"
+						       type="number"
+						       placeholder="{{localize 'CAREER.StartingConservativeSegments'}}" />
+					</label>
 				</div>
 
 				<div>
-					<label class="sheet-form-label">{{localize 'CAREER.StartingRecklessSegments'}}</label>
-					<input class="sheet-form-input" name="system.startingStance.recklessSegments" type="number" value="{{item.system.startingStance.recklessSegments}}" placeholder="{{localize 'CAREER.StartingRecklessSegments'}}" />
+					<label class="sheet-form-label">
+						{{localize 'CAREER.StartingRecklessSegments'}}
+
+						<input class="sheet-form-input"
+						       name="system.startingStance.recklessSegments"
+						       type="number"
+						       value="{{item.system.startingStance.recklessSegments}}"
+						       placeholder="{{localize 'CAREER.StartingRecklessSegments'}}" />
+					</label>
 				</div>
 			</div>
 		</div>
@@ -78,50 +127,106 @@
 		<div class="tab tab-container advances-tab-link" data-group="primary" data-tab="advances">
 			<div class="sheet-form-div career-advance-options">
 				<div>
-					<label class="sheet-form-label">{{localize 'CAREER.ActionAdvanceOptions'}}</label>
-					<input class="sheet-form-input" name="system.advanceOptions.action" type="number" value="{{item.system.advanceOptions.action}}" placeholder="{{localize 'CAREER.ActionAdvanceOptions'}}" />
+					<label class="sheet-form-label">
+						{{localize 'CAREER.ActionAdvanceOptions'}}
+
+						<input class="sheet-form-input"
+						       name="system.advanceOptions.action"
+						       value="{{item.system.advanceOptions.action}}"
+						       type="number"
+						       placeholder="{{localize 'CAREER.ActionAdvanceOptions'}}" />
+					</label>
 				</div>
 
 				<div>
-					<label class="sheet-form-label">{{localize 'CAREER.TalentAdvanceOptions'}}</label>
-					<input class="sheet-form-input" name="system.advanceOptions.talent" type="number" value="{{item.system.advanceOptions.talent}}" placeholder="{{localize 'CAREER.TalentAdvanceOptions'}}" />
+					<label class="sheet-form-label">
+						{{localize 'CAREER.TalentAdvanceOptions'}}
+
+						<input class="sheet-form-input"
+						       name="system.advanceOptions.talent"
+						       value="{{item.system.advanceOptions.talent}}"
+						       type="number"
+						       placeholder="{{localize 'CAREER.TalentAdvanceOptions'}}" />
+					</label>
 				</div>
 			</div>
 
 			<div class="sheet-form-div career-advance-options">
 				<div>
-					<label class="sheet-form-label">{{localize 'CAREER.SkillAdvanceOptions'}}</label>
-					<input class="sheet-form-input" name="system.advanceOptions.skill" type="number" value="{{item.system.advanceOptions.skill}}" placeholder="{{localize 'CAREER.SkillAdvanceOptions'}}" />		
+					<label class="sheet-form-label">
+						{{localize 'CAREER.SkillAdvanceOptions'}}
+
+						<input class="sheet-form-input"
+						       name="system.advanceOptions.skill"
+						       value="{{item.system.advanceOptions.skill}}"
+						       type="number"
+						       placeholder="{{localize 'CAREER.SkillAdvanceOptions'}}" />
+					</label>
 				</div>
 
 				<div>
-					<label class="sheet-form-label">{{localize 'CAREER.FortuneAdvanceOptions'}}</label>
-					<input class="sheet-form-input" name="system.advanceOptions.fortune" type="number" value="{{item.system.advanceOptions.fortune}}" placeholder="{{localize 'CAREER.FortuneAdvanceOptions'}}" />
+					<label class="sheet-form-label">
+						{{localize 'CAREER.FortuneAdvanceOptions'}}
+
+						<input class="sheet-form-input"
+						       name="system.advanceOptions.fortune"
+						       value="{{item.system.advanceOptions.fortune}}"
+						       type="number"
+						       placeholder="{{localize 'CAREER.FortuneAdvanceOptions'}}" />
+					</label>
 				</div>
 			</div>
 
 			<div class="sheet-form-div career-advance-options">
 				<div>
-					<label class="sheet-form-label">{{localize 'CAREER.ConservativeAdvanceOptions'}}</label>
-					<input class="sheet-form-input" name="system.advanceOptions.conservative" type="number" value="{{item.system.advanceOptions.conservative}}" placeholder="{{localize 'CAREER.ConservativeAdvanceOptions'}}" />
+					<label class="sheet-form-label">
+						{{localize 'CAREER.ConservativeAdvanceOptions'}}
+
+						<input class="sheet-form-input"
+						       name="system.advanceOptions.conservative"
+						       value="{{item.system.advanceOptions.conservative}}"
+						       type="number"
+						       placeholder="{{localize 'CAREER.ConservativeAdvanceOptions'}}" />
+					</label>
 				</div>
 
 				<div class="sheet-form-div">
-					<label class="sheet-form-label">{{localize 'CAREER.RecklessAdvanceOptions'}}</label>
-					<input class="sheet-form-input" name="system.advanceOptions.reckless" type="number" value="{{item.system.advanceOptions.reckless}}" placeholder="{{localize 'CAREER.RecklessAdvanceOptions'}}" />
+					<label class="sheet-form-label">
+						{{localize 'CAREER.RecklessAdvanceOptions'}}
+
+						<input class="sheet-form-input"
+						       name="system.advanceOptions.reckless"
+						       value="{{item.system.advanceOptions.reckless}}"
+						       type="number"
+						       placeholder="{{localize 'CAREER.RecklessAdvanceOptions'}}" />
+					</label>
 				</div>
 			</div>
 
 			<div class="sheet-form-div">
-				<label class="sheet-form-label">{{localize 'CAREER.WoundAdvanceOptions'}}</label>
-				<input class="sheet-form-input" name="system.advanceOptions.wound" type="number" value="{{item.system.advanceOptions.wound}}" placeholder="{{localize 'CAREER.WoundsAdvanceOptions'}}" />
+				<label class="sheet-form-label">
+					{{localize 'CAREER.WoundAdvanceOptions'}}
+
+					<input class="sheet-form-input"
+					       name="system.advanceOptions.wound"
+					       value="{{item.system.advanceOptions.wound}}"
+					       type="number"
+					       placeholder="{{localize 'CAREER.WoundsAdvanceOptions'}}" />
+				</label>
 			</div>
 		</div>
 
 		<div class="tab tab-container setting-tab-link" data-group="primary" data-tab="setting">
 			<div class="sheet-form-div">
-				<label class="sheet-form-label">{{localize 'CAREER.Summary'}}</label>
-				<input class="sheet-form-input" name="system.summary" type="text" value="{{item.system.summary}}" placeholder="{{localize 'CAREER.Summary'}}" />
+				<label class="sheet-form-label">
+					{{localize 'CAREER.Summary'}}
+
+					<input class="sheet-form-input"
+					       name="system.summary"
+					       value="{{item.system.summary}}"
+					       type="text"
+					       placeholder="{{localize 'CAREER.Summary'}}" />
+				</label>
 			</div>
 
 			<div class="sheet-form-div">

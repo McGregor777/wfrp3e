@@ -1,0 +1,26 @@
+{
+  "folder": "k9frJVrXOYBhXYbo",
+  "name": "Gambler",
+  "type": "ability",
+  "_id": "8dh4kUBhOoXTMGR8",
+  "img": "systems/wfrp3e/assets/images/careers/gambler.webp",
+  "system": {
+    "description": "<p>Once per session, you may re-roll the entire dice pool for any single check. Dice cannot be changed or added to the pool. You must accept the new result</p>"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "0.8.1-alpha",
+    "coreVersion": "11.315",
+    "createdTime": 1710869608731,
+    "modifiedTime": 1710871144107,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!items!8dh4kUBhOoXTMGR8"
+}
