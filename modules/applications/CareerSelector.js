@@ -21,13 +21,14 @@ export default class CareerSelector extends FormApplication
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "selector", "career-selector"],
 			template: "systems/wfrp3e/templates/applications/career-selector.hbs",
 			tabs: [{group: "careers", navSelector: ".career-tabs", contentSelector: ".careers", initial: "basic"}],
 			width: 920,
 			height: 835
-		});
+		};
 	}
 
 	/** @inheritDoc */
@@ -35,10 +36,11 @@ export default class CareerSelector extends FormApplication
 	{
 		await this._buildCareerLists();
 
-		return mergeObject(super.getData(), {
+		return {
+			...super.getData(),
 			careers: this.careers,
 			characteristics: CONFIG.WFRP3e.characteristics
-		});
+		};
 	}
 
 	/** @inheritDoc */

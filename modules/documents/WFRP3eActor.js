@@ -169,7 +169,7 @@ export default class WFRP3eActor extends Actor
 	 */
 	changeImpairment(impairment, value)
 	{
-		const changes = {system: {impairments: {}}};
+		const changes = {"system.impairments": {}};
 		changes.system.impairments[impairment] = this.system.impairments[impairment] + value;
 
 		this.update(changes);

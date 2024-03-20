@@ -3,24 +3,22 @@ export default class WFRP3ePartySheet extends ActorSheet
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {
+		return {
+			...super.defaultOptions,
 			template: "systems/wfrp3e/templates/applications/actors/party-sheet.hbs",
 			width: 800,
 			height: 540,
 			classes: ["wfrp3e", "sheet", "actor", "party", "party-sheet"]
-		});
+		};
 	}
 
 	/** @inheritDoc */
 	getData()
 	{
-		const data = super.getData();
-
-		data.talentTypes = Object.assign(CONFIG.WFRP3e.talentTypes, {any: "TALENT.TYPE.Any"});
-
-		console.log(data);
-
-		return data;
+		return {
+			...super.getData(),
+			talentTypes: {any: "TALENT.TYPE.Any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPE.Insanity"}
+		};
 	}
 
 	/** @inheritDoc */

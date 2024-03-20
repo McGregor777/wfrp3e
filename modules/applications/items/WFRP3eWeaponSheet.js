@@ -2,29 +2,26 @@ export default class WFRP3eWeaponSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return {
+			...super.defaultOptions,
 			template: "systems/wfrp3e/templates/applications/items/weapon-sheet.hbs",
 			//width: 530,
 			//height: 560,
 			classes: ["wfrp3e", "sheet", "item", "trapping", "weapon"],
-			tabs: [
-				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"},
-			]
-		});
+			tabs: [{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"},]
+		};
 	}
 
 	getData()
 	{
-		const data = super.getData();
-
-		data.rarities = CONFIG.WFRP3e.rarities;
-		data.qualities = CONFIG.WFRP3e.weapon.qualities;
-		data.qualitiesWithRating = ["attuned", "pierce", "unreliable"];
-		data.groups = CONFIG.WFRP3e.weapon.groups;
-		data.ranges = CONFIG.WFRP3e.weapon.ranges;
-
-		return data;
+		return {
+			...super.getData(),
+			rarities: CONFIG.WFRP3e.rarities,
+			qualities: CONFIG.WFRP3e.weapon.qualities,
+			qualitiesWithRating: ["attuned", "pierce", "unreliable"],
+			groups: CONFIG.WFRP3e.weapon.groups,
+			ranges: CONFIG.WFRP3e.weapon.ranges
+		};
 	}
 
 	/** @inheritDoc */

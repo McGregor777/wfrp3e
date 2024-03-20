@@ -8,8 +8,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return {
+			...super.defaultOptions,
 			template: "systems/wfrp3e/templates/applications/actors/character-sheet.hbs",
 			width: 932,
 			height: 815,
@@ -21,13 +21,14 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 				{group: "talents", navSelector: ".character-sheet-talent-tabs", contentSelector: ".character-sheet-talents", initial: "focus"},
 				{group: "actions", navSelector: ".character-sheet-action-tabs", contentSelector: ".character-sheet-actions", initial: "melee"}
 			]
-		});
+		};
 	}
 
 	/** @inheritDoc */
 	getData()
 	{
-		const data = mergeObject(super.getData(), {
+		const data = {
+			...super.getData(),
 			actionTypes: CONFIG.WFRP3e.actionTypes,
 			conditionDurations: CONFIG.WFRP3e.conditionDurations,
 			characteristics: CONFIG.WFRP3e.characteristics,
@@ -43,7 +44,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			weaponQualities: CONFIG.WFRP3e.weapon.qualities,
 			weaponRanges: CONFIG.WFRP3e.weapon.ranges,
 			talentSocketsByType: this._buildTalentSocketsList()
-		});
+		};
 		data.items = this._buildItemLists(data.items);
 
 		this.options.tabs[1].initial = this.actor.system.currentCareer?._id;
@@ -92,12 +93,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 		html.find(".flip-link").click(this._onFlipClick.bind(this));
 
-		html.find(".quantity-link")
-			.click(this._onQuantityLeftClick.bind(this))
-			.contextmenu(this._onQuantityRightClick.bind(this));
-
 		html.find(".item-roll-link").click(this._onItemRoll.bind(this));
-		html.find(".item-expand-link").click(this._onItemExpandClickClick.bind(this));
+		html.find(".item-expand-link").click(this._onItemExpandClick.bind(this));
 		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
 		html.find(".item-delete-link").click(this._onItemDelete.bind(this));
 
@@ -106,6 +103,10 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			.contextmenu(this._onItemRightClick.bind(this));
 
 		html.find(".item-input").change(this._onItemInput.bind(this));
+
+		html.find(".quantity-link")
+			.click(this._onQuantityLeftClick.bind(this))
+			.contextmenu(this._onQuantityRightClick.bind(this));
 
 		html.find(".recharge-token")
 			.click(this._onRechargeTokenLeftClick.bind(this))
@@ -167,8 +168,9 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		let talentSocketsByType = {};
 
-		for(const talentType of Object.keys(Object.assign(CONFIG.WFRP3e.talentTypes, {any: "TALENT.TYPE.Any"})))
+		["any", ...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"].forEach(talentType => {
 			talentSocketsByType[talentType] = {};
+		});
 
 		if(this.actor.system.currentCareer) {
 			this.actor.system.currentCareer.system.talentSockets.forEach((talentSocket, index) => {
@@ -486,7 +488,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onItemExpandClickClick(event)
+	_onItemExpandClick(event)
 	{
 		event.preventDefault();
 
@@ -519,7 +521,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Skill's training level checkbox.
+	 * Performs follow-up operations after changes on a Skill's training level checkbox.
 	 * @param {Event} event
 	 * @private
 	 */

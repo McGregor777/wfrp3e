@@ -44,17 +44,19 @@ export default class CheckBuilder extends FormApplication
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "check-builder"],
 			template: "systems/wfrp3e/templates/applications/check-builder.hbs",
 			width: 640
-		});
+		};
 	}
 
 	/** @inheritDoc */
 	async getData()
 	{
-		const data = mergeObject(super.getData(), {
+		const data = {
+			...super.getData(),
 			challengeLevel: ["melee", "ranged"].includes(this.roll.data?.action?.system.type) ? "easy" : "simple",
 			challengeLevels: CONFIG.WFRP3e.challengeLevels,
 			diceIcons: {
@@ -67,7 +69,7 @@ export default class CheckBuilder extends FormApplication
 			isGM: game.user.isGM,
 			sounds: [],
 			users: [{name: "Send To All", id: "all"}]
-		});
+		};
 
 		if(game.user.isGM) {
 			game.users.contents.forEach((user) => {

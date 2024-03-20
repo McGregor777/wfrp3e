@@ -23,13 +23,14 @@ export default class ActionSelector extends FormApplication
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "selector", "action-selector"],
 			template: "systems/wfrp3e/templates/applications/action-selector.hbs",
 			tabs: [{group: "actions", navSelector: ".action-tabs", contentSelector: ".actions", initial: "melee"}],
 			width: 910,
 			height: 860
-		});
+		};
 	}
 
 	/** @inheritDoc */
@@ -37,12 +38,13 @@ export default class ActionSelector extends FormApplication
 	{
 		await this._buildActionLists();
 
-		return mergeObject(super.getData(), {
+		return {
+			...super.getData(),
 			actions: this.actions,
 			actionTypes: CONFIG.WFRP3e.actionTypes,
 			stances: CONFIG.WFRP3e.stances,
 			symbols: CONFIG.WFRP3e.symbols
-		});
+		};
 	}
 
 	/** @inheritDoc */

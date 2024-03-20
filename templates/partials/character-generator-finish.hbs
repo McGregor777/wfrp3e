@@ -15,11 +15,13 @@
 					</li>
 				{{/with}}
 			{{/each}}
+
 			<li class="wound-threshold">
-				<strong>{{localize "CHARACTERGENERATOR.WoundThreshold"}}</strong> <span>{{localize "CHARACTERGENERATOR.PlusToughnessRating" value=race.wound}}</span>
+				<strong>{{localize "CHARACTERGENERATOR.WoundThreshold"}}</strong> <span>{{localize "CHARACTERGENERATOR.PlusToughnessRating" value=origin.wound}}</span>
 			</li>
+
 			<li class="corruption-threshold">
-				<strong>{{localize "CHARACTERGENERATOR.CorruptionThreshold"}}</strong> <span>{{localize "CHARACTERGENERATOR.PlusToughnessRating" value=race.corruption}}</span>
+				<strong>{{localize "CHARACTERGENERATOR.CorruptionThreshold"}}</strong> <span>{{localize "CHARACTERGENERATOR.PlusToughnessRating" value=origin.corruption}}</span>
 			</li>
 		</ul>
 	</div>
@@ -80,12 +82,12 @@
 						{{localize (lookup (lookup @root.characteristics this.system.characteristic) "name")}}
 					</td>
 					<td class="center-aligned skill-training-level">
-						<input name="{{this._id}}_trainingLevel" type="checkbox" value="1"
+						<input name="{{this._id}}_trainingLevel" value="1" type="checkbox"
 							{{#if (superiorOrEqualTo (lookup (lookup @root.skills this._id) "trainingLevel") 1)}}
 								checked
 							{{/if}} disabled />
-						<input name="{{this._id}}_trainingLevel" type="checkbox" value="2" disabled />
-						<input name="{{this._id}}_trainingLevel" type="checkbox" value="3" disabled />
+						<input name="{{this._id}}_trainingLevel" value="2" type="checkbox" disabled />
+						<input name="{{this._id}}_trainingLevel" value="3" type="checkbox" disabled />
 					</td>
 					<td class="left-aligned skill-specialisations">
 						<input name="{{this._id}}_specialisations" type="text" value="{{lookup (lookup @root.skills this._id) 'specialisations'}}" disabled />
@@ -113,7 +115,7 @@
 
 	<div class="actions">
 		{{#each actions}}
-			{{>systems/wfrp3e/templates/partials/character-generator-action-card.hbs action=this}}
+			{{>systems/wfrp3e/templates/partials/item-action-card.hbs action=this currentStance="conservative"}}
 		{{/each}}
 	</div>
 </div>

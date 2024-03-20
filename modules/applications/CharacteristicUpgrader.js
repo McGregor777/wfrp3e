@@ -23,40 +23,42 @@ export default class CharacteristicUpgrader extends FormApplication
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "selector", "characteristic-upgrader"],
 			template: "systems/wfrp3e/templates/applications/characteristic-upgrader.hbs",
 			width: 360
-		});
+		};
 	}
 
 	/** @inheritDoc */
 	async getData()
 	{
-		const data = mergeObject(super.getData(), {
+		const data = {
+			...super.getData(),
 			availableOpenAdvancesAmount: this.career.system.advances.open.filter(advance => !advance).length,
 			availableNonCareerAdvancesAmount: this.career.system.advances.nonCareer.filter(advance => !advance.type).length,
 			career: this.career,
 			characteristics: Object.entries(this.object.system.characteristics).reduce((characteristics, characteristic) => {
 				if(!this.nonCareer) {
 					if(this.career.system.primaryCharacteristics.includes(characteristic[0]))
-						characteristics[characteristic[0]] = mergeObject(
-							characteristic[1],
-							CONFIG.WFRP3e.characteristics[characteristic[0]]
-						);
+						characteristics[characteristic[0]] = {
+							...characteristic[1],
+							...CONFIG.WFRP3e.characteristics[characteristic[0]]
+						};
 				}
 				else {
 					if(!this.career.system.primaryCharacteristics.includes(characteristic[0]))
-						characteristics[characteristic[0]] = mergeObject(
-							characteristic[1],
-							CONFIG.WFRP3e.characteristics[characteristic[0]]
-						);
+						characteristics[characteristic[0]] = {
+							...characteristic[1],
+							...CONFIG.WFRP3e.characteristics[characteristic[0]]
+						};
 				}
 
 				return characteristics;
 			}, {}),
 			nonCareer: this.nonCareer
-		});
+		};
 
 		console.log(data);
 

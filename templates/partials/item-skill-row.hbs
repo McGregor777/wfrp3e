@@ -8,9 +8,23 @@
 	</td>
 
 	<td class="center-aligned">
-		<input class="skill-training-level-input" name="skill.system.training-level" type="checkbox" value="1" data-dtype="Number"{{#if (superiorOrEqualTo skill.system.trainingLevel 1)}} checked{{/if}} />
-		<input class="skill-training-level-input" name="skill.system.training-level" type="checkbox" value="2" data-dtype="Number"{{#if (superiorOrEqualTo skill.system.trainingLevel 2)}} checked{{/if}} />
-		<input class="skill-training-level-input" name="skill.system.training-level" type="checkbox" value="3" data-dtype="Number"{{#if (superiorOrEqualTo skill.system.trainingLevel 3)}} checked{{/if}} />
+		<input class="skill-training-level-input"
+		       name="skill.system.training-level"
+		       value="1"
+		       type="checkbox"
+			{{#if (superiorOrEqualTo skill.system.trainingLevel 1)}} checked{{/if}} />
+
+		<input class="skill-training-level-input"
+		       name="skill.system.training-level"
+		       value="2"
+		       type="checkbox"
+			{{#if (superiorOrEqualTo skill.system.trainingLevel 2)}} checked{{/if}} />
+
+		<input class="skill-training-level-input"
+		       name="skill.system.training-level"
+		       value="3"
+		       type="checkbox"
+			{{#if (superiorOrEqualTo skill.system.trainingLevel 3)}} checked{{/if}} />
 	</td>
 
 	{{#if @root.document.isOwner}}

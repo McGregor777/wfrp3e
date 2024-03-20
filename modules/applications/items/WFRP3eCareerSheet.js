@@ -2,23 +2,24 @@ export default class WFRP3eCareerSheet extends ItemSheet
 {
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return {
+			...super.defaultOptions,
 			template: "systems/wfrp3e/templates/applications/items/career-sheet.hbs",
 			//width: 530,
 			height: 820,
 			classes: ["wfrp3e", "sheet", "item", "career"],
 			tabs: [{group: "primary", navSelector: ".career-sheet-tabs", contentSelector: ".career-sheet-body", initial: "header"}]
-		});
+		};
 	}
 
 	getData()
 	{
-		return mergeObject(super.getData(), {
+		return {
+			...super.getData(),
 			characteristics: CONFIG.WFRP3e.characteristics,
-			races: mergeObject({...CONFIG.WFRP3e.availableRaces}, {any: {name: "RACE.Any"}}),
-			talentTypes: mergeObject({...CONFIG.WFRP3e.talentTypes}, {any: "TALENT.TYPE.Any"})
-		});
+			races: {...CONFIG.WFRP3e.availableRaces, any: {name: "RACE.Any"}},
+			talentTypes: {any: "TALENT.TYPE.Any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPE.Insanity"}
+		};
 	}
 
 	/** @inheritDoc */

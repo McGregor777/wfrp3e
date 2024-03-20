@@ -24,11 +24,12 @@ export default class TrainingSelector extends FormApplication
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "selector", "training-selector"],
 			template: "systems/wfrp3e/templates/applications/training-selector.hbs",
 			width: 800
-		});
+		};
 	}
 
 	/** @inheritDoc */
@@ -36,10 +37,11 @@ export default class TrainingSelector extends FormApplication
 	{
 		await this._buildSkillLists();
 
-		return mergeObject(super.getData(), {
+		return {
+			...super.getData(),
 			careerSkills: this.careerSkills,
 			characteristics: CONFIG.WFRP3e.characteristics
-		});
+		};
 	}
 
 	/** @inheritDoc */

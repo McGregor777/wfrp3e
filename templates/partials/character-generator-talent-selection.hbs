@@ -11,15 +11,15 @@
 	{{/if}}
 
 	{{#if priest}}
-		<a class="tab-link{{#unless talentInvestment}} active{{/unless}}" data-tab="faith">{{localize 'TALENT.TYPE.Faith'}}</a>
+		<a class="tab-link{{#unless talentsInvestment}} active{{/unless}}" data-tab="faith">{{localize 'TALENT.TYPE.Faith'}}</a>
 	{{/if}}
 
 	{{#if wizard}}
-		<a class="tab-link{{#unless talentInvestment}} active{{/unless}}" data-tab="order">{{localize 'TALENT.TYPE.Order'}}</a>
+		<a class="tab-link{{#unless talentsInvestment}} active{{/unless}}" data-tab="order">{{localize 'TALENT.TYPE.Order'}}</a>
 	{{/if}}
 
 	{{#if zealot}}
-		<a class="tab-link{{#unless talentInvestment}} active{{/unless}}" data-tab="insanity">{{localize 'TALENT.TYPE.Insanity'}}</a>
+		<a class="tab-link{{#unless talentsInvestment}} active{{/unless}}" data-tab="insanity">{{localize 'TALENT.TYPE.Insanity'}}</a>
 	{{/if}}
 </div>
 
@@ -74,7 +74,7 @@
 	{{/if}}
 
 	{{#if priest}}
-		<div class="tab{{#unless talentInvestment}} active{{/unless}}" data-group="talents" data-tab="faith">
+		<div class="tab{{#unless talentsInvestment}} active{{/unless}}" data-group="talents" data-tab="faith">
 			{{#each talents.faith}}
 				<label>
 					{{>systems/wfrp3e/templates/partials/character-generator-talent-card.hbs talent=this}}
@@ -85,7 +85,7 @@
 	{{/if}}
 
 	{{#if wizard}}
-		<div class="tab{{#unless talentInvestment}} active{{/unless}}" data-group="talents" data-tab="order">
+		<div class="tab{{#unless talentsInvestment}} active{{/unless}}" data-group="talents" data-tab="order">
 			{{#each talents.order}}
 				<label>
 					{{>systems/wfrp3e/templates/partials/character-generator-talent-card.hbs talent=this}}
@@ -96,18 +96,20 @@
 	{{/if}}
 
 	{{#if zealot}}
-		<div class="tab{{#unless talentInvestment}} active{{/unless}}" data-group="talents" data-tab="insanity">
+		<div class="tab{{#unless talentsInvestment}} active{{/unless}}" data-group="talents" data-tab="insanity">
 			{{#each insanities}}
 				<label class="insanity-card card">
 					<div class="insanity-card-header">
 						<span class="insanity-card-name">{{this.name}}</span>
 						<div class="insanity-card-traits">{{this.system.traits}}</div>
 					</div>
+
 					<div class="insanity-card-content">
 						<div class="insanity-card-effects">{{{this.system.effects}}}</div>
 						<blockquote class="insanity-card-description">{{this.system.description}}</blockquote>
 						<div class="insanity-card-severity-rating">{{this.system.severityRating}}</div>
 					</div>
+
 					<input name="insanity" value="{{this._id}}" type="checkbox"/>
 				</label>
 			{{/each}}

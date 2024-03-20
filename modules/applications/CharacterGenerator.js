@@ -26,34 +26,38 @@ export default class CharacterGenerator extends FormApplication
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "character-generator"],
 			template: "systems/wfrp3e/templates/applications/character-generator.hbs",
 			width: 920,
-			height: 860,
-			tabs: [{group: "talents", navSelector: ".talent-tabs", contentSelector: ".talents", initial: "focus"}]
-		});
+			height: 860
+		};
 	}
 
 	/** @inheritDoc */
 	async getData()
 	{
 		const abilities = await game.packs.get("wfrp3e.items").getDocuments({type: "ability"});
-		const data = mergeObject(super.getData(), Object.entries(CONFIG.WFRP3e.availableRaces).reduce((object, race) => {
-			Object.entries(race[1].origins).forEach(origin => {
-				object.origins[origin[0]] = mergeObject(origin[1], {
-					creationPoints: race[1].creationPoints,
-					defaultRatings: race[1].defaultRatings
-				});
+		const data = {
+			...super.getData(),
+			...Object.entries(CONFIG.WFRP3e.availableRaces).reduce((object, race) => {
+				Object.entries(race[1].origins).forEach(origin => {
+						object.origins[origin[0]] = {
+							...origin[1],
+							creationPoints: race[1].creationPoints,
+							defaultRatings: race[1].defaultRatings
+						};
 
-				origin[1].abilities.forEach(originAbilityName => {
-					if(!object.originAbilities[originAbilityName])
-						object.originAbilities[originAbilityName] = abilities.find(ability => ability.name === originAbilityName);
-				});
-			});
+						origin[1].abilities.forEach(originAbilityName => {
+							if(!object.originAbilities[originAbilityName])
+								object.originAbilities[originAbilityName] = abilities.find(ability => ability.name === originAbilityName);
+						});
+					});
 
-			return object;
-		}, {origins: {}, originAbilities: {}}));
+					return object;
+			}, {origins: {}, originAbilities: {}})
+		};
 
 		await this._buildItemLists();
 
@@ -128,37 +132,37 @@ export default class CharacterGenerator extends FormApplication
 		}, []), {parent: newCharacter});
 
 		await Item.createDocuments([this.selectedCareer], {parent: newCharacter})
-			.then(careerCopy => careerCopy[0].update({system: {current: true}}));
+			.then(careerCopy => careerCopy[0].update({"system.current": true}));
 
 		await Item.createDocuments([...this.selectedTalents.values(), ...this.finalActions], {parent: newCharacter});
 	}
 
 	async _buildItemLists()
 	{
-		this.talents = [];
-		this.insanities = [];
-		this.actions = [];
+		const talents = [];
+		const insanities = [];
+		const actions = [];
 
 		for(const pack of [...game.packs.values()].filter(pack => pack.documentName === "Item")) {
-			pack.getDocuments({type: "talent"}).then(foundTalents => {
+			await pack.getDocuments({type: "talent"}).then(foundTalents => {
 				if(foundTalents.length > 0)
-					this.talents.push(...foundTalents);
+					talents.push(...foundTalents);
 			});
 
-			pack.getDocuments({type: "insanity"}).then(foundInsanities => {
+			await pack.getDocuments({type: "insanity"}).then(foundInsanities => {
 				if(foundInsanities.length > 0)
-					this.insanities.push(...foundInsanities);
+					insanities.push(...foundInsanities);
 			});
 
-			pack.getDocuments({type: "action"}).then(foundActions => {
+			await pack.getDocuments({type: "action"}).then(foundActions => {
 				if(foundActions.length > 0)
-					this.actions.push(...foundActions);
+					actions.push(...foundActions);
 			});
 		}
 
-		this.talents = this.talents.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
-		this.insanities = this.insanities.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
-		this.actions = this.actions.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		this.talents = talents.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		this.insanities = insanities.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		this.actions = actions.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
 	}
 
 	_onNextButtonClick(html, event)
@@ -324,23 +328,6 @@ export default class CharacterGenerator extends FormApplication
 		html.find(".careers input").change(this._onCareerChange.bind(this, html));
 	}
 
-	/**
-	 * Performs follow-up operations after clicks on a sheet's flip button.
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_onFlipClick(event)
-	{
-		event.preventDefault();
-
-		const parent = $(event.currentTarget).parents(".career-sheet");
-		const activeFace = parent.find(".face.active");
-		const inactiveFace = parent.find(".face:not(.active)");
-
-		activeFace.removeClass("active");
-		inactiveFace.addClass("active");
-	}
-
 	_onCareerChange(html, event)
 	{
 		this.selectedCareer = this.drawnCareers.find(career => career._id === event.currentTarget.value);
@@ -476,12 +463,10 @@ export default class CharacterGenerator extends FormApplication
 	{
 		this._proceedToNextStep(html, event);
 
-		this.careerSkills = this.selectedCareer.system.careerSkills;
-
 		// Get every Career Skills from the Game System compendium.
 		this.careerSkills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill"}).then(skills => {
 			return skills
-				.filter(skill => this.careerSkills.includes(skill.name))
+				.filter(skill => this.selectedCareer.system.careerSkills.includes(skill.name))
 				.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
 		});
 
@@ -684,6 +669,23 @@ export default class CharacterGenerator extends FormApplication
 		tabs.filter('[data-tab="' + tabName + '"]').addClass("active");
 	}
 
+	/**
+	 * Performs follow-up operations after clicks on a sheet's flip button.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	async _onFlipClick(event)
+	{
+		event.preventDefault();
+
+		const parent = $(event.currentTarget).parents(".item");
+		const activeFace = parent.find(".face.active");
+		const inactiveFace = parent.find(".face:not(.active)");
+
+		activeFace.removeClass("active");
+		inactiveFace.addClass("active");
+	}
+
 	async _onSkillTrainingConfirmation(html, event)
 	{
 		this._proceedToNextStep(html, event);
@@ -790,10 +792,12 @@ export default class CharacterGenerator extends FormApplication
 		const remainingOrderTalentsCounter = rootElement.find('.remaining-order-talents');
 		const remainingInsanityTalentsCounter = rootElement.find('.remaining-insanities');
 
-		const selectedTalentCounts = Object.keys(CONFIG.WFRP3e.talentTypes).reduce((types, talentType) => {
-			types[talentType] = rootElement.find('.tab[data-tab="' + talentType + '"] input:checked').length;
-			return types;
-		}, {});
+		const selectedTalentCounts = [...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"].reduce(
+			(types, talentType) => {
+				types[talentType] = rootElement.find('.tab[data-tab="' + talentType + '"] input:checked').length;
+				return types;
+				}, {}
+			);
 
 		// Handle free Focus Talent selection for characters owning the Composure ability.
 		if(this.selectedOrigin.abilities.includes("Composure")) {
@@ -866,37 +870,39 @@ export default class CharacterGenerator extends FormApplication
 		this._proceedToNextStep(html, event);
 
 		const actions = Object.keys(CONFIG.WFRP3e.actionTypes).reduce((everyActions, actionType) => {
-			everyActions[actionType] = this.actions.filter(action => {
-				return action.system.type === actionType && !action.system.conservative.traits.includes("Basic")
-			});
+			if(!["blessing", "spell"].includes(actionType)
+				|| (actionType === "blessing" && this.priest)
+				|| (actionType === "spell" && this.wizard))
+				everyActions[actionType] = this.actions.filter(action => {
+					return action.system.type === actionType && !action.system.conservative.traits.includes("Basic");
+				});
 
 			return everyActions;
 		}, {});
 
-		actions.basic = this.actions.filter(action => action.system.conservative.traits.includes("Basic"));
-
 		this.selectedActions = new Map();
 
-		const rootElement = html.find('.step[data-step="action-selection"] .action-selection');
+		const rootElement = html.find('.step[data-step="action-selection"] .action-selector');
 
 		if(this.priest) {
 			let faithName = null;
-			const talent = this.talents.find(
+			const faithTalent = this.talents.find(
 				talent => talent._id === html.find('.step[data-step="talent-selection"] .talent-selection .tab[data-tab="faith"] input:checked').val()
 			);
-			const match = talent.name.match(new RegExp(/([\w\s]+),?/));
+			const match = faithTalent.name.match(new RegExp(/([\w\s]+),?/));
 
 			if(match)
 				faithName = match[1];
 
 			actions.blessing = actions.blessing.filter(action => action.system.reckless.traits.includes(faithName));
 		}
-		else if(this.wizard) {
+
+		if(this.wizard) {
 			let orderName = null;
-			const talent = this.talents.find(
+			const orderTalent = this.talents.find(
 				talent => talent._id === html.find('.step[data-step="talent-selection"] .talent-selection .tab[data-tab="order"] input:checked').val()
 			);
-			const match = talent.name.match(new RegExp(/([\w\s]+), ?[\w\s]+, ?([\w\s]+)/));
+			const match = orderTalent.name.match(new RegExp(/([\w\s]+), ?[\w\s]+, ?([\w\s]+)/));
 
 			if(match)
 				orderName = match[2] ?? match[1];
@@ -907,6 +913,7 @@ export default class CharacterGenerator extends FormApplication
 		rootElement.html(
 			await renderTemplate("systems/wfrp3e/templates/partials/character-generator-action-selection.hbs", {
 				actions: actions,
+				actionTypes: CONFIG.WFRP3e.actionTypes,
 				stances: CONFIG.WFRP3e.stances,
 				symbols: CONFIG.WFRP3e.symbols,
 				priest: this.priest,
@@ -915,6 +922,7 @@ export default class CharacterGenerator extends FormApplication
 		);
 
 		rootElement.find(".action-tabs .tab-link").click(this._onTabClick.bind(this, html));
+		rootElement.find(".flip-link").click(this._onFlipClick.bind(this));
 		rootElement.find("input").change(this._onActionChange.bind(this, html));
 
 		this._updateRemainingActions(html);

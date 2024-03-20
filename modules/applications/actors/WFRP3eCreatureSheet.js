@@ -2,8 +2,8 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 {
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions,
-		{
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "sheet", "actor", "creature", "creature-sheet"],
 			dragDrop: [{dragSelector: ".item", dropSelector: null}],
 			height: 660,
@@ -13,21 +13,21 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 			],
 			template: "systems/wfrp3e/templates/applications/actors/creature-sheet.hbs",
 			width: 420
-		});
+		};
 	}
 
 	/** @inheritDoc */
 	getData()
 	{
-		const data = super.getData();
-
-		data.actionTypes = CONFIG.WFRP3e.actionTypes;
-		data.attributes = CONFIG.WFRP3e.attributes;
-		data.characteristics = CONFIG.WFRP3e.characteristics;
-		data.stances = CONFIG.WFRP3e.stances;
-		data.symbols = CONFIG.WFRP3e.symbols;
-
-		data.items = this._buildItemLists(data);
+		const data = {
+			...super.getData(),
+			actionTypes: CONFIG.WFRP3e.actionTypes,
+			attributes: CONFIG.WFRP3e.attributes,
+			characteristics: CONFIG.WFRP3e.characteristics,
+			stances: CONFIG.WFRP3e.stances,
+			symbols: CONFIG.WFRP3e.symbols
+		};
+		data.items = this._buildItemLists(data.items);
 
 		console.log(data)
 

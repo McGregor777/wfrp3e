@@ -1,36 +1,35 @@
 /** @inheritDoc */
 export default class WFRP3ePartyDataModel extends foundry.abstract.TypeDataModel
 {
-    /** @inheritDoc */
-    static defineSchema()
-    {
-        const fields = foundry.data.fields;
-        const requiredInteger = {required: true, nullable: false, integer: true};
+	/** @inheritDoc */
+	static defineSchema()
+	{
+		const fields = foundry.data.fields;
 
-        return {
-            fortunePool: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-            members: new fields.ArrayField(new fields.DocumentIdField()),
+		return {
+			fortunePool: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+			members: new fields.ArrayField(new fields.DocumentIdField()),
 
-            specialAbility: new fields.SchemaField({
-                title: new fields.StringField(),
-                description: new fields.HTMLField()
-            }),
+			specialAbility: new fields.SchemaField({
+				title: new fields.StringField(),
+				description: new fields.HTMLField()
+			}),
 
-            talentSockets: new fields.ArrayField(new fields.StringField(), {initial: ["focus"]}),
+			talentSockets: new fields.ArrayField(new fields.StringField(), {initial: ["focus"]}),
 
-            tension: new fields.SchemaField({
-                events: new fields.ArrayField(
-                    new fields.SchemaField({
-                        threshold: new fields.NumberField({...requiredInteger, initial: 4, min: 0}),
-                        effects: new fields.HTMLField({required: true})
-                    }),
-                    {initial: [{threshold: 4, effects: ""}, {threshold: 8, effects: ""}]}
-                ),
-                maximum: new fields.NumberField({...requiredInteger, initial: 8, min: 0}),
-                value: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
-            }),
+			tension: new fields.SchemaField({
+				events: new fields.ArrayField(
+					new fields.SchemaField({
+						threshold: new fields.NumberField({initial: 4, integer: true, min: 0, nullable: false, required: true}),
+						effects: new fields.HTMLField({required: true})
+					}),
+					{initial: [{threshold: 4, effects: ""}, {threshold: 8, effects: ""}]}
+				),
+				maximum: new fields.NumberField({initial: 8, integer: true, min: 0, nullable: false, required: true}),
+				value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
+			}),
 
-            traits: new fields.StringField({initial: "Party, , "})
-        };
-    }
+			traits: new fields.StringField({initial: "Party, , "})
+		};
+	}
 }

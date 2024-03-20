@@ -1033,8 +1033,7 @@ export const WFRP3e = {
 		tactic: "TALENT.TYPE.Tactic",
 		faith: "TALENT.TYPE.Faith",
 		order: "TALENT.TYPE.Order",
-		tricks: "TALENT.TYPE.Tricks",
-		insanity: "TALENT.TYPE.Insanity"
+		tricks: "TALENT.TYPE.Tricks"
 	},
 	weapon: {
 		groups: {

@@ -23,13 +23,14 @@ export default class TalentSelector extends FormApplication
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {
+		return {
+			...super.defaultOptions,
 			classes: ["wfrp3e", "selector", "talent-selector"],
 			template: "systems/wfrp3e/templates/applications/talent-selector.hbs",
 			tabs: [{group: "talents", navSelector: ".talent-tabs", contentSelector: ".talents", initial: "focus"}],
 			width: 824,
 			height: 720
-		});
+		};
 	}
 
 	/** @inheritDoc */
@@ -37,10 +38,11 @@ export default class TalentSelector extends FormApplication
 	{
 		await this._buildTalentLists();
 
-		return mergeObject(super.getData(), {
+		return {
+			...super.getData(),
 			talents: this.talents,
 			talentTypes: CONFIG.WFRP3e.talentTypes
-		});
+		};
 	}
 
 	/** @inheritDoc */
