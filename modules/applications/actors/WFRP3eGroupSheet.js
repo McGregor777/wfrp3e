@@ -45,13 +45,15 @@ export default class WFRP3eGroupSheet extends ActorSheet
 
 	/**
 	 * Returns items sorted by type.
-	 * @param {Object} data The Actor data
+	 * @param {Array} items The items owned by the Actor.
+	 * @returns {Object} The sorted items owned by the Actor.
+	 * @private
 	 */
-	_buildItemLists(data)
+	_buildItemLists(items)
 	{
-		const talents = data.items
-			.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
-			.filter(item => item.type === "talent");
+		const talents = items
+			.filter(item => item.type === "talent")
+			.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
 
 		return {
 			talents: {
