@@ -7,31 +7,17 @@
 		<div class="dice-result">
 			{{#if hasStandardDice}}
 				<div class="dice-formula">{{formula}}</div>
-			{{/if}}
 
-			{{#if hasStandardDice}}
 				<h4 class="dice-total">{{total}}</h4>
 			{{/if}}
 
 			{{#if hasSpecialDice}}
 				<div class="dice-array">
 					<ol class="dice-rolls">
-						{{#each specialDice}}
-							{{#if this.isSpecialDie}}
-								{{#each this.rolls}}
-									<li class="roll">{{{this.result}}}</li>
-								{{/each}}
-							{{/if}}
+						{{#each specialDieResultLabels}}
+							<li class="roll">{{{this}}}</li>
 						{{/each}}
 					</ol>
-				</div>
-
-				<div>
-					{{#each addedResults}}
-						{{#if (ne this.value 0)}}
-							<div>{{#if this.negative}}-{{else}}+{{/if}}{{this.value}}{{{this.symbol}}}</div>
-						{{/if}}
-					{{/each}}
 				</div>
 			{{/if}}
 
@@ -39,41 +25,37 @@
 
 			{{#if hasSpecialDice}}
 				<ul>
-					{{#if hasSuccess}}
-						{{#if symbols.successes}}
-							<li class="roll-success">{{localize "ROLL.OUTCOME.Successful"}}</li>
-						{{else}}
-							<li class="roll-failure">{{localize "ROLL.OUTCOME.Failed"}}</li>
-						{{/if}}
+					{{#if resultSymbols.successes}}
+						<li class="roll-success">{{localize "ROLL.OUTCOME.Successful"}}</li>
+					{{else}}
+						<li class="roll-failure">{{localize "ROLL.OUTCOME.Failed"}}</li>
 					{{/if}}
 
-					{{#each @root.data.symbols as |symbol sym|}}
-						{{#if (lookup @root.symbols symbol.plural)}}
-							{{#unless (equalTo sym "righteousSuccess")}}
+					{{#each @root.symbols as |symbol sym|}}
+						{{#with (lookup @root.resultSymbols symbol.plural)}}
+							{{#if (and (superiorTo this 0) (notEqualTo sym "righteousSuccess"))}}
 								<li class="roll-symbols">
-									{{localize symbol.result nb=(lookup @root.symbols symbol.plural)}}
+									{{localize symbol.result nb=this}}
 
-									{{#if (equalTo sym "success")}}
-										{{#if (superiorTo @root.symbols.righteousSuccesses 0)}}
-											{{localize @root.data.symbols.righteousSuccess.result nb=@root.symbols.righteousSuccesses}}
-										{{/if}}
+									{{#if (and (equalTo sym "success") (superiorTo @root.resultSymbols.righteousSuccesses 0))}}
+										{{localize @root.symbols.righteousSuccess.result nb=@root.resultSymbols.righteousSuccesses}}
 									{{/if}}
 
-									{{#for 0 (lookup @root.data.remainingSymbols symbol.plural) 1}}
+									{{#for 0 (lookup @root.remainingSymbols symbol.plural) 1}}
 										<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
 									{{/for}}
 								</li>
-							{{/unless}}
-						{{/if}}
+							{{/if}}
+						{{/with}}
 					{{/each}}
 				</ul>
 
-				{{#if data.effects}}
+				{{#if effects}}
 					{{>systems/wfrp3e/templates/partials/action-effects.hbs
-							action=data.action
-							face=data.face
-							symbols=data.symbols
-							effects=data.effects}}
+							action=action
+							face=face
+							symbols=symbols
+							effects=effects}}
 				{{/if}}
 			{{/if}}
 		</div>

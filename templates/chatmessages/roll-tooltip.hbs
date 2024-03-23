@@ -5,17 +5,13 @@
 				<header class="part-header flexrow">
 					<span class="part-count-text">{{this.countText}}</span>
 					{{#if this.flavor}}<span class="part-flavor">{{this.flavor}}</span>{{/if}}
-					{{#if this.notSpecial}}<span class="part-total">{{this.total}}</span>{{/if}}
+					{{#unless this.isSpecial}}<span class="part-total">{{this.total}}</span>{{/unless}}
 				</header>
 
 				<ol class="dice-rolls">
 					{{#each this.rolls}}
 						<li class="roll {{this.classes}}">{{{this.result}}}</li>
 					{{/each}}
-				</ol>
-
-				<ol class="dice-rolls">
-					<li class="roll">{{{addedResults.success}}}</li>
 				</ol>
 			</div>
 		</section>

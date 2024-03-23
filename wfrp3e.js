@@ -1,6 +1,6 @@
 import {WFRP3e} from "./modules/config.js";
 import CharacterGenerator from "./modules/applications/CharacterGenerator.js";
-import CheckBuilder from "./modules/applications/CheckBuilder.js";
+import DicePoolBuilder from "./modules/applications/DicePoolBuilder.js";
 import WFRP3eCharacterSheet from "./modules/applications/actors/WFRP3eCharacterSheet.js";
 import WFRP3eCreatureSheet from "./modules/applications/actors/WFRP3eCreatureSheet.js";
 import WFRP3eGroupSheet from "./modules/applications/actors/WFRP3eGroupSheet.js";
@@ -88,8 +88,6 @@ async function preloadHandlebarsTemplates()
 
 Hooks.once("init", () => {
 	console.log("WFRP3e | Initialising Warhammer Fantasy Roleplay - 3rd Edition System");
-
-	game.symbols = {diceterms: [ChallengeDie, CharacteristicDie, ConservativeDie, ExpertiseDie, FortuneDie, MisfortuneDie, RecklessDie]};
 
 	CONFIG.WFRP3e = WFRP3e;
 
@@ -181,7 +179,7 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
 		);
 
 		html.find("#chat-controls > .control-buttons > .wfrp3e-dice-roller").click(async () => {
-			await new CheckBuilder().render(true);
+			await new DicePoolBuilder().render(true);
 		});
 	}
 });
