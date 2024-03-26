@@ -104,12 +104,15 @@ export default class CheckHelper
 	/**
 	 * Prepares an initiative check.
 	 * @param {WFRP3eActor} actor The Character making the initiative check.
-	 * @param {string} characteristicName The Characteristic used for the initiative check.
+	 * @param {WFRP3eCombat} combat The Combat document associated with the initiative check.
+	 * @param {Object} [options]
+	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
+	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
 	 * @returns {DicePool}
 	 */
-	static prepareInitiativeCheck(actor, characteristicName)
+	static prepareInitiativeCheck(actor, combat, {flavor = null, sound = null} = {})
 	{
-		const characteristic = actor.system.characteristics[characteristicName];
+		const characteristic = actor.system.characteristics[combat.initiativeCharacteristic];
 		const stance = actor.system.stance.current ?? actor.system.stance;
 
 		return new DicePool({
@@ -119,6 +122,11 @@ export default class CheckHelper
 				conservative: stance < 0 ? Math.abs(stance) : 0,
 				reckless: stance > 0 ? stance : 0
 			}
+		}, {
+			name: game.i18n.localize("ROLL.InitiativeCheckBuilder"),
+			checkData: {actor: actor, characteristic: characteristic, combat},
+			flavor,
+			sound
 		});
 	}
 

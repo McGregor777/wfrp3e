@@ -1,0 +1,262 @@
+<section class="{{cssClass}} directory flexcol" id="{{cssId}}" data-tab="{{tabName}}">
+	<header class="combat-tracker-header">
+		{{#if user.isGM}}
+			<nav class="encounters flexrow" aria-label="{{localize 'COMBAT.NavLabel'}}">
+				<a class="combat-button combat-create"
+				   aria-label="{{localize 'COMBAT.Create'}}"
+				   role="button"
+				   data-tooltip="COMBAT.Create">
+					<span class="fas fa-plus"></span>
+				</a>
+
+				{{#if combatCount}}
+					<a class="combat-button combat-cycle"
+					   aria-label="{{localize 'COMBAT.EncounterPrevious'}}"
+					   role="button"
+					   data-tooltip="COMBAT.EncounterPrevious"
+					    {{#if previousId}}data-document-id="{{previousId}}"{{else}}disabled{{/if}}>
+						<span class="fas fa-caret-left"></span>
+					</a>
+				
+					<h4 class="encounter">{{localize "COMBAT.Encounter"}} {{currentIndex}} / {{combatCount}}</h4>
+				
+					<a class="combat-button combat-cycle"
+					   aria-label="{{localize 'COMBAT.EncounterNext'}}"
+					   role="button"
+					   data-tooltip="COMBAT.EncounterNext"
+					    {{#if nextId}}data-document-id="{{nextId}}"{{else}}disabled{{/if}}>
+						<span class="fas fa-caret-right"></span>
+					</a>
+				{{/if}}
+
+				<a class="combat-button combat-control"
+				   aria-label="{{localize 'COMBAT.Delete'}}"
+				   role="button"
+				   data-tooltip="COMBAT.Delete"
+				   data-control="endCombat"
+				    {{#unless combatCount}}disabled{{/unless}}>
+					<span class="fas fa-trash"></span>
+				</a>
+			</nav>
+		{{/if}}
+
+        <div class="encounter-inputs flexrow {{#if hasCombat}}combat{{/if}}">
+            {{#each encounterTypes as |encounterType type|}}
+                <label class="encounter-type">
+                    {{localize encounterType}}
+
+                    <input class="combat-input"
+                           name="flags.encounterType"
+                           value="{{type}}"
+                           type="radio"
+                        {{#if (equalTo @root.combat.flags.encounterType type)}}checked{{/if}}
+                        {{#if user.isGM}}disabled{{/if}}/>
+                </label>
+            {{/each}}
+        </div>
+
+		<div class="encounter-controls flexrow {{#if hasCombat}}combat{{/if}}">
+			{{#if user.isGM}}
+				<a class="combat-button combat-control"
+				   aria-label="{{localize 'COMBAT.RollAll'}}"
+				   role="button"
+				   data-tooltip="COMBAT.RollAll"
+				   data-control="rollAll"
+				    {{#unless turns}}disabled{{/unless}}>
+					<span class="fas fa-users"></span>
+				</a>
+
+				<a class="combat-button combat-control"
+				   aria-label="{{localize 'COMBAT.RollNPC'}}"
+				   role="button"
+				   data-tooltip="COMBAT.RollNPC"
+				   data-control="rollNPC"
+				    {{#unless turns}}disabled{{/unless}}>
+					<span class="fas fa-users-cog"></span>
+				</a>
+			{{/if}}
+
+			{{#if combatCount}}
+				{{#if combat.round}}
+					<h3 class="encounter-title noborder">{{localize 'COMBAT.Round'}} {{combat.round}}</h3>
+				{{else}}
+					<h3 class="encounter-title noborder">{{localize 'COMBAT.NotStarted'}}</h3>
+				{{/if}}
+			{{else}}
+				<h3 class="encounter-title noborder">{{localize "COMBAT.None"}}</h3>
+			{{/if}}
+
+			{{#if user.isGM}}
+				<a class="combat-button combat-control"
+				   aria-label="{{localize 'COMBAT.InitiativeReset'}}"
+				   role="button"
+				   data-tooltip="COMBAT.InitiativeReset"
+				   data-control="resetAll"
+				    {{#unless hasCombat}}disabled{{/unless}}>
+					<span class="fas fa-undo"></span>
+				</a>
+			
+				<a class="combat-button combat-control"
+				   aria-label="{{localize 'labels.scope'}}"
+				   role="button"
+				   data-tooltip="{{labels.scope}}"
+				   data-control="toggleSceneLink"
+				    {{#unless hasCombat}}disabled{{/unless}}>
+					<span class="fas fa-{{#unless linked}}un{{/unless}}link"></span>
+				</a>
+			{{/if}}
+			
+			<a class="combat-button combat-settings"
+			   aria-label="{{localize 'COMBAT.Settings'}}"
+			   role="button"
+			   data-tooltip="COMBAT.Settings"
+			   data-control="trackerSettings">
+				<span class="fas fa-cog"></span>
+			</a>
+		</div>
+	</header>
+
+	<ol id="combat-tracker" class="directory-list">
+		{{#each turns}}
+			<li class="combatant actor directory-item flexrow {{this.css}}" data-combatant-id="{{this.id}}">
+				<img class="token-image" data-src="{{this.img}}" alt="{{this.name}}"/>
+				
+				<div class="token-name flexcol">
+					<h4>{{this.name}}</h4>
+					
+					<div class="combatant-controls flexrow">
+						{{#if ../user.isGM}}
+							<a class="combatant-control {{#if this.hidden}}active{{/if}}"
+							   aria-label="{{localize 'COMBAT.ToggleVis'}}"
+							   role="button"
+							   data-tooltip="COMBAT.ToggleVis"
+							   data-control="toggleHidden">
+								<i class="fas fa-eye-slash"></i>
+							</a>
+						
+							<a class="combatant-control {{#if this.defeated}}active{{/if}}"
+							   aria-label="{{localize 'COMBAT.ToggleDead'}}"
+							   role="button"
+							   data-tooltip="COMBAT.ToggleDead"
+							   data-control="toggleDefeated">
+								<span class="fas fa-skull"></span>
+							</a>
+						{{/if}}
+						
+						{{#if this.canPing}}
+							<a class="combatant-control"
+							   aria-label="{{localize 'COMBAT.PingCombatant'}}"
+							   role="button"
+							   data-tooltip="COMBAT.PingCombatant"
+							   data-control="pingCombatant">
+								<span class="fa-solid fa-bullseye-arrow"></span>
+							</a>
+						{{/if}}
+						
+						<div class="token-effects">
+							{{#each this.effects}}
+								<img class="token-effect" src="{{this}}"/>
+							{{/each}}
+						</div>
+					</div>
+				</div>
+
+				{{#if this.hasResource}}
+					<div class="token-resource">
+						<span class="resource">{{this.resource}}</span>
+					</div>
+				{{/if}}
+
+				<div class="token-initiative">
+					{{#if this.hasRolled}}
+						<span class="initiative">{{this.initiative}}</span>
+					{{else if this.owner}}
+						<a class="combatant-control roll"
+						   aria-label="{{localize 'COMBAT.InitiativeRoll'}}"
+						   role="button"
+						   data-tooltip="COMBAT.InitiativeRoll"
+						   data-control="rollInitiative"></a>
+					{{/if}}
+				</div>
+			</li>
+		{{/each}}
+	</ol>
+
+	<nav id="combat-controls" class="directory-footer flexrow" data-tooltip-direction="UP">
+		{{#if hasCombat}}
+			{{#if user.isGM}}
+				{{#if round}}
+					<a class="combat-control"
+					   aria-label="{{localize 'COMBAT.RoundPrev'}}"
+					   role="button"
+					   data-tooltip="COMBAT.RoundPrev"
+					   data-control="previousRound">
+						<span class="fas fa-step-backward"></span>
+					</a>
+				
+					<a class="combat-control"
+					   aria-label="{{localize 'COMBAT.TurnPrev'}}"
+					   role="button"
+					   data-tooltip="COMBAT.TurnPrev"
+					   data-control="previousTurn">
+						<span class="fas fa-arrow-left"></span>
+					</a>
+				
+					<a class="combat-control center"
+					   aria-label="{{localize 'COMBAT.End'}}"
+					   role="button"
+					   data-control="endCombat">
+						{{localize 'COMBAT.End'}}
+					</a>
+				
+					<a class="combat-control"
+					   aria-label="{{localize 'COMBAT.TurnNext'}}"
+					   role="button"
+					   data-tooltip="COMBAT.TurnNext"
+					   data-control="nextTurn">
+						<span class="fas fa-arrow-right"></span>
+					</a>
+				
+					<a class="combat-control"
+					   aria-label="{{localize 'COMBAT.RoundNext'}}"
+					   role="button"
+					   data-tooltip="COMBAT.RoundNext"
+					   data-control="nextRound">
+						<span class="fas fa-step-forward"></span>
+					</a>
+				{{else}}
+					<a class="combat-control center"
+					   aria-label="{{localize 'COMBAT.Begin'}}"
+					   role="button"
+					   data-control="startCombat">
+						{{localize 'COMBAT.Begin'}}
+					</a>
+				{{/if}}
+				
+			{{else if control}}
+				<a class="combat-control"
+				   aria-label="{{localize 'COMBAT.TurnPrev'}}"
+				   role="button"
+				   data-tooltip="COMBAT.TurnPrev"
+				   data-control="previousTurn">
+					<span class="fas fa-arrow-left"></span>
+				</a>
+			
+				<a class="combat-control center"
+				   aria-label="{{localize 'COMBAT.TurnEnd'}}"
+				   role="button"
+				   data-control="nextTurn">
+					{{localize 'COMBAT.TurnEnd'}}
+				</a>
+			
+				<a class="combat-control"
+				   aria-label="{{localize 'COMBAT.TurnNext'}}"
+				   role="button"
+				   data-tooltip="COMBAT.TurnNext"
+				   data-control="nextTurn">
+					<span class="fas fa-arrow-right"></span>
+				</a>
+			{{/if}}
+		{{/if}}
+	</nav>
+</section>

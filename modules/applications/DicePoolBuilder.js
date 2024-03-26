@@ -98,9 +98,6 @@ export default class DicePoolBuilder extends FormApplication
 					this.object.checkData.weapon = Object.values(data.availableWeapons)[0];
 				}
 			}
-
-			if(this.object.checkData.combat)
-				data.encounterTypes = CONFIG.WFRP3e.encounterTypes;
 		}
 
 		return data;

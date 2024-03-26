@@ -1,25 +1,7 @@
 <form>
 	<div class="main-options">
-		{{#if encounterTypes}}
-			<div class="encounter-type-select">
-				<h4>{{localize "ROLL.DICEPOOLBUILDER.EncounterType"}}</h4>
-
-				{{#each encounterTypes as |encounter enc|}}
-					<label class="encounter-type">
-						{{localize (concat "ENCOUNTER." (capitalize enc))}}
-						<input name="encounterType" value="{{enc}}" type="radio" {{#if @first}}checked{{/if}}/>
-					</label>
-				{{/each}}
-			</div>
-		{{/if}}
-		
 		<div class="dice-pool"></div>
 		<div class="symbols-pool"></div>
-
-		{{#if encounterTypes}}
-			<details>
-				<summary>{{localize "ROLL.DICEPOOLBUILDER.DicePool"}}</summary>
-		{{/if}}
 
 		<p class="dice-pool-hint">
 			<em>{{localize "ROLL.DICEPOOLBUILDER.Hint"}}</em>
@@ -39,11 +21,6 @@
 			<button class="convert-conservative">{{localize "ROLL.DICEPOOLBUILDER.ConvertConservative"}}</button>
 			<button class="convert-reckless">{{localize "ROLL.DICEPOOLBUILDER.ConvertReckless"}}</button>
 		</div>
-
-		{{#if encounterTypes}}
-			</details>
-		{{/if}}
-
 		{{#if attributes}}
 			<div class="attributes">
 				{{#each attributes as |attribute attr|}}
