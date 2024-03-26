@@ -1,3 +1,5 @@
+import DataHelper from "../DataHelper.js";
+
 /** @inheritDoc */
 export default class WFRP3eInsanityDataModel extends foundry.abstract.TypeDataModel
 {
@@ -13,5 +15,25 @@ export default class WFRP3eInsanityDataModel extends foundry.abstract.TypeDataMo
 			severityRating: new fields.NumberField({...requiredInteger, initial: 1, integer: true, min: 1}),
 			traits: new fields.StringField({...requiredInteger, initial: ", "}),
 		};
+	}
+
+	/** @inheritDoc */
+	prepareBaseData()
+	{
+		super.prepareBaseData();
+
+		this._prepareDescription();
+	}
+
+	/**
+	 * Prepares the description of the Insanity's description.
+	 * @private
+	 */
+	_prepareDescription()
+	{
+		const cleanedUpDescription = DataHelper._getCleanedupDescription(this.description);
+
+		if(cleanedUpDescription)
+			this.updateSource({description: cleanedUpDescription});
 	}
 }

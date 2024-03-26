@@ -1,6 +1,6 @@
 import {WFRP3e} from "./modules/config.js";
 import CharacterGenerator from "./modules/applications/CharacterGenerator.js";
-import CheckBuilder from "./modules/applications/CheckBuilder.js";
+import DicePoolBuilder from "./modules/applications/DicePoolBuilder.js";
 import WFRP3eCharacterSheet from "./modules/applications/actors/WFRP3eCharacterSheet.js";
 import WFRP3eCreatureSheet from "./modules/applications/actors/WFRP3eCreatureSheet.js";
 import WFRP3eGroupSheet from "./modules/applications/actors/WFRP3eGroupSheet.js";
@@ -20,6 +20,9 @@ import WFRP3eSkillSheet from "./modules/applications/items/WFRP3eSkillSheet.js";
 import WFRP3eTalentSheet from "./modules/applications/items/WFRP3eTalentSheet.js";
 import WFRP3eTrappingSheet from "./modules/applications/items/WFRP3eTrappingSheet.js";
 import WFRP3eWeaponSheet from "./modules/applications/items/WFRP3eWeaponSheet.js";
+import WFRP3eCombatTracker from "./modules/applications/sidebar/WFRP3eCombatTracker.js";
+import WFRP3eCombat from "./modules/combat/WFRP3eCombat.js";
+import WFRP3eCombatant from "./modules/combat/WFRP3eCombatant.js";
 import WFRP3eCharacterDataModel from "./modules/data/actors/WFRP3eCharacterDataModel.js";
 import WFRP3eCreatureDataModel from "./modules/data/actors/WFRP3eCreatureDataModel.js";
 import WFRP3eGroupDataModel from "./modules/data/actors/WFRP3eGroupDataModel.js";
@@ -46,12 +49,11 @@ import ExpertiseDie from "./modules/dice/ExpertiseDie.js";
 import FortuneDie from "./modules/dice/FortuneDie.js";
 import MisfortuneDie from "./modules/dice/MisfortuneDie.js";
 import RecklessDie from "./modules/dice/RecklessDie.js";
+import WFRP3eActor from "./modules/documents/WFRP3eActor.js"
+import WFRP3eItem from "./modules/documents/WFRP3eItem.js"
 import CheckHelper from "./modules/CheckHelper.js";
 import DicePool from "./modules/DicePool.js";
 import WFRP3eRoll from "./modules/WFRP3eRoll.js";
-import WFRP3eActor from "./modules/documents/WFRP3eActor.js"
-import WFRP3eCombat from "./modules/documents/WFRP3eCombat.js";
-import WFRP3eItem from "./modules/documents/WFRP3eItem.js"
 import * as handlebarsHelpers from "./modules/handlebars.js";
 
 async function preloadHandlebarsTemplates()
@@ -89,8 +91,6 @@ async function preloadHandlebarsTemplates()
 Hooks.once("init", () => {
 	console.log("WFRP3e | Initialising Warhammer Fantasy Roleplay - 3rd Edition System");
 
-	game.symbols = {diceterms: [ChallengeDie, CharacteristicDie, ConservativeDie, ExpertiseDie, FortuneDie, MisfortuneDie, RecklessDie]};
-
 	CONFIG.WFRP3e = WFRP3e;
 
 	Object.assign(CONFIG.Actor.dataModels, {
@@ -121,6 +121,7 @@ Hooks.once("init", () => {
 	CONFIG.Item.documentClass = WFRP3eItem;
 
 	CONFIG.Combat.documentClass = WFRP3eCombat;
+	CONFIG.Combatant.documentClass = WFRP3eCombatant;
 
 	CONFIG.Dice.rolls.push(CONFIG.Dice.rolls[0]);
 	CONFIG.Dice.rolls[0] = WFRP3eRoll;
@@ -143,6 +144,8 @@ Hooks.once("init", () => {
 		]
 	};
 	CONFIG.fontDefinitions["Caslon Antique"] = {editor: true, fonts: []};
+
+	CONFIG.ui.combat = WFRP3eCombatTracker;
 
 	Actors.unregisterSheet("core", ActorSheet);
 	Actors.registerSheet("wfrp3e", WFRP3eCharacterSheet, {label: "Character Sheet", types: ["character"], makeDefault: true});
@@ -181,7 +184,7 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
 		);
 
 		html.find("#chat-controls > .control-buttons > .wfrp3e-dice-roller").click(async () => {
-			await new CheckBuilder().render(true);
+			await new DicePoolBuilder().render(true);
 		});
 	}
 });

@@ -1,3 +1,5 @@
+import {capitalize} from "../../helpers.js";
+
 /**
  * Provides the data and general interaction with Actor Sheets - Abstract class.
  * WFRP3CharacterSheet provides the general interaction and data organization shared among all actors sheets, as this is an abstract class, inherited by either Character or NPC specific actors sheet classes. When rendering an actors sheet, getData() is called, which is a large and key that prepares the actors data for display, processing the raw data and items and compiling them into data to display on the sheet. Additionally, this class contains all the main events that respond to sheet interaction in activateListeners()
@@ -180,11 +182,11 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 				talentSocketsByType[talentSocket]["career_" + this.actor.system.currentCareer._id + "_" + index] =
 					this.actor.system.currentCareer.name + (talent
 						? " - " + game.i18n.format("TALENT.TakenSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`),
+								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocket[0])}`),
 								talent: talent.name
 							})
 						: " - " + game.i18n.format("TALENT.AvailableSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`)
+								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocket[0])}`)
 							}));
 			});
 		}
@@ -204,11 +206,11 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 				talentSocketsByType[talentSocket]["party_" + this.actor.system.currentParty._id + "_" + index] =
 					this.actor.system.currentParty.name + (talent
 						? " - " + game.i18n.format("TALENT.TakenSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`),
+								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocket[0])}`),
 								talent: talent.name
 							})
 						: " - " + game.i18n.format("TALENT.AvailableSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${talentSocket[0].toUpperCase() + talentSocket.slice(1, talentSocket.length)}`)
+								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocket[0])}`)
 							}));
 			});
 		}

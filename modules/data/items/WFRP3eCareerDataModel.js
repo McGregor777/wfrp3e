@@ -1,3 +1,5 @@
+import DataHelper from "../DataHelper.js";
+
 /** @inheritDoc */
 export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataModel
 {
@@ -56,6 +58,8 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 	{
 		super.prepareBaseData();
 
+		this._prepareDescription();
+
 		const updates = {advances: {}};
 
 		// Ensure there is six open career advances available for each Career.
@@ -74,6 +78,18 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 
 		if(updates.advances.open || updates.advances.nonCareer)
 			this.updateSource(updates);
+	}
+
+	/**
+	 * Prepares the description of the Career's description.
+	 * @private
+	 */
+	_prepareDescription()
+	{
+		const cleanedUpDescription = DataHelper._getCleanedupDescription(this.description);
+
+		if(cleanedUpDescription)
+			this.updateSource({description: cleanedUpDescription});
 	}
 
 	/** @inheritDoc */

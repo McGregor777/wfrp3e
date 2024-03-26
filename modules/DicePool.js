@@ -5,36 +5,86 @@ import ExpertiseDie from "./dice/ExpertiseDie.js";
 import FortuneDie from "./dice/FortuneDie.js";
 import MisfortuneDie from "./dice/MisfortuneDie.js";
 import RecklessDie from "./dice/RecklessDie.js";
+import WFRP3eRoll from "./WFRP3eRoll.js";
 
 /**
  * DicePool utility helps prepare WFRP3e's special dice pools.
+ *
+ * @param {Object} [startingPool]
+ * @param {Object} [options]
+ * @param {String} [options.name]
+ * @param {Object} [options.data]
+ * @param {String} [options.flavor]
+ * @param {String} [options.sound]
  */
 export default class DicePool
 {
-	/**
-	 * @param {Object} [dicePool]
-	 */
-	constructor(dicePool = {})
+	constructor(startingPool = {}, options = {name: game.i18n.localize("ROLL.FreeCheck"), checkData: null, flavor: null, sound: null})
 	{
-		Object.keys(CONFIG.WFRP3e.dice).forEach((diceName) => {
-			this[diceName + "Dice"] = dicePool[diceName + "Dice"] ?? 0;
-		});
+		this.dice = Object.keys(CONFIG.WFRP3e.dice).reduce((dice, dieName) => {
+			dice[dieName] = startingPool.dice ? startingPool.dice[dieName] ?? 0 : 0;
+			return dice;
+		}, {});
 
-		Object.values(CONFIG.WFRP3e.symbols).forEach((symbol) => {
-			this[symbol.plural] = dicePool[symbol.plural] ?? 0;
-		});
+		this.symbols = Object.values(CONFIG.WFRP3e.symbols).reduce((symbols, symbol) => {
+			symbols[symbol.plural] = startingPool.symbols ? startingPool.symbols[symbol.plural] ?? 0 : 0;
+			return symbols;
+		}, {});
 
-		Object.keys(CONFIG.WFRP3e.attributes).forEach((attribute) => {
-			const attributeName = attribute[0].toUpperCase() + attribute.slice(1, attribute.length);
+		this.creatureDice = Object.keys(CONFIG.WFRP3e.attributes).reduce((creatureDice, attributeName) => {
+			creatureDice[attributeName] = startingPool.creatureDice ? startingPool.creatureDice[attributeName] ?? 0 : 0;
+			return creatureDice;
+		}, {});
 
-			this["creatures" + attributeName + "Dice"] = dicePool["creatures" + attributeName + "Dice"] ?? 0;
-		});
+		mergeObject(this, options);
+	}
+
+	/**
+	 * Transforms the DicePool values into a rollable formula.
+	 * @returns {string} A rollable formula.
+	 */
+	get formula()
+	{
+		return [
+			this.dice.characteristic + "d" + CharacteristicDie.DENOMINATION,
+			(this.dice.fortune + this.creatureDice.aggression + this.creatureDice.cunning) + "d" + FortuneDie.DENOMINATION,
+			(this.dice.expertise + this.creatureDice.expertise) + "d" + ExpertiseDie.DENOMINATION,
+			this.dice.conservative + "d" + ConservativeDie.DENOMINATION,
+			this.dice.reckless + "d" + RecklessDie.DENOMINATION,
+			this.dice.challenge + "d" + ChallengeDie.DENOMINATION,
+			this.dice.misfortune + "d" + MisfortuneDie.DENOMINATION
+		].filter((d) => {
+			const test = d.split(/([0-9]+)/);
+			return test[1] > 0;
+		}).join("+");
+	}
+
+	/**
+	 * Adds another DicePool to the current one.
+	 * @param {DicePool} [otherDicePool]
+	 */
+	addDicePool(otherDicePool)
+	{
+		if(otherDicePool.dice)
+			Object.keys(CONFIG.WFRP3e.dice).forEach((dieName) => {
+				this.dice[dieName] += otherDicePool.dice[dieName];
+			});
+
+		if(otherDicePool.symbols)
+			Object.values(CONFIG.WFRP3e.symbols).forEach((symbol) => {
+				this.symbols[symbol.plural] += otherDicePool.symbols[symbol.plural];
+			});
+
+		if(otherDicePool.creatureDice)
+			Object.keys(CONFIG.WFRP3e.attributes).forEach((attributeName) => {
+				this.creatureDice[attributeName] += otherDicePool.creatureDice[attributeName];
+			});
 	}
 
 	/**
 	 * Converts any remaining Characteristic Die from the Dice Pool into a Conservative/Reckless Die. If no Characteristic Die remains, adds a Conservative/Reckless Die instead.
 	 * @param {string} type The type of die the Characteristic Die must be converted to.
-	 * @param {number} times The amount of conversion to perform(defaults to 1).
+	 * @param {number} times The amount of conversion to perform (defaults to 1).
 	 */
 	convertCharacteristicDie(type, times = 1)
 	{
@@ -47,62 +97,58 @@ export default class DicePool
 
 		for(let i = 0; i < times; i++) {
 			if(revert) {
-				if(this[type + "Dice"] > 0) {
-					this[type + "Dice"]--;
-					this.characteristicDice++;
+				if(this.dice[type] > 0) {
+					this.dice[type]--;
+					this.dice.characteristic++;
 				}
 				else
-					ui.notifications.warn(game.i18n.format("ROLL.CHECKBUILDER.ConvertBackWarning", {type: type}));
+					ui.notifications.warn(game.i18n.format("ROLL.DICEPOOLBUILDER.ConvertBackWarning", {type: type}));
 			}
 			else {
-				if(this.characteristicDice > 0) {
-					this.characteristicDice--;
-					this[type + "Dice"]++;
+				if(this.dice.characteristic > 0) {
+					this.dice.characteristic--;
+					this.dice[type]++;
 				}
 				else
-					ui.notifications.warn(game.i18n.format("ROLL.CHECKBUILDER.ConvertWarning", {type: "characteristic"}));
+					ui.notifications.warn(game.i18n.format("ROLL.DICEPOOLBUILDER.ConvertWarning", {type: "characteristic"}));
 			}
 		}
 	}
 
 	/**
-	 * Adds another DicePool to the current one.
-	 * @param {DicePool} [otherDicePool]
+	 *
 	 */
-	addDicePool(otherDicePool)
+	async roll()
 	{
-		Object.keys(CONFIG.WFRP3e.dice).forEach((diceName) => {
-			this[diceName + "Dice"] += otherDicePool[diceName + "Dice"] ?? 0;
+		const roll = WFRP3eRoll.create(
+			this.renderDiceExpression(),
+			this.checkData?.actor ? this.checkData.actor.getRollData() : {},
+			{checkData: this.checkData, flavor: this.flavor, startingSymbols: this.symbols}
+		);
+
+		roll.toMessage({
+			flavor: this.name,
+			speaker: {actor: this.checkData?.actor},
+			user: game.user.id
 		});
 
-		Object.values(CONFIG.WFRP3e.symbols).forEach((symbol) => {
-			this[symbol.plural] += otherDicePool[symbol.plural] ?? 0;
-		});
+		if(this.sound)
+			AudioHelper.play({src: this.sound}, true);
 
-		Object.keys(CONFIG.WFRP3e.attributes).forEach((attribute) => {
-			const attributeName = attribute[0].toUpperCase() + attribute.slice(1, attribute.length);
+		if(this.checkData?.actor?.type === "creature") {
+			const updates = {system: {attributes: {}}};
 
-			this["creatures" + attributeName + "Dice"] += otherDicePool["creatures" + attributeName + "Dice"] ?? 0;
-		});
-	}
+			for(const [attributeName, creatureDice] of Object.entries(this.creatureDice)) {
+				if(creatureDice > 0) {
+					updates.system.attributes[attributeName] = {
+						current: this.checkData.actor.system.attributes[attributeName].current - creatureDice
+					};
+				}
+			}
 
-	/**
-	 * Transforms the DicePool into a rollable expression.
-	 * @returns {string} a applications expression that can be used to roll the applications pool
-	 */
-	renderDiceExpression()
-	{
-		return [
-			this.characteristicDice + "d" + CharacteristicDie.DENOMINATION,
-			(this.fortuneDice + this.creaturesAggressionDice + this.creaturesCunningDice) + "d" + FortuneDie.DENOMINATION,
-			(this.expertiseDice + this.creaturesExpertiseDice) + "d" + ExpertiseDie.DENOMINATION,
-			this.conservativeDice + "d" + ConservativeDie.DENOMINATION,
-			this.recklessDice + "d" + RecklessDie.DENOMINATION,
-			this.challengeDice + "d" + ChallengeDie.DENOMINATION,
-			this.misfortuneDice + "d" + MisfortuneDie.DENOMINATION
-		].filter((d) => {
-			const test = d.split(/([0-9]+)/);
-			return test[1] > 0;
-		}).join("+");
+			this.checkData.actor.update(updates);
+		}
+
+		return roll;
 	}
 }

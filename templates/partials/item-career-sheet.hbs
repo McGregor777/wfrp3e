@@ -104,7 +104,14 @@
 				{{else}}
 					{{localize "CAREER.SHEET.BasicCareer"}}
 				{{/if}}
-				: {{career.system.raceRestrictions}}
+                :
+                {{#each career.system.raceRestrictions}}
+                    {{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
+                        {{localize "CAREER.SHEET.OneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+                    {{else}}
+                        {{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
+                    {{/if}}
+                {{/each}}
 			</div>
 
 			<div class="career-sheet-traits">{{career.system.summary}}</div>

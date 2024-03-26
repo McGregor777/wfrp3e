@@ -93,44 +93,46 @@
 			</div>
 
 			<div class="creature-sheet-secondary-infos">
-				<a title="{{localize 'CREATURE.Stance'}}" class="creature-sheet-stance
+				<a title="{{localize 'CREATURE.Stance'}}" class="creature-sheet-stance {{actor.system.defaultStance}}">
 					{{#if (inferiorTo actor.system.stance 0)}}
-						reckless">R{{abs actor.system.stance}}
+						C{{abs actor.system.stance}}
 					{{else}}
 						{{#if (superiorTo actor.system.stance 0)}}
-							conservative">C{{actor.system.stance}}
+							R{{actor.system.stance}}
 						{{else}}
-							">N/A
+							N/A
 						{{/if}}
 					{{/if}}
 				</a>
 
 				<div class="creature-sheet-special-rule-summary">
-				{{editor actor.system.specialRuleSummary target="system.specialRuleSummary" button=true owner=owner editable=editable}}
-			</div>
+					{{editor actor.system.specialRuleSummary target="system.specialRuleSummary" button=true owner=owner editable=editable}}
+				</div>
 			</div>
 
 			<div class="creature-sheet-attributes">
 				{{#each actor.system.attributes as |attribute attr|}}
-					<div class="attribute {{attr}}">
-						<span class="attribute-title">{{localize (lookup (lookup @root.attributes attr) "name")}}</span>
+					{{#with (lookup @root.attributes attr)}}
+						<div class="attribute {{attr}}">
+							<span class="attribute-title">{{localize this.name}}</span>
 
-						<div class="attribute-input-container">
-							<input class="attribute-budget-input"
-							       name="system.attributes.{{attr}}.current"
-							       value="{{attribute.current}}"
-							       type="number"
-							       placeholder="{{localize 'CREATURE.Current'}}"  />
+							<div class="attribute-input-container">
+								<input class="attribute-budget-input"
+								       name="system.attributes.{{attr}}.value"
+								       value="{{attribute.value}}"
+								       type="number"
+								       placeholder="{{localize 'CREATURE.Current'}}"  />
 
-							<span>/</span>
+								<span>/</span>
 
-							<input class="attribute-budget-input"
-							       name="system.attributes.{{attr}}.budget"
-							       value="{{attribute.budget}}"
-							       type="number"
-							       placeholder="{{localize (lookup (lookup @root.attributes attr) 'abbreviation')}}"  />
+								<input class="attribute-budget-input"
+								       name="system.attributes.{{attr}}.max"
+								       value="{{attribute.max}}"
+								       type="number"
+								       placeholder="{{localize this.abbreviation}}"  />
+							</div>
 						</div>
-					</div>
+					{{/with}}
 				{{/each}}
 			</div>
 		</section>
@@ -149,7 +151,9 @@
 					{{#if (lookup @root.items.actions ty)}}
 						<div class="action-container tab {{ty}} item-container" data-group="actions" data-tab="{{ty}}">
 							{{#each (lookup @root.items.actions ty) as |action act|}}
-								{{>systems/wfrp3e/templates/partials/item-action-card.hbs action=action}}
+								{{>systems/wfrp3e/templates/partials/item-action-card.hbs
+										action=action
+										currentStance=@root.actor.system.defaultStance}}
 							{{/each}}
 						</div>
 					{{/if}}

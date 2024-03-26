@@ -3,6 +3,7 @@ import CareerSelector from "../applications/CareerSelector.js";
 import CharacteristicUpgrader from "../applications/CharacteristicUpgrader.js";
 import TalentSelector from "../applications/TalentSelector.js";
 import TrainingSelector from "../applications/TrainingSelector.js";
+import {capitalize} from "../helpers.js";
 
 /**
  * Provides the main Actor data computation and organization.
@@ -16,7 +17,7 @@ export default class WFRP3eActor extends Actor
 	{
 		try {
 			// Call `prepareOwned<Type>` function
-			let functionName = `_prepare${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`;
+			let functionName = `_prepare${capitalize(this.type)}`;
 
 			if(this[`${functionName}`])
 				this[`${functionName}`]();
@@ -169,10 +170,10 @@ export default class WFRP3eActor extends Actor
 	 */
 	changeImpairment(impairment, value)
 	{
-		const changes = {"system.impairments": {}};
-		changes.system.impairments[impairment] = this.system.impairments[impairment] + value;
+		const updates = {system: {impairments: {}}};
+		updates.system.impairments[impairment] = this.system.impairments[impairment] + value;
 
-		this.update(changes);
+		this.update(updates);
 	}
 
 	/**

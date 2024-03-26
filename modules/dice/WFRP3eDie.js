@@ -1,68 +1,80 @@
 /** @inheritDoc */
 export default class WFRP3eDie extends Die
 {
-	/** @inheritDoc */
-	constructor(termData)
+	constructor(termData = {})
 	{
 		super(termData);
-	}
 
-	/**
-	 * A string representation of the formula expression for this RollTerm, prior to evaluation.
-	 * @type {string}
-	 * @inheritDoc
-	 */
-	get expression()
-	{
-		return `${this.number}d${this.constructor.DENOMINATION}${this.modifiers.join("")}`;
-	}
-
-	/**
-	 * Return a standardized representation for the displayed formula associated with this DiceTerm
-	 * @return {string}
-	 * @inheritDoc
-	 */
-	get formula()
-	{
-		return this.expression;
-	}
-
-	/**
-	 * Evaluate the term, processing its inputs and finalizing its total.
-	 * @param {boolean} minimize Minimize the result, obtaining the smallest possible value.
-	 * @param {boolean} maximize Maximize the result, obtaining the largest possible value.
-	 * @param {boolean} async Evaluate the term asynchronously, receiving a Promise as the returned value. This will become the default behavior in version 10.x
-	 * @return {WFRP3eDie} The evaluated RollTerm
-	 * @inheritDoc
-	 */
-	evaluate({minimize = false, maximize = false, async = true} = {})
-	{
-		if(this._evaluated)
-			throw new Error(`This ${this.constructor.name} has already been evaluated and is immutable`);
-
-		for(let n = 1; n <= this.number; n++)
-			this.roll({minimize, maximize});
-
-		this.symbols = {
+		this.resultSymbols = {
 			...Object.values(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
 				object[symbol.plural] = 0;
 				return object;
 			}, {})
 		};
+	}
+	static NAME = "wfrp3e-die";
+
+	/** @inheritDoc */
+	_evaluateSync({minimize = false, maximize = false} = {}) {
+		if((this.number > 999))
+			throw new Error(`You may not evaluate a DiceTerm with more than 999 requested results`);
+
+		for(let n = 1; n <= this.number; n++)
+			this.roll({minimize, maximize});
+
+		this._evaluateModifiers();
 
 		this.results.forEach((result) => {
-			Object.keys(this.symbols).forEach((symbolName, index) => {
-				this.symbols[symbolName] += parseInt(result.symbols[symbolName]);
+			Object.keys(this.resultSymbols).forEach((symbolName, index) => {
+				this.resultSymbols[symbolName] += parseInt(result.symbols[symbolName]);
 			}, {});
 
 			if(result.symbols.righteousSuccesses > 0)
 				result.exploded = true;
 		});
 
-		// Return the evaluated term
-		this._evaluated = true;
-		this._isSpecialDie = true;
-
 		return this;
+	}
+
+	/** @inheritDoc */
+	roll({minimize = false, maximize = false} = {})
+	{
+		const roll = super.roll({minimize = false, maximize = false} = {});
+
+		roll.symbols = CONFIG.WFRP3e.dice[this.constructor.NAME].results[roll.result];
+
+		return roll;
+	}
+
+	/** @inheritDoc */
+	getResultLabel(result)
+	{
+		const die = CONFIG.WFRP3e.dice[this.constructor.NAME].results[result.result];
+		return `<img class="special-die" src="${die.image}" title="${game.i18n.localize(die.label)}" alt=""/>`;
+	}
+
+	/** @inheritDoc */
+	getResultCSS(result) {
+		return [
+			"wfrp3e-die",
+			`${this.constructor.NAME}-die`,
+			result.rerolled ? "rerolled" : null,
+			result.exploded ? "exploded" : null,
+			result.discarded ? "discarded" : null
+		]
+	}
+
+	/** @inheritDoc */
+	getTooltipData()
+	{
+		let countText = game.i18n.format("ROLL.AMOUNT." + this.constructor.name, {nb: this.results.length});
+		if(this.results.length > this.number)
+			countText += `  ${game.i18n.format("ROLL.AMOUNT.ExplodedDie", {nb: this.results.length - this.number})}`;
+
+		return {
+			...super.getTooltipData(),
+			countText,
+			isSpecial: true
+		}
 	}
 }

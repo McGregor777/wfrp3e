@@ -12,7 +12,9 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 			attributes: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.attributes).reduce((object, attribute) => {
 				object[attribute] = new fields.SchemaField({
 					budget: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
-					current: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
+					current: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+					max: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+					value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 				}, {label: attribute});
 
 				return object;
@@ -61,6 +63,13 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 				source.characteristics[characteristic].rating = source.characteristics[characteristic].value;
 		});
 
+		Object.keys(CONFIG.WFRP3e.attributes).forEach((attribute) => {
+			if(!source.attributes[attribute].max)
+				source.attributes[attribute].max = source.attributes[attribute].budget;
+			if(!source.attributes[attribute].value)
+				source.attributes[attribute].value = source.attributes[attribute].current;
+		});
+
 		return super.migrateData(source);
 	}
 
@@ -84,7 +93,7 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 	{
 		this.defaultStance = "conservative";
 
-		if(this.stance < 0) {
+		if(this.stance > 0) {
 			this.defaultStance = "reckless";
 		}
 	}
