@@ -200,6 +200,7 @@ export default class WFRP3eRoll extends Roll
 		if(!Number.isNumeric(total)) {
 			throw new Error(game.i18n.format("DICE.ErrorNonNumeric", {formula: this.formula}));
 		}
+
 		return total;
 	}
 
