@@ -1,3 +1,5 @@
+import {capitalize} from "./helpers.js";
+
 export default function()
 {
     Hooks.on("init", () => {
@@ -12,7 +14,7 @@ export default function()
 		Handlebars.registerHelper("increment", (value, valueToAdd) => value + parseInt(valueToAdd));
 		Handlebars.registerHelper("multiply", (value, multiplier) => value * multiplier);
 		Handlebars.registerHelper("concat", (value, otherValue) => value.toString() + otherValue.toString());
-		Handlebars.registerHelper("capitalize", (string) => string[0].toUpperCase() + string.slice(1));
+		Handlebars.registerHelper("capitalize", (string) => capitalize(string));
 		Handlebars.registerHelper("abs", (number) => Math.abs(number));
 		Handlebars.registerHelper("in", (value, array) => array.includes(value));
 

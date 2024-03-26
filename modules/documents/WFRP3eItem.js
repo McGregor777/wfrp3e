@@ -1,4 +1,5 @@
 import CheckHelper from "../CheckHelper.js";
+import {capitalize} from "../helpers.js";
 
 export default class WFRP3eItem extends Item
 {
@@ -7,7 +8,7 @@ export default class WFRP3eItem extends Item
 	{
 		super.prepareData();
 
-		const functionName = `_prepare${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`;
+		const functionName = `_prepare${capitalize(this.type)}`;
 
 		if(this[`${functionName}`])
 			this[`${functionName}`]();
@@ -18,7 +19,7 @@ export default class WFRP3eItem extends Item
 	 */
 	useItem(options = {})
 	{
-		const functionName = `use${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}`;
+		const functionName = `use${capitalize(this.type)}`;
 
 		if(this[`${functionName}`])
 			this[`${functionName}`](options);
@@ -293,7 +294,7 @@ export default class WFRP3eItem extends Item
 		super._onUpdate(changed, options, userId);
 
 		try {
-			const functionName = `_on${this.type[0].toUpperCase() + this.type.slice(1, this.type.length)}Update`;
+			const functionName = `_on${capitalize(this.type)}Update`;
 
 			if(this[`${functionName}`])
 				this[`${functionName}`](changed, options, userId);

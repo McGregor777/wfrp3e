@@ -1,14 +1,11 @@
+import {capitalize} from "../helpers.js";
+
 /** @inheritDoc */
 export default class CharacteristicUpgrader extends FormApplication
 {
-	/**
-	 * @param {WFRP3eActor} object
-	 * @param {WFRP3eItem} career
-	 * @param {boolean} [nonCareer]
-	 */
-	constructor(object, career, nonCareer = false)
+	constructor(object, career, nonCareer = false, options = {})
 	{
-		super(object);
+		super(object, options);
 
 		this.career = career;
 		this.nonCareer = nonCareer;
@@ -81,7 +78,7 @@ export default class CharacteristicUpgrader extends FormApplication
 
 		const matches = [...formData.upgrade.matchAll(new RegExp(/(^\w*)_(\w*$)/, "g"))][0];
 		const advancementName = game.i18n.format(
-			`CHARACTERISTICUPGRADER.Characteristic${matches[2][0].toUpperCase() + matches[2].slice(1, matches[2].length)}`, {
+			`CHARACTERISTICUPGRADER.Characteristic${capitalize(matches[2])}`, {
 			characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[matches[1]].name)
 		});
 		const actorUpdates = {};
@@ -136,7 +133,7 @@ export default class CharacteristicUpgrader extends FormApplication
 
 		html.find(".selection").text(
 			game.i18n.format(
-				`CHARACTERISTICUPGRADER.Characteristic${matches[2][0].toUpperCase() + matches[2].slice(1, matches[2].length)}`, {
+				`CHARACTERISTICUPGRADER.Characteristic${capitalize(matches[2])}`, {
 					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[matches[1]].name)
 				})
 		);
