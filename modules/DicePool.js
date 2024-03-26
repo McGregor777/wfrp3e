@@ -121,7 +121,7 @@ export default class DicePool
 	async roll()
 	{
 		const roll = WFRP3eRoll.create(
-			this.renderDiceExpression(),
+			this.formula,
 			this.checkData?.actor ? this.checkData.actor.getRollData() : {},
 			{checkData: this.checkData, flavor: this.flavor, startingSymbols: this.symbols}
 		);

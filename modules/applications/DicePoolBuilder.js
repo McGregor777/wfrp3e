@@ -145,7 +145,7 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		// if sound was not passed search for sound dropdown value
 		if(!this.sound) {
-			const sound = html.find(".sound-selection")?.[0]?.value;
+			const sound = this.element.find(".sound-selection")?.[0]?.value;
 
 			if(sound) {
 				this.sound = sound;
@@ -174,13 +174,13 @@ export default class DicePoolBuilder extends FormApplication
 		}
 
 		if(!this.flavor) {
-			const flavor = html.find(".flavor-text")?.[0]?.value;
+			const flavor = this.element.find(".flavor-text")?.[0]?.value;
 
 			if(flavor)
 				this.flavor = flavor;
 		}
 
-		const sentToPlayer = html.find(".user-selection")?.[0]?.value;
+		const sentToPlayer = this.element.find(".user-selection")?.[0]?.value;
 
 		if(sentToPlayer) {
 			let container = $(`<div class="dice-pool"></div>`)[0];
@@ -188,7 +188,7 @@ export default class DicePoolBuilder extends FormApplication
 
 			const messageText = `<div>
 					<div>${game.i18n.localize("WFRP3e.SentDicePoolRollHint")}</div>
-					${$(container).html()}
+					${$(container).this.element()}
 					<button class="special-pool-to-player">${game.i18n.localize("WFRP3e.SentDicePoolRoll")}</button>
 				</div>`;
 
