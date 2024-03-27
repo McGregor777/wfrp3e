@@ -194,7 +194,7 @@
 					{{#if (lookup @root.items.talents ty)}}
 						<div class="talent-container item-container tab {{ty}}" data-group="talents" data-tab="{{ty}}">
 							{{#each (lookup @root.items.talents ty) as |talent ta|}}
-								<div>
+								<label>
 									{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 
 									<select class="sheet-form-select item-input talent-card-socket-select"
@@ -205,7 +205,7 @@
 												selected=talent.system.talentSocket
 												blank=(localize "TALENT.NoSocket")}}
 									</select>
-								</div>
+								</label>
 							{{/each}}
 						</div>
 					{{/if}}

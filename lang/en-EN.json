@@ -415,6 +415,7 @@
 	"ROLL.DICEPOOLBUILDER.Hint": "Left click to increase dice, right click to decrease.",
 	"ROLL.DICEPOOLBUILDER.Options": "Options",
 	"ROLL.DICEPOOLBUILDER.RollCheck": "Roll check",
+	"ROLL.DICEPOOLBUILDER.Specialisations": "Specialisations",
 	"ROLL.DICEPOOLBUILDER.Skill": "Skill",
 	"ROLL.DICEPOOLBUILDER.StartingResults": "Starting results",
 	"ROLL.DICEPOOLBUILDER.Weapon": "Weapon",
@@ -456,8 +457,13 @@
 	"ROLL.UNIVERSAL.MentalBane": "Suffer 1 stress",
 	"ROLL.UNIVERSAL.SigmarsComet": "+1 critical",
 
-	"SKILL.Characteristic": "Characteristic",
 	"SKILL.AdvancedSkill": "Advanced Skill",
+	"SKILL.Characteristic": "Characteristic",
+	"SKILL.Name": "Name",
+	"SKILL.SpecialisationList": "Specialisations: {specialisations}",
+	"SKILL.Specialisations": "Specialisations",
+	"SKILL.TrainingLevel": "Training Level",
+	"SKILL.ABBREVIATION.Characteristic": "Char",
 
 	"TALENT.AvailableSocket": "Available {type} Socket",
 	"TALENT.TakenSocket": "{type} Socket taken by {talent}",

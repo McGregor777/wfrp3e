@@ -415,6 +415,7 @@
 	"ROLL.DICEPOOLBUILDER.Hint": "Clic gauche pour ajouter des dés, clic droit pour en retirer.",
 	"ROLL.DICEPOOLBUILDER.Options": "Options",
 	"ROLL.DICEPOOLBUILDER.RollCheck": "Lancer le test",
+	"ROLL.DICEPOOLBUILDER.Specialisations": "Spécialisations",
 	"ROLL.DICEPOOLBUILDER.Skill": "Skill",
 	"ROLL.DICEPOOLBUILDER.StartingResults": "Pictogrammes de départ",
 	"ROLL.DICEPOOLBUILDER.Weapon": "Arme",
@@ -456,8 +457,13 @@
 	"ROLL.UNIVERSAL.MentalBane": "Suffer 1 stress",
 	"ROLL.UNIVERSAL.SigmarsComet": "+1 critical",
 
-	"SKILL.Characteristic": "Caractéristique",
 	"SKILL.AdvancedSkill": "Compétence Avancée",
+	"SKILL.Characteristic": "Caractéristique",
+	"SKILL.Name": "Nom",
+	"SKILL.SpecialisationList": "Spécialisations : {specialisations}",
+	"SKILL.Specialisations": "Spécialisations",
+	"SKILL.TrainingLevel": "Formation",
+	"SKILL.ABBREVIATION.Characteristic": "Car.",
 
 	"TALENT.AvailableSocket": "Emplacement {type} libre",
 	"TALENT.TakenSocket": "Emplacement {type} occupé par {talent}",
