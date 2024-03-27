@@ -231,6 +231,22 @@
 					</select>
 				</label>
 			{{/if}}
+
+            <div class="specialisations">
+                {{localize "ROLL.DICEPOOLBUILDER.Specialisations"}}
+
+                {{#if specialisations}}
+                    {{#each specialisations}}
+                        <label>
+                            {{this}}
+
+                            <input class="pool-value" name="specialisations" type="checkbox" value="{{this}}" />
+                        </label>
+                    {{/each}}
+                {{else}}
+                    None
+                {{/if}}
+            </div>
 		</div>
 	{{/if}}
 </form>

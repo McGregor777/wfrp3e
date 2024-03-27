@@ -15,11 +15,12 @@ export default class WFRP3eItem extends Item
 	}
 
 	/**
+	 * Makes usage of the WFRP3eItem. The result depends on the type of the WFRP3eItem.
 	 * @param {Object} [options]
 	 */
 	useItem(options = {})
 	{
-		const functionName = `use${capitalize(this.type)}`;
+		const functionName = `_use${capitalize(this.type)}`;
 
 		if(this[`${functionName}`])
 			this[`${functionName}`](options);
@@ -29,8 +30,10 @@ export default class WFRP3eItem extends Item
 
 	/**
 	 * @param {Object} [options]
+	 * @returns {Promise<void>}
+	 * @private
 	 */
-	async useAction(options = {})
+	async _useAction(options = {})
 	{
 		if(!options.face)
 			throw new Error("Knowing which face of the Action to use is needed.");
@@ -78,16 +81,20 @@ export default class WFRP3eItem extends Item
 
 	/**
 	 * @param {Object} [options]
+	 * @returns {Promise<void>}
+	 * @private
 	 */
-	async useSkill(options = {})
+	async _useSkill(options = {})
 	{
 		await CheckHelper.prepareSkillCheck(this.actor, this);
 	}
 
 	/**
 	 * @param {Object} [options]
+	 * @returns {Promise<void>}
+	 * @private
 	 */
-	async useWeapon(options = {})
+	async _useWeapon(options = {})
 	{
 		const weaponType = CONFIG.WFRP3e.weapon.groups[this.system.group].type;
 		let action = null;
@@ -103,6 +110,30 @@ export default class WFRP3eItem extends Item
 			throw new Error("Unable to find the relevant basic Action.");
 
 		await CheckHelper.prepareActionCheck(this.actor, action, this.actor.getCurrentStanceName(), {weapon: this});
+	}
+
+	/**
+	 * Fetches the details of the WFRP3eItem, depending on its type.
+	 * @returns {*}
+	 */
+	getDetails()
+	{
+		const functionName = `_get${capitalize(this.type)}Details`;
+
+		if(this[`${functionName}`])
+			return this[`${functionName}`]();
+		else
+			return this.system.description;
+	}
+
+	_getSkillDetails()
+	{
+		return game.i18n.format("SKILL.SpecialisationList", {specialisations: this.system.specialisations ?? ""});
+	}
+
+	_getWeaponDetails()
+	{
+		return this.system.description.concat(this.system.special);
 	}
 
 	/**
