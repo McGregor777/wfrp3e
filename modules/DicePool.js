@@ -36,6 +36,8 @@ export default class DicePool
 			return creatureDice;
 		}, {});
 
+		this.specialisations = [];
+
 		mergeObject(this, options);
 	}
 
@@ -47,7 +49,9 @@ export default class DicePool
 	{
 		return [
 			this.dice.characteristic + "d" + CharacteristicDie.DENOMINATION,
-			(this.dice.fortune + this.creatureDice.aggression + this.creatureDice.cunning) + "d" + FortuneDie.DENOMINATION,
+			(this.dice.fortune + this.specialisations.length
+				+ this.creatureDice.aggression
+				+ this.creatureDice.cunning) + "d" + FortuneDie.DENOMINATION,
 			(this.dice.expertise + this.creatureDice.expertise) + "d" + ExpertiseDie.DENOMINATION,
 			this.dice.conservative + "d" + ConservativeDie.DENOMINATION,
 			this.dice.reckless + "d" + RecklessDie.DENOMINATION,

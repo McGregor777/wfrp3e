@@ -72,6 +72,16 @@ export default class DicePoolBuilder extends FormApplication
 					return object;
 				}, {});
 
+				data.specialisations = this.object.checkData.actor.itemTypes.skill
+					.filter(skill => skill.system.specialisations)
+					.reduce((specialisations, skill) => {
+						specialisations.push(...skill.system.specialisations
+							.split(",")
+							.map(specialisation => specialisation.trim())
+						);
+						return specialisations;
+					}, []);
+
 				if(this.object.checkData.actor.type === "creature")
 					data.attributes = this.object.checkData.actor.system.attributes;
 			}
@@ -131,11 +141,17 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		await super._onChangeInput(event);
 
-		setProperty(
-			this.object,
-			event.currentTarget.name,
-			isNaN(event.currentTarget.value) ? event.currentTarget.value : Number(event.currentTarget.value)
-		);
+		let value = [];
+		for(const element of $(event.delegateTarget).find(`[name="${event.currentTarget.name}"]`)) {
+			if(element.type === "checkbox") {
+				if(element.checked)
+					value.push(element.value);
+			}
+			else
+				value = element.value;
+		}
+
+		setProperty(this.object, event.currentTarget.name, isNaN(value) ? value : Number(value));
 
 		this._updatePreview();
 	}
@@ -351,7 +367,9 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		container.innerHTML = "";
 
-		const totalDice = Object.values(this.object.dice).reduce((accumulator, dice) => accumulator + +dice, 0);
+		const totalDice = Object.values(this.object.dice).reduce((accumulator, dice) => accumulator + +dice, 0)
+			+ Object.values(this.object.creatureDice).reduce((accumulator, dice) => accumulator + +dice, 0)
+			+ this.object.specialisations.length;
 
 		// Adjust dice icons' size.
 		let height = 48;
@@ -374,7 +392,9 @@ export default class DicePoolBuilder extends FormApplication
 		Object.entries(this.object.dice).forEach((dice, index) => {
 			if(this.object.creatureDice) {
 				if(dice[0] === "fortune")
-					dice[1] += this.object.creatureDice.aggression + this.object.creatureDice.cunning;
+					dice[1] += this.object.specialisations.length
+						+ this.object.creatureDice.aggression
+						+ this.object.creatureDice.cunning;
 				else if(dice[0] === "expertise")
 					dice[1] += this.object.creatureDice.expertise;
 			}

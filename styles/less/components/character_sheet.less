@@ -402,6 +402,14 @@
 						background: #E9E2DB;
 					}
 
+					&.skill {
+						background: #EDE1D1;
+
+						&:nth-of-type(even) {
+							background: #E1CFB6;
+						}
+					}
+
 					& .content:first-child {
 						align-items: center;
 						display: flex;
@@ -417,6 +425,13 @@
 					padding: 0.25rem;
 					text-align: center;
 					text-shadow: 1px 1px var(--color-shadow-dark);
+
+					&.skill {
+						background: initial;
+						color: initial;
+						font-variant-caps: small-caps;
+						text-shadow: initial;
+					}
 
 					&.title {
 						background: #3F0B0CFF;
@@ -451,6 +466,27 @@
 					& .money-name {
 						text-align: initial;
 						width: 70%;
+					}
+				}
+
+				&.skill {
+					& .buttons {
+						width: 10%;
+					}
+
+					& .skill-characteristic {
+						font-variant-caps: small-caps;
+						width: 15%;
+					}
+
+					& .skill-name {
+						font-variant-caps: small-caps;
+						text-align: initial;
+						width: 50%;
+					}
+
+					& .skill-training-level {
+						width: 25%;
 					}
 				}
 

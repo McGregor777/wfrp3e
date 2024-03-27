@@ -96,7 +96,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		html.find(".flip-link").click(this._onFlipClick.bind(this));
 
 		html.find(".item-roll-link").click(this._onItemRoll.bind(this));
-		html.find(".item-expand-link").click(this._onItemExpandClick.bind(this));
+		html.find(".item.row, .item-expand-link").click(this._onItemExpandClick.bind(this));
 		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
 		html.find(".item-delete-link").click(this._onItemDelete.bind(this));
 
@@ -115,7 +115,6 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			.contextmenu(this._onRechargeTokenRightClick.bind(this));
 
 		html.find(".skill-training-level-input").change(this._onSkillTrainingLevelChange.bind(this));
-		html.find(".stance-meter-segment").click(this._onStanceMeterSegmentClick.bind(this));
 	}
 
 	/**
@@ -175,24 +174,24 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		});
 
 		if(this.actor.system.currentCareer) {
-			this.actor.system.currentCareer.system.talentSockets.forEach((talentSocket, index) => {
+			this.actor.system.currentCareer.system.talentSockets.forEach((talentSocketName, index) => {
 				// Find a potential Talent that would be socketed in that Talent Socket.
 				const talent = this.actor.itemTypes.talent.find(talent => talent.system.talentSocket === "career_" + this.actor.system.currentCareer._id + "_" + index);
 
-				talentSocketsByType[talentSocket]["career_" + this.actor.system.currentCareer._id + "_" + index] =
+				talentSocketsByType[talentSocketName]["career_" + this.actor.system.currentCareer._id + "_" + index] =
 					this.actor.system.currentCareer.name + (talent
 						? " - " + game.i18n.format("TALENT.TakenSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocket[0])}`),
+								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocketName)}`),
 								talent: talent.name
 							})
 						: " - " + game.i18n.format("TALENT.AvailableSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocket[0])}`)
+								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocketName)}`)
 							}));
 			});
 		}
 
 		if(this.actor.system.currentParty) {
-			this.actor.system.currentParty.system.talentSockets.forEach((talentSocket, index) => {
+			this.actor.system.currentParty.system.talentSockets.forEach((talentSocketName, index) => {
 				let talent = null;
 
 				for(const member of this.actor.system.currentParty.memberActors) {
@@ -203,15 +202,17 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 						break;
 				}
 
-				talentSocketsByType[talentSocket]["party_" + this.actor.system.currentParty._id + "_" + index] =
+				talentSocketsByType[talentSocketName]["party_" + this.actor.system.currentParty._id + "_" + index] =
 					this.actor.system.currentParty.name + (talent
-						? " - " + game.i18n.format("TALENT.TakenSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocket[0])}`),
+						? " - " +
+							game.i18n.format("TALENT.TakenSocket", {
+								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocketName)}`),
 								talent: talent.name
 							})
-						: " - " + game.i18n.format("TALENT.AvailableSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocket[0])}`)
-							}));
+						: " - " +
+						game.i18n.format("TALENT.AvailableSocket", {
+							type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocketName)}`)
+						}));
 			});
 		}
 
@@ -493,8 +494,11 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	_onItemExpandClick(event)
 	{
 		event.preventDefault();
+		event.stopPropagation();
 
-		const itemElement = $(event.currentTarget).parents(".item");
+		const itemElement = $(event.currentTarget).hasClass("item")
+			? $(event.currentTarget)
+			: $(event.currentTarget).parents(".item");
 		const item = this._getItemById(event);
 
 		if(itemElement.hasClass("expanded")) {
@@ -503,20 +507,16 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 			details.slideUp(200, () => details.remove());
 
-			$(event.currentTarget).find(".fas").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+			itemElement.find(".item-expand-link .fas").removeClass("fa-chevron-up").addClass("fa-chevron-down");
 		}
 		else {
 			// Add a div with the item's details below the row.
-			const detailsElement = $(`<div class="details">${item.system.description}</div>`);
-
-			if(item.type === "weapon" && item.system.special)
-				detailsElement.append(item.system.special);
+			const detailsElement = $(`<div class="details">${item.getDetails()}</div>`);
 
 			itemElement.append(detailsElement.hide());
 			detailsElement.slideDown(200);
 
-			$(event.currentTarget).find(".fas").removeClass("fa-chevron-down").addClass("fa-chevron-up");
-
+			itemElement.find(".item-expand-link .fas").removeClass("fa-chevron-down").addClass("fa-chevron-up");
 		}
 
 		itemElement.toggleClass("expanded");
@@ -537,17 +537,5 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			clickedItem.update({"system.trainingLevel": Number(event.target.value - 1)});
 		else
 			clickedItem.update({"system.trainingLevel": Number(event.target.value)});
-	}
-
-	/**
-	 * Performs follow-up operations after clicks on a Stance meter's segment.
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	async _onStanceMeterSegmentClick(event)
-	{
-		event.preventDefault();
-
-		this.actor.update({"system.stance.current": parseInt($(event.currentTarget).find("input")[0].value)});
 	}
 }

@@ -1,22 +1,37 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
 		<img class="actor-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
-		<h1><input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}"/></h1>
+
+		<h1>
+            <label>
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}"/>
+            </label>
+        </h1>
 	</header>
 
 	<section class="sheet-body">
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'SKILL.Characteristic'}}</label>
-			<select class="sheet-form-select" name="system.characteristic" data-dtype="String">
+		<label class="form-label">
+            {{localize 'SKILL.Characteristic'}}
+
+			<select class="sheet-form-select" name="system.characteristic">
 				{{selectOptions characteristics selected=item.system.characteristic labelAttr="name" localize=true}}
 			</select>
-		</div>
+		</label>
 
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'SKILL.AdvancedSkill'}}</label>
-			<input class="sheet-form-input" name="system.advanced" type="checkbox" {{#if item.system.advanced}} checked{{/if}} data-dtype="boolean" />
-		</div>
+		<label class="sheet-form-div">
+			{{localize 'SKILL.AdvancedSkill'}}
+
+			<input name="system.advanced" type="checkbox"{{#if item.system.advanced}} checked{{/if}} />
+		</label>
 
 		{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
+
+        {{#if item.parent}}
+            <label class="form-label">
+                {{localize 'SKILL.Specialisations'}}
+
+                <input name="system.specialisations" type="text" value="{{item.system.specialisations}}" />
+            </label>
+        {{/if}}
 	</section>
 </form>
