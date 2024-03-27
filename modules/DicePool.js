@@ -36,6 +36,8 @@ export default class DicePool
 			return creatureDice;
 		}, {});
 
+		this.fortunePoints = 0;
+
 		mergeObject(this, options);
 	}
 
@@ -47,7 +49,7 @@ export default class DicePool
 	{
 		return [
 			this.dice.characteristic + "d" + CharacteristicDie.DENOMINATION,
-			(this.dice.fortune + this.creatureDice.aggression + this.creatureDice.cunning) + "d" + FortuneDie.DENOMINATION,
+			(this.dice.fortune + this.fortunePoints + this.creatureDice.aggression + this.creatureDice.cunning) + "d" + FortuneDie.DENOMINATION,
 			(this.dice.expertise + this.creatureDice.expertise) + "d" + ExpertiseDie.DENOMINATION,
 			this.dice.conservative + "d" + ConservativeDie.DENOMINATION,
 			this.dice.reckless + "d" + RecklessDie.DENOMINATION,
@@ -135,18 +137,34 @@ export default class DicePool
 		if(this.sound)
 			AudioHelper.play({src: this.sound}, true);
 
-		if(this.checkData?.actor?.type === "creature") {
-			const updates = {system: {attributes: {}}};
+		if(this.checkData?.actor) {
+			const actor = this.checkData.actor;
 
-			for(const [attributeName, creatureDice] of Object.entries(this.creatureDice)) {
-				if(creatureDice > 0) {
-					updates.system.attributes[attributeName] = {
-						current: this.checkData.actor.system.attributes[attributeName].current - creatureDice
-					};
+			// Remove the fortune points spent on the check.
+			if(actor.type === "character" && this.fortunePoints > 0) {
+				const updates = {"system.fortune.value": Math.max(actor.system.fortune.value - this.fortunePoints, 0)};
+
+				if(this.fortunePoints > actor.system.fortune.value) {
+					const party = actor.system.currentParty;
+					party.update({"system.fortunePool": Math.max(party.system.fortunePool - (this.fortunePoints - actor.system.fortune.value), 0)})
 				}
-			}
 
-			this.checkData.actor.update(updates);
+				actor.update(updates);
+			}
+			// Remove the attribute dice spent on the check.
+			else if(actor.type === "creature") {
+				const updates = {system: {attributes: {}}};
+
+				for(const [attributeName, creatureDice] of Object.entries(this.creatureDice)) {
+					if(creatureDice > 0)
+						updates.system.attributes[attributeName] = {
+							value: actor.system.attributes[attributeName].value - creatureDice
+						};
+				}
+
+				if(Object.keys(updates.system.attributes).length > 0)
+					actor.update(updates);
+			}
 		}
 
 		return roll;

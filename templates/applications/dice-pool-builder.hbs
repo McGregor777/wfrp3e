@@ -11,7 +11,7 @@
 			{{#each diceIcons as |die d|}}
 				<label class="pool-container">
 					<img class="pool-picture special-die" src="{{die}}" width="43" height="43" alt="{{capitalize d}} die"/>
-					<input class="pool-value" name="dice.{{d}}" type="number" min="0" value="{{lookup object.dice d}}"/>
+					<input class="pool-value" name="dice.{{d}}" type="number" min="0" value="{{lookup ../object.dice d}}"/>
 					<div class="pool-text">{{localize (concat (concat "ROLL.DIE." (capitalize d)) "Dice")}}</div>
 				</label>
 			{{/each}}
@@ -27,7 +27,7 @@
 					<label class="attribute-dice">
 						<input class="pool-value"
 						       name="creatureDice.{{attr}}"
-						       value="{{lookup object.creatureDice d}}"
+						       value="{{lookup ../object.creatureDice attr}}"
 						       type="number"
 						       min="0"
 						       max="{{attribute.budget}}" />
@@ -217,9 +217,9 @@
 			</label>
 
 			<label>
-				{{localize "ROLL.DICEPOOLBUILDER.Fortune"}}
+				{{localize "ROLL.DICEPOOLBUILDER.FortunePoints"}}
 
-				<input class="pool-value" name="fortune" type="number" min="0" />
+				<input class="pool-value" name="fortunePoints" type="number" min="0" max="{{maxFortunePoints}}" />
 			</label>
 
 			{{#if availableWeapons}}

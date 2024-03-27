@@ -411,6 +411,7 @@
 	"ROLL.DICEPOOLBUILDER.DicePool": "Dice Pool",
 	"ROLL.DICEPOOLBUILDER.EncounterType": "Encounter Type",
 	"ROLL.DICEPOOLBUILDER.ExpertiseDice": "Expertise Dice",
+	"ROLL.DICEPOOLBUILDER.FortunePoints": "Fortune Points",
 	"ROLL.DICEPOOLBUILDER.Hint": "Left click to increase dice, right click to decrease.",
 	"ROLL.DICEPOOLBUILDER.Options": "Options",
 	"ROLL.DICEPOOLBUILDER.RollCheck": "Roll check",
