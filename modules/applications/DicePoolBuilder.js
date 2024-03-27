@@ -61,51 +61,56 @@ export default class DicePoolBuilder extends FormApplication
 		}
 
 		if(this.object.checkData) {
-			this.object.checkData.challengeLevel = data.challengeLevel;
+			const checkData = this.object.checkData;
+			checkData.challengeLevel = data.challengeLevel;
 
-			if(this.object.checkData.actor) {
-				data.skills = this.object.checkData.actor.itemTypes.skill;
+			if(checkData.actor) {
+				const actor = checkData.actor;
 
+				data.skills = actor.itemTypes.skill;
 				data.characteristics = Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
 					if(characteristic[0] !== "varies")
 						object[characteristic[0]] = characteristic[1].name;
 					return object;
 				}, {});
 
-				data.specialisations = this.object.checkData.actor.itemTypes.skill
-					.filter(skill => skill.system.specialisations)
-					.reduce((specialisations, skill) => {
-						specialisations.push(...skill.system.specialisations
-							.split(",")
-							.map(specialisation => specialisation.trim())
+				if(actor.type === "character") {
+					data.maxFortunePoints = actor.system.fortune.value + actor.system.currentParty.system.fortunePool;
+					data.specialisations = actor.itemTypes.skill
+						.filter(skill => skill.system.specialisations)
+						.reduce((specialisations, skill) => {
+							specialisations.push(
+								...skill.system.specialisations.split(",").map(specialisation => specialisation.trim()
+							)
 						);
 						return specialisations;
 					}, []);
-
-				if(this.object.checkData.actor.type === "creature")
-					data.attributes = this.object.checkData.actor.system.attributes;
+				}
+				else if(actor.type === "creature")
+					data.attributes = actor.system.attributes;
 			}
 
-			if(this.object.checkData.skill)
-				data.skill = this.object.checkData.skill;
+			if(checkData.skill)
+				data.skill = checkData.skill;
 
-			if(this.object.checkData.characteristic)
-				data.characteristic = this.object.checkData.characteristic;
+			if(checkData.characteristic)
+				data.characteristic = checkData.characteristic;
 
-			if(this.object.checkData.action) {
-				data.action = this.object.checkData.action
+			if(checkData.action) {
+				const action = checkData.action;
+				data.action = action;
 
-				if(["melee", "ranged"].includes(data.action.system.type)) {
-					data.availableWeapons = data.action.actor.itemTypes.weapon.filter(weapon => {
+				if(["melee", "ranged"].includes(action.system.type)) {
+					data.availableWeapons = action.actor.itemTypes.weapon.filter(weapon => {
 						return Object.entries(CONFIG.WFRP3e.weapon.groups).reduce((array, weaponGroup) => {
-							if(weaponGroup[1].type === data.action.system.type)
+							if(weaponGroup[1].type === action.system.type)
 								array.push(weaponGroup[0]);
 							return array;
 						}, []).includes(weapon.system.group);
 					});
 
-					data.weapon = this.object.checkData.weapon ?? Object.values(data.availableWeapons)[0];
-					this.object.checkData.weapon = Object.values(data.availableWeapons)[0];
+					data.weapon = checkData.weapon ?? Object.values(data.availableWeapons)[0];
+					checkData.weapon = Object.values(data.availableWeapons)[0];
 				}
 			}
 		}
@@ -369,6 +374,7 @@ export default class DicePoolBuilder extends FormApplication
 
 		const totalDice = Object.values(this.object.dice).reduce((accumulator, dice) => accumulator + +dice, 0)
 			+ Object.values(this.object.creatureDice).reduce((accumulator, dice) => accumulator + +dice, 0)
+			+ this.object.fortunePoints;
 			+ this.object.specialisations.length;
 
 		// Adjust dice icons' size.
@@ -392,7 +398,8 @@ export default class DicePoolBuilder extends FormApplication
 		Object.entries(this.object.dice).forEach((dice, index) => {
 			if(this.object.creatureDice) {
 				if(dice[0] === "fortune")
-					dice[1] += this.object.specialisations.length
+					dice[1] += this.object.fortunePoints
+						+ this.object.specialisations.length
 						+ this.object.creatureDice.aggression
 						+ this.object.creatureDice.cunning;
 				else if(dice[0] === "expertise")
@@ -492,14 +499,12 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		event.preventDefault();
 
-		const skill = this.object.checkData.actor.itemTypes.skill.find(skill => skill._id === event.currentTarget.value)
+		const skill = this.object.checkData.actor.itemTypes.skill.find(skill => skill._id === event.currentTarget.value);
 
 		this.object.checkData.skill = skill;
 		this.object.dice.expertise = skill.system.trainingLevel;
 
-		html.find(".characteristic-select")
-			.val(skill.system.characteristic)
-			.trigger("change");
+		html.find(".characteristic-select").val(skill.system.characteristic).trigger("change");
 
 		this._synchronizeInputs(html);
 	}
