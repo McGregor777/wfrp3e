@@ -22,9 +22,23 @@
 				overflow: auto;
 			}
 
-			& .abilities-tab .character-sheet-abilities {
-				display: flex;
-				flex-wrap: wrap;
+			& .abilities-tab {
+				overflow: unset;
+
+				& .character-sheet-abilities {
+					min-height: 0;
+				}
+
+				& .character-sheet-ability-tabs {
+					border-bottom: 1px solid #b5b3a4;
+					display: flex;
+					flex-flow: row wrap;
+					justify-content: space-around;
+
+					& > * {
+						margin: 0 5px;
+					}
+				}
 			}
 
 			& .actions-tab {
