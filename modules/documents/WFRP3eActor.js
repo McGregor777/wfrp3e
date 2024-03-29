@@ -3,6 +3,7 @@ import CareerSelector from "../applications/CareerSelector.js";
 import CharacteristicUpgrader from "../applications/CharacteristicUpgrader.js";
 import TalentSelector from "../applications/TalentSelector.js";
 import TrainingSelector from "../applications/TrainingSelector.js";
+import CheckHelper from "../CheckHelper.js";
 import {capitalize} from "../helpers.js";
 
 /**
@@ -27,6 +28,14 @@ export default class WFRP3eActor extends Actor
 		}
 
 		super.prepareDerivedData();
+	}
+
+	performCharacteristicCheck(characteristic)
+	{
+		CheckHelper.prepareCharacteristicCheck(
+			this,
+			{name: characteristic, ...this.system.characteristics[characteristic]}
+		);
 	}
 
 	/**

@@ -39,6 +39,8 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	{
 		super.activateListeners(html);
 
+		html.find(".characteristic a").click(this._onCharacteristicLink.bind(this));
+
 		html.find(".creature-sheet-stance")
 			.click(this._onStanceLinkLeftClick.bind(this))
 			.contextmenu(this._onStanceLinkRightClick.bind(this));
@@ -109,6 +111,16 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	_getItemById(event)
 	{
 		return this.actor.items.get(event.currentTarget.dataset.itemId ?? $(event.currentTarget).parents(".item").data("itemId"));
+	}
+
+	/**
+	 * Performs follow-up operations after clicks on a Characteristic link.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onCharacteristicLink(event)
+	{
+		this.actor.performCharacteristicCheck(event.currentTarget.dataset.characteristic);
 	}
 
 	/**
@@ -195,6 +207,8 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 */
 	async _onItemLeftClick(event)
 	{
+		event.stopPropagation();
+		
 		const item = this._getItemById(event);
 		const options = {};
 		const face = $(event.currentTarget).parents(".face").data("face");

@@ -190,12 +190,13 @@
 		</div>
 	</div>
 
-	{{#if skill}}
+	{{#if actor}}
 		<div class="quick-settings">
 			<label>
 				{{localize "ROLL.DICEPOOLBUILDER.Skill"}}
 
 				<select class="skill-select" name="skill">
+                    <option value=""></option>
 					{{selectOptions @root.skills selected=@root.skill._id nameAttr="_id" labelAttr="name"}}
 				</select>
 			</label>
@@ -204,7 +205,7 @@
 				{{localize "ROLL.DICEPOOLBUILDER.Characteristic"}}
 
 				<select class="characteristic-select" name="characteristic">
-					{{selectOptions @root.characteristics selected=@root.characteristic localize=true}}
+					{{selectOptions @root.characteristics selected=@root.characteristic.name localize=true}}
 				</select>
 			</label>
 
