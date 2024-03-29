@@ -1,70 +1,36 @@
-.miscasts
-{
-	& .miscast-card
-	{
+.miscast-card {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	width: 255px;
+	height: 385px;
+	margin: 8px;
+	border: 10px solid #385060;
+	border-width: 10px 0;
+	border-radius: 10px;
+	text-align: center;
+	background-color: #e8f0f8;
+
+	& .miscast-card-description {
+		flex-grow: 1;
+		padding: 10px;
+
+		& p {
+			text-align: left;
+		}
+	}
+
+	& .miscast-card-header {
 		display: flex;
 		flex-direction: column;
-		position: relative;
-		width: 255px;
-		height: 385px;
-		margin: 0 auto;
-		border: 10px solid #385060;
-		border-width: 10px 0;
-		border-radius: 10px;
-		text-align: center;
-		background-color: #e8f0f8;
+		height: 50px;
+		margin-bottom: 5px;
+		background-color: #e8e8e0;
 
-		& .miscast-card-description
-		{
-			flex-grow: 1;
-			padding: 10px;
-
-			& p
-			{
-				text-align: left;
-			}
-		}
-
-		& .miscast-card-header
-		{
-			display: flex;
-			flex-direction: column;
-			height: 50px;
-			margin-bottom: 5px;
-			background-color: #e8e8e0;
-
-			& .miscast-card-name
-			{
-				margin: auto 0;
-				color: white;
-				font: small-caps 16pt var(--font-title);
-				text-shadow:
-					-1pt -1pt 0 black,
-					-1pt 0 0 black,
-					0 -1pt 0 black,
-					-1pt 1pt 0 black,
-					1pt -1pt 0 black,
-					0 1pt 0 black,
-					1pt 0 0 black,
-					1pt 1pt 0 black;
-
-				&:hover
-				{
-					text-shadow: 0 0 8px var(--color-shadow-primary);
-				}
-			}
-		}
-
-		& .miscast-card-severity-rating
-		{
-			position: absolute;
-			width: 31px;
-			height: 31px;
-			bottom: 15px;
-			right: 15px;
-			background-color: #703818;
+		& .miscast-card-name {
+			margin: auto 0;
 			color: white;
-			font: small-caps 20pt var(--font-title);
+			font: small-caps 16pt var(--font-title);
 			text-shadow:
 				-1pt -1pt 0 black,
 				-1pt 0 0 black,
@@ -74,13 +40,36 @@
 				0 1pt 0 black,
 				1pt 0 0 black,
 				1pt 1pt 0 black;
-		}
 
-		& .item-delete-link
-		{
-			position: absolute;
-			bottom: 0;
-			right: 5px;
+			&:hover {
+				text-shadow: 0 0 8px var(--color-shadow-primary);
+			}
 		}
+	}
+
+	& .miscast-card-severity-rating {
+		position: absolute;
+		width: 31px;
+		height: 31px;
+		bottom: 15px;
+		right: 15px;
+		background-color: #703818;
+		color: white;
+		font: small-caps 20pt var(--font-title);
+		text-shadow:
+			-1pt -1pt 0 black,
+			-1pt 0 0 black,
+			0 -1pt 0 black,
+			-1pt 1pt 0 black,
+			1pt -1pt 0 black,
+			0 1pt 0 black,
+			1pt 0 0 black,
+			1pt 1pt 0 black;
+	}
+
+	& .item-delete-link {
+		position: absolute;
+		bottom: 0;
+		right: 5px;
 	}
 }
