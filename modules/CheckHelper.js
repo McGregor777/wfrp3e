@@ -7,9 +7,38 @@ import DicePool from "./DicePool.js";
 export default class CheckHelper
 {
 	/**
+	 * Prepares a Characteristic check then opens the Dice Pool Builder afterwards.
+	 * @param {WFRP3eActor}	actor The Character making the check.
+	 * @param {Object} characteristic The Characteristic used for the check.
+	 * @param {Object} [options]
+	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
+	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
+	 * @returns {Promise<void>}
+	 */
+	static async prepareCharacteristicCheck(actor, characteristic, {flavor = null, sound = null} = {})
+	{
+		const stance = actor.system.stance.current ?? actor.system.stance;
+
+		await new DicePoolBuilder(
+			new DicePool({
+				dice: {
+					characteristic: characteristic.rating - Math.abs(stance),
+					fortune: characteristic.fortune,
+					conservative: stance < 0 ? Math.abs(stance) : 0,
+					reckless: stance > 0 ? stance : 0
+				}
+			}, {
+				checkData: {actor, characteristic},
+				flavor,
+				sound
+			})
+		).render(true);
+	}
+
+	/**
 	 * Prepares a Skill check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor}	actor The Character using the Action.
-	 * @param {WFRP3eItem} skill The Skill check has been triggered.
+	 * @param {WFRP3eActor}	actor The Character making the check.
+	 * @param {WFRP3eItem} skill The Skill used for the check.
 	 * @param {Object} [options]
 	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
 	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
@@ -30,8 +59,7 @@ export default class CheckHelper
 					reckless: stance > 0 ? stance : 0
 				}
 			}, {
-				name: game.i18n.format("ROLL.SkillCheck", {skill: skill.name}),
-				checkData: {actor: actor, skill: skill, characteristic: skill.system.characteristic},
+				checkData: {actor, skill, characteristic: skill.system.characteristic},
 				flavor,
 				sound
 			})
@@ -93,7 +121,6 @@ export default class CheckHelper
 							: 0)
 				}
 			}, {
-				name: game.i18n.format("ROLL.ActionCheck", {action: action.name}),
 				checkData,
 				flavor,
 				sound
@@ -123,7 +150,6 @@ export default class CheckHelper
 				reckless: stance > 0 ? stance : 0
 			}
 		}, {
-			name: game.i18n.localize("ROLL.InitiativeCheckBuilder"),
 			checkData: {actor: actor, characteristic: characteristic, combat},
 			flavor,
 			sound

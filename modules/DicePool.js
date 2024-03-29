@@ -6,20 +6,19 @@ import FortuneDie from "./dice/FortuneDie.js";
 import MisfortuneDie from "./dice/MisfortuneDie.js";
 import RecklessDie from "./dice/RecklessDie.js";
 import WFRP3eRoll from "./WFRP3eRoll.js";
+import {capitalize} from "./helpers.js";
 
 /**
  * DicePool utility helps prepare WFRP3e's special dice pools.
- *
  * @param {Object} [startingPool]
  * @param {Object} [options]
- * @param {String} [options.name]
- * @param {Object} [options.data]
+ * @param {Object} [options.checkData]
  * @param {String} [options.flavor]
  * @param {String} [options.sound]
  */
 export default class DicePool
 {
-	constructor(startingPool = {}, options = {name: game.i18n.localize("ROLL.FreeCheck"), checkData: null, flavor: null, sound: null})
+	constructor(startingPool = {}, options = {checkData: null, flavor: null, sound: null})
 	{
 		this.dice = Object.keys(CONFIG.WFRP3e.dice).reduce((dice, dieName) => {
 			dice[dieName] = startingPool.dice ? startingPool.dice[dieName] ?? 0 : 0;
@@ -64,6 +63,22 @@ export default class DicePool
 			const test = d.split(/([0-9]+)/);
 			return test[1] > 0;
 		}).join("+");
+	}
+
+	get name()
+	{
+		if(this.checkData.combat)
+			return game.i18n.localize(`ROLL.${capitalize(this.check.combat.tags.encounterType)}EncounterInitiativeCheck`);
+		else if(this.checkData.action)
+			return game.i18n.format("ROLL.ActionCheck", {action: this.checkData.action.name});
+		else if(this.checkData.skill)
+			return game.i18n.format("ROLL.SkillCheck", {skill: this.checkData.skill.name});
+		else if(this.checkData.characteristic)
+			return game.i18n.format("ROLL.CharacteristicCheck", {
+				characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[this.checkData.characteristic.name].name)
+			});
+
+		return game.i18n.localize("ROLL.FreeCheck");
 	}
 
 	/**
@@ -123,7 +138,8 @@ export default class DicePool
 	}
 
 	/**
-	 *
+	 * Rolls the Dice Pool, then shows the results in a Message.
+	 * @returns {Promise<*>}
 	 */
 	async roll()
 	{

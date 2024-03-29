@@ -26,23 +26,27 @@
 			<div class="creature-sheet-main-infos">
 				<div class="creature-sheet-characteristics">
 					{{#each actor.system.characteristics as |characteristic char|}}
-						<div class="characteristic">
-							<span class="characteristic-title" title="{{localize (lookup (lookup @root.characteristics char) "name")}}">
-								{{localize (lookup (lookup @root.characteristics char) "abbreviation")}}
-							</span>
+						{{#with (lookup @root.characteristics char) as |charac|}}
+							<div class="characteristic">
+								<a class="characteristic-title"
+								   data-tooltip="{{localize charac.name}}"
+								   data-characteristic="{{char}}">
+									{{localize charac.abbreviation}}
+								</a>
 
-							<input class="characteristic-value-input"
-							       name="system.characteristics.{{char}}.value"
-							       value="{{characteristic.value}}"
-							       type="number"
-							       placeholder="{{localize (lookup (lookup @root.characteristics char) 'abbreviation')}}" />
+								<input class="characteristic-value-input"
+								       name="system.characteristics.{{char}}.rating"
+								       value="{{characteristic.rating}}"
+								       type="number"
+								       placeholder="{{localize charac.abbreviation}}" />
 
-							<input class="characteristic-fortune-input"
-							       name="system.characteristics.{{char}}.fortune"
-							       type="number"
-							       value="{{characteristic.fortune}}"
-							       placeholder="{{localize 'CHARACTER.Fortune'}}" />
-						</div>
+								<input class="characteristic-fortune-input"
+								       name="system.characteristics.{{char}}.fortune"
+								       type="number"
+								       value="{{characteristic.fortune}}"
+								       placeholder="{{localize 'CHARACTER.Fortune'}}" />
+							</div>
+						{{/with}}
 					{{/each}}
 				</div>
 

@@ -87,6 +87,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 		html.find(".advance-checkbox").change(this._onAdvanceCheckboxChange.bind(this));
 
+		html.find(".characteristic a").click(this._onCharacteristicLink.bind(this));
+
 		html.find(".current-career-input").click(this._onCurrentCareerInput.bind(this));
 
 		html.find(".impairment .token")
@@ -261,6 +263,16 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			event.currentTarget.checked = false;
 			ui.notifications.warn(game.i18n.localize("CHARACTER.SHEET.NoExperienceLeft"));
 		}
+	}
+
+	/**
+	 * Performs follow-up operations after clicks on a Characteristic link.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onCharacteristicLink(event)
+	{
+		this.actor.performCharacteristicCheck(event.currentTarget.dataset.characteristic);
 	}
 
 	/**

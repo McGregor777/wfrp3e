@@ -11,13 +11,19 @@ export default class DicePoolBuilder extends FormApplication
 	/** @inheritDoc */
 	get title()
 	{
-		if(this.checkData) {
-			if(this.checkData.action)
-				return game.i18n.format("ROLL.ActionCheckBuilder", {action: this.check.data.action.name});
-			else if(this.checkData.skill)
-				return game.i18n.format("ROLL.SkillCheckBuilder", {skill: this.check.data.skill.name});
-			else if(this.checkData.combat)
+		if(this.object.checkData) {
+			const checkData = this.object.checkData;
+
+			if(checkData.combat)
 				return game.i18n.localize("ROLL.InitiativeCheckBuilder");
+			else if(checkData.action)
+				return game.i18n.format("ROLL.ActionCheckBuilder", {action: checkData.action.name});
+			else if(checkData.skill)
+				return game.i18n.format("ROLL.SkillCheckBuilder", {skill: checkData.skill.name});
+			else if(checkData.characteristic)
+				return game.i18n.format("ROLL.CharacteristicCheckBuilder", {
+					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].name)
+				});
 		}
 
 		return game.i18n.localize("ROLL.CheckBuilder");
@@ -67,12 +73,13 @@ export default class DicePoolBuilder extends FormApplication
 			if(checkData.actor) {
 				const actor = checkData.actor;
 
-				data.skills = actor.itemTypes.skill;
+				data.actor = actor;
 				data.characteristics = Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
 					if(characteristic[0] !== "varies")
 						object[characteristic[0]] = characteristic[1].name;
 					return object;
 				}, {});
+				data.skills = actor.itemTypes.skill;
 
 				if(actor.type === "character") {
 					data.maxFortunePoints = actor.system.fortune.value + actor.system.currentParty.system.fortunePool;
@@ -89,6 +96,9 @@ export default class DicePoolBuilder extends FormApplication
 				else if(actor.type === "creature")
 					data.attributes = actor.system.attributes;
 			}
+
+			if(checkData.characteristic)
+				data.characteristic = checkData.characteristic;
 
 			if(checkData.skill)
 				data.skill = checkData.skill;
@@ -475,13 +485,15 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		event.preventDefault();
 
-		const characteristic = this.object.checkData.actor.system.characteristics[event.currentTarget.value];
+		this.object.checkData.characteristic = {
+			name: event.currentTarget.value,
+			...this.object.checkData.actor.system.characteristics[event.currentTarget.value]
+		};
 		const stance = this.object.checkData.actor.system.stance.current;
 
-		this.object.checkData.skill = event.currentTarget.value;
 		mergeObject(this.object.dice, {
-			characteristic: characteristic.value - Math.abs(stance),
-			fortune: characteristic.fortune,
+			characteristic: this.object.checkData.characteristic.value - Math.abs(stance),
+			fortune: this.object.checkData.characteristic.fortune,
 			conservative: stance < 0 ? Math.abs(stance) : 0,
 			reckless: stance > 0 ? stance : 0
 		});
@@ -502,9 +514,13 @@ export default class DicePoolBuilder extends FormApplication
 		const skill = this.object.checkData.actor.itemTypes.skill.find(skill => skill._id === event.currentTarget.value);
 
 		this.object.checkData.skill = skill;
-		this.object.dice.expertise = skill.system.trainingLevel;
 
-		html.find(".characteristic-select").val(skill.system.characteristic).trigger("change");
+		if(skill) {
+			this.object.dice.expertise = skill.system.trainingLevel;
+			html.find(".characteristic-select").val(skill.system.characteristic).trigger("change");
+		}
+		else
+			this.object.dice.expertise = 0;
 
 		this._synchronizeInputs(html);
 	}
