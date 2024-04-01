@@ -369,7 +369,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		this._getItemById(event).useItem(options);
 	}
 
-	/**²
+	/**
 	 * Performs follow-up operations after clicks on an Item edit button.
 	 * @param {MouseEvent} event
 	 * @private
@@ -547,11 +547,11 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	{
 		event.preventDefault();
 
-		const clickedItem = this.actor.items.get($(event.currentTarget).parents("tr").attr("data-item-id"));
+		const item = this._getItemById(event);
 
 		if(event.target.defaultChecked)
-			clickedItem.update({"system.trainingLevel": Number(event.target.value - 1)});
+			item.update({"system.trainingLevel": Number(event.target.value - 1)});
 		else
-			clickedItem.update({"system.trainingLevel": Number(event.target.value)});
+			item.update({"system.trainingLevel": Number(event.target.value)});
 	}
 }
