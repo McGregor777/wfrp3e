@@ -49,7 +49,6 @@ export default class DicePool
 	{
 		return [
 			this.dice.characteristic + "d" + CharacteristicDie.DENOMINATION,
-			(this.dice.fortune+ this.creatureDice.aggression + this.creatureDice.cunning) + "d" + FortuneDie.DENOMINATION,
 			(this.dice.fortune + this.fortunePoints
 				+ this.specialisations.length
 				+ this.creatureDice.aggression
