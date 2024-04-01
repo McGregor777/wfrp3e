@@ -59,7 +59,7 @@ export default class CheckHelper
 					reckless: stance > 0 ? stance : 0
 				}
 			}, {
-				checkData: {actor, skill, characteristic: skill.system.characteristic},
+				checkData: {actor, skill, characteristic: {name: skill.system.characteristic, ...characteristic}},
 				flavor,
 				sound
 			})
@@ -92,7 +92,7 @@ export default class CheckHelper
 		}
 
 		const characteristic = actor.system.characteristics[characteristicName];
-		const checkData = {actor: actor, action: action, face: face, skill: skill, characteristic: characteristicName};
+		const checkData = {actor, action, face, skill, characteristic: {name: characteristicName, ...characteristic}};
 		let stance = 0;
 
 		if(actor.type === "character")
