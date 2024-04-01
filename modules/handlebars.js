@@ -4,6 +4,7 @@ export default function()
 {
     Hooks.on("init", () => {
 		Handlebars.registerHelper("and", (firstCondition, secondCondition) => firstCondition === true && secondCondition === true);
+		Handlebars.registerHelper("or", (firstCondition, secondCondition) => firstCondition === true || secondCondition === true);
 		Handlebars.registerHelper("superiorTo", (value, compareValue) => Number(value) > Number(compareValue));
 		Handlebars.registerHelper("inferiorTo", (value, compareValue) => Number(value) < Number(compareValue));
 		Handlebars.registerHelper("equalTo", (value, compareValue) => value == compareValue);
@@ -13,7 +14,7 @@ export default function()
 		Handlebars.registerHelper("inferiorOrEqualTo", (value, compareValue) => Number(value) <= Number(compareValue));
 		Handlebars.registerHelper("increment", (value, valueToAdd) => value + parseInt(valueToAdd));
 		Handlebars.registerHelper("multiply", (value, multiplier) => value * multiplier);
-		Handlebars.registerHelper("concat", (value, otherValue) => value.toString() + otherValue.toString());
+		Handlebars.registerHelper("concat", () => arguments.join());
 		Handlebars.registerHelper("capitalize", (string) => capitalize(string));
 		Handlebars.registerHelper("abs", (number) => Math.abs(number));
 		Handlebars.registerHelper("in", (value, array) => array.includes(value));

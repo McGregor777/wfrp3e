@@ -12,7 +12,7 @@
 				<label class="pool-container">
 					<img class="pool-picture special-die" src="{{die}}" width="43" height="43" alt="{{capitalize d}} die"/>
 					<input class="pool-value" name="dice.{{d}}" type="number" min="0" value="{{lookup ../object.dice d}}"/>
-					<div class="pool-text">{{localize (concat (concat "ROLL.DIE." (capitalize d)) "Dice")}}</div>
+					<div class="pool-text">{{localize (concat "ROLL.DIE." (capitalize d) "Dice")}}</div>
 				</label>
 			{{/each}}
 		</div>
@@ -31,7 +31,7 @@
 						       type="number"
 						       min="0"
 						       max="{{attribute.budget}}" />
-						<div>{{localize (concat (concat "ROLL.DICEPOOLBUILDER." (capitalize attr)) "Dice")}}</div>
+						<div>{{localize (concat "ROLL.DICEPOOLBUILDER." (capitalize attr) "Dice")}}</div>
 					</label>
 				{{/each}}
 			</div>
@@ -196,8 +196,8 @@
 				{{localize "ROLL.DICEPOOLBUILDER.Skill"}}
 
 				<select class="skill-select" name="skill">
-                    <option value=""></option>
-					{{selectOptions @root.skills selected=@root.skill._id nameAttr="_id" labelAttr="name"}}
+                    <option value=""{{#unless skill}} selected{{/unless}}></option>
+					{{selectOptions @root.skills selected=skill._id nameAttr="_id" labelAttr="name"}}
 				</select>
 			</label>
 
@@ -205,7 +205,7 @@
 				{{localize "ROLL.DICEPOOLBUILDER.Characteristic"}}
 
 				<select class="characteristic-select" name="characteristic">
-					{{selectOptions @root.characteristics selected=@root.characteristic.name localize=true}}
+					{{selectOptions @root.characteristics selected=characteristic.name localize=true}}
 				</select>
 			</label>
 
@@ -213,7 +213,7 @@
 				{{localize "ROLL.DICEPOOLBUILDER.ChallengeLevel"}}
 
 				<select class="challenge-level-select" name="challengeLevel">
-					{{selectOptions @root.challengeLevels selected=@root.challengeLevel labelAttr="name" localize=true}}
+					{{selectOptions @root.challengeLevels selected=challengeLevel labelAttr="name" localize=true}}
 				</select>
 			</label>
 
@@ -228,7 +228,7 @@
 					{{localize "ROLL.DICEPOOLBUILDER.Weapon"}}
 
 					<select class="weapon-select" name="weapon">
-						{{selectOptions @root.availableWeapons selected=@root.weapon._id nameAttr="_id" labelAttr="name"}}
+						{{selectOptions @root.availableWeapons selected=weapon._id nameAttr="_id" labelAttr="name"}}
 					</select>
 				</label>
 			{{/if}}

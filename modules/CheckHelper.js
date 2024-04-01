@@ -210,27 +210,80 @@ export default class CheckHelper
 
 	/**
 	 * Toggles effects from a Roll, depending on the symbols remaining.
-	 * @param chatMessageId The id of the ChatMessage containing the Roll.
-	 * @param symbol The symbol of the effect to toggle.
-	 * @param index The index of the effect to toggle.
+	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
+	 * @param {String} symbol The symbol of the effect to toggle.
+	 * @param {Number} index The index of the effect to toggle.
 	 */
 	static toggleEffect(chatMessageId, symbol, index)
 	{
 		const chatMessage = game.messages.get(chatMessageId);
 		const changes = {rolls: chatMessage.rolls};
+		const roll = changes.rolls[0];
+		const toggledEffect = roll.effects[symbol][index];
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
 
-		if(changes.rolls[0].effects[symbol][index].active === true)
-			changes.rolls[0].effects[symbol][index].active = false;
-		else if(changes.rolls[0].remainingSymbols[CONFIG.WFRP3e.symbols[symbol].plural] >= changes.rolls[0].effects[symbol][index].symbolAmount)
-			changes.rolls[0].effects[symbol][index].active = true;
+		if(toggledEffect.active === true)
+			toggledEffect.active = false;
+		// Delay/Exertion + Bane effects.
+		else if(["delay", "exertion"].includes(symbol)) {
+			if(roll.remainingSymbols[plural] > 0) {
+				if(toggledEffect.symbolAmount > 1) {
+					if(roll.remainingSymbols.banes >= toggledEffect.symbolAmount - 1)
+						toggledEffect.active = true;
+					else
+						ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {
+							symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
+						}));
+				}
+				else
+					toggledEffect.active = true;
+			}
+			else
+				ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {
+					symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+				}));
+		}
+		// Sigmar's Comet as Success/Boon.
+		else if(["success", "boon"].includes(symbol) && (roll.remainingSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount))
+			toggledEffect.active = true;
+		// Default.
+		else if(roll.remainingSymbols[plural] >= toggledEffect.symbolAmount)
+			toggledEffect.active = true;
 		else
-			ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)}));
+			ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {
+				symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+			}));
 
-		changes.rolls[0].remainingSymbols[CONFIG.WFRP3e.symbols[symbol].plural] = changes.rolls[0].effects[symbol].reduce((accumulator, effect) => {
-			if(effect.active)
-				accumulator -= effect.symbolAmount;
-			return accumulator;
-		}, changes.rolls[0].resultSymbols[CONFIG.WFRP3e.symbols[symbol].plural]);
+		roll.remainingSymbols = {...roll.resultSymbols};
+
+		// Recalculate remaining symbols for every type.
+		Object.entries(roll.effects).forEach(effects => {
+			const symbolName = effects[0];
+			const plural = CONFIG.WFRP3e.symbols[symbolName].plural;
+
+			roll.remainingSymbols[plural] = effects[1].filter(effect => effect.active)
+				.reduce((remainingSymbols, effect) => {
+					if(["delay", "exertion"].includes(symbolName)) {
+						remainingSymbols--;
+
+						if(effect.symbolAmount > 1)
+							roll.remainingSymbols.banes -= effect.symbolAmount - 1;
+					}
+					else if(remainingSymbols < effect.symbolAmount) {
+						if(["success", "boon"].includes(symbolName)
+							&& (remainingSymbols + roll.remainingSymbols.sigmarsComets >= effect.symbolAmount)) {
+							roll.remainingSymbols.sigmarsComets += remainingSymbols - effect.symbolAmount;
+							return 0;
+						}
+
+						throw new Error(`The remaining number of ${symbolName} cannot be negative.`);
+					}
+					else
+						remainingSymbols -= effect.symbolAmount;
+
+					return remainingSymbols;
+				}, roll.remainingSymbols[plural]);
+		});
 
 		chatMessage.update(changes);
 	}
