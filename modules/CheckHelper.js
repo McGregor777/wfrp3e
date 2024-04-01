@@ -170,41 +170,57 @@ export default class CheckHelper
 	/**
 	 * Get the universal boon effect.
 	 * @param {boolean} isMental Whether the check is based upon a mental characteristic.
+	 * @returns {{symbolAmount: Number, description: String}}
 	 */
 	static getUniversalBoonEffect(isMental)
 	{
 		return isMental ? {
 			symbolAmount: 2,
-			description: game.i18n.localize("ROLL.UNIVERSAL.MentalBoon")
+			description: game.i18n.format("ROLL.EFFECT.RecoverFatigue", {amount: 1})
 		} : {
 			symbolAmount: 2,
-			description: game.i18n.localize("ROLL.UNIVERSAL.PhysicalBoon")
+			description: game.i18n.format("ROLL.EFFECT.RecoverStress", {amount: 1})
 		};
 	}
 
 	/**
-	 * Get the universal boon effect.
+	 * Get the universal bane effect.
 	 * @param {boolean} isMental Whether the check is based upon a mental characteristic.
+	 * @returns {{symbolAmount: Number, description: String}}
 	 */
 	static getUniversalBaneEffect(isMental)
 	{
 		return isMental ? {
 			symbolAmount: 2,
-			description: game.i18n.localize("ROLL.UNIVERSAL.MentalBane")
+			description: game.i18n.format("ROLL.EFFECT.SufferFatigue", {amount: 1})
 			} : {
 			symbolAmount: 2,
-			description: game.i18n.localize("ROLL.UNIVERSAL.PhysicalBane")
+			description: game.i18n.format("ROLL.EFFECT.SufferStress", {amount: 1})
+		};
+	}
+
+	/**
+	 * Get the weapon's Critical Rating effect.
+	 * @param {WFRP3eItem} weapon
+	 * @returns {{symbolAmount: Number, description: String}}
+	 */
+	static getCriticalRatingEffect(weapon)
+	{
+		return {
+			symbolAmount: weapon.system.criticalRating,
+			description: game.i18n.format("ROLL.EFFECT.Critical", {amount: 1})
 		};
 	}
 
 	/**
 	 * Get the universal Sigmar's comet effect.
+	 * @returns {{symbolAmount: Number, description: String}}
 	 */
 	static getUniversalSigmarsCometEffect()
 	{
 		return {
 			symbolAmount: 1,
-			description: game.i18n.localize("ROLL.UNIVERSAL.SigmarsComet")
+			description: game.i18n.format("ROLL.EFFECT.Critical", {amount: 1})
 		};
 	}
 
