@@ -35,6 +35,7 @@
 	"ACTION.EFFECT.SymbolAmount": "Symbol Amount",
 	"ACTION.FACE.Conservative": "Conservative",
 	"ACTION.FACE.Reckless": "Reckless",
+	"ACTION.TRAITS.Basic": "Base",
 	"ACTION.TYPE.Melee": "Melee",
 	"ACTION.TYPE.Ranged": "Ranged",
 	"ACTION.TYPE.Support": "Support",

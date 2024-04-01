@@ -87,9 +87,10 @@ export default class ActionSelector extends FormApplication
 		}
 
 		this.allActions = actions.sort((a, b) => {
-			if(a.system.conservative.traits.includes("Basic") && !b.system.conservative.traits.includes("Basic"))
+			const basicTrait = game.i18n.localize("ACTION.TRAITS.Basic");
+			if(a.system.conservative.traits.includes(basicTrait) && !b.system.conservative.traits.includes(basicTrait))
 				return -1;
-			else if(!a.system.conservative.traits.includes("Basic") && b.system.conservative.traits.includes("Basic"))
+			else if(!a.system.conservative.traits.includes(basicTrait) && b.system.conservative.traits.includes(basicTrait))
 				return 1
 			else if(a.name < b.name)
 				return -1;
