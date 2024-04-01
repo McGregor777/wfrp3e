@@ -23,8 +23,9 @@ export default class WFRP3eRoll extends Roll
 			}, {});
 
 		if(this.options.checkData?.action) {
+			const checkData = this.options.checkData;
 			this.effects = {
-				...Object.entries(this.options.checkData.action.system[this.options.checkData.face].effects)
+				...Object.entries(checkData.action.system[checkData.face].effects)
 					.reduce((object, effectArray) => {
 						object[effectArray[0]] = effectArray[1].reduce((array, effect) => {
 							effect.active = false;
@@ -34,11 +35,13 @@ export default class WFRP3eRoll extends Roll
 						return object;
 					}, {})
 			};
-			this.effects.boon.push(CheckHelper.getUniversalBoonEffect(CONFIG.WFRP3e.characteristics[this.options.checkData.characteristic].type === "mental"));
-			this.effects.bane.push(CheckHelper.getUniversalBaneEffect(CONFIG.WFRP3e.characteristics[this.options.checkData.characteristic].type === "mental"));
+			this.effects.boon.push(CheckHelper.getUniversalBoonEffect(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"));
+			this.effects.bane.push(CheckHelper.getUniversalBaneEffect(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"));
 
-			if(["melee", "ranged"].includes(this.options.checkData.action.system.type))
+			if(["melee", "ranged"].includes(checkData.action.system.type)) {
+				this.effects.boon.push(CheckHelper.getCriticalRatingEffect(checkData.weapon));
 				this.effects.sigmarsComet.push(CheckHelper.getUniversalSigmarsCometEffect());
+			}
 		}
 	}
 
@@ -216,9 +219,9 @@ export default class WFRP3eRoll extends Roll
 			user: game.user.id,
 			tooltip: isPrivate ? "" : await this.getTooltip(),
 			total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-			action: this.options?.data?.action,
+			action: this.options?.checkData?.action,
 			effects: this.effects,
-			face: this.options?.data?.face,
+			face: this.options?.checkData?.face,
 			hasSpecialDice: this.hasSpecialDice,
 			hasStandardDice: this.hasStandardDice,
 			publicRoll: !isPrivate,

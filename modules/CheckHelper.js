@@ -1,5 +1,5 @@
-import DicePoolBuilder from "./applications/DicePoolBuilder.js";
 import DicePool from "./DicePool.js";
+import DicePoolBuilder from "./applications/DicePoolBuilder.js";
 
 /**
  * The CheckHelper provides methods to prepare checks.
@@ -7,9 +7,38 @@ import DicePool from "./DicePool.js";
 export default class CheckHelper
 {
 	/**
+	 * Prepares a Characteristic check then opens the Dice Pool Builder afterwards.
+	 * @param {WFRP3eActor}	actor The Character making the check.
+	 * @param {Object} characteristic The Characteristic used for the check.
+	 * @param {Object} [options]
+	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
+	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
+	 * @returns {Promise<void>}
+	 */
+	static async prepareCharacteristicCheck(actor, characteristic, {flavor = null, sound = null} = {})
+	{
+		const stance = actor.system.stance.current ?? actor.system.stance;
+
+		await new DicePoolBuilder(
+			new DicePool({
+				dice: {
+					characteristic: characteristic.rating - Math.abs(stance),
+					fortune: characteristic.fortune,
+					conservative: stance < 0 ? Math.abs(stance) : 0,
+					reckless: stance > 0 ? stance : 0
+				}
+			}, {
+				checkData: {actor, characteristic},
+				flavor,
+				sound
+			})
+		).render(true);
+	}
+
+	/**
 	 * Prepares a Skill check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor}	actor The Character using the Action.
-	 * @param {WFRP3eItem} skill The Skill check has been triggered.
+	 * @param {WFRP3eActor}	actor The Character making the check.
+	 * @param {WFRP3eItem} skill The Skill used for the check.
 	 * @param {Object} [options]
 	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
 	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
@@ -30,8 +59,7 @@ export default class CheckHelper
 					reckless: stance > 0 ? stance : 0
 				}
 			}, {
-				name: game.i18n.format("ROLL.SkillCheck", {skill: skill.name}),
-				checkData: {actor: actor, skill: skill, characteristic: skill.system.characteristic},
+				checkData: {actor, skill, characteristic: {name: skill.system.characteristic, ...characteristic}},
 				flavor,
 				sound
 			})
@@ -51,9 +79,13 @@ export default class CheckHelper
 	 */
 	static async prepareActionCheck(actor, action, face, {weapon = null, flavor = null, sound = null} = {})
 	{
-		const match = action.system[face].check.match(new RegExp(/(([\w\s]+) \((\w+)\))( vs\.? ([\w\s]+))?/));
-		let skill = actor.itemTypes.skill[0] ?? null;
-		let characteristicName = skill ? skill.system.characteristic : "Strength";
+		const match = action.system[face].check.match(new RegExp(
+			"(([\\p{L}\\s]+) \\((\\p{L}+)\\))( " +
+			game.i18n.localize("ACTION.CHECK.Against") +
+			"\\.? ([\\p{L}\\s]+))?", "u")
+		);
+		let skill = null;
+		let characteristicName = skill?.system.characteristic ?? "Strength";
 
 		if(match) {
 			skill = actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
@@ -64,13 +96,13 @@ export default class CheckHelper
 		}
 
 		const characteristic = actor.system.characteristics[characteristicName];
-		const checkData = {actor: actor, action: action, face: face, skill: skill, characteristic: characteristicName};
+		const checkData = {actor, action, face, skill, characteristic: {name: characteristicName, ...characteristic}};
 		let stance = 0;
 
 		if(actor.type === "character")
-			stance = actor.system.stance.current
+			stance = actor.system.stance.current;
 		else if(actor.type === "creature")
-			stance = actor.system.stance
+			stance = actor.system.stance;
 
 		if(weapon)
 			checkData.weapon = weapon;
@@ -93,7 +125,6 @@ export default class CheckHelper
 							: 0)
 				}
 			}, {
-				name: game.i18n.format("ROLL.ActionCheck", {action: action.name}),
 				checkData,
 				flavor,
 				sound
@@ -123,7 +154,6 @@ export default class CheckHelper
 				reckless: stance > 0 ? stance : 0
 			}
 		}, {
-			name: game.i18n.localize("ROLL.InitiativeCheckBuilder"),
 			checkData: {actor: actor, characteristic: characteristic, combat},
 			flavor,
 			sound
@@ -144,67 +174,136 @@ export default class CheckHelper
 	/**
 	 * Get the universal boon effect.
 	 * @param {boolean} isMental Whether the check is based upon a mental characteristic.
+	 * @returns {{symbolAmount: Number, description: String}}
 	 */
 	static getUniversalBoonEffect(isMental)
 	{
 		return isMental ? {
 			symbolAmount: 2,
-			description: game.i18n.localize("ROLL.UNIVERSAL.MentalBoon")
+			description: game.i18n.format("ROLL.EFFECT.RecoverFatigue", {amount: 1})
 		} : {
 			symbolAmount: 2,
-			description: game.i18n.localize("ROLL.UNIVERSAL.PhysicalBoon")
+			description: game.i18n.format("ROLL.EFFECT.RecoverStress", {amount: 1})
 		};
 	}
 
 	/**
-	 * Get the universal boon effect.
+	 * Get the universal bane effect.
 	 * @param {boolean} isMental Whether the check is based upon a mental characteristic.
+	 * @returns {{symbolAmount: Number, description: String}}
 	 */
 	static getUniversalBaneEffect(isMental)
 	{
 		return isMental ? {
 			symbolAmount: 2,
-			description: game.i18n.localize("ROLL.UNIVERSAL.MentalBane")
+			description: game.i18n.format("ROLL.EFFECT.SufferFatigue", {amount: 1})
 			} : {
 			symbolAmount: 2,
-			description: game.i18n.localize("ROLL.UNIVERSAL.PhysicalBane")
+			description: game.i18n.format("ROLL.EFFECT.SufferStress", {amount: 1})
+		};
+	}
+
+	/**
+	 * Get the weapon's Critical Rating effect.
+	 * @param {WFRP3eItem} weapon
+	 * @returns {{symbolAmount: Number, description: String}}
+	 */
+	static getCriticalRatingEffect(weapon)
+	{
+		return {
+			symbolAmount: weapon.system.criticalRating,
+			description: game.i18n.format("ROLL.EFFECT.Critical", {amount: 1})
 		};
 	}
 
 	/**
 	 * Get the universal Sigmar's comet effect.
+	 * @returns {{symbolAmount: Number, description: String}}
 	 */
 	static getUniversalSigmarsCometEffect()
 	{
 		return {
 			symbolAmount: 1,
-			description: game.i18n.localize("ROLL.UNIVERSAL.SigmarsComet")
+			description: game.i18n.format("ROLL.EFFECT.Critical", {amount: 1})
 		};
 	}
 
 	/**
 	 * Toggles effects from a Roll, depending on the symbols remaining.
-	 * @param chatMessageId The id of the ChatMessage containing the Roll.
-	 * @param symbol The symbol of the effect to toggle.
-	 * @param index The index of the effect to toggle.
+	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
+	 * @param {String} symbol The symbol of the effect to toggle.
+	 * @param {Number} index The index of the effect to toggle.
 	 */
 	static toggleEffect(chatMessageId, symbol, index)
 	{
 		const chatMessage = game.messages.get(chatMessageId);
 		const changes = {rolls: chatMessage.rolls};
+		const roll = changes.rolls[0];
+		const toggledEffect = roll.effects[symbol][index];
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
 
-		if(changes.rolls[0].effects[symbol][index].active === true)
-			changes.rolls[0].effects[symbol][index].active = false;
-		else if(changes.rolls[0].remainingSymbols[CONFIG.WFRP3e.symbols[symbol].plural] >= changes.rolls[0].effects[symbol][index].symbolAmount)
-			changes.rolls[0].effects[symbol][index].active = true;
+		if(toggledEffect.active === true)
+			toggledEffect.active = false;
+		// Delay/Exertion + Bane effects.
+		else if(["delay", "exertion"].includes(symbol)) {
+			if(roll.remainingSymbols[plural] > 0) {
+				if(toggledEffect.symbolAmount > 1) {
+					if(roll.remainingSymbols.banes >= toggledEffect.symbolAmount - 1)
+						toggledEffect.active = true;
+					else
+						ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {
+							symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
+						}));
+				}
+				else
+					toggledEffect.active = true;
+			}
+			else
+				ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {
+					symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+				}));
+		}
+		// Sigmar's Comet as Success/Boon.
+		else if(["success", "boon"].includes(symbol) && (roll.remainingSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount))
+			toggledEffect.active = true;
+		// Default.
+		else if(roll.remainingSymbols[plural] >= toggledEffect.symbolAmount)
+			toggledEffect.active = true;
 		else
-			ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)}));
+			ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {
+				symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+			}));
 
-		changes.rolls[0].remainingSymbols[CONFIG.WFRP3e.symbols[symbol].plural] = changes.rolls[0].effects[symbol].reduce((accumulator, effect) => {
-			if(effect.active)
-				accumulator -= effect.symbolAmount;
-			return accumulator;
-		}, changes.rolls[0].resultSymbols[CONFIG.WFRP3e.symbols[symbol].plural]);
+		roll.remainingSymbols = {...roll.resultSymbols};
+
+		// Recalculate remaining symbols for every type.
+		Object.entries(roll.effects).forEach(effects => {
+			const symbolName = effects[0];
+			const plural = CONFIG.WFRP3e.symbols[symbolName].plural;
+
+			roll.remainingSymbols[plural] = effects[1].filter(effect => effect.active)
+				.reduce((remainingSymbols, effect) => {
+					if(["delay", "exertion"].includes(symbolName)) {
+						remainingSymbols--;
+
+						if(effect.symbolAmount > 1)
+							roll.remainingSymbols.banes -= effect.symbolAmount - 1;
+					}
+					else if(remainingSymbols < effect.symbolAmount) {
+						if(["success", "boon"].includes(symbolName)
+							&& (remainingSymbols + roll.remainingSymbols.sigmarsComets >= effect.symbolAmount)) {
+							roll.remainingSymbols.sigmarsComets += remainingSymbols - effect.symbolAmount;
+							return 0;
+						}
+
+						throw new Error(`The remaining number of ${symbolName} cannot be negative.`);
+					}
+					else
+						remainingSymbols -= effect.symbolAmount;
+
+					return remainingSymbols;
+				}, roll.remainingSymbols[plural]);
+		});
 
 		chatMessage.update(changes);
 	}

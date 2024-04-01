@@ -22,147 +22,149 @@
 
 	<div class="sheet-body">
 		{{#each @root.stances as |stance st|}}
-			<section class="{{st}} tab" data-group="face" data-tab="{{st}}">
-				<nav class="sheet-tabs tabs {{st}}-tabs" data-group="{{st}}">
-					<a class="tab-link main-tab-link" data-tab="main">{{localize "Main"}}</a>
-					<a class="tab-link effects-tab-link" data-tab="effects">{{localize "ACTION.Effects"}}</a>
-				</nav>
+			{{#with (lookup @root.item.system st) as |face|}}
+				<section class="{{st}} tab" data-group="face" data-tab="{{st}}">
+					<nav class="sheet-tabs tabs {{st}}-tabs" data-group="{{st}}">
+						<a class="tab-link main-tab-link" data-tab="main">{{localize "Main"}}</a>
+						<a class="tab-link effects-tab-link" data-tab="effects">{{localize "ACTION.Effects"}}</a>
+					</nav>
 
-				<section class="{{st}} main-tab tab" data-group="{{st}}" data-tab="main">
-					<div class="form-div">
+					<section class="{{st}} main-tab tab" data-group="{{st}}" data-tab="main">
+						<div class="form-div">
+							<label class="form-label">
+								{{localize "ACTION.Name"}}:
+
+								<input name="system.{{st}}.name"
+								       value="{{face.name}}"
+								       type="text"
+								       placeholder="{{localize 'ACTION.Name'}}" />
+							</label>
+
+							<label class="form-label">
+								{{localize "ACTION.Traits"}}:
+
+								<input name="system.{{st}}.traits"
+								       value="{{face.traits}}"
+								       type="text"
+								       placeholder="{{localize 'ACTION.Traits'}}" />
+							</label>
+						</div>
+
+						<hr />
+
+						<label class="art-selector">
+							{{localize "ACTION.Art"}}:
+
+							<img src="{{face.art}}" data-edit="system.{{st}}.art" />
+						</label>
+
+						<hr />
+
+						<div class="form-div">
+							<label>
+								{{localize "ACTION.RechargeRating"}}:
+
+								<input name="system.{{st}}.rechargeRating"
+								       value="{{face.rechargeRating}}"
+								       type="number"
+								       min="0"
+								       placeholder="{{localize 'ACTION.RechargeRating'}}" />
+							</label>
+
+							<label>
+								{{localize "ACTION.ChallengeDice"}}:
+
+								<input name="system.{{st}}.difficultyModifiers.challengeDice"
+								       value="{{face.difficultyModifiers.challengeDice}}"
+								       type="number"
+								       min="0"
+								       placeholder="{{localize 'ACTION.ChallengeDice'}}" />
+							</label>
+
+							<label>
+								{{localize "ACTION.MisfortuneDice"}}:
+
+								<input name="system.{{st}}.difficultyModifiers.misfortuneDice"
+								       value="{{face.difficultyModifiers.misfortuneDice}}"
+								       type="number"
+							 	      min="0"
+							 	      placeholder="{{localize 'ACTION.MisfortuneDice'}}" />
+							</label>
+						</div>
+
+						<hr />
+
 						<label class="form-label">
-							{{localize "ACTION.Name"}}:
+							{{localize "ACTION.Check"}}:
 
-							<input name="system.{{st}}.name"
-							       value="{{lookup (lookup @root.item.system st) 'name'}}"
+							<input name="system.{{st}}.check"
+							       value="{{face.check}}"
 							       type="text"
-							       placeholder="{{localize 'ACTION.Name'}}" />
+						 	      placeholder="{{localize 'ACTION.Check'}}" />
 						</label>
 
-						<label class="form-label">
-							{{localize "ACTION.Traits"}}:
-
-							<input name="system.{{st}}.traits"
-							       value="{{lookup (lookup @root.item.system st) 'traits'}}"
-							       type="text"
-							       placeholder="{{localize 'ACTION.Traits'}}" />
-						</label>
-					</div>
-
-					<hr />
-
-					<label class="art-selector">
-						{{localize "ACTION.Art"}}:
-
-						<img src="{{lookup (lookup @root.item.system st) 'art'}}" data-edit="system.{{st}}.art" />
-					</label>
-
-					<hr />
-
-					<div class="form-div">
-						<label>
-							{{localize "ACTION.RechargeRating"}}:
-
-							<input name="system.{{st}}.rechargeRating"
-							       value="{{lookup (lookup @root.item.system st) 'rechargeRating'}}"
-							       type="number"
-							       min="0"
-							       placeholder="{{localize 'ACTION.RechargeRating'}}" />
-						</label>
+						<hr />
 
 						<label>
-							{{localize "ACTION.ChallengeDice"}}:
+							{{localize "ACTION.Requirements"}}:
 
-							<input name="system.{{st}}.difficultyModifiers.challengeDice"
-							       value="{{lookup (lookup (lookup @root.item.system st) 'difficultyModifiers') 'challengeDice'}}"
-							       type="number"
-							       min="0"
-							       placeholder="{{localize 'ACTION.ChallengeDice'}}" />
+							{{editor face.requirements
+									 target=(concat "system." st ".requirements")
+									 button=true
+									 owner=owner
+									 editable=@root.editable}}
 						</label>
+					</section>
 
-						<label>
-							{{localize "ACTION.MisfortuneDice"}}:
+					<section class="tab {{st}}-effects-tab" data-group="{{st}}" data-tab="effects">
+						<div>
+							<label>{{localize "ACTION.Effects"}}</label>
 
-							<input name="system.{{st}}.difficultyModifiers.misfortuneDice"
-							       value="{{lookup (lookup (lookup @root.item.system st) 'difficultyModifiers') 'misfortuneDice'}}"
-							       type="number"
-							       min="0"
-							       placeholder="{{localize 'ACTION.MisfortuneDice'}}" />
-						</label>
-					</div>
+							{{#each @root.symbols as |symbol sym|}}
+								<div class="effect-group">
+									<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+									<a class="effect-add" data-face="{{st}}" data-symbol="{{sym}}"><span class="fas fa-plus"></span></a>
 
-					<hr />
+									{{#each (lookup face.effects sym) as |effect ef|}}
+										<div class="effect">
+											<input class="sheet-form-input effect-symbol-amount"
+											       name="system.{{st}}.effects.{{sym}}.{{ef}}.symbolAmount"
+											       value="{{effect.symbolAmount}}"
+											       type="number"
+											       min="0"
+											       placeholder="{{localize 'ACTION.EFFECT.SymbolAmount'}}" />
 
-					<label class="form-label">
-						{{localize "ACTION.Check"}}:
+											{{editor effect.description
+													 target=(concat "system." st ".effects." sym "." ef ".description")
+													 button=true
+													 owner=@root.owner
+													 editable=@root.editable}}
 
-						<input name="system.{{st}}.check"
-						       value="{{lookup (lookup @root.item.system st) 'check'}}"
-						       type="text"
-						       placeholder="{{localize 'ACTION.Check'}}" />
-					</label>
+											<input class="sheet-form-input effect-description"
+											       name="system.{{st}}.effects.{{sym}}.{{ef}}.description"
+											       value="{{effect.description}}"
+											       type="text"
+											       placeholder="{{localize 'ACTION.EFFECT.Description'}}" />
 
-					<hr />
+											<a class="effect-remove fa fa-eraser" data-face="{{st}}" data-symbol="{{sym}}" data-index="{{ef}}"></a>
+										</div>
+									{{/each}}
+								</div>
+							{{/each}}
+						</div>
 
-					<label>
-						{{localize "ACTION.Requirements"}}:
+						<details{{#if face.special}} open{{/if}}>
+							<summary><label>{{localize "ACTION.Special"}}</label></summary>
+							{{editor face.special target=(concat "system." st ".special") button=true owner=owner editable=@root.editable}}
+						</details>
 
-						{{editor (lookup (lookup @root.item.system st) "requirements")
-								 target=(concat (concat "system." st) ".requirements")
-								 button=true
-								 owner=owner
-								 editable=@root.editable}}
-					</label>
+						<details{{#if face.uniqueEffect}} open{{/if}}>
+							<summary><label>{{localize "ACTION.UniqueEffect"}}</label></summary>
+							{{editor face.uniqueEffect target=(concat "system." st ".uniqueEffect") button=true owner=@root.owner editable=@root.editable}}
+						</details>
+					</section>
 				</section>
-
-				<section class="tab {{st}}-effects-tab" data-group="{{st}}" data-tab="effects">
-					<div>
-						<label>{{localize "ACTION.Effects"}}</label>
-
-						{{#each @root.symbols as |symbol sym|}}
-							<div class="effect-group">
-								<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
-								<a class="effect-add" data-face="{{st}}" data-symbol="{{sym}}"><span class="fas fa-plus"></span></a>
-
-								{{#each (lookup (lookup (lookup @root.item.system st) "effects") sym) as |effect ef|}}
-									<div class="effect">
-										<input class="sheet-form-input effect-symbol-amount"
-										       name="system.{{st}}.effects.{{sym}}.{{ef}}.symbolAmount"
-										       value="{{effect.symbolAmount}}"
-										       type="number"
-										       min="0"
-										       placeholder="{{localize 'ACTION.EFFECT.SymbolAmount'}}" />
-
-										{{editor effect.description
-												 target=(concat (concat (concat (concat (concat (concat "system." st) ".effects.") sym) ".") ef) ".description")
-												 button=true
-												 owner=@root.owner
-												 editable=@root.editable}}
-
-										<input class="sheet-form-input effect-description"
-										       name="system.{{st}}.effects.{{sym}}.{{ef}}.description"
-										       value="{{effect.description}}"
-										       type="text"
-										       placeholder="{{localize 'ACTION.EFFECT.Description'}}" />
-
-										<a class="effect-remove fa fa-eraser" data-face="{{st}}" data-symbol="{{sym}}" data-index="{{ef}}"></a>
-									</div>
-								{{/each}}
-							</div>
-						{{/each}}
-					</div>
-
-					<details{{#if (lookup (lookup @root.item.system st) "special")}} open{{/if}}>
-						<summary><label>{{localize "ACTION.Special"}}</label></summary>
-						{{editor (lookup (lookup @root.item.system st) "special") target=(concat (concat "system." st) ".special") button=true owner=owner editable=@root.editable}}
-					</details>
-
-					<details{{#if (lookup (lookup @root.item.system st) "uniqueEffect")}} open{{/if}}>
-						<summary><label>{{localize "ACTION.UniqueEffect"}}</label></summary>
-						{{editor (lookup (lookup @root.item.system st) "uniqueEffect") target=(concat (concat "system." st) ".uniqueEffect") button=true owner=@root.owner editable=@root.editable}}
-					</details>
-				</section>
-			</section>
+			{{/with}}
 		{{/each}}
 	</div>
 </form>

@@ -5,7 +5,7 @@ export default class WFRP3eActionSheet extends ItemSheet
 		return {
 			...super.defaultOptions,
 			template: "systems/wfrp3e/templates/applications/items/action-sheet.hbs",
-			width: 540,
+			width: 550,
 			height: 680,
 			classes: ["wfrp3e", "sheet", "item", "action"],
 			tabs: [

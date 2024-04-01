@@ -18,7 +18,7 @@
       "name": "Assess The Situation",
       "art": "systems/wfrp3e/assets/images/actions/assess_the_situation.jpg",
       "type": "support",
-      "traits": "Basic, Defense",
+      "traits": "Basic, Defence",
       "rechargeRating": 2,
       "difficultyModifiers": {
         "challengeDice": 0,
@@ -59,7 +59,7 @@
       "name": "Assess The Situation",
       "art": "systems/wfrp3e/assets/images/actions/assess_the_situation.jpg",
       "type": "support",
-      "traits": "Basic, Defense",
+      "traits": "Basic, Defence",
       "rechargeRating": 2,
       "difficultyModifiers": {
         "challengeDice": 0,

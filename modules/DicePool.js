@@ -6,20 +6,19 @@ import FortuneDie from "./dice/FortuneDie.js";
 import MisfortuneDie from "./dice/MisfortuneDie.js";
 import RecklessDie from "./dice/RecklessDie.js";
 import WFRP3eRoll from "./WFRP3eRoll.js";
+import {capitalize} from "./helpers.js";
 
 /**
  * DicePool utility helps prepare WFRP3e's special dice pools.
- *
  * @param {Object} [startingPool]
  * @param {Object} [options]
- * @param {String} [options.name]
- * @param {Object} [options.data]
+ * @param {Object} [options.checkData]
  * @param {String} [options.flavor]
  * @param {String} [options.sound]
  */
 export default class DicePool
 {
-	constructor(startingPool = {}, options = {name: game.i18n.localize("ROLL.FreeCheck"), checkData: null, flavor: null, sound: null})
+	constructor(startingPool = {}, options = {checkData: null, flavor: null, sound: null})
 	{
 		this.dice = Object.keys(CONFIG.WFRP3e.dice).reduce((dice, dieName) => {
 			dice[dieName] = startingPool.dice ? startingPool.dice[dieName] ?? 0 : 0;
@@ -36,6 +35,9 @@ export default class DicePool
 			return creatureDice;
 		}, {});
 
+		this.fortunePoints = 0;
+		this.specialisations = [];
+
 		mergeObject(this, options);
 	}
 
@@ -47,7 +49,10 @@ export default class DicePool
 	{
 		return [
 			this.dice.characteristic + "d" + CharacteristicDie.DENOMINATION,
-			(this.dice.fortune + this.creatureDice.aggression + this.creatureDice.cunning) + "d" + FortuneDie.DENOMINATION,
+			(this.dice.fortune + this.fortunePoints
+				+ this.specialisations.length
+				+ this.creatureDice.aggression
+				+ this.creatureDice.cunning) + "d" + FortuneDie.DENOMINATION,
 			(this.dice.expertise + this.creatureDice.expertise) + "d" + ExpertiseDie.DENOMINATION,
 			this.dice.conservative + "d" + ConservativeDie.DENOMINATION,
 			this.dice.reckless + "d" + RecklessDie.DENOMINATION,
@@ -57,6 +62,26 @@ export default class DicePool
 			const test = d.split(/([0-9]+)/);
 			return test[1] > 0;
 		}).join("+");
+	}
+
+	get name()
+	{
+		if(this.checkData) {
+			const checkData = this.checkData;
+
+			if(checkData.combat)
+				return game.i18n.localize(`ROLL.${capitalize(checkData.combat.tags.encounterType)}EncounterInitiativeCheck`);
+			else if(checkData.action)
+				return game.i18n.format("ROLL.ActionCheck", {action: checkData.action.name});
+			else if(checkData.skill)
+				return game.i18n.format("ROLL.SkillCheck", {skill: checkData.skill.name});
+			else if(checkData.characteristic)
+				return game.i18n.format("ROLL.CharacteristicCheck", {
+					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].name)
+				});
+		}
+
+		return game.i18n.localize("ROLL.FreeCheck");
 	}
 
 	/**
@@ -116,7 +141,8 @@ export default class DicePool
 	}
 
 	/**
-	 *
+	 * Rolls the Dice Pool, then shows the results in a Message.
+	 * @returns {Promise<*>}
 	 */
 	async roll()
 	{
@@ -135,18 +161,34 @@ export default class DicePool
 		if(this.sound)
 			AudioHelper.play({src: this.sound}, true);
 
-		if(this.checkData?.actor?.type === "creature") {
-			const updates = {system: {attributes: {}}};
+		if(this.checkData?.actor) {
+			const actor = this.checkData.actor;
 
-			for(const [attributeName, creatureDice] of Object.entries(this.creatureDice)) {
-				if(creatureDice > 0) {
-					updates.system.attributes[attributeName] = {
-						current: this.checkData.actor.system.attributes[attributeName].current - creatureDice
-					};
+			// Remove the fortune points spent on the check.
+			if(actor.type === "character" && this.fortunePoints > 0) {
+				const updates = {"system.fortune.value": Math.max(actor.system.fortune.value - this.fortunePoints, 0)};
+
+				if(this.fortunePoints > actor.system.fortune.value) {
+					const party = actor.system.currentParty;
+					party.update({"system.fortunePool": Math.max(party.system.fortunePool - (this.fortunePoints - actor.system.fortune.value), 0)})
 				}
-			}
 
-			this.checkData.actor.update(updates);
+				actor.update(updates);
+			}
+			// Remove the attribute dice spent on the check.
+			else if(actor.type === "creature") {
+				const updates = {system: {attributes: {}}};
+
+				for(const [attributeName, creatureDice] of Object.entries(this.creatureDice)) {
+					if(creatureDice > 0)
+						updates.system.attributes[attributeName] = {
+							value: actor.system.attributes[attributeName].value - creatureDice
+						};
+				}
+
+				if(Object.keys(updates.system.attributes).length > 0)
+					actor.update(updates);
+			}
 		}
 
 		return roll;

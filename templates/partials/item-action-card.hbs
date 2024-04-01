@@ -46,7 +46,11 @@
 											{{#each effects as |effect ef|}}
 												<div>
 													{{#for 0 effect.symbolAmount 1}}
-														<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+														{{#unless (and (or (sameAs sym "delay") (sameAs sym "exertion")) (superiorTo this 0))}}
+															<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+														{{else}}
+															<span class="wfrp3e-font symbol {{@root.symbols.bane.cssClass}}"></span>
+														{{/unless}}
 													{{/for}}
 
 													{{{striptags effect.description "p"}}}

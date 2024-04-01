@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="character-sheet-header sheet-header">
-		<img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+		<img class="actor-img" src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" />
 
 		<label class="name">
 			<input class="name-input" name="name" value="{{actor.name}}" type="text" placeholder="{{localize 'Name'}}" />
@@ -18,12 +18,12 @@
 			<span class="character-sheet-title">{{localize "CHARACTER.Experience"}}</span>
 
 			<div class="input-container">
-				<span title="{{localize 'CHARACTER.CurrentExperience'}}">{{actor.system.experience.current}}</span>
+				<span data-tooltip="{{localize 'CHARACTER.CurrentExperience'}}">{{actor.system.experience.current}}</span>
 				/
 				<input name="system.experience.total"
 				       value="{{actor.system.experience.total}}"
 				       type="number"
-				       title="{{localize 'CHARACTER.TotalExperience'}}" />
+				       data-tooltip="{{localize 'CHARACTER.TotalExperience'}}" />
 			</div>
 		</label>
 	</header>
@@ -94,53 +94,16 @@
 
 					<div class="stance-meter-segments">
 						{{#for actor.system.stanceMeter.conservative (increment actor.system.stanceMeter.reckless 1) 1}}
-							<a class="stance-meter-segment{{#if (equalTo @root.actor.system.stance.current this)}} active{{/if}}">
-								<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}"
-									 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
+							<label class="stance-meter-segment{{#if (equalTo @root.actor.system.stance.current this)}} active{{/if}}">
+								<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}"
+									 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}.webp" height="27" />
+
 								<input name="system.stance.current"
 								       value="{{this}}"
 								       type="radio"
 									{{#if (equalTo @root.actor.system.stance.current this)}}checked{{/if}}/>
-							</a>
+							</label>
 						{{/for}}
-					</div>
-				</div>
-
-				<div class="cards">
-					<div class="conditions">
-						{{#each items.conditions as |condition cond|}}
-							{{>systems/wfrp3e/templates/partials/item-condition-card.hbs condition=condition}}
-						{{/each}}
-					</div>
-
-					<div class="wounds">
-						{{#each items.criticalWounds as |wound wnd|}}
-							{{>systems/wfrp3e/templates/partials/item-wound-card.hbs wound=wound}}
-						{{/each}}
-					</div>
-
-					<div class="diseases">
-						{{#each items.diseases as |disease dis|}}
-							{{>systems/wfrp3e/templates/partials/item-disease-card.hbs disease=disease}}
-						{{/each}}
-					</div>
-
-					<div class="insanities">
-						{{#each items.insanities as |insanity ins|}}
-							{{>systems/wfrp3e/templates/partials/item-insanity-card.hbs insanity=insanity}}
-						{{/each}}
-					</div>
-
-					<div class="mutations">
-						{{#each items.mutations as |mutation mut|}}
-							{{>systems/wfrp3e/templates/partials/item-mutation-card.hbs mutation=mutation}}
-						{{/each}}
-					</div>
-
-					<div class="miscasts">
-						{{#each items.miscasts as |miscast mis|}}
-							{{>systems/wfrp3e/templates/partials/item-miscast-card.hbs miscast=miscast}}
-						{{/each}}
 					</div>
 				</div>
 			</div>
@@ -148,13 +111,21 @@
 			<div class="skills">
 				<h3 class="character-sheet-title">{{localize "CHARACTER.Skills"}}</h3>
 
-				<table class="skill-table">
-					<tbody>
-						{{#each items.skills as |skill sk|}}
-							{{>systems/wfrp3e/templates/partials/item-skill-row.hbs skill=skill}}
-						{{/each}}
-					</tbody>
-				</table>
+				<div class="skill table">
+					<div class="skill table-header">
+						<span class="skill-name">{{localize "SKILL.Name"}}</span>
+
+						<span class="skill-characteristic">{{localize "SKILL.ABBREVIATION.Characteristic"}}</span>
+
+						<span class="skill-training-level">{{localize "SKILL.TrainingLevel"}}</span>
+
+						<span class="buttons"></span>
+					</div>
+
+					{{#each items.skills as |skill sk|}}
+						{{>systems/wfrp3e/templates/partials/item-skill-row.hbs skill=skill}}
+					{{/each}}
+				</div>
 			</div>
 		</section>
 
@@ -194,7 +165,7 @@
 					{{#if (lookup @root.items.talents ty)}}
 						<div class="talent-container item-container tab {{ty}}" data-group="talents" data-tab="{{ty}}">
 							{{#each (lookup @root.items.talents ty) as |talent ta|}}
-								<div>
+								<label>
 									{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 
 									<select class="sheet-form-select item-input talent-card-socket-select"
@@ -205,7 +176,7 @@
 												selected=talent.system.talentSocket
 												blank=(localize "TALENT.NoSocket")}}
 									</select>
-								</div>
+								</label>
 							{{/each}}
 						</div>
 					{{/if}}
@@ -238,10 +209,76 @@
 		</section>
 
 		<section class="tab abilities-tab" data-group="primary" data-tab="abilities">
+			<div class="character-sheet-ability-tabs sheet-tabs" data-group="abilities">
+				<a class="tab-link ability" data-tab="ability">{{localize "CHARACTER.Abilities"}}</a>
+
+				{{#if items.conditions}}
+					<a class="tab-link condition" data-tab="condition">{{localize "CHARACTER.Conditions"}}</a>
+				{{/if}}
+
+				{{#if items.criticalWounds}}
+					<a class="tab-link wound" data-tab="wound">{{localize "CHARACTER.CriticalWounds"}}</a>
+				{{/if}}
+
+				{{#if items.diseases}}
+					<a class="tab-link disease" data-tab="disease">{{localize "CHARACTER.Diseases"}}</a>
+				{{/if}}
+
+				{{#if items.insanities}}
+					<a class="tab-link insanity" data-tab="insanity">{{localize "CHARACTER.Insanities"}}</a>
+				{{/if}}
+
+				{{#if items.mutations}}
+					<a class="tab-link mutation" data-tab="mutation">{{localize "CHARACTER.Mutations"}}</a>
+				{{/if}}
+
+				{{#if items.miscasts}}
+					<a class="tab-link miscast" data-tab="miscast">{{localize "CHARACTER.Miscasts"}}</a>
+				{{/if}}
+			</div>
+
 			<div class="character-sheet-abilities">
-				{{#each items.abilities as |ability ab|}}
-					{{>systems/wfrp3e/templates/partials/item-ability-card.hbs ability=ability}}
-				{{/each}}
+				<div class="item-container tab ability" data-group="abilities" data-tab="ability">
+					{{#each items.abilities as |ability ab|}}
+						{{>systems/wfrp3e/templates/partials/item-ability-card.hbs ability=ability}}
+					{{/each}}
+				</div>
+
+				<div class="item-container tab condition" data-group="abilities" data-tab="condition">
+					{{#each items.conditions as |condition cond|}}
+						{{>systems/wfrp3e/templates/partials/item-condition-card.hbs condition=condition}}
+					{{/each}}
+				</div>
+
+				<div class="item-container tab wound" data-group="abilities" data-tab="wound">
+					{{#each items.criticalWounds as |wound wnd|}}
+						{{>systems/wfrp3e/templates/partials/item-wound-card.hbs wound=wound}}
+					{{/each}}
+				</div>
+
+				<div class="item-container tab disease" data-group="abilities" data-tab="disease">
+					{{#each items.diseases as |disease dis|}}
+						{{>systems/wfrp3e/templates/partials/item-disease-card.hbs disease=disease}}
+					{{/each}}
+				</div>
+
+				<div class="item-container tab insanity" data-group="abilities" data-tab="insanity">
+					{{#each items.insanities as |insanity ins|}}
+						{{>systems/wfrp3e/templates/partials/item-insanity-card.hbs insanity=insanity}}
+					{{/each}}
+				</div>
+
+				<div class="item-container tab mutation" data-group="abilities" data-tab="mutation">
+					{{#each items.mutations as |mutation mut|}}
+						{{>systems/wfrp3e/templates/partials/item-mutation-card.hbs mutation=mutation}}
+					{{/each}}
+				</div>
+
+				<div class="item-container tab miscast" data-group="abilities" data-tab="miscast">
+					{{#each items.miscasts as |miscast mis|}}
+						{{>systems/wfrp3e/templates/partials/item-miscast-card.hbs miscast=miscast}}
+					{{/each}}
+				</div>
 			</div>
 		</section>
 

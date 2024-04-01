@@ -1,18 +1,26 @@
 <div class="item weapon row" data-item-id="{{weapon._id}}">
 	<div class="content">
-		<a class="weapon-name item-name-link">{{weapon.name}}</a>
+		<span class="weapon-name">
+            <a class="item-name-link">{{weapon.name}}</a>
+        </span>
 
 		<hr />
 
-		<span class="weapon-damage-rating">{{weapon.system.damageRating}}</span>
+		<span class="weapon-damage-rating">
+            {{weapon.system.damageRating}}
+        </span>
 
 		<hr />
 
-		<span class="weapon-critical-rating">{{weapon.system.criticalRating}}</span>
+		<span class="weapon-critical-rating">
+            {{weapon.system.criticalRating}}
+        </span>
 
 		<hr />
 
-		<span class="weapon-range">{{localize (lookup @root.weaponRanges weapon.system.range)}}</span>
+		<span class="weapon-range">
+            {{localize (lookup @root.weaponRanges weapon.system.range)}}
+        </span>
 
 		<hr />
 
@@ -28,11 +36,15 @@
 
 		<hr />
 
-		<span class="weapon-group">{{localize (lookup (lookup @root.weaponGroups weapon.system.group) "name")}}</span>
+		<span class="weapon-group">
+            {{localize (lookup (lookup @root.weaponGroups weapon.system.group) "name")}}
+        </span>
 
 		<hr />
 
-		<span class="encumbrance">{{weapon.system.encumbrance}}</span>
+		<span class="encumbrance">
+            {{weapon.system.encumbrance}}
+        </span>
 
 		<hr />
 

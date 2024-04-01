@@ -29,8 +29,10 @@ export default class WFRP3eCombatTracker extends CombatTracker
 	{
 		event.preventDefault();
 
+		const value = event.currentTarget.value;
 		const updates = {};
-		updates[event.currentTarget.name] = isNaN(event.currentTarget.value) ? event.currentTarget.value : Number(event.currentTarget.value);
+
+		updates[event.currentTarget.name] = Array.isArray(value) || isNaN(value) ? value : Number(value);
 
 		this.viewed.update(updates);
 	}

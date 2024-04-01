@@ -26,35 +26,39 @@
 			<div class="creature-sheet-main-infos">
 				<div class="creature-sheet-characteristics">
 					{{#each actor.system.characteristics as |characteristic char|}}
-						<div class="characteristic">
-							<span class="characteristic-title" title="{{localize (lookup (lookup @root.characteristics char) "name")}}">
-								{{localize (lookup (lookup @root.characteristics char) "abbreviation")}}
-							</span>
+						{{#with (lookup @root.characteristics char) as |charac|}}
+							<div class="characteristic">
+								<a class="characteristic-title"
+								   data-tooltip="{{localize charac.name}}"
+								   data-characteristic="{{char}}">
+									{{localize charac.abbreviation}}
+								</a>
 
-							<input class="characteristic-value-input"
-							       name="system.characteristics.{{char}}.value"
-							       value="{{characteristic.value}}"
-							       type="number"
-							       placeholder="{{localize (lookup (lookup @root.characteristics char) 'abbreviation')}}" />
+								<input class="characteristic-value-input"
+								       name="system.characteristics.{{char}}.rating"
+								       value="{{characteristic.rating}}"
+								       type="number"
+								       placeholder="{{localize charac.abbreviation}}" />
 
-							<input class="characteristic-fortune-input"
-							       name="system.characteristics.{{char}}.fortune"
-							       type="number"
-							       value="{{characteristic.fortune}}"
-							       placeholder="{{localize 'CHARACTER.Fortune'}}" />
-						</div>
+								<input class="characteristic-fortune-input"
+								       name="system.characteristics.{{char}}.fortune"
+								       type="number"
+								       value="{{characteristic.fortune}}"
+								       placeholder="{{localize 'CHARACTER.Fortune'}}" />
+							</div>
+						{{/with}}
 					{{/each}}
 				</div>
 
 				<div class="creature-sheet-image">
-					<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+					<img src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" />
 				</div>
 
 				<div class="creature-sheet-ratings">
 					<div class="damage-rating">
 						<img class="damage-rating-icon"
 						     src="systems/wfrp3e/assets/images/damage-rating.webp"
-						     title="{{localize 'CREATURE.DamageRating'}}"
+						     data-tooltip="{{localize 'CREATURE.DamageRating'}}"
 						     alt="{{localize 'CREATURE.ABBREVIATION.DamageRating'}}"/>
 
 						<input class="damage-rating-input"
@@ -67,7 +71,7 @@
 					<div class="soak-value">
 						<img class="soak-value-icon"
 						     src="systems/wfrp3e/assets/images/soak-value.webp"
-						     title="{{localize 'CREATURE.SoakValue'}}"
+						     data-tooltip="{{localize 'CREATURE.SoakValue'}}"
 						     alt="{{localize 'CREATURE.ABBREVIATION.SoakValue'}}"/>
 
 						<input class="soak-value-input"
@@ -80,7 +84,7 @@
 					<div class="defence-value">
 						<img class="defence-value-icon"
 						     src="systems/wfrp3e/assets/images/defence-value.webp"
-						     title="{{localize 'CREATURE.DefenceValue'}}"
+						     data-tooltip="{{localize 'CREATURE.DefenceValue'}}"
 						     alt="{{localize 'CREATURE.ABBREVIATION.DefenceValue'}}"/>
 
 						<input class="defence-value-input"
@@ -93,7 +97,7 @@
 			</div>
 
 			<div class="creature-sheet-secondary-infos">
-				<a title="{{localize 'CREATURE.Stance'}}" class="creature-sheet-stance {{actor.system.defaultStance}}">
+				<a class="creature-sheet-stance {{actor.system.defaultStance}}" data-tooltip="{{localize 'CREATURE.Stance'}}">
 					{{#if (inferiorTo actor.system.stance 0)}}
 						C{{abs actor.system.stance}}
 					{{else}}

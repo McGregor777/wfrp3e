@@ -874,7 +874,8 @@ export default class CharacterGenerator extends FormApplication
 				|| (actionType === "blessing" && this.priest)
 				|| (actionType === "spell" && this.wizard))
 				everyActions[actionType] = this.actions.filter(action => {
-					return action.system.type === actionType && !action.system.conservative.traits.includes("Basic");
+					return action.system.type === actionType
+						&& !action.system.conservative.traits.includes(game.i18n.localize("ACTION.TRAITS.Basic"));
 				});
 
 			return everyActions;
@@ -984,7 +985,8 @@ export default class CharacterGenerator extends FormApplication
 
 		// Add every Basic Support Actions, except Block, Dodge and Parry if their requirements are not met.
 		this.actions
-			.filter(action => action.system.type === "support" && action.system.conservative.traits.includes("Basic"))
+			.filter(action => action.system.type === "support"
+				&& action.system.conservative.traits.includes(game.i18n.localize("ACTION.TRAITS.Basic")))
 			.forEach(action => {
 				if((action._id === "gevnvkwHS62NBrpf" && this.characteristicRatings.toughness >= 3)
 					|| (action._id === "eXHXyTK445ZEARTB" && this.characteristicRatings.agility >= 3)
@@ -1001,7 +1003,7 @@ export default class CharacterGenerator extends FormApplication
 			// Add Minor Blessing, Minor Ward, and Blessing of Health to Priests who have acquired Invocation.
 			if(this.chosenTrainingsAndSpecialisations["ekPGMSRCHYlLWWZS"].acquired)
 				this.finalActions.push(...this.actions.filter(action => action.system.type === "blessing"
-					&& action.system.reckless.traits.includes("Basic")
+					&& action.system.reckless.traits.includes(game.i18n.localize("ACTION.TRAITS.Basic"))
 					&& action._id !== "b1Zbbl8fybXf8gkI"));
 		}
 

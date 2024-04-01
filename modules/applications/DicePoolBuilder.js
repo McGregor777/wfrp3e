@@ -11,13 +11,19 @@ export default class DicePoolBuilder extends FormApplication
 	/** @inheritDoc */
 	get title()
 	{
-		if(this.checkData) {
-			if(this.checkData.action)
-				return game.i18n.format("ROLL.ActionCheckBuilder", {action: this.check.data.action.name});
-			else if(this.checkData.skill)
-				return game.i18n.format("ROLL.SkillCheckBuilder", {skill: this.check.data.skill.name});
-			else if(this.checkData.combat)
+		if(this.object.checkData) {
+			const checkData = this.object.checkData;
+
+			if(checkData.combat)
 				return game.i18n.localize("ROLL.InitiativeCheckBuilder");
+			else if(checkData.action)
+				return game.i18n.format("ROLL.ActionCheckBuilder", {action: checkData.action.name});
+			else if(checkData.skill)
+				return game.i18n.format("ROLL.SkillCheckBuilder", {skill: checkData.skill.name});
+			else if(checkData.characteristic)
+				return game.i18n.format("ROLL.CharacteristicCheckBuilder", {
+					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].name)
+				});
 		}
 
 		return game.i18n.localize("ROLL.CheckBuilder");
@@ -61,41 +67,60 @@ export default class DicePoolBuilder extends FormApplication
 		}
 
 		if(this.object.checkData) {
-			this.object.checkData.challengeLevel = data.challengeLevel;
+			const checkData = this.object.checkData;
+			checkData.challengeLevel = data.challengeLevel;
 
-			if(this.object.checkData.actor) {
-				data.skills = this.object.checkData.actor.itemTypes.skill;
+			if(checkData.actor) {
+				const actor = checkData.actor;
 
+				data.actor = actor;
 				data.characteristics = Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
 					if(characteristic[0] !== "varies")
 						object[characteristic[0]] = characteristic[1].name;
 					return object;
 				}, {});
+				data.skills = actor.itemTypes.skill;
 
-				if(this.object.checkData.actor.type === "creature")
-					data.attributes = this.object.checkData.actor.system.attributes;
+				if(actor.type === "character") {
+					data.maxFortunePoints = actor.system.fortune.value + actor.system.currentParty.system.fortunePool;
+					data.specialisations = actor.itemTypes.skill
+						.filter(skill => skill.system.specialisations)
+						.reduce((specialisations, skill) => {
+							specialisations.push(
+								...skill.system.specialisations.split(",").map(specialisation => specialisation.trim()
+							)
+						);
+						return specialisations;
+					}, []);
+				}
+				else if(actor.type === "creature")
+					data.attributes = actor.system.attributes;
 			}
 
-			if(this.object.checkData.skill)
-				data.skill = this.object.checkData.skill;
+			if(checkData.characteristic)
+				data.characteristic = checkData.characteristic;
 
-			if(this.object.checkData.characteristic)
-				data.characteristic = this.object.checkData.characteristic;
+			if(checkData.skill)
+				data.skill = checkData.skill;
 
-			if(this.object.checkData.action) {
-				data.action = this.object.checkData.action
+			if(checkData.characteristic)
+				data.characteristic = checkData.characteristic;
 
-				if(["melee", "ranged"].includes(data.action.system.type)) {
-					data.availableWeapons = data.action.actor.itemTypes.weapon.filter(weapon => {
+			if(checkData.action) {
+				const action = checkData.action;
+				data.action = action;
+
+				if(["melee", "ranged"].includes(action.system.type)) {
+					data.availableWeapons = action.actor.itemTypes.weapon.filter(weapon => {
 						return Object.entries(CONFIG.WFRP3e.weapon.groups).reduce((array, weaponGroup) => {
-							if(weaponGroup[1].type === data.action.system.type)
+							if(weaponGroup[1].type === action.system.type)
 								array.push(weaponGroup[0]);
 							return array;
 						}, []).includes(weapon.system.group);
 					});
 
-					data.weapon = this.object.checkData.weapon ?? Object.values(data.availableWeapons)[0];
-					this.object.checkData.weapon = Object.values(data.availableWeapons)[0];
+					data.weapon = checkData.weapon ?? Object.values(data.availableWeapons)[0];
+					checkData.weapon = Object.values(data.availableWeapons)[0];
 				}
 			}
 		}
@@ -131,11 +156,17 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		await super._onChangeInput(event);
 
-		setProperty(
-			this.object,
-			event.currentTarget.name,
-			isNaN(event.currentTarget.value) ? event.currentTarget.value : Number(event.currentTarget.value)
-		);
+		let value = [];
+		for(const element of $(event.delegateTarget).find(`[name="${event.currentTarget.name}"]`)) {
+			if(element.type === "checkbox") {
+				if(element.checked)
+					value.push(element.value);
+			}
+			else
+				value = element.value;
+		}
+
+		setProperty(this.object, event.currentTarget.name, Array.isArray(value) || isNaN(value) ? value : Number(value));
 
 		this._updatePreview();
 	}
@@ -351,7 +382,10 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		container.innerHTML = "";
 
-		const totalDice = Object.values(this.object.dice).reduce((accumulator, dice) => accumulator + +dice, 0);
+		const totalDice = Object.values(this.object.dice).reduce((accumulator, dice) => accumulator + +dice, 0)
+			+ Object.values(this.object.creatureDice).reduce((accumulator, dice) => accumulator + +dice, 0)
+			+ this.object.fortunePoints;
+			+ this.object.specialisations.length;
 
 		// Adjust dice icons' size.
 		let height = 48;
@@ -374,7 +408,10 @@ export default class DicePoolBuilder extends FormApplication
 		Object.entries(this.object.dice).forEach((dice, index) => {
 			if(this.object.creatureDice) {
 				if(dice[0] === "fortune")
-					dice[1] += this.object.creatureDice.aggression + this.object.creatureDice.cunning;
+					dice[1] += this.object.fortunePoints
+						+ this.object.specialisations.length
+						+ this.object.creatureDice.aggression
+						+ this.object.creatureDice.cunning;
 				else if(dice[0] === "expertise")
 					dice[1] += this.object.creatureDice.expertise;
 			}
@@ -431,11 +468,11 @@ export default class DicePoolBuilder extends FormApplication
 		const challengeLevel = CONFIG.WFRP3e.challengeLevels[event.currentTarget.value];
 
 		this.object.checkData.challengeLevel = event.currentTarget.value;
-		this.object.dice.challenge = this.object.checkData.action?.system[this.object.checkData.face].difficultyModifiers.challengeDice ?? 0 +
+		this.object.dice.challenge = (this.object.checkData.action?.system[this.object.checkData.face].difficultyModifiers.challengeDice ?? 0) +
 			(["melee", "ranged"].includes(this.object.checkData.action?.system.type) ? 1 : 0) +
 			challengeLevel.challengeDice;
 
-		this._synchronizeInputs(html, html);
+		this._synchronizeInputs(html);
 	}
 
 	/**
@@ -448,13 +485,15 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		event.preventDefault();
 
-		const characteristic = this.object.checkData.actor.system.characteristics[event.currentTarget.value];
+		this.object.checkData.characteristic = {
+			name: event.currentTarget.value,
+			...this.object.checkData.actor.system.characteristics[event.currentTarget.value]
+		};
 		const stance = this.object.checkData.actor.system.stance.current;
 
-		this.object.checkData.skill = event.currentTarget.value;
 		mergeObject(this.object.dice, {
-			characteristic: characteristic.value - Math.abs(stance),
-			fortune: characteristic.fortune,
+			characteristic: this.object.checkData.characteristic.value - Math.abs(stance),
+			fortune: this.object.checkData.characteristic.fortune,
 			conservative: stance < 0 ? Math.abs(stance) : 0,
 			reckless: stance > 0 ? stance : 0
 		});
@@ -472,14 +511,16 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		event.preventDefault();
 
-		const skill = this.object.checkData.actor.itemTypes.skill.find(skill => skill._id === event.currentTarget.value)
+		const skill = this.object.checkData.actor.itemTypes.skill.find(skill => skill._id === event.currentTarget.value);
 
 		this.object.checkData.skill = skill;
-		this.object.dice.expertise = skill.system.trainingLevel;
 
-		html.find(".characteristic-select")
-			.val(skill.system.characteristic)
-			.trigger("change");
+		if(skill) {
+			this.object.dice.expertise = skill.system.trainingLevel;
+			html.find(".characteristic-select").val(skill.system.characteristic).trigger("change");
+		}
+		else
+			this.object.dice.expertise = 0;
 
 		this._synchronizeInputs(html);
 	}
