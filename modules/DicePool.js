@@ -66,16 +66,20 @@ export default class DicePool
 
 	get name()
 	{
-		if(this.checkData.combat)
-			return game.i18n.localize(`ROLL.${capitalize(this.check.combat.tags.encounterType)}EncounterInitiativeCheck`);
-		else if(this.checkData.action)
-			return game.i18n.format("ROLL.ActionCheck", {action: this.checkData.action.name});
-		else if(this.checkData.skill)
-			return game.i18n.format("ROLL.SkillCheck", {skill: this.checkData.skill.name});
-		else if(this.checkData.characteristic)
-			return game.i18n.format("ROLL.CharacteristicCheck", {
-				characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[this.checkData.characteristic.name].name)
-			});
+		if(this.checkData) {
+			const checkData = this.checkData;
+
+			if(checkData.combat)
+				return game.i18n.localize(`ROLL.${capitalize(checkData.combat.tags.encounterType)}EncounterInitiativeCheck`);
+			else if(checkData.action)
+				return game.i18n.format("ROLL.ActionCheck", {action: checkData.action.name});
+			else if(checkData.skill)
+				return game.i18n.format("ROLL.SkillCheck", {skill: checkData.skill.name});
+			else if(checkData.characteristic)
+				return game.i18n.format("ROLL.CharacteristicCheck", {
+					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].name)
+				});
+		}
 
 		return game.i18n.localize("ROLL.FreeCheck");
 	}
