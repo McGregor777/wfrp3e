@@ -99,7 +99,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		html.find(".flip-link").click(this._onFlipClick.bind(this));
 
 		html.find(".item-roll-link").click(this._onItemRoll.bind(this));
-		html.find(".item.row, .item-expand-link").click(this._onItemExpandClick.bind(this));
+		html.find(".item-expand-link").click(this._onItemExpandClick.bind(this));
 		html.find(".item-edit-link").click(this._onItemEdit.bind(this));
 		html.find(".item-delete-link").click(this._onItemDelete.bind(this));
 
@@ -416,6 +416,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	async _onItemLeftClick(event)
 	{
+		event.stopPropagation();
+
 		const options = {};
 		const face = $(event.currentTarget).parents(".face").data("face");
 
