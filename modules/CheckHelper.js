@@ -1,5 +1,5 @@
-import DicePoolBuilder from "./applications/DicePoolBuilder.js";
 import DicePool from "./DicePool.js";
+import DicePoolBuilder from "./applications/DicePoolBuilder.js";
 
 /**
  * The CheckHelper provides methods to prepare checks.
@@ -79,9 +79,13 @@ export default class CheckHelper
 	 */
 	static async prepareActionCheck(actor, action, face, {weapon = null, flavor = null, sound = null} = {})
 	{
-		const match = action.system[face].check.match(new RegExp(/(([\w\s]+) \((\w+)\))( vs\.? ([\w\s]+))?/));
-		let skill = actor.itemTypes.skill[0] ?? null;
-		let characteristicName = skill ? skill.system.characteristic : "Strength";
+		const match = action.system[face].check.match(new RegExp(
+			"(([\\p{L}\\s]+) \\((\\p{L}+)\\))( " +
+			game.i18n.localize("ACTION.CHECK.Against") +
+			"\\.? ([\\p{L}\\s]+))?", "u")
+		);
+		let skill = null;
+		let characteristicName = skill?.system.characteristic ?? "Strength";
 
 		if(match) {
 			skill = actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
@@ -96,9 +100,9 @@ export default class CheckHelper
 		let stance = 0;
 
 		if(actor.type === "character")
-			stance = actor.system.stance.current
+			stance = actor.system.stance.current;
 		else if(actor.type === "creature")
-			stance = actor.system.stance
+			stance = actor.system.stance;
 
 		if(weapon)
 			checkData.weapon = weapon;
