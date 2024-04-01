@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="character-sheet-header sheet-header">
-		<img class="actor-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+		<img class="actor-img" src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" />
 
 		<label class="name">
 			<input class="name-input" name="name" value="{{actor.name}}" type="text" placeholder="{{localize 'Name'}}" />
@@ -18,12 +18,12 @@
 			<span class="character-sheet-title">{{localize "CHARACTER.Experience"}}</span>
 
 			<div class="input-container">
-				<span title="{{localize 'CHARACTER.CurrentExperience'}}">{{actor.system.experience.current}}</span>
+				<span data-tooltip="{{localize 'CHARACTER.CurrentExperience'}}">{{actor.system.experience.current}}</span>
 				/
 				<input name="system.experience.total"
 				       value="{{actor.system.experience.total}}"
 				       type="number"
-				       title="{{localize 'CHARACTER.TotalExperience'}}" />
+				       data-tooltip="{{localize 'CHARACTER.TotalExperience'}}" />
 			</div>
 		</label>
 	</header>

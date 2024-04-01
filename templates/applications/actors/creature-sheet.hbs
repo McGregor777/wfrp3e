@@ -51,14 +51,14 @@
 				</div>
 
 				<div class="creature-sheet-image">
-					<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+					<img src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" />
 				</div>
 
 				<div class="creature-sheet-ratings">
 					<div class="damage-rating">
 						<img class="damage-rating-icon"
 						     src="systems/wfrp3e/assets/images/damage-rating.webp"
-						     title="{{localize 'CREATURE.DamageRating'}}"
+						     data-tooltip="{{localize 'CREATURE.DamageRating'}}"
 						     alt="{{localize 'CREATURE.ABBREVIATION.DamageRating'}}"/>
 
 						<input class="damage-rating-input"
@@ -71,7 +71,7 @@
 					<div class="soak-value">
 						<img class="soak-value-icon"
 						     src="systems/wfrp3e/assets/images/soak-value.webp"
-						     title="{{localize 'CREATURE.SoakValue'}}"
+						     data-tooltip="{{localize 'CREATURE.SoakValue'}}"
 						     alt="{{localize 'CREATURE.ABBREVIATION.SoakValue'}}"/>
 
 						<input class="soak-value-input"
@@ -84,7 +84,7 @@
 					<div class="defence-value">
 						<img class="defence-value-icon"
 						     src="systems/wfrp3e/assets/images/defence-value.webp"
-						     title="{{localize 'CREATURE.DefenceValue'}}"
+						     data-tooltip="{{localize 'CREATURE.DefenceValue'}}"
 						     alt="{{localize 'CREATURE.ABBREVIATION.DefenceValue'}}"/>
 
 						<input class="defence-value-input"
@@ -97,7 +97,7 @@
 			</div>
 
 			<div class="creature-sheet-secondary-infos">
-				<a title="{{localize 'CREATURE.Stance'}}" class="creature-sheet-stance {{actor.system.defaultStance}}">
+				<a class="creature-sheet-stance {{actor.system.defaultStance}}" data-tooltip="{{localize 'CREATURE.Stance'}}">
 					{{#if (inferiorTo actor.system.stance 0)}}
 						C{{abs actor.system.stance}}
 					{{else}}
