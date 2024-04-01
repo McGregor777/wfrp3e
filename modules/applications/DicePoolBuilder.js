@@ -468,11 +468,11 @@ export default class DicePoolBuilder extends FormApplication
 		const challengeLevel = CONFIG.WFRP3e.challengeLevels[event.currentTarget.value];
 
 		this.object.checkData.challengeLevel = event.currentTarget.value;
-		this.object.dice.challenge = this.object.checkData.action?.system[this.object.checkData.face].difficultyModifiers.challengeDice ?? 0 +
+		this.object.dice.challenge = (this.object.checkData.action?.system[this.object.checkData.face].difficultyModifiers.challengeDice ?? 0) +
 			(["melee", "ranged"].includes(this.object.checkData.action?.system.type) ? 1 : 0) +
 			challengeLevel.challengeDice;
 
-		this._synchronizeInputs(html, html);
+		this._synchronizeInputs(html);
 	}
 
 	/**
