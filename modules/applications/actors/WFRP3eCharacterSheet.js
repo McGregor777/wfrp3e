@@ -21,7 +21,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".character-sheet-body", initial: "characteristics"},
 				{group: "careers", navSelector: ".character-sheet-career-tabs", contentSelector: ".character-sheet-careers"},
 				{group: "talents", navSelector: ".character-sheet-talent-tabs", contentSelector: ".character-sheet-talents", initial: "focus"},
-				{group: "actions", navSelector: ".character-sheet-action-tabs", contentSelector: ".character-sheet-actions", initial: "melee"}
+				{group: "actions", navSelector: ".character-sheet-action-tabs", contentSelector: ".character-sheet-actions", initial: "melee"},
+				{group: "abilities", navSelector: ".character-sheet-ability-tabs", contentSelector: ".character-sheet-abilities", initial: "ability"}
 			]
 		};
 	}
