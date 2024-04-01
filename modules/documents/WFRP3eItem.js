@@ -40,43 +40,41 @@ export default class WFRP3eItem extends Item
 
 		if(this.system.rechargeTokens > 0)
 			ui.notifications.warn(game.i18n.localize("ACTION.Recharging"));
-		else {
-			if (CheckHelper.doesRequireNoCheck(this.system[options.face].check))
-				await new Dialog({
-					title: game.i18n.localize("APPLICATION.TITLE.ActionUsage"),
-					content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.ActionUsage", {action: this.system[options.face].name}) + "</p>",
-					buttons: {
-						confirm: {
-							icon: '<span class="fa fa-check"></span>',
-							label: game.i18n.localize("Yes"),
-							callback: async dlg => {
-								this.exhaustAction(options.face);
+		else if(CheckHelper.doesRequireNoCheck(this.system[options.face].check))
+			await new Dialog({
+				title: game.i18n.localize("APPLICATION.TITLE.ActionUsage"),
+				content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.ActionUsage", {action: this.system[options.face].name}) + "</p>",
+				buttons: {
+					confirm: {
+						icon: '<span class="fa fa-check"></span>',
+						label: game.i18n.localize("Yes"),
+						callback: async dlg => {
+							this.exhaustAction(options.face);
 
-								return ChatMessage.create({
-									content: await renderTemplate("systems/wfrp3e/templates/partials/action-effects.hbs", {
-										action: this,
-										face: options.face,
-										symbols: CONFIG.WFRP3e.symbols,
-										effects: this.system[options.face].effects
-									}),
-									flavor: game.i18n.format("ACTION.UsageMessage", {
-										actor: this.actor.name,
-										action: this.system[options.face].name
-									}),
-									speaker: ChatMessage.getSpeaker({actor: this.actor})
-								});
-							}
-						},
-						cancel: {
-							icon: '<span class="fas fa-xmark"></span>',
-							label: game.i18n.localize("Cancel")
-						},
+							return ChatMessage.create({
+								content: await renderTemplate("systems/wfrp3e/templates/partials/action-effects.hbs", {
+									action: this,
+									face: options.face,
+									symbols: CONFIG.WFRP3e.symbols,
+									effects: this.system[options.face].effects
+								}),
+								flavor: game.i18n.format("ACTION.UsageMessage", {
+									actor: this.actor.name,
+									action: this.system[options.face].name
+								}),
+								speaker: ChatMessage.getSpeaker({actor: this.actor})
+							});
+						}
 					},
-					default: "confirm"
-				}).render(true);
-			else
-				await CheckHelper.prepareActionCheck(this.actor, this, options.face);
-		}
+					cancel: {
+						icon: '<span class="fas fa-xmark"></span>',
+						label: game.i18n.localize("Cancel")
+					},
+				},
+				default: "confirm"
+			}).render(true);
+		else
+			await CheckHelper.prepareActionCheck(this.actor, this, options.face);
 	}
 
 	/**
