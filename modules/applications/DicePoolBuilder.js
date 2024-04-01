@@ -166,7 +166,7 @@ export default class DicePoolBuilder extends FormApplication
 				value = element.value;
 		}
 
-		setProperty(this.object, event.currentTarget.name, isNaN(value) ? value : Number(value));
+		setProperty(this.object, event.currentTarget.name, Array.isArray(value) || isNaN(value) ? value : Number(value));
 
 		this._updatePreview();
 	}
