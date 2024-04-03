@@ -179,21 +179,17 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	_calculateCurrentExperience()
 	{
 		this.experience.current = this.experience.total - this.parent.itemTypes.career.reduce(
-			(totalAmountOfAdvances, career) => {
-				let amountOfAdvances = (career.system.advances.action.length > 0 ? 1 : 0)
-					+ (career.system.advances.talent.length > 0 ? 1 : 0)
-					+ (career.system.advances.skill.length > 0 ? 1 : 0)
-					+ (career.system.advances.wound.length > 0 ? 1 : 0)
-					+ (career.system.advances.open.filter(openAdvance => openAdvance.length > 0)).length
-					+ career.system.advances.careerTransition.cost
-					+ (career.system.advances.dedicationBonus.length > 0 ? 1 : 0);
-
-				Object.values(career.system.advances.nonCareer).forEach(nonCareerAdvance => {
-					amountOfAdvances = amountOfAdvances + nonCareerAdvance.cost;
-				});
-
-				return totalAmountOfAdvances + amountOfAdvances;
-			}, 0);
+			(totalAdvancesSpent, career) => totalAdvancesSpent +
+				(career.system.advances.action.length > 0 ? 1 : 0) +
+				(career.system.advances.talent.length > 0 ? 1 : 0) +
+				(career.system.advances.skill.length > 0 ? 1 : 0) +
+				(career.system.advances.wound.length > 0 ? 1 : 0) +
+				(career.system.advances.open.filter(openAdvance => openAdvance.length > 0)).length +
+				career.system.advances.careerTransition.cost +
+				(career.system.advances.dedicationBonus.length > 0 ? 1 : 0) +
+				Object.values(career.system.advances.nonCareer)
+					.reduce((advancesSpent, nonCareerAdvance) => advancesSpent + nonCareerAdvance.cost, 0),
+			0);
 	}
 
 	/**
