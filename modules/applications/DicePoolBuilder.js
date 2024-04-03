@@ -82,7 +82,7 @@ export default class DicePoolBuilder extends FormApplication
 				data.skills = actor.itemTypes.skill;
 
 				if(actor.type === "character") {
-					data.maxFortunePoints = actor.system.fortune.value + actor.system.currentParty.system.fortunePool;
+					data.maxFortunePoints = actor.system.fortune.value + (actor.system.currentParty?.system.fortunePool ?? 0);
 					data.specialisations = actor.itemTypes.skill
 						.filter(skill => skill.system.specialisations)
 						.reduce((specialisations, skill) => {
