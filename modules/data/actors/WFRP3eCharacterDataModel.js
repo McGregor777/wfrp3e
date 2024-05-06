@@ -184,7 +184,7 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 				(career.system.advances.talent.length > 0 ? 1 : 0) +
 				(career.system.advances.skill.length > 0 ? 1 : 0) +
 				(career.system.advances.wound.length > 0 ? 1 : 0) +
-				(career.system.advances.open.filter(openAdvance => openAdvance.length > 0)).length +
+				(career.system.advances.open.filter(openAdvance => openAdvance?.length > 0)).length +
 				career.system.advances.careerTransition.cost +
 				(career.system.advances.dedicationBonus.length > 0 ? 1 : 0) +
 				Object.values(career.system.advances.nonCareer)
