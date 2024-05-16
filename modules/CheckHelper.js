@@ -237,6 +237,12 @@ export default class CheckHelper
 	static toggleEffect(chatMessageId, symbol, index)
 	{
 		const chatMessage = game.messages.get(chatMessageId);
+
+		if(!chatMessage.isOwner) {
+			ui.notifications.warn(game.i18n.localize("ROLL.NotAllowedToTriggerEffect"));
+			return;
+		}
+
 		const changes = {rolls: chatMessage.rolls};
 		const roll = changes.rolls[0];
 		const toggledEffect = roll.effects[symbol][index];
