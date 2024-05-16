@@ -242,6 +242,7 @@ export default class CheckHelper
 		const toggledEffect = roll.effects[symbol][index];
 		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
 
+		// Toggled effect.
 		if(toggledEffect.active === true)
 			toggledEffect.active = false;
 		// Delay/Exertion + Bane effects.
@@ -263,8 +264,15 @@ export default class CheckHelper
 					symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
 				}));
 		}
-		// Sigmar's Comet as Success/Boon.
-		else if(["success", "boon"].includes(symbol) && (roll.remainingSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount))
+		// Sigmar's Comet as Success + Only one Success effect toggled at once.
+		else if(symbol === "success"
+			&& (roll.resultSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)) {
+			roll.effects.success.forEach(effect => effect.active = false);
+			toggledEffect.active = true;
+		}
+		// Sigmar's Comet as Boon.
+		else if(symbol === "boon"
+			&& (roll.remainingSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount))
 			toggledEffect.active = true;
 		// Default.
 		else if(roll.remainingSymbols[plural] >= toggledEffect.symbolAmount)
