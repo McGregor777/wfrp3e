@@ -14,7 +14,6 @@ export default function()
 		Handlebars.registerHelper("inferiorOrEqualTo", (value, compareValue) => Number(value) <= Number(compareValue));
 		Handlebars.registerHelper("increment", (value, valueToAdd) => value + parseInt(valueToAdd));
 		Handlebars.registerHelper("multiply", (value, multiplier) => value * multiplier);
-		Handlebars.registerHelper("concat", () => arguments.join());
 		Handlebars.registerHelper("capitalize", (string) => capitalize(string));
 		Handlebars.registerHelper("abs", (number) => Math.abs(number));
 		Handlebars.registerHelper("in", (value, array) => array.includes(value));

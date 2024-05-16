@@ -65,28 +65,31 @@
 			<div class="attributes">
 				<div class="attributes-subdivision">
 					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
-						class="wounds"
-						title="CHARACTER.Wounds"
-						maxTitle="CHARACTER.Threshold"
-						dataPath="system.wounds"
-						max=actor.system.wounds.max
-						value=actor.system.wounds.value}}
+							class="wounds"
+							max=actor.system.wounds.max
+							maxDataPath="system.wounds.max"
+							maxTitle="CHARACTER.Threshold"
+							value=actor.system.wounds.value
+							valueDataPath="system.wounds.value"
+							title="CHARACTER.Wounds"}}
 
 					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
-						class="corruption"
-						title="CHARACTER.Corruption"
-						maxTitle="CHARACTER.Threshold"
-						dataPath="system.corruption"
-						max=actor.system.corruption.max
-						value=actor.system.corruption.value}}
+							class="corruption"
+							max=actor.system.corruption.max
+							maxDataPath="system.corruption.max"
+							maxTitle="CHARACTER.Threshold"
+							value=actor.system.corruption.value
+							valueDataPath="system.corruption.value"
+							title="CHARACTER.Corruption"}}
 
 					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
-						class="fortune"
-						title="CHARACTER.Fortune"
-						maxTitle="CHARACTER.Maximum"
-						dataPath="system.fortune"
-						max=actor.system.fortune.max
-						value=actor.system.fortune.value}}
+							class="fortune"
+							max=actor.system.fortune.max
+							maxDataPath="system.fortune.max"
+							maxTitle="CHARACTER.Maximum"
+							value=actor.system.fortune.value
+							valueDataPath="system.fortune.value"
+							title="CHARACTER.Fortune"}}
 				</div>
 
 				<div class="stance-meter">
@@ -105,6 +108,20 @@
 							</label>
 						{{/for}}
 					</div>
+				</div>
+
+				<div class="attributes-subdivision">
+					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
+							class="favour"
+							value=actor.system.favour
+							valueDataPath="system.favour"
+							title="CHARACTER.Favour"}}
+
+					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
+							class="power"
+							value=actor.system.power
+							valueDataPath="system.corruption"
+							title="CHARACTER.Power"}}
 				</div>
 			</div>
 

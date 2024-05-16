@@ -39,7 +39,9 @@ export default class WFRP3eRoll extends Roll
 			this.effects.bane.push(CheckHelper.getUniversalBaneEffect(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"));
 
 			if(["melee", "ranged"].includes(checkData.action.system.type)) {
-				this.effects.boon.push(CheckHelper.getCriticalRatingEffect(checkData.weapon));
+				if(checkData.weapon)
+					this.effects.boon.push(CheckHelper.getCriticalRatingEffect(checkData.weapon));
+
 				this.effects.sigmarsComet.push(CheckHelper.getUniversalSigmarsCometEffect());
 			}
 		}
@@ -213,15 +215,15 @@ export default class WFRP3eRoll extends Roll
 		if(!this._evaluated)
 			await this.evaluate({async: true});
 
+		const checkData = this.options?.checkData;
+
 		const chatData = {
 			formula: isPrivate ? "???" : this._formula,
 			flavor: isPrivate ? null : flavor,
 			user: game.user.id,
 			tooltip: isPrivate ? "" : await this.getTooltip(),
 			total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-			action: this.options?.checkData?.action,
 			effects: this.effects,
-			face: this.options?.checkData?.face,
 			hasSpecialDice: this.hasSpecialDice,
 			hasStandardDice: this.hasStandardDice,
 			publicRoll: !isPrivate,
@@ -234,6 +236,40 @@ export default class WFRP3eRoll extends Roll
 				}, []),
 			symbols: CONFIG.WFRP3e.symbols,
 		};
+
+		if(checkData) {
+			const actor = checkData.actor.actorId
+					? game.actors.get(checkData.actor.actorId)
+					: game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor;
+
+			mergeObject(chatData, {
+				action: checkData.action,
+				actorName: actor.token ? actor.token.name : actor.prototypeToken.name,
+				face: checkData.face,
+				outcome: checkData.outcome
+			});
+
+			if(checkData.outcome?.criticalWounds && Array.isArray(checkData.outcome.criticalWounds))
+				chatData.criticalWoundLinks = checkData.outcome?.criticalWounds?.reduce((names, criticalWound) => {
+					const criticalWoundLink = actor.items.get(criticalWound._id).toAnchor();
+					names = names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
+					return names;
+				}, "").outerHTML
+
+			if(checkData.targets && checkData.targets.length > 0) {
+				const targetActor = game.scenes.get(checkData.targets[0].sceneId)
+					.collections.tokens.get(checkData.targets[0].tokenId).actor;
+
+				chatData.targetActorName = targetActor.token ? targetActor.token.name : targetActor.prototypeToken.name;
+
+				if(checkData.outcome?.targetCriticalWounds && Array.isArray(checkData.outcome.targetCriticalWounds))
+					chatData.targetCriticalWoundLinks = checkData.outcome?.targetCriticalWounds?.reduce((names, criticalWound) => {
+						const criticalWoundLink = targetActor.items.get(criticalWound._id).toAnchor();
+						names = names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
+						return names;
+					}, "").outerHTML;
+			}
+		}
 
 		return renderTemplate(template, chatData);
 	}

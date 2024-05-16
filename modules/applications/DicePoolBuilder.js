@@ -71,19 +71,21 @@ export default class DicePoolBuilder extends FormApplication
 			checkData.challengeLevel = data.challengeLevel;
 
 			if(checkData.actor) {
-				const actor = checkData.actor;
+				this.actor = checkData.actor.tokenId
+					? game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor
+					: game.actors.get(checkData.actor.actorId)
 
-				data.actor = actor;
+				data.actor = this.actor;
 				data.characteristics = Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
 					if(characteristic[0] !== "varies")
 						object[characteristic[0]] = characteristic[1].name;
 					return object;
 				}, {});
-				data.skills = actor.itemTypes.skill;
+				data.skills = this.actor.itemTypes.skill;
 
-				if(actor.type === "character") {
-					data.maxFortunePoints = actor.system.fortune.value + actor.system.currentParty.system.fortunePool;
-					data.specialisations = actor.itemTypes.skill
+				if(this.actor.type === "character") {
+					data.maxFortunePoints = this.actor.system.fortune.value + (this.actor.system.currentParty?.system.fortunePool ?? 0);
+					data.specialisations = this.actor.itemTypes.skill
 						.filter(skill => skill.system.specialisations)
 						.reduce((specialisations, skill) => {
 							specialisations.push(
@@ -93,8 +95,8 @@ export default class DicePoolBuilder extends FormApplication
 						return specialisations;
 					}, []);
 				}
-				else if(actor.type === "creature")
-					data.attributes = actor.system.attributes;
+				else if(this.actor.type === "creature")
+					data.attributes = this.actor.system.attributes;
 			}
 
 			if(checkData.characteristic)
@@ -511,7 +513,7 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		event.preventDefault();
 
-		const skill = this.object.checkData.actor.itemTypes.skill.find(skill => skill._id === event.currentTarget.value);
+		const skill = this.actor.itemTypes.skill.find(skill => skill._id === event.currentTarget.value);
 
 		this.object.checkData.skill = skill;
 
@@ -534,7 +536,7 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		event.preventDefault();
 
-		this.object.checkData.weapon = this.object.checkData.actor.itemTypes.weapon(weapon => weapon._id === event.currentTarget.value);
+		this.object.checkData.weapon = this.actor.itemTypes.weapon(weapon => weapon._id === event.currentTarget.value);
 	}
 
 	/**

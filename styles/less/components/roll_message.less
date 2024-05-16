@@ -1,51 +1,54 @@
-.dice-additional-flavor {
-	font-size: var(--font-size-10);
-	font-style: oblique;
-}
+.dice-roll {
+	& .dice-result {
+		order: initial;
 
-.dice-array {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-start;
+		.dice-array {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: flex-start;
 
-	& .dice-rolls {
-		list-style: none;
-		margin: 0;
-		overflow: hidden;
-		padding: 0;
+			& .dice-rolls {
+				list-style: none;
+				margin: 0;
+				overflow: hidden;
+				padding: 0;
 
-		& .roll {
-			float: left;
-			width: 3.25rem;
-		}
-	}
-}
-
-.dice-result {
-	& .roll-success {
-		color: darkgreen;
-	}
-
-	& .roll-failure {
-		color: darkred;
-	}
-}
-
-.dice-tooltip {
-	& .dice-rolls {
-		& .roll.wfrp3e-die {
-			background: none;
-
-			& > .special-die {
-				width: 44px;
+				& .roll {
+					float: left;
+					width: 3.25rem;
+				}
 			}
 		}
+
+		.dice-tooltip {
+			& .dice-rolls {
+				& .roll.wfrp3e-die {
+					background: none;
+
+					& > .special-die {
+						width: 44px;
+					}
+				}
+			}
+		}
+
+		.dice-total:not(:last-child) {
+			margin-bottom: 0.25rem;
+		}
+
+		& .roll-success {
+			color: darkgreen;
+		}
+
+		& .roll-failure {
+			color: darkred;
+		}
 	}
 }
 
-.dice-total:not(:last-child) {
-	margin-bottom: 0.25rem;
+.outcome {
+	flex-basis: 100%;
 }
 
 .roll-effects {
@@ -67,6 +70,15 @@
 				left: 100%;
 				position: absolute;
 			}
+		}
+	}
+
+	&.disabled {
+		opacity: 50%;
+
+		& .effect-toggle:hover {
+			cursor: default;
+			text-shadow: none;
 		}
 	}
 }

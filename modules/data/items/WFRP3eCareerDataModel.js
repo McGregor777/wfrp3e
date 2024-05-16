@@ -20,20 +20,20 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 				wound: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 			}),
 			advances: new fields.SchemaField({
-				action: new fields.StringField(),
-				talent: new fields.StringField(),
-				skill: new fields.StringField(),
-				wound: new fields.StringField(),
-				open: new fields.ArrayField(new fields.StringField(), {initial: new Array(6).fill("")}),
+				action: new fields.StringField({initial: "", nullable: false, required: true}),
+				talent: new fields.StringField({initial: "", nullable: false, required: true}),
+				skill: new fields.StringField({initial: "", nullable: false, required: true}),
+				wound: new fields.StringField({initial: "", nullable: false, required: true}),
+				open: new fields.ArrayField(new fields.StringField(), {initial: new Array(6).fill(""), nullable: false, required: true}),
 				careerTransition: new fields.SchemaField({
 					cost: new fields.NumberField({initial: 0, integer: true, min: 0}),
 					newCareer: new fields.StringField()
 				}),
-				dedicationBonus: new fields.StringField(),
+				dedicationBonus: new fields.StringField({initial: "", nullable: false, required: true}),
 				nonCareer: new fields.ArrayField(
 					new fields.SchemaField({
 						cost: new fields.NumberField({initial: 0, integer: true, min: 0}),
-						type: new fields.StringField()
+						type: new fields.StringField({initial: "", nullable: false, required: true})
 					}),
 					{initial: new Array(2).fill({cost: 0, nature: ""})}
 				)
@@ -68,6 +68,9 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 				new Array(6 - this.advances.open.length).fill("")
 			);
 		}
+
+		// Ensure there is no null or undefined values amongst the open career advances.
+		this.advances.open.filter(openAdvance => openAdvance == null).map(() => "");
 
 		// Ensure there is two non-career advances available for each Career.
 		if(this.advances.nonCareer.length < 2) {
