@@ -35,7 +35,7 @@
 									{{localize charac.abbreviation}}
 								</a>
 
-								<input class="characteristic-value-input"
+								<input class="characteristic-rating-input"
 								       name="system.characteristics.{{char}}.rating"
 								       value="{{characteristic.rating}}"
 								       type="number"
@@ -142,30 +142,7 @@
 			</div>
 		</section>
 
-		<section class="creature-sheet-actions-tab tab" data-group="primary" data-tab="actions">
-			<div class="creature-sheet-action-tabs sheet-tabs" data-group="actions">
-				{{#each actionTypes as |type ty|}}
-					{{#if (lookup @root.items.actions ty)}}
-						<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
-					{{/if}}
-				{{/each}}
-			</div>
-
-			<div class="creature-sheet-actions">
-				{{#each actionTypes as |type ty|}}
-					{{#if (lookup @root.items.actions ty)}}
-						<div class="action-container tab {{ty}} item-container" data-group="actions" data-tab="{{ty}}">
-							{{#each (lookup @root.items.actions ty) as |action act|}}
-								{{>systems/wfrp3e/templates/partials/item-action-card.hbs
-										action=action
-										currentStance=@root.actor.system.defaultStance}}
-							{{/each}}
-						</div>
-					{{/if}}
-				{{/each}}
-			</div>
-		</section>
-
+        {{>systems/wfrp3e/templates/partials/action-tab.hbs}}
         {{>systems/wfrp3e/templates/partials/ability-tab.hbs}}
 
 		<section class="creature-sheet-detail-tab tab" data-group="primary" data-tab="details">

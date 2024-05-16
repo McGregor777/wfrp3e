@@ -167,7 +167,7 @@
 			</div>
 		</section>
 
-		<section class="tab talents-tab" data-group="primary" data-tab="talents">
+		<section class="talents-tab tab" data-group="primary" data-tab="talents">
 			<div class="talent-tabs sheet-tabs" data-group="talents">
 				{{#each talentTypes as |type ty|}}
 					{{#if (lookup @root.items.talents ty)}}
@@ -176,7 +176,7 @@
 				{{/each}}
 			</div>
 
-			<div class="talents">
+			<div class="talents tab-content">
 				{{#each talentTypes as |type ty|}}
 					{{#if (lookup @root.items.talents ty)}}
 						<div class="talent-container tab {{ty}} item-container" data-group="talents" data-tab="{{ty}}">
