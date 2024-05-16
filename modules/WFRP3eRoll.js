@@ -251,10 +251,10 @@ export default class WFRP3eRoll extends Roll
 
 			if(checkData.outcome?.criticalWounds && Array.isArray(checkData.outcome.criticalWounds))
 				chatData.criticalWoundLinks = checkData.outcome?.criticalWounds?.reduce((names, criticalWound) => {
-					const criticalWoundLink = actor.items.get(criticalWound._id).toAnchor();
+					const criticalWoundLink = actor.items.get(criticalWound._id).toAnchor().outerHTML;
 					names = names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
 					return names;
-				}, "").outerHTML
+				}, "")
 
 			if(checkData.targets && checkData.targets.length > 0) {
 				const targetActor = game.scenes.get(checkData.targets[0].sceneId)
@@ -264,10 +264,10 @@ export default class WFRP3eRoll extends Roll
 
 				if(checkData.outcome?.targetCriticalWounds && Array.isArray(checkData.outcome.targetCriticalWounds))
 					chatData.targetCriticalWoundLinks = checkData.outcome?.targetCriticalWounds?.reduce((names, criticalWound) => {
-						const criticalWoundLink = targetActor.items.get(criticalWound._id).toAnchor();
+						const criticalWoundLink = targetActor.items.get(criticalWound._id).toAnchor().outerHTML;
 						names = names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
 						return names;
-					}, "").outerHTML;
+					}, "");
 			}
 		}
 
