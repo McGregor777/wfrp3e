@@ -22,25 +22,6 @@
 				overflow: auto;
 			}
 
-			& .abilities-tab {
-				overflow: unset;
-
-				& .character-sheet-abilities {
-					min-height: 0;
-				}
-
-				& .character-sheet-ability-tabs {
-					border-bottom: 1px solid #b5b3a4;
-					display: flex;
-					flex-flow: row wrap;
-					justify-content: space-around;
-
-					& > * {
-						margin: 0 5px;
-					}
-				}
-			}
-
 			& .actions-tab {
 				overflow: unset;
 
@@ -318,64 +299,53 @@
 				}
 			}
 
-			& .item-container {
-				display: none;
+			& .item-container .career-partial {
+				display: flex;
 				flex-flow: row wrap;
-				height: 100%;
-				overflow: auto;
+				flex-grow: 1;
 
-				&.active {
-					display: flex;
-				}
+				& .career-advancement {
+					flex: 1 1 300px;
 
-				& .career-partial {
-					display: flex;
-					flex-flow: row wrap;
-					flex-grow: 1;
+					& h4 {
+						color: white;
+						text-align: center;
+						text-shadow:
+								-1pt -1pt 0 black,
+								-1pt 0 0 black,
+								0 -1pt 0 black,
+								-1pt 1pt 0 black,
+								1pt -1pt 0 black,
+								0 1pt 0 black,
+								1pt 0 0 black,
+								1pt 1pt 0 black;
+						font-variant-caps: small-caps;
+					}
 
-					& .career-advancement {
-						flex: 1 1 300px;
-
-						& h4 {
-							color: white;
-							text-align: center;
-							text-shadow:
-									-1pt -1pt 0 black,
-									-1pt 0 0 black,
-									0 -1pt 0 black,
-									-1pt 1pt 0 black,
-									1pt -1pt 0 black,
-									0 1pt 0 black,
-									1pt 0 0 black,
-									1pt 1pt 0 black;
-							font-variant-caps: small-caps;
+					& > div {
+						&:first-child {
+							margin-top: 0.5rem;
 						}
 
-						& > div {
-							&:first-child {
-								margin-top: 0.5rem;
-							}
-
-							&:not(:last-child) {
-								margin-bottom: 1rem;
-							}
-
-							& > *:not(:last-child) {
-								margin-bottom: 0.5rem;
-							}
+						&:not(:last-child) {
+							margin-bottom: 1rem;
 						}
 
-						& .career-form-div {
-							display: flex;
+						& > *:not(:last-child) {
+							margin-bottom: 0.5rem;
+						}
+					}
 
-							& > input[type=checkbox] {
-								flex: 0 1;
-								margin: 0.25rem;
-							}
+					& .career-form-div {
+						display: flex;
 
-							& > label {
-								flex: 1 1;
-							}
+						& > input[type=checkbox] {
+							flex: 0 1;
+							margin: 0.25rem;
+						}
+
+						& > label {
+							flex: 1 1;
 						}
 					}
 				}

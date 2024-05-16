@@ -7,6 +7,48 @@
 		border-top: none;
 	}
 
+	& .sheet-body {
+		flex: 1 1 0;
+		min-height: 0;
+
+		& > .tab.active {
+			display: flex;
+			flex-flow: column nowrap;
+			height: 100%;
+			overflow: auto;
+		}
+
+		& .ability-tab {
+			overflow: unset;
+
+			& .abilities {
+				min-height: 0;
+			}
+
+			& .ability-tabs {
+				border-bottom: 1px solid #b5b3a4;
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: space-around;
+
+				& > * {
+					margin: 0 5px;
+				}
+			}
+		}
+
+		& .item-container {
+			display: none;
+			flex-flow: row wrap;
+			height: 100%;
+			overflow: auto;
+
+			&.active {
+				display: flex;
+			}
+		}
+	}
+
 	& .editor-content {
 		margin: 0 0.5rem;
 	}

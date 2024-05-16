@@ -59,6 +59,7 @@ import * as handlebarsHelpers from "./modules/handlebars.js";
 async function preloadHandlebarsTemplates()
 {
 	const templatePaths = [
+		"systems/wfrp3e/templates/partials/ability-tab.hbs",
 		"systems/wfrp3e/templates/partials/ability-track-editor-segment.hbs",
 		"systems/wfrp3e/templates/partials/action-effects.hbs",
 		"systems/wfrp3e/templates/partials/attribute-partial.hbs",
