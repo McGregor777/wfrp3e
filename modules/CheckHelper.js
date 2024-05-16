@@ -582,7 +582,7 @@ export default class CheckHelper
 		const allCriticalWounds = [];
 
 		await game.packs.get("wfrp3e.roll-tables").getDocument("KpiwJKBdJ8qAyQjs").then(async table => {
-			await table.drawMany(amount).then(async rollTableDraw => {
+			await table.drawMany(amount, {displayChat: false}).then(async rollTableDraw => {
 				for(const result of rollTableDraw.results) {
 					// Roll Twice and select the critical wound with the higher severity rating (if tied, GM chooses)
 					if(result.id === "uZIgluknIsZ428Cn") {
@@ -591,15 +591,17 @@ export default class CheckHelper
 
 						for(let i = 0; i < 2; i++) {
 							let rollTableDraw = null;
+							let criticalWound = null
 
 							while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
-								rollTableDraw = await table.draw();
+								rollTableDraw = await table.draw({displayChat: false});
 
-							criticalWounds.push(await game.packs.get(rollTableDraw.results[0].documentCollection)
-								.getDocument(rollTableDraw.results[0].documentId));
+							criticalWound = await game.packs.get(rollTableDraw.results[0].documentCollection)
+								.getDocument(rollTableDraw.results[0].documentId);
+							criticalWounds.push(criticalWound);
 
-							if(!highestCriticalWound || highestCriticalWound.system.severityRating < rollTableDraw.results[0].system.severityRating)
-								highestCriticalWound = rollTableDraw.results[0];
+							if(!highestCriticalWound || highestCriticalWound.system.severityRating < criticalWound.system.severityRating)
+								highestCriticalWound = criticalWound;
 						}
 
 						if(criticalWounds[0].system.severityRating === criticalWounds[1].system.severityRating)
@@ -630,7 +632,7 @@ export default class CheckHelper
 							let rollTableDraw = null;
 
 							while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
-								rollTableDraw = await table.draw();
+								rollTableDraw = await table.draw({displayChat: false});
 
 							allCriticalWounds.push(await game.packs.get(rollTableDraw.results[0].documentCollection)
 								.getDocument(rollTableDraw.results[0].documentId));
@@ -638,8 +640,8 @@ export default class CheckHelper
 					}
 					// Default.
 					else
-						allCriticalWounds.push(await game.packs.get(rollTableDraw.results[0].documentCollection)
-							.getDocument(rollTableDraw.results[0].documentId));
+						allCriticalWounds.push(await game.packs.get(result.documentCollection)
+							.getDocument(result.documentId));
 				}
 			});
 		});
