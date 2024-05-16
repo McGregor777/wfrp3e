@@ -174,6 +174,21 @@ Hooks.once("init", () => {
 	preloadHandlebarsTemplates();
 });
 
+Hooks.on("getChatLogEntryContext", (html, options) => {
+	options.push({
+			name: "Apply Toggled Effects",
+			icon: '<i class="fas fa-swords"></i>',
+			condition: li => {
+				const message = game.messages.get(li.attr("data-message-id"));
+				return message.rolls.length > 0
+					&& message.rolls[0].effects
+					&& Object.values(message.rolls[0].effects).find(symbol => symbol.length > 0).length > 0
+					&& !Object.hasOwn(message.rolls[0].options.checkData, "outcome");
+			},
+			callback: li => CheckHelper.triggerEffects(li.attr("data-message-id"))
+		});
+});
+
 Hooks.on('renderSidebarTab', (app, html, data) => {
 	const chatControls = html.find("#chat-controls > .control-buttons");
 
@@ -219,7 +234,7 @@ Hooks.on("renderChatMessage", (app, html, messageData) => {
 		await EmbeddedItemHelpers.displayOwnedItemItemModifiersAsJournal(embeddedId, modifierType, modifierId, entityId);
 	});
 
-	html.find(".roll-effects .effect-toggle").click((event) => {
+	html.find(".roll-effects:not(.disabled) .effect-toggle").click((event) => {
 		event.stopPropagation();
 
 		CheckHelper.toggleEffect(

@@ -13,7 +13,7 @@ export default class CheckHelper
 	 * @param {Object} [options]
 	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
 	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {Promise<void>}
+	 * @returns {Promise<void>} The DicePool for a characteristic check.
 	 */
 	static async prepareCharacteristicCheck(actor, characteristic, {flavor = null, sound = null} = {})
 	{
@@ -28,7 +28,14 @@ export default class CheckHelper
 					reckless: stance > 0 ? stance : 0
 				}
 			}, {
-				checkData: {actor, characteristic},
+				checkData: {
+					actor: {
+						actorId: actor._id,
+						sceneId: actor.token?.object.scene._id,
+						tokenId: actor.token?._id
+					},
+					characteristic
+				},
 				flavor,
 				sound
 			})
@@ -42,7 +49,7 @@ export default class CheckHelper
 	 * @param {Object} [options]
 	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
 	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {Promise<void>}
+	 * @returns {Promise<void>} The DicePool for an skill check.
 	 */
 	static async prepareSkillCheck(actor, skill, {flavor = null, sound = null} = {})
 	{
@@ -59,7 +66,15 @@ export default class CheckHelper
 					reckless: stance > 0 ? stance : 0
 				}
 			}, {
-				checkData: {actor, skill, characteristic: {name: skill.system.characteristic, ...characteristic}},
+				checkData: {
+					actor: {
+						actorId: actor._id,
+						sceneId: actor.token?.object.scene._id,
+						tokenId: actor.token?._id
+					},
+					skill,
+					characteristic: {name: skill.system.characteristic, ...characteristic}
+				},
 				flavor,
 				sound
 			})
@@ -75,7 +90,7 @@ export default class CheckHelper
 	 * @param {WFRP3eItem} [options.weapon] The weapon used alongside the Action.
 	 * @param {String} [options.flavor] Some flavor text to add to the Action check's outcome description.
 	 * @param {String} [options.sound] Some sound to play after the Action check completion.
-	 * @returns {Promise<void>}
+	 * @returns {Promise<void>} The DicePool for an action check.
 	 */
 	static async prepareActionCheck(actor, action, face, {weapon = null, flavor = null, sound = null} = {})
 	{
@@ -96,7 +111,23 @@ export default class CheckHelper
 		}
 
 		const characteristic = actor.system.characteristics[characteristicName];
-		const checkData = {actor, action, face, skill, characteristic: {name: characteristicName, ...characteristic}};
+		const checkData = {
+			actor: {
+				actorId: actor._id,
+				sceneId: actor.token?.object.scene._id,
+				tokenId: actor.token?._id
+			},
+			action,
+			face,
+			skill,
+			characteristic: {name: characteristicName, ...characteristic},
+			targets: [...game.user.targets].map(target => {
+				return {
+					sceneId: target.scene.id,
+					tokenId: target.id
+				}
+			})
+		};
 		let stance = 0;
 
 		if(actor.type === "character")
@@ -121,7 +152,10 @@ export default class CheckHelper
 							: 0),
 					misfortune: action.system[face].difficultyModifiers.misfortuneDice +
 						((match ? match[5] === game.i18n.localize("ACTION.CHECK.TargetDefence") : false)
-							? [...game.user.targets][0]?.actor.system.totalDefence ?? 0
+							? checkData.targets.length > 0
+								? game.scenes.get(checkData.targets[0].sceneId)
+									.collections.tokens.get(checkData.targets[0].tokenId).actor.system.totalDefence
+								: 0
 							: 0)
 				}
 			}, {
@@ -139,7 +173,7 @@ export default class CheckHelper
 	 * @param {Object} [options]
 	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
 	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {DicePool}
+	 * @returns {DicePool} The DicePool for an initiative check.
 	 */
 	static prepareInitiativeCheck(actor, combat, {flavor = null, sound = null} = {})
 	{
@@ -320,5 +354,292 @@ export default class CheckHelper
 		});
 
 		chatMessage.update(changes);
+	}
+
+	/**
+	 * Triggers the toggled effects from a Roll.
+	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
+	 * @returns {Promise<void>}
+	 */
+	static async triggerEffects(chatMessageId)
+	{
+		const chatMessage = game.messages.get(chatMessageId),
+		      roll = chatMessage.rolls[0],
+		      checkData = roll.options.checkData,
+		      actor = checkData.actor.actorId
+				  ? game.actors.get(checkData.actor.actorId)
+				  : game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor,
+			  targetActor = checkData.targets.length > 0
+				  ? game.scenes.get(checkData.targets[0].sceneId).collections.tokens.get(checkData.targets[0].tokenId).actor
+				  : null,
+			  toggledEffects = Object.values(structuredClone(roll.effects)).reduce((symbol, allEffects) => {
+				  allEffects.push(...symbol.filter(effect => effect.active));
+				  return allEffects;
+			  }, []),
+			  outcome = {
+				  targetDamages: 0,
+				  targetCriticalWounds: 0,
+				  targetFatigue: 0,
+				  targetStress: 0,
+				  wounds: 0,
+				  criticalWounds: 0,
+				  fatigue:  CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "physical"
+					  ? roll.remainingSymbols.exertions
+					  : 0,
+				  stress: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"
+					  ? roll.remainingSymbols.exertions
+					  : 0,
+				  favour: 0,
+				  power: 0
+			  },
+			  actorUpdates = {system: {}},
+			  targetUpdates = {system: {}},
+			  chatMessageUpdates = {rolls: chatMessage.rolls};
+
+		for(const effect of toggledEffects) {
+			const effectDescription = TextEditor.decodeHTML(effect.description);
+			let match = null;
+
+			if(targetActor) {
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForPlusAmountDamage"), "u"));
+				if(match)
+					outcome.targetDamages = actor.system.characteristics.strength.value +
+						(checkData.weapon?.system.damageRating ?? 0) +
+						(actor.system.damageRating ?? 0) +
+						parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForCharacteristicDamage"), "u"));
+				if(match) {
+					const characteristicName = Object.entries(CONFIG.WFRP3e.characteristics).find(characteristic => {
+						return game.i18n.localize(characteristic[1].abbreviation) === match[2];
+					})[0];
+					const characteristic = actor.system.characteristics[characteristicName];
+
+					outcome.targetDamages = characteristic.value + parseInt(match[1]);
+				}
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForMinusAmountDamage"), "u"));
+				if(match)
+					outcome.targetDamages = actor.system.characteristics.strength.value +
+						(checkData.weapon?.system.damageRating ?? 0) +
+						(actor.system.damageRating ?? 0) +
+						parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForNormalDamage"), "u"));
+				if(match)
+					outcome.targetDamages = actor.system.characteristics.strength.value +
+						(checkData.weapon?.system.damageRating ?? 0) +
+						(actor.system.damageRating ?? 0);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.MinusDamage"), "u"));
+				if(match)
+					outcome.targetDamages -= parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.PlusDamage"), "u"));
+				if(match)
+					outcome.targetDamages += parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.PlusCritical"), "u"));
+				if(match)
+					outcome.targetCriticalWounds += parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.TargetSuffersAmountFatigue"), "iu"));
+				if(match)
+					outcome.targetFatigue += parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.TargetSuffersAmountStress"), "iu"));
+				if(match)
+					outcome.targetStress += parseInt(match[1]);
+			}
+
+			if(actor) {
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.RecoverAmountFatigue"), "iu"));
+				if(match)
+					outcome.fatigue -= parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.RecoverAmountStress"), "iu"));
+				if(match)
+					outcome.stress -= parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.SufferAmountCritical"), "iu"));
+				if(match)
+					outcome.criticalWounds += parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.SufferAmountFatigue"), "iu"));
+				if(match)
+					outcome.fatigue += parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.SufferAmountStress"), "iu"));
+				if(match)
+					outcome.stress += parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.SufferAmountWound"), "iu"));
+				if(match)
+					outcome.wounds += parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.SufferAmountWound"), "iu"));
+				if(match)
+					outcome.favour += parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.GainAmountPower"), "iu"));
+				if(match)
+					outcome.power += parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.LoseAmountFavour"), "iu"));
+				if(match)
+					outcome.favour -= parseInt(match[1]);
+
+				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.LoseAmountPower"), "iu"));
+				if(match)
+					outcome.power -= parseInt(match[1]);
+			}
+		}
+
+		if(targetActor) {
+			// If the attack inflicts damages, reduce them by Toughness and Soak values.
+			if(outcome.targetDamages > 0) {
+				outcome.targetDamages -= targetActor.system.characteristics.toughness.value +
+					(targetActor.system.totalSoak ?? 0) +
+					(targetActor.system.soakValue ?? 0);
+
+				// If the attack still inflicts more damages than the target's wound threshold, the target suffers from a critical wound
+				// (in addition to those coming from effects).
+				if(outcome.targetDamages > 0 && outcome.targetDamages > targetActor.system.wounds.value) {
+					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetDamages};
+
+					outcome.targetCriticalWounds = await Item.createDocuments(
+						await this.drawCriticalWoundsRandomly(outcome.targetCriticalWounds + 1),
+						{parent: targetActor}
+					);
+				}
+				else if(outcome.targetDamages > 0) {
+					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetDamages};
+
+					if(outcome.targetCriticalWounds > 0) {
+						outcome.targetCriticalWounds = await Item.createDocuments(
+							await this.drawCriticalWoundsRandomly(outcome.targetCriticalWounds),
+							{parent: targetActor}
+						);
+					}
+				}
+				// If the attack inflicts 0 damages in spite of hitting the target, the target still suffers one damage
+				// (no critical wounds are inflicted though).
+				else {
+					outcome.targetDamages = 1
+					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - 1};
+				}
+
+				console.log(targetActor.system.characteristics.toughness.value, targetActor.system.soakValue, outcome.targetDamages)
+			}
+
+			if(outcome.targetFatigue > 0 || outcome.targetFatigue < 0)
+				targetUpdates.system.impairments = {fatigue: targetActor.system.impairments.fatigue + outcome.targetFatigue};
+
+			if(outcome.targetStress > 0 || outcome.targetStress < 0)
+				targetUpdates.system.impairments = {stress: targetActor.system.impairments.stress + outcome.targetStress};
+
+			targetActor.update(targetUpdates);
+		}
+
+		if(actor) {
+			if(outcome.wounds > 0)
+				actorUpdates.system.wounds = actor.system.wounds.value - outcome.wounds;
+
+			outcome.criticalWounds = await Item.createDocuments(
+				await this.drawCriticalWoundsRandomly(outcome.criticalWounds),
+				{parent: actor}
+			);
+
+			if(outcome.fatigue > 0 || outcome.fatigue < 0)
+				actorUpdates.system.impairments = {fatigue: actor.system.impairments.fatigue + outcome.fatigue};
+
+			if(outcome.stress > 0 || outcome.stress < 0)
+				actorUpdates.system.impairments = {stress: actor.system.impairments.stress + outcome.stress};
+
+			if(outcome.favour > 0 || outcome.favour < 0)
+				actorUpdates.system.favour = actor.system.favour + outcome.favour;
+
+			if(outcome.power > 0 || outcome.power < 0)
+				actorUpdates.system.power = actor.system.power + outcome.power;
+
+			actor.update(actorUpdates);
+		}
+
+		chatMessageUpdates.rolls[0].options.checkData.outcome = outcome;
+		chatMessage.update(chatMessageUpdates);
+	}
+
+	/**
+	 * Draws one or several critical wounds randomly from the Critical Wounds RollTable.
+	 * @param {Number} amount The amount of critical wounds to draw.
+	 * @returns {Promise<*[]>} The critical wounds Items owned by the target Actor.
+	 */
+	static async drawCriticalWoundsRandomly(amount)
+	{
+		const allCriticalWounds = [];
+
+		await game.packs.get("wfrp3e.roll-tables").getDocument("KpiwJKBdJ8qAyQjs").then(async table => {
+			await table.drawMany(amount).then(async rollTableDraw => {
+				for(const result of rollTableDraw.results) {
+					// Roll Twice and select the critical wound with the higher severity rating (if tied, GM chooses)
+					if(result.id === "uZIgluknIsZ428Cn") {
+						const criticalWounds = [];
+						let highestCriticalWound = null;
+
+						for(let i = 0; i < 2; i++) {
+							let rollTableDraw = null;
+
+							while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
+								rollTableDraw = await table.draw();
+
+							criticalWounds.push(await game.packs.get(rollTableDraw.results[0].documentCollection)
+								.getDocument(rollTableDraw.results[0].documentId));
+
+							if(!highestCriticalWound || highestCriticalWound.system.severityRating < rollTableDraw.results[0].system.severityRating)
+								highestCriticalWound = rollTableDraw.results[0];
+						}
+
+						if(criticalWounds[0].system.severityRating === criticalWounds[1].system.severityRating)
+							await new Dialog({
+								title: game.i18n.localize("APPLICATION.TITLE.ChooseACriticalWound"),
+								content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.ChooseACriticalWound")}</p>`,
+								buttons: {
+									one: {
+										label: criticalWounds[0].name,
+										callback: async dlg => {
+											allCriticalWounds.push(criticalWounds[0]);
+										}
+									},
+									two: {
+										label: criticalWounds[1].name,
+										callback: async dlg => {
+											allCriticalWounds.push(criticalWounds[1]);
+										}
+									},
+								}
+							}).render(true);
+						else
+							allCriticalWounds.push(highestCriticalWound);
+					}
+					// Roll Twice and apply both results! You poor sod...
+					else if(result.id === "aJ0a8gzJbFSPS7xY") {
+						for(let j = 0; j < 2; j++) {
+							let rollTableDraw = null;
+
+							while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
+								rollTableDraw = await table.draw();
+
+							allCriticalWounds.push(await game.packs.get(rollTableDraw.results[0].documentCollection)
+								.getDocument(rollTableDraw.results[0].documentId));
+						}
+					}
+					// Default.
+					else
+						allCriticalWounds.push(await game.packs.get(rollTableDraw.results[0].documentCollection)
+							.getDocument(rollTableDraw.results[0].documentId));
+				}
+			});
+		});
+
+		return allCriticalWounds;
 	}
 }

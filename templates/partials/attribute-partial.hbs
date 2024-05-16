@@ -1,21 +1,33 @@
 <div class="attribute {{class}}">
-	<span class="attribute-title">{{localize title}}</span>
+	{{#if max}}<span class="attribute-title">{{localize title}}</span>{{/if}}
+
+	{{#if max}}
+		<div class="attribute-input-container">
+			<label class="attribute-label">
+				{{localize maxTitle}}
+
+				<input class="attribute-input"
+				       name="{{maxDataPath}}"
+				       value="{{max}}"
+				       type="number"
+				       placeholder="{{localize maxTitle}}" />
+			</label>
+		</div>
+	{{/if}}
 
 	<div class="attribute-input-container">
-		<label class="attribute-label">{{localize maxTitle}}</label>
-		<input class="attribute-input"
-		       name="{{dataPath}}.max"
-		       value="{{max}}"
-		       type="number"
-		       placeholder="{{localize maxTitle}}" />
-	</div>
+		<label class="attribute-label">
+			{{#if max}}
+				{{localize 'CHARACTER.Current'}}
+			{{else}}
+				{{localize title}}
+			{{/if}}
 
-	<div class="attribute-input-container">
-		<label class="attribute-label">{{localize 'Current'}}</label>
-		<input class="attribute-input"
-		       name="{{dataPath}}.value"
-		       value="{{value}}"
-		       type="number"
-		       placeholder="{{localize 'Current'}}" />
+			<input class="attribute-input"
+			       name="{{valueDataPath}}"
+			       value="{{value}}"
+			       type="number"
+			       placeholder="{{#if max}}{{localize 'CHARACTER.Current'}}{{else}}{{localize title}}{{/if}}" />
+		</label>
 	</div>
 </div>
