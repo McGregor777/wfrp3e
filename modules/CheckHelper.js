@@ -402,11 +402,13 @@ export default class CheckHelper
 
 			if(targetActor) {
 				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForPlusAmountDamage"), "u"));
-				if(match)
-					outcome.targetDamages = actor.system.characteristics.strength.value +
+				if(match) {
+					let characteristicName = checkData.action.system.type === "ranged" ? "agility" : "strength";
+					outcome.targetDamages = actor.system.characteristics[characteristicName].value +
 						(checkData.weapon?.system.damageRating ?? 0) +
 						(actor.system.damageRating ?? 0) +
 						parseInt(match[1]);
+				}
 
 				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForCharacteristicDamage"), "u"));
 				if(match) {
@@ -418,17 +420,21 @@ export default class CheckHelper
 					outcome.targetDamages = characteristic.value + parseInt(match[1]);
 				}
 				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForMinusAmountDamage"), "u"));
-				if(match)
-					outcome.targetDamages = actor.system.characteristics.strength.value +
+				if(match) {
+					let characteristicName = checkData.action.system.type === "ranged" ? "agility" : "strength";
+					outcome.targetDamages = actor.system.characteristics[characteristicName].value +
 						(checkData.weapon?.system.damageRating ?? 0) +
 						(actor.system.damageRating ?? 0) +
 						parseInt(match[1]);
+				}
 
 				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForNormalDamage"), "u"));
-				if(match)
-					outcome.targetDamages = actor.system.characteristics.strength.value +
+				if(match) {
+					let characteristicName = checkData.action.system.type === "ranged" ? "agility" : "strength";
+					outcome.targetDamages = actor.system.characteristics[characteristicName].value +
 						(checkData.weapon?.system.damageRating ?? 0) +
 						(actor.system.damageRating ?? 0);
+				}
 
 				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.MinusDamage"), "u"));
 				if(match)
@@ -527,8 +533,6 @@ export default class CheckHelper
 					outcome.targetDamages = 1
 					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - 1};
 				}
-
-				console.log(targetActor.system.characteristics.toughness.value, targetActor.system.soakValue, outcome.targetDamages)
 			}
 
 			if(outcome.targetFatigue > 0 || outcome.targetFatigue < 0)
