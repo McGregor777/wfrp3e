@@ -70,6 +70,7 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 				current: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 				total: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 			}),
+			favour: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			fortune: new fields.SchemaField({
 				max: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 				value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
@@ -80,6 +81,7 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 			}),
 			origin: new fields.StringField({initial: "reiklander", nullable: false, required: true}),
 			party: new fields.DocumentIdField(),
+			power: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			stance: new fields.SchemaField({
 				...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
 					object[stance] = new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true});
