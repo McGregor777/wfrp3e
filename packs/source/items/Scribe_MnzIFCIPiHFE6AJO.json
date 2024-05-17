@@ -10,7 +10,11 @@
   "system": {
     "description": "<p>Most people in the Empire are illiterate; the peasantry and even a great number of the nobility do not know their letters. However, it is sometimes necessary for an unlettered individual to understand or write documents, perhaps to stay in touch with distant friends or to keep on the right side of the law. For this reason, the services of scribes are often sought.</p>\n<p>Some scribes work in the streets and market squares. They sit at small portable desks, taking down letters dictated by their clients. They draft correspondences, legal documents (such as wills and contracts), and even diaries. They also provide a reading service, letting customers know about local announcements, bye-laws, bill posters, and other notices. The services of a scribe are not cheap &ndash; they often charge by the word, and writing materials such as parchment and ink are costly. The better scribes in the larger towns of the Empire are often employed by scriptoriums. These writing houses employ ranks of scribes to work on illuminated manuscripts, official documents and important letters. Work in a scriptorium is hard and dull, but the pay is regular and generous. Scribes can also find employment with merchant houses, noble courts, temples, and even with organised criminals.</p>\n<p>Despite the service they perform, the livelihood of scribes is under threat. Printing presses in many towns offer similar services for competitive prices. An appetite for learning amongst the growing middle class means there are more literate individuals about than in years gone by. Faced with hard times, a scribe sometimes joins parties of adventurers, where they are often appreciated for their advice in tight spots of the law or when looking for job opportunities in scurrilous news-sheets and pamphlets. Some adventurers actually employ scribes to accompany them and record their exploits, so that their heroic deeds will be immortalised in thrilling chapbooks.</p>\n<p><strong>Typical Trappings:</strong> A scribe typically carries a number of feather quills, a bottle of ink, an inkhorn and a leather folder containing a dozen pieces of parchment.</p>\n<p><strong>Career Ability:</strong> Your Education checks gain:</p>\n<ul>\n<li>♢♢ Add 1 fortune to the party fortune pool</li>\n</ul>",
     "advanced": false,
-    "raceRestrictions": ["human", "dwarf", "highElf"],
+    "raceRestrictions": [
+      "human",
+      "dwarf",
+      "highElf"
+    ],
     "traits": "Academic, Basic, Social, Specialist",
     "talentSockets": [
       "focus",

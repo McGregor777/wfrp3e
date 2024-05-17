@@ -146,23 +146,12 @@ export default class DicePool
 	 */
 	async roll()
 	{
-		const roll = WFRP3eRoll.create(
-			this.formula,
-			this.checkData?.actor ? this.checkData.actor.getRollData() : {},
-			{checkData: this.checkData, flavor: this.flavor, startingSymbols: this.symbols}
-		);
-
-		roll.toMessage({
-			flavor: this.name,
-			speaker: {actor: this.checkData?.actor},
-			user: game.user.id
-		});
-
-		if(this.sound)
-			AudioHelper.play({src: this.sound}, true);
+		let actor = null;
 
 		if(this.checkData?.actor) {
-			const actor = this.checkData.actor;
+			actor = this.checkData.actor.tokenId
+				? game.scenes.get(this.checkData.actor.sceneId).collections.tokens.get(this.checkData.actor.tokenId).actor
+				: game.actors.get(this.checkData.actor.actorId);
 
 			// Remove the fortune points spent on the check.
 			if(actor.type === "character" && this.fortunePoints > 0) {
@@ -190,6 +179,21 @@ export default class DicePool
 					actor.update(updates);
 			}
 		}
+
+		const roll = WFRP3eRoll.create(
+			this.formula,
+			actor ? actor.getRollData() : {},
+			{checkData: this.checkData, flavor: this.flavor, startingSymbols: this.symbols}
+		);
+
+		roll.toMessage({
+			flavor: this.name,
+			speaker: {actor},
+			user: game.user.id
+		});
+
+		if(this.sound)
+			AudioHelper.play({src: this.sound}, true);
 
 		return roll;
 	}

@@ -1,13 +1,9 @@
 /** @inheritDoc */
 export default class ActionSelector extends FormApplication
 {
-	/**
-	 * @param {WFRP3eActor} object
-	 * @param {WFRP3eItem} career
-	 */
-	constructor(object, career)
+	constructor(object, career, options = {})
 	{
-		super(object);
+		super(object, options);
 
 		this.career = career;
 		this.priest = this.object.itemTypes.talent.find(talent => talent.system.type === "faith") != null;

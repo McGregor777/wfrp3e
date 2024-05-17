@@ -1,14 +1,9 @@
 /** @inheritDoc */
 export default class TrainingSelector extends FormApplication
 {
-	/**
-	 * @param {WFRP3eActor} object
-	 * @param {WFRP3eItem} career
-	 * @param {boolean} [nonCareer]
-	 */
-	constructor(object, career, nonCareer = false)
+	constructor(object, career, nonCareer = false, options = {})
 	{
-		super(object);
+		super(object, options);
 
 		this.career = career;
 		this.nonCareer = nonCareer;

@@ -6,13 +6,14 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 			...super.defaultOptions,
 			classes: ["wfrp3e", "sheet", "actor", "creature", "creature-sheet"],
 			dragDrop: [{dragSelector: ".item", dropSelector: null}],
-			height: 660,
+			height: 750,
 			tabs: [
 				{group: "primary", navSelector: ".creature-sheet-tabs", contentSelector: ".creature-sheet-body", initial: "main"},
-				{group: "actions", navSelector: ".creature-sheet-action-tabs", contentSelector: ".creature-sheet-actions", initial: "melee"}
+				{group: "actions", navSelector: ".action-tabs", contentSelector: ".actions", initial: "melee"},
+				{group: "abilities", navSelector: ".ability-tabs", contentSelector: ".abilities", initial: "ability"}
 			],
 			template: "systems/wfrp3e/templates/applications/actors/creature-sheet.hbs",
-			width: 420
+			width: 600
 		};
 	}
 

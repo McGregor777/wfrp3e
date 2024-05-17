@@ -11,16 +11,16 @@
 		<hr />
 
 		<div class="buttons">
-			<a class="item-expand-link" title="{{localize 'APPLICATION.BUTTON.Expand'}}">
+			<a class="item-expand-link" data-tooltip="{{localize 'APPLICATION.BUTTON.Expand'}}">
 				<span class="fas fa-chevron-down"></span>
 			</a>
 			
 			{{#>if @root.document.isOwner}}
-				<a class="item-edit-link" title="{{localize 'APPLICATION.TITLE.EditItem'}}">
+				<a class="item-edit-link" data-tooltip="{{localize 'APPLICATION.TITLE.EditItem'}}">
 					<span class="fas fa-pen-to-square"></span>
 				</a>
 
-				<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
+				<a class="item-delete-link" data-tooltip="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
 					<span class="fas fa-trash"></span>
 				</a>
 			{{/if}}

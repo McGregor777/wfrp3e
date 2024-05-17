@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
-		<img class="actor-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+		<img class="actor-img" src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" />
 
 		<h1>
 			<input class="name-input" name="name" value="{{item.name}}" type="text" placeholder="Name" />
@@ -15,7 +15,7 @@
 				       value="{{item.system.value}}"
 				       type="number"
 				       placeholder="{{localize 'MONEY.Value'}}"
-				       title="{{localize 'MONEY.Value'}}" />
+				       data-tooltip="{{localize 'MONEY.Value'}}" />
 			</label>
 		</div>
 
@@ -26,7 +26,7 @@
 				       value="{{item.system.quantity}}"
 				       placeholder="{{localize 'TRAPPING.ABBREVIATION.Quantity'}}"
 				       type="number"
-				       title="{{localize 'TRAPPING.Quantity'}}" />
+				       data-tooltip="{{localize 'TRAPPING.Quantity'}}" />
 			</label>
 		</div>
 

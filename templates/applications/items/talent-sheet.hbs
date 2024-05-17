@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="sheet-header">
-		<img class="actor-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+		<img class="actor-img" src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" />
 
 		<h1>
 			<input class="name-input" name="name" value="{{item.name}}" type="text" placeholder="Name" />
@@ -9,7 +9,7 @@
 
 	<section class="sheet-body">
 		<div class="sheet-form-div">
-			<select class="sheet-form-select" name="system.type" data-dtype="String">
+			<select class="sheet-form-select" name="system.type">
 				{{selectOptions talentTypes selected=item.system.type localize=true}}
 			</select>
 		</div>

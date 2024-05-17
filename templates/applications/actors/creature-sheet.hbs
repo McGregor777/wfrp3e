@@ -18,10 +18,11 @@
 	<nav class="creature-sheet-tabs sheet-tabs tabs" data-group="primary">
 		<a class="tab-link main-tab-link" data-tab="main">{{localize 'Main'}}</a>
 		<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CREATURE.Actions'}}</a>
+        <a class="tab-link abilities-tab-link" data-tab="abilities">{{localize "CREATURE.Abilities"}}</a>
 		<a class="tab-link details-tab-link" data-tab="details">{{localize 'CREATURE.Details'}}</a>
 	</nav>
 
-	<div class="creature-sheet-body">
+	<div class="creature-sheet-body sheet-body">
 		<section class="creature-sheet-main-tab tab" data-group="primary" data-tab="main">
 			<div class="creature-sheet-main-infos">
 				<div class="creature-sheet-characteristics">
@@ -34,7 +35,7 @@
 									{{localize charac.abbreviation}}
 								</a>
 
-								<input class="characteristic-value-input"
+								<input class="characteristic-rating-input"
 								       name="system.characteristics.{{char}}.rating"
 								       value="{{characteristic.rating}}"
 								       type="number"
@@ -141,29 +142,8 @@
 			</div>
 		</section>
 
-		<section class="creature-sheet-actions-tab tab" data-group="primary" data-tab="actions">
-			<div class="creature-sheet-action-tabs sheet-tabs" data-group="actions">
-				{{#each actionTypes as |type ty|}}
-					{{#if (lookup @root.items.actions ty)}}
-						<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
-					{{/if}}
-				{{/each}}
-			</div>
-
-			<div class="creature-sheet-actions">
-				{{#each actionTypes as |type ty|}}
-					{{#if (lookup @root.items.actions ty)}}
-						<div class="action-container tab {{ty}} item-container" data-group="actions" data-tab="{{ty}}">
-							{{#each (lookup @root.items.actions ty) as |action act|}}
-								{{>systems/wfrp3e/templates/partials/item-action-card.hbs
-										action=action
-										currentStance=@root.actor.system.defaultStance}}
-							{{/each}}
-						</div>
-					{{/if}}
-				{{/each}}
-			</div>
-		</section>
+        {{>systems/wfrp3e/templates/partials/action-tab.hbs}}
+        {{>systems/wfrp3e/templates/partials/ability-tab.hbs}}
 
 		<section class="creature-sheet-detail-tab tab" data-group="primary" data-tab="details">
 			{{editor actor.system.description target="system.description" button=true owner=owner editable=editable}}

@@ -1,6 +1,6 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<header class="party-sheet-tension-meter">
-		<a class="party-sheet-tension-meter-minus" title="{{localize 'PARTY.TENSIONMETER.Decrease'}}">
+		<a class="party-sheet-tension-meter-minus" data-tooltip="{{localize 'PARTY.TENSIONMETER.Decrease'}}">
 			<span class="fas fa-minus"></span>
 		</a>
 
@@ -21,7 +21,7 @@
 			{{/for}}
 		</div>
 
-		<a class="party-sheet-tension-meter-plus" title="{{localize 'PARTY.TENSIONMETER.Increase'}}">
+		<a class="party-sheet-tension-meter-plus" data-tooltip="{{localize 'PARTY.TENSIONMETER.Increase'}}">
 			<span class="fas fa-plus"></span>
 		</a>
 	</header>
@@ -29,8 +29,19 @@
 	<div class="party-sheet-body">
 		<div class="party-sheet-left-side">
 			<div class="party-sheet-header">
-				<input class="party-sheet-name" name="name" type="text" value="{{actor.name}}" placeholder="Name"  title="Name" />
-				<input class="party-sheet-traits" name="system.traits" type="text" value="{{actor.system.traits}}" placeholder="{{localize 'PARTY.Traits'}}" title="{{localize 'PARTY.Traits'}}" />
+				<input class="party-sheet-name"
+				       name="name"
+				       type="text"
+				       value="{{actor.name}}"
+				       placeholder="Name"
+				       data-tooltip="Name" />
+
+				<input class="party-sheet-traits"
+				       name="system.traits"
+				       type="text"
+				       value="{{actor.system.traits}}"
+				       placeholder="{{localize 'PARTY.Traits'}}"
+				       data-tooltip="{{localize 'PARTY.Traits'}}" />
 			</div>
 
 			<div class="party-sheet-tension">
@@ -39,8 +50,20 @@
 				{{#each actor.system.tension.events as |event ev|}}
 					<hr>
 					<div class="party-sheet-tension-event">
-						<input class="party-sheet-tension-event-threshold" name="system.tension.events.{{ev}}.threshold" type="number" value="{{event.threshold}}" min="0" max="{{actor.system.tension.maximum}}" title="{{localize 'PARTY.TENSIONEVENT.Threshold'}}" />
-						<input class="party-sheet-tension-event-effects" name="system.tension.events.{{ev}}.effects" type="text" value="{{event.effects}}" placeholder="{{localize 'PARTY.TENSIONEVENT.Effects'}}" title="{{localize 'PARTY.TENSIONEVENT.Effects'}}" />
+						<input class="party-sheet-tension-event-threshold"
+						       value="{{event.threshold}}"
+						       name="system.tension.events.{{ev}}.threshold"
+						       type="number"
+						       min="0"
+						       max="{{actor.system.tension.maximum}}"
+						       data-tooltip="{{localize 'PARTY.TENSIONEVENT.Threshold'}}" />
+
+						<input class="party-sheet-tension-event-effects"
+						       name="system.tension.events.{{ev}}.effects"
+						       value="{{event.effects}}"
+						       type="text"
+						       placeholder="{{localize 'PARTY.TENSIONEVENT.Effects'}}"
+						       data-tooltip="{{localize 'PARTY.TENSIONEVENT.Effects'}}" />
 					</div>
 				{{/each}}
 			</div>
@@ -48,19 +71,19 @@
 			<div class="party-sheet-members">
 				{{#each actor.memberActors as |actor act|}}
 					<div class="party-sheet-member" data-actor-id="{{actor.id}}">
-						<a class="party-sheet-member-portrait" title="{{actor.name}}">
+						<a class="party-sheet-member-portrait" data-tooltip="{{actor.name}}">
 							<img src="{{actor.img}}" width="50" height="50" />
 						</a>
-						<a class="party-sheet-member-remove" title="{{localize 'PARTY.RemoveMember'}}"><span class="fas fa-trash"></span></a>
+						<a class="party-sheet-member-remove" data-tooltip="{{localize 'PARTY.RemoveMember'}}"><span class="fas fa-trash"></span></a>
 					</div>
 				{{/each}}
 			</div>
 		</div>
 
 		<div class="party-sheet-right-side">
-			<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="250"/>
+			<img src="{{actor.img}}" data-edit="img" data-tooltip="{{actor.name}}" height="250"/>
 
-			<a class="fortune-token" title="{{localize 'PARTY.FortunePool'}}">
+			<a class="fortune-token" data-tooltip="{{localize 'PARTY.FortunePool'}}">
 				<img src="systems/wfrp3e/assets/images/token-grey.webp" alt="{{localize 'PARTY.FortuneToken'}}" />
 				<span class="fortune-counter">{{actor.system.fortunePool}}</span>
 			</a>
@@ -68,7 +91,12 @@
 	</div>
 
 	<div class="party-sheet-special-ability">
-		<input class="party-sheet-special-ability-title" name="system.specialAbility.title" type="text" value="{{actor.system.specialAbility.title}}" placeholder="{{localize 'PARTY.SpecialAbility.Title'}}" title="{{localize 'PARTY.SpecialAbility.Title'}}" />
+		<input class="party-sheet-special-ability-title"
+		       name="system.specialAbility.title"
+		       value="{{actor.system.specialAbility.title}}"
+		       type="text"
+		       placeholder="{{localize 'PARTY.SpecialAbility.Title'}}"
+		       data-tooltip="{{localize 'PARTY.SpecialAbility.Title'}}" />
 		
 		<div class="party-sheet-special-ability-description">
 			{{editor actor.system.specialAbility.description target='system.specialAbility.description' button=true owner=owner editable=editable}}
@@ -77,7 +105,9 @@
 
 	<footer class="sheet-footer party-sheet-footer">
 		{{#each actor.system.talentSockets as |type ty|}}
-			<select class="sheet-form-select party-sheet-talent-socket" name="system.talentSockets" data-dtype="String" title="{{localize 'PARTY.TalentSocket'}}">
+			<select class="sheet-form-select party-sheet-talent-socket"
+			        name="system.talentSockets"
+			        data-tooltip="{{localize 'PARTY.TalentSocket'}}">
 				{{selectOptions @root.talentTypes selected=type localize=true}}
 			</select>
 		{{/each}}

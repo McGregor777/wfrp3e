@@ -24,7 +24,7 @@
 					{{/each}}
 
 					{{#if document.isOwner}}
-						<a class="ability-track-edit" title="{{localize 'GROUP.SPECIALABILITY.Edit'}}">
+						<a class="ability-track-edit" data-tooltip="{{localize 'GROUP.SPECIALABILITY.Edit'}}">
 							<span class="fas fa-edit"></span>
 						</a>
 					{{/if}}
@@ -32,7 +32,7 @@
 
 				<div class="ability-track-editor">
 					<div>
-						<a class="ability-track-editor-minus" title="{{localize 'GROUP.SPECIALABILITY.Decrease'}}">
+						<a class="ability-track-editor-minus" data-tooltip="{{localize 'GROUP.SPECIALABILITY.Decrease'}}">
 							<span class="fas fa-minus"></span>
 						</a>
 
@@ -45,11 +45,11 @@
 							{{/each}}
 						</div>
 
-						<a class="ability-track-editor-plus" title="{{localize 'GROUP.SPECIALABILITY.Increase'}}">
+						<a class="ability-track-editor-plus" data-tooltip="{{localize 'GROUP.SPECIALABILITY.Increase'}}">
 							<span class="fas fa-plus"></span>
 						</a>
 
-						<button class="ability-track-editor-submit" type="submit" title="{{localize 'Confirm'}}">
+						<button class="ability-track-editor-submit" type="submit" data-tooltip="{{localize 'Confirm'}}">
 							<span class="fas fa-check"></span>
 						</button>
 					</div>
@@ -60,7 +60,7 @@
 
 			<div class="middle">
 				<div class="portrait">
-					<img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="250"/>
+					<img src="{{actor.img}}" data-edit="img" data-tooltip="{{actor.name}}" height="250"/>
 				</div>
 
 				<div class="center">
@@ -70,7 +70,7 @@
 						       value="{{actor.system.specialAbilities.0.title}}"
 						       type="text"
 						       placeholder="{{localize 'GROUP.SPECIALABILITY.Title'}}"
-						       title="{{localize 'GROUP.SPECIALABILITY.Title'}}" />
+						       data-tooltip="{{localize 'GROUP.SPECIALABILITY.Title'}}" />
 
 						<div class="special-ability-description">
 							{{editor actor.system.specialAbilities.0.description
@@ -96,7 +96,7 @@
                                value="{{actor.system.specialAbilities.1.title}}"
 						       type="text"
 						       placeholder="{{localize 'GROUP.SPECIALABILITY.Title'}}"
-						       title="{{localize 'GROUP.SPECIALABILITY.Title'}}" />
+						       data-tooltip="{{localize 'GROUP.SPECIALABILITY.Title'}}" />
 
 						<div class="special-ability-description">
 							{{editor actor.system.specialAbilities.1.description
@@ -132,7 +132,7 @@
 					{{/each}}
 
 					{{#if document.isOwner}}
-						<a class="ability-track-edit" title="{{localize 'GROUP.SPECIALABILITY.Edit'}}">
+						<a class="ability-track-edit" data-tooltip="{{localize 'GROUP.SPECIALABILITY.Edit'}}">
 							<span class="fas fa-edit"></span>
 						</a>
 					{{/if}}
@@ -140,7 +140,7 @@
 
 				<div class="ability-track-editor">
 					<div>
-						<a class="ability-track-editor-minus" title="{{localize 'GROUP.SPECIALABILITY.Decrease'}}">
+						<a class="ability-track-editor-minus" data-tooltip="{{localize 'GROUP.SPECIALABILITY.Decrease'}}">
 							<span class="fas fa-minus"></span>
 						</a>
 
@@ -153,11 +153,11 @@
 							{{/each}}
 						</div>
 
-						<a class="ability-track-editor-plus" title="{{localize 'GROUP.SPECIALABILITY.Increase'}}">
+						<a class="ability-track-editor-plus" data-tooltip="{{localize 'GROUP.SPECIALABILITY.Increase'}}">
 							<span class="fas fa-plus"></span>
 						</a>
 
-						<button class="ability-track-editor-submit" type="submit" title="{{localize 'Confirm'}}">
+						<button class="ability-track-editor-submit" type="submit" data-tooltip="{{localize 'Confirm'}}">
 							<span class="fas fa-check"></span>
 						</button>
 					</div>
@@ -167,7 +167,7 @@
 			</div>
 		</section>
 
-		<section class="tab talents-tab" data-group="primary" data-tab="talents">
+		<section class="talents-tab tab" data-group="primary" data-tab="talents">
 			<div class="talent-tabs sheet-tabs" data-group="talents">
 				{{#each talentTypes as |type ty|}}
 					{{#if (lookup @root.items.talents ty)}}
@@ -176,7 +176,7 @@
 				{{/each}}
 			</div>
 
-			<div class="talents">
+			<div class="talents tab-content">
 				{{#each talentTypes as |type ty|}}
 					{{#if (lookup @root.items.talents ty)}}
 						<div class="talent-container tab {{ty}} item-container" data-group="talents" data-tab="{{ty}}">
@@ -195,7 +195,7 @@
 					{{#each actor.system.talentSockets as |type ty|}}
 						<select class="sheet-form-select talent-socket"
 						        name="system.talentSockets"
-						        title="{{localize 'GROUP.TalentSocket'}}">
+						        data-tooltip="{{localize 'GROUP.TalentSocket'}}">
 							{{selectOptions @root.talentTypes selected=type localize=true}}
 						</select>
 					{{/each}}

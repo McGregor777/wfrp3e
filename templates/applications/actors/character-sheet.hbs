@@ -62,31 +62,56 @@
 				</div>
 			</div>
 
+			<div class="skills">
+				<h3 class="character-sheet-title">{{localize "CHARACTER.Skills"}}</h3>
+
+				<div class="skill table">
+					<div class="skill table-header">
+						<span class="skill-name">{{localize "SKILL.Name"}}</span>
+
+						<span class="skill-characteristic">{{localize "SKILL.ABBREVIATION.Characteristic"}}</span>
+
+						<span class="skill-training-level">{{localize "SKILL.TrainingLevel"}}</span>
+
+						<span class="buttons"></span>
+					</div>
+
+					<div class="skill table-body">
+						{{#each items.skills as |skill sk|}}
+							{{>systems/wfrp3e/templates/partials/item-skill-row.hbs skill=skill}}
+						{{/each}}
+					</div>
+				</div>
+			</div>
+
 			<div class="attributes">
 				<div class="attributes-subdivision">
 					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
-						class="wounds"
-						title="CHARACTER.Wounds"
-						maxTitle="CHARACTER.Threshold"
-						dataPath="system.wounds"
-						max=actor.system.wounds.max
-						value=actor.system.wounds.value}}
+							class="wounds"
+							max=actor.system.wounds.max
+							maxDataPath="system.wounds.max"
+							maxTitle="CHARACTER.Threshold"
+							value=actor.system.wounds.value
+							valueDataPath="system.wounds.value"
+							title="CHARACTER.Wounds"}}
 
 					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
-						class="corruption"
-						title="CHARACTER.Corruption"
-						maxTitle="CHARACTER.Threshold"
-						dataPath="system.corruption"
-						max=actor.system.corruption.max
-						value=actor.system.corruption.value}}
+							class="corruption"
+							max=actor.system.corruption.max
+							maxDataPath="system.corruption.max"
+							maxTitle="CHARACTER.Threshold"
+							value=actor.system.corruption.value
+							valueDataPath="system.corruption.value"
+							title="CHARACTER.Corruption"}}
 
 					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
-						class="fortune"
-						title="CHARACTER.Fortune"
-						maxTitle="CHARACTER.Maximum"
-						dataPath="system.fortune"
-						max=actor.system.fortune.max
-						value=actor.system.fortune.value}}
+							class="fortune"
+							max=actor.system.fortune.max
+							maxDataPath="system.fortune.max"
+							maxTitle="CHARACTER.Maximum"
+							value=actor.system.fortune.value
+							valueDataPath="system.fortune.value"
+							title="CHARACTER.Fortune"}}
 				</div>
 
 				<div class="stance-meter">
@@ -106,30 +131,24 @@
 						{{/for}}
 					</div>
 				</div>
-			</div>
 
-			<div class="skills">
-				<h3 class="character-sheet-title">{{localize "CHARACTER.Skills"}}</h3>
+				<div class="attributes-subdivision">
+					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
+							class="favour"
+							value=actor.system.favour
+							valueDataPath="system.favour"
+							title="CHARACTER.Favour"}}
 
-				<div class="skill table">
-					<div class="skill table-header">
-						<span class="skill-name">{{localize "SKILL.Name"}}</span>
-
-						<span class="skill-characteristic">{{localize "SKILL.ABBREVIATION.Characteristic"}}</span>
-
-						<span class="skill-training-level">{{localize "SKILL.TrainingLevel"}}</span>
-
-						<span class="buttons"></span>
-					</div>
-
-					{{#each items.skills as |skill sk|}}
-						{{>systems/wfrp3e/templates/partials/item-skill-row.hbs skill=skill}}
-					{{/each}}
+					{{>systems/wfrp3e/templates/partials/attribute-partial.hbs
+							class="power"
+							value=actor.system.power
+							valueDataPath="system.corruption"
+							title="CHARACTER.Power"}}
 				</div>
 			</div>
 		</section>
 
-		<section class="tab careers-tab" data-group="primary" data-tab="careers">
+		<section class="careers-tab tab" data-group="primary" data-tab="careers">
 			<div class="character-sheet-career-tabs sheet-tabs" data-group="careers">
 				{{#each items.careers as |career|}}
 					<a class="tab-link" data-tab="{{career._id}}">
@@ -142,7 +161,7 @@
 				{{/each}}
 			</div>
 
-			<div class="character-sheet-careers">
+			<div class="character-sheet-careers tab-content">
 				{{#each items.careers as |career|}}
 					<div class="career-container tab item-container" data-group="careers" data-tab="{{career._id}}">
 						{{>systems/wfrp3e/templates/partials/item-career-partial.hbs career=career}}
@@ -151,7 +170,7 @@
 			</div>
 		</section>
 
-		<section class="tab talents-tab" data-group="primary" data-tab="talents">
+		<section class="talents-tab tab" data-group="primary" data-tab="talents">
 			<div class="character-sheet-talent-tabs sheet-tabs" data-group="talents">
 				{{#each talentTypes as |type ty|}}
 					{{#if (lookup @root.items.talents ty)}}
@@ -160,7 +179,7 @@
 				{{/each}}
 			</div>
 
-			<div class="character-sheet-talents">
+			<div class="character-sheet-talents tab-content">
 				{{#each talentTypes as |type ty|}}
 					{{#if (lookup @root.items.talents ty)}}
 						<div class="talent-container item-container tab {{ty}}" data-group="talents" data-tab="{{ty}}">
@@ -184,105 +203,10 @@
 			</div>
 		</section>
 
-		<section class="tab actions-tab" data-group="primary" data-tab="actions">
-			<div class="character-sheet-action-tabs sheet-tabs" data-group="actions">
-				{{#each actionTypes as |type ty|}}
-					{{#if (lookup @root.items.actions ty)}}
-						<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
-					{{/if}}
-				{{/each}}
-			</div>
+		{{>systems/wfrp3e/templates/partials/action-tab.hbs}}
+		{{>systems/wfrp3e/templates/partials/ability-tab.hbs}}
 
-			<div class="character-sheet-actions">
-				{{#each actionTypes as |type ty|}}
-					{{#if (lookup @root.items.actions ty)}}
-						<div class="action-container item-container tab {{ty}}" data-group="actions" data-tab="{{ty}}">
-							{{#each (lookup @root.items.actions ty) as |action act|}}
-								{{>systems/wfrp3e/templates/partials/item-action-card.hbs
-										action=action
-										currentStance=@root.actor.system.defaultStance}}
-							{{/each}}
-						</div>
-					{{/if}}
-				{{/each}}
-			</div>
-		</section>
-
-		<section class="tab abilities-tab" data-group="primary" data-tab="abilities">
-			<div class="character-sheet-ability-tabs sheet-tabs" data-group="abilities">
-				<a class="tab-link ability" data-tab="ability">{{localize "CHARACTER.Abilities"}}</a>
-
-				{{#if items.conditions}}
-					<a class="tab-link condition" data-tab="condition">{{localize "CHARACTER.Conditions"}}</a>
-				{{/if}}
-
-				{{#if items.criticalWounds}}
-					<a class="tab-link wound" data-tab="wound">{{localize "CHARACTER.CriticalWounds"}}</a>
-				{{/if}}
-
-				{{#if items.diseases}}
-					<a class="tab-link disease" data-tab="disease">{{localize "CHARACTER.Diseases"}}</a>
-				{{/if}}
-
-				{{#if items.insanities}}
-					<a class="tab-link insanity" data-tab="insanity">{{localize "CHARACTER.Insanities"}}</a>
-				{{/if}}
-
-				{{#if items.mutations}}
-					<a class="tab-link mutation" data-tab="mutation">{{localize "CHARACTER.Mutations"}}</a>
-				{{/if}}
-
-				{{#if items.miscasts}}
-					<a class="tab-link miscast" data-tab="miscast">{{localize "CHARACTER.Miscasts"}}</a>
-				{{/if}}
-			</div>
-
-			<div class="character-sheet-abilities">
-				<div class="item-container tab ability" data-group="abilities" data-tab="ability">
-					{{#each items.abilities as |ability ab|}}
-						{{>systems/wfrp3e/templates/partials/item-ability-card.hbs ability=ability}}
-					{{/each}}
-				</div>
-
-				<div class="item-container tab condition" data-group="abilities" data-tab="condition">
-					{{#each items.conditions as |condition cond|}}
-						{{>systems/wfrp3e/templates/partials/item-condition-card.hbs condition=condition}}
-					{{/each}}
-				</div>
-
-				<div class="item-container tab wound" data-group="abilities" data-tab="wound">
-					{{#each items.criticalWounds as |wound wnd|}}
-						{{>systems/wfrp3e/templates/partials/item-wound-card.hbs wound=wound}}
-					{{/each}}
-				</div>
-
-				<div class="item-container tab disease" data-group="abilities" data-tab="disease">
-					{{#each items.diseases as |disease dis|}}
-						{{>systems/wfrp3e/templates/partials/item-disease-card.hbs disease=disease}}
-					{{/each}}
-				</div>
-
-				<div class="item-container tab insanity" data-group="abilities" data-tab="insanity">
-					{{#each items.insanities as |insanity ins|}}
-						{{>systems/wfrp3e/templates/partials/item-insanity-card.hbs insanity=insanity}}
-					{{/each}}
-				</div>
-
-				<div class="item-container tab mutation" data-group="abilities" data-tab="mutation">
-					{{#each items.mutations as |mutation mut|}}
-						{{>systems/wfrp3e/templates/partials/item-mutation-card.hbs mutation=mutation}}
-					{{/each}}
-				</div>
-
-				<div class="item-container tab miscast" data-group="abilities" data-tab="miscast">
-					{{#each items.miscasts as |miscast mis|}}
-						{{>systems/wfrp3e/templates/partials/item-miscast-card.hbs miscast=miscast}}
-					{{/each}}
-				</div>
-			</div>
-		</section>
-
-		<section class="tab trappings-tab" data-group="primary" data-tab="trappings">
+		<section class="trappings-tab tab" data-group="primary" data-tab="trappings">
 			<div class="weapon table">
 				<div class="weapon table-header title">{{localize "CHARACTER.Weapons"}}</div>
 
