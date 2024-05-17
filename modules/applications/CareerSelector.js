@@ -1,13 +1,9 @@
 /** @inheritDoc */
 export default class CareerSelector extends FormApplication
 {
-	/**
-	 * @param {WFRP3eActor} object
-	 * @param {WFRP3eItem} career
-	 */
-	constructor(object, career)
+	constructor(object, career, options = {})
 	{
-		super(object);
+		super(object, options);
 
 		this.career = career;
 	}

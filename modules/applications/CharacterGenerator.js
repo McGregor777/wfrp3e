@@ -3,12 +3,9 @@ import WFRP3eActor from "../documents/WFRP3eActor.js";
 /** @inheritDoc */
 export default class CharacterGenerator extends FormApplication
 {
-	/**
-	 * @param {WFRP3eActor} [object]
-	 */
-	constructor(object = {})
+	constructor(object = {}, options = {})
 	{
-		super(object);
+		super(object, options);
 
 		this.object = this.object instanceof WFRP3eActor ? object : new WFRP3eActor({
 			name: "New Character",
