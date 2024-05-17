@@ -51,7 +51,6 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 		super.prepareBaseData();
 
 		this._prepareEffectDescriptions();
-		this._migrateActionType();
 	}
 
 	/**
@@ -98,11 +97,5 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 		});
 
 		this.updateSource(changes);
-	}
-
-	_migrateActionType()
-	{
-		if(!this.type)
-			this.updateSource({type: this.conservative.type});
 	}
 }

@@ -8,36 +8,6 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 		const requiredInteger = {required: true, nullable: false, integer: true};
 
 		return {
-			attributes: new fields.SchemaField({
-				characteristics: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
-					if(characteristic !== "varies")
-						object[characteristic] = new fields.SchemaField({
-							value: new fields.NumberField({...requiredInteger, initial: 2, min: 0}),
-							fortune: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
-						}, {label: characteristic});
-
-					return object;
-				}, {})),
-				corruption: new fields.SchemaField({
-					threshold: new fields.NumberField({...requiredInteger, initial: 5, min: 0}),
-					value: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
-				}),
-				fortune: new fields.SchemaField({
-					maximum: new fields.NumberField({...requiredInteger, initial: 3, min: 0}),
-					value: new fields.NumberField({...requiredInteger, initial: 3, min: 0})
-				}),
-				stance: new fields.SchemaField({
-					...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
-						object[stance] = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
-						return object;
-					}, {}),
-					current: new fields.NumberField({...requiredInteger, initial: 0})
-				}),
-				wounds: new fields.SchemaField({
-					threshold: new fields.NumberField({...requiredInteger, initial: 7, min: 0}),
-					value: new fields.NumberField({...requiredInteger, initial: 7, min: 0})
-				})
-			}),
 			background: new fields.SchemaField({
 				biography: new fields.HTMLField(),
 				height: new fields.StringField(),
@@ -55,7 +25,6 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 			characteristics: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
 				if(characteristic !== "varies")
 					object[characteristic] = new fields.SchemaField({
-						value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 						rating: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 						fortune: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 					}, {label: characteristic});
@@ -110,50 +79,6 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 		this._prepareRank();
 		this._prepareStanceMeter();
 		this._prepareDefaultStance();
-	}
-
-	/** @inheritDoc */
-	static migrateData(source)
-	{
-		Object.keys(CONFIG.WFRP3e.characteristics).forEach((characteristic) => {
-			if(!source.characteristics[characteristic].value)
-				source.characteristics[characteristic].value = source.attributes.characteristics[characteristic].value;
-
-			if(!source.characteristics[characteristic].fortune)
-				source.characteristics[characteristic].fortune = source.attributes.characteristics[characteristic].fortune;
-
-			if(!source.characteristics[characteristic].rating)
-				source.characteristics[characteristic].rating = source.characteristics[characteristic].value;
-		});
-
-		if(!source.corruption.max)
-			source.corruption.max = source.attributes.corruption.threshold;
-
-		if(!source.corruption.value)
-			source.corruption.value = source.attributes.corruption.value;
-
-		if(!source.fortune.max)
-			source.fortune.max = source.attributes.fortune.maximum;
-
-		if(!source.fortune.value)
-			source.fortune.value = source.attributes.fortune.value;
-
-		if(!source.stance.conservative)
-			source.stance.conservative = source.attributes.stance.conservative;
-
-		if(!source.stance.reckless)
-			source.stance.reckless = source.attributes.stance.reckless;
-
-		if(!source.stance.current)
-			source.stance.current = source.attributes.stance.current;
-
-		if(!source.wounds.max)
-			source.wounds.max = source.attributes.wounds.threshold;
-
-		if(!source.wounds.value)
-			source.wounds.value = source.attributes.wounds.value;
-
-		return super.migrateData(source);
 	}
 
 	/**

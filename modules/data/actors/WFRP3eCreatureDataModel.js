@@ -11,8 +11,6 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 		return {
 			attributes: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.attributes).reduce((object, attribute) => {
 				object[attribute] = new fields.SchemaField({
-					budget: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
-					current: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 					max: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 					value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 				}, {label: attribute});
@@ -22,7 +20,6 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 			characteristics: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
 				if(characteristic !== "varies")
 					object[characteristic] = new fields.SchemaField({
-						value: new fields.NumberField({initial: 2, integer: true, min: 0, nullable: false, required: true}),
 						rating: new fields.NumberField({initial: 2, integer: true, min: 0, nullable: false, required: true}),
 						fortune: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 					}, {label: characteristic});
@@ -53,24 +50,6 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 
 		if(this.specialRuleSummary)
 			this._prepareSpecialRuleSummary();
-	}
-
-	/** @inheritDoc */
-	static migrateData(source)
-	{
-		Object.keys(CONFIG.WFRP3e.characteristics).forEach((characteristic) => {
-			if(!source.characteristics[characteristic].rating)
-				source.characteristics[characteristic].rating = source.characteristics[characteristic].value;
-		});
-
-		Object.keys(CONFIG.WFRP3e.attributes).forEach((attribute) => {
-			if(!source.attributes[attribute].max)
-				source.attributes[attribute].max = source.attributes[attribute].budget;
-			if(!source.attributes[attribute].value)
-				source.attributes[attribute].value = source.attributes[attribute].current;
-		});
-
-		return super.migrateData(source);
 	}
 
 	/**

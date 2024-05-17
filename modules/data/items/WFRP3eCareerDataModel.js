@@ -94,32 +94,4 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 		if(cleanedUpDescription)
 			this.updateSource({description: cleanedUpDescription});
 	}
-
-	/** @inheritDoc */
-	static migrateData(source)
-	{
-		if(!(source.raceRestrictions instanceof Array)) {
-			const raceRestrictions = source.raceRestrictions.replaceAll(" ", "").toLowerCase();
-
-			if(raceRestrictions.includes("any"))
-				source.raceRestrictions = ["any"];
-			else {
-				source.raceRestrictions = [];
-
-				if(raceRestrictions.includes("human"))
-					source.raceRestrictions.push("human");
-
-				if(raceRestrictions.includes("dwarf"))
-					source.raceRestrictions.push("dwarf");
-
-				if(raceRestrictions.includes("highelf"))
-					source.raceRestrictions.push("highElf");
-
-				if(raceRestrictions.includes("woodelf"))
-					source.raceRestrictions.push("woodElf");
-			}
-		}
-
-		return super.migrateData(source);
-	}
 }
