@@ -10,7 +10,11 @@
   "system": {
     "description": "<p>The cities of the Empire are centres of learning in the Old World, home to many universities. Some teach a broad range of subjects, from philosophy and the sciences to languages and the arts. Others dedicate themselves to a single subject, such as the Imperial College of Engineers in Altdorf.</p>\n<p>To study at a university requires money for fees and board, and most students are from wealthy families. Many are members of the nobility, though each year more merchants and burghers pay for their sons to receive an education. A very few students are from poorer backgrounds; either their parents made significant sacrifices for them to attend university or they have shown enough potential to impress a benefactor into providing them with a scholarship.</p>\n<p>Dedicated students with enthusiasm for their subject find the resources and guidance at universities to become experts in their field. Other students show little interest in learning, and use university life as an opportunity to socialise and indulge in excesses of alcohol. These hedonists look down on the studious, just as serious students bewail them for wasting their opportunities. High elf and dwarf students sometimes visit the universities, but generally prefer their own lore masters. High elves who visit the Empire&rsquo;s universities typically remark that the knowledge they contain is trifling in comparison to that found in the famed White Tower of Hoeth, the greatest seat of learning in the world.</p>\n<p>Some students find university life stifling or tedious. Such individuals sometimes take up a life of adventure, justifying it to themselves by vowing to be on the lookout for any hidden lore or fresh ideas. Others relish the opportunity to travel abroad, gaining valuable experience that they can apply to their studies.</p>\n<p><strong>Typical Trappings:</strong> A student usually carries a couple of well-thumbed books expounding on their chosen subject in dry detail. He might also carry quills, ink, an inkhorn, and a dozen sheets of parchment for notes and dissertations.</p>\n<p><strong>Career Ability:</strong> Once per session, you may add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to any Education or Folklore check</p>",
     "advanced": false,
-    "raceRestrictions": ["human", "dwarf", "highElf"],
+    "raceRestrictions": [
+      "human",
+      "dwarf",
+      "highElf"
+    ],
     "traits": "Academic, Basic, Social, Urban",
     "talentSockets": [
       "focus",
