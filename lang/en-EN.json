@@ -366,6 +366,7 @@
 	"RACE.Human": "Human",
 	"RACE.WoodElf": "Wood Elf",
 
+	"ROLL.ApplyToggled Effects": "Apply Toggled Effects",
 	"ROLL.DicePoolBuilder": "Dice Pool Builder",
 	"ROLL.ActionCheckBuilder": "{action} Check Builder",
 	"ROLL.CharacteristicCheckBuilder": "{characteristic} Check Builder",

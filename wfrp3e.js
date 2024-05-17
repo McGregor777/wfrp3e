@@ -177,7 +177,7 @@ Hooks.once("init", () => {
 
 Hooks.on("getChatLogEntryContext", (html, options) => {
 	options.push({
-			name: "Apply Toggled Effects",
+			name: game.i18n.localize("ROLL.ApplyToggled Effects"),
 			icon: '<i class="fas fa-swords"></i>',
 			condition: li => {
 				const message = game.messages.get(li.attr("data-message-id"));

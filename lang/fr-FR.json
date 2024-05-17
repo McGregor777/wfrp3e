@@ -366,6 +366,7 @@
 	"RACE.Human": "Humain",
 	"RACE.WoodElf": "Elfe Sylvain",
 
+	"ROLL.ApplyToggled Effects": "Appliquer les effets activés",
 	"ROLL.DicePoolBuilder": "Préparateur de réserve de dés",
 	"ROLL.ActionCheckBuilder": "Préparateur du test de {action}",
 	"ROLL.CharacteristicCheckBuilder": "Préparateur du test de {characteristic}",
