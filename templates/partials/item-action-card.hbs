@@ -64,17 +64,17 @@
 					</table>
 
 					<div class="action-card-bottom-line">
-						<a class="flip-link" title="{{localize "Flip Card"}}">
+						<a class="flip-link" data-tooltip="{{localize "Flip Card"}}">
 							<span class="fas fa-undo"></span>
 						</a>
 
 						{{#if @root.document.isOwner}}
-							<a class="recharge-token" title="{{localize "ACTION.RechargeTokens"}}">
+							<a class="recharge-token" data-tooltip="{{localize "ACTION.RechargeTokens"}}">
 								<img src="systems/wfrp3e/assets/images/token-black.webp" alt="{{localize "ACTION.RechargeTokens"}}" />
 								<span class="recharge-token-counter">{{../../action.system.rechargeTokens}}</span>
 							</a>
 
-							<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
+							<a class="item-delete-link" data-tooltip="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
 								<span class="fas fa-trash"></span>
 							</a>
 						{{/if}}

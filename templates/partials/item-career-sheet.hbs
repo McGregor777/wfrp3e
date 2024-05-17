@@ -121,7 +121,7 @@
 	</div>
 
 	<div class="bottom-line">
-		<a class="flip-link" title="{{localize 'Flip sheet'}}"><span class="fas fa-undo"></span></a>
+		<a class="flip-link" data-tooltip="{{localize 'Flip sheet'}}"><span class="fas fa-undo"></span></a>
 
         {{#if @root.document.isOwner}}
             <label class="current-career-div">
@@ -133,7 +133,7 @@
                     {{#if career.system.current}} checked{{/if}} />
             </label>
 
-            <a class="item-delete-link sheet-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
+            <a class="item-delete-link sheet-delete-link" data-tooltip="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
                 <span class="fas fa-trash"></span>
             </a>
         {{/if}}

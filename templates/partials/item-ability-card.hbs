@@ -3,13 +3,13 @@
 	<div class="ability-card-description">{{{ability.system.description}}}</div>
 
     <div class="ability-card-bottom">
-        <a class="recharge-token" title="{{localize "ABILITY.RechargeTokens"}}">
+        <a class="recharge-token" data-tooltip="{{localize "ABILITY.RechargeTokens"}}">
             <img src="systems/wfrp3e/assets/images/token-grey.webp" alt="{{localize "ABILITY.RechargeTokens"}}" />
             <span class="recharge-token-counter">{{{talent.system.rechargeTokens}}}</span>
         </a>
 
         {{#if @root.document.isOwner}}
-            <a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
+            <a class="item-delete-link" data-tooltip="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
                 <span class="fas fa-trash"></span>
             </a>
         {{/if}}

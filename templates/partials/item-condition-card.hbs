@@ -7,7 +7,7 @@
 		<div class="condition-card-description">{{{condition.system.description}}}</div>
 
 		{{#>if @root.document.isOwner}}
-			<a class="item-delete-link" title="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
+			<a class="item-delete-link" data-tooltip="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
 				<span class="fas fa-trash"></span>
 			</a>
 		{{/if}}

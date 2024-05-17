@@ -3,12 +3,12 @@
 		<input name="system.specialAbilities.{{specialAbilityIndex}}.values.{{index}}.content"
 		       value="{{value.content}}"
 		       type="text"
-		       title="{{localize 'GROUP.SPECIALABILITY.Content'}}" />
+		       data-tooltip="{{localize 'GROUP.SPECIALABILITY.Content'}}" />
 	</label>
 
 	<input class="ability-track-editor-trigger"
 	       name="system.specialAbilities.{{specialAbilityIndex}}.values.{{index}}.trigger"
 	       type="checkbox"
-	       title="{{localize 'GROUP.SPECIALABILITY.Trigger'}}"
+	       data-tooltip="{{localize 'GROUP.SPECIALABILITY.Trigger'}}"
 		{{#if value.trigger}} checked{{/if}} />
 </div>
