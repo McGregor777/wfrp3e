@@ -157,9 +157,9 @@ export default class CharacterGenerator extends FormApplication
 			});
 		}
 
-		this.talents = talents.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
-		this.insanities = insanities.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
-		this.actions = actions.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		this.talents = talents.sort((a, b) => a.name.localeCompare(b.name));
+		this.insanities = insanities.sort((a, b) => a.name.localeCompare(b.name));
+		this.actions = actions.sort((a, b) => a.name.localeCompare(b.name));
 	}
 
 	_onNextButtonClick(html, event)
@@ -309,7 +309,7 @@ export default class CharacterGenerator extends FormApplication
 			});
 		} while(drawnCareers.size < 3);
 
-		this.drawnCareers = [...drawnCareers.values()].sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		this.drawnCareers = [...drawnCareers.values()].sort((a, b) => a.name.localeCompare(b.name));
 
 		this.selectedCareer = this.drawnCareers[0];
 
@@ -464,7 +464,7 @@ export default class CharacterGenerator extends FormApplication
 		this.careerSkills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill"}).then(skills => {
 			return skills
 				.filter(skill => this.selectedCareer.system.careerSkills.includes(skill.name))
-				.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+				.sort((a, b) => a.name.localeCompare(b.name));
 		});
 
 		// If a skill has been trained for free, add it to the list of Career Skills.

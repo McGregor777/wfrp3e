@@ -29,17 +29,17 @@
 	</header>
 
 	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
-		<a class="tab-link characteristics-tab-link" data-tab="characteristics">{{localize "CHARACTER.Attributes"}}</a>
-		<a class="tab-link careers-tab-link" data-tab="careers">{{localize "CHARACTER.Careers"}}</a>
-		<a class="tab-link talents-tab-link" data-tab="talents">{{localize "CHARACTER.Talents"}}</a>
-		<a class="tab-link actions-tab-link" data-tab="actions">{{localize "CHARACTER.Actions"}}</a>
-		<a class="tab-link abilities-tab-link" data-tab="abilities">{{localize "CHARACTER.Abilities"}}</a>
-		<a class="tab-link trappings-tab-link" data-tab="trappings">{{localize "CHARACTER.Trappings"}}</a>
-		<a class="tab-link background-tab-link" data-tab="background">{{localize "CHARACTER.Background"}}</a>
+		<a class="characteristics-tab-link tab-link" data-tab="characteristics">{{localize "CHARACTER.Attributes"}}</a>
+		<a class="careers-tab-link tab-link" data-tab="careers">{{localize "CHARACTER.Careers"}}</a>
+		<a class="talents-tab-link tab-link" data-tab="talents">{{localize "CHARACTER.Talents"}}</a>
+		<a class="actions-tab-link tab-link" data-tab="actions">{{localize "CHARACTER.Actions"}}</a>
+		<a class="abilities-tab-link tab-link" data-tab="abilities">{{localize "CHARACTER.Abilities"}}</a>
+		<a class="trappings-tab-link tab-link" data-tab="trappings">{{localize "CHARACTER.Trappings"}}</a>
+		<a class="background-tab-link tab-link" data-tab="background">{{localize "CHARACTER.Background"}}</a>
 	</nav>
 
 	<div class="character-sheet-body sheet-body">
-		<section class="tab characteristics-tab" data-group="primary" data-tab="characteristics">
+		<section class="characteristics-tab tab" data-group="primary" data-tab="characteristics">
 			<div class="characteristics-and-impairments">
 				<h3 class="character-sheet-title">{{localize "CHARACTER.Characteristics"}}</h3>
 
@@ -115,7 +115,25 @@
 				</div>
 
 				<div class="stance-meter">
-					<h3 class="character-sheet-title">{{localize "CHARACTER.Stances"}}</h3>
+					<h3 class="character-sheet-title">
+						<a class="stance-meter-segment stance-meter-link"
+						   data-stance="conservative"
+						   data-tooltip="{{localize 'CHARACTER.SHEET.AddRemoveConservativeSegment'}}">
+							<img class="stance-conservative"
+							     src="systems/wfrp3e/assets/images/stance-conservative.webp"
+							     height="27" />
+						</a>
+
+						{{localize "CHARACTER.Stances"}}
+
+						<a class="stance-meter-segment stance-meter-link"
+						   data-stance="reckless"
+						   data-tooltip="{{localize 'CHARACTER.SHEET.AddRemoveRecklessSegment'}}">
+							<img class="stance-conservative"
+							     src="systems/wfrp3e/assets/images/stance-reckless.webp"
+							     height="27" />
+						</a>
+					</h3>
 
 					<div class="stance-meter-segments">
 						{{#for actor.system.stanceMeter.conservative (increment actor.system.stanceMeter.reckless 1) 1}}

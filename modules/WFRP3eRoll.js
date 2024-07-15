@@ -242,7 +242,7 @@ export default class WFRP3eRoll extends Roll
 					? game.actors.get(checkData.actor.actorId)
 					: game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor;
 
-			mergeObject(chatData, {
+			foundry.utils.mergeObject(chatData, {
 				action: checkData.action,
 				actorName: actor.token ? actor.token.name : actor.prototypeToken.name,
 				face: checkData.face,
@@ -277,7 +277,7 @@ export default class WFRP3eRoll extends Roll
 	/** @inheritDoc */
 	toJSON()
 	{
-		return mergeObject(super.toJSON(), {
+		return foundry.utils.mergeObject(super.toJSON(), {
 			effects: this.effects,
 			hasSpecialDice: this.hasSpecialDice,
 			hasStandardDice: this.hasStandardDice,
@@ -289,7 +289,7 @@ export default class WFRP3eRoll extends Roll
 	/** @inheritDoc */
 	static fromData(data)
 	{
-		return mergeObject(super.fromData(data), {
+		return foundry.utils.mergeObject(super.fromData(data), {
 			effects: data.effects,
 			hasSpecialDice: data.hasSpecialDice,
 			hasStandardDice: data.hasStandardDice,

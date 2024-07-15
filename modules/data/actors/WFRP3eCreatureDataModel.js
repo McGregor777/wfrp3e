@@ -46,6 +46,7 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 	{
 		super.prepareBaseData();
 
+		this._prepareDefence();
 		this._prepareDefaultStance();
 
 		if(this.specialRuleSummary)
@@ -62,6 +63,16 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 
 		if(cleanedUpDescription)
 			this.updateSource({specialRuleSummary: cleanedUpDescription});
+	}
+
+	/**
+	 * Prepares the total defence of the WFRP3eCharacter.
+	 * @private
+	 */
+	_prepareDefence()
+	{
+		const armourValue = this.parent.itemTypes.armour.reduce((totalDefence, armour) => totalDefence + armour.system.defenceValue, 0);
+		this.totalDefence = armourValue > 0 ? armourValue : this.defenceValue;
 	}
 
 	/**

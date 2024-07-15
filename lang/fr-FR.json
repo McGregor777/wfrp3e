@@ -158,6 +158,9 @@
 	"CHARACTER.IMPAIRMENT.Stress": "Stress",
 	"CHARACTER.IMPAIRMENT.FatigueTokens": "Jetons de Fatigue",
 	"CHARACTER.IMPAIRMENT.StressTokens": "Jetons de Stress",
+	"CHARACTER.SHEET.AddRemoveConservativeSegment": "Ajouter/retirer un segment de prudence",
+	"CHARACTER.SHEET.AddRemoveRecklessSegment": "Ajouter/retirer un segment de témérité",
+	"CHARACTER.SHEET.MinimumSegmentWarning": "Vous ne pouvez pas retirer davantage de segments.",
 	"CHARACTER.SHEET.NoExperienceLeft": "Vous n'avez pas d'expérience à dépenser.",
 
 	"CHARACTERGENERATOR.Actions": "Cartes d'action",

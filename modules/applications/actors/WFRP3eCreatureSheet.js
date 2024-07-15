@@ -69,7 +69,7 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	_buildItemLists(items)
 	{
 		const basicTrait = game.i18n.localize("ACTION.TRAITS.Basic");
-		const sortedItems = items.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name));
 		const actions = sortedItems.filter(item => item.type === "action").sort((a, b) => {
 			if(a.system.conservative.traits.includes(basicTrait) && !b.system.conservative.traits.includes(basicTrait))
 				return -1;
@@ -177,11 +177,11 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onItemDelete(event)
+	async _onItemDelete(event)
 	{
 		const item = this._getItemById(event);
 
-		new Dialog({
+		await new Dialog({
 			title: game.i18n.localize("APPLICATION.TITLE.DeleteItem"),
 			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: item.name}) + "</p>",
 			buttons: {

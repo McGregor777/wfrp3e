@@ -4,13 +4,13 @@ export default class WFRP3eCombatTracker extends CombatTracker
 	/** @inheritdoc */
 	static get defaultOptions()
 	{
-		return mergeObject(super.defaultOptions, {template: "systems/wfrp3e/templates/applications/sidebar/combat-tracker.hbs"});
+		return foundry.utils.mergeObject(super.defaultOptions, {template: "systems/wfrp3e/templates/applications/sidebar/combat-tracker.hbs"});
 	}
 
 	/** @inheritdoc */
 	async getData(options = {})
 	{
-		return mergeObject(await super.getData(options), {encounterTypes: CONFIG.WFRP3e.encounterTypes});
+		return foundry.utils.mergeObject(await super.getData(options), {encounterTypes: CONFIG.WFRP3e.encounterTypes});
 	}
 
 	/** @inheritdoc */

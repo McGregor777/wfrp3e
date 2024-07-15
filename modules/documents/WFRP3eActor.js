@@ -53,12 +53,26 @@ export default class WFRP3eActor extends Actor
 	}
 
 	/**
-	 * Buys a new Advance for the WFRP3eCharacter.
-	 * @param {WFRP3eItem} career The Career containg the new Advance.
+	 * Adds or removes a specified amount of segments on either side on the stance meter.
+	 */
+	adjustStanceMeter(stance, amount)
+	{
+		if(this.system.stance[stance] + amount < 0)
+			ui.notifications.warn(game.i18n.localize("CHARACTER.SHEET.MinimumSegmentWarning"));
+
+		this.update({system: {stance: {[`${stance}`]: this.system.stance[stance] + amount}}});
+	}
+
+	/**
+	 * Buys a new advance on a specific Career for the WFRP3eCharacter.
+	 * @param {WFRP3eItem} career The Career containing the new Advance.
 	 * @param {String} type The type of the new Advance.
 	 */
 	async buyAdvance(career, type)
 	{
+		if(this.system.experience.current > 0)
+			ui.notifications.warn(game.i18n.localize("CHARACTER.SHEET.NoExperienceLeft"));
+
 		switch(type) {
 			case "action":
 				await new ActionSelector(this, career).render(true);
@@ -170,6 +184,28 @@ export default class WFRP3eActor extends Actor
 				}, {classes: ["new-career-advance-selection"]}).render(true);
 				break;
 		}
+	}
+
+	removeAdvance(career, type)
+	{
+		const updates = {system: {advances: career.system.advances}};
+
+		if(isNaN(type))
+			updates.system.advances[type] = "";
+		else
+			updates.system.advances.open[type] = "";
+
+		career.update(updates);
+	}
+
+	/**
+	 * Changes the WFRP3eActor's current Career.
+	 * @param career {WFRP3eItem} The new current Career.
+	 * @see {WFRP3eItem._onCareerUpdate}  Performs follow-up
+	 */
+	changeCurrentCareer(career)
+	{
+		career.update({"system.current": true});
 	}
 
 	/**

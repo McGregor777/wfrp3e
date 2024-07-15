@@ -87,7 +87,7 @@ export default class TrainingSelector extends FormApplication
 				.filter(skill => this.nonCareer
 					? !this.career.system.careerSkills.includes(skill.name)
 					: this.career.system.careerSkills.includes(skill.name))
-				.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+				.sort((a, b) => a.name.localeCompare(b.name));
 		});
 
 		for(let i = 0; i < careerSkills.length; i++)

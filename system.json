@@ -3,9 +3,9 @@
 	"description": "<p>A game system for <em><strong>Warhammer Fantasy Roleplay - 3rd Edition</strong></em> in the Foundry Virtual Tabletop environment.</p>",
 	"version": "#{VERSION}#",
 	"compatibility": {
-		"minimum": "11",
-		"verified": "11.315",
-		"maximum": "11"
+		"minimum": "12",
+		"verified": "12.328",
+		"maximum": "12"
 	},
 	"authors": [{
 		"name": "Grégory Soupé",

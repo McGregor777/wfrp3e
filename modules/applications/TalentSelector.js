@@ -82,7 +82,7 @@ export default class TalentSelector extends FormApplication
 			});
 		}
 
-		this.allTalents = talents.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		this.allTalents = talents.sort((a, b) => a.name.localeCompare(b.name));
 
 		talents = Object.keys(CONFIG.WFRP3e.talentTypes).reduce((sortedTalents, talentType) => {
 			if(["focus", "reputation", "tactic", "tricks"].includes(talentType)

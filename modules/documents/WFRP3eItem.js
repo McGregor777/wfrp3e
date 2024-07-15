@@ -8,10 +8,119 @@ export default class WFRP3eItem extends Item
 	{
 		super.prepareData();
 
-		const functionName = `_prepare${capitalize(this.type)}`;
+		try {
+			const functionName = `_prepare${capitalize(this.type)}`;
+
+			if(this[functionName])
+				this[functionName]();
+		}
+		catch(error) {
+			console.error(`Something went wrong when updating the Item ${this.name} of type ${this.type}: ${error}`);
+		}
+	}
+
+	/** @inheritDoc */
+	_onUpdate(changed, options, userId)
+	{
+		super._onUpdate(changed, options, userId);
+
+		try {
+			const functionName = `_on${capitalize(this.type)}Update`;
+
+			if(this[functionName])
+				this[functionName](changed, options, userId);
+		}
+		catch(exception) {
+			console.error(`Something went wrong when updating the Item ${this.name} of type ${this.type}: ${exception}`);
+		}
+	}
+
+	/**
+	 * Performs follow-up operations after a Career is updated. Post-update operations occur for all clients after the update is broadcast.
+	 * @param changed {any} The differential data that was changed relative to the documents prior values
+	 * @param options {any} Additional options which modify the update request
+	 * @param userId {string} The id of the User requesting the document update
+	 * @private
+	 */
+	_onCareerUpdate(changed, options, userId)
+	{
+		if(changed.system?.current)
+			this._onCurrentCareerChange();
+
+		if(changed.system?.talentSockets)
+			this._onCareerTalentSocketsChange();
+	}
+
+	/**
+	 * Performs follow-up operations after a Character's current Career has changed.
+	 * @private
+	 */
+	_onCurrentCareerChange()
+	{
+		if(this.actor) {
+			this.actor.itemTypes.career.filter(career => career !== this).forEach((otherCareer, index) => {
+				otherCareer.update({"system.current": false});
+			});
+			this.actor.resetTalentsSocket("career");
+		}
+	}
+
+	/**
+	 * Performs follow-up operations after a Career's Talent sockets change.
+	 * @private
+	 */
+	_onCareerTalentSocketsChange()
+	{
+		this.actor?.resetTalentsSocket("career");
+	}
+
+	/**
+	 * Performs follow-up operations after a Talent is updated. Post-update operations occur for all clients after the update is broadcast.
+	 * @param changed {any} The differential data that was changed relative to the documents prior values
+	 * @param options {any} Additional options which modify the update request
+	 * @param userId {string} The id of the User requesting the document update
+	 * @private
+	 */
+	_onTalentUpdate(changed, options, userId)
+	{
+		if(changed.system?.talentSocket)
+			this._onTalentSocketChange(changed.system.talentSocket);
+	}
+
+	/* Common WFRP3eItem methods */
+
+	/**
+	 * Fetches the details of the WFRP3eItem, depending on its type.
+	 * @returns {*}
+	 */
+	getDetails()
+	{
+		const functionName = `_get${capitalize(this.type)}Details`;
 
 		if(this[`${functionName}`])
-			this[`${functionName}`]();
+			return this[`${functionName}`]();
+		else
+			return this.system.description;
+	}
+
+	/**
+	 * Fetches the details of the Skill.
+	 * @returns {String}
+	 * @private
+	 */
+	_getSkillDetails()
+	{
+		return game.i18n.format("SKILL.SpecialisationList", {specialisations: this.system.specialisations ?? ""});
+	}
+
+	/**
+	 * Fetches the details of the Weapon.
+	 * @returns {String}
+	 * @private
+	 */
+	_getWeaponDetails()
+	{
+		return this.system.description.concat(this.system.special);
 	}
 
 	/**
@@ -29,6 +138,7 @@ export default class WFRP3eItem extends Item
 	}
 
 	/**
+	 * Makes usage of the Action.
 	 * @param {Object} [options]
 	 * @returns {Promise<void>}
 	 * @private
@@ -78,6 +188,7 @@ export default class WFRP3eItem extends Item
 	}
 
 	/**
+	 * Makes usage of the Skill.
 	 * @param {Object} [options]
 	 * @returns {Promise<void>}
 	 * @private
@@ -88,6 +199,7 @@ export default class WFRP3eItem extends Item
 	}
 
 	/**
+	 * Makes usage of the Weapon.
 	 * @param {Object} [options]
 	 * @returns {Promise<void>}
 	 * @private
@@ -110,38 +222,7 @@ export default class WFRP3eItem extends Item
 		await CheckHelper.prepareActionCheck(this.actor, action, this.actor.getCurrentStanceName(), {weapon: this});
 	}
 
-	/**
-	 * Fetches the details of the WFRP3eItem, depending on its type.
-	 * @returns {*}
-	 */
-	getDetails()
-	{
-		const functionName = `_get${capitalize(this.type)}Details`;
-
-		if(this[`${functionName}`])
-			return this[`${functionName}`]();
-		else
-			return this.system.description;
-	}
-
-	_getSkillDetails()
-	{
-		return game.i18n.format("SKILL.SpecialisationList", {specialisations: this.system.specialisations ?? ""});
-	}
-
-	_getWeaponDetails()
-	{
-		return this.system.description.concat(this.system.special);
-	}
-
-	/**
-	 * Adds recharge tokens to an Action equal to its recharge rating.
-	 * @param {string} face
-	 */
-	exhaustAction(face)
-	{
-		this.update({"system.rechargeTokens": this.system[face].rechargeRating});
-	}
+	/* Action methods */
 
 	/**
 	 * Adds a new effect to the Action.
@@ -181,93 +262,15 @@ export default class WFRP3eItem extends Item
 	}
 
 	/**
-	 * Prepare Action's data.
-	 * @private
+	 * Adds recharge tokens to an Action equal to its recharge rating.
+	 * @param {string} face The Action face used to determine the recharge rating.
 	 */
-	_prepareAction() {}
-
-	/**
-	 * Prepare Armour's data.
-	 * @private
-	 */
-	_prepareArmour() {}
-
-	/**
-	 * Prepare Career's data.
-	 * @private
-	 */
-	_prepareCareer() {}
-
-	/**
-	 * Prepare CriticalWound's data.
-	 * @private
-	 */
-	_prepareCriticalWound() {}
-
-	/**
-	 * Prepare Disease's data.
-	 * @private
-	 */
-	_prepareDisease() {}
-
-	/**
-	 * Prepare Skill's data.
-	 * @private
-	 */
-	_prepareSkill() {}
-
-	/**
-	 * Prepare Talent's data.
-	 * @private
-	 */
-	_prepareTalent() {}
-
-	/**
-	 * Prepare Weapon's data.
-	 * @private
-	 */
-	_prepareWeapon()
+	exhaustAction(face)
 	{
-		if(!(this.system.qualities instanceof Array))
-			this._convertQualitiesToArray();
+		this.update({"system.rechargeTokens": this.system[face].rechargeRating});
 	}
 
-	/**
-	/**
-	 * Adds a new Quality to the Weapon's list of Qualities.
-	 */
-	addNewQuality()
-	{
-		const qualities = this.system.qualities;
-
-		qualities.push({
-			name: "attuned",
-			rating: 1
-		});
-
-		this.update({"system.qualities": qualities});
-	}
-
-	/**
-	 * Removes the last Quality from the Weapon's list of Qualities.
-	 */
-	removeLastQuality()
-	{
-		const qualities = this.system.qualities;
-
-		qualities.pop();
-
-		this.update({"system.qualities": qualities});
-	}
-
-	/**
-	 * Converts the Item's Qualities to Array.
-	 * @private
-	 */
-	_convertQualitiesToArray()
-	{
-		this.update({"system.qualities": Object.values(this.system.qualities)});
-	}
+	/* Career methods */
 
 	/**
 	 * Adds a new Race restriction to the Career's list of Race restrictions.
@@ -317,84 +320,55 @@ export default class WFRP3eItem extends Item
 		this.update({"system.talentSockets": talentSockets});
 	}
 
-	/** @inheritDoc */
-	_onUpdate(changed, options, userId)
+	/* Talent methods */
+
+	/**
+	 * Performs follow-up operations after a Talent's socket has changed.
+	 * @param newTalentSocket {string} The new socket used by the Talent.
+	 * @private
+	 */
+	_onTalentSocketChange(newTalentSocket)
 	{
-		super._onUpdate(changed, options, userId);
+		this.actor?.checkForDuplicateTalentSockets(newTalentSocket);
+	}
 
-		try {
-			const functionName = `_on${capitalize(this.type)}Update`;
+	/* Trapping methods */
 
-			if(this[`${functionName}`])
-				this[`${functionName}`](changed, options, userId);
-		}
-		catch(exception) {
-			console.error(`Something went wrong when updating the Item ${this.name} of type ${this.type}: ${exception}`);
-		}
+	/**
+	 * Changes the quantity of the Trapping.
+	 * @param increment {Number} The amount of quantity to add (or remove if negative).
+	 */
+	changeQuantity(increment)
+	{
+		this.update({"system.quantity": this.system.quantity + increment});
+	}
+
+	/* Weapon methods */
+
+	/**
+	 * Adds a new quality to the Weapon's list of qualities.
+	 */
+	addNewQuality()
+	{
+		const qualities = this.system.qualities;
+
+		qualities.push({
+			name: "attuned",
+			rating: 1
+		});
+
+		this.update({"system.qualities": qualities});
 	}
 
 	/**
-	 * Perform follow-up operations after a Career is updated. Post-update operations occur for all clients after the update is broadcast.
-	 * @param changed {any} The differential data that was changed relative to the documents prior values
-	 * @param options {any} Additional options which modify the update request
-	 * @param userId {string} The id of the User requesting the document update
-	 * @private
+	 * Removes the last quality from the Weapon's list of qualities.
 	 */
-	_onCareerUpdate(changed, options, userId)
+	removeLastQuality()
 	{
-		if(changed.system?.current)
-			this._onCurrentCareerChange();
+		const qualities = this.system.qualities;
 
-		if(changed.system?.talentSockets)
-			this._onCareerTalentSocketsChange();
-	}
+		qualities.pop();
 
-	/**
-	 * Perform follow-up operations after a Talent is updated. Post-update operations occur for all clients after the update is broadcast.
-	 * @param changed {any} The differential data that was changed relative to the documents prior values
-	 * @param options {any} Additional options which modify the update request
-	 * @param userId {string} The id of the User requesting the document update
-	 * @private
-	 */
-	_onTalentUpdate(changed, options, userId)
-	{
-		if(changed.system?.talentSocket)
-			this._onTalentSocketChange(changed.system?.talentSocket);
-	}
-
-	/**
-	 * Performs check-ups following up a Career's Talent sockets change.
-	 * @private
-	 */
-	_onCurrentCareerChange()
-	{
-		if(this.actor) {
-			this.actor.itemTypes.career.filter(career => career !== this).forEach((otherCareer, index) => {
-				otherCareer.update({"system.current": false});
-			});
-			this.actor.resetTalentsSocket("career");
-		}
-	}
-
-	/**
-	 * Performs check-ups following up a Career's Talent sockets change.
-	 * @private
-	 */
-	_onCareerTalentSocketsChange()
-	{
-		if(this.actor)
-			this.actor.resetTalentsSocket("career");
-	}
-
-	/**
-	 * Performs check-ups following up a Talent socket change to a non-null value.
-	 * @param talent {WFRP3eItem} The Talent that has been changed
-	 * @param newTalentSocket {string}
-	 * @private
-	 */
-	_onTalentSocketChange(talent, newTalentSocket)
-	{
-		if(this.actor)
-			this.actor.checkForDuplicateTalentSockets(newTalentSocket);
+		this.update({"system.qualities": qualities});
 	}
 }

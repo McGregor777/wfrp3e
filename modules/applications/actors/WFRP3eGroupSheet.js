@@ -49,7 +49,7 @@ export default class WFRP3eGroupSheet extends ActorSheet
 	{
 		const talents = items
 			.filter(item => item.type === "talent")
-			.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+			.sort((a, b) => a.name.localeCompare(b.name));
 
 		return {
 			talents: {
