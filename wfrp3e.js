@@ -90,7 +90,7 @@ async function preloadHandlebarsTemplates()
 	return loadTemplates(templatePaths);
 }
 
-Hooks.once("init", () => {
+Hooks.once("init", async () => {
 	console.log("WFRP3e | Initialising Warhammer Fantasy Roleplay - 3rd Edition System");
 
 	CONFIG.WFRP3e = WFRP3e;
@@ -172,7 +172,7 @@ Hooks.once("init", () => {
 	Items.registerSheet("wfrp3e", WFRP3eWeaponSheet, {label: "Weapon Sheet", types: ["weapon"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eTrappingSheet, {label: "Trapping Sheet", types: ["trapping"], makeDefault: true});
 
-	preloadHandlebarsTemplates();
+	await preloadHandlebarsTemplates();
 });
 
 Hooks.on("getChatLogEntryContext", (html, options) => {
@@ -215,24 +215,6 @@ Hooks.on("renderChatMessage", (app, html, messageData) => {
 		const dicePool = new DicePool(poolData.dicePool);
 
 		DiceHelpers.displayRollDialog(poolData.roll.data, dicePool, poolData.description, poolData.roll.skillName, poolData.roll.item, poolData.roll.flavor, poolData.roll.sound);
-	});
-
-	html.find(".item-display .item-pill, .item-properties .item-pill").on("click", async (event) => {
-		event.preventDefault();
-		event.stopPropagation();
-
-		const li = event.currentTarget;
-		let uuid = li.dataset.itemId;
-		let modifierId = li.dataset.modifierId;
-		let modifierType = li.dataset.modifierType;
-
-		if(li.dataset.uuid)
-			uuid = li.dataset.uuid;
-
-		const parts = uuid.split(".");
-		const [entityName, entityId, embeddedName, embeddedId] = parts;
-
-		await EmbeddedItemHelpers.displayOwnedItemItemModifiersAsJournal(embeddedId, modifierType, modifierId, entityId);
 	});
 
 	html.find(".roll-effects:not(.disabled) .effect-toggle").click((event) => {
