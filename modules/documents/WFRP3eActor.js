@@ -172,6 +172,28 @@ export default class WFRP3eActor extends Actor
 		}
 	}
 
+	removeAdvance(career, type)
+	{
+		const updates = {system: {advances: career.system.advances}};
+
+		if(isNaN(type))
+			updates.system.advances[type] = "";
+		else
+			updates.system.advances.open[type] = "";
+
+		career.update(updates);
+	}
+
+	/**
+	 * Changes the WFRP3eActor's current Career.
+	 * @param career {WFRP3eItem} The new current Career.
+	 * @see {WFRP3eItem._onCareerUpdate}  Performs follow-up
+	 */
+	changeCurrentCareer(career)
+	{
+		career.update({"system.current": true});
+	}
+
 	/**
 	 * Updates one of the Character impairment value.
 	 * @param {String} impairment The impairment to update.

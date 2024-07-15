@@ -177,11 +177,11 @@ export default class WFRP3eCreatureSheet extends ActorSheet
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onItemDelete(event)
+	async _onItemDelete(event)
 	{
 		const item = this._getItemById(event);
 
-		new Dialog({
+		await new Dialog({
 			title: game.i18n.localize("APPLICATION.TITLE.DeleteItem"),
 			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: item.name}) + "</p>",
 			buttons: {

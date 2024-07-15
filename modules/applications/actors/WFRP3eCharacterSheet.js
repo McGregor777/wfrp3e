@@ -1,10 +1,6 @@
 import {capitalize} from "../../helpers.js";
 
-/**
- * Provides the data and general interaction with Actor Sheets - Abstract class.
- * WFRP3CharacterSheet provides the general interaction and data organization shared among all actors sheets, as this is an abstract class, inherited by either Character or NPC specific actors sheet classes. When rendering an actors sheet, getData() is called, which is a large and key that prepares the actors data for display, processing the raw data and items and compiling them into data to display on the sheet. Additionally, this class contains all the main events that respond to sheet interaction in activateListeners()
- * @see WFRP3CharacterSheet - Data and main computation model (this.actors)
- */
+/** @inheritDoc */
 export default class WFRP3eCharacterSheet extends ActorSheet
 {
 	/** @inheritDoc */
@@ -88,7 +84,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 		html.find(".advance-checkbox").change(this._onAdvanceCheckboxChange.bind(this));
 
-		html.find(".characteristic a").click(this._onCharacteristicLink.bind(this));
+		html.find(".characteristic a").click(this._onCharacteristicClick.bind(this));
 
 		html.find(".current-career-input").click(this._onCurrentCareerInput.bind(this));
 
@@ -237,42 +233,29 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations after changes on Advance checkbox.
+	 * Performs follow-up operations after changes on advance checkbox.
 	 * @param {Event} event
 	 * @private
 	 */
 	_onAdvanceCheckboxChange(event)
 	{
-		if(this.actor.system.experience.current > 0) {
-			const career = this._getItemById(event);
+		const career = this._getItemById(event),
+			  type = event.currentTarget.dataset.type;
 
-			if(event.currentTarget.checked) {
-				event.currentTarget.checked = false;
-				this.actor.buyAdvance(career, event.currentTarget.dataset.type);
-			}
-			else {
-				const updates = {system: {advances: career.system.advances}};
-
-				if(isNaN(event.currentTarget.dataset.type))
-					updates.system.advances[event.currentTarget.dataset.type] = "";
-				else
-					updates.system.advances.open[event.currentTarget.dataset.type] = "";
-
-				career.update(updates);
-			}
-		}
-		else {
+		if(event.currentTarget.checked) {
 			event.currentTarget.checked = false;
-			ui.notifications.warn(game.i18n.localize("CHARACTER.SHEET.NoExperienceLeft"));
+			this.actor.buyAdvance(career, type);
 		}
+		else
+			this.actor.removeAdvance(career, type);
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Characteristic link.
+	 * Performs follow-up operations after clicks on a Characteristic.
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onCharacteristicLink(event)
+	_onCharacteristicClick(event)
 	{
 		this.actor.performCharacteristicCheck(event.currentTarget.dataset.characteristic);
 	}
@@ -284,7 +267,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	_onCurrentCareerInput(event)
 	{
-		this._getItemById(event).update({"system.current": true});
+		this.actor.changeCurrentCareer(this._getItemById(event));
 	}
 
 	/**
@@ -331,9 +314,7 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 */
 	_onQuantityLeftClick(event)
 	{
-		const item = this._getItemById(event);
-
-		item.update({"system.quantity": item.system.quantity + (event.ctrlKey ? 10 : 1)});
+		this._getItemById(event).changeQuantity(event.ctrlKey ? 10 : 1);
 	}
 
 	/**
@@ -384,11 +365,11 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onItemDelete(event)
+	async _onItemDelete(event)
 	{
 		const clickedItem = this._getItemById(event);
 
-		new Dialog({
+		await new Dialog({
 			title: game.i18n.localize("APPLICATION.TITLE.DeleteItem"),
 			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: clickedItem.name}) + "</p>",
 			buttons: {

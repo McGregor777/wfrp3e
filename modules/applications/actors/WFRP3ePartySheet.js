@@ -104,12 +104,12 @@ export default class WFRP3ePartySheet extends ActorSheet
 	 * @param event {MouseEvent}
 	 * @private
 	 */
-	_onMemberRemoveClick(event)
+	async _onMemberRemoveClick(event)
 	{
 		const actorId = $(event.currentTarget).parent(".party-sheet-member").data("actorId");
 		const actorName = game.actors.get(actorId).name;
 
-		new Dialog({
+		await new Dialog({
 			title: game.i18n.localize("APPLICATION.TITLE.MemberRemoval"),
 			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.MemberRemoval", {actor: actorName}) + "</p>",
 			buttons: {
