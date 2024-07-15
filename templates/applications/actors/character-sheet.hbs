@@ -115,7 +115,25 @@
 				</div>
 
 				<div class="stance-meter">
-					<h3 class="character-sheet-title">{{localize "CHARACTER.Stances"}}</h3>
+					<h3 class="character-sheet-title">
+						<a class="stance-meter-segment stance-meter-link"
+						   data-stance="conservative"
+						   data-tooltip="{{localize 'CHARACTER.SHEET.AddRemoveConservativeSegment'}}">
+							<img class="stance-conservative"
+							     src="systems/wfrp3e/assets/images/stance-conservative.webp"
+							     height="27" />
+						</a>
+
+						{{localize "CHARACTER.Stances"}}
+
+						<a class="stance-meter-segment stance-meter-link"
+						   data-stance="reckless"
+						   data-tooltip="{{localize 'CHARACTER.SHEET.AddRemoveRecklessSegment'}}">
+							<img class="stance-conservative"
+							     src="systems/wfrp3e/assets/images/stance-reckless.webp"
+							     height="27" />
+						</a>
+					</h3>
 
 					<div class="stance-meter-segments">
 						{{#for actor.system.stanceMeter.conservative (increment actor.system.stanceMeter.reckless 1) 1}}

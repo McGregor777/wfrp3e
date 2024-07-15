@@ -113,6 +113,10 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			.click(this._onRechargeTokenLeftClick.bind(this))
 			.contextmenu(this._onRechargeTokenRightClick.bind(this));
 
+		html.find(".stance-meter .stance-meter-link")
+			.click(this._onStanceMeterLinkClick.bind(this, 1))
+			.contextmenu(this._onStanceMeterLinkClick.bind(this, -1));
+
 		html.find(".skill-training-level-input").change(this._onSkillTrainingLevelChange.bind(this));
 	}
 
@@ -517,6 +521,15 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		}
 
 		itemElement.toggleClass("expanded");
+	}
+
+	/**
+	 * Performs follow-up operations after clicks on a stance meter link.
+	 * @private
+	 */
+	_onStanceMeterLinkClick(amount, event)
+	{
+		this.actor.adjustStanceMeter(event.currentTarget.dataset.stance, amount);
 	}
 
 	/**

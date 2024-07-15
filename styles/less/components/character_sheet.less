@@ -200,30 +200,42 @@
 				& .stance-meter {
 					margin-bottom: 0.5rem;
 
+					& h3 {
+						align-items: center;
+						display: flex;
+						gap: 0.25rem;
+						justify-content: center;
+						margin-bottom: 0.25rem;
+
+						& .stance-meter-segment > img {
+							opacity: 50%;
+						}
+					}
+
 					& .stance-meter-segments {
 						display: flex;
 						justify-content: center;
+					}
 
-						& .stance-meter-segment {
-							display: block;
-							height: 27px;
+					& .stance-meter-segment {
+						display: block;
+						height: 27px;
 
-							&.active {
-								filter: drop-shadow(gold 0px 0px 4px);
+						&.active {
+							filter: drop-shadow(gold 0px 0px 4px);
+						}
+
+						& > img {
+							border: none;
+							width: 32px;
+
+							&.stance-neutral {
+								width: 38px;
 							}
+						}
 
-							& > img {
-								border: none;
-								width: 32px;
-
-								&.stance-neutral {
-									width: 38px;
-								}
-							}
-
-							& > input {
-								display: none;
-							}
+						& > input {
+							display: none;
 						}
 					}
 				}

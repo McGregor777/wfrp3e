@@ -158,6 +158,9 @@
 	"CHARACTER.IMPAIRMENT.Stress": "Stress",
 	"CHARACTER.IMPAIRMENT.FatigueTokens": "Fatigue Tokens",
 	"CHARACTER.IMPAIRMENT.StressTokens": "Stress Tokens",
+	"CHARACTER.SHEET.AddRemoveConservativeSegment": "Add/Remove Conservative Segment",
+	"CHARACTER.SHEET.AddRemoveRecklessSegment": "Add/Remove Reckless Segment",
+	"CHARACTER.SHEET.MinimumSegmentWarning": "You cannot remove any more segment.",
 	"CHARACTER.SHEET.NoExperienceLeft": "You have no Experience left.",
 
 	"CHARACTERGENERATOR.Actions": "Action Cards",

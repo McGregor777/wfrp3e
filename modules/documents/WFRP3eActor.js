@@ -53,6 +53,17 @@ export default class WFRP3eActor extends Actor
 	}
 
 	/**
+	 * Adds or removes a specified amount of segments on either side on the stance meter.
+	 */
+	adjustStanceMeter(stance, amount)
+	{
+		if(this.system.stance[stance] + amount < 0)
+			ui.notifications.warn(game.i18n.localize("CHARACTER.SHEET.MinimumSegmentWarning"));
+
+		this.update({system: {stance: {[`${stance}`]: this.system.stance[stance] + amount}}});
+	}
+
+	/**
 	 * Buys a new advance on a specific Career for the WFRP3eCharacter.
 	 * @param {WFRP3eItem} career The Career containing the new Advance.
 	 * @param {String} type The type of the new Advance.
