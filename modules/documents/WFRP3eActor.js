@@ -53,12 +53,15 @@ export default class WFRP3eActor extends Actor
 	}
 
 	/**
-	 * Buys a new Advance for the WFRP3eCharacter.
-	 * @param {WFRP3eItem} career The Career containg the new Advance.
+	 * Buys a new advance on a specific Career for the WFRP3eCharacter.
+	 * @param {WFRP3eItem} career The Career containing the new Advance.
 	 * @param {String} type The type of the new Advance.
 	 */
 	async buyAdvance(career, type)
 	{
+		if(this.system.experience.current > 0)
+			ui.notifications.warn(game.i18n.localize("CHARACTER.SHEET.NoExperienceLeft"));
+
 		switch(type) {
 			case "action":
 				await new ActionSelector(this, career).render(true);
