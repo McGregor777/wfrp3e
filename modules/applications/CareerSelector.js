@@ -81,7 +81,7 @@ export default class CareerSelector extends FormApplication
 			});
 		}
 
-		this.allCareers = careers.sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+		this.allCareers = careers.sort((a, b) => a.name.localeCompare(b.name));
 
 		careers = careers.reduce((sortedCareers, career) => {
 			if(career.system.raceRestrictions.includes(this.object.system.race)
