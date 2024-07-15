@@ -15,16 +15,30 @@ export default class WFRP3eDie extends Die
 	static NAME = "wfrp3e-die";
 
 	/** @inheritDoc */
-	_evaluateSync({minimize = false, maximize = false} = {}) {
-		if((this.number > 999))
-			throw new Error(`You may not evaluate a DiceTerm with more than 999 requested results`);
-
-		for(let n = 1; n <= this.number; n++)
-			this.roll({minimize, maximize});
-
-		this._evaluateModifiers();
+	async _evaluateAsync(options = {})
+	{
+		await super._evaluateAsync(options);
 
 		this.results.forEach((result) => {
+			Object.keys(this.resultSymbols).forEach((symbolName) => {
+				this.resultSymbols[symbolName] += parseInt(result.symbols[symbolName]);
+			}, {});
+
+			if(result.symbols.righteousSuccesses > 0)
+				result.exploded = true;
+		});
+
+		return this;
+	}
+
+	/** @inheritDoc */
+	_evaluateSync(options = {})
+	{
+		super._evaluateSync(options);
+
+		this.results.forEach((result) => {
+			result.symbols = CONFIG.WFRP3e.dice[this.constructor.NAME].results[result.result];
+
 			Object.keys(this.resultSymbols).forEach((symbolName, index) => {
 				this.resultSymbols[symbolName] += parseInt(result.symbols[symbolName]);
 			}, {});
@@ -37,9 +51,9 @@ export default class WFRP3eDie extends Die
 	}
 
 	/** @inheritDoc */
-	roll({minimize = false, maximize = false} = {})
+	async roll({minimize = false, maximize = false, ...options} = {})
 	{
-		const roll = super.roll({minimize = false, maximize = false} = {});
+		const roll = await super.roll({minimize, maximize, ...options} = {});
 
 		roll.symbols = CONFIG.WFRP3e.dice[this.constructor.NAME].results[roll.result];
 
@@ -54,7 +68,8 @@ export default class WFRP3eDie extends Die
 	}
 
 	/** @inheritDoc */
-	getResultCSS(result) {
+	getResultCSS(result)
+	{
 		return [
 			"wfrp3e-die",
 			`${this.constructor.NAME}-die`,
