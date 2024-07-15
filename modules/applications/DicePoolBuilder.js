@@ -168,7 +168,7 @@ export default class DicePoolBuilder extends FormApplication
 				value = element.value;
 		}
 
-		setProperty(this.object, event.currentTarget.name, Array.isArray(value) || isNaN(value) ? value : Number(value));
+		foundry.utils.setProperty(this.object, event.currentTarget.name, Array.isArray(value) || isNaN(value) ? value : Number(value));
 
 		this._updatePreview();
 	}
@@ -200,7 +200,7 @@ export default class DicePoolBuilder extends FormApplication
 							entityData = {_id: embeddedId};
 					}
 
-					setProperty(entityData, "flags.ffgsound", sound);
+					foundry.utils.setProperty(entityData, "flags.ffgsound", sound);
 					entity.updateOwnedItem(entityData);
 				}
 			}
@@ -254,7 +254,7 @@ export default class DicePoolBuilder extends FormApplication
 	_synchronizeInputs(html)
 	{
 		html.find(".dice-pool-table input, .symbols-pool-container input").each((key, input) => {
-			input.value = getProperty(this.object, input.name);
+			input.value = foundry.utils.getProperty(this.object, input.name);
 		});
 
 		this._updatePreview();
@@ -297,7 +297,7 @@ export default class DicePoolBuilder extends FormApplication
 
 		if(event.target !== input) {
 			input.value++;
-			setProperty(this.object, input.name, parseInt(input.value));
+			foundry.utils.setProperty(this.object, input.name, parseInt(input.value));
 			this._updatePreview();
 		}
 	}
@@ -316,7 +316,7 @@ export default class DicePoolBuilder extends FormApplication
 
 		if(event.target !== input && input.value > 0) {
 			input.value--;
-			setProperty(this.object, input.name, parseInt(input.value));
+			foundry.utils.setProperty(this.object, input.name, parseInt(input.value));
 			this._updatePreview();
 		}
 	}
@@ -493,7 +493,7 @@ export default class DicePoolBuilder extends FormApplication
 		};
 		const stance = this.object.checkData.actor.system.stance.current;
 
-		mergeObject(this.object.dice, {
+		foundry.utils.mergeObject(this.object.dice, {
 			characteristic: this.object.checkData.characteristic.value - Math.abs(stance),
 			fortune: this.object.checkData.characteristic.fortune,
 			conservative: stance < 0 ? Math.abs(stance) : 0,

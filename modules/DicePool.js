@@ -38,7 +38,7 @@ export default class DicePool
 		this.fortunePoints = 0;
 		this.specialisations = [];
 
-		mergeObject(this, options);
+		foundry.utils.mergeObject(this, options);
 	}
 
 	/**
