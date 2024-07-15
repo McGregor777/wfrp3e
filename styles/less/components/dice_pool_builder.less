@@ -4,8 +4,6 @@
 		
 		.main-options {
 			flex: 1 0 420px;
-			overflow-y: scroll;
-			scrollbar-width: thin;
 
 			& .attributes {
 				display: flex;
@@ -31,7 +29,7 @@
 				margin-bottom: 1rem;
 
 				& button {
-					font-size: var(--font-size-10);
+					font-size: var(--font-size-14);
 					line-height: 1.5rem;
 					text-align: center;
 				}
@@ -156,69 +154,6 @@
 				& .wfrp3e.picture {
 					display: inline-block;
 					width: 1.25rem;
-				}
-			}
-
-			.item-display {
-				background: rgba(255, 255, 255, 0.75);
-				border: 1px solid #782e22;
-				margin: 0.5rem 0 0.8rem 0;
-				padding: 0.5rem;
-
-				& img {
-					height: 50px;
-					width: auto;
-				}
-
-				& h4 {
-					align-items: center;
-					display: flex;
-					flex-direction: row;
-					justify-content: space-around;
-
-					& input {
-						width: 70%;
-					}
-				}
-
-				& .item-miss {
-					color: darkred;
-					font-style: italic;
-					text-align: center;
-				}
-
-				& .item-pill {
-					background-color: #aaa;
-					border: 1px solid black;
-					border-radius: 0.75rem;
-					cursor: pointer;
-					display: inline-block;
-					font-size: var(--font-size-10);
-					line-height: 1.5rem;
-					list-style-type: none;
-					margin: 1px;
-					padding: 0 0.25rem;
-					white-space: nowrap;
-
-					&.adjusted {
-						color: #8b0000;
-					}
-
-					& .rank {
-						padding-right: 15px;
-
-						&:hover {
-							color: green;
-						}
-					}
-
-					& .item-delete {
-						cursor: pointer;
-
-						&:hover {
-							color: red;
-						}
-					}
 				}
 			}
 
