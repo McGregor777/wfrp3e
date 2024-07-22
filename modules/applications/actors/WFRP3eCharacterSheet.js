@@ -56,30 +56,6 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 
 		this.options.tabs[1].initial = this.actor.system.currentCareer?._id;
 
-		// Add basic skills to the Character.
-		if(this.actor.type === "character" && data.items.skills.length === 0) {
-			new Dialog({
-				title: game.i18n.localize("APPLICATION.TITLE.BasicSkillsAdding"),
-				content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.BasicSkillsAdding", {actor: this.actor.name}) + "</p>",
-				buttons: {
-					confirm: {
-						icon: '<span class="fa fa-check"></span>',
-						label: game.i18n.localize("APPLICATION.BUTTON.BasicSkillsAdding"),
-						callback: async dlg => {
-							const basicSkills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill", system: {advanced: false}});
-
-							await Item.createDocuments(basicSkills, {parent: this.actor});
-						}
-					},
-					cancel: {
-						icon: '<span class="fas fa-xmark"></span>',
-						label: game.i18n.localize("Ignore")
-					},
-				},
-				default: 'confirm'
-			}).render(true);
-		}
-
 		console.log(data)
 
 		return data;
@@ -91,6 +67,8 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		super.activateListeners(html);
 
 		html.find(".advance-checkbox").change(this._onAdvanceCheckboxChange.bind(this));
+
+		html.find(".basic-skills-adding").click(this._onBasicSkillsAddingClick.bind(this));
 
 		html.find(".characteristic a").click(this._onCharacteristicClick.bind(this));
 
@@ -260,6 +238,19 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 		}
 		else
 			this.actor.removeAdvance(career, type);
+	}
+
+	/**
+	 * Performs follow-up operations after clicks on a basic skills adding button.
+	 * @param {Event} event
+	 * @private
+	 */
+	async _onBasicSkillsAddingClick(event)
+	{
+		await Item.createDocuments(
+			await game.packs.get("wfrp3e.items").getDocuments({type: "skill", system: {advanced: false}}),
+			{parent: this.actor}
+		);
 	}
 
 	/**

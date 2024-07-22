@@ -75,23 +75,28 @@
 			<div class="skills">
 				<h3 class="character-sheet-title">{{localize "CHARACTER.Skills"}}</h3>
 
-				<div class="skill table">
-					<div class="skill table-header">
-						<span class="skill-name">{{localize "SKILL.Name"}}</span>
+				{{#if items.skills}}
+					<div class="skill table">
+						<div class="skill table-header">
+							<span class="skill-name">{{localize "SKILL.Name"}}</span>
 
-						<span class="skill-characteristic">{{localize "SKILL.ABBREVIATION.Characteristic"}}</span>
+							<span class="skill-characteristic">{{localize "SKILL.ABBREVIATION.Characteristic"}}</span>
 
-						<span class="skill-training-level">{{localize "SKILL.TrainingLevel"}}</span>
+							<span class="skill-training-level">{{localize "SKILL.TrainingLevel"}}</span>
 
-						<span class="buttons"></span>
+							<span class="buttons"></span>
+						</div>
+
+						<div class="skill table-body">
+							{{#each items.skills as |skill sk|}}
+								{{>systems/wfrp3e/templates/partials/item-skill-row.hbs skill=skill}}
+							{{/each}}
+						</div>
 					</div>
-
-					<div class="skill table-body">
-						{{#each items.skills as |skill sk|}}
-							{{>systems/wfrp3e/templates/partials/item-skill-row.hbs skill=skill}}
-						{{/each}}
-					</div>
-				</div>
+				{{else}}
+					<p>{{{localize "CHARACTER.SHEET.NoSkill" actor=actor.name}}}</p>
+					<button class="basic-skills-adding">{{localize "CHARACTER.SHEET.AddBasicSkills"}}</button>
+				{{/if}}
 			</div>
 
 			<div class="attributes">
