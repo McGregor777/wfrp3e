@@ -35,7 +35,7 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 						cost: new fields.NumberField({initial: 0, integer: true, min: 0}),
 						type: new fields.StringField({initial: "", nullable: false, required: true})
 					}),
-					{initial: new Array(2).fill({cost: 0, nature: ""})}
+					{initial: new Array(2).fill({cost: 0, type: ""})}
 				)
 			}),
 			careerSkills: new fields.StringField({initial: ", , , , ", required: true}),
