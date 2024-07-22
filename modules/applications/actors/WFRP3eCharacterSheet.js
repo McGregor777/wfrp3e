@@ -45,6 +45,14 @@ export default class WFRP3eCharacterSheet extends ActorSheet
 			talentSocketsByType: this._buildTalentSocketsList()
 		};
 		data.items = this._buildItemLists(data.items);
+		data.hasAbility = (data.items.abilities.length > 0
+			|| data.items.conditions.length > 0
+			|| data.items.criticalWounds.length > 0
+			|| data.items.diseases.length > 0
+			|| data.items.insanities.length > 0
+			|| data.items.miscasts.length > 0
+			|| data.items.mutations.length > 0);
+		data.hasTrapping = (data.items.armours.length > 0 || data.items.trappings.length > 0 || data.items.weapons.length > 0);
 
 		this.options.tabs[1].initial = this.actor.system.currentCareer?._id;
 

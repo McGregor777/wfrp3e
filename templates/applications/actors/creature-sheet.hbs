@@ -1,31 +1,48 @@
 <form class="{{cssClass}}" autocomplete="off">
-	<header class="creature-sheet-header sheet-header">
-		<input class="creature-sheet-threat-rating" name="system.threatRating" type="number" value="{{actor.system.threatRating}}" placeholder="{{localize 'CREATURE.ThreatRating'}}" />
+	<header class="sheet-header">
+		<input class="threat-rating"
+		       name="system.threatRating"
+		       type="number" value="{{actor.system.threatRating}}"
+		       placeholder="{{localize 'CREATURE.ThreatRating'}}" />
 
-		<h1 class="creature-sheet-name">
+		<h1 class="name">
 			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'CREATURE.Name'}}"/>
 		</h1>
 
-		<div class="creature-sheet-wounds">
-			<input name="system.wounds.value" type="number" value="{{actor.system.wounds.value}}" placeholder="{{localize 'CREATURE.WoundsValue'}}" />
+		<div class="wounds">
+			<input name="system.wounds.value"
+			       type="number" value="{{actor.system.wounds.value}}"
+			       placeholder="{{localize 'CREATURE.WoundsValue'}}" />
 			<hr />
-			<input name="system.wounds.max" type="number" value="{{actor.system.wounds.max}}" placeholder="{{localize 'CREATURE.WoundsThreshold'}}" />
+			<input name="system.wounds.max"
+			       type="number" value="{{actor.system.wounds.max}}"
+			       placeholder="{{localize 'CREATURE.WoundsThreshold'}}" />
 		</div>
 	</header>
 
-	<input class="creature-sheet-category" name="system.category" type="text" value="{{actor.system.category}}" placeholder="{{localize 'CREATURE.Category'}}" />
+	<input class="category"
+	       name="system.category"
+	       type="text" value="{{actor.system.category}}"
+	       placeholder="{{localize 'CREATURE.Category'}}" />
 
-	<nav class="creature-sheet-tabs sheet-tabs tabs" data-group="primary">
+	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
 		<a class="tab-link main-tab-link" data-tab="main">{{localize 'Main'}}</a>
-		<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CREATURE.Actions'}}</a>
-        <a class="tab-link abilities-tab-link" data-tab="abilities">{{localize "CREATURE.Abilities"}}</a>
+		{{#if items.actions}}
+			<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CREATURE.Actions'}}</a>
+		{{/if}}
+		{{#if hasAbility}}
+			<a class="tab-link abilities-tab-link" data-tab="abilities">{{localize "CREATURE.Abilities"}}</a>
+		{{/if}}
+		{{#if hasTrapping}}
+			<a class="tab-link trappings-tab-link" data-tab="trappings">{{localize "CREATURE.Trappings"}}</a>
+		{{/if}}
 		<a class="tab-link details-tab-link" data-tab="details">{{localize 'CREATURE.Details'}}</a>
 	</nav>
 
-	<div class="creature-sheet-body sheet-body">
-		<section class="creature-sheet-main-tab tab" data-group="primary" data-tab="main">
-			<div class="creature-sheet-main-infos">
-				<div class="creature-sheet-characteristics">
+	<div class="sheet-body">
+		<section class="main-tab tab" data-group="primary" data-tab="main">
+			<div class="main-infos">
+				<div class="characteristics">
 					{{#each actor.system.characteristics as |characteristic char|}}
 						{{#with (lookup @root.characteristics char) as |charac|}}
 							<div class="characteristic">
@@ -51,11 +68,11 @@
 					{{/each}}
 				</div>
 
-				<div class="creature-sheet-image">
+				<div class="image">
 					<img src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" />
 				</div>
 
-				<div class="creature-sheet-ratings">
+				<div class="ratings">
 					<div class="damage-rating">
 						<img class="damage-rating-icon"
 						     src="systems/wfrp3e/assets/images/damage-rating.webp"
@@ -97,8 +114,8 @@
 				</div>
 			</div>
 
-			<div class="creature-sheet-secondary-infos">
-				<a class="creature-sheet-stance {{actor.system.defaultStance}}" data-tooltip="{{localize 'CREATURE.Stance'}}">
+			<div class="secondary-infos">
+				<a class="stance {{actor.system.defaultStance}}" data-tooltip="{{localize 'CREATURE.Stance'}}">
 					{{#if (inferiorTo actor.system.stance 0)}}
 						C{{abs actor.system.stance}}
 					{{else}}
@@ -110,12 +127,12 @@
 					{{/if}}
 				</a>
 
-				<div class="creature-sheet-special-rule-summary">
+				<div class="special-rule-summary">
 					{{editor actor.system.specialRuleSummary target="system.specialRuleSummary" button=true owner=owner editable=editable}}
 				</div>
 			</div>
 
-			<div class="creature-sheet-attributes">
+			<div class="attributes">
 				{{#each actor.system.attributes as |attribute attr|}}
 					{{#with (lookup @root.attributes attr)}}
 						<div class="attribute {{attr}}">
@@ -142,10 +159,17 @@
 			</div>
 		</section>
 
-        {{>systems/wfrp3e/templates/partials/action-tab.hbs}}
-        {{>systems/wfrp3e/templates/partials/ability-tab.hbs}}
+		{{#if items.actions}}
+			{{>systems/wfrp3e/templates/partials/action-tab.hbs}}
+		{{/if}}
+		{{#if hasAbility}}
+			{{>systems/wfrp3e/templates/partials/ability-tab.hbs}}
+		{{/if}}
+		{{#if hasTrapping}}
+			{{>systems/wfrp3e/templates/partials/trapping-tab.hbs}}
+		{{/if}}
 
-		<section class="creature-sheet-detail-tab tab" data-group="primary" data-tab="details">
+		<section class="detail-tab tab" data-group="primary" data-tab="details">
 			{{editor actor.system.description target="system.description" button=true owner=owner editable=editable}}
 		</section>
 	</div>

@@ -73,9 +73,8 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 
 		this._calculateCurrentExperience();
 		this._prepareRace();
-		this._prepareDefence();
+		this._prepareDefenceAndSoak();
 		this._prepareEncumbrance();
-		this._prepareSoak();
 		this._prepareRank();
 		this._prepareStanceMeter();
 		this._prepareDefaultStance();
@@ -129,12 +128,24 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	}
 
 	/**
-	 * Prepares the total defence of the WFRP3eCharacter.
+	 * Prepares the total defence and soak of the WFRP3eCharacter.
 	 * @private
 	 */
-	_prepareDefence()
+	_prepareDefenceAndSoak()
 	{
-		this.totalDefence = this.parent.itemTypes.armour.reduce((totalDefence, armour) => totalDefence + armour.system.defenceValue, 0);
+		this.totalDefence = 0;
+		this.totalSoak = 0;
+
+		this.parent.itemTypes.armour.forEach((armour) => {
+			this.totalDefence += armour.system.defenceValue;
+			this.totalSoak += armour.system.soakValue;
+		});
+
+		if(this.totalDefence === 0)
+			this.totalDefence = this.defenceValue;
+
+		if(this.totalSoak === 0)
+			this.totalSoak = this.soakValue;
 	}
 
 	/**
@@ -146,15 +157,6 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 		this.totalEncumbrance = this.parent.items
 			.filter((item) => ["armour", "trapping", "weapon"].includes(item.type))
 			.reduce((totalEncumbrance, item) => totalEncumbrance + item.system.encumbrance, 0);
-	}
-
-	/**
-	 * Prepares the total soak of the WFRP3eCharacter.
-	 * @private
-	 */
-	_prepareSoak()
-	{
-		this.totalSoak = this.parent.itemTypes.armour.reduce((totalSoak, armour) => totalSoak + armour.system.soakValue, 0);
 	}
 
 	/**

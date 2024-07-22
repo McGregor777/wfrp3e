@@ -6,7 +6,19 @@
 			display: flex;
 			flex-direction: column;
 
-			& .creature-sheet-body {
+			& .category {
+				background-color: #240000;
+				border: solid dimgray;
+				border-radius: 0;
+				border-width: 2px 0;
+				color: white;
+				font-style: italic;
+				padding-top: 0.25rem;
+				text-align: center;
+				width: 100%;
+			}
+
+			& .sheet-body {
 				flex: 1 1 0;
 				min-height: 0;
 
@@ -17,44 +29,15 @@
 					overflow: auto;
 				}
 
-				& .creature-sheet-actions-tab {
-					overflow: unset;
-
-					&.action-card {
-						margin: 0.5rem auto;
-					}
-
-					& .creature-sheet-actions {
-						min-height: 0;
-						overflow: auto;
-					}
-
-					& .creature-sheet-action-tabs {
-						border-bottom: 1px solid #b5b3a4;
-						display: flex;
-						flex-flow: row wrap;
-						justify-content: space-around;
-
-						& > * {
-							margin: 0 5px;
-						}
-					}
-
-					& .action-container {
-						&.active {
-							align-items: center;
-							display: flex;
-							flex-wrap: wrap;
-							justify-content: space-around;
-						}
-					}
+				& .action-tab .actions .action-container {
+					justify-content: center;
 				}
 
-				& .creature-sheet-main-tab {
+				& .main-tab {
 					& > div {
 						display: flex;
 
-						&.creature-sheet-attributes {
+						&.attributes {
 							background-color: #884832;
 							border: solid dimgray;
 							border-radius: 0;
@@ -63,14 +46,14 @@
 							padding: 0.25rem 0 0.5rem;
 							text-align: center;
 							text-shadow:
-								-1pt -1pt 0 black,
-								-1pt 0 0 black,
-								0 -1pt 0 black,
-								-1pt 1pt 0 black,
-								1pt -1pt 0 black,
-								0 1pt 0 black,
-								1pt 0 0 black,
-								1pt 1pt 0 black;
+										-1pt -1pt 0 black,
+									-1pt 0 0 black,
+										0 -1pt 0 black,
+									-1pt 1pt 0 black,
+										1pt -1pt 0 black,
+									0 1pt 0 black,
+									1pt 0 0 black,
+									1pt 1pt 0 black;
 
 							& .attribute {
 								flex-grow: 1;
@@ -87,11 +70,11 @@
 									font-style: italic;
 									padding-top: 0.5rem;
 									text-shadow:
-											-1pt -1pt 0 black,
+												-1pt -1pt 0 black,
 											-1pt 0 0 black,
-											0 -1pt 0 black,
+												0 -1pt 0 black,
 											-1pt 1pt 0 black,
-											1pt -1pt 0 black,
+												1pt -1pt 0 black,
 											0 1pt 0 black,
 											1pt 0 0 black,
 											1pt 1pt 0 black;
@@ -108,9 +91,9 @@
 							}
 						}
 
-						&.creature-sheet-main-infos {
-							& .creature-sheet-characteristics {
-								flex: 1 1 20%;
+						&.main-infos {
+							& .characteristics {
+								flex: 0 0 100px;
 								padding: 0 0.5rem;
 
 								& > div {
@@ -146,12 +129,17 @@
 								}
 							}
 
-							& .creature-sheet-image {
-								flex-basis: 60%;
+							& .image {
+								flex: 1 1 auto;
+
+								& > img {
+									display: block;
+									margin: auto;
+								}
 							}
 
-							& .creature-sheet-ratings {
-								flex: 1 1 20%;
+							& .ratings {
+								flex: 0 0 100px;
 								padding-left: 0.5rem;
 
 								& > div {
@@ -182,11 +170,11 @@
 							}
 						}
 
-						&.creature-sheet-secondary-infos {
+						&.secondary-infos {
 							flex-grow: 1;
 							padding: 0 1rem 1rem;
 
-							& .creature-sheet-special-rule-summary {
+							& .special-rule-summary {
 								flex-grow: 1;
 
 								& > .editor {
@@ -194,7 +182,7 @@
 								}
 							}
 
-							& .creature-sheet-stance {
+							& .stance {
 								font-size: var(--font-size-18);
 								margin: auto 1rem 1rem 0;
 
@@ -211,19 +199,7 @@
 				}
 			}
 
-			& .creature-sheet-category {
-				background-color: #240000;
-				border: solid dimgray;
-				border-radius: 0;
-				border-width: 2px 0;
-				color: white;
-				font-style: italic;
-				padding-top: 0.25rem;
-				text-align: center;
-				width: 100%;
-			}
-
-			& .creature-sheet-header {
+			& .sheet-header {
 				background: url(../assets/images/creature-sheet-header.webp) center/100% 100% no-repeat;
 				flex-wrap: nowrap;
 				padding: 0 0.5rem;
@@ -247,7 +223,7 @@
 						text-shadow: 0 0 5px var(--color-shadow-primary);
 					}
 
-					&.creature-sheet-threat-rating {
+					&.threat-rating {
 						color: white;
 						flex: 0 0 12.5%;
 						font-size: var(--font-size-28);
@@ -255,7 +231,7 @@
 					}
 				}
 
-				& .creature-sheet-name > input {
+				& .name > input {
 					color: bisque;
 					text-shadow:
 							-1pt -1pt 2pt black,
@@ -268,7 +244,7 @@
 							1pt 1pt 2pt black;
 				}
 
-				& .creature-sheet-wounds {
+				& .wounds {
 					flex: 0 0 3rem;
 
 					& hr {
@@ -283,7 +259,7 @@
 				}
 			}
 
-			& .creature-sheet-tabs {
+			& .primary-tabs {
 				border-top: none;
 			}
 		}

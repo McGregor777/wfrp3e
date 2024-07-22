@@ -248,6 +248,7 @@
 	"CREATURE.SoakValue": "Valeur d'Encaissement",
 	"CREATURE.Stance": "Attitude",
 	"CREATURE.ThreatRating": "Niveau de Menace",
+	"CREATURE.Trappings": "Dotations",
 	"CREATURE.WoundsThreshold": "Plafond de Blessure",
 	"CREATURE.WoundsValue": "Points de Blessures",
 	"CREATURE.ABBREVIATION.DamageRating": "ND",

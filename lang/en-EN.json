@@ -248,6 +248,7 @@
 	"CREATURE.SoakValue": "Soak Value",
 	"CREATURE.Stance": "Stance",
 	"CREATURE.ThreatRating": "Threat Rating",
+	"CREATURE.Trappings": "Trappings",
 	"CREATURE.WoundsThreshold": "Wounds Threshold",
 	"CREATURE.WoundsValue": "Wounds Value",
 	"CREATURE.ABBREVIATION.DamageRating": "DR",
