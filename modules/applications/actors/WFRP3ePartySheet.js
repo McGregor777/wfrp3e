@@ -1,11 +1,12 @@
-export default class WFRP3ePartySheet extends ActorSheet
+import WFRP3eActorSheet from "./WFRP3eActorSheet.js";
+
+export default class WFRP3ePartySheet extends WFRP3eActorSheet
 {
 	/** @inheritDoc */
 	static get defaultOptions()
 	{
 		return {
 			...super.defaultOptions,
-			template: "systems/wfrp3e/templates/applications/actors/party-sheet.hbs",
 			width: 800,
 			height: 540,
 			classes: ["wfrp3e", "sheet", "actor", "party", "party-sheet"]
@@ -31,7 +32,11 @@ export default class WFRP3ePartySheet extends ActorSheet
 		html.find(".party-sheet-tension-meter .party-sheet-tension-meter-minus").click(this._onTensionMeterMinusClick.bind(this));
 		html.find(".party-sheet-members .party-sheet-member .party-sheet-member-portrait").click(this._onMemberPortraitClick.bind(this));
 		html.find(".party-sheet-members .party-sheet-member .party-sheet-member-remove").click(this._onMemberRemoveClick.bind(this));
-		html.find(".fortune-token").mousedown(this._onFortunePoolClick.bind(this));
+
+		html.find(".fortune-token")
+			.click(this._onFortunePoolClick.bind(this, 1))
+			.contextmenu(this._onFortunePoolClick.bind(this, -1));
+
 		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .talent-socket-add").click(this._onTalentSocketAdd.bind(this));
 		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .talent-socket-delete").click(this._onTalentSocketDelete.bind(this));
 	}
@@ -129,29 +134,13 @@ export default class WFRP3ePartySheet extends ActorSheet
 
 	/**
 	 * Performs follow-up operations after clicks on the Fortune Pool's button.
-	 * @param event {MouseEvent}
+	 * @param {Number} amount
+	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onFortunePoolClick(event)
+	_onFortunePoolClick(amount, event)
 	{
-		let fortunePool = this.actor.system.fortunePool;
-
-		switch(event.button) {
-			// If left click…
-			case 0:
-				fortunePool++;
-				break;
-			// If right click…
-			case 2:
-				fortunePool--;
-				
-				if(fortunePool < 0)
-				fortunePool = 0;
-
-				break;
-		}
-
-		this.actor.update({"system.fortunePool": fortunePool});
+		this.actor.update({"system.fortunePool": this.actor.system.fortunePool + amount});
 	}
 
 	/**

@@ -1,11 +1,11 @@
-export default class WFRP3eCareerSheet extends ItemSheet
+import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
+
+export default class WFRP3eCareerSheet extends WFRP3eItemSheet
 {
 	static get defaultOptions()
 	{
 		return {
 			...super.defaultOptions,
-			template: "systems/wfrp3e/templates/applications/items/career-sheet.hbs",
-			//width: 530,
 			height: 820,
 			classes: ["wfrp3e", "sheet", "item", "career"],
 			tabs: [{group: "primary", navSelector: ".career-sheet-tabs", contentSelector: ".career-sheet-body", initial: "header"}]
