@@ -1,7 +1,7 @@
 <div class="attribute {{class}}">
-	{{#if max}}<span class="attribute-title">{{localize title}}</span>{{/if}}
+	{{#if maxDataPath}}<span class="attribute-title">{{localize title}}</span>{{/if}}
 
-	{{#if max}}
+	{{#if maxDataPath}}
 		<div class="attribute-input-container">
 			<label class="attribute-label">
 				{{localize maxTitle}}
@@ -17,7 +17,7 @@
 
 	<div class="attribute-input-container">
 		<label class="attribute-label">
-			{{#if max}}
+			{{#if maxDataPath}}
 				{{localize 'CHARACTER.Current'}}
 			{{else}}
 				{{localize title}}
@@ -27,7 +27,7 @@
 			       name="{{valueDataPath}}"
 			       value="{{value}}"
 			       type="number"
-			       placeholder="{{#if max}}{{localize 'CHARACTER.Current'}}{{else}}{{localize title}}{{/if}}" />
+			       placeholder="{{#if maxDataPath}}{{localize 'CHARACTER.Current'}}{{else}}{{localize title}}{{/if}}" />
 		</label>
 	</div>
 </div>

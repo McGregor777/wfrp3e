@@ -25,14 +25,14 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 			characteristics: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
 				if(characteristic !== "varies")
 					object[characteristic] = new fields.SchemaField({
-						rating: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+						rating: new fields.NumberField({initial: 2, integer: true, min: 0, nullable: false, required: true}),
 						fortune: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 					}, {label: characteristic});
 
 				return object;
 			}, {})),
 			corruption: new fields.SchemaField({
-				max: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+				max: new fields.NumberField({initial: 7, integer: true, min: 0, nullable: false, required: true}),
 				value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 			}),
 			experience: new fields.SchemaField({
@@ -41,8 +41,8 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 			}),
 			favour: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			fortune: new fields.SchemaField({
-				max: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
-				value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
+				max: new fields.NumberField({initial: 3, integer: true, min: 0, nullable: false, required: true}),
+				value: new fields.NumberField({initial: 3, integer: true, min: 0, nullable: false, required: true})
 			}),
 			impairments: new fields.SchemaField({
 				fatigue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
@@ -59,8 +59,8 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 				current: new fields.NumberField({initial: 0, integer: true, nullable: false, required: true})
 			}),
 			wounds: new fields.SchemaField({
-				max: new fields.NumberField({initial: 7, integer: true, min: 0, nullable: false, required: true}),
-				value: new fields.NumberField({initial: 7, integer: true, min: 0, nullable: false, required: true})
+				max: new fields.NumberField({initial: 10, integer: true, min: 0, nullable: false, required: true}),
+				value: new fields.NumberField({initial: 10, integer: true, min: 0, nullable: false, required: true})
 			})
 		};
 	}
