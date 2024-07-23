@@ -8,12 +8,14 @@
 	</header>
 
 	<section class="sheet-body">
-		<div class="sheet-form-div">
-			<select class="sheet-form-select" name="system.type">
+		<div>
+			<select name="system.type">
 				{{selectOptions talentTypes selected=item.system.type localize=true}}
 			</select>
 		</div>
 
-		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
+		<div class="editor-container">
+			{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
+		</div>
 	</section>
 </form>

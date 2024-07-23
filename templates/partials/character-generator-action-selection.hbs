@@ -9,8 +9,8 @@
 <div class="actions body">
 	{{#each actions as |type ty|}}
 		<div class="action-container item-container tab {{ty}}{{#if @first}} active{{/if}}"
-             data-group="actions"
-             data-tab="{{ty}}">
+		     data-group="actions"
+		     data-tab="{{ty}}">
 			{{#each type}}
 				<label>
 					{{>systems/wfrp3e/templates/partials/item-action-card.hbs

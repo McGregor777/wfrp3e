@@ -8,44 +8,37 @@
 	</header>
 
 	<section class="sheet-body">
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'MUTATION.Traits'}}
+		<label>
+			{{localize 'MUTATION.Traits'}}
 
-				<input class="sheet-form-input"
-				       name="system.traits"
-				       value="{{item.system.traits}}"
-				       type="text"
-				       placeholder="{{localize 'Traits'}}" />
-            </label>
+			<input name="system.traits"
+			       value="{{item.system.traits}}"
+			       type="text"
+			       placeholder="{{localize 'Traits'}}" />
+		</label>
+
+		<label>
+			{{localize 'MUTATION.SeverityRating'}}
+
+			<input name="system.severityRating"
+			       value="{{item.system.severityRating}}"
+			       type="number"
+			       placeholder="{{localize 'MUTATION.SeverityRating'}}"
+			       data-tooltip="{{localize 'MUTATION.SeverityRating'}}" />
+		</label>
+
+		<label>
+			{{localize "MUTATION.Description"}}
+
+			<input name="system.description"
+			       value="{{item.system.description}}"
+			       type="text"
+			       placeholder="{{localize 'MUTATION.Description'}}"
+			       data-tooltip="{{localize 'MUTATION.Description'}}" />
+		</label>
+
+		<div class="editor-container">
+			{{editor item.system.effects target="system.effects" button=true owner=owner editable=editable}}
 		</div>
-
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'MUTATION.SeverityRating'}}
-
-				<input class="sheet-form-input"
-				       name="system.severityRating"
-				       value="{{item.system.severityRating}}"
-				       type="number"
-				       placeholder="{{localize 'MUTATION.SeverityRating'}}"
-				       data-tooltip="{{localize 'MUTATION.SeverityRating'}}" />
-            </label>
-		</div>
-
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'MUTATION.Description'}}
-
-				<input class="sheet-form-input"
-				       name="system.description"
-				       value="{{item.system.description}}"
-				       type="text"
-				       placeholder="{{localize 'MUTATION.Description'}}"
-				       data-tooltip="{{localize 'MUTATION.Description'}}" />
-            </label>
-		</div>
-
-		{{editor item.system.effects target='system.effects' button=true owner=owner editable=editable}}
 	</section>
 </form>

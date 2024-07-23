@@ -94,18 +94,18 @@
 				</div>
 			</div>
 
-			<label>
-				{{localize "WEAPON.QUALITY.Special"}}
+			<hr />
 
+			<label class="editor-container">
+				{{localize "WEAPON.QUALITY.Special"}}
 				{{editor item.system.special target="system.special" button=true owner=owner editable=editable}}
 			</label>
 		</section>
 
 		<section class="tab main-tab" data-group="primary" data-tab="details">
-			{{localize "TRAPPING.Description"}}
-
-			<label>
-				{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
+			<label class="editor-container">
+				{{localize "TRAPPING.Description"}}
+				{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
 			</label>
 		</section>
 	</div>

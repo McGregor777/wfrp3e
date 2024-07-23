@@ -1,14 +1,14 @@
 <form>
-    <h1>{{localize "CHARACTERISTICUPGRADER.UpgradeACharacteristic"}}</h1>
+	<h1>{{localize "CHARACTERISTICUPGRADER.UpgradeACharacteristic"}}</h1>
 
-    <div class="characteristics body">
-        {{#each characteristics as |characteristic char|}}
-            <div>
-                <h2>
-                    {{localize characteristic.name}}
+	<div class="characteristics body">
+		{{#each characteristics as |characteristic char|}}
+			<div>
+				<h2>
+					{{localize characteristic.name}}
 
-                    {{#unless @root.nonCareer}}
-                        <span class="fas fa-check"></span>
+					{{#unless @root.nonCareer}}
+	                    <span class="fas fa-check"></span>
                     {{/unless}}
                 </h2>
 

@@ -14,7 +14,7 @@
 					   aria-label="{{localize 'COMBAT.EncounterPrevious'}}"
 					   role="button"
 					   data-tooltip="COMBAT.EncounterPrevious"
-					    {{#if previousId}}data-document-id="{{previousId}}"{{else}}disabled{{/if}}>
+						{{#if previousId}}data-document-id="{{previousId}}"{{else}}disabled{{/if}}>
 						<span class="fas fa-caret-left"></span>
 					</a>
 				
@@ -24,7 +24,7 @@
 					   aria-label="{{localize 'COMBAT.EncounterNext'}}"
 					   role="button"
 					   data-tooltip="COMBAT.EncounterNext"
-					    {{#if nextId}}data-document-id="{{nextId}}"{{else}}disabled{{/if}}>
+						{{#if nextId}}data-document-id="{{nextId}}"{{else}}disabled{{/if}}>
 						<span class="fas fa-caret-right"></span>
 					</a>
 				{{/if}}
@@ -34,26 +34,26 @@
 				   role="button"
 				   data-tooltip="COMBAT.Delete"
 				   data-control="endCombat"
-				    {{#unless combatCount}}disabled{{/unless}}>
+					{{#unless combatCount}}disabled{{/unless}}>
 					<span class="fas fa-trash"></span>
 				</a>
 			</nav>
 		{{/if}}
 
-        <div class="encounter-inputs flexrow {{#if hasCombat}}combat{{/if}}">
-            {{#each encounterTypes as |encounterType type|}}
-                <label class="encounter-type">
-                    {{localize encounterType}}
+		<div class="encounter-inputs flexrow {{#if hasCombat}}combat{{/if}}">
+			{{#each encounterTypes as |encounterType type|}}
+				<label class="encounter-type">
+					{{localize encounterType}}
 
-                    <input class="combat-input"
-                           name="flags.encounterType"
-                           value="{{type}}"
-                           type="radio"
-                        {{#if (equalTo @root.combat.flags.encounterType type)}}checked{{/if}}
-                        {{#if user.isGM}}disabled{{/if}}/>
-                </label>
-            {{/each}}
-        </div>
+					<input class="combat-input"
+					       name="flags.encounterType"
+					       value="{{type}}"
+					       type="radio"
+						{{#if (equalTo @root.combat.flags.encounterType type)}}checked{{/if}}
+						{{#if user.isGM}}disabled{{/if}}/>
+				</label>
+			{{/each}}
+		</div>
 
 		<div class="encounter-controls flexrow {{#if hasCombat}}combat{{/if}}">
 			{{#if user.isGM}}
@@ -62,7 +62,7 @@
 				   role="button"
 				   data-tooltip="COMBAT.RollAll"
 				   data-control="rollAll"
-				    {{#unless turns}}disabled{{/unless}}>
+					{{#unless turns}}disabled{{/unless}}>
 					<span class="fas fa-users"></span>
 				</a>
 
@@ -71,7 +71,7 @@
 				   role="button"
 				   data-tooltip="COMBAT.RollNPC"
 				   data-control="rollNPC"
-				    {{#unless turns}}disabled{{/unless}}>
+					{{#unless turns}}disabled{{/unless}}>
 					<span class="fas fa-users-cog"></span>
 				</a>
 			{{/if}}
@@ -92,7 +92,7 @@
 				   role="button"
 				   data-tooltip="COMBAT.InitiativeReset"
 				   data-control="resetAll"
-				    {{#unless hasCombat}}disabled{{/unless}}>
+					{{#unless hasCombat}}disabled{{/unless}}>
 					<span class="fas fa-undo"></span>
 				</a>
 			
@@ -101,7 +101,7 @@
 				   role="button"
 				   data-tooltip="{{labels.scope}}"
 				   data-control="toggleSceneLink"
-				    {{#unless hasCombat}}disabled{{/unless}}>
+					{{#unless hasCombat}}disabled{{/unless}}>
 					<span class="fas fa-{{#unless linked}}un{{/unless}}link"></span>
 				</a>
 			{{/if}}

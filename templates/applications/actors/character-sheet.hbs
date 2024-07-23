@@ -243,7 +243,9 @@
 		{{>systems/wfrp3e/templates/partials/trapping-tab.hbs}}
 
 		<section class="tab background-tab" data-group="primary" data-tab="background">
-			{{editor actor.system.background.biography target="system.background.biography" button=true owner=owner editable=editable}}
+			<div class="editor-container">
+				{{editor actor.system.background.biography target="system.background.biography" button=true owner=owner editable=editable}}
+			</div>
 		</section>
 	</div>
 </form>

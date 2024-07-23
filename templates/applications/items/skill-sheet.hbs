@@ -3,35 +3,36 @@
 		<img class="actor-img" src="{{item.img}}" data-edit="img" data-tooltip="{{item.name}}" />
 
 		<h1>
-            <label>
-                <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}"/>
-            </label>
-        </h1>
+			<label>
+				<input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Name'}}"/>
+			</label>
+		</h1>
 	</header>
 
 	<section class="sheet-body">
 		<label class="form-label">
-            {{localize 'SKILL.Characteristic'}}
+			{{localize 'SKILL.Characteristic'}}
 
-			<select class="sheet-form-select" name="system.characteristic">
+			<select name="system.characteristic">
 				{{selectOptions characteristics selected=item.system.characteristic labelAttr="name" localize=true}}
 			</select>
 		</label>
 
-		<label class="sheet-form-div">
+		<label>
 			{{localize 'SKILL.AdvancedSkill'}}
 
 			<input name="system.advanced" type="checkbox"{{#if item.system.advanced}} checked{{/if}} />
 		</label>
 
-		{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
+		<div class="editor-container">
+			{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
+		</div>
 
-        {{#if item.parent}}
-            <label class="form-label">
-                {{localize 'SKILL.Specialisations'}}
-
-                <input name="system.specialisations" type="text" value="{{item.system.specialisations}}" />
-            </label>
-        {{/if}}
+		{{#if item.parent}}
+			<label class="form-label">
+				{{localize "SKILL.Specialisations"}}
+				<input name="system.specialisations" type="text" value="{{item.system.specialisations}}" />
+			</label>
+		{{/if}}
 	</section>
 </form>

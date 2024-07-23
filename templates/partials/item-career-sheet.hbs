@@ -1,11 +1,11 @@
 <div class="career-sheet">
 	<div class="face front active">
 		<div class="career-sheet-header">
-            {{#if @root.document.isOwner}}
-                <a class="career-sheet-name item-name-link">{{career.name}}</a>
-            {{else}}
-                <span class="career-sheet-name">{{career.name}}</span>
-            {{/if}}
+			{{#if @root.document.isOwner}}
+				<a class="career-sheet-name item-name-link">{{career.name}}</a>
+			{{else}}
+				<span class="career-sheet-name">{{career.name}}</span>
+			{{/if}}
 
 			<div class="career-sheet-race-restrictions">
 				{{#if career.system.advanced}}
@@ -14,13 +14,13 @@
 					{{localize "CAREER.SHEET.BasicCareer"}}
 				{{/if}}
 				:
-                {{#each career.system.raceRestrictions}}
-                    {{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
-                        {{localize "CAREER.SHEET.OneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
-                    {{else}}
-                        {{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
-                    {{/if}}
-                {{/each}}
+				{{#each career.system.raceRestrictions}}
+					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
+						{{localize "CAREER.SHEET.OneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+					{{else}}
+						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
+					{{/if}}
+				{{/each}}
 			</div>
 
 			<div class="career-sheet-traits">{{career.system.traits}}</div>
@@ -104,14 +104,14 @@
 				{{else}}
 					{{localize "CAREER.SHEET.BasicCareer"}}
 				{{/if}}
-                :
-                {{#each career.system.raceRestrictions}}
-                    {{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
-                        {{localize "CAREER.SHEET.OneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
-                    {{else}}
-                        {{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
-                    {{/if}}
-                {{/each}}
+				:
+				{{#each career.system.raceRestrictions}}
+					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
+						{{localize "CAREER.SHEET.OneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+					{{else}}
+						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
+					{{/if}}
+				{{/each}}
 			</div>
 
 			<div class="career-sheet-traits">{{career.system.summary}}</div>
@@ -123,19 +123,19 @@
 	<div class="bottom-line">
 		<a class="flip-link" data-tooltip="{{localize 'Flip sheet'}}"><span class="fas fa-undo"></span></a>
 
-        {{#if @root.document.isOwner}}
-            <label class="current-career-div">
-                {{localize 'CAREER.CurrentCareer'}}
+		{{#if @root.document.isOwner}}
+			<label class="current-career-div">
+				{{localize 'CAREER.CurrentCareer'}}
 
-                <input class="item-input current-career-input"
-                       data-path="system.current"
-                       type="radio"
-                    {{#if career.system.current}} checked{{/if}} />
-            </label>
+				<input class="item-input current-career-input"
+				       data-path="system.current"
+				       type="radio"
+					{{#if career.system.current}} checked{{/if}} />
+			</label>
 
-            <a class="item-delete-link sheet-delete-link" data-tooltip="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
-                <span class="fas fa-trash"></span>
-            </a>
-        {{/if}}
+			<a class="item-delete-link sheet-delete-link" data-tooltip="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
+				<span class="fas fa-trash"></span>
+			</a>
+		{{/if}}
 	</div>
 </div>

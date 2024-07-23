@@ -127,7 +127,7 @@
 					{{/if}}
 				</a>
 
-				<div class="special-rule-summary">
+				<div class="special-rule-summary editor-container">
 					{{editor actor.system.specialRuleSummary target="system.specialRuleSummary" button=true owner=owner editable=editable}}
 				</div>
 			</div>
@@ -170,7 +170,9 @@
 		{{/if}}
 
 		<section class="detail-tab tab" data-group="primary" data-tab="details">
-			{{editor actor.system.description target="system.description" button=true owner=owner editable=editable}}
+			<div class="editor-container">
+				{{editor actor.system.description target="system.description" button=true owner=owner editable=editable}}
+			</div>
 		</section>
 	</div>
 </form>

@@ -1,263 +1,287 @@
 .wfrp3e.sheet {
-	& nav.primary-tabs {
-		font: small-caps bold var(--font-size-18) var(--font-primary);
-	}
-
-	& section > nav {
-		border-top: none;
-	}
-
-	& .editor-content {
-		margin: 0 0.5rem;
-	}
-
-	& .form-div {
+	& form {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
+		flex-direction: column;
 
-		& > * {
-			flex: 1 1 auto;
+		& hr {
+			width: 100%;
 		}
 
-		& input[type=number] {
-			width: 2rem;
+		& nav.primary-tabs {
+			font: small-caps bold var(--font-size-18) var(--font-primary);
 		}
-	}
 
-	& .form-label {
-		align-items: center;
-		display: flex;
-		gap: 0.5rem;
-
-		& > input {
+		& .editor-container {
+			display: flex;
+			flex-direction: column;
 			flex-grow: 1;
-			width: unset;
 		}
-	}
 
-	& .sheet-body {
-		flex: 1 1 0;
-		min-height: 0;
-
-		& > .tab.active {
+		& .sheet-body {
 			display: flex;
-			flex-flow: column nowrap;
-			height: 100%;
-			overflow: auto;
-		}
-
-		& .tab {
-			overflow: unset;
-
-			& .tab-content {
-				min-height: 0;
-			}
-
-			& .sheet-tabs {
-				border-bottom: 1px solid #b5b3a4;
-				display: flex;
-				flex-flow: row wrap;
-				justify-content: space-around;
-
-				& > * {
-					margin: 0 5px;
-				}
-			}
-		}
-
-		& .item-container {
-			display: none;
-			flex-flow: row wrap;
-			height: 100%;
-			overflow: auto;
-
-			&.active {
-				display: flex;
-			}
-		}
-
-		& .table {
-			display: flex;
+			flex: 1 1 0;
 			flex-direction: column;
 			min-height: 0;
 
-			& hr {
-				margin: 0;
-			}
+			& .editor {
+				background: rgba(250, 240, 230, 0.5);
+				border-radius: 0.5rem;
+				flex-grow: 1;
+				min-height: 200px;
 
-			& > * hr {
-				border: none;
-				border-left: 1px solid var(--color-border-light-primary);
-				border-right: 1px solid var(--color-border-light-highlight);
-				height: 1rem;
-				width: 1px;
-			}
-
-			& .buttons {
-				font-size: 10pt;
-				width: 5%;
-			}
-
-			& .encumbrance {
-				width: 5%;
-			}
-
-			& .quantity {
-				width: 10%;
-			}
-
-			& .row {
-				background: #D8CFC0;
-				padding: 0.25rem;
-
-				&:nth-of-type(even) {
-					background: #E9E2DB;
-				}
-
-				&.skill {
-					background: #EDE1D1;
-
-					&:nth-of-type(even) {
-						background: #E1CFB6;
-					}
-				}
-
-				& .content:first-child {
-					align-items: center;
-					display: flex;
-					text-align: center;
+				& .editor-content {
+					margin: 0 0.5rem;
 				}
 			}
 
-			& .table-header {
-				background: #7E1518;
-				color: var(--color-text-light-highlight);
+			& .form-div {
 				display: flex;
-				font-weight: bold;
-				padding: 0.25rem;
-				text-align: center;
-				text-shadow: 1px 1px var(--color-shadow-dark);
+				flex-wrap: wrap;
+				gap: 0.5rem;
 
-				&.skill {
-					background: initial;
-					color: initial;
-					font-variant-caps: small-caps;
-					text-shadow: initial;
+				& > * {
+					flex: 1 1 auto;
 				}
 
-				&.title {
-					background: #3F0B0CFF;
-					display: block;
-				}
-
-				& hr {
-					border-right: 1px solid var(--color-border-light-primary);
+				& input[type=number] {
+					width: 2rem;
 				}
 			}
 
-			& .table-body {
+			& .form-label {
+				align-items: center;
+				display: flex;
+				gap: 0.5rem;
+
+				& > input {
+					flex-grow: 1;
+					width: unset;
+				}
+			}
+
+			& .item-container {
+				display: none;
+				flex-flow: row wrap;
+				height: 100%;
+				overflow: auto;
+
+				&.active {
+					display: flex;
+				}
+			}
+
+			& section > nav {
+				border-top: none;
+			}
+
+			& > .tab.active {
+				display: flex;
+				flex-flow: column nowrap;
+				height: 100%;
 				overflow: auto;
 			}
 
-			&.armour {
-				& .armour-defence-value {
-					width: 10%;
+			& .tab {
+				overflow: unset;
+
+				& .tab-content {
+					min-height: 0;
 				}
 
-				& .armour-soak-value {
-					width: 10%;
-				}
+				& .sheet-tabs {
+					border-bottom: 1px solid #b5b3a4;
+					display: flex;
+					flex-flow: row wrap;
+					justify-content: space-around;
 
-				& .armour-name {
-					text-align: initial;
-					width: 70%;
-				}
-			}
-
-			&.money {
-				& .money-value {
-					width: 10%;
-				}
-
-				& .money-name {
-					text-align: initial;
-					width: 70%;
+					& > * {
+						margin: 0 5px;
+					}
 				}
 			}
 
-			&.skill {
+			& .table {
+				display: flex;
+				flex-direction: column;
+				min-height: 0;
+
+				& hr {
+					margin: 0;
+				}
+
+				& > * hr {
+					border: none;
+					border-left: 1px solid var(--color-border-light-primary);
+					border-right: 1px solid var(--color-border-light-highlight);
+					height: 1rem;
+					width: 1px;
+				}
+
 				& .buttons {
-					width: 10%;
-				}
-
-				& .skill-characteristic {
-					font-variant-caps: small-caps;
-					width: 15%;
-				}
-
-				& .skill-name {
-					font-variant-caps: small-caps;
-					text-align: initial;
-					width: 50%;
-				}
-
-				& .skill-training-level {
-					width: 25%;
-				}
-			}
-
-			&.trapping {
-
-				& .trapping-name {
-					text-align: initial;
-					width: 90%;
-				}
-			}
-
-			&.weapon {
-				& .weapon-critical-rating {
+					font-size: 10pt;
 					width: 5%;
 				}
 
-				& .weapon-damage-rating {
+				& .encumbrance {
 					width: 5%;
 				}
 
-				& .weapon-group {
-					width: 15%;
-				}
-
-				& .weapon-name {
-					text-align: initial;
-					width: 20%;
-				}
-
-				& .weapon-qualities {
-					width: 40%;
-				}
-
-				& .weapon-range {
+				& .quantity {
 					width: 10%;
 				}
+
+				& .row {
+					background: #D8CFC0;
+					padding: 0.25rem;
+
+					&:nth-of-type(even) {
+						background: #E9E2DB;
+					}
+
+					&.skill {
+						background: #EDE1D1;
+
+						&:nth-of-type(even) {
+							background: #E1CFB6;
+						}
+					}
+
+					& .content:first-child {
+						align-items: center;
+						display: flex;
+						text-align: center;
+					}
+				}
+
+				& .table-header {
+					background: #7E1518;
+					color: var(--color-text-light-highlight);
+					display: flex;
+					font-weight: bold;
+					padding: 0.25rem;
+					text-align: center;
+					text-shadow: 1px 1px var(--color-shadow-dark);
+
+					&.skill {
+						background: initial;
+						color: initial;
+						font-variant-caps: small-caps;
+						text-shadow: initial;
+					}
+
+					&.title {
+						background: #3F0B0CFF;
+						display: block;
+					}
+
+					& hr {
+						border-right: 1px solid var(--color-border-light-primary);
+					}
+				}
+
+				& .table-body {
+					overflow: auto;
+				}
+
+				&.armour {
+					& .armour-defence-value {
+						width: 10%;
+					}
+
+					& .armour-soak-value {
+						width: 10%;
+					}
+
+					& .armour-name {
+						text-align: initial;
+						width: 70%;
+					}
+				}
+
+				&.money {
+					& .money-value {
+						width: 10%;
+					}
+
+					& .money-name {
+						text-align: initial;
+						width: 70%;
+					}
+				}
+
+				&.skill {
+					& .buttons {
+						width: 10%;
+					}
+
+					& .skill-characteristic {
+						font-variant-caps: small-caps;
+						width: 15%;
+					}
+
+					& .skill-name {
+						font-variant-caps: small-caps;
+						text-align: initial;
+						width: 50%;
+					}
+
+					& .skill-training-level {
+						width: 25%;
+					}
+				}
+
+				&.trapping {
+
+					& .trapping-name {
+						text-align: initial;
+						width: 90%;
+					}
+				}
+
+				&.weapon {
+					& .weapon-critical-rating {
+						width: 5%;
+					}
+
+					& .weapon-damage-rating {
+						width: 5%;
+					}
+
+					& .weapon-group {
+						width: 15%;
+					}
+
+					& .weapon-name {
+						text-align: initial;
+						width: 20%;
+					}
+
+					& .weapon-qualities {
+						width: 40%;
+					}
+
+					& .weapon-range {
+						width: 10%;
+					}
+				}
+			}
+
+			& .trappings-tab {
+				gap: 1rem;
 			}
 		}
 
-		& .trappings-tab {
-			gap: 1rem;
+		& .tab-link.active {
+			color: white;
+			text-shadow:
+					-1px -1px 0 black,
+					-1px 0 0 black,
+					0 -1px 0 black,
+					-1px 1px 0 black,
+					1px -1px 0 black,
+					0 1px 0 black,
+					1px 0 0 black,
+					1px 1px 0 black !important;
 		}
-	}
-
-	& .tab-link.active {
-		color: white;
-		text-shadow:
-				-1px -1px 0 black,
-				-1px 0 0 black,
-				0 -1px 0 black,
-				-1px 1px 0 black,
-				1px -1px 0 black,
-				0 1px 0 black,
-				1px 0 0 black,
-				1px 1px 0 black !important;
 	}
 }
