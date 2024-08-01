@@ -228,7 +228,7 @@
 					{{localize "ROLL.DICEPOOLBUILDER.Weapon"}}
 
 					<select class="weapon-select" name="weapon">
-						{{selectOptions @root.availableWeapons selected=weapon._id nameAttr="_id" labelAttr="name"}}
+						{{selectOptions availableWeapons selected=weapon._id nameAttr="id" labelAttr="name" localize=true}}
 					</select>
 				</label>
 			{{/if}}

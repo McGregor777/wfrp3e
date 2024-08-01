@@ -1036,6 +1036,41 @@ export const WFRP3e = {
 		tricks: "TALENT.TYPE.Tricks"
 	},
 	weapon: {
+		commonWeapons: {
+			improvised: {
+				id: "improvised",
+				name: "WEAPON.Improvised",
+				system: {
+					criticalRating: 4,
+					damageRating: 3,
+					group: "thrown",
+					qualities: ["thrown"],
+					range: "close"
+				}
+			},
+			improvisedWeapon: {
+				id: "improvisedWeapon",
+				name: "WEAPON.ImprovisedWeapon",
+				system: {
+					criticalRating: 3,
+					damageRating: 3,
+					group: "ordinary",
+					qualities: [],
+					range: "close"
+				}
+			},
+			unarmed: {
+				id: "unarmed",
+				name: "WEAPON.Unarmed",
+				system: {
+					criticalRating: 4,
+					damageRating: 3,
+					group: "unarmed",
+					qualities: [],
+					range: "close"
+				}
+			}
+		},
 		groups: {
 			blackpowder: {
 				name: "WEAPON.GROUP.Blackpowder",
