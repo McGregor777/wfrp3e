@@ -2,12 +2,20 @@ import WFRP3eActorSheet from "./WFRP3eActorSheet.js";
 
 export default class WFRP3eCreatureSheet extends WFRP3eActorSheet
 {
+	constructor(object = {}, options = {})
+	{
+		super(object, options);
+
+		if(this.actor.system.nemesis)
+			this.position.height = 780;
+	}
+
 	static get defaultOptions()
 	{
 		return {
 			...super.defaultOptions,
 			width: 600,
-			height: 750,
+			height: 710,
 			classes: ["wfrp3e", "sheet", "actor", "creature", "creature-sheet"],
 			tabs: [
 				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"},

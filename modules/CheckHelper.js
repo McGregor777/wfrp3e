@@ -531,11 +531,23 @@ export default class CheckHelper
 				}
 			}
 
-			if(outcome.targetFatigue > 0 || outcome.targetFatigue < 0)
-				targetUpdates.system.impairments = {fatigue: targetActor.system.impairments.fatigue + outcome.targetFatigue};
+			if(outcome.targetFatigue > 0 || outcome.targetFatigue < 0) {
+				if(targetActor.type === "creature" && !targetActor.system.nemesis)
+					targetUpdates.system.impairments = {fatigue: targetActor.system.impairments.fatigue + outcome.targetFatigue};
+				else if(targetActor.system.wounds.value)
+					targetUpdates.system.wounds.value -= outcome.targetFatigue;
+				else
+					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetFatigue};
+			}
 
-			if(outcome.targetStress > 0 || outcome.targetStress < 0)
-				targetUpdates.system.impairments = {stress: targetActor.system.impairments.stress + outcome.targetStress};
+			if(outcome.targetStress > 0 || outcome.targetStress < 0) {
+				if(targetActor.type === "creature" && !targetActor.system.nemesis)
+					targetUpdates.system.impairments = {stress: targetActor.system.impairments.stress + outcome.targetStress};
+				else if(targetActor.system.wounds.value)
+					targetUpdates.system.wounds.value -= outcome.targetStress;
+				else
+					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetStress};
+			}
 
 			targetActor.update(targetUpdates);
 		}

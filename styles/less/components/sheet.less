@@ -23,6 +23,17 @@
 			flex-direction: column;
 			min-height: 0;
 
+			& > .tab.active {
+				display: flex;
+				flex-flow: column nowrap;
+				height: 100%;
+				overflow: auto;
+			}
+
+			& section > nav {
+				border-top: none;
+			}
+
 			& .editor {
 				background: rgba(250, 240, 230, 0.5);
 				border-radius: 0.5rem;
@@ -59,6 +70,60 @@
 				}
 			}
 
+			& .impairment {
+				display: flex;
+				margin: auto;
+				flex: 1 1 auto;
+				flex-direction: row;
+
+				&:first-child {
+					margin-bottom: 10px;
+				}
+
+				&:last-child {
+					margin-top: 10px;
+				}
+
+				& > .token {
+					position: relative;
+					width: 4rem;
+
+					& > * {
+						position: absolute;
+					}
+
+
+					& > img {
+						border: none;
+						opacity: 75%;
+						top: 50%;
+						transform: translate(0, -50%);
+					}
+
+					& > .token-counter {
+						color: white;
+						font-size: 24pt;
+						text-shadow:
+								-1pt -1pt 0 black,
+								-1pt 0 0 black,
+								0 -1pt 0 black,
+								-1pt 1pt 0 black,
+								1pt -1pt 0 black,
+								0 1pt 0 black,
+								1pt 0 0 black,
+								1pt 1pt 0 black;
+					}
+				}
+
+				& .title {
+					display: block;
+					font: small-caps bold var(--font-size-18) var(--font-primary);
+					padding: 0 2px 0 4px;
+					writing-mode: vertical-lr;
+					text-align: center;
+				}
+			}
+
 			& .item-container {
 				display: none;
 				flex-flow: row wrap;
@@ -70,15 +135,39 @@
 				}
 			}
 
-			& section > nav {
-				border-top: none;
-			}
+			& .stance-meter {
+				margin-bottom: 0.5rem;
 
-			& > .tab.active {
-				display: flex;
-				flex-flow: column nowrap;
-				height: 100%;
-				overflow: auto;
+				& .stance-meter-link > img {
+					opacity: 50%;
+				}
+
+				& .stance-meter-segment {
+					display: block;
+					height: 27px;
+
+					&.active {
+						filter: drop-shadow(gold 0px 0px 4px);
+					}
+
+					& > img {
+						border: none;
+						width: 32px;
+
+						&.stance-neutral {
+							width: 38px;
+						}
+					}
+
+					& > input {
+						display: none;
+					}
+				}
+
+				& .stance-meter-segment-container {
+					display: flex;
+					justify-content: center;
+				}
 			}
 
 			& .tab {

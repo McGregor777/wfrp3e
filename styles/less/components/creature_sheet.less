@@ -33,168 +33,177 @@
 					justify-content: center;
 				}
 
-				& .main-tab {
-					& > div {
-						display: flex;
+				& .main-tab > div {
+					display: flex;
 
-						&.attributes {
-							background-color: #884832;
-							border: solid dimgray;
-							border-radius: 0;
-							border-width: 4px 1rem 0;
-							color: white;
-							padding: 0.25rem 0 0.5rem;
-							text-align: center;
-							text-shadow:
-										-1pt -1pt 0 black,
-									-1pt 0 0 black,
-										0 -1pt 0 black,
-									-1pt 1pt 0 black,
-										1pt -1pt 0 black,
-									0 1pt 0 black,
-									1pt 0 0 black,
-									1pt 1pt 0 black;
+					&.attributes {
+						background-color: #884832;
+						border: solid dimgray;
+						border-radius: 0;
+						border-width: 4px 1rem 0;
+						color: white;
+						padding: 0.25rem 0 0.5rem;
+						text-align: center;
+						text-shadow:
+									-1pt -1pt 0 black,
+								-1pt 0 0 black,
+									0 -1pt 0 black,
+								-1pt 1pt 0 black,
+									1pt -1pt 0 black,
+								0 1pt 0 black,
+								1pt 0 0 black,
+								1pt 1pt 0 black;
 
-							& .attribute {
-								flex-grow: 1;
-								margin: 0 0.5rem;
+						& .attribute {
+							flex-grow: 1;
+							margin: 0 0.5rem;
 
-								& .attribute-title {
-									font-size: var(--font-size-18);
-									font-variant: small-caps;
+							& .attribute-title {
+								font-size: var(--font-size-18);
+								font-variant: small-caps;
+							}
+
+							& .attribute-input-container input {
+								color: white;
+								font-size: var(--font-size-22);
+								font-style: italic;
+								padding-top: 0.5rem;
+								text-shadow:
+											-1pt -1pt 0 black,
+										-1pt 0 0 black,
+											0 -1pt 0 black,
+										-1pt 1pt 0 black,
+											1pt -1pt 0 black,
+										0 1pt 0 black,
+										1pt 0 0 black,
+										1pt 1pt 0 black;
+								width: 2rem;
+							}
+
+							&.expertise {
+								color: yellow;
+
+								& input {
+									color: yellow;
+								}
+							}
+						}
+					}
+
+					&.main-infos {
+						& .characteristics {
+							flex: 0 0 100px;
+							padding: 0 0.5rem;
+
+							& > div {
+								align-items: center;
+								display: flex;
+								font-weight: bold;
+								margin-bottom: 0.25rem;
+
+								& > .characteristic-title {
+									margin-right: auto;
 								}
 
-								& .attribute-input-container input {
-									color: white;
-									font-size: var(--font-size-22);
-									font-style: italic;
-									padding-top: 0.5rem;
-									text-shadow:
-												-1pt -1pt 0 black,
-											-1pt 0 0 black,
-												0 -1pt 0 black,
-											-1pt 1pt 0 black,
-												1pt -1pt 0 black,
-											0 1pt 0 black,
-											1pt 0 0 black,
-											1pt 1pt 0 black;
+								& .characteristic-rating-input {
+									background: lightcyan;
+									border-color: lightsteelblue;
+									border-width: 2px;
+									padding-top: 0.25rem;
+									font-weight: bold;
+									text-align: center;
 									width: 2rem;
 								}
 
-								&.expertise {
-									color: yellow;
-
-									& input {
-										color: yellow;
-									}
+								& .characteristic-fortune-input {
+									background: white;
+									border-color: dimgray;
+									font-size: var(--font-size-14);
+									font-weight: bold;
+									height: 1.25rem;
+									padding-top: 0.25rem;
+									text-align: center;
+									width: 1.25rem;
 								}
 							}
 						}
 
-						&.main-infos {
-							& .characteristics {
-								flex: 0 0 100px;
-								padding: 0 0.5rem;
+						& .image {
+							flex: 1 1 auto;
 
-								& > div {
-									align-items: center;
-									display: flex;
-									font-weight: bold;
-									margin-bottom: 0.25rem;
-
-									& > .characteristic-title {
-										margin-right: auto;
-									}
-
-									& .characteristic-rating-input {
-										background: lightcyan;
-										border-color: lightsteelblue;
-										border-width: 2px;
-										padding-top: 0.25rem;
-										font-weight: bold;
-										text-align: center;
-										width: 2rem;
-									}
-
-									& .characteristic-fortune-input {
-										background: white;
-										border-color: dimgray;
-										font-size: var(--font-size-14);
-										font-weight: bold;
-										height: 1.25rem;
-										padding-top: 0.25rem;
-										text-align: center;
-										width: 1.25rem;
-									}
-								}
+							& > img {
+								display: block;
+								margin: auto;
 							}
+						}
 
-							& .image {
-								flex: 1 1 auto;
+						& .ratings {
+							flex: 0 0 100px;
+							padding-left: 0.5rem;
+
+							& > .rating-container {
+								align-items: center;
+								background-color: #240000;
+								border: solid dimgrey;
+								border-radius: 2rem 0 0 2rem;
+								border-width: 2px 0;
+								display: flex;
+								margin-bottom: 0.25rem;
 
 								& > img {
-									display: block;
-									margin: auto;
+									border: none;
+								}
+
+								& > input {
+									border: none;
+									color: white;
+									font-weight: bold;
+									padding: 0.25rem 0 0 0.5rem;
+
+									&:focus {
+										box-shadow: none;
+										text-shadow: 0 0 5px var(--color-shadow-primary);
+									}
 								}
 							}
 
-							& .ratings {
-								flex: 0 0 100px;
-								padding-left: 0.5rem;
-
-								& > div {
-									align-items: center;
-									background-color: #240000;
-									border: solid dimgrey;
-									border-radius: 2rem 0 0 2rem;
-									border-width: 2px 0;
-									display: flex;
-									margin-bottom: 0.25rem;
-
-									& > img {
-										border: none;
-									}
-
-									& > input {
-										border: none;
-										color: white;
-										font-weight: bold;
-										padding: 0.25rem 0 0 0.5rem;
-
-										&:focus {
-											box-shadow: none;
-											text-shadow: 0 0 5px var(--color-shadow-primary);
-										}
-									}
-								}
+							& > .impairment .token-counter {
+								left: 50%;
+								top: 50%;
+								transform: translate(-50%, -25%);
 							}
 						}
+					}
 
-						&.secondary-infos {
+					&.secondary-infos {
+						flex-grow: 1;
+						padding: 0 1rem 1rem;
+
+						& .special-rule-summary {
 							flex-grow: 1;
-							padding: 0 1rem 1rem;
 
-							& .special-rule-summary {
-								flex-grow: 1;
-
-								& > .editor {
-									height: 100%;
-								}
-							}
-
-							& .stance {
-								font-size: var(--font-size-18);
-								margin: auto 1rem 1rem 0;
-
-								&.conservative {
-									color: green;
-								}
-
-								&.reckless {
-									color: red;
-								}
+							& > .editor {
+								height: 100%;
 							}
 						}
+
+						& .stance {
+							font-size: var(--font-size-18);
+							margin: auto 1rem 1rem 0;
+
+							&.conservative {
+								color: green;
+							}
+
+							&.reckless {
+								color: red;
+							}
+						}
+					}
+
+					&.stance-meter {
+						justify-content: center;
+						margin: 0.5rem 0;
 					}
 				}
 			}

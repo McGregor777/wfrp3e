@@ -73,7 +73,7 @@
 				</div>
 
 				<div class="ratings">
-					<div class="damage-rating">
+					<div class="rating-container damage-rating">
 						<img class="damage-rating-icon"
 						     src="systems/wfrp3e/assets/images/damage-rating.webp"
 						     data-tooltip="{{localize 'CREATURE.DamageRating'}}"
@@ -86,7 +86,7 @@
 						       placeholder="{{localize 'CREATURE.ABBREVIATION.DamageRating'}}" />
 					</div>
 
-					<div class="soak-value">
+					<div class="rating-container soak-value">
 						<img class="soak-value-icon"
 						     src="systems/wfrp3e/assets/images/soak-value.webp"
 						     data-tooltip="{{localize 'CREATURE.SoakValue'}}"
@@ -99,7 +99,7 @@
 						       placeholder="{{localize 'CREATURE.ABBREVIATION.SoakValue'}}" />
 					</div>
 
-					<div class="defence-value">
+					<div class="rating-container defence-value">
 						<img class="defence-value-icon"
 						     src="systems/wfrp3e/assets/images/defence-value.webp"
 						     data-tooltip="{{localize 'CREATURE.DefenceValue'}}"
@@ -111,21 +111,67 @@
 						       type="number"
 						       placeholder="{{localize 'CREATURE.ABBREVIATION.DefenceValue'}}" />
 					</div>
+
+                    {{#if actor.system.nemesis}}
+						{{>systems/wfrp3e/templates/partials/impairment-partial.hbs
+								impairment="fatigue"
+								tokenPath="systems/wfrp3e/assets/images/token-red.webp"}}
+
+						{{>systems/wfrp3e/templates/partials/impairment-partial.hbs
+								impairment="stress"
+								tokenPath="systems/wfrp3e/assets/images/token-blue.webp"}}
+					{{/if}}
 				</div>
 			</div>
 
+			{{#if actor.system.nemesis}}
+				<div class="stance-meter">
+					<div class="stance-meter-segment-container">
+                        <a class="stance-meter-segment stance-meter-link"
+                           data-stance="conservative"
+                           data-tooltip="{{localize 'CHARACTER.SHEET.AddRemoveConservativeSegment'}}">
+                            <img class="stance-conservative"
+                                 src="systems/wfrp3e/assets/images/stance-conservative.webp"
+                                 height="27" />
+                        </a>
+
+						{{#for actor.system.stanceMeter.conservative (increment actor.system.stanceMeter.reckless 1) 1}}
+							<label class="stance-meter-segment{{#if (equalTo @root.actor.system.stance.current this)}} active{{/if}}">
+								<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}"
+								     src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}.webp" height="27" />
+
+								<input name="system.stance.current"
+								       value="{{this}}"
+								       type="radio"
+								       {{#if (equalTo @root.actor.system.stance.current this)}}checked{{/if}}/>
+							</label>
+						{{/for}}
+
+                        <a class="stance-meter-segment stance-meter-link"
+                           data-stance="reckless"
+                           data-tooltip="{{localize 'CHARACTER.SHEET.AddRemoveRecklessSegment'}}">
+                            <img class="stance-conservative"
+                                 src="systems/wfrp3e/assets/images/stance-reckless.webp"
+                                 height="27" />
+                        </a>
+					</div>
+				</div>
+			{{/if}}
+
 			<div class="secondary-infos">
-				<a class="stance {{actor.system.defaultStance}}" data-tooltip="{{localize 'CREATURE.Stance'}}">
-					{{#if (inferiorTo actor.system.stance 0)}}
-						C{{abs actor.system.stance}}
-					{{else}}
-						{{#if (superiorTo actor.system.stance 0)}}
-							R{{actor.system.stance}}
+				{{#unless actor.system.nemesis}}
+					<a class="stance {{actor.system.defaultStance}}" data-tooltip="{{localize 'CREATURE.Stance'}}">
+						{{#if (inferiorTo actor.system.stance.current 0)}}
+							C{{abs actor.system.stance.current}}
 						{{else}}
-							N/A
+							{{#if (superiorTo actor.system.stance.current 0)}}
+								R{{actor.system.stance.current}}
+							{{else}}
+								N/A
+							{{/if}}
 						{{/if}}
-					{{/if}}
-				</a>
+					</a>
+				{{/unless}}
 
 				<div class="special-rule-summary editor-container">
 					{{editor actor.system.specialRuleSummary target="system.specialRuleSummary" button=true owner=owner editable=editable}}

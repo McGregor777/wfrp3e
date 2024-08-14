@@ -150,7 +150,7 @@
 						</a>
 					</h3>
 
-					<div class="stance-meter-segments">
+					<div class="stance-meter-segment-container">
 						{{#for actor.system.stanceMeter.conservative (increment actor.system.stanceMeter.reckless 1) 1}}
 							<label class="stance-meter-segment{{#if (equalTo @root.actor.system.stance.current this)}} active{{/if}}">
 								<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}"
