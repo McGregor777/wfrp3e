@@ -7,33 +7,29 @@
 		</h1>
 	</header>
 
-	<section class="sheet-body">
-		<div class="form-div">
-			<label>{{localize 'MONEY.Value'}}:
+	<section>
+		<label>{{localize 'MONEY.Value'}}:
 
-				<input name="system.value"
-				       value="{{item.system.value}}"
-				       type="number"
-				       placeholder="{{localize 'MONEY.Value'}}"
-				       data-tooltip="{{localize 'MONEY.Value'}}" />
-			</label>
-		</div>
-
-		<div class="sheet-form-div">
-			<label>{{localize "TRAPPING.Quantity"}}:
-
-				<input name="system.quantity"
-				       value="{{item.system.quantity}}"
-				       placeholder="{{localize 'TRAPPING.ABBREVIATION.Quantity'}}"
-				       type="number"
-				       data-tooltip="{{localize 'TRAPPING.Quantity'}}" />
-			</label>
-		</div>
+			<input name="system.value"
+			       value="{{item.system.value}}"
+			       type="number"
+			       placeholder="{{localize 'MONEY.Value'}}"
+				   data-tooltip="{{localize 'MONEY.Value'}}" />
+		</label>
 
 		<label>
-			{{localize "TRAPPING.Description"}}:
+			{{localize "TRAPPING.Quantity"}}:
 
-			{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
+			<input name="system.quantity"
+			       value="{{item.system.quantity}}"
+			       placeholder="{{localize 'TRAPPING.ABBREVIATION.Quantity'}}"
+			       type="number"
+			       data-tooltip="{{localize 'TRAPPING.Quantity'}}" />
+		</label>
+
+		<label class="editor-container">
+			{{localize "TRAPPING.Description"}}:
+			{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
 		</label>
 	</section>
 </form>

@@ -113,16 +113,26 @@ export default class DicePoolBuilder extends FormApplication
 				data.action = action;
 
 				if(["melee", "ranged"].includes(action.system.type)) {
-					data.availableWeapons = action.actor.itemTypes.weapon.filter(weapon => {
-						return Object.entries(CONFIG.WFRP3e.weapon.groups).reduce((array, weaponGroup) => {
-							if(weaponGroup[1].type === action.system.type)
-								array.push(weaponGroup[0]);
-							return array;
-						}, []).includes(weapon.system.group);
-					});
+					data.availableWeapons = [
+						...action.actor.itemTypes.weapon.filter(weapon => {
+							return Object.entries(CONFIG.WFRP3e.weapon.groups).reduce((array, weaponGroup) => {
+								if(weaponGroup[1].type === action.system.type)
+									array.push(weaponGroup[0]);
+								return array;
+							}, []).includes(weapon.system.group);
+						})
+					];
 
-					data.weapon = checkData.weapon ?? Object.values(data.availableWeapons)[0];
-					checkData.weapon = Object.values(data.availableWeapons)[0];
+					if(action.system.type === "melee")
+						data.availableWeapons.push(
+							CONFIG.WFRP3e.weapon.commonWeapons.improvisedWeapon,
+							CONFIG.WFRP3e.weapon.commonWeapons.unarmed
+						);
+					else
+						data.availableWeapons.push(CONFIG.WFRP3e.weapon.commonWeapons.improvised);
+
+					data.weapon = checkData.weapon ?? data.availableWeapons[0];
+					checkData.weapon = data.availableWeapons[0];
 				}
 			}
 		}
@@ -536,11 +546,24 @@ export default class DicePoolBuilder extends FormApplication
 	{
 		event.preventDefault();
 
-		this.object.checkData.weapon = this.actor.itemTypes.weapon(weapon => weapon._id === event.currentTarget.value);
+		switch(event.currentTarget.value) {
+			case "unarmed":
+				this.object.checkData.weapon = CONFIG.WFRP3e.weapon.commonWeapons.unarmed;
+				break;
+			case "improvised":
+				this.object.checkData.weapon = CONFIG.WFRP3e.weapon.commonWeapons.improvised;
+				break;
+			case "improvisedWeapon":
+				this.object.checkData.weapon = CONFIG.WFRP3e.weapon.commonWeapons.improvisedWeapon;
+				break;
+			default:
+				this.object.checkData.weapon = this.actor.itemTypes.weapon.find(weapon => weapon.id === event.currentTarget.value);
+				break;
+		}
 	}
 
 	/**
-	 * Performs follow-up operations after left-clicks on a extend button.
+	 * Performs follow-up operations after left-clicks on an extend button.
 	 * @param {MouseEvent} event
 	 * @private
 	 */

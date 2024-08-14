@@ -5,44 +5,37 @@
 	</header>
 
 	<section class="sheet-body">
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'INSANITY.Traits'}}
+		<label>
+			{{localize 'INSANITY.Traits'}}
 
-				<input class="sheet-form-input"
-				       name="system.traits"
-				       value="{{item.system.traits}}"
-				       type="text"
-				       placeholder="{{localize 'Traits'}}" />
-            </label>
+			<input name="system.traits"
+			       value="{{item.system.traits}}"
+			       type="text"
+			       placeholder="{{localize 'Traits'}}" />
+		</label>
+
+		<label>
+			{{localize 'INSANITY.SeverityRating'}}
+
+			<input name="system.severityRating"
+			       value="{{item.system.severityRating}}"
+			       type="number"
+			       placeholder="{{localize 'INSANITY.SeverityRating'}}"
+			       data-tooltip="{{localize 'INSANITY.SeverityRating'}}" />
+		</label>
+
+		<label>
+			{{localize "INSANITY.Description"}}
+
+			<input name="system.description"
+			       value="{{item.system.description}}"
+			       type="text"
+			       placeholder="{{localize 'INSANITY.Description'}}"
+			       data-tooltip="{{localize 'INSANITY.Description'}}" />
+		</label>
+
+		<div class="editor-container">
+			{{editor item.system.effects target="system.effects" button=true owner=owner editable=editable}}
 		</div>
-
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'INSANITY.SeverityRating'}}
-
-				<input class="sheet-form-input"
-				       name="system.severityRating"
-				       value="{{item.system.severityRating}}"
-				       type="number"
-				       placeholder="{{localize 'INSANITY.SeverityRating'}}"
-				       data-tooltip="{{localize 'INSANITY.SeverityRating'}}" />
-            </label>
-		</div>
-
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'INSANITY.Description'}}
-
-				<input class="sheet-form-input"
-				       name="system.description"
-				       value="{{item.system.description}}"
-				       type="text"
-				       placeholder="{{localize 'INSANITY.Description'}}"
-				       data-tooltip="{{localize 'INSANITY.Description'}}" />
-            </label>
-		</div>
-
-		{{editor item.system.effects target='system.effects' button=true owner=owner editable=editable}}
 	</section>
 </form>

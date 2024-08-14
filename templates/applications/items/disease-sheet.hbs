@@ -5,54 +5,45 @@
 	</header>
 
 	<section class="sheet-body">
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'DISEASE.Traits'}}
+		<label>
+			{{localize 'DISEASE.Traits'}}
 
-				<input class="sheet-form-input"
-				       name="system.traits"
-				       value="{{item.system.traits}}"
-				       type="text"
-				       placeholder="{{localize 'Traits'}}" />
-            </label>
+			<input name="system.traits"
+			       value="{{item.system.traits}}"
+			       type="text"
+			       placeholder="{{localize 'Traits'}}" />
+		</label>
+
+		<label>
+			{{localize 'DISEASE.Symptom'}}
+
+			<select class="sheet-form-select" name="system.symptom">
+				{{selectOptions diseaseSymptoms selected=item.system.symptom labelAttr="name" localize=true}}
+			</select>
+		</label>
+
+		<label>
+			{{localize 'DISEASE.SeverityRating'}}
+
+			<input name="system.severityRating"
+			       value="{{item.system.severityRating}}"
+			       type="number"
+			       placeholder="{{localize 'DISEASE.SeverityRating'}}"
+			       data-tooltip="{{localize 'DISEASE.SeverityRating'}}" />
+		</label>
+
+		<label>
+			{{localize "DISEASE.Description"}}
+
+			<input name="system.description"
+			       value="{{item.system.description}}"
+			       type="text"
+			       placeholder="{{localize 'DISEASE.Description'}}"
+			       data-tooltip="{{localize 'DISEASE.Description'}}" />
+		</label>
+
+		<div class="editor-container">
+			{{editor item.system.effects target="system.effects" button=true owner=owner editable=editable}}
 		</div>
-
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'DISEASE.Symptom'}}
-
-				<select class="sheet-form-select" name="system.symptom">
-					{{selectOptions diseaseSymptoms selected=item.system.symptom labelAttr="name" localize=true}}
-				</select>
-            </label>
-		</div>
-
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'DISEASE.SeverityRating'}}
-
-				<input class="sheet-form-input"
-				       name="system.severityRating"
-				       value="{{item.system.severityRating}}"
-				       type="number"
-				       placeholder="{{localize 'DISEASE.SeverityRating'}}"
-				       data-tooltip="{{localize 'DISEASE.SeverityRating'}}" />
-            </label>
-		</div>
-
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'DISEASE.Description'}}
-
-				<input class="sheet-form-input"
-				       name="system.description"
-				       value="{{item.system.description}}"
-				       type="text"
-				       placeholder="{{localize 'DISEASE.Description'}}"
-				       data-tooltip="{{localize 'DISEASE.Description'}}" />
-            </label>
-		</div>
-
-		{{editor item.system.effects target='system.effects' button=true owner=owner editable=editable}}
 	</section>
 </form>

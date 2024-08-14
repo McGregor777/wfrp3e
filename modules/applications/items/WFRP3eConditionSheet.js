@@ -1,12 +1,11 @@
-export default class WFRP3eConditionSheet extends ItemSheet
+import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
+
+export default class WFRP3eConditionSheet extends WFRP3eItemSheet
 {
 	static get defaultOptions()
 	{
 		return {
 			...super.defaultOptions,
-			template: "systems/wfrp3e/templates/applications/items/condition-sheet.hbs",
-			//width: 530,
-			height: 400,
 			classes: ["wfrp3e", "sheet", "item", "condition"]
 		};
 	}

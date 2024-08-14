@@ -1,11 +1,12 @@
-export default class WFRP3eActionSheet extends ItemSheet
+import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
+
+export default class WFRP3eActionSheet extends WFRP3eItemSheet
 {
 	static get defaultOptions()
 	{
 		return {
 			...super.defaultOptions,
-			template: "systems/wfrp3e/templates/applications/items/action-sheet.hbs",
-			width: 550,
+			width: 600,
 			height: 680,
 			classes: ["wfrp3e", "sheet", "item", "action"],
 			tabs: [

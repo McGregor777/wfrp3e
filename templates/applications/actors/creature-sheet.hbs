@@ -1,31 +1,48 @@
 <form class="{{cssClass}}" autocomplete="off">
-	<header class="creature-sheet-header sheet-header">
-		<input class="creature-sheet-threat-rating" name="system.threatRating" type="number" value="{{actor.system.threatRating}}" placeholder="{{localize 'CREATURE.ThreatRating'}}" />
+	<header class="sheet-header">
+		<input class="threat-rating"
+		       name="system.threatRating"
+		       type="number" value="{{actor.system.threatRating}}"
+		       placeholder="{{localize 'CREATURE.ThreatRating'}}" />
 
-		<h1 class="creature-sheet-name">
+		<h1 class="name">
 			<input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'CREATURE.Name'}}"/>
 		</h1>
 
-		<div class="creature-sheet-wounds">
-			<input name="system.wounds.value" type="number" value="{{actor.system.wounds.value}}" placeholder="{{localize 'CREATURE.WoundsValue'}}" />
+		<div class="wounds">
+			<input name="system.wounds.value"
+			       type="number" value="{{actor.system.wounds.value}}"
+			       placeholder="{{localize 'CREATURE.WoundsValue'}}" />
 			<hr />
-			<input name="system.wounds.max" type="number" value="{{actor.system.wounds.max}}" placeholder="{{localize 'CREATURE.WoundsThreshold'}}" />
+			<input name="system.wounds.max"
+			       type="number" value="{{actor.system.wounds.max}}"
+			       placeholder="{{localize 'CREATURE.WoundsThreshold'}}" />
 		</div>
 	</header>
 
-	<input class="creature-sheet-category" name="system.category" type="text" value="{{actor.system.category}}" placeholder="{{localize 'CREATURE.Category'}}" />
+	<input class="category"
+	       name="system.category"
+	       type="text" value="{{actor.system.category}}"
+	       placeholder="{{localize 'CREATURE.Category'}}" />
 
-	<nav class="creature-sheet-tabs sheet-tabs tabs" data-group="primary">
+	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
 		<a class="tab-link main-tab-link" data-tab="main">{{localize 'Main'}}</a>
-		<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CREATURE.Actions'}}</a>
-        <a class="tab-link abilities-tab-link" data-tab="abilities">{{localize "CREATURE.Abilities"}}</a>
+		{{#if items.actions}}
+			<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CREATURE.Actions'}}</a>
+		{{/if}}
+		{{#if hasAbility}}
+			<a class="tab-link abilities-tab-link" data-tab="abilities">{{localize "CREATURE.Abilities"}}</a>
+		{{/if}}
+		{{#if hasTrapping}}
+			<a class="tab-link trappings-tab-link" data-tab="trappings">{{localize "CREATURE.Trappings"}}</a>
+		{{/if}}
 		<a class="tab-link details-tab-link" data-tab="details">{{localize 'CREATURE.Details'}}</a>
 	</nav>
 
-	<div class="creature-sheet-body sheet-body">
-		<section class="creature-sheet-main-tab tab" data-group="primary" data-tab="main">
-			<div class="creature-sheet-main-infos">
-				<div class="creature-sheet-characteristics">
+	<div class="sheet-body">
+		<section class="main-tab tab" data-group="primary" data-tab="main">
+			<div class="main-infos">
+				<div class="characteristics">
 					{{#each actor.system.characteristics as |characteristic char|}}
 						{{#with (lookup @root.characteristics char) as |charac|}}
 							<div class="characteristic">
@@ -51,12 +68,12 @@
 					{{/each}}
 				</div>
 
-				<div class="creature-sheet-image">
+				<div class="image">
 					<img src="{{actor.img}}" alt="{{actor.name}}" data-edit="img" />
 				</div>
 
-				<div class="creature-sheet-ratings">
-					<div class="damage-rating">
+				<div class="ratings">
+					<div class="rating-container damage-rating">
 						<img class="damage-rating-icon"
 						     src="systems/wfrp3e/assets/images/damage-rating.webp"
 						     data-tooltip="{{localize 'CREATURE.DamageRating'}}"
@@ -69,7 +86,7 @@
 						       placeholder="{{localize 'CREATURE.ABBREVIATION.DamageRating'}}" />
 					</div>
 
-					<div class="soak-value">
+					<div class="rating-container soak-value">
 						<img class="soak-value-icon"
 						     src="systems/wfrp3e/assets/images/soak-value.webp"
 						     data-tooltip="{{localize 'CREATURE.SoakValue'}}"
@@ -82,7 +99,7 @@
 						       placeholder="{{localize 'CREATURE.ABBREVIATION.SoakValue'}}" />
 					</div>
 
-					<div class="defence-value">
+					<div class="rating-container defence-value">
 						<img class="defence-value-icon"
 						     src="systems/wfrp3e/assets/images/defence-value.webp"
 						     data-tooltip="{{localize 'CREATURE.DefenceValue'}}"
@@ -94,28 +111,74 @@
 						       type="number"
 						       placeholder="{{localize 'CREATURE.ABBREVIATION.DefenceValue'}}" />
 					</div>
+
+                    {{#if actor.system.nemesis}}
+						{{>systems/wfrp3e/templates/partials/impairment-partial.hbs
+								impairment="fatigue"
+								tokenPath="systems/wfrp3e/assets/images/token-red.webp"}}
+
+						{{>systems/wfrp3e/templates/partials/impairment-partial.hbs
+								impairment="stress"
+								tokenPath="systems/wfrp3e/assets/images/token-blue.webp"}}
+					{{/if}}
 				</div>
 			</div>
 
-			<div class="creature-sheet-secondary-infos">
-				<a class="creature-sheet-stance {{actor.system.defaultStance}}" data-tooltip="{{localize 'CREATURE.Stance'}}">
-					{{#if (inferiorTo actor.system.stance 0)}}
-						C{{abs actor.system.stance}}
-					{{else}}
-						{{#if (superiorTo actor.system.stance 0)}}
-							R{{actor.system.stance}}
-						{{else}}
-							N/A
-						{{/if}}
-					{{/if}}
-				</a>
+			{{#if actor.system.nemesis}}
+				<div class="stance-meter">
+					<div class="stance-meter-segment-container">
+                        <a class="stance-meter-segment stance-meter-link"
+                           data-stance="conservative"
+                           data-tooltip="{{localize 'CHARACTER.SHEET.AddRemoveConservativeSegment'}}">
+                            <img class="stance-conservative"
+                                 src="systems/wfrp3e/assets/images/stance-conservative.webp"
+                                 height="27" />
+                        </a>
 
-				<div class="creature-sheet-special-rule-summary">
+						{{#for actor.system.stanceMeter.conservative (increment actor.system.stanceMeter.reckless 1) 1}}
+							<label class="stance-meter-segment{{#if (equalTo @root.actor.system.stance.current this)}} active{{/if}}">
+								<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}"
+								     src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}.webp" height="27" />
+
+								<input name="system.stance.current"
+								       value="{{this}}"
+								       type="radio"
+								       {{#if (equalTo @root.actor.system.stance.current this)}}checked{{/if}}/>
+							</label>
+						{{/for}}
+
+                        <a class="stance-meter-segment stance-meter-link"
+                           data-stance="reckless"
+                           data-tooltip="{{localize 'CHARACTER.SHEET.AddRemoveRecklessSegment'}}">
+                            <img class="stance-conservative"
+                                 src="systems/wfrp3e/assets/images/stance-reckless.webp"
+                                 height="27" />
+                        </a>
+					</div>
+				</div>
+			{{/if}}
+
+			<div class="secondary-infos">
+				{{#unless actor.system.nemesis}}
+					<a class="stance {{actor.system.defaultStance}}" data-tooltip="{{localize 'CREATURE.Stance'}}">
+						{{#if (inferiorTo actor.system.stance.current 0)}}
+							C{{abs actor.system.stance.current}}
+						{{else}}
+							{{#if (superiorTo actor.system.stance.current 0)}}
+								R{{actor.system.stance.current}}
+							{{else}}
+								N/A
+							{{/if}}
+						{{/if}}
+					</a>
+				{{/unless}}
+
+				<div class="special-rule-summary editor-container">
 					{{editor actor.system.specialRuleSummary target="system.specialRuleSummary" button=true owner=owner editable=editable}}
 				</div>
 			</div>
 
-			<div class="creature-sheet-attributes">
+			<div class="attributes">
 				{{#each actor.system.attributes as |attribute attr|}}
 					{{#with (lookup @root.attributes attr)}}
 						<div class="attribute {{attr}}">
@@ -142,11 +205,20 @@
 			</div>
 		</section>
 
-        {{>systems/wfrp3e/templates/partials/action-tab.hbs}}
-        {{>systems/wfrp3e/templates/partials/ability-tab.hbs}}
+		{{#if items.actions}}
+			{{>systems/wfrp3e/templates/partials/action-tab.hbs}}
+		{{/if}}
+		{{#if hasAbility}}
+			{{>systems/wfrp3e/templates/partials/ability-tab.hbs}}
+		{{/if}}
+		{{#if hasTrapping}}
+			{{>systems/wfrp3e/templates/partials/trapping-tab.hbs}}
+		{{/if}}
 
-		<section class="creature-sheet-detail-tab tab" data-group="primary" data-tab="details">
-			{{editor actor.system.description target="system.description" button=true owner=owner editable=editable}}
+		<section class="detail-tab tab" data-group="primary" data-tab="details">
+			<div class="editor-container">
+				{{editor actor.system.description target="system.description" button=true owner=owner editable=editable}}
+			</div>
 		</section>
 	</div>
 </form>

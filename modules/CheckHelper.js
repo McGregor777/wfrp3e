@@ -405,8 +405,7 @@ export default class CheckHelper
 				if(match) {
 					const characteristicName = checkData.action.system.type === "ranged" ? "agility" : "strength";
 					outcome.targetDamages = actor.system.characteristics[characteristicName].rating +
-						(checkData.weapon?.system.damageRating ?? 0) +
-						(actor.system.damageRating ?? 0) +
+						(checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) +
 						parseInt(match[1]);
 				}
 
@@ -422,17 +421,14 @@ export default class CheckHelper
 				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForMinusAmountDamage"), "u"));
 				if(match) {
 					const characteristicName = checkData.action.system.type === "ranged" ? "agility" : "strength";
-					console.
 					outcome.targetDamages = actor.system.characteristics[characteristicName].rating +
-						(checkData.weapon?.system.damageRating ?? 0) +
-						(actor.system.damageRating ?? 0) +
+						(checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) +
 						parseInt(match[1]);
 				}
 
 				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForNormalDamage"), "u"));
 				if(match) {
 					const characteristicName = checkData.action.system.type === "ranged" ? "agility" : "strength";
-					console.log(actor.system.characteristics[characteristicName].rating, checkData.weapon?.system.damageRating, actor.system.damageRating)
 					outcome.targetDamages = actor.system.characteristics[characteristicName].rating +
 						(checkData.weapon?.system.damageRating ?? 0) +
 						(actor.system.damageRating ?? 0);
@@ -505,9 +501,7 @@ export default class CheckHelper
 		if(targetActor) {
 			// If the attack inflicts damages, reduce them by Toughness and Soak values.
 			if(outcome.targetDamages > 0) {
-				outcome.targetDamages -= targetActor.system.characteristics.toughness.rating +
-					(targetActor.system.totalSoak ?? 0) +
-					(targetActor.system.soakValue ?? 0);
+				outcome.targetDamages -= targetActor.system.characteristics.toughness.rating + targetActor.system.totalSoak;
 
 				// If the attack still inflicts more damages than the target's wound threshold, the target suffers from a critical wound
 				// (in addition to those coming from effects).
@@ -537,11 +531,23 @@ export default class CheckHelper
 				}
 			}
 
-			if(outcome.targetFatigue > 0 || outcome.targetFatigue < 0)
-				targetUpdates.system.impairments = {fatigue: targetActor.system.impairments.fatigue + outcome.targetFatigue};
+			if(outcome.targetFatigue > 0 || outcome.targetFatigue < 0) {
+				if(targetActor.type === "creature" && !targetActor.system.nemesis)
+					targetUpdates.system.impairments = {fatigue: targetActor.system.impairments.fatigue + outcome.targetFatigue};
+				else if(targetActor.system.wounds.value)
+					targetUpdates.system.wounds.value -= outcome.targetFatigue;
+				else
+					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetFatigue};
+			}
 
-			if(outcome.targetStress > 0 || outcome.targetStress < 0)
-				targetUpdates.system.impairments = {stress: targetActor.system.impairments.stress + outcome.targetStress};
+			if(outcome.targetStress > 0 || outcome.targetStress < 0) {
+				if(targetActor.type === "creature" && !targetActor.system.nemesis)
+					targetUpdates.system.impairments = {stress: targetActor.system.impairments.stress + outcome.targetStress};
+				else if(targetActor.system.wounds.value)
+					targetUpdates.system.wounds.value -= outcome.targetStress;
+				else
+					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetStress};
+			}
 
 			targetActor.update(targetUpdates);
 		}

@@ -5,19 +5,18 @@
 	</header>
 
 	<section class="sheet-body">
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">
-				{{localize 'CRITICALWOUND.SeverityRating'}}
+		<label>
+			{{localize "CRITICALWOUND.SeverityRating"}}
 
-				<input class="sheet-form-input"
-				       name="system.severityRating"
-				       value="{{item.system.severityRating}}"
-				       type="number"
-				       placeholder="{{localize 'CRITICALWOUND.SeverityRating'}}"
-				       data-tooltip="{{localize 'CRITICALWOUND.SeverityRating'}}" />
-            </label>
+			<input name="system.severityRating"
+			       value="{{item.system.severityRating}}"
+			       type="number"
+			       placeholder="{{localize 'CRITICALWOUND.SeverityRating'}}"
+			       data-tooltip="{{localize 'CRITICALWOUND.SeverityRating'}}" />
+		</label>
+
+		<div class="editor-container">
+			{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
 		</div>
-
-		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
 	</section>
 </form>

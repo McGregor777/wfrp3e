@@ -10,7 +10,7 @@
 	<label class="type form-label">
 		{{localize "ACTION.Type"}}:
 
-		<select class="sheet-form-select" name="system.type" data-dtype="String">
+		<select name="system.type">
 			{{selectOptions @root.actionTypes selected=@root.item.system.type localize=true}}
 		</select>
 	</label>
@@ -105,9 +105,8 @@
 
 						<hr />
 
-						<label>
+						<label class="editor-container">
 							{{localize "ACTION.Requirements"}}:
-
 							{{editor face.requirements
 									 target=(concat "system." st ".requirements")
 									 button=true
@@ -134,11 +133,13 @@
 											       min="0"
 											       placeholder="{{localize 'ACTION.EFFECT.SymbolAmount'}}" />
 
-											{{editor effect.description
-													 target=(concat "system." st ".effects." sym "." ef ".description")
-													 button=true
-													 owner=@root.owner
-													 editable=@root.editable}}
+											<div class="editor-container">
+												{{editor effect.description
+														 target=(concat "system." st ".effects." sym "." ef ".description")
+														 button=true
+														 owner=@root.owner
+														 editable=@root.editable}}
+											</div>
 
 											<input class="sheet-form-input effect-description"
 											       name="system.{{st}}.effects.{{sym}}.{{ef}}.description"

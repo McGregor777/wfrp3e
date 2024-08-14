@@ -1,27 +1,19 @@
-export default class WFRP3eGroupSheet extends ActorSheet
+import WFRP3eActorSheet from "./WFRP3eActorSheet.js";
+
+export default class WFRP3eGroupSheet extends WFRP3eActorSheet
 {
 	static get defaultOptions()
 	{
 		return {
 			...super.defaultOptions,
-			template: "systems/wfrp3e/templates/applications/actors/group-sheet.hbs",
-			classes: ["wfrp3e", "sheet", "actor", "group", "group-sheet"],
 			width: 830,
 			height: 540,
+			classes: ["wfrp3e", "sheet", "actor", "group", "group-sheet"],
 			tabs: [
 				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"},
 				{group: "talents", navSelector: ".talent-tabs", contentSelector: ".talents", initial: "focus"}
 			]
 		};
-	}
-
-	/** @inheritDoc */
-	getData()
-	{
-		const data = {...super.getData(), talentTypes: CONFIG.WFRP3e.talentTypes};
-		data.items = this._buildItemLists(data.items);
-
-		return data;
 	}
 
 	/** @inheritDoc */
@@ -37,30 +29,6 @@ export default class WFRP3eGroupSheet extends ActorSheet
 		html.find(".ability-track-editor-submit").click(this._onAbilityTrackEditorSubmit.bind(this));
 		html.find(".talent-socket-add").click(this._onTalentSocketAdd.bind(this));
 		html.find(".talent-socket-delete").click(this._onTalentSocketDelete.bind(this));
-	}
-
-	/**
-	 * Returns items sorted by type.
-	 * @param {Array} items The items owned by the Actor.
-	 * @returns {Object} The sorted items owned by the Actor.
-	 * @private
-	 */
-	_buildItemLists(items)
-	{
-		const talents = items
-			.filter(item => item.type === "talent")
-			.sort((a, b) => a.name.localeCompare(b.name));
-
-		return {
-			talents: {
-				focus: talents.filter(item => item.system.type === "focus"),
-				reputation: talents.filter(item => item.system.type === "reputation"),
-				tactic: talents.filter(item => item.system.type === "tactic"),
-				faith: talents.filter(item => item.system.type === "faith"),
-				order: talents.filter(item => item.system.type === "order"),
-				trick: talents.filter(item => item.system.type === "trick")
-			}
-		};
 	}
 
 	/**

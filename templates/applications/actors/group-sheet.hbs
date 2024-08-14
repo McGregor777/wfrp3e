@@ -72,7 +72,7 @@
 						       placeholder="{{localize 'GROUP.SPECIALABILITY.Title'}}"
 						       data-tooltip="{{localize 'GROUP.SPECIALABILITY.Title'}}" />
 
-						<div class="special-ability-description">
+						<div class="special-ability-description editor-container">
 							{{editor actor.system.specialAbilities.0.description
 									 target="system.specialAbilities.0.description"
 									 button=true
@@ -93,12 +93,12 @@
 					<div class="special-ability">
 						<input class="special-ability-title"
 						       name="system.specialAbilities.1.title"
-                               value="{{actor.system.specialAbilities.1.title}}"
+						       value="{{actor.system.specialAbilities.1.title}}"
 						       type="text"
 						       placeholder="{{localize 'GROUP.SPECIALABILITY.Title'}}"
 						       data-tooltip="{{localize 'GROUP.SPECIALABILITY.Title'}}" />
 
-						<div class="special-ability-description">
+						<div class="special-ability-description editor-container">
 							{{editor actor.system.specialAbilities.1.description
 									 target="system.specialAbilities.1.description"
 									 button=true
@@ -106,7 +106,7 @@
 									 editable=editable}}
 
 							<input name="system.specialAbilities.1.description"
-                                   value="{{actor.system.specialAbilities.1.description}}"
+							       value="{{actor.system.specialAbilities.1.description}}"
 							       type="text"
 							       placeholder="{{localize 'GROUP.SPECIALABILITY.Description'}}" />
 						</div>
@@ -181,7 +181,7 @@
 					{{#if (lookup @root.items.talents ty)}}
 						<div class="talent-container tab {{ty}} item-container" data-group="talents" data-tab="{{ty}}">
 							{{#each (lookup @root.items.talents ty) as |talent ta|}}
-                                {{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
+								{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=talent}}
 							{{/each}}
 						</div>
 					{{/if}}

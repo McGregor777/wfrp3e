@@ -8,13 +8,16 @@
 	</header>
 
 	<section class="sheet-body">
-		<div class="sheet-form-div">
-			<label class="sheet-form-label">{{localize 'CONDITION.Duration'}}</label>
-			<select class="sheet-form-select" name="system.duration" data-dtype="String">
+		<label>
+			{{localize 'CONDITION.Duration'}}
+
+			<select name="system.duration" data-dtype="String">
 				{{selectOptions conditionDurations selected=item.system.duration localize=true}}
 			</select>
-		</div>
+		</label>
 
-		{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
+		<div class="editor-container">
+			{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
+		</div>
 	</section>
 </form>

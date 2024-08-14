@@ -1,14 +1,13 @@
-export default class WFRP3eTrappingSheet extends ItemSheet
+import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
+
+export default class WFRP3eTrappingSheet extends WFRP3eItemSheet
 {
 	static get defaultOptions()
 	{
 		return {
 			...super.defaultOptions,
-			template: "systems/wfrp3e/templates/applications/items/trapping-sheet.hbs",
-			//width: 530,
-			height: 400,
 			classes: ["wfrp3e", "sheet", "item", "trapping"],
-			tabs: [{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"},]
+			tabs: [{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"}]
 		};
 	}
 

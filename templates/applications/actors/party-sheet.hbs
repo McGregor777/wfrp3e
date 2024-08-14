@@ -98,15 +98,14 @@
 		       placeholder="{{localize 'PARTY.SpecialAbility.Title'}}"
 		       data-tooltip="{{localize 'PARTY.SpecialAbility.Title'}}" />
 		
-		<div class="party-sheet-special-ability-description">
+		<div class="party-sheet-special-ability-description editor-container">
 			{{editor actor.system.specialAbility.description target='system.specialAbility.description' button=true owner=owner editable=editable}}
 		</div>
 	</div>
 
 	<footer class="sheet-footer party-sheet-footer">
 		{{#each actor.system.talentSockets as |type ty|}}
-			<select class="sheet-form-select party-sheet-talent-socket"
-			        name="system.talentSockets"
+			<select name="system.talentSockets"
 			        data-tooltip="{{localize 'PARTY.TalentSocket'}}">
 				{{selectOptions @root.talentTypes selected=type localize=true}}
 			</select>

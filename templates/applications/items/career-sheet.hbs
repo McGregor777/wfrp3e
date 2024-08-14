@@ -16,223 +16,180 @@
 
 	<section class="sheet-body career-sheet-body">
 		<div class="tab tab-container header-tab-link" data-group="primary" data-tab="header">
-			<div class="sheet-form-div">
-				<label class="sheet-form-label">
-					{{localize 'CAREER.AdvancedCareer'}}
+			<label>
+				{{localize 'CAREER.AdvancedCareer'}}
 
-					<input class="sheet-form-input"
-					       name="system.advanced"
-					       value="{{item.system.advanced}}"
-					       type="checkbox"{{#if item.system.advanced}} checked{{/if}} />
-				</label>
-			</div>
+				<input name="system.advanced"
+				       value="{{item.system.advanced}}"
+				       type="checkbox"{{#if item.system.advanced}} checked{{/if}} />
+			</label>
 
-			<div class="sheet-form-div">
-				<label class="sheet-form-label">
-					{{localize 'CAREER.RaceRestrictions'}}
+			<label>
+				{{localize 'CAREER.RaceRestrictions'}}
 
-					<a class="race-restriction-remove"><span class="fas fa-minus"></span></a>
-					<a class="race-restriction-add"><span class="fas fa-plus"></span></a>
+				<a class="race-restriction-remove"><span class="fas fa-minus"></span></a>
+				<a class="race-restriction-add"><span class="fas fa-plus"></span></a>
 
-					<div>
-						{{#each item.system.raceRestrictions}}
-							<select class="career-sheet-race-restriction-select sheet-form-select" name="system.raceRestrictions">
-								{{selectOptions @root.races selected=this labelAttr="name" localize=true}}
-							</select>
-						{{/each}}
-					</div>
-				</label>
-			</div>
+				<div>
+					{{#each item.system.raceRestrictions}}
+						<select name="system.raceRestrictions">
+							{{selectOptions @root.races selected=this labelAttr="name" localize=true}}
+						</select>
+					{{/each}}
+				</div>
+			</label>
 
-			<div class="sheet-form-div">
-				<label class="sheet-form-label">
-					{{localize 'CAREER.Traits'}}
+			<label>
+				{{localize 'CAREER.Traits'}}
 
-					<input class="sheet-form-input"
-					       name="system.traits"
-					       value="{{item.system.traits}}"
-					       type="text"
-					       placeholder="{{localize 'Traits'}}" />
-				</label>
-			</div>
+				<input name="system.traits"
+				       value="{{item.system.traits}}"
+				       type="text"
+				       placeholder="{{localize 'Traits'}}" />
+			</label>
 		</div>
 
 		<div class="tab tab-container aptitudes" data-group="primary" data-tab="aptitudes">
-			<div class="sheet-form-div career-talent-sockets">
-				<label class="sheet-form-label">{{localize 'CAREER.TalentSockets'}}</label>
+			<label>
+				{{localize 'CAREER.TalentSockets'}}
 
 				<a class="talent-socket-remove"><span class="fas fa-minus"></span></a>
 				<a class="talent-socket-add"><span class="fas fa-plus"></span></a>
 
 				<div>
 					{{#each item.system.talentSockets as |type ty|}}
-						<select class="career-sheet-talent-socket-select sheet-form-select" name="system.talentSockets" data-dtype="String">
+						<select name="system.talentSockets">
 							{{selectOptions @root.talentTypes selected=type localize=true}}
 						</select>
 					{{/each}}
 				</div>
-			</div>
+			</label>
 
-			<div class="sheet-form-div careeer-primary-characteristics">
-				<label class="sheet-form-label">{{localize 'CAREER.PrimaryCharacteristics'}}</label>
+			<label>
+				{{localize 'CAREER.PrimaryCharacteristics'}}
 
-				<div>
-					{{#each item.system.primaryCharacteristics as |characteristic char|}}
-						<select name="system.primaryCharacteristics" data-dtype="String">
-							{{selectOptions ../characteristics selected=characteristic labelAttr="name" localize=true}}
-						</select>
-					{{/each}}
-				</div>
-			</div>
+				{{#each item.system.primaryCharacteristics as |characteristic char|}}
+					<select name="system.primaryCharacteristics" data-dtype="String">
+						{{selectOptions ../characteristics selected=characteristic labelAttr="name" localize=true}}
+					</select>
+				{{/each}}
+			</label>
 
-			<div class="sheet-form-div">
-				<label class="sheet-form-label">
-					{{localize 'CAREER.CareerSkills'}}
+			<label>
+				{{localize 'CAREER.CareerSkills'}}
 
-					<input class="sheet-form-input"
-					       name="system.careerSkills"
-					       value="{{item.system.careerSkills}}"
-					       type="text"
-					       placeholder="{{localize 'CAREER.CareerSkills'}}" />
+				<input name="system.careerSkills"
+				       value="{{item.system.careerSkills}}"
+				       type="text"
+				       placeholder="{{localize 'CAREER.CareerSkills'}}" />
+			</label>
+
+			<div class="form-div">
+				<label>
+					{{localize 'CAREER.StartingConservativeSegments'}}
+
+					<input name="system.startingStance.conservativeSegments"
+					       value="{{item.system.startingStance.conservativeSegments}}"
+					       type="number"
+					       placeholder="{{localize 'CAREER.StartingConservativeSegments'}}" />
 				</label>
-			</div>
 
-			<div class="sheet-form-div career-starting-stance-segments">
-				<div>
-					<label class="sheet-form-label">
-						{{localize 'CAREER.StartingConservativeSegments'}}
+				<label>
+					{{localize 'CAREER.StartingRecklessSegments'}}
 
-						<input class="sheet-form-input"
-						       name="system.startingStance.conservativeSegments"
-						       value="{{item.system.startingStance.conservativeSegments}}"
-						       type="number"
-						       placeholder="{{localize 'CAREER.StartingConservativeSegments'}}" />
-					</label>
-				</div>
-
-				<div>
-					<label class="sheet-form-label">
-						{{localize 'CAREER.StartingRecklessSegments'}}
-
-						<input class="sheet-form-input"
-						       name="system.startingStance.recklessSegments"
-						       type="number"
-						       value="{{item.system.startingStance.recklessSegments}}"
-						       placeholder="{{localize 'CAREER.StartingRecklessSegments'}}" />
-					</label>
-				</div>
+					<input name="system.startingStance.recklessSegments"
+					       type="number"
+					       value="{{item.system.startingStance.recklessSegments}}"
+					       placeholder="{{localize 'CAREER.StartingRecklessSegments'}}" />
+				</label>
 			</div>
 		</div>
 
 		<div class="tab tab-container advances-tab-link" data-group="primary" data-tab="advances">
-			<div class="sheet-form-div career-advance-options">
-				<div>
-					<label class="sheet-form-label">
-						{{localize 'CAREER.ActionAdvanceOptions'}}
+			<div class="form-div">
+				<label>
+					{{localize 'CAREER.ActionAdvanceOptions'}}
 
-						<input class="sheet-form-input"
-						       name="system.advanceOptions.action"
-						       value="{{item.system.advanceOptions.action}}"
-						       type="number"
-						       placeholder="{{localize 'CAREER.ActionAdvanceOptions'}}" />
-					</label>
-				</div>
-
-				<div>
-					<label class="sheet-form-label">
-						{{localize 'CAREER.TalentAdvanceOptions'}}
-
-						<input class="sheet-form-input"
-						       name="system.advanceOptions.talent"
-						       value="{{item.system.advanceOptions.talent}}"
-						       type="number"
-						       placeholder="{{localize 'CAREER.TalentAdvanceOptions'}}" />
-					</label>
-				</div>
-			</div>
-
-			<div class="sheet-form-div career-advance-options">
-				<div>
-					<label class="sheet-form-label">
-						{{localize 'CAREER.SkillAdvanceOptions'}}
-
-						<input class="sheet-form-input"
-						       name="system.advanceOptions.skill"
-						       value="{{item.system.advanceOptions.skill}}"
-						       type="number"
-						       placeholder="{{localize 'CAREER.SkillAdvanceOptions'}}" />
-					</label>
-				</div>
-
-				<div>
-					<label class="sheet-form-label">
-						{{localize 'CAREER.FortuneAdvanceOptions'}}
-
-						<input class="sheet-form-input"
-						       name="system.advanceOptions.fortune"
-						       value="{{item.system.advanceOptions.fortune}}"
-						       type="number"
-						       placeholder="{{localize 'CAREER.FortuneAdvanceOptions'}}" />
-					</label>
-				</div>
-			</div>
-
-			<div class="sheet-form-div career-advance-options">
-				<div>
-					<label class="sheet-form-label">
-						{{localize 'CAREER.ConservativeAdvanceOptions'}}
-
-						<input class="sheet-form-input"
-						       name="system.advanceOptions.conservative"
-						       value="{{item.system.advanceOptions.conservative}}"
-						       type="number"
-						       placeholder="{{localize 'CAREER.ConservativeAdvanceOptions'}}" />
-					</label>
-				</div>
-
-				<div class="sheet-form-div">
-					<label class="sheet-form-label">
-						{{localize 'CAREER.RecklessAdvanceOptions'}}
-
-						<input class="sheet-form-input"
-						       name="system.advanceOptions.reckless"
-						       value="{{item.system.advanceOptions.reckless}}"
-						       type="number"
-						       placeholder="{{localize 'CAREER.RecklessAdvanceOptions'}}" />
-					</label>
-				</div>
-			</div>
-
-			<div class="sheet-form-div">
-				<label class="sheet-form-label">
-					{{localize 'CAREER.WoundAdvanceOptions'}}
-
-					<input class="sheet-form-input"
-					       name="system.advanceOptions.wound"
-					       value="{{item.system.advanceOptions.wound}}"
+					<input name="system.advanceOptions.action"
+					       value="{{item.system.advanceOptions.action}}"
 					       type="number"
-					       placeholder="{{localize 'CAREER.WoundsAdvanceOptions'}}" />
+					       placeholder="{{localize 'CAREER.ActionAdvanceOptions'}}" />
+				</label>
+
+				<label>
+					{{localize 'CAREER.TalentAdvanceOptions'}}
+
+					<input name="system.advanceOptions.talent"
+					       value="{{item.system.advanceOptions.talent}}"
+					       type="number"
+					       placeholder="{{localize 'CAREER.TalentAdvanceOptions'}}" />
 				</label>
 			</div>
+
+			<div class="form-div">
+				<label>
+					{{localize 'CAREER.SkillAdvanceOptions'}}
+
+					<input name="system.advanceOptions.skill"
+					       value="{{item.system.advanceOptions.skill}}"
+					       type="number"
+					       placeholder="{{localize 'CAREER.SkillAdvanceOptions'}}" />
+				</label>
+
+				<label>
+					{{localize 'CAREER.FortuneAdvanceOptions'}}
+
+					<input name="system.advanceOptions.fortune"
+					       value="{{item.system.advanceOptions.fortune}}"
+					       type="number"
+					       placeholder="{{localize 'CAREER.FortuneAdvanceOptions'}}" />
+				</label>
+			</div>
+
+			<div class="form-div">
+				<label>
+					{{localize 'CAREER.ConservativeAdvanceOptions'}}
+
+					<input name="system.advanceOptions.conservative"
+					       value="{{item.system.advanceOptions.conservative}}"
+					       type="number"
+					       placeholder="{{localize 'CAREER.ConservativeAdvanceOptions'}}" />
+				</label>
+
+				<label>
+					{{localize 'CAREER.RecklessAdvanceOptions'}}
+
+					<input name="system.advanceOptions.reckless"
+					       value="{{item.system.advanceOptions.reckless}}"
+					       type="number"
+					       placeholder="{{localize 'CAREER.RecklessAdvanceOptions'}}" />
+				</label>
+			</div>
+
+			<label>
+				{{localize 'CAREER.WoundAdvanceOptions'}}
+
+				<input name="system.advanceOptions.wound"
+				       value="{{item.system.advanceOptions.wound}}"
+				       type="number"
+				       placeholder="{{localize 'CAREER.WoundsAdvanceOptions'}}" />
+			</label>
 		</div>
 
 		<div class="tab tab-container setting-tab-link" data-group="primary" data-tab="setting">
-			<div class="sheet-form-div">
-				<label class="sheet-form-label">
-					{{localize 'CAREER.Summary'}}
+			<label>
+				{{localize 'CAREER.Summary'}}
 
-					<input class="sheet-form-input"
-					       name="system.summary"
-					       value="{{item.system.summary}}"
-					       type="text"
-					       placeholder="{{localize 'CAREER.Summary'}}" />
-				</label>
-			</div>
+				<input name="system.summary"
+				       value="{{item.system.summary}}"
+				       type="text"
+				       placeholder="{{localize 'CAREER.Summary'}}" />
+			</label>
 
-			<div class="sheet-form-div">
-				<label class="sheet-form-label">{{localize 'CAREER.SettingInformation'}}</label>
+			<label class="editor-container">
+				{{localize 'CAREER.SettingInformation'}}
 				{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
-			</div>
+			</label>
 		</div>
 	</section>
 </form>

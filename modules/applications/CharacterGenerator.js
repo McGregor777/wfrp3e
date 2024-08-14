@@ -301,7 +301,7 @@ export default class CharacterGenerator extends FormApplication
 
 		do {
 			await startingCareerRollTable.draw({displayChat: false}).then(async tableResult => {
-				if(tableResult.results[0].type === 2 && !drawnCareers.has(tableResult.results[0].documentId))
+				if(tableResult.results[0].type === "pack" && !drawnCareers.has(tableResult.results[0].documentId))
 					drawnCareers.set(
 						tableResult.results[0].documentId,
 						await game.packs.get("wfrp3e.items").getDocument(tableResult.results[0].documentId)
