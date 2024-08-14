@@ -192,20 +192,22 @@
 
 	{{#if actor}}
 		<div class="quick-settings">
-			<label>
-				{{localize "ROLL.DICEPOOLBUILDER.Skill"}}
+			{{#if skills}}
+				<label>
+					{{localize "ROLL.DICEPOOLBUILDER.Skill"}}
 
-				<select class="skill-select" name="skill">
-                    <option value=""{{#unless skill}} selected{{/unless}}></option>
-					{{selectOptions @root.skills selected=skill._id nameAttr="_id" labelAttr="name"}}
-				</select>
-			</label>
+					<select class="skill-select" name="skill">
+						<option value=""{{#unless skill}} selected{{/unless}}></option>
+						{{selectOptions skills selected=skill._id nameAttr="_id" labelAttr="name"}}
+					</select>
+				</label>
+			{{/if}}
 
 			<label>
 				{{localize "ROLL.DICEPOOLBUILDER.Characteristic"}}
 
 				<select class="characteristic-select" name="characteristic">
-					{{selectOptions @root.characteristics selected=characteristic.name localize=true}}
+					{{selectOptions characteristics selected=characteristic.name localize=true}}
 				</select>
 			</label>
 
@@ -213,7 +215,7 @@
 				{{localize "ROLL.DICEPOOLBUILDER.ChallengeLevel"}}
 
 				<select class="challenge-level-select" name="challengeLevel">
-					{{selectOptions @root.challengeLevels selected=challengeLevel labelAttr="name" localize=true}}
+					{{selectOptions challengeLevels selected=challengeLevel labelAttr="name" localize=true}}
 				</select>
 			</label>
 
@@ -233,21 +235,20 @@
 				</label>
 			{{/if}}
 
-            <div class="specialisations">
-                {{localize "ROLL.DICEPOOLBUILDER.Specialisations"}}
+			<div class="specialisations">
+				{{localize "ROLL.DICEPOOLBUILDER.Specialisations"}}
 
-                {{#if specialisations}}
-                    {{#each specialisations}}
-                        <label>
-                            {{this}}
-
-                            <input class="pool-value" name="specialisations" type="checkbox" value="{{this}}" />
-                        </label>
-                    {{/each}}
-                {{else}}
-                    None
-                {{/if}}
-            </div>
+				{{#if specialisations}}
+					{{#each specialisations}}
+						<label>
+							{{this}}
+							<input class="pool-value" name="specialisations" type="checkbox" value="{{this}}" />
+						</label>
+					{{/each}}
+				{{else}}
+					None
+				{{/if}}
+			</div>
 		</div>
 	{{/if}}
 </form>
