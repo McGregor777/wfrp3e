@@ -219,11 +219,13 @@
 				</select>
 			</label>
 
-			<label>
-				{{localize "ROLL.DICEPOOLBUILDER.FortunePoints"}}
+			{{#if maxFortunePoints}}
+				<label>
+					{{localize "ROLL.DICEPOOLBUILDER.FortunePoints"}}
 
-				<input class="pool-value" name="fortunePoints" type="number" min="0" max="{{maxFortunePoints}}" />
-			</label>
+					<input class="pool-value" name="fortunePoints" type="number" min="0" max="{{maxFortunePoints}}" value="0" />
+				</label>
+			{{/if}}
 
 			{{#if availableWeapons}}
 				<label>
