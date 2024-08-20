@@ -1,3 +1,4 @@
+import ActionEffectEditor from "../applications/ActionEffectEditor.js";
 import CheckHelper from "../CheckHelper.js";
 import {capitalize} from "../helpers.js";
 
@@ -210,9 +211,9 @@ export default class WFRP3eItem extends Item
 		let action = null;
 
 		if(weaponType === "melee")
-			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.MeleeStrike"));
+			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.CARD.MeleeStrike"));
 		else if(weaponType === "ranged")
-			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.RangedShot"));
+			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.CARD.RangedShot"));
 		else
 			throw new Error("Unable to define the weapon type.");
 
@@ -225,22 +226,41 @@ export default class WFRP3eItem extends Item
 	/* Action methods */
 
 	/**
-	 * Adds a new effect to the Action.
+	 * Creates a new effect for the Action and opens the Action Effect Editor to edit it.
 	 * @param face {string} The Action's face which receives the new effect.
-	 * @param symbol {string} The symbol used by the new effect.
 	 */
-	addNewEffect(face, symbol)
+	async createEffect(face)
 	{
-		const effects = this.system[face].effects[symbol];
-		const updates = {system: {}};
-		updates.system[face] = {effects: {}};
+		await new ActionEffectEditor({
+			data: {
+				action: this,
+				face,
+				effect: {
+					symbolAmount: 1,
+					description: "",
+					script: ""
+				}
+			}
+		}).render(true);
+	}
 
-		effects.push({"symbolAmount": 1, "description": ""});
-
-		updates.system[face].effects[symbol] = effects;
-
-		this.update(updates);
-
+	/**
+	 * Opens the Action Effect Editor to edit an Action effect.
+	 * @param face {string} The Action's face of the effect to edit.
+	 * @param symbol {string} The symbol used by the effect to edit.
+	 * @param index {string} The index to the effect to edit.
+	 */
+	async editEffect(face, symbol, index)
+	{
+		await new ActionEffectEditor({
+			data: {
+				action: this,
+				face,
+				symbol,
+				index,
+				effect: this.system[face].effects[symbol][index]
+			}
+		}).render(true);
 	}
 
 	/**
@@ -252,13 +272,10 @@ export default class WFRP3eItem extends Item
 	removeEffect(face, symbol, index)
 	{
 		const effects = this.system[face].effects[symbol];
-		const updates = {system: {}};
-		updates.system[face] = {effects: {}};
 
-		effects.splice(index, 1)
-		updates.system[face].effects[symbol] = effects;
+		effects.splice(index, 1);
 
-		this.update(updates);
+		this.update({[`system.${face}.effects.${symbol}`]: effects});
 	}
 
 	/**

@@ -24,8 +24,9 @@
         "righteousSuccess": [],
         "boon": [
           {
-            "symbolAmount": 2,
-            "description": "<p>The target may recover 1 wound</p>"
+            "description": "<p>The target may recover 1 wound</p>",
+            "script": "outcome.targetDamages--;",
+            "symbolAmount": 2
           }
         ],
         "sigmarsComet": [],
@@ -67,8 +68,9 @@
         "righteousSuccess": [],
         "boon": [
           {
-            "symbolAmount": 2,
-            "description": "<p>The target may recover 1 wound</p>"
+            "description": "<p>The target may recover 1 wound</p>",
+            "script": "outcome.targetDamages--;",
+            "symbolAmount": 2
           }
         ],
         "sigmarsComet": [],
@@ -103,11 +105,13 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.6.1-alpha",
-    "coreVersion": "11.315",
+    "systemVersion": "1.1-alpha",
+    "coreVersion": "12.331",
     "createdTime": 1701907222210,
-    "modifiedTime": 1701907565580,
-    "lastModifiedBy": "Bq3CTOvANoOneedB"
+    "modifiedTime": 1724077625184,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "XWlk7rT0gfG2Pg1b",
   "sort": 0,

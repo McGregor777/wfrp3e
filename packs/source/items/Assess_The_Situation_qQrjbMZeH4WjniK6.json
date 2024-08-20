@@ -31,8 +31,9 @@
       "effects": {
         "success": [
           {
-            "symbolAmount": 1,
-            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>"
+            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
+            "script": "outcome.fatigue--;\noutcome.stress--;",
+            "symbolAmount": 1
           }
         ],
         "boon": [
@@ -72,8 +73,9 @@
       "effects": {
         "success": [
           {
-            "symbolAmount": 1,
-            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>"
+            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
+            "script": "outcome.fatigue--;\noutcome.stress--;",
+            "symbolAmount": 1
           }
         ],
         "boon": [
@@ -101,11 +103,13 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.6.1-alpha",
-    "coreVersion": "11.315",
+    "systemVersion": "1.1-alpha",
+    "coreVersion": "12.331",
     "createdTime": 1696334694650,
-    "modifiedTime": 1701883793736,
-    "lastModifiedBy": "Bq3CTOvANoOneedB"
+    "modifiedTime": 1724076944243,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "qQrjbMZeH4WjniK6",
   "sort": 1200000,

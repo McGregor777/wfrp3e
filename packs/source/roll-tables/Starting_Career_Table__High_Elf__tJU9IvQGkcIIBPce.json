@@ -4,7 +4,7 @@
   "description": "<p>To determine a character’s starting career, you may either draw a sheet from a basic career deck, or roll percentile dice (d00) and consult the following table. Cross reference your character’s race with the d00 result to determine the character’s starting career.</p>",
   "results": [
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         1,
@@ -20,7 +20,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.PLO7mpDJMCjCwBwB"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         5,
@@ -36,7 +36,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.OWAvkyPbwK3IdpYs"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         9,
@@ -52,7 +52,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.4EaiLZc0dsap09Ml"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         13,
@@ -68,7 +68,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.jGBchNNfWw1yY5qD"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         17,
@@ -84,7 +84,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.6aBHgUKjgpu7QYeM"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -100,7 +100,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.heGIXtQX76LTkwfk"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -116,7 +116,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.wG4HKvjCnXzUuH7S"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -132,7 +132,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.eLGp9tuaavBa1TUE"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -148,7 +148,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.keygesbkXNbhSeQc"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -164,7 +164,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.7ICLclgAaMTRPQM5"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -180,7 +180,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.ZR5iiK3u71fpybjN"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -196,7 +196,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.0eaXKQ9IQn8vqVJs"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -212,7 +212,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.vxB5cw9rqYdnXWaq"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -228,7 +228,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.VxxSeMthjDQ35ekq"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -244,7 +244,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.sRbevTkOMbIt9tb6"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -260,7 +260,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.8n4XavLy3DgGS1JS"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -276,7 +276,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.n9ntGnxpm6allIos"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -292,7 +292,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.0fyM9pGSLqJsO1Uh"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -308,7 +308,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.qrMod29sGmK1l7dx"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -324,7 +324,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.gsy0EAJYePAaPrKy"
     },
     {
-      "type": 0,
+      "type": "text",
       "documentCollection": "world.wfrp3e-items",
       "weight": 1,
       "range": [
@@ -340,7 +340,7 @@
       "_key": "!tables.results!tJU9IvQGkcIIBPce.1m2icEh2oxtYMHdo"
     },
     {
-      "type": 0,
+      "type": "text",
       "documentCollection": "world.wfrp3e-items",
       "weight": 1,
       "range": [
@@ -368,10 +368,12 @@
   "_stats": {
     "systemId": "wfrp3e",
     "systemVersion": "0.6.1-alpha",
-    "coreVersion": "11.315",
+    "coreVersion": "12.327",
     "createdTime": 1699554936217,
     "modifiedTime": 1703687283397,
-    "lastModifiedBy": "Bq3CTOvANoOneedB"
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "formula": "1d100",
   "_id": "tJU9IvQGkcIIBPce",

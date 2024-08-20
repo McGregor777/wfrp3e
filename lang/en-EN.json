@@ -29,7 +29,9 @@
 	"ACTION.CHECK.NoCheckRequired": "No Check Required",
 	"ACTION.CHECK.TargetDefence": "Target Defence",
 	"ACTION.EFFECT.Description": "Description",
+	"ACTION.EFFECT.Script": "Script",
 	"ACTION.EFFECT.SymbolAmount": "Symbol Amount",
+	"ACTION.EFFECT.SymbolType": "Symbol Type",
 	"ACTION.FACE.Conservative": "Conservative",
 	"ACTION.FACE.Reckless": "Reckless",
 	"ACTION.TRAITS.Basic": "Base",
@@ -38,6 +40,11 @@
 	"ACTION.TYPE.Support": "Support",
 	"ACTION.TYPE.Blessing": "Blessing",
 	"ACTION.TYPE.Spell": "Spell",
+
+	"ACTIONEFFECTEDITOR.Submit": "Save Effect",
+	"ACTIONEFFECTEDITOR.Title": "Action Effect Editor",
+	"ACTIONEFFECTEDITOR.TAB.Main": "Main",
+	"ACTIONEFFECTEDITOR.TAB.Script": "Script",
 
 	"ACTIONSELECTOR.ChooseANewAction": "Choose a New Action",
 	"ACTIONSELECTOR.NoActionSelected": "None",
@@ -256,6 +263,9 @@
 	"CREATURE.ABBREVIATION.SoakValue": "Soak",
 
 	"CRITICALWOUND.SeverityRating": "Severity Rating",
+
+	"DIALOG.TITLE.EffectDeletion": "Effect Deletion",
+	"DIALOG.DESCRIPTION.EffectDeletion": "Do you really wish to delete this effect?",
 
 	"DISEASE.Description": "Description",
 	"DISEASE.SeverityRating": "Severity Rating",

@@ -7,7 +7,6 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 	static defineSchema()
 	{
 		const fields = foundry.data.fields;
-		const requiredInteger = {required: true, nullable: false, integer: true};
 
 		return {
 			...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
@@ -16,10 +15,10 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 					art: new fields.FilePathField({categories: ["IMAGE"]}),
 					type: new fields.StringField(),
 					traits: new fields.StringField(),
-					rechargeRating: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
+					rechargeRating: new fields.NumberField({integer: true, initial: 0, min: 0, nullable: false, required: true}),
 					difficultyModifiers: new fields.SchemaField({
-						challengeDice: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-						misfortuneDice: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
+						challengeDice: new fields.NumberField({integer: true, initial: 0, min: 0, nullable: false, required: true}),
+						misfortuneDice: new fields.NumberField({integer: true, initial: 0, min: 0, nullable: false, required: true}),
 					}),
 					check: new fields.StringField(),
 					requirements: new fields.StringField(),
@@ -29,18 +28,30 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 						...Object.keys(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
 							object[symbol] = new fields.ArrayField(
 								new fields.SchemaField({
-									symbolAmount: new fields.NumberField({...requiredInteger, initial: 1, min: 1}),
-									description: new fields.HTMLField({required: true})
+									description: new fields.HTMLField({
+										label: "ACTION.EFFECT.Description",
+										required: true
+									}),
+
+									script: new fields.JavaScriptField({label: "ACTION.EFFECT.Script"}),
+
+									symbolAmount: new fields.NumberField({
+										integer: true,
+										initial: 1,
+										label: "ACTION.EFFECT.SymbolAmount",
+										min: 1,
+										nullable: false,
+										required: true
+									})
 								})
 							);
-
 							return object;
 						}, {})
 					})
 				})
 				return object;
 			}, {}),
-			rechargeTokens: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
+			rechargeTokens: new fields.NumberField({integer: true, initial: 0, min: 0, nullable: false, required: true}),
 			type: new fields.StringField()
 		};
 	}

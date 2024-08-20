@@ -73,10 +73,12 @@
   "_stats": {
     "systemId": "wfrp3e",
     "systemVersion": "0.6.1-alpha",
-    "coreVersion": "11.315",
+    "coreVersion": "12.327",
     "createdTime": 1699549812004,
     "modifiedTime": 1701883658637,
-    "lastModifiedBy": "Bq3CTOvANoOneedB"
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "aAZGsyRYFxlApmLm",
   "sort": 100000,
