@@ -1,5 +1,5 @@
 /** @inheritDoc */
-export default class WFRP3eDie extends Die
+export default class WFRP3eDie extends foundry.dice.terms.Die
 {
 	constructor(termData = {})
 	{
