@@ -33,7 +33,10 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 										required: true
 									}),
 
-									script: new fields.JavaScriptField({label: "ACTION.EFFECT.Script"}),
+									script: new fields.JavaScriptField({
+										label: "ACTION.EFFECT.Script",
+										hint: "ACTION.EFFECT.HINT.Script"
+									}),
 
 									symbolAmount: new fields.NumberField({
 										integer: true,
