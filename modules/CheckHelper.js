@@ -213,12 +213,14 @@ export default class CheckHelper
 	static getUniversalBoonEffect(isMental)
 	{
 		return isMental ? {
-			symbolAmount: 2,
-			description: game.i18n.format("ROLL.EFFECT.RecoverFatigue", {amount: 1})
-		} : {
-			symbolAmount: 2,
-			description: game.i18n.format("ROLL.EFFECT.RecoverStress", {amount: 1})
-		};
+				description: game.i18n.format("ROLL.EFFECT.RecoverStress", {amount: 1}),
+				script: "outcome.stress -= 2;",
+				symbolAmount: 2
+			} : {
+				description: game.i18n.format("ROLL.EFFECT.RecoverFatigue", {amount: 1}),
+				script: "outcome.fatigue -= 2;",
+				symbolAmount: 2
+			};
 	}
 
 	/**
@@ -229,12 +231,14 @@ export default class CheckHelper
 	static getUniversalBaneEffect(isMental)
 	{
 		return isMental ? {
-			symbolAmount: 2,
-			description: game.i18n.format("ROLL.EFFECT.SufferFatigue", {amount: 1})
+				description: game.i18n.format("ROLL.EFFECT.SufferStress", {amount: 1}),
+				script: "outcome.stress++;",
+				symbolAmount: 2
 			} : {
-			symbolAmount: 2,
-			description: game.i18n.format("ROLL.EFFECT.SufferStress", {amount: 1})
-		};
+				description: game.i18n.format("ROLL.EFFECT.SufferFatigue", {amount: 1}),
+				script: "outcome.fatigue++;",
+				symbolAmount: 2
+			}
 	}
 
 	/**
@@ -245,8 +249,9 @@ export default class CheckHelper
 	static getCriticalRatingEffect(weapon)
 	{
 		return {
-			symbolAmount: weapon.system.criticalRating,
-			description: game.i18n.format("ROLL.EFFECT.Critical", {amount: 1})
+			description: game.i18n.format("ROLL.EFFECT.Critical", {amount: 1}),
+			script: "outcome.targetCriticalWounds++;",
+			symbolAmount: weapon.system.criticalRating
 		};
 	}
 
@@ -257,13 +262,14 @@ export default class CheckHelper
 	static getUniversalSigmarsCometEffect()
 	{
 		return {
-			symbolAmount: 1,
-			description: game.i18n.format("ROLL.EFFECT.Critical", {amount: 1})
+			description: game.i18n.format("ROLL.EFFECT.Critical", {amount: 1}),
+			script: "outcome.targetCriticalWounds++;",
+			symbolAmount: 1
 		};
 	}
 
 	/**
-	 * Toggles effects from a Roll, depending on the symbols remaining.
+	 * Toggles an effect from a Roll, depending on the symbols remaining.
 	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
 	 * @param {String} symbol The symbol of the effect to toggle.
 	 * @param {Number} index The index of the effect to toggle.
@@ -364,9 +370,9 @@ export default class CheckHelper
 	static async triggerEffects(chatMessageId)
 	{
 		const chatMessage = game.messages.get(chatMessageId),
-		      roll = chatMessage.rolls[0],
-		      checkData = roll.options.checkData,
-		      actor = checkData.actor.actorId
+			  roll = chatMessage.rolls[0],
+			  checkData = roll.options.checkData,
+			  actor = checkData.actor.actorId
 				  ? game.actors.get(checkData.actor.actorId)
 				  : game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor,
 			  targetActor = checkData.targets.length > 0
@@ -397,104 +403,12 @@ export default class CheckHelper
 			  chatMessageUpdates = {rolls: chatMessage.rolls};
 
 		for(const effect of toggledEffects) {
-			const effectDescription = TextEditor.decodeHTML(effect.description);
-			let match = null;
-
-			if(targetActor) {
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForPlusAmountDamage"), "u"));
-				if(match) {
-					const characteristicName = checkData.action.system.type === "ranged" ? "agility" : "strength";
-					outcome.targetDamages = actor.system.characteristics[characteristicName].rating +
-						(checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) +
-						parseInt(match[1]);
-				}
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForCharacteristicDamage"), "u"));
-				if(match) {
-					const characteristicName = Object.entries(CONFIG.WFRP3e.characteristics).find(characteristic => {
-						return game.i18n.localize(characteristic[1].abbreviation) === match[2];
-					})[0];
-					const characteristic = actor.system.characteristics[characteristicName];
-
-					outcome.targetDamages = characteristic.value + parseInt(match[1]);
-				}
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForMinusAmountDamage"), "u"));
-				if(match) {
-					const characteristicName = checkData.action.system.type === "ranged" ? "agility" : "strength";
-					outcome.targetDamages = actor.system.characteristics[characteristicName].rating +
-						(checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) +
-						parseInt(match[1]);
-				}
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.ForNormalDamage"), "u"));
-				if(match) {
-					const characteristicName = checkData.action.system.type === "ranged" ? "agility" : "strength";
-					outcome.targetDamages = actor.system.characteristics[characteristicName].rating +
-						(checkData.weapon?.system.damageRating ?? 0) +
-						(actor.system.damageRating ?? 0);
-				}
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.MinusDamage"), "u"));
-				if(match)
-					outcome.targetDamages -= parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.PlusDamage"), "u"));
-				if(match)
-					outcome.targetDamages += parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.PlusCritical"), "u"));
-				if(match)
-					outcome.targetCriticalWounds += parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.TargetSuffersAmountFatigue"), "iu"));
-				if(match)
-					outcome.targetFatigue += parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.TargetSuffersAmountStress"), "iu"));
-				if(match)
-					outcome.targetStress += parseInt(match[1]);
-			}
-
-			if(actor) {
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.RecoverAmountFatigue"), "iu"));
-				if(match)
-					outcome.fatigue -= parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.RecoverAmountStress"), "iu"));
-				if(match)
-					outcome.stress -= parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.SufferAmountCritical"), "iu"));
-				if(match)
-					outcome.criticalWounds += parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.SufferAmountFatigue"), "iu"));
-				if(match)
-					outcome.fatigue += parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.SufferAmountStress"), "iu"));
-				if(match)
-					outcome.stress += parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.SufferAmountWound"), "iu"));
-				if(match)
-					outcome.wounds += parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.SufferAmountWound"), "iu"));
-				if(match)
-					outcome.favour += parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.GainAmountPower"), "iu"));
-				if(match)
-					outcome.power += parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.LoseAmountFavour"), "iu"));
-				if(match)
-					outcome.favour -= parseInt(match[1]);
-
-				match = effectDescription.match(new RegExp(game.i18n.localize("ROLL.REGEX.LoseAmountPower"), "iu"));
-				if(match)
-					outcome.power -= parseInt(match[1]);
+			try {
+				// eslint-disable-next-line no-new-func
+				const fn = new foundry.utils.AsyncFunction("checkData", "actor", "outcome", effect.script);
+				await fn.call(globalThis, checkData, actor, outcome);
+			} catch(err) {
+				console.error(err);
 			}
 		}
 

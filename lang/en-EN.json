@@ -29,7 +29,10 @@
 	"ACTION.CHECK.NoCheckRequired": "No Check Required",
 	"ACTION.CHECK.TargetDefence": "Target Defence",
 	"ACTION.EFFECT.Description": "Description",
+	"ACTION.EFFECT.Script": "Script",
 	"ACTION.EFFECT.SymbolAmount": "Symbol Amount",
+	"ACTION.EFFECT.SymbolType": "Symbol Type",
+	"ACTION.EFFECT.HINT.Script": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.",
 	"ACTION.FACE.Conservative": "Conservative",
 	"ACTION.FACE.Reckless": "Reckless",
 	"ACTION.TRAITS.Basic": "Base",
@@ -38,6 +41,11 @@
 	"ACTION.TYPE.Support": "Support",
 	"ACTION.TYPE.Blessing": "Blessing",
 	"ACTION.TYPE.Spell": "Spell",
+
+	"ACTIONEFFECTEDITOR.Submit": "Save Effect",
+	"ACTIONEFFECTEDITOR.Title": "Action Effect Editor",
+	"ACTIONEFFECTEDITOR.TAB.Main": "Main",
+	"ACTIONEFFECTEDITOR.TAB.Script": "Script",
 
 	"ACTIONSELECTOR.ChooseANewAction": "Choose a New Action",
 	"ACTIONSELECTOR.NoActionSelected": "None",
@@ -256,6 +264,9 @@
 	"CREATURE.ABBREVIATION.SoakValue": "Soak",
 
 	"CRITICALWOUND.SeverityRating": "Severity Rating",
+
+	"DIALOG.TITLE.EffectDeletion": "Effect Deletion",
+	"DIALOG.DESCRIPTION.EffectDeletion": "Do you really wish to delete this effect?",
 
 	"DISEASE.Description": "Description",
 	"DISEASE.SeverityRating": "Severity Rating",

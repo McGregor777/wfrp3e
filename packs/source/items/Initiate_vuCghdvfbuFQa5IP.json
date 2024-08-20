@@ -10,7 +10,9 @@
   "system": {
     "description": "<p>The people of the Empire acknowledge many deities. These gods and goddesses vary in importance from little-known deities of a particular landmark, to Sigmar, the patron deity of the Empire. To most people, the gods are somewhat distant and feckless forces of nature. They must be respected in order to stave off disaster, but money has taken the place of religion in many people&rsquo;s affections. However, there are still men and women who seek to devote their lives to the gods.</p>\n<p>In order to become a priest, a devotee of a particular god must first become an initiate. An initiate has to learn literacy and calligraphy, needs to have a good memory for scripture, and must make a close study of the holy texts associated with each god. The initiate will have to understand the context of each parable and passage in order to explain them to the members of their congregation. The initiate will also have to learn the art of oratory, as they will often have to read to large congregations, or lead them in prayer or song. The gold and silver altar pieces and large illuminated books found in temples provide a tempting target for thieves and raiders, so initiates are often taught how to fight in close combat in order to repel plunderers. Even initiates of Shallya are taught a few (non-lethal) self-defence techniques, whilst followers of Sigmar consider it an act of faith to become experts in the art of fighting.</p>\n<p>Initiates can grow weary of their rather strenuous and regimented lives, or they may be divinely inspired to leave their temples for a period of wandering. Such initiates may even join adventuring parties, where their skills in miracle working are welcomed. Sometimes their superiors order them to travel so that they can experience how their god interacts with the world beyond their cloisters.</p>\n<p><strong>Special:</strong> In order to play an initiate you must choose a patron god, such as Sigmar, Morr, or Shallya, into whose cult you have been inducted.</p>\n<p><strong>Typical Trappings:</strong> Initiates wear a religious symbol and robes appropriate to the god they worship.</p>\n<p><strong>Career Ability:</strong> Invocation checks for Rank 1 or lower blessings gain <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼</span></p>",
     "advanced": false,
-    "raceRestrictions": ["human"],
+    "raceRestrictions": [
+      "human"
+    ],
     "traits": "Academic, Basic, Priest, Religion",
     "talentSockets": [
       "faith",
@@ -69,10 +71,12 @@
   "_stats": {
     "systemId": "wfrp3e",
     "systemVersion": "0.5.1",
-    "coreVersion": "11.315",
+    "coreVersion": "12.327",
     "createdTime": 1699549839211,
     "modifiedTime": 1699628676964,
-    "lastModifiedBy": "Bq3CTOvANoOneedB"
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "vuCghdvfbuFQa5IP",
   "sort": 500000,

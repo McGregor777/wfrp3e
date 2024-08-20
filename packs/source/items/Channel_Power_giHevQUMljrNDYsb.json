@@ -13,37 +13,43 @@
       "effects": {
         "success": [
           {
-            "symbolAmount": 1,
-            "description": "<p>Gain 2 power</p>"
+            "description": "<p>Gain 2 power</p>",
+            "script": "outcome.power += 2;",
+            "symbolAmount": 1
           },
           {
-            "symbolAmount": 2,
-            "description": "<p>Gain 3 power</p>"
+            "description": "<p>Gain 3 power</p>",
+            "script": "outcome.power += 3;",
+            "symbolAmount": 2
           },
           {
-            "symbolAmount": 3,
-            "description": "<p>Gain 4 power</p>"
+            "description": "<p>Gain 4 power</p>",
+            "script": "outcome.power += 4;",
+            "symbolAmount": 3
           }
         ],
         "righteousSuccess": [],
         "boon": [
           {
-            "symbolAmount": 2,
-            "description": "<p>Gain 1 power</p>"
+            "description": "<p>Gain 1 power</p>",
+            "script": "outcome.power++;",
+            "symbolAmount": 2
           }
         ],
         "sigmarsComet": [],
         "challenge": [],
         "bane": [
           {
-            "symbolAmount": 2,
-            "description": "<p>Suffer 1 stress. If, after resolving this action, you have more power than twice your Willpower, suffer 1 additional stress</p>"
+            "description": "<p>Suffer 1 stress. If, after resolving this action, you have more power than twice your Willpower, suffer 1 additional stress</p>",
+            "script": "outcome.stress++;\nif(actor.system.power > actor.system.characteristics.willpower.rating * 2)\n\toutcome.stress++;",
+            "symbolAmount": 2
           }
         ],
         "chaosStar": [
           {
-            "symbolAmount": 1,
-            "description": "<p>After resolving this action, lose all power in excess of twice your Willpower and suffer 1 stress per power lost this way</p>"
+            "description": "<p>After resolving this action, lose all power in excess of twice your Willpower and suffer 1 stress per power lost this way</p>",
+            "script": "outcome.stress += actor.system.power - actor.system.characteristics.willpower.rating;",
+            "symbolAmount": 1
           }
         ],
         "delay": [],
@@ -64,37 +70,43 @@
       "effects": {
         "success": [
           {
-            "symbolAmount": 1,
-            "description": "<p>Gain 2 power</p>"
+            "description": "<p>Gain 2 power</p>",
+            "script": "outcome.power += 2;",
+            "symbolAmount": 1
           },
           {
-            "symbolAmount": 1,
-            "description": "<p>Gain 4 power</p>"
+            "description": "<p>Gain 4 power</p>",
+            "script": "outcome.power += 4;",
+            "symbolAmount": 2
           },
           {
-            "symbolAmount": 1,
-            "description": "<p>Gain 6 power</p>"
+            "description": "<p>Gain 6 power</p>",
+            "script": "outcome.power += 6;",
+            "symbolAmount": 3
           }
         ],
         "righteousSuccess": [],
         "boon": [
           {
-            "symbolAmount": 1,
-            "description": "<p>Gain 1 power</p>"
+            "description": "<p>Gain 1 power</p>",
+            "script": "outcome.power++;",
+            "symbolAmount": 1
           }
         ],
         "sigmarsComet": [],
         "challenge": [],
         "bane": [
           {
-            "symbolAmount": 2,
-            "description": "<p>Suffer 1 wound. If, after resolving this action, you have more power than twice your Willpower, suffer 1 additional stress</p>"
+            "description": "<p>Suffer 1 wound. If, after resolving this action, you have more power than twice your Willpower, suffer 1 additional stress</p>",
+            "script": "outcome.wounds++;\nif(actor.system.power > actor.system.characteristics.willpower.rating * 2)\n\toutcome.stress++;",
+            "symbolAmount": 2
           }
         ],
         "chaosStar": [
           {
-            "symbolAmount": 1,
-            "description": "<p>At the end of your turn, lose all power in excess of your Willpower and suffer 1 stress per power lost this way</p>"
+            "description": "<p>At the end of your turn, lose all power in excess of your Willpower and suffer 1 stress per power lost this way</p>",
+            "script": "outcome.stress += actor.system.power - actor.system.characteristics.willpower.rating;",
+            "symbolAmount": 1
           }
         ],
         "delay": [],
@@ -119,11 +131,13 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.6.1-alpha",
-    "coreVersion": "11.315",
+    "systemVersion": "1.1-alpha",
+    "coreVersion": "12.331",
     "createdTime": 1701863029100,
-    "modifiedTime": 1703178590171,
-    "lastModifiedBy": "Bq3CTOvANoOneedB"
+    "modifiedTime": 1724077541055,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "giHevQUMljrNDYsb",
   "sort": 400000,

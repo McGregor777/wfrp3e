@@ -5,7 +5,7 @@
   "description": "<p>To determine a character’s starting career, you may either draw a sheet from a basic career deck, or roll percentile dice (d00) and consult the following table. Cross reference your character’s race with the d00 result to determine the character’s starting career.</p>",
   "results": [
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         1,
@@ -21,7 +21,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.4Bll9fQovrFGEvMO"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         4,
@@ -37,7 +37,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.RqP2eQ2EaI9CVGjS"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         7,
@@ -53,7 +53,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.PLO7mpDJMCjCwBwB"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         9,
@@ -69,7 +69,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.vTpwVMXCkmdQEBaS"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         11,
@@ -85,7 +85,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.B0CZ6fTzq2yPsKdA"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         13,
@@ -101,7 +101,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.chqOx5LVR3t8ciMU"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         16,
@@ -117,7 +117,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.OWAvkyPbwK3IdpYs"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         18,
@@ -133,7 +133,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.4EaiLZc0dsap09Ml"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         21,
@@ -149,7 +149,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.jGBchNNfWw1yY5qD"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         23,
@@ -165,7 +165,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.XOtVPXFkFe2EaJCW"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         25,
@@ -181,7 +181,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.bPX9HU1vWRHuEKJL"
     },
     {
-      "type": 2,
+      "type": "pack",
       "weight": 1,
       "range": [
         28,
@@ -197,7 +197,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.6aBHgUKjgpu7QYeM"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -213,7 +213,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.heGIXtQX76LTkwfk"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -229,7 +229,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.MR61eLgvgPqMFBxn"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -245,7 +245,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.wG4HKvjCnXzUuH7S"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -261,7 +261,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.5uyh2jaB9cqI1sJ1"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -277,7 +277,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.eLGp9tuaavBa1TUE"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -293,7 +293,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.UnfQGD0FehcwY35o"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -309,7 +309,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.keygesbkXNbhSeQc"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -325,7 +325,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.7ICLclgAaMTRPQM5"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -341,7 +341,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.Xy2ED0LHzQIM32xw"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -357,7 +357,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.ZR5iiK3u71fpybjN"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -373,7 +373,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.0eaXKQ9IQn8vqVJs"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -389,7 +389,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.vxB5cw9rqYdnXWaq"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -405,7 +405,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.B2zvqOpUdPygq1g8"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -421,7 +421,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.QZnW4iW4PCpklWAq"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -437,7 +437,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.mGQ0P1XoKnPw0kYw"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -453,7 +453,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.wuEjxXcbu9BPTTZO"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -469,7 +469,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.VxxSeMthjDQ35ekq"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -485,7 +485,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.sRbevTkOMbIt9tb6"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -501,7 +501,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.8n4XavLy3DgGS1JS"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -517,7 +517,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.n9ntGnxpm6allIos"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -533,7 +533,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.0fyM9pGSLqJsO1Uh"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -549,7 +549,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.qrMod29sGmK1l7dx"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -565,7 +565,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.gsy0EAJYePAaPrKy"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -581,7 +581,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.wywPkQzCHEvsZE2X"
     },
     {
-      "type": 2,
+      "type": "pack",
       "documentCollection": "wfrp3e.items",
       "weight": 1,
       "range": [
@@ -597,7 +597,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.GBaQtVZ4mGHJupqR"
     },
     {
-      "type": 0,
+      "type": "text",
       "documentCollection": "world.wfrp3e-items",
       "weight": 1,
       "range": [
@@ -613,7 +613,7 @@
       "_key": "!tables.results!PoY76It3s6IkTr3g.1m2icEh2oxtYMHdo"
     },
     {
-      "type": 0,
+      "type": "text",
       "documentCollection": "world.wfrp3e-items",
       "weight": 1,
       "range": [
@@ -641,10 +641,12 @@
   "_stats": {
     "systemId": "wfrp3e",
     "systemVersion": "0.6.1-alpha",
-    "coreVersion": "11.315",
+    "coreVersion": "12.327",
     "createdTime": 1699554936217,
     "modifiedTime": 1703687290307,
-    "lastModifiedBy": "Bq3CTOvANoOneedB"
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "formula": "1d100",
   "_key": "!tables!PoY76It3s6IkTr3g"

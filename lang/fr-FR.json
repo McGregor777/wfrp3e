@@ -29,7 +29,10 @@
 	"ACTION.CHECK.NoCheckRequired": "Aucun Test Requis",
 	"ACTION.CHECK.TargetDefence": "Défense de la Cible",
 	"ACTION.EFFECT.Description": "Description",
+	"ACTION.EFFECT.Script": "Script",
 	"ACTION.EFFECT.SymbolAmount": "Quantité de symboles",
+	"ACTION.EFFECT.SymbolType": "Type de symbole",
+	"ACTION.EFFECT.HINT.Script": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.",
 	"ACTION.FACE.Conservative": "Prudence",
 	"ACTION.FACE.Reckless": "Téméraire",
 	"ACTION.TRAITS.Basic": "Base",
@@ -38,6 +41,11 @@
 	"ACTION.TYPE.Support": "Support",
 	"ACTION.TYPE.Blessing": "Bénédiction",
 	"ACTION.TYPE.Spell": "Sort",
+
+	"ACTIONEFFECTEDITOR.Submit": "Enregistrer l'effet",
+	"ACTIONEFFECTEDITOR.Title": "Éditeur d'effect d'action",
+	"ACTIONEFFECTEDITOR.TAB.Main": "Principal",
+	"ACTIONEFFECTEDITOR.TAB.Script": "Script",
 
 	"ACTIONSELECTOR.ChooseANewAction": "Choisissez une nouvelle action",
 	"ACTIONSELECTOR.NoActionSelected": "Aucune",
@@ -256,6 +264,9 @@
 	"CREATURE.ABBREVIATION.SoakValue": "Encaissement",
 
 	"CRITICALWOUND.SeverityRating": "Niveau de Gravité",
+
+	"DIALOG.TITLE.EffectDeletion": "Suppression d'effet",
+	"DIALOG.DESCRIPTION.EffectDeletion": "Souhaitez-vous vraiment supprimer cet effet ?",
 
 	"DISEASE.Description": "Description",
 	"DISEASE.SeverityRating": "Niveau de Gravité",

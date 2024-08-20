@@ -1,0 +1,23 @@
+<section class="tab main active" data-group="primary" data-tab="main">
+	<label class="form-group slim">
+		<span>{{localize "ACTION.EFFECT.SymbolType"}}</span>
+
+		<span class="form-fields">
+			<select name="symbol" {{#if symbol}}disabled{{/if}}>
+				{{selectOptions symbols selected=symbol labelAttr="name" localize=true}}
+			</select>
+		</span>
+	</label>
+
+	{{formGroup fields.symbolAmount
+				value=effect.symbolAmount
+				classes="slim"
+				placeholder=(localize "ACTION.EFFECT.SymbolAmount")
+				localize=true}}
+
+	{{formGroup fields.description
+				value=effect.description
+				enriched=enrichedDescription
+				toggled=true
+				localize=true}}
+</section>

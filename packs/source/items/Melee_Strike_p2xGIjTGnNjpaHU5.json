@@ -31,12 +31,14 @@
       "effects": {
         "success": [
           {
-            "symbolAmount": 1,
-            "description": "<p>You hit the target for normal damage</p>"
+            "description": "<p>You hit the target for normal damage</p>",
+            "script": "const characteristicName = checkData.action.system.type === \"ranged\" ? \"agility\" : \"strength\";\noutcome.targetDamages = actor.system.characteristics[characteristicName].rating + (checkData.weapon?.system.damageRating ?? 0) + (actor.system.damageRating ?? 0);",
+            "symbolAmount": 1
           },
           {
-            "symbolAmount": 3,
-            "description": "<p>You hit the target for +2 damage</p>"
+            "description": "<p>You hit the target for +2 damage</p>",
+            "script": "const characteristicName = checkData.action.system.type === \"ranged\" ? \"agility\" : \"strength\";\noutcome.targetDamages = actor.system.characteristics[characteristicName].rating + (checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) + 2;",
+            "symbolAmount": 3
           }
         ],
         "boon": [
@@ -76,12 +78,14 @@
       "effects": {
         "success": [
           {
-            "symbolAmount": 1,
-            "description": "<p>You hit the target for normal damage</p>"
+            "description": "<p>You hit the target for normal damage</p>",
+            "script": "const characteristicName = checkData.action.system.type === \"ranged\" ? \"agility\" : \"strength\";\noutcome.targetDamages = actor.system.characteristics[characteristicName].rating + (checkData.weapon?.system.damageRating ?? 0) + (actor.system.damageRating ?? 0);",
+            "symbolAmount": 1
           },
           {
-            "symbolAmount": 3,
-            "description": "<p>You hit the target for +2 damage</p>"
+            "description": "<p>You hit the target for +2 damage</p>",
+            "script": "const characteristicName = checkData.action.system.type === \"ranged\" ? \"agility\" : \"strength\";\noutcome.targetDamages = actor.system.characteristics[characteristicName].rating + (checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) + 2;",
+            "symbolAmount": 3
           }
         ],
         "boon": [
@@ -109,11 +113,13 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.6.1-alpha",
-    "coreVersion": "11.315",
+    "systemVersion": "1.1-alpha",
+    "coreVersion": "12.331",
     "createdTime": 1696334694650,
-    "modifiedTime": 1701883837306,
-    "lastModifiedBy": "Bq3CTOvANoOneedB"
+    "modifiedTime": 1724024748167,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null
   },
   "_id": "p2xGIjTGnNjpaHU5",
   "sort": 900000,

@@ -23,11 +23,11 @@
 	<div class="sheet-body">
 		{{#each @root.stances as |stance st|}}
 			{{#with (lookup @root.item.system st) as |face|}}
-				<section class="{{st}} tab" data-group="face" data-tab="{{st}}">
-					<nav class="sheet-tabs tabs {{st}}-tabs" data-group="{{st}}">
+				<section class="{{st}} tab" data-group="face" data-tab="{{st}}" data-face="{{st}}">
+					<div class="sheet-tabs tabs {{st}}-tabs" data-group="{{st}}">
 						<a class="tab-link main-tab-link" data-tab="main">{{localize "Main"}}</a>
 						<a class="tab-link effects-tab-link" data-tab="effects">{{localize "ACTION.Effects"}}</a>
-					</nav>
+					</div>
 
 					<section class="{{st}} main-tab tab" data-group="{{st}}" data-tab="main">
 						<div class="form-div">
@@ -87,8 +87,8 @@
 								<input name="system.{{st}}.difficultyModifiers.misfortuneDice"
 								       value="{{face.difficultyModifiers.misfortuneDice}}"
 								       type="number"
-							 	      min="0"
-							 	      placeholder="{{localize 'ACTION.MisfortuneDice'}}" />
+							 	       min="0"
+							 	       placeholder="{{localize 'ACTION.MisfortuneDice'}}" />
 							</label>
 						</div>
 
@@ -100,13 +100,14 @@
 							<input name="system.{{st}}.check"
 							       value="{{face.check}}"
 							       type="text"
-						 	      placeholder="{{localize 'ACTION.Check'}}" />
+						 	       placeholder="{{localize 'ACTION.Check'}}" />
 						</label>
 
 						<hr />
 
 						<label class="editor-container">
 							{{localize "ACTION.Requirements"}}:
+
 							{{editor face.requirements
 									 target=(concat "system." st ".requirements")
 									 button=true
@@ -117,37 +118,28 @@
 
 					<section class="tab {{st}}-effects-tab" data-group="{{st}}" data-tab="effects">
 						<div>
-							<label>{{localize "ACTION.Effects"}}</label>
+							<label>
+								{{localize "ACTION.Effects"}}
+
+								<a class="effect-add"><span class="fas fa-plus"></span></a>
+							</label>
 
 							{{#each @root.symbols as |symbol sym|}}
-								<div class="effect-group">
-									<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
-									<a class="effect-add" data-face="{{st}}" data-symbol="{{sym}}"><span class="fas fa-plus"></span></a>
-
+								<div class="effect-group" data-symbol="{{sym}}">
 									{{#each (lookup face.effects sym) as |effect ef|}}
-										<div class="effect">
-											<input class="sheet-form-input effect-symbol-amount"
-											       name="system.{{st}}.effects.{{sym}}.{{ef}}.symbolAmount"
-											       value="{{effect.symbolAmount}}"
-											       type="number"
-											       min="0"
-											       placeholder="{{localize 'ACTION.EFFECT.SymbolAmount'}}" />
+										<div class="effect" data-index="{{ef}}">
+											{{#for 0 effect.symbolAmount 1}}
+												{{#unless (and (or (sameAs sym "delay") (sameAs sym "exertion")) (superiorTo this 0))}}
+													<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+												{{else}}
+													<span class="wfrp3e-font symbol {{@root.symbols.bane.cssClass}}"></span>
+												{{/unless}}
+											{{/for}}
 
-											<div class="editor-container">
-												{{editor effect.description
-														 target=(concat "system." st ".effects." sym "." ef ".description")
-														 button=true
-														 owner=@root.owner
-														 editable=@root.editable}}
-											</div>
+											{{{striptags effect.description "p"}}}
 
-											<input class="sheet-form-input effect-description"
-											       name="system.{{st}}.effects.{{sym}}.{{ef}}.description"
-											       value="{{effect.description}}"
-											       type="text"
-											       placeholder="{{localize 'ACTION.EFFECT.Description'}}" />
-
-											<a class="effect-remove fa fa-eraser" data-face="{{st}}" data-symbol="{{sym}}" data-index="{{ef}}"></a>
+											<a class="effect-edit fas fa-pen-to-square"></a>
+											<a class="effect-remove fa fa-eraser"></a>
 										</div>
 									{{/each}}
 								</div>
