@@ -160,7 +160,7 @@
 
 			<div class="secondary-infos">
 				{{#unless actor.system.nemesis}}
-					<a class="stance {{actor.system.defaultStance}}" data-tooltip="{{localize 'CREATURE.Stance'}}">
+					<a class="stance-link {{actor.system.defaultStance}}" data-tooltip="{{localize 'CREATURE.Stance'}}">
 						{{#if (inferiorTo actor.system.stance.current 0)}}
 							C{{abs actor.system.stance.current}}
 						{{else}}

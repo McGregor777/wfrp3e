@@ -39,19 +39,19 @@ export default class WFRP3eCreatureSheet extends WFRP3eActorSheet
 	{
 		super.activateListeners(html);
 
-		html.find(".stance")
+		html.find(".stance-link")
 			.click(this._onStanceLinkClick.bind(this, 1))
 			.contextmenu(this._onStanceLinkClick.bind(this, -1));
 	}
 
 	/**
-	 * Performs follow-up operations after left-clicks on the stance link.
+	 * Performs follow-up operations after clicks on the stance link.
 	 * @param {Number} amount
 	 * @param {MouseEvent} event
 	 * @private
 	 */
-	_onStanceLinkClick(event)
+	_onStanceLinkClick(amount, event)
 	{
-		this.actor.update({"system.stance": this.actor.system.stance + 1});
+		this.actor.update({"system.stance.current": this.actor.system.stance.current + amount});
 	}
 }
