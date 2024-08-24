@@ -22,11 +22,8 @@
 				flex: 1 1 0;
 				min-height: 0;
 
-				& > .tab.active {
-					display: flex;
-					flex-flow: column nowrap;
-					height: 100%;
-					overflow: auto;
+				& > .main-tab {
+					gap: 0.5rem;
 				}
 
 				& .action-tab .actions .action-container {
@@ -133,7 +130,7 @@
 
 							& > img {
 								display: block;
-								margin: auto;
+								margin: auto;height: 260px;
 							}
 						}
 
@@ -177,7 +174,7 @@
 
 					&.secondary-infos {
 						flex-grow: 1;
-						padding: 0 1rem 1rem;
+						padding: 0 1rem 0;
 
 						& .special-rule-summary {
 							flex-grow: 1;
