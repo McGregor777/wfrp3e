@@ -123,13 +123,15 @@ export default class DicePoolBuilder extends FormApplication
 						})
 					];
 
-					if(action.system.type === "melee")
-						data.availableWeapons.push(
-							CONFIG.WFRP3e.weapon.commonWeapons.improvisedWeapon,
-							CONFIG.WFRP3e.weapon.commonWeapons.unarmed
-						);
-					else
-						data.availableWeapons.push(CONFIG.WFRP3e.weapon.commonWeapons.improvised);
+					if(this.actor.type === "character") {
+						if(action.system.type === "melee")
+							data.availableWeapons.push(
+								CONFIG.WFRP3e.weapon.commonWeapons.improvisedWeapon,
+								CONFIG.WFRP3e.weapon.commonWeapons.unarmed
+							);
+						else
+							data.availableWeapons.push(CONFIG.WFRP3e.weapon.commonWeapons.improvised);
+					}
 
 					data.weapon = checkData.weapon ?? data.availableWeapons[0];
 					checkData.weapon = data.availableWeapons[0];
