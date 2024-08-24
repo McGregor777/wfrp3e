@@ -17,7 +17,7 @@ export default class CheckHelper
 	 */
 	static async prepareCharacteristicCheck(actor, characteristic, {flavor = null, sound = null} = {})
 	{
-		const stance = actor.system.stance.current ?? actor.system.stance;
+		const stance = actor.system.stance.current;
 
 		await new DicePoolBuilder(
 			new DicePool({
