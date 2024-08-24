@@ -24,10 +24,13 @@
 			min-height: 0;
 
 			& > .tab.active {
-				display: flex;
 				flex-flow: column nowrap;
 				height: 100%;
 				overflow: auto;
+
+				&.active {
+					display: flex;
+				}
 			}
 
 			& section > nav {
