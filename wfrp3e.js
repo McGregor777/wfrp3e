@@ -7,6 +7,7 @@ import WFRP3eGroupSheet from "./modules/applications/actors/WFRP3eGroupSheet.js"
 import WFRP3ePartySheet from "./modules/applications/actors/WFRP3ePartySheet.js";
 import WFRP3eAbilitySheet from "./modules/applications/items/WFRP3eAbilitySheet.js";
 import WFRP3eActionSheet from "./modules/applications/items/WFRP3eActionSheet.js";
+import WFRP3eActionSheetV2 from "./modules/applications/items/WFRP3eActionSheetV2.js";
 import WFRP3eArmourSheet from "./modules/applications/items/WFRP3eArmourSheet.js";
 import WFRP3eCareerSheet from "./modules/applications/items/WFRP3eCareerSheet.js";
 import WFRP3eConditionSheet from "./modules/applications/items/WFRP3eConditionSheet.js";
@@ -158,7 +159,8 @@ Hooks.once("init", async () => {
 
 	Items.unregisterSheet("core", ItemSheet);
 	Items.registerSheet("wfrp3e", WFRP3eAbilitySheet, {label: "Ability Sheet", types: ["ability"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eActionSheet, {label: "Action Sheet", types: ["action"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eActionSheet, {label: "Action Sheet", types: ["action"]});
+	Items.registerSheet("wfrp3e", WFRP3eActionSheetV2, {label: "Action Sheet V2", types: ["action"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eArmourSheet, {label: "Armour Sheet", types: ["armour"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eCareerSheet, {label: "Career Sheet", types: ["career"], makeDefault: true})
 	Items.registerSheet("wfrp3e", WFRP3eConditionSheet, {label: "Condition Sheet", types: ["condition"], makeDefault: true});

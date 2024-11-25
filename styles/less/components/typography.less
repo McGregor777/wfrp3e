@@ -1,3 +1,7 @@
+@font-primary: "ArnoPro";
+@font-symbols: "WFRP3eSymbols";
+@font-title: "Caslon Antique";
+
 @font-face {
 	font-family: "ArnoPro";
 	font-stretch: normal;
@@ -40,11 +44,11 @@
 
 :root {
 	--font-primary: @font-primary;
-	--font-title: @font-title;
 	--font-symbols: @font-symbols;
-	--font-size-10: 0,625rem;
 }
 
-@font-primary: "ArnoPro";
-@font-symbols: "WFRP3eSymbols";
-@font-title: "Caslon Antique";
+body {
+	--font-h1: @font-title;
+	--font-h2: @font-title;
+	--font-h3: @font-title;
+}

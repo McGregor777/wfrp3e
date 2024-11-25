@@ -11,37 +11,56 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 		return {
 			...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
 				object[stance] = new fields.SchemaField({
-					name: new fields.StringField(),
-					art: new fields.FilePathField({categories: ["IMAGE"]}),
-					type: new fields.StringField(),
-					traits: new fields.StringField(),
-					rechargeRating: new fields.NumberField({integer: true, initial: 0, min: 0, nullable: false, required: true}),
-					difficultyModifiers: new fields.SchemaField({
-						challengeDice: new fields.NumberField({integer: true, initial: 0, min: 0, nullable: false, required: true}),
-						misfortuneDice: new fields.NumberField({integer: true, initial: 0, min: 0, nullable: false, required: true}),
+					name: new fields.StringField({label: "ACTION.FIELDS.name.label"}),
+					art: new fields.FilePathField({categories: ["IMAGE"], label: "ACTION.FIELDS.art.label"}),
+					traits: new fields.StringField({label: "ACTION.FIELDS.traits.label"}),
+
+					rechargeRating: new fields.NumberField({
+						integer: true,
+						initial: 0,
+						label: "ACTION.FIELDS.rechargeRating.label",
+						min: 0,
+						nullable: false,
+						required: true
 					}),
-					check: new fields.StringField(),
-					requirements: new fields.StringField(),
-					special: new fields.StringField(),
-					uniqueEffect: new fields.StringField(),
+
+					difficultyModifiers: new fields.SchemaField({
+						challengeDice: new fields.NumberField({
+							integer: true,
+							initial: 0,
+							label: "ACTION.FIELDS.difficultyModifiers.challengeDice.label",
+							min: 0,
+							nullable: false,
+							required: true
+						}),
+
+						misfortuneDice: new fields.NumberField({
+							integer: true,
+							initial: 0,
+							label: "ACTION.FIELDS.difficultyModifiers.misfortuneDice.label",
+							min: 0,
+							nullable: false,
+							required: true
+						}),
+					}),
+					check: new fields.StringField({label: "ACTION.FIELDS.check.label"}),
+					requirements: new fields.HTMLField({label: "ACTION.FIELDS.requirements.label"}),
+					special: new fields.HTMLField({label: "ACTION.FIELDS.special.label"}),
+					uniqueEffect: new fields.HTMLField({label: "ACTION.FIELDS.uniqueEffect.label"}),
 					effects: new fields.SchemaField({
 						...Object.keys(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
 							object[symbol] = new fields.ArrayField(
 								new fields.SchemaField({
 									description: new fields.HTMLField({
-										label: "ACTION.EFFECT.Description",
+										label: "ACTION.FIELDS.effects.description.label",
 										required: true
 									}),
 
-									script: new fields.JavaScriptField({
-										label: "ACTION.EFFECT.Script",
-										hint: "ACTION.EFFECT.HINT.Script"
-									}),
-
+									script: new fields.JavaScriptField({label: "ACTION.FIELDS.effects.script.label"}),
 									symbolAmount: new fields.NumberField({
 										integer: true,
 										initial: 1,
-										label: "ACTION.EFFECT.SymbolAmount",
+										label: "ACTION.FIELDS.effects.symbolAmount.label",
 										min: 1,
 										nullable: false,
 										required: true
@@ -55,9 +74,16 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 				return object;
 			}, {}),
 			rechargeTokens: new fields.NumberField({integer: true, initial: 0, min: 0, nullable: false, required: true}),
-			type: new fields.StringField()
+			type: new fields.StringField({
+				choices: CONFIG.WFRP3e.actionTypes,
+				initial: Object.keys(CONFIG.WFRP3e.actionTypes)[0],
+				required: true
+			})
 		};
 	}
+
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["ACTION"];
 
 	/** @inheritDoc */
 	prepareBaseData()

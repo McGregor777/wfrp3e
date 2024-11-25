@@ -1,10 +1,10 @@
 export const WFRP3e = {
 	actionTypes: {
-		melee: "ACTION.TYPE.Melee",
-		ranged: "ACTION.TYPE.Ranged",
-		support: "ACTION.TYPE.Support",
-		blessing: "ACTION.TYPE.Blessing",
-		spell: "ACTION.TYPE.Spell"
+		melee: "ACTION.TYPES.melee",
+		ranged: "ACTION.TYPES.ranged",
+		support: "ACTION.TYPES.support",
+		blessing: "ACTION.TYPES.blessing",
+		spell: "ACTION.TYPES.spell"
 	},
 	availableRaces: {
 		human: {
@@ -968,8 +968,8 @@ export const WFRP3e = {
 		exotic: "TRAPPING.RARITY.Exotic"
 	},
 	stances: {
-		"conservative": "ACTION.FACE.Conservative",
-		"reckless": "ACTION.FACE.Reckless"
+		"conservative": "STANCES.conservative",
+		"reckless": "STANCES.reckless"
 	},
 	symbols: {
 		success: {

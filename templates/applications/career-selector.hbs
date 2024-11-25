@@ -6,7 +6,7 @@
             {{equalTo ty "advanced"}}
 			{{inferiorTo object.system.rank 2}}
 			{{#unless (and (equalTo ty "advanced") (inferiorTo @root.object.system.rank 2))}}
-				<a class="tab-link {{ty}}" data-tab="{{ty}}">
+				<a class="{{ty}}" data-tab="{{ty}}">
 					{{localize (concat "CAREER.SHEET." (capitalize ty) "Career")}}
                 </a>
             {{else}}

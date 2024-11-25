@@ -2,7 +2,7 @@
 	<div class="action-tabs sheet-tabs" data-group="actions">
 		{{#each actionTypes as |type ty|}}
 			{{#if (lookup @root.items.actions ty)}}
-				<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
+				<a class="{{ty}}" data-tab="{{ty}}">{{localize type}}</a>
 			{{/if}}
 		{{/each}}
 	</div>

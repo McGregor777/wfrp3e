@@ -49,10 +49,10 @@ export default class ActionSelector extends FormApplication
 		super.activateListeners(html);
 
 		if(!this.priest)
-			html.find(".tab-link.blessing, .tab.blessing").css({display: "none"});
+			html.find("a.blessing, .tab.blessing").css({display: "none"});
 
 		if(!this.wizard)
-			html.find(".tab-link.spell, .tab.spell").css({display: "none"});
+			html.find("a.spell, .tab.spell").css({display: "none"});
 
 		html.find(".action-card .flip-link").click(this._onFlipClick.bind(this));
 		html.find(".item-container input").change(this._onActionChange.bind(this, html));

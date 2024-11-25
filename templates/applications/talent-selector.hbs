@@ -3,7 +3,7 @@
 
 	<nav class="talent-tabs tabs" data-group="talents">
 		{{#each talents as |type ty|}}
-			<a class="tab-link {{ty}}" data-tab="{{ty}}">
+			<a class="{{ty}}" data-tab="{{ty}}">
 				{{localize (lookup @root.talentTypes ty)}}
 			</a>
 		{{/each}}

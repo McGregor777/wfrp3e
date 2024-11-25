@@ -26,17 +26,21 @@
 	       placeholder="{{localize 'CREATURE.Category'}}" />
 
 	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
-		<a class="tab-link main-tab-link" data-tab="main">{{localize 'Main'}}</a>
+		<a class="main-tab-link" data-tab="main">{{localize 'Main'}}</a>
+
 		{{#if items.actions}}
-			<a class="tab-link actions-tab-link" data-tab="actions">{{localize 'CREATURE.Actions'}}</a>
+			<a class="actions-tab-link" data-tab="actions">{{localize 'CREATURE.Actions'}}</a>
 		{{/if}}
+
 		{{#if hasAbility}}
-			<a class="tab-link abilities-tab-link" data-tab="abilities">{{localize "CREATURE.Abilities"}}</a>
+			<a class="abilities-tab-link" data-tab="abilities">{{localize "CREATURE.Abilities"}}</a>
 		{{/if}}
+
 		{{#if hasTrapping}}
-			<a class="tab-link trappings-tab-link" data-tab="trappings">{{localize "CREATURE.Trappings"}}</a>
+			<a class="trappings-tab-link" data-tab="trappings">{{localize "CREATURE.Trappings"}}</a>
 		{{/if}}
-		<a class="tab-link details-tab-link" data-tab="details">{{localize 'CREATURE.Details'}}</a>
+
+		<a class="details-tab-link" data-tab="details">{{localize 'CREATURE.Details'}}</a>
 	</nav>
 
 	<div class="sheet-body">

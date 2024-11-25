@@ -7,45 +7,73 @@
 
 	"ACTOR.GenerateACharacter": "Générer un Personnage",
 
-	"ACTION.Art": "Illustration",
-	"ACTION.ChallengeDice": "Dés de Défi",
-	"ACTION.Check": "Test d'Action",
-	"ACTION.Effects": "Effets",
-	"ACTION.MisfortuneDice": "Dés d'Infortune",
-	"ACTION.Name": "Titre",
-	"ACTION.RechargeRating": "Temps de Recharge",
-	"ACTION.RechargeTokens": "Jetons de recharge",
-	"ACTION.Recharging": "Vous ne pouvez pas utiliser une Action en cours de rechargement.",
-	"ACTION.Requirements": "Conditions",
-	"ACTION.Special": "Spécial",
-	"ACTION.Traits": "Traits",
-	"ACTION.Type": "Type d'Action",
-	"ACTION.UniqueEffect": "Effet seul",
-	"ACTION.UsageMessage": "utilise {action}",
-	"ACTION.MeleeStrike": "Attaque au corps-à-corps",
-	"ACTION.RangedShot": "Tir à distance",
-	"ACTION.CHECK.Against": "contre",
-	"ACTION.CHECK.GenerallyNoCheckRequired": "Généralement Aucun Test Requis",
-	"ACTION.CHECK.NoCheckRequired": "Aucun Test Requis",
-	"ACTION.CHECK.TargetDefence": "Défense de la Cible",
-	"ACTION.EFFECT.Description": "Description",
-	"ACTION.EFFECT.Script": "Script",
-	"ACTION.EFFECT.SymbolAmount": "Quantité de symboles",
-	"ACTION.EFFECT.SymbolType": "Type de symbole",
-	"ACTION.EFFECT.HINT.Script": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.",
-	"ACTION.FACE.Conservative": "Prudence",
-	"ACTION.FACE.Reckless": "Téméraire",
-	"ACTION.TRAITS.Basic": "Base",
-	"ACTION.TYPE.Melee": "Mêlée",
-	"ACTION.TYPE.Ranged": "Distance",
-	"ACTION.TYPE.Support": "Support",
-	"ACTION.TYPE.Blessing": "Bénédiction",
-	"ACTION.TYPE.Spell": "Sort",
+	"ACTION": {
+		"ACTIONS": {
+			"update": "Enregistrer l'action"
+		},
+		"FIELDS": {
+			"art.label": "Illustration",
+			"check.label": "Test d'Action",
+			"name.label": "Titre",
+			"rechargeRating.label": "Temps de Recharge",
+			"rechargeTokens.label": "Jetons de recharge",
+			"recharging.label": "Vous ne pouvez pas utiliser une Action en cours de rechargement.",
+			"requirements.label": "Conditions",
+			"special.label": "Spécial",
+			"traits.label": "Traits",
+			"type.label": "Type d'Action",
+			"uniqueEffect.label": "Effet seul",
+			"usageMessage.label": "utilise {action}",
+			"difficultyModifiers": {
+				"challengeDice.label": "Dés de Défi",
+				"misfortuneDice.label": "Dés d'Infortune"
+			},
+			"effects": {
+				"description.label": "Description",
+				"label": "Effets",
+				"script.label": "Script",
+				"script.hint": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.",
+				"symbolAmount.label": "Quantité de symboles",
+				"symbolType.label": "Type de symbole"
+			}
+		},
+		"TRAITS": {
+			"Basic": "Base"
+		},
+		"CARDS": {
+			"Block": "Blocage",
+			"MeleeStrike": "Attaque au corps-à-corps",
+			"RangedShot": "Tir à distance"
+		},
+		"CHECK": {
+			"against": "contre",
+			"generallyNoCheckRequired": "Généralement Aucun Test Requis",
+			"noCheckRequired": "Aucun Test Requis",
+			"targetDefence": "Défense de la Cible"
+		},
+		"TABS": {
+			"effects": "Effets",
+			"main": "Principal"
+		},
+		"TYPES": {
+			"melee": "Mêlée",
+			"ranged": "Distance",
+			"support": "Support",
+			"blessing": "Bénédiction",
+			"spell": "Sort"
+		}
+	},
 
-	"ACTIONEFFECTEDITOR.Submit": "Enregistrer l'effet",
-	"ACTIONEFFECTEDITOR.Title": "Éditeur d'effect d'action",
-	"ACTIONEFFECTEDITOR.TAB.Main": "Principal",
-	"ACTIONEFFECTEDITOR.TAB.Script": "Script",
+	"ACTIONEFFECTEDITOR": {
+		"title": "Éditeur d'effect d'action",
+		"ACTIONS": {
+			"submit": "Enregistrer l'effet"
+		},
+		"TABS": {
+			"main": "Principal",
+			"script": "Script"
+		}
+	},
 
 	"ACTIONSELECTOR.ChooseANewAction": "Choisissez une nouvelle action",
 	"ACTIONSELECTOR.NoActionSelected": "Aucune",
@@ -499,6 +527,11 @@
 	"ROLL.REGEX.TargetSuffersAmountFatigue": "cible subit .*(\\d+) fatigue",
 	"ROLL.REGEX.TargetSuffersAmountStress": "cible subit .*(\\d+) stress",
 
+	"STANCES": {
+		"conservative": "Prudence",
+		"reckless": "Téméraire"
+	},
+
 	"SKILL.AdvancedSkill": "Compétence Avancée",
 	"SKILL.Characteristic": "Caractéristique",
 	"SKILL.Name": "Nom",
@@ -552,26 +585,32 @@
 	"TRAPPING.RARITY.Common": "Courant",
 	"TRAPPING.RARITY.Rare": "Rare",
 	"TRAPPING.RARITY.Exotic": "Exotique",
-
-	"TYPES.ACTOR.character": "Personnage",
-	"TYPES.ACTOR.creature": "Créature",
-	"TYPES.ACTOR.group": "Bande",
-	"TYPES.ACTOR.party": "Groupe",
-	"TYPES.ITEM.ability": "Aptitude",
-	"TYPES.ITEM.action": "Action",
-	"TYPES.ITEM.armour": "Armure",
-	"TYPES.ITEM.career": "Carrière",
-	"TYPES.ITEM.condition": "État",
-	"TYPES.ITEM.criticalwound": "Blessure",
-	"TYPES.ITEM.disease": "Maladie",
-	"TYPES.ITEM.insanity": "Folie",
-	"TYPES.ITEM.money": "Monnaie",
-	"TYPES.ITEM.miscast": "Revers Magique",
-	"TYPES.ITEM.mutation": "Mutation",
-	"TYPES.ITEM.skill": "Compétence",
-	"TYPES.ITEM.talent": "Talent",
-	"TYPES.ITEM.trapping": "Dotation",
-	"TYPES.ITEM.weapon": "Arme",
+	
+	"TYPES": {
+		"Actor": {
+			"character": "Personnage",
+			"creature": "Créature",
+			"group": "Bande",
+			"party": "Groupe"
+		},
+		"Item": {
+			"ability": "Aptitude",
+			"action": "Action",
+			"armour": "Armure",
+			"career": "Carrière",
+			"condition": "État",
+			"criticalwound": "Blessure",
+			"disease": "Maladie",
+			"insanity": "Folie",
+			"money": "Monnaie",
+			"miscast": "Revers Magique",
+			"mutation": "Mutation",
+			"skill": "Compétence",
+			"talent": "Talent",
+			"trapping": "Dotation",
+			"weapon": "Arme"
+		}
+	},
 
 	"WEAPON.CriticalRating": "Niveau Critique",
 	"WEAPON.DamageRating": "Niveau de Dégâts",

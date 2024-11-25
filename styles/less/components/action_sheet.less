@@ -1,15 +1,11 @@
-.sheet.action {
-	& nav.face-tabs {
-		font: small-caps bold var(--font-size-18) var(--font-primary);
+.app.sheet.action {
+	& nav.primary-tabs a.active {
+		&[data-tab="conservative"] {
+			color: lightgreen;
+		}
 
-		& .tab-link.active {
-			&.conservative-tab-link {
-				color: lightgreen;
-			}
-
-			&.reckless-tab-link {
-				color: lightcoral;
-			}
+		&[data-tab="reckless"] {
+			color: lightcoral;
 		}
 	}
 
@@ -35,5 +31,41 @@
 
 	& .type {
 		margin: 0.5rem 0;
+	}
+}
+
+.application.wfrp3e.sheet .window-content {
+	& nav > a[data-group="primary"] {
+		&.active[data-tab="conservative"] {
+			color: lightgreen;
+		}
+
+		&.active[data-tab="reckless"] {
+			color: lightcoral;
+		}
+	}
+
+	& .art {
+		display: block;
+		margin: 0 auto;
+	}
+
+	& .effect-group {
+		margin-bottom: 0.5rem;
+
+		& .effect > .effect-edit {
+			margin-left: 0.25rem;
+		}
+	}
+
+	& section > nav {
+		border-top: none;
+		margin-bottom: 1rem;
+		margin-top: 0;
+
+		& > a {
+			padding-bottom: 0;
+			padding-top: 0;
+		}
 	}
 }

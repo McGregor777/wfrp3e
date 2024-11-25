@@ -3,7 +3,7 @@
 
 	<nav class="action-tabs tabs" data-group="actions">
 		{{#each actions as |type ty|}}
-			<a class="tab-link {{ty}}" data-tab="{{ty}}">
+			<a class="{{ty}}" data-tab="{{ty}}">
 				{{localize (lookup @root.actionTypes ty)}}
 			</a>
 		{{/each}}

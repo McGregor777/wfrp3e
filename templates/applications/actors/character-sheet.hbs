@@ -29,23 +29,29 @@
 	</header>
 
 	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
-		<a class="characteristics-tab-link tab-link" data-tab="characteristics">{{localize "CHARACTER.Attributes"}}</a>
+		<a class="characteristics-tab-link" data-tab="characteristics">{{localize "CHARACTER.Attributes"}}</a>
+
 		{{#if items.careers}}
-			<a class="careers-tab-link tab-link" data-tab="careers">{{localize "CHARACTER.Careers"}}</a>
+			<a class="careers-tab-link" data-tab="careers">{{localize "CHARACTER.Careers"}}</a>
 		{{/if}}
+
 		{{#if items.talents}}
-			<a class="talents-tab-link tab-link" data-tab="talents">{{localize "CHARACTER.Talents"}}</a>
+			<a class="talents-tab-link" data-tab="talents">{{localize "CHARACTER.Talents"}}</a>
 		{{/if}}
+
 		{{#if items.actions}}
-			<a class="actions-tab-link tab-link" data-tab="actions">{{localize "CHARACTER.Actions"}}</a>
+			<a class="actions-tab-link" data-tab="actions">{{localize "CHARACTER.Actions"}}</a>
 		{{/if}}
+
 		{{#if hasAbility}}
-			<a class="abilities-tab-link tab-link" data-tab="abilities">{{localize "CHARACTER.Abilities"}}</a>
+			<a class="abilities-tab-link" data-tab="abilities">{{localize "CHARACTER.Abilities"}}</a>
 		{{/if}}
+
 		{{#if items.actions}}
-			<a class="trappings-tab-link tab-link" data-tab="trappings">{{localize "CHARACTER.Trappings"}}</a>
+			<a class="trappings-tab-link" data-tab="trappings">{{localize "CHARACTER.Trappings"}}</a>
 		{{/if}}
-		<a class="background-tab-link tab-link" data-tab="background">{{localize "CHARACTER.Background"}}</a>
+
+		<a class="background-tab-link" data-tab="background">{{localize "CHARACTER.Background"}}</a>
 	</nav>
 
 	<div class="character-sheet-body sheet-body">
@@ -184,7 +190,7 @@
 		<section class="careers-tab tab" data-group="primary" data-tab="careers">
 			<div class="character-sheet-career-tabs sheet-tabs" data-group="careers">
 				{{#each items.careers as |career|}}
-					<a class="tab-link" data-tab="{{career._id}}">
+					<a data-tab="{{career._id}}">
 						{{career.name}}
 
 						{{#if career.system.current}}
@@ -207,7 +213,7 @@
 			<div class="character-sheet-talent-tabs sheet-tabs" data-group="talents">
 				{{#each talentTypes as |type ty|}}
 					{{#if (lookup @root.items.talents ty)}}
-						<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
+						<a class="{{ty}}" data-tab="{{ty}}">{{localize type}}</a>
 					{{/if}}
 				{{/each}}
 			</div>

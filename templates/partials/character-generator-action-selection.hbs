@@ -1,6 +1,6 @@
 <div class="action-tabs tabs" data-group="actions">
 	{{#each actions as |type ty|}}
-		<a class="tab-link {{ty}}{{#if @first}} active{{/if}}" data-tab="{{ty}}">
+		<a class="{{ty}}{{#if @first}} active{{/if}}" data-tab="{{ty}}">
 			{{localize (lookup @root.actionTypes ty)}}
 		</a>
 	{{/each}}
