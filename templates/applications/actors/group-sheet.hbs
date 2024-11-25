@@ -1,7 +1,7 @@
 <form class="{{cssClass}}" autocomplete="off">
 	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
-		<a class="tab-link main-tab-link" data-tab="main">{{localize 'Main'}}</a>
-		<a class="tab-link talents-tab-link" data-tab="talents">{{localize 'GROUP.Talents'}}</a>
+		<a class="main-tab-link" data-tab="main">{{localize 'Main'}}</a>
+		<a class="talents-tab-link" data-tab="talents">{{localize 'GROUP.Talents'}}</a>
 	</nav>
 
 	<div class="sheet-body">
@@ -171,7 +171,7 @@
 			<div class="talent-tabs sheet-tabs" data-group="talents">
 				{{#each talentTypes as |type ty|}}
 					{{#if (lookup @root.items.talents ty)}}
-						<a class="tab-link {{ty}}" data-tab="{{ty}}">{{localize type}}</a>
+						<a class="{{ty}}" data-tab="{{ty}}">{{localize type}}</a>
 					{{/if}}
 				{{/each}}
 			</div>

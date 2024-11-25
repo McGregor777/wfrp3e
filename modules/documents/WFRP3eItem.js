@@ -211,9 +211,9 @@ export default class WFRP3eItem extends Item
 		let action = null;
 
 		if(weaponType === "melee")
-			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.CARD.MeleeStrike"));
+			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.CARDS.meleeStrike"));
 		else if(weaponType === "ranged")
-			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.CARD.RangedShot"));
+			action = this.actor.itemTypes.action.find((action) => action.name === game.i18n.localize("ACTION.CARDS.rangedShot"));
 		else
 			throw new Error("Unable to define the weapon type.");
 

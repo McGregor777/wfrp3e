@@ -9,7 +9,7 @@ export default class WFRP3eCharacterSheet extends WFRP3eActorSheet
 	{
 		return {
 			...super.defaultOptions,
-			width: 920,
+			width: 992,
 			height: 840,
 			classes: ["wfrp3e", "sheet", "actor", "character", "character-sheet"],
 			tabs: [

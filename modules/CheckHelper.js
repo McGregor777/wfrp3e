@@ -53,8 +53,8 @@ export default class CheckHelper
 	 */
 	static async prepareSkillCheck(actor, skill, {flavor = null, sound = null} = {})
 	{
-		const characteristic = actor.system.characteristics[skill.system.characteristic];
-		const stance = actor.system.stance.current;
+		const characteristic = actor.system.characteristics[skill.system.characteristic],
+			  stance = actor.system.stance.current;
 
 		await new DicePoolBuilder(
 			new DicePool({
@@ -96,11 +96,11 @@ export default class CheckHelper
 	{
 		const match = action.system[face].check.match(new RegExp(
 			"(([\\p{L}\\s]+) \\((\\p{L}+)\\))( " +
-			game.i18n.localize("ACTION.CHECK.Against") +
+			game.i18n.localize("ACTION.CHECK.against") +
 			"\\.? ([\\p{L}\\s]+))?", "u")
 		);
-		let skill = null;
-		let characteristicName = skill?.system.characteristic ?? "Strength";
+		let skill = null,
+			characteristicName = skill?.system.characteristic ?? "Strength";
 
 		if(match) {
 			skill = actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
@@ -110,30 +110,25 @@ export default class CheckHelper
 			})[0] ?? characteristicName;
 		}
 
-		const characteristic = actor.system.characteristics[characteristicName];
-		const checkData = {
-			actor: {
-				actorId: actor._id,
-				sceneId: actor.token?.object.scene._id,
-				tokenId: actor.token?._id
-			},
-			action,
-			face,
-			skill,
-			characteristic: {name: characteristicName, ...characteristic},
-			targets: [...game.user.targets].map(target => {
-				return {
-					sceneId: target.scene.id,
-					tokenId: target.id
-				}
-			})
-		};
-		let stance = 0;
-
-		if(actor.type === "character")
-			stance = actor.system.stance.current;
-		else if(actor.type === "creature")
-			stance = actor.system.stance;
+		const characteristic = actor.system.characteristics[characteristicName],
+			  checkData = {
+				  actor: {
+					  actorId: actor._id,
+					  sceneId: actor.token?.object.scene._id,
+					  tokenId: actor.token?._id
+				  },
+				  action,
+				  face,
+				  skill,
+				  characteristic: {name: characteristicName, ...characteristic},
+				  targets: [...game.user.targets].map(target => {
+					  return {
+						  sceneId: target.scene.id,
+						  tokenId: target.id
+					  }
+				  })
+			  },
+			  stance = actor.system.stance.current;
 
 		if(weapon)
 			checkData.weapon = weapon;
@@ -151,7 +146,7 @@ export default class CheckHelper
 							? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
 							: 0),
 					misfortune: action.system[face].difficultyModifiers.misfortuneDice +
-						((match ? match[5] === game.i18n.localize("ACTION.CHECK.TargetDefence") : false)
+						((match ? match[5] === game.i18n.localize("ACTION.CHECK.targetDefence") : false)
 							? checkData.targets.length > 0
 								? game.scenes.get(checkData.targets[0].sceneId)
 									.collections.tokens.get(checkData.targets[0].tokenId).actor.system.totalDefence
@@ -201,8 +196,8 @@ export default class CheckHelper
 	 */
 	static doesRequireNoCheck(check)
 	{
-		return [game.i18n.localize("ACTION.CHECK.NoCheckRequired"),
-			game.i18n.localize("ACTION.CHECK.GenerallyNoCheckRequired")].includes(check);
+		return [game.i18n.localize("ACTION.CHECK.noCheckRequired"),
+			game.i18n.localize("ACTION.CHECK.generallyNoCheckRequired")].includes(check);
 	}
 
 	/**
@@ -213,14 +208,14 @@ export default class CheckHelper
 	static getUniversalBoonEffect(isMental)
 	{
 		return isMental ? {
-				description: game.i18n.format("ROLL.EFFECT.RecoverStress", {amount: 1}),
-				script: "outcome.stress -= 2;",
-				symbolAmount: 2
-			} : {
-				description: game.i18n.format("ROLL.EFFECT.RecoverFatigue", {amount: 1}),
-				script: "outcome.fatigue -= 2;",
-				symbolAmount: 2
-			};
+			description: game.i18n.format("ROLL.EFFECT.RecoverStress", {amount: 1}),
+			script: "outcome.stress -= 2;",
+			symbolAmount: 2
+		} : {
+			description: game.i18n.format("ROLL.EFFECT.RecoverFatigue", {amount: 1}),
+			script: "outcome.fatigue -= 2;",
+			symbolAmount: 2
+		};
 	}
 
 	/**
@@ -231,14 +226,14 @@ export default class CheckHelper
 	static getUniversalBaneEffect(isMental)
 	{
 		return isMental ? {
-				description: game.i18n.format("ROLL.EFFECT.SufferStress", {amount: 1}),
-				script: "outcome.stress++;",
-				symbolAmount: 2
-			} : {
-				description: game.i18n.format("ROLL.EFFECT.SufferFatigue", {amount: 1}),
-				script: "outcome.fatigue++;",
-				symbolAmount: 2
-			}
+			description: game.i18n.format("ROLL.EFFECT.SufferStress", {amount: 1}),
+			script: "outcome.stress++;",
+			symbolAmount: 2
+		} : {
+			description: game.i18n.format("ROLL.EFFECT.SufferFatigue", {amount: 1}),
+			script: "outcome.fatigue++;",
+			symbolAmount: 2
+		};
 	}
 
 	/**
@@ -283,10 +278,10 @@ export default class CheckHelper
 			return;
 		}
 
-		const changes = {rolls: chatMessage.rolls};
-		const roll = changes.rolls[0];
-		const toggledEffect = roll.effects[symbol][index];
-		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+		const changes = {rolls: chatMessage.rolls},
+			  roll = changes.rolls[0],
+			  toggledEffect = roll.effects[symbol][index],
+			  plural = CONFIG.WFRP3e.symbols[symbol].plural;
 
 		// Toggled effect.
 		if(toggledEffect.active === true)
@@ -513,8 +508,8 @@ export default class CheckHelper
 						let highestCriticalWound = null;
 
 						for(let i = 0; i < 2; i++) {
-							let rollTableDraw = null;
-							let criticalWound = null
+							let rollTableDraw = null,
+								criticalWound = null
 
 							while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
 								rollTableDraw = await table.draw({displayChat: false});

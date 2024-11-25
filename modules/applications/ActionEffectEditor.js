@@ -6,7 +6,7 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 		id: "action-effect-editor-{id}",
 		classes: ["wfrp3e"],
 		tag: "form",
-		window: {title: "ACTIONEFFECTEDITOR.Title"},
+		window: {title: "ACTIONEFFECTEDITOR.title"},
 		form: {
 			handler: ActionEffectEditor.handleForm,
 			submitOnChange: false,
@@ -26,61 +26,59 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 	/** @inheritDoc */
 	tabGroups = {primary: "main"}
 
-	/**
-	 * Process form submission for the Action Effect Editor.
-	 * @this {ActionEffectEditor} The handler is called with the application as its bound scope.
-	 * @param {SubmitEvent} event The originating form submission event.
-	 * @param {HTMLFormElement} form The form element that was submitted.
-	 * @param {FormDataExtended} formData Processed data for the submitted form.
-	 * @returns {Promise<void>}
-	 */
-	static async handleForm(event, form, formData)
-	{
-		const data = this.options.data,
-			  symbol = formData.object.symbol ?? data.symbol,
-			  effects = data.action.system[data.face].effects[symbol];
-
-		delete formData.object.symbol;
-
-		// If the index exists, update the effect, else add the new effect.
-		data.index ? effects[data.index] = formData.object : effects.push(formData.object);
-
-		data.action.update({[`system.${data.face}.effects.${symbol}`]: effects})
-	}
-
 	/** @inheritDoc */
 	async _prepareContext(options)
 	{
-		const data = this.options.data,
-			  symbols = {...CONFIG.WFRP3e.symbols},
-			  symbolElements = '<span class="symbol-container">'
-				  + `<span class="wfrp3e-font symbol ${symbols[data.effect.symbol ?? data.symbol ?? "success"].cssClass}"></span>`.repeat(data.effect.symbolAmount)
-				  + "</span>";
-		let enrichedDescription = await TextEditor.enrichHTML(data.effect.description);
-
-		// Prepend symbols to the enriched description of the effect.
-		if(data.effect.description.length > 0) {
-			const match = enrichedDescription.match(new RegExp(/<\w+>/));
-
-			enrichedDescription = match[0]
-				+ symbolElements
-				+ enrichedDescription.slice(match.index + match[0].length, enrichedDescription.length);
-		}
-		else
-			enrichedDescription = symbolElements;
-
-		// Remove irrelevant symbols from symbol type selection.
-		delete symbols.righteousSuccess;
-		data.face === "conservative" ? delete symbols.exertion : delete symbols.delay;
+		const data = this.options.data;
 
 		return {
-			buttons: [{type: "submit", icon: "fas fa-save", label: "ACTIONEFFECTEDITOR.Submit"}],
-			enrichedDescription,
-			fields: data.action.system.schema.fields[data.face].fields.effects.fields[data.symbol ?? "success"].element.fields,
-			tabs: this.#getTabs(),
+			...await super._prepareContext(options),
 			...data,
-			symbols
+			fields: data.action.system.schema.fields[data.face].fields.effects.fields[data.symbol ?? "success"].element.fields,
+			tabs: this.#getTabs()
 		};
+	}
+
+	/** @override */
+	async _preparePartContext(partId, context)
+	{
+		switch(partId) {
+			case "main":
+				context.symbols = {...CONFIG.WFRP3e.symbols};
+				context.tab = context.tabs.main;
+
+				let enrichedDescription = await TextEditor.enrichHTML(context.effect.description);
+				const symbolElements = '<span class="symbol-container">'
+					+ `<span class="wfrp3e-font symbol ${context.symbols[context.effect.symbol ?? context.symbol ?? "success"].cssClass}"></span>`.repeat(context.effect.symbolAmount)
+					+ "</span>";
+
+				// Prepend symbols to the enriched description of the effect.
+				if(context.effect.description.length > 0) {
+					const match = enrichedDescription.match(new RegExp(/<\w+>/));
+
+					enrichedDescription = match[0]
+						+ symbolElements
+						+ enrichedDescription.slice(match.index + match[0].length, enrichedDescription.length);
+				}
+				else
+					enrichedDescription = symbolElements;
+
+				context.enrichedDescription = enrichedDescription;
+
+				// Remove irrelevant symbols from symbol type selection.
+				delete context.symbols.righteousSuccess;
+				context.face === "conservative" ? delete context.symbols.exertion : delete context.symbols.delay;
+
+				break;
+			case "script":
+				context.tab = context.tabs.script;
+				break;
+			case "footer":
+				context.buttons = this.#getFooterButtons();
+				break;
+		}
+
+		return context;
 	}
 
 	/** @inheritDoc */
@@ -111,8 +109,8 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 	#getTabs()
 	{
 		const tabs = {
-			main: {id: "main", group: "primary", label: "ACTIONEFFECTEDITOR.TAB.Main"},
-			script: {id: "script", group: "primary", label: "ACTIONEFFECTEDITOR.TAB.Script"},
+			main: {id: "main", group: "primary", label: "ACTIONEFFECTEDITOR.TABS.main"},
+			script: {id: "script", group: "primary", label: "ACTIONEFFECTEDITOR.TABS.script"},
 		};
 
 		for(const value of Object.values(tabs)) {
@@ -121,5 +119,36 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 		}
 
 		return tabs;
+	}
+
+	/**
+	 * Prepare an array of form footer buttons.
+	 * @returns {Partial<FormFooterButton>[]}
+	 */
+	#getFooterButtons()
+	{
+		return [{type: "submit", icon: "fa-solid fa-save", label: "ACTIONEFFECTEDITOR.ACTIONS.submit"}]
+	}
+
+	/**
+	 * Process form submission for the Action Effect Editor.
+	 * @this {ActionEffectEditor} The handler is called with the application as its bound scope.
+	 * @param {SubmitEvent} event The originating form submission event.
+	 * @param {HTMLFormElement} form The form element that was submitted.
+	 * @param {FormDataExtended} formData Processed data for the submitted form.
+	 * @returns {Promise<void>}
+	 */
+	static async handleForm(event, form, formData)
+	{
+		const data = this.options.data,
+			  symbol = formData.object.symbol ?? data.symbol,
+			  effects = data.action.system[data.face].effects[symbol];
+
+		delete formData.object.symbol;
+
+		// If the index exists, update the effect, else add the new effect.
+		data.index ? effects[data.index] = formData.object : effects.push(formData.object);
+
+		data.action.update({[`system.${data.face}.effects.${symbol}`]: effects})
 	}
 }

@@ -1,6 +1,6 @@
-<section class="tab main active" data-group="primary" data-tab="main">
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
 	<label class="form-group slim">
-		<span>{{localize "ACTION.EFFECT.SymbolType"}}</span>
+		<span>{{localize "ACTION.FIELDS.effects.symbolType.label"}}</span>
 
 		<span class="form-fields">
 			<select name="symbol" {{#if symbol}}disabled{{/if}}>
@@ -12,7 +12,7 @@
 	{{formGroup fields.symbolAmount
 				value=effect.symbolAmount
 				classes="slim"
-				placeholder=(localize "ACTION.EFFECT.SymbolAmount")
+				placeholder=(localize "ACTION.FIELDS.effects.symbolAmount.label")
 				localize=true}}
 
 	{{formGroup fields.description

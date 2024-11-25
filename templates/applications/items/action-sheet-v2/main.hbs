@@ -1,0 +1,132 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}" data-stance="{{stance}}">
+	<nav class="sheet-tabs tabs">
+		{{#each tabs as |tab|}}
+			<a class="{{tab.cssClass}}" data-action="tab" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+				<span class="{{tab.icon}}"></span>
+				<label>{{localize tab.label}}</label>
+			</a>
+		{{/each}}
+	</nav>
+
+	{{#with tabs.main as |tab|}}
+	<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{/with}}
+		<div class="form-group-container">
+			{{formGroup fields.name
+						value=system.name
+						classes="extended"
+						localize=true}}
+
+			{{formGroup fields.traits
+						value=system.traits
+						classes="extended"
+						localize=true}}
+		</div>
+
+		<hr />
+
+		<img class="art"
+			 src="{{system.art}}"
+			 alt="{{system.name}}"
+			 height="100"
+			 data-action="editImage"
+			 data-edit="{{fields.art.fieldPath}}" />
+
+		{{formGroup fields.art value=system.art classes="extended" localize=true}}
+
+		<hr />
+
+		<div class="form-group-container">
+			{{formGroup fields.rechargeRating
+						value=system.rechargeRating
+						classes="slim"
+						localize=true}}
+
+			{{formGroup fields.difficultyModifiers.fields.challengeDice
+						value=system.difficultyModifiers.challengeDice
+						classes="slim"
+						localize=true}}
+
+			{{formGroup fields.difficultyModifiers.fields.misfortuneDice
+						value=system.difficultyModifiers.misfortuneDice
+						classes="slim"
+						localize=true}}
+		</div>
+
+		<hr />
+
+		{{formGroup fields.check value=system.check classes="extended" localize=true}}
+
+		<hr />
+
+		{{formGroup fields.requirements
+					value=system.requirements
+					enriched=enriched.requirements
+					toggled=true
+					localize=true}}
+	</section>
+
+	{{#with tabs.effects as |tab|}}
+	<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{/with}}
+		<div>
+			<label>
+				{{localize "ACTION.FIELDS.effects.label"}}
+
+				<a data-action="addEffect">
+					<span class="fas fa-plus"></span>
+				</a>
+			</label>
+
+			{{#each @root.symbols as |symbol sym|}}
+				<div class="effect-group" data-symbol="{{sym}}">
+					{{#each (lookup @root.system.effects sym) as |effect ef|}}
+						<div class="effect" data-index="{{ef}}">
+							{{#for 0 effect.symbolAmount 1}}
+								{{#unless (and (or (sameAs sym "delay") (sameAs sym "exertion")) (superiorTo this 0))}}
+									<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+								{{else}}
+									<span class="wfrp3e-font symbol {{@root.symbols.bane.cssClass}}"></span>
+								{{/unless}}
+							{{/for}}
+
+							{{{striptags effect.description "p"}}}
+
+							<a data-action="editEffect">
+								<span class="fas fa-pen-to-square" ></span>
+							</a>
+
+							<a data-action="removeEffect">
+								<span class="fa fa-eraser"></span>
+							</a>
+						</div>
+					{{/each}}
+				</div>
+			{{/each}}
+		</div>
+
+		<details{{#if system.special}} open{{/if}}>
+			<summary>
+				<label>{{localize "ACTION.FIELDS.special.label"}}</label>
+			</summary>
+
+			{{formInput fields.special
+						value=system.special
+						enriched=enriched.special
+						toggled=true
+						localize=true}}
+		</details>
+
+		<details{{#if system.uniqueEffect}} open{{/if}}>
+			<summary>
+				<label>{{localize "ACTION.FIELDS.uniqueEffect.label"}}</label>
+			</summary>
+
+			{{formInput fields.uniqueEffect
+						value=system.uniqueEffect
+						enriched=enriched.uniqueEffect
+						toggled=true
+						localize=true}}
+		</details>
+	</section>
+</section>

@@ -1,25 +1,25 @@
 <div class="talent-tabs tabs" data-group="talents">
 	{{#if talentsInvestment}}
-		<a class="tab-link active" data-tab="focus">{{localize 'TALENT.TYPE.Focus'}}</a>
-		<a class="tab-link" data-tab="reputation">{{localize 'TALENT.TYPE.Reputation'}}</a>
-		<a class="tab-link" data-tab="tactic">{{localize 'TALENT.TYPE.Tactic'}}</a>
-		<a class="tab-link" data-tab="trick">{{localize 'TALENT.TYPE.Tricks'}}</a>
+		<a class="active" data-tab="focus">{{localize 'TALENT.TYPE.Focus'}}</a>
+		<a data-tab="reputation">{{localize 'TALENT.TYPE.Reputation'}}</a>
+		<a data-tab="tactic">{{localize 'TALENT.TYPE.Tactic'}}</a>
+		<a data-tab="trick">{{localize 'TALENT.TYPE.Tricks'}}</a>
 	{{else}}
 		{{#if erudite}}
-			<a class="tab-link active" data-tab="focus">{{localize 'TALENT.TYPE.Focus'}}</a>
+			<a class="active" data-tab="focus">{{localize 'TALENT.TYPE.Focus'}}</a>
 		{{/if}}
 	{{/if}}
 
 	{{#if priest}}
-		<a class="tab-link{{#unless talentsInvestment}} active{{/unless}}" data-tab="faith">{{localize 'TALENT.TYPE.Faith'}}</a>
+		<a class="{{#unless talentsInvestment}} active{{/unless}}" data-tab="faith">{{localize 'TALENT.TYPE.Faith'}}</a>
 	{{/if}}
 
 	{{#if wizard}}
-		<a class="tab-link{{#unless talentsInvestment}} active{{/unless}}" data-tab="order">{{localize 'TALENT.TYPE.Order'}}</a>
+		<a class="{{#unless talentsInvestment}} active{{/unless}}" data-tab="order">{{localize 'TALENT.TYPE.Order'}}</a>
 	{{/if}}
 
 	{{#if zealot}}
-		<a class="tab-link{{#unless talentsInvestment}} active{{/unless}}" data-tab="insanity">{{localize 'TALENT.TYPE.Insanity'}}</a>
+		<a class="{{#unless talentsInvestment}} active{{/unless}}" data-tab="insanity">{{localize 'TALENT.TYPE.Insanity'}}</a>
 	{{/if}}
 </div>
 

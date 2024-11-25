@@ -10,7 +10,7 @@ export default class WFRP3eActionSheet extends WFRP3eItemSheet
 			height: 690,
 			classes: ["wfrp3e", "sheet", "item", "action"],
 			tabs: [
-				{group: "face", navSelector: ".face-tabs", contentSelector: ".sheet-body", initial: "conservative.tab"},
+				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "conservative.tab"},
 				{group: "conservative", navSelector: ".conservative-tabs", contentSelector: ".conservative.tab", initial: "main"},
 				{group: "reckless", navSelector: ".reckless-tabs", contentSelector: ".reckless.tab", initial: "main"}
 			]
@@ -33,7 +33,7 @@ export default class WFRP3eActionSheet extends WFRP3eItemSheet
 		super.activateListeners(html);
 
 		html.find(".effect-add").click(this._onAddEffectButtonClick.bind(this));
-		html.find(".effect-edit").click(this._onEffectEditorButtonClick.bind(this));
+		html.find(".effect-edit").click(this._onEffectEditButtonClick.bind(this));
 		html.find(".effect-remove").click(this._onRemoveEffectButtonClick.bind(this));
 	}
 
@@ -54,7 +54,7 @@ export default class WFRP3eActionSheet extends WFRP3eItemSheet
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onEffectEditorButtonClick(event)
+	async _onEffectEditButtonClick(event)
 	{
 		this.item.editEffect(
 			event.currentTarget.closest("section[data-face]").dataset.face,
@@ -71,7 +71,6 @@ export default class WFRP3eActionSheet extends WFRP3eItemSheet
 	 */
 	async _onRemoveEffectButtonClick(event)
 	{
-
 		await foundry.applications.api.DialogV2.confirm({
 			window: {title: game.i18n.localize("DIALOG.TITLE.EffectDeletion")},
 			modal: true,

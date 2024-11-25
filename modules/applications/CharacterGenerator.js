@@ -656,7 +656,7 @@ export default class CharacterGenerator extends FormApplication
 	{
 		const tabGroupName = event.currentTarget.parentElement.dataset.group;
 		const tabName = event.currentTarget.dataset.tab;
-		const tabLinks = html.find('.tabs[data-group="' + tabGroupName + '"] .tab-link');
+		const tabLinks = html.find('.tabs[data-group="' + tabGroupName + '"] a');
 		const tabs = html.find('.tab[data-group="' + tabGroupName + '"]');
 
 		tabLinks.removeClass("active");
@@ -709,7 +709,7 @@ export default class CharacterGenerator extends FormApplication
 				})
 			);
 
-			rootElement.find(".talent-tabs .tab-link").click(this._onTabClick.bind(this, html));
+			rootElement.find(".talent-tabs a").click(this._onTabClick.bind(this, html));
 			rootElement.find("input").change(this._onTalentChange.bind(this, html));
 
 			this._updateRemainingTalents(html);
@@ -919,7 +919,7 @@ export default class CharacterGenerator extends FormApplication
 			})
 		);
 
-		rootElement.find(".action-tabs .tab-link").click(this._onTabClick.bind(this, html));
+		rootElement.find(".action-tabs a").click(this._onTabClick.bind(this, html));
 		rootElement.find(".flip-link").click(this._onFlipClick.bind(this));
 		rootElement.find("input").change(this._onActionChange.bind(this, html));
 

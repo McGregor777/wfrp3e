@@ -7,45 +7,73 @@
 
 	"ACTOR.GenerateACharacter": "Generate a Character",
 
-	"ACTION.Art": "Art",
-	"ACTION.ChallengeDice": "Challenge Dice",
-	"ACTION.Check": "Action Check",
-	"ACTION.Effects": "Effects",
-	"ACTION.MisfortuneDice": "Misfortune Dice",
-	"ACTION.Name": "Title",
-	"ACTION.RechargeRating": "Recharge Rating",
-	"ACTION.RechargeTokens": "Recharge Tokens",
-	"ACTION.Recharging": "You cannot use an Action that is recharging.",
-	"ACTION.Requirements": "Requirements",
-	"ACTION.Special": "Special",
-	"ACTION.Traits": "Traits",
-	"ACTION.Type": "Action Type",
-	"ACTION.UniqueEffect": "Unique Effect",
-	"ACTION.UsageMessage": "uses {action}",
-	"ACTION.MeleeStrike": "Melee Strike",
-	"ACTION.RangedShot": "Ranged Shot",
-	"ACTION.CHECK.Against": "vs",
-	"ACTION.CHECK.GenerallyNoCheckRequired": "Generally No Check Required",
-	"ACTION.CHECK.NoCheckRequired": "No Check Required",
-	"ACTION.CHECK.TargetDefence": "Target Defence",
-	"ACTION.EFFECT.Description": "Description",
-	"ACTION.EFFECT.Script": "Script",
-	"ACTION.EFFECT.SymbolAmount": "Symbol Amount",
-	"ACTION.EFFECT.SymbolType": "Symbol Type",
-	"ACTION.EFFECT.HINT.Script": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.",
-	"ACTION.FACE.Conservative": "Conservative",
-	"ACTION.FACE.Reckless": "Reckless",
-	"ACTION.TRAITS.Basic": "Base",
-	"ACTION.TYPE.Melee": "Melee",
-	"ACTION.TYPE.Ranged": "Ranged",
-	"ACTION.TYPE.Support": "Support",
-	"ACTION.TYPE.Blessing": "Blessing",
-	"ACTION.TYPE.Spell": "Spell",
+	"ACTION": {
+		"ACTIONS": {
+			"update": "Save Action"
+		},
+		"FIELDS": {
+			"art.label": "Art",
+			"check.label": "Action Check",
+			"effects.label": "Effects",
+			"name.label": "Title",
+			"rechargeRating.label": "Recharge Rating",
+			"rechargeTokens.label": "Recharge Tokens",
+			"recharging.label": "You cannot use an Action that is recharging.",
+			"requirements.label": "Requirements",
+			"special.label": "Special",
+			"traits.label": "Traits",
+			"type.label": "Action Type",
+			"uniqueEffect.label": "Unique Effect",
+			"usageMessage.label": "uses {action}",
+			"difficultyModifiers": {
+				"challengeDice.label": "Challenge Dice",
+				"misfortuneDice.label": "Misfortune Dice"
+			},
+			"effects": {
+				"description.label": "Description",
+				"script.label": "Script",
+				"script.hint": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.",
+				"symbolAmount.label": "Symbol Amount",
+				"symbolType.label": "Symbol Type"
+			}
+		},
+		"TRAITS": {
+			"Basic": "Base"
+		},
+		"CARDS": {
+			"Block": "Block",
+			"MeleeStrike": "Melee Strike",
+			"RangedShot": "Ranged Shot"
+		},
+		"CHECK": {
+			"against": "vs",
+			"generallyNoCheckRequired": "Generally No Check Required",
+			"noCheckRequired": "No Check Required",
+			"targetDefence": "Target Defence"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		},
+		"TYPES": {
+			"melee": "Melee",
+			"ranged": "Ranged",
+			"support": "Support",
+			"blessing": "Blessing",
+			"spell": "Spell"
+		}
+	},
 
-	"ACTIONEFFECTEDITOR.Submit": "Save Effect",
-	"ACTIONEFFECTEDITOR.Title": "Action Effect Editor",
-	"ACTIONEFFECTEDITOR.TAB.Main": "Main",
-	"ACTIONEFFECTEDITOR.TAB.Script": "Script",
+	"ACTIONEFFECTEDITOR": {
+		"title": "Action Effect Editor",
+		"ACTIONS": {
+			"submit": "Save Effect"
+		},
+		"TABS": {
+			"main": "Main",
+			"script": "Script"
+		}
+	},
 
 	"ACTIONSELECTOR.ChooseANewAction": "Choose a New Action",
 	"ACTIONSELECTOR.NoActionSelected": "None",
@@ -499,6 +527,11 @@
 	"ROLL.REGEX.TargetSuffersAmountFatigue": "target suffers .*(\\d+) fatigue",
 	"ROLL.REGEX.TargetSuffersAmountStress": "target suffers .*(\\d+) stress",
 
+	"STANCES": {
+		"conservative": "Conservative",
+		"reckless": "Reckless"
+	},
+
 	"SKILL.AdvancedSkill": "Advanced Skill",
 	"SKILL.Characteristic": "Characteristic",
 	"SKILL.Name": "Name",
@@ -552,26 +585,32 @@
 	"TRAPPING.RARITY.Common": "Common",
 	"TRAPPING.RARITY.Rare": "Rare",
 	"TRAPPING.RARITY.Exotic": "Exotic",
-
-	"TYPES.ACTOR.character": "Character",
-	"TYPES.ACTOR.creature": "Creature",
-	"TYPES.ACTOR.group": "Group",
-	"TYPES.ACTOR.party": "Party",
-	"TYPES.ITEM.ability": "Ability",
-	"TYPES.ITEM.action": "Action",
-	"TYPES.ITEM.armour": "Armour",
-	"TYPES.ITEM.career": "Career",
-	"TYPES.ITEM.condition": "Condition",
-	"TYPES.ITEM.criticalwound": "Critical Wound",
-	"TYPES.ITEM.disease": "Disease",
-	"TYPES.ITEM.insanity": "Insanity",
-	"TYPES.ITEM.money": "Money",
-	"TYPES.ITEM.miscast": "Miscast",
-	"TYPES.ITEM.mutation": "Mutation",
-	"TYPES.ITEM.skill": "Skill",
-	"TYPES.ITEM.talent": "Talent",
-	"TYPES.ITEM.trapping": "Trapping",
-	"TYPES.ITEM.weapon": "Weapon",
+	
+	"TYPES": {
+		"Actor": {
+			"character": "Character",
+			"creature": "Creature",
+			"group": "Group",
+			"party": "Party"
+		},
+		"Item": {
+			"ability": "Ability",
+			"action": "Action",
+			"armour": "Armour",
+			"career": "Career",
+			"condition": "Condition",
+			"criticalwound": "Critical Wound",
+			"disease": "Disease",
+			"insanity": "Insanity",
+			"money": "Money",
+			"miscast": "Miscast",
+			"mutation": "Mutation",
+			"skill": "Skill",
+			"talent": "Talent",
+			"trapping": "Trapping",
+			"weapon": "Weapon"
+		}
+	},
 
 	"WEAPON.CriticalRating": "Critical Rating",
 	"WEAPON.DamageRating": "Damage Rating",

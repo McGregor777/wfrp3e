@@ -8,52 +8,52 @@
 	</header>
 
 	<label class="type form-label">
-		{{localize "ACTION.Type"}}:
+		{{localize "ACTION.FIELDS.type.label"}}:
 
 		<select name="system.type">
 			{{selectOptions @root.actionTypes selected=@root.item.system.type localize=true}}
 		</select>
 	</label>
 
-	<nav class="face-tabs sheet-tabs tabs" data-group="face">
-		<a class="tab-link conservative-tab-link" data-tab="conservative">{{localize "ACTION.FACE.Conservative"}}</a>
-		<a class="tab-link reckless-tab-link" data-tab="reckless">{{localize "ACTION.FACE.Reckless"}}</a>
+	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
+		<a data-tab="conservative">{{localize "STANCES.conservative"}}</a>
+		<a data-tab="reckless">{{localize "STANCES.reckless"}}</a>
 	</nav>
 
 	<div class="sheet-body">
 		{{#each @root.stances as |stance st|}}
 			{{#with (lookup @root.item.system st) as |face|}}
-				<section class="{{st}} tab" data-group="face" data-tab="{{st}}" data-face="{{st}}">
+				<section class="{{st}} tab" data-group="primary" data-tab="{{st}}" data-face="{{st}}">
 					<div class="sheet-tabs tabs {{st}}-tabs" data-group="{{st}}">
-						<a class="tab-link main-tab-link" data-tab="main">{{localize "Main"}}</a>
-						<a class="tab-link effects-tab-link" data-tab="effects">{{localize "ACTION.Effects"}}</a>
+						<a class="tab-link main-tab-link" data-tab="main">{{localize "ACTION.TABS.main"}}</a>
+						<a class="tab-link effects-tab-link" data-tab="effects">{{localize "ACTION.TABS.effects"}}</a>
 					</div>
 
 					<section class="{{st}} main-tab tab" data-group="{{st}}" data-tab="main">
 						<div class="form-div">
 							<label class="form-label">
-								{{localize "ACTION.Name"}}:
+								{{localize "ACTION.FIELDS.name.label"}}:
 
 								<input name="system.{{st}}.name"
 								       value="{{face.name}}"
 								       type="text"
-								       placeholder="{{localize 'ACTION.Name'}}" />
+								       placeholder="{{localize 'ACTION.FIELDS.name.label'}}" />
 							</label>
 
 							<label class="form-label">
-								{{localize "ACTION.Traits"}}:
+								{{localize "ACTION.FIELDS.traits.label"}}:
 
 								<input name="system.{{st}}.traits"
 								       value="{{face.traits}}"
 								       type="text"
-								       placeholder="{{localize 'ACTION.Traits'}}" />
+								       placeholder="{{localize 'ACTION.FIELDS.traits.label'}}" />
 							</label>
 						</div>
 
 						<hr />
 
 						<label class="art-selector">
-							{{localize "ACTION.Art"}}:
+							{{localize "ACTION.FIELDS.art.label"}}:
 
 							<img src="{{face.art}}" data-edit="system.{{st}}.art" />
 						</label>
@@ -62,51 +62,51 @@
 
 						<div class="form-div">
 							<label>
-								{{localize "ACTION.RechargeRating"}}:
+								{{localize "ACTION.FIELDS.rechargeRating.label"}}:
 
 								<input name="system.{{st}}.rechargeRating"
 								       value="{{face.rechargeRating}}"
 								       type="number"
 								       min="0"
-								       placeholder="{{localize 'ACTION.RechargeRating'}}" />
+								       placeholder="{{localize 'ACTION.FIELDS.rechargeRating.label'}}" />
 							</label>
 
 							<label>
-								{{localize "ACTION.ChallengeDice"}}:
+								{{localize "ACTION.FIELDS.difficultyModifiers.challengeDice.label"}}:
 
 								<input name="system.{{st}}.difficultyModifiers.challengeDice"
 								       value="{{face.difficultyModifiers.challengeDice}}"
 								       type="number"
 								       min="0"
-								       placeholder="{{localize 'ACTION.ChallengeDice'}}" />
+								       placeholder="{{localize 'ACTION.FIELDS.difficultyModifiers.challengeDice.label'}}" />
 							</label>
 
 							<label>
-								{{localize "ACTION.MisfortuneDice"}}:
+								{{localize "ACTION.FIELDS.difficultyModifiers.misfortuneDice.label"}}:
 
 								<input name="system.{{st}}.difficultyModifiers.misfortuneDice"
 								       value="{{face.difficultyModifiers.misfortuneDice}}"
 								       type="number"
 							 	       min="0"
-							 	       placeholder="{{localize 'ACTION.MisfortuneDice'}}" />
+							 	       placeholder="{{localize 'ACTION.FIELDS.difficultyModifiers.misfortuneDice.label'}}" />
 							</label>
 						</div>
 
 						<hr />
 
 						<label class="form-label">
-							{{localize "ACTION.Check"}}:
+							{{localize "ACTION.FIELDS.check.label"}}:
 
 							<input name="system.{{st}}.check"
 							       value="{{face.check}}"
 							       type="text"
-						 	       placeholder="{{localize 'ACTION.Check'}}" />
+						 	       placeholder="{{localize 'ACTION.FIELDS.check.label'}}" />
 						</label>
 
 						<hr />
 
 						<label class="editor-container">
-							{{localize "ACTION.Requirements"}}:
+							{{localize "ACTION.FIELDS.requirements.label"}}:
 
 							{{editor face.requirements
 									 target=(concat "system." st ".requirements")
@@ -119,7 +119,7 @@
 					<section class="tab {{st}}-effects-tab" data-group="{{st}}" data-tab="effects">
 						<div>
 							<label>
-								{{localize "ACTION.Effects"}}
+								{{localize "ACTION.FIELDS.effects.label"}}
 
 								<a class="effect-add"><span class="fas fa-plus"></span></a>
 							</label>
@@ -147,12 +147,12 @@
 						</div>
 
 						<details{{#if face.special}} open{{/if}}>
-							<summary><label>{{localize "ACTION.Special"}}</label></summary>
+							<summary><label>{{localize "ACTION.FIELDS.special.label"}}</label></summary>
 							{{editor face.special target=(concat "system." st ".special") button=true owner=owner editable=@root.editable}}
 						</details>
 
 						<details{{#if face.uniqueEffect}} open{{/if}}>
-							<summary><label>{{localize "ACTION.UniqueEffect"}}</label></summary>
+							<summary><label>{{localize "ACTION.FIELDS.uniqueEffect.label"}}</label></summary>
 							{{editor face.uniqueEffect target=(concat "system." st ".uniqueEffect") button=true owner=@root.owner editable=@root.editable}}
 						</details>
 					</section>
