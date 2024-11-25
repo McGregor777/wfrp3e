@@ -367,31 +367,35 @@ export default class CheckHelper
 		const chatMessage = game.messages.get(chatMessageId),
 			  roll = chatMessage.rolls[0],
 			  checkData = roll.options.checkData,
+			  actorToken = checkData.actor.sceneId && checkData.actor.tokenId
+				   ? game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor
+				   : null,
 			  actor = checkData.actor.actorId
-				  ? game.actors.get(checkData.actor.actorId)
-				  : game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor,
-			  targetActor = checkData.targets.length > 0
-				  ? game.scenes.get(checkData.targets[0].sceneId).collections.tokens.get(checkData.targets[0].tokenId).actor
-				  : null,
+				   ? game.actors.get(checkData.actor.actorId)
+				   : game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor,
+			  targetToken = checkData.targets.length > 0
+				   ? game.scenes.get(checkData.targets[0].sceneId).collections.tokens.get(checkData.targets[0].tokenId)
+				   : null,
+			  targetActor = targetToken?.actor ?? null,
 			  toggledEffects = Object.values(structuredClone(roll.effects)).reduce((symbol, allEffects) => {
-				  allEffects.push(...symbol.filter(effect => effect.active));
-				  return allEffects;
+				   allEffects.push(...symbol.filter(effect => effect.active));
+				   return allEffects;
 			  }, []),
 			  outcome = {
-				  targetDamages: 0,
-				  targetCriticalWounds: 0,
-				  targetFatigue: 0,
-				  targetStress: 0,
-				  wounds: 0,
-				  criticalWounds: 0,
-				  fatigue:  CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "physical"
-					  ? roll.remainingSymbols.exertions
-					  : 0,
-				  stress: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"
-					  ? roll.remainingSymbols.exertions
-					  : 0,
-				  favour: 0,
-				  power: 0
+				   targetDamages: 0,
+				   targetCriticalWounds: 0,
+				   targetFatigue: 0,
+				   targetStress: 0,
+				   wounds: 0,
+				   criticalWounds: 0,
+				   fatigue: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "physical"
+					   ? roll.remainingSymbols.exertions
+					   : 0,
+				   stress: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"
+					   ? roll.remainingSymbols.exertions
+					   : 0,
+				   favour: 0,
+				   power: 0
 			  },
 			  actorUpdates = {system: {}},
 			  targetUpdates = {system: {}},
@@ -400,8 +404,16 @@ export default class CheckHelper
 		for(const effect of toggledEffects) {
 			try {
 				// eslint-disable-next-line no-new-func
-				const fn = new foundry.utils.AsyncFunction("checkData", "actor", "outcome", effect.script);
-				await fn.call(globalThis, checkData, actor, outcome);
+				const fn = new foundry.utils.AsyncFunction(
+					"checkData",
+					"actor",
+					"actorToken",
+					"outcome",
+					"targetActor",
+					"targetToken",
+					effect.script
+				);
+				await fn.call(globalThis, checkData, actor, actorToken, outcome, targetActor, targetToken);
 			} catch(err) {
 				console.error(err);
 			}
