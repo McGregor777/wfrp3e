@@ -524,6 +524,15 @@
 		}
 	},
 
+	"SCRIPT": {
+		"TYPES": {
+			"onCheckPreparation": "Préparation d'un test",
+			"onCheckRoll": "Réalisation d'un test",
+			"onTargettingCheckPreparation": "Préparation d'un test ciblant",
+			"onTrigger": "Déclenchement manuel"
+		}
+	},
+
 	"STANCES": {
 		"conservative": "Prudence",
 		"reckless": "Téméraire"

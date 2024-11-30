@@ -524,6 +524,15 @@
 		}
 	},
 
+	"SCRIPT": {
+		"TYPES": {
+			"onCheckPreparation": "Check Preparation",
+			"onCheckRoll": "Check Roll",
+			"onTargettingCheckPreparation": "Targetting Check Preparation",
+			"onTrigger": "Manual Trigger"
+		}
+	},
+
 	"STANCES": {
 		"conservative": "Conservative",
 		"reckless": "Reckless"

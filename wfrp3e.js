@@ -19,6 +19,7 @@ import WFRP3eMoneySheet from "./modules/applications/items/WFRP3eMoneySheet.js";
 import WFRP3eMutationSheet from "./modules/applications/items/WFRP3eMutationSheet.js";
 import WFRP3eSkillSheet from "./modules/applications/items/WFRP3eSkillSheet.js";
 import WFRP3eTalentSheet from "./modules/applications/items/WFRP3eTalentSheet.js";
+import WFRP3eTalentSheetV2 from "./modules/applications/items/WFRP3eTalentSheetV2.js";
 import WFRP3eTrappingSheet from "./modules/applications/items/WFRP3eTrappingSheet.js";
 import WFRP3eWeaponSheet from "./modules/applications/items/WFRP3eWeaponSheet.js";
 import WFRP3eCombatTracker from "./modules/applications/sidebar/WFRP3eCombatTracker.js";
@@ -171,7 +172,8 @@ Hooks.once("init", async () => {
 	Items.registerSheet("wfrp3e", WFRP3eMoneySheet, {label: "Money Sheet", types: ["money"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eMutationSheet, {label: "Mutation Sheet", types: ["mutation"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eSkillSheet, {label: "Skill Sheet", types: ["skill"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eTalentSheet, {label: "Talent Sheet", types: ["talent"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eTalentSheet, {label: "Talent Sheet", types: ["talent"]});
+	Items.registerSheet("wfrp3e", WFRP3eTalentSheetV2, {label: "Talent Sheet V2", types: ["talent"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eWeaponSheet, {label: "Weapon Sheet", types: ["weapon"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eTrappingSheet, {label: "Trapping Sheet", types: ["trapping"], makeDefault: true});
 

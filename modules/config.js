@@ -974,9 +974,15 @@ export const WFRP3e = {
 		rare: "TRAPPING.RARITY.Rare",
 		exotic: "TRAPPING.RARITY.Exotic"
 	},
+	scriptTypes: {
+		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
+		onCheckRoll: "SCRIPT.TYPES.onCheckRoll",
+		onTargettingCheckPreparation: "SCRIPT.TYPES.onTargettingCheckPreparation",
+		onTrigger: "SCRIPT.TYPES.onTrigger"
+	},
 	stances: {
-		"conservative": "STANCES.conservative",
-		"reckless": "STANCES.reckless"
+		conservative: "STANCES.conservative",
+		reckless: "STANCES.reckless"
 	},
 	symbols: {
 		success: {
