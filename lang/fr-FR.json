@@ -606,6 +606,7 @@
 			"tricks": "Familier"
 		},
 		"WARNINGS": {
+			"notSocketed": "Vous ne pouvez pas utiliser un talent n'occupant aucun emplacement.",
 			"recharging": "Vous ne pouvez pas utiliser un talent en cours de rechargement."
 		}
 	},

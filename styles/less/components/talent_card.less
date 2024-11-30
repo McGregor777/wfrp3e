@@ -13,6 +13,7 @@
 	width: 385px;
 
 	& .talent-card-bottom {
+		align-items: center;
 		display: flex;
 
 		& .item-delete-link {
@@ -55,6 +56,11 @@
 				text-shadow: 0 0 8px var(--color-shadow-primary);
 			}
 		}
+
+		& .talent-trigger {
+			flex-grow: 1;
+			text-align: center;
+		}
 	}
 
 	& .talent-card-socket-select {
@@ -72,7 +78,7 @@
 	& .talent-card-name {
 		background: padding-box saddlebrown;
 		color: white;
-		font: 20pt var(--font-title);
+		font-size: 20pt;
 		grid-area: talent-card-name;
 		margin: auto 0;
 		text-align: center;

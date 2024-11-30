@@ -213,12 +213,9 @@ export default class WFRP3eActor extends Actor
 	 * @param {String} impairment The impairment to update.
 	 * @param {Number} value The value to add to the impairment.
 	 */
-	changeImpairment(impairment, value)
+	adjustImpairment(impairment, value)
 	{
-		const updates = {system: {impairments: {}}};
-		updates.system.impairments[impairment] = this.system.impairments[impairment] + value;
-
-		this.update(updates);
+		this.update({[`system.impairments.${impairment}`]: this.system.impairments[impairment] + value});
 	}
 
 	/**

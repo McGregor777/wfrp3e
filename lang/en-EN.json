@@ -606,7 +606,8 @@
 			"tricks": "Tricks"
 		},
 		"WARNINGS": {
-			"recharging": "You cannot use an Talent that is recharging."
+			"notSocketed": "You cannot use a Talent that is not socketed.",
+			"recharging": "You cannot use a Talent that is recharging."
 		}
 	},
 

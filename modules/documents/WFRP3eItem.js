@@ -200,6 +200,22 @@ export default class WFRP3eItem extends Item
 	}
 
 	/**
+	 * Makes usage of the Talent.
+	 * @param {Object} [options]
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	async _useTalent(options = {})
+	{
+		if(this.system.rechargeTokens > 0)
+			ui.notifications.warn(game.i18n.localize("TALENT.WARNINGS.recharging"));
+		else if(this.system.talentSocket == null)
+			ui.notifications.warn(game.i18n.localize("TALENT.WARNINGS.notSocketed"));
+		else
+			await this._triggerTalentEffect();
+	}
+
+	/**
 	 * Makes usage of the Weapon.
 	 * @param {Object} [options]
 	 * @returns {Promise<void>}
@@ -338,6 +354,22 @@ export default class WFRP3eItem extends Item
 	}
 
 	/* Talent methods */
+
+	exhaustTalent()
+	{
+		this.update({"system.rechargeTokens": 4});
+	}
+
+	async _triggerTalentEffect()
+	{
+		try {
+			const fn = new foundry.utils.AsyncFunction(this.system.effect.script);
+			await fn.call(this);
+		}
+		catch(error) {
+			console.error(error);
+		}
+	}
 
 	/**
 	 * Performs follow-up operations after a Talent's socket has changed.

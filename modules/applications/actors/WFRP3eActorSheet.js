@@ -129,6 +129,8 @@ export default class WFRP3eActorSheet extends ActorSheet
 		html.find(".stance-meter .stance-meter-link")
 			.click(this._onStanceMeterLinkClick.bind(this, 1))
 			.contextmenu(this._onStanceMeterLinkClick.bind(this, -1));
+
+		html.find(".talent-trigger").click(this._onTalentTriggerClick.bind(this))
 	}
 
 	/**
@@ -176,7 +178,7 @@ export default class WFRP3eActorSheet extends ActorSheet
 	 */
 	_onImpairmentTokenClick(amount, event)
 	{
-		this.actor.changeImpairment(event.currentTarget.dataset.impairment, amount);
+		this.actor.adjustImpairment(event.currentTarget.dataset.impairment, amount);
 	}
 
 	/**
@@ -300,13 +302,16 @@ export default class WFRP3eActorSheet extends ActorSheet
 	{
 		event.stopPropagation();
 
-		const options = {};
-		const face = $(event.currentTarget).parents(".face").data("face");
+		const item = this._getItemById(event);
+		if(["action", "skill", "weapon"].includes(item.type)) {
+			const options = {};
+			const face = $(event.currentTarget).parents(".face").data("face");
 
-		if(face)
-			options.face = face;
+			if(face)
+				options.face = face;
 
-		this._getItemById(event).useItem(options);
+			item.useItem(options);
+		}
 	}
 
 	/**
@@ -368,5 +373,10 @@ export default class WFRP3eActorSheet extends ActorSheet
 	_onStanceMeterLinkClick(amount, event)
 	{
 		this.actor.adjustStanceMeter(event.currentTarget.dataset.stance, amount);
+	}
+
+	_onTalentTriggerClick(event)
+	{
+		this._getItemById(event).useItem();
 	}
 }

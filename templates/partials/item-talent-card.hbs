@@ -1,6 +1,10 @@
 <div class="item talent-card" data-item-id="{{talent._id}}">
 	<span class="talent-card-type {{talent.system.type}}">{{localize talent.system.type}}</span>
-	<a class="talent-card-name item-name-link">{{talent.name}}</a>
+
+	<h3 class="talent-card-name item-name-link">
+		<a>{{talent.name}}</a>
+	</h3>
+
 	<div class="talent-card-content">{{{talent.system.description}}}</div>
 
 	<div class="talent-card-bottom">
@@ -10,6 +14,10 @@
 		</a>
 
 		{{#if @root.document.isOwner}}
+			{{#if (sameAs talent.system.effect.type "onTrigger")}}
+				<a class="talent-trigger">{{localize "TALENT.ACTIONS.trigger"}}</a>
+			{{/if}}
+
 			<a class="item-delete-link" data-tooltip="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
 				<span class="fas fa-trash"></span>
 			</a>
