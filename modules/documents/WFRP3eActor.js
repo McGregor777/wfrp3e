@@ -311,6 +311,32 @@ export default class WFRP3eActor extends Actor
 		this.update({"system.talentSockets": talentSockets});
 	}
 
+	/**
+	 * Finds every Item owned by the Actor with an effect triggered.
+	 * @param {String} triggerType The trigger type of the effect.
+	 * @returns Object[] An Array of triggered items.
+	 */
+	findTriggeredItems(triggerType)
+	{
+		return this.items.search({
+			filters: [{
+				field: "system.effect.type",
+				operator: "EQUALS",
+				negate: false,
+				value: triggerType
+			}, {
+				field: "system.rechargeTokens",
+				operator: "EQUALS",
+				negate: false,
+				value: 0
+			}, {
+				field: "system.talentSocket",
+				operator: "IS_EMPTY",
+				negate: true
+			}]
+		});
+	}
+
 	/** @inheritDoc */
 	_onDelete(options, userId)
 	{

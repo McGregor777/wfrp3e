@@ -8,7 +8,7 @@ export default class CheckHelper
 {
 	/**
 	 * Prepares a Characteristic check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor}	actor The Character making the check.
+	 * @param {WFRP3eActor}	actor The WFRP3eActor performing the check.
 	 * @param {Object} characteristic The Characteristic used for the check.
 	 * @param {Object} [options]
 	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
@@ -17,34 +17,35 @@ export default class CheckHelper
 	 */
 	static async prepareCharacteristicCheck(actor, characteristic, {flavor = null, sound = null} = {})
 	{
-		const stance = actor.system.stance.current;
+		const stance = actor.system.stance.current,
+			  checkData = {
+				  actor: actor.uuid,
+				  characteristic,
+				  stance,
+				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
+			  },
+			  startingPool = {
+				  dice: {
+					  characteristic: characteristic.rating - Math.abs(stance),
+					  fortune: characteristic.fortune,
+					  expertise: 0,
+					  conservative: stance < 0 ? Math.abs(stance) : 0,
+					  reckless: stance > 0 ? stance : 0,
+					  challenge: 0,
+					  misfortune: 0
+				  }
+			  };
+
+		await this.triggerCheckEffects(actor, checkData, startingPool);
 
 		await new CheckBuilder(
-			new DicePool({
-				dice: {
-					characteristic: characteristic.rating - Math.abs(stance),
-					fortune: characteristic.fortune,
-					conservative: stance < 0 ? Math.abs(stance) : 0,
-					reckless: stance > 0 ? stance : 0
-				}
-			}, {
-				checkData: {
-					actor: {
-						actorId: actor._id,
-						sceneId: actor.token?.object.scene._id,
-						tokenId: actor.token?._id
-					},
-					characteristic
-				},
-				flavor,
-				sound
-			})
+			new DicePool(startingPool, {checkData, flavor, sound})
 		).render(true);
 	}
 
 	/**
 	 * Prepares a Skill check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor}	actor The Character making the check.
+	 * @param {WFRP3eActor}	actor The WFRP3eActor performing the check.
 	 * @param {WFRP3eItem} skill The Skill used for the check.
 	 * @param {Object} [options]
 	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
@@ -54,36 +55,36 @@ export default class CheckHelper
 	static async prepareSkillCheck(actor, skill, {flavor = null, sound = null} = {})
 	{
 		const characteristic = actor.system.characteristics[skill.system.characteristic],
-			  stance = actor.system.stance.current;
+			  stance = actor.system.stance.current,
+			  checkData = {
+				  actor: actor.uuid,
+				  characteristic: {name: skill.system.characteristic, ...characteristic},
+				  skill,
+				  stance,
+				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
+			  },
+			  startingPool = {
+				  dice: {
+					  characteristic: characteristic.rating - Math.abs(stance),
+					  fortune: characteristic.fortune,
+					  expertise: skill.system.trainingLevel,
+					  conservative: stance < 0 ? Math.abs(stance) : 0,
+					  reckless: stance > 0 ? stance : 0,
+					  challenge: 0,
+					  misfortune: 0
+				  }
+			  };
+
+		await this.triggerCheckEffects(actor, checkData, startingPool);
 
 		await new CheckBuilder(
-			new DicePool({
-				dice: {
-					characteristic: characteristic.rating - Math.abs(stance),
-					fortune: characteristic.fortune,
-					expertise: skill.system.trainingLevel,
-					conservative: stance < 0 ? Math.abs(stance) : 0,
-					reckless: stance > 0 ? stance : 0
-				}
-			}, {
-				checkData: {
-					actor: {
-						actorId: actor._id,
-						sceneId: actor.token?.object.scene._id,
-						tokenId: actor.token?._id
-					},
-					skill,
-					characteristic: {name: skill.system.characteristic, ...characteristic}
-				},
-				flavor,
-				sound
-			})
+			new DicePool(startingPool, {checkData, flavor, sound})
 		).render(true);
 	}
 
 	/**
 	 * Prepares an Action check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor} actor The Character using the Action.
+	 * @param {WFRP3eActor} actor The WFRP3eActor using the Action.
 	 * @param {WFRP3eItem} action The Action that is used.
 	 * @param {string} face The Action face.
 	 * @param {Object} [options]
@@ -111,53 +112,43 @@ export default class CheckHelper
 		}
 
 		const characteristic = actor.system.characteristics[characteristicName],
+			  stance = actor.system.stance.current,
 			  checkData = {
-				  actor: {
-					  actorId: actor._id,
-					  sceneId: actor.token?.object.scene._id,
-					  tokenId: actor.token?._id
-				  },
 				  action,
+				  actor: actor.uuid,
+				  characteristic: {name: characteristicName, ...characteristic},
 				  face,
 				  skill,
-				  characteristic: {name: characteristicName, ...characteristic},
-				  targets: [...game.user.targets].map(target => {
-					  return {
-						  sceneId: target.scene.id,
-						  tokenId: target.id
-					  }
-				  })
+				  stance,
+				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
 			  },
-			  stance = actor.system.stance.current;
+			  startingPool = {
+				  dice: {
+					  characteristic: characteristic?.rating - Math.abs(stance) ?? 0,
+					  fortune: characteristic?.fortune ?? 0,
+					  expertise: skill?.system.trainingLevel ?? 0,
+					  conservative: stance < 0 ? Math.abs(stance) : 0,
+					  reckless: stance > 0 ? stance : 0,
+					  challenge: action.system[face].difficultyModifiers.challengeDice +
+						  (["melee", "ranged"].includes(action.system.type)
+							  ? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
+							  : 0),
+					  misfortune: action.system[face].difficultyModifiers.misfortuneDice +
+						  ((match ? match[5] === game.i18n.localize("ACTION.CHECK.targetDefence") : false)
+							  ? checkData.targets.length > 0
+								  ? await fromUuid(checkData.targets[0]).then(actor => actor.system.totalDefence)
+								  : 0
+							  : 0)
+				  }
+			  }
 
 		if(weapon)
 			checkData.weapon = weapon;
 
+		await this.triggerCheckEffects(actor, checkData, startingPool);
+
 		await new CheckBuilder(
-			new DicePool({
-				dice: {
-					characteristic: characteristic?.rating - Math.abs(stance) ?? 0,
-					fortune: characteristic?.fortune ?? 0,
-					expertise: skill?.system.trainingLevel ?? 0,
-					conservative: stance < 0 ? Math.abs(stance) : 0,
-					reckless: stance > 0 ? stance : 0,
-					challenge: action.system[face].difficultyModifiers.challengeDice +
-						(["melee", "ranged"].includes(action.system.type)
-							? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
-							: 0),
-					misfortune: action.system[face].difficultyModifiers.misfortuneDice +
-						((match ? match[5] === game.i18n.localize("ACTION.CHECK.targetDefence") : false)
-							? checkData.targets.length > 0
-								? game.scenes.get(checkData.targets[0].sceneId)
-									.collections.tokens.get(checkData.targets[0].tokenId).actor.system.totalDefence
-								: 0
-							: 0)
-				}
-			}, {
-				checkData,
-				flavor,
-				sound
-			})
+			new DicePool(startingPool, {checkData, flavor, sound})
 		).render(true);
 	}
 
@@ -170,23 +161,78 @@ export default class CheckHelper
 	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
 	 * @returns {DicePool} The DicePool for an initiative check.
 	 */
-	static prepareInitiativeCheck(actor, combat, {flavor = null, sound = null} = {})
+	static async prepareInitiativeCheck(actor, combat, {flavor = null, sound = null} = {})
 	{
-		const characteristic = actor.system.characteristics[combat.initiativeCharacteristic];
-		const stance = actor.system.stance.current ?? actor.system.stance;
+		const characteristic = actor.system.characteristics[combat.initiativeCharacteristic],
+			  stance = actor.system.stance.current ?? actor.system.stance,
+			  checkData = {
+				  actor: actor.uuid,
+				  characteristic,
+				  combat,
+				  stance
+			  },
+			  startingPool = {
+				  dice: {
+					  characteristic: characteristic.rating - Math.abs(stance),
+					  fortune: characteristic.fortune,
+					  expertise: 0,
+					  conservative: stance < 0 ? Math.abs(stance) : 0,
+					  reckless: stance > 0 ? stance : 0,
+					  challenge: 0,
+					  misfortune: 0
+				  }
+			  }
 
-		return new DicePool({
-			dice: {
-				characteristic: characteristic.rating - Math.abs(stance),
-				fortune: characteristic.fortune,
-				conservative: stance < 0 ? Math.abs(stance) : 0,
-				reckless: stance > 0 ? stance : 0
+		await this.triggerCheckEffects(actor, checkData, startingPool);
+
+		return new DicePool(startingPool, {checkData, flavor, sound});
+	}
+
+	/**
+	 * Searches and triggers every relevant effects owned either by the Actor performing the check, or its target.
+	 * @param {WFRP3eActor} actor The WFRP3eActor performing the check.
+	 * @param {Object} checkData The check data.
+	 * @param {Object} startingPool The starting dice pool.
+	 * @returns {Promise<void>}
+	 */
+	static async triggerCheckEffects(actor, checkData, startingPool)
+	{
+		const triggeredItems = actor.findTriggeredItems("onCheckPrepraration");
+		for(const item of triggeredItems) {
+			try {
+				const fn = new foundry.utils.AsyncFunction(
+					"actor",
+					"checkData",
+					"startingPool",
+					item.system.effect.script
+				);
+				await fn.call(item, actor, checkData, startingPool);
 			}
-		}, {
-			checkData: {actor: actor, characteristic: characteristic, combat},
-			flavor,
-			sound
-		});
+			catch(error) {
+				console.error(error);
+			}
+		}
+
+		if(checkData.targets.length > 0) {
+			const targetTriggeredItems = await fromUuid(checkData.targets[0]).then(
+				actor => actor.findTriggeredItems("onTargettingCheckPreparation")
+			);
+
+			for(const item of targetTriggeredItems) {
+				try {
+					const fn = new foundry.utils.AsyncFunction(
+						"actor",
+						"checkData",
+						"startingPool",
+						item.system.effect.script
+					);
+					await fn.call(item, actor, checkData, startingPool);
+				}
+				catch(error) {
+					console.error(error);
+				}
+			}
+		}
 	}
 
 	/**
@@ -362,40 +408,34 @@ export default class CheckHelper
 	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
 	 * @returns {Promise<void>}
 	 */
-	static async triggerEffects(chatMessageId)
+	static async triggerActionEffects(chatMessageId)
 	{
 		const chatMessage = game.messages.get(chatMessageId),
 			  roll = chatMessage.rolls[0],
 			  checkData = roll.options.checkData,
-			  actorToken = checkData.actor.sceneId && checkData.actor.tokenId
-				   ? game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor
-				   : null,
-			  actor = checkData.actor.actorId
-				   ? game.actors.get(checkData.actor.actorId)
-				   : game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor,
-			  targetToken = checkData.targets.length > 0
-				   ? game.scenes.get(checkData.targets[0].sceneId).collections.tokens.get(checkData.targets[0].tokenId)
-				   : null,
-			  targetActor = targetToken?.actor ?? null,
+			  actor = await fromUuid(checkData.actor),
+			  actorToken = actor.token,
+			  targetActor = checkData.targets?.length > 0 ? await fromUuid(checkData.targets[0]) : null,
+			  targetToken = targetActor?.token,
 			  toggledEffects = Object.values(structuredClone(roll.effects)).reduce((symbol, allEffects) => {
-				   allEffects.push(...symbol.filter(effect => effect.active));
-				   return allEffects;
+				  allEffects.push(...symbol.filter(effect => effect.active));
+				  return allEffects;
 			  }, []),
 			  outcome = {
-				   targetDamages: 0,
-				   targetCriticalWounds: 0,
-				   targetFatigue: 0,
-				   targetStress: 0,
-				   wounds: 0,
-				   criticalWounds: 0,
-				   fatigue: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "physical"
-					   ? roll.remainingSymbols.exertions
-					   : 0,
-				   stress: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"
-					   ? roll.remainingSymbols.exertions
-					   : 0,
-				   favour: 0,
-				   power: 0
+				  targetDamages: 0,
+				  targetCriticalWounds: 0,
+				  targetFatigue: 0,
+				  targetStress: 0,
+				  wounds: 0,
+				  criticalWounds: 0,
+				  fatigue: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "physical"
+					  ? roll.remainingSymbols.exertions
+					  : 0,
+				  stress: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"
+					  ? roll.remainingSymbols.exertions
+					  : 0,
+				  favour: 0,
+				  power: 0
 			  },
 			  actorUpdates = {system: {}},
 			  targetUpdates = {system: {}},
@@ -414,8 +454,9 @@ export default class CheckHelper
 					effect.script
 				);
 				await fn.call(globalThis, checkData, actor, actorToken, outcome, targetActor, targetToken);
-			} catch(err) {
-				console.error(err);
+			}
+			catch(error) {
+				console.error(error);
 			}
 		}
 
@@ -441,7 +482,7 @@ export default class CheckHelper
 						outcome.targetCriticalWounds = await Item.createDocuments(
 							await this.drawCriticalWoundsRandomly(outcome.targetCriticalWounds),
 							{parent: targetActor}
-						);
+						).then(documents => documents.map(document => document.uuid));
 					}
 				}
 				// If the attack inflicts 0 damages in spite of hitting the target, the target still suffers one damage
@@ -481,7 +522,7 @@ export default class CheckHelper
 				outcome.criticalWounds = await Item.createDocuments(
 					await this.drawCriticalWoundsRandomly(outcome.criticalWounds),
 					{parent: actor}
-				);
+				).then(documents => documents.map(document => document.uuid));
 
 			if(outcome.fatigue > 0 || outcome.fatigue < 0)
 				actorUpdates.system.impairments = {fatigue: actor.system.impairments.fatigue + outcome.fatigue};

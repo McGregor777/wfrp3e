@@ -71,9 +71,7 @@ export default class CheckBuilder extends FormApplication
 			checkData.challengeLevel = data.challengeLevel;
 
 			if(checkData.actor) {
-				this.actor = checkData.actor.tokenId
-					? game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor
-					: game.actors.get(checkData.actor.actorId)
+				this.actor = await fromUuid(checkData.actor);
 
 				data.actor = this.actor;
 				data.characteristics = Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {

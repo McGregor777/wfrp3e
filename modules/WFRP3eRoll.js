@@ -238,9 +238,7 @@ export default class WFRP3eRoll extends Roll
 		};
 
 		if(checkData) {
-			const actor = checkData.actor.actorId
-					? game.actors.get(checkData.actor.actorId)
-					: game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor;
+			const actor = await fromUuid(checkData.actor);
 
 			foundry.utils.mergeObject(chatData, {
 				action: checkData.action,
@@ -257,8 +255,7 @@ export default class WFRP3eRoll extends Roll
 				}, "")
 
 			if(checkData.targets && checkData.targets.length > 0) {
-				const targetActor = game.scenes.get(checkData.targets[0].sceneId)
-					.collections.tokens.get(checkData.targets[0].tokenId).actor;
+				const targetActor = await fromUuid(checkData.targets[0]);
 
 				chatData.targetActorName = targetActor.token ? targetActor.token.name : targetActor.prototypeToken.name;
 

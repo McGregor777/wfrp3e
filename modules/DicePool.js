@@ -148,9 +148,7 @@ export default class DicePool
 		let actor = null;
 
 		if(this.checkData?.actor) {
-			actor = this.checkData.actor.tokenId
-				? game.scenes.get(this.checkData.actor.sceneId).collections.tokens.get(this.checkData.actor.tokenId).actor
-				: game.actors.get(this.checkData.actor.actorId);
+			actor = await fromUuid(this.checkData.actor);
 
 			// Remove the fortune points spent on the check.
 			if(actor.type === "character" && this.fortunePoints > 0) {

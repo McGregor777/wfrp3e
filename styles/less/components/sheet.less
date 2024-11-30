@@ -255,10 +255,16 @@
 						}
 					}
 
-					& .content:first-child {
-						align-items: center;
-						display: flex;
-						text-align: center;
+					& .content {
+						&:first-child {
+							align-items: center;
+							display: flex;
+							text-align: center;
+						}
+
+						& .item-name-link {
+							vertical-align: sub;
+						}
 					}
 				}
 

@@ -191,7 +191,7 @@ Hooks.on("getChatLogEntryContext", (html, options) => {
 				&& Object.values(message.rolls[0].effects).find(symbol => symbol.length > 0).length > 0
 				&& (!Object.hasOwn(message.rolls[0].options.checkData, "outcome") || game.user.isGM);
 		},
-		callback: li => CheckHelper.triggerEffects(li.attr("data-message-id"))
+		callback: li => CheckHelper.triggerActionEffects(li.attr("data-message-id"))
 	});
 });
 
