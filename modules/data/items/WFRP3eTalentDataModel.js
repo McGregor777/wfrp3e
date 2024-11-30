@@ -17,6 +17,9 @@ export default class WFRP3eTalentDataModel extends foundry.abstract.TypeDataMode
 	}
 
 	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["TALENT"];
+
+	/** @inheritDoc */
 	prepareBaseData()
 	{
 		super.prepareBaseData();

@@ -561,6 +561,46 @@
 		}
 	},
 
+	"TALENT": {
+		"ACTIONS": {
+			"update": "Enregistrer le talent",
+			"trigger": "Déclencher le talent"
+		},
+		"FIELDS": {
+			"description.label": "Description",
+			"effect": {
+				"script.label": "Script",
+				"script.hint": "Arguments:\n  - this: The triggered Talent.",
+				"type.label": "Déclenchement du script"
+			},
+			"rechargeTokens.label": "Jetons de recharge",
+			"talentSocket.label": "Emplacement de talent",
+			"type.label": "Type de talent"
+		},
+		"SOCKET": {
+			"available": "Emplacement {type} libre",
+			"none": "Aucun emplacement",
+			"taken": "Emplacement {type} occupé par {talent}"
+		},
+		"TABS": {
+			"main": "Principal",
+			"effect": "Effet"
+		},
+		"TYPES": {
+			"any": "Au choix",
+			"faith": "Foi",
+			"focus": "Affinité",
+			"insanity": "Folie",
+			"order": "Ordre",
+			"reputation": "Réputation",
+			"tactic": "Tactique",
+			"tricks": "Familier"
+		},
+		"WARNINGS": {
+			"recharging": "Vous ne pouvez pas utiliser un talent en cours de rechargement."
+		}
+	},
+
 	"TALENTSELECTOR.ChooseANewTalent": "Choisissez un nouveau talent",
 	"TALENTSELECTOR.NoTalentSelected": "Aucun",
 	"TALENTSELECTOR.NoTalentSelectedWarning": "Vous devez sélectionner une carte de talent.",

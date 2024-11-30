@@ -18,7 +18,7 @@ export default class WFRP3eCareerSheet extends WFRP3eItemSheet
 			...super.getData(),
 			characteristics: CONFIG.WFRP3e.characteristics,
 			races: {...CONFIG.WFRP3e.availableRaces, any: {name: "RACE.Any"}},
-			talentTypes: {any: "TALENT.TYPE.Any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPE.Insanity"}
+			talentTypes: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"}
 		};
 	}
 

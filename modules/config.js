@@ -1035,12 +1035,12 @@ export const WFRP3e = {
 		}
 	},
 	talentTypes: {
-		focus: "TALENT.TYPE.Focus",
-		reputation: "TALENT.TYPE.Reputation",
-		tactic: "TALENT.TYPE.Tactic",
-		faith: "TALENT.TYPE.Faith",
-		order: "TALENT.TYPE.Order",
-		tricks: "TALENT.TYPE.Tricks"
+		focus: "TALENT.TYPES.focus",
+		reputation: "TALENT.TYPES.reputation",
+		tactic: "TALENT.TYPES.tactic",
+		faith: "TALENT.TYPES.faith",
+		order: "TALENT.TYPES.order",
+		tricks: "TALENT.TYPES.tricks"
 	},
 	weapon: {
 		commonWeapons: {

@@ -18,7 +18,7 @@ export default class WFRP3ePartySheet extends WFRP3eActorSheet
 	{
 		return {
 			...super.getData(),
-			talentTypes: {any: "TALENT.TYPE.Any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPE.Insanity"}
+			talentTypes: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"}
 		};
 	}
 

@@ -1,5 +1,4 @@
 import WFRP3eActorSheet from "./WFRP3eActorSheet.js";
-import {capitalize} from "../../helpers.js";
 
 /** @inheritDoc */
 export default class WFRP3eCharacterSheet extends WFRP3eActorSheet
@@ -63,12 +62,12 @@ export default class WFRP3eCharacterSheet extends WFRP3eActorSheet
 
 				talentSocketsByType[talentSocketName]["career_" + this.actor.system.currentCareer._id + "_" + index] =
 					this.actor.system.currentCareer.name + (talent
-						? " - " + game.i18n.format("TALENT.TakenSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocketName)}`),
+						? " - " + game.i18n.format("TALENT.SOCKET.taken", {
+								type: game.i18n.localize(`TALENT.TYPES.${talentSocketName}`),
 								talent: talent.name
 							})
-						: " - " + game.i18n.format("TALENT.AvailableSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocketName)}`)
+						: " - " + game.i18n.format("TALENT.SOCKET.available", {
+								type: game.i18n.localize(`TALENT.TYPES.${talentSocketName}`)
 							}));
 			});
 		}
@@ -88,13 +87,13 @@ export default class WFRP3eCharacterSheet extends WFRP3eActorSheet
 				talentSocketsByType[talentSocketName]["party_" + this.actor.system.currentParty._id + "_" + index] =
 					this.actor.system.currentParty.name + (talent
 						? " - " +
-							game.i18n.format("TALENT.TakenSocket", {
-								type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocketName)}`),
+							game.i18n.format("TALENT.SOCKET.taken", {
+								type: game.i18n.localize(`TALENT.TYPES.${talentSocketName}`),
 								talent: talent.name
 							})
 						: " - " +
-						game.i18n.format("TALENT.AvailableSocket", {
-							type: game.i18n.localize(`TALENT.TYPE.${capitalize(talentSocketName)}`)
+						game.i18n.format("TALENT.SOCKET.available", {
+							type: game.i18n.localize(`TALENT.TYPES.${talentSocketName}`)
 						}));
 			});
 		}

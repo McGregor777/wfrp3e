@@ -561,6 +561,46 @@
 		}
 	},
 
+	"TALENT": {
+		"ACTIONS": {
+			"update": "Save Talent",
+			"trigger": "Trigger Talent"
+		},
+		"FIELDS": {
+			"description.label": "Description",
+			"effect": {
+				"script.label": "Script",
+				"script.hint": "Arguments:\n  - this: The triggered Talent.",
+				"type.label": "Script Trigger"
+			},
+			"rechargeTokens.label": "Recharge Tokens",
+			"talentSocket.label": "Talent Socket",
+			"type.label": "Talent Type"
+		},
+		"SOCKET": {
+			"available": "Available {type} Socket",
+			"none": "No Socket",
+			"taken": "{type} Socket taken by {talent}"
+		},
+		"TABS": {
+			"main": "Main",
+			"effect": "Effect"
+		},
+		"TYPES": {
+			"any": "Any",
+			"faith": "Faith",
+			"focus": "Focus",
+			"insanity": "Insanity",
+			"order": "Order",
+			"reputation": "Reputation",
+			"tactic": "Tactic",
+			"tricks": "Tricks"
+		},
+		"WARNINGS": {
+			"recharging": "You cannot use an Talent that is recharging."
+		}
+	},
+
 	"TALENTSELECTOR.ChooseANewTalent": "Choose a New Talent",
 	"TALENTSELECTOR.NoTalentSelected": "None",
 	"TALENTSELECTOR.NoTalentSelectedWarning": "You must select a Talent card.",
