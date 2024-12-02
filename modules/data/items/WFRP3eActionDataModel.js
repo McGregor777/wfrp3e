@@ -1,5 +1,12 @@
 import DataHelper from "../DataHelper.js";
 
+/**
+ * @typedef {Object} ActionEffect
+ * @property {string} description
+ * @property {number} symbolAmount
+ * @property {string} script
+ */
+
 /** @inheritDoc */
 export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataModel
 {

@@ -256,9 +256,9 @@ export default class WFRP3eItem extends Item
 			data: {
 				action: this,
 				face,
+				effect: this.system[face].effects[symbol][index],
 				symbol,
-				index,
-				effect: this.system[face].effects[symbol][index]
+				index
 			}
 		}).render(true);
 	}
