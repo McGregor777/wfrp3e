@@ -271,6 +271,35 @@
 	"CHARACTERISTICUPGRADER.Title": "Améliorateur de caractéristique",
 	"CHARACTERISTICUPGRADER.UpgradeACharacteristic": "Améliorer une caractéristique",
 
+	"CHECKBUILDER": {
+		"TITLES": {
+			"action": "Préparateur du test de {action}",
+			"characteristic": "Préparateur du test de {characteristic}",
+			"checkBuilder": "Préparateur de test",
+			"initiative": "Préparateur du test d'initiative",
+			"skill": "Préparateur du test de {skill}"
+		},
+		"aggressionDice": "Dés d'Agressivité",
+		"challengeLevel": "Niveau de Défi",
+		"characteristic": "Caractéristique",
+		"convertConservative": "Convertir en dé de prudence",
+		"convertReckless": "Convertir en dé de témérité",
+		"convertWarning": "Il n'y a pas de dé de {type} à convertir.",
+		"convertBackWarning": "Il n'y a plus de dé de {type} à reconvertir.",
+		"cunningDice": "Dés d'Astuce",
+		"dicePool": "Réserve de dés",
+		"encounterType": "Type de rencontre",
+		"expertiseDice": "Dés d'Adresse",
+		"fortunePoints": "Points de Fortune",
+		"hint": "Clic gauche pour ajouter des dés, clic droit pour en retirer.",
+		"options": "Options",
+		"rollCheck": "Lancer le test",
+		"specialisations": "Spécialisations",
+		"skill": "Compétence",
+		"startingResults": "Pictogrammes de départ",
+		"weapon": "Arme"
+	},
+
 	"CONDITION.Duration": "Durée",
 	"CONDITION.DURATION.Brief": "Brève",
 	"CONDITION.DURATION.Dependent": "Subordonnée",

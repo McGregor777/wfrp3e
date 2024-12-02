@@ -127,7 +127,7 @@ export default class DicePool
 					this.dice.characteristic++;
 				}
 				else
-					ui.notifications.warn(game.i18n.format("ROLL.DICEPOOLBUILDER.ConvertBackWarning", {type: type}));
+					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convertBack", {type: type}));
 			}
 			else {
 				if(this.dice.characteristic > 0) {
@@ -135,7 +135,7 @@ export default class DicePool
 					this.dice[type]++;
 				}
 				else
-					ui.notifications.warn(game.i18n.format("ROLL.DICEPOOLBUILDER.ConvertWarning", {type: "characteristic"}));
+					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convert", {type: "characteristic"}));
 			}
 		}
 	}

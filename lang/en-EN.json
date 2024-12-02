@@ -271,6 +271,35 @@
 	"CHARACTERISTICUPGRADER.Title": "Characteristic Upgrader",
 	"CHARACTERISTICUPGRADER.UpgradeACharacteristic": "Upgrade A Characteristic",
 
+	"CHECKBUILDER": {
+		"TITLES": {
+			"action": "{action} Check Builder",
+			"characteristic": "{characteristic} Check Builder",
+			"checkBuilder": "Check Builder",
+			"initiative": "Initiative Check Builder",
+			"skill": "{skill} Check Builder"
+		},
+		"aggressionDice": "Aggression Dice",
+		"challengeLevel": "Challenge Level",
+		"characteristic": "Characteristic",
+		"convertConservative": "Convert to conservative die",
+		"convertReckless": "Convert to reckless die",
+		"convertWarning": "There is no {type} die to convert.",
+		"convertBackWarning": "There is no {type} die left to convert back.",
+		"cunningDice": "Cunning Dice",
+		"dicePool": "Dice Pool",
+		"encounterType": "Encounter Type",
+		"expertiseDice": "Expertise Dice",
+		"fortunePoints": "Fortune Points",
+		"hint": "Left click to increase dice, right click to decrease.",
+		"options": "Options",
+		"rollCheck": "Roll check",
+		"specialisations": "Specialisations",
+		"skill": "Skill",
+		"startingResults": "Starting results",
+		"weapon": "Weapon"
+	},
+
 	"CONDITION.Duration": "Duration",
 	"CONDITION.DURATION.Brief": "Brief",
 	"CONDITION.DURATION.Dependent": "Dependent",

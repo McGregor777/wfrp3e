@@ -1,6 +1,6 @@
 import {WFRP3e} from "./modules/config.js";
 import CharacterGenerator from "./modules/applications/CharacterGenerator.js";
-import DicePoolBuilder from "./modules/applications/DicePoolBuilder.js";
+import CheckBuilder from "./modules/applications/CheckBuilder.js";
 import WFRP3eCharacterSheet from "./modules/applications/actors/WFRP3eCharacterSheet.js";
 import WFRP3eCreatureSheet from "./modules/applications/actors/WFRP3eCreatureSheet.js";
 import WFRP3eGroupSheet from "./modules/applications/actors/WFRP3eGroupSheet.js";
@@ -204,7 +204,7 @@ Hooks.on('renderSidebarTab', (app, html, data) => {
 		);
 
 		html.find("#chat-controls > .control-buttons > .wfrp3e-dice-roller").click(async () => {
-			await new DicePoolBuilder().render(true);
+			await new CheckBuilder().render(true);
 		});
 	}
 });

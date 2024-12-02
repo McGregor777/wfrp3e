@@ -4,7 +4,7 @@
 		<div class="symbols-pool"></div>
 
 		<p class="dice-pool-hint">
-			<em>{{localize "ROLL.DICEPOOLBUILDER.Hint"}}</em>
+			<em>{{localize "CHECKBUILDER.hint"}}</em>
 		</p>
 
 		<div class="dice-pool-table">
@@ -12,14 +12,14 @@
 				<label class="pool-container">
 					<img class="pool-picture special-die" src="{{die}}" width="43" height="43" alt="{{capitalize d}} die"/>
 					<input class="pool-value" name="dice.{{d}}" type="number" min="0" value="{{lookup ../object.dice d}}"/>
-					<div class="pool-text">{{localize (concat "ROLL.DIE." (capitalize d) "Dice")}}</div>
+					<div class="pool-text">{{localize (concat "DIE.NAMES." d "Dice")}}</div>
 				</label>
 			{{/each}}
 		</div>
 
 		<div class="convert-buttons">
-			<button class="convert-conservative">{{localize "ROLL.DICEPOOLBUILDER.ConvertConservative"}}</button>
-			<button class="convert-reckless">{{localize "ROLL.DICEPOOLBUILDER.ConvertReckless"}}</button>
+			<button class="convert-conservative">{{localize "CHECKBUILDER.convertConservative"}}</button>
+			<button class="convert-reckless">{{localize "CHECKBUILDER.convertReckless"}}</button>
 		</div>
 		{{#if attributes}}
 			<div class="attributes">
@@ -31,14 +31,14 @@
 						       type="number"
 						       min="0"
 						       max="{{attribute.budget}}" />
-						<div>{{localize (concat "ROLL.DICEPOOLBUILDER." (capitalize attr) "Dice")}}</div>
+						<div>{{localize (concat "CHECKBUILDER." (capitalize attr) "Dice")}}</div>
 					</label>
 				{{/each}}
 			</div>
 		{{/if}}
 	
 		<details>
-			<summary>{{localize "ROLL.DICEPOOLBUILDER.StartingResults"}}</summary>
+			<summary>{{localize "CHECKBUILDER.startingResults"}}</summary>
 	
 			<table class="symbols-pool-container">
 				<tr>
@@ -50,7 +50,7 @@
 							       value="{{object.symbols.successes}}"
 							       type="number"
 							       min="0" />
-							<div class="pool-text">{{localize "ROLL.SYMBOL.Successes"}}</div>
+							<div class="pool-text">{{localize "SYMBOL.NAMES.successes"}}</div>
 						</label>
 					</td>
 	
@@ -62,7 +62,7 @@
 							       value="{{object.symbols.challenges}}"
 							       type="number"
 							       min="0" />
-							<div class="pool-text">{{localize "ROLL.SYMBOL.Challenges"}}</div>
+							<div class="pool-text">{{localize "SYMBOL.NAMES.challenges"}}</div>
 						</label>
 					</td>
 				</tr>
@@ -75,7 +75,7 @@
 							       value="{{object.symbols.boons}}"
 							       type="number"
 							       min="0" />
-							<div class="pool-text">{{localize "ROLL.SYMBOL.Boons"}}</div>
+							<div class="pool-text">{{localize "SYMBOL.NAMES.boons"}}</div>
 						</label>
 					</td>
 	
@@ -87,7 +87,7 @@
 							       value="{{object.symbols.banes}}"
 							       type="number"
 							       min="0" />
-							<div class="pool-text">{{localize "ROLL.SYMBOL.Banes"}}</div>
+							<div class="pool-text">{{localize "SYMBOL.NAMES.banes"}}</div>
 						</label>
 					</td>
 				</tr>
@@ -100,7 +100,7 @@
 							       value="{{object.symbols.delays}}"
 							       type="number"
 							       min="0" />
-							<label class="pool-text">{{localize "ROLL.SYMBOL.Delays"}}</label>
+							<div class="pool-text">{{localize "SYMBOL.NAMES.delays"}}</div>
 						</label>
 					</td>
 	
@@ -112,7 +112,7 @@
 							       value="{{object.symbols.exertions}}"
 							       type="number"
 							       min="0" />
-							<div class="pool-text">{{localize "ROLL.SYMBOL.Exertions"}}</div>
+							<div class="pool-text">{{localize "SYMBOL.NAMES.exertions"}}</div>
 						</label>
 					</td>
 				</tr>
@@ -125,7 +125,7 @@
 							       value="{{object.symbols.sigmarsComets}}"
 							       type="number"
 							       min="0" />
-							<div class="pool-text">{{localize "ROLL.SYMBOL.SigmarsComets"}}</div>
+							<div class="pool-text">{{localize "SYMBOL.NAMES.sigmarsComets"}}</div>
 						</label>
 					</td>
 	
@@ -137,7 +137,7 @@
 							       value="{{object.symbols.chaosStars}}"
 							       type="number"
 							       min="0" />
-							<div class="pool-text">{{localize "ROLL.SYMBOL.ChaosStars"}}</div>
+							<div class="pool-text">{{localize "SYMBOL.NAMES.chaosStars"}}</div>
 						</label>
 					</td>
 				</tr>
@@ -145,7 +145,7 @@
 		</details>
 	
 		<details>
-			<summary>{{localize "ROLL.DICEPOOLBUILDER.Options"}}</summary>
+			<summary>{{localize "CHECKBUILDER.options"}}</summary>
 	
 			<div class="dice-pool-roll-options">
 				{{#if (or (eq isGM true) (eq canUserAddAudio true)) }}
@@ -186,7 +186,7 @@
 		</details>
 	
 		<div class="roll-button flexrow">
-			<button class="roll-check-button">{{localize "ROLL.DICEPOOLBUILDER.RollCheck"}}</button>
+			<button class="roll-check-button">{{localize "CHECKBUILDER.rollCheck"}}</button>
 		</div>
 	</div>
 
@@ -194,7 +194,7 @@
 		<div class="quick-settings">
 			{{#if skills}}
 				<label>
-					{{localize "ROLL.DICEPOOLBUILDER.Skill"}}
+					{{localize "CHECKBUILDER.skill"}}
 
 					<select class="skill-select" name="skill">
 						<option value=""{{#unless skill}} selected{{/unless}}></option>
@@ -204,7 +204,7 @@
 			{{/if}}
 
 			<label>
-				{{localize "ROLL.DICEPOOLBUILDER.Characteristic"}}
+				{{localize "CHECKBUILDER.characteristic"}}
 
 				<select class="characteristic-select" name="characteristic">
 					{{selectOptions characteristics selected=characteristic.name localize=true}}
@@ -212,7 +212,7 @@
 			</label>
 
 			<label>
-				{{localize "ROLL.DICEPOOLBUILDER.ChallengeLevel"}}
+				{{localize "CHECKBUILDER.challengeLevel"}}
 
 				<select class="challenge-level-select" name="challengeLevel">
 					{{selectOptions challengeLevels selected=challengeLevel labelAttr="name" localize=true}}
@@ -221,7 +221,7 @@
 
 			{{#if maxFortunePoints}}
 				<label>
-					{{localize "ROLL.DICEPOOLBUILDER.FortunePoints"}}
+					{{localize "CHECKBUILDER.fortunePoints"}}
 
 					<input class="pool-value" name="fortunePoints" type="number" min="0" max="{{maxFortunePoints}}" value="0" />
 				</label>
@@ -229,7 +229,7 @@
 
 			{{#if availableWeapons}}
 				<label>
-					{{localize "ROLL.DICEPOOLBUILDER.Weapon"}}
+					{{localize "CHECKBUILDER.weapon"}}
 
 					<select class="weapon-select" name="weapon">
 						{{selectOptions availableWeapons selected=weapon._id nameAttr="id" labelAttr="name" localize=true}}
@@ -239,7 +239,7 @@
 
 			{{#if (equalTo actor.type "character")}}
 				<div class="specialisations">
-					{{localize "ROLL.DICEPOOLBUILDER.Specialisations"}}
+					{{localize "CHECKBUILDER.specialisations"}}
 
 					{{#if specialisations}}
 						{{#each specialisations}}

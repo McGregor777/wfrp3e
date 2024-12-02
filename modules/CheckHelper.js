@@ -1,5 +1,5 @@
 import DicePool from "./DicePool.js";
-import DicePoolBuilder from "./applications/DicePoolBuilder.js";
+import CheckBuilder from "./applications/CheckBuilder.js";
 
 /**
  * The CheckHelper provides methods to prepare checks.
@@ -19,7 +19,7 @@ export default class CheckHelper
 	{
 		const stance = actor.system.stance.current;
 
-		await new DicePoolBuilder(
+		await new CheckBuilder(
 			new DicePool({
 				dice: {
 					characteristic: characteristic.rating - Math.abs(stance),
@@ -56,7 +56,7 @@ export default class CheckHelper
 		const characteristic = actor.system.characteristics[skill.system.characteristic],
 			  stance = actor.system.stance.current;
 
-		await new DicePoolBuilder(
+		await new CheckBuilder(
 			new DicePool({
 				dice: {
 					characteristic: characteristic.rating - Math.abs(stance),
@@ -133,7 +133,7 @@ export default class CheckHelper
 		if(weapon)
 			checkData.weapon = weapon;
 
-		await new DicePoolBuilder(
+		await new CheckBuilder(
 			new DicePool({
 				dice: {
 					characteristic: characteristic?.rating - Math.abs(stance) ?? 0,
