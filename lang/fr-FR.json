@@ -11,35 +11,6 @@
 		"ACTIONS": {
 			"update": "Enregistrer l'action"
 		},
-		"FIELDS": {
-			"art.label": "Illustration",
-			"check.label": "Test d'Action",
-			"name.label": "Titre",
-			"rechargeRating.label": "Temps de Recharge",
-			"rechargeTokens.label": "Jetons de recharge",
-			"recharging.label": "Vous ne pouvez pas utiliser une Action en cours de rechargement.",
-			"requirements.label": "Conditions",
-			"special.label": "Spécial",
-			"traits.label": "Traits",
-			"type.label": "Type d'Action",
-			"uniqueEffect.label": "Effet seul",
-			"usageMessage.label": "utilise {action}",
-			"difficultyModifiers": {
-				"challengeDice.label": "Dés de Défi",
-				"misfortuneDice.label": "Dés d'Infortune"
-			},
-			"effects": {
-				"description.label": "Description",
-				"label": "Effets",
-				"script.label": "Script",
-				"script.hint": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.",
-				"symbolAmount.label": "Quantité de symboles",
-				"symbolType.label": "Type de symbole"
-			}
-		},
-		"TRAITS": {
-			"Basic": "Base"
-		},
 		"CARDS": {
 			"Block": "Blocage",
 			"MeleeStrike": "Attaque au corps-à-corps",
@@ -51,9 +22,37 @@
 			"noCheckRequired": "Aucun Test Requis",
 			"targetDefence": "Défense de la Cible"
 		},
+		"FIELDS": {
+			"art.label": "Illustration",
+			"check.label": "Test d'action",
+			"name.label": "Titre",
+			"rechargeRating.label": "Temps de recharge",
+			"rechargeTokens.label": "Jetons de recharge",
+			"requirements.label": "Conditions",
+			"special.label": "Spécial",
+			"traits.label": "Traits",
+			"type.label": "Type d'action",
+			"uniqueEffect.label": "Effet seul",
+			"usageMessage.label": "utilise {action}",
+			"difficultyModifiers": {
+				"challengeDice.label": "Dés de Défi",
+				"misfortuneDice.label": "Dés d'Infortune"
+			},
+			"effects": {
+				"description.label": "Description",
+				"label": "Effets",
+				"script.label": "Script",
+				"script.hint": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - actorToken: The TokenDocument of the WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.\n  - targetActor: The WFRP3eActor targetted by the player performing the check.\n  - actorToken: The TokenDocument targetted by the player performing the check.",
+				"symbolAmount.label": "Quantité de symboles",
+				"symbolType.label": "Type de symbole"
+			}
+		},
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
+		},
+		"TRAITS": {
+			"Basic": "Base"
 		},
 		"TYPES": {
 			"melee": "Mêlée",
@@ -61,6 +60,9 @@
 			"support": "Support",
 			"blessing": "Bénédiction",
 			"spell": "Sort"
+		},
+		"WARNINGS": {
+			"recharging": "Vous ne pouvez pas utiliser une action en cours de rechargement."
 		}
 	},
 

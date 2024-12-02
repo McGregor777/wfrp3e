@@ -150,7 +150,7 @@ export default class WFRP3eItem extends Item
 			throw new Error("Knowing which face of the Action to use is needed.");
 
 		if(this.system.rechargeTokens > 0)
-			ui.notifications.warn(game.i18n.localize("ACTION.Recharging"));
+			ui.notifications.warn(game.i18n.localize("ACTION.WARNINGS.recharging"));
 		else if(CheckHelper.doesRequireNoCheck(this.system[options.face].check))
 			await new Dialog({
 				title: game.i18n.localize("APPLICATION.TITLE.ActionUsage"),

@@ -11,6 +11,17 @@
 		"ACTIONS": {
 			"update": "Save Action"
 		},
+		"CARDS": {
+			"Block": "Block",
+			"MeleeStrike": "Melee Strike",
+			"RangedShot": "Ranged Shot"
+		},
+		"CHECK": {
+			"against": "vs",
+			"generallyNoCheckRequired": "Generally No Check Required",
+			"noCheckRequired": "No Check Required",
+			"targetDefence": "Target Defence"
+		},
 		"FIELDS": {
 			"art.label": "Art",
 			"check.label": "Action Check",
@@ -18,7 +29,6 @@
 			"name.label": "Title",
 			"rechargeRating.label": "Recharge Rating",
 			"rechargeTokens.label": "Recharge Tokens",
-			"recharging.label": "You cannot use an Action that is recharging.",
 			"requirements.label": "Requirements",
 			"special.label": "Special",
 			"traits.label": "Traits",
@@ -32,28 +42,17 @@
 			"effects": {
 				"description.label": "Description",
 				"script.label": "Script",
-				"script.hint": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.",
+				"script.hint": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - actorToken: The TokenDocument of the WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.\n  - targetActor: The WFRP3eActor targetted by the player performing the check.\n  - actorToken: The TokenDocument targetted by the player performing the check.",
 				"symbolAmount.label": "Symbol Amount",
 				"symbolType.label": "Symbol Type"
 			}
 		},
-		"TRAITS": {
-			"Basic": "Base"
-		},
-		"CARDS": {
-			"Block": "Block",
-			"MeleeStrike": "Melee Strike",
-			"RangedShot": "Ranged Shot"
-		},
-		"CHECK": {
-			"against": "vs",
-			"generallyNoCheckRequired": "Generally No Check Required",
-			"noCheckRequired": "No Check Required",
-			"targetDefence": "Target Defence"
-		},
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
+		},
+		"TRAITS": {
+			"Basic": "Base"
 		},
 		"TYPES": {
 			"melee": "Melee",
@@ -61,6 +60,9 @@
 			"support": "Support",
 			"blessing": "Blessing",
 			"spell": "Spell"
+		},
+		"WARNINGS": {
+			"recharging": "You cannot use an Action that is recharging."
 		}
 	},
 
