@@ -977,6 +977,7 @@ export const WFRP3e = {
 	scriptTypes: {
 		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
 		onCheckRoll: "SCRIPT.TYPES.onCheckRoll",
+		onCheckTrigger: "SCRIPT.TYPES.onCheckTrigger",
 		onTargettingCheckPreparation: "SCRIPT.TYPES.onTargettingCheckPreparation",
 		onTrigger: "SCRIPT.TYPES.onTrigger"
 	},

@@ -528,6 +528,7 @@
 		"TYPES": {
 			"onCheckPreparation": "Check Preparation",
 			"onCheckRoll": "Check Roll",
+			"onCheckTrigger": "Manual Trigger on a Check",
 			"onTargettingCheckPreparation": "Targetting Check Preparation",
 			"onTrigger": "Manual Trigger"
 		}
@@ -607,6 +608,7 @@
 		},
 		"WARNINGS": {
 			"notSocketed": "You cannot use a Talent that is not socketed.",
+			"noTalentToUse": "There is no Talent to use.",
 			"recharging": "You cannot use a Talent that is recharging."
 		}
 	},

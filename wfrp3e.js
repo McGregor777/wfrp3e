@@ -182,6 +182,15 @@ Hooks.once("init", async () => {
 
 Hooks.on("getChatLogEntryContext", (html, options) => {
 	options.push({
+		name: "ROLL.ACTIONS.useTalent",
+		icon: '<span class="fa-solid fa-gears"></span>',
+		condition: li => {
+			const message = game.messages.get(li.attr("data-message-id"));
+			return message.rolls.length > 0
+				&& (!Object.hasOwn(message.rolls[0].options.checkData, "outcome") || game.user.isGM);
+		},
+		callback: li => CheckHelper.useTalent(li.attr("data-message-id"))
+	}, {
 		name: "ROLL.ACTIONS.applyToggledEffects",
 		icon: '<span class="fa-solid fa-check"></span>',
 		condition: li => {

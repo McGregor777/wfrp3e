@@ -1,5 +1,7 @@
 import DicePool from "./DicePool.js";
 import CheckBuilder from "./applications/CheckBuilder.js";
+import TalentSelectorV2 from "./applications/TalentSelectorV2.js";
+import {sortTalentsByType} from "./helpers.js";
 
 /**
  * The CheckHelper provides methods to prepare checks.
@@ -233,6 +235,43 @@ export default class CheckHelper
 				}
 			}
 		}
+	}
+
+	/**
+	 * Uses a Talent on a Roll.
+	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
+	 */
+	static async useTalent(chatMessageId)
+	{
+		const chatMessage = game.messages.get(chatMessageId),
+			  roll = chatMessage.rolls[0],
+			  checkData = roll.options.checkData,
+			  actor = await fromUuid(checkData.actor);
+		let triggeredTalents = actor.findTriggeredItems("onCheckTrigger");
+
+		if(triggeredTalents.length > 0) {
+			let selectedTalent = await TalentSelectorV2.wait({talents: sortTalentsByType(triggeredTalents)});
+
+			if(selectedTalent) {
+				selectedTalent = await fromUuid(selectedTalent);
+
+				try {
+					const fn = new foundry.utils.AsyncFunction(
+						"actor",
+						"chatMessage",
+						"checkData",
+						"roll",
+						selectedTalent.system.effect.script
+					);
+					await fn.call(selectedTalent, actor, chatMessage, checkData, roll);
+				}
+				catch(error) {
+					console.error(error);
+				}
+			}
+		}
+		else
+			ui.notifications.warn(game.i18n.localize("ROLL.WARNINGS.noTalentToUse"));
 	}
 
 	/**

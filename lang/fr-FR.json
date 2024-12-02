@@ -528,6 +528,7 @@
 		"TYPES": {
 			"onCheckPreparation": "Préparation d'un test",
 			"onCheckRoll": "Réalisation d'un test",
+			"onCheckTrigger": "Déclenchement manuel après un test",
 			"onTargettingCheckPreparation": "Préparation d'un test ciblant",
 			"onTrigger": "Déclenchement manuel"
 		}
@@ -607,6 +608,7 @@
 		},
 		"WARNINGS": {
 			"notSocketed": "Vous ne pouvez pas utiliser un talent n'occupant aucun emplacement.",
+			"noTalentToUse": "Il n'y a aucun talent à utiliser.",
 			"recharging": "Vous ne pouvez pas utiliser un talent en cours de rechargement."
 		}
 	},
