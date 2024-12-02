@@ -1,7 +1,7 @@
 import DicePool from "../DicePool.js";
 
 /** @inheritDoc */
-export default class DicePoolBuilder extends FormApplication
+export default class CheckBuilder extends FormApplication
 {
 	constructor(object = new DicePool(), options = {})
 	{
@@ -15,18 +15,18 @@ export default class DicePoolBuilder extends FormApplication
 			const checkData = this.object.checkData;
 
 			if(checkData.combat)
-				return game.i18n.localize("ROLL.InitiativeCheckBuilder");
+				return game.i18n.localize("CHECKBUILDER.TITLES.initiative");
 			else if(checkData.action)
-				return game.i18n.format("ROLL.ActionCheckBuilder", {action: checkData.action.name});
+				return game.i18n.format("CHECKBUILDER.TITLES.action", {action: checkData.action.name});
 			else if(checkData.skill)
-				return game.i18n.format("ROLL.SkillCheckBuilder", {skill: checkData.skill.name});
+				return game.i18n.format("CHECKBUILDER.TITLES.skill", {skill: checkData.skill.name});
 			else if(checkData.characteristic)
-				return game.i18n.format("ROLL.CharacteristicCheckBuilder", {
+				return game.i18n.format("CHECKBUILDER.TITLES.characteristic", {
 					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].name)
 				});
 		}
 
-		return game.i18n.localize("ROLL.CheckBuilder");
+		return game.i18n.localize("CHECKBUILDER.TITLES.checkBuilder");
 	}
 
 	/** @inheritDoc */
@@ -35,7 +35,7 @@ export default class DicePoolBuilder extends FormApplication
 		return {
 			...super.defaultOptions,
 			classes: ["wfrp3e", "dice-pool-builder"],
-			template: "systems/wfrp3e/templates/applications/dice-pool-builder.hbs",
+			template: "systems/wfrp3e/templates/applications/check-builder.hbs",
 			width: 640
 		};
 	}

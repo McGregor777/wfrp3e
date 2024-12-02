@@ -1,5 +1,5 @@
 import DicePool from "./DicePool.js";
-import DicePoolBuilder from "./applications/DicePoolBuilder.js";
+import CheckBuilder from "./applications/CheckBuilder.js";
 
 /**
  * The CheckHelper provides methods to prepare checks.
@@ -19,7 +19,7 @@ export default class CheckHelper
 	{
 		const stance = actor.system.stance.current;
 
-		await new DicePoolBuilder(
+		await new CheckBuilder(
 			new DicePool({
 				dice: {
 					characteristic: characteristic.rating - Math.abs(stance),
@@ -56,7 +56,7 @@ export default class CheckHelper
 		const characteristic = actor.system.characteristics[skill.system.characteristic],
 			  stance = actor.system.stance.current;
 
-		await new DicePoolBuilder(
+		await new CheckBuilder(
 			new DicePool({
 				dice: {
 					characteristic: characteristic.rating - Math.abs(stance),
@@ -133,7 +133,7 @@ export default class CheckHelper
 		if(weapon)
 			checkData.weapon = weapon;
 
-		await new DicePoolBuilder(
+		await new CheckBuilder(
 			new DicePool({
 				dice: {
 					characteristic: characteristic?.rating - Math.abs(stance) ?? 0,
@@ -208,11 +208,11 @@ export default class CheckHelper
 	static getUniversalBoonEffect(isMental)
 	{
 		return isMental ? {
-			description: game.i18n.format("ROLL.EFFECT.RecoverStress", {amount: 1}),
+			description: game.i18n.format("ROLL.EFFECTS.recoverStress", {amount: 1}),
 			script: "outcome.stress -= 2;",
 			symbolAmount: 2
 		} : {
-			description: game.i18n.format("ROLL.EFFECT.RecoverFatigue", {amount: 1}),
+			description: game.i18n.format("ROLL.EFFECTS.recoverFatigue", {amount: 1}),
 			script: "outcome.fatigue -= 2;",
 			symbolAmount: 2
 		};
@@ -226,11 +226,11 @@ export default class CheckHelper
 	static getUniversalBaneEffect(isMental)
 	{
 		return isMental ? {
-			description: game.i18n.format("ROLL.EFFECT.SufferStress", {amount: 1}),
+			description: game.i18n.format("ROLL.EFFECTS.sufferStress", {amount: 1}),
 			script: "outcome.stress++;",
 			symbolAmount: 2
 		} : {
-			description: game.i18n.format("ROLL.EFFECT.SufferFatigue", {amount: 1}),
+			description: game.i18n.format("ROLL.EFFECTS.sufferFatigue", {amount: 1}),
 			script: "outcome.fatigue++;",
 			symbolAmount: 2
 		};
@@ -244,7 +244,7 @@ export default class CheckHelper
 	static getCriticalRatingEffect(weapon)
 	{
 		return {
-			description: game.i18n.format("ROLL.EFFECT.Critical", {amount: 1}),
+			description: game.i18n.format("ROLL.EFFECTS.critical", {amount: 1}),
 			script: "outcome.targetCriticalWounds++;",
 			symbolAmount: weapon.system.criticalRating
 		};
@@ -257,7 +257,7 @@ export default class CheckHelper
 	static getUniversalSigmarsCometEffect()
 	{
 		return {
-			description: game.i18n.format("ROLL.EFFECT.Critical", {amount: 1}),
+			description: game.i18n.format("ROLL.EFFECTS.critical", {amount: 1}),
 			script: "outcome.targetCriticalWounds++;",
 			symbolAmount: 1
 		};
@@ -274,7 +274,7 @@ export default class CheckHelper
 		const chatMessage = game.messages.get(chatMessageId);
 
 		if(!chatMessage.isOwner) {
-			ui.notifications.warn(game.i18n.localize("ROLL.NotAllowedToTriggerEffect"));
+			ui.notifications.warn(game.i18n.localize("ROLL.WARNINGS.notAllowed"));
 			return;
 		}
 
@@ -293,7 +293,7 @@ export default class CheckHelper
 					if(roll.remainingSymbols.banes >= toggledEffect.symbolAmount - 1)
 						toggledEffect.active = true;
 					else
-						ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {
+						ui.notifications.warn(game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
 							symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
 						}));
 				}
@@ -301,7 +301,7 @@ export default class CheckHelper
 					toggledEffect.active = true;
 			}
 			else
-				ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {
+				ui.notifications.warn(game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
 					symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
 				}));
 		}
@@ -319,7 +319,7 @@ export default class CheckHelper
 		else if(roll.remainingSymbols[plural] >= toggledEffect.symbolAmount)
 			toggledEffect.active = true;
 		else
-			ui.notifications.warn(game.i18n.format("ROLL.NotEnoughSymbolToTriggerEffect", {
+			ui.notifications.warn(game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
 				symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
 			}));
 

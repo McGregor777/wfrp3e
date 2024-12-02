@@ -6,7 +6,6 @@ import FortuneDie from "./dice/FortuneDie.js";
 import MisfortuneDie from "./dice/MisfortuneDie.js";
 import RecklessDie from "./dice/RecklessDie.js";
 import WFRP3eRoll from "./WFRP3eRoll.js";
-import {capitalize} from "./helpers.js";
 
 /**
  * DicePool utility helps prepare WFRP3e's special dice pools.
@@ -70,18 +69,18 @@ export default class DicePool
 			const checkData = this.checkData;
 
 			if(checkData.combat)
-				return game.i18n.localize(`ROLL.${capitalize(checkData.combat.tags.encounterType)}EncounterInitiativeCheck`);
+				return game.i18n.localize(`ROLL.NAMES.${checkData.combat.tags.encounterType}EncounterInitiativeCheck`);
 			else if(checkData.action)
-				return game.i18n.format("ROLL.ActionCheck", {action: checkData.action.name});
+				return game.i18n.format("ROLL.NAMES.actionCheck", {action: checkData.action.name});
 			else if(checkData.skill)
-				return game.i18n.format("ROLL.SkillCheck", {skill: checkData.skill.name});
+				return game.i18n.format("ROLL.NAMES.skillCheck", {skill: checkData.skill.name});
 			else if(checkData.characteristic)
-				return game.i18n.format("ROLL.CharacteristicCheck", {
+				return game.i18n.format("ROLL.NAMES.characteristicCheck", {
 					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].name)
 				});
 		}
 
-		return game.i18n.localize("ROLL.FreeCheck");
+		return game.i18n.localize("ROLL.NAMES.freeCheck");
 	}
 
 	/**
@@ -127,7 +126,7 @@ export default class DicePool
 					this.dice.characteristic++;
 				}
 				else
-					ui.notifications.warn(game.i18n.format("ROLL.DICEPOOLBUILDER.ConvertBackWarning", {type: type}));
+					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convertBack", {type: type}));
 			}
 			else {
 				if(this.dice.characteristic > 0) {
@@ -135,7 +134,7 @@ export default class DicePool
 					this.dice[type]++;
 				}
 				else
-					ui.notifications.warn(game.i18n.format("ROLL.DICEPOOLBUILDER.ConvertWarning", {type: "characteristic"}));
+					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convert", {type: "characteristic"}));
 			}
 		}
 	}

@@ -32,12 +32,12 @@
         "success": [
           {
             "description": "<p>You hit the target for normal damage</p>",
-            "script": "const characteristicName = checkData.action.system.type === \"ranged\" ? \"agility\" : \"strength\";\noutcome.targetDamages = actor.system.characteristics[characteristicName].rating + (checkData.weapon?.system.damageRating ?? 0) + (actor.system.damageRating ?? 0);",
+            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon?.system.damageRating ?? 0) + (actor.system.damageRating ?? 0);",
             "symbolAmount": 1
           },
           {
             "description": "<p>You hit the target for +2 damage</p>",
-            "script": "const characteristicName = checkData.action.system.type === \"ranged\" ? \"agility\" : \"strength\";\noutcome.targetDamages = actor.system.characteristics[characteristicName].rating + (checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) + 2;",
+            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) + 2;",
             "symbolAmount": 3
           }
         ],
@@ -79,12 +79,12 @@
         "success": [
           {
             "description": "<p>You hit the target for normal damage</p>",
-            "script": "const characteristicName = checkData.action.system.type === \"ranged\" ? \"agility\" : \"strength\";\noutcome.targetDamages = actor.system.characteristics[characteristicName].rating + (checkData.weapon?.system.damageRating ?? 0) + (actor.system.damageRating ?? 0);",
+            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon?.system.damageRating ?? 0) + (actor.system.damageRating ?? 0);",
             "symbolAmount": 1
           },
           {
             "description": "<p>You hit the target for +2 damage</p>",
-            "script": "const characteristicName = checkData.action.system.type === \"ranged\" ? \"agility\" : \"strength\";\noutcome.targetDamages = actor.system.characteristics[characteristicName].rating + (checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) + 2;",
+            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) + 2;",
             "symbolAmount": 3
           }
         ],

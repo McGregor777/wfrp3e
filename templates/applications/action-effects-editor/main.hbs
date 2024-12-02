@@ -3,7 +3,7 @@
 		<span>{{localize "ACTION.FIELDS.effects.symbolType.label"}}</span>
 
 		<span class="form-fields">
-			<select name="symbol" {{#if symbol}}disabled{{/if}}>
+			<select name="symbol" {{#if index}}disabled{{/if}}>
 				{{selectOptions symbols selected=symbol labelAttr="name" localize=true}}
 			</select>
 		</span>
