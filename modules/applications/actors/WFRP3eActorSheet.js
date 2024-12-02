@@ -1,3 +1,5 @@
+import {sortTalentsByType} from "../../helpers.js";
+
 /** @inheritDoc */
 export default class WFRP3eActorSheet extends ActorSheet
 {
@@ -85,10 +87,7 @@ export default class WFRP3eActorSheet extends ActorSheet
 			money: sortedItems.filter(item => item.type === "money"),
 			mutations: sortedItems.filter(item => item.type === "mutation"),
 			skills: sortedItems.filter(item => item.type === "skill"),
-			talents: Object.keys(CONFIG.WFRP3e.talentTypes).reduce((sortedTalents, talentType) => {
-				sortedTalents[talentType] = talents.filter(talent => talent.system.type === talentType);
-				return sortedTalents;
-			}, {}),
+			talents: sortTalentsByType(talents),
 			trappings: sortedItems.filter(item => item.type === "trapping"),
 			weapons: sortedItems.filter(item => item.type === "weapon")
 		};

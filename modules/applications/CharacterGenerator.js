@@ -1,4 +1,5 @@
 import WFRP3eActor from "../documents/WFRP3eActor.js";
+import {sortTalentsByType} from "../helpers.js";
 
 /** @inheritDoc */
 export default class CharacterGenerator extends FormApplication
@@ -690,11 +691,7 @@ export default class CharacterGenerator extends FormApplication
 		this.selectedTalents = new Map();
 
 		if(this.talentsInvestment >= 1 || this.selectedOrigin.abilities.includes("Erudite") || this.priest || this.wizard || this.zealot) {
-			const talents = Object.keys(CONFIG.WFRP3e.talentTypes).reduce((everyTalents, talentType) => {
-				everyTalents[talentType] = this.talents.filter(talent => talent.system.type === talentType);
-				return everyTalents;
-			}, {});
-
+			const talents = sortTalentsByType(this.talents);
 			const rootElement = html.find('.step[data-step="talent-selection"] .talent-selection');
 
 			rootElement.html(
