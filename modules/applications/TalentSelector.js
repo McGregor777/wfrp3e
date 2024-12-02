@@ -12,7 +12,7 @@ export default class TalentSelector extends FormApplication
 	/** @inheritDoc */
 	get title()
 	{
-		return game.i18n.localize("TALENTSELECTOR.Title");
+		return game.i18n.localize("TALENTSELECTOR.title");
 	}
 
 	/** @inheritDoc */
@@ -54,7 +54,7 @@ export default class TalentSelector extends FormApplication
 		const selectedTalent = this.allTalents.find(talent => talent._id === formData.talent);
 
 		if(!selectedTalent)
-			ui.notifications.warn(game.i18n.localize("TALENTSELECTOR.NoTalentSelectedWarning"));
+			ui.notifications.warn(game.i18n.localize("TALENTSELECTOR.WARNINGS.noTalentSelected"));
 
 		if(!this.nonCareer)
 			this.career.update({"system.advances.talent": selectedTalent.name});

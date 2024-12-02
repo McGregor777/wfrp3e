@@ -611,11 +611,21 @@
 		}
 	},
 
-	"TALENTSELECTOR.ChooseANewTalent": "Choisissez un nouveau talent",
-	"TALENTSELECTOR.NoTalentSelected": "Aucun",
-	"TALENTSELECTOR.NoTalentSelectedWarning": "Vous devez sélectionner une carte de talent.",
-	"TALENTSELECTOR.SelectedTalent": "Talent sélectionné :",
-	"TALENTSELECTOR.Title": "Sélecteur de talent",
+	"TALENTSELECTOR": {
+		"ACTIONS": {
+			"chooseTalent": "Choisir un talent"
+		},
+		"HEADINGS": {
+			"newTalent": "Choisissez un nouveau talent",
+			"triggerTalent": "Choisissez un talent à utiliser"
+		},
+		"WARNINGS": {
+			"noTalentSelected": "Vous devez sélectionner une carte de talent."
+		},
+		"noTalentSelected": "Aucun",
+		"selectedTalent": "Talent sélectionné :",
+		"title": "Sélecteur de talent"
+	},
 
 	"TRAININGSELECTOR.Acquired": "Acquis",
 	"TRAININGSELECTOR.Characteristic": "Caractéristique",

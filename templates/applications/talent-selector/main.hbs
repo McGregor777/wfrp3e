@@ -1,0 +1,22 @@
+<section>
+	{{#each tabs as |tab|}}
+		<section class="tab {{tab.id}} {{tab.cssClass}} item-container talent-container"
+				 data-tab="{{tab.id}}"
+				 data-group="{{tab.group}}">
+			{{#with (lookup @root.talents tab.id) as |talents|}}
+				{{#each talents}}
+					<label>
+						{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=this}}
+
+						<input name="selection" value="{{this.uuid}}" type="radio" />
+					</label>
+				{{/each}}
+			{{/with}}
+		</section>
+	{{/each}}
+
+	<p>
+		{{localize "TALENTSELECTOR.selectedTalent"}}
+		<span class="selection">{{localize "TALENTSELECTOR.noTalentSelected"}}</span>
+	</p>
+</section>
