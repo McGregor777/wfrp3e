@@ -54,7 +54,6 @@ import RecklessDie from "./modules/dice/RecklessDie.js";
 import WFRP3eActor from "./modules/documents/WFRP3eActor.js"
 import WFRP3eItem from "./modules/documents/WFRP3eItem.js"
 import CheckHelper from "./modules/CheckHelper.js";
-import DicePool from "./modules/DicePool.js";
 import WFRP3eRoll from "./modules/WFRP3eRoll.js";
 import * as handlebarsHelpers from "./modules/handlebars.js";
 

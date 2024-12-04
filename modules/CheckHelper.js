@@ -392,7 +392,7 @@ export default class CheckHelper
 		}
 		// Sigmar's Comet as Success + Only one Success effect toggled at once.
 		else if(symbol === "success"
-			&& (roll.resultSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)) {
+			&& (roll.totalSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)) {
 			roll.effects.success.forEach(effect => effect.active = false);
 			toggledEffect.active = true;
 		}
@@ -407,37 +407,6 @@ export default class CheckHelper
 			ui.notifications.warn(game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
 				symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
 			}));
-
-		roll.remainingSymbols = {...roll.resultSymbols};
-
-		// Recalculate remaining symbols for every type.
-		Object.entries(roll.effects).forEach(effects => {
-			const symbolName = effects[0];
-			const plural = CONFIG.WFRP3e.symbols[symbolName].plural;
-
-			roll.remainingSymbols[plural] = effects[1].filter(effect => effect.active)
-				.reduce((remainingSymbols, effect) => {
-					if(["delay", "exertion"].includes(symbolName)) {
-						remainingSymbols--;
-
-						if(effect.symbolAmount > 1)
-							roll.remainingSymbols.banes -= effect.symbolAmount - 1;
-					}
-					else if(remainingSymbols < effect.symbolAmount) {
-						if(["success", "boon"].includes(symbolName)
-							&& (remainingSymbols + roll.remainingSymbols.sigmarsComets >= effect.symbolAmount)) {
-							roll.remainingSymbols.sigmarsComets += remainingSymbols - effect.symbolAmount;
-							return 0;
-						}
-
-						throw new Error(`The remaining number of ${symbolName} cannot be negative.`);
-					}
-					else
-						remainingSymbols -= effect.symbolAmount;
-
-					return remainingSymbols;
-				}, roll.remainingSymbols[plural]);
-		});
 
 		chatMessage.update(changes);
 	}

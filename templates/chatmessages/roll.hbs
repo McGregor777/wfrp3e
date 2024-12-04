@@ -21,20 +21,20 @@
 
 			{{#if hasSpecialDice}}
 				<ul>
-					{{#if resultSymbols.successes}}
+					{{#if totalSymbols.successes}}
 						<li class="roll-success">{{localize "ROLL.OUTCOMES.successful"}}</li>
 					{{else}}
 						<li class="roll-failure">{{localize "ROLL.OUTCOMES.failed"}}</li>
 					{{/if}}
 
 					{{#each @root.symbols as |symbol sym|}}
-						{{#with (lookup @root.resultSymbols symbol.plural)}}
+						{{#with (lookup @root.totalSymbols symbol.plural)}}
 							{{#if (and (superiorTo this 0) (notEqualTo sym "righteousSuccess"))}}
 								<li class="roll-symbols">
 									{{localize symbol.result nb=this}}
 
-									{{#if (and (equalTo sym "success") (superiorTo @root.resultSymbols.righteousSuccesses 0))}}
-										{{localize @root.symbols.righteousSuccess.result nb=@root.resultSymbols.righteousSuccesses}}
+									{{#if (and (equalTo sym "success") (superiorTo @root.totalSymbols.righteousSuccesses 0))}}
+										{{localize @root.symbols.righteousSuccess.result nb=@root.totalSymbols.righteousSuccesses}}
 									{{/if}}
 
 									{{#for 0 (lookup @root.remainingSymbols symbol.plural) 1}}

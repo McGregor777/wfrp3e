@@ -65,9 +65,8 @@ export default class DicePool
 
 	get name()
 	{
-		if(this.checkData) {
-			const checkData = this.checkData;
-
+		const checkData = this.checkData;
+		if(checkData) {
 			if(checkData.combat)
 				return game.i18n.localize(`ROLL.NAMES.${checkData.combat.tags.encounterType}EncounterInitiativeCheck`);
 			else if(checkData.action)
@@ -141,52 +140,54 @@ export default class DicePool
 
 	/**
 	 * Rolls the Dice Pool, then shows the results in a Message.
-	 * @returns {Promise<*>}
+	 * @returns {Promise<{WFRP3eRoll}>}
 	 */
 	async roll()
 	{
-		let actor = null;
+		const checkData = this.checkData;
+		let actor = checkData?.actor;
 
-		if(this.checkData?.actor) {
-			actor = await fromUuid(this.checkData.actor);
+		if(checkData) {
+			checkData.fortunePoints = this.fortunePoints;
 
-			// Remove the fortune points spent on the check.
-			if(actor.type === "character" && this.fortunePoints > 0) {
-				const updates = {"system.fortune.value": Math.max(actor.system.fortune.value - this.fortunePoints, 0)};
+			if(actor) {
+				actor = await fromUuid(checkData.actor);
 
-				if(this.fortunePoints > actor.system.fortune.value) {
-					const party = actor.system.currentParty;
-					party.update({"system.fortunePool": Math.max(party.system.fortunePool - (this.fortunePoints - actor.system.fortune.value), 0)})
-				}
+				// Remove the fortune points spent on the check from the Actor and/or Party.
+				if(actor.type === "character" && this.fortunePoints > 0) {
+					const updates = {"system.fortune.value": Math.max(actor.system.fortune.value - this.fortunePoints, 0)};
 
-				actor.update(updates);
-			}
-			// Remove the attribute dice spent on the check.
-			else if(actor.type === "creature") {
-				const updates = {system: {attributes: {}}};
+					if(this.fortunePoints > actor.system.fortune.value) {
+						const party = actor.system.currentParty;
+						party.update({"system.fortunePool": Math.max(party.system.fortunePool - (this.fortunePoints - actor.system.fortune.value), 0)})
+					}
 
-				for(const [attributeName, creatureDice] of Object.entries(this.creatureDice)) {
-					if(creatureDice > 0)
-						updates.system.attributes[attributeName] = {
-							value: actor.system.attributes[attributeName].value - creatureDice
-						};
-				}
-
-				if(Object.keys(updates.system.attributes).length > 0)
 					actor.update(updates);
+				}
+				// Remove the attribute dice spent on the check from the Creature.
+				else if(actor.type === "creature") {
+					const updates = {system: {attributes: {}}};
+
+					for(const [attributeName, creatureDice] of Object.entries(this.creatureDice)) {
+						if(creatureDice > 0)
+							updates.system.attributes[attributeName] = {
+								value: actor.system.attributes[attributeName].value - creatureDice
+							};
+					}
+
+					if(Object.keys(updates.system.attributes).length > 0)
+						actor.update(updates);
+				}
 			}
 		}
 
-		const roll = WFRP3eRoll.create(
+		const roll = await WFRP3eRoll.create(
 			this.formula,
 			actor ? actor.getRollData() : {},
-			{checkData: this.checkData, flavor: this.flavor, startingSymbols: this.symbols}
-		);
-
-		roll.toMessage({
+			{checkData, flavor: this.flavor, startingSymbols: this.symbols}
+		).toMessage({
 			flavor: this.name,
-			speaker: {actor},
-			user: game.user.id
+			speaker: {actor}
 		});
 
 		if(this.sound)
