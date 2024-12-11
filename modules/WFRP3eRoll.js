@@ -152,7 +152,7 @@ export default class WFRP3eRoll extends Roll
 
 			if(checkData.action)
 				foundry.utils.mergeObject(chatData, {
-					action: checkData.action,
+					action: await fromUuid(checkData.action),
 					effects: this.effects,
 					face: checkData.face
 				});
@@ -169,11 +169,11 @@ export default class WFRP3eRoll extends Roll
 				chatData.targetActorName = targetActor.token ? targetActor.token.name : targetActor.prototypeToken.name;
 
 				if(checkData.outcome?.targetCriticalWounds && Array.isArray(checkData.outcome.targetCriticalWounds))
-					chatData.targetCriticalWoundLinks = checkData.outcome.targetCriticalWounds?.reduce(async (names, criticalWound) => {
-						const criticalWoundLink = await fromUuid(criticalWound._id).toAnchor().outerHTML;
-						names = names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
-						return names;
-					}, "");
+					chatData.targetCriticalWoundLinks = checkData.outcome.targetCriticalWounds
+						?.reduce((names, criticalWound) => {
+							const criticalWoundLink = fromUuidSync(criticalWound).toAnchor().outerHTML;
+							return names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
+						}, "");
 			}
 		}
 
@@ -200,11 +200,12 @@ export default class WFRP3eRoll extends Roll
 	async _prepareEffects()
 	{
 		const checkData = this.options.checkData,
-			  {action, characteristic, weapon} = checkData,
-			  actor = await fromUuid(checkData.actor);
+			  actor = await fromUuid(checkData.actor),
+			  action = await fromUuid(checkData.action),
+			  {characteristic, weapon} = checkData;
 
 		this.effects = {
-			...Object.entries(action.system[checkData.face].effects)
+			...Object.entries(structuredClone(action.system[checkData.face].effects))
 				.reduce((allEffects, [symbol, effects]) => {
 					effects.map((effect) => effect.active = false);
 					allEffects[symbol] = effects;

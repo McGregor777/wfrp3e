@@ -70,7 +70,7 @@ export default class DicePool
 			if(checkData.combat)
 				return game.i18n.localize(`ROLL.NAMES.${checkData.combat.tags.encounterType}EncounterInitiativeCheck`);
 			else if(checkData.action)
-				return game.i18n.format("ROLL.NAMES.actionCheck", {action: checkData.action.name});
+				return game.i18n.format("ROLL.NAMES.actionCheck", {action: fromUuidSync(checkData.action).name});
 			else if(checkData.skill)
 				return game.i18n.format("ROLL.NAMES.skillCheck", {skill: checkData.skill.name});
 			else if(checkData.characteristic)

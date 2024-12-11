@@ -41,8 +41,19 @@
 			},
 			"effects": {
 				"description.label": "Description",
-				"script.label": "Script",
-				"script.hint": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - actorToken: The TokenDocument of the WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.\n  - targetActor: The WFRP3eActor targetted by the player performing the check.\n  - actorToken: The TokenDocument targetted by the player performing the check.",
+				"immediate": {
+					"label": "Immediate Effect",
+					"hint": "Check if the Effect script must be executed immediately when selected."
+				},
+				"label": "Effects",
+				"reverseScript": {
+					"label": "Reverse Script",
+					"hint": "This script is executed when an immediate effect is deselected.Arguments:\n  - this: The effect being executed.\n  - roll: The WFRP3eRoll that is executing the effect script.\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - actorToken: The TokenDocument of the WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.\n  - targetActor: The WFRP3eActor targetted by the player performing the check.\n  - targetActorToken: The TokenDocument targetted by the player performing the check."
+				},
+				"script": {
+					"label": "Script",
+					"hint": "This script is executed after an Action check has been validated, if the effect has been selected.\nIf the effect is immediate, this script is executed when the effect is selected.Arguments:\n  - this: The effect being executed.\n  - roll: The WFRP3eRoll that is executing the effect script.\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - actorToken: The TokenDocument of the WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.\n  - targetActor: The WFRP3eActor targetted by the player performing the check.\n  - targetActorToken: The TokenDocument targetted by the player performing the check.",				"symbolAmount.label": "Symbol Amount"
+				},
 				"symbolAmount.label": "Symbol Amount",
 				"symbolType.label": "Symbol Type"
 			}

@@ -1,7 +1,7 @@
 import DicePool from "./DicePool.js";
 import CheckBuilder from "./applications/CheckBuilder.js";
 import TalentSelectorV2 from "./applications/TalentSelectorV2.js";
-import {sortTalentsByType} from "./helpers.js";
+import {capitalize, sortTalentsByType} from "./helpers.js";
 
 /**
  * The CheckHelper provides methods to prepare checks.
@@ -116,7 +116,7 @@ export default class CheckHelper
 		const characteristic = actor.system.characteristics[characteristicName],
 			  stance = actor.system.stance.current,
 			  checkData = {
-				  action,
+				  action: action.uuid,
 				  actor: actor.uuid,
 				  characteristic: {name: characteristicName, ...characteristic},
 				  face,
@@ -349,12 +349,12 @@ export default class CheckHelper
 	}
 
 	/**
-	 * Toggles an effect from a Roll, depending on the symbols remaining.
+	 * Toggles an Action Effect from a Roll, depending on the symbols remaining, and execute scripts if necessary.
 	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
 	 * @param {String} symbol The symbol of the effect to toggle.
 	 * @param {Number} index The index of the effect to toggle.
 	 */
-	static toggleEffect(chatMessageId, symbol, index)
+	static async toggleActionEffect(chatMessageId, symbol, index)
 	{
 		const chatMessage = game.messages.get(chatMessageId);
 
@@ -365,50 +365,251 @@ export default class CheckHelper
 
 		const changes = {rolls: chatMessage.rolls},
 			  roll = changes.rolls[0],
-			  toggledEffect = roll.effects[symbol][index],
-			  plural = CONFIG.WFRP3e.symbols[symbol].plural;
+			  toggledEffect = roll.effects[symbol][index];
 
-		// Toggled effect.
 		if(toggledEffect.active === true)
-			toggledEffect.active = false;
-		// Delay/Exertion + Bane effects.
-		else if(["delay", "exertion"].includes(symbol)) {
-			if(roll.remainingSymbols[plural] > 0) {
-				if(toggledEffect.symbolAmount > 1) {
-					if(roll.remainingSymbols.banes >= toggledEffect.symbolAmount - 1)
-						toggledEffect.active = true;
-					else
-						ui.notifications.warn(game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-							symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
-						}));
-				}
-				else
-					toggledEffect.active = true;
+			await CheckHelper._toggleOffActionEffect(toggledEffect, roll, symbol);
+		else {
+			try {
+				const functionName = `toggleOn${capitalize(symbol)}Effect`;
+
+				await CheckHelper[`${functionName}`]
+					? CheckHelper[`${functionName}`](toggledEffect, roll, symbol)
+					: CheckHelper._toggleOnActionEffect(toggledEffect, roll, symbol);
 			}
-			else
-				ui.notifications.warn(game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-					symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
-				}));
+			catch(error) {
+				console.error(`Something went wrong when toggling the Action effect: ${error}`);
+			}
 		}
-		// Sigmar's Comet as Success + Only one Success effect toggled at once.
-		else if(symbol === "success"
-			&& (roll.totalSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)) {
-			roll.effects.success.forEach(effect => effect.active = false);
-			toggledEffect.active = true;
-		}
-		// Sigmar's Comet as Boon.
-		else if(symbol === "boon"
-			&& (roll.remainingSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount))
-			toggledEffect.active = true;
-		// Default.
-		else if(roll.remainingSymbols[plural] >= toggledEffect.symbolAmount)
-			toggledEffect.active = true;
-		else
-			ui.notifications.warn(game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-				symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
-			}));
 
 		chatMessage.update(changes);
+	}
+
+	/**
+	 * Toggles an Action Effect off, and execute its revert script if it was an immediate Action Effect.
+	 * @param toggledEffect
+	 * @param roll
+	 */
+	static async _toggleOffActionEffect(toggledEffect, roll)
+	{
+		if(toggledEffect.immediate)
+			await CheckHelper.executeActionEffectScript(toggledEffect, toggledEffect.reverseScript, roll);
+
+		toggledEffect.active = false;
+	}
+
+	/**
+	 * Checks if an Action Effect can be toggled on, then toggles it if it does.
+	 * @param toggledEffect
+	 * @param roll
+	 * @param symbol
+	 */
+	static async _toggleOnActionEffect(toggledEffect, roll, symbol)
+	{
+		let result = "";
+
+		try {
+			const functionName = `check${capitalize(symbol)}EffectToggleable`;
+
+			result = CheckHelper[`${functionName}`]
+				? CheckHelper[`${functionName}`](toggledEffect, roll, symbol)
+				: CheckHelper.checkEffectToggleable(toggledEffect, roll, symbol);
+		}
+		catch(error) {
+			console.error(`Something went wrong when toggling the Action effect: ${error}`);
+		}
+
+		if(result === "") {
+			toggledEffect.active = true;
+
+			if(toggledEffect.immediate)
+				await CheckHelper.executeActionEffectScript(toggledEffect, toggledEffect.script, roll);
+		}
+		else
+			ui.notifications.warn(result);
+	}
+
+	/**
+	 * Checks if a success Action Effect can be toggled on, then toggles it if it does.
+	 * @param toggledEffect
+	 * @param roll
+	 * @param symbol
+	 */
+	static async toggleOnSuccessActionEffect(toggledEffect, roll, symbol = "success")
+	{
+		let result = CheckHelper.checkSuccessEffectToggleable(toggledEffect, symbol, roll);
+
+		if(result === "") {
+			roll.effects.success.forEach(effect => effect.active = false);
+			toggledEffect.active = true;
+
+			if(toggledEffect.immediate)
+				await CheckHelper.executeActionEffectScript(toggledEffect, toggledEffect.script, roll);
+		}
+		else
+			ui.notifications.warn(result);
+	}
+
+	/**
+	 * Checks if an Action Effect can be toggled.
+	 * @param {ActionEffect} toggledEffect
+	 * @param {WFRP3eRoll} roll
+	 * @param {string} symbol
+	 * @returns {string} Either returns an empty string if the effect is toggleable, or the reason if not.
+	 */
+	static checkEffectToggleable(toggledEffect, roll, symbol)
+	{
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+
+		if(roll.remainingSymbols[plural] >= toggledEffect.symbolAmount)
+			return "";
+
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+		});
+	}
+
+	/**
+	 * Checks if a boon Action Effect can be toggled, taking remaining Sigmar's comet symbols into account.
+	 * @param {ActionEffect} toggledEffect
+	 * @param {WFRP3eRoll} roll
+	 * @param {string} symbol
+	 * @returns {string} Either returns an empty string if the effect is toggleable, or the reason if not.
+	 */
+	static checkBoonEffectToggleable(toggledEffect, roll, symbol = "boon")
+	{
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+
+		if(roll.remainingSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)
+			return "";
+
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+		});
+	}
+
+	/**
+	 * Checks if a delay Action Effect can be toggled, taking remaining bane symbols into account.
+	 * @param {ActionEffect} toggledEffect
+	 * @param {WFRP3eRoll} roll
+	 * @param {string} symbol
+	 * @returns {string} Either returns an empty string if the effect is toggleable, or the reason if not.
+	 */
+	static checkDelayEffectToggleable(toggledEffect, roll, symbol = "delay")
+	{
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+
+		if(roll.remainingSymbols[plural] > 0) {
+			if(toggledEffect.symbolAmount > 1) {
+				if(roll.remainingSymbols.banes >= toggledEffect.symbolAmount - 1)
+					return "";
+				else
+					return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+						symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
+					});
+			}
+			else
+				return "";
+		}
+
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+		});
+	}
+
+	/**
+	 * Checks if an exertion Action Effect can be toggled, taking remaining bane symbols into account.
+	 * @param {ActionEffect} toggledEffect
+	 * @param {WFRP3eRoll} roll
+	 * @param {string} symbol
+	 * @returns {string} Either returns an empty string if the effect is toggleable, or the reason if not.
+	 */
+	static checkExertionEffectToggleable(toggledEffect, roll, symbol = "exertion")
+	{
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+
+		if(roll.remainingSymbols[plural] > 0) {
+			if(toggledEffect.symbolAmount > 1) {
+				if(roll.remainingSymbols.banes >= toggledEffect.symbolAmount - 1)
+					return "";
+				else
+					return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+						symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
+					});
+			}
+			else
+				return "";
+		}
+
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+		});
+	}
+
+	/**
+	 * Checks if a success Action Effect can be toggled, taking remaining Sigmar's comet symbols into account.
+	 * @param {ActionEffect} toggledEffect
+	 * @param {WFRP3eRoll} roll
+	 * @param {string} symbol
+	 * @returns {string} Either returns an empty string if the effect is toggleable, or the reason if not.
+	 */
+	static checkSuccessEffectToggleable(toggledEffect, roll, symbol = "symbol")
+	{
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+
+		if(roll.totalSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)
+			return "";
+
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+		});
+	}
+
+	/**
+	 *
+	 * @param {ActionEffect} effect
+	 * @param {string} script
+	 * @param {WFRP3eRoll} roll
+	 * @param [options]
+	 * @param {CheckData} [options.checkData]
+	 * @param {WFRP3eActor} [options.actor]
+	 * @param {CheckOutcome} [options.outcome]
+	 * @param {WFRP3eActor} [options.targetActor]
+	 * @returns {Promise<void>}
+	 */
+	static async executeActionEffectScript(effect, script, roll, options = {})
+	{
+		const checkData = options.checkData ?? roll.options.checkData,
+			  actor = options.actor ?? await fromUuid(checkData.actor),
+			  targetActor = options.targetActor
+			  	  ?? checkData.targets?.length > 0 ? await fromUuid(checkData.targets[0]) : null;
+
+		try {
+			// eslint-disable-next-line no-new-func
+			const fn = new foundry.utils.AsyncFunction(
+				"roll",
+				"checkData",
+				"actor",
+				"actorToken",
+				"outcome",
+				"targetActor",
+				"targetToken",
+				script
+			);
+			await fn.call(
+				effect,
+				roll,
+				checkData,
+				actor,
+				actor.token,
+				options.outcome,
+				targetActor,
+				targetActor ? targetActor?.token : null
+			);
+		}
+		catch(error) {
+			console.error(error);
+		}
 	}
 
 	/**
@@ -422,9 +623,7 @@ export default class CheckHelper
 			  roll = chatMessage.rolls[0],
 			  checkData = roll.options.checkData,
 			  actor = await fromUuid(checkData.actor),
-			  actorToken = actor.token,
 			  targetActor = checkData.targets?.length > 0 ? await fromUuid(checkData.targets[0]) : null,
-			  targetToken = targetActor?.token,
 			  toggledEffects = Object.values(structuredClone(roll.effects)).reduce((symbol, allEffects) => {
 				  allEffects.push(...symbol.filter(effect => effect.active));
 				  return allEffects;
@@ -449,24 +648,8 @@ export default class CheckHelper
 			  targetUpdates = {system: {}},
 			  chatMessageUpdates = {rolls: chatMessage.rolls};
 
-		for(const effect of toggledEffects) {
-			try {
-				// eslint-disable-next-line no-new-func
-				const fn = new foundry.utils.AsyncFunction(
-					"checkData",
-					"actor",
-					"actorToken",
-					"outcome",
-					"targetActor",
-					"targetToken",
-					effect.script
-				);
-				await fn.call(globalThis, checkData, actor, actorToken, outcome, targetActor, targetToken);
-			}
-			catch(error) {
-				console.error(error);
-			}
-		}
+		for(const effect of toggledEffects)
+			await CheckHelper.executeActionEffectScript(effect, effect.script, roll, {checkData, actor, outcome, targetActor})
 
 		if(targetActor) {
 			// If the attack inflicts damages, reduce them by Toughness and Soak values.
@@ -549,6 +732,9 @@ export default class CheckHelper
 
 		chatMessageUpdates.rolls[0].options.checkData.outcome = outcome;
 		chatMessage.update(chatMessageUpdates);
+
+		if(roll.totalSymbols.successes && checkData?.action)
+			await fromUuid(checkData.action).then(action => action.exhaustAction(checkData.face));
 	}
 
 	/**

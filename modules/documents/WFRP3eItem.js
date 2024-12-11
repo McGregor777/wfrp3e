@@ -111,7 +111,7 @@ export default class WFRP3eItem extends Item
 	 */
 	_getSkillDetails()
 	{
-		return game.i18n.format("SKILL.SpecialisationList", {specialisations: this.system.specialisations ?? ""});
+		return game.i18n.format("SKILL.specialisationList", {specialisations: this.system.specialisations ?? ""});
 	}
 
 	/**

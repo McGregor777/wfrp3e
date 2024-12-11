@@ -40,9 +40,19 @@
 			},
 			"effects": {
 				"description.label": "Description",
+				"immediate": {
+					"label": "Effet immédiat",
+					"hint": "Cocher si le script de l'effet doit être executé immédiatement lorsque l'effet sélectionné."
+				},
 				"label": "Effets",
-				"script.label": "Script",
-				"script.hint": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - actorToken: The TokenDocument of the WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.\n  - targetActor: The WFRP3eActor targetted by the player performing the check.\n  - actorToken: The TokenDocument targetted by the player performing the check.",
+				"reverseScript": {
+					"label": "Script inverse",
+					"hint": "This script is executed when an immediate effect is deselected.\nArguments:\n\t- this: The effect being executed.\n\t- roll: The WFRP3eRoll that is executing the effect script.\n\t- checkData: Contains various data concerning the check.\n\t- actor: The WFRP3eActor performing the check.\n\t- actorToken: The TokenDocument of the WFRP3eActor performing the check.\n\t- outcome: The sum-up of the changes to be applied to both the actor and the target.\n\t- targetActor: The WFRP3eActor targetted by the player performing the check.\n\t- targetActorToken: The TokenDocument targetted by the player performing the check."
+				},
+				"script": {
+					"label": "Script",
+					"hint": "This script is executed after an Action check has been validated, if the effect has been selected.\nIf the effect is immediate, this script is executed when the effect is selected.\nArguments:\n\t- this: The effect being executed.\n\t- roll: The WFRP3eRoll that is executing the effect script.\n\t- checkData: Contains various data concerning the check.\n\t- actor: The WFRP3eActor performing the check.\n\t- actorToken: The TokenDocument of the WFRP3eActor performing the check.\n\t- outcome: The sum-up of the changes to be applied to both the actor and the target.\n\t- targetActor: The WFRP3eActor targetted by the player performing the check.\n\t- targetActorToken: The TokenDocument targetted by the player performing the check."
+				},
 				"symbolAmount.label": "Quantité de symboles",
 				"symbolType.label": "Type de symbole"
 			}

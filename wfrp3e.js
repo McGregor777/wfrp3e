@@ -233,7 +233,7 @@ Hooks.on("renderChatMessage", (app, html, messageData) => {
 	html.find(".roll-effects:not(.disabled) .effect-toggle").click((event) => {
 		event.stopPropagation();
 
-		CheckHelper.toggleEffect(
+		CheckHelper.toggleActionEffect(
 			$(event.currentTarget).parents(".chat-message").data("messageId"),
 			event.currentTarget.dataset.symbol,
 			event.currentTarget.dataset.index
