@@ -342,9 +342,9 @@ export default class CharacterGenerator extends FormApplication
 
 		this.selectedCareer.system.current = true;
 
-		this.priest = this.selectedCareer.system.talentSockets.includes("faith");
-		this.wizard = this.selectedCareer.system.talentSockets.includes("order");
-		this.zealot = this.selectedCareer.system.talentSockets.includes("insanity");
+		this.priest = this.selectedCareer.system.sockets.find(socket => socket.type === "faith");
+		this.wizard = this.selectedCareer.system.sockets.find(socket => socket.type === "order");
+		this.zealot = this.selectedCareer.system.sockets.find(socket => socket.type === "insanity");
 
 		const rootElement = html.find('.step[data-step="creation-point-investment"] .creation-point-investment');
 

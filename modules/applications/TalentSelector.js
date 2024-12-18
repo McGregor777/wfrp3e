@@ -86,8 +86,8 @@ export default class TalentSelector extends FormApplication
 
 		talents = Object.keys(CONFIG.WFRP3e.talentTypes).reduce((sortedTalents, talentType) => {
 			if(["focus", "reputation", "tactic", "tricks"].includes(talentType)
-				&& ((!this.nonCareer && this.career.system.talentSockets.includes(talentType))
-					|| (this.nonCareer && !this.career.system.talentSockets.includes(talentType))))
+				&& ((!this.nonCareer && this.career.system.sockets.find(socket => socket.type === talentType))
+					|| (this.nonCareer && !this.career.system.sockets.find(socket => socket.type === talentType))))
 				sortedTalents[talentType] = talents.filter(talent => {
 					return !this.object.itemTypes.talent.find(ownedTalent => ownedTalent.name === talent.name)
 						&& talent.system.type === talentType;

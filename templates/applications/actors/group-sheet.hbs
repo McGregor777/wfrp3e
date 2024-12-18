@@ -192,19 +192,17 @@
 				<h4>{{localize "GROUP.TalentSockets"}}</h4>
 
 				<div class="talent-socket-button-container">
-					{{#each actor.system.talentSockets as |type ty|}}
-						<select class="sheet-form-select talent-socket"
-						        name="system.talentSockets"
-						        data-tooltip="{{localize 'GROUP.TalentSocket'}}">
-							{{selectOptions @root.talentTypes selected=type localize=true}}
+					{{#each actor.system.sockets}}
+						<select name="system.sockets.{{@key}}.type">
+							{{selectOptions @root.socketTypes selected=this.type localize=true}}
 						</select>
 					{{/each}}
 
-					<a class="talent-socket-delete">
-						<span class="fas fa-trash"></span>
+					<a class="socket-remove">
+						<span class="fas fa-minus"></span>
 					</a>
 
-					<a class="talent-socket-add">
+					<a class="socket-add">
 						<span class="fas fa-plus"></span>
 					</a>
 				</div>

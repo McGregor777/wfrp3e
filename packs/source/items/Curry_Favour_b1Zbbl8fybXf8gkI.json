@@ -23,26 +23,26 @@
             "symbolAmount": 2
           },
           {
+            "symbolAmount": 3,
             "description": "<p>As above, but gain 4 favour</p>",
-            "script": "outcome.favour += 4;",
-            "symbolAmount": 3
+            "script": "outcome.favour += 4;"
           }
         ],
         "righteousSuccess": [],
         "boon": [
           {
+            "symbolAmount": 2,
             "description": "<p>Gain 1 favour</p>",
-            "script": "outcome.favour++;",
-            "symbolAmount": 2
+            "script": "outcome.favour++;"
           }
         ],
         "sigmarsComet": [],
         "challenge": [],
         "bane": [
           {
+            "symbolAmount": 2,
             "description": "<p>Suffer 1 stress. If, after completing this action, you have more favour than twice your Willpower score, suffer 1 additional stress</p>",
-            "script": "outcome.stress++;\nif(actor.system.favour > actor.system.characteristics.willpower.rating * 2)\n\toutcome.stress++;",
-            "symbolAmount": 2
+            "script": "outcome.stress++;\nif(actor.system.favour > actor.system.characteristics.willpower.rating * 2)\n\toutcome.stress++;"
           }
         ],
         "chaosStar": [],
@@ -64,9 +64,9 @@
       "effects": {
         "success": [
           {
+            "symbolAmount": 1,
             "description": "<p>You pray to your god. Gain 2 favour</p>",
-            "script": "outcome.favour += 2;",
-            "symbolAmount": 1
+            "script": "outcome.favour += 2;"
           },
           {
             "description": "<p>As above, but gain 4 favour</p>",
@@ -82,18 +82,18 @@
         "righteousSuccess": [],
         "boon": [
           {
+            "symbolAmount": 1,
             "description": "<p>Gain 1 favour</p>",
-            "script": "outcome.favour++;",
-            "symbolAmount": 1
+            "script": "outcome.favour++;"
           }
         ],
         "sigmarsComet": [],
         "challenge": [],
         "bane": [
           {
+            "symbolAmount": 2,
             "description": "<p>Suffer 1 stress. If, after completing this action, you have more favour than twice your Willpower score, suffer 1 additional stress</p>",
-            "script": "outcome.stress++;\nif(actor.system.favour > actor.system.characteristics.willpower.rating * 2)\n\toutcome.stress++;",
-            "symbolAmount": 2
+            "script": "outcome.stress++;\nif(actor.system.favour > actor.system.characteristics.willpower.rating * 2)\n\toutcome.stress++;"
           }
         ],
         "chaosStar": [
@@ -116,15 +116,12 @@
   },
   "effects": [],
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
-  "flags": {
-    "core": {}
-  },
+  "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.1-alpha",
+    "systemVersion": "1.2",
     "coreVersion": "12.331",
     "createdTime": 1701899722323,
     "modifiedTime": 1724077954677,

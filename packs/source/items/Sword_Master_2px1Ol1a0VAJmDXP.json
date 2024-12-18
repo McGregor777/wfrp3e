@@ -4,9 +4,7 @@
   "img": "systems/wfrp3e/assets/images/careers/sword_master.webp",
   "effects": [],
   "folder": "m8G9zWMGUYpKI5Hg",
-  "flags": {
-    "core": {}
-  },
+  "flags": {},
   "system": {
     "description": "<p>One of the most impressive of the many wonders in the land of Ulthuan is the White Tower of Hoeth, a tall, slender structure that spirals high into the sky. The tower was commissioned by the Scholar King Bel-Korhadris, and designed to be a repository of knowledge and magical lore. The tower was also built in honour of Hoeth, the elven god of wisdom, and it houses his greatest shrine. The Sword Masters are the guardians of the White Tower.</p>\n<p>Sword Masters are particularly famed for their ability with their chosen weapon, the greatsword of Hoeth. These are exquisitely crafted ceremonial blades of considerable size, wielded with both hands.</p>\n<p>Sword Masters spend much of their waking hours honing their skills and practising great feats of arms. It is rumoured that the greatest Sword Masters can slice a candle in half without disturbing the flame or fight an enemy in the dark guided only by the sound of his breathing. What little time they do not dedicate to training, the Sword Masters spend in conversation with Tower lore masters, learning all they can about the art of war. The Sword Masters are not cloistered ascetics. Many also have duties that may take them away from the Tower. They provide reliable messengers for their masters, and are sometimes tasked with escorting a travelling scholar in safety or confronting threats to the high elf way of life.</p>\n<p>Sword Masters may also leave the Tower in order to seek out knowledge. These errant individuals travel in order to study the fighting techniques of other cultures. They are often eager to test their great skills on real enemies in a setting where there is no room for second best. In extreme circumstances, a Sword Master might even travel as far as the Empire in the service of a travelling scholar or to seek out previously undiscovered martial techniques.</p>\n<p><strong>Typical Trappings:</strong> A Sword Master carries a greatsword of Hoeth, a visible sign of his dedication to perfecting his art. He generally wears a sleeved scale mail coat and a tall helm.</p>\n<p><strong>Career Ability:</strong> You have a Greatsword of Hoeth. Take the Greatsword of Hoeth item card. You cannot give away, sell, lend, or trade this sword</p>",
     "advanced": false,
@@ -14,10 +12,6 @@
       "highElf"
     ],
     "traits": "Basic, Combat, Sword Master, Specialist",
-    "talentSockets": [
-      "focus",
-      "tactic"
-    ],
     "primaryCharacteristics": [
       "toughness",
       "agility"
@@ -66,14 +60,24 @@
         }
       ]
     },
-    "current": false
+    "current": false,
+    "sockets": [
+      {
+        "type": "focus",
+        "item": null
+      },
+      {
+        "type": "tactic",
+        "item": null
+      }
+    ]
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.5.1",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1699549877935,
-    "modifiedTime": 1699628778010,
+    "modifiedTime": 1734396680637,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null
@@ -81,8 +85,7 @@
   "_id": "2px1Ol1a0VAJmDXP",
   "sort": 3200000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!2px1Ol1a0VAJmDXP"
 }

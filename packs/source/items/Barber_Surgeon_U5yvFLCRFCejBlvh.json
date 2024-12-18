@@ -4,9 +4,7 @@
   "img": "systems/wfrp3e/assets/images/careers/barber_surgeon.webp",
   "effects": [],
   "folder": "m8G9zWMGUYpKI5Hg",
-  "flags": {
-    "core": {}
-  },
+  "flags": {},
   "system": {
     "description": "<p>Followers of Shallya do what they can to assuage the ills and injuries of the people of the Empire, but they can only work so many miracles. Many towns in the Empire have no access to Shallyan temples, and temple hospices in the larger cities lack the facilities to deal with everyone who comes in need of healing. There are also those who are reluctant to deal with followers of Shallya for reasons of shame, or who wish to avoid the eyes of anyone in a position of authority. They prefer the anonymous ministrations of back-alley surgeons.</p>\n<p>So despite the presence of miracle healers in the Empire, there is still a living to be made for those who take a down-to-earth approach to healing. Barbersurgeons typically have little to no formal training in medicine, but they know enough about first aid and simple remedies to treat common complaints. Barber-surgeons provide rough and ready healing to their patients, usually treating trivial complaints such as fevers, rotten teeth, cuts, and scrapes. In times of war or plague, barber-surgeons may be called upon to deal with mangled limbs or to restore unbalanced humours through bloodletting. When business is slow, they can still rely on a steady stream of customers in need of a shave and a haircut.</p>\n<p>When times are hard, barbersurgeons often take up a travelling lifestyle. For example, ships&rsquo; captains and the organisers of expeditions rarely command the resources to have a priestess of Shallya or a qualified physician as a part of their crew, and so offer contracts to barber-surgeons. Some barber-surgeons even get a taste for exploration and join parties of adventurers, who usually appreciate their medical talents.</p>\n<p><strong>Typical Trappings:</strong> A barber-surgeon will carry the tools of his trade, such as pliers, scalpels, scissors, jars containing medicinal leeches, a clyster syringe for administering enemas, a straight razor for removing beards, and a saw for removing limbs. Some considerate barber-surgeons might possess pain-killing drugs such as tincture of black lotus, but most forego the expense.</p>\n<p><strong>Career Ability:</strong> Once per session, you may add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to any First Aid or Medicine check</p>",
     "advanced": false,
@@ -15,10 +13,6 @@
       "dwarf"
     ],
     "traits": "Basic, Social, Specialist, Urban",
-    "talentSockets": [
-      "focus",
-      "reputation"
-    ],
     "primaryCharacteristics": [
       "intelligence",
       "fellowship"
@@ -67,14 +61,24 @@
         }
       ]
     },
-    "current": false
+    "current": false,
+    "sockets": [
+      {
+        "type": "focus",
+        "item": null
+      },
+      {
+        "type": "reputation",
+        "item": null
+      }
+    ]
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.5.1",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1699549809967,
-    "modifiedTime": 1699628603169,
+    "modifiedTime": 1734396570324,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null
@@ -82,8 +86,7 @@
   "_id": "U5yvFLCRFCejBlvh",
   "sort": 2200000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!U5yvFLCRFCejBlvh"
 }

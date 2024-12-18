@@ -4,15 +4,7 @@
   "img": "systems/wfrp3e/assets/images/actions/assess_the_situation.jpg",
   "effects": [],
   "folder": "ivXOnATwCKlIm1Tl",
-  "flags": {
-    "core": {},
-    "exportSource": {
-      "world": "warhammer-3e",
-      "system": "wfrp3e",
-      "coreVersion": "11.311",
-      "systemVersion": "0.5.2-alpha"
-    }
-  },
+  "flags": {},
   "system": {
     "conservative": {
       "name": "Assess The Situation",
@@ -31,9 +23,9 @@
       "effects": {
         "success": [
           {
-            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
-            "script": "outcome.fatigue--;\noutcome.stress--;",
-            "symbolAmount": 1
+            "symbolAmount": 1,
+            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
+            "script": "outcome.fatigue--;\noutcome.stress--;"
           }
         ],
         "boon": [
@@ -73,9 +65,9 @@
       "effects": {
         "success": [
           {
-            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
-            "script": "outcome.fatigue--;\noutcome.stress--;",
-            "symbolAmount": 1
+            "symbolAmount": 1,
+            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
+            "script": "outcome.fatigue--;\noutcome.stress--;"
           }
         ],
         "boon": [
@@ -103,7 +95,7 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.1-alpha",
+    "systemVersion": "1.2",
     "coreVersion": "12.331",
     "createdTime": 1696334694650,
     "modifiedTime": 1724076944243,
@@ -114,8 +106,7 @@
   "_id": "qQrjbMZeH4WjniK6",
   "sort": 1200000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!qQrjbMZeH4WjniK6"
 }

@@ -10,6 +10,7 @@ import WFRP3eActionSheet from "./modules/applications/items/WFRP3eActionSheet.js
 import WFRP3eActionSheetV2 from "./modules/applications/items/WFRP3eActionSheetV2.js";
 import WFRP3eArmourSheet from "./modules/applications/items/WFRP3eArmourSheet.js";
 import WFRP3eCareerSheet from "./modules/applications/items/WFRP3eCareerSheet.js";
+import WFRP3eCareerSheetV2 from "./modules/applications/items/WFRP3eCareerSheetV2.js";
 import WFRP3eConditionSheet from "./modules/applications/items/WFRP3eConditionSheet.js";
 import WFRP3eCriticalWoundSheet from "./modules/applications/items/WFRP3eCriticalWoundSheet.js";
 import WFRP3eDiseaseSheet from "./modules/applications/items/WFRP3eDiseaseSheet.js";
@@ -163,6 +164,7 @@ Hooks.once("init", async () => {
 	Items.registerSheet("wfrp3e", WFRP3eActionSheetV2, {label: "Action Sheet V2", types: ["action"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eArmourSheet, {label: "Armour Sheet", types: ["armour"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eCareerSheet, {label: "Career Sheet", types: ["career"], makeDefault: true})
+	Items.registerSheet("wfrp3e", WFRP3eCareerSheetV2, {label: "Career Sheet V2", types: ["career"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eConditionSheet, {label: "Condition Sheet", types: ["condition"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eCriticalWoundSheet, {label: "Critical Wound Sheet", types: ["criticalWound"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eDiseaseSheet, {label: "Disease Sheet", types: ["disease"], makeDefault: true});

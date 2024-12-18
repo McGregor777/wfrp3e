@@ -110,7 +110,7 @@ export default class WFRP3eRoll extends Roll
 
 		await this._evaluate({minimize, maximize, allowStrings, allowInteractive});
 
-		if(this.options.checkData.action)
+		if(this.options.checkData?.action)
 			return this._prepareEffects();
 
 		return this;

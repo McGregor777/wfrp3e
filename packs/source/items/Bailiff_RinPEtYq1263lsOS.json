@@ -10,14 +10,13 @@
   "effects": [],
   "sort": 0,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.8.1-alpha",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1710869261687,
     "modifiedTime": 1710871021037,
     "lastModifiedBy": "Bq3CTOvANoOneedB",

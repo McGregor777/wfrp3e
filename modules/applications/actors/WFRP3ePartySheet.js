@@ -18,7 +18,7 @@ export default class WFRP3ePartySheet extends WFRP3eActorSheet
 	{
 		return {
 			...super.getData(),
-			talentTypes: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"}
+			socketTypes: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"}
 		};
 	}
 
@@ -37,8 +37,8 @@ export default class WFRP3ePartySheet extends WFRP3eActorSheet
 			.click(this._onFortunePoolClick.bind(this, 1))
 			.contextmenu(this._onFortunePoolClick.bind(this, -1));
 
-		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .talent-socket-add").click(this._onTalentSocketAdd.bind(this));
-		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .talent-socket-delete").click(this._onTalentSocketDelete.bind(this));
+		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .socket-add").click(this._onSocketAdd.bind(this));
+		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .socket-remove").click(this._onSocketRemove.bind(this));
 	}
 
 	/** @inheritDoc */
@@ -144,22 +144,22 @@ export default class WFRP3ePartySheet extends WFRP3eActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations clicks on a Party talent socket addition button.
+	 * Performs follow-up operations clicks on a Party socket addition button.
 	 * @param event {MouseEvent}
 	 * @private
 	 */
-	async _onTalentSocketAdd(event)
+	async _onSocketAdd(event)
 	{
-		this.actor.addNewTalentSocket();
+		this.actor.addNewSocket();
 	}
 
 	/**
-	 * Performs follow-up operations clicks on a Party talent socket removal button.
+	 * Performs follow-up operations clicks on a Party socket removal button.
 	 * @param event {MouseEvent}
 	 * @private
 	 */
-	async _onTalentSocketDelete(event)
+	async _onSocketRemove(event)
 	{
-		this.actor.removeLastTalentSocket();
+		this.actor.removeLastSocket();
 	}
 }

@@ -975,6 +975,7 @@ export const WFRP3e = {
 		exotic: "TRAPPING.RARITY.Exotic"
 	},
 	scriptTypes: {
+		onCareerSocket: "SCRIPT.TYPES.onCareerSocket",
 		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
 		onCheckRoll: "SCRIPT.TYPES.onCheckRoll",
 		onCheckTrigger: "SCRIPT.TYPES.onCheckTrigger",

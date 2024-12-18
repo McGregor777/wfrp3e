@@ -28,7 +28,7 @@ export default class WFRP3eCharacterSheet extends WFRP3eActorSheet
 
 		return {
 			...super.getData(),
-			talentSocketsByType: this._buildTalentSocketsList()
+			socketsByType: this._buildSocketList()
 		};
 	}
 
@@ -47,61 +47,75 @@ export default class WFRP3eCharacterSheet extends WFRP3eActorSheet
 	 * Builds up the list of Talent Sockets available for the Actor by Talent type.
 	 * @private
 	 */
-	_buildTalentSocketsList()
+	_buildSocketList()
 	{
-		let talentSocketsByType = {};
+		const socketsByType = Object.fromEntries(
+			["any", ...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"].map(key => [key, {}])
+		);
 
-		["any", ...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"].forEach(talentType => {
-			talentSocketsByType[talentType] = {};
+		this.actor.system.currentCareer?.system.sockets.forEach((socket, index) => {
+			// Find a potential Item that would be socketed in that socket.
+			const item = this.actor.items.search({
+				filters: [{
+					field: "system.socket",
+					operator: "is_empty",
+					negate: true
+				}, {
+					field: "system.socket",
+					operator: "equals",
+					negate: false,
+					value: `${this.actor.system.currentCareer.uuid}_${index}`
+				}]
+			})[0];
+
+			socketsByType[socket.type][this.actor.system.currentCareer.uuid + "_" + index] =
+				this.actor.system.currentCareer.name + " - " + (item
+					? game.i18n.format("TALENT.SOCKET.taken", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
+						talent: item.name
+					})
+					: game.i18n.format("TALENT.SOCKET.available", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
+					}));
 		});
 
-		if(this.actor.system.currentCareer) {
-			this.actor.system.currentCareer.system.talentSockets.forEach((talentSocketName, index) => {
-				// Find a potential Talent that would be socketed in that Talent Socket.
-				const talent = this.actor.itemTypes.talent.find(talent => talent.system.talentSocket === "career_" + this.actor.system.currentCareer._id + "_" + index);
+		this.actor.system.currentParty?.system.sockets.forEach((socket, index) => {
+			let item = null;
 
-				talentSocketsByType[talentSocketName]["career_" + this.actor.system.currentCareer._id + "_" + index] =
-					this.actor.system.currentCareer.name + (talent
-						? " - " + game.i18n.format("TALENT.SOCKET.taken", {
-								type: game.i18n.localize(`TALENT.TYPES.${talentSocketName}`),
-								talent: talent.name
-							})
-						: " - " + game.i18n.format("TALENT.SOCKET.available", {
-								type: game.i18n.localize(`TALENT.TYPES.${talentSocketName}`)
-							}));
-			});
-		}
+			for(const member of this.actor.system.currentParty.memberActors) {
+				// Find a potential Item that would be socketed in that socket.
+				item = member.items.search({
+					filters: [{
+						field: "system.socket",
+						operator: "is_empty",
+						negate: true
+					}, {
+						field: "system.socket",
+						operator: "equals",
+						negate: false,
+						value: `${this.actor.system.currentParty.uuid}_${index}`
+					}]
+				})[0];
 
-		if(this.actor.system.currentParty) {
-			this.actor.system.currentParty.system.talentSockets.forEach((talentSocketName, index) => {
-				let talent = null;
+				if(item)
+					break;
+			}
 
-				for(const member of this.actor.system.currentParty.memberActors) {
-					// Find a potential Talent that would be socketed in that Talent Socket.
-					talent = member.itemTypes.talent.find(talent => talent.system.talentSocket === "party_" + this.actor.system.currentParty._id + "_" + index);
+			socketsByType[socket.type][this.actor.system.currentParty.uuid + "_" + index] =
+				this.actor.system.currentParty.name + " - " + (item
+					? game.i18n.format("TALENT.SOCKET.taken", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
+						talent: item.name
+					})
+					: game.i18n.format("TALENT.SOCKET.available", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
+					}));
+		});
 
-					if(talent)
-						break;
-				}
+		for(const itemType of Object.keys(CONFIG.WFRP3e.talentTypes))
+			Object.assign(socketsByType[itemType], socketsByType["any"]);
 
-				talentSocketsByType[talentSocketName]["party_" + this.actor.system.currentParty._id + "_" + index] =
-					this.actor.system.currentParty.name + (talent
-						? " - " +
-							game.i18n.format("TALENT.SOCKET.taken", {
-								type: game.i18n.localize(`TALENT.TYPES.${talentSocketName}`),
-								talent: talent.name
-							})
-						: " - " +
-						game.i18n.format("TALENT.SOCKET.available", {
-							type: game.i18n.localize(`TALENT.TYPES.${talentSocketName}`)
-						}));
-			});
-		}
-
-		for(const talentType of Object.keys(CONFIG.WFRP3e.talentTypes))
-			Object.assign(talentSocketsByType[talentType], talentSocketsByType["any"]);
-
-		return talentSocketsByType;
+		return socketsByType;
 	}
 
 	/**

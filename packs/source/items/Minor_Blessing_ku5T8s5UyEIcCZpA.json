@@ -59,16 +59,13 @@
   },
   "effects": [],
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
-  "flags": {
-    "core": {}
-  },
+  "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.6.1-alpha",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1701907097402,
     "modifiedTime": 1701907564524,
     "lastModifiedBy": "Bq3CTOvANoOneedB",

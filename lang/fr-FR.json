@@ -114,51 +114,70 @@
 	"ATTRIBUTE.ABBREVIATION.Cunning": "As",
 	"ATTRIBUTE.ABBREVIATION.Expertise": "Ad",
 
-	"CAREER.ActionAdvanceOptions": "Promotions d'Action possibles",
-	"CAREER.AdvancedCareer": "Carrière Avancée",
-	"CAREER.AdvanceOptions": "Options d'Avancement",
-	"CAREER.CareerAptitudes": "Aptitudes de Carrière",
-	"CAREER.CareerCompletionAdvances": "Améliorations de Fin de Carrière",
-	"CAREER.CareerSkills": "Compétences de Carrière",
-	"CAREER.ConservativeAdvanceOptions": "Promotions de Prudence possibles",
-	"CAREER.CurrentCareer": "Carrière en cours",
-	"CAREER.FortuneAdvanceOptions": "Promotions de Fortune possibles",
-	"CAREER.GeneralCareerAdvances": "Améliorations de Carrière",
-	"CAREER.Header": "En-tête",
-	"CAREER.PrimaryCharacteristics": "Caractéristiques Primaires",
-	"CAREER.RaceRestrictions": "Restrictions de Race",
-	"CAREER.SettingInformation": "Description",
-	"CAREER.SkillAdvanceOptions": "Promotions de Compétence possibles",
-	"CAREER.StartingConservativeSegments": "Segments de Prudence de départ",
-	"CAREER.StartingRecklessSegments": "Segments de Témérité de départ",
-	"CAREER.Summary": "Résumé",
-	"CAREER.TalentAdvanceOptions": "Promotions Talent possibles",
-	"CAREER.TalentSockets": "Emplacements de Talent",
-	"CAREER.Traits": "Traits",
-	"CAREER.RecklessAdvanceOptions": "Promotions de Témérité possibles",
-	"CAREER.WoundAdvanceOptions": "Promotions de Point de Blessure possibles",
-	"CAREER.NonCareerAdvances": "Améliorations Extracurriculaires",
-	"CAREER.ADVANCE.Action": "Action",
-	"CAREER.ADVANCE.CareerTransition": "Transition de Carrière",
-	"CAREER.ADVANCE.DedicationBonus": "Bonus de Fin de Carrière",
-	"CAREER.ADVANCE.Open": "Amélioration Libre de Carrière",
-	"CAREER.ADVANCE.Talent": "Talent",
-	"CAREER.ADVANCE.Skill": "Formation ou Spécialisation",
-	"CAREER.ADVANCE.Type": "Amélioration choisie",
-	"CAREER.ADVANCE.Wound": "Plafond de Blessure",
-	"CAREER.SHEET.Action": "Action",
-	"CAREER.SHEET.AdvancedCareer": "Carrière Avancée",
-	"CAREER.SHEET.Advances": "Promotions",
-	"CAREER.SHEET.BasicCareer": "Carrière de Base",
-	"CAREER.SHEET.CareerSkills": "Compétences de Carrière",
-	"CAREER.SHEET.Conservative": "Prudence",
-	"CAREER.SHEET.Fortune": "Fortune",
-	"CAREER.SHEET.OneRaceOnly": "{race} seulement",
-	"CAREER.SHEET.PrimaryCharacteristics": "Caractéristiques Primaires",
-	"CAREER.SHEET.Skill": "Compétence",
-	"CAREER.SHEET.Talent": "Talent",
-	"CAREER.SHEET.Reckless": "Témérité",
-	"CAREER.SHEET.Wound": "Point de Blessure",
+	"CAREER": {
+		"ACTIONS": {
+			"update": "Enregistrer la carrière"
+		},
+		"FIELDS": {
+			"advanced.label": "Carrière Avancée",
+			"advanceOptions": {
+				"action.label": "Promotions d'Action possibles",
+				"conservative.label": "Promotions de Prudence possibles",
+				"fortune.label": "Promotions de Fortune possibles",
+				"reckless.label": "Promotions de Témérité possibles",
+				"skill.label": "Promotions de Compétence possibles",
+				"talent.label": "Promotions Talent possibles",
+				"wound.label": "Promotions de Point de Blessure possibles"
+			},
+			"advances": {
+				"action": "Action",
+				"careerCompletion": "Améliorations de Fin de Carrière",
+				"careerTransition": "Transition de Carrière",
+				"dedicationBonus": "Bonus de Fin de Carrière",
+				"generalCareer": "Améliorations de Carrière",
+				"nonCareer": "Améliorations Extracurriculaires",
+				"open": "Amélioration Libre de Carrière",
+				"skill": "Formation ou Spécialisation",
+				"talent": "Talent",
+				"type": "Amélioration choisie",
+				"wound": "Plafond de Blessure"
+			},
+			"careerSkills.label": "Compétences de Carrière",
+			"current.label": "Carrière en cours",
+			"description.label": "Description",
+			"primaryCharacteristics.label": "Caractéristiques Primaires",
+			"raceRestrictions.label": "Restrictions de Race",
+			"sockets.label": "Emplacements de Talent",
+			"startingStance" : {
+				"conservativeSegments.label": "Segments de Prudence de départ",
+				"recklessSegments.label": "Segments de Témérité de départ"
+			},
+			"summary.label": "Résumé",
+			"traits.label": "Traits"
+		},
+		"SHEET": {
+			"action": "Action",
+			"advancedCareer": "Carrière Avancée",
+			"advances": "Promotions",
+			"basicCareer": "Carrière de Base",
+			"careerSkills": "Compétences de Carrière",
+			"conservative": "Prudence",
+			"fortune": "Fortune",
+			"oneRaceOnly": "{race} seulement",
+			"primaryCharacteristics": "Caractéristiques Primaires",
+			"skill": "Compétence",
+			"talent": "Talent",
+			"reckless": "Témérité",
+			"wound": "Point de Blessure"
+		},
+		"TABS": {
+			"advanceOptions": "Options d'Avancement",
+			"aptitudes": "Aptitudes de Carrière",
+			"header": "En-tête",
+			"main": "Principal",
+			"setting": "Description"
+		}
+	},
 
 	"CAREERSELECTOR.ChooseANewCareer": "Choisissez une nouvelle carrière",
 	"CAREERSELECTOR.ExperienceCost": "{cost} PE",
@@ -526,16 +545,7 @@
 
 	"SCRIPT": {
 		"TYPES": {
-			"onCheckPreparation": "Préparation d'un test",
-			"onCheckRoll": "Réalisation d'un test",
-			"onCheckTrigger": "Déclenchement manuel après un test",
-			"onTargettingCheckPreparation": "Préparation d'un test ciblant",
-			"onTrigger": "Déclenchement manuel"
-		}
-	},
-
-	"SCRIPT": {
-		"TYPES": {
+			"onCareerSocket": "Placement sur un emplacement de talent de carrière",
 			"onCheckPreparation": "Préparation d'un test",
 			"onCheckRoll": "Réalisation d'un test",
 			"onCheckTrigger": "Déclenchement manuel après un test",

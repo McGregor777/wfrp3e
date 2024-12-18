@@ -8,16 +8,16 @@
 	</header>
 	
 	<nav class="sheet-tabs tabs career-sheet-tabs" data-group="primary">
-		<a class="conservative-tab-link" data-tab="header">{{localize 'CAREER.Header'}}</a>
-		<a class="reckless-tab-link" data-tab="aptitudes">{{localize 'CAREER.CareerAptitudes'}}</a>
-		<a class="reckless-tab-link" data-tab="advances">{{localize 'CAREER.AdvanceOptions'}}</a>
-		<a class="reckless-tab-link" data-tab="setting">{{localize 'CAREER.SettingInformation'}}</a>
+		<a data-tab="header">{{localize "CAREER.TABS.header"}}</a>
+		<a data-tab="aptitudes">{{localize "CAREER.TABS.aptitudes"}}</a>
+		<a data-tab="advances">{{localize "CAREER.TABS.advanceOptions"}}</a>
+		<a data-tab="setting">{{localize "CAREER.TABS.setting"}}</a>
 	</nav>
 
 	<section class="sheet-body career-sheet-body">
 		<div class="tab tab-container header-tab-link" data-group="primary" data-tab="header">
 			<label>
-				{{localize 'CAREER.AdvancedCareer'}}
+				{{localize "CAREER.FIELDS.advanced.label"}}
 
 				<input name="system.advanced"
 				       value="{{item.system.advanced}}"
@@ -25,10 +25,15 @@
 			</label>
 
 			<label>
-				{{localize 'CAREER.RaceRestrictions'}}
+				{{localize "CAREER.FIELDS.raceRestrictions.label"}}
 
-				<a class="race-restriction-remove"><span class="fas fa-minus"></span></a>
-				<a class="race-restriction-add"><span class="fas fa-plus"></span></a>
+				<a class="race-restriction-remove">
+					<span class="fas fa-minus"></span>
+				</a>
+
+				<a class="race-restriction-add">
+					<span class="fas fa-plus"></span>
+				</a>
 
 				<div>
 					{{#each item.system.raceRestrictions}}
@@ -40,7 +45,7 @@
 			</label>
 
 			<label>
-				{{localize 'CAREER.Traits'}}
+				{{localize "CAREER.FIELDS.traits.label"}}
 
 				<input name="system.traits"
 				       value="{{item.system.traits}}"
@@ -51,56 +56,61 @@
 
 		<div class="tab tab-container aptitudes" data-group="primary" data-tab="aptitudes">
 			<label>
-				{{localize 'CAREER.TalentSockets'}}
+				{{localize "CAREER.FIELDS.sockets.label"}}
 
-				<a class="talent-socket-remove"><span class="fas fa-minus"></span></a>
-				<a class="talent-socket-add"><span class="fas fa-plus"></span></a>
+				<a class="socket-remove">
+					<span class="fas fa-minus"></span>
+				</a>
+
+				<a class="socket-add">
+					<span class="fas fa-plus"></span>
+				</a>
 
 				<div>
-					{{#each item.system.talentSockets as |type ty|}}
-						<select name="system.talentSockets">
-							{{selectOptions @root.talentTypes selected=type localize=true}}
+					{{#each item.system.sockets}}
+						<select name="system.sockets.{{@key}}.type">
+							{{selectOptions @root.socketTypes selected=this.type localize=true}}
 						</select>
 					{{/each}}
 				</div>
 			</label>
 
 			<label>
-				{{localize 'CAREER.PrimaryCharacteristics'}}
+				{{localize "CAREER.FIELDS.primaryCharacteristics.label"}}
 
 				{{#each item.system.primaryCharacteristics as |characteristic char|}}
-					<select name="system.primaryCharacteristics" data-dtype="String">
+					<select name="system.primaryCharacteristics">
 						{{selectOptions ../characteristics selected=characteristic labelAttr="name" localize=true}}
 					</select>
 				{{/each}}
 			</label>
 
 			<label>
-				{{localize 'CAREER.CareerSkills'}}
+				{{localize "CAREER.FIELDS.careerSkills.label"}}
 
 				<input name="system.careerSkills"
 				       value="{{item.system.careerSkills}}"
 				       type="text"
-				       placeholder="{{localize 'CAREER.CareerSkills'}}" />
+				       placeholder="{{localize 'CAREER.FIELDS.careerSkills.label'}}" />
 			</label>
 
 			<div class="form-div">
 				<label>
-					{{localize 'CAREER.StartingConservativeSegments'}}
+					{{localize "CAREER.FIELDS.startingStance.conservativeSegments.label"}}
 
 					<input name="system.startingStance.conservativeSegments"
 					       value="{{item.system.startingStance.conservativeSegments}}"
 					       type="number"
-					       placeholder="{{localize 'CAREER.StartingConservativeSegments'}}" />
+					       placeholder="{{localize 'CAREER.FIELDS.startingStance.conservativeSegments.label'}}" />
 				</label>
 
 				<label>
-					{{localize 'CAREER.StartingRecklessSegments'}}
+					{{localize "CAREER.FIELDS.startingStance.recklessSegments.label"}}
 
 					<input name="system.startingStance.recklessSegments"
 					       type="number"
 					       value="{{item.system.startingStance.recklessSegments}}"
-					       placeholder="{{localize 'CAREER.StartingRecklessSegments'}}" />
+					       placeholder="{{localize 'CAREER.FIELDS.startingStance.recklessSegments.label'}}" />
 				</label>
 			</div>
 		</div>
@@ -108,86 +118,86 @@
 		<div class="tab tab-container advances-tab-link" data-group="primary" data-tab="advances">
 			<div class="form-div">
 				<label>
-					{{localize 'CAREER.ActionAdvanceOptions'}}
+					{{localize "CAREER.FIELDS.advanceOptions.action.label"}}
 
 					<input name="system.advanceOptions.action"
 					       value="{{item.system.advanceOptions.action}}"
 					       type="number"
-					       placeholder="{{localize 'CAREER.ActionAdvanceOptions'}}" />
+					       placeholder="{{localize 'CAREER.FIELDS.advanceOptions.action.label'}}" />
 				</label>
 
 				<label>
-					{{localize 'CAREER.TalentAdvanceOptions'}}
+					{{localize "CAREER.FIELDS.advanceOptions.talent.label"}}
 
 					<input name="system.advanceOptions.talent"
 					       value="{{item.system.advanceOptions.talent}}"
 					       type="number"
-					       placeholder="{{localize 'CAREER.TalentAdvanceOptions'}}" />
+					       placeholder="{{localize 'CAREER.FIELDS.advanceOptions.talent.label'}}" />
 				</label>
 			</div>
 
 			<div class="form-div">
 				<label>
-					{{localize 'CAREER.SkillAdvanceOptions'}}
+					{{localize "CAREER.FIELDS.advanceOptions.skill.label"}}
 
 					<input name="system.advanceOptions.skill"
 					       value="{{item.system.advanceOptions.skill}}"
 					       type="number"
-					       placeholder="{{localize 'CAREER.SkillAdvanceOptions'}}" />
+					       placeholder="{{localize 'CAREER.FIELDS.advanceOptions.skill.label'}}" />
 				</label>
 
 				<label>
-					{{localize 'CAREER.FortuneAdvanceOptions'}}
+					{{localize "CAREER.FIELDS.advanceOptions.fortune.label"}}
 
 					<input name="system.advanceOptions.fortune"
 					       value="{{item.system.advanceOptions.fortune}}"
 					       type="number"
-					       placeholder="{{localize 'CAREER.FortuneAdvanceOptions'}}" />
+					       placeholder="{{localize 'CAREER.FIELDS.advanceOptions.fortune.label'}}" />
 				</label>
 			</div>
 
 			<div class="form-div">
 				<label>
-					{{localize 'CAREER.ConservativeAdvanceOptions'}}
+					{{localize "CAREER.FIELDS.advanceOptions.conservative.label"}}
 
 					<input name="system.advanceOptions.conservative"
 					       value="{{item.system.advanceOptions.conservative}}"
 					       type="number"
-					       placeholder="{{localize 'CAREER.ConservativeAdvanceOptions'}}" />
+					       placeholder="{{localize 'CAREER.FIELDS.advanceOptions.conservative.label'}}" />
 				</label>
 
 				<label>
-					{{localize 'CAREER.RecklessAdvanceOptions'}}
+					{{localize "CAREER.FIELDS.advanceOptions.reckless.label"}}
 
 					<input name="system.advanceOptions.reckless"
 					       value="{{item.system.advanceOptions.reckless}}"
 					       type="number"
-					       placeholder="{{localize 'CAREER.RecklessAdvanceOptions'}}" />
+					       placeholder="{{localize 'CAREER.FIELDS.advanceOptions.reckless.label'}}" />
 				</label>
 			</div>
 
 			<label>
-				{{localize 'CAREER.WoundAdvanceOptions'}}
+				{{localize "CAREER.FIELDS.advanceOptions.wound.label"}}
 
 				<input name="system.advanceOptions.wound"
 				       value="{{item.system.advanceOptions.wound}}"
 				       type="number"
-				       placeholder="{{localize 'CAREER.WoundsAdvanceOptions'}}" />
+				       placeholder="{{localize 'CAREER.FIELDS.advanceOptions.wound.label'}}" />
 			</label>
 		</div>
 
 		<div class="tab tab-container setting-tab-link" data-group="primary" data-tab="setting">
 			<label>
-				{{localize 'CAREER.Summary'}}
+				{{localize "CAREER.FIELDS.summary.label"}}
 
 				<input name="system.summary"
 				       value="{{item.system.summary}}"
 				       type="text"
-				       placeholder="{{localize 'CAREER.Summary'}}" />
+				       placeholder="{{localize 'CAREER.FIELDS.summary.label'}}" />
 			</label>
 
 			<label class="editor-container">
-				{{localize 'CAREER.SettingInformation'}}
+				{{localize "CAREER.FIELDS.description.label"}}
 				{{editor item.system.description target='system.description' button=true owner=owner editable=editable}}
 			</label>
 		</div>

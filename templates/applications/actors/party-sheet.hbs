@@ -104,16 +104,20 @@
 	</div>
 
 	<footer class="sheet-footer party-sheet-footer">
-		{{#each actor.system.talentSockets as |type ty|}}
-			<select name="system.talentSockets"
-			        data-tooltip="{{localize 'PARTY.TalentSocket'}}">
-				{{selectOptions @root.talentTypes selected=type localize=true}}
+		{{#each actor.system.sockets}}
+			<select name="system.sockets.{{@key}}.type">
+				{{selectOptions @root.socketTypes selected=this.type localize=true}}
 			</select>
 		{{/each}}
 		
 		<div class="party-sheet-talent-socket-button-container">
-			<a class="talent-socket-delete"><span class="fas fa-trash"></span></a>
-			<a class="talent-socket-add"><span class="fas fa-plus"></span></a>
+			<a class="socket-remove">
+				<span class="fas fa-minus"></span>
+			</a>
+
+			<a class="socket-add">
+				<span class="fas fa-plus"></span>
+			</a>
 		</div>
 	</footer>
 </form>

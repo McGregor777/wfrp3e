@@ -1,9 +1,9 @@
 <div class="career-partial item" data-item-id="{{career._id}}">
-		{{>systems/wfrp3e/templates/partials/item-career-sheet.hbs career=career}}
+	{{>systems/wfrp3e/templates/partials/item-career-sheet.hbs career=career}}
 
 	<div class="career-advancement">
 		<div>
-			<h4>{{localize "CAREER.GeneralCareerAdvances"}}</h4>
+			<h4>{{localize "CAREER.FIELDS.advances.generalCareer"}}</h4>
 
 			<div class="career-form-div">
 				<input class="advance-checkbox"
@@ -12,7 +12,7 @@
 					{{#if career.system.advances.action}} checked{{/if}} />
 
 				<label class="form-label">
-					{{localize "CAREER.ADVANCE.Action"}}:
+					{{localize "CAREER.FIELDS.advances.action"}}:
 
 					<input class="item-input"
 					       data-path="system.advances.action"
@@ -28,7 +28,7 @@
 					{{#if career.system.advances.talent}} checked{{/if}} />
 
 				<label class="form-label">
-					{{localize "CAREER.ADVANCE.Talent"}}:
+					{{localize "CAREER.FIELDS.advances.talent"}}:
 
 					<input class="item-input"
 					       data-path="system.advances.talent"
@@ -44,7 +44,7 @@
 					{{#if career.system.advances.skill}} checked{{/if}} />
 
 				<label class="form-label">
-					{{localize "CAREER.ADVANCE.Skill"}}:
+					{{localize "CAREER.FIELDS.advances.skill"}}:
 
 					<input class="item-input"
 					       data-path="system.advances.skill"
@@ -60,7 +60,7 @@
 					{{#if career.system.advances.wound}} checked{{/if}} />
 
 				<label class="form-label">
-					{{localize "CAREER.ADVANCE.Wound"}}:
+					{{localize "CAREER.FIELDS.advances.wound"}}:
 
 					<input class="item-input"
 					       data-path="system.advances.wound"
@@ -77,7 +77,7 @@
 						{{#if openAdvance}} checked{{/if}} />
 
 					<label class="form-label">
-						{{localize "CAREER.ADVANCE.Open"}}:
+						{{localize "CAREER.FIELDS.advances.open"}}:
 
 						<input class="item-input"
 						       value="{{openAdvance}}"
@@ -90,7 +90,7 @@
 		</div>
 
 		<div>
-			<h4>{{localize "CAREER.CareerCompletionAdvances"}}</h4>
+			<h4>{{localize "CAREER.FIELDS.advances.careerCompletion"}}</h4>
 
 			<div class="career-form-div">
 				{{#for 1 6 1}}
@@ -103,7 +103,7 @@
 				{{/for}}
 
 				<label class="form-label">
-					{{localize "CAREER.ADVANCE.CareerTransition"}}:
+					{{localize "CAREER.FIELDS.advances.careerTransition"}}:
 
 					<input class="item-input"
 					       data-path="system.advances.careerTransition.newCareer"
@@ -120,7 +120,7 @@
 					{{#if career.system.advances.dedicationBonus}} checked{{/if}} />
 
 				<label class="form-label">
-					{{localize "CAREER.ADVANCE.DedicationBonus"}}
+					{{localize "CAREER.FIELDS.advances.dedicationBonus"}}
 
 					<input class="item-input"
 					       data-path="system.advances.dedicationBonus"
@@ -131,7 +131,7 @@
 		</div>
 
 		<div>
-			<h4>{{localize "CAREER.NonCareerAdvances"}}</h4>
+			<h4>{{localize "CAREER.FIELDS.advances.nonCareer"}}</h4>
 
 			{{#each career.system.advances.nonCareer as |nonCareerAdvance nca|}}
 				<div class="career-form-div">
@@ -147,7 +147,7 @@
 					{{/for}}
 
 					<label class="form-label">
-						{{localize "CAREER.ADVANCE.Type"}}:
+						{{localize "CAREER.FIELDS.advances.type"}}:
 
 						<input class="item-input"
 						       data-path="system.advances.nonCareer"

@@ -4,9 +4,7 @@
   "img": "systems/wfrp3e/assets/images/careers/smuggler.webp",
   "effects": [],
   "folder": "m8G9zWMGUYpKI5Hg",
-  "flags": {
-    "core": {}
-  },
+  "flags": {},
   "system": {
     "description": "<p>The Empire is the wealthiest nation in the Old World. All manner of trade is done in the cities of the Empire, and businesses thrive &ndash; from pedlars hawking their wares to conglomerates who enjoy a complete monopoly in their town or city. The Imperial authorities and heads of the Empire&rsquo;s guilds keep a close eye on such commercial activity. They impose taxes on cargos that move through their warehouses and restrict or ban imports and exports of certain goods.</p>\n<p>Many people in the Empire resent the imposition of having to pay taxes or being told that they cannot buy a bottle of Bretonnian brandy whenever they feel like it. Such people may well deal in smuggled goods. Smugglers are thieves with some knowledge of legitimate commercial practices and how to get around them. Many smugglers simply steal from cargo-laden barges and carts, then sell to a likely customer or fence in the nearest town. Other smugglers act more like genuine traders, picking up a cargo legitimately in one town and then sneaking it past the bailiffs at the other end of their journey.</p>\n<p>To guilds, local authorities, and legitimate traders, smugglers are notorious criminals whose activities jeopardise profits. Smugglers face harsh punishments such as incarceration, branding or execution if caught. Most smugglers are hardened criminals who are not above acts of violence or even murder to avoid being caught. Many smugglers deal in highly illegal cargos, such as those containing addictive drugs, body parts or even darker, more nefarious goods. Smugglers keep on the move to find new opportunities and to avoid the attention of the authorities. They sometimes join bands of adventurers where their combined skills of commercial acumen and underworld savvy often come in useful.</p>\n<p><strong>Typical Trappings:</strong> A smuggler usually wears a leather jack to keep off the weather and help protect him should a scuffle break out. Most smugglers have access to a small rowboat or a horse and cart. Smugglers work mainly at night, so they often carry some form of illumination, such as a lantern or some torches.</p>\n<p><strong>Career Ability:</strong> Your Skulduggery checks gain:</p>\n<ul>\n<li>♢♢ Add 1 fortune to the party fortune pool</li>\n</ul>",
     "advanced": false,
@@ -15,10 +13,6 @@
       "dwarf"
     ],
     "traits": "Basic, Rogue, Specialist, Urban",
-    "talentSockets": [
-      "reputation",
-      "reputation"
-    ],
     "primaryCharacteristics": [
       "toughness",
       "fellowship"
@@ -67,14 +61,24 @@
         }
       ]
     },
-    "current": false
+    "current": false,
+    "sockets": [
+      {
+        "type": "reputation",
+        "item": null
+      },
+      {
+        "type": "reputation",
+        "item": null
+      }
+    ]
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.8.1-alpha",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1699549873531,
-    "modifiedTime": 1710870254762,
+    "modifiedTime": 1734396667436,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null
@@ -82,8 +86,7 @@
   "_id": "2M3PQd0PYPeXKzrr",
   "sort": 2900000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!2M3PQd0PYPeXKzrr"
 }

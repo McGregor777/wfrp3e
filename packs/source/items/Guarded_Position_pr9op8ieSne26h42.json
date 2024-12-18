@@ -4,15 +4,7 @@
   "img": "icons/skills/melee/shield-block-gray-orange.webp",
   "effects": [],
   "folder": "ivXOnATwCKlIm1Tl",
-  "flags": {
-    "core": {},
-    "exportSource": {
-      "world": "warhammer-3e",
-      "system": "wfrp3e",
-      "coreVersion": "11.311",
-      "systemVersion": "0.5.2-alpha"
-    }
-  },
+  "flags": {},
   "system": {
     "conservative": {
       "name": "Guarded Position",
@@ -109,8 +101,8 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.6.1-alpha",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1696334694650,
     "modifiedTime": 1701883626467,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
@@ -120,8 +112,7 @@
   "_id": "pr9op8ieSne26h42",
   "sort": 800000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!pr9op8ieSne26h42"
 }

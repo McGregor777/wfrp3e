@@ -115,51 +115,70 @@
 	"ATTRIBUTE.ABBREVIATION.Cunning": "C",
 	"ATTRIBUTE.ABBREVIATION.Expertise": "E",
 
-	"CAREER.ActionAdvanceOptions": "Action Advance Options",
-	"CAREER.AdvancedCareer": "Advanced Career",
-	"CAREER.AdvanceOptions": "Advance Options",
-	"CAREER.CareerAptitudes": "Career Aptitudes",
-	"CAREER.CareerCompletionAdvances": "Career Completion Advances",
-	"CAREER.CareerSkills": "Career Skills",
-	"CAREER.ConservativeAdvanceOptions": "Conservative Advance Options",
-	"CAREER.CurrentCareer": "Current Career",
-	"CAREER.FortuneAdvanceOptions": "Fortune Advance Options",
-	"CAREER.GeneralCareerAdvances": "General Career Advances",
-	"CAREER.Header": "Header",
-	"CAREER.PrimaryCharacteristics": "Primary Characteristics",
-	"CAREER.RaceRestrictions": "Race Restrictions",
-	"CAREER.SettingInformation": "Setting Information",
-	"CAREER.SkillAdvanceOptions": "Skill Advance Options",
-	"CAREER.StartingConservativeSegments": "Starting Conservative Segments",
-	"CAREER.StartingRecklessSegments": "Starting Reckless Segments",
-	"CAREER.Summary": "Summary",
-	"CAREER.TalentAdvanceOptions": "Talent Advance Options",
-	"CAREER.TalentSockets": "Talent Sockets",
-	"CAREER.Traits": "Traits",
-	"CAREER.RecklessAdvanceOptions": "Reckless Advance Options",
-	"CAREER.WoundAdvanceOptions": "Wound Advance Options",
-	"CAREER.NonCareerAdvances": "Non Career Advances",
-	"CAREER.ADVANCE.Action": "Action",
-	"CAREER.ADVANCE.CareerTransition": "Career Transition",
-	"CAREER.ADVANCE.DedicationBonus": "Dedication Bonus",
-	"CAREER.ADVANCE.Open": "Open Career Advance",
-	"CAREER.ADVANCE.Talent": "Talent",
-	"CAREER.ADVANCE.Skill": "Skill Training or Specialty",
-	"CAREER.ADVANCE.Type": "Advance Type",
-	"CAREER.ADVANCE.Wound": "Light Wound Threshold",
-	"CAREER.SHEET.Action": "Action",
-	"CAREER.SHEET.AdvancedCareer": "Advanced Career",
-	"CAREER.SHEET.Advances": "Advances",
-	"CAREER.SHEET.BasicCareer": "Basic Career",
-	"CAREER.SHEET.CareerSkills": "Career Skills",
-	"CAREER.SHEET.Conservative": "Conservative",
-	"CAREER.SHEET.Fortune": "Fortune",
-	"CAREER.SHEET.OneRaceOnly": "{race} only",
-	"CAREER.SHEET.PrimaryCharacteristics": "Primary Characteristics",
-	"CAREER.SHEET.Skill": "Skill",
-	"CAREER.SHEET.Talent": "Talent",
-	"CAREER.SHEET.Reckless": "Reckless",
-	"CAREER.SHEET.Wound": "Wound",
+	"CAREER": {
+		"ACTIONS": {
+			"update": "Save Career"
+		},
+		"FIELDS": {
+			"advanced.label": "Advanced Career",
+			"advanceOptions": {
+				"action.label": "Action Advance Options",
+				"conservative.label": "Conservative Advance Options",
+				"fortune.label": "Fortune Advance Options",
+				"reckless.label": "Reckless Advance Options",
+				"skill.label": "Skill Advance Options",
+				"talent.label": "Talent Advance Options",
+				"wound.label": "Wound Advance Options"
+			},
+			"advances": {
+				"action": "Action",
+				"careerCompletion": "Career Completion Advances",
+				"careerTransition": "Career Transition",
+				"dedicationBonus": "Dedication Bonus",
+				"generalCareer": "General Career Advances",
+				"nonCareer": "Non Career Advances",
+				"open": "Open Career Advance",
+				"skill": "Skill Training or Specialty",
+				"talent": "Talent",
+				"type": "Advance Type",
+				"wound": "Light Wound Threshold"
+			},
+			"careerSkills.label": "Career Skills",
+			"current.label": "Current Career",
+			"description.label": "Setting Information",
+			"primaryCharacteristics.label": "Primary Characteristics",
+			"raceRestrictions.label": "Race Restrictions",
+			"sockets.label": "Talent Sockets",
+			"startingStance" : {
+				"conservativeSegments.label": "Starting Conservative Segments",
+				"recklessSegments.label": "Starting Reckless Segments"
+			},
+			"summary.label": "Summary",
+			"traits.label": "Traits"
+		},
+		"SHEET": {
+			"action": "Action",
+			"advancedCareer": "Advanced Career",
+			"advances": "Advances",
+			"basicCareer": "Basic Career",
+			"careerSkills": "Career Skills",
+			"conservative": "Conservative",
+			"fortune": "Fortune",
+			"oneRaceOnly": "{race} only",
+			"primaryCharacteristics": "Primary Characteristics",
+			"skill": "Skill",
+			"talent": "Talent",
+			"reckless": "Reckless",
+			"wound": "Wound"
+		},
+		"TABS": {
+			"advanceOptions": "Advance Options",
+			"aptitudes": "Career Aptitudes",
+			"header": "Header",
+			"main": "Main",
+			"setting": "Setting Information"
+		}
+	},
 
 	"CAREERSELECTOR.ChooseANewCareer": "Choose a New Career",
 	"CAREERSELECTOR.ExperienceCost": "{cost} XP",
@@ -527,16 +546,7 @@
 
 	"SCRIPT": {
 		"TYPES": {
-			"onCheckPreparation": "Check Preparation",
-			"onCheckRoll": "Check Roll",
-			"onCheckTrigger": "Manual Trigger on a Check",
-			"onTargettingCheckPreparation": "Targetting Check Preparation",
-			"onTrigger": "Manual Trigger"
-		}
-	},
-
-	"SCRIPT": {
-		"TYPES": {
+			"onCareerSocket": "Career Socket",
 			"onCheckPreparation": "Check Preparation",
 			"onCheckRoll": "Check Roll",
 			"onCheckTrigger": "Manual Trigger on a Check",

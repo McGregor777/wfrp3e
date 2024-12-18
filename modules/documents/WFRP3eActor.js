@@ -260,55 +260,74 @@ export default class WFRP3eActor extends Actor
 	}
 
 	/**
-	 * Checks for Talents sharing the same socket as the current Talent then remove them from this socket.
-	 * @param {string} newTalentSocket
+	 * Checks for Items sharing the same socket and removes all except the current one.
+	 * @param {WFRP3eItem} item
 	 */
-	checkForDuplicateTalentSockets(newTalentSocket)
+	preventMultipleItemsOnSameSocket(item)
 	{
-		this.system.currentParty.memberActors.forEach((member) => {
-			member.itemTypes.talent
-				.filter(talent => talent !== this && talent.system.talentSocket === newTalentSocket)
-				.forEach((talent) => {
-					talent.update({"system.talentSocket": null});
-				});
-		});
+		const actors = this.system.currentParty ? this.system.currentParty.memberActors : [this],
+			  items = actors.reduce((items, actor) => {
+				  items.push(...actor.items.search({
+					  filters: [
+						  {
+							  field: "system.socket",
+							  operator: "is_empty",
+							  negate: true
+						  }, {
+							  field: "uuid",
+							  operator: "equals",
+							  negate: true,
+							  value: item.uuid
+						  }, {
+							  field: "system.socket",
+							  operator: "equals",
+							  negate: false,
+							  value: item.system.socket
+						  }
+					  ]
+				  }));
+				  return items;
+			  }, []);
+
+		items.forEach(item => item.update({"system.socket": ""}));
 	}
 
 	/**
-	 * Resets the socket of every Actor's Talents which socket matches a string.
-	 * @param {string} match The string the Talent socket must match.
+	 * Resets the socket of every Actor's which socket matches a string.
+	 * @param {string} match The string the socket must match.
 	 */
-	resetTalentsSocket(match)
+	resetSocket(match)
 	{
-		this.itemTypes.talent
-			.filter(talent => talent.system.talentSocket?.startsWith(match))
-			.forEach((talent) => {
-				talent.update({"system.talentSocket": null});
-			});
+		this.items.search({
+			filters: [{
+				field: "system.socket",
+				operator: "is_empty",
+				negate: true
+			}, {
+				field: "system.socket",
+				operator: "starts_with",
+				negate: false,
+				value: match
+			}]
+		}).forEach(item => item.update({"system.socket": null}));
 	}
 
 	/**
-	 * Adds a new Talent socket to the Party's list of Talent sockets.
+	 * Adds a new socket to the Actor's list of sockets.
 	 */
-	addNewTalentSocket()
+	addNewSocket()
 	{
-		const talentSockets = this.system.talentSockets;
-
-		talentSockets.push("focus");
-
-		this.update({"system.talentSockets": talentSockets});
+		this.update({"system.sockets": [...this.system.sockets, {item: null, type: "any"}]});
 	}
 
 	/**
-	 * Removes the last Talent socket from the Party's list of Talent sockets.
+	 * Removes the last socket from the Actor's list of sockets.
 	 */
-	removeLastTalentSocket()
+	removeLastSocket()
 	{
-		const talentSockets = this.system.talentSockets;
-
-		talentSockets.pop();
-
-		this.update({"system.talentSockets": talentSockets});
+		const sockets = this.system.sockets;
+		sockets.pop();
+		this.update({"system.sockets": sockets});
 	}
 
 	/**
@@ -321,17 +340,17 @@ export default class WFRP3eActor extends Actor
 		return this.items.search({
 			filters: [{
 				field: "system.effect.type",
-				operator: "EQUALS",
+				operator: "equals",
 				negate: false,
 				value: triggerType
 			}, {
 				field: "system.rechargeTokens",
-				operator: "EQUALS",
+				operator: "equals",
 				negate: false,
 				value: 0
 			}, {
-				field: "system.talentSocket",
-				operator: "IS_EMPTY",
+				field: "system.socket",
+				operator: "is_empty",
 				negate: true
 			}]
 		});
@@ -394,7 +413,7 @@ export default class WFRP3eActor extends Actor
 	{
 		if(Array.isArray(this.memberActors) && this.memberActors.length > 0)
 			this.memberActors.forEach((member) => {
-				member.resetTalentsSocket("party");
+				member.resetSocket("party");
 			});
 	}
 
@@ -410,8 +429,8 @@ export default class WFRP3eActor extends Actor
 		if(changed.system?.members)
 			this._onPartyMembersChange(changed.system.members);
 
-		if(changed.system?.talentSockets)
-			this._onPartyTalentSocketsChange();
+		if(changed.system?.sockets)
+			this._onPartySocketsChange();
 	}
 
 	/**
@@ -431,7 +450,7 @@ export default class WFRP3eActor extends Actor
 			});
 
 			missingMembers.forEach((member) => {
-				member.resetTalentsSocket("party");
+				member.resetSocket("party");
 			});
 		}
 	}
@@ -440,11 +459,11 @@ export default class WFRP3eActor extends Actor
 	 * Performs check-ups following up a Party's Talent sockets change.
 	 * @private
 	 */
-	_onPartyTalentSocketsChange()
+	_onPartySocketsChange()
 	{
 		if(Array.isArray(this.memberActors) && this.memberActors.length > 0) {
 			this.memberActors.forEach((member) => {
-				member.resetTalentsSocket("party")
+				member.resetSocket("party")
 			});
 		}
 	}
