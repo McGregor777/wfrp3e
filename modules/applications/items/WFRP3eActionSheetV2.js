@@ -3,13 +3,13 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 {
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
-		actions: {
-			addEffect: this.addEffect,
-			editEffect: this.editEffect,
-			removeEffect: this.removeEffect,
-			editImage: this.editImage
-		},
 		classes: ["wfrp3e", "sheet", "item", "action"],
+		actions: {
+			addEffect: this._addEffect,
+			editEffect: this._editEffect,
+			removeEffect: this._removeEffect,
+			editImage: this._editImage
+		},
 		form: {closeOnSubmit: true},
 		position: {width: 600}
 	}
@@ -88,9 +88,9 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 	}
 
 	/**
-	 * Prepare an array of form header tabs.
+	 * Prepares an array of form header tabs.
 	 * @returns {Record<string, Partial<ApplicationTab>>}
-	 * @private
+	 * @protected
 	 */
 	_getMainTabs()
 	{
@@ -108,9 +108,9 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 	}
 
 	/**
-	 * Prepare an array of form sub tabs.
+	 * Prepares an array of form sub tabs.
 	 * @returns {Record<string, Partial<ApplicationTab>>}
-	 * @private
+	 * @protected
 	 */
 	_getSubTabs(faceName)
 	{
@@ -128,8 +128,9 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 	}
 
 	/**
-	 * Prepare an array of form footer buttons.
+	 * Prepares an array of form footer buttons.
 	 * @returns {Partial<FormFooterButton>[]}
+	 * @protected
 	 */
 	_getFooterButtons()
 	{
@@ -167,22 +168,22 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 	 * Opens the Action Effect Editor in order to add a new effect to the Action.
 	 * @param event {Event}
 	 * @returns {Promise<void>}
-	 * @private
+	 * @protected
 	 */
-	static async addEffect(event)
+	static async _addEffect(event)
 	{
-		await this.item.createEffect(event.target.closest("section[data-stance]").dataset.stance);
+		await this.item.createActionEffect(event.target.closest("section[data-stance]").dataset.stance);
 	}
 
 	/**
 	 * Opens the Action Effect Editor in order to edit a specific effect of the Action.
 	 * @param event {Event}
 	 * @returns {Promise<void>}
-	 * @private
+	 * @protected
 	 */
-	static async editEffect(event)
+	static async _editEffect(event)
 	{
-		await this.item.editEffect(
+		await this.item.editActionEffect(
 			event.target.closest("section[data-stance]").dataset.stance,
 			event.target.closest("div.effect-group[data-symbol]").dataset.symbol,
 			event.target.closest("div.effect[data-index]").dataset.index
@@ -193,9 +194,9 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 	 * Asks for confirmation for a specific Action effect definitive removal.
 	 * @param event {Event}
 	 * @returns {Promise<void>}
-	 * @private
+	 * @protected
 	 */
-	static async removeEffect(event)
+	static async _removeEffect(event)
 	{
 		await foundry.applications.api.DialogV2.confirm({
 			window: {title: game.i18n.localize("DIALOG.TITLE.EffectDeletion")},
@@ -203,7 +204,7 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 			content: `<p>${game.i18n.localize("DIALOG.DESCRIPTION.EffectDeletion")}</p>`,
 			submit: (result) => {
 				if(result)
-					this.item.removeEffect(
+					this.item.removeActionEffect(
 						event.target.closest("section[data-stance]").dataset.stance,
 						event.target.closest("div.effect-group[data-symbol]").dataset.symbol,
 						event.target.closest("div.effect[data-index]").dataset.index
@@ -212,14 +213,14 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 		});
 	}
 
-	// TODO: Remove _onEditImage() method in V13
+	// TODO: Remove _editImage() method in V13
 	/**
-	 * Handle changing a Document's image.
+	 * Handles changing a Document's image.
 	 * @param {MouseEvent} event  The click event.
 	 * @returns {Promise}
 	 * @protected
 	 */
-	static async editImage(event)
+	static async _editImage(event)
 	{
 		const picker = new FilePicker({
 			type: "image",

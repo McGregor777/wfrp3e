@@ -598,9 +598,9 @@
 		},
 		"FIELDS": {
 			"description.label": "Description",
-			"effect": {
+			"effects": {
 				"script.label": "Script",
-				"script.hint": "Arguments:\n  - this: The triggered Talent.",
+				"script.hint": "Arguments:\n\t- this: The triggered Talent.",
 				"type.label": "Déclenchement du script"
 			},
 			"rechargeTokens.label": "Jetons de recharge",
@@ -614,7 +614,7 @@
 		},
 		"TABS": {
 			"main": "Principal",
-			"effect": "Effet"
+			"effects": "Effets"
 		},
 		"TYPES": {
 			"any": "Au choix",

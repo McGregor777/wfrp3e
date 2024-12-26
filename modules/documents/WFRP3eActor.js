@@ -332,17 +332,16 @@ export default class WFRP3eActor extends Actor
 
 	/**
 	 * Finds every Item owned by the Actor with an effect triggered.
-	 * @param {String} triggerType The trigger type of the effect.
-	 * @returns Object[] An Array of triggered items.
+	 * @param {string} triggerType The trigger type of the effect.
+	 * @returns {WFRP3eItem[]} An Array of triggered items.
 	 */
 	findTriggeredItems(triggerType)
 	{
 		return this.items.search({
 			filters: [{
-				field: "system.effect.type",
-				operator: "equals",
-				negate: false,
-				value: triggerType
+				field: "system.rechargeTokens",
+				operator: "is_empty",
+				negate: true
 			}, {
 				field: "system.rechargeTokens",
 				operator: "equals",
@@ -353,7 +352,7 @@ export default class WFRP3eActor extends Actor
 				operator: "is_empty",
 				negate: true
 			}]
-		});
+		}).filter(item => item.system.effects.filter(effect => effect.type === triggerType).length > 0);
 	}
 
 	/** @inheritDoc */

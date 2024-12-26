@@ -64,10 +64,12 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 										hint: "ACTION.FIELDS.effects.immediate.hint"
 									}),
 									reverseScript: new fields.JavaScriptField({
+										async: true,
 										label: "ACTION.FIELDS.effects.reverseScript.label",
 										hint: "ACTION.FIELDS.effects.reverseScript.hint"
 									}),
 									script: new fields.JavaScriptField({
+										async: true,
 										label: "ACTION.FIELDS.effects.script.label",
 										hint: "ACTION.FIELDS.effects.script.hint"
 									}),

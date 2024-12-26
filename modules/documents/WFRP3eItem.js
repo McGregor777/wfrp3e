@@ -70,7 +70,7 @@ export default class WFRP3eItem extends Item
 	 * Creates a new effect for the Action and opens the Action Effect Editor to edit it.
 	 * @param face {string} The Action's face which receives the new effect.
 	 */
-	async createEffect(face)
+	async createActionEffect(face)
 	{
 		await new ActionEffectEditor({
 			data: {
@@ -91,7 +91,7 @@ export default class WFRP3eItem extends Item
 	 * @param symbol {string} The symbol used by the effect to edit.
 	 * @param index {string} The index to the effect to edit.
 	 */
-	async editEffect(face, symbol, index)
+	async editActionEffect(face, symbol, index)
 	{
 		await new ActionEffectEditor({
 			data: {
@@ -110,7 +110,7 @@ export default class WFRP3eItem extends Item
 	 * @param symbol {string} The symbol used by the effect to remove.
 	 * @param index {string} The index to the effect to remove.
 	 */
-	removeEffect(face, symbol, index)
+	removeActionEffect(face, symbol, index)
 	{
 		const effects = this.system[face].effects[symbol];
 
@@ -226,9 +226,7 @@ export default class WFRP3eItem extends Item
 	addNewRaceRestriction()
 	{
 		const raceRestrictions = this.system.raceRestrictions;
-
 		raceRestrictions.push("human");
-
 		this.update({"system.raceRestrictions": raceRestrictions});
 	}
 
@@ -238,9 +236,7 @@ export default class WFRP3eItem extends Item
 	removeLastRaceRestriction()
 	{
 		const raceRestrictions = this.system.raceRestrictions;
-
 		raceRestrictions.pop();
-
 		this.update({"system.raceRestrictions": raceRestrictions});
 	}
 
@@ -288,6 +284,30 @@ export default class WFRP3eItem extends Item
 
 	//#endregion
 	//#region Talent methods
+
+	/**
+	 * Creates a new effect for the Talent.
+	 */
+	async createTalentEffect()
+	{
+		const effects = this.system.effects;
+		effects.push({
+			script: null,
+			type: Object.keys(CONFIG.WFRP3e.scriptTypes)[0]
+		});
+		this.update({"system.effects": effects})
+	}
+
+	/**
+	 * Removes an effect from the Talent.
+	 * @param index {string} The index to the effect to remove.
+	 */
+	removeTalentEffect(index)
+	{
+		const effects = this.system.effects;
+		effects.splice(index, 1);
+		this.update({["system.effects"]: effects});
+	}
 
 	exhaustTalent()
 	{
@@ -399,12 +419,10 @@ export default class WFRP3eItem extends Item
 	addNewQuality()
 	{
 		const qualities = this.system.qualities;
-
 		qualities.push({
 			name: "attuned",
 			rating: 1
 		});
-
 		this.update({"system.qualities": qualities});
 	}
 

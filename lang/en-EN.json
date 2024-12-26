@@ -599,9 +599,9 @@
 		},
 		"FIELDS": {
 			"description.label": "Description",
-			"effect": {
+			"effects": {
 				"script.label": "Script",
-				"script.hint": "Arguments:\n  - this: The triggered Talent.",
+				"script.hint": "Arguments:\n\t- this: The triggered Talent.",
 				"type.label": "Script Trigger"
 			},
 			"rechargeTokens.label": "Recharge Tokens",
@@ -615,7 +615,7 @@
 		},
 		"TABS": {
 			"main": "Main",
-			"effect": "Effect"
+			"effects": "Effects"
 		},
 		"TYPES": {
 			"any": "Any",

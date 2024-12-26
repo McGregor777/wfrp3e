@@ -201,17 +201,20 @@ export default class CheckHelper
 	{
 		const triggeredItems = actor.findTriggeredItems("onCheckPrepraration");
 		for(const item of triggeredItems) {
-			try {
-				const fn = new foundry.utils.AsyncFunction(
-					"actor",
-					"checkData",
-					"startingPool",
-					item.system.effect.script
-				);
-				await fn.call(item, actor, checkData, startingPool);
-			}
-			catch(error) {
-				console.error(error);
+			const effects =  item.system.effects.filter(effect => effect.type === "onCheckPrepraration");
+			for(const effect of effects) {
+				try {
+					const fn = new foundry.utils.AsyncFunction(
+						"actor",
+						"checkData",
+						"startingPool",
+						effect.script
+					);
+					await fn.call(item, actor, checkData, startingPool);
+				}
+				catch(error) {
+					console.error(error);
+				}
 			}
 		}
 
@@ -221,17 +224,20 @@ export default class CheckHelper
 			);
 
 			for(const item of targetTriggeredItems) {
-				try {
-					const fn = new foundry.utils.AsyncFunction(
-						"actor",
-						"checkData",
-						"startingPool",
-						item.system.effect.script
-					);
-					await fn.call(item, actor, checkData, startingPool);
-				}
-				catch(error) {
-					console.error(error);
+				const effects =  item.system.effects.filter(effect => effect.type === "onTargettingCheckPreparation");
+				for(const effect of effects) {
+					try {
+						const fn = new foundry.utils.AsyncFunction(
+							"actor",
+							"checkData",
+							"startingPool",
+							effect.script
+						);
+						await fn.call(item, actor, checkData, startingPool);
+					}
+					catch(error) {
+						console.error(error);
+					}
 				}
 			}
 		}
@@ -246,8 +252,8 @@ export default class CheckHelper
 		const chatMessage = game.messages.get(chatMessageId),
 			  roll = chatMessage.rolls[0],
 			  checkData = roll.options.checkData,
-			  actor = await fromUuid(checkData.actor);
-		let triggeredTalents = actor.findTriggeredItems("onCheckTrigger");
+			  actor = await fromUuid(checkData.actor),
+			  triggeredTalents = actor.findTriggeredItems("onCheckTrigger");
 
 		if(triggeredTalents.length > 0) {
 			let selectedTalent = await TalentSelectorV2.wait({talents: sortTalentsByType(triggeredTalents)});
@@ -255,18 +261,21 @@ export default class CheckHelper
 			if(selectedTalent) {
 				selectedTalent = await fromUuid(selectedTalent);
 
-				try {
-					const fn = new foundry.utils.AsyncFunction(
-						"actor",
-						"chatMessage",
-						"checkData",
-						"roll",
-						selectedTalent.system.effect.script
-					);
-					await fn.call(selectedTalent, actor, chatMessage, checkData, roll);
-				}
-				catch(error) {
-					console.error(error);
+				const effects =  item.system.effects.filter(effect => effect.type === "onCheckTrigger");
+				for(const effect of effects) {
+					try {
+						const fn = new foundry.utils.AsyncFunction(
+							"actor",
+							"chatMessage",
+							"checkData",
+							"roll",
+							effect.script
+						);
+						await fn.call(selectedTalent, actor, chatMessage, checkData, roll);
+					}
+					catch(error) {
+						console.error(error);
+					}
 				}
 			}
 		}
