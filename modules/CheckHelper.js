@@ -49,7 +49,7 @@ export default class CheckHelper
 			  roll = chatMessage.rolls[0],
 			  checkData = roll.options.checkData,
 			  actor = await fromUuid(checkData.actor),
-			  triggeredTalents = actor.findTriggeredItems("onCheckTrigger");
+			  triggeredTalents = actor.findTriggeredItems("onPostCheckTrigger");
 
 		if(triggeredTalents.length > 0) {
 			let selectedTalent = await TalentSelectorV2.wait({talents: sortTalentsByType(triggeredTalents)});
@@ -57,7 +57,7 @@ export default class CheckHelper
 			if(selectedTalent) {
 				selectedTalent = await fromUuid(selectedTalent);
 
-				const effects =  item.system.effects.filter(effect => effect.type === "onCheckTrigger");
+				const effects =  item.system.effects.filter(effect => effect.type === "onPostCheckTrigger");
 				for(const effect of effects) {
 					await selectedTalent.triggerEffect(
 						effect, {

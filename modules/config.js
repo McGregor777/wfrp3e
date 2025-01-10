@@ -978,7 +978,8 @@ export const WFRP3e = {
 		onCareerSocket: "SCRIPT.TYPES.onCareerSocket",
 		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
 		onCheckRoll: "SCRIPT.TYPES.onCheckRoll",
-		onCheckTrigger: "SCRIPT.TYPES.onCheckTrigger",
+		onPostCheckTrigger: "SCRIPT.TYPES.onPostCheckTrigger",
+		onPreCheckTrigger: "SCRIPT.TYPES.onPreCheckTrigger",
 		onTargettingCheckPreparation: "SCRIPT.TYPES.onTargettingCheckPreparation",
 		onTrigger: "SCRIPT.TYPES.onTrigger"
 	},

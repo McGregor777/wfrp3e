@@ -592,7 +592,8 @@
 			"onCareerSocket": "Placement sur un emplacement de talent de carrière",
 			"onCheckPreparation": "Préparation d'un test",
 			"onCheckRoll": "Réalisation d'un test",
-			"onCheckTrigger": "Déclenchement manuel après un test",
+			"onPostCheckTrigger": "Déclenchement manuel après un test",
+			"onPreCheckTrigger": "Sélection manuelle avant un test",
 			"onTargettingCheckPreparation": "Préparation d'un test ciblant",
 			"onTrigger": "Déclenchement manuel"
 		}

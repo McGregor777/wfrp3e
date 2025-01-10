@@ -593,7 +593,8 @@
 			"onCareerSocket": "Career Socket",
 			"onCheckPreparation": "Check Preparation",
 			"onCheckRoll": "Check Roll",
-			"onCheckTrigger": "Manual Trigger on a Check",
+			"onPostCheckTrigger": "Manual Trigger Post Check",
+			"onPreCheckTrigger": "Manual Selection Pre Check",
 			"onTargettingCheckPreparation": "Targetting Check Preparation",
 			"onTrigger": "Manual Trigger"
 		}
