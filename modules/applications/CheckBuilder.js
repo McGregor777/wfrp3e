@@ -22,7 +22,7 @@ export default class CheckBuilder extends FormApplication
 				return game.i18n.format("CHECKBUILDER.TITLES.skill", {skill: checkData.skill.name});
 			else if(checkData.characteristic)
 				return game.i18n.format("CHECKBUILDER.TITLES.characteristic", {
-					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].name)
+					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic].name)
 				});
 		}
 
@@ -500,15 +500,17 @@ export default class CheckBuilder extends FormApplication
 	{
 		event.preventDefault();
 
+		const characteristic = this.actor.system.characteristics[event.currentTarget.value],
+			  stance = this.actor.system.stance.current;
+
 		this.object.checkData.characteristic = {
 			name: event.currentTarget.value,
-			...this.object.checkData.actor.system.characteristics[event.currentTarget.value]
+			...characteristic
 		};
-		const stance = this.object.checkData.actor.system.stance.current;
 
 		foundry.utils.mergeObject(this.object.dice, {
-			characteristic: this.object.checkData.characteristic.value - Math.abs(stance),
-			fortune: this.object.checkData.characteristic.fortune,
+			characteristic: characteristic.rating - Math.abs(stance),
+			fortune: characteristic.fortune,
 			conservative: stance < 0 ? Math.abs(stance) : 0,
 			reckless: stance > 0 ? stance : 0
 		});

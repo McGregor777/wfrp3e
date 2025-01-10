@@ -1,9 +1,9 @@
 import ActionSelector from "../applications/ActionSelector.js";
 import CareerSelector from "../applications/CareerSelector.js";
 import CharacteristicUpgrader from "../applications/CharacteristicUpgrader.js";
+import CheckBuilderV2 from "../applications/CheckBuilderV2.js";
 import TalentSelector from "../applications/TalentSelector.js";
 import TrainingSelector from "../applications/TrainingSelector.js";
-import CheckHelper from "../CheckHelper.js";
 import {capitalize} from "../helpers.js";
 
 /**
@@ -32,7 +32,7 @@ export default class WFRP3eActor extends Actor
 
 	performCharacteristicCheck(characteristic)
 	{
-		CheckHelper.prepareCharacteristicCheck(
+		CheckBuilderV2.prepareCharacteristicCheck(
 			this,
 			{name: characteristic, ...this.system.characteristics[characteristic]}
 		);

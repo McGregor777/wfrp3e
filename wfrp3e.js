@@ -1,6 +1,6 @@
 import {WFRP3e} from "./modules/config.js";
 import CharacterGenerator from "./modules/applications/CharacterGenerator.js";
-import CheckBuilder from "./modules/applications/CheckBuilder.js";
+import CheckBuilderV2 from "./modules/applications/CheckBuilderV2.js";
 import WFRP3eCharacterSheet from "./modules/applications/actors/WFRP3eCharacterSheet.js";
 import WFRP3eCreatureSheet from "./modules/applications/actors/WFRP3eCreatureSheet.js";
 import WFRP3eGroupSheet from "./modules/applications/actors/WFRP3eGroupSheet.js";
@@ -207,18 +207,18 @@ Hooks.on("getChatLogEntryContext", (html, options) => {
 	});
 });
 
-Hooks.on('renderSidebarTab', (app, html, data) => {
+Hooks.on("renderSidebarTab", (app, html, data) => {
 	const chatControls = html.find("#chat-controls > .control-buttons");
 
 	if(chatControls.length > 0) {
 		chatControls.prepend(
-			'<a class="wfrp3e-dice-roller" role="button" data-tooltip="' + game.i18n.localize("ROLL.NAMES.freeCheck") +' ">' +
+			'<a class="wfrp3e-dice-roller" role="button" data-tooltip="' + game.i18n.localize("ROLL.ACTIONS.performAFreeCheck") +' ">' +
 			'	<img src="systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp" alt="' + game.i18n.localize("ROLL.NAMES.freeCheck") + '"/>' +
 			'</a>'
 		);
 
 		html.find("#chat-controls > .control-buttons > .wfrp3e-dice-roller").click(async () => {
-			await new CheckBuilder().render(true);
+			await new CheckBuilderV2().render(true);
 		});
 	}
 });

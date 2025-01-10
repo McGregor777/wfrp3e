@@ -21,6 +21,7 @@
 			<button class="convert-conservative">{{localize "CHECKBUILDER.convertConservative"}}</button>
 			<button class="convert-reckless">{{localize "CHECKBUILDER.convertReckless"}}</button>
 		</div>
+
 		{{#if attributes}}
 			<div class="attributes">
 				{{#each attributes as |attribute attr|}}
@@ -31,7 +32,7 @@
 						       type="number"
 						       min="0"
 						       max="{{attribute.budget}}" />
-						<div>{{localize (concat "CHECKBUILDER." (capitalize attr) "Dice")}}</div>
+						<div>{{localize (concat "CHECKBUILDER.FIELDS." attr "Dice")}}</div>
 					</label>
 				{{/each}}
 			</div>
@@ -186,7 +187,7 @@
 		</details>
 	
 		<div class="roll-button flexrow">
-			<button class="roll-check-button">{{localize "CHECKBUILDER.rollCheck"}}</button>
+			<button class="roll-check-button">{{localize "CHECKBUILDER.ACTIONS.rollCheck"}}</button>
 		</div>
 	</div>
 
@@ -194,7 +195,7 @@
 		<div class="quick-settings">
 			{{#if skills}}
 				<label>
-					{{localize "CHECKBUILDER.skill"}}
+					{{localize "CHECKBUILDER.FIELDS.skill"}}
 
 					<select class="skill-select" name="skill">
 						<option value=""{{#unless skill}} selected{{/unless}}></option>
@@ -204,15 +205,15 @@
 			{{/if}}
 
 			<label>
-				{{localize "CHECKBUILDER.characteristic"}}
+				{{localize "CHECKBUILDER.FIELDS.characteristic"}}
 
 				<select class="characteristic-select" name="characteristic">
-					{{selectOptions characteristics selected=characteristic.name localize=true}}
+					{{selectOptions characteristics selected=characteristic localize=true}}
 				</select>
 			</label>
 
 			<label>
-				{{localize "CHECKBUILDER.challengeLevel"}}
+				{{localize "CHECKBUILDER.FIELDS.challengeLevel"}}
 
 				<select class="challenge-level-select" name="challengeLevel">
 					{{selectOptions challengeLevels selected=challengeLevel labelAttr="name" localize=true}}
@@ -221,7 +222,7 @@
 
 			{{#if maxFortunePoints}}
 				<label>
-					{{localize "CHECKBUILDER.fortunePoints"}}
+					{{localize "CHECKBUILDER.FIELDS.fortunePoints"}}
 
 					<input class="pool-value" name="fortunePoints" type="number" min="0" max="{{maxFortunePoints}}" value="0" />
 				</label>
@@ -229,7 +230,7 @@
 
 			{{#if availableWeapons}}
 				<label>
-					{{localize "CHECKBUILDER.weapon"}}
+					{{localize "CHECKBUILDER.FIELDS.weapon"}}
 
 					<select class="weapon-select" name="weapon">
 						{{selectOptions availableWeapons selected=weapon._id nameAttr="id" labelAttr="name" localize=true}}
@@ -239,7 +240,7 @@
 
 			{{#if (equalTo actor.type "character")}}
 				<div class="specialisations">
-					{{localize "CHECKBUILDER.specialisations"}}
+					{{localize "CHECKBUILDER.FIELDS.specialisations"}}
 
 					{{#if specialisations}}
 						{{#each specialisations}}

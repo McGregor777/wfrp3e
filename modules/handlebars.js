@@ -16,6 +16,7 @@ export default function()
 		Handlebars.registerHelper("multiply", (value, multiplier) => value * multiplier);
 		Handlebars.registerHelper("capitalize", (string) => capitalize(string));
 		Handlebars.registerHelper("abs", (number) => Math.abs(number));
+		Handlebars.registerHelper("find", (value, array) => array.find(item => item === value));
 		Handlebars.registerHelper("in", (value, array) => array.includes(value));
 
 		Handlebars.registerHelper("for", (startingNumber, goalNumber, increment, block) => {

@@ -344,6 +344,27 @@
 	"CHARACTERISTICUPGRADER.UpgradeACharacteristic": "Upgrade A Characteristic",
 
 	"CHECKBUILDER": {
+		"ACTIONS": {
+			"convertConservative": "Convert to conservative die",
+			"convertReckless": "Convert to reckless die",
+			"rollCheck": "Roll check"
+		},
+		"FIELDS": {
+			"aggressionDice": "Aggression Dice",
+			"challengeLevel": "Challenge Level",
+			"characteristic": "Characteristic",
+			"cunningDice": "Cunning Dice",
+			"encounterType": "Encounter Type",
+			"expertiseDice": "Expertise Dice",
+			"fortunePoints": "Fortune Points",
+			"specialisations": "Specialisations",
+			"skill": "Skill",
+			"weapon": "Weapon"
+		},
+		"TABS": {
+			"quickSettings": "Quick Settings",
+			"settings": "Settings"
+		},
 		"TITLES": {
 			"action": "{action} Check Builder",
 			"characteristic": "{characteristic} Check Builder",
@@ -351,25 +372,14 @@
 			"initiative": "Initiative Check Builder",
 			"skill": "{skill} Check Builder"
 		},
-		"aggressionDice": "Aggression Dice",
-		"challengeLevel": "Challenge Level",
-		"characteristic": "Characteristic",
-		"convertConservative": "Convert to conservative die",
-		"convertReckless": "Convert to reckless die",
-		"convertWarning": "There is no {type} die to convert.",
-		"convertBackWarning": "There is no {type} die left to convert back.",
-		"cunningDice": "Cunning Dice",
+		"WARNINGS": {
+			"convert": "There is no {type} die to convert.",
+			"convertBack": "There is no {type} die left to convert back."
+		},
 		"dicePool": "Dice Pool",
-		"encounterType": "Encounter Type",
-		"expertiseDice": "Expertise Dice",
-		"fortunePoints": "Fortune Points",
 		"hint": "Left click to increase dice, right click to decrease.",
 		"options": "Options",
-		"rollCheck": "Roll check",
-		"specialisations": "Specialisations",
-		"skill": "Skill",
-		"startingResults": "Starting results",
-		"weapon": "Weapon"
+		"startingResults": "Starting results"
 	},
 
 	"CONDITION.Duration": "Duration",
@@ -517,6 +527,7 @@
 	"ROLL": {
 		"ACTIONS": {
 			"applyToggledEffects": "Apply Toggled Effects",
+			"performAFreeCheck": "Perform a Free Check",
 			"useTalent": "Use Talent"
 		},
 		"EFFECTS": {
@@ -527,12 +538,12 @@
 			"sufferStress": "Suffer {amount} stress"
 		},
 		"NAMES": {
-			"actionCheck": "{action} check",
-			"characteristicCheck": "{characteristic} check",
-			"combatEncounterInitiativeCheck": "Combat encounter initiative check",
-			"freeCheck": "Free check",
-			"skillCheck": "{skill} check",
-			"socialEncounterInitiativeCheck": "Social encounter initiative check"
+			"actionCheck": "{action} Check",
+			"characteristicCheck": "{characteristic} Check",
+			"combatEncounterInitiativeCheck": "Combat Encounter Initiative Check",
+			"freeCheck": "Free Check",
+			"skillCheck": "{skill} Check",
+			"socialEncounterInitiativeCheck": "Social Encounter Initiative Check"
 		},
 		"OUTCOMES": {
 			"criticalWounds": "{actor} suffers from {criticalWounds}.",

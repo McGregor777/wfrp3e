@@ -202,7 +202,8 @@ export default class WFRP3eRoll extends Roll
 		const checkData = this.options.checkData,
 			  actor = await fromUuid(checkData.actor),
 			  action = await fromUuid(checkData.action),
-			  {characteristic, weapon} = checkData;
+			  characteristic = checkData.characteristic,
+			  weapon = await fromUuid(checkData.weapon);
 
 		this.effects = {
 			...Object.entries(structuredClone(action.system[checkData.face].effects))
@@ -213,10 +214,10 @@ export default class WFRP3eRoll extends Roll
 				}, {})
 		};
 		this.effects.boon.push(CheckHelper.getUniversalBoonEffect(
-			CONFIG.WFRP3e.characteristics[characteristic.name].type === "mental")
+			CONFIG.WFRP3e.characteristics[characteristic].type === "mental")
 		);
 		this.effects.bane.push(CheckHelper.getUniversalBaneEffect(
-			CONFIG.WFRP3e.characteristics[characteristic.name].type === "mental")
+			CONFIG.WFRP3e.characteristics[characteristic].type === "mental")
 		);
 
 		if(["melee", "ranged"].includes(action.system.type)) {

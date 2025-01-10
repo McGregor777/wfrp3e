@@ -1,4 +1,5 @@
 import ActionEffectEditor from "../applications/ActionEffectEditor.js";
+import CheckBuilderV2 from "../applications/CheckBuilderV2.js";
 import CheckHelper from "../CheckHelper.js";
 import {capitalize} from "../helpers.js";
 
@@ -211,15 +212,15 @@ export default class WFRP3eItem extends Item
 	}
 
 	/**
-	 * Makes usage of the Action.
-	 * @param {Object} [options]
+	 * Makes usage of the Action by preparing an Action check.
+	 * @param {string} options.face The face of the Action to use.
 	 * @returns {Promise<void>}
 	 * @private
 	 */
 	async _useAction(options = {})
 	{
 		if(!options.face)
-			throw new Error("Knowing which face of the Action to use is needed.");
+			throw new Error("The Action face to use is needed.");
 
 		if(this.system.rechargeTokens > 0)
 			ui.notifications.warn(game.i18n.localize("ACTION.WARNINGS.recharging"));
@@ -257,7 +258,7 @@ export default class WFRP3eItem extends Item
 				default: "confirm"
 			}).render(true);
 		else
-			await CheckHelper.prepareActionCheck(this.actor, this, options.face);
+			await CheckBuilderV2.prepareActionCheck(this.actor, this, options.face);
 	}
 
 	//#endregion
@@ -361,7 +362,7 @@ export default class WFRP3eItem extends Item
 	 */
 	async _useSkill(options = {})
 	{
-		await CheckHelper.prepareSkillCheck(this.actor, this);
+		await CheckBuilderV2.prepareSkillCheck(this.actor, this);
 	}
 
 	//#endregion
@@ -462,7 +463,7 @@ export default class WFRP3eItem extends Item
 		if(!action)
 			throw new Error("Unable to find the relevant basic Action.");
 
-		await CheckHelper.prepareActionCheck(this.actor, action, this.actor.getCurrentStanceName(), {weapon: this});
+		await CheckBuilderV2.prepareActionCheck(this.actor, action, this.actor.getCurrentStanceName(), {weapon: this});
 	}
 
 	/**

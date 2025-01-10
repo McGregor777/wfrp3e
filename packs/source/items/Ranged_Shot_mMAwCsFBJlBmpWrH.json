@@ -24,13 +24,13 @@
         "success": [
           {
             "description": "<p>You hit the target for normal damage</p>",
-            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon?.system.damageRating ?? 0) + (actor.system.damageRating ?? 0);",
+            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0);",
             "symbolAmount": 1
           },
           {
             "symbolAmount": 3,
             "description": "<p>You hit the target for +2 damage</p>",
-            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) + 2;"
+            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0) + 2;"
           }
         ],
         "boon": [
@@ -71,13 +71,13 @@
         "success": [
           {
             "description": "<p>You hit the target for normal damage</p>",
-            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon?.system.damageRating ?? 0) + (actor.system.damageRating ?? 0);",
+            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0);",
             "symbolAmount": 1
           },
           {
             "symbolAmount": 3,
             "description": "<p>You hit the target for +2 damage</p>",
-            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) + 2;"
+            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0) + 2;"
           }
         ],
         "boon": [

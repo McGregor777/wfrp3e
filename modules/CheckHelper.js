@@ -1,5 +1,3 @@
-import DicePool from "./DicePool.js";
-import CheckBuilder from "./applications/CheckBuilder.js";
 import TalentSelectorV2 from "./applications/TalentSelectorV2.js";
 import {capitalize, sortTalentsByType} from "./helpers.js";
 
@@ -8,188 +6,6 @@ import {capitalize, sortTalentsByType} from "./helpers.js";
  */
 export default class CheckHelper
 {
-	/**
-	 * Prepares a Characteristic check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor}	actor The WFRP3eActor performing the check.
-	 * @param {Object} characteristic The Characteristic used for the check.
-	 * @param {Object} [options]
-	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {Promise<void>} The DicePool for a characteristic check.
-	 */
-	static async prepareCharacteristicCheck(actor, characteristic, {flavor = null, sound = null} = {})
-	{
-		const stance = actor.system.stance.current,
-			  checkData = {
-				  actor: actor.uuid,
-				  characteristic,
-				  stance,
-				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
-			  },
-			  startingPool = {
-				  dice: {
-					  characteristic: characteristic.rating - Math.abs(stance),
-					  fortune: characteristic.fortune,
-					  expertise: 0,
-					  conservative: stance < 0 ? Math.abs(stance) : 0,
-					  reckless: stance > 0 ? stance : 0,
-					  challenge: 0,
-					  misfortune: 0
-				  }
-			  };
-
-		await this.triggerCheckEffects(actor, checkData, startingPool);
-
-		await new CheckBuilder(
-			new DicePool(startingPool, {checkData, flavor, sound})
-		).render(true);
-	}
-
-	/**
-	 * Prepares a Skill check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor}	actor The WFRP3eActor performing the check.
-	 * @param {WFRP3eItem} skill The Skill used for the check.
-	 * @param {Object} [options]
-	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {Promise<void>} The DicePool for an skill check.
-	 */
-	static async prepareSkillCheck(actor, skill, {flavor = null, sound = null} = {})
-	{
-		const characteristic = actor.system.characteristics[skill.system.characteristic],
-			  stance = actor.system.stance.current,
-			  checkData = {
-				  actor: actor.uuid,
-				  characteristic: {name: skill.system.characteristic, ...characteristic},
-				  skill,
-				  stance,
-				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
-			  },
-			  startingPool = {
-				  dice: {
-					  characteristic: characteristic.rating - Math.abs(stance),
-					  fortune: characteristic.fortune,
-					  expertise: skill.system.trainingLevel,
-					  conservative: stance < 0 ? Math.abs(stance) : 0,
-					  reckless: stance > 0 ? stance : 0,
-					  challenge: 0,
-					  misfortune: 0
-				  }
-			  };
-
-		await this.triggerCheckEffects(actor, checkData, startingPool);
-
-		await new CheckBuilder(
-			new DicePool(startingPool, {checkData, flavor, sound})
-		).render(true);
-	}
-
-	/**
-	 * Prepares an Action check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor} actor The WFRP3eActor using the Action.
-	 * @param {WFRP3eItem} action The Action that is used.
-	 * @param {string} face The Action face.
-	 * @param {Object} [options]
-	 * @param {WFRP3eItem} [options.weapon] The weapon used alongside the Action.
-	 * @param {String} [options.flavor] Some flavor text to add to the Action check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Action check completion.
-	 * @returns {Promise<void>} The DicePool for an action check.
-	 */
-	static async prepareActionCheck(actor, action, face, {weapon = null, flavor = null, sound = null} = {})
-	{
-		const match = action.system[face].check.match(new RegExp(
-			"(([\\p{L}\\s]+) \\((\\p{L}+)\\))( " +
-			game.i18n.localize("ACTION.CHECK.against") +
-			"\\.? ([\\p{L}\\s]+))?", "u")
-		);
-		let skill = null,
-			characteristicName = skill?.system.characteristic ?? "Strength";
-
-		if(match) {
-			skill = actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
-			// Either get the Characteristic specified on the Action's check, or use the Characteristic used by the Skill.
-			characteristicName = Object.entries(CONFIG.WFRP3e.characteristics).find((characteristic) => {
-				return game.i18n.localize(characteristic[1].abbreviation) === match[3];
-			})[0] ?? characteristicName;
-		}
-
-		const characteristic = actor.system.characteristics[characteristicName],
-			  stance = actor.system.stance.current,
-			  checkData = {
-				  action: action.uuid,
-				  actor: actor.uuid,
-				  characteristic: {name: characteristicName, ...characteristic},
-				  face,
-				  skill,
-				  stance,
-				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
-			  },
-			  startingPool = {
-				  dice: {
-					  characteristic: characteristic?.rating - Math.abs(stance) ?? 0,
-					  fortune: characteristic?.fortune ?? 0,
-					  expertise: skill?.system.trainingLevel ?? 0,
-					  conservative: stance < 0 ? Math.abs(stance) : 0,
-					  reckless: stance > 0 ? stance : 0,
-					  challenge: action.system[face].difficultyModifiers.challengeDice +
-						  (["melee", "ranged"].includes(action.system.type)
-							  ? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
-							  : 0),
-					  misfortune: action.system[face].difficultyModifiers.misfortuneDice +
-						  ((match ? match[5] === game.i18n.localize("ACTION.CHECK.targetDefence") : false)
-							  ? checkData.targets.length > 0
-								  ? await fromUuid(checkData.targets[0]).then(actor => actor.system.totalDefence)
-								  : 0
-							  : 0)
-				  }
-			  }
-
-		if(weapon)
-			checkData.weapon = weapon;
-
-		await this.triggerCheckEffects(actor, checkData, startingPool);
-
-		await new CheckBuilder(
-			new DicePool(startingPool, {checkData, flavor, sound})
-		).render(true);
-	}
-
-	/**
-	 * Prepares an initiative check.
-	 * @param {WFRP3eActor} actor The Character making the initiative check.
-	 * @param {WFRP3eCombat} combat The Combat document associated with the initiative check.
-	 * @param {Object} [options]
-	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {DicePool} The DicePool for an initiative check.
-	 */
-	static async prepareInitiativeCheck(actor, combat, {flavor = null, sound = null} = {})
-	{
-		const characteristic = actor.system.characteristics[combat.initiativeCharacteristic],
-			  stance = actor.system.stance.current ?? actor.system.stance,
-			  checkData = {
-				  actor: actor.uuid,
-				  characteristic,
-				  combat,
-				  stance
-			  },
-			  startingPool = {
-				  dice: {
-					  characteristic: characteristic.rating - Math.abs(stance),
-					  fortune: characteristic.fortune,
-					  expertise: 0,
-					  conservative: stance < 0 ? Math.abs(stance) : 0,
-					  reckless: stance > 0 ? stance : 0,
-					  challenge: 0,
-					  misfortune: 0
-				  }
-			  }
-
-		await this.triggerCheckEffects(actor, checkData, startingPool);
-
-		return new DicePool(startingPool, {checkData, flavor, sound});
-	}
-
 	/**
 	 * Searches and triggers every relevant effects owned either by the Actor performing the check, or its target.
 	 * @param {WFRP3eActor} actor The WFRP3eActor performing the check.
@@ -616,10 +432,10 @@ export default class CheckHelper
 				  targetStress: 0,
 				  wounds: 0,
 				  criticalWounds: 0,
-				  fatigue: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "physical"
+				  fatigue: CONFIG.WFRP3e.characteristics[checkData.characteristic].type === "physical"
 					  ? roll.remainingSymbols.exertions
 					  : 0,
-				  stress: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"
+				  stress: CONFIG.WFRP3e.characteristics[checkData.characteristic].type === "mental"
 					  ? roll.remainingSymbols.exertions
 					  : 0,
 				  favour: 0,
