@@ -1,5 +1,5 @@
 /** @inheritDoc */
-export default class WFRP3eTalentSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2)
+export default class WFRP3eAbilitySheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2)
 {
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
@@ -7,7 +7,7 @@ export default class WFRP3eTalentSheetV2 extends foundry.applications.api.Handle
 			addEffect: this._addEffect,
 			removeEffect: this._removeEffect,
 		},
-		classes: ["wfrp3e", "sheet", "item", "talent"],
+		classes: ["wfrp3e", "sheet", "item", "ability"],
 		form: {closeOnSubmit: true},
 		position: {width: 600}
 	}
@@ -16,7 +16,7 @@ export default class WFRP3eTalentSheetV2 extends foundry.applications.api.Handle
 	static PARTS = {
 		header: {template: "systems/wfrp3e/templates/applications/header.hbs"},
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
-		main: {template: "systems/wfrp3e/templates/applications/items/talent-sheet-v2/main.hbs"},
+		main: {template: "systems/wfrp3e/templates/applications/items/ability-sheet-v2/main.hbs"},
 		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	}
@@ -87,8 +87,8 @@ export default class WFRP3eTalentSheetV2 extends foundry.applications.api.Handle
 	_getMainTabs()
 	{
 		const tabs = {
-			main: {id: "main", group: "primary", label: "TALENT.TABS.main"},
-			effects: {id: "effects", group: "primary", label: "TALENT.TABS.effects"}
+			main: {id: "main", group: "primary", label: "ABILITY.TABS.main"},
+			effects: {id: "effects", group: "primary", label: "ABILITY.TABS.effects"}
 		};
 
 		for(const tab of Object.values(tabs)) {
@@ -125,7 +125,7 @@ export default class WFRP3eTalentSheetV2 extends foundry.applications.api.Handle
 	 */
 	_getFooterButtons()
 	{
-		return [{type: "submit", icon: "fa-solid fa-save", label: "TALENT.ACTIONS.update"}]
+		return [{type: "submit", icon: "fa-solid fa-save", label: "ABILITY.ACTIONS.update"}]
 	}
 
 	/**
@@ -142,7 +142,7 @@ export default class WFRP3eTalentSheetV2 extends foundry.applications.api.Handle
 	}
 
 	/**
-	 * Adds a new effect to the Talent.
+	 * Adds a new effect to the Ability.
 	 * @param event {Event}
 	 * @returns {Promise<void>}
 	 * @protected
@@ -153,7 +153,7 @@ export default class WFRP3eTalentSheetV2 extends foundry.applications.api.Handle
 	}
 
 	/**
-	 * Asks for confirmation for a specific Talent effect definitive removal.
+	 * Asks for confirmation for a specific Ability effect definitive removal.
 	 * @param event {Event}
 	 * @returns {Promise<void>}
 	 * @protected

@@ -240,23 +240,12 @@ export default class WFRP3eRoll extends Roll
 	 */
 	static async triggerOnCheckRollEffects(actor, checkData, roll)
 	{
-		const triggeredItems = actor.findTriggeredItems("onCheckRoll");
-		for(const item of triggeredItems) {
-			const effects =  item.system.effects.filter(effect => effect.type === "onCheckRoll");
-			for(const effect of effects) {
-				try {
-					const fn = new foundry.utils.AsyncFunction(
-						"actor",
-						"checkData",
-						"roll",
-						effect.script
-					);
-					await fn.call(item, actor, checkData, roll);
-				}
-				catch(error) {
-					console.error(error);
-				}
-			}
-		}
+		const triggeredEffects = actor.findTriggeredEffects("onCheckRoll");
+		for(const effect of triggeredEffects)
+			await fromUuid(effect.parent).then(item => item.triggerEffect(
+				effect, {
+					parameters: [actor, checkData, roll],
+					parameterNames: ["actor", "checkData", "roll"]
+				}));
 	}
 }

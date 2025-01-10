@@ -64,6 +64,88 @@ export default class WFRP3eItem extends Item
 			this.sheet.render(true);
 	}
 
+	/**
+	 * Creates a new effect for the WFRP3eItem.
+	 */
+	async createEffect()
+	{
+		const effects = this.system.effects;
+		effects.push({
+			script: null,
+			type: Object.keys(CONFIG.WFRP3e.scriptTypes)[0]
+		});
+		this.update({"system.effects": effects});
+	}
+
+	/**
+	 * Removes an effect from the WFRP3eItem.
+	 * @param index {string} The index to the effect to remove.
+	 */
+	removeEffect(index)
+	{
+		const effects = this.system.effects;
+		effects.splice(index, 1);
+		this.update({["system.effects"]: effects});
+	}
+
+	/**
+	 * Triggers an effect contained by the WFRP3eItem.
+	 * @param {Object} effect The effect to trigger.
+	 * @param {Object} options
+	 * @param {Object[]} [options.parameters]
+	 * @param {string[]} [options.parameterNames]
+	 * @returns {Promise<void>}
+	 */
+	async triggerEffect(effect, {parameters = [], parameterNames = []} = {})
+	{
+		try {
+			const fn = new foundry.utils.AsyncFunction(...parameterNames, effect.script);
+			await fn.call(this, ...parameters);
+		}
+		catch(error) {
+			console.error(error);
+		}
+	}
+
+	/**
+	 * Checks an effect condition script.
+	 * @param {Object} effect The effect to trigger.
+	 * @param {Object} options
+	 * @param {Object[]} [options.parameters]
+	 * @param {string[]} [options.parameterNames]
+	 * @returns {Promise<boolean>} The result of the condition script.
+	 * @private
+	 */
+	checkEffectConditionScript(effect, {parameters = [], parameterNames = []} = {})
+	{
+		try {
+			const fn = new Function(...parameterNames, effect.conditionScript);
+			return fn.call(this, ...parameters);
+		}
+		catch(error) {
+			console.error(error);
+		}
+	}
+
+	//#region Ability methods
+
+	/**
+	 * Makes usage of the Ability by triggering one of its effects.
+	 * @param {number} options.index The index of the effect to trigger.
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	async _useAbility(options = {})
+	{
+		if(!options.index)
+			throw new Error("Effect index is needed");
+		if(this.system.cooldown)
+			ui.notifications.warn(game.i18n.localize("ABILITY.WARNINGS.cooldown"));
+		else
+			await this.triggerEffect(this.system.effects[options.index]);
+	}
+
+	//#endregion
 	//#region Action methods
 
 	/**
@@ -285,30 +367,6 @@ export default class WFRP3eItem extends Item
 	//#endregion
 	//#region Talent methods
 
-	/**
-	 * Creates a new effect for the Talent.
-	 */
-	async createTalentEffect()
-	{
-		const effects = this.system.effects;
-		effects.push({
-			script: null,
-			type: Object.keys(CONFIG.WFRP3e.scriptTypes)[0]
-		});
-		this.update({"system.effects": effects})
-	}
-
-	/**
-	 * Removes an effect from the Talent.
-	 * @param index {string} The index to the effect to remove.
-	 */
-	removeTalentEffect(index)
-	{
-		const effects = this.system.effects;
-		effects.splice(index, 1);
-		this.update({["system.effects"]: effects});
-	}
-
 	exhaustTalent()
 	{
 		this.update({"system.rechargeTokens": 4});
@@ -343,35 +401,29 @@ export default class WFRP3eItem extends Item
 		owningDocumentSockets[matches[2]].item = this.uuid;
 		owningDocument.update({"system.sockets": owningDocumentSockets});
 
-		if(owningDocument.type === "career" && this.system.effect.type === "onCareerSocket")
-			this._triggerTalentEffect();
+		if(owningDocument.type === "career")
+			this.system.effects.forEach(async effect => {
+				if(effect.type === "onCareerSocket")
+					await this.triggerEffect(effect);
+			});
 	}
 
 	/**
-	 * Makes usage of the Talent.
-	 * @param {Object} [options]
+	 * Makes usage of the Talent by triggering one of its effects.
+	 * @param {number} options.index The index of the effect to trigger.
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _useTalent(options = {})
+	async _useTalent(options= {})
 	{
+		if(!options.index)
+			throw new Error("Effect index is needed");
 		if(this.system.rechargeTokens > 0)
 			ui.notifications.warn(game.i18n.localize("TALENT.WARNINGS.recharging"));
 		else if(this.system.socket == null)
 			ui.notifications.warn(game.i18n.localize("TALENT.WARNINGS.notSocketed"));
 		else
-			await this._triggerTalentEffect();
-	}
-
-	async _triggerTalentEffect()
-	{
-		try {
-			const fn = new foundry.utils.AsyncFunction(this.system.effect.script);
-			await fn.call(this);
-		}
-		catch(error) {
-			console.error(error);
-		}
+			await this.triggerEffect(this.system.effects[options.index]);
 	}
 
 	//#endregion

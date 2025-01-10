@@ -333,26 +333,63 @@ export default class WFRP3eActor extends Actor
 	/**
 	 * Finds every Item owned by the Actor with an effect triggered.
 	 * @param {string} triggerType The trigger type of the effect.
+	 * @param {Object} options
+	 * @param {Object[]} [options.parameters]
+	 * @param {string[]} [options.parameterNames]
 	 * @returns {WFRP3eItem[]} An Array of triggered items.
 	 */
-	findTriggeredItems(triggerType)
+	findTriggeredItems(triggerType, {parameters = [], parameterNames = [] } = {})
 	{
-		return this.items.search({
-			filters: [{
-				field: "system.rechargeTokens",
-				operator: "is_empty",
-				negate: true
-			}, {
-				field: "system.rechargeTokens",
-				operator: "equals",
-				negate: false,
-				value: 0
-			}, {
-				field: "system.socket",
-				operator: "is_empty",
-				negate: true
-			}]
-		}).filter(item => item.system.effects.filter(effect => effect.type === triggerType).length > 0);
+		return [
+			...this.items.search({
+				filters: [{
+					field: "type",
+					operator: "equals",
+					value: "talent"
+				}, {
+					field: "system.rechargeTokens",
+					operator: "equals",
+					value: 0
+				}, {
+					field: "system.socket",
+					operator: "is_empty",
+					negate: true
+				}]
+			}),
+			...this.items.search({
+				filters: [{
+					field: "type",
+					operator: "equals",
+					value: "talent",
+					negate: true
+				}, {
+					field: "system.effects",
+					operator: "is_empty",
+					negate: true
+				}]
+			})
+		].filter(item => item.system.effects
+			.filter(effect => {
+				return !(effect.type !== triggerType
+					|| effect.conditionScript && !item.checkEffectConditionScript(
+						effect, {parameters, parameterNames}
+					));
+			}).length > 0);
+	}
+
+	/**
+	 * Finds every effect triggered by a specific script trigger.
+	 * @param {string} triggerType The type of script trigger.
+	 * @returns {Object[]} An Array of triggered effects.
+	 */
+	findTriggeredEffects(triggerType)
+	{
+		return this.findTriggeredItems(triggerType).map(item => {
+			 return {
+				 ...item.system.effects.find(effect => effect.type === triggerType),
+				 parent: item.uuid
+			}
+		});
 	}
 
 	/** @inheritDoc */

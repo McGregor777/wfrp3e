@@ -10,16 +10,17 @@ export default class WFRP3eTalentDataModel extends foundry.abstract.TypeDataMode
 
 		return {
 			description: new fields.HTMLField(),
-			effect: new fields.SchemaField({
-				script: new fields.JavaScriptField({async: true}),
-				type: new fields.StringField({
-					choices: CONFIG.WFRP3e.scriptTypes,
-					initial: Object.keys(CONFIG.WFRP3e.scriptTypes)[0],
-					required: true
-				})
-			}),
 			effects: new fields.ArrayField(
 				new fields.SchemaField({
+					conditionScript: new fields.JavaScriptField({
+						hint: "TALENT.FIELDS.effects.conditionScript.hint",
+						label: "TALENT.FIELDS.effects.conditionScript.label"
+					}),
+					reverseScript: new fields.JavaScriptField({
+						async: true,
+						hint: "TALENT.FIELDS.effects.reverseScript.hint",
+						label: "TALENT.FIELDS.effects.reverseScript.label"
+					}),
 					script: new fields.JavaScriptField({
 						async: true,
 						hint: "TALENT.FIELDS.effects.script.hint",

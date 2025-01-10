@@ -129,7 +129,7 @@ export default class WFRP3eActorSheet extends ActorSheet
 			.click(this._onStanceMeterLinkClick.bind(this, 1))
 			.contextmenu(this._onStanceMeterLinkClick.bind(this, -1));
 
-		html.find(".talent-trigger").click(this._onTalentTriggerClick.bind(this))
+		html.find(".effect-trigger").click(this._onEffectTriggerClick.bind(this))
 	}
 
 	/**
@@ -374,8 +374,8 @@ export default class WFRP3eActorSheet extends ActorSheet
 		this.actor.adjustStanceMeter(event.currentTarget.dataset.stance, amount);
 	}
 
-	_onTalentTriggerClick(event)
+	_onEffectTriggerClick(event)
 	{
-		this._getItemById(event).useItem();
+		this._getItemById(event).useItem({index: event.target.dataset.index});
 	}
 }

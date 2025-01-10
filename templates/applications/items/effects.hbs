@@ -19,12 +19,19 @@
 							name=(concat @root.fields.effects.fieldPath "." @index "." @root.fields.effects.element.fields.type.fieldPath)
 							localize=true}}
 
+				{{#if (sameAs effect.type "onPreCheckTrigger")}}
+					{{formGroup @root.fields.effects.element.fields.conditionScript
+								name=(concat @root.fields.effects.fieldPath "." @index "." @root.fields.effects.element.fields.conditionScript.fieldPath)
+								value=effect.conditionScript
+								localize=true
+								rows=9}}
+				{{/if}}
+
 				{{formGroup @root.fields.effects.element.fields.script
 							name=(concat @root.fields.effects.fieldPath "." @index "." @root.fields.effects.element.fields.script.fieldPath)
 							value=effect.script
 							localize=true
 							rows=9}}
-
 				<div>
 					<a data-action="removeEffect">
 						<span class="fa-solid fa-trash"></span>

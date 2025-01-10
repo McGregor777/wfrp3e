@@ -5,6 +5,39 @@
 	"Main": "Main",
 	"Details": "Details",
 
+	"ABILITY": {
+		"ACTIONS": {
+			"update": "Save Ability",
+			"trigger": "Trigger Ability"
+		},
+		"FIELDS": {
+			"cooldown.label": "Is Cooling Down",
+			"description.label": "Description",
+			"effects": {
+				"conditionScript": {
+					"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Ability.\nMust return a boolean, true if condition is met, false if not.",
+					"label": "Condition Script"
+				},
+				"reverseScript": {
+					"hint": "This script is executed when the effect is deselected.Arguments:\n\t- this: The triggered Ability.",
+					"label": "Reverse Script"
+				},
+				"script": {
+					"hint": "Arguments:\n\t- this: The triggered Ability.",
+					"label": "Script"
+				},
+				"type.label": "Script Trigger"
+			}
+		},
+		"TABS": {
+			"main": "Main",
+			"effects": "Effects"
+		},
+		"WARNINGS": {
+			"cooldown": "This ability has been used during this session already."
+		}
+	},
+
 	"ACTOR.GenerateACharacter": "Generate a Character",
 
 	"ACTION": {
@@ -600,8 +633,18 @@
 		"FIELDS": {
 			"description.label": "Description",
 			"effects": {
-				"script.label": "Script",
-				"script.hint": "Arguments:\n\t- this: The triggered Talent.",
+				"conditionScript": {
+					"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Talent.\nMust return a boolean, true if condition is met, false if not.",
+					"label": "Condition Script"
+				},
+				"reverseScript": {
+					"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Talent.",
+					"label": "Reverse Script"
+				},
+				"script": {
+					"hint": "Arguments:\n\t- this: The triggered Talent.",
+					"label": "Script"
+				},
 				"type.label": "Script Trigger"
 			},
 			"rechargeTokens.label": "Recharge Tokens",

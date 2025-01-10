@@ -197,48 +197,28 @@ export default class CheckHelper
 	 * @param {Object} startingPool The starting dice pool.
 	 * @returns {Promise<void>}
 	 */
-	static async triggerCheckEffects(actor, checkData, startingPool)
+	static async triggerCheckPreparationEffects(actor, checkData, startingPool)
 	{
-		const triggeredItems = actor.findTriggeredItems("onCheckPrepraration");
-		for(const item of triggeredItems) {
-			const effects =  item.system.effects.filter(effect => effect.type === "onCheckPrepraration");
-			for(const effect of effects) {
-				try {
-					const fn = new foundry.utils.AsyncFunction(
-						"actor",
-						"checkData",
-						"startingPool",
-						effect.script
-					);
-					await fn.call(item, actor, checkData, startingPool);
-				}
-				catch(error) {
-					console.error(error);
-				}
-			}
+		const triggeredEffects = actor.findTriggeredEffects("onCheckPrepraration");
+		for(const effect of triggeredEffects) {
+			await fromUuid(effect.parent).then(item => item.triggerEffect(
+				effect, {
+					parameters: [actor, checkData, startingPool],
+					parameterNames: ["actor", "checkData", "startingPool"]
+				}));
 		}
 
 		if(checkData.targets.length > 0) {
-			const targetTriggeredItems = await fromUuid(checkData.targets[0]).then(
-				actor => actor.findTriggeredItems("onTargettingCheckPreparation")
+			const targetTriggeredEffects = await fromUuid(checkData.targets[0]).then(
+				actor => actor.findTriggeredEffects("onTargettingCheckPreparation")
 			);
 
-			for(const item of targetTriggeredItems) {
-				const effects =  item.system.effects.filter(effect => effect.type === "onTargettingCheckPreparation");
-				for(const effect of effects) {
-					try {
-						const fn = new foundry.utils.AsyncFunction(
-							"actor",
-							"checkData",
-							"startingPool",
-							effect.script
-						);
-						await fn.call(item, actor, checkData, startingPool);
-					}
-					catch(error) {
-						console.error(error);
-					}
-				}
+			for(const effect of targetTriggeredEffects) {
+				await fromUuid(effect.parent).then(item => item.triggerEffect(
+					effect, {
+						parameters: [actor, checkData, startingPool],
+						parameterNames: ["actor", "checkData", "startingPool"]
+					}));
 			}
 		}
 	}
@@ -263,19 +243,11 @@ export default class CheckHelper
 
 				const effects =  item.system.effects.filter(effect => effect.type === "onCheckTrigger");
 				for(const effect of effects) {
-					try {
-						const fn = new foundry.utils.AsyncFunction(
-							"actor",
-							"chatMessage",
-							"checkData",
-							"roll",
-							effect.script
-						);
-						await fn.call(selectedTalent, actor, chatMessage, checkData, roll);
-					}
-					catch(error) {
-						console.error(error);
-					}
+					await selectedTalent.triggerEffect(
+						effect, {
+							parameters: [actor, chatMessage, checkData, roll],
+							parameterNames: ["actor", "chatMessage", "checkData", "roll"]
+						});
 				}
 			}
 		}

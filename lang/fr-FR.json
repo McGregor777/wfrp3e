@@ -5,6 +5,39 @@
 	"Main": "Principal",
 	"Details": "Détails",
 
+	"ABILITY": {
+		"ACTIONS": {
+			"update": "Enregistrer l'aptitude",
+			"trigger": "Déclencher l'aptitude'"
+		},
+		"FIELDS": {
+			"cooldown.label": "En rechargement",
+			"description.label": "Description",
+			"effects": {
+				"conditionScript": {
+					"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Ability.\nMust return a boolean, true if condition is met, false if not.",
+					"label": "Script conditionnel"
+				},
+				"reverseScript": {
+					"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Ability.",
+					"label": "Script inverse"
+				},
+				"script": {
+					"hint": "Arguments:\n\t- this: The triggered Ability.",
+					"label": "Script"
+				},
+				"type.label": "Déclenchement du script"
+			}
+		},
+		"TABS": {
+			"main": "Principal",
+			"effects": "Effets"
+		},
+		"WARNINGS": {
+			"cooldown": "Cette aptitude a déjà été utilisée durant la session."
+		}
+	},
+
 	"ACTOR.GenerateACharacter": "Générer un Personnage",
 
 	"ACTION": {
@@ -599,8 +632,18 @@
 		"FIELDS": {
 			"description.label": "Description",
 			"effects": {
-				"script.label": "Script",
-				"script.hint": "Arguments:\n\t- this: The triggered Talent.",
+				"conditionScript": {
+					"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Talent.\nMust return a boolean, true if condition is met, false if not.",
+					"label": "Script conditionnel"
+				},
+				"reverseScript": {
+					"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Talent.",
+					"label": "Script inverse"
+				},
+				"script": {
+					"hint": "Arguments:\n\t- this: The triggered Talent.",
+					"label": "Script"
+				},
 				"type.label": "Déclenchement du script"
 			},
 			"rechargeTokens.label": "Jetons de recharge",
