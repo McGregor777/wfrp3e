@@ -1,26 +1,27 @@
+import WFRP3eItemSheetV2 from "./WFRP3eItemSheetV2.js";
+
 /** @inheritDoc */
-export default class WFRP3eActionSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2)
+export default class WFRP3eActionSheetV2 extends WFRP3eItemSheetV2
 {
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
-		classes: ["wfrp3e", "sheet", "item", "action"],
+		classes: [...this.DEFAULT_OPTIONS.classes, "action"],
 		actions: {
-			addEffect: this._addEffect,
-			editEffect: this._editEffect,
-			removeEffect: this._removeEffect,
-			editImage: this._editImage
-		},
-		form: {closeOnSubmit: true},
-		position: {width: 600}
+			...this.DEFAULT_OPTIONS.actions,
+			addActionEffect: this._addActionEffect,
+			editActionEffect: this._editActionEffect,
+			removeActionEffect: this._removeActionEffect
+		}
 	}
 
 	/** @inheritDoc */
 	static PARTS = {
 		header: {template: "systems/wfrp3e/templates/applications/header.hbs"},
-		type:  {template: "systems/wfrp3e/templates/applications/items/action-sheet-v2/type.hbs"},
+		type: {template: "systems/wfrp3e/templates/applications/items/action-sheet-v2/type.hbs"},
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
 		conservative: {template: "systems/wfrp3e/templates/applications/items/action-sheet-v2/main.hbs"},
 		reckless: {template: "systems/wfrp3e/templates/applications/items/action-sheet-v2/main.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	}
 
@@ -32,21 +33,12 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 	}
 
 	/** @inheritDoc */
-	async _prepareContext(options)
-	{
-		return {
-			...await super._prepareContext(options),
-			document: this.document.toObject(),
-			fields: this.item.schema.fields,
-			system: this.item.system,
-			tabs: this._getMainTabs()
-		};
-	}
-
-	/** @inheritDoc */
 	async _preparePartContext(partId, context)
 	{
 		switch(partId) {
+			case "tabs":
+				context.tabs = this._getMainTabs();
+				break;
 			case "type":
 				context.fields = this.item.system.schema.fields;
 				break;
@@ -67,24 +59,18 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 					tabs: this._getSubTabs(partId)
 				};
 				break;
+			case "effects":
+				context = {
+					...context,
+					effects: this.document.effects,
+					tab: context.tabs[partId]
+				}
 			case "footer":
 				context.buttons = this._getFooterButtons();
 				break;
 		}
 
 		return context;
-	}
-
-	/** @inheritDoc */
-	_onRender(context, options)
-	{
-		for(const element of this.element.querySelectorAll("file-picker, file-picker input"))
-			element.addEventListener("change", this._updateImages.bind(this, options));
-
-		for(const element of this.element.querySelectorAll("prose-mirror"))
-			element.addEventListener("change", this._updateEnrichedProperty.bind(this, options));
-
-		return super._onRender(context, options);
 	}
 
 	/**
@@ -96,7 +82,8 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 	{
 		const tabs = {
 			conservative: {id: "conservative", group: "primary", label: "STANCES.conservative"},
-			reckless: {id: "reckless", group: "primary", label: "STANCES.reckless"}
+			reckless: {id: "reckless", group: "primary", label: "STANCES.reckless"},
+			effects: {id: "effects", group: "primary", label: "ACTION.TABS.effects"}
 		};
 
 		for(const value of Object.values(tabs)) {
@@ -138,39 +125,12 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 	}
 
 	/**
-	 * Updates the property with an enriched value.
-	 * @param options
-	 * @param event {Event}
-	 * @protected
-	 */
-	_updateEnrichedProperty(options, event)
-	{
-		foundry.utils.setProperty(this.item, event.target.name, event.target.value);
-
-		this.render(options);
-	}
-
-	/**
-	 * Updates images which input have changed.
-	 * @param options
-	 * @param event {Event}
-	 * @protected
-	 */
-	_updateImages(options, event)
-	{
-		const rootElement = event.target.closest("[name]");
-
-		for(const element of this.element.querySelectorAll(`img[data-edit="${rootElement.name}"]`))
-			element.src = rootElement.value;
-	}
-
-	/**
 	 * Opens the Action Effect Editor in order to add a new effect to the Action.
 	 * @param event {Event}
 	 * @returns {Promise<void>}
 	 * @protected
 	 */
-	static async _addEffect(event)
+	static async _addActionEffect(event)
 	{
 		await this.item.createActionEffect(event.target.closest("section[data-stance]").dataset.stance);
 	}
@@ -181,7 +141,7 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 	 * @returns {Promise<void>}
 	 * @protected
 	 */
-	static async _editEffect(event)
+	static async _editActionEffect(event)
 	{
 		await this.item.editActionEffect(
 			event.target.closest("section[data-stance]").dataset.stance,
@@ -196,7 +156,7 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 	 * @returns {Promise<void>}
 	 * @protected
 	 */
-	static async _removeEffect(event)
+	static async _removeActionEffect(event)
 	{
 		await foundry.applications.api.DialogV2.confirm({
 			window: {title: game.i18n.localize("DIALOG.TITLE.EffectDeletion")},
@@ -211,32 +171,5 @@ export default class WFRP3eActionSheetV2 extends foundry.applications.api.Handle
 					);
 			}
 		});
-	}
-
-	// TODO: Remove _editImage() method in V13
-	/**
-	 * Handles changing a Document's image.
-	 * @param {MouseEvent} event  The click event.
-	 * @returns {Promise}
-	 * @protected
-	 */
-	static async _editImage(event)
-	{
-		const picker = new FilePicker({
-			type: "image",
-			current: foundry.utils.getProperty(this.document, event.target.dataset.edit),
-			allowUpload: true,
-			callback: src => {
-				for(const element of this.element.querySelectorAll(`img[data-edit="${event.target.dataset.edit}"]`))
-					element.src = src;
-
-				for(const element of this.element.querySelectorAll(
-					`input[name="${event.target.dataset.edit}"], file-picker[name="${event.target.dataset.edit}"]`
-				))
-					element.value = src;
-			}
-		});
-
-		return picker.browse();
 	}
 }

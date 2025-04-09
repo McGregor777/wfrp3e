@@ -1,6 +1,7 @@
 import {WFRP3e} from "./modules/config.js";
 import CharacterGenerator from "./modules/applications/CharacterGenerator.js";
 import CheckBuilderV2 from "./modules/applications/CheckBuilderV2.js";
+import WFRP3eEffectConfig from "./modules/applications/WFRP3eEffectConfig.js";
 import WFRP3eCharacterSheet from "./modules/applications/actors/WFRP3eCharacterSheet.js";
 import WFRP3eCreatureSheet from "./modules/applications/actors/WFRP3eCreatureSheet.js";
 import WFRP3eGroupSheet from "./modules/applications/actors/WFRP3eGroupSheet.js";
@@ -46,6 +47,7 @@ import WFRP3eSkillDataModel from "./modules/data/items/WFRP3eSkillDataModel.js";
 import WFRP3eTalentDataModel from "./modules/data/items/WFRP3eTalentDataModel.js";
 import WFRP3eTrappingDataModel from "./modules/data/items/WFRP3eTrappingDataModel.js";
 import WFRP3eWeaponDataModel from "./modules/data/items/WFRP3eWeaponDataModel.js";
+import WFRP3eEffectDataModel from "./modules/data/WFRP3eEffectDataModel.js";
 import ChallengeDie from "./modules/dice/ChallengeDie.js";
 import CharacteristicDie from "./modules/dice/CharacteristicDie.js";
 import ConservativeDie from "./modules/dice/ConservativeDie.js";
@@ -54,6 +56,7 @@ import FortuneDie from "./modules/dice/FortuneDie.js";
 import MisfortuneDie from "./modules/dice/MisfortuneDie.js";
 import RecklessDie from "./modules/dice/RecklessDie.js";
 import WFRP3eActor from "./modules/documents/WFRP3eActor.js"
+import WFRP3eEffect from "./modules/documents/WFRP3eEffect.js"
 import WFRP3eItem from "./modules/documents/WFRP3eItem.js"
 import CheckHelper from "./modules/CheckHelper.js";
 import WFRP3eRoll from "./modules/WFRP3eRoll.js";
@@ -126,6 +129,16 @@ Hooks.once("init", async () => {
 	});
 	CONFIG.Item.documentClass = WFRP3eItem;
 
+	CONFIG.ActiveEffect.dataModels["base"] = WFRP3eEffectDataModel;
+	CONFIG.ActiveEffect.documentClass = WFRP3eEffect;
+	DocumentSheetConfig.registerSheet(
+		ActiveEffect,
+		"wfrp3e",
+		WFRP3eEffectConfig, {
+			//label: "Advanced Active Effect Config",
+			makeDefault: true
+		});
+
 	CONFIG.Combat.documentClass = WFRP3eCombat;
 	CONFIG.Combatant.documentClass = WFRP3eCombatant;
 
@@ -192,7 +205,7 @@ Hooks.on("getChatLogEntryContext", (html, options) => {
 			return message.rolls.length > 0
 				&& (!Object.hasOwn(message.rolls[0].options.checkData, "outcome") || game.user.isGM);
 		},
-		callback: li => CheckHelper.useTalent(li.attr("data-message-id"))
+		callback: li => CheckHelper.useTalentOrAbility(li.attr("data-message-id"))
 	}, {
 		name: "ROLL.ACTIONS.applyToggledEffects",
 		icon: '<span class="fa-solid fa-check"></span>',
@@ -225,15 +238,6 @@ Hooks.on("renderSidebarTab", (app, html, data) => {
 
 // Update chat messages with dice images
 Hooks.on("renderChatMessage", (app, html, messageData) => {
-	const content = html.find(".message-content");
-
-	html.on("click", ".special-pool-to-player", () => {
-		const poolData = messageData.message.flags.wfrp3e;
-		const dicePool = new DicePool(poolData.dicePool);
-
-		DiceHelpers.displayRollDialog(poolData.roll.data, dicePool, poolData.description, poolData.roll.skillName, poolData.roll.item, poolData.roll.flavor, poolData.roll.sound);
-	});
-
 	html.find(".roll-effects:not(.disabled) .effect-toggle").click((event) => {
 		event.stopPropagation();
 
@@ -260,7 +264,7 @@ Hooks.on("renderActorDirectory", (app, html, data) => {
 });
 
 // Register all WFRP3e special dice for Dice So Nice! support.
-Hooks.once('diceSoNiceReady', (dice3d) => {
+Hooks.once("diceSoNiceReady", (dice3d) => {
 	dice3d.addSystem({id: "wfrp3e", name: "Warhammer Fantasy Roleplay - 3rd Edition"}, "preferred");
 
 	// Characteristic Dice.

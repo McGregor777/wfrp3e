@@ -8,9 +8,11 @@
 			<span class="recharge-token-counter">{{{talent.system.rechargeTokens}}}</span>
 		</a>
 
-		{{#each ability.system.effects as |effect ef|}}
-			{{#if (sameAs effect.type "onTrigger")}}
-				<a class="effect-trigger" data-index="{{ef}}">{{localize "ABILITY.ACTIONS.trigger"}}</a>
+		{{#each ability.effects as |effect ef|}}
+			{{#if (sameAs effect.system.type "onTrigger")}}
+				<a class="effect-trigger" data-id="{{effect.id}}">
+					{{localize "ABILITY.ACTIONS.trigger"}}
+				</a>
 			{{/if}}
 		{{/each}}
 

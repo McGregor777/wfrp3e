@@ -354,6 +354,10 @@ export default class WFRP3eActor extends Actor
 					field: "system.socket",
 					operator: "is_empty",
 					negate: true
+				}, {
+					field: "effects",
+					operator: "is_empty",
+					negate: true
 				}]
 			}),
 			...this.items.search({
@@ -363,32 +367,30 @@ export default class WFRP3eActor extends Actor
 					value: "talent",
 					negate: true
 				}, {
-					field: "system.effects",
+					field: "effects",
 					operator: "is_empty",
 					negate: true
 				}]
 			})
-		].filter(item => item.system.effects
-			.filter(effect => {
-				return !(effect.type !== triggerType
-					|| effect.conditionScript && !item.checkEffectConditionScript(
-						effect, {parameters, parameterNames}
-					));
-			}).length > 0);
+		].filter(item => item.effects.filter(
+			effect => {
+				// Check if the WFRP3eEffect's trigger type matches, and if it has a condition script, that it returns true.
+				return !(effect.system.type !== triggerType
+					|| effect.system.conditionScript
+						&& !effect.checkEffectConditionScript({parameters, parameterNames}));
+			}).length > 0
+		);
 	}
 
 	/**
 	 * Finds every effect triggered by a specific script trigger.
 	 * @param {string} triggerType The type of script trigger.
-	 * @returns {Object[]} An Array of triggered effects.
+	 * @returns {WFRP3eEffect[]} An Array of triggered WFRP3eEffects.
 	 */
 	findTriggeredEffects(triggerType)
 	{
 		return this.findTriggeredItems(triggerType).map(item => {
-			 return {
-				 ...item.system.effects.find(effect => effect.type === triggerType),
-				 parent: item.uuid
-			}
+			 return item.effects.find(effect => effect.system.type === triggerType)
 		});
 	}
 

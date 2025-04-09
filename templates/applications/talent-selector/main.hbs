@@ -1,12 +1,16 @@
 <section>
 	{{#each tabs as |tab|}}
-		<section class="tab {{tab.id}} {{tab.cssClass}} item-container talent-container"
+		<section class="tab {{tab.id}} {{tab.cssClass}} item-container"
 				 data-tab="{{tab.id}}"
 				 data-group="{{tab.group}}">
-			{{#with (lookup @root.talents tab.id) as |talents|}}
-				{{#each talents}}
+			{{#with (lookup @root.items tab.id) as |items|}}
+				{{#each items}}
 					<label>
-						{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=this}}
+						{{#if (sameAs this.type "talent")}}
+							{{>systems/wfrp3e/templates/partials/item-talent-card.hbs talent=this}}
+						{{else if (sameAs this.type "ability")}}
+							{{>systems/wfrp3e/templates/partials/item-ability-card.hbs ability=this}}
+						{{/if}}
 
 						<input name="selection" value="{{this.uuid}}" type="radio" />
 					</label>

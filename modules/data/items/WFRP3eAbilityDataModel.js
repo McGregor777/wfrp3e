@@ -10,25 +10,7 @@ export default class WFRP3eAbilityDataModel extends foundry.abstract.TypeDataMod
 
 		return {
 			cooldown: new fields.BooleanField(),
-			description: new fields.HTMLField(),
-			effects: new fields.ArrayField(
-				new fields.SchemaField({
-					conditionScript: new fields.JavaScriptField({
-						hint: "ABILITY.FIELDS.effects.conditionScript.hint",
-						label: "ABILITY.FIELDS.effects.conditionScript.label"
-					}),
-					script: new fields.JavaScriptField({
-						async: true,
-						hint: "ABILITY.FIELDS.effects.script.hint",
-						label: "ABILITY.FIELDS.effects.script.label"
-					}),
-					type: new fields.StringField({
-						choices: CONFIG.WFRP3e.scriptTypes,
-						initial: Object.keys(CONFIG.WFRP3e.scriptTypes)[0],
-						label: "ABILITY.FIELDS.effects.type.label",
-						required: true
-					})
-				}, {initial: {script: null, type: Object.keys(CONFIG.WFRP3e.scriptTypes)[0]}}))
+			description: new fields.HTMLField()
 		};
 	}
 

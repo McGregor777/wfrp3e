@@ -242,11 +242,11 @@ export default class WFRP3eRoll extends Roll
 	static async triggerOnCheckRollEffects(actor, checkData, roll)
 	{
 		const triggeredEffects = actor.findTriggeredEffects("onCheckRoll");
+
 		for(const effect of triggeredEffects)
-			await fromUuid(effect.parent).then(item => item.triggerEffect(
-				effect, {
-					parameters: [actor, checkData, roll],
-					parameterNames: ["actor", "checkData", "roll"]
-				}));
+			await effect.triggerEffect({
+				parameters: [actor, checkData, roll],
+				parameterNames: ["actor", "checkData", "roll"]
+			});
 	}
 }

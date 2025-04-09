@@ -111,7 +111,7 @@ export default class WFRP3eActorSheet extends ActorSheet
 		html.find(".item-edit-link").click(this._onItemEditClick.bind(this));
 		html.find(".item-delete-link").click(this._onItemDeleteClick.bind(this));
 
-		html.find(".item-name-link")
+		html.find(".item-name-link, .talent-trigger")
 			.click(this._onItemLeftClick.bind(this))
 			.contextmenu(this._onItemRightClick.bind(this));
 
@@ -129,7 +129,7 @@ export default class WFRP3eActorSheet extends ActorSheet
 			.click(this._onStanceMeterLinkClick.bind(this, 1))
 			.contextmenu(this._onStanceMeterLinkClick.bind(this, -1));
 
-		html.find(".effect-trigger").click(this._onEffectTriggerClick.bind(this))
+		html.find(".effect-trigger").click(this._onEffectTriggerClick.bind(this));
 	}
 
 	/**
@@ -366,7 +366,7 @@ export default class WFRP3eActorSheet extends ActorSheet
 	/**
 	 * Performs follow-up operations after clicks on a stance meter link.
 	 * @param {Number} amount
-	 * @param {MouseEvent}  event
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	_onStanceMeterLinkClick(amount, event)
@@ -374,8 +374,13 @@ export default class WFRP3eActorSheet extends ActorSheet
 		this.actor.adjustStanceMeter(event.currentTarget.dataset.stance, amount);
 	}
 
+	/**
+	 * Performs follow-up operations after clicks on an effect trigger.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
 	_onEffectTriggerClick(event)
 	{
-		this._getItemById(event).useItem({index: event.target.dataset.index});
+		this._getItemById(event).useItem({id: event.target.dataset.id});
 	}
 }

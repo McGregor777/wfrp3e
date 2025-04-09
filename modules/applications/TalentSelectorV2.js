@@ -29,7 +29,7 @@ export default class TalentSelectorV2 extends foundry.applications.api.Handlebar
 	}
 
 	/** @inheritDoc */
-	tabGroups = {talentTypes: "focus"}
+	tabGroups = {types: "focus"}
 
 	/** @inheritDoc */
 	async _preparePartContext(partId, context)
@@ -39,7 +39,7 @@ export default class TalentSelectorV2 extends foundry.applications.api.Handlebar
 				context.tabs = this._getTabs()
 				break;
 			case "main":
-				context.talents = this.options.talents;
+				context.items = this.options.items;
 				break;
 			case "footer":
 				context.buttons = this._getFooterButtons();
@@ -77,17 +77,21 @@ export default class TalentSelectorV2 extends foundry.applications.api.Handlebar
 	_getTabs()
 	{
 		const tabs = {};
-		let activeTalentType = null;
+		let activeType = null;
 
-		for(const [talentType, talents] of Object.entries(this.options.talents)) {
-			if(talents.length > 0) {
-				tabs[talentType] = {id: talentType, group: "talentTypes", label: CONFIG.WFRP3e.talentTypes[talentType]}
+		for(const [type, items] of Object.entries(this.options.items)) {
+			if(items.length > 0) {
+				tabs[type] = {id: type, group: "types"}
 
-				if(activeTalentType === null) {
-					activeTalentType = talentType;
+				tabs[type].label = Object.keys(CONFIG.WFRP3e.talentTypes).includes(type)
+					? CONFIG.WFRP3e.talentTypes[type]
+					: tabs[type].label = "TYPES.Item." + items[0].type;
 
-					tabs[talentType] = {
-						...tabs[talentType],
+				if(activeType === null) {
+					activeType = type;
+
+					tabs[type] = {
+						...tabs[type],
 						active: true,
 						cssClass: "active"
 					};

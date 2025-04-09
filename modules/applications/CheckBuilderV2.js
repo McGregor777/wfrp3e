@@ -382,6 +382,7 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 				  action: action.uuid,
 				  actor: actor.uuid,
 				  characteristic: characteristicName,
+				  challengeLevel: (["melee", "ranged"].includes(action.system.type) ? "easy" : "simple"),
 				  face,
 				  skill: skill?.uuid,
 				  stance,
@@ -394,10 +395,8 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 					  expertise: skill?.system.trainingLevel ?? 0,
 					  conservative: stance < 0 ? Math.abs(stance) : 0,
 					  reckless: stance > 0 ? stance : 0,
-					  challenge: action.system[face].difficultyModifiers.challengeDice
-						  + (["melee", "ranged"].includes(action.system.type)
-							  ? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
-							  : 0),
+					  challenge: CONFIG.WFRP3e.challengeLevels[checkData.challengeLevel].challengeDice
+						  + action.system[face].difficultyModifiers.challengeDice,
 					  misfortune: action.system[face].difficultyModifiers.misfortuneDice
 						  + (match && match[5] === game.i18n.localize("ACTION.CHECK.targetDefence")
 						  	&& checkData.targets.length > 0
@@ -461,13 +460,12 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 	{
 		const actor = await fromUuid(this.dicePool.checkData.actor),
 			  item = await fromUuid(itemUuid),
-			  effects = item.system.effects.filter(effect => effect.type === "onPreCheckTrigger");
+			  effects = item.effects.filter(effect => effect.system.type === "onPreCheckTrigger");
 
 		for(const effect of effects)
-			await item.triggerEffect(
-				effect, {
-					parameters: [actor, this.dicePool, this.dicePool.checkData],
-					parameterNames: ["actor", "dicePool", "checkData"]
-				});
+			await effect.triggerEffect({
+				parameters: [actor, this.dicePool, this.dicePool.checkData],
+				parameterNames: ["actor", "dicePool", "checkData"]
+			});
 	}
 }

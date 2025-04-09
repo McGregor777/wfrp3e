@@ -14,9 +14,11 @@
 				<span class="recharge-token-counter">{{{talent.system.rechargeTokens}}}</span>
 			</a>
 
-			{{#each talent.system.effects as |effect|}}
-				{{#if (sameAs effect.type "onTrigger")}}
-					<a class="talent-trigger">{{localize "TALENT.ACTIONS.trigger"}}</a>
+			{{#each talent.effects as |effect|}}
+				{{#if (sameAs effect.system.type "onTrigger")}}
+					<a class="effect-trigger" data-id="{{effect._id}}">
+						{{localize "TALENT.ACTIONS.trigger"}}
+					</a>
 				{{/if}}
 			{{/each}}
 

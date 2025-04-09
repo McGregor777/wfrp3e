@@ -1,43 +1,20 @@
 <section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
-	<nav class="sheet-tabs tabs" aria-role="{{localize 'SHEETS.FormNavLabel'}}">
-		{{#each tabs as |tab|}}
-			<a class="{{tab.cssClass}}" data-action="tab" data-group="{{tab.group}}" data-tab="{{tab.id}}">
-				<i class="{{tab.icon}}"></i>
-				<label>{{tab.label}}</label>
+	{{#each effects as |effect ef|}}
+		<div class="effect flexrow" data-uuid="{{effect.uuid}}">
+			<a class="icon" data-action="editEffect">
+				<img src="{{effect.img}}" alt="{{effect.img}}" height="40" />
 			</a>
-		{{/each}}
 
-		<a data-action="addEffect">
-			<span class="fa-solid fa-plus"></span>
-		</a>
-	</nav>
+			<a data-action="editEffect">{{effect.name}}</a>
 
-	{{#each effects as |effect|}}
-		{{#with (lookup @root.tabs @index) as |tab|}}
-			<section class="effect tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}" data-index="{{@index}}">
-				{{formGroup @root.fields.effects.element.fields.type value=effect.type
-							name=(concat @root.fields.effects.fieldPath "." @index "." @root.fields.effects.element.fields.type.fieldPath)
-							localize=true}}
-
-				{{#if (sameAs effect.type "onPreCheckTrigger")}}
-					{{formGroup @root.fields.effects.element.fields.conditionScript
-								name=(concat @root.fields.effects.fieldPath "." @index "." @root.fields.effects.element.fields.conditionScript.fieldPath)
-								value=effect.conditionScript
-								localize=true
-								rows=9}}
-				{{/if}}
-
-				{{formGroup @root.fields.effects.element.fields.script
-							name=(concat @root.fields.effects.fieldPath "." @index "." @root.fields.effects.element.fields.script.fieldPath)
-							value=effect.script
-							localize=true
-							rows=9}}
-				<div>
-					<a data-action="removeEffect">
-						<span class="fa-solid fa-trash"></span>
-					</a>
-				</div>
-			</section>
-		{{/with}}
+			<a class="flex0" data-action="removeEffect" data-tooltip="{{localize 'ITEM.ACTIONS.deleteEffect' effect=effect.name}}">
+				<span class="fa-solid fa-trash"></span>
+			</a>
+		</div>
 	{{/each}}
+
+	<a data-action="addEffect">
+		<span class="fa-solid fa-plus"></span>
+		{{localize "ITEM.ACTIONS.addEffect"}}
+	</a>
 </section>

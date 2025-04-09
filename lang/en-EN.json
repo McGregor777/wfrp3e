@@ -2,8 +2,6 @@
 	"Confirm": "Confirm",
 	"Finish": "Finish",
 	"Ignore": "Ignore",
-	"Main": "Main",
-	"Details": "Details",
 
 	"ABILITY": {
 		"ACTIONS": {
@@ -12,26 +10,11 @@
 		},
 		"FIELDS": {
 			"cooldown.label": "Is Cooling Down",
-			"description.label": "Description",
-			"effects": {
-				"conditionScript": {
-					"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Ability.\nMust return a boolean, true if condition is met, false if not.",
-					"label": "Condition Script"
-				},
-				"reverseScript": {
-					"hint": "This script is executed when the effect is deselected.Arguments:\n\t- this: The triggered Ability.",
-					"label": "Reverse Script"
-				},
-				"script": {
-					"hint": "Arguments:\n\t- this: The triggered Ability.",
-					"label": "Script"
-				},
-				"type.label": "Script Trigger"
-			}
+			"description.label": "Description"
 		},
 		"TABS": {
-			"main": "Main",
-			"effects": "Effects"
+			"effects": "Effects",
+			"main": "Main"
 		},
 		"WARNINGS": {
 			"cooldown": "This ability has been used during this session already."
@@ -452,6 +435,27 @@
 	"DISEASE.SYMPTOM.DESCRIPTION.Virulent": "Each <strong class=\"symptom-name\">Virulent</strong> symptom acts as a copy of each other symptom the target suffers from.",
 	"DISEASE.SYMPTOM.DESCRIPTION.Weary": "Each <strong class=\"symptom-name\">Weary</strong> symptom adds 1 recharge token to actions performed, or adds 1 fewer token to <em>Ongoing</em> actions.",
 
+	"EFFECT": {
+		"FIELDS": {
+			"conditionScript": {
+				"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Talent.\nMust return a boolean, true if condition is met, false if not.",
+				"label": "Condition Script"
+			},
+			"reverseScript": {
+				"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Talent.",
+				"label": "Reverse Script"
+			},
+			"script": {
+				"hint": "Arguments:\n\t- this: The triggered Talent.",
+				"label": "Script"
+			},
+			"type.label": "Script Trigger"
+		},
+		"TABS": {
+			"scripts": "Scripts"
+		}
+	},
+	
 	"ENCOUNTER.Combat": "Combat",
 	"ENCOUNTER.Social": "Social",
 
@@ -583,7 +587,8 @@
 		},
 		"WARNINGS": {
 			"notAllowed": "You are not allowed to toggle effects for this check.",
-			"notEnoughSymbol": "You have not enough {symbol} to toggle this effect."
+			"notEnoughSymbol": "You have not enough {symbol} to toggle this effect.",
+			"noTalentNorAbilityToUse": "There is no Talent nor Ability to use."
 		},
 		"availableEffects": "Available Effects"
 	},
@@ -644,21 +649,6 @@
 		},
 		"FIELDS": {
 			"description.label": "Description",
-			"effects": {
-				"conditionScript": {
-					"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Talent.\nMust return a boolean, true if condition is met, false if not.",
-					"label": "Condition Script"
-				},
-				"reverseScript": {
-					"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Talent.",
-					"label": "Reverse Script"
-				},
-				"script": {
-					"hint": "Arguments:\n\t- this: The triggered Talent.",
-					"label": "Script"
-				},
-				"type.label": "Script Trigger"
-			},
 			"rechargeTokens.label": "Recharge Tokens",
 			"talentSocket.label": "Talent Socket",
 			"type.label": "Talent Type"
@@ -669,8 +659,8 @@
 			"taken": "{type} Socket taken by {talent}"
 		},
 		"TABS": {
-			"main": "Main",
-			"effects": "Effects"
+			"effects": "Effects",
+			"main": "Main"
 		},
 		"TYPES": {
 			"any": "Any",
@@ -684,7 +674,6 @@
 		},
 		"WARNINGS": {
 			"notSocketed": "You cannot use a Talent that is not socketed.",
-			"noTalentToUse": "There is no Talent to use.",
 			"recharging": "You cannot use a Talent that is recharging."
 		}
 	},

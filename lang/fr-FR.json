@@ -2,8 +2,6 @@
 	"Confirm": "Confirmer",
 	"Finish": "Terminer",
 	"Ignore": "Ignorer",
-	"Main": "Principal",
-	"Details": "Détails",
 
 	"ABILITY": {
 		"ACTIONS": {
@@ -12,26 +10,11 @@
 		},
 		"FIELDS": {
 			"cooldown.label": "En rechargement",
-			"description.label": "Description",
-			"effects": {
-				"conditionScript": {
-					"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Ability.\nMust return a boolean, true if condition is met, false if not.",
-					"label": "Script conditionnel"
-				},
-				"reverseScript": {
-					"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Ability.",
-					"label": "Script inverse"
-				},
-				"script": {
-					"hint": "Arguments:\n\t- this: The triggered Ability.",
-					"label": "Script"
-				},
-				"type.label": "Déclenchement du script"
-			}
+			"description.label": "Description"
 		},
 		"TABS": {
-			"main": "Principal",
-			"effects": "Effets"
+			"effects": "Effets",
+			"main": "Principal"
 		},
 		"WARNINGS": {
 			"cooldown": "Cette aptitude a déjà été utilisée durant la session."
@@ -451,6 +434,27 @@
 	"DISEASE.SYMPTOM.DESCRIPTION.Virulent": "Chaque symptôme <strong class=\"symptom-name\">Virulent</strong> agit comme une copie de chaque autre symptôme dont la cible souffre.",
 	"DISEASE.SYMPTOM.DESCRIPTION.Weary": "Chaque symptôme <strong class=\"symptom-name\">Fatigué</strong> ajoute 1 jeton de recharge aux actions effectuées, ou ajoute 1 jeton de moins aux actions <em>Ongoing</em>.",
 
+	"EFFECT": {
+		"FIELDS": {
+			"conditionScript": {
+				"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Talent.\nMust return a boolean, true if condition is met, false if not.",
+				"label": "Script conditionnel"
+			},
+			"reverseScript": {
+				"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Talent.",
+				"label": "Script inverse"
+			},
+			"script": {
+				"hint": "Arguments:\n\t- this: The triggered Talent.",
+				"label": "Script"
+			},
+			"type.label": "Déclenchement du script"
+		},
+		"TABS": {
+			"scripts": "Scripts"
+		}
+	},
+
 	"ENCOUNTER.Combat": "Combat",
 	"ENCOUNTER.Social": "Social",
 
@@ -467,6 +471,13 @@
 	"INSANITY.SeverityRating": "Niveau de Gravité",
 	"INSANITY.Traits": "Traits",
 	"INSANITY.Description": "Description",
+	"ITEM": {
+		"ACTIONS": {
+			"addEffect": "Ajouter un Effet",
+			"deleteEffect": "Supprimer l'Effet {effect}"
+		}
+	},
+
 
 	"MONEY.Value": "Valeur",
 	"MONEY.Brass": "Cuivre",
@@ -582,7 +593,8 @@
 		},
 		"WARNINGS": {
 			"notAllowed": "Vous n'êtes pas autorisé à activer des effets pour ce test.",
-			"notEnoughSymbol": "Vous manquez de {symbol} pour activer cet effet."
+			"notEnoughSymbol": "Vous manquez de {symbol} pour activer cet effet.",
+			"noTalentNorAbilityToUse": "Il n'y a aucune aptitude ni aucun talent à utiliser."
 		},
 		"availableEffects": "Effets disponibles"
 	},
@@ -643,21 +655,6 @@
 		},
 		"FIELDS": {
 			"description.label": "Description",
-			"effects": {
-				"conditionScript": {
-					"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Talent.\nMust return a boolean, true if condition is met, false if not.",
-					"label": "Script conditionnel"
-				},
-				"reverseScript": {
-					"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Talent.",
-					"label": "Script inverse"
-				},
-				"script": {
-					"hint": "Arguments:\n\t- this: The triggered Talent.",
-					"label": "Script"
-				},
-				"type.label": "Déclenchement du script"
-			},
 			"rechargeTokens.label": "Jetons de recharge",
 			"talentSocket.label": "Emplacement de talent",
 			"type.label": "Type de talent"
@@ -668,8 +665,8 @@
 			"taken": "Emplacement {type} occupé par {talent}"
 		},
 		"TABS": {
-			"main": "Principal",
-			"effects": "Effets"
+			"effects": "Effets",
+			"main": "Principal"
 		},
 		"TYPES": {
 			"any": "Au choix",
@@ -683,7 +680,6 @@
 		},
 		"WARNINGS": {
 			"notSocketed": "Vous ne pouvez pas utiliser un talent n'occupant aucun emplacement.",
-			"noTalentToUse": "Il n'y a aucun talent à utiliser.",
 			"recharging": "Vous ne pouvez pas utiliser un talent en cours de rechargement."
 		}
 	},

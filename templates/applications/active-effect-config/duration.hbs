@@ -1,0 +1,33 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{formGroup fields.seconds value=duration.seconds localize=true}}
+
+	{{formGroup fields.startTime value=duration.startTime localize=true}}
+
+	<hr/>
+
+	<div class="form-group">
+		<label>{{ localize "EFFECT.DurationTurns" }}</label>
+
+		<div class="form-fields">
+			<label>{{ localize "COMBAT.Rounds" }}</label>
+			{{formInput fields.rounds value=duration.rounds localize=true}}
+
+			<label>{{ localize "COMBAT.Turns" }}</label>
+			{{formInput fields.turns value=duration.turns localize=true}}
+		</div>
+	</div>
+
+	{{formGroup fields.combat value=duration.combat localize=true}}
+
+	<div class="form-group">
+		<label>{{ localize "EFFECT.StartTurns" }}</label>
+
+		<div class="form-fields">
+			<label>{{ localize "COMBAT.Round" }}</label>
+			{{formInput fields.startRound value=duration.startRound localize=true}}
+
+			<label>{{ localize "COMBAT.Turn" }}</label>
+			{{formInput fields.startTurn value=duration.startTurn localize=true}}
+		</div>
+	</div>
+</section>

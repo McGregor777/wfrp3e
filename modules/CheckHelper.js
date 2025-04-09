@@ -17,11 +17,10 @@ export default class CheckHelper
 	{
 		const triggeredEffects = actor.findTriggeredEffects("onCheckPrepraration");
 		for(const effect of triggeredEffects) {
-			await fromUuid(effect.parent).then(item => item.triggerEffect(
-				effect, {
-					parameters: [actor, checkData, startingPool],
-					parameterNames: ["actor", "checkData", "startingPool"]
-				}));
+			await effect.triggerEffect({
+				parameters: [actor, checkData, startingPool],
+				parameterNames: ["actor", "checkData", "startingPool"]
+			});
 		}
 
 		if(checkData.targets.length > 0) {
@@ -30,45 +29,53 @@ export default class CheckHelper
 			);
 
 			for(const effect of targetTriggeredEffects) {
-				await fromUuid(effect.parent).then(item => item.triggerEffect(
-					effect, {
-						parameters: [actor, checkData, startingPool],
-						parameterNames: ["actor", "checkData", "startingPool"]
-					}));
+				await effect.triggerEffect({
+					parameters: [actor, checkData, startingPool],
+					parameterNames: ["actor", "checkData", "startingPool"]
+				});
 			}
 		}
 	}
 
 	/**
-	 * Uses a Talent on a Roll.
+	 * Uses a Talent or Ability on a Roll.
 	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
 	 */
-	static async useTalent(chatMessageId)
+	static async useTalentOrAbility(chatMessageId)
 	{
 		const chatMessage = game.messages.get(chatMessageId),
 			  roll = chatMessage.rolls[0],
 			  checkData = roll.options.checkData,
 			  actor = await fromUuid(checkData.actor),
-			  triggeredTalents = actor.findTriggeredItems("onPostCheckTrigger");
+			  triggeredItems = actor.findTriggeredItems(
+				  "onPostCheckTrigger",{
+					  parameters: [actor, chatMessage, checkData, roll],
+					  parameterNames: ["actor", "chatMessage", "checkData", "roll"]
+				  });
 
-		if(triggeredTalents.length > 0) {
-			let selectedTalent = await TalentSelectorV2.wait({talents: sortTalentsByType(triggeredTalents)});
+		if(triggeredItems.length > 0) {
+			const sortedItems = {
+				...sortTalentsByType(triggeredItems),
+				abilities: triggeredItems.filter(item => item.type === "ability")
+			}
+			let selectedTalentUuid = await TalentSelectorV2.wait({items: sortedItems});
 
-			if(selectedTalent) {
-				selectedTalent = await fromUuid(selectedTalent);
+			if(selectedTalentUuid) {
+				const selectedTalent = await fromUuid(selectedTalentUuid),
+					  effects =  selectedTalent.effects.filter(effect => effect.system.type === "onPostCheckTrigger");
 
-				const effects =  item.system.effects.filter(effect => effect.type === "onPostCheckTrigger");
 				for(const effect of effects) {
-					await selectedTalent.triggerEffect(
-						effect, {
-							parameters: [actor, chatMessage, checkData, roll],
-							parameterNames: ["actor", "chatMessage", "checkData", "roll"]
-						});
+					await effect.triggerEffect({
+						parameters: [actor, chatMessage, checkData, roll],
+						parameterNames: ["actor", "chatMessage", "checkData", "roll"]
+					});
 				}
+
+				chatMessage.update({"options.checkData.triggeredItems": checkData.triggeredItems ? checkData.triggeredItems.push(selectedTalentUuid) : [selectedTalentUuid]});
 			}
 		}
 		else
-			ui.notifications.warn(game.i18n.localize("ROLL.WARNINGS.noTalentToUse"));
+			ui.notifications.warn(game.i18n.localize("ROLL.WARNINGS.noTalentNorAbilityToUse"));
 	}
 
 	/**
