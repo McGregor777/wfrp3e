@@ -4,9 +4,7 @@
   "img": "systems/wfrp3e/assets/images/careers/agitator.webp",
   "effects": [],
   "folder": "m8G9zWMGUYpKI5Hg",
-  "flags": {
-    "core": {}
-  },
+  "flags": {},
   "system": {
     "description": "<p>The Empire has stood firm against its enemies for more than 2,500 years. It has prospered in that time to become the most powerful nation in the Old World. The noble and religious leaders are quick to take the credit for this.</p>\n<p>There are those who feel that progress has not happened fast enough. They regard the nobility as parasites living in luxury off the labours of the poor. They declaim the priests as hypocrites who preach virtues they fail to practice. Whilst many people hold such views, usually they content themselves by grumbling over a pint of ale. However, some nurse such vehemence against the social order that they make a career out of calling for change. These agitators take to the streets of the Empire&rsquo;s cities, shouting their grievances in the hope of gathering an audience.</p>\n<p>The issues they complain about are usually local concerns such as a new tax, a military draft, or the state of the drains. Some agitators deal with more controversial matters such as the dangers posed by Chaos. A few are lunatic conspiracists who rant about &ldquo;ratmen&rdquo; in the sewers plotting to topple the Empire. There is little money to be made from preaching change in this manner, though enterprising agitators produce scurrilous pamphlets that interested parties can purchase for a small amount.</p>\n<p>The authorities do not take kindly to criticism, and agitators have to take care that their rabble-rousing does not end in the cells of the nearest watch station. The penalties for those found guilty of sedition can be harsh, and the heads of unlucky agitators adorn bridges and city gates throughout the Empire. For this reason, many agitators keep on the move. The pressing need to relocate, and the need to supplement their meagre income should an opportunity arise, means that agitators are often willing to take up a life of adventure.</p>\n<p><strong>Typical Trappings:</strong> An agitator usually wears a tough leather jacket to protect him in the streets. Many agitators carry bundles of printed pamphlets to help spread their message.</p>\n<p><strong>Career Ability:</strong> Your social initiative checks gain <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼&nbsp;◼</span></p>",
     "advanced": false,
@@ -15,10 +13,6 @@
       "dwarf"
     ],
     "traits": "Basic, Rogue, Social, Urban",
-    "talentSockets": [
-      "reputation",
-      "reputation"
-    ],
     "primaryCharacteristics": [
       "intelligence",
       "fellowship"
@@ -67,14 +61,24 @@
         }
       ]
     },
-    "current": false
+    "current": false,
+    "sockets": [
+      {
+        "type": "reputation",
+        "item": null
+      },
+      {
+        "type": "reputation",
+        "item": null
+      }
+    ]
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.5.1",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1699549805887,
-    "modifiedTime": 1699628577777,
+    "modifiedTime": 1734396551598,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null
@@ -82,8 +86,7 @@
   "_id": "Vcnx5nsMJQMok4rK",
   "sort": 2400000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!Vcnx5nsMJQMok4rK"
 }

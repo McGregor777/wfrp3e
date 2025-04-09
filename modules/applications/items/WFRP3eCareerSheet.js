@@ -18,7 +18,7 @@ export default class WFRP3eCareerSheet extends WFRP3eItemSheet
 			...super.getData(),
 			characteristics: CONFIG.WFRP3e.characteristics,
 			races: {...CONFIG.WFRP3e.availableRaces, any: {name: "RACE.Any"}},
-			talentTypes: {any: "TALENT.TYPE.Any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPE.Insanity"}
+			socketTypes: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"}
 		};
 	}
 
@@ -30,8 +30,8 @@ export default class WFRP3eCareerSheet extends WFRP3eItemSheet
 		html.find(".race-restriction-add").click(this._onRaceRestrictionAddClick.bind(this));
 		html.find(".race-restriction-remove").click(this._onRaceRestrictionRemoveClick.bind(this));
 
-		html.find(".talent-socket-add").click(this._onTalentSocketAddClick.bind(this));
-		html.find(".talent-socket-remove").click(this._onTalentSocketRemoveClick.bind(this));
+		html.find(".socket-add").click(this._onSocketAddClick.bind(this));
+		html.find(".socket-remove").click(this._onSocketRemoveClick.bind(this));
 	}
 
 	/**
@@ -62,9 +62,9 @@ export default class WFRP3eCareerSheet extends WFRP3eItemSheet
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onTalentSocketAddClick(event)
+	async _onSocketAddClick(event)
 	{
-		this.item.addNewTalentSocket();
+		this.item.addNewSocket();
 	}
 
 	/**
@@ -73,8 +73,8 @@ export default class WFRP3eCareerSheet extends WFRP3eItemSheet
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onTalentSocketRemoveClick(event)
+	async _onSocketRemoveClick(event)
 	{
-		this.item.removeLastTalentSocket();
+		this.item.removeLastSocket();
 	}
 }

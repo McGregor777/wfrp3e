@@ -42,7 +42,7 @@ export default class WFRP3eCombat extends Combat
 			// Produce an initiative roll for the Combatant
 			const roll = combatant.getInitiativeRoll(formula);
 			await roll.evaluate({async: true});
-			updates.push({_id: id, initiative: roll.resultSymbols.successes});
+			updates.push({_id: id, initiative: roll.totalSymbols.successes});
 
 			// Construct chat message data
 			let messageData = foundry.utils.mergeObject({

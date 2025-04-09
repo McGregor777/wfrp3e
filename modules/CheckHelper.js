@@ -1,5 +1,5 @@
-import DicePool from "./DicePool.js";
-import CheckBuilder from "./applications/CheckBuilder.js";
+import TalentSelectorV2 from "./applications/TalentSelectorV2.js";
+import {capitalize, sortTalentsByType} from "./helpers.js";
 
 /**
  * The CheckHelper provides methods to prepare checks.
@@ -7,186 +7,75 @@ import CheckBuilder from "./applications/CheckBuilder.js";
 export default class CheckHelper
 {
 	/**
-	 * Prepares a Characteristic check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor}	actor The Character making the check.
-	 * @param {Object} characteristic The Characteristic used for the check.
-	 * @param {Object} [options]
-	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {Promise<void>} The DicePool for a characteristic check.
+	 * Searches and triggers every relevant effects owned either by the Actor performing the check, or its target.
+	 * @param {WFRP3eActor} actor The WFRP3eActor performing the check.
+	 * @param {Object} checkData The check data.
+	 * @param {Object} startingPool The starting dice pool.
+	 * @returns {Promise<void>}
 	 */
-	static async prepareCharacteristicCheck(actor, characteristic, {flavor = null, sound = null} = {})
+	static async triggerCheckPreparationEffects(actor, checkData, startingPool)
 	{
-		const stance = actor.system.stance.current;
-
-		await new CheckBuilder(
-			new DicePool({
-				dice: {
-					characteristic: characteristic.rating - Math.abs(stance),
-					fortune: characteristic.fortune,
-					conservative: stance < 0 ? Math.abs(stance) : 0,
-					reckless: stance > 0 ? stance : 0
-				}
-			}, {
-				checkData: {
-					actor: {
-						actorId: actor._id,
-						sceneId: actor.token?.object.scene._id,
-						tokenId: actor.token?._id
-					},
-					characteristic
-				},
-				flavor,
-				sound
-			})
-		).render(true);
-	}
-
-	/**
-	 * Prepares a Skill check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor}	actor The Character making the check.
-	 * @param {WFRP3eItem} skill The Skill used for the check.
-	 * @param {Object} [options]
-	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {Promise<void>} The DicePool for an skill check.
-	 */
-	static async prepareSkillCheck(actor, skill, {flavor = null, sound = null} = {})
-	{
-		const characteristic = actor.system.characteristics[skill.system.characteristic],
-			  stance = actor.system.stance.current;
-
-		await new CheckBuilder(
-			new DicePool({
-				dice: {
-					characteristic: characteristic.rating - Math.abs(stance),
-					fortune: characteristic.fortune,
-					expertise: skill.system.trainingLevel,
-					conservative: stance < 0 ? Math.abs(stance) : 0,
-					reckless: stance > 0 ? stance : 0
-				}
-			}, {
-				checkData: {
-					actor: {
-						actorId: actor._id,
-						sceneId: actor.token?.object.scene._id,
-						tokenId: actor.token?._id
-					},
-					skill,
-					characteristic: {name: skill.system.characteristic, ...characteristic}
-				},
-				flavor,
-				sound
-			})
-		).render(true);
-	}
-
-	/**
-	 * Prepares an Action check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor} actor The Character using the Action.
-	 * @param {WFRP3eItem} action The Action that is used.
-	 * @param {string} face The Action face.
-	 * @param {Object} [options]
-	 * @param {WFRP3eItem} [options.weapon] The weapon used alongside the Action.
-	 * @param {String} [options.flavor] Some flavor text to add to the Action check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Action check completion.
-	 * @returns {Promise<void>} The DicePool for an action check.
-	 */
-	static async prepareActionCheck(actor, action, face, {weapon = null, flavor = null, sound = null} = {})
-	{
-		const match = action.system[face].check.match(new RegExp(
-			"(([\\p{L}\\s]+) \\((\\p{L}+)\\))( " +
-			game.i18n.localize("ACTION.CHECK.against") +
-			"\\.? ([\\p{L}\\s]+))?", "u")
-		);
-		let skill = null,
-			characteristicName = skill?.system.characteristic ?? "Strength";
-
-		if(match) {
-			skill = actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
-			// Either get the Characteristic specified on the Action's check, or use the Characteristic used by the Skill.
-			characteristicName = Object.entries(CONFIG.WFRP3e.characteristics).find((characteristic) => {
-				return game.i18n.localize(characteristic[1].abbreviation) === match[3];
-			})[0] ?? characteristicName;
+		const triggeredEffects = actor.findTriggeredEffects("onCheckPrepraration");
+		for(const effect of triggeredEffects) {
+			await effect.triggerEffect({
+				parameters: [actor, checkData, startingPool],
+				parameterNames: ["actor", "checkData", "startingPool"]
+			});
 		}
 
-		const characteristic = actor.system.characteristics[characteristicName],
-			  checkData = {
-				  actor: {
-					  actorId: actor._id,
-					  sceneId: actor.token?.object.scene._id,
-					  tokenId: actor.token?._id
-				  },
-				  action,
-				  face,
-				  skill,
-				  characteristic: {name: characteristicName, ...characteristic},
-				  targets: [...game.user.targets].map(target => {
-					  return {
-						  sceneId: target.scene.id,
-						  tokenId: target.id
-					  }
-				  })
-			  },
-			  stance = actor.system.stance.current;
+		if(checkData.targets.length > 0) {
+			const targetTriggeredEffects = await fromUuid(checkData.targets[0]).then(
+				actor => actor.findTriggeredEffects("onTargettingCheckPreparation")
+			);
 
-		if(weapon)
-			checkData.weapon = weapon;
-
-		await new CheckBuilder(
-			new DicePool({
-				dice: {
-					characteristic: characteristic?.rating - Math.abs(stance) ?? 0,
-					fortune: characteristic?.fortune ?? 0,
-					expertise: skill?.system.trainingLevel ?? 0,
-					conservative: stance < 0 ? Math.abs(stance) : 0,
-					reckless: stance > 0 ? stance : 0,
-					challenge: action.system[face].difficultyModifiers.challengeDice +
-						(["melee", "ranged"].includes(action.system.type)
-							? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
-							: 0),
-					misfortune: action.system[face].difficultyModifiers.misfortuneDice +
-						((match ? match[5] === game.i18n.localize("ACTION.CHECK.targetDefence") : false)
-							? checkData.targets.length > 0
-								? game.scenes.get(checkData.targets[0].sceneId)
-									.collections.tokens.get(checkData.targets[0].tokenId).actor.system.totalDefence
-								: 0
-							: 0)
-				}
-			}, {
-				checkData,
-				flavor,
-				sound
-			})
-		).render(true);
+			for(const effect of targetTriggeredEffects) {
+				await effect.triggerEffect({
+					parameters: [actor, checkData, startingPool],
+					parameterNames: ["actor", "checkData", "startingPool"]
+				});
+			}
+		}
 	}
 
 	/**
-	 * Prepares an initiative check.
-	 * @param {WFRP3eActor} actor The Character making the initiative check.
-	 * @param {WFRP3eCombat} combat The Combat document associated with the initiative check.
-	 * @param {Object} [options]
-	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {DicePool} The DicePool for an initiative check.
+	 * Uses a Talent or Ability on a Roll.
+	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
 	 */
-	static prepareInitiativeCheck(actor, combat, {flavor = null, sound = null} = {})
+	static async useTalentOrAbility(chatMessageId)
 	{
-		const characteristic = actor.system.characteristics[combat.initiativeCharacteristic];
-		const stance = actor.system.stance.current ?? actor.system.stance;
+		const chatMessage = game.messages.get(chatMessageId),
+			  roll = chatMessage.rolls[0],
+			  checkData = roll.options.checkData,
+			  actor = await fromUuid(checkData.actor),
+			  triggeredItems = actor.findTriggeredItems(
+				  "onPostCheckTrigger",{
+					  parameters: [actor, chatMessage, checkData, roll],
+					  parameterNames: ["actor", "chatMessage", "checkData", "roll"]
+				  });
 
-		return new DicePool({
-			dice: {
-				characteristic: characteristic.rating - Math.abs(stance),
-				fortune: characteristic.fortune,
-				conservative: stance < 0 ? Math.abs(stance) : 0,
-				reckless: stance > 0 ? stance : 0
+		if(triggeredItems.length > 0) {
+			const sortedItems = {
+				...sortTalentsByType(triggeredItems),
+				abilities: triggeredItems.filter(item => item.type === "ability")
 			}
-		}, {
-			checkData: {actor: actor, characteristic: characteristic, combat},
-			flavor,
-			sound
-		});
+			let selectedTalentUuid = await TalentSelectorV2.wait({items: sortedItems});
+
+			if(selectedTalentUuid) {
+				const selectedTalent = await fromUuid(selectedTalentUuid),
+					  effects =  selectedTalent.effects.filter(effect => effect.system.type === "onPostCheckTrigger");
+
+				for(const effect of effects) {
+					await effect.triggerEffect({
+						parameters: [actor, chatMessage, checkData, roll],
+						parameterNames: ["actor", "chatMessage", "checkData", "roll"]
+					});
+				}
+
+				chatMessage.update({"options.checkData.triggeredItems": checkData.triggeredItems ? checkData.triggeredItems.push(selectedTalentUuid) : [selectedTalentUuid]});
+			}
+		}
+		else
+			ui.notifications.warn(game.i18n.localize("ROLL.WARNINGS.noTalentNorAbilityToUse"));
 	}
 
 	/**
@@ -264,12 +153,12 @@ export default class CheckHelper
 	}
 
 	/**
-	 * Toggles an effect from a Roll, depending on the symbols remaining.
+	 * Toggles an Action Effect from a Roll, depending on the symbols remaining, and execute scripts if necessary.
 	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
 	 * @param {String} symbol The symbol of the effect to toggle.
 	 * @param {Number} index The index of the effect to toggle.
 	 */
-	static toggleEffect(chatMessageId, symbol, index)
+	static async toggleActionEffect(chatMessageId, symbol, index)
 	{
 		const chatMessage = game.messages.get(chatMessageId);
 
@@ -280,81 +169,251 @@ export default class CheckHelper
 
 		const changes = {rolls: chatMessage.rolls},
 			  roll = changes.rolls[0],
-			  toggledEffect = roll.effects[symbol][index],
-			  plural = CONFIG.WFRP3e.symbols[symbol].plural;
+			  toggledEffect = roll.effects[symbol][index];
 
-		// Toggled effect.
 		if(toggledEffect.active === true)
-			toggledEffect.active = false;
-		// Delay/Exertion + Bane effects.
-		else if(["delay", "exertion"].includes(symbol)) {
-			if(roll.remainingSymbols[plural] > 0) {
-				if(toggledEffect.symbolAmount > 1) {
-					if(roll.remainingSymbols.banes >= toggledEffect.symbolAmount - 1)
-						toggledEffect.active = true;
-					else
-						ui.notifications.warn(game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-							symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
-						}));
-				}
-				else
-					toggledEffect.active = true;
+			await CheckHelper._toggleOffActionEffect(toggledEffect, roll, symbol);
+		else {
+			try {
+				const functionName = `toggleOn${capitalize(symbol)}Effect`;
+
+				await CheckHelper[`${functionName}`]
+					? CheckHelper[`${functionName}`](toggledEffect, roll, symbol)
+					: CheckHelper._toggleOnActionEffect(toggledEffect, roll, symbol);
 			}
-			else
-				ui.notifications.warn(game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-					symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
-				}));
+			catch(error) {
+				console.error(`Something went wrong when toggling the Action effect: ${error}`);
+			}
 		}
-		// Sigmar's Comet as Success + Only one Success effect toggled at once.
-		else if(symbol === "success"
-			&& (roll.resultSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)) {
-			roll.effects.success.forEach(effect => effect.active = false);
-			toggledEffect.active = true;
-		}
-		// Sigmar's Comet as Boon.
-		else if(symbol === "boon"
-			&& (roll.remainingSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount))
-			toggledEffect.active = true;
-		// Default.
-		else if(roll.remainingSymbols[plural] >= toggledEffect.symbolAmount)
-			toggledEffect.active = true;
-		else
-			ui.notifications.warn(game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-				symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
-			}));
-
-		roll.remainingSymbols = {...roll.resultSymbols};
-
-		// Recalculate remaining symbols for every type.
-		Object.entries(roll.effects).forEach(effects => {
-			const symbolName = effects[0];
-			const plural = CONFIG.WFRP3e.symbols[symbolName].plural;
-
-			roll.remainingSymbols[plural] = effects[1].filter(effect => effect.active)
-				.reduce((remainingSymbols, effect) => {
-					if(["delay", "exertion"].includes(symbolName)) {
-						remainingSymbols--;
-
-						if(effect.symbolAmount > 1)
-							roll.remainingSymbols.banes -= effect.symbolAmount - 1;
-					}
-					else if(remainingSymbols < effect.symbolAmount) {
-						if(["success", "boon"].includes(symbolName)
-							&& (remainingSymbols + roll.remainingSymbols.sigmarsComets >= effect.symbolAmount)) {
-							roll.remainingSymbols.sigmarsComets += remainingSymbols - effect.symbolAmount;
-							return 0;
-						}
-
-						throw new Error(`The remaining number of ${symbolName} cannot be negative.`);
-					}
-					else
-						remainingSymbols -= effect.symbolAmount;
-
-					return remainingSymbols;
-				}, roll.remainingSymbols[plural]);
-		});
 
 		chatMessage.update(changes);
+	}
+
+	/**
+	 * Toggles an Action Effect off, and execute its revert script if it was an immediate Action Effect.
+	 * @param toggledEffect
+	 * @param roll
+	 */
+	static async _toggleOffActionEffect(toggledEffect, roll)
+	{
+		if(toggledEffect.immediate)
+			await CheckHelper.executeActionEffectScript(toggledEffect, toggledEffect.reverseScript, roll);
+
+		toggledEffect.active = false;
+	}
+
+	/**
+	 * Checks if an Action Effect can be toggled on, then toggles it if it does.
+	 * @param toggledEffect
+	 * @param roll
+	 * @param symbol
+	 */
+	static async _toggleOnActionEffect(toggledEffect, roll, symbol)
+	{
+		let result = "";
+
+		try {
+			const functionName = `check${capitalize(symbol)}EffectToggleable`;
+
+			result = CheckHelper[`${functionName}`]
+				? CheckHelper[`${functionName}`](toggledEffect, roll, symbol)
+				: CheckHelper.checkEffectToggleable(toggledEffect, roll, symbol);
+		}
+		catch(error) {
+			console.error(`Something went wrong when toggling the Action effect: ${error}`);
+		}
+
+		if(result === "") {
+			toggledEffect.active = true;
+
+			if(toggledEffect.immediate)
+				await CheckHelper.executeActionEffectScript(toggledEffect, toggledEffect.script, roll);
+		}
+		else
+			ui.notifications.warn(result);
+	}
+
+	/**
+	 * Checks if a success Action Effect can be toggled on, then toggles it if it does.
+	 * @param toggledEffect
+	 * @param roll
+	 * @param symbol
+	 */
+	static async toggleOnSuccessActionEffect(toggledEffect, roll, symbol = "success")
+	{
+		let result = CheckHelper.checkSuccessEffectToggleable(toggledEffect, symbol, roll);
+
+		if(result === "") {
+			roll.effects.success.forEach(effect => effect.active = false);
+			toggledEffect.active = true;
+
+			if(toggledEffect.immediate)
+				await CheckHelper.executeActionEffectScript(toggledEffect, toggledEffect.script, roll);
+		}
+		else
+			ui.notifications.warn(result);
+	}
+
+	/**
+	 * Checks if an Action Effect can be toggled.
+	 * @param {ActionEffect} toggledEffect
+	 * @param {WFRP3eRoll} roll
+	 * @param {string} symbol
+	 * @returns {string} Either returns an empty string if the effect is toggleable, or the reason if not.
+	 */
+	static checkEffectToggleable(toggledEffect, roll, symbol)
+	{
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+
+		if(roll.remainingSymbols[plural] >= toggledEffect.symbolAmount)
+			return "";
+
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+		});
+	}
+
+	/**
+	 * Checks if a boon Action Effect can be toggled, taking remaining Sigmar's comet symbols into account.
+	 * @param {ActionEffect} toggledEffect
+	 * @param {WFRP3eRoll} roll
+	 * @param {string} symbol
+	 * @returns {string} Either returns an empty string if the effect is toggleable, or the reason if not.
+	 */
+	static checkBoonEffectToggleable(toggledEffect, roll, symbol = "boon")
+	{
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+
+		if(roll.remainingSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)
+			return "";
+
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+		});
+	}
+
+	/**
+	 * Checks if a delay Action Effect can be toggled, taking remaining bane symbols into account.
+	 * @param {ActionEffect} toggledEffect
+	 * @param {WFRP3eRoll} roll
+	 * @param {string} symbol
+	 * @returns {string} Either returns an empty string if the effect is toggleable, or the reason if not.
+	 */
+	static checkDelayEffectToggleable(toggledEffect, roll, symbol = "delay")
+	{
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+
+		if(roll.remainingSymbols[plural] > 0) {
+			if(toggledEffect.symbolAmount > 1) {
+				if(roll.remainingSymbols.banes >= toggledEffect.symbolAmount - 1)
+					return "";
+				else
+					return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+						symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
+					});
+			}
+			else
+				return "";
+		}
+
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+		});
+	}
+
+	/**
+	 * Checks if an exertion Action Effect can be toggled, taking remaining bane symbols into account.
+	 * @param {ActionEffect} toggledEffect
+	 * @param {WFRP3eRoll} roll
+	 * @param {string} symbol
+	 * @returns {string} Either returns an empty string if the effect is toggleable, or the reason if not.
+	 */
+	static checkExertionEffectToggleable(toggledEffect, roll, symbol = "exertion")
+	{
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+
+		if(roll.remainingSymbols[plural] > 0) {
+			if(toggledEffect.symbolAmount > 1) {
+				if(roll.remainingSymbols.banes >= toggledEffect.symbolAmount - 1)
+					return "";
+				else
+					return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+						symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
+					});
+			}
+			else
+				return "";
+		}
+
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+		});
+	}
+
+	/**
+	 * Checks if a success Action Effect can be toggled, taking remaining Sigmar's comet symbols into account.
+	 * @param {ActionEffect} toggledEffect
+	 * @param {WFRP3eRoll} roll
+	 * @param {string} symbol
+	 * @returns {string} Either returns an empty string if the effect is toggleable, or the reason if not.
+	 */
+	static checkSuccessEffectToggleable(toggledEffect, roll, symbol = "symbol")
+	{
+		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+
+		if(roll.totalSymbols[plural] + roll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)
+			return "";
+
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
+			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+		});
+	}
+
+	/**
+	 *
+	 * @param {ActionEffect} effect
+	 * @param {string} script
+	 * @param {WFRP3eRoll} roll
+	 * @param [options]
+	 * @param {CheckData} [options.checkData]
+	 * @param {WFRP3eActor} [options.actor]
+	 * @param {CheckOutcome} [options.outcome]
+	 * @param {WFRP3eActor} [options.targetActor]
+	 * @returns {Promise<void>}
+	 */
+	static async executeActionEffectScript(effect, script, roll, options = {})
+	{
+		const checkData = options.checkData ?? roll.options.checkData,
+			  actor = options.actor ?? await fromUuid(checkData.actor),
+			  targetActor = options.targetActor
+			  	  ?? checkData.targets?.length > 0 ? await fromUuid(checkData.targets[0]) : null;
+
+		try {
+			// eslint-disable-next-line no-new-func
+			const fn = new foundry.utils.AsyncFunction(
+				"roll",
+				"checkData",
+				"actor",
+				"actorToken",
+				"outcome",
+				"targetActor",
+				"targetToken",
+				script
+			);
+			await fn.call(
+				effect,
+				roll,
+				checkData,
+				actor,
+				actor.token,
+				options.outcome,
+				targetActor,
+				targetActor ? targetActor?.token : null
+			);
+		}
+		catch(error) {
+			console.error(error);
+		}
 	}
 
 	/**
@@ -362,62 +421,39 @@ export default class CheckHelper
 	 * @param {String} chatMessageId The id of the ChatMessage containing the Roll.
 	 * @returns {Promise<void>}
 	 */
-	static async triggerEffects(chatMessageId)
+	static async triggerActionEffects(chatMessageId)
 	{
 		const chatMessage = game.messages.get(chatMessageId),
 			  roll = chatMessage.rolls[0],
 			  checkData = roll.options.checkData,
-			  actorToken = checkData.actor.sceneId && checkData.actor.tokenId
-				   ? game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor
-				   : null,
-			  actor = checkData.actor.actorId
-				   ? game.actors.get(checkData.actor.actorId)
-				   : game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor,
-			  targetToken = checkData.targets.length > 0
-				   ? game.scenes.get(checkData.targets[0].sceneId).collections.tokens.get(checkData.targets[0].tokenId)
-				   : null,
-			  targetActor = targetToken?.actor ?? null,
+			  actor = await fromUuid(checkData.actor),
+			  targetActor = checkData.targets?.length > 0 ? await fromUuid(checkData.targets[0]) : null,
 			  toggledEffects = Object.values(structuredClone(roll.effects)).reduce((symbol, allEffects) => {
-				   allEffects.push(...symbol.filter(effect => effect.active));
-				   return allEffects;
+				  allEffects.push(...symbol.filter(effect => effect.active));
+				  return allEffects;
 			  }, []),
 			  outcome = {
-				   targetDamages: 0,
-				   targetCriticalWounds: 0,
-				   targetFatigue: 0,
-				   targetStress: 0,
-				   wounds: 0,
-				   criticalWounds: 0,
-				   fatigue: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "physical"
-					   ? roll.remainingSymbols.exertions
-					   : 0,
-				   stress: CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"
-					   ? roll.remainingSymbols.exertions
-					   : 0,
-				   favour: 0,
-				   power: 0
+				  targetDamages: 0,
+				  targetCriticalWounds: 0,
+				  targetFatigue: 0,
+				  targetStress: 0,
+				  wounds: 0,
+				  criticalWounds: 0,
+				  fatigue: CONFIG.WFRP3e.characteristics[checkData.characteristic].type === "physical"
+					  ? roll.remainingSymbols.exertions
+					  : 0,
+				  stress: CONFIG.WFRP3e.characteristics[checkData.characteristic].type === "mental"
+					  ? roll.remainingSymbols.exertions
+					  : 0,
+				  favour: 0,
+				  power: 0
 			  },
 			  actorUpdates = {system: {}},
 			  targetUpdates = {system: {}},
 			  chatMessageUpdates = {rolls: chatMessage.rolls};
 
-		for(const effect of toggledEffects) {
-			try {
-				// eslint-disable-next-line no-new-func
-				const fn = new foundry.utils.AsyncFunction(
-					"checkData",
-					"actor",
-					"actorToken",
-					"outcome",
-					"targetActor",
-					"targetToken",
-					effect.script
-				);
-				await fn.call(globalThis, checkData, actor, actorToken, outcome, targetActor, targetToken);
-			} catch(err) {
-				console.error(err);
-			}
-		}
+		for(const effect of toggledEffects)
+			await CheckHelper.executeActionEffectScript(effect, effect.script, roll, {checkData, actor, outcome, targetActor})
 
 		if(targetActor) {
 			// If the attack inflicts damages, reduce them by Toughness and Soak values.
@@ -441,7 +477,7 @@ export default class CheckHelper
 						outcome.targetCriticalWounds = await Item.createDocuments(
 							await this.drawCriticalWoundsRandomly(outcome.targetCriticalWounds),
 							{parent: targetActor}
-						);
+						).then(documents => documents.map(document => document.uuid));
 					}
 				}
 				// If the attack inflicts 0 damages in spite of hitting the target, the target still suffers one damage
@@ -481,7 +517,7 @@ export default class CheckHelper
 				outcome.criticalWounds = await Item.createDocuments(
 					await this.drawCriticalWoundsRandomly(outcome.criticalWounds),
 					{parent: actor}
-				);
+				).then(documents => documents.map(document => document.uuid));
 
 			if(outcome.fatigue > 0 || outcome.fatigue < 0)
 				actorUpdates.system.impairments = {fatigue: actor.system.impairments.fatigue + outcome.fatigue};
@@ -500,6 +536,9 @@ export default class CheckHelper
 
 		chatMessageUpdates.rolls[0].options.checkData.outcome = outcome;
 		chatMessage.update(chatMessageUpdates);
+
+		if(roll.totalSymbols.successes && checkData?.action)
+			await fromUuid(checkData.action).then(action => action.exhaustAction(checkData.face));
 	}
 
 	/**

@@ -45,7 +45,7 @@ export default class WFRP3eActionSheet extends WFRP3eItemSheet
 	 */
 	async _onAddEffectButtonClick(event)
 	{
-		this.item.createEffect(event.currentTarget.closest("section[data-face]").dataset.face);
+		this.item.createActionEffect(event.currentTarget.closest("section[data-face]").dataset.face);
 	}
 
 	/**
@@ -56,7 +56,7 @@ export default class WFRP3eActionSheet extends WFRP3eItemSheet
 	 */
 	async _onEffectEditButtonClick(event)
 	{
-		this.item.editEffect(
+		this.item.editActionEffect(
 			event.currentTarget.closest("section[data-face]").dataset.face,
 			event.currentTarget.closest("div.effect-group[data-symbol]").dataset.symbol,
 			event.currentTarget.closest("div.effect[data-index]").dataset.index
@@ -77,7 +77,7 @@ export default class WFRP3eActionSheet extends WFRP3eItemSheet
 			content: `<p>${game.i18n.localize("DIALOG.DESCRIPTION.EffectDeletion")}</p>`,
 			submit: (result) => {
 				if(result)
-					this.item.removeEffect(
+					this.item.removeActionEffect(
 						event.currentTarget.closest("section[data-face]").dataset.face,
 						event.currentTarget.closest("div.effect-group[data-symbol]").dataset.symbol,
 						event.currentTarget.closest("div.effect[data-index]").dataset.index

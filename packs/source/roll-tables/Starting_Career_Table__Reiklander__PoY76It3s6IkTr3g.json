@@ -634,14 +634,13 @@
   "folder": "GGWmOAItSjZHydKl",
   "sort": 300000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.6.1-alpha",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1699554936217,
     "modifiedTime": 1703687290307,
     "lastModifiedBy": "Bq3CTOvANoOneedB",

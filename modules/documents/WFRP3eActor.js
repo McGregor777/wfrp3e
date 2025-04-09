@@ -1,9 +1,9 @@
 import ActionSelector from "../applications/ActionSelector.js";
 import CareerSelector from "../applications/CareerSelector.js";
 import CharacteristicUpgrader from "../applications/CharacteristicUpgrader.js";
+import CheckBuilderV2 from "../applications/CheckBuilderV2.js";
 import TalentSelector from "../applications/TalentSelector.js";
 import TrainingSelector from "../applications/TrainingSelector.js";
-import CheckHelper from "../CheckHelper.js";
 import {capitalize} from "../helpers.js";
 
 /**
@@ -32,7 +32,7 @@ export default class WFRP3eActor extends Actor
 
 	performCharacteristicCheck(characteristic)
 	{
-		CheckHelper.prepareCharacteristicCheck(
+		CheckBuilderV2.prepareCharacteristicCheck(
 			this,
 			{name: characteristic, ...this.system.characteristics[characteristic]}
 		);
@@ -213,12 +213,9 @@ export default class WFRP3eActor extends Actor
 	 * @param {String} impairment The impairment to update.
 	 * @param {Number} value The value to add to the impairment.
 	 */
-	changeImpairment(impairment, value)
+	adjustImpairment(impairment, value)
 	{
-		const updates = {system: {impairments: {}}};
-		updates.system.impairments[impairment] = this.system.impairments[impairment] + value;
-
-		this.update(updates);
+		this.update({[`system.impairments.${impairment}`]: this.system.impairments[impairment] + value});
 	}
 
 	/**
@@ -263,55 +260,138 @@ export default class WFRP3eActor extends Actor
 	}
 
 	/**
-	 * Checks for Talents sharing the same socket as the current Talent then remove them from this socket.
-	 * @param {string} newTalentSocket
+	 * Checks for Items sharing the same socket and removes all except the current one.
+	 * @param {WFRP3eItem} item
 	 */
-	checkForDuplicateTalentSockets(newTalentSocket)
+	preventMultipleItemsOnSameSocket(item)
 	{
-		this.system.currentParty.memberActors.forEach((member) => {
-			member.itemTypes.talent
-				.filter(talent => talent !== this && talent.system.talentSocket === newTalentSocket)
-				.forEach((talent) => {
-					talent.update({"system.talentSocket": null});
-				});
+		const actors = this.system.currentParty ? this.system.currentParty.memberActors : [this],
+			  items = actors.reduce((items, actor) => {
+				  items.push(...actor.items.search({
+					  filters: [
+						  {
+							  field: "system.socket",
+							  operator: "is_empty",
+							  negate: true
+						  }, {
+							  field: "uuid",
+							  operator: "equals",
+							  negate: true,
+							  value: item.uuid
+						  }, {
+							  field: "system.socket",
+							  operator: "equals",
+							  negate: false,
+							  value: item.system.socket
+						  }
+					  ]
+				  }));
+				  return items;
+			  }, []);
+
+		items.forEach(item => item.update({"system.socket": ""}));
+	}
+
+	/**
+	 * Resets the socket of every Actor's which socket matches a string.
+	 * @param {string} match The string the socket must match.
+	 */
+	resetSocket(match)
+	{
+		this.items.search({
+			filters: [{
+				field: "system.socket",
+				operator: "is_empty",
+				negate: true
+			}, {
+				field: "system.socket",
+				operator: "starts_with",
+				negate: false,
+				value: match
+			}]
+		}).forEach(item => item.update({"system.socket": null}));
+	}
+
+	/**
+	 * Adds a new socket to the Actor's list of sockets.
+	 */
+	addNewSocket()
+	{
+		this.update({"system.sockets": [...this.system.sockets, {item: null, type: "any"}]});
+	}
+
+	/**
+	 * Removes the last socket from the Actor's list of sockets.
+	 */
+	removeLastSocket()
+	{
+		const sockets = this.system.sockets;
+		sockets.pop();
+		this.update({"system.sockets": sockets});
+	}
+
+	/**
+	 * Finds every Item owned by the Actor with an effect triggered.
+	 * @param {string} triggerType The trigger type of the effect.
+	 * @param {Object} options
+	 * @param {Object[]} [options.parameters]
+	 * @param {string[]} [options.parameterNames]
+	 * @returns {WFRP3eItem[]} An Array of triggered items.
+	 */
+	findTriggeredItems(triggerType, {parameters = [], parameterNames = [] } = {})
+	{
+		return [
+			...this.items.search({
+				filters: [{
+					field: "type",
+					operator: "equals",
+					value: "talent"
+				}, {
+					field: "system.rechargeTokens",
+					operator: "equals",
+					value: 0
+				}, {
+					field: "system.socket",
+					operator: "is_empty",
+					negate: true
+				}, {
+					field: "effects",
+					operator: "is_empty",
+					negate: true
+				}]
+			}),
+			...this.items.search({
+				filters: [{
+					field: "type",
+					operator: "equals",
+					value: "talent",
+					negate: true
+				}, {
+					field: "effects",
+					operator: "is_empty",
+					negate: true
+				}]
+			})
+		].filter(item => item.effects.filter(
+			effect => {
+				// Check if the WFRP3eEffect's trigger type matches, and if it has a condition script, that it returns true.
+				return !(effect.system.type !== triggerType
+					|| effect.system.conditionScript
+						&& !effect.checkEffectConditionScript({parameters, parameterNames}));
+			}).length > 0
+		);
+	}
+
+	/**
+	 * Finds every effect triggered by a specific script trigger.
+	 * @param {string} triggerType The type of script trigger.
+	 * @returns {WFRP3eEffect[]} An Array of triggered WFRP3eEffects.
+	 */
+	findTriggeredEffects(triggerType)
+	{
+		return this.findTriggeredItems(triggerType).map(item => {
+			 return item.effects.find(effect => effect.system.type === triggerType)
 		});
-	}
-
-	/**
-	 * Resets the socket of every Actor's Talents which socket matches a string.
-	 * @param {string} match The string the Talent socket must match.
-	 */
-	resetTalentsSocket(match)
-	{
-		this.itemTypes.talent
-			.filter(talent => talent.system.talentSocket?.startsWith(match))
-			.forEach((talent) => {
-				talent.update({"system.talentSocket": null});
-			});
-	}
-
-	/**
-	 * Adds a new Talent socket to the Party's list of Talent sockets.
-	 */
-	addNewTalentSocket()
-	{
-		const talentSockets = this.system.talentSockets;
-
-		talentSockets.push("focus");
-
-		this.update({"system.talentSockets": talentSockets});
-	}
-
-	/**
-	 * Removes the last Talent socket from the Party's list of Talent sockets.
-	 */
-	removeLastTalentSocket()
-	{
-		const talentSockets = this.system.talentSockets;
-
-		talentSockets.pop();
-
-		this.update({"system.talentSockets": talentSockets});
 	}
 
 	/** @inheritDoc */
@@ -371,7 +451,7 @@ export default class WFRP3eActor extends Actor
 	{
 		if(Array.isArray(this.memberActors) && this.memberActors.length > 0)
 			this.memberActors.forEach((member) => {
-				member.resetTalentsSocket("party");
+				member.resetSocket("party");
 			});
 	}
 
@@ -387,8 +467,8 @@ export default class WFRP3eActor extends Actor
 		if(changed.system?.members)
 			this._onPartyMembersChange(changed.system.members);
 
-		if(changed.system?.talentSockets)
-			this._onPartyTalentSocketsChange();
+		if(changed.system?.sockets)
+			this._onPartySocketsChange();
 	}
 
 	/**
@@ -408,7 +488,7 @@ export default class WFRP3eActor extends Actor
 			});
 
 			missingMembers.forEach((member) => {
-				member.resetTalentsSocket("party");
+				member.resetSocket("party");
 			});
 		}
 	}
@@ -417,11 +497,11 @@ export default class WFRP3eActor extends Actor
 	 * Performs check-ups following up a Party's Talent sockets change.
 	 * @private
 	 */
-	_onPartyTalentSocketsChange()
+	_onPartySocketsChange()
 	{
 		if(Array.isArray(this.memberActors) && this.memberActors.length > 0) {
 			this.memberActors.forEach((member) => {
-				member.resetTalentsSocket("party")
+				member.resetSocket("party")
 			});
 		}
 	}

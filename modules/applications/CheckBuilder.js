@@ -17,12 +17,12 @@ export default class CheckBuilder extends FormApplication
 			if(checkData.combat)
 				return game.i18n.localize("CHECKBUILDER.TITLES.initiative");
 			else if(checkData.action)
-				return game.i18n.format("CHECKBUILDER.TITLES.action", {action: checkData.action.name});
+				return game.i18n.format("CHECKBUILDER.TITLES.action", {action: fromUuidSync(checkData.action).name});
 			else if(checkData.skill)
 				return game.i18n.format("CHECKBUILDER.TITLES.skill", {skill: checkData.skill.name});
 			else if(checkData.characteristic)
 				return game.i18n.format("CHECKBUILDER.TITLES.characteristic", {
-					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].name)
+					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic].name)
 				});
 		}
 
@@ -45,7 +45,9 @@ export default class CheckBuilder extends FormApplication
 	{
 		const data = {
 			...super.getData(),
-			challengeLevel: ["melee", "ranged"].includes(this.object.checkData?.action?.system.type) ? "easy" : "simple",
+			challengeLevel: ["melee", "ranged"].includes(await fromUuid(this.object.checkData?.action).then(action => action?.system.type))
+				? "easy"
+				: "simple",
 			challengeLevels: CONFIG.WFRP3e.challengeLevels,
 			diceIcons: {
 				...Object.entries(CONFIG.WFRP3e.dice).reduce((object, dieType) => {
@@ -71,9 +73,7 @@ export default class CheckBuilder extends FormApplication
 			checkData.challengeLevel = data.challengeLevel;
 
 			if(checkData.actor) {
-				this.actor = checkData.actor.tokenId
-					? game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor
-					: game.actors.get(checkData.actor.actorId)
+				this.actor = await fromUuid(checkData.actor);
 
 				data.actor = this.actor;
 				data.characteristics = Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
@@ -109,7 +109,7 @@ export default class CheckBuilder extends FormApplication
 				data.characteristic = checkData.characteristic;
 
 			if(checkData.action) {
-				const action = checkData.action;
+				const action = await fromUuid(checkData.action);
 				data.action = action;
 
 				if(["melee", "ranged"].includes(action.system.type)) {
@@ -475,16 +475,17 @@ export default class CheckBuilder extends FormApplication
 	 * @param {Event} event
 	 * @private
 	 */
-	_onChallengeLevelSelectChange(html, event)
+	async _onChallengeLevelSelectChange(html, event)
 	{
 		event.preventDefault();
 
-		const challengeLevel = CONFIG.WFRP3e.challengeLevels[event.currentTarget.value];
+		const challengeLevel = CONFIG.WFRP3e.challengeLevels[event.currentTarget.value],
+			  action = await fromUuid(this.object.checkData.action);
 
 		this.object.checkData.challengeLevel = event.currentTarget.value;
-		this.object.dice.challenge = (this.object.checkData.action?.system[this.object.checkData.face].difficultyModifiers.challengeDice ?? 0) +
-			(["melee", "ranged"].includes(this.object.checkData.action?.system.type) ? 1 : 0) +
-			challengeLevel.challengeDice;
+		this.object.dice.challenge = (action?.system[this.object.checkData.face].difficultyModifiers.challengeDice ?? 0)
+			+ (["melee", "ranged"].includes(action?.system.type) ? 1 : 0)
+			+ challengeLevel.challengeDice;
 
 		this._synchronizeInputs(html);
 	}
@@ -499,15 +500,17 @@ export default class CheckBuilder extends FormApplication
 	{
 		event.preventDefault();
 
+		const characteristic = this.actor.system.characteristics[event.currentTarget.value],
+			  stance = this.actor.system.stance.current;
+
 		this.object.checkData.characteristic = {
 			name: event.currentTarget.value,
-			...this.object.checkData.actor.system.characteristics[event.currentTarget.value]
+			...characteristic
 		};
-		const stance = this.object.checkData.actor.system.stance.current;
 
 		foundry.utils.mergeObject(this.object.dice, {
-			characteristic: this.object.checkData.characteristic.value - Math.abs(stance),
-			fortune: this.object.checkData.characteristic.fortune,
+			characteristic: characteristic.rating - Math.abs(stance),
+			fortune: characteristic.fortune,
 			conservative: stance < 0 ? Math.abs(stance) : 0,
 			reckless: stance > 0 ? stance : 0
 		});

@@ -7,16 +7,24 @@ export default class WFRP3eDiseaseDataModel extends foundry.abstract.TypeDataMod
 	static defineSchema()
 	{
 		const fields = foundry.data.fields;
-		const requiredInteger = {nullable: false, required: true};
 
 		return {
 			description: new fields.HTMLField(),
-			effects: new fields.StringField({...requiredInteger}),
-			severityRating: new fields.NumberField({...requiredInteger, initial: 1, integer: true, min: 1}),
-			symptom: new fields.StringField({...requiredInteger, initial: "delirium"}),
-			traits: new fields.StringField({...requiredInteger, initial: ", "}),
+			severityRating: new fields.NumberField({initial: 1, integer: true, min: 1, nullable: false, required: true}),
+			symptom: new fields.StringField({
+				choices: Object.entries(CONFIG.WFRP3e.disease.symptoms).reduce((groups, [key, group]) => {
+					groups[key] = group.name
+					return groups;
+				}, {}),
+				initial: Object.keys(CONFIG.WFRP3e.disease.symptoms)[0],
+				required: true
+			}),
+			traits: new fields.StringField({nullable: false, required: true})
 		};
 	}
+
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["DISEASE"];
 
 	/** @inheritDoc */
 	prepareBaseData()

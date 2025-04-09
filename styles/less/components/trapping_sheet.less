@@ -18,3 +18,31 @@
 		color: grey;
 	}
 }
+
+.application.sheet.trapping .trapping-cost {
+	& .form-group {
+		flex: 1 1 80px;
+
+		&.brass,
+		&.brass > input {
+			color: chocolate;
+		}
+
+		&.gold,
+		&.gold > input {
+			color: goldenrod;
+		}
+
+		&.silver,
+		&.silver > input {
+			color: lightgrey;
+		}
+	}
+}
+
+body.theme-light .application.sheet.trapping .trapping-cost .form-group {
+	&.silver,
+	&.silver > input {
+		color: grey;
+	}
+}

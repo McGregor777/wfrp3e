@@ -7,267 +7,173 @@ export default class WFRP3eRoll extends Roll
 	static CHAT_TEMPLATE = "systems/wfrp3e/templates/chatmessages/roll.hbs";
 	static TOOLTIP_TEMPLATE = "systems/wfrp3e/templates/chatmessages/roll-tooltip.hbs";
 
-	constructor(formula, data= {}, options = {})
+	get resultSymbols()
 	{
-		super(formula, data, options);
+		const resultSymbols = Object.entries(CONFIG.WFRP3e.symbols).reduce((object, [key, value]) => {
+			if(key !== "righteousSuccess")
+				object[value.plural] = 0;
 
-		this.hasSpecialDice = false;
-		this.hasStandardDice = false;
+			return object;
+		}, {});
 
-		if(options.startingSymbols)
-			this.resultSymbols = options.startingSymbols;
-		else
-			this.resultSymbols = Object.values(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
-				object[symbol.plural] = 0;
-				return object;
-			}, {});
+		this.terms.filter(term => term instanceof WFRP3eDie).forEach(term => {
+			term.results.forEach(result => {
+				Object.keys(resultSymbols).forEach(symbolName => {
+					resultSymbols[symbolName] += parseInt(result.symbols[symbolName]);
+				});
 
-		if(this.options.checkData?.action) {
-			const checkData = this.options.checkData;
-			this.effects = {
-				...Object.entries(checkData.action.system[checkData.face].effects)
-					.reduce((object, effectArray) => {
-						object[effectArray[0]] = effectArray[1].reduce((array, effect) => {
-							effect.active = false;
-							array.push(effect);
-							return array;
-						}, []);
-						return object;
-					}, {})
-			};
-			this.effects.boon.push(CheckHelper.getUniversalBoonEffect(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"));
-			this.effects.bane.push(CheckHelper.getUniversalBaneEffect(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === "mental"));
-
-			if(["melee", "ranged"].includes(checkData.action.system.type)) {
-				if(checkData.weapon)
-					this.effects.boon.push(CheckHelper.getCriticalRatingEffect(checkData.weapon));
-
-				this.effects.sigmarsComet.push(CheckHelper.getUniversalSigmarsCometEffect());
-			}
-		}
-	}
-
-	/** @inheritDoc */
-	async _evaluate({minimize = false, maximize = false} = {})
-	{
-		// Step 1 - Replace intermediate terms with evaluated numbers
-		const intermediate = [];
-		for(let term of this.terms) {
-			if(!(term instanceof RollTerm))
-				throw new Error("Roll evaluation encountered an invalid term which was not a RollTerm instance");
-
-			if(term instanceof WFRP3eDie)
-				this.hasSpecialDice = true;
-			else if(term instanceof DiceTerm)
-				this.hasStandardDice = true;
-
-			if(term.isIntermediate) {
-				await term.evaluate({minimize, maximize, async: true});
-				this._dice = this._dice.concat(term.dice);
-				term = new NumericTerm({number: term.total, options: term.options});
-			}
-
-			intermediate.push(term);
-		}
-		this.terms = intermediate;
-
-		// Step 2 - Simplify remaining terms
-		this.terms = this.constructor.simplifyTerms(this.terms);
-
-		// Step 3 - Evaluate remaining terms
-		for(const term of this.terms)
-			if(!term._evaluated)
-				await term.evaluate({minimize, maximize, async: true});
-
-		// Step 4 - Retrieve all FFG results and combine into a single total.
-		if(this.hasSpecialDice) {
-			this.terms.forEach((term) => {
-				if(term instanceof WFRP3eDie) {
-					Object.keys(this.resultSymbols).forEach((symbolPlural) => {
-						this.resultSymbols[symbolPlural] += parseInt(term.resultSymbols[symbolPlural]);
-
-						if(symbolPlural === "successes")
-							this.resultSymbols[symbolPlural] += parseInt(term.resultSymbols.righteousSuccesses);
-					});
-				}
+				resultSymbols.successes += parseInt(result.symbols.righteousSuccesses);
 			});
-
-			// Step 5 - Calculate actual results by cancelling out successes with challenges, boons with banes, etc.
-			if(this.resultSymbols.successes < this.resultSymbols.challenges) {
-				this.resultSymbols.challenges -= parseInt(this.resultSymbols.successes);
-				this.resultSymbols.successes = 0;
-			}
-			else {
-				this.resultSymbols.successes -= parseInt(this.resultSymbols.challenges);
-				this.resultSymbols.challenges = 0;
-			}
-
-			if(this.resultSymbols.boons < this.resultSymbols.banes) {
-				this.resultSymbols.banes -= parseInt(this.resultSymbols.boons);
-				this.resultSymbols.boons = 0;
-			}
-			else {
-				this.resultSymbols.boons -= parseInt(this.resultSymbols.banes);
-				this.resultSymbols.banes = 0;
-			}
-		}
-
-		this.remainingSymbols = this.resultSymbols;
-
-		if(this.resultSymbols.successes && this.options.checkData?.action)
-			this.options.checkData.action.exhaustAction(this.options.checkData.face);
-
-		// Step 6 - Evaluate the final expression
-		this._total = this._evaluateTotal();
-
-		return this;
-	}
-
-	/** @inheritDoc */
-	_evaluateSync({minimize = false, maximize = false} = {})
-	{
-		// Step 1 - Replace intermediate terms with evaluated numbers
-		this.terms = this.terms.map(term => {
-			if(!(term instanceof RollTerm))
-				throw new Error("Roll evaluation encountered an invalid term which was not a RollTerm instance");
-
-			if(term instanceof WFRP3eDie)
-				this.hasSpecialDice = true;
-			else if(term instanceof DiceTerm)
-				this.hasStandardDice = true;
-
-			if(term.isIntermediate) {
-				term.evaluate({minimize, maximize, async: false});
-				this._dice = this._dice.concat(term.dice);
-				return new NumericTerm({number: term.total, options: term.options});
-			}
-
-			return term;
 		});
 
-		// Step 2 - Simplify remaining terms
-		this.terms = this.constructor.simplifyTerms(this.terms);
+		return resultSymbols;
+	}
 
-		// Step 3 - Evaluate remaining terms
-		for(const term of this.terms)
-			if(!term._evaluated)
-				term.evaluate({minimize, maximize, async: false});
+	get totalSymbols()
+	{
+		const totalSymbols = this.resultSymbols;
 
-		// Step 4 - Retrieve all FFG results and combine into a single total.
-		if(this.hasSpecialDice) {
-			this.terms.forEach((term) => {
-				if(term instanceof WFRP3eDie) {
-					Object.keys(this.resultSymbols).forEach((symbolPlural) => {
-						this.resultSymbols[symbolPlural] += parseInt(term.resultSymbols[symbolPlural]);
+		if(this.options.startingSymbols)
+			for(const key of Object.keys(totalSymbols))
+				totalSymbols[key] += this.options.startingSymbols[key];
 
-						if(symbolPlural === "successes")
-							this.resultSymbols[symbolPlural] += parseInt(term.resultSymbols.righteousSuccesses);
-					});
-				}
-			});
-
-			// Step 5 - Calculate actual results by cancelling out successes with challenges, boons with banes, etc.
-			if(this.resultSymbols.successes < this.resultSymbols.challenges) {
-				this.resultSymbols.challenges -= parseInt(this.resultSymbols.successes);
-				this.resultSymbols.successes = 0;
-			}
-			else {
-				this.resultSymbols.successes -= parseInt(this.resultSymbols.challenges);
-				this.resultSymbols.challenges = 0;
-			}
-
-			if(this.resultSymbols.boons < this.resultSymbols.banes) {
-				this.resultSymbols.banes -= parseInt(this.resultSymbols.boons);
-				this.resultSymbols.boons = 0;
-			}
-			else {
-				this.resultSymbols.boons -= parseInt(this.resultSymbols.banes);
-				this.resultSymbols.banes = 0;
-			}
+		if(totalSymbols.successes < totalSymbols.challenges) {
+			totalSymbols.challenges -= parseInt(totalSymbols.successes);
+			totalSymbols.successes = 0;
+		}
+		else {
+			totalSymbols.successes -= parseInt(totalSymbols.challenges);
+			totalSymbols.challenges = 0;
 		}
 
-		this.remainingSymbols = this.resultSymbols;
+		if(totalSymbols.boons < totalSymbols.banes) {
+			totalSymbols.banes -= parseInt(totalSymbols.boons);
+			totalSymbols.boons = 0;
+		}
+		else {
+			totalSymbols.boons -= parseInt(totalSymbols.banes);
+			totalSymbols.banes = 0;
+		}
 
-		if(this.resultSymbols.successes && this.options.checkData?.action)
-			this.action.exhaustAction(this.options.checkData.face);
+		return totalSymbols;
+	}
 
-		// Step 6 - Evaluate the final expression
-		this._total = this._evaluateTotal();
+	get remainingSymbols()
+	{
+		const totalSymbols = {...this.totalSymbols};
 
-		return this;
+		if(this.effects)
+			Object.entries(this.effects).forEach(([symbolName, effects]) => {
+				const plural = CONFIG.WFRP3e.symbols[symbolName].plural;
+
+				totalSymbols[plural] = effects.filter(effect => effect.active).reduce((remainingSymbols, effect) => {
+					if(["delay", "exertion"].includes(symbolName)) {
+						remainingSymbols--;
+
+						if(effect.symbolAmount > 1)
+							totalSymbols.banes -= effect.symbolAmount - 1;
+					}
+					else if(remainingSymbols < effect.symbolAmount) {
+						if(["success", "boon"].includes(symbolName)
+							&& (remainingSymbols + totalSymbols.sigmarsComets >= effect.symbolAmount)) {
+							totalSymbols.sigmarsComets += remainingSymbols - effect.symbolAmount;
+							return 0;
+						}
+
+						throw new Error(`The remaining number of ${symbolName} cannot be negative.`);
+					}
+					else
+						remainingSymbols -= effect.symbolAmount;
+
+					return remainingSymbols;
+				}, totalSymbols[plural]);
+			});
+
+		return totalSymbols;
 	}
 
 	/** @inheritDoc */
-	_evaluateTotal() {
-		const expression = this.terms.map(term => term instanceof WFRP3eDie ? 0 : term.total).join(" ");
-		const total = this.constructor.safeEval(expression);
+	async evaluate({minimize  = false, maximize = false, allowStrings = false, allowInteractive = true, ...options} = {})
+	{
+		if(this._evaluated)
+			throw new Error(`The ${this.constructor.name} has already been evaluated and is now immutable`);
 
-		if(!Number.isNumeric(total)) {
-			throw new Error(game.i18n.format("DICE.ErrorNonNumeric", {formula: this.formula}));
-		}
+		this._evaluated = true;
 
-		return total;
+		if(CONFIG.debug.dice)
+			console.debug(`Evaluating roll with formula "${this.formula}"`);
+
+		// Migration path for async rolls
+		if("async" in options)
+			foundry.utils.logCompatibilityWarning("The async option for Roll#evaluate has been removed. "
+				+ "Use Roll#evaluateSync for synchronous roll evaluation.");
+
+		await this._evaluate({minimize, maximize, allowStrings, allowInteractive});
+
+		if(this.options.checkData?.action)
+			return this._prepareEffects();
+
+		return this;
 	}
 
 	/** @inheritDoc */
 	async render({flavor, template = this.constructor.CHAT_TEMPLATE, isPrivate = false} = {})
 	{
 		if(!this._evaluated)
-			await this.evaluate({async: true});
-
-		const checkData = this.options?.checkData;
+			await this.evaluate({allowInteractive: !isPrivate});
 
 		const chatData = {
 			formula: isPrivate ? "???" : this._formula,
-			flavor: isPrivate ? null : flavor,
+			flavor: isPrivate ? null : flavor ?? this.options.flavor,
 			user: game.user.id,
 			tooltip: isPrivate ? "" : await this.getTooltip(),
 			total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-			effects: this.effects,
-			hasSpecialDice: this.hasSpecialDice,
-			hasStandardDice: this.hasStandardDice,
+			totalSymbols: this.totalSymbols,
+			hasSpecialDice: !!this.terms.find(term => term instanceof WFRP3eDie),
+			hasStandardDice: !!this.terms.find(term => !(term instanceof WFRP3eDie) && term instanceof foundry.dice.terms.DiceTerm),
 			publicRoll: !isPrivate,
 			remainingSymbols: isPrivate ? {} : this.remainingSymbols,
-			resultSymbols: isPrivate ? {} : this.resultSymbols,
-			specialDieResultLabels: isPrivate ? {} : this.dice.filter(die => die instanceof WFRP3eDie)
-				.reduce((resultLabels, die) => {
+			specialDieResultLabels: isPrivate
+				? {}
+				: this.dice.filter(die => die instanceof WFRP3eDie).reduce((resultLabels, die) => {
 					die.results.forEach(result => resultLabels.push(die.getResultLabel(result)));
 					return resultLabels;
 				}, []),
-			symbols: CONFIG.WFRP3e.symbols,
+			symbols: CONFIG.WFRP3e.symbols
 		};
 
+		const checkData = this.options.checkData;
 		if(checkData) {
-			const actor = checkData.actor.actorId
-					? game.actors.get(checkData.actor.actorId)
-					: game.scenes.get(checkData.actor.sceneId).collections.tokens.get(checkData.actor.tokenId).actor;
-
+			const actor = await fromUuid(checkData.actor);
 			foundry.utils.mergeObject(chatData, {
-				action: checkData.action,
 				actorName: actor.token ? actor.token.name : actor.prototypeToken.name,
-				face: checkData.face,
 				outcome: checkData.outcome
 			});
 
+			if(checkData.action)
+				foundry.utils.mergeObject(chatData, {
+					action: await fromUuid(checkData.action),
+					effects: this.effects,
+					face: checkData.face
+				});
+
 			if(checkData.outcome?.criticalWounds && Array.isArray(checkData.outcome.criticalWounds))
-				chatData.criticalWoundLinks = checkData.outcome?.criticalWounds?.reduce((names, criticalWound) => {
-					const criticalWoundLink = actor.items.get(criticalWound._id).toAnchor().outerHTML;
+				chatData.criticalWoundLinks = checkData.outcome.criticalWounds.reduce(async (names, criticalWound) => {
+					const criticalWoundLink = await fromUuid(criticalWound).toAnchor().outerHTML;
 					names = names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
 					return names;
 				}, "")
 
 			if(checkData.targets && checkData.targets.length > 0) {
-				const targetActor = game.scenes.get(checkData.targets[0].sceneId)
-					.collections.tokens.get(checkData.targets[0].tokenId).actor;
-
+				const targetActor = await fromUuid(checkData.targets[0]);
 				chatData.targetActorName = targetActor.token ? targetActor.token.name : targetActor.prototypeToken.name;
 
 				if(checkData.outcome?.targetCriticalWounds && Array.isArray(checkData.outcome.targetCriticalWounds))
-					chatData.targetCriticalWoundLinks = checkData.outcome?.targetCriticalWounds?.reduce((names, criticalWound) => {
-						const criticalWoundLink = targetActor.items.get(criticalWound._id).toAnchor().outerHTML;
-						names = names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
-						return names;
-					}, "");
+					chatData.targetCriticalWoundLinks = checkData.outcome.targetCriticalWounds
+						?.reduce((names, criticalWound) => {
+							const criticalWoundLink = fromUuidSync(criticalWound).toAnchor().outerHTML;
+							return names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
+						}, "");
 			}
 		}
 
@@ -277,24 +183,70 @@ export default class WFRP3eRoll extends Roll
 	/** @inheritDoc */
 	toJSON()
 	{
-		return foundry.utils.mergeObject(super.toJSON(), {
-			effects: this.effects,
-			hasSpecialDice: this.hasSpecialDice,
-			hasStandardDice: this.hasStandardDice,
-			remainingSymbols: this.remainingSymbols,
-			resultSymbols: this.resultSymbols
-		});
+		return foundry.utils.mergeObject(super.toJSON(), {effects: this.effects});
 	}
 
 	/** @inheritDoc */
 	static fromData(data)
 	{
-		return foundry.utils.mergeObject(super.fromData(data), {
-			effects: data.effects,
-			hasSpecialDice: data.hasSpecialDice,
-			hasStandardDice: data.hasStandardDice,
-			remainingSymbols: data.remainingSymbols,
-			resultSymbols: data.resultSymbols
-		});
+		return foundry.utils.mergeObject(super.fromData(data), {effects: data.effects});
+	}
+
+	/**
+	 * Prepares all the effects of the check.
+	 * @returns {Promise<WFRP3eRoll>}
+	 * @private
+	 */
+	async _prepareEffects()
+	{
+		const checkData = this.options.checkData,
+			  actor = await fromUuid(checkData.actor),
+			  action = await fromUuid(checkData.action),
+			  characteristic = checkData.characteristic,
+			  weapon = await fromUuid(checkData.weapon);
+
+		this.effects = {
+			...Object.entries(structuredClone(action.system[checkData.face].effects))
+				.reduce((allEffects, [symbol, effects]) => {
+					effects.map((effect) => effect.active = false);
+					allEffects[symbol] = effects;
+					return allEffects;
+				}, {})
+		};
+		this.effects.boon.push(CheckHelper.getUniversalBoonEffect(
+			CONFIG.WFRP3e.characteristics[characteristic].type === "mental")
+		);
+		this.effects.bane.push(CheckHelper.getUniversalBaneEffect(
+			CONFIG.WFRP3e.characteristics[characteristic].type === "mental")
+		);
+
+		if(["melee", "ranged"].includes(action.system.type)) {
+			if(weapon)
+				this.effects.boon.push(CheckHelper.getCriticalRatingEffect(weapon));
+
+			this.effects.sigmarsComet.push(CheckHelper.getUniversalSigmarsCometEffect());
+		}
+
+		await WFRP3eRoll.triggerOnCheckRollEffects(actor, checkData, this);
+
+		return this;
+	}
+
+	/**
+	 * Searches and triggers every effect that are supposed to be triggered on a check roll and that belong to an Item owned by the Actor.
+	 * @param {WFRP3eActor} actor The WFRP3eActor performing the check.
+	 * @param {Object} checkData The check data.
+	 * @param {WFRP3eRoll} roll The check roll.
+	 * @returns {Promise<void>}
+	 */
+	static async triggerOnCheckRollEffects(actor, checkData, roll)
+	{
+		const triggeredEffects = actor.findTriggeredEffects("onCheckRoll");
+
+		for(const effect of triggeredEffects)
+			await effect.triggerEffect({
+				parameters: [actor, checkData, roll],
+				parameterNames: ["actor", "checkData", "roll"]
+			});
 	}
 }

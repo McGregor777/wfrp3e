@@ -1,54 +1,7 @@
 /** @inheritDoc */
 export default class WFRP3eDie extends foundry.dice.terms.Die
 {
-	constructor(termData = {})
-	{
-		super(termData);
-
-		this.resultSymbols = {
-			...Object.values(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
-				object[symbol.plural] = 0;
-				return object;
-			}, {})
-		};
-	}
 	static NAME = "wfrp3e-die";
-
-	/** @inheritDoc */
-	async _evaluateAsync(options = {})
-	{
-		await super._evaluateAsync(options);
-
-		this.results.forEach((result) => {
-			Object.keys(this.resultSymbols).forEach((symbolName) => {
-				this.resultSymbols[symbolName] += parseInt(result.symbols[symbolName]);
-			}, {});
-
-			if(result.symbols.righteousSuccesses > 0)
-				result.exploded = true;
-		});
-
-		return this;
-	}
-
-	/** @inheritDoc */
-	_evaluateSync(options = {})
-	{
-		super._evaluateSync(options);
-
-		this.results.forEach((result) => {
-			result.symbols = CONFIG.WFRP3e.dice[this.constructor.NAME].results[result.result];
-
-			Object.keys(this.resultSymbols).forEach((symbolName, index) => {
-				this.resultSymbols[symbolName] += parseInt(result.symbols[symbolName]);
-			}, {});
-
-			if(result.symbols.righteousSuccesses > 0)
-				result.exploded = true;
-		});
-
-		return this;
-	}
 
 	/** @inheritDoc */
 	async roll({minimize = false, maximize = false, ...options} = {})

@@ -2,5 +2,14 @@
 	{{formGroup fields.script
 				value=effect.script
 				localize=true
-				rows=9}}
+				rows=8}}
+
+	{{formGroup fields.immediate value=effect.immediate localize=true}}
+
+	<div class="reverse-script-container" {{#unless effect.immediate}}style="display: none;"{{/unless}}>
+		{{formGroup fields.reverseScript
+					value=effect.reverseScript
+					localize=true
+					rows=8}}
+	</div>
 </section>

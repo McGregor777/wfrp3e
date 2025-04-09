@@ -9,14 +9,14 @@
 
 			<div class="career-sheet-race-restrictions">
 				{{#if career.system.advanced}}
-					{{localize "CAREER.SHEET.AdvancedCareer"}}
+					{{localize "CAREER.SHEET.advancedCareer"}}
 				{{else}}
-					{{localize "CAREER.SHEET.BasicCareer"}}
+					{{localize "CAREER.SHEET.basicCareer"}}
 				{{/if}}
 				:
 				{{#each career.system.raceRestrictions}}
 					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
-						{{localize "CAREER.SHEET.OneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
 					{{else}}
 						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
 					{{/if}}
@@ -29,17 +29,17 @@
 		<div class="career-sheet-details">
 			<div class="career-sheet-career-aptitudes">
 				<div class="career-sheet-primary-characteristics">
-					<div class="career-sheet-career-aptitudes-title">{{localize "CAREER.SHEET.PrimaryCharacteristics"}}</div>
+					<div class="career-sheet-career-aptitudes-title">{{localize "CAREER.SHEET.primaryCharacteristics"}}</div>
 
 					<div class="career-sheet-career-aptitudes-content">
 						{{#each career.system.primaryCharacteristics}}
-							{{localize (lookup (lookup @root.characteristics this) 'name')}}{{#unless @last}},{{/unless}}
+							{{localize (lookup (lookup @root.characteristics this) "name")}}{{#unless @last}},{{/unless}}
 						{{/each}}
 					</div>
 				</div>
 
 				<div class="career-sheet-career-skills">
-					<div class="career-sheet-career-aptitudes-title">{{localize "CAREER.SHEET.CareerSkills"}}</div>
+					<div class="career-sheet-career-aptitudes-title">{{localize "CAREER.SHEET.careerSkills"}}</div>
 					<div class="career-sheet-career-aptitudes-content">{{career.system.careerSkills}}</div>
 				</div>
 
@@ -52,40 +52,40 @@
 			</div>
 
 			<div class="career-sheet-advance-options">
-				<span class="career-sheet-advance-options-header">{{localize "CAREER.SHEET.Advances"}}</span>
+				<span class="career-sheet-advance-options-header">{{localize "CAREER.SHEET.advances"}}</span>
 
 				<div class="career-sheet-advance-option action">
-					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Action"}}</div>
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.action"}}</div>
 					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.action}}</div>
 				</div>
 
 				<div class="career-sheet-advance-option talent">
-					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Talent"}}</div>
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.talent"}}</div>
 					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.talent}}</div>
 				</div>
 
 				<div class="career-sheet-advance-option skill">
-					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Skill"}}</div>
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.skill"}}</div>
 					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.skill}}</div>
 				</div>
 
 				<div class="career-sheet-advance-option fortune">
-					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Fortune"}}</div>
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.fortune"}}</div>
 					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.fortune}}</div>
 				</div>
 
 				<div class="career-sheet-advance-option conservative">
-					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Conservative"}}</div>
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.conservative"}}</div>
 					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.conservative}}</div>
 				</div>
 
 				<div class="career-sheet-advance-option reckless">
-					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Reckless"}}</div>
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.reckless"}}</div>
 					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.reckless}}</div>
 				</div>
 
 				<div class="career-sheet-advance-option wound">
-					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.Wound"}}</div>
+					<div class="career-sheet-advance-option-title">{{localize "CAREER.SHEET.wound"}}</div>
 					<div class="career-sheet-advance-option-content">{{career.system.advanceOptions.wound}}</div>
 				</div>
 			</div>
@@ -100,14 +100,14 @@
 
 			<div class="career-sheet-race-restrictions">
 				{{#if career.system.advanced}}
-					{{localize "CAREER.SHEET.AdvancedCareer"}}
+					{{localize "CAREER.SHEET.advancedCareer"}}
 				{{else}}
-					{{localize "CAREER.SHEET.BasicCareer"}}
+					{{localize "CAREER.SHEET.basicCareer"}}
 				{{/if}}
 				:
 				{{#each career.system.raceRestrictions}}
 					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
-						{{localize "CAREER.SHEET.OneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
 					{{else}}
 						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
 					{{/if}}
@@ -121,11 +121,13 @@
 	</div>
 
 	<div class="bottom-line">
-		<a class="flip-link" data-tooltip="{{localize 'Flip sheet'}}"><span class="fas fa-undo"></span></a>
+		<a class="flip-link" data-tooltip="{{localize 'Flip sheet'}}">
+			<span class="fas fa-undo"></span>
+		</a>
 
 		{{#if @root.document.isOwner}}
 			<label class="current-career-div">
-				{{localize 'CAREER.CurrentCareer'}}
+				{{localize "CAREER.FIELDS.current.label"}}
 
 				<input class="item-input current-career-input"
 				       data-path="system.current"

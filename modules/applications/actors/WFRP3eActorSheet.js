@@ -1,3 +1,5 @@
+import {sortTalentsByType} from "../../helpers.js";
+
 /** @inheritDoc */
 export default class WFRP3eActorSheet extends ActorSheet
 {
@@ -85,10 +87,7 @@ export default class WFRP3eActorSheet extends ActorSheet
 			money: sortedItems.filter(item => item.type === "money"),
 			mutations: sortedItems.filter(item => item.type === "mutation"),
 			skills: sortedItems.filter(item => item.type === "skill"),
-			talents: Object.keys(CONFIG.WFRP3e.talentTypes).reduce((sortedTalents, talentType) => {
-				sortedTalents[talentType] = talents.filter(talent => talent.system.type === talentType);
-				return sortedTalents;
-			}, {}),
+			talents: sortTalentsByType(talents),
 			trappings: sortedItems.filter(item => item.type === "trapping"),
 			weapons: sortedItems.filter(item => item.type === "weapon")
 		};
@@ -112,7 +111,7 @@ export default class WFRP3eActorSheet extends ActorSheet
 		html.find(".item-edit-link").click(this._onItemEditClick.bind(this));
 		html.find(".item-delete-link").click(this._onItemDeleteClick.bind(this));
 
-		html.find(".item-name-link")
+		html.find(".item-name-link, .talent-trigger")
 			.click(this._onItemLeftClick.bind(this))
 			.contextmenu(this._onItemRightClick.bind(this));
 
@@ -129,6 +128,8 @@ export default class WFRP3eActorSheet extends ActorSheet
 		html.find(".stance-meter .stance-meter-link")
 			.click(this._onStanceMeterLinkClick.bind(this, 1))
 			.contextmenu(this._onStanceMeterLinkClick.bind(this, -1));
+
+		html.find(".effect-trigger").click(this._onEffectTriggerClick.bind(this));
 	}
 
 	/**
@@ -176,7 +177,7 @@ export default class WFRP3eActorSheet extends ActorSheet
 	 */
 	_onImpairmentTokenClick(amount, event)
 	{
-		this.actor.changeImpairment(event.currentTarget.dataset.impairment, amount);
+		this.actor.adjustImpairment(event.currentTarget.dataset.impairment, amount);
 	}
 
 	/**
@@ -300,13 +301,16 @@ export default class WFRP3eActorSheet extends ActorSheet
 	{
 		event.stopPropagation();
 
-		const options = {};
-		const face = $(event.currentTarget).parents(".face").data("face");
+		const item = this._getItemById(event);
+		if(["action", "skill", "weapon"].includes(item.type)) {
+			const options = {};
+			const face = $(event.currentTarget).parents(".face").data("face");
 
-		if(face)
-			options.face = face;
+			if(face)
+				options.face = face;
 
-		this._getItemById(event).useItem(options);
+			item.useItem(options);
+		}
 	}
 
 	/**
@@ -362,11 +366,21 @@ export default class WFRP3eActorSheet extends ActorSheet
 	/**
 	 * Performs follow-up operations after clicks on a stance meter link.
 	 * @param {Number} amount
-	 * @param {MouseEvent}  event
+	 * @param {MouseEvent} event
 	 * @private
 	 */
 	_onStanceMeterLinkClick(amount, event)
 	{
 		this.actor.adjustStanceMeter(event.currentTarget.dataset.stance, amount);
+	}
+
+	/**
+	 * Performs follow-up operations after clicks on an effect trigger.
+	 * @param {MouseEvent} event
+	 * @private
+	 */
+	_onEffectTriggerClick(event)
+	{
+		this._getItemById(event).useItem({id: event.target.dataset.id});
 	}
 }

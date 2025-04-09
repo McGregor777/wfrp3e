@@ -1,0 +1,20 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{#each effects as |effect ef|}}
+		<div class="effect flexrow" data-uuid="{{effect.uuid}}">
+			<a class="icon" data-action="editEffect">
+				<img src="{{effect.img}}" alt="{{effect.img}}" height="40" />
+			</a>
+
+			<a data-action="editEffect">{{effect.name}}</a>
+
+			<a class="flex0" data-action="removeEffect" data-tooltip="{{localize 'ITEM.ACTIONS.deleteEffect' effect=effect.name}}">
+				<span class="fa-solid fa-trash"></span>
+			</a>
+		</div>
+	{{/each}}
+
+	<a data-action="addEffect">
+		<span class="fa-solid fa-plus"></span>
+		{{localize "ITEM.ACTIONS.addEffect"}}
+	</a>
+</section>

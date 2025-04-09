@@ -12,7 +12,7 @@ export default class TalentSelector extends FormApplication
 	/** @inheritDoc */
 	get title()
 	{
-		return game.i18n.localize("TALENTSELECTOR.Title");
+		return game.i18n.localize("TALENTSELECTOR.title");
 	}
 
 	/** @inheritDoc */
@@ -54,7 +54,7 @@ export default class TalentSelector extends FormApplication
 		const selectedTalent = this.allTalents.find(talent => talent._id === formData.talent);
 
 		if(!selectedTalent)
-			ui.notifications.warn(game.i18n.localize("TALENTSELECTOR.NoTalentSelectedWarning"));
+			ui.notifications.warn(game.i18n.localize("TALENTSELECTOR.WARNINGS.noTalentSelected"));
 
 		if(!this.nonCareer)
 			this.career.update({"system.advances.talent": selectedTalent.name});
@@ -86,8 +86,8 @@ export default class TalentSelector extends FormApplication
 
 		talents = Object.keys(CONFIG.WFRP3e.talentTypes).reduce((sortedTalents, talentType) => {
 			if(["focus", "reputation", "tactic", "tricks"].includes(talentType)
-				&& ((!this.nonCareer && this.career.system.talentSockets.includes(talentType))
-					|| (this.nonCareer && !this.career.system.talentSockets.includes(talentType))))
+				&& ((!this.nonCareer && this.career.system.sockets.find(socket => socket.type === talentType))
+					|| (this.nonCareer && !this.career.system.sockets.find(socket => socket.type === talentType))))
 				sortedTalents[talentType] = talents.filter(talent => {
 					return !this.object.itemTypes.talent.find(ownedTalent => ownedTalent.name === talent.name)
 						&& talent.system.type === talentType;

@@ -4,9 +4,7 @@
   "img": "systems/wfrp3e/assets/images/careers/coachman.webp",
   "effects": [],
   "folder": "m8G9zWMGUYpKI5Hg",
-  "flags": {
-    "core": {}
-  },
+  "flags": {},
   "system": {
     "description": "<p>The Empire is a populous nation, but it is also vast. Travelling between settlements involves long journeys along lonely roads that wend through miles of dangerous wilderness. The wilds of the Empire are home to bandit gangs, herds of beastmen, goblin raiders, and worse. Taking a trip by coach is, relatively speaking, one of the safer ways to travel, and a number of Imperial chartered coaching lines operate services. These are designed to get their customers from one destination to another securely and with some degree of comfort. The coaching lines own a fleet of coaches that travel to their destination in stages. Coaching inns dot strategic points along the roads of the Empire, providing a safe place for longdistance travellers to rest at night. In more remote parts, these inns are quite heavily fortified.</p>\n<p>Coaches are well defended by a pair of coachmen, one of whom keeps a look out for trouble whilst the other drives the coach. Should a highwayman or outlaw band interrupt the journey, the coachmen will attempt to see off the threat with their intimidating blunderbusses. The coachmen are also tasked with looking after the packages of mail that the coaches carry from city to city. Diligent coachmen also learn a few jaunty tunes to play on their coach horn in order to keep their passengers entertained.</p>\n<p>During the cold winter months, most of the coaching lines limit their services, and coachmen can find themselves at a loose end. Under such circumstances, a coachman might be tempted by the opportunity to join a party of adventurers. A coachman who wants to spend a long time chasing after adventure may have to come to some understanding with his bosses in the coaching line though, as they might want their expensive blunderbuss back.</p>\n<p><strong>Typical Trappings:</strong> The coaching lines provide their coachmen with adequate protection in the form of a mail coat and leather jack, as well as a blunderbuss and ammunition for a dozen shots. Coachmen often carry a coach horn for signalling to other road users.</p>\n<p><strong>Career Ability:</strong> Once per session, you may add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to a Ride check or to a Ballistic Skill check made while mounted or while on a moving vehicle</p>",
     "advanced": false,
@@ -15,10 +13,6 @@
       "dwarf"
     ],
     "traits": "Basic, Rural, Specialist, Urban",
-    "talentSockets": [
-      "reputation",
-      "tactic"
-    ],
     "primaryCharacteristics": [
       "toughness",
       "agility"
@@ -67,14 +61,24 @@
         }
       ]
     },
-    "current": false
+    "current": false,
+    "sockets": [
+      {
+        "type": "reputation",
+        "item": null
+      },
+      {
+        "type": "tactic",
+        "item": null
+      }
+    ]
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.5.1",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1699549820341,
-    "modifiedTime": 1699628624172,
+    "modifiedTime": 1734396591358,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null
@@ -82,8 +86,7 @@
   "_id": "ITZLRDJrAot7pFLX",
   "sort": 2000000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!ITZLRDJrAot7pFLX"
 }

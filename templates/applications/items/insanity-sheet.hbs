@@ -6,36 +6,26 @@
 
 	<section class="sheet-body">
 		<label>
-			{{localize 'INSANITY.Traits'}}
+			{{localize "INSANITY.FIELDS.traits.label"}}
 
 			<input name="system.traits"
 			       value="{{item.system.traits}}"
 			       type="text"
-			       placeholder="{{localize 'Traits'}}" />
+			       placeholder="{{localize 'INSANITY.FIELDS.traits.label'}}" />
 		</label>
 
 		<label>
-			{{localize 'INSANITY.SeverityRating'}}
+			{{localize "INSANITY.FIELDS.severityRating.label"}}
 
 			<input name="system.severityRating"
 			       value="{{item.system.severityRating}}"
 			       type="number"
-			       placeholder="{{localize 'INSANITY.SeverityRating'}}"
-			       data-tooltip="{{localize 'INSANITY.SeverityRating'}}" />
-		</label>
-
-		<label>
-			{{localize "INSANITY.Description"}}
-
-			<input name="system.description"
-			       value="{{item.system.description}}"
-			       type="text"
-			       placeholder="{{localize 'INSANITY.Description'}}"
-			       data-tooltip="{{localize 'INSANITY.Description'}}" />
+			       placeholder="{{localize 'INSANITY.FIELDS.severityRating.label'}}"
+			       data-tooltip="{{localize 'INSANITY.FIELDS.severityRating.label'}}" />
 		</label>
 
 		<div class="editor-container">
-			{{editor item.system.effects target="system.effects" button=true owner=owner editable=editable}}
+			{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
 		</div>
 	</section>
 </form>

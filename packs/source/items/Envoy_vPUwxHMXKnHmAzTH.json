@@ -15,10 +15,6 @@
       "woodElf"
     ],
     "traits": "Academic, Basic, Bureaucrat, Social",
-    "talentSockets": [
-      "reputation",
-      "reputation"
-    ],
     "primaryCharacteristics": [
       "intelligence",
       "fellowship"
@@ -67,14 +63,24 @@
         }
       ]
     },
-    "current": false
+    "current": false,
+    "sockets": [
+      {
+        "type": "reputation",
+        "item": null
+      },
+      {
+        "type": "reputation",
+        "item": null
+      }
+    ]
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.5.1",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1699549828957,
-    "modifiedTime": 1699628646576,
+    "modifiedTime": 1734396606464,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null
@@ -82,8 +88,7 @@
   "_id": "vPUwxHMXKnHmAzTH",
   "sort": 1600000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!vPUwxHMXKnHmAzTH"
 }

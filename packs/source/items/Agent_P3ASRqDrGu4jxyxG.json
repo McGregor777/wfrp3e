@@ -4,15 +4,7 @@
   "img": "systems/wfrp3e/assets/images/careers/agent.webp",
   "effects": [],
   "folder": "m8G9zWMGUYpKI5Hg",
-  "flags": {
-    "exportSource": {
-      "world": "warhammer-3e",
-      "system": "wfrp3e",
-      "coreVersion": "0.8.9",
-      "systemVersion": "0.0.1"
-    },
-    "core": {}
-  },
+  "flags": {},
   "system": {
     "description": "<p>There are so many demands on the time of powerful people and organisations that they struggle to look after all their interests, especially those that may be in geographically remote places, politically sensitive, or strictly confidential. As a consequence, many powerful people and organisations make use of agents: skilled individuals who act on behalf of their &gt;employer.</p>\n<p>Most agents work exclusively for a single employer over the long term. Their day-to-day responsibilities may change, but their loyalty remains fixed. These agents proudly wear the badge of the noble house, Imperial cult, or guild that employs them, and use it as a means of getting ahead in the world.</p>\n<p>Agents are tasked with a broad variety of assignments. Whether negotiating a new trade agreement, evaluating prospective members of a guild, or recovering missing relics, the agent is trusted to oversee his employer&rsquo;s interests&hellip; sometimes by any means necessary. A smaller number of agents, particularly in cosmopolitan places such as Altdorf, perform a more restricted set of tasks on a contracted basis for whoever hires them. They may act as go-betweens for ship captains and merchant houses, or specialise in finding missing people, or acquiring rare works of art.</p>\n<p>For every type of agent, the line between adventuring and discharging their normal duties may become blurred. Some set off on an adventure on behalf of their patron, whereas others grow tired of their responsibilities and put their skills to use for their own ends after becoming disillusioned with a patron or getting a taste for the adventuring life.</p>\n<p><strong>Typical Trappings:</strong> An agent travels with two sets of clothing, one formal and one nondescript for travelling incognito. He often bears a badge, seal, or letter authorising him to act on his employer&rsquo;s behalf (though an agent employed in clandestine work will forego this item). He carries an easily concealed weapon such as a dagger, and perhaps a less subtle weapon, such as a blackpowder pistol.</p>\n<p><strong>Career Ability:</strong> Once per session, you may suffer one stress and one fatigue to add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to any skill check</p>",
     "advanced": false,
@@ -21,10 +13,6 @@
       "dwarf"
     ],
     "traits": "Basic, Bureaucrat, Social, Urban",
-    "talentSockets": [
-      "focus",
-      "reputation"
-    ],
     "primaryCharacteristics": [
       "intelligence",
       "fellowship"
@@ -73,14 +61,24 @@
         }
       ]
     },
-    "current": false
+    "current": false,
+    "sockets": [
+      {
+        "type": "focus",
+        "item": null
+      },
+      {
+        "type": "reputation",
+        "item": null
+      }
+    ]
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "0.5.1",
-    "coreVersion": "12.327",
+    "systemVersion": "1.2",
+    "coreVersion": "12.331",
     "createdTime": 1699549805099,
-    "modifiedTime": 1699628570268,
+    "modifiedTime": 1734396554711,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null
@@ -88,8 +86,7 @@
   "_id": "P3ASRqDrGu4jxyxG",
   "sort": 2600000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!P3ASRqDrGu4jxyxG"
 }

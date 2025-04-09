@@ -84,11 +84,11 @@
 				{{#if items.skills}}
 					<div class="skill table">
 						<div class="skill table-header">
-							<span class="skill-name">{{localize "SKILL.Name"}}</span>
+							<span class="skill-name">{{localize "Name"}}</span>
 
-							<span class="skill-characteristic">{{localize "SKILL.ABBREVIATION.Characteristic"}}</span>
+							<span class="skill-characteristic">{{localize "SKILL.FIELDS.characteristic.abbreviation"}}</span>
 
-							<span class="skill-training-level">{{localize "SKILL.TrainingLevel"}}</span>
+							<span class="skill-training-level">{{localize "SKILL.FIELDS.trainingLevel.label"}}</span>
 
 							<span class="buttons"></span>
 						</div>
@@ -228,11 +228,11 @@
 
 									<select class="sheet-form-select item-input talent-card-socket-select"
 									        data-item-id="{{talent._id}}"
-									        data-path="system.talentSocket">
+									        data-path="system.socket">
 										{{selectOptions
-												(lookup @root.talentSocketsByType talent.system.type)
-												selected=talent.system.talentSocket
-												blank=(localize "TALENT.NoSocket")}}
+												(lookup @root.socketsByType talent.system.type)
+												selected=talent.system.socket
+												blank=(localize "TALENT.SOCKET.none")}}
 									</select>
 								</label>
 							{{/each}}

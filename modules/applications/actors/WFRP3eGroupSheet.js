@@ -27,8 +27,8 @@ export default class WFRP3eGroupSheet extends WFRP3eActorSheet
 		html.find(".ability-track-editor-segment > input").change(this._onAbilityTrackSegmentTextChange.bind(this));
 		html.find(".ability-track-editor-trigger").change(this._onAbilityTrackTriggerChange.bind(this));
 		html.find(".ability-track-editor-submit").click(this._onAbilityTrackEditorSubmit.bind(this));
-		html.find(".talent-socket-add").click(this._onTalentSocketAdd.bind(this));
-		html.find(".talent-socket-delete").click(this._onTalentSocketDelete.bind(this));
+		html.find(".socket-add").click(this._onSocketAdd.bind(this));
+		html.find(".socket-remove").click(this._onSocketRemove.bind(this));
 	}
 
 	/**
@@ -117,22 +117,22 @@ export default class WFRP3eGroupSheet extends WFRP3eActorSheet
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Group talent socket addition button.
+	 * Performs follow-up operations after clicks on a Group socket addition button.
 	 * @param event {MouseEvent}
 	 * @private
 	 */
-	async _onTalentSocketAdd(event)
+	async _onSocketAdd(event)
 	{
-		this.actor.addNewTalentSocket();
+		this.actor.addNewSocket();
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Group talent socket removal button.
+	 * Performs follow-up operations after clicks on a Group socket removal button.
 	 * @param event {MouseEvent}
 	 * @private
 	 */
-	async _onTalentSocketDelete(event)
+	async _onSocketRemove(event)
 	{
-		this.actor.removeLastTalentSocket();
+		this.actor.removeLastSocket();
 	}
 }

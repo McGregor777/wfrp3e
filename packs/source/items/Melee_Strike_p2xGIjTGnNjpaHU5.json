@@ -4,15 +4,7 @@
   "img": "systems/wfrp3e/assets/images/actions/melee_strike.jpg",
   "effects": [],
   "folder": "ivXOnATwCKlIm1Tl",
-  "flags": {
-    "core": {},
-    "exportSource": {
-      "world": "warhammer-3e",
-      "system": "wfrp3e",
-      "coreVersion": "11.311",
-      "systemVersion": "0.5.2-alpha"
-    }
-  },
+  "flags": {},
   "system": {
     "conservative": {
       "name": "Melee Strike",
@@ -32,13 +24,13 @@
         "success": [
           {
             "description": "<p>You hit the target for normal damage</p>",
-            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon?.system.damageRating ?? 0) + (actor.system.damageRating ?? 0);",
+            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0);",
             "symbolAmount": 1
           },
           {
+            "symbolAmount": 3,
             "description": "<p>You hit the target for +2 damage</p>",
-            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) + 2;",
-            "symbolAmount": 3
+            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0) + 2;"
           }
         ],
         "boon": [
@@ -79,13 +71,13 @@
         "success": [
           {
             "description": "<p>You hit the target for normal damage</p>",
-            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon?.system.damageRating ?? 0) + (actor.system.damageRating ?? 0);",
+            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0);",
             "symbolAmount": 1
           },
           {
+            "symbolAmount": 3,
             "description": "<p>You hit the target for +2 damage</p>",
-            "script": "outcome.targetDamages = checkData.characteristic.rating + (checkData.weapon ? checkData.weapon.system.damageRating : actor.system.damageRating ?? 0) + 2;",
-            "symbolAmount": 3
+            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0) + 2;"
           }
         ],
         "boon": [
@@ -113,10 +105,10 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.1-alpha",
+    "systemVersion": "1.2",
     "coreVersion": "12.331",
     "createdTime": 1696334694650,
-    "modifiedTime": 1724024748167,
+    "modifiedTime": 1732982979234,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null
@@ -124,8 +116,7 @@
   "_id": "p2xGIjTGnNjpaHU5",
   "sort": 900000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!p2xGIjTGnNjpaHU5"
 }

@@ -9,9 +9,13 @@ export default class WFRP3eAbilityDataModel extends foundry.abstract.TypeDataMod
 		const fields = foundry.data.fields;
 
 		return {
+			cooldown: new fields.BooleanField(),
 			description: new fields.HTMLField()
 		};
 	}
+
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["ABILITY"];
 
 	/** @inheritDoc */
 	prepareBaseData()

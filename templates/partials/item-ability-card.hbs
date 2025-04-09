@@ -8,6 +8,14 @@
 			<span class="recharge-token-counter">{{{talent.system.rechargeTokens}}}</span>
 		</a>
 
+		{{#each ability.effects as |effect ef|}}
+			{{#if (sameAs effect.system.type "onTrigger")}}
+				<a class="effect-trigger" data-id="{{effect.id}}">
+					{{localize "ABILITY.ACTIONS.trigger"}}
+				</a>
+			{{/if}}
+		{{/each}}
+
 		{{#if @root.document.isOwner}}
 			<a class="item-delete-link" data-tooltip="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
 				<span class="fas fa-trash"></span>

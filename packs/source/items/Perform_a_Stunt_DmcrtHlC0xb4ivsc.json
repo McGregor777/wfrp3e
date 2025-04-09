@@ -4,15 +4,7 @@
   "img": "icons/skills/movement/figure-running-gray.webp",
   "effects": [],
   "folder": "ivXOnATwCKlIm1Tl",
-  "flags": {
-    "core": {},
-    "exportSource": {
-      "world": "warhammer-3e",
-      "system": "wfrp3e",
-      "coreVersion": "11.311",
-      "systemVersion": "0.5.2-alpha"
-    }
-  },
+  "flags": {},
   "system": {
     "conservative": {
       "name": "Perform a Stunt",
@@ -41,17 +33,17 @@
         ],
         "boon": [
           {
+            "symbolAmount": 1,
             "description": "<p>If the check relied on a physical characteristic, recover 1 fatigue. If the check relied on a mental characteristic, recover 1 stress</p>",
-            "script": "CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === \"physical\"\n\t? outcome.fatigue--\n\t: outcome.stress--;",
-            "symbolAmount": 1
+            "script": "CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === \"physical\"\n\t? outcome.fatigue--\n\t: outcome.stress--;"
           }
         ],
         "sigmarsComet": [],
         "bane": [
           {
+            "symbolAmount": 1,
             "description": "<p>If the check relied on a physical characteristic, suffer 1 fatigue. If the check relied on a mental characteristic, suffer 1 stress</p>",
-            "script": "CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === \"physical\"\n\t? outcome.fatigue++\n\t: outcome.stress++;",
-            "symbolAmount": 1
+            "script": "CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === \"physical\"\n\t? outcome.fatigue++\n\t: outcome.stress++;"
           }
         ],
         "chaosStar": [],
@@ -88,17 +80,17 @@
         ],
         "boon": [
           {
+            "symbolAmount": 1,
             "description": "<p>If the check relied on a physical characteristic, recover 1 fatigue. If the check relied on a mental characteristic, recover 1 stress</p>",
-            "script": "CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === \"physical\"\n\t? outcome.fatigue--\n\t: outcome.stress--;",
-            "symbolAmount": 1
+            "script": "CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === \"physical\"\n\t? outcome.fatigue--\n\t: outcome.stress--;"
           }
         ],
         "sigmarsComet": [],
         "bane": [
           {
+            "symbolAmount": 1,
             "description": "<p>If the check relied on a physical characteristic, suffer 1 fatigue. If the check relied on a mental characteristic, suffer 1 stress</p>",
-            "script": "CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === \"physical\"\n\t? outcome.fatigue++\n\t: outcome.stress++;",
-            "symbolAmount": 1
+            "script": "CONFIG.WFRP3e.characteristics[checkData.characteristic.name].type === \"physical\"\n\t? outcome.fatigue++\n\t: outcome.stress++;"
           }
         ],
         "chaosStar": [],
@@ -113,7 +105,7 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.1-alpha",
+    "systemVersion": "1.2",
     "coreVersion": "12.331",
     "createdTime": 1696334694650,
     "modifiedTime": 1724077788341,
@@ -124,8 +116,7 @@
   "_id": "DmcrtHlC0xb4ivsc",
   "sort": 700000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
   "_key": "!items!DmcrtHlC0xb4ivsc"
 }

@@ -1,0 +1,17 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{formGroup fields.type
+				value=system.type
+				localize=true}}
+
+	{{#if (or (sameAs system.type "onPreCheckTrigger") (sameAs system.type "onPostCheckTrigger"))}}
+		{{formGroup fields.conditionScript
+					value=system.conditionScript
+					localize=true
+					rows=9}}
+	{{/if}}
+
+	{{formGroup fields.script
+				value=system.script
+				localize=true
+				rows=9}}
+</section>

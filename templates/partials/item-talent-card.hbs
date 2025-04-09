@@ -1,15 +1,27 @@
-<div class="item talent-card" data-item-id="{{talent._id}}">
+<div class="item talent-card" data-item-id="{{talent._id}}" data-uuid="{{talent.uuid}}">
 	<span class="talent-card-type {{talent.system.type}}">{{localize talent.system.type}}</span>
-	<a class="talent-card-name item-name-link">{{talent.name}}</a>
+
+	<h3 class="talent-card-name item-name-link">
+		<a>{{talent.name}}</a>
+	</h3>
+
 	<div class="talent-card-content">{{{talent.system.description}}}</div>
 
 	<div class="talent-card-bottom">
-		<a class="recharge-token" data-tooltip="{{localize "TALENT.RechargeTokens"}}">
-			<img src="systems/wfrp3e/assets/images/token-grey.webp" alt="{{localize "TALENT.RechargeTokens"}}" />
-			<span class="recharge-token-counter">{{{talent.system.rechargeTokens}}}</span>
-		</a>
-
 		{{#if @root.document.isOwner}}
+			<a class="recharge-token" data-tooltip="{{localize "TALENT.FIELDS.rechargeTokens.label"}}">
+				<img src="systems/wfrp3e/assets/images/token-grey.webp" alt="{{localize "TALENT.FIELDS.rechargeTokens.label"}}" />
+				<span class="recharge-token-counter">{{{talent.system.rechargeTokens}}}</span>
+			</a>
+
+			{{#each talent.effects as |effect|}}
+				{{#if (sameAs effect.system.type "onTrigger")}}
+					<a class="effect-trigger" data-id="{{effect._id}}">
+						{{localize "TALENT.ACTIONS.trigger"}}
+					</a>
+				{{/if}}
+			{{/each}}
+
 			<a class="item-delete-link" data-tooltip="{{localize 'APPLICATION.TITLE.DeleteItem'}}">
 				<span class="fas fa-trash"></span>
 			</a>

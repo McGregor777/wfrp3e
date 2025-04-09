@@ -2,8 +2,24 @@
 	"Confirm": "Confirm",
 	"Finish": "Finish",
 	"Ignore": "Ignore",
-	"Main": "Main",
-	"Details": "Details",
+
+	"ABILITY": {
+		"ACTIONS": {
+			"update": "Save Ability",
+			"trigger": "Trigger Ability"
+		},
+		"FIELDS": {
+			"cooldown.label": "Is Cooling Down",
+			"description.label": "Description"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		},
+		"WARNINGS": {
+			"cooldown": "This ability has been used during this session already."
+		}
+	},
 
 	"ACTOR.GenerateACharacter": "Generate a Character",
 
@@ -41,8 +57,19 @@
 			},
 			"effects": {
 				"description.label": "Description",
-				"script.label": "Script",
-				"script.hint": "Arguments:\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - actorToken: The TokenDocument of the WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.\n  - targetActor: The WFRP3eActor targetted by the player performing the check.\n  - actorToken: The TokenDocument targetted by the player performing the check.",
+				"immediate": {
+					"label": "Immediate Effect",
+					"hint": "Check if the Effect script must be executed immediately when selected."
+				},
+				"label": "Effects",
+				"reverseScript": {
+					"label": "Reverse Script",
+					"hint": "This script is executed when an immediate effect is deselected.Arguments:\n  - this: The effect being executed.\n  - roll: The WFRP3eRoll that is executing the effect script.\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - actorToken: The TokenDocument of the WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.\n  - targetActor: The WFRP3eActor targetted by the player performing the check.\n  - targetActorToken: The TokenDocument targetted by the player performing the check."
+				},
+				"script": {
+					"label": "Script",
+					"hint": "This script is executed after an Action check has been validated, if the effect has been selected.\nIf the effect is immediate, this script is executed when the effect is selected.Arguments:\n  - this: The effect being executed.\n  - roll: The WFRP3eRoll that is executing the effect script.\n  - checkData: Contains various data concerning the check.\n  - actor: The WFRP3eActor performing the check.\n  - actorToken: The TokenDocument of the WFRP3eActor performing the check.\n  - outcome: The sum-up of the changes to be applied to both the actor and the target.\n  - targetActor: The WFRP3eActor targetted by the player performing the check.\n  - targetActorToken: The TokenDocument targetted by the player performing the check.",				"symbolAmount.label": "Symbol Amount"
+				},
 				"symbolAmount.label": "Symbol Amount",
 				"symbolType.label": "Symbol Type"
 			}
@@ -94,8 +121,17 @@
 	"APPLICATION.DESCRIPTION.DeleteItem": "Do you really want to delete <em><strong>{item}</em></strong>?",
 	"APPLICATION.DESCRIPTION.MemberRemoval": "Do you really wish to remove <em><strong>{actor}</em></strong> from the party?",
 
-	"ARMOUR.Defence": "Defence",
-	"ARMOUR.Soak": "Soak",
+	"ARMOUR": {
+		"ACTIONS.update": "Save Armour",
+		"FIELDS": {
+			"defenceValue.label": "Defence",
+			"soakValue.label": "Soak"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		}
+	},
 
 	"ATTRIBUTE.Aggression": "Aggression",
 	"ATTRIBUTE.Cunning": "Cunning",
@@ -104,51 +140,70 @@
 	"ATTRIBUTE.ABBREVIATION.Cunning": "C",
 	"ATTRIBUTE.ABBREVIATION.Expertise": "E",
 
-	"CAREER.ActionAdvanceOptions": "Action Advance Options",
-	"CAREER.AdvancedCareer": "Advanced Career",
-	"CAREER.AdvanceOptions": "Advance Options",
-	"CAREER.CareerAptitudes": "Career Aptitudes",
-	"CAREER.CareerCompletionAdvances": "Career Completion Advances",
-	"CAREER.CareerSkills": "Career Skills",
-	"CAREER.ConservativeAdvanceOptions": "Conservative Advance Options",
-	"CAREER.CurrentCareer": "Current Career",
-	"CAREER.FortuneAdvanceOptions": "Fortune Advance Options",
-	"CAREER.GeneralCareerAdvances": "General Career Advances",
-	"CAREER.Header": "Header",
-	"CAREER.PrimaryCharacteristics": "Primary Characteristics",
-	"CAREER.RaceRestrictions": "Race Restrictions",
-	"CAREER.SettingInformation": "Setting Information",
-	"CAREER.SkillAdvanceOptions": "Skill Advance Options",
-	"CAREER.StartingConservativeSegments": "Starting Conservative Segments",
-	"CAREER.StartingRecklessSegments": "Starting Reckless Segments",
-	"CAREER.Summary": "Summary",
-	"CAREER.TalentAdvanceOptions": "Talent Advance Options",
-	"CAREER.TalentSockets": "Talent Sockets",
-	"CAREER.Traits": "Traits",
-	"CAREER.RecklessAdvanceOptions": "Reckless Advance Options",
-	"CAREER.WoundAdvanceOptions": "Wound Advance Options",
-	"CAREER.NonCareerAdvances": "Non Career Advances",
-	"CAREER.ADVANCE.Action": "Action",
-	"CAREER.ADVANCE.CareerTransition": "Career Transition",
-	"CAREER.ADVANCE.DedicationBonus": "Dedication Bonus",
-	"CAREER.ADVANCE.Open": "Open Career Advance",
-	"CAREER.ADVANCE.Talent": "Talent",
-	"CAREER.ADVANCE.Skill": "Skill Training or Specialty",
-	"CAREER.ADVANCE.Type": "Advance Type",
-	"CAREER.ADVANCE.Wound": "Light Wound Threshold",
-	"CAREER.SHEET.Action": "Action",
-	"CAREER.SHEET.AdvancedCareer": "Advanced Career",
-	"CAREER.SHEET.Advances": "Advances",
-	"CAREER.SHEET.BasicCareer": "Basic Career",
-	"CAREER.SHEET.CareerSkills": "Career Skills",
-	"CAREER.SHEET.Conservative": "Conservative",
-	"CAREER.SHEET.Fortune": "Fortune",
-	"CAREER.SHEET.OneRaceOnly": "{race} only",
-	"CAREER.SHEET.PrimaryCharacteristics": "Primary Characteristics",
-	"CAREER.SHEET.Skill": "Skill",
-	"CAREER.SHEET.Talent": "Talent",
-	"CAREER.SHEET.Reckless": "Reckless",
-	"CAREER.SHEET.Wound": "Wound",
+	"CAREER": {
+		"ACTIONS": {
+			"update": "Save Career"
+		},
+		"FIELDS": {
+			"advanced.label": "Advanced Career",
+			"advanceOptions": {
+				"action.label": "Action Advance Options",
+				"conservative.label": "Conservative Advance Options",
+				"fortune.label": "Fortune Advance Options",
+				"reckless.label": "Reckless Advance Options",
+				"skill.label": "Skill Advance Options",
+				"talent.label": "Talent Advance Options",
+				"wound.label": "Wound Advance Options"
+			},
+			"advances": {
+				"action": "Action",
+				"careerCompletion": "Career Completion Advances",
+				"careerTransition": "Career Transition",
+				"dedicationBonus": "Dedication Bonus",
+				"generalCareer": "General Career Advances",
+				"nonCareer": "Non Career Advances",
+				"open": "Open Career Advance",
+				"skill": "Skill Training or Specialty",
+				"talent": "Talent",
+				"type": "Advance Type",
+				"wound": "Light Wound Threshold"
+			},
+			"careerSkills.label": "Career Skills",
+			"current.label": "Current Career",
+			"description.label": "Setting Information",
+			"primaryCharacteristics.label": "Primary Characteristics",
+			"raceRestrictions.label": "Race Restrictions",
+			"sockets.label": "Talent Sockets",
+			"startingStance" : {
+				"conservativeSegments.label": "Starting Conservative Segments",
+				"recklessSegments.label": "Starting Reckless Segments"
+			},
+			"summary.label": "Summary",
+			"traits.label": "Traits"
+		},
+		"SHEET": {
+			"action": "Action",
+			"advancedCareer": "Advanced Career",
+			"advances": "Advances",
+			"basicCareer": "Basic Career",
+			"careerSkills": "Career Skills",
+			"conservative": "Conservative",
+			"fortune": "Fortune",
+			"oneRaceOnly": "{race} only",
+			"primaryCharacteristics": "Primary Characteristics",
+			"skill": "Skill",
+			"talent": "Talent",
+			"reckless": "Reckless",
+			"wound": "Wound"
+		},
+		"TABS": {
+			"advanceOptions": "Advance Options",
+			"aptitudes": "Career Aptitudes",
+			"header": "Header",
+			"main": "Main",
+			"setting": "Setting Information"
+		}
+	},
 
 	"CAREERSELECTOR.ChooseANewCareer": "Choose a New Career",
 	"CAREERSELECTOR.ExperienceCost": "{cost} XP",
@@ -255,20 +310,36 @@
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Not enough Skill Training left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Not enough Specialisation left.",
 
-	"CHARACTERISTIC.Strength": "Strength",
-	"CHARACTERISTIC.Toughness": "Toughness",
-	"CHARACTERISTIC.Agility": "Agility",
-	"CHARACTERISTIC.Intelligence": "Intelligence",
-	"CHARACTERISTIC.Willpower": "Willpower",
-	"CHARACTERISTIC.Fellowship": "Fellowship",
-	"CHARACTERISTIC.Varies": "Varies",
-	"CHARACTERISTIC.ABBREVIATION.Strength": "St",
-	"CHARACTERISTIC.ABBREVIATION.Toughness": "To",
-	"CHARACTERISTIC.ABBREVIATION.Agility": "Ag",
-	"CHARACTERISTIC.ABBREVIATION.Intelligence": "Int",
-	"CHARACTERISTIC.ABBREVIATION.Willpower": "WP",
-	"CHARACTERISTIC.ABBREVIATION.Fellowship": "Fel",
-	"CHARACTERISTIC.ABBREVIATION.Varies": "V",
+	"CHARACTERISTICS": {
+		"agility": {
+			"abbreviation": "Ag",
+			"name": "Agility"
+		},
+		"fellowship": {
+			"abbreviation": "Fel",
+			"name": "Fellowship"
+		},
+		"intelligence": {
+			"abbreviation": "Int",
+			"name": "Intelligence"
+		},
+		"strength": {
+			"abbreviation": "St",
+			"name": "Strength"
+		},
+		"toughness": {
+			"abbreviation": "To",
+			"name": "Toughness"
+		},
+		"varies": {
+			"abbreviation": "V",
+			"name": "Varies"
+		},
+		"willpower": {
+			"abbreviation": "WP",
+			"name": "Willpower"
+		}
+	},
 
 	"CHARACTERISTICUPGRADER.CharacteristicFortune": "{characteristic} Fortune Die",
 	"CHARACTERISTICUPGRADER.CharacteristicRating": "{characteristic} Rating",
@@ -281,6 +352,27 @@
 	"CHARACTERISTICUPGRADER.UpgradeACharacteristic": "Upgrade A Characteristic",
 
 	"CHECKBUILDER": {
+		"ACTIONS": {
+			"convertConservative": "Convert to conservative die",
+			"convertReckless": "Convert to reckless die",
+			"rollCheck": "Roll check"
+		},
+		"FIELDS": {
+			"aggressionDice": "Aggression Dice",
+			"challengeLevel": "Challenge Level",
+			"characteristic": "Characteristic",
+			"cunningDice": "Cunning Dice",
+			"encounterType": "Encounter Type",
+			"expertiseDice": "Expertise Dice",
+			"fortunePoints": "Fortune Points",
+			"specialisations": "Specialisations",
+			"skill": "Skill",
+			"weapon": "Weapon"
+		},
+		"TABS": {
+			"quickSettings": "Quick Settings",
+			"settings": "Settings"
+		},
 		"TITLES": {
 			"action": "{action} Check Builder",
 			"characteristic": "{characteristic} Check Builder",
@@ -288,31 +380,31 @@
 			"initiative": "Initiative Check Builder",
 			"skill": "{skill} Check Builder"
 		},
-		"aggressionDice": "Aggression Dice",
-		"challengeLevel": "Challenge Level",
-		"characteristic": "Characteristic",
-		"convertConservative": "Convert to conservative die",
-		"convertReckless": "Convert to reckless die",
-		"convertWarning": "There is no {type} die to convert.",
-		"convertBackWarning": "There is no {type} die left to convert back.",
-		"cunningDice": "Cunning Dice",
+		"WARNINGS": {
+			"convert": "There is no {type} die to convert.",
+			"convertBack": "There is no {type} die left to convert back."
+		},
 		"dicePool": "Dice Pool",
-		"encounterType": "Encounter Type",
-		"expertiseDice": "Expertise Dice",
-		"fortunePoints": "Fortune Points",
 		"hint": "Left click to increase dice, right click to decrease.",
 		"options": "Options",
-		"rollCheck": "Roll check",
-		"specialisations": "Specialisations",
-		"skill": "Skill",
-		"startingResults": "Starting results",
-		"weapon": "Weapon"
+		"startingResults": "Starting results"
 	},
 
-	"CONDITION.Duration": "Duration",
-	"CONDITION.DURATION.Brief": "Brief",
-	"CONDITION.DURATION.Dependent": "Dependent",
-	"CONDITION.DURATION.Lingering": "Lingering",
+	"CONDITION": {
+		"ACTION.update": "Save Condition",
+		"FIELDS": {
+			"duration.label": "Duration"
+		},
+		"DURATIONS": {
+			"brief": "Brief",
+			"dependent": "Dependent",
+			"lingering": "Lingering"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		}
+	},
 
 	"CREATURE.Abilities": "Abilities",
 	"CREATURE.Actions": "Actions",
@@ -331,7 +423,14 @@
 	"CREATURE.ABBREVIATION.DefenceValue": "Defence",
 	"CREATURE.ABBREVIATION.SoakValue": "Soak",
 
-	"CRITICALWOUND.SeverityRating": "Severity Rating",
+	"CRITICALWOUND": {
+		"ACTIONS.update": "Save Critical Wound",
+		"FIELDS.severityRating.label": "Severity Rating",
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		}
+	},
 
 	"DIALOG.TITLE.EffectDeletion": "Effect Deletion",
 	"DIALOG.DESCRIPTION.EffectDeletion": "Do you really wish to delete this effect?",
@@ -358,27 +457,75 @@
 		}
 	},
 
-	"DISEASE.Description": "Description",
-	"DISEASE.SeverityRating": "Severity Rating",
-	"DISEASE.Symptom": "Symptom",
-	"DISEASE.Traits": "Traits",
-	"DISEASE.SYMPTOM.Delirium": "Delirium",
-	"DISEASE.SYMPTOM.Fever": "Fever",
-	"DISEASE.SYMPTOM.Infectious": "Infectious",
-	"DISEASE.SYMPTOM.Lethal": "Lethal",
-	"DISEASE.SYMPTOM.Painful": "Painful",
-	"DISEASE.SYMPTOM.Tiring": "Tiring",
-	"DISEASE.SYMPTOM.Virulent": "Virulent",
-	"DISEASE.SYMPTOM.Weary": "Weary",
-	"DISEASE.SYMPTOM.DESCRIPTION.Delirium": "Each <strong class=\"symptom-name\">Delirium</strong> symptom counts as 1 stress.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Fever": "Each <strong class=\"symptom-name\">Fever</strong> symptom adds <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> to all mental checks performed by the sufferer.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Infectious": "Each <strong class=\"symptom-name\">Infectious</strong> symptom disables one Party Sheet talent slot. Place a token on the talent slot to show it is unavailable.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Lethal": "Each <strong class=\"symptom-name\">Lethal</strong> symptom increases the severity rating of each other disease or symptom card by +1.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Painful": "Each <strong class=\"symptom-name\">Painful</strong> symptom adds <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> to all physical checks performed by the sufferer.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Tiring": "Each <strong class=\"symptom-name\">Tiring</strong> symptom counts as 1 fatigue.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Virulent": "Each <strong class=\"symptom-name\">Virulent</strong> symptom acts as a copy of each other symptom the target suffers from.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Weary": "Each <strong class=\"symptom-name\">Weary</strong> symptom adds 1 recharge token to actions performed, or adds 1 fewer token to <em>Ongoing</em> actions.",
+	"DISEASE": {
+		"ACTIONS.update": "Save Disease",
+		"FIELDS": {
+			"description": "Description",
+			"severityRating": "Severity Rating",
+			"symptom": "Symptom",
+			"traits": "Traits"
+		},
+		"SYMPTOMS": {
+			"delirium": {
+				"description": "Each <strong class=\"symptom-name\">Delirium</strong> symptom counts as 1 stress.",
+				"name": "Delirium"
+			},
+			"fever": {
+				"description": "Each <strong class=\"symptom-name\">Fever</strong> symptom adds <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> to all mental checks performed by the sufferer.",
+				"name": "Fever"
+			},
+			"infectious": {
+				"description": "Each <strong class=\"symptom-name\">Infectious</strong> symptom disables one Party Sheet talent slot. Place a token on the talent slot to show it is unavailable.",
+				"name": "Infectious"
+			},
+			"lethal": {
+				"description": "Each <strong class=\"symptom-name\">Lethal</strong> symptom increases the severity rating of each other disease or symptom card by +1.",
+				"name": "Lethal"
+			},
+			"painful": {
+				"description": "Each <strong class=\"symptom-name\">Painful</strong> symptom adds <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> to all physical checks performed by the sufferer.",
+				"name": "Painful"
+			},
+			"tiring": {
+				"description": "Each <strong class=\"symptom-name\">Tiring</strong> symptom counts as 1 fatigue.",
+				"name": "Tiring"
+			},
+			"virulent": {
+				"description": "Each <strong class=\"symptom-name\">Virulent</strong> symptom acts as a copy of each other symptom the target suffers from.",
+				"name": "Virulent"
+			},
+			"weary": {
+				"description": "Each <strong class=\"symptom-name\">Weary</strong> symptom adds 1 recharge token to actions performed, or adds 1 fewer token to <em>Ongoing</em> actions.",
+				"name": "Weary"
+			}
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		}
+	},
 
+	"EFFECT": {
+		"FIELDS": {
+			"conditionScript": {
+				"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Talent.\nMust return a boolean, true if condition is met, false if not.",
+				"label": "Condition Script"
+			},
+			"reverseScript": {
+				"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Talent.",
+				"label": "Reverse Script"
+			},
+			"script": {
+				"hint": "Arguments:\n\t- this: The triggered Talent.",
+				"label": "Script"
+			},
+			"type.label": "Script Trigger"
+		},
+		"TABS": {
+			"scripts": "Scripts"
+		}
+	},
+	
 	"ENCOUNTER.Combat": "Combat",
 	"ENCOUNTER.Social": "Social",
 
@@ -392,21 +539,65 @@
 	"GROUP.SPECIALABILITY.Content": "Content",
 	"GROUP.SPECIALABILITY.Trigger": "Trigger",
 
-	"INSANITY.SeverityRating": "Severity Rating",
-	"INSANITY.Traits": "Traits",
-	"INSANITY.Description": "Description",
+	"INSANITY": {
+		"ACTIONS.update": "Save Insanity",
+		"FIELDS": {
+			"severityRating.label": "Severity Rating",
+			"traits.label": "Traits",
+			"description.label": "Description"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		}
+	},
 
-	"MONEY.Value": "Value",
-	"MONEY.Brass": "Brass",
-	"MONEY.Silver": "Silver",
-	"MONEY.Gold": "Gold",
-	"MONEY.ABBREVIATION.BrassCoins": "b",
-	"MONEY.ABBREVIATION.SilverShillings": "s",
-	"MONEY.ABBREVIATION.GoldCrowns": "g",
+	"ITEM": {
+		"ACTIONS": {
+			"addEffect": "Add Effect",
+			"deleteEffect": "Delete {effect} Effect "
+		}
+	},
 
-	"MUTATION.SeverityRating": "Severity Rating",
-	"MUTATION.Traits": "Traits",
-	"MUTATION.Description": "Description",
+	"MISCAST": {
+		"ACTIONS.update": "Save Miscast",
+		"FIELDS": {
+			"description.label": "Description"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		}
+	},
+
+	"MONEY": {
+		"ACTIONS.update": "Save Money",
+		"FIELDS": {
+			"description.label": "Description",
+			"quantity": {
+				"abbreviation": "Qu",
+				"label": "Quantity"
+			},
+			"value.label": "Value"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		}
+	},
+
+	"MUTATION": {
+		"ACTIONS.update": "Save Mutation",
+		"FIELDS": {
+			"severityRating.label": "Severity Rating",
+			"traits.label": "Traits",
+			"description.label": "Description"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		}
+	},
 
 	"NEWCAREERADVANCESELECTION.Content": "Choose a new career advance",
 	"NEWCAREERADVANCESELECTION.Title": "New Career Advance Selection",
@@ -454,6 +645,7 @@
 	"ROLL": {
 		"ACTIONS": {
 			"applyToggledEffects": "Apply Toggled Effects",
+			"performAFreeCheck": "Perform a Free Check",
 			"useTalent": "Use Talent"
 		},
 		"EFFECTS": {
@@ -464,12 +656,12 @@
 			"sufferStress": "Suffer {amount} stress"
 		},
 		"NAMES": {
-			"actionCheck": "{action} check",
-			"characteristicCheck": "{characteristic} check",
-			"combatEncounterInitiativeCheck": "Combat encounter initiative check",
-			"freeCheck": "Free check",
-			"skillCheck": "{skill} check",
-			"socialEncounterInitiativeCheck": "Social encounter initiative check"
+			"actionCheck": "{action} Check",
+			"characteristicCheck": "{characteristic} Check",
+			"combatEncounterInitiativeCheck": "Combat Encounter Initiative Check",
+			"freeCheck": "Free Check",
+			"skillCheck": "{skill} Check",
+			"socialEncounterInitiativeCheck": "Social Encounter Initiative Check"
 		},
 		"OUTCOMES": {
 			"criticalWounds": "{actor} suffers from {criticalWounds}.",
@@ -509,16 +701,19 @@
 		},
 		"WARNINGS": {
 			"notAllowed": "You are not allowed to toggle effects for this check.",
-			"notEnoughSymbol": "You have not enough {symbol} to toggle this effect."
+			"notEnoughSymbol": "You have not enough {symbol} to toggle this effect.",
+			"noTalentNorAbilityToUse": "There is no Talent nor Ability to use."
 		},
 		"availableEffects": "Available Effects"
 	},
 
 	"SCRIPT": {
 		"TYPES": {
+			"onCareerSocket": "Career Socket",
 			"onCheckPreparation": "Check Preparation",
 			"onCheckRoll": "Check Roll",
-			"onCheckTrigger": "Manual Trigger on a Check",
+			"onPostCheckTrigger": "Manual Trigger Post Check",
+			"onPreCheckTrigger": "Manual Selection Pre Check",
 			"onTargettingCheckPreparation": "Targetting Check Preparation",
 			"onTrigger": "Manual Trigger"
 		}
@@ -529,13 +724,34 @@
 		"reckless": "Reckless"
 	},
 
-	"SKILL.AdvancedSkill": "Advanced Skill",
-	"SKILL.Characteristic": "Characteristic",
-	"SKILL.Name": "Name",
-	"SKILL.SpecialisationList": "Specialisations: {specialisations}",
-	"SKILL.Specialisations": "Specialisations",
-	"SKILL.TrainingLevel": "Training Level",
-	"SKILL.ABBREVIATION.Characteristic": "Char",
+	"SKILL": {
+		"ACTIONS.update": "Save Skill",
+		"FIELDS": {
+			"advanced.label": "Advanced Skill",
+			"characteristic": {
+				"abbreviation": "Char",
+				"label": "Characteristic"
+			},
+			"description.label": "Description",
+			"specialisations.label": "Specialisations",
+			"trainingLevel.label": "Training Level"
+		},
+		"NAMES": {
+			"channeling": "Channeling",
+			"education": "Education",
+			"folklore": "Folklore",
+			"intimidate": "Intimidate",
+			"intuition": "Intuition",
+			"observation": "Observation",
+			"piety": "Piety",
+			"weaponSkill": "Weapon Skill"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		},
+		"specialisationList": "Specialisations: {specialisations}"
+	},
 
 	"SYMBOL": {
 		"AMOUNT": {
@@ -561,11 +777,57 @@
 		}
 	},
 
-	"TALENTSELECTOR.ChooseANewTalent": "Choose a New Talent",
-	"TALENTSELECTOR.NoTalentSelected": "None",
-	"TALENTSELECTOR.NoTalentSelectedWarning": "You must select a Talent card.",
-	"TALENTSELECTOR.SelectedTalent": "Selected Talent:",
-	"TALENTSELECTOR.Title": "Talent Selector",
+	"TALENT": {
+		"ACTIONS": {
+			"update": "Save Talent",
+			"trigger": "Trigger Talent"
+		},
+		"FIELDS": {
+			"description.label": "Description",
+			"rechargeTokens.label": "Recharge Tokens",
+			"talentSocket.label": "Talent Socket",
+			"type.label": "Talent Type"
+		},
+		"SOCKET": {
+			"available": "Available {type} Socket",
+			"none": "No Socket",
+			"taken": "{type} Socket taken by {talent}"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"main": "Main"
+		},
+		"TYPES": {
+			"any": "Any",
+			"faith": "Faith",
+			"focus": "Focus",
+			"insanity": "Insanity",
+			"order": "Order",
+			"reputation": "Reputation",
+			"tactic": "Tactic",
+			"tricks": "Tricks"
+		},
+		"WARNINGS": {
+			"notSocketed": "You cannot use a Talent that is not socketed.",
+			"recharging": "You cannot use a Talent that is recharging."
+		}
+	},
+
+	"TALENTSELECTOR": {
+		"ACTIONS": {
+			"chooseTalent": "Choose Talent"
+		},
+		"HEADINGS": {
+			"newTalent": "Choose a New Talent",
+			"triggerTalent": "Choose a Talent to Use"
+		},
+		"WARNINGS": {
+			"noTalentSelected": "You must select a Talent card."
+		},
+		"noTalentSelected": "None",
+		"selectedTalent": "Selected Talent:",
+		"title": "Talent Selector"
+	},
 
 	"TRAININGSELECTOR.Acquired": "Acquired",
 	"TRAININGSELECTOR.Characteristic": "Characteristic",
@@ -579,20 +841,70 @@
 	"TRAININGSELECTOR.Title": "Training Selector",
 	"TRAININGSELECTOR.TrainingLevel": "Training Level",
 
-	"TRAPPING.Cost": "Cost",
-	"TRAPPING.Encumbrance": "Encumbrance",
-	"TRAPPING.Description": "Description",
-	"TRAPPING.Quantity": "Quantity",
-	"TRAPPING.Name": "Name",
-	"TRAPPING.Price": "Price",
-	"TRAPPING.Rarity": "Rarity",
-	"TRAPPING.ABBREVIATION.Encumbrance": "Enc",
-	"TRAPPING.ABBREVIATION.Quantity": "Qu",
-	"TRAPPING.RARITY.Abundant": "Abundant",
-	"TRAPPING.RARITY.Plentiful": "Plentiful",
-	"TRAPPING.RARITY.Common": "Common",
-	"TRAPPING.RARITY.Rare": "Rare",
-	"TRAPPING.RARITY.Exotic": "Exotic",
+	"TRAPPING": {
+		"ACTIONS.update": "Save Trapping",
+		"FIELDS": {
+			"cost": {
+				"cost": {
+					"brass": {
+						"abbreviation": "b",
+						"label": "Brass"
+					},
+					"gold": {
+						"abbreviation": "g",
+						"label": "Gold"
+					},
+					"label": "Cost",
+					"silver": {
+						"abbreviation": "s",
+						"label": "Silver"
+					}
+				}
+			},
+			"encumbrance": {
+				"abbreviation": "Enc",
+				"label": "Encumbrance"
+			},
+			"description.label": "Description",
+			"quantity": {
+				"abbreviation": "Qu",
+				"label": "Quantity"
+			},
+			"name.label": "Name",
+			"price.label": "Price",
+			"rarity.label": "Rarity"
+		},
+		"RARITIES": {
+			"abundant": "Abundant",
+			"plentiful": "Plentiful",
+			"common": "Common",
+			"rare": "Rare",
+			"exotic": "Exotic"
+		},
+		"TABS": {
+			"effects": "Effects",
+			"details": "Details",
+			"main": "Main"
+		},
+		"brassCoins": {
+			"abbreviation": "b",
+			"label": "Brass Coins"
+		},
+		"goldCrowns": {
+			"abbreviation": "s",
+			"label": "Gold Crowns"
+		},
+		"silverShillings": {
+			"abbreviation": "g",
+			"label": "Silver Shillings"
+		}
+	},
+
+	"TRAITS": {
+		"greyOrder": "Grey Order",
+		"rankZero": "Rank 0",
+		"rankOne": "Rank 1"
+	},
 	
 	"TYPES": {
 		"Actor": {
@@ -620,46 +932,71 @@
 		}
 	},
 
-	"WEAPON.CriticalRating": "Critical Rating",
-	"WEAPON.DamageRating": "Damage Rating",
-	"WEAPON.Group": "Group",
-	"WEAPON.Improvised": "Improvised",
-	"WEAPON.ImprovisedWeapon": "Improvised Weapon",
-	"WEAPON.Qualities": "Qualities",
-	"WEAPON.Range": "Range",
-	"WEAPON.Rating": "Rating",
-	"WEAPON.Unarmed": "Unarmed",
-	"WEAPON.ABBREVIATION.CriticalRating": "CR",
-	"WEAPON.ABBREVIATION.DamageRating": "DR",
-	"WEAPON.GROUP.Blackpowder": "Blackpowder",
-	"WEAPON.GROUP.Bow": "Bow",
-	"WEAPON.GROUP.Cavalry": "Cavalry",
-	"WEAPON.GROUP.Crossbow": "Crossbow",
-	"WEAPON.GROUP.Fencing": "Fencing",
-	"WEAPON.GROUP.Flail": "Flail",
-	"WEAPON.GROUP.GreatWeapon": "Great Weapon",
-	"WEAPON.GROUP.Ordinary": "Ordinary",
-	"WEAPON.GROUP.Polearm": "Polearm",
-	"WEAPON.GROUP.Sling": "Sling",
-	"WEAPON.GROUP.Spear": "Spear",
-	"WEAPON.GROUP.Staff": "Staff",
-	"WEAPON.GROUP.Thrown": "Thrown",
-	"WEAPON.GROUP.Unarmed": "Unarmed",
-	"WEAPON.QUALITY.Attuned": "Attuned" ,
-	"WEAPON.QUALITY.Blast": "Blast",
-	"WEAPON.QUALITY.Defensive": "Defensive",
-	"WEAPON.QUALITY.Entangling": "Entangling",
-	"WEAPON.QUALITY.Fast": "Fast",
-	"WEAPON.QUALITY.Pierce": "Pierce",
-	"WEAPON.QUALITY.Reload": "Reload",
-	"WEAPON.QUALITY.Slow": "Slow",
-	"WEAPON.QUALITY.Thrown": "Thrown",
-	"WEAPON.QUALITY.TwoHanded": "Two-Handed",
-	"WEAPON.QUALITY.Unreliable": "Unreliable",
-	"WEAPON.QUALITY.Vicious": "Vicious",
-	"WEAPON.QUALITY.Special": "Special",
-	"WEAPON.RANGE.Close": "Close",
-	"WEAPON.RANGE.Medium": "Medium",
-	"WEAPON.RANGE.Long": "Long",
-	"WEAPON.RANGE.Extreme": "Extreme"
+	"WEAPON": {
+		"ACTIONS": {
+			"addQuality": "Add Quality",
+			"removeQuality": "Remove {quality} Quality",
+			"update": "Save Weapon"
+		},
+		"FIELDS": {
+			"criticalRating": {
+				"abbreviation": "CR",
+				"label": "Critical Rating"
+			},
+			"damageRating": {
+				"abbreviation": "DR",
+				"label": "Damage Rating"
+			},
+			"group.label": "Group",
+			"qualities": {
+				"FIELDS": {
+					"name.label": "Name",
+					"rating.label": "Rating"
+				},
+				"label": "Qualities"
+			},
+			"range": "Range",
+			"special": "Special"
+		},
+		"GROUPS": {
+			"blackpowder": "Blackpowder",
+			"bow": "Bow",
+			"cavalry": "Cavalry",
+			"crossbow": "Crossbow",
+			"fencing": "Fencing",
+			"flail": "Flail",
+			"greatWeapon": "Great Weapon",
+			"ordinary": "Ordinary",
+			"polearm": "Polearm",
+			"sling": "Sling",
+			"spear": "Spear",
+			"staff": "Staff",
+			"thrown": "Thrown",
+			"unarmed": "Unarmed"
+		},
+		"QUALITIES": {
+			"attuned": "Attuned" ,
+			"blast": "Blast",
+			"defensive": "Defensive",
+			"entangling": "Entangling",
+			"fast": "Fast",
+			"pierce": "Pierce",
+			"reload": "Reload",
+			"slow": "Slow",
+			"thrown": "Thrown",
+			"twoHanded": "Two-Handed",
+			"unreliable": "Unreliable",
+			"vicious": "Vicious",
+			"special": "Special"
+		},
+		"RANGES": {
+			"close": "Close",
+			"medium": "Medium",
+			"long": "Long",
+			"extreme": "Extreme"
+		},
+		"improvised": "Improvised",
+		"improvisedWeapon": "Improvised Weapon",
+		"unarmed": "Unarmed"
+	}
 }

@@ -8,15 +8,43 @@ import RecklessDie from "./dice/RecklessDie.js";
 import WFRP3eRoll from "./WFRP3eRoll.js";
 
 /**
+ * @typedef {Object} CheckData
+ * @property {string} actor
+ * @property {string} characteristic
+ * @property {string} [action]
+ * @property {string} [challengeLevel]
+ * @property {boolean} [combat]
+ * @property {string} [face]
+ * @property {string} [fortunePoints]
+ * @property {CheckOutcome} [outcome]
+ * @property {Array} [specialisations]
+ * @property {string} [skill]
+ * @property {Array} [targets]
+ * @property {Array} [triggeredItems]
+ * @property {string} [weapon]
+ */
+
+/**
+ * @typedef {Object} CheckOutcome
+ */
+
+/**
  * DicePool utility helps prepare WFRP3e's special dice pools.
- * @param {Object} [startingPool]
- * @param {Object} [options]
- * @param {Object} [options.checkData]
- * @param {String} [options.flavor]
- * @param {String} [options.sound]
+ * @property {Object} dice The various dice that will be rolled.
+ * @property {Object} symbols The various symbols that will be added to the results of the check once the rolled.
+ * @property {CheckData} [checkData] Contains various data concerning the check of the DicePool.
+ * @property {String} [flavor] A flavor text.
+ * @property {String} [sound] An audio file path.
  */
 export default class DicePool
 {
+	/**
+	 * @param {Object} [startingPool]
+	 * @param {Object} [options]
+	 * @param {CheckData} [options.checkData] Contains various data concerning the check of the DicePool.
+	 * @param {String} [options.flavor] A flavor text.
+	 * @param {String} [options.sound] An audio file path.
+	 */
 	constructor(startingPool = {}, options = {checkData: null, flavor: null, sound: null})
 	{
 		this.dice = Object.keys(CONFIG.WFRP3e.dice).reduce((dice, dieName) => {
@@ -29,14 +57,6 @@ export default class DicePool
 			return symbols;
 		}, {});
 
-		this.creatureDice = Object.keys(CONFIG.WFRP3e.attributes).reduce((creatureDice, attributeName) => {
-			creatureDice[attributeName] = startingPool.creatureDice ? startingPool.creatureDice[attributeName] ?? 0 : 0;
-			return creatureDice;
-		}, {});
-
-		this.fortunePoints = 0;
-		this.specialisations = [];
-
 		foundry.utils.mergeObject(this, options);
 	}
 
@@ -48,11 +68,8 @@ export default class DicePool
 	{
 		return [
 			this.dice.characteristic + "d" + CharacteristicDie.DENOMINATION,
-			(this.dice.fortune + this.fortunePoints
-				+ this.specialisations.length
-				+ this.creatureDice.aggression
-				+ this.creatureDice.cunning) + "d" + FortuneDie.DENOMINATION,
-			(this.dice.expertise + this.creatureDice.expertise) + "d" + ExpertiseDie.DENOMINATION,
+			this.dice.fortune + "d" + FortuneDie.DENOMINATION,
+			this.dice.expertise + "d" + ExpertiseDie.DENOMINATION,
 			this.dice.conservative + "d" + ConservativeDie.DENOMINATION,
 			this.dice.reckless + "d" + RecklessDie.DENOMINATION,
 			this.dice.challenge + "d" + ChallengeDie.DENOMINATION,
@@ -65,18 +82,17 @@ export default class DicePool
 
 	get name()
 	{
-		if(this.checkData) {
-			const checkData = this.checkData;
-
+		const checkData = this.checkData;
+		if(checkData) {
 			if(checkData.combat)
 				return game.i18n.localize(`ROLL.NAMES.${checkData.combat.tags.encounterType}EncounterInitiativeCheck`);
 			else if(checkData.action)
-				return game.i18n.format("ROLL.NAMES.actionCheck", {action: checkData.action.name});
+				return game.i18n.format("ROLL.NAMES.actionCheck", {action: fromUuidSync(checkData.action).name});
 			else if(checkData.skill)
 				return game.i18n.format("ROLL.NAMES.skillCheck", {skill: checkData.skill.name});
 			else if(checkData.characteristic)
 				return game.i18n.format("ROLL.NAMES.characteristicCheck", {
-					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic.name].name)
+					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic].name)
 				});
 		}
 
@@ -97,11 +113,6 @@ export default class DicePool
 		if(otherDicePool.symbols)
 			Object.values(CONFIG.WFRP3e.symbols).forEach((symbol) => {
 				this.symbols[symbol.plural] += otherDicePool.symbols[symbol.plural];
-			});
-
-		if(otherDicePool.creatureDice)
-			Object.keys(CONFIG.WFRP3e.attributes).forEach((attributeName) => {
-				this.creatureDice[attributeName] += otherDicePool.creatureDice[attributeName];
 			});
 	}
 
@@ -140,55 +151,95 @@ export default class DicePool
 	}
 
 	/**
+	 * Determines the number of dice of each type depending on the check data.
+	 */
+	determineDicePoolFromCheckData()
+	{
+		const checkData = this.checkData;
+		if(checkData.actor) {
+			const actor = fromUuidSync(checkData.actor),
+				  action = fromUuidSync(checkData.action),
+				  characteristic = actor.system.characteristics[checkData.characteristic],
+				  face = checkData.face,
+				  stance = actor.system.stance.current ?? actor.system.stance,
+				  match = action?.system[face].check.match(new RegExp(
+					  "(([\\p{L}\\s]+) \\((\\p{L}+)\\))( " +
+					  game.i18n.localize("ACTION.CHECK.against") +
+					  "\\.? ([\\p{L}\\s]+))?", "u")
+				  );
+
+			this.dice = {
+				characteristic: characteristic.rating - Math.abs(stance),
+				fortune: characteristic.fortune + (checkData.fortunePoints ?? 0) + (checkData.specialisations?.length ?? 0),
+				expertise: fromUuidSync(checkData.skill)?.system.trainingLevel ?? 0,
+				conservative: stance < 0 ? Math.abs(stance) : 0,
+				reckless: stance > 0 ? stance : 0,
+				challenge: CONFIG.WFRP3e.challengeLevels[checkData.challengeLevel].challengeDice
+					+ action?.system[face].difficultyModifiers.challengeDice
+					+ (["melee", "ranged"].includes(action?.system.type)
+						? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
+						: 0),
+				misfortune: action?.system[face].difficultyModifiers.misfortuneDice
+					+ match && match[5] === game.i18n.localize("ACTION.CHECK.targetDefence")
+						&& checkData.targets?.length > 0
+							? fromUuidSync(checkData.targets[0]).system.totalDefence
+							: 0
+			}
+		}
+		else
+			throw new Error("Cannot determine dicePool from checkData without an Actor");
+	}
+
+	/**
 	 * Rolls the Dice Pool, then shows the results in a Message.
-	 * @returns {Promise<*>}
+	 * @returns {Promise<{WFRP3eRoll}>}
 	 */
 	async roll()
 	{
-		let actor = null;
+		const checkData = this.checkData;
+		let actor = checkData?.actor;
 
-		if(this.checkData?.actor) {
-			actor = this.checkData.actor.tokenId
-				? game.scenes.get(this.checkData.actor.sceneId).collections.tokens.get(this.checkData.actor.tokenId).actor
-				: game.actors.get(this.checkData.actor.actorId);
+		if(checkData) {
+			checkData.fortunePoints = this.fortunePoints;
 
-			// Remove the fortune points spent on the check.
-			if(actor.type === "character" && this.fortunePoints > 0) {
-				const updates = {"system.fortune.value": Math.max(actor.system.fortune.value - this.fortunePoints, 0)};
+			if(actor) {
+				actor = await fromUuid(checkData.actor);
 
-				if(this.fortunePoints > actor.system.fortune.value) {
-					const party = actor.system.currentParty;
-					party.update({"system.fortunePool": Math.max(party.system.fortunePool - (this.fortunePoints - actor.system.fortune.value), 0)})
-				}
+				// Remove the fortune points spent on the check from the Actor and/or Party.
+				if(actor.type === "character" && this.fortunePoints > 0) {
+					const updates = {"system.fortune.value": Math.max(actor.system.fortune.value - this.fortunePoints, 0)};
 
-				actor.update(updates);
-			}
-			// Remove the attribute dice spent on the check.
-			else if(actor.type === "creature") {
-				const updates = {system: {attributes: {}}};
+					if(this.fortunePoints > actor.system.fortune.value) {
+						const party = actor.system.currentParty;
+						party.update({"system.fortunePool": Math.max(party.system.fortunePool - (this.fortunePoints - actor.system.fortune.value), 0)})
+					}
 
-				for(const [attributeName, creatureDice] of Object.entries(this.creatureDice)) {
-					if(creatureDice > 0)
-						updates.system.attributes[attributeName] = {
-							value: actor.system.attributes[attributeName].value - creatureDice
-						};
-				}
-
-				if(Object.keys(updates.system.attributes).length > 0)
 					actor.update(updates);
+				}
+				// Remove the attribute dice spent on the check from the Creature.
+				else if(actor.type === "creature") {
+					const updates = {system: {attributes: {}}};
+
+					for(const [attributeName, creatureDice] of Object.entries(this.creatureDice)) {
+						if(creatureDice > 0)
+							updates.system.attributes[attributeName] = {
+								value: actor.system.attributes[attributeName].value - creatureDice
+							};
+					}
+
+					if(Object.keys(updates.system.attributes).length > 0)
+						actor.update(updates);
+				}
 			}
 		}
 
-		const roll = WFRP3eRoll.create(
+		const roll = await WFRP3eRoll.create(
 			this.formula,
 			actor ? actor.getRollData() : {},
-			{checkData: this.checkData, flavor: this.flavor, startingSymbols: this.symbols}
-		);
-
-		roll.toMessage({
+			{checkData, flavor: this.flavor, startingSymbols: this.symbols}
+		).toMessage({
 			flavor: this.name,
-			speaker: {actor},
-			user: game.user.id
+			speaker: {actor}
 		});
 
 		if(this.sound)

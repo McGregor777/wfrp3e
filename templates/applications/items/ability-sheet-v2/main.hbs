@@ -1,0 +1,9 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{formGroup fields.cooldown value=system.cooldown localize=true}}
+
+	{{formGroup fields.description
+				value=system.description
+				enriched=enriched.description
+				toggled=true
+				localize=true}}
+</section>

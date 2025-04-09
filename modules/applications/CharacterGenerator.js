@@ -1,4 +1,5 @@
 import WFRP3eActor from "../documents/WFRP3eActor.js";
+import {sortTalentsByType} from "../helpers.js";
 
 /** @inheritDoc */
 export default class CharacterGenerator extends FormApplication
@@ -341,9 +342,9 @@ export default class CharacterGenerator extends FormApplication
 
 		this.selectedCareer.system.current = true;
 
-		this.priest = this.selectedCareer.system.talentSockets.includes("faith");
-		this.wizard = this.selectedCareer.system.talentSockets.includes("order");
-		this.zealot = this.selectedCareer.system.talentSockets.includes("insanity");
+		this.priest = this.selectedCareer.system.sockets.find(socket => socket.type === "faith");
+		this.wizard = this.selectedCareer.system.sockets.find(socket => socket.type === "order");
+		this.zealot = this.selectedCareer.system.sockets.find(socket => socket.type === "insanity");
 
 		const rootElement = html.find('.step[data-step="creation-point-investment"] .creation-point-investment');
 
@@ -690,11 +691,7 @@ export default class CharacterGenerator extends FormApplication
 		this.selectedTalents = new Map();
 
 		if(this.talentsInvestment >= 1 || this.selectedOrigin.abilities.includes("Erudite") || this.priest || this.wizard || this.zealot) {
-			const talents = Object.keys(CONFIG.WFRP3e.talentTypes).reduce((everyTalents, talentType) => {
-				everyTalents[talentType] = this.talents.filter(talent => talent.system.type === talentType);
-				return everyTalents;
-			}, {});
-
+			const talents = sortTalentsByType(this.talents);
 			const rootElement = html.find('.step[data-step="talent-selection"] .talent-selection');
 
 			rootElement.html(

@@ -128,6 +128,21 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 		return super._onRender(context, options);
 	}
 
+	/** @inheritDoc */
+	async _onChangeForm(formConfig, event)
+	{
+		// Show or hide reverse script textarea whether the effect is immediate.
+		if(event.target.name === "immediate") {
+			const form = event.currentTarget,
+				  formData = new FormDataExtended(form),
+				  reverseScriptContainer = form.querySelector(".reverse-script-container");
+
+			reverseScriptContainer.style.display = formData.object.immediate ? "block" : "none";
+		}
+
+		super._onChangeForm(formConfig, event);
+	}
+
 	/**
 	 * Prepends symbols to an enriched description of the effect.
 	 * @protected
@@ -213,6 +228,6 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 		// If the index exists, update the effect, else add the new effect.
 		this.data.index ? effects[this.data.index] = formData.object : effects.push(formData.object);
 
-		this.action.update({[`system.${this.face}.effects.${symbol}`]: effects})
+		this.action.update({[`system.${this.face}.effects.${symbol}`]: effects});
 	}
 }

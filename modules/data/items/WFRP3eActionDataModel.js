@@ -21,7 +21,6 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 					name: new fields.StringField({label: "ACTION.FIELDS.name.label"}),
 					art: new fields.FilePathField({categories: ["IMAGE"], label: "ACTION.FIELDS.art.label"}),
 					traits: new fields.StringField({label: "ACTION.FIELDS.traits.label"}),
-
 					rechargeRating: new fields.NumberField({
 						integer: true,
 						initial: 0,
@@ -30,7 +29,6 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 						nullable: false,
 						required: true
 					}),
-
 					difficultyModifiers: new fields.SchemaField({
 						challengeDice: new fields.NumberField({
 							integer: true,
@@ -40,7 +38,6 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 							nullable: false,
 							required: true
 						}),
-
 						misfortuneDice: new fields.NumberField({
 							integer: true,
 							initial: 0,
@@ -62,8 +59,20 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 										label: "ACTION.FIELDS.effects.description.label",
 										required: true
 									}),
-
-									script: new fields.JavaScriptField({label: "ACTION.FIELDS.effects.script.label"}),
+									immediate: new fields.BooleanField({
+										label: "ACTION.FIELDS.effects.immediate.label",
+										hint: "ACTION.FIELDS.effects.immediate.hint"
+									}),
+									reverseScript: new fields.JavaScriptField({
+										async: true,
+										label: "ACTION.FIELDS.effects.reverseScript.label",
+										hint: "ACTION.FIELDS.effects.reverseScript.hint"
+									}),
+									script: new fields.JavaScriptField({
+										async: true,
+										label: "ACTION.FIELDS.effects.script.label",
+										hint: "ACTION.FIELDS.effects.script.hint"
+									}),
 									symbolAmount: new fields.NumberField({
 										integer: true,
 										initial: 1,
