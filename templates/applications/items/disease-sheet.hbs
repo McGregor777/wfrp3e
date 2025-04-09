@@ -6,16 +6,16 @@
 
 	<section class="sheet-body">
 		<label>
-			{{localize 'DISEASE.Traits'}}
+			{{localize "DISEASE.FIELDS.traits.label"}}
 
 			<input name="system.traits"
 			       value="{{item.system.traits}}"
 			       type="text"
-			       placeholder="{{localize 'Traits'}}" />
+			       placeholder="{{localize 'DISEASE.FIELDS.traits.label'}}" />
 		</label>
 
 		<label>
-			{{localize 'DISEASE.Symptom'}}
+			{{localize "DISEASE.FIELDS.symptom.label"}}
 
 			<select class="sheet-form-select" name="system.symptom">
 				{{selectOptions diseaseSymptoms selected=item.system.symptom labelAttr="name" localize=true}}
@@ -23,27 +23,17 @@
 		</label>
 
 		<label>
-			{{localize 'DISEASE.SeverityRating'}}
+			{{localize "DISEASE.FIELDS.severityRating.label"}}
 
 			<input name="system.severityRating"
 			       value="{{item.system.severityRating}}"
 			       type="number"
-			       placeholder="{{localize 'DISEASE.SeverityRating'}}"
-			       data-tooltip="{{localize 'DISEASE.SeverityRating'}}" />
-		</label>
-
-		<label>
-			{{localize "DISEASE.Description"}}
-
-			<input name="system.description"
-			       value="{{item.system.description}}"
-			       type="text"
-			       placeholder="{{localize 'DISEASE.Description'}}"
-			       data-tooltip="{{localize 'DISEASE.Description'}}" />
+			       placeholder="{{localize 'DISEASE.FIELDS.severityRating.label'}}"
+			       data-tooltip="{{localize 'DISEASE.FIELDS.severityRating.label'}}" />
 		</label>
 
 		<div class="editor-container">
-			{{editor item.system.effects target="system.effects" button=true owner=owner editable=editable}}
+			{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
 		</div>
 	</section>
 </form>

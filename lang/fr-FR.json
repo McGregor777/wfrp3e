@@ -120,8 +120,17 @@
 	"APPLICATION.DESCRIPTION.DeleteItem": "Souhaitez-vous vraiment supprimer <em><strong>{item}</em></strong> ?",
 	"APPLICATION.DESCRIPTION.MemberRemoval": "Souhaitez-vous vraiment retirer <em><strong>{actor}</em></strong> du groupe ?",
 
-	"ARMOUR.Defence": "Défense",
-	"ARMOUR.Soak": "Encaissement",
+	"ARMOUR": {
+		"ACTIONS.update": "Enregistrer l'armure",
+		"FIELDS": {
+			"defenceValue.label": "Défense",
+			"soakValue.label": "Encaissement"
+		},
+		"TABS": {
+			"effects": "Effets",
+			"main": "Principal"
+		}
+	},
 
 	"ATTRIBUTE.Aggression": "Agressivité",
 	"ATTRIBUTE.Cunning": "Astuce",
@@ -300,20 +309,36 @@
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Pas assez de formations de compétence.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Pas assez de spécialisations.",
 
-	"CHARACTERISTIC.Strength": "Force",
-	"CHARACTERISTIC.Toughness": "Endurance",
-	"CHARACTERISTIC.Agility": "Agilité",
-	"CHARACTERISTIC.Intelligence": "Intelligence",
-	"CHARACTERISTIC.Willpower": "Force Mentale",
-	"CHARACTERISTIC.Fellowship": "Sociabilité",
-	"CHARACTERISTIC.Varies": "Varie",
-	"CHARACTERISTIC.ABBREVIATION.Strength": "Fo",
-	"CHARACTERISTIC.ABBREVIATION.Toughness": "End",
-	"CHARACTERISTIC.ABBREVIATION.Agility": "Ag",
-	"CHARACTERISTIC.ABBREVIATION.Intelligence": "Int",
-	"CHARACTERISTIC.ABBREVIATION.Willpower": "FM",
-	"CHARACTERISTIC.ABBREVIATION.Fellowship": "Soc",
-	"CHARACTERISTIC.ABBREVIATION.Varies": "V",
+	"CHARACTERISTICS": {
+		"agility": {
+			"abbreviation": "Ag",
+			"name": "Agilité"
+		},
+		"fellowship": {
+			"abbreviation": "Soc",
+			"name": "Sociabilité"
+		},
+		"intelligence": {
+			"abbreviation": "Int",
+			"name": "Intelligence"
+		},
+		"strength": {
+			"abbreviation": "Fo",
+			"name": "Force"
+		},
+		"toughness": {
+			"abbreviation": "End",
+			"name": "Endurance"
+		},
+		"varies": {
+			"abbreviation": "V",
+			"name": "Varie"
+		},
+		"willpower": {
+			"abbreviation": "FM",
+			"name": "Force Mentale"
+		}
+	},
 
 	"CHARACTERISTICUPGRADER.CharacteristicFortune": "Dé de Fortune {characteristic} ",
 	"CHARACTERISTICUPGRADER.CharacteristicRating": "Valeur de {characteristic}",
@@ -364,10 +389,21 @@
 		"startingResults": "Pictogrammes de départ"
 	},
 
-	"CONDITION.Duration": "Durée",
-	"CONDITION.DURATION.Brief": "Brève",
-	"CONDITION.DURATION.Dependent": "Subordonnée",
-	"CONDITION.DURATION.Lingering": "Prolongée",
+	"CONDITION": {
+		"ACTION.update": "Enregistrer l'état",
+		"FIELDS": {
+			"duration.label": "Durée"
+		},
+		"DURATIONS": {
+			"brief": "Brève",
+			"dependent": "Subordonnée",
+			"lingering": "Prolongée"
+		},
+		"TABS": {
+			"effects": "Effets",
+			"main": "Principal"
+		}
+	},
 
 	"CREATURE.Abilities": "Aptitudes",
 	"CREATURE.Actions": "Actions",
@@ -386,7 +422,14 @@
 	"CREATURE.ABBREVIATION.DefenceValue": "Défence",
 	"CREATURE.ABBREVIATION.SoakValue": "Encaissement",
 
-	"CRITICALWOUND.SeverityRating": "Niveau de Gravité",
+	"CRITICALWOUND": {
+		"ACTIONS.uodate": "Enregistrer la blessure critique",
+		"FIELDS.severityRating.label": "Niveau de Gravité",
+		"TABS": {
+			"effects": "Effets",
+			"main": "Principal"
+		}
+	},
 
 	"DIALOG.TITLE.EffectDeletion": "Suppression d'effet",
 	"DIALOG.DESCRIPTION.EffectDeletion": "Souhaitez-vous vraiment supprimer cet effet ?",
@@ -413,26 +456,53 @@
 		}
 	},
 
-	"DISEASE.Description": "Description",
-	"DISEASE.SeverityRating": "Niveau de Gravité",
-	"DISEASE.Symptom": "Symptôme",
-	"DISEASE.Traits": "Traits",
-	"DISEASE.SYMPTOM.Delirium": "Délire",
-	"DISEASE.SYMPTOM.Fever": "Fièvre",
-	"DISEASE.SYMPTOM.Infectious": "Infectieux",
-	"DISEASE.SYMPTOM.Lethal": "Létal",
-	"DISEASE.SYMPTOM.Painful": "Douloureux",
-	"DISEASE.SYMPTOM.Tiring": "Épuisant",
-	"DISEASE.SYMPTOM.Virulent": "Virulent",
-	"DISEASE.SYMPTOM.Weary": "Fatigué",
-	"DISEASE.SYMPTOM.DESCRIPTION.Delirium": "Chaque symptôme <strong class=\"symptom-name\">Délire</strong> compte comme 1 stress.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Fever": "Chaque symptôme <strong class=\"symptom-name\">Fièvre</strong> ajoute <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> à tous les tests mentaux effectués par le souffrant.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Infectious": "Chaque symptôme <strong class=\"symptom-name\">Infectieux</strong> désactive un emplacement de talent de la fiche de groupe. Placez un jeton sur l'emplacement de talent pour montrer qu'il est occupé.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Lethal": "Chaque symptôme <strong class=\"symptom-name\">Létal</strong> augmente le niveau de gravité de chaque autre carte de maladie ou de symptôme de +1.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Painful": "Chaque symptôme <strong class=\"symptom-name\">Douloureux</strong> ajoute <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> à tous les tests physiques effectués par le souffrant.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Tiring": "Chaque symptôme <strong class=\"symptom-name\">Épuisant</strong> compte comme 1 fatigue.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Virulent": "Chaque symptôme <strong class=\"symptom-name\">Virulent</strong> agit comme une copie de chaque autre symptôme dont la cible souffre.",
-	"DISEASE.SYMPTOM.DESCRIPTION.Weary": "Chaque symptôme <strong class=\"symptom-name\">Fatigué</strong> ajoute 1 jeton de recharge aux actions effectuées, ou ajoute 1 jeton de moins aux actions <em>Ongoing</em>.",
+	"DISEASE": {
+		"ACTIONS.update": "Enregistrer la maladie",
+		"FIELDS": {
+			"description.label": "Description",
+			"severityRating.label": "Niveau de Gravité",
+			"symptom.label": "Symptôme",
+			"traits.label": "Traits"
+		},
+		"SYMPTOMS": {
+			"delirium": {
+				"description": "Chaque symptôme <strong class=\"symptom-name\">Délire</strong> compte comme 1 stress.",
+				"name": "Délire"
+			},
+			"fever": {
+				"description": "Chaque symptôme <strong class=\"symptom-name\">Fièvre</strong> ajoute <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> à tous les tests mentaux effectués par le souffrant.",
+				"name": "Fièvre"
+			},
+			"infectious": {
+				"description": "Chaque symptôme <strong class=\"symptom-name\">Infectieux</strong> désactive un emplacement de talent de la fiche de groupe. Placez un jeton sur l'emplacement de talent pour montrer qu'il est occupé.",
+				"name": "Infectieux"
+			},
+			"lethal": {
+				"description": "Chaque symptôme <strong class=\"symptom-name\">Létal</strong> augmente le niveau de gravité de chaque autre carte de maladie ou de symptôme de +1.",
+				"name": "Létal"
+			},
+			"painful": {
+				"description": "Chaque symptôme <strong class=\"symptom-name\">Douloureux</strong> ajoute <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> à tous les tests physiques effectués par le souffrant.",
+				"name": "Douloureux"
+			},
+			"tiring": {
+				"description": "Chaque symptôme <strong class=\"symptom-name\">Épuisant</strong> compte comme 1 fatigue.",
+				"name": "Épuisant"
+			},
+			"virulent": {
+				"description": "Chaque symptôme <strong class=\"symptom-name\">Virulent</strong> agit comme une copie de chaque autre symptôme dont la cible souffre.",
+				"name": "Virulent"
+			},
+			"weary": {
+				"description": "Chaque symptôme <strong class=\"symptom-name\">Fatigué</strong> ajoute 1 jeton de recharge aux actions effectuées, ou ajoute 1 jeton de moins aux actions <em>Ongoing</em>.",
+				"name": "Fatigué"
+			}
+		},
+		"TABS": {
+			"effects": "Effets",
+			"main": "Principal"
+		}
+	},
 
 	"EFFECT": {
 		"FIELDS": {
@@ -468,9 +538,6 @@
 	"GROUP.SPECIALABILITY.Content": "Contenu",
 	"GROUP.SPECIALABILITY.Trigger": "Déclencheur",
 
-	"INSANITY.SeverityRating": "Niveau de Gravité",
-	"INSANITY.Traits": "Traits",
-	"INSANITY.Description": "Description",
 	"ITEM": {
 		"ACTIONS": {
 			"addEffect": "Ajouter un Effet",
@@ -478,18 +545,58 @@
 		}
 	},
 
+	"INSANITY": {
+		"ACTIONS.update": "Enregistrer la folie",
+		"FIELDS": {
+			"severityRating.label": "Niveau de Gravité",
+			"traits.label": "Traits",
+			"description.label": "Description"
+		},
+		"TABS": {
+			"effects": "Effets",
+			"main": "Principal"
+		}
+	},
 
-	"MONEY.Value": "Valeur",
-	"MONEY.Brass": "Cuivre",
-	"MONEY.Silver": "Argent",
-	"MONEY.Gold": "Or",
-	"MONEY.ABBREVIATION.BrassCoins": "c",
-	"MONEY.ABBREVIATION.SilverShillings": "a",
-	"MONEY.ABBREVIATION.GoldCrowns": "o",
+	"MISCAST": {
+		"ACTIONS.update": "Enregistrer le revers magique",
+		"FIELDS": {
+			"description.label": "Description"
+		},
+		"TABS": {
+			"effects": "Effets",
+			"main": "Principal"
+		}
+	},
 
-	"MUTATION.SeverityRating": "Niveau de Gravité",
-	"MUTATION.Traits": "Traits",
-	"MUTATION.Description": "Description",
+	"MONEY": {
+		"ACTIONS.update": "Enregistrer la monnaie",
+		"FIELDS": {
+			"description.label": "Description",
+			"quantity": {
+				"abbreviation": "Qu",
+				"label": "Quantité"
+			},
+			"value.label": "Valeur"
+		},
+		"TABS": {
+			"effects": "Effets",
+			"main": "Principal"
+		}
+	},
+
+	"MUTATION": {
+		"ACTIONS.update": "Enregistrer la mutation",
+		"FIELDS": {
+			"severityRating.label": "Niveau de Gravité",
+			"traits.label": "Traits",
+			"description.label": "Description"
+		},
+		"TABS": {
+			"effects": "Effets",
+			"main": "Principal"
+		}
+	},
 
 	"NEWCAREERADVANCESELECTION.Content": "Choisissez une nouvelle augmentation de carrière",
 	"NEWCAREERADVANCESELECTION.Title": "Sélection d'augmentation de carrière",
@@ -616,13 +723,34 @@
 		"reckless": "Téméraire"
 	},
 
-	"SKILL.AdvancedSkill": "Compétence Avancée",
-	"SKILL.Characteristic": "Caractéristique",
-	"SKILL.Name": "Nom",
-	"SKILL.SpecialisationList": "Spécialisations : {specialisations}",
-	"SKILL.Specialisations": "Spécialisations",
-	"SKILL.TrainingLevel": "Formation",
-	"SKILL.ABBREVIATION.Characteristic": "Car.",
+	"SKILL": {
+		"ACTIONS.update": "Enregistrer la compétence",
+		"FIELDS": {
+			"advanced.label": "Compétence Avancée",
+			"characteristic": {
+				"abbreviation": "Car.",
+				"label": "Caractéristique"
+			},
+			"description.label": "Description",
+			"specialisations.label": "Spécialisations",
+			"trainingLevel.label": "Formation"
+		},
+		"NAMES": {
+			"channeling": "Focalisation",
+			"education": "Éducation",
+			"folklore": "Folklore",
+			"intimidate": "Intimidation",
+			"intuition": "Intuition",
+			"observation": "Observation",
+			"piety": "Piété",
+			"weaponSkill": "Capacité de Combat"
+		},
+		"TABS": {
+			"effects": "Effets",
+			"main": "Principal"
+		},
+		"specialisationList": "Spécialisations : {specialisations}"
+	},
 
 	"SYMBOL": {
 		"AMOUNT": {
@@ -712,20 +840,68 @@
 	"TRAININGSELECTOR.Title": "Sélecteur de formation",
 	"TRAININGSELECTOR.TrainingLevel": "Niveau de formation",
 
-	"TRAPPING.Cost": "Coût",
-	"TRAPPING.Encumbrance": "Encombrement",
-	"TRAPPING.Description": "Description",
-	"TRAPPING.Quantity": "Quantité",
-	"TRAPPING.Name": "Nom",
-	"TRAPPING.Price": "Prix",
-	"TRAPPING.Rarity": "Rareté",
-	"TRAPPING.ABBREVIATION.Encumbrance": "Enc",
-	"TRAPPING.ABBREVIATION.Quantity": "Qu",
-	"TRAPPING.RARITY.Abundant": "Banal",
-	"TRAPPING.RARITY.Plentiful": "Très Courant",
-	"TRAPPING.RARITY.Common": "Courant",
-	"TRAPPING.RARITY.Rare": "Rare",
-	"TRAPPING.RARITY.Exotic": "Exotique",
+	"TRAPPING": {
+		"ACTIONS.update": "Enregistrer la dotation",
+		"FIELDS": {
+			"cost": {
+				"brass": {
+					"abbreviation": "c",
+					"label": "Cuivre"
+				},
+				"gold": {
+					"abbreviation": "o",
+					"label": "Or"
+				},
+				"label": "Coût",
+				"silver": {
+					"abbreviation": "a",
+					"label": "Argent"
+				}
+			},
+			"encumbrance": {
+				"abbreviation": "Enc",
+				"label": "Encombrement"
+			},
+			"description.label": "Description",
+			"quantity": {
+				"abbreviation": "Qu",
+				"label": "Quantité"
+			},
+			"name.label": "Nom",
+			"price.label": "Prix",
+			"rarity.label": "Rareté"
+		},
+		"RARITIES": {
+			"abundant": "Banal",
+			"plentiful": "Très Courant",
+			"common": "Courant",
+			"rare": "Rare",
+			"exotic": "Exotique"
+		},
+		"TABS": {
+			"effects": "Effets",
+			"details": "Détails",
+			"main": "Principal"
+		},
+		"brassCoins": {
+			"abbreviation": "c",
+			"label": "Sous de cuivre"
+		},
+		"goldCrowns": {
+			"abbreviation": "a",
+			"label": "Couronnes d'or"
+		},
+		"silverShillings": {
+			"abbreviation": "p",
+			"label": "Pistoles d'argent"
+		}
+	},
+
+	"TRAITS": {
+		"greyOrder": "Ordre Gris",
+		"rankZero": "Rang 0",
+		"rankOne": "Rang 1"
+	},
 	
 	"TYPES": {
 		"Actor": {
@@ -753,46 +929,71 @@
 		}
 	},
 
-	"WEAPON.CriticalRating": "Niveau Critique",
-	"WEAPON.DamageRating": "Niveau de Dégâts",
-	"WEAPON.Group": "Groupe",
-	"WEAPON.Improvised": "Improvised",
-	"WEAPON.ImprovisedWeapon": "Arme improvisée",
-	"WEAPON.Qualities": "Attributs",
-	"WEAPON.Range": "Portée",
-	"WEAPON.Rating": "Niveau",
-	"WEAPON.Unarmed": "Mains nues",
-	"WEAPON.ABBREVIATION.CriticalRating": "NC",
-	"WEAPON.ABBREVIATION.DamageRating": "ND",
-	"WEAPON.GROUP.Blackpowder": "Poudre Noire",
-	"WEAPON.GROUP.Bow": "Arc",
-	"WEAPON.GROUP.Cavalry": "Cavalerie",
-	"WEAPON.GROUP.Crossbow": "Arbalète",
-	"WEAPON.GROUP.Fencing": "Escrime",
-	"WEAPON.GROUP.Flail": "Fléau",
-	"WEAPON.GROUP.GreatWeapon": "Deux Mains",
-	"WEAPON.GROUP.Ordinary": "Ordinaire",
-	"WEAPON.GROUP.Polearm": "Hast",
-	"WEAPON.GROUP.Sling": "Fronde",
-	"WEAPON.GROUP.Spear": "Lance",
-	"WEAPON.GROUP.Staff": "Bâton",
-	"WEAPON.GROUP.Thrown": "Jet",
-	"WEAPON.GROUP.Unarmed": "Mains Nues",
-	"WEAPON.QUALITY.Attuned": "Harmonisé" ,
-	"WEAPON.QUALITY.Blast": "Déflagration",
-	"WEAPON.QUALITY.Defensive": "Défensive",
-	"WEAPON.QUALITY.Entangling": "Paralysante",
-	"WEAPON.QUALITY.Fast": "Rapide",
-	"WEAPON.QUALITY.Pierce": "Perforante",
-	"WEAPON.QUALITY.Reload": "Rechargement",
-	"WEAPON.QUALITY.Slow": "Lente",
-	"WEAPON.QUALITY.Thrown": "Jet",
-	"WEAPON.QUALITY.TwoHanded": "Lourde",
-	"WEAPON.QUALITY.Unreliable": "Peu Fiable",
-	"WEAPON.QUALITY.Vicious": "Haineuse",
-	"WEAPON.QUALITY.Special": "Spéciale",
-	"WEAPON.RANGE.Close": "Proche",
-	"WEAPON.RANGE.Medium": "Moyenne",
-	"WEAPON.RANGE.Long": "Longue",
-	"WEAPON.RANGE.Extreme": "Extrême"
+	"WEAPON": {
+		"ACTIONS": {
+			"addQuality": "Ajouter un attribut",
+			"removeQuality": "Retirer l'attribut {quality}",
+			"update": "Enregistrer l'arme"
+		},
+		"FIELDS": {
+			"criticalRating": {
+				"abbreviation": "NC",
+				"label": "Niveau Critique"
+			},
+			"damageRating": {
+				"abbreviation": "ND",
+				"label": "Niveau de Dégâts"
+			},
+			"group.label": "Groupe",
+			"qualities": {
+				"FIELDS": {
+					"name.label": "Nom",
+					"rating.label": "Niveau"
+				},
+				"label": "Attributs"
+			},
+			"range.label": "Range",
+			"special.label": "Special"
+		},
+		"GROUPS": {
+			"blackpowder": "Poudre Noire",
+			"bow": "Arc",
+			"cavalry": "Cavalerie",
+			"crossbow": "Arbalète",
+			"fencing": "Escrime",
+			"flail": "Fléau",
+			"greatWeapon": "Deux Mains",
+			"ordinary": "Ordinaire",
+			"polearm": "Hast",
+			"sling": "Fronde",
+			"spear": "Lance",
+			"staff": "Bâton",
+			"thrown": "Jet",
+			"unarmed": "Mains Nues"
+		},
+		"QUALITIES": {
+			"attuned": "Harmonisé" ,
+			"blast": "Déflagration",
+			"defensive": "Défensive",
+			"entangling": "Paralysante",
+			"fast": "Rapide",
+			"pierce": "Perforante",
+			"reload": "Rechargement",
+			"slow": "Lente",
+			"thrown": "Jet",
+			"twoHanded": "Lourde",
+			"unreliable": "Peu Fiable",
+			"vicious": "Haineuse",
+			"special": "Spéciale"
+		},
+		"RANGES": {
+			"close": "Proche",
+			"medium": "Moyenne",
+			"long": "Longue",
+			"extreme": "Extrême"
+		},
+		"improvised": "Improvisé",
+		"improvisedWeapon": "Arme improvisée",
+		"unarmed": "Mains nues"
+	}
 }

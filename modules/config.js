@@ -116,38 +116,38 @@ export const WFRP3e = {
 	},
 	characteristics: {
 		strength: {
-			name: "CHARACTERISTIC.Strength",
-			abbreviation: "CHARACTERISTIC.ABBREVIATION.Strength",
+			name: "CHARACTERISTICS.strength.name",
+			abbreviation: "CHARACTERISTICS.strength.abbreviation",
 			type: "physical"
 		},
 		toughness: {
-			name: "CHARACTERISTIC.Toughness",
-			abbreviation: "CHARACTERISTIC.ABBREVIATION.Toughness",
+			name: "CHARACTERISTICS.toughness.name",
+			abbreviation: "CHARACTERISTICS.toughness.abbreviation",
 			type: "physical"
 		},
 		agility: {
-			name: "CHARACTERISTIC.Agility",
-			abbreviation: "CHARACTERISTIC.ABBREVIATION.Agility",
+			name: "CHARACTERISTICS.agility.name",
+			abbreviation: "CHARACTERISTICS.agility.abbreviation",
 			type: "physical"
 		},
 		intelligence: {
-			name: "CHARACTERISTIC.Intelligence",
-			abbreviation: "CHARACTERISTIC.ABBREVIATION.Intelligence",
+			name: "CHARACTERISTICS.intelligence.name",
+			abbreviation: "CHARACTERISTICS.intelligence.abbreviation",
 			type: "mental"
 		},
 		willpower: {
-			name: "CHARACTERISTIC.Willpower",
-			abbreviation: "CHARACTERISTIC.ABBREVIATION.Willpower",
+			name: "CHARACTERISTICS.willpower.name",
+			abbreviation: "CHARACTERISTICS.willpower.abbreviation",
 			type: "mental"
 		},
 		fellowship: {
-			name: "CHARACTERISTIC.Fellowship",
-			abbreviation: "CHARACTERISTIC.ABBREVIATION.Fellowship",
+			name: "CHARACTERISTICS.fellowship.name",
+			abbreviation: "CHARACTERISTICS.fellowship.abbreviation",
 			type: "mental"
 		},
 		varies: {
-			name: "CHARACTERISTIC.Varies",
-			abbreviation: "CHARACTERISTIC.ABBREVIATION.Varies"
+			name: "CHARACTERISTICS.varies.name",
+			abbreviation: "CHARACTERISTICS.varies.abbreviation"
 		}
 	},
 	challengeLevels: {
@@ -177,9 +177,9 @@ export const WFRP3e = {
 		}
 	},
 	conditionDurations: {
-		brief: "CONDITION.DURATION.Brief",
-		dependent: "CONDITION.DURATION.Dependent",
-		lingering: "CONDITION.DURATION.Lingering"
+		brief: "CONDITION.DURATIONS.Brief",
+		dependent: "CONDITION.DURATIONS.Dependent",
+		lingering: "CONDITION.DURATIONS.Lingering"
 	},
 	dice: {
 		characteristic: {
@@ -930,36 +930,36 @@ export const WFRP3e = {
 	disease: {
 		symptoms: {
 			delirium: {
-				description: "DISEASE.SYMPTOM.DESCRIPTION.Delirium",
-				name: "DISEASE.SYMPTOM.Delirium"
+				description: "DISEASE.SYMPTOMS.delirium.description",
+				name: "DISEASE.SYMPTOMS.delirium.name"
 			},
 			fever: {
-				description: "DISEASE.SYMPTOM.DESCRIPTION.Fever",
-				name: "DISEASE.SYMPTOM.Fever"
+				description: "DISEASE.SYMPTOMS.fever.description",
+				name: "DISEASE.SYMPTOMS.fever.name"
 			},
 			infectious: {
-				description: "DISEASE.SYMPTOM.DESCRIPTION.Infectious",
-				name: "DISEASE.SYMPTOM.Infectious"
+				description: "DISEASE.SYMPTOMS.infectious.description",
+				name: "DISEASE.SYMPTOMS.infectious.name"
 			},
 			lethal: {
-				description: "DISEASE.SYMPTOM.DESCRIPTION.Lethal",
-				name: "DISEASE.SYMPTOM.Lethal"
+				description: "DISEASE.SYMPTOMS.lethal.description",
+				name: "DISEASE.SYMPTOMS.lethal.name"
 			},
 			painful: {
-				description: "DISEASE.SYMPTOM.DESCRIPTION.Painful",
-				name: "DISEASE.SYMPTOM.Painful"
+				description: "DISEASE.SYMPTOMS.painful.description",
+				name: "DISEASE.SYMPTOMS.painful.name"
 			},
 			tiring: {
-				description: "DISEASE.SYMPTOM.DESCRIPTION.Tiring",
-				name: "DISEASE.SYMPTOM.Tiring"
+				description: "DISEASE.SYMPTOMS.tiring.description",
+				name: "DISEASE.SYMPTOMS.tiring.name"
 			},
 			virulent: {
-				description: "DISEASE.SYMPTOM.DESCRIPTION.Virulent",
-				name: "DISEASE.SYMPTOM.Virulent"
+				description: "DISEASE.SYMPTOMS.virulent.description",
+				name: "DISEASE.SYMPTOMS.virulent.name"
 			},
 			weary: {
-				description: "DISEASE.SYMPTOM.DESCRIPTION.Weary",
-				name: "DISEASE.SYMPTOM.Weary"
+				description: "DISEASE.SYMPTOMS.weary.description",
+				name: "DISEASE.SYMPTOMS.weary.name"
 			}
 		}
 	},
@@ -968,11 +968,11 @@ export const WFRP3e = {
 		social: "ENCOUNTER.Social"
 	},
 	rarities: {
-		abundant: "TRAPPING.RARITY.Abundant",
-		plentiful: "TRAPPING.RARITY.Plentiful",
-		common: "TRAPPING.RARITY.Common",
-		rare: "TRAPPING.RARITY.Rare",
-		exotic: "TRAPPING.RARITY.Exotic"
+		abundant: "TRAPPING.RARITIES.abundant",
+		plentiful: "TRAPPING.RARITIES.plentiful",
+		common: "TRAPPING.RARITIES.common",
+		rare: "TRAPPING.RARITIES.rare",
+		exotic: "TRAPPING.RARITIES.exotic"
 	},
 	scriptTypes: {
 		onCareerSocket: "SCRIPT.TYPES.onCareerSocket",
@@ -1055,7 +1055,7 @@ export const WFRP3e = {
 		commonWeapons: {
 			improvised: {
 				id: "improvised",
-				name: "WEAPON.Improvised",
+				name: "WEAPON.improvised",
 				system: {
 					criticalRating: 4,
 					damageRating: 3,
@@ -1066,7 +1066,7 @@ export const WFRP3e = {
 			},
 			improvisedWeapon: {
 				id: "improvisedWeapon",
-				name: "WEAPON.ImprovisedWeapon",
+				name: "WEAPON.improvisedWeapon",
 				system: {
 					criticalRating: 3,
 					damageRating: 3,
@@ -1077,7 +1077,7 @@ export const WFRP3e = {
 			},
 			unarmed: {
 				id: "unarmed",
-				name: "WEAPON.Unarmed",
+				name: "WEAPON.unarmed",
 				system: {
 					criticalRating: 4,
 					damageRating: 3,
@@ -1089,81 +1089,81 @@ export const WFRP3e = {
 		},
 		groups: {
 			blackpowder: {
-				name: "WEAPON.GROUP.Blackpowder",
+				name: "WEAPON.GROUPS.blackpowder",
 				type: "ranged"
 			},
 			bow: {
-				name: "WEAPON.GROUP.Bow",
+				name: "WEAPON.GROUPS.bow",
 				type: "ranged"
 			},
 			cavalry: {
-				name: "WEAPON.GROUP.Cavalry",
+				name: "WEAPON.GROUPS.cavalry",
 				type: "melee"
 			},
 			crossbow: {
-				name: "WEAPON.GROUP.Crossbow",
+				name: "WEAPON.GROUPS.crossbow",
 				type: "ranged"
 			},
 			fencing: {
-				name: "WEAPON.GROUP.Fencing",
+				name: "WEAPON.GROUPS.fencing",
 				type: "melee"
 			},
 			flail: {
-				name: "WEAPON.GROUP.Flail",
+				name: "WEAPON.GROUPS.flail",
 				type: "melee"
 			},
 			greatWeapon: {
-				name: "WEAPON.GROUP.GreatWeapon",
+				name: "WEAPON.GROUPS.greatWeapon",
 				type: "melee"
 			},
 			ordinary: {
-				name: "WEAPON.GROUP.Ordinary",
+				name: "WEAPON.GROUPS.ordinary",
 				type: "melee"
 			},
 			polearm: {
-				name: "WEAPON.GROUP.Polearm",
+				name: "WEAPON.GROUPS.polearm",
 				type: "melee"
 			},
 			sling: {
-				name: "WEAPON.GROUP.Sling",
+				name: "WEAPON.GROUPS.sling",
 				type: "ranged"
 			},
 			spear: {
-				name: "WEAPON.GROUP.Spear",
+				name: "WEAPON.GROUPS.spear",
 				type: "melee"
 			},
 			staff: {
-				name: "WEAPON.GROUP.Staff",
+				name: "WEAPON.GROUPS.staff",
 				type: "melee"
 			},
 			thrown: {
-				name: "WEAPON.GROUP.Thrown",
+				name: "WEAPON.GROUPS.thrown",
 				type: "ranged"
 			},
 			unarmed: {
-				name: "WEAPON.GROUP.Unarmed",
+				name: "WEAPON.GROUPS.unarmed",
 				type: "melee"
 			}
 		},
 		qualities: {
-			attuned: "WEAPON.QUALITY.Attuned",
-			blast: "WEAPON.QUALITY.Blast",
-			defensive: "WEAPON.QUALITY.Defensive",
-			entangling: "WEAPON.QUALITY.Entangling",
-			fast: "WEAPON.QUALITY.Fast",
-			pierce: "WEAPON.QUALITY.Pierce",
-			reload: "WEAPON.QUALITY.Reload",
-			slow: "WEAPON.QUALITY.Slow",
-			thrown: "WEAPON.QUALITY.Thrown",
-			twohanded: "WEAPON.QUALITY.TwoHanded",
-			unreliable: "WEAPON.QUALITY.Unreliable",
-			vicious: "WEAPON.QUALITY.Vicious"
+			attuned: "WEAPON.QUALITIES.attuned",
+			blast: "WEAPON.QUALITIES.blast",
+			defensive: "WEAPON.QUALITIES.defensive",
+			entangling: "WEAPON.QUALITIES.entangling",
+			fast: "WEAPON.QUALITIES.fast",
+			pierce: "WEAPON.QUALITIES.pierce",
+			reload: "WEAPON.QUALITIES.reload",
+			slow: "WEAPON.QUALITIES.slow",
+			thrown: "WEAPON.QUALITIES.thrown",
+			twohanded: "WEAPON.QUALITIES.twoHanded",
+			unreliable: "WEAPON.QUALITIES.unreliable",
+			vicious: "WEAPON.QUALITIES.vicious"
 		},
 		ranges: {
-			close: "WEAPON.RANGE.Close",
-			medium: "WEAPON.RANGE.Medium",
-			long: "WEAPON.RANGE.Long",
-			extreme: "WEAPON.RANGE.Extreme"
+			close: "WEAPON.RANGES.close",
+			medium: "WEAPON.RANGES.medium",
+			long: "WEAPON.RANGES.long",
+			extreme: "WEAPON.RANGES.extreme"
 		}
 	}
 };

@@ -10,9 +10,12 @@ export default class WFRP3eCriticalWoundDataModel extends foundry.abstract.TypeD
 
 		return {
 			description: new fields.HTMLField(),
-			severityRating: new fields.NumberField({required: true, nullable: false, integer: true, initial: 1, min: 1})
+			severityRating: new fields.NumberField({integer: true, initial: 1, min: 1, nullable: false, required: true})
 		};
 	}
+
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["CRITICALWOUND"];
 
 	/** @inheritDoc */
 	prepareBaseData()

@@ -14,6 +14,9 @@ export default class WFRP3eMiscastDataModel extends foundry.abstract.TypeDataMod
 	}
 
 	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["MISCAST"];
+
+	/** @inheritDoc */
 	prepareBaseData()
 	{
 		super.prepareBaseData();

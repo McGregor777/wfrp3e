@@ -10,12 +10,22 @@ export default class WFRP3eSkillDataModel extends foundry.abstract.TypeDataModel
 
 		return {
 			advanced: new fields.BooleanField(),
-			characteristic: new fields.StringField({required: true}),
+			characteristic: new fields.StringField({
+				choices: Object.entries(CONFIG.WFRP3e.characteristics).reduce((groups, [key, group]) => {
+					groups[key] = group.name
+					return groups;
+				}, {}),
+				initial: Object.values(CONFIG.WFRP3e.characteristics)[0].name,
+				required: true
+			}),
 			description: new fields.HTMLField(),
 			specialisations: new fields.StringField(),
-			trainingLevel: new fields.NumberField({required: true, nullable: false, integer: true, initial: 0, min: 0})
+			trainingLevel: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 		};
 	}
+
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["SKILL"];
 
 	/** @inheritDoc */
 	prepareBaseData()

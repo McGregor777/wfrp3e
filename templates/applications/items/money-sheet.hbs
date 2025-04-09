@@ -8,27 +8,27 @@
 	</header>
 
 	<section>
-		<label>{{localize 'MONEY.Value'}}:
+		<label>{{localize "MONEY.FIELDS.value"}}:
 
 			<input name="system.value"
 			       value="{{item.system.value}}"
 			       type="number"
-			       placeholder="{{localize 'MONEY.Value'}}"
-				   data-tooltip="{{localize 'MONEY.Value'}}" />
+			       placeholder="{{localize 'MONEY.FIELDS.value'}}"
+				   data-tooltip="{{localize 'MONEY.FIELDS.value'}}" />
 		</label>
 
 		<label>
-			{{localize "TRAPPING.Quantity"}}:
+			{{localize "MONEY.FIELDS.quantity.label"}}:
 
 			<input name="system.quantity"
 			       value="{{item.system.quantity}}"
-			       placeholder="{{localize 'TRAPPING.ABBREVIATION.Quantity'}}"
+			       placeholder="{{localize 'MONEY.FIELDS.quantity.abbreviation'}}"
 			       type="number"
-			       data-tooltip="{{localize 'TRAPPING.Quantity'}}" />
+			       data-tooltip="{{localize 'MONEY.FIELDS.quantity.label'}}" />
 		</label>
 
 		<label class="editor-container">
-			{{localize "TRAPPING.Description"}}:
+			{{localize "MONEY.FIELDS.description.label"}}:
 			{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
 		</label>
 	</section>

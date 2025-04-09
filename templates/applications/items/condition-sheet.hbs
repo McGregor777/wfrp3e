@@ -9,9 +9,9 @@
 
 	<section class="sheet-body">
 		<label>
-			{{localize 'CONDITION.Duration'}}
+			{{localize "CONDITION.FIELDS.duration.label"}}
 
-			<select name="system.duration" data-dtype="String">
+			<select name="system.duration">
 				{{selectOptions conditionDurations selected=item.system.duration localize=true}}
 			</select>
 		</label>

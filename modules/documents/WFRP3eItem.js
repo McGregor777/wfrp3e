@@ -431,6 +431,18 @@ export default class WFRP3eItem extends Item
 		this.update({"system.qualities": qualities});
 	}
 
+
+	/**
+	 * Removes a quality from the Weapon's list of qualities.
+	 * @param {Number} index
+	 */
+	removeQuality(index)
+	{
+		const qualities = this.system.qualities.splice(index, 1);
+
+		this.update({"system.qualities": qualities});
+	}
+
 	/**
 	 * Removes the last quality from the Weapon's list of qualities.
 	 */

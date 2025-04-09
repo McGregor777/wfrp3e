@@ -7,15 +7,16 @@ export default class WFRP3eInsanityDataModel extends foundry.abstract.TypeDataMo
 	static defineSchema()
 	{
 		const fields = foundry.data.fields;
-		const requiredInteger = {nullable: false, required: true};
 
 		return {
 			description: new fields.HTMLField(),
-			effects: new fields.StringField({...requiredInteger}),
-			severityRating: new fields.NumberField({...requiredInteger, initial: 1, integer: true, min: 1}),
-			traits: new fields.StringField({...requiredInteger, initial: ", "}),
+			severityRating: new fields.NumberField({initial: 1, integer: true, min: 1, nullable: false, required: true}),
+			traits: new fields.StringField({nullable: false, required: true})
 		};
 	}
+
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["INSANITY"];
 
 	/** @inheritDoc */
 	prepareBaseData()

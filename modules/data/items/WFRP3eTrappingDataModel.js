@@ -7,19 +7,25 @@ export default class WFRP3eTrappingDataModel extends foundry.abstract.TypeDataMo
 	static defineSchema()
 	{
 		const fields = foundry.data.fields;
-		const requiredInteger = {integer: true, nullable: false, required: true};
 
 		return {
 			cost: new fields.SchemaField({
-				brass: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-				silver: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-				gold: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
+				brass: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+				silver: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+				gold: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 			}),
 			description: new fields.HTMLField(),
-			encumbrance: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-			rarity: new fields.StringField({initial: "abundant", required: true, nullable: false})
+			encumbrance: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+			rarity: new fields.StringField({
+				choices: CONFIG.WFRP3e.rarities,
+				initial: Object.keys(CONFIG.WFRP3e.rarities)[0],
+				required: true
+			})
 		};
 	}
+
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["TRAPPING"];
 
 	/** @inheritDoc */
 	prepareBaseData()

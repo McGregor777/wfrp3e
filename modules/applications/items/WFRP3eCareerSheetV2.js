@@ -1,17 +1,11 @@
+import WFRP3eItemSheetV2 from "./WFRP3eItemSheetV2.js";
+
 /** @inheritDoc */
-export default class WFRP3eCareerSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ItemSheetV2)
+export default class WFRP3eCareerSheetV2 extends WFRP3eItemSheetV2
 {
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
-		classes: ["wfrp3e", "sheet", "item", "career"],
-		actions: {
-			addRaceRestriction: this._addRaceRestriction,
-			removeRaceRestriction: this._removeRaceRestriction,
-			addSocket: this._addSocket,
-			removeSocket: this._removeSocket
-		},
-		form: {closeOnSubmit: true},
-		position: {width: 550}
+		classes: [...this.DEFAULT_OPTIONS.classes, "career"]
 	}
 
 	/** @inheritDoc */
@@ -21,28 +15,17 @@ export default class WFRP3eCareerSheetV2 extends foundry.applications.api.Handle
 		main: {template: "systems/wfrp3e/templates/applications/items/career-sheet-v2/main.hbs"},
 		advanceOptions: {template: "systems/wfrp3e/templates/applications/items/career-sheet-v2/advance-options.hbs"},
 		setting: {template: "systems/wfrp3e/templates/applications/items/career-sheet-v2/setting.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
-	}
-
-	/** @inheritDoc */
-	tabGroups = {primary: "main"}
-
-	/** @inheritDoc */
-	async _prepareContext(options)
-	{
-		return {
-			...await super._prepareContext(options),
-			document: this.document.toObject(),
-			fields: this.item.schema.fields,
-			system: this.item.system,
-			tabs: this._getTabs()
-		};
 	}
 
 	/** @inheritDoc */
 	async _preparePartContext(partId, context)
 	{
 		switch(partId) {
+			case "tabs":
+				context.tabs = this._getMainTabs();
+				break;
 			case "main":
 				context = {
 					...context,
@@ -67,6 +50,13 @@ export default class WFRP3eCareerSheetV2 extends foundry.applications.api.Handle
 					tab: context.tabs[partId]
 				};
 				break;
+			case "effects":
+				context = {
+					...context,
+					effects: this.document.effects,
+					tab: context.tabs[partId]
+				}
+				break;
 			case "footer":
 				context.buttons = this._getFooterButtons();
 				break;
@@ -75,26 +65,18 @@ export default class WFRP3eCareerSheetV2 extends foundry.applications.api.Handle
 		return context;
 	}
 
-	/** @inheritDoc */
-	_onRender(context, options)
-	{
-		for(const element of this.element.querySelectorAll("prose-mirror"))
-			element.addEventListener("change", this._updateEnrichedProperty.bind(this, options));
-
-		return super._onRender(context, options);
-	}
-
 	/**
 	 * Prepares an array of form header tabs.
 	 * @returns {Record<string, Partial<ApplicationTab>>}
 	 * @private
 	 */
-	_getTabs()
+	_getMainTabs()
 	{
 		const tabs = {
 			main: {id: "main", group: "primary", label: "CAREER.TABS.main"},
 			advanceOptions: {id: "advanceOptions", group: "primary", label: "CAREER.TABS.advanceOptions"},
-			setting: {id: "setting", group: "primary", label: "CAREER.TABS.setting"}
+			setting: {id: "setting", group: "primary", label: "CAREER.TABS.setting"},
+			effects: {id: "effects", group: "primary", label: "CAREER.TABS.effects"}
 		};
 
 		for(const value of Object.values(tabs)) {
@@ -112,19 +94,6 @@ export default class WFRP3eCareerSheetV2 extends foundry.applications.api.Handle
 	_getFooterButtons()
 	{
 		return [{type: "submit", icon: "fa-solid fa-save", label: "CAREER.ACTIONS.update"}]
-	}
-
-	/**
-	 * Updates the property with an enriched value.
-	 * @param options
-	 * @param event {Event}
-	 * @protected
-	 */
-	_updateEnrichedProperty(options, event)
-	{
-		foundry.utils.setProperty(this.item, event.target.name, event.target.value);
-
-		this.render(options);
 	}
 
 	/**

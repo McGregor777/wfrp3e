@@ -9,7 +9,7 @@
 
 	<section class="sheet-body">
 		<label>
-			{{localize 'MUTATION.Traits'}}
+			{{localize "MUTATION.FIELDS.traits.label"}}
 
 			<input name="system.traits"
 			       value="{{item.system.traits}}"
@@ -18,27 +18,17 @@
 		</label>
 
 		<label>
-			{{localize 'MUTATION.SeverityRating'}}
+			{{localize "MUTATION.FIELDS.severityRating.label"}}
 
 			<input name="system.severityRating"
 			       value="{{item.system.severityRating}}"
 			       type="number"
-			       placeholder="{{localize 'MUTATION.SeverityRating'}}"
-			       data-tooltip="{{localize 'MUTATION.SeverityRating'}}" />
-		</label>
-
-		<label>
-			{{localize "MUTATION.Description"}}
-
-			<input name="system.description"
-			       value="{{item.system.description}}"
-			       type="text"
-			       placeholder="{{localize 'MUTATION.Description'}}"
-			       data-tooltip="{{localize 'MUTATION.Description'}}" />
+			       placeholder="{{localize 'MUTATION.FIELDS.severityRating.label'}}"
+			       data-tooltip="{{localize 'MUTATION.FIELDS.severityRating.label'}}" />
 		</label>
 
 		<div class="editor-container">
-			{{editor item.system.effects target="system.effects" button=true owner=owner editable=editable}}
+			{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
 		</div>
 	</section>
 </form>

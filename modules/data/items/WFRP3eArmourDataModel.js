@@ -7,11 +7,13 @@ export default class WFRP3eWeaponDataModel extends WFRP3eTrappingDataModel
 	static defineSchema()
 	{
 		const fields = foundry.data.fields;
-		const requiredInteger = {integer: true, nullable: false, required: true};
 
 		return Object.assign({
-			defenceValue: new fields.NumberField({...requiredInteger, initial: 0, min: 0}),
-			soakValue: new fields.NumberField({...requiredInteger, initial: 0, min: 0})
+			defenceValue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+			soakValue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 		}, super.defineSchema());
 	}
+
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["TRAPPING", "ARMOUR"];
 }

@@ -10,9 +10,16 @@ export default class WFRP3eConditionDataModel extends foundry.abstract.TypeDataM
 
 		return {
 			description: new fields.HTMLField(),
-			duration: new fields.StringField({initial: "brief", required: true, nullable: false})
+			duration: new fields.StringField({
+				choices: CONFIG.WFRP3e.conditionDurations,
+				initial: Object.keys(CONFIG.WFRP3e.conditionDurations)[0],
+				required: true
+			})
 		};
 	}
+
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["CONDITION"];
 
 	/** @inheritDoc */
 	prepareBaseData()

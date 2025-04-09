@@ -11,7 +11,7 @@
 
 	<section class="sheet-body">
 		<label class="form-label">
-			{{localize 'SKILL.Characteristic'}}
+			{{localize 'SKILL.FIELDS.characteristic.label'}}
 
 			<select name="system.characteristic">
 				{{selectOptions characteristics selected=item.system.characteristic labelAttr="name" localize=true}}
@@ -19,7 +19,7 @@
 		</label>
 
 		<label>
-			{{localize 'SKILL.AdvancedSkill'}}
+			{{localize "SKILL.FIELDS.advanced.label"}}
 
 			<input name="system.advanced" type="checkbox"{{#if item.system.advanced}} checked{{/if}} />
 		</label>
@@ -30,7 +30,7 @@
 
 		{{#if item.parent}}
 			<label class="form-label">
-				{{localize "SKILL.Specialisations"}}
+				{{localize "SKILL.FIELDS.specialisations.label"}}
 				<input name="system.specialisations" type="text" value="{{item.system.specialisations}}" />
 			</label>
 		{{/if}}

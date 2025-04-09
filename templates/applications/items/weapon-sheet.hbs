@@ -8,8 +8,8 @@
 	</header>
 
 	<nav class="primary-tabs sheet-tabs tabs" data-group="primary">
-		<a class="main-tab-link" data-tab="main">{{localize "Main"}}</a>
-		<a class="details-tab-link" data-tab="details">{{localize "Details"}}</a>
+		<a class="main-tab-link" data-tab="main">{{localize "TRAPPING.TABS.main"}}</a>
+		<a class="details-tab-link" data-tab="details">{{localize "TRAPPING.TABS.details"}}</a>
 	</nav>
 
 	<div class="sheet-body">
@@ -20,25 +20,25 @@
 
 			<div class="form-div">
 				<label>
-					{{localize 'WEAPON.DamageRating'}}:
+					{{localize "WEAPON.FIELDS.damageRating.label"}}:
 
 					<input name="system.damageRating"
 					       value="{{item.system.damageRating}}"
 					       type="number"
-					       placeholder="{{localize 'WEAPON.ABBREVIATION.DamageRating'}}" />
+					       placeholder="{{localize 'WEAPON.FIELDS.damageRating.abbreviation'}}" />
 				</label>
 
 				<label>
-					{{localize 'WEAPON.CriticalRating'}}:
+					{{localize "WEAPON.FIELDS.criticalRating.label"}}:
 
 					<input name="system.criticalRating"
 					       value="{{item.system.criticalRating}}"
 					       type="number"
-					       placeholder="{{localize 'WEAPON.ABBREVIATION.CriticalRating'}}" />
+					       placeholder="{{localize 'WEAPON.FIELDS.criticalRating.abbreviation'}}" />
 				</label>
 
 				<label>
-					{{localize 'WEAPON.Range'}}:
+					{{localize "WEAPON.FIELDS.range.label"}}:
 
 					<select name="system.range">
 						{{selectOptions ranges selected=item.system.range localize=true}}
@@ -46,7 +46,7 @@
 				</label>
 
 				<label>
-					{{localize 'WEAPON.Group'}}:
+					{{localize "WEAPON.FIELDS.group.label"}}:
 
 					<select name="system.group">
 						{{selectOptions groups selected=item.system.group labelAttr="name" localize=true}}
@@ -57,9 +57,9 @@
 			<hr />
 
 			<div class="qualities">
-				{{localize 'WEAPON.Qualities'}}
+				{{localize "WEAPON.FIELDS.qualities.label"}}
 
-				<a class="quality-add">
+				<a class="quality-add" data-tooltip="{{localize 'WEAPON.ACTIONS.addQuality'}}">
 					<span class="fas fa-plus"></span>
 				</a>
 
@@ -74,17 +74,18 @@
 
 							{{#if (in quality.name @root.qualitiesWithRating) }}
 								<label class="quality-rating-label">
-									<span>{{localize "WEAPON.Rating"}}: </span>
+									<span>{{localize "WEAPON.FIELDS.qualities.rating.label"}}: </span>
 
 									<input name="system.qualities.{{qu}}.rating"
 									       value="{{quality.rating}}"
 									       type="number"
 									       min="1"
-									       placeholder="{{localize 'WEAPON.QualityRating'}}" />
+									       placeholder="{{localize 'WEAPON.FIELDS.qualities.rating.label'}}" />
 								</label>
 							{{/if}}
 
-							<a class="quality-remove">
+							<a class="quality-remove" data-tooltip="{{localize 'WEAPON.ACTIONS.removeQuality'
+																			   quality=(localize (lookup @root.qualities quality.name))}}">
 								<span class="fas fa-trash"></span>
 							</a>
 						</div>
@@ -97,14 +98,14 @@
 			<hr />
 
 			<label class="editor-container">
-				{{localize "WEAPON.QUALITY.Special"}}
+				{{localize "WEAPON.FIELDS.special.label"}}
 				{{editor item.system.special target="system.special" button=true owner=owner editable=editable}}
 			</label>
 		</section>
 
 		<section class="tab main-tab" data-group="primary" data-tab="details">
 			<label class="editor-container">
-				{{localize "TRAPPING.Description"}}
+				{{localize "TRAPPING.FIELDS.description.label"}}
 				{{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
 			</label>
 		</section>
