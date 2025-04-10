@@ -69,17 +69,14 @@
 				<legend>{{localize "CHECKBUILDER.FIELDS.specialisations"}}</legend>
 
 				{{#if availableSpecialisations}}
-					{{#each availableSpecialisations as |specialisation spe|}}
-						<div>
-							<label>{{specialisation}}</label>
-
-							<input class="pool-value"
-								   name="checkData.specialisations"
-								   type="checkbox"
-								   value="{{specialisation}}"
-								   {{#if (in specialisation @root.specialisations)}}checked{{/if}} />
-						</div>
-					{{/each}}
+					<multi-select name="checkData.specialisations">
+						{{#each availableSpecialisations as |specialisation|}}
+							<option value="{{specialisation}}"
+									{{#if (in specialisation @root.specialisations)}}selected{{/if}}>
+								{{specialisation}}
+							</option>
+						{{/each}}
+					</multi-select>
 				{{else}}
 					None
 				{{/if}}
