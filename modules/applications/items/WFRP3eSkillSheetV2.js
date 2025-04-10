@@ -13,8 +13,7 @@ export default class WFRP3eMutationSheetV2 extends WFRP3eItemSheetV2
 		header: {template: "systems/wfrp3e/templates/applications/header.hbs"},
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
 		main: {template: "systems/wfrp3e/templates/applications/items/skill-sheet-v2/main.hbs"},
-		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"},
-		footer: {template: "templates/generic/form-footer.hbs"}
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
 	}
 
 	/** @inheritDoc */
@@ -40,9 +39,6 @@ export default class WFRP3eMutationSheetV2 extends WFRP3eItemSheetV2
 					tab: context.tabs[partId]
 				}
 				break;
-			case "footer":
-				context.buttons = this._getFooterButtons();
-				break;
 		}
 
 		return context;
@@ -66,14 +62,5 @@ export default class WFRP3eMutationSheetV2 extends WFRP3eItemSheetV2
 		}
 
 		return tabs;
-	}
-
-	/**
-	 * Prepares an array of form footer buttons.
-	 * @returns {Partial<FormFooterButton>[]}
-	 */
-	_getFooterButtons()
-	{
-		return [{type: "submit", icon: "fa-solid fa-save", label: "SKILL.ACTIONS.update"}]
 	}
 }

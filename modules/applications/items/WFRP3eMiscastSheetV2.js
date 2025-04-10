@@ -36,13 +36,4 @@ export default class WFRP3eMiscastSheetV2 extends WFRP3eItemSheetV2
 
 		return tabs;
 	}
-
-	/**
-	 * Prepares an array of form footer buttons.
-	 * @returns {Partial<FormFooterButton>[]}
-	 */
-	_getFooterButtons()
-	{
-		return [{type: "submit", icon: "fa-solid fa-save", label: "MISCAST.ACTIONS.update"}]
-	}
 }

@@ -19,8 +19,7 @@ export default class WFRP3eWeaponSheetV2 extends WFRP3eTrappingSheetV2
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
 		main: {template: "systems/wfrp3e/templates/applications/items/weapon-sheet-v2/main.hbs"},
 		details: {template: "systems/wfrp3e/templates/applications/items/details.hbs"},
-		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"},
-		footer: {template: "templates/generic/form-footer.hbs"}
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
 	}
 
 	/** @inheritDoc */
@@ -54,21 +53,9 @@ export default class WFRP3eWeaponSheetV2 extends WFRP3eTrappingSheetV2
 					tab: context.tabs[partId]
 				}
 				break;
-			case "footer":
-				context.buttons = this._getFooterButtons();
-				break;
 		}
 
 		return context;
-	}
-
-	/**
-	 * Prepares an array of form footer buttons.
-	 * @returns {Partial<FormFooterButton>[]}
-	 */
-	_getFooterButtons()
-	{
-		return [{type: "submit", icon: "fa-solid fa-save", label: "WEAPON.ACTIONS.update"}]
 	}
 
 	/**

@@ -10,7 +10,7 @@ export default class WFRP3eItemSheetV2 extends foundry.applications.api.Handleba
 			editImage: this._editImage
 		},
 		classes: ["wfrp3e", "sheet", "item"],
-		form: {closeOnSubmit: true},
+		form: {submitOnChange: true},
 		position: {width: 600}
 	}
 

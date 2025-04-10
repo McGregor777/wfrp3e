@@ -21,8 +21,7 @@ export default class WFRP3eActionSheetV2 extends WFRP3eItemSheetV2
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
 		conservative: {template: "systems/wfrp3e/templates/applications/items/action-sheet-v2/main.hbs"},
 		reckless: {template: "systems/wfrp3e/templates/applications/items/action-sheet-v2/main.hbs"},
-		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"},
-		footer: {template: "templates/generic/form-footer.hbs"}
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
 	}
 
 	/** @inheritDoc */
@@ -65,8 +64,6 @@ export default class WFRP3eActionSheetV2 extends WFRP3eItemSheetV2
 					effects: this.document.effects,
 					tab: context.tabs[partId]
 				}
-			case "footer":
-				context.buttons = this._getFooterButtons();
 				break;
 		}
 
@@ -112,16 +109,6 @@ export default class WFRP3eActionSheetV2 extends WFRP3eItemSheetV2
 		}
 
 		return tabs;
-	}
-
-	/**
-	 * Prepares an array of form footer buttons.
-	 * @returns {Partial<FormFooterButton>[]}
-	 * @protected
-	 */
-	_getFooterButtons()
-	{
-		return [{type: "submit", icon: "fa-solid fa-save", label: "ACTION.ACTIONS.update"}]
 	}
 
 	/**

@@ -13,8 +13,7 @@ export default class WFRP3eAbilitySheetV2 extends WFRP3eItemSheetV2
 		header: {template: "systems/wfrp3e/templates/applications/header.hbs"},
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
 		main: {template: "systems/wfrp3e/templates/applications/items/ability-sheet-v2/main.hbs"},
-		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"},
-		footer: {template: "templates/generic/form-footer.hbs"}
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
 	}
 
 	/**
@@ -35,14 +34,5 @@ export default class WFRP3eAbilitySheetV2 extends WFRP3eItemSheetV2
 		}
 
 		return tabs;
-	}
-
-	/**
-	 * Prepares an array of form footer buttons.
-	 * @returns {Partial<FormFooterButton>[]}
-	 */
-	_getFooterButtons()
-	{
-		return [{type: "submit", icon: "fa-solid fa-save", label: "ABILITY.ACTIONS.update"}]
 	}
 }
