@@ -89,7 +89,7 @@ export default class DicePool
 			else if(checkData.action)
 				return game.i18n.format("ROLL.NAMES.actionCheck", {action: fromUuidSync(checkData.action).name});
 			else if(checkData.skill)
-				return game.i18n.format("ROLL.NAMES.skillCheck", {skill: checkData.skill.name});
+				return game.i18n.format("ROLL.NAMES.skillCheck", {skill: fromUuidSync(checkData.skill).name});
 			else if(checkData.characteristic)
 				return game.i18n.format("ROLL.NAMES.characteristicCheck", {
 					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic].name)
@@ -175,10 +175,7 @@ export default class DicePool
 				conservative: stance < 0 ? Math.abs(stance) : 0,
 				reckless: stance > 0 ? stance : 0,
 				challenge: CONFIG.WFRP3e.challengeLevels[checkData.challengeLevel].challengeDice
-					+ action?.system[face].difficultyModifiers.challengeDice
-					+ (["melee", "ranged"].includes(action?.system.type)
-						? CONFIG.WFRP3e.challengeLevels.easy.challengeDice
-						: 0),
+					+ (action?.system[face].difficultyModifiers.challengeDice ?? 0),
 				misfortune: action?.system[face].difficultyModifiers.misfortuneDice
 					+ match && match[5] === game.i18n.localize("ACTION.CHECK.targetDefence")
 						&& checkData.targets?.length > 0
@@ -200,18 +197,17 @@ export default class DicePool
 		let actor = checkData?.actor;
 
 		if(checkData) {
-			checkData.fortunePoints = this.fortunePoints;
-
 			if(actor) {
+				const fortunePoints = this.checkData.fortunePoints;
 				actor = await fromUuid(checkData.actor);
 
 				// Remove the fortune points spent on the check from the Actor and/or Party.
-				if(actor.type === "character" && this.fortunePoints > 0) {
-					const updates = {"system.fortune.value": Math.max(actor.system.fortune.value - this.fortunePoints, 0)};
+				if(actor.type === "character" && fortunePoints > 0) {
+					const updates = {"system.fortune.value": Math.max(actor.system.fortune.value - fortunePoints, 0)};
 
-					if(this.fortunePoints > actor.system.fortune.value) {
+					if(fortunePoints > actor.system.fortune.value) {
 						const party = actor.system.currentParty;
-						party.update({"system.fortunePool": Math.max(party.system.fortunePool - (this.fortunePoints - actor.system.fortune.value), 0)})
+						party.update({"system.fortunePool": Math.max(party.system.fortunePool - (fortunePoints - actor.system.fortune.value), 0)})
 					}
 
 					actor.update(updates);
