@@ -1,6 +1,10 @@
 <div class="item money row" data-item-id="{{money._id}}">
 	<div class="content">
-		<a class="money-name item-name-link">{{money.name}}</a>
+		<a class="item-name-link money-image">
+			<img src="{{money.img}}" alt="{{money.name}}" width="40" height="40" />
+		</a>
+
+		<a class="item-name-link money-name">{{money.name}}</a>
 
 		<hr />
 
