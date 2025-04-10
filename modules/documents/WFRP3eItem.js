@@ -438,7 +438,9 @@ export default class WFRP3eItem extends Item
 	 */
 	removeQuality(index)
 	{
-		const qualities = this.system.qualities.splice(index, 1);
+		const qualities = this.system.qualities;
+
+		qualities.splice(index, 1);
 
 		this.update({"system.qualities": qualities});
 	}
