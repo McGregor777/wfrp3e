@@ -38,20 +38,20 @@ export default class WFRP3eRoll extends Roll
 				totalSymbols[key] += this.options.startingSymbols[key];
 
 		if(totalSymbols.successes < totalSymbols.challenges) {
-			totalSymbols.challenges -= parseInt(totalSymbols.successes);
+			totalSymbols.challenges -= totalSymbols.successes < 0 ? 0 : parseInt(totalSymbols.successes);
 			totalSymbols.successes = 0;
 		}
 		else {
-			totalSymbols.successes -= parseInt(totalSymbols.challenges);
+			totalSymbols.successes -= totalSymbols.challenges < 0 ? 0 : parseInt(totalSymbols.challenges);
 			totalSymbols.challenges = 0;
 		}
 
 		if(totalSymbols.boons < totalSymbols.banes) {
-			totalSymbols.banes -= parseInt(totalSymbols.boons);
+			totalSymbols.banes -= totalSymbols.boons < 0 ? 0 : parseInt(totalSymbols.boons);
 			totalSymbols.boons = 0;
 		}
 		else {
-			totalSymbols.boons -= parseInt(totalSymbols.banes);
+			totalSymbols.boons -= totalSymbols.banes < 0 ? 0 : parseInt(totalSymbols.banes);
 			totalSymbols.banes = 0;
 		}
 
