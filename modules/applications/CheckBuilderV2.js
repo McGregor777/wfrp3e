@@ -174,8 +174,8 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 									context.availableWeapons.push(CONFIG.WFRP3e.weapon.commonWeapons.improvised);
 							}
 
-							if(!checkData.weapon)
-								checkData.weapon = context.availableWeapons[0].uuid;
+							if(!checkData.weapon && context.availableWeapons?.length)
+								checkData.weapon = context.availableWeapons[0]?.uuid;
 						}
 					}
 				}
