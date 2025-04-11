@@ -28,9 +28,9 @@
 			"update": "Enregistrer l'action"
 		},
 		"CARDS": {
-			"Block": "Blocage",
-			"MeleeStrike": "Attaque au corps-à-corps",
-			"RangedShot": "Tir à distance"
+			"block": "Blocage",
+			"meleeStrike": "Attaque au corps-à-corps",
+			"rangedShot": "Tir à distance"
 		},
 		"CHECK": {
 			"against": "contre",

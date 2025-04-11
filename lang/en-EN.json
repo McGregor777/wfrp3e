@@ -28,9 +28,9 @@
 			"update": "Save Action"
 		},
 		"CARDS": {
-			"Block": "Block",
-			"MeleeStrike": "Melee Strike",
-			"RangedShot": "Ranged Shot"
+			"block": "Block",
+			"meleeStrike": "Melee Strike",
+			"rangedShot": "Ranged Shot"
 		},
 		"CHECK": {
 			"against": "vs",
