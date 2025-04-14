@@ -25,7 +25,8 @@
 
 	"ACTION": {
 		"ACTIONS": {
-			"update": "Save Action"
+			"update": "Save Action",
+			"usage": "uses {action}"
 		},
 		"CARDS": {
 			"block": "Block",
@@ -50,7 +51,6 @@
 			"traits.label": "Traits",
 			"type.label": "Action Type",
 			"uniqueEffect.label": "Unique Effect",
-			"usageMessage.label": "uses {action}",
 			"difficultyModifiers": {
 				"challengeDice.label": "Challenge Dice",
 				"misfortuneDice.label": "Misfortune Dice"
@@ -77,9 +77,6 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		},
-		"TRAITS": {
-			"Basic": "Base"
 		},
 		"TYPES": {
 			"melee": "Melee",
@@ -360,6 +357,7 @@
 		},
 		"FIELDS": {
 			"aggressionDice": "Aggression Dice",
+			"attributes": "Creature Attributes",
 			"challengeLevel": "Challenge Level",
 			"characteristic": "Characteristic",
 			"cunningDice": "Cunning Dice",
@@ -682,7 +680,8 @@
 			"targetFatigueRecovery": "{target} recovers {amount} fatigue.",
 			"targetStressRecovery": "{target} recovers {amount} stress.",
 			"targetFatigueSuffering": "{target} suffers {amount} fatigue.",
-			"targetStressSuffering": "{target} suffers {amount} stress."
+			"targetStressSuffering": "{target} suffers {amount} stress.",
+			"wounds": "{actor} suffers {amount} wounds."
 		},
 		"RESULTS": {
 			"blank": "Blank",
@@ -903,6 +902,7 @@
 	},
 
 	"TRAITS": {
+		"basic": "Basic",
 		"greyOrder": "Grey Order",
 		"rankZero": "Rank 0",
 		"rankOne": "Rank 1"

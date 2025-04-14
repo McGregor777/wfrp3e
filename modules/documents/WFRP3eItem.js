@@ -194,7 +194,7 @@ export default class WFRP3eItem extends Item
 									symbols: CONFIG.WFRP3e.symbols,
 									effects: this.system[options.face].effects
 								}),
-								flavor: game.i18n.format("ACTION.UsageMessage", {
+								flavor: game.i18n.format("ACTION.ACTIONS.usage", {
 									actor: this.actor.name,
 									action: this.system[options.face].name
 								}),
@@ -415,7 +415,7 @@ export default class WFRP3eItem extends Item
 		if(!action)
 			throw new Error("Unable to find the relevant basic Action.");
 
-		await CheckBuilderV2.prepareActionCheck(this.actor, action, this.actor.getCurrentStanceName(), {weapon: this});
+		await CheckBuilderV2.prepareActionCheck(this.actor, action, this.actor.getCurrentStanceName(), {weapon: this.uuid});
 	}
 
 	/**

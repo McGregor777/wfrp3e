@@ -59,7 +59,7 @@ export default class WFRP3eActorSheet extends ActorSheet
 	 */
 	_buildItemLists(items)
 	{
-		const basicTrait = game.i18n.localize("ACTION.TRAITS.Basic");
+		const basicTrait = game.i18n.localize("TRAITS.basic");
 		const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name));
 		const actions = sortedItems.filter(item => item.type === "action").sort((a, b) => {
 			if(a.system.conservative.traits.includes(basicTrait) && !b.system.conservative.traits.includes(basicTrait))

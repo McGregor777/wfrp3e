@@ -177,9 +177,9 @@ export const WFRP3e = {
 		}
 	},
 	conditionDurations: {
-		brief: "CONDITION.DURATIONS.Brief",
-		dependent: "CONDITION.DURATIONS.Dependent",
-		lingering: "CONDITION.DURATIONS.Lingering"
+		brief: "CONDITION.DURATIONS.brief",
+		dependent: "CONDITION.DURATIONS.dependent",
+		lingering: "CONDITION.DURATIONS.lingering"
 	},
 	dice: {
 		characteristic: {

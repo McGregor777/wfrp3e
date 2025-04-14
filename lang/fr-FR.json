@@ -25,7 +25,8 @@
 
 	"ACTION": {
 		"ACTIONS": {
-			"update": "Enregistrer l'action"
+			"update": "Enregistrer l'action",
+			"usage": "utilise {action}"
 		},
 		"CARDS": {
 			"block": "Blocage",
@@ -50,7 +51,6 @@
 			"traits.label": "Traits",
 			"type.label": "Type d'action",
 			"uniqueEffect.label": "Effet seul",
-			"usageMessage.label": "utilise {action}",
 			"difficultyModifiers": {
 				"challengeDice.label": "Dés de Défi",
 				"misfortuneDice.label": "Dés d'Infortune"
@@ -77,9 +77,6 @@
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
-		},
-		"TRAITS": {
-			"Basic": "Base"
 		},
 		"TYPES": {
 			"melee": "Mêlée",
@@ -360,6 +357,7 @@
 		},
 		"FIELDS": {
 			"aggressionDice": "Dés d'Agressivité",
+			"attributes": "Attributs de Créature",
 			"challengeLevel": "Niveau de Défi",
 			"characteristic": "Caractéristique",
 			"cunningDice": "Dés d'Astuce",
@@ -677,12 +675,13 @@
 			"stressRecovery": "{actor} élimine {amount} stress.",
 			"stressSuffering": "{actor} subit {amount} stress.",
 			"successful": "Test réussi",
-			"targetCriticalWounds": "{actor} inflige {criticalWounds} to {target}.",
+			"targetCriticalWounds": "{actor} inflige {criticalWounds} à {target}.",
 			"targetDamages": "{actor} inflige {amount} dégâts à {target}.",
 			"targetFatigueRecovery": "{target} élimine {amount} fatigue.",
 			"targetStressRecovery": "{target} élimine {amount} stress.",
 			"targetFatigueSuffering": "{target} subit {amount} fatigue.",
-			"targetStressSuffering": "{target} subit {amount} stress."
+			"targetStressSuffering": "{target} subit {amount} stress.",
+			"wounds": "{actor} subit {amount} blessures."
 		},
 		"RESULTS": {
 			"blank": "Vierge",
@@ -901,6 +900,7 @@
 	},
 
 	"TRAITS": {
+		"basic": "Base",
 		"greyOrder": "Ordre Gris",
 		"rankZero": "Rang 0",
 		"rankOne": "Rang 1"
