@@ -209,6 +209,10 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 		if(event.target.name.startsWith("checkData"))
 			dicePool.determineDicePoolFromCheckData();
 
+		// Execute the scripts from all OnCheckPreparation WFRP3eEffects.
+		if(checkData?.actor)
+			await CheckHelper.triggerCheckPreparationEffects(await fromUuid(checkData.actor), checkData, dicePool.dice);
+
 		// Execute the scripts from all selected items.
 		const triggeredItems = checkData.triggeredItems;
 		if(triggeredItems != null) {
