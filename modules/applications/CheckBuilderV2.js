@@ -12,7 +12,7 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 
 		if(this.dicePool.checkData?.action) {
 			const checkData = this.dicePool.checkData;
-			checkData.challengeLevel = ["melee", "ranged"].includes(fromUuidSync(checkData.action).type)
+			checkData.challengeLevel = ["melee", "ranged"].includes(fromUuidSync(checkData.action).system.type)
 				? "easy"
 				: "simple";
 		}
