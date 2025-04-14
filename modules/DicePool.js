@@ -57,6 +57,18 @@ export default class DicePool
 			return symbols;
 		}, {});
 
+		const checkData = options.checkData;
+		if(checkData?.actor) {
+			const actor = fromUuidSync(checkData.actor);
+
+			if(actor.type === "creature")
+				checkData.creatureDice = {
+					aggression: 0,
+					cunning: 0,
+					expertise: 0
+				}
+		}
+
 		foundry.utils.mergeObject(this, options);
 	}
 
@@ -170,8 +182,13 @@ export default class DicePool
 
 			this.dice = {
 				characteristic: characteristic.rating - Math.abs(stance),
-				fortune: characteristic.fortune + (checkData.fortunePoints ?? 0) + (checkData.specialisations?.length ?? 0),
-				expertise: fromUuidSync(checkData.skill)?.system.trainingLevel ?? 0,
+				fortune: characteristic.fortune
+					+ (checkData.fortunePoints ?? 0)
+					+ (checkData.specialisations?.length ?? 0)
+					+ (checkData.creatureDice?.aggression ?? 0)
+					+ (checkData.creatureDice?.cunning ?? 0),
+				expertise: (fromUuidSync(checkData.skill)?.system.trainingLevel ?? 0)
+					+ (checkData.creatureDice?.expertise ?? 0),
 				conservative: stance < 0 ? Math.abs(stance) : 0,
 				reckless: stance > 0 ? stance : 0,
 				challenge: CONFIG.WFRP3e.challengeLevels[checkData.challengeLevel].challengeDice
@@ -213,10 +230,10 @@ export default class DicePool
 					actor.update(updates);
 				}
 				// Remove the attribute dice spent on the check from the Creature.
-				else if(actor.type === "creature") {
+				else if(actor.type === "creature" && checkData.creatureDice) {
 					const updates = {system: {attributes: {}}};
 
-					for(const [attributeName, creatureDice] of Object.entries(this.creatureDice)) {
+					for(const [attributeName, creatureDice] of Object.entries(checkData.creatureDice)) {
 						if(creatureDice > 0)
 							updates.system.attributes[attributeName] = {
 								value: actor.system.attributes[attributeName].value - creatureDice
