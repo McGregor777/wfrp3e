@@ -18,7 +18,7 @@
 
 			<div class="form-fields">
 				<select class="characteristic-select" name="checkData.characteristic">
-					{{selectOptions characteristics selected=characteristic localize=true}}
+					{{selectOptions characteristics selected=checkData.characteristic localize=true}}
 				</select>
 			</div>
 		</div>
@@ -28,7 +28,7 @@
 
 			<div class="form-fields">
 				<select class="challenge-level-select" name="checkData.challengeLevel">
-					{{selectOptions challengeLevels selected=challengeLevel labelAttr="name" localize=true}}
+					{{selectOptions challengeLevels selected=checkData.challengeLevel labelAttr="name" localize=true}}
 				</select>
 			</div>
 		</div>

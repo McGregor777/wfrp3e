@@ -293,6 +293,7 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 			  checkData = {
 				  actor: actor.uuid,
 				  characteristic: characteristic.name,
+				  challengeLevel: "simple",
 				  stance,
 				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
 			  },
@@ -331,6 +332,7 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 			  checkData = {
 				  actor: actor.uuid,
 				  characteristic: skill.system.characteristic,
+				  challengeLevel: "simple",
 				  skill: skill.uuid,
 				  stance,
 				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
@@ -438,6 +440,7 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 			  checkData = {
 				  actor: actor.uuid,
 				  characteristic: combat.initiativeCharacteristic,
+				  challengeLevel: "simple",
 				  combat,
 				  stance
 			  },
