@@ -23,7 +23,7 @@ export default class CheckHelper
 			});
 		}
 
-		if(checkData.targets.length > 0) {
+		if(checkData.targets?.length > 0) {
 			const targetTriggeredEffects = await fromUuid(checkData.targets[0]).then(
 				actor => actor.findTriggeredEffects("onTargettingCheckPreparation")
 			);
@@ -98,11 +98,11 @@ export default class CheckHelper
 	{
 		return isMental ? {
 			description: game.i18n.format("ROLL.EFFECTS.recoverStress", {amount: 1}),
-			script: "outcome.stress -= 2;",
+			script: "outcome.stress--;",
 			symbolAmount: 2
 		} : {
 			description: game.i18n.format("ROLL.EFFECTS.recoverFatigue", {amount: 1}),
-			script: "outcome.fatigue -= 2;",
+			script: "outcome.fatigue--;",
 			symbolAmount: 2
 		};
 	}
@@ -468,7 +468,7 @@ export default class CheckHelper
 					outcome.targetCriticalWounds = await Item.createDocuments(
 						await this.drawCriticalWoundsRandomly(outcome.targetCriticalWounds + 1),
 						{parent: targetActor}
-					);
+					).then(documents => documents.map(document => document.uuid));
 				}
 				else if(outcome.targetDamages > 0) {
 					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetDamages};
