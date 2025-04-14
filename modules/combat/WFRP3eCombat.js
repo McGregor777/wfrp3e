@@ -7,7 +7,7 @@ export default class WFRP3eCombat extends Combat
 	{
 		super(data, context);
 
-		this.flags.encounterType = this.flags.encounterType || "combat";
+		this.flags.encounterType = this.flags.encounterType ?? "combat";
 	}
 
 	get initiativeCharacteristic()
@@ -40,8 +40,8 @@ export default class WFRP3eCombat extends Combat
 				continue;
 
 			// Produce an initiative roll for the Combatant
-			const roll = combatant.getInitiativeRoll(formula);
-			await roll.evaluate({async: true});
+			const roll = await combatant.getInitiativeRoll(formula);
+			await roll.evaluate();
 			updates.push({_id: id, initiative: roll.totalSymbols.successes});
 
 			// Construct chat message data
