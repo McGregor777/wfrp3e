@@ -5,12 +5,13 @@ export default class WFRP3eEffect extends ActiveEffect
 	 * @param {Object} options
 	 * @param {Object[]} [options.parameters]
 	 * @param {string[]} [options.parameterNames]
+	 * @param {string} [options.script]
 	 * @returns {Promise<void>}
 	 */
-	async triggerEffect({parameters = [], parameterNames = []} = {})
+	async triggerEffect({parameters = [], parameterNames = [], script = "script"} = {})
 	{
 		try {
-			const fn = new foundry.utils.AsyncFunction(...parameterNames, this.system.script);
+			const fn = new foundry.utils.AsyncFunction(...parameterNames, this.system[script]);
 			await fn.call(this, ...parameters);
 		}
 		catch(error) {

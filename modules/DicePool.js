@@ -227,6 +227,16 @@ export default class DicePool
 						actor.update(updates);
 				}
 			}
+
+			// Execute the effects from all selected items.
+			const triggeredItems = this.checkData.triggeredItems;
+			if(triggeredItems != null) {
+				if(Array.isArray(triggeredItems))
+					for(const itemUuid of triggeredItems)
+						await this.executeItemEffects(itemUuid, "postScript");
+				else
+					await this.executeItemEffects(triggeredItems, "postScript");
+			}
 		}
 
 		const roll = await WFRP3eRoll.create(
@@ -242,5 +252,25 @@ export default class DicePool
 			AudioHelper.play({src: this.sound}, true);
 
 		return roll;
+	}
+
+	/**
+	 * Executes scripts from onPreCheckTrigger WFRP3eEffects contained by a WFRP3eItem.
+	 * @param {string} itemUuid The UUID of the WFRP3eItem.
+	 * @param {string} script The type of script to execute.
+	 * @returns {Promise<void>}
+	 */
+	async executeItemEffects(itemUuid, script = "script")
+	{
+		const actor = await fromUuid(this.checkData.actor),
+			  item = await fromUuid(itemUuid),
+			  effects = item.effects.filter(effect => effect.system.type === "onPreCheckTrigger");
+
+		for(const effect of effects)
+			await effect.triggerEffect({
+				parameters: [actor, this, this.checkData],
+				parameterNames: ["actor", "dicePool", "checkData"],
+				script: script
+			});
 	}
 }

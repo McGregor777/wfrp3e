@@ -194,7 +194,9 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 	/** @inheritDoc */
 	async _onChangeForm(formConfig, event)
 	{
-		const form = event.currentTarget,
+		const dicePool = this.dicePool,
+			  checkData = dicePool.checkData,
+			  form = event.currentTarget,
 			  formData = new FormDataExtended(form);
 		let value = formData.object[event.target.name];
 
@@ -202,18 +204,19 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 		if(Array.isArray(value))
 			value = value.filter(value => value);
 
-		foundry.utils.setProperty(this.dicePool, event.target.name, value);
+		foundry.utils.setProperty(dicePool, event.target.name, value);
 
 		if(event.target.name.startsWith("checkData"))
-			this.dicePool.determineDicePoolFromCheckData();
+			dicePool.determineDicePoolFromCheckData();
 
-		// Execute the effects from all selected items.
-		if(this.dicePool.checkData.triggeredItems != null) {
-			if(Array.isArray(this.dicePool.checkData.triggeredItems))
-				for(const itemUuid of this.dicePool.checkData.triggeredItems)
-					await this.executeItemEffects(itemUuid);
+		// Execute the scripts from all selected items.
+		const triggeredItems = checkData.triggeredItems;
+		if(triggeredItems != null) {
+			if(Array.isArray(triggeredItems))
+				for(const itemUuid of triggeredItems)
+					await dicePool.executeItemEffects(itemUuid);
 			else
-				await this.executeItemEffects(this.dicePool.checkData.triggeredItems);
+				await dicePool.executeItemEffects(triggeredItems);
 		}
 
 		await this.render();
@@ -449,23 +452,5 @@ export default class CheckBuilderV2 extends foundry.applications.api.HandlebarsA
 		await CheckHelper.triggerCheckPreparationEffects(actor, checkData, startingPool);
 
 		return new DicePool(startingPool, {checkData, flavor, sound});
-	}
-
-	/**
-	 * Executes onPreCheckTrigger scripts from a WFRP3eItem.
-	 * @param {string} itemUuid The Uuid of the WFRP3eItem which effects are executed.
-	 * @returns {Promise<void>}
-	 */
-	async executeItemEffects(itemUuid)
-	{
-		const actor = await fromUuid(this.dicePool.checkData.actor),
-			  item = await fromUuid(itemUuid),
-			  effects = item.effects.filter(effect => effect.system.type === "onPreCheckTrigger");
-
-		for(const effect of effects)
-			await effect.triggerEffect({
-				parameters: [actor, this.dicePool, this.dicePool.checkData],
-				parameterNames: ["actor", "dicePool", "checkData"]
-			});
 	}
 }

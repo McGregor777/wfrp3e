@@ -8,6 +8,7 @@ export default class WFRP3eEffectDataModel extends foundry.abstract.TypeDataMode
 
 		return {
 			conditionScript: new fields.JavaScriptField(),
+			postScript: new fields.JavaScriptField({async: true}),
 			reverseScript: new fields.JavaScriptField({async: true}),
 			script: new fields.JavaScriptField({async: true}),
 			type: new fields.StringField({
