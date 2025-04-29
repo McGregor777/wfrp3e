@@ -113,6 +113,9 @@ export default class WFRP3eEffectConfig extends foundry.applications.api.Handleb
 		for(const element of this.element.querySelectorAll("prose-mirror"))
 			element.addEventListener("change", this._updateEnrichedProperty.bind(this, options))
 
+		for(const element of this.element.querySelectorAll('[name="system.type"]'))
+			element.addEventListener("change", this._onTypeChange.bind(this, options))
+
 		return super._onRender(context, options);
 	}
 
@@ -231,5 +234,15 @@ export default class WFRP3eEffectConfig extends foundry.applications.api.Handleb
 		});
 
 		return picker.browse();
+	}
+
+	async _onTypeChange(options, event)
+	{
+		foundry.utils.setProperty(this.document, event.target.name, event.target.value);
+
+		await this.submit({
+			preventClose: true,
+			updateData: {"system.type": this.document.system.type}
+		});
 	}
 }
