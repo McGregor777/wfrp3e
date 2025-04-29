@@ -10,16 +10,16 @@ export default class CheckHelper
 	 * Searches and triggers every relevant effects owned either by the Actor performing the check, or its target.
 	 * @param {WFRP3eActor} actor The WFRP3eActor performing the check.
 	 * @param {Object} checkData The check data.
-	 * @param {Object} startingPool The starting dice pool.
+	 * @param {DicePool} dicePool The dice pool.
 	 * @returns {Promise<void>}
 	 */
-	static async triggerCheckPreparationEffects(actor, checkData, startingPool)
+	static async triggerCheckPreparationEffects(actor, checkData, dicePool)
 	{
-		const triggeredEffects = actor.findTriggeredEffects("onCheckPrepraration");
+		const triggeredEffects = actor.findTriggeredEffects("onCheckPreparation");
 		for(const effect of triggeredEffects) {
 			await effect.triggerEffect({
-				parameters: [actor, checkData, startingPool],
-				parameterNames: ["actor", "checkData", "startingPool"]
+				parameters: [actor, checkData, dicePool],
+				parameterNames: ["actor", "checkData", "dicePool"]
 			});
 		}
 
@@ -30,8 +30,8 @@ export default class CheckHelper
 
 			for(const effect of targetTriggeredEffects) {
 				await effect.triggerEffect({
-					parameters: [actor, checkData, startingPool],
-					parameterNames: ["actor", "checkData", "startingPool"]
+					parameters: [actor, checkData, dicePool],
+					parameterNames: ["actor", "checkData", "dicePool"]
 				});
 			}
 		}
