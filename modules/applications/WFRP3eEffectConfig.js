@@ -11,10 +11,7 @@ export default class WFRP3eEffectConfig extends foundry.applications.api.Handleb
 		window: {
 			contentClasses: ["standard-form"]
 		},
-		position: {
-			width: 580,
-			height: "auto"
-		},
+		position: {width: 580},
 		form: {closeOnSubmit: true}
 	};
 
@@ -119,6 +116,23 @@ export default class WFRP3eEffectConfig extends foundry.applications.api.Handleb
 		return super._onRender(context, options);
 	}
 
+	/** @inheritdoc */
+	async submit({updateData} = {})
+	{
+		const formConfig = this.options.form;
+
+		if(!formConfig?.handler)
+			throw new Error(`The ${this.constructor.name} DocumentSheetV2 does not support a single top-level form element.`);
+
+		const form = this.element,
+			  event = new Event("submit"),
+			  formData = new FormDataExtended(form),
+			  submitData = this._prepareSubmitData(event, form, formData);
+
+		foundry.utils.mergeObject(submitData, updateData, {inplace: true});
+		await this._processSubmitData(event, form, submitData);
+	}
+
 	/**
 	 * Updates the property with an enriched value.
 	 * @param options
@@ -170,13 +184,11 @@ export default class WFRP3eEffectConfig extends foundry.applications.api.Handleb
 	 */
 	static async _addEffectChange()
 	{
-		const index = this.document.changes.length;
+		this.document.changes.push({key: "", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: ""});
 
-		this.submit({
+		await this.submit({
 			preventClose: true,
-			updateData: {
-				[`changes.${index}`]: {key: "", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: ""}
-			}
+			updateData: {"changes": this.document.changes}
 		});
 	}
 
@@ -188,10 +200,10 @@ export default class WFRP3eEffectConfig extends foundry.applications.api.Handleb
 	{
 		this.document.changes.splice(event.target.closest(".effect-change").dataset.index, 1);
 
-		this.submit({
+		await this.submit({
 			preventClose: true,
 			updateData: {"changes": this.document.changes}
-		}).then(() => this.render());
+		});
 	}
 
 	// TODO: Remove _editImage() method in V13
