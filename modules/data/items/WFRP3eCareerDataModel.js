@@ -51,15 +51,24 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 			description: new fields.HTMLField(),
 			primaryCharacteristics: new fields.ArrayField(
 				new fields.StringField({
-					choices: CONFIG.WFRP3e.characteristics,
+					choices: Object.entries(CONFIG.WFRP3e.characteristics).reduce((choices, [key, value]) => {
+						choices[key] = value.name
+						return choices;
+					}, {}),
 					initial: "strength",
 					required: true
 				}),
-				{initial: ["strength", "ability"], required: true}
+				{initial: ["strength", "agility"], required: true}
 			),
 			raceRestrictions: new fields.ArrayField(
 				new fields.StringField({
-					choices: {any: {name: "RACE.Any"}, ...CONFIG.WFRP3e.availableRaces},
+					choices: {
+						any: "RACE.Any",
+						...Object.entries(CONFIG.WFRP3e.availableRaces).reduce((choices, [key, value]) => {
+							choices[key] = value.name
+							return choices;
+						}, {})
+					},
 					initial: "any",
 					required: true
 				}),
@@ -67,14 +76,18 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 			),
 			sockets: new fields.ArrayField(
 				new fields.SchemaField({
-					item: new fields.DocumentUUIDField(),
+					item: new fields.DocumentUUIDField({label: "CAREER.FIELDS.sockets.FIELDS.item.label"}),
 					type: new fields.StringField({
 						choices: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"},
-						initial: "any",
+						initial: "focus",
+						label: "CAREER.FIELDS.sockets.FIELDS.type.label",
 						required: true
-					})}, {initial: {item: null, type: "focus"}}),
-				{initial: new Array(2).fill({item: null, type: "focus"}), required: true}
-			),
+					})}, {initial: {item: null, type: "focus"}}
+				), {
+					initial: new Array(2).fill({item: null, type: "focus"}),
+					label: "CAREER.FIELDS.sockets",
+					required: true
+				}),
 			traits: new fields.StringField({initial: ", , , ", required: true}),
 			startingStance: new fields.SchemaField({
 				conservativeSegments: new fields.NumberField({initial: 2, integer: true, min: 0, nullable: false, required: true}),
@@ -90,18 +103,18 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 	/** @inheritDoc */
 	static cleanData(source = {}, options = {})
 	{
-		if(source.advances?.open.length < 6)
+		if(source.advances?.open?.length < 6)
 			source.advances.open.push(
 				new Array(6 - source.advances.open.length).fill({cost: 0, type: ""})
 			);
-		else if(source.advances?.open.length > 6)
+		else if(source.advances?.open?.length > 6)
 			source.advances.open = source.advances.open.slice(0, 6);
 
-		if(source.advances?.nonCareer.length < 2)
+		if(source.advances?.nonCareer?.length < 2)
 			source.advances.nonCareer.push(
 				new Array(2 - source.advances.nonCareer.length).fill({cost: 0, type: ""})
 			);
-		else if(source.advances?.nonCareer.length > 2)
+		else if(source.advances?.nonCareer?.length > 2)
 			source.advances.nonCareer = source.advances.nonCareer.slice(0, 2);
 
 		if(source.raceRestrictions?.length === 1) {

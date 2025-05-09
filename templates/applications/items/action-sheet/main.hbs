@@ -1,0 +1,116 @@
+<section class="tab {{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}" data-stance="{{stance}}">
+	<nav class="tabs{{#if verticalTabs}} vertical{{/if}}"
+		 aria-roledescription="{{localize "SHEETS.FormNavLabel"}}">
+		{{#each tabs as |tab|}}
+			<a data-action="tab" data-group="{{tab.group}}" data-tab="{{tab.id}}"
+			   {{#if tab.cssClass}}class="{{tab.cssClass}}"{{/if}}
+				{{#if tab.tooltip}}data-tooltip="{{tab.tooltip}}"{{/if}}>
+				{{#if tab.icon}}<i class="{{tab.icon}}" inert></i>{{/if}}
+				{{#if tab.label}}<span>{{localize tab.label}}</span>{{/if}}
+			</a>
+		{{/each}}
+	</nav>
+
+	{{#with tabs.main as |tab|}}
+	<section class="tab {{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+	{{/with}}
+		<fieldset class="inline">
+			{{formGroup fields.name value=system.name classes="expanded" rootId=rootId localize=true}}
+
+			{{formGroup fields.traits value=system.traits classes="expanded" rootId=rootId localize=true}}
+		</fieldset>
+
+		<fieldset>
+			<img class="art"
+				 src="{{system.art}}"
+				 alt="{{system.name}}"
+				 height="100"
+				 data-action="onEditImage"
+				 data-edit="{{fields.art.fieldPath}}" />
+		</fieldset>
+
+		{{formGroup fields.art value=system.art classes="expanded" rootId=rootId localize=true}}
+
+		<fieldset class="inline">
+			{{formGroup fields.rechargeRating value=system.rechargeRating classes="slim" rootId=rootId localize=true}}
+
+			{{formGroup fields.difficultyModifiers.fields.challengeDice
+						value=system.difficultyModifiers.challengeDice
+						classes="slim"
+						rootId=rootId
+						localize=true}}
+
+			{{formGroup fields.difficultyModifiers.fields.misfortuneDice
+						value=system.difficultyModifiers.misfortuneDice
+						classes="slim"
+						rootId=rootId
+						localize=true}}
+		</fieldset>
+
+		<fieldset>
+			{{formGroup fields.check value=system.check classes="expanded" rootId=rootId localize=true}}
+		</fieldset>
+
+		{{formGroup fields.requirements value=system.requirements rootId=rootId localize=true}}
+	</section>
+
+	{{#with tabs.effects as |tab|}}
+	<section class="tab scrollable{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+	{{/with}}
+		<div>
+			<label>
+				{{localize "ACTION.FIELDS.effects.label"}}
+
+				<a data-action="addActionEffect">
+					<span class="fas fa-plus"></span>
+				</a>
+			</label>
+
+			{{#each @root.symbols as |symbol sym|}}
+				<div class="effect-group" data-symbol="{{sym}}">
+					{{#each (lookup @root.system.effects sym) as |effect ef|}}
+						<div class="effect" data-index="{{ef}}">
+							{{#for 0 effect.symbolAmount 1}}
+								{{#unless (and (or (sameAs sym "delay") (sameAs sym "exertion")) (superiorTo this 0))}}
+									<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+								{{else}}
+									<span class="wfrp3e-font symbol {{@root.symbols.bane.cssClass}}"></span>
+								{{/unless}}
+							{{/for}}
+
+							{{{striptags effect.description "p"}}}
+
+							<a data-action="editActionEffect">
+								<span class="fas fa-pen-to-square" ></span>
+							</a>
+
+							<a data-action="removeActionEffect">
+								<span class="fa fa-eraser"></span>
+							</a>
+						</div>
+					{{/each}}
+				</div>
+			{{/each}}
+		</div>
+
+		<details{{#if system.special}} open{{/if}}>
+			<summary>
+				<label for="{{concat rootId "-" fields.special.fieldPath}}">
+					{{localize "ACTION.FIELDS.special.label"}}
+				</label>
+			</summary>
+
+			{{formInput fields.special value=system.special id=(concat rootId "-" fields.special.fieldPath)}}
+		</details>
+
+		<details{{#if system.uniqueEffect}} open{{/if}}>
+			<summary>
+				<label for="{{concat rootId "-" fields.uniqueEffect.fieldPath}}">
+					{{localize "ACTION.FIELDS.uniqueEffect.label"}}
+				</label>
+			</summary>
+
+			{{formInput fields.uniqueEffect value=system.uniqueEffect id=(concat rootId "-" fields.uniqueEffect.fieldPath)}}
+		</details>
+	</section>
+</section>

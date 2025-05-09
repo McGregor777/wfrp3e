@@ -1,12 +1,23 @@
 import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
 
+/** @inheritDoc */
 export default class WFRP3eMoneySheet extends WFRP3eItemSheet
 {
-	static get defaultOptions()
-	{
-		return {
-			...super.defaultOptions,
-			classes: ["wfrp3e", "sheet", "item", "money"]
-		};
-	}
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {classes: ["money"]};
+
+	/** @inheritDoc */
+	static PARTS = {
+		...super.PARTS,
+		main: {template: "systems/wfrp3e/templates/applications/items/money-sheet/main.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+	};
+
+	/** @inheritDoc */
+	static TABS = {
+		sheet: {
+			...super.TABS.sheet,
+			labelPrefix: "MONEY.TABS"
+		}
+	};
 }

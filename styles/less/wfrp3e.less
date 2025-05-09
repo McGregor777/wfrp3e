@@ -21,11 +21,12 @@
 @import "components/sheet";
 @import "components/talent_card";
 @import "components/typography";
+@import "components/variables";
 @import "components/weapon_sheet";
 @import "components/wound_card";
 
 h3 {
-	font: 16pt @font-title;
+	font: 16pt var(--font-title);
 
 	&.entity-name, .encounters &, .folder-header &, #players &, #pause & {
 		background: unset;
@@ -34,16 +35,16 @@ h3 {
 }
 
 h4 {
-	font: 16pt @font-title;
+	font: 16pt var(--font-title);
 	margin: auto !important;
 }
 
 h5 {
-	font: 14pt @font-primary;
+	font: 14pt var(--font-primary);
 }
 
 h6 {
-	font: 12pt @font-primary;
+	font: 12pt var(--font-primary);
 }
 
 input[type="checkbox"] {
@@ -98,14 +99,13 @@ th {
 }
 
 .bottom-line {
-	bottom: 0.25rem;
-	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
-	left: 0.5rem;
-	line-height: 0;
+	bottom: 0;
+	display: flex;
+	left: 0;
+	margin: 0.25rem;
 	position: absolute;
-	right: 0.5rem;
+	right: 0;
 
 	& > * {
 		display: block;
@@ -151,7 +151,7 @@ th {
 }
 
 .wfrp3e-font {
-	font-family: @font-symbols;
+	font-family: var(--font-symbols);
 
 	&.dice {
 		text-shadow: none;

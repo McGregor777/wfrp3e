@@ -52,7 +52,9 @@
 			"type.label": "Action Type",
 			"uniqueEffect.label": "Unique Effect",
 			"difficultyModifiers": {
+				"abbreviation": "Difficulty",
 				"challengeDice.label": "Challenge Dice",
+				"label": "Difficulty Modifiers",
 				"misfortuneDice.label": "Misfortune Dice"
 			},
 			"effects": {
@@ -75,8 +77,10 @@
 			}
 		},
 		"TABS": {
+			"conservative": "Conservative",
 			"effects": "Effects",
-			"main": "Main"
+			"main": "Main",
+			"reckless": "Reckless"
 		},
 		"TYPES": {
 			"melee": "Melee",
@@ -139,6 +143,8 @@
 
 	"CAREER": {
 		"ACTIONS": {
+			"addSocket": "Add Talent Socket",
+			"deleteSocket": "Remove Talent Socket",
 			"update": "Save Career"
 		},
 		"FIELDS": {
@@ -170,7 +176,13 @@
 			"description.label": "Setting Information",
 			"primaryCharacteristics.label": "Primary Characteristics",
 			"raceRestrictions.label": "Race Restrictions",
-			"sockets.label": "Talent Sockets",
+			"sockets": {
+				"FIELDS": {
+					"item.label": "Taken by",
+					"type.label": "Type"
+				},
+				"label": "Talent Sockets"
+			},
 			"startingStance" : {
 				"conservativeSegments.label": "Starting Conservative Segments",
 				"recklessSegments.label": "Starting Reckless Segments"
@@ -554,8 +566,8 @@
 
 	"ITEM": {
 		"ACTIONS": {
-			"addEffect": "Add Effect",
-			"deleteEffect": "Delete {effect} Effect "
+			"addActiveEffect": "Add Effect",
+			"deleteActiveEffect": "Delete {effect} Effect "
 		}
 	},
 
@@ -921,7 +933,7 @@
 			"armour": "Armour",
 			"career": "Career",
 			"condition": "Condition",
-			"criticalwound": "Critical Wound",
+			"criticalWound": "Critical Wound",
 			"disease": "Disease",
 			"insanity": "Insanity",
 			"money": "Money",

@@ -1,17 +1,23 @@
 import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
 
+/** @inheritDoc */
 export default class WFRP3eTalentSheet extends WFRP3eItemSheet
 {
-	static get defaultOptions()
-	{
-		return {
-			...super.defaultOptions,
-			classes: ["wfrp3e", "sheet", "item", "talent"]
-		};
-	}
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {classes: ["talent"]};
 
-	getData()
-	{
-		return {...super.getData(), talentTypes: CONFIG.WFRP3e.talentTypes};
-	}
+	/** @inheritDoc */
+	static PARTS = {
+		...super.PARTS,
+		main: {template: "systems/wfrp3e/templates/applications/items/talent-sheet/main.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+	};
+
+	/** @inheritDoc */
+	static TABS = {
+		sheet: {
+			...super.TABS.sheet,
+			labelPrefix: "TALENT.TABS"
+		}
+	};
 }

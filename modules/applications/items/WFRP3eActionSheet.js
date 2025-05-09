@@ -1,86 +1,131 @@
 import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
 
+/** @inheritDoc */
 export default class WFRP3eActionSheet extends WFRP3eItemSheet
 {
-	static get defaultOptions()
-	{
-		return {
-			...super.defaultOptions,
-			width: 600,
-			height: 690,
-			classes: ["wfrp3e", "sheet", "item", "action"],
-			tabs: [
-				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "conservative.tab"},
-				{group: "conservative", navSelector: ".conservative-tabs", contentSelector: ".conservative.tab", initial: "main"},
-				{group: "reckless", navSelector: ".reckless-tabs", contentSelector: ".reckless.tab", initial: "main"}
-			]
-		};
-	}
-
-	getData()
-	{
-		return {
-			...super.getData(),
-			actionTypes: CONFIG.WFRP3e.actionTypes,
-			stances: CONFIG.WFRP3e.stances,
-			symbols: CONFIG.WFRP3e.symbols
-		};
-	}
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {
+		actions: {
+			addActionEffect: this.#addActionEffect,
+			editActionEffect: this.#editActionEffect,
+			removeActionEffect: this.#removeActionEffect
+		},
+		classes: ["action"]
+	};
 
 	/** @inheritDoc */
-	activateListeners(html)
-	{
-		super.activateListeners(html);
+	static PARTS = {
+		header: {template: "systems/wfrp3e/templates/applications/items/action-sheet/header.hbs"},
+		tabs: {template: "templates/generic/tab-navigation.hbs"},
+		conservative: {template: "systems/wfrp3e/templates/applications/items/action-sheet/main.hbs"},
+		reckless: {template: "systems/wfrp3e/templates/applications/items/action-sheet/main.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+	};
 
-		html.find(".effect-add").click(this._onAddEffectButtonClick.bind(this));
-		html.find(".effect-edit").click(this._onEffectEditButtonClick.bind(this));
-		html.find(".effect-remove").click(this._onRemoveEffectButtonClick.bind(this));
+	/** @inheritDoc */
+	static TABS = {
+		sheet: {
+			tabs: [
+				{id: "conservative", icon: "fa-solid fa-hourglass"},
+				{id: "reckless", icon: "fa-solid fa-droplet"},
+				{id: "effects", icon: "fa-fw fa-solid fa-person-rays"}
+			],
+			initial: "conservative",
+			labelPrefix: "ACTION.TABS"
+		},
+		conservative: {
+			tabs: [
+				{id: "main", icon: "fa-solid fa-book"},
+				{id: "effects", icon: "fa-solid fa-gears"}
+			],
+			initial: "main",
+			labelPrefix: "ACTION.TABS"
+		},
+		reckless: {
+			tabs: [
+				{id: "main", icon: "fa-solid fa-book"},
+				{id: "effects", icon: "fa-solid fa-gears"},
+			],
+			initial: "main",
+			labelPrefix: "ACTION.TABS"
+		}
+	};
+
+	/** @inheritDoc */
+	async _preparePartContext(partId, context)
+	{
+		let partContext = await super._preparePartContext(partId, context);
+
+		switch(partId) {
+			case "tabs":
+				partContext.tabs = this._prepareTabs("sheet");
+				break;
+			case "type":
+				partContext.fields = this.item.system.schema.fields;
+				break;
+			case "conservative":
+			case "reckless":
+				partContext = {
+					...partContext,
+					fields: this.item.system.schema.fields[partId].fields,
+					stance: partId,
+					symbols: {...CONFIG.WFRP3e.symbols},
+					system: this.item.system[partId],
+					tabs: this._prepareTabs(partId)
+				};
+				break;
+		}
+
+		return partContext;
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on an effect addition button.
-	 * @param event {Event}
+	 * Opens the Action Effect Editor in order to add a new effect to the Action.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onAddEffectButtonClick(event)
+	static async #addActionEffect(event, target)
 	{
-		this.item.createActionEffect(event.currentTarget.closest("section[data-face]").dataset.face);
+		await this.item.createActionEffect(target.closest("section[data-stance]").dataset.stance);
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on an effect editor button.
-	 * @param event {Event}
+	 * Opens the Action Effect Editor in order to edit a specific effect of the Action.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onEffectEditButtonClick(event)
+	static async #editActionEffect(event, target)
 	{
-		this.item.editActionEffect(
-			event.currentTarget.closest("section[data-face]").dataset.face,
-			event.currentTarget.closest("div.effect-group[data-symbol]").dataset.symbol,
-			event.currentTarget.closest("div.effect[data-index]").dataset.index
+		await this.item.editActionEffect(
+			target.closest("section[data-stance]").dataset.stance,
+			target.closest("div.effect-group[data-symbol]").dataset.symbol,
+			target.closest("div.effect[data-index]").dataset.index
 		);
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on an effect removal button.
-	 * @param event {Event}
+	 * Asks for confirmation for a specific Action effect definitive removal.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onRemoveEffectButtonClick(event)
+	static async #removeActionEffect(event, target)
 	{
 		await foundry.applications.api.DialogV2.confirm({
 			window: {title: game.i18n.localize("DIALOG.TITLE.EffectDeletion")},
 			modal: true,
 			content: `<p>${game.i18n.localize("DIALOG.DESCRIPTION.EffectDeletion")}</p>`,
-			submit: (result) => {
+			submit: async (result) => {
 				if(result)
-					this.item.removeActionEffect(
-						event.currentTarget.closest("section[data-face]").dataset.face,
-						event.currentTarget.closest("div.effect-group[data-symbol]").dataset.symbol,
-						event.currentTarget.closest("div.effect[data-index]").dataset.index
+					await this.item.removeActionEffect(
+						target.closest("section[data-stance]").dataset.stance,
+						target.closest("div.effect-group[data-symbol]").dataset.symbol,
+						target.closest("div.effect[data-index]").dataset.index
 					);
 			}
 		});

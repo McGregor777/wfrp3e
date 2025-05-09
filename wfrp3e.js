@@ -7,35 +7,20 @@ import WFRP3eCreatureSheet from "./modules/applications/actors/WFRP3eCreatureShe
 import WFRP3eGroupSheet from "./modules/applications/actors/WFRP3eGroupSheet.js";
 import WFRP3ePartySheet from "./modules/applications/actors/WFRP3ePartySheet.js";
 import WFRP3eAbilitySheet from "./modules/applications/items/WFRP3eAbilitySheet.js";
-import WFRP3eAbilitySheetV2 from "./modules/applications/items/WFRP3eAbilitySheetV2.js";
 import WFRP3eActionSheet from "./modules/applications/items/WFRP3eActionSheet.js";
-import WFRP3eActionSheetV2 from "./modules/applications/items/WFRP3eActionSheetV2.js";
 import WFRP3eArmourSheet from "./modules/applications/items/WFRP3eArmourSheet.js";
-import WFRP3eArmourSheetV2 from "./modules/applications/items/WFRP3eArmourSheetV2.js";
 import WFRP3eCareerSheet from "./modules/applications/items/WFRP3eCareerSheet.js";
-import WFRP3eCareerSheetV2 from "./modules/applications/items/WFRP3eCareerSheetV2.js";
 import WFRP3eConditionSheet from "./modules/applications/items/WFRP3eConditionSheet.js";
-import WFRP3eConditionSheetV2 from "./modules/applications/items/WFRP3eConditionSheetV2.js";
 import WFRP3eCriticalWoundSheet from "./modules/applications/items/WFRP3eCriticalWoundSheet.js";
-import WFRP3eCriticalWoundSheetV2 from "./modules/applications/items/WFRP3eCriticalWoundSheetV2.js";
 import WFRP3eDiseaseSheet from "./modules/applications/items/WFRP3eDiseaseSheet.js";
-import WFRP3eDiseaseSheetV2 from "./modules/applications/items/WFRP3eDiseaseSheetV2.js";
 import WFRP3eInsanitySheet from "./modules/applications/items/WFRP3eInsanitySheet.js";
-import WFRP3eInsanitySheetV2 from "./modules/applications/items/WFRP3eInsanitySheetV2.js";
 import WFRP3eMiscastSheet from "./modules/applications/items/WFRP3eMiscastSheet.js";
-import WFRP3eMiscastSheetV2 from "./modules/applications/items/WFRP3eMiscastSheetV2.js";
 import WFRP3eMoneySheet from "./modules/applications/items/WFRP3eMoneySheet.js";
-import WFRP3eMoneySheetV2 from "./modules/applications/items/WFRP3eMoneySheetV2.js";
 import WFRP3eMutationSheet from "./modules/applications/items/WFRP3eMutationSheet.js";
-import WFRP3eMutationSheetV2 from "./modules/applications/items/WFRP3eMutationSheetV2.js";
 import WFRP3eSkillSheet from "./modules/applications/items/WFRP3eSkillSheet.js";
-import WFRP3eSkillSheetV2 from "./modules/applications/items/WFRP3eSkillSheetV2.js";
 import WFRP3eTalentSheet from "./modules/applications/items/WFRP3eTalentSheet.js";
-import WFRP3eTalentSheetV2 from "./modules/applications/items/WFRP3eTalentSheetV2.js";
 import WFRP3eTrappingSheet from "./modules/applications/items/WFRP3eTrappingSheet.js";
-import WFRP3eTrappingSheetV2 from "./modules/applications/items/WFRP3eTrappingSheetV2.js";
 import WFRP3eWeaponSheet from "./modules/applications/items/WFRP3eWeaponSheet.js";
-import WFRP3eWeaponSheetV2 from "./modules/applications/items/WFRP3eWeaponSheetV2.js";
 import WFRP3eCombatTracker from "./modules/applications/sidebar/WFRP3eCombatTracker.js";
 import WFRP3eCombat from "./modules/combat/WFRP3eCombat.js";
 import WFRP3eCombatant from "./modules/combat/WFRP3eCombatant.js";
@@ -101,9 +86,7 @@ async function preloadHandlebarsTemplates()
 		"systems/wfrp3e/templates/partials/item-talent-card.hbs",
 		"systems/wfrp3e/templates/partials/item-trapping-row.hbs",
 		"systems/wfrp3e/templates/partials/item-weapon-row.hbs",
-		"systems/wfrp3e/templates/partials/item-wound-card.hbs",
-		"systems/wfrp3e/templates/partials/trapping-cost-informations.hbs",
-		"systems/wfrp3e/templates/partials/trapping-tab.hbs"
+		"systems/wfrp3e/templates/partials/item-wound-card.hbs"
 	];
 
 	return loadTemplates(templatePaths);
@@ -185,36 +168,21 @@ Hooks.once("init", async () => {
 	Actors.registerSheet("wfrp3e", WFRP3eGroupSheet, {label: "Group Sheet", types: ["group"], makeDefault: true});
 
 	Items.unregisterSheet("core", ItemSheet);
-	Items.registerSheet("wfrp3e", WFRP3eAbilitySheet, {label: "Ability Sheet", types: ["ability"]});
-	Items.registerSheet("wfrp3e", WFRP3eAbilitySheetV2, {label: "Ability Sheet V2", types: ["ability"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eActionSheet, {label: "Action Sheet", types: ["action"]});
-	Items.registerSheet("wfrp3e", WFRP3eActionSheetV2, {label: "Action Sheet V2", types: ["action"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eArmourSheet, {label: "Armour Sheet", types: ["armour"]});
-	Items.registerSheet("wfrp3e", WFRP3eArmourSheetV2, {label: "Armour Sheet V2", types: ["armour"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eAbilitySheet, {label: "Ability Sheet", types: ["ability"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eActionSheet, {label: "Action Sheet", types: ["action"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eArmourSheet, {label: "Armour Sheet", types: ["armour"], makeDefault: true});
 	Items.registerSheet("wfrp3e", WFRP3eCareerSheet, {label: "Career Sheet", types: ["career"], makeDefault: true})
-	Items.registerSheet("wfrp3e", WFRP3eCareerSheetV2, {label: "Career Sheet V2", types: ["career"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eConditionSheet, {label: "Condition Sheet", types: ["condition"]});
-	Items.registerSheet("wfrp3e", WFRP3eConditionSheetV2, {label: "Condition Sheet V2", types: ["condition"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eCriticalWoundSheet, {label: "Critical Wound Sheet", types: ["criticalWound"]});
-	Items.registerSheet("wfrp3e", WFRP3eCriticalWoundSheetV2, {label: "Critical Wound Sheet V2", types: ["criticalWound"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eDiseaseSheet, {label: "Disease Sheet", types: ["disease"]});
-	Items.registerSheet("wfrp3e", WFRP3eDiseaseSheetV2, {label: "Disease Sheet V2", types: ["disease"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eInsanitySheet, {label: "Insanity Sheet", types: ["insanity"]});
-	Items.registerSheet("wfrp3e", WFRP3eInsanitySheetV2, {label: "Insanity Sheet V2", types: ["insanity"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eMiscastSheet, {label: "Miscast Sheet", types: ["miscast"]});
-	Items.registerSheet("wfrp3e", WFRP3eMiscastSheetV2, {label: "Miscast Sheet V2", types: ["miscast"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eMoneySheet, {label: "Money Sheet", types: ["money"]});
-	Items.registerSheet("wfrp3e", WFRP3eMoneySheetV2, {label: "Money Sheet V2", types: ["money"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eMutationSheet, {label: "Mutation Sheet", types: ["mutation"]});
-	Items.registerSheet("wfrp3e", WFRP3eMutationSheetV2, {label: "Mutation Sheet V2", types: ["mutation"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eSkillSheet, {label: "Skill Sheet", types: ["skill"]});
-	Items.registerSheet("wfrp3e", WFRP3eSkillSheetV2, {label: "Skill Sheet V2", types: ["skill"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eTalentSheet, {label: "Talent Sheet", types: ["talent"]});
-	Items.registerSheet("wfrp3e", WFRP3eTalentSheetV2, {label: "Talent Sheet V2", types: ["talent"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eWeaponSheet, {label: "Weapon Sheet", types: ["weapon"]});
-	Items.registerSheet("wfrp3e", WFRP3eWeaponSheetV2, {label: "Weapon Sheet V2", types: ["weapon"], makeDefault: true});
-	Items.registerSheet("wfrp3e", WFRP3eTrappingSheet, {label: "Trapping Sheet", types: ["trapping"]});
-	Items.registerSheet("wfrp3e", WFRP3eTrappingSheetV2, {label: "Trapping Sheet V2", types: ["trapping"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eConditionSheet, {label: "Condition Sheet", types: ["condition"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eCriticalWoundSheet, {label: "Critical Wound Sheet", types: ["criticalWound"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eDiseaseSheet, {label: "Disease Sheet", types: ["disease"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eInsanitySheet, {label: "Insanity Sheet", types: ["insanity"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eMiscastSheet, {label: "Miscast Sheet", types: ["miscast"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eMoneySheet, {label: "Money Sheet", types: ["money"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eMutationSheet, {label: "Mutation Sheet", types: ["mutation"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eSkillSheet, {label: "Skill Sheet", types: ["skill"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eTalentSheet, {label: "Talent Sheet", types: ["talent"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eWeaponSheet, {label: "Weapon Sheet", types: ["weapon"], makeDefault: true});
+	Items.registerSheet("wfrp3e", WFRP3eTrappingSheet, {label: "Trapping Sheet", types: ["trapping"], makeDefault: true});
 
 	await preloadHandlebarsTemplates();
 });

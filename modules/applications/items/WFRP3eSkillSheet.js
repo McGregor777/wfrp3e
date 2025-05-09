@@ -1,17 +1,23 @@
 import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
 
-export default class WFRP3eSkillSheet extends WFRP3eItemSheet
+/** @inheritDoc */
+export default class WFRP3eMutationSheetV2 extends WFRP3eItemSheet
 {
-	static get defaultOptions()
-	{
-		return {
-			...super.defaultOptions,
-			classes: ["wfrp3e", "sheet", "item", "skill"]
-		};
-	}
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {classes: ["skill"]};
 
-	getData()
-	{
-		return {...super.getData(), characteristics: CONFIG.WFRP3e.characteristics};
-	}
+	/** @inheritDoc */
+	static PARTS = {
+		...super.PARTS,
+		main: {template: "systems/wfrp3e/templates/applications/items/skill-sheet/main.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+	};
+
+	/** @inheritDoc */
+	static TABS = {
+		sheet: {
+			...super.TABS.sheet,
+			labelPrefix: "SKILL.TABS"
+		}
+	};
 }

@@ -1,17 +1,23 @@
 import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
 
+/** @inheritDoc */
 export default class WFRP3eConditionSheet extends WFRP3eItemSheet
 {
-	static get defaultOptions()
-	{
-		return {
-			...super.defaultOptions,
-			classes: ["wfrp3e", "sheet", "item", "condition"]
-		};
-	}
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {classes: ["condition"]};
 
-	getData()
-	{
-		return {...super.getData(), conditionDurations: CONFIG.WFRP3e.conditionDurations};
-	}
+	/** @inheritDoc */
+	static PARTS = {
+		...super.PARTS,
+		main: {template: "systems/wfrp3e/templates/applications/items/condition-sheet/main.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+	};
+
+	/** @inheritDoc */
+	static TABS = {
+		sheet: {
+			...super.TABS.sheet,
+			labelPrefix: "CONDITION.TABS"
+		}
+	};
 }

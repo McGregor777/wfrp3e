@@ -52,7 +52,9 @@
 			"type.label": "Type d'action",
 			"uniqueEffect.label": "Effet seul",
 			"difficultyModifiers": {
+				"abbreviation": "Difficulté",
 				"challengeDice.label": "Dés de Défi",
+				"label": "Modificateurs de difficulté",
 				"misfortuneDice.label": "Dés d'Infortune"
 			},
 			"effects": {
@@ -75,8 +77,10 @@
 			}
 		},
 		"TABS": {
+			"conservative": "Prudence",
 			"effects": "Effets",
-			"main": "Principal"
+			"main": "Principal",
+			"reckless": "Témérité"
 		},
 		"TYPES": {
 			"melee": "Mêlée",
@@ -139,6 +143,8 @@
 
 	"CAREER": {
 		"ACTIONS": {
+			"addSocket": "Ajouter un emplacement de talent",
+			"deleteSocket": "Retirer un emplacement de talent",
 			"update": "Enregistrer la carrière"
 		},
 		"FIELDS": {
@@ -170,8 +176,14 @@
 			"description.label": "Description",
 			"primaryCharacteristics.label": "Caractéristiques Primaires",
 			"raceRestrictions.label": "Restrictions de Race",
-			"sockets.label": "Emplacements de Talent",
-			"startingStance" : {
+			"sockets": {
+				"FIELDS": {
+					"item.label": "Occupé par",
+					"type.label": "Type"
+				},
+				"label": "Emplacements de Talent"
+			},
+			"startingStance": {
 				"conservativeSegments.label": "Segments de Prudence de départ",
 				"recklessSegments.label": "Segments de Témérité de départ"
 			},
@@ -541,8 +553,8 @@
 
 	"ITEM": {
 		"ACTIONS": {
-			"addEffect": "Ajouter un Effet",
-			"deleteEffect": "Supprimer l'Effet {effect}"
+			"addActiveEffect": "Ajouter un Effet",
+			"deleteActiveEffect": "Supprimer l'Effet {effect}"
 		}
 	},
 
@@ -919,7 +931,7 @@
 			"armour": "Armure",
 			"career": "Carrière",
 			"condition": "État",
-			"criticalwound": "Blessure",
+			"criticalWound": "Blessure",
 			"disease": "Maladie",
 			"insanity": "Folie",
 			"money": "Monnaie",

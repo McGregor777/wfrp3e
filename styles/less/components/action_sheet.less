@@ -1,41 +1,5 @@
-.app.sheet.action {
-	& nav.primary-tabs a.active {
-		&[data-tab="conservative"] {
-			color: lightgreen;
-		}
-
-		&[data-tab="reckless"] {
-			color: lightcoral;
-		}
-	}
-
-	& .art-selector {
-		& > * {
-			display: block;
-		}
-
-		& > img {
-			border: none;
-			height: 80px;
-			width: 278px;
-		}
-	}
-
-	& .effect-group {
-		margin-bottom: 0.5rem;
-
-		& .effect > .effect-edit {
-			margin-left: 0.25rem;
-		}
-	}
-
-	& .type {
-		margin: 0.5rem 0;
-	}
-}
-
 .application.wfrp3e.sheet .window-content {
-	& nav > a[data-group="primary"] {
+	& nav.sheet-tabs > a {
 		&.active[data-tab="conservative"] {
 			color: lightgreen;
 		}
@@ -55,17 +19,6 @@
 
 		& .effect > .effect-edit {
 			margin-left: 0.25rem;
-		}
-	}
-
-	& section > nav {
-		border-top: none;
-		margin-bottom: 1rem;
-		margin-top: 0;
-
-		& > a {
-			padding-bottom: 0;
-			padding-top: 0;
 		}
 	}
 }

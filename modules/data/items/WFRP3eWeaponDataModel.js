@@ -17,7 +17,7 @@ export default class WFRP3eWeaponDataModel extends WFRP3eTrappingDataModel
 					groups[key] = group.name
 					return groups;
 				}, {}),
-				initial: Object.values(CONFIG.WFRP3e.weapon.groups)[0].name,
+				initial: Object.keys(CONFIG.WFRP3e.weapon.groups)[0],
 				required: true
 			}),
 			qualities: new fields.ArrayField(

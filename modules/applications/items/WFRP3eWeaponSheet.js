@@ -1,57 +1,86 @@
-import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
+import WFRP3eTrappingSheet from "./WFRP3eTrappingSheet.js";
 
-export default class WFRP3eWeaponSheet extends WFRP3eItemSheet
+/** @inheritDoc */
+export default class WFRP3eWeaponSheet extends WFRP3eTrappingSheet
 {
-	static get defaultOptions()
-	{
-		return {
-			...super.defaultOptions,
-			height: 600,
-			classes: ["wfrp3e", "sheet", "item", "trapping", "weapon"],
-			tabs: [{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"}]
-		};
-	}
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {
+		actions: {
+			addQuality: this.#onAddQuality,
+			removeQuality: this.#onRemoveQuality
+		},
+		classes: ["weapon"]
+	};
 
-	getData()
+	/** @inheritDoc */
+	static PARTS = {
+		...super.PARTS,
+		main: {
+			template: "systems/wfrp3e/templates/applications/items/weapon-sheet/main.hbs",
+			scrollable: [".qualities-container"]
+		},
+		details: {template: "systems/wfrp3e/templates/applications/items/details.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+	};
+
+	/** @inheritDoc */
+	async _preparePartContext(partId, context)
 	{
-		return {
-			...super.getData(),
-			rarities: CONFIG.WFRP3e.rarities,
-			qualities: CONFIG.WFRP3e.weapon.qualities,
-			qualitiesWithRating: ["attuned", "pierce", "unreliable"],
-			groups: CONFIG.WFRP3e.weapon.groups,
-			ranges: CONFIG.WFRP3e.weapon.ranges
-		};
+		let partContext = await super._preparePartContext(partId, context);
+
+		if(partId === "main")
+			partContext.qualitiesWithRating = ["attuned", "pierce", "unreliable"];
+
+		return context;
 	}
 
 	/** @inheritDoc */
-	activateListeners(html)
+	_processFormData(event, form, formData)
 	{
-		super.activateListeners(html);
+		const data = foundry.utils.expandObject(formData.object);
 
-		html.find(".quality-add").click(this._onQualityAddClick.bind(this));
-		html.find(".quality-remove").click(this._onQualityRemoveClick.bind(this));
+		if(data.system.qualities.element.name) {
+			const qualityData = data.system.qualities.element;
+			const qualities = [];
+
+			if(Array.isArray(qualityData.name))
+				for(let i = 0; i < qualityData.name.length; i++) {
+					qualities.push({
+						name: qualityData.name[i],
+						rating: qualityData.rating[i]
+					});
+				}
+			else
+				qualities.push({
+					name: qualityData.name,
+					rating: qualityData.rating
+				});
+
+			data.system.qualities = qualities;
+		}
+
+		return data;
 	}
 
 	/**
 	 * Performs follow-up operations after clicks on a Quality addition icon.
-	 * @param event {Event}
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onQualityAddClick(event)
+	static async #onAddQuality()
 	{
-		this.item.addNewQuality();
+		await this.item.addNewQuality();
 	}
 
 	/**
 	 * Performs follow-up operations after clicks on a Quality removal icon.
-	 * @param event {Event}
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onQualityRemoveClick(event)
+	static async #onRemoveQuality(event, target)
 	{
-		this.item.removeLastQuality();
+		await this.item.removeQuality(target.closest(".quality").dataset.index);
 	}
 }

@@ -1,0 +1,11 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{formGroup fields.characteristic value=system.characteristic rootId=rootId}}
+
+	{{formGroup fields.advanced value=system.advanced rootId=rootId}}
+
+	{{formGroup fields.description value=system.description rootId=rootId}}
+
+	{{#if item.parent}}
+		{{formGroup fields.specialisations value=system.specialisations rootId=rootId}}
+	{{/if}}
+</section>

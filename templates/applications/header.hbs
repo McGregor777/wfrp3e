@@ -1,6 +1,5 @@
-<header class="sheet-header">
-	<img src="{{document.img}}" alt="{{document.name}}" height="64" width="64" data-action="editImage" data-edit="img" />
-	{{formInput fields.img value=document.img}}
+<header class="sheet-header img-name">
+	<img src="{{source.img}}" data-action="editImage" data-edit="img" alt="{{localize fields.img.label}}">
 
-	<h1>{{formInput fields.name value=document.name}}</h1>
+	{{formInput fields.name value=document.name id=(concat rootId "-" source.schema.name.fieldPath)}}
 </header>
