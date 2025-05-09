@@ -1,53 +1,55 @@
-<div class="wfrp3e dice-roll">
-	{{#if publicRoll}}
-		<div class="dice-result">
-			{{#if hasStandardDice}}
-				<div class="dice-formula">{{formula}}</div>
-
-				<h4 class="dice-total">{{total}}</h4>
-			{{/if}}
-
-			{{#if hasSpecialDice}}
-				<div class="dice-array">
-					<ol class="dice-rolls">
-						{{#each specialDieResultLabels}}
-							<li class="roll">{{{this}}}</li>
-						{{/each}}
-					</ol>
-				</div>
-			{{/if}}
-
-			{{{tooltip}}}
-
-			{{#if hasSpecialDice}}
-				<ul>
-					{{#if totalSymbols.successes}}
-						<li class="roll-success">{{localize "ROLL.OUTCOMES.successful"}}</li>
-					{{else}}
-						<li class="roll-failure">{{localize "ROLL.OUTCOMES.failed"}}</li>
-					{{/if}}
-
-					{{#each @root.symbols as |symbol sym|}}
-						{{#with (lookup @root.totalSymbols symbol.plural)}}
-							{{#if (and (superiorTo this 0) (notEqualTo sym "righteousSuccess"))}}
-								<li class="roll-symbols">
-									{{localize symbol.result nb=this}}
-
-									{{#if (and (equalTo sym "success") (superiorTo @root.totalSymbols.righteousSuccesses 0))}}
-										{{localize @root.symbols.righteousSuccess.result nb=@root.totalSymbols.righteousSuccesses}}
-									{{/if}}
-
-									{{#for 0 (lookup @root.remainingSymbols symbol.plural) 1}}
-										<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
-									{{/for}}
-								</li>
-							{{/if}}
-						{{/with}}
-					{{/each}}
-				</ul>
-			{{/if}}
-		</div>
+<div class="wfrp3e dice-roll" data-action="expandRoll">
+	{{#if flavor}}
+		<div class="dice-flavor">{{flavor}}</div>
 	{{/if}}
+
+	<div class="dice-result">
+		{{#if hasStandardDice}}
+			<div class="dice-formula">{{formula}}</div>
+
+			<h4 class="dice-total">{{total}}</h4>
+		{{/if}}
+
+		{{#if hasSpecialDice}}
+			<div class="dice-array">
+				<ol class="dice-rolls">
+					{{#each specialDieResultLabels}}
+						<li class="roll">{{{this}}}</li>
+					{{/each}}
+				</ol>
+			</div>
+		{{/if}}
+
+		{{{tooltip}}}
+
+		{{#if hasSpecialDice}}
+			<ul>
+				{{#if totalSymbols.successes}}
+					<li class="roll-success">{{localize "ROLL.OUTCOMES.successful"}}</li>
+				{{else}}
+					<li class="roll-failure">{{localize "ROLL.OUTCOMES.failed"}}</li>
+				{{/if}}
+
+				{{#each @root.symbols as |symbol sym|}}
+					{{#with (lookup @root.totalSymbols symbol.plural)}}
+						{{#if (and (superiorTo this 0) (notEqualTo sym "righteousSuccess"))}}
+							<li class="roll-symbols">
+								{{localize symbol.result nb=this}}
+
+								{{#if (and (equalTo sym "success") (superiorTo @root.totalSymbols.righteousSuccesses 0))}}
+									{{localize @root.symbols.righteousSuccess.result nb=@root.totalSymbols.righteousSuccesses}}
+								{{/if}}
+
+								{{#for 0 (lookup @root.remainingSymbols symbol.plural) 1}}
+									<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+								{{/for}}
+							</li>
+						{{/if}}
+					{{/with}}
+				{{/each}}
+			</ul>
+		{{/if}}
+	</div>
 </div>
 
 {{#if effects}}

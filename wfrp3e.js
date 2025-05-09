@@ -219,27 +219,27 @@ Hooks.once("init", async () => {
 	await preloadHandlebarsTemplates();
 });
 
-Hooks.on("getChatLogEntryContext", (html, options) => {
+Hooks.on("getChatMessageContextOptions", (chatLog, options) => {
 	options.push({
 		name: "ROLL.ACTIONS.useTalent",
-		icon: '<span class="fa-solid fa-gears"></span>',
+		icon: '<i class="fa-solid fa-gears fa-fw"></i>',
 		condition: li => {
-			const message = game.messages.get(li.attr("data-message-id"));
+			const message = game.messages.get(li.dataset.messageId);
 			return message.rolls.length > 0
 				&& (!Object.hasOwn(message.rolls[0].options.checkData, "outcome") || game.user.isGM);
 		},
 		callback: li => CheckHelper.useTalentOrAbility(li.attr("data-message-id"))
 	}, {
 		name: "ROLL.ACTIONS.applyToggledEffects",
-		icon: '<span class="fa-solid fa-check"></span>',
+		icon: '<i class="fa-solid fa-check fa-fw"></i>',
 		condition: li => {
-			const message = game.messages.get(li.attr("data-message-id"));
+			const message = game.messages.get(li.dataset.messageId);
 			return message.rolls.length > 0
 				&& message.rolls[0].effects
 				&& Object.values(message.rolls[0].effects).find(symbol => symbol.length > 0).length > 0
 				&& (!Object.hasOwn(message.rolls[0].options.checkData, "outcome") || game.user.isGM);
 		},
-		callback: li => CheckHelper.triggerActionEffects(li.attr("data-message-id"))
+		callback: li => CheckHelper.triggerActionEffects(li.dataset.messageId)
 	});
 });
 
