@@ -130,7 +130,7 @@ Hooks.once("init", async () => {
 		ActiveEffect,
 		"wfrp3e",
 		WFRP3eEffectConfig, {
-			//label: "Advanced Active Effect Config",
+			label: "WFRP3e Active Effect Config",
 			makeDefault: true
 		});
 
