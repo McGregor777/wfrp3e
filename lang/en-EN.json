@@ -415,6 +415,16 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
+		},
+		"name": "Condition",
+		"plural": "Conditions"
+	},
+
+	"COMBAT": {
+		"FIELDS.type.label": "Encounter Type",
+		"types": {
+			"combat": "Combat",
+			"social": "Social"
 		}
 	},
 
@@ -537,9 +547,6 @@
 			"scripts": "Scripts"
 		}
 	},
-
-	"ENCOUNTER.Combat": "Combat",
-	"ENCOUNTER.Social": "Social",
 
 	"GROUP.Talents": "Talents",
 	"GROUP.TalentSockets": "Talent Sockets",

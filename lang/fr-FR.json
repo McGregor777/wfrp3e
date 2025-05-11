@@ -415,6 +415,16 @@
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
+		},
+		"name": "État",
+		"plural": "États"
+	},
+
+	"COMBAT": {
+		"FIELDS.type.label": "Type de rencontre",
+		"types": {
+			"combat": "Combat",
+			"social": "Social"
 		}
 	},
 
@@ -537,9 +547,6 @@
 			"scripts": "Scripts"
 		}
 	},
-
-	"ENCOUNTER.Combat": "Combat",
-	"ENCOUNTER.Social": "Social",
 
 	"GROUP.Talents": "Talents",
 	"GROUP.TalentSockets": "Emplacements de talents",

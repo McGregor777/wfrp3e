@@ -22,6 +22,7 @@ import WFRP3eTalentSheet from "./modules/applications/items/WFRP3eTalentSheet.js
 import WFRP3eTrappingSheet from "./modules/applications/items/WFRP3eTrappingSheet.js";
 import WFRP3eWeaponSheet from "./modules/applications/items/WFRP3eWeaponSheet.js";
 import WFRP3eCombatTracker from "./modules/applications/sidebar/WFRP3eCombatTracker.js";
+import WFRP3eChatLog from "./modules/applications/sidebar/tabs/WFRP3eChatLog.js";
 import WFRP3eCombat from "./modules/combat/WFRP3eCombat.js";
 import WFRP3eCombatant from "./modules/combat/WFRP3eCombatant.js";
 import WFRP3eCharacterDataModel from "./modules/data/actors/WFRP3eCharacterDataModel.js";
@@ -159,6 +160,7 @@ Hooks.once("init", async () => {
 	};
 	CONFIG.fontDefinitions["Caslon Antique"] = {editor: true, fonts: []};
 
+	CONFIG.ui.chat = WFRP3eChatLog;
 	CONFIG.ui.combat = WFRP3eCombatTracker;
 
 	Actors.unregisterSheet("core", ActorSheet);
@@ -185,46 +187,6 @@ Hooks.once("init", async () => {
 	Items.registerSheet("wfrp3e", WFRP3eTrappingSheet, {label: "Trapping Sheet", types: ["trapping"], makeDefault: true});
 
 	await preloadHandlebarsTemplates();
-});
-
-Hooks.on("getChatMessageContextOptions", (chatLog, options) => {
-	options.push({
-		name: "ROLL.ACTIONS.useTalent",
-		icon: '<i class="fa-solid fa-gears fa-fw"></i>',
-		condition: li => {
-			const message = game.messages.get(li.dataset.messageId);
-			return message.rolls.length > 0
-				&& (!Object.hasOwn(message.rolls[0].options.checkData, "outcome") || game.user.isGM);
-		},
-		callback: li => CheckHelper.useTalentOrAbility(li.attr("data-message-id"))
-	}, {
-		name: "ROLL.ACTIONS.applyToggledEffects",
-		icon: '<i class="fa-solid fa-check fa-fw"></i>',
-		condition: li => {
-			const message = game.messages.get(li.dataset.messageId);
-			return message.rolls.length > 0
-				&& message.rolls[0].effects
-				&& Object.values(message.rolls[0].effects).find(symbol => symbol.length > 0).length > 0
-				&& (!Object.hasOwn(message.rolls[0].options.checkData, "outcome") || game.user.isGM);
-		},
-		callback: li => CheckHelper.triggerActionEffects(li.dataset.messageId)
-	});
-});
-
-Hooks.on("renderSidebarTab", (app, html, data) => {
-	const chatControls = html.find("#chat-controls > .control-buttons");
-
-	if(chatControls.length > 0) {
-		chatControls.prepend(
-			'<a class="wfrp3e-dice-roller" role="button" data-tooltip="' + game.i18n.localize("ROLL.ACTIONS.performAFreeCheck") +' ">' +
-			'	<img src="systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp" alt="' + game.i18n.localize("ROLL.NAMES.freeCheck") + '"/>' +
-			'</a>'
-		);
-
-		html.find("#chat-controls > .control-buttons > .wfrp3e-dice-roller").click(async () => {
-			await new CheckBuilderV2().render(true);
-		});
-	}
 });
 
 // Update chat messages with dice images
