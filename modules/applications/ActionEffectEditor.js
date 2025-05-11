@@ -16,7 +16,7 @@
 export default class ActionEffectEditor extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)
 {
 	/** @inheritDoc */
-	constructor(options={})
+	constructor(options = {})
 	{
 		super(options);
 
@@ -29,16 +29,19 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
 		id: "action-effect-editor-{id}",
-		classes: ["wfrp3e"],
+		classes: ["wfrp3e action-effect-editor"],
 		tag: "form",
-		window: {title: "ACTIONEFFECTEDITOR.title"},
+		window: {
+			contentClasses: ["standard-form"],
+			title: "ACTIONEFFECTEDITOR.title"
+		},
 		form: {
-			handler: this._handleForm,
+			handler: this.#onActionEffectFormSubmit,
 			submitOnChange: false,
 			closeOnSubmit: true
 		},
 		position: {width: 600}
-	}
+	};
 
 	/** @inheritDoc */
 	static PARTS = {
@@ -46,10 +49,19 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 		main: {template: "systems/wfrp3e/templates/applications/action-effects-editor/main.hbs"},
 		script: {template: "systems/wfrp3e/templates/applications/action-effects-editor/script.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
-	}
+	};
 
 	/** @inheritDoc */
-	tabGroups = {primary: "main"};
+	static TABS = {
+		sheet: {
+			tabs: [
+				{id: "main", icon: "fa-solid fa-book"},
+				{id: "script", icon: "fa-solid fa-code"}
+			],
+			initial: "main",
+			labelPrefix: "ACTIONEFFECTEDITOR.TABS"
+		}
+	};
 
 	/**
 	 * @type {ActionEffectEditorData}
@@ -79,53 +91,38 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 	{
 		return {
 			...await super._prepareContext(options),
+			buttons: [{type: "submit", icon: "fa-solid fa-save", label: "ACTIONEFFECTEDITOR.ACTIONS.submit"}],
 			effect: this.effect,
 			fields: this.action.system.schema.fields[this.face]
 				.fields.effects.fields[this.data.symbol ?? "success"]
-				.element.fields
+				.element.fields,
+			rootId: this.id
 		};
 	}
 
 	/** @inheritDoc */
 	async _preparePartContext(partId, context)
 	{
-		switch(partId) {
-			case "tabs":
-				context.tabs = this._getTabs();
-				break;
-			case "main":
-				context = {
-					...context,
-					enrichedDescription: await this._prepareEnrichedDescription(),
-					index: this.data.index,
-					symbol: this.effect.symbol ?? this.data.symbol,
-					symbols: {...CONFIG.WFRP3e.symbols},
-					tab: context.tabs[partId]
-				};
+		let partContext = await super._preparePartContext(partId, context);
 
-				// Remove irrelevant symbols from symbol type selection.
-				delete context.symbols.righteousSuccess;
-				this.face === "conservative" ? delete context.symbols.exertion : delete context.symbols.delay;
+		if(partContext.tabs && partId in partContext.tabs)
+			partContext.tab = partContext.tabs[partId];
 
-				break;
-			case "script":
-				context.tab = context.tabs[partId];
-				break;
-			case "footer":
-				context.buttons = this._getFooterButtons();
-				break;
+		if(partId === "main") {
+			partContext = {
+				...partContext,
+				enrichedDescription: await this._prepareEnrichedDescription(),
+				index: this.data.index,
+				symbol: this.effect.symbol ?? this.data.symbol,
+				symbols: {...CONFIG.WFRP3e.symbols}
+			};
+
+			// Remove irrelevant symbols from symbol type selection.
+			delete partContext.symbols.righteousSuccess;
+			this.face === "conservative" ? delete partContext.symbols.exertion : delete partContext.symbols.delay;
 		}
 
-		return context;
-	}
-
-	/** @inheritDoc */
-	_onRender(context, options)
-	{
-		for(const element of this.element.querySelectorAll("section.main input, section.main prose-mirror, section.main select"))
-			element.addEventListener("change", this._updateEnrichedProperty.bind(this, options))
-
-		return super._onRender(context, options);
+		return partContext;
 	}
 
 	/** @inheritDoc */
@@ -149,7 +146,7 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 	 */
 	async _prepareEnrichedDescription()
 	{
-		let enrichedDescription = await TextEditor.enrichHTML(this.effect.description);
+		let enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.effect.description);
 		const symbolElements = '<span class="symbol-container">'
 			+ `<span class="wfrp3e-font symbol ${CONFIG.WFRP3e.symbols[this.effect.symbol ?? this.data.symbol ?? "success"].cssClass}"></span>`.repeat(this.effect.symbolAmount)
 			+ "</span>";
@@ -167,66 +164,22 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 	}
 
 	/**
-	 * Updates the property with an enriched value.
-	 * @param options
-	 * @param event {Event}
-	 * @protected
-	 */
-	_updateEnrichedProperty(options, event)
-	{
-		foundry.utils.setProperty(this.effect, event.target.name, event.target.value);
-
-		this.render(options);
-	}
-
-	/**
-	 * Prepares an array of form header tabs.
-	 * @returns {Record<string, Partial<ApplicationTab>>}
-	 * @protected
-	 */
-	_getTabs()
-	{
-		const tabs = {
-			main: {id: "main", group: "primary", label: "ACTIONEFFECTEDITOR.TABS.main"},
-			script: {id: "script", group: "primary", label: "ACTIONEFFECTEDITOR.TABS.script"},
-		};
-
-		for(const value of Object.values(tabs)) {
-			value.active = this.tabGroups[value.group] === value.id;
-			value.cssClass = value.active ? "active" : "";
-		}
-
-		return tabs;
-	}
-
-	/**
-	 * Prepares an array of form footer buttons.
-	 * @returns {Partial<FormFooterButton>[]}
-	 * @protected
-	 */
-	_getFooterButtons()
-	{
-		return [{type: "submit", icon: "fa-solid fa-save", label: "ACTIONEFFECTEDITOR.ACTIONS.submit"}]
-	}
-
-	/**
 	 * Processes form submission for the Action Effect Editor.
 	 * @this {ActionEffectEditor} The handler is called with the application as its bound scope.
 	 * @param {SubmitEvent} event The originating form submission event.
 	 * @param {HTMLFormElement} form The form element that was submitted.
 	 * @param {FormDataExtended} formData Processed data for the submitted form.
 	 * @returns {Promise<void>}
-	 * @protected
+	 * @private
 	 */
-	static async _handleForm(event, form, formData)
+	static async #onActionEffectFormSubmit(event, form, formData)
 	{
 		const symbol = formData.object.symbol ?? this.data.symbol,
-			  effects = this.action.system[this.face].effects[symbol];
-
-		delete formData.object.symbol;
+			  effects = this.action.system[this.face].effects[symbol],
+			  data = foundry.utils.expandObject(formData.object);
 
 		// If the index exists, update the effect, else add the new effect.
-		this.data.index ? effects[this.data.index] = formData.object : effects.push(formData.object);
+		this.data.index ? effects[this.data.index] = data : effects.push(data);
 
 		this.action.update({[`system.${this.face}.effects.${symbol}`]: effects});
 	}

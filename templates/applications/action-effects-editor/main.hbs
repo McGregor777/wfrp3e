@@ -1,23 +1,15 @@
 <section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
-	<label class="form-group slim">
-		<span>{{localize "ACTION.FIELDS.effects.symbolType.label"}}</span>
+	<div class="form-group slim">
+		<label>{{localize "ACTION.FIELDS.effects.symbolType.label"}}</label>
 
-		<span class="form-fields">
+		<div class="form-fields">
 			<select name="symbol" {{#if index}}disabled{{/if}}>
 				{{selectOptions symbols selected=symbol labelAttr="name" localize=true}}
 			</select>
-		</span>
-	</label>
+		</div>
+	</div>
 
-	{{formGroup fields.symbolAmount
-				value=effect.symbolAmount
-				classes="slim"
-				placeholder=(localize "ACTION.FIELDS.effects.symbolAmount.label")
-				localize=true}}
+	{{formGroup fields.symbolAmount value=effect.symbolAmount classes="slim" localize=true}}
 
-	{{formGroup fields.description
-				value=effect.description
-				enriched=enrichedDescription
-				toggled=true
-				localize=true}}
+	{{formGroup fields.description value=effect.description localize=true}}
 </section>

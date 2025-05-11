@@ -95,14 +95,14 @@
 	},
 
 	"ACTIONEFFECTEDITOR": {
-		"title": "Éditeur d'effect d'action",
 		"ACTIONS": {
 			"submit": "Enregistrer l'effet"
 		},
 		"TABS": {
 			"main": "Principal",
 			"script": "Script"
-		}
+		},
+		"title": "Éditeur d'effet d'action"
 	},
 
 	"ACTIONSELECTOR.ChooseANewAction": "Choisissez une nouvelle action",
