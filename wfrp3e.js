@@ -1,6 +1,5 @@
 import {WFRP3e} from "./modules/config.js";
 import CharacterGenerator from "./modules/applications/CharacterGenerator.js";
-import CheckBuilderV2 from "./modules/applications/CheckBuilderV2.js";
 import WFRP3eEffectConfig from "./modules/applications/WFRP3eEffectConfig.js";
 import WFRP3eCharacterSheet from "./modules/applications/actors/WFRP3eCharacterSheet.js";
 import WFRP3eCreatureSheet from "./modules/applications/actors/WFRP3eCreatureSheet.js";

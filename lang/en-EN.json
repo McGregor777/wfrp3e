@@ -363,6 +363,7 @@
 
 	"CHECKBUILDER": {
 		"ACTIONS": {
+			"adjustDiceAmount": "Left click to increase dice, right click to decrease.",
 			"convertConservative": "Convert to conservative die",
 			"convertReckless": "Convert to reckless die",
 			"rollCheck": "Roll check"
@@ -393,11 +394,10 @@
 			"skill": "{skill} Check Builder"
 		},
 		"WARNINGS": {
-			"convert": "There is no {type} die to convert.",
-			"convertBack": "There is no {type} die left to convert back."
+			"convert": "There is no {type} to convert.",
+			"convertBack": "There is no {type} left to convert back."
 		},
 		"dicePool": "Dice Pool",
-		"hint": "Left click to increase dice, right click to decrease.",
 		"options": "Options",
 		"startingResults": "Starting results"
 	},
@@ -458,25 +458,42 @@
 	"DIALOG.DESCRIPTION.EffectDeletion": "Do you really wish to delete this effect?",
 
 	"DIE": {
-		"AMOUNT": {
-			"challengeDice": "{nb} challenge dice",
-			"characteristicDice": "{nb} characteristic dice",
-			"conservativeDice": "{nb} conservative dice",
-			"expertiseDice": "{nb} expertise dice",
-			"explodedDice": "(including {nb} exploded dice)",
-			"fortuneDice": "{nb} fortune dice",
-			"misfortuneDice": "{nb} misfortune dice",
-			"recklessDice": "{nb} reckless dice"
+		"challenge": {
+			"amount": "{nb} challenge dice",
+			"name": "challenge die",
+			"plural": "challenge dice"
 		},
-		"NAMES": {
-			"challengeDice": "challenge dice",
-			"characteristicDice": "characteristic dice",
-			"conservativeDice": "conservative dice",
-			"expertiseDice": "expertise dice",
-			"fortuneDice": "fortune dice",
-			"misfortuneDice": "misfortune dice",
-			"recklessDice": "reckless dice"
-		}
+		"characteristic": {
+			"amount": "{nb} characteristic dice",
+			"name": "characteristic die",
+			"plural": "characteristic dice"
+		},
+		"conservative": {
+			"amount": "{nb} conservative dice",
+			"name": "conservative die",
+			"plural": "conservative dice"
+		},
+		"expertise": {
+			"amount": "{nb} expertise dice",
+			"name": "expertise die",
+			"plural": "expertise dice"
+		},
+		"fortune": {
+			"amount": "{nb} fortune dice",
+			"name": "fortune die",
+			"plural": "fortune dice"
+		},
+		"misfortune": {
+			"amount": "{nb} misfortune dice",
+			"name": "misfortune die",
+			"plural": "misfortune dice"
+		},
+		"reckless": {
+			"amount": "{nb} reckless dice",
+			"name": "reckless die",
+			"plural": "reckless dice"
+		},
+		"exploded": "(including {nb} exploded dice)"
 	},
 
 	"DISEASE": {

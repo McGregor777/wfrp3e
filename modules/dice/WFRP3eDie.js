@@ -38,7 +38,7 @@ export default class WFRP3eDie extends foundry.dice.terms.Die
 		let countText = game.i18n.format(CONFIG.WFRP3e.dice[this.constructor.NAME].amount, {nb: this.results.length});
 
 		if(this.results.length > this.number)
-			countText += `  ${game.i18n.format("DIE.AMOUNT.explodedDice", {nb: this.results.length - this.number})}`;
+			countText += `  ${game.i18n.format("DIE.exploded", {nb: this.results.length - this.number})}`;
 
 		return {
 			...super.getTooltipData(),

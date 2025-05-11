@@ -1,7 +1,9 @@
 .check-builder {
-	& .dice-pool {
+	& .dice-pool,
+	& .symbols-pool {
+		display: flex;
+		justify-content: center;
 		margin-top: 0.5rem;
-		min-height: 3.5rem;
 		text-align: center;
 	}
 
@@ -21,7 +23,7 @@
 			margin: 0.5rem 0;
 
 			& > div {
-				flex: 1 1 auto;
+				flex: 1;
 			}
 
 			& > multi-select {
@@ -38,7 +40,8 @@
 			display: flex;
 			margin-bottom: 1rem;
 
-			& button {
+			& > button {
+				flex: 1;
 				font-size: var(--font-size-14);
 				line-height: 1.5rem;
 				text-align: center;
@@ -55,7 +58,8 @@
 			margin: 0.25rem;
 
 			& .pool-container {
-				align-items: baseline;
+				align-items: center;
+				cursor: pointer;
 				display: flex;
 				padding: 0.5rem;
 
@@ -63,17 +67,11 @@
 					background-color: rgba(255, 255, 255, 0.2);
 				}
 
-				& > img {
-					align-self: center;
+				&:hover > label {
+					color: var(--color-form-label-hover);
 				}
 
-				& > .pool-text {
-					height: 10px;
-					margin: auto 0;
-					line-height: 1;
-				}
-
-				& > .pool-value {
+				& > input {
 					font: var(--font-size-20) var(--font-primary);
 					height: initial;
 					margin: auto 1rem;
@@ -82,10 +80,15 @@
 					text-align: center;
 					width: 3.5rem;
 				}
+
+				& > label {
+					cursor: pointer;
+					line-height: 1;
+				}
 			}
 		}
 
-		& .symbols-pool-container {
+		& .symbols-pool-container > table {
 			margin: 0;
 			min-width: 320px;
 
@@ -99,7 +102,7 @@
 				}
 
 				& .pool-text {
-					height: 10px;
+					height: 0.5rem;
 					line-height: 1;
 				}
 

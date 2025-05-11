@@ -183,8 +183,10 @@ export const WFRP3e = {
 	},
 	dice: {
 		characteristic: {
-			amount: "DIE.AMOUNT.characteristicDice",
+			amount: "DIE.characteristic.amount",
+			name: "DIE.characteristic.name",
 			icon: "systems/wfrp3e/assets/icons/dice/characteristic.webp",
+			plural: "DIE.characteristic.plural",
 			results: {
 				1: {
 					label: "ROLL.RESULTS.blank",
@@ -293,8 +295,10 @@ export const WFRP3e = {
 			}
 		},
 		fortune: {
-			amount: "DIE.AMOUNT.fortuneDice",
+			amount: "DIE.fortune.amount",
+			name: "DIE.fortune.name",
 			icon: "systems/wfrp3e/assets/icons/dice/fortune.webp",
+			plural: "DIE.fortune.plural",
 			results: {
 				1: {
 					label: "ROLL.RESULTS.blank",
@@ -377,8 +381,10 @@ export const WFRP3e = {
 			},
 		},
 		expertise: {
-			amount: "DIE.AMOUNT.expertiseDice",
+			amount: "DIE.expertise.amount",
+			name: "DIE.expertise.name",
 			icon: "systems/wfrp3e/assets/icons/dice/expertise.webp",
+			plural: "DIE.expertise.plural",
 			results: {
 				1: {
 					label: "ROLL.RESULTS.blank",
@@ -461,8 +467,10 @@ export const WFRP3e = {
 			},
 		},
 		conservative: {
-			amount: "DIE.AMOUNT.conservativeDice",
+			amount: "DIE.conservative.amount",
+			name: "DIE.conservative.name",
 			icon: "systems/wfrp3e/assets/icons/dice/conservative.webp",
+			plural: "DIE.conservative.plural",
 			results: {
 				1: {
 					label: "ROLL.RESULTS.blank",
@@ -597,8 +605,10 @@ export const WFRP3e = {
 			},
 		},
 		reckless: {
-			amount: "DIE.AMOUNT.recklessDice",
+			amount: "DIE.reckless.amount",
+			name: "DIE.reckless.name",
 			icon: "systems/wfrp3e/assets/icons/dice/reckless.webp",
+			plural: "DIE.reckless.plural",
 			results: {
 				1: {
 					label: "ROLL.RESULTS.blank",
@@ -733,8 +743,10 @@ export const WFRP3e = {
 			}
 		},
 		challenge: {
-			amount: "DIE.AMOUNT.challengeDice",
+			amount: "DIE.challenge.amount",
+			name: "DIE.challenge.name",
 			icon: "systems/wfrp3e/assets/icons/dice/challenge.webp",
+			plural: "DIE.challenge.plural",
 			results: {
 				1: {
 					label: "ROLL.RESULTS.blank",
@@ -843,8 +855,10 @@ export const WFRP3e = {
 			}
 		},
 		misfortune: {
-			amount: "DIE.AMOUNT.misfortuneDice",
+			amount: "DIE.misfortune.amount",
+			name: "DIE.misfortune.name",
 			icon: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
+			plural: "DIE.misfortune.plural",
 			results: {
 				1: {
 					label: "ROLL.RESULTS.blank",

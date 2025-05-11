@@ -363,6 +363,7 @@
 
 	"CHECKBUILDER": {
 		"ACTIONS": {
+			"adjustDiceAmount": "Clic gauche pour ajouter des dés, clic droit pour en retirer.",
 			"convertConservative": "Convertir en dé de prudence",
 			"convertReckless": "Convertir en dé de témérité",
 			"rollCheck": "Lancer le test"
@@ -393,11 +394,10 @@
 			"skill": "Préparateur du test de {skill}"
 		},
 		"WARNINGS": {
-			"convert": "Il n'y a pas de dé de {type} à convertir.",
-			"convertBack": "Il n'y a plus de dé de {type} à reconvertir."
+			"convert": "Il n'y a pas de {type} à convertir.",
+			"convertBack": "Il n'y a plus de {type} à reconvertir."
 		},
 		"dicePool": "Réserve de dés",
-		"hint": "Clic gauche pour ajouter des dés, clic droit pour en retirer.",
 		"options": "Options",
 		"startingResults": "Pictogrammes de départ"
 	},
@@ -458,25 +458,42 @@
 	"DIALOG.DESCRIPTION.EffectDeletion": "Souhaitez-vous vraiment supprimer cet effet ?",
 
 	"DIE": {
-		"AMOUNT": {
-			"challengeDice": "{nb} dés de défi",
-			"characteristicDice": "{nb} dés de caractéristique",
-			"conservativeDice": "{nb} dés de prudence",
-			"expertiseDice": "{nb} dés d'expertise",
-			"explodedDice": "(dont {nb} dés additionnels)",
-			"fortuneDice": "{nb} dés de fortune",
-			"misfortuneDice": "{nb} dés d'infortune",
-			"recklessDice": "{nb} dés de témérité"
+		"challenge": {
+			"amount": "{nb} dés de défi",
+			"name": "dé de défi",
+			"plural": "dés de défi"
 		},
-		"NAMES": {
-			"challengeDice": "dés de défi",
-			"characteristicDice": "dés de caractéristique",
-			"conservativeDice": "dés de prudence",
-			"expertiseDice": "dés d'expertise",
-			"fortuneDice": "dés de fortune",
-			"misfortuneDice": "dés d'infortune",
-			"recklessDice": "dés de témérité"
-		}
+		"characteristic": {
+			"amount": "{nb} dés de caractéristique",
+			"name": "dé de caractéristique",
+			"plural": "dés de caractéristique"
+		},
+		"conservative": {
+			"amount": "{nb} dés de prudence",
+			"name": "dé de prudence",
+			"plural": "dés de prudence"
+		},
+		"expertise": {
+			"amount": "{nb} dés d'expertise",
+			"name": "dé d'expertise",
+			"plural": "dés d'expertise"
+		},
+		"fortune": {
+			"amount": "{nb} dés de fortune",
+			"name": "dé de fortune",
+			"plural": "dés de fortune"
+		},
+		"misfortune": {
+			"amount": "{nb} dés d'infortune",
+			"name": "dé d'infortune",
+			"plural": "dés d'infortune"
+		},
+		"reckless": {
+			"amount": "{nb} dés de témérité",
+			"name": "dé de témérité",
+			"plural": "dés de témérité"
+		},
+		"exploded": "(dont {nb} dés additionnels)"
 	},
 
 	"DISEASE": {

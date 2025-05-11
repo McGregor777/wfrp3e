@@ -10,9 +10,9 @@
 	</div>
 
 	<div class="symbols-pool">
-		{{#each dice as |symbol sym|}}
-			{{#if (superiorTo (lookup @root.dicePool.symbols sym) 0)}}
-				{{#for 0 (lookup @root.dicePool.symbols sym) 1}}
+		{{#each symbols as |symbol sym|}}
+			{{#if (superiorTo (lookup @root.dicePool.symbols symbol.plural) 0)}}
+				{{#for 0 (lookup @root.dicePool.symbols symbol.plural) 1}}
 					<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
 				{{/for}}
 			{{/if}}

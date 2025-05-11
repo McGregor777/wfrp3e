@@ -1,4 +1,4 @@
-import CheckBuilderV2 from "../applications/CheckBuilderV2.js";
+import CheckBuilder from "../applications/CheckBuilder.js";
 
 /**
  * Extends the base Combatant document.
@@ -11,7 +11,7 @@ export default class WFRP3eCombatant extends Combatant
 
 		const rollData = this.actor?.getRollData() || {};
 
-		return Roll.create(formula, rollData);
+		return foundry.dice.Roll.create(formula, rollData);
 	}
 
 	/** @inheritDoc */
@@ -29,7 +29,7 @@ export default class WFRP3eCombatant extends Combatant
 		return String(
 			CONFIG.Combat.initiative.formula
 			|| game.system.initiative
-			|| (await CheckBuilderV2.prepareInitiativeCheck(this.actor, this.combat)).formula
+			|| (await CheckBuilder.prepareInitiativeCheck(this.actor, this.combat)).formula
 		);
 	}
 }

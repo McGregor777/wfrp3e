@@ -149,7 +149,9 @@ export default class DicePool
 					this.dice.characteristic++;
 				}
 				else
-					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convertBack", {type: type}));
+					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convertBack", {
+						type: game.i18n.localize(`DIE.${type}.name`)
+					}));
 			}
 			else {
 				if(this.dice.characteristic > 0) {
@@ -157,7 +159,9 @@ export default class DicePool
 					this.dice[type]++;
 				}
 				else
-					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convert", {type: "characteristic"}));
+					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convert", {
+						type: game.i18n.localize("DIE.characteristic.name")
+					}));
 			}
 		}
 	}
