@@ -21,8 +21,8 @@ import WFRP3eSkillSheet from "./modules/applications/items/WFRP3eSkillSheet.js";
 import WFRP3eTalentSheet from "./modules/applications/items/WFRP3eTalentSheet.js";
 import WFRP3eTrappingSheet from "./modules/applications/items/WFRP3eTrappingSheet.js";
 import WFRP3eWeaponSheet from "./modules/applications/items/WFRP3eWeaponSheet.js";
-import WFRP3eCombatTracker from "./modules/applications/sidebar/WFRP3eCombatTracker.js";
 import WFRP3eChatLog from "./modules/applications/sidebar/tabs/WFRP3eChatLog.js";
+import WFRP3eCombatTracker from "./modules/applications/sidebar/tabs/WFRP3eCombatTracker.js";
 import WFRP3eCombat from "./modules/combat/WFRP3eCombat.js";
 import WFRP3eCombatant from "./modules/combat/WFRP3eCombatant.js";
 import WFRP3eCharacterDataModel from "./modules/data/actors/WFRP3eCharacterDataModel.js";
@@ -44,6 +44,7 @@ import WFRP3eSkillDataModel from "./modules/data/items/WFRP3eSkillDataModel.js";
 import WFRP3eTalentDataModel from "./modules/data/items/WFRP3eTalentDataModel.js";
 import WFRP3eTrappingDataModel from "./modules/data/items/WFRP3eTrappingDataModel.js";
 import WFRP3eWeaponDataModel from "./modules/data/items/WFRP3eWeaponDataModel.js";
+import WFRP3eCombatDataModel from "./modules/data/WFRP3eCombatDataModel.js";
 import WFRP3eEffectDataModel from "./modules/data/WFRP3eEffectDataModel.js";
 import ChallengeDie from "./modules/dice/ChallengeDie.js";
 import CharacteristicDie from "./modules/dice/CharacteristicDie.js";
@@ -135,7 +136,9 @@ Hooks.once("init", async () => {
 			makeDefault: true
 		});
 
+	CONFIG.Combat.dataModels["base"] = WFRP3eCombatDataModel;
 	CONFIG.Combat.documentClass = WFRP3eCombat;
+
 	CONFIG.Combatant.documentClass = WFRP3eCombatant;
 
 	CONFIG.Dice.rolls.push(CONFIG.Dice.rolls[0]);

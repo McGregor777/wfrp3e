@@ -964,8 +964,14 @@ export const WFRP3e = {
 		}
 	},
 	encounterTypes: {
-		combat: "ENCOUNTER.Combat",
-		social: "ENCOUNTER.Social"
+		combat: {
+			characteristic: "agility",
+			name: "COMBAT.types.combat"
+		},
+		social: {
+			characteristic: "fellowship",
+			name: "COMBAT.types.social"
+		}
 	},
 	rarities: {
 		abundant: "TRAPPING.RARITIES.abundant",

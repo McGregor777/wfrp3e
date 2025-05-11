@@ -97,7 +97,7 @@ export default class DicePool
 		const checkData = this.checkData;
 		if(checkData) {
 			if(checkData.combat)
-				return game.i18n.localize(`ROLL.NAMES.${checkData.combat.tags.encounterType}EncounterInitiativeCheck`);
+				return game.i18n.localize(`ROLL.NAMES.${checkData.combat.system.type}EncounterInitiativeCheck`);
 			else if(checkData.action)
 				return game.i18n.format("ROLL.NAMES.actionCheck", {action: fromUuidSync(checkData.action).name});
 			else if(checkData.skill)
