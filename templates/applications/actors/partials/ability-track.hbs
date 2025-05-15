@@ -1,0 +1,48 @@
+<div class="ability-track" data-index="{{index}}">
+	<a data-action="decreaseAbilityTrack" data-tooltip="{{localize 'GROUP.ACTIONS.decreaseAbilityTrack'}}">
+		<span class="fas fa-minus"></span>
+	</a>
+
+	<div class="segment-container regular">
+		{{#each specialAbility.values as |value val|}}
+			<label class="segment{{#if value.trigger}} trigger{{/if}}">
+				{{#if (equalTo ../specialAbility.current val)}}
+					<img src="systems/wfrp3e/assets/images/token-black.webp" />
+				{{else}}
+					{{{value.content}}}
+				{{/if}}
+
+				<input name="{{replace ../fields.current.fieldPath "element" ../index}}"
+					   value="{{val}}"
+					   type="radio"
+					   {{#if (equalTo ../specialAbility.current val)}}checked{{/if}} />
+			</label>
+		{{/each}}
+	</div>
+
+	<div class="segment-container edit">
+		{{#each specialAbility.values as |value val|}}
+			{{#with ../fields.values.element.fields as |fields|}}
+				<div class="segment{{#if value.trigger}} trigger{{/if}}">
+					{{formInput fields.content
+								name=(replace (replace fields.content.fieldPath "element" ../../index) "element" val)
+								value=value.content
+								id=(concat @root.rootId "-" fields.content.fieldPath)}}
+
+					{{formInput fields.trigger
+								name=(replace (replace fields.trigger.fieldPath "element" ../../index) "element" val)
+								value=value.trigger
+								id=(concat @root.rootId "-" fields.trigger.fieldPath)}}
+				</div>
+			{{/with}}
+		{{/each}}
+	</div>
+
+	<a data-action="increaseAbilityTrack" data-tooltip="{{localize 'GROUP.ACTIONS.increaseAbilityTrack'}}">
+		<span class="fas fa-plus"></span>
+	</a>
+
+	<a data-action="editAbilityTrack" data-tooltip="{{localize 'GROUP.ACTIONS.editAbilityTrack'}}">
+		<span class="fas fa-pen-to-square"></span>
+	</a>
+</div>

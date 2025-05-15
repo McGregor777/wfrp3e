@@ -20,12 +20,12 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 				wound: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 			}),
 			advances: new fields.SchemaField({
-				action: new fields.StringField({initial: "", nullable: false, required: true}),
-				talent: new fields.StringField({initial: "", nullable: false, required: true}),
-				skill: new fields.StringField({initial: "", nullable: false, required: true}),
-				wound: new fields.StringField({initial: "", nullable: false, required: true}),
-				open: new fields.ArrayField(new fields.StringField(), {
-					initial: new Array(6).fill(""),
+				action: new fields.StringField({nullable: true}),
+				talent: new fields.StringField({nullable: true}),
+				skill: new fields.StringField({nullable: true}),
+				wound: new fields.StringField({nullable: true}),
+				open: new fields.ArrayField(new fields.StringField({nullable: true}), {
+					initial: new Array(6),
 					max: 6,
 					min: 6,
 					nullable: false,
@@ -33,15 +33,15 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 				}),
 				careerTransition: new fields.SchemaField({
 					cost: new fields.NumberField({initial: 0, integer: true, min: 0}),
-					newCareer: new fields.StringField()
+					newCareer: new fields.StringField({nullable: true})
 				}),
-				dedicationBonus: new fields.StringField({initial: "", nullable: false, required: true}),
+				dedicationBonus: new fields.StringField({nullable: true}),
 				nonCareer: new fields.ArrayField(
 					new fields.SchemaField({
 						cost: new fields.NumberField({initial: 0, integer: true, min: 0}),
-						type: new fields.StringField({initial: "", nullable: false, required: true})
+						type: new fields.StringField({nullable: true})
 					}), {
-					initial: new Array(2).fill({cost: 0, type: ""}),
+					initial: new Array(2).fill({cost: 0, type: null}),
 					max: 2,
 					min: 2
 				})
@@ -99,35 +99,6 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["CAREER"];
-
-	/** @inheritDoc */
-	static cleanData(source = {}, options = {})
-	{
-		if(source.advances?.open?.length < 6)
-			source.advances.open.push(
-				new Array(6 - source.advances.open.length).fill({cost: 0, type: ""})
-			);
-		else if(source.advances?.open?.length > 6)
-			source.advances.open = source.advances.open.slice(0, 6);
-
-		if(source.advances?.nonCareer?.length < 2)
-			source.advances.nonCareer.push(
-				new Array(2 - source.advances.nonCareer.length).fill({cost: 0, type: ""})
-			);
-		else if(source.advances?.nonCareer?.length > 2)
-			source.advances.nonCareer = source.advances.nonCareer.slice(0, 2);
-
-		if(source.raceRestrictions?.length === 1) {
-			const raceRestrictionKeys = ["any", ...Object.keys(CONFIG.WFRP3e.availableRaces)];
-
-			if(!raceRestrictionKeys.includes(source.raceRestrictions[0])) {
-				const match = source.raceRestrictions[0].match(new RegExp(/^\w*/));
-				source.raceRestrictions[0] = match[0].toLowerCase();
-			}
-		}
-
-		return this.schema.clean(source, options);
-	}
 
 	/** @inheritDoc */
 	prepareBaseData()

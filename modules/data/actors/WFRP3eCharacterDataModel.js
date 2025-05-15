@@ -5,29 +5,42 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	static defineSchema()
 	{
 		const fields = foundry.data.fields;
-		const requiredInteger = {required: true, nullable: false, integer: true};
 
 		return {
 			background: new fields.SchemaField({
-				biography: new fields.HTMLField(),
-				height: new fields.StringField(),
-				weight: new fields.StringField(),
-				build: new fields.StringField(),
-				hairColour: new fields.StringField(),
-				eyeColour: new fields.StringField(),
-				birthplace: new fields.StringField(),
-				familyMembers: new fields.StringField(),
-				personalGoal: new fields.StringField(),
-				allies: new fields.StringField(),
-				enemies: new fields.StringField(),
-				campaignNotes: new fields.StringField()
+				biography: new fields.HTMLField({nullable: true}),
+				height: new fields.StringField({nullable: true}),
+				weight: new fields.StringField({nullable: true}),
+				build: new fields.StringField({nullable: true}),
+				hairColour: new fields.StringField({nullable: true}),
+				eyeColour: new fields.StringField({nullable: true}),
+				birthplace: new fields.StringField({nullable: true}),
+				familyMembers: new fields.StringField({nullable: true}),
+				personalGoal: new fields.StringField({nullable: true}),
+				allies: new fields.StringField({nullable: true}),
+				enemies: new fields.StringField({nullable: true}),
+				campaignNotes: new fields.HTMLField({nullable: true})
 			}),
-			characteristics: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
-				if(characteristic !== "varies")
-					object[characteristic] = new fields.SchemaField({
-						rating: new fields.NumberField({initial: 2, integer: true, min: 0, nullable: false, required: true}),
-						fortune: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
-					}, {label: characteristic});
+			characteristics: new fields.SchemaField(Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, [key, value]) => {
+				if(key !== "varies")
+					object[key] = new fields.SchemaField({
+						rating: new fields.NumberField({
+							initial: 2,
+							integer: true,
+							label: "ACTOR.FIELDS.characteristics.rating.label",
+							min: 0,
+							nullable: false,
+							required: true
+						}),
+						fortune: new fields.NumberField({
+							initial: 0,
+							integer: true,
+							label: "ACTOR.FIELDS.characteristics.fortune.label",
+							min: 0,
+							nullable: false,
+							required: true
+						})
+					}, {label: value.name});
 
 				return object;
 			}, {})),
@@ -48,7 +61,17 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 				fatigue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 				stress: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 			}),
-			origin: new fields.StringField({initial: "reiklander", nullable: false, required: true}),
+			origin: new fields.StringField({
+				choices: Object.entries(CONFIG.WFRP3e.availableRaces).reduce((origins, [key, race]) => {
+					Object.entries(race.origins).forEach(([key, origin]) => {
+						origins[key] = origin.name;
+					});
+					return origins;
+				}, {}),
+				initial: "reiklander",
+				nullable: false,
+				required: true
+			}),
 			party: new fields.DocumentIdField(),
 			power: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			stance: new fields.SchemaField({
@@ -64,6 +87,9 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 			})
 		};
 	}
+
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["ACTOR", "CHARACTER"];
 
 	/** @inheritDoc */
 	prepareDerivedData()

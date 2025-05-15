@@ -1,0 +1,74 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	<nav class="search-bar">
+		<div class="form-group expanded">
+			<label>{{localize "ACTOR.SHEET.search"}}</label>
+
+			<div class="form-fields">
+				<input class="search-filter"
+					   name="searchFilters.talents.text"
+					   value="{{searchFilters.text}}"
+					   type="text">
+
+				<a data-action="openFilters" data-tooltip="{{localize 'ACTOR.ACTIONS.openFilters'}}">
+					<span class="fas fa-filter"></span>
+				</a>
+			</div>
+		</div>
+
+		<div class="form-group stacked filter-container">
+			<label>{{localize "ACTOR.SHEET.filters"}}</label>
+
+			{{#each types as |type t|}}
+				<div class="form-group">
+					<label>{{localize type}}</label>
+
+					<div class="form-fields">
+						<input class="search-filter"
+							   name="searchFilters.talents.type"
+							   value="{{t}}"
+							   type="radio"
+							   {{#if (sameAs t @root.searchFilters.type)}}checked{{/if}} />
+					</div>
+				</div>
+			{{/each}}
+		</div>
+	</nav>
+
+	{{#if (sameAs source.flags.wfrp3e.embeddedItemsDisplayMode "cards")}}
+		<section class="item-container">
+			{{#each items as |item i|}}
+				{{#if (sameAs item.type "talent")}}
+					<div class="talent-container">
+						{{>systems/wfrp3e/templates/applications/actors/partials/talent-card.hbs talent=item}}
+
+						<select class="sheet-form-select item-input socket-select"
+								data-item-id="{{item._id}}"
+								data-path="system.socket"
+								{{#unless @root.editable}}disabled{{/unless}}>
+							{{selectOptions
+									(lookup @root.socketsByType item.system.type)
+									selected=item.system.socket
+									blank=(localize "TALENT.SOCKET.none")}}
+						</select>
+					</div>
+				{{else if (sameAs item.type "ability")}}
+					<div>
+						{{>systems/wfrp3e/templates/applications/actors/partials/ability-card.hbs ability=item}}
+					</div>
+				{{/if}}
+			{{/each}}
+		</section>
+	{{else}}
+		<section class="talent table scrollable">
+			<div class="table-body">
+				{{#each items as |item i|}}
+					{{#if (sameAs item.type "talent")}}
+						{{>systems/wfrp3e/templates/applications/actors/partials/talent-row.hbs talent=item}}
+					{{else if (sameAs item.type "ability")}}
+						{{>systems/wfrp3e/templates/applications/actors/partials/ability-row.hbs ability=item}}
+					{{/if}}
+				{{/each}}
+			</div>
+		</section>
+	{{/if}}
+</section>

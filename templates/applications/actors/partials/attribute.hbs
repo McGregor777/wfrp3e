@@ -1,0 +1,11 @@
+<fieldset class="attribute {{attribute.name}}">
+	{{#if attribute.fields}}
+		<legend>{{localize attribute.label}}</legend>
+
+		{{#each attribute.fields}}
+			{{formGroup this value=(getProperty @root.actor this.fieldPath) rootId=rootId}}
+		{{/each}}
+	{{else}}
+		{{formGroup attribute value=(getProperty actor attribute.fieldPath) rootId=rootId}}
+	{{/if}}
+</fieldset>

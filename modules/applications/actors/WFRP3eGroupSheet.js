@@ -1,138 +1,178 @@
 import WFRP3eActorSheet from "./WFRP3eActorSheet.js";
 
+/** @inheritDoc */
 export default class WFRP3eGroupSheet extends WFRP3eActorSheet
 {
-	static get defaultOptions()
-	{
-		return {
-			...super.defaultOptions,
-			width: 830,
-			height: 540,
-			classes: ["wfrp3e", "sheet", "actor", "group", "group-sheet"],
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {
+		actions: {
+			addSocket: this.#addSocket,
+			decreaseAbilityTrack: this.#decreaseAbilityTrack,
+			deleteSocket: this.#deleteSocket,
+			editAbilityTrack: this.#editAbilityTrack,
+			increaseAbilityTrack: this.#increaseAbilityTrack
+		},
+		classes: ["group"],
+		position: {width: 800}
+	};
+
+	/** @inheritDoc */
+	static PARTS = {
+		tabs: {template: "templates/generic/tab-navigation.hbs"},
+		attributes: {template: "systems/wfrp3e/templates/applications/actors/group-sheet/attributes.hbs"},
+		talents: {
+			template: "systems/wfrp3e/templates/applications/actors/talents.hbs",
+			scrollable: [".item-container", ".table-body"]
+		},
+		actions: {
+			template: "systems/wfrp3e/templates/applications/actors/actions.hbs",
+			scrollable: [".item-container", ".table-body"]
+		},
+		effects: {
+			template: "systems/wfrp3e/templates/applications/actors/effects.hbs",
+			scrollable: [".item-container", ".table-body"]
+		},
+		trappings: {template: "systems/wfrp3e/templates/applications/actors/trappings.hbs"},
+	};
+
+	/** @inheritDoc */
+	static TABS = {
+		sheet: {
 			tabs: [
-				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"},
-				{group: "talents", navSelector: ".talent-tabs", contentSelector: ".talents", initial: "focus"}
-			]
-		};
+				{id: "attributes"},
+				{id: "talents"},
+				{id: "actions"},
+				{id: "effects"},
+				{id: "trappings"}
+			],
+			initial: "attributes",
+			labelPrefix: "GROUP.TABS"
+		}
+	};
+
+	/** @inheritDoc */
+	async _preparePartContext(partId, context)
+	{
+		let partContext = await super._preparePartContext(partId, context);
+
+		switch(partId) {
+			case "attributes":
+				partContext = {
+					...partContext,
+					enriched: {specialAbilities: []},
+					fields: this.actor.system.schema.fields
+				};
+
+				for(const ability of this.actor.system.specialAbilities)
+					partContext.enriched.specialAbilities.push(
+						await foundry.applications.ux.TextEditor.enrichHTML(ability.description)
+					);
+
+				break;
+		}
+
+		return partContext;
 	}
 
 	/** @inheritDoc */
-	activateListeners(html)
+	_processFormData(event, form, formData)
 	{
-		super.activateListeners(html);
+		const data = foundry.utils.expandObject(formData.object);
 
-		html.find(".ability-track-edit").click(this._onAbilityTrackEditButtonClick.bind(this));
-		html.find(".ability-track-editor-plus").click(this._onAbilityTrackPlusClick.bind(this));
-		html.find(".ability-track-editor-minus").click(this._onAbilityTrackMinusClick.bind(this));
-		html.find(".ability-track-editor-segment > input").change(this._onAbilityTrackSegmentTextChange.bind(this));
-		html.find(".ability-track-editor-trigger").change(this._onAbilityTrackTriggerChange.bind(this));
-		html.find(".ability-track-editor-submit").click(this._onAbilityTrackEditorSubmit.bind(this));
-		html.find(".socket-add").click(this._onSocketAdd.bind(this));
-		html.find(".socket-remove").click(this._onSocketRemove.bind(this));
+		if(data.system.sockets.element.type) {
+			const socketData = data.system.sockets.element;
+			const sockets = [];
+
+			if(Array.isArray(socketData.type))
+				for(let i = 0; i < socketData.type.length; i++) {
+					sockets.push({type: socketData.type[i]});
+				}
+			else
+				sockets.push({type: socketData.type});
+
+			data.system.sockets = sockets;
+		}
+
+		return data;
 	}
 
 	/**
-	 * Performs follow-up operations clicks on an Ability Track edit button.
-	 * @param event {MouseEvent}
+	 * Adds a new socket to the Group.
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	_onAbilityTrackEditButtonClick(event)
+	static async #addSocket()
 	{
-		const abilityTrackElement = $(event.currentTarget).parents(".ability-track");
-
-		abilityTrackElement.find(".ability-track-editor").css({display: "block"});
-		abilityTrackElement.find(".ability-track-segment-container").css({display: "none"});
+		await this.actor.addNewSocket();
 	}
 
 	/**
-	 * Performs follow-up operations clicks on an Ability Track Editor's increase button.
-	 * @param event {MouseEvent}
+	 * Decreases one of the Group's ability track by one.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onAbilityTrackPlusClick(event)
+	static async #decreaseAbilityTrack(event, target)
 	{
-		const segmentContainer = $(event.currentTarget).siblings(".ability-track-editor-segment-container");
-		const newSegment = segmentContainer.append(
-			await renderTemplate("systems/wfrp3e/templates/partials/ability-track-editor-segment.hbs", {
-				value: {
-					content: segmentContainer.children().length,
-					trigger: false
-				},
-				index: segmentContainer.children().length,
-				specialAbilityIndex: parseInt($(event.currentTarget).parents(".ability-track").data("specialAbilityIndex"))
-			})
-		);
+		const specialAbilities= this.actor.system.specialAbilities;
 
-		newSegment.find(".ability-track-editor-segment > input").change(this._onAbilityTrackSegmentTextChange.bind(this));
-		newSegment.find(".ability-track-editor-trigger").change(this._onAbilityTrackTriggerChange.bind(this));
+		specialAbilities[target.closest(".ability-track").dataset.index].values.pop();
+
+		await this.actor.update({"system.specialAbilities": this.actor.system.specialAbilities});
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on an Ability Track Editor's decrease button.
-	 * @param event {MouseEvent}
+	 * Increases one of the Group's ability track by one.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	_onAbilityTrackMinusClick(event)
+	static async #increaseAbilityTrack(event, target)
 	{
-		$(event.currentTarget).siblings(".ability-track-editor-segment-container").children().last().remove();
+		const specialAbilities= this.actor.system.specialAbilities,
+			  index = target.closest(".ability-track").dataset.index;
+
+		specialAbilities[index].values.push({content: specialAbilities[index].values.length});
+
+		await this.actor.update({"system.specialAbilities": this.actor.system.specialAbilities});
 	}
 
 	/**
-	 * Performs follow-up operations after changes on an Ability Track segment's text input.
-	 * @param event {Event}
+	 * Deletes a specific socket of the Group.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	_onAbilityTrackSegmentTextChange(event)
+	static async #deleteSocket(event, target)
 	{
-		event.preventDefault();
-		event.stopPropagation();
+		await this.actor.deleteSocket(target.closest("[data-index]").dataset.index);
 	}
 
 	/**
-	 * Performs follow-up operations after changes to an Ability Track segment's trigger checkbox.
-	 * @param event {Event}
+	 * Toggles Group's Special Ability hidden inputs in order to edit it.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	_onAbilityTrackTriggerChange(event)
+	static async #editAbilityTrack(event, target)
 	{
-		event.preventDefault();
-		event.stopPropagation();
+		const abilityTrack = target.closest(".ability-track"),
+			  editElement = abilityTrack.querySelector(".edit"),
+			  regularElement = abilityTrack.querySelector(".regular");
 
-		const segment = $(event.currentTarget).siblings(".ability-track-editor-segment");
-
-		event.currentTarget.checked ? segment.addClass("trigger") : segment.removeClass("trigger");
-	}
-
-	/**
-	 * Performs follow-up operations clicks on an Ability Track edit button.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	_onAbilityTrackEditorSubmit(event)
-	{
-		const $abilityTrackElement = $(event.currentTarget).parents(".ability-track");
-
-		$abilityTrackElement.find(".ability-track-segment-container").css({display: "block"});
-		$abilityTrackElement.find(".ability-track-editor").css({display: "none"});
-	}
-
-	/**
-	 * Performs follow-up operations after clicks on a Group socket addition button.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	async _onSocketAdd(event)
-	{
-		this.actor.addNewSocket();
-	}
-
-	/**
-	 * Performs follow-up operations after clicks on a Group socket removal button.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	async _onSocketRemove(event)
-	{
-		this.actor.removeLastSocket();
+		if(editElement.classList.contains("active")) {
+			editElement.classList.remove("active");
+			regularElement.classList.remove("hidden");
+			target.innerHTML = '<span class="fas fa-pen-to-square"></span>';
+		}
+		else {
+			editElement.classList.add("active");
+			regularElement.classList.add("hidden");
+			target.innerHTML = '<span class="fas fa-check"></span>';
+		}
 	}
 }

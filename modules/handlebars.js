@@ -18,6 +18,7 @@ export default function()
 		Handlebars.registerHelper("abs", (number) => Math.abs(number));
 		Handlebars.registerHelper("find", (value, array) => array.find(item => item === value));
 		Handlebars.registerHelper("in", (value, array) => array.includes(value));
+		Handlebars.registerHelper("getProperty", (object, key) => foundry.utils.getProperty(object, key));
 
 		Handlebars.registerHelper("for", (startingNumber, goalNumber, increment, block) => {
 			let accumulator = "";

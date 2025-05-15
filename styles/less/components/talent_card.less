@@ -1,85 +1,39 @@
-.talent-card {
+.talent.card {
+	background: #f8f0e0;
 	border: 1px solid black;
-	border-radius: 10px;
+	border-radius: 0.5rem;
+	color: black;
 	display: grid;
-	grid-template: 60px 1fr / 50px 1fr;
+	grid-template: 4rem 1fr / 3rem 1fr;
 	grid-template-areas:
-		'talent-card-type talent-card-name'
-		'talent-card-type talent-card-content'
-		'talent-card-type talent-card-bottom';
+		"type name"
+		"type content"
+		"type bottom";
 	height: 255px;
-	margin: 8px;
+	margin: 0.5rem;
 	position: relative;
 	width: 385px;
 
-	& .talent-card-bottom {
-		align-items: center;
-		display: flex;
-
-		& .item-delete-link {
-			bottom: 5px;
-			display: block;
-			line-height: 0;
-			padding: 2px 3px;
-			position: absolute;
-			right: 5px;
-		}
-
-		& .recharge-token {
-			position: relative;
-
-			& > img {
-				border: none;
-				height: 48px;
-				opacity: 75%;
-			}
-
-			& > .recharge-token-counter {
-				font-size: 32px;
-				left: 50%;
-				position: absolute;
-				text-shadow:
-					-1pt -1pt 0 white,
-					-1pt 0 0 white,
-					0 -1pt 0 white,
-					-1pt 1pt 0 white,
-					1pt -1pt 0 white,
-					0 1pt 0 white,
-					1pt 0 0 white,
-					1pt 1pt 0 white;
-				top: 60%;
-				transform: translate(-50%, -50%);
-			}
-
-			&:hover > .recharge-token-counter {
-				color: white;
-				text-shadow: 0 0 8px var(--color-shadow-primary);
-			}
-		}
-
-		& .talent-trigger {
-			flex-grow: 1;
-			text-align: center;
-		}
+	& .bottom-line {
+		align-items: flex-end;
+		grid-area: bottom;
+		justify-content: space-between;
+		margin: 0.25rem 0.5rem;
+		position: relative;
 	}
 
-	& .talent-card-socket-select {
-		position: absolute;
-		top: 100%;
-		width: 100%;
-	}
-
-	& .talent-card-content {
+	& .content {
 		font-size: 12pt;
-		grid-area: talent-card-content;
-		margin: auto 6px;
+		grid-area: content;
+		margin: auto 0.5rem;
 	}
 
-	& .talent-card-name {
+	& .name {
 		background: padding-box saddlebrown;
 		color: white;
-		font-size: 20pt;
-		grid-area: talent-card-name;
+		font: 20pt var(--font-title);
+		grid-area: name;
+		height: 3rem;
 		margin: auto 0;
 		text-align: center;
 		text-shadow:
@@ -93,14 +47,14 @@
 			1pt 1pt 0 black;
 	}
 
-	& .talent-card-type {
+	& .type {
 		background-color: saddlebrown;
 		color: white;
 		display: block;
 		font: small-caps bold 14pt var(--font-primary);
-		grid-area: talent-card-type;
-		margin: 10px auto;
-		padding: 0 2px 0 4px;
+		grid-area: type;
+		margin: 0.5rem auto;
+		padding: 0 2px 0 0.25rem;
 		text-align: center;
 		text-shadow:
 			-1pt -1pt 0 black,

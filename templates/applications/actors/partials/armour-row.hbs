@@ -1,0 +1,55 @@
+<div class="item armour row" data-uuid="{{armour.uuid}}">
+	<div class="content">
+		<div class="image">
+			{{#if @root.editable}}
+				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+					<img class="type" src="{{armour.img}}" alt="{{armour.name}}" width="40" height="40" />
+				</a>
+			{{else}}
+				<span><img class="type" src="{{armour.img}}" alt="{{armour.name}}" width="40" height="40" /></span>
+			{{/if}}
+		</div>
+
+		<div class="name">
+			{{#if @root.editable}}
+				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+					<span>{{armour.name}}</span>
+				</a>
+			{{else}}
+				<span>{{armour.name}}</span>
+			{{/if}}
+		</div>
+
+		<hr />
+
+		<div class="defence-value">
+			<span>{{armour.system.defenceValue}}</span>
+		</div>
+
+		<hr />
+
+		<div class="soak-value">
+			<span>{{armour.system.soakValue}}</span>
+		</div>
+
+		<hr />
+
+		<div class="encumbrance">
+			<span>{{armour.system.encumbrance}}</span>
+		</div>
+
+		<hr />
+
+		<div class="buttons">
+			{{#if @root.editable}}
+				<a class="context-menu">
+					<span class="fas fa-ellipsis-vertical"></span>
+				</a>
+			{{else}}
+				<a data-action="expandDocument" data-tooltip="{{localize 'Expand'}}">
+					<span class="fas fa-chevron-down"></span>
+				</a>
+			{{/if}}
+		</div>
+	</div>
+</div>

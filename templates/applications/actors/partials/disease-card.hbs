@@ -1,0 +1,45 @@
+<div class="item disease card" data-uuid="{{disease.uuid}}">
+	{{#with (lookup @root.symptoms disease.system.symptom) as |symptom|}}
+		<div class="header">
+			{{#if @root.editable}}
+				<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+					{{../disease.name}}
+				</a>
+			{{else}}
+				<span>{{../disease.name}}</span>
+			{{/if}}
+
+			<div class="traits">
+				{{../disease.system.traits}}
+			</div>
+		</div>
+
+		<div class="content">
+			<blockquote class="description">
+				{{{localize ../disease.system.description}}}
+			</blockquote>
+
+			<p>{{{localize symptom.description}}}</p>
+		</div>
+
+		<div class="severity-rating">
+			{{../disease.system.severityRating}}
+		</div>
+
+		<div class="symptom">
+			<strong>{{{localize symptom.name}}}</strong>
+		</div>
+
+		<div class="bottom-line">
+			{{#if @root.editable}}
+				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+					<span class="fas fa-pen-to-square"></span>
+				</a>
+
+				<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+					<span class="fas fa-trash"></span>
+				</a>
+			{{/if}}
+		</div>
+	{{/with}}
+</div>

@@ -1,0 +1,11 @@
+<div class="rating {{ratingName}}">
+	<label for="{{concat rootId "-" fields "." ratingName "." fieldPath}}">
+		<img src={{icon}}
+			 data-tooltip="{{localize (concat 'CREATURE.FIELDS.' ratingName '.label')}}"
+			 alt="{{localize (concat 'CREATURE.FIELDS.' damageRating '.abbreviation')}}" />
+	</label>
+
+	{{formInput (lookup fields ratingName)
+				value=(lookup system ratingName)
+				id=(concat rootId "-" fields "." ratingName "." fieldPath)}}
+</div>

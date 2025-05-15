@@ -1,0 +1,19 @@
+<header class="sheet-header">
+	{{formInput system.schema.fields.threatRating
+				value=system.threatRating
+				id=(concat rootId "-" system.schema.fields.threatRating.fieldPath)}}
+
+	{{formInput fields.name value=source.name id=(concat rootId "-" source.schema.name.fieldPath)}}
+
+	<div class="wounds">
+		{{formInput system.schema.fields.wounds.fields.value
+					value=system.wounds.value
+					id=(concat rootId "-" system.schema.fields.wounds.fields.value.fieldPath)}}
+
+		<hr />
+
+		{{formInput system.schema.fields.wounds.fields.max
+					value=system.wounds.max
+					id=(concat rootId "-" system.schema.fields.wounds.fields.max.fieldPath)}}
+	</div>
+</header>

@@ -9,32 +9,60 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 		const fields = foundry.data.fields;
 
 		return {
-			attributes: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.attributes).reduce((object, attribute) => {
-				object[attribute] = new fields.SchemaField({
-					max: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
-					value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
-				}, {label: attribute});
+			attributes: new fields.SchemaField(Object.entries(CONFIG.WFRP3e.attributes).reduce((object, [key, value]) => {
+				object[key] = new fields.SchemaField({
+					max: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						label: "CREATURE.FIELDS.attributes.max.label",
+						min: 0,
+						nullable: false,
+						required: true
+					}),
+					value: new fields.NumberField({
+						initial: 0,
+						integer: true,
+						label: "CREATURE.FIELDS.attributes.value.label",
+						min: 0,
+						nullable: false,
+						required: true
+					})
+				}, {label: value.name});
 
 				return object;
 			}, {})),
-			characteristics: new fields.SchemaField(Object.keys(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
-				if(characteristic !== "varies")
-					object[characteristic] = new fields.SchemaField({
-						rating: new fields.NumberField({initial: 2, integer: true, min: 0, nullable: false, required: true}),
-						fortune: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
-					}, {label: characteristic});
+			characteristics: new fields.SchemaField(Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, [key, value]) => {
+				if(key !== "varies")
+					object[key] = new fields.SchemaField({
+						rating: new fields.NumberField({
+							initial: 2,
+							integer: true,
+							label: "ACTOR.FIELDS.characteristics.rating.label",
+							min: 0,
+							nullable: false,
+							required: true
+						}),
+						fortune: new fields.NumberField({
+							initial: 0,
+							integer: true,
+							label: "ACTOR.FIELDS.characteristics.fortune.label",
+							min: 0,
+							nullable: false,
+							required: true
+						})
+					}, {label: value.name});
 
 				return object;
 			}, {})),
-			category: new fields.StringField(),
+			category: new fields.StringField({nullable: true}),
 			damageRating: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			defenceValue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
-			description: new fields.HTMLField(),
+			description: new fields.HTMLField({nullable: true}),
 			impairments: new fields.SchemaField({
 				fatigue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 				stress: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 			}),
-			specialRuleSummary: new fields.HTMLField(),
+			specialRuleSummary: new fields.HTMLField({nullable: true}),
 			soakValue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			stance: new fields.SchemaField({
 				...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
@@ -51,17 +79,8 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 		};
 	}
 
-	static migrateData(source)
-	{
-		if(typeof source.stance === "number")
-			source.stance = {
-				conservative: source.stance < 0 ? Math.abs(source.stance) : 1,
-				reckless: source.stance > 0 ? source.stance : 1,
-				current: source.stance
-			};
-
-		return source;
-	}
+	/** @inheritDoc */
+	static LOCALIZATION_PREFIXES = ["ACTOR", "CREATURE"];
 
 	/** @inheritDoc */
 	prepareBaseData()
@@ -128,7 +147,7 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 	 */
 	_prepareNemesis()
 	{
-		this.nemesis = this.category.includes(game.i18n.localize("CREATURE.Nemesis"));
+		this.nemesis = this.category.includes(game.i18n.localize("CREATURE.nemesis"));
 	}
 
 	/**

@@ -1,0 +1,124 @@
+<section>
+	<div class="tension-meter">
+		<a data-action="decreaseTensionMeter" data-tooltip="{{localize 'PARTY.ACTIONS.decreaseTensionMeter'}}">
+			<span class="fas fa-minus"></span>
+		</a>
+
+		<div class="segment-container">
+			{{#for 0 (increment system.tension.max 1) 1}}
+				<label class="segment
+					{{#if (or (equalTo @root.system.tension.events.0.threshold this)
+							  (equalTo @root.system.tension.events.1.threshold this))}}threshold{{/if}}">
+					{{#if (equalTo @root.system.tension.value this)}}
+						<img src="systems/wfrp3e/assets/images/token-grey.webp"/>
+					{{else}}
+						{{this}}
+					{{/if}}
+
+					<input name="system.tension.value"
+						   type="radio"
+						   value="{{this}}"
+						{{#if (equalTo @root.system.tension.value this)}}checked{{/if}} />
+				</label>
+			{{/for}}
+		</div>
+
+		<a data-action="increaseTensionMeter" data-tooltip="{{localize 'PARTY.ACTIONS.increaseTensionMeter'}}">
+			<span class="fas fa-plus"></span>
+		</a>
+	</div>
+
+	<header class="header">
+		{{formInput document.schema.fields.name
+					value=source.name
+					id=(concat rootId "-" document.schema.fields.name.fieldPath)}}
+
+		{{formInput fields.traits value=system.traits id=(concat rootId "-" fields.traits.fieldPath)}}
+	</header>
+
+	<div class="events">
+		<h4>{{localize "PARTY.FIELDS.tension.label"}}</h4>
+
+		{{#each system.tension.events as |event ev|}}
+			<div class="event" data-index="{{ev}}">
+				<span class="threshold">{{event.threshold}}</span>
+				<div>{{{event.description}}}</div>
+
+				<a data-action="editEvent" data-tooltip="{{localize 'PARTY.ACTIONS.editEvent'}}">
+					<span class="fa-solid fa-pen-to-square"></span>
+				</a>
+			</div>
+		{{/each}}
+	</div>
+
+	<div class="members">
+		{{#each members as |member m|}}
+			<div class="member" data-uuid="{{member.uuid}}" data-index="{{m}}">
+				<a class="portrait" data-action="editDocument" data-tooltip="{{member.name}}">
+					<img src="{{member.img}}" width="50" height="50" />
+				</a>
+
+				<a data-action="removeMember" data-tooltip="{{localize 'PARTY.ACTIONS.removeMember'}}">
+					<span class="fa-solid fa-trash"></span>
+				</a>
+			</div>
+		{{/each}}
+	</div>
+
+	<div class="illustration">
+		<img src="{{source.img}}"
+			 data-action="editImage"
+			 data-edit="img"
+			 alt="{{localize fields.img.label}}"
+			 height="250" />
+
+		<a class="fortune-token"
+		   data-action="adjustFortunePool"
+		   data-tooltip="{{localize 'PARTY.ACTIONS.adjustFortunePool'}}">
+			<img src="systems/wfrp3e/assets/images/token-grey.webp"
+				 alt="{{localize 'PARTY.FIELDS.fortunePool.label'}}" />
+			<span class="fortune-counter">{{system.fortunePool}}</span>
+		</a>
+	</div>
+
+	<div class="special-ability">
+		{{formInput fields.specialAbility.fields.title
+					value=system.specialAbility.title
+					id=(concat rootId "-" fields.specialAbility.fields.title.fieldPath)}}
+
+		{{formInput fields.specialAbility.fields.description
+					value=system.specialAbility.description
+					enriched=enriched.specialAbility.description
+					toggled=true
+					id=(concat rootId "-" fields.specialAbility.fields.description.fieldPath)}}
+	</div>
+
+	<footer class="sockets">
+		<h4>
+			{{localize "PARTY.FIELDS.sockets.label"}}
+
+			<a data-action="addSocket" data-tooltip="{{localize 'PARTY.ACTIONS.addSocket'}}">
+				<span class="fas fa-plus"></span>
+			</a>
+		</h4>
+
+		{{#if (superiorTo system.sockets.length 0)}}
+			<div class="flexrow">
+				{{#each system.sockets as |socket|}}
+					<fieldset class="socket inline" data-index="{{@index}}">
+						{{formGroup @root.fields.sockets.element.fields.type
+									value=socket.type
+									name=@root.fields.sockets.element.fields.type.fieldPath
+									classes="expanded"
+									rootId=@root.rootId
+									localize=true}}
+
+						<a data-action="deleteSocket" data-tooltip="{{localize 'PARTY.ACTIONS.deleteSocket'}}">
+							<span class="fas fa-trash"></span>
+						</a>
+					</fieldset>
+				{{/each}}
+			</div>
+		{{/if}}
+	</footer>
+</section>

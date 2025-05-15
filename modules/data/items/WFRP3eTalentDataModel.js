@@ -31,15 +31,6 @@ export default class WFRP3eTalentDataModel extends foundry.abstract.TypeDataMode
 		this._prepareDescription();
 	}
 
-	/** @inheritDoc */
-	static migrateData(source)
-	{
-		if(source.effect && source.effects.length <= 0)
-			source.effects.push(source.effect);
-
-		return super.migrateData(source);
-	}
-
 	/**
 	 * Prepares the description of the Talent's description.
 	 * @private

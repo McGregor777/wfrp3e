@@ -18,10 +18,10 @@
 		},
 		"WARNINGS": {
 			"cooldown": "This ability has been used during this session already."
-		}
+		},
+		"name": "Ability",
+		"plural": "Abilities"
 	},
-
-	"ACTOR.GenerateACharacter": "Generate a Character",
 
 	"ACTION": {
 		"ACTIONS": {
@@ -91,7 +91,9 @@
 		},
 		"WARNINGS": {
 			"recharging": "You cannot use an Action that is recharging."
-		}
+		},
+		"name": "Action",
+		"plural": "Actions"
 	},
 
 	"ACTIONEFFECTEDITOR": {
@@ -110,6 +112,90 @@
 	"ACTIONSELECTOR.NoActionSelectedWarning": "You must select an Action card.",
 	"ACTIONSELECTOR.SelectedAction": "Selected Action:",
 	"ACTIONSELECTOR.Title": "Action Selector",
+
+	"ACTOR": {
+		"ACTIONS": {
+			"addActiveEffect": "Add Active Effect",
+			"adjustConservativeSegment": "Add/Remove Conservative Segment",
+			"adjustRechargeTokens": "Adjust Recharge Tokens",
+			"adjustRecklessSegment": "Add/Remove Reckless Segment",
+			"adjustStance": "Adjust Stance",
+			"editDocument": "Edit",
+			"flip": "Flip",
+			"openFilters": "Open Filters",
+			"useDocument": "Use",
+			"rollActionCheck": "Roll Action Check",
+			"rollCharacteristicCheck": "Roll Characteristic Check",
+			"rollItem": "Roll Item",
+			"rollSkillCheck": "Roll Skill Check"
+		},
+		"CONTROLS": {
+			"switchDisplayMode": "Switch Display Mode"
+		},
+		"FIELDS": {
+			"characteristics": {
+				"agility": {
+					"abbreviation": "Ag",
+					"label": "Agility"
+				},
+				"fellowship": {
+					"abbreviation": "Fel",
+					"label": "Fellowship"
+				},
+				"intelligence": {
+					"abbreviation": "Int",
+					"label": "Intelligence"
+				},
+				"strength": {
+					"abbreviation": "St",
+					"label": "Strength"
+				},
+				"toughness": {
+					"abbreviation": "To",
+					"label": "Toughness"
+				},
+				"varies": {
+					"abbreviation": "V",
+					"label": "Varies"
+				},
+				"willpower": {
+					"abbreviation": "WP",
+					"label": "Willpower"
+				},
+				"fortune.label": "Fortune Dice",
+				"label": "Characteristics",
+				"rating.label": "Rating"
+			},
+			"impairments": {
+				"fatigue": {
+					"label": "Fatigue",
+					"tokens": "Fatigue Tokens"
+				},
+				"label": "Impairments",
+				"stress": {
+					"label": "Stress",
+					"tokens": "Stress Tokens"
+				}
+			},
+			"stance": {
+				"conservative.label": "Conservative Segments",
+				"current.label": "Current Stance",
+				"label": "Attitude",
+				"reckless.label": "Reckless Segments"
+			},
+			"wounds": {
+				"label": "Wounds",
+				"max.label": "Threshold",
+				"value.label": "Current"
+			}
+		},
+		"SHEET": {
+			"all": "All",
+			"filters": "Filters",
+			"search": "Search"
+		},
+		"WARNINGS.minimumSegment": "You cannot remove any more segment."
+	},
 
 	"APPLICATION.BUTTON.DeleteItem": "Delete Item",
 	"APPLICATION.BUTTON.EditItem": "Edit Item",
@@ -131,15 +217,10 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Armour",
+		"plural": "Armours"
 	},
-
-	"ATTRIBUTE.Aggression": "Aggression",
-	"ATTRIBUTE.Cunning": "Cunning",
-	"ATTRIBUTE.Expertise": "Expertise",
-	"ATTRIBUTE.ABBREVIATION.Aggression": "A",
-	"ATTRIBUTE.ABBREVIATION.Cunning": "C",
-	"ATTRIBUTE.ABBREVIATION.Expertise": "E",
 
 	"CAREER": {
 		"ACTIONS": {
@@ -212,7 +293,9 @@
 			"header": "Header",
 			"main": "Main",
 			"setting": "Setting Information"
-		}
+		},
+		"name": "Career",
+		"plural": "Careers"
 	},
 
 	"CAREERSELECTOR.ChooseANewCareer": "Choose a New Career",
@@ -232,47 +315,61 @@
 		"heroic": "Heroic"
 	},
 
-	"CHARACTER.Abilities": "Abilities",
-	"CHARACTER.Actions": "Actions",
-	"CHARACTER.Armours": "Armours",
-	"CHARACTER.Attributes": "Attributes",
-	"CHARACTER.Background": "Background",
-	"CHARACTER.Careers": "Careers",
-	"CHARACTER.Characteristics": "Characteristics",
-	"CHARACTER.Conditions": "Conditions",
-	"CHARACTER.Corruption": "Corruption",
-	"CHARACTER.CriticalWounds": "Critical Wounds",
-	"CHARACTER.Current": "Current",
-	"CHARACTER.CurrentExperience": "Current Experience",
-	"CHARACTER.Experience": "Experience",
-	"CHARACTER.Favour": "Favour",
-	"CHARACTER.Fortune": "Fortune",
-	"CHARACTER.Insanities": "Insanities",
-	"CHARACTER.Maximum": "Maximum",
-	"CHARACTER.Origin": "Origin",
-	"CHARACTER.Power": "Power",
-	"CHARACTER.Skills": "Skills",
-	"CHARACTER.Stances": "Stances",
-	"CHARACTER.Talents": "Talents",
-	"CHARACTER.Threshold": "Threshold",
-	"CHARACTER.TotalExperience": "Total Experience",
-	"CHARACTER.Trappings": "Trappings",
-	"CHARACTER.Miscasts": "Miscasts",
-	"CHARACTER.Money": "Money",
-	"CHARACTER.Mutations": "Mutations",
-	"CHARACTER.Weapons": "Weapons",
-	"CHARACTER.Wounds": "Wounds",
-	"CHARACTER.WoundThreshold": "Wound Threshold",
-	"CHARACTER.IMPAIRMENT.Fatigue": "Fatigue",
-	"CHARACTER.IMPAIRMENT.Stress": "Stress",
-	"CHARACTER.IMPAIRMENT.FatigueTokens": "Fatigue Tokens",
-	"CHARACTER.IMPAIRMENT.StressTokens": "Stress Tokens",
-	"CHARACTER.SHEET.AddBasicSkills": "Add Basic Skills",
-	"CHARACTER.SHEET.AddRemoveConservativeSegment": "Add/Remove Conservative Segment",
-	"CHARACTER.SHEET.AddRemoveRecklessSegment": "Add/Remove Reckless Segment",
-	"CHARACTER.SHEET.MinimumSegmentWarning": "You cannot remove any more segment.",
-	"CHARACTER.SHEET.NoExperienceLeft": "You have no Experience left.",
-	"CHARACTER.SHEET.NoSkill": "<em><strong>{actor}</em></strong> has no skill. Do you wish to give <em><strong>{actor}</em></strong> all the basic skills?",
+	"CHARACTER": {
+		"ACTIONS.addBasicSkills": "Add Basic Skills",
+		"FIELDS": {
+			"background": {
+				"allies.label": "Allies",
+				"biography.label": "Biography",
+				"birthplace.label": "Birth Place",
+				"build.label": "Build",
+				"campaignNotes.label": "Campaign Notes",
+				"enemies.label": "Enemies",
+				"eyeColour.label": "Eye Colour",
+				"familyMembers.label": "Family Members",
+				"hairColour.label": "Hair Colour",
+				"height.label": "Height",
+				"label": "Background",
+				"personalGoal.label": "Personal Goal",
+				"weight.label": "Weight"
+			},
+			"corruption": {
+				"FIELDS": {
+					"max.label": "Threshold",
+					"value.label": "Current"
+				},
+				"label": "Corruption"
+			},
+			"experience": {
+				"current.label": "Current Experience",
+				"label": "Experience",
+				"total.label": "Total Experience"
+			},
+			"favour.label": "Favour",
+			"fortune": {
+				"max.label": "Maximum",
+				"value.label": "Current",
+				"label": "Fortune"
+			},
+			"origin.label": "Origin",
+			"party.label": "Party",
+			"power.label": "Power"
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributes",
+			"background": "Background",
+			"careers": "Careers",
+			"effects": "Effects",
+			"talents": "Talents",
+			"trappings": "Trappings"
+		},
+		"WARNINGS": {
+			"noExperienceLeft": "You have no Experience left.",
+			"noSkill": "<em><strong>{actor}</em></strong> has no skill. Do you wish to give <em><strong>{actor}</em></strong> all the basic skills?"
+		},
+		"woundThreshold": "Wound Threshold"
+	},
 
 	"CHARACTERGENERATOR.Actions": "Action Cards",
 	"CHARACTERGENERATOR.Acquired": "Acquired",
@@ -319,37 +416,6 @@
 	"CHARACTERGENERATOR.WARNING.NotEnoughCreationPoints": "Not enough Creation Point left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Not enough Skill Training left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Not enough Specialisation left.",
-
-	"CHARACTERISTICS": {
-		"agility": {
-			"abbreviation": "Ag",
-			"name": "Agility"
-		},
-		"fellowship": {
-			"abbreviation": "Fel",
-			"name": "Fellowship"
-		},
-		"intelligence": {
-			"abbreviation": "Int",
-			"name": "Intelligence"
-		},
-		"strength": {
-			"abbreviation": "St",
-			"name": "Strength"
-		},
-		"toughness": {
-			"abbreviation": "To",
-			"name": "Toughness"
-		},
-		"varies": {
-			"abbreviation": "V",
-			"name": "Varies"
-		},
-		"willpower": {
-			"abbreviation": "WP",
-			"name": "Willpower"
-		}
-	},
 
 	"CHARACTERISTICUPGRADER.CharacteristicFortune": "{characteristic} Fortune Die",
 	"CHARACTERISTICUPGRADER.CharacteristicRating": "{characteristic} Rating",
@@ -428,22 +494,50 @@
 		}
 	},
 
-	"CREATURE.Abilities": "Abilities",
-	"CREATURE.Actions": "Actions",
-	"CREATURE.Category": "Category",
-	"CREATURE.DamageRating": "Damage Rating",
-	"CREATURE.DefenceValue": "Defence Value",
-	"CREATURE.Details": "Details",
-	"CREATURE.Nemesis": "Nemesis",
-	"CREATURE.SoakValue": "Soak Value",
-	"CREATURE.Stance": "Stance",
-	"CREATURE.ThreatRating": "Threat Rating",
-	"CREATURE.Trappings": "Trappings",
-	"CREATURE.WoundsThreshold": "Wounds Threshold",
-	"CREATURE.WoundsValue": "Wounds Value",
-	"CREATURE.ABBREVIATION.DamageRating": "DR",
-	"CREATURE.ABBREVIATION.DefenceValue": "Defence",
-	"CREATURE.ABBREVIATION.SoakValue": "Soak",
+	"CREATURE": {
+		"FIELDS": {
+			"attributes": {
+				"aggression": {
+					"abbreviation": "A",
+					"label": "Aggression"
+				},
+				"cunning": {
+					"abbreviation": "C",
+					"label": "Cunning"
+				},
+				"expertise": {
+					"abbreviation": "E",
+					"label": "Expertise"
+				},
+				"max.label": "Rating",
+				"value.label": "Budget"
+			},
+			"category.label": "Category",
+			"damageRating": {
+				"abbreviation": "DR",
+				"label": "Damage Rating"
+			},
+			"defenceValue": {
+				"abbreviation": "Defence",
+				"label": "Defence Value"
+			},
+			"description.label": "Description",
+			"soakValue": {
+				"abbreviation": "Soak",
+				"label": "Soak Value"
+			},
+			"threatRating": "Threat Rating"
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributes",
+			"details": "Details",
+			"effects": "Effects",
+			"talents": "Talents",
+			"trappings": "Trappings"
+		},
+		"nemesis": "Nemesis"
+	},
 
 	"CRITICALWOUND": {
 		"ACTIONS.update": "Save Critical Wound",
@@ -451,7 +545,9 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Critical Wound",
+		"plural": "Critical Wounds"
 	},
 
 	"DIALOG.TITLE.EffectDeletion": "Effect Deletion",
@@ -541,7 +637,9 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Disease",
+		"plural": "Diseases"
 	},
 
 	"EFFECT": {
@@ -565,15 +663,44 @@
 		}
 	},
 
-	"GROUP.Talents": "Talents",
-	"GROUP.TalentSockets": "Talent Sockets",
-	"GROUP.SPECIALABILITY.Title": "Special Ability Title",
-	"GROUP.SPECIALABILITY.Description": "Special Ability Description",
-	"GROUP.SPECIALABILITY.Edit": "Edit Ability Track",
-	"GROUP.SPECIALABILITY.Decrease": "Decrease Ability Track",
-	"GROUP.SPECIALABILITY.Increase": "Increase Ability Track",
-	"GROUP.SPECIALABILITY.Content": "Content",
-	"GROUP.SPECIALABILITY.Trigger": "Trigger",
+	"GROUP": {
+		"ACTIONS": {
+			"decreaseAbilityTrack": "Decrease Ability Track",
+			"editAbilityTrack": "Edit Ability Track",
+			"increaseAbilityTrack": "Increase Ability Track"
+		},
+		"FIELDS": {
+			"specialAbilities": {
+				"FIELDS": {
+					"current.label": "Current",
+					"description": "Description",
+					"title": "Title",
+					"values": {
+						"FIELDS": {
+							"content.label": "Content",
+							"trigger.label": "Is Trigger?"
+						},
+						"label": "Step"
+					}
+				},
+				"label": "Special Abilities"
+			},
+			"sockets": {
+				"FIELDS": {
+					"item.label": "Taken by",
+					"type.label": "Type"
+				},
+				"label": "Talent Sockets"
+			}
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributes",
+			"effects": "Effects",
+			"talents": "Talents",
+			"trappings": "Trappings"
+		}
+	},
 
 	"INSANITY": {
 		"ACTIONS.update": "Save Insanity",
@@ -585,7 +712,9 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Insanity",
+		"plural": "Insanities"
 	},
 
 	"ITEM": {
@@ -603,7 +732,9 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Miscast",
+		"plural": "Miscasts"
 	},
 
 	"MONEY": {
@@ -619,7 +750,9 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Money",
+		"plural": "Moneys"
 	},
 
 	"MUTATION": {
@@ -632,7 +765,9 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Mutation",
+		"plural": "Mutations"
 	},
 
 	"NEWCAREERADVANCESELECTION.Content": "Choose a new career advance",
@@ -660,17 +795,57 @@
 	"ORIGIN.INTRODUCTION.Reiklander": "To reflect their upbringing and individuality, Reiklander characters have the following racial abilities:",
 	"ORIGIN.INTRODUCTION.AthelLoren": "To reflect their ties to nature and tradition-bound culture, wood elf characters have the following racial abilities:",
 
-	"PARTY.FortunePool": "Fortune Pool",
-	"PARTY.FortuneToken": "Fortune Token",
-	"PARTY.RemoveMember": "Remove Member from Party",
-	"PARTY.SpecialAbility.Title": "Special Ability's Title",
-	"PARTY.TalentSockets": "Talent Sockets",
-	"PARTY.Traits": "Traits",
-	"PARTY.TENSIONEVENT.Effects": "Tension Event Effects",
-	"PARTY.TENSIONEVENT.Threshold": "Tension Event Threshold",
-	"PARTY.TENSIONMETER.Decrease": "Decrease Tension Meter",
-	"PARTY.TENSIONMETER.Increase": "Increase Tension Meter",
-	"PARTY.TENSIONMETER.Title": "Party Tension Meter",
+	"PARTY": {
+		"ACTIONS": {
+			"addSocket": "Add Talent Socket",
+			"adjustFortunePool": "Add/Remove Fortune",
+			"decreaseTensionMeter": "Decrease Tension Meter",
+			"deleteSocket": "Remove Talent Socket",
+			"editEvent": "Edit Event",
+			"increaseTensionMeter": "Increase Tension Meter",
+			"removeMember": "Remove Member From Party"
+		},
+		"FIELDS": {
+			"fortunePool.label": "Fortune Pool",
+			"members.label": "Party Members",
+			"sockets": {
+				"FIELDS": {
+					"item.label": "Taken by",
+					"type.label": "Type"
+				},
+				"label": "Talent Sockets"
+			},
+			"specialAbility": {
+				"FIELDS": {
+					"description.label": "Description",
+					"title.label": "Name"
+				},
+				"label": "Special Ability"
+			},
+			"tension": {
+				"FIELDS": {
+					"events": {
+						"FIELDS": {
+							"description.label": "Effects",
+							"threshold.label": "Threshold"
+						},
+						"label": "Tension Event"
+					},
+					"max.label": "Maximum",
+					"value.label": "Current"
+				},
+				"label": "Party Tension Meter"
+			},
+			"traits.label": "Traits"
+		},
+		"WARNINGS.alreadyMember": "{name} is already a member of the party."
+	},
+
+	"PARTYEVENTEDITOR": {
+		"ACTIONS.submit": "Save Event",
+		"TABS.main": "Main",
+		"title": "Party Event Editor"
+	},
 
 	"RACE.Any": "Any Race",
 	"RACE.Dwarf": "Dwarf",
@@ -787,6 +962,8 @@
 			"effects": "Effects",
 			"main": "Main"
 		},
+		"name": "Skill",
+		"plural": "Skills",
 		"specialisationList": "Specialisations: {specialisations}"
 	},
 
@@ -847,7 +1024,9 @@
 		"WARNINGS": {
 			"notSocketed": "You cannot use a Talent that is not socketed.",
 			"recharging": "You cannot use a Talent that is recharging."
-		}
+		},
+		"name": "Talent",
+		"plural": "Talents"
 	},
 
 	"TALENTSELECTOR": {
@@ -934,7 +1113,9 @@
 		"silverShillings": {
 			"abbreviation": "g",
 			"label": "Silver Shillings"
-		}
+		},
+		"name": "Trapping",
+		"plural": "Trappings"
 	},
 
 	"TRAITS": {
@@ -1035,6 +1216,8 @@
 		},
 		"improvised": "Improvised",
 		"improvisedWeapon": "Improvised Weapon",
-		"unarmed": "Unarmed"
+		"unarmed": "Unarmed",
+		"name": "Weapon",
+		"plural": "Weapons"
 	}
 }

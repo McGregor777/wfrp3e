@@ -1,386 +1,654 @@
-import {sortTalentsByType} from "../../helpers.js";
-
 /** @inheritDoc */
-export default class WFRP3eActorSheet extends ActorSheet
+export default class WFRP3eActorSheet extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2)
 {
-	/** @inheritDoc */
-	static get defaultOptions()
+	constructor(options = {})
 	{
-		return {
-			...super.defaultOptions,
-			dragDrop: [{dragSelector: ".item", dropSelector: null}]
-		};
-	}
-
-	/** @inheritdoc */
-	get template()
-	{
-		return `systems/wfrp3e/templates/applications/actors/${this.actor.type.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}-sheet.hbs`;
-	}
-
-	/** @inheritdoc */
-	getData()
-	{
-		const data = {
-			...super.getData(),
-			actionTypes: CONFIG.WFRP3e.actionTypes,
-			conditionDurations: CONFIG.WFRP3e.conditionDurations,
-			characteristics: CONFIG.WFRP3e.characteristics,
-			diseaseSymptoms: CONFIG.WFRP3e.disease.symptoms,
-			origins: Object.values(CONFIG.WFRP3e.availableRaces).reduce((origins, race) => {
-				Object.entries(race.origins).forEach(origin => origins[origin[0]] = origin[1]);
-				return origins;
-			}, {}),
-			stances: CONFIG.WFRP3e.stances,
-			symbols: CONFIG.WFRP3e.symbols,
-			talentTypes: CONFIG.WFRP3e.talentTypes,
-			weaponGroups: CONFIG.WFRP3e.weapon.groups,
-			weaponQualities: CONFIG.WFRP3e.weapon.qualities,
-			weaponRanges: CONFIG.WFRP3e.weapon.ranges
-		};
-		data.items = this._buildItemLists(data.items);
-		data.hasAbility = data.items.abilities.length > 0
-			|| data.items.conditions.length > 0
-			|| data.items.criticalWounds.length > 0
-			|| data.items.diseases.length > 0
-			|| data.items.insanities.length > 0
-			|| data.items.miscasts.length > 0
-			|| data.items.mutations.length > 0;
-		data.hasTrapping = (data.items.armours.length > 0 || data.items.trappings.length > 0 || data.items.weapons.length > 0);
-
-		return data;
-	}
-
-	/**
-	 * Returns items sorted by type.
-	 * @param {Array} items The items owned by the Actor.
-	 * @returns {Object} The sorted items owned by the Actor.
-	 * @private
-	 */
-	_buildItemLists(items)
-	{
-		const basicTrait = game.i18n.localize("TRAITS.basic");
-		const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name));
-		const actions = sortedItems.filter(item => item.type === "action").sort((a, b) => {
-			if(a.system.conservative.traits.includes(basicTrait) && !b.system.conservative.traits.includes(basicTrait))
-				return -1;
-			else if(!a.system.conservative.traits.includes(basicTrait) && b.system.conservative.traits.includes(basicTrait))
-				return 1
-			else
-				return 0;
-		});
-		const talents = sortedItems.filter(item => item.type === "talent");
-
-		return {
-			abilities: sortedItems.filter(item => item.type === "ability"),
-			actions: Object.keys(CONFIG.WFRP3e.actionTypes).reduce((sortedActions, actionType) => {
-				sortedActions[actionType] = actions.filter(action => action.system.type === actionType);
-				return sortedActions;
-			}, {}),
-			armours: sortedItems.filter(item => item.type === "armour"),
-			careers: sortedItems.filter(item => item.type === "career"),
-			conditions: sortedItems.filter(item => item.type === "condition"),
-			criticalWounds: sortedItems.filter(item => item.type === "criticalWound"),
-			diseases: sortedItems.filter(item => item.type === "disease"),
-			insanities: sortedItems.filter(item => item.type === "insanity"),
-			miscasts: sortedItems.filter(item => item.type === "miscast"),
-			money: sortedItems.filter(item => item.type === "money"),
-			mutations: sortedItems.filter(item => item.type === "mutation"),
-			skills: sortedItems.filter(item => item.type === "skill"),
-			talents: sortTalentsByType(talents),
-			trappings: sortedItems.filter(item => item.type === "trapping"),
-			weapons: sortedItems.filter(item => item.type === "weapon")
+		super(options);
+		this.searchFilters = {
+			actions: {text: "", type: "all"},
+			talents: {text: "", type: "all"}
 		};
 	}
 
 	/** @inheritDoc */
-	activateListeners(html)
+	static DEFAULT_OPTIONS = {
+		actions: {
+			addActiveEffect: this.#addActiveEffect,
+			adjustImpairment: {handler: this.#adjustImpairment, buttons: [0, 2]},
+			adjustQuantity: {handler: this.#adjustQuantity, buttons: [0, 2]},
+			adjustRechargeTokens: {handler: this.#adjustRechargeTokens, buttons: [0, 2]},
+			adjustStanceMeter: {handler: this.#adjustStanceMeter, buttons: [0, 2]},
+			deleteDocument: this.#deleteDocument,
+			editDocument: this.#editDocument,
+			expandDocument: this.#expandDocument,
+			flip: this.#flip,
+			openFilters: this.#openFilters,
+			rollCharacteristicCheck: this.#rollCharacteristicCheck,
+			rollItem: this.#rollItem,
+			useDocument: {handler:  this.#useDocument, buttons: [0, 2]},
+			switchDisplayMode: this.#switchItemsDisplayMode
+		},
+		classes: ["wfrp3e", "sheet", "actor"],
+		form: {submitOnChange: true},
+		window: {
+			contentClasses: ["standard-form"],
+			controls: [{
+				action: "switchDisplayMode",
+				icon: "fa-solid fa-display",
+				label: "ACTOR.CONTROLS.switchDisplayMode",
+				ownership: "OWNER"
+			}]
+		}
+	};
+
+	/** @inheritDoc */
+	async _prepareContext(options)
 	{
-		super.activateListeners(html);
-
-		html.find(".characteristic a").click(this._onCharacteristicClick.bind(this));
-
-		html.find(".impairment .token")
-			.click(this._onImpairmentTokenClick.bind(this, 1))
-			.contextmenu(this._onImpairmentTokenClick.bind(this, -1));
-
-		html.find(".flip-link").click(this._onFlipClick.bind(this));
-
-		html.find(".item-roll-link").click(this._onItemRollClick.bind(this));
-		html.find(".item-expand-link").click(this._onItemExpandClick.bind(this));
-		html.find(".item-edit-link").click(this._onItemEditClick.bind(this));
-		html.find(".item-delete-link").click(this._onItemDeleteClick.bind(this));
-
-		html.find(".item-name-link, .talent-trigger")
-			.click(this._onItemLeftClick.bind(this))
-			.contextmenu(this._onItemRightClick.bind(this));
-
-		html.find(".item-input").change(this._onItemInput.bind(this));
-
-		html.find(".quantity-link")
-			.click(this._onQuantityClick.bind(this, 1))
-			.contextmenu(this._onQuantityClick.bind(this, -1));
-
-		html.find(".recharge-token")
-			.click(this._onRechargeTokenClick.bind(this, 1))
-			.contextmenu(this._onRechargeTokenClick.bind(this, -1));
-
-		html.find(".stance-meter .stance-meter-link")
-			.click(this._onStanceMeterLinkClick.bind(this, 1))
-			.contextmenu(this._onStanceMeterLinkClick.bind(this, -1));
-
-		html.find(".effect-trigger").click(this._onEffectTriggerClick.bind(this));
+		return {
+			...await super._prepareContext(options),
+			system: this.actor.system
+		};
 	}
 
-	/**
-	 * Get an Item's id from a clicked element hierarchy.
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_getItemById(event)
+	/** @inheritDoc */
+	async _preparePartContext(partId, context)
 	{
-		return this.actor.items.get(event.currentTarget.dataset.itemId ?? $(event.currentTarget).parents(".item").data("itemId"));
-	}
+		let partContext = await super._preparePartContext(partId, context);
 
-	/**
-	 * Performs follow-up operations after clicks on a Characteristic.
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_onCharacteristicClick(event)
-	{
-		this.actor.performCharacteristicCheck(event.currentTarget.dataset.characteristic);
-	}
+		if(partContext.tabs && partId in partContext.tabs)
+			partContext.tab = partContext.tabs[partId];
 
-	/**
-	 * Performs follow-up operations after clicks on a sheet's flip button.
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	async _onFlipClick(event)
-	{
-		event.preventDefault();
+		switch(partId) {
+			case "talents":
+				let items = [...this.actor.itemTypes.talent, ...this.actor.itemTypes.ability];
 
-		const parent = $(event.currentTarget).parents(".item");
-		const activeFace = parent.find(".face.active");
-		const inactiveFace = parent.find(".face:not(.active)");
+				if(this.searchFilters.talents.text || this.searchFilters.talents.type !== "all") {
+					const filters = [];
 
-		activeFace.removeClass("active");
-		inactiveFace.addClass("active");
-	}
+					if(this.searchFilters.talents.type in CONFIG.WFRP3e.talentTypes)
+						filters.push({
+							field: "type",
+							operator: "contains",
+							value: ["talent"]
+						}, {
+							field: "system.type",
+							operator: "equals",
+							value: this.searchFilters.talents.type
+						});
+					else if(this.searchFilters.talents.type === "ability")
+						filters.push({
+							field: "type",
+							operator: "contains",
+							value: ["ability"]
+						});
 
-	/**
-	 * Performs follow-up operations after clicks on an impairment token.
-	 * @param {Number} amount
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_onImpairmentTokenClick(amount, event)
-	{
-		this.actor.adjustImpairment(event.currentTarget.dataset.impairment, amount);
-	}
+					items = this.actor.items.search({query: this.searchFilters.talents.text ?? "", filters});
+				}
 
-	/**
-	 * Performs follow-up operations after clicks on an Item delete button.
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	async _onItemDeleteClick(event)
-	{
-		const item = this._getItemById(event);
-
-		await new Dialog({
-			title: game.i18n.localize("APPLICATION.TITLE.DeleteItem"),
-			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: item.name}) + "</p>",
-			buttons: {
-				confirm: {
-					icon: '<span class="fa fa-check"></span>',
-					label: game.i18n.localize("Yes"),
-					callback: async dlg => {
-						await this.actor.deleteEmbeddedDocuments("Item", [item._id]);
-						li.slideUp(200, () => this.render(false));
+				partContext = {
+					...partContext,
+					fields: this.actor.system.schema.fields,
+					items: items.sort((a, b) => a.name.localeCompare(b.name)),
+					searchFilters: this.searchFilters?.talents,
+					socketsByType: await this.actor.buildSocketList(),
+					types: {
+						all: "ACTOR.SHEET.all",
+						ability: "ABILITY.plural",
+						...CONFIG.WFRP3e.talentTypes
 					}
-				},
-				cancel: {
-					icon: '<span class="fas fa-xmark"></span>',
-					label: game.i18n.localize("Cancel")
-				},
-			},
-			default: "confirm"
-		}).render(true);
+				};
+				break;
+			case "actions":
+				let actions = this.actor.itemTypes.action;
+
+				if(this.searchFilters.actions.text || this.searchFilters.actions.type !== "all") {
+					const filters = [{
+						field: "type",
+						operator: "equals",
+						value: "action"
+					}];
+
+					if(this.searchFilters.actions.type !== "all")
+						filters.push({
+							field: "system.type",
+							operator: "equals",
+							value: this.searchFilters.actions.type
+						});
+
+					actions = this.actor.items.search({query: this.searchFilters.actions.text ?? "", filters});
+				}
+
+				partContext = {
+					...partContext,
+					actions: actions.sort((a, b) => a.name.localeCompare(b.name)),
+					defaultStance: this.actor.system.defaultStance,
+					fields: this.actor.system.schema.fields,
+					searchFilters: this.searchFilters?.actions,
+					stances: CONFIG.WFRP3e.stances,
+					symbols: CONFIG.WFRP3e.symbols,
+					types: {
+						all: "ACTOR.SHEET.all",
+						...CONFIG.WFRP3e.actionTypes
+					}
+				};
+				break;
+			case "trappings":
+				partContext = {
+					...partContext,
+					armours: this.actor.itemTypes.armour.sort((a, b) => a.name.localeCompare(b.name)),
+					fields: this.actor.system.schema.fields,
+					money: this.actor.itemTypes.money.sort((a, b) => a.name.localeCompare(b.name)),
+					weaponGroups: CONFIG.WFRP3e.weapon.groups,
+					weaponQualities: CONFIG.WFRP3e.weapon.qualities,
+					weaponRanges: CONFIG.WFRP3e.weapon.ranges,
+					trappings: this.actor.itemTypes.trapping.sort((a, b) => a.name.localeCompare(b.name)),
+					weapons: this.actor.itemTypes.weapon.sort((a, b) => a.name.localeCompare(b.name))
+				};
+				break;
+			case "effects":
+				partContext = {
+					...partContext,
+					durations: CONFIG.WFRP3e.conditionDurations,
+					effects: this.actor.effects,
+					items: [
+						...this.actor.itemTypes.condition,
+						...this.actor.itemTypes.criticalWound,
+						...this.actor.itemTypes.disease,
+						...this.actor.itemTypes.insanity,
+						...this.actor.itemTypes.miscast,
+						...this.actor.itemTypes.mutation
+					].sort((a, b) => a.name.localeCompare(b.name)),
+					symptoms: CONFIG.WFRP3e.disease.symptoms,
+					types: {
+						all: "ACTOR.SHEET.all",
+						condition: "CONDITION.plural",
+						criticalWound: "CRITICALWOUND.plural",
+						disease: "DISEASE.plural",
+						insanity: "INSANITY.plural",
+						miscast: "MISCAST.plural",
+						mutation: "MUTATION.plural",
+					}
+				};
+				break;
+		}
+
+		return partContext;
 	}
 
-	/**
-	 * Performs follow-up operations after clicks on an Item edit button.
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_onItemEditClick(event)
+	/** @inheritDoc */
+	_prepareTabs(group)
 	{
-		return this._getItemById(event).sheet.render(true);
+		const tabs = super._prepareTabs(group);
+
+		if(this.actor.type in ["character", "creature"]) {
+			if((this.actor.itemTypes.ability.length + this.actor.itemTypes.talent.length) <= 0)
+				tabs.talents.cssClass += " hidden";
+
+			if(this.actor.itemTypes.action.length <= 0)
+				tabs.actions.cssClass += " hidden";
+
+			if((this.actor.itemTypes.armour.length
+				+ this.actor.itemTypes.money.length
+				+ this.actor.itemTypes.trapping.length
+				+ this.actor.itemTypes.weapon.length) <= 0)
+				tabs.trappings.cssClass += " hidden";
+		}
+
+		return tabs;
+	}
+
+	/** @inheritDoc */
+	async _onFirstRender(context, options)
+	{
+		await super._onFirstRender(context, options);
+
+		this._createContextMenu(this._getContextMenuOptions, ".item", {fixed: true});
+		this._createContextMenu(this._getContextMenuOptions, ".context-menu", {eventName : "click", fixed: true});
+	}
+
+	/** @inheritDoc */
+	async _onRender(context, options)
+	{
+		await super._onRender(context, options);
+
+		for(const element of this.element.querySelectorAll(".search-bar input.search-filter"))
+			element.addEventListener("change", this._onSearchChange.bind(this, options));
+
+		for(const element of this.element.querySelectorAll(".item-input"))
+			element.addEventListener("change", this._onItemInput.bind(this, options));
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on an item's expand button.
-	 * @param {MouseEvent} event
-	 * @private
+	 * Find all Documents which match a given search term using a full-text search against their indexed HTML fields and
+	 * their name. If filters are provided, results are filtered to only those that match the provided values.
+	 * @param options
+	 * @param event {Event}
+	 * @protected
 	 */
-	_onItemExpandClick(event)
+	async _onSearchChange(options, event)
 	{
 		event.preventDefault();
 		event.stopPropagation();
 
-		const itemElement = $(event.currentTarget).hasClass("item")
-			? $(event.currentTarget)
-			: $(event.currentTarget).parents(".item");
-		const item = this._getItemById(event);
+		foundry.utils.setProperty(this, event.target.name, event.target.value);
 
-		if(itemElement.hasClass("expanded")) {
-			// Toggle expansion for an item
-			const details = itemElement.children(".details");
-
-			details.slideUp(200, () => details.remove());
-
-			itemElement.find(".item-expand-link .fas").removeClass("fa-chevron-up").addClass("fa-chevron-down");
-		}
-		else {
-			// Add a div with the item's details below the row.
-			const detailsElement = $(`<div class="details">${item.getDetails()}</div>`);
-
-			itemElement.append(detailsElement.hide());
-			detailsElement.slideDown(200);
-
-			itemElement.find(".item-expand-link .fas").removeClass("fa-chevron-down").addClass("fa-chevron-up");
-		}
-
-		itemElement.toggleClass("expanded");
+		await this.render(options);
 	}
 
-	/**
-	 * Performs follow-up operations after inputs on an Item.
-	 * @param {Event} event
-	 * @private
-	 */
-	_onItemInput(event)
+	async _onItemInput(options, event)
 	{
 		event.preventDefault();
 		event.stopPropagation();
 
-		const item = this._getItemById(event);
-		const propertyPath = event.currentTarget.dataset.path;
-		let value = event.target.value;
+		const item = await this._getByUuid(event),
+			  input = event.target,
+			  name = input.name,
+			  property = input.dataset.property;
+		let value = input.value;
 
-		if(event.currentTarget.type === "checkbox" && !event.currentTarget.checked)
-			value = false;
 		if(value === "on")
 			value = true;
+		else if(value === "")
+			value = null;
 
-		// Additional process needed for updates on Arrays.
-		let itemProperty = item;
-		for(let i = 0, path = propertyPath.split('.'), length = path.length; i < length; i++)
-			itemProperty = itemProperty[path[i]];
+		if(this.element.querySelectorAll(`input[name="${name}"][type="checkbox"]`).length > 1
+			&& foundry.utils.getProperty(item, name) === Number(value))
+			Number(value--);
 
-		if(itemProperty instanceof Array) {
-			const index = event.currentTarget.dataset.index;
-			const subProperty = event.currentTarget.dataset.property;
-
-			subProperty ? itemProperty[index][subProperty] = value : itemProperty[index] = value;
-
-			item.update({[propertyPath]: itemProperty});
+		if(property) {
+			foundry.utils.setProperty(item, name, value);
+			await item.update({[property]: foundry.utils.getProperty(item, property)});
 		}
 		else
-			item.update({[propertyPath]: value});
+			await item.update({[name]: value});
 	}
 
 	/**
-	 * Performs follow-up operations after left-clicks on an Item button.
-	 * @param {MouseEvent} event
+	 * Get the set of ContextMenu options which should be used for journal entry pages in the sidebar.
+	 * @returns {ContextMenuEntry[]}
+	 * @protected
+	 */
+	_getContextMenuOptions()
+	{
+		return [{
+			name: "ACTOR.ACTIONS.rollItem",
+			icon: '<i class="fa-solid fa-dice-d20"></i>',
+			condition: async li => {
+				const document = await fromUuidSync(li.closest("[data-uuid]").dataset.uuid);
+				return this.isEditable
+					&& document.canUserModify(game.user, "update")
+					&& ["action", "skill", "weapon"].includes(document.type)
+			},
+			callback: async li => {
+				const documentElement = li.closest("[data-uuid]"),
+					  options = {},
+					  face = li.closest(".face")?.dataset.face;
+
+				if(face)
+					options.face = face;
+
+				await fromUuid(documentElement.dataset.uuid).then(item => item.useItem(options));
+			}
+		}, {
+			name: "Expand",
+			icon: '<i class="fa-solid fa-chevron-down"></i>',
+			condition: li => li.closest(".row"),
+			callback: async li => {
+				const documentElement = li.closest(".item[data-uuid]");
+
+				if(documentElement.classList.contains("expanded")) {
+					// Toggle expansion for an item
+					const detailsElement = documentElement.querySelector(".details");
+
+					$(detailsElement).slideUp(200, () => detailsElement.remove());
+				}
+				else {
+					try {
+						// Add a div with the item's details below the row.
+						const detailsElement = document.createElement("div"),
+							  options = {},
+							  activeFace = documentElement.querySelector(".active[data-face]")?.dataset.face;
+
+						if(activeFace)
+							options.face = activeFace;
+
+						detailsElement.classList.add("details");
+						detailsElement.innerHTML = await fromUuid(documentElement.dataset.uuid)
+							.then(document => document.getDetails(options));
+
+						documentElement.append(detailsElement);
+						$(detailsElement).hide();
+						$(detailsElement).slideDown(200);
+					}
+					catch(error) {
+						console.error(error);
+					}
+				}
+
+				documentElement.classList.toggle("expanded");
+			}
+		}, {
+			name: "ACTOR.ACTIONS.flip",
+			icon: '<i class="fa-solid fa-undo"></i>',
+			condition: li => li.closest(".face") || li.querySelector(".face"),
+			callback: async li => {
+				const documentElement = li.closest(".item"),
+					  activeFaceElements = documentElement.querySelectorAll(".face.active"),
+					  inactiveFaceElements = documentElement.querySelectorAll(".face:not(.active)");
+
+				activeFaceElements.forEach(element => element.classList.remove("active"));
+				inactiveFaceElements.forEach(element => element.classList.add("active"));
+			}
+		}, {
+			name: "ACTOR.ACTIONS.editDocument",
+			icon: '<i class="fa-solid fa-pen-to-square"></i>',
+			condition: li => this.isEditable
+				&& fromUuidSync(li.closest("[data-uuid]").dataset.uuid).canUserModify(game.user, "update"),
+			callback: async li => await fromUuid(li.closest("[data-uuid]").dataset.uuid)
+				.then(document => document.sheet.render(true))
+		}, {
+			name: "Delete",
+			icon: '<i class="fa-solid fa-trash"></i>',
+			condition: li => this.isEditable
+				&& fromUuidSync(li.closest("[data-uuid]").dataset.uuid).canUserModify(game.user, "update"),
+			callback: async li => {
+				const document = await fromUuid(li.closest("[data-uuid]").dataset.uuid);
+
+				await foundry.applications.api.DialogV2.confirm({
+					window: {title: game.i18n.localize("APPLICATION.TITLE.DeleteItem")},
+					modal: true,
+					content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: document.name})}</p>`,
+					submit: async (result) => {
+						if(result)
+							await this.actor.deleteEmbeddedDocuments("Item", [document._id]);
+					}
+				});
+			}
+		}];
+	}
+
+	/**
+	 * Get a Document from its UUID.
+	 * @param {Event} event
+	 * @returns {Promise<Document>}
+	 * @protected
+	 */
+	async _getByUuid(event)
+	{
+		return await fromUuid(event.target.closest("[data-uuid]").dataset.uuid);
+	}
+
+	/**
+	 * Adds a new effect to the Actor.
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onItemLeftClick(event)
+	static async #addActiveEffect()
 	{
-		event.stopPropagation();
+		await this.actor.createEffect();
+	}
 
-		const item = this._getItemById(event);
-		if(["action", "skill", "weapon"].includes(item.type)) {
-			const options = {};
-			const face = $(event.currentTarget).parents(".face").data("face");
+	/**
+	 * Either increments or decrements a specific impairment value depending on the clicked button.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #adjustImpairment(event, target)
+	{
+		let amount = 0;
 
-			if(face)
-				options.face = face;
+		switch(event.button) {
+			case 0:
+				amount = 1;
+				break;
+			case 2:
+				amount = -1;
+				break;
+		}
 
-			item.useItem(options);
+		await this.actor.adjustImpairment(target.closest("[data-impairment]").dataset.impairment, amount);
+	}
+
+	/**
+	 * Either increments or decrements the quantity of a trapping depending on the clicked button.
+	 * @param {PointerEvent} event
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #adjustQuantity(event)
+	{
+		let amount = 0;
+
+		switch(event.button) {
+			case 0:
+				amount = 1;
+				break;
+			case 2:
+				amount = -1;
+				break;
+		}
+
+		await this._getByUuid(event).changeQuantity(event.ctrlKey ? amount * 10 : amount);
+	}
+
+	/**
+	 * Either adds or removes a recharge token on a WFRP3eItem depending on the clicked button.
+	 * @param {PointerEvent} event
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #adjustRechargeTokens(event)
+	{
+		const item = await this._getByUuid(event);
+		let amount = 0;
+
+		switch(event.button) {
+			case 0:
+				amount = 1;
+				break;
+			case 2:
+				amount = -1;
+				break;
+		}
+
+		await item.update({"system.rechargeTokens": item.system.rechargeTokens + amount});
+	}
+
+	/**
+	 * Either increases or decrements the amount of segment of the Actor's stance meter, depending on the clicked button
+	 * and the type of segment clicked.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #adjustStanceMeter(event, target)
+	{
+		let amount = 0;
+
+		switch(event.button) {
+			case 0:
+				amount = 1;
+				break;
+			case 2:
+				amount = -1;
+				break;
+		}
+
+		await this.actor.adjustStanceMeter(target.closest("[data-stance]").dataset.stance, amount);
+	}
+
+	/**
+	 * Asks for confirmation for a specific Document definitive removal.
+	 * @param {PointerEvent} event
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #deleteDocument(event)
+	{
+		const document = await this._getByUuid(event);
+
+		await foundry.applications.api.DialogV2.confirm({
+			window: {title: game.i18n.localize("APPLICATION.TITLE.DeleteItem")},
+			modal: true,
+			content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: document.name})}</p>`,
+			submit: async (result) => {
+				if(result)
+					await this.actor.deleteEmbeddedDocuments("Item", [document._id]);
+			}
+		});
+	}
+
+	/**
+	 * Opens a Document's sheet.
+	 * @param {PointerEvent} event
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #editDocument(event)
+	{
+		await this._getByUuid(event).then(document => document.sheet.render(true));
+	}
+
+	/**
+	 * Appends an element with additional details about a Document, or removes the element if it already exists.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #expandDocument(event, target)
+	{
+		const documentElement = target.closest(".item");
+
+		if(documentElement.classList.contains("row")) {
+			const icon = documentElement.querySelector('[data-action="expandDocument"] .fas');
+
+			if(documentElement.classList.contains("expanded")) {
+				// Toggle expansion for an item
+				const detailsElement = documentElement.querySelector(".details");
+
+				$(detailsElement).slideUp(200, () => detailsElement.remove());
+
+				icon.classList.remove("fa-chevron-up");
+				icon.classList.add("fa-chevron-down");
+			}
+			else {
+				// Add a div with the item's details below the row.
+				const detailsElement = document.createElement("div");
+				detailsElement.classList.add("details");
+				detailsElement.appendChild(
+					document.createTextNode(
+						await this._getByUuid(event).then(document => document.getDetails())
+					)
+				);
+
+				documentElement.append(detailsElement);
+				$(detailsElement).hide();
+				$(detailsElement).slideDown(200);
+
+				icon.classList.remove("fa-chevron-down");
+				icon.classList.add("fa-chevron-up")
+			}
+
+			documentElement.classList.toggle("expanded");
 		}
 	}
 
 	/**
-	 * Performs follow-up operations after right-clicks on an Item button.
-	 * @param {MouseEvent} event
+	 * Switches between two faces of a Document.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onItemRightClick(event)
+	static async #flip(event, target)
 	{
-		this._getItemById(event).sheet.render(true);
+		const itemElement = target.closest(".item"),
+			  activeFace = itemElement.querySelector(".face.active"),
+			  inactiveFace = itemElement.querySelector(".face:not(.active)");
+
+		activeFace.classList.remove("active");
+		inactiveFace.classList.add("active");
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on an Item roll button.
-	 * @param {MouseEvent} event
+	 * Shows an element containing filters allowing to refine search queries.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
 	 * @private
 	 */
-	_onItemRollClick(event)
+	static #openFilters(event, target)
 	{
-		const options = {};
-		const face = $(event.currentTarget).parents(".face").data("face");
+		target.closest(".search-bar").querySelector(".filter-container").classList.toggle("show");
+	}
+
+	/**
+	 * Initiates a check based on the clicked characteristic.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @private
+	 */
+	static #rollCharacteristicCheck(event, target)
+	{
+		this.actor.performCharacteristicCheck(target.dataset.characteristic);
+	}
+
+	/**
+	 * Makes usage of an Item depending on its type.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #rollItem(event, target)
+	{
+		const options = {},
+			  face = target.closest(".face")?.dataset.face;
 
 		if(face)
 			options.face = face;
 
-		this._getItemById(event).useItem(options);
+		await this._getByUuid(event).then(item => item.useItem(options));
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Trapping's quantity button.
-	 * @param {Number} amount
-	 * @param {MouseEvent} event
+	 * Switches the display mode of the Actor's embedded Items, between cards/game sheets or tables.
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	_onQuantityClick(amount, event)
+	static async #switchItemsDisplayMode()
 	{
-		this._getItemById(event).changeQuantity(event.ctrlKey ? amount * 10 : amount);
+		this.actor.setFlag(
+			"wfrp3e",
+			"embeddedItemsDisplayMode",
+			this.actor.getFlag("wfrp3e", "embeddedItemsDisplayMode") !== "tables" ? "tables" : "cards"
+		);
 	}
 
 	/**
-	 * Performs follow-up operations after left-clicks on a Card's recharge token button.
-	 * @param {Number} amount
-	 * @param {MouseEvent} event
+	 * Makes usage of an Item depending on its type.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	_onRechargeTokenClick(amount, event)
+	static async #useDocument(event, target)
 	{
-		const item = this._getItemById(event);
+		const document = await this._getByUuid(event);
 
-		item.update({"system.rechargeTokens": item.system.rechargeTokens + amount});
-	}
+		if(event.button === 0 && ["ability", "action", "skill", "talent", "weapon"].includes(document.type)) {
+			const options = {},
+				  face = target.closest(".face")?.dataset.face;
 
-	/**
-	 * Performs follow-up operations after clicks on a stance meter link.
-	 * @param {Number} amount
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_onStanceMeterLinkClick(amount, event)
-	{
-		this.actor.adjustStanceMeter(event.currentTarget.dataset.stance, amount);
-	}
+			if(face)
+				options.face = face;
 
-	/**
-	 * Performs follow-up operations after clicks on an effect trigger.
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_onEffectTriggerClick(event)
-	{
-		this._getItemById(event).useItem({id: event.target.dataset.id});
+			document.useItem(options);
+		}
+		else
+			await document.sheet.render(true);
 	}
 }

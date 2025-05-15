@@ -1,0 +1,24 @@
+<div class="impairment {{impairment.name}}">
+	{{#if (sameAs source.type "creature")}}
+		<span class="title">
+			{{impairment.label}}
+		</span>
+	{{/if}}
+
+	<a class="token"
+	   data-action="adjustImpairment"
+	   data-impairment="{{impairment.name}}"
+	   data-tooltip="{{localize (concat 'ACTOR.FIELDS.impairments.' impairment.name '.tokens')}}">
+		<img src="{{token}}" alt="{{localize (concat 'ACTOR.FIELDS.impairments.' impairment.name '.tokens')}}" />
+
+		<span class="token-counter">
+			{{getProperty source impairment.fieldPath}}
+		</span>
+	</a>
+
+	{{#if (sameAs source.type "character")}}
+		<span class="title">
+			{{impairment.label}}
+		</span>
+	{{/if}}
+</div>

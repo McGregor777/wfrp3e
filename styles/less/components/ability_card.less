@@ -1,70 +1,38 @@
-.ability-card {
+.ability.card {
+	background: #f8f0e0;
 	border: 1px solid black;
-	border-radius: 10px;
-	display: flex;
-	flex-direction: column;
+	border-radius: 0.5rem;
+	color: black;
+	display: grid;
+	grid-template-areas:
+		"name"
+		"description"
+		"bottom";
 	height: 255px;
-	margin: 8px;
+	margin: 0.5rem;
 	position: relative;
 	width: 385px;
 
-	& .ability-card-bottom {
-		display: flex;
-		margin: 0.25rem;
-
-		& .item-delete-link {
-			bottom: 5px;
-			display: block;
-			line-height: 0;
-			padding: 2px 3px;
-			position: absolute;
-			right: 5px;
-		}
-
-		& .recharge-token {
-			position: relative;
-			max-height: 48px;
-
-			& > img {
-				border: none;
-				height: 48px;
-				opacity: 75%;
-			}
-
-			& > .recharge-token-counter {
-				font-size: 32px;
-				left: 50%;
-				position: absolute;
-				text-shadow:
-						-1pt -1pt 0 white,
-						-1pt 0 0 white,
-						0 -1pt 0 white,
-						-1pt 1pt 0 white,
-						1pt -1pt 0 white,
-						0 1pt 0 white,
-						1pt 0 0 white,
-						1pt 1pt 0 white;
-				top: 60%;
-				transform: translate(-50%, -50%);
-			}
-
-			&:hover > .recharge-token-counter {
-				color: white;
-				text-shadow: 0 0 8px var(--color-shadow-primary);
-			}
-		}
+	& .bottom-line {
+		align-items: flex-end;
+		grid-area: bottom;
+		justify-content: space-between;
+		margin: 0.25rem 0.5rem;
+		position: relative;
 	}
 
-	& .ability-card-description {
+	& .description {
 		font-size: 12pt;
+		grid-area: description;
 		margin: auto 2rem;
 	}
 
-	& .ability-card-name {
+	& .name {
 		background: padding-box dimgrey;
 		color: white;
 		font: 20pt var(--font-title);
-		height: 50px;
+		grid-area: name;
+		height: 3rem;
 		margin: 0.5rem auto 0;
 		padding: 0.5rem;
 		text-align: center;

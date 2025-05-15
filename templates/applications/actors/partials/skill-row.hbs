@@ -1,0 +1,52 @@
+<div class="item skill row" data-uuid="{{skill.uuid}}">
+	<div class="content">
+		<div class="name">
+			{{#if @root.editable}}
+				<a data-action="rollItem" data-tooltip="{{localize 'ACTOR.ACTIONS.rollSkillCheck'}}">
+					<span>{{skill.name}}</span> <span class="fas fa-dice-d20"></span>
+				</a>
+			{{else}}
+				<span>{{skill.name}}</span>
+			{{/if}}
+		</div>
+
+		<div class="characteristic">
+			<span>{{localize (lookup (lookup @root.characteristics skill.system.characteristic) "abbreviation")}}</span>
+		</div>
+
+		<div class="training-level">
+			<input class="item-input"
+			       name="system.trainingLevel"
+			       value="1"
+			       type="checkbox"
+				   {{#if (superiorOrEqualTo skill.system.trainingLevel 1)}} checked{{/if}}
+				   {{#unless @root.editable}}disabled{{/unless}} />
+
+			<input class="item-input"
+			       name="system.trainingLevel"
+			       value="2"
+			       type="checkbox"
+				   {{#if (superiorOrEqualTo skill.system.trainingLevel 2)}} checked{{/if}}
+				   {{#unless @root.editable}}disabled{{/unless}} />
+
+			<input class="item-input"
+			       name="system.trainingLevel"
+			       value="3"
+			       type="checkbox"
+				   {{#if (superiorOrEqualTo skill.system.trainingLevel 3)}} checked{{/if}}
+				   {{#unless @root.editable}}disabled{{/unless}} />
+		</div>
+
+		<div class="buttons">
+			{{#if @root.editable}}
+				<a class="context-menu">
+					<span class="fas fa-ellipsis-vertical"></span>
+				</a>
+			{{else}}
+				<a data-action="expandDocument" data-tooltip="{{localize 'Expand'}}">
+					<span class="fas fa-chevron-down"></span>
+				</a>
+			{{/if}}
+		</div>
+	</div>
+</div>

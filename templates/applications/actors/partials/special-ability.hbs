@@ -1,0 +1,13 @@
+<div class="special-ability" data-index="{{index}}">
+	{{formInput fields.title
+				name=(replace fields.title.fieldPath "element" index)
+				value=specialAbility.title
+				id=(concat @root.rootId "-" fields.title.fieldPath)}}
+
+	{{formInput fields.description
+				name=(replace fields.description.fieldPath "element" index)
+				value=specialAbility.description
+				toggled=true
+				enriched=(lookup @root.enriched.specialAbilities index)
+				id=(concat @root.rootId "-" fields.description.fieldPath)}}
+</div>

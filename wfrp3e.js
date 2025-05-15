@@ -62,32 +62,36 @@ import * as handlebarsHelpers from "./modules/handlebars.js";
 async function preloadHandlebarsTemplates()
 {
 	const templatePaths = [
-		"systems/wfrp3e/templates/applications/items/trapping-data.hbs",
-		"systems/wfrp3e/templates/partials/ability-tab.hbs",
-		"systems/wfrp3e/templates/partials/action-tab.hbs",
-		"systems/wfrp3e/templates/partials/ability-track-editor-segment.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/ability-card.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/ability-row.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/ability-track.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/action-card.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/action-row.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/armour-row.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/attribute.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/career.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/career-sheet.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/characteristic.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/condition-card.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/creature-attribute.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/critical-wound-card.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/disease-card.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/impairment.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/insanity-card.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/miscast-card.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/money-row.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/mutation-card.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/rating.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/skill-row.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/special-ability.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/talent-card.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/talent-row.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/trapping-row.hbs",
+		"systems/wfrp3e/templates/applications/actors/partials/weapon-row.hbs",
+		"systems/wfrp3e/templates/applications/items/partials/trapping-data.hbs",
 		"systems/wfrp3e/templates/partials/action-effects.hbs",
-		"systems/wfrp3e/templates/partials/attribute-partial.hbs",
-		"systems/wfrp3e/templates/partials/item-career-sheet.hbs",
 		"systems/wfrp3e/templates/partials/character-generator-origin-description.hbs",
 		"systems/wfrp3e/templates/partials/character-generator-talent-card.hbs",
-		"systems/wfrp3e/templates/partials/characteristic-partial.hbs",
-		"systems/wfrp3e/templates/partials/impairment-partial.hbs",
-		"systems/wfrp3e/templates/partials/item-ability-card.hbs",
-		"systems/wfrp3e/templates/partials/item-action-card.hbs",
-		"systems/wfrp3e/templates/partials/item-armour-row.hbs",
-		"systems/wfrp3e/templates/partials/item-career-partial.hbs",
-		"systems/wfrp3e/templates/partials/item-condition-card.hbs",
-		"systems/wfrp3e/templates/partials/item-disease-card.hbs",
-		"systems/wfrp3e/templates/partials/item-insanity-card.hbs",
-		"systems/wfrp3e/templates/partials/item-money-row.hbs",
-		"systems/wfrp3e/templates/partials/item-mutation-card.hbs",
-		"systems/wfrp3e/templates/partials/item-miscast-card.hbs",
-		"systems/wfrp3e/templates/partials/item-skill-row.hbs",
-		"systems/wfrp3e/templates/partials/item-talent-card.hbs",
-		"systems/wfrp3e/templates/partials/item-trapping-row.hbs",
-		"systems/wfrp3e/templates/partials/item-weapon-row.hbs",
-		"systems/wfrp3e/templates/partials/item-wound-card.hbs"
 	];
 
 	return loadTemplates(templatePaths);
@@ -167,8 +171,8 @@ Hooks.once("init", async () => {
 
 	Actors.unregisterSheet("core", ActorSheet);
 	Actors.registerSheet("wfrp3e", WFRP3eCharacterSheet, {label: "Character Sheet", types: ["character"], makeDefault: true});
-	Actors.registerSheet("wfrp3e", WFRP3ePartySheet, {label: "Party Sheet", types: ["party"], makeDefault: true});
 	Actors.registerSheet("wfrp3e", WFRP3eCreatureSheet, {label: "Creature Sheet", types: ["creature"], makeDefault: true});
+	Actors.registerSheet("wfrp3e", WFRP3ePartySheet, {label: "Party Sheet", types: ["party"], makeDefault: true});
 	Actors.registerSheet("wfrp3e", WFRP3eGroupSheet, {label: "Group Sheet", types: ["group"], makeDefault: true});
 
 	Items.unregisterSheet("core", ItemSheet);

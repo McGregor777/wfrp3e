@@ -1,0 +1,126 @@
+<div class="item action card" data-uuid="{{action.uuid}}">
+	{{#each @root.stances as |stance st|}}
+		{{#with (lookup ../action.system st) as |face|}}
+			<div class="face {{st}}{{#if (equalTo ../../currentStance st)}} active{{/if}}" data-face="{{st}}">
+				<div class="header">
+					<img class="type" src="systems/wfrp3e/assets/icons/{{../../action.system.type}}.webp" />
+
+					<div class="difficulty-modifiers">
+						{{#for 0 face.difficultyModifiers.challengeDice 1}}
+							<span class="wfrp3e-font dice challenge"></span>
+						{{/for}}
+
+						{{#for 0 face.difficultyModifiers.misfortuneDice 1}}
+							<span class="wfrp3e-font dice misfortune"></span>
+						{{/for}}
+					</div>
+
+					{{#if @root.editable}}
+						<a class="name" data-action="rollItem" data-tooltip="{{localize 'ACTOR.ACTIONS.rollActionCheck'}}">
+							{{face.name}} <span class="fas fa-dice-d20 fa-2xs"></span>
+						</a>
+					{{else}}
+						<span class="name">{{face.name}}</span>
+					{{/if}}
+
+					<span class="traits">
+						{{face.traits}}
+					</span>
+
+					<span class="recharge-rating">
+						{{face.rechargeRating}}
+					</span>
+				</div>
+
+				<div class="check">
+					{{face.check}}
+				</div>
+
+				{{#if face.art}}
+					<img class="art-image" src="{{face.art}}" />
+				{{/if}}
+
+				<div class="requirements">
+					{{{face.requirements}}}
+				</div>
+
+				<div class="effects">
+					<table>
+						<tbody>
+							{{#if face.special}}
+								<tr><td>{{{striptags face.special "p"}}}</td></tr>
+							{{/if}}
+
+							{{#if face.uniqueEffect}}
+								<tr><td>{{{striptags face.uniqueEffect "p"}}}</td></tr>
+							{{/if}}
+
+							{{#each @root.symbols as |symbol sym|}}
+								{{#with (lookup face.effects sym) as |effects|}}
+									{{#if effects}}
+										<tr><td>
+											{{#each effects as |effect ef|}}
+												<div>
+													{{#for 0 effect.symbolAmount 1}}
+														{{#unless (and (or (sameAs sym "delay") (sameAs sym "exertion")) (superiorTo this 0))}}
+															<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+														{{else}}
+															<span class="wfrp3e-font symbol {{@root.symbols.bane.cssClass}}"></span>
+														{{/unless}}
+													{{/for}}
+
+													{{{striptags effect.description "p"}}}
+												</div>
+											{{/each}}
+										</td></tr>
+									{{/if}}
+								{{/with}}
+							{{/each}}
+						</tbody>
+					</table>
+
+					<div class="bottom-line">
+						<div>
+							<a data-action="flip" data-tooltip="{{localize 'ACTOR.ACTIONS.flip'}}">
+								<span class="fas fa-undo"></span>
+							</a>
+						</div>
+
+						{{#if @root.editable}}
+							<a class="recharge-token" data-action="adjustRechargeTokens"
+							   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}">
+								<img src="systems/wfrp3e/assets/images/token-black.webp"
+									 alt="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}" />
+								<span class="recharge-token-counter">{{../../action.system.rechargeTokens}}</span>
+							</a>
+
+							<div>
+								<a data-action="editDocument"
+								   data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+									<span class="fas fa-pen-to-square"></span>
+								</a>
+
+								<a data-action="deleteDocument"
+								   data-tooltip="{{localize 'Delete'}}">
+									<span class="fas fa-trash"></span>
+								</a>
+							</div>
+						{{else}}
+							<span class="recharge-token"
+								  data-tooltip="{{localize 'TALENT.FIELDS.rechargeTokens.label'}}">
+								<img src="systems/wfrp3e/assets/images/token-grey.webp"
+									 alt="{{localize 'TALENT.FIELDS.rechargeTokens.label'}}" />
+
+								<span class="recharge-token-counter">
+									{{{talent.system.rechargeTokens}}}
+								</span>
+							</span>
+
+							<div></div>
+						{{/if}}
+					</div>
+				</div>
+			</div>
+		{{/with}}
+	{{/each}}
+</div>

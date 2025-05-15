@@ -1,57 +1,113 @@
 import WFRP3eActorSheet from "./WFRP3eActorSheet.js";
 
+/** @inheritDoc */
 export default class WFRP3eCreatureSheet extends WFRP3eActorSheet
 {
-	constructor(object = {}, options = {})
-	{
-		super(object, options);
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {
+		actions: {adjustStance: {handler: this.#adjustStance, buttons: [0, 2]}},
+		classes: ["creature"],
+		position: {
+			width: 560,
+			height: 870
+		}
+	};
 
-		if(this.actor.system.nemesis)
-			this.position.height = 780;
-	}
+	/** @inheritDoc */
+	static PARTS = {
+		header: {template: "systems/wfrp3e/templates/applications/actors/creature-sheet/header.hbs"},
+		category: {template: "systems/wfrp3e/templates/applications/actors/creature-sheet/category.hbs"},
+		tabs: {template: "templates/generic/tab-navigation.hbs"},
+		attributes: {
+			template: "systems/wfrp3e/templates/applications/actors/creature-sheet/attributes.hbs",
+			scrollable: [".table-body"]
+		},
+		actions: {
+			template: "systems/wfrp3e/templates/applications/actors/actions.hbs",
+			scrollable: [".item-container", ".table-body"]
+		},
+		talents: {
+			template: "systems/wfrp3e/templates/applications/actors/talents.hbs",
+			scrollable: [".item-container", ".table-body"]
+		},
+		effects: {
+			template: "systems/wfrp3e/templates/applications/actors/effects.hbs",
+			scrollable: [".item-container", ".table-body"]
+		},
+		trappings: {template: "systems/wfrp3e/templates/applications/actors/trappings.hbs"},
+		details: {template: "systems/wfrp3e/templates/applications/actors/creature-sheet/details.hbs"}
+	};
 
-	static get defaultOptions()
-	{
-		return {
-			...super.defaultOptions,
-			width: 600,
-			height: 710,
-			classes: ["wfrp3e", "sheet", "actor", "creature", "creature-sheet"],
+	/** @inheritDoc */
+	static TABS = {
+		sheet: {
 			tabs: [
-				{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"},
-				{group: "actions", navSelector: ".action-tabs", contentSelector: ".actions", initial: "melee"},
-				{group: "abilities", navSelector: ".ability-tabs", contentSelector: ".abilities", initial: "ability"}
-			]
-		};
-	}
+				{id: "attributes"},
+				{id: "actions"},
+				{id: "talents"},
+				{id: "effects"},
+				{id: "trappings"},
+				{id: "details"}
+			],
+			initial: "attributes",
+			labelPrefix: "CREATURE.TABS"
+		}
+	};
 
 	/** @inheritDoc */
-	getData()
+	async _preparePartContext(partId, context)
 	{
-		return {
-			...super.getData(),
-			attributes: CONFIG.WFRP3e.attributes,
-		};
-	}
+		let partContext = await super._preparePartContext(partId, context);
 
-	/** @inheritDoc */
-	activateListeners(html)
-	{
-		super.activateListeners(html);
+		switch(partId) {
+			case "attributes":
+				partContext = {
+					...partContext,
+					attributes: CONFIG.WFRP3e.attributes,
+					characteristics: CONFIG.WFRP3e.characteristics,
+					enriched: {
+						specialRuleSummary: await foundry.applications.ux.TextEditor.enrichHTML(
+							this.actor.system.specialRuleSummary
+						)
+					},
+					fields: this.actor.system.schema.fields,
+					skills: this.actor.itemTypes.skill.sort((a, b) => a.name.localeCompare(b.name))
+				};
+				break;
+			case "category":
+			case "details":
+				partContext = {
+					...partContext,
+					enriched: {
+						description: await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.description)
+					},
+					fields: this.actor.system.schema.fields
+				};
+				break;
+		}
 
-		html.find(".stance-link")
-			.click(this._onStanceLinkClick.bind(this, 1))
-			.contextmenu(this._onStanceLinkClick.bind(this, -1));
+		return partContext;
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on the stance link.
-	 * @param {Number} amount
-	 * @param {MouseEvent} event
+	 * Changes the current stance of the Creature.
+	 * @param {PointerEvent} event
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	_onStanceLinkClick(amount, event)
+	static async #adjustStance(event)
 	{
-		this.actor.update({"system.stance.current": this.actor.system.stance.current + amount});
+		let amount = 0;
+
+		switch(event.button) {
+			case 0:
+				amount = 1;
+				break;
+			case 2:
+				amount = -1;
+				break;
+		}
+
+		await this.actor.update({"system.stance.current": this.actor.system.stance.current + amount});
 	}
 }

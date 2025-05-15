@@ -1,0 +1,21 @@
+<header class="sheet-header img-name">
+	<img src="{{source.img}}" data-action="editImage" data-edit="img" alt="{{localize fields.img.label}}">
+
+	{{formInput fields.name value=source.name id=(concat rootId "-" source.schema.name.fieldPath)}}
+
+	{{formGroup system.schema.fields.origin value=system.origin classes="stacked origin" rootId=rootId localize=true}}
+
+	<div class="form-group slim stacked experience">
+		<label for="{{concat rootId "-" system.schema.fields.experience.fields.total.fieldPath}}">
+			{{localize "CHARACTER.FIELDS.experience.label"}}
+		</label>
+
+		<div class="form-fields">
+			<span>{{system.experience.current}}</span>
+			/
+			{{formInput system.schema.fields.experience.fields.total
+						value=system.experience.total
+						id=(concat rootId "-" system.schema.fields.experience.fields.total.fieldPath)}}
+		</div>
+	</div>
+</header>

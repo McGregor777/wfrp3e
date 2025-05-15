@@ -18,9 +18,15 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 		return {
 			...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
 				object[stance] = new fields.SchemaField({
-					name: new fields.StringField({label: "ACTION.FIELDS.name.label"}),
+					name: new fields.StringField({
+						label: "ACTION.FIELDS.name.label",
+						textSearch: true
+					}),
 					art: new fields.FilePathField({categories: ["IMAGE"], label: "ACTION.FIELDS.art.label"}),
-					traits: new fields.StringField({label: "ACTION.FIELDS.traits.label"}),
+					traits: new fields.StringField({
+						label: "ACTION.FIELDS.traits.label",
+						textSearch: true
+					}),
 					rechargeRating: new fields.NumberField({
 						integer: true,
 						initial: 0,
@@ -47,8 +53,14 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 							required: true
 						}),
 					}),
-					check: new fields.StringField({label: "ACTION.FIELDS.check.label"}),
-					requirements: new fields.HTMLField({label: "ACTION.FIELDS.requirements.label"}),
+					check: new fields.StringField({
+						label: "ACTION.FIELDS.check.label",
+						textSearch: true
+					}),
+					requirements: new fields.HTMLField({
+						label: "ACTION.FIELDS.requirements.label",
+						textSearch: true
+					}),
 					special: new fields.HTMLField({label: "ACTION.FIELDS.special.label"}),
 					uniqueEffect: new fields.HTMLField({label: "ACTION.FIELDS.uniqueEffect.label"}),
 					effects: new fields.SchemaField({

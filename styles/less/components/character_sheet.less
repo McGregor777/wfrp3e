@@ -1,266 +1,253 @@
-.app.character-sheet {
-	& form {
-		display: flex;
-		flex-direction: column;
-
-		& .character-sheet-title {
-			border-bottom: none;
-			display: block;
-			font: small-caps bold var(--font-size-18) var(--font-primary);
-			margin: 0;
-			text-align: center;
+.application.wfrp3e.character .window-content {
+	& > header.sheet-header > .form-group.experience {
+		& input {
+			width: 2.25rem;
 		}
 
-		& .character-sheet-body {
-			flex: 1 1 0;
-			min-height: 0;
+		& .form-fields {
+			text-align: center;
+			width: 100%;
+		}
+	}
 
-			& .characteristics-tab {
-				&.active {
-					flex-direction: row !important;
-				}
+	& > section.tab {
+		flex-grow: 1;
+		min-height: 0;
 
-				& .attributes {
+		&.attributes {
+			flex-direction: row !important;
+			margin-top: 0.5rem;
+
+			& > *:first-child {
+				margin-top: 0 !important;
+			}
+
+			& .attributes {
+				display: flex;
+				flex: 1 1 240px;
+				flex-direction: column;
+				gap: 1rem;
+
+				& > .attributes-subdivision {
 					display: flex;
-					flex: 1 1 240px;
-					flex-direction: column;
+					flex-flow: row wrap;
 
-					& .attributes-subdivision {
-						display: flex;
-						flex-flow: row wrap;
+					& fieldset.attribute {
+						border: none;
+						flex: 1 0 5rem;
+						gap: 0.25rem;
+						padding: 0.25rem;
+						text-align: center;
 
-						& .attribute {
-							flex: 1 0 80px;
-							padding: 5px;
-							text-align: center;
+						& .form-group {
+							display: flex;
+							flex-direction: column;
 
-							& .attribute-input {
-								height: 60px;
-							}
-
-							& .attribute-input-container {
-								display: flex;
-								flex-direction: column;
-							}
-
-							& .attribute-label {
-								padding-top: 10px;
+							& input {
+								height: 4rem;
+								text-align: center;
 							}
 						}
 					}
-
-					& .cards {
-						overflow-y: scroll;
-
-						& > div:not(:last-child) .card {
-							margin-bottom: 20px;
-						}
-					}
 				}
 
-				& .characteristics-and-impairments {
-					display: flex;
-					flex-direction: column;
-					width: auto;
+				& .cards {
+					overflow-y: scroll;
 
-					& .characteristics-and-impairments-subdivision {
-						display: flex;
-						flex-direction: row;
-						flex-grow: 1;
+					& > div:not(:last-child) .card {
+						margin-bottom: 20px;
 					}
+				}
+			}
 
-					& .characteristics {
-						display: flex;
-						flex: 1 1 auto;
-						flex-direction: column;
-						justify-content: space-around;
-						padding: 0 10px;
+			& .characteristics-and-impairments {
+				display: flex;
+				flex-direction: column;
+				width: auto;
 
-						& .characteristic {
-							width: 130px;
+				& > div {
+					display: flex;
+					flex-direction: row;
+					flex-grow: 1;
+				}
 
-							& .characteristic-fortune-input {
-								background: white;
-								border-color: dimgray;
-								font-weight: bold;
-								height: 25px;
-								margin-left: 10px;
-								padding: 3px;
-								text-align: center;
-								width: 25px;
-							}
+				& .characteristics {
+					display: flex;
+					flex: 1 1 auto;
+					flex-direction: column;
+					justify-content: space-around;
+					padding: 0 0.5rem;
 
-							& .characteristic-input-container {
-								align-items: center;
-								display: flex;
-								flex-flow: row wrap;
-								justify-content: flex-end;
-							}
+					& .characteristic {
+						width: 130px;
 
-							& .characteristic-title {
-								font: small-caps bold var(--font-size-18) var(--font-primary);
-								text-align: center;
-							}
+						& .characteristic-container {
+							align-items: center;
+							display: flex;
+							flex-flow: row wrap;
+							justify-content: flex-end;
 
-							& .characteristic-rating-input {
-								background: lightcyan;
-								border-color: lightsteelblue;
+							& input[name$=".rating"] {
+								border-color: steelblue;
 								border-width: 2px;
 								display: block;
 								font-weight: bold;
 								height: 45px;
-								padding: 3px;
+								padding: 0.25rem;
 								text-align: center;
 								width: 35px;
 							}
+
+							& input[name$=".fortune"] {
+								border-color: darkgray;
+								font-weight: bold;
+								height: 1.5rem;
+								margin-left: 0.5rem;
+								padding: 0.25rem;
+								text-align: center;
+								width: 1.5rem;
+							}
 						}
-					}
 
-					& .impairments {
-						display: flex;
-						flex-direction: column;
-
-						& .token-counter {
-							left: 50%;
-							top: 50%;
-							transform: translate(-50%, -20%);
-						}
-
-						& .title {
-							transform: rotate(180deg);
+						& .characteristic-title {
+							font: small-caps bold var(--font-size-18) var(--font-primary);
+							text-align: center;
 						}
 					}
 				}
 
-				& .skills {
+				& .impairments {
 					display: flex;
-					flex: 1 1 370px;
 					flex-direction: column;
-					overflow: auto;
 
-					& .skill-row {
-						font-variant-caps: small-caps;
-					}
-				}
-
-				& .stance-meter h3 {
-					align-items: center;
-					display: flex;
-					gap: 0.25rem;
-					justify-content: center;
-					margin-bottom: 0.25rem;
-				}
-			}
-
-			& .talents-tab .character-sheet-talents .talent-container {
-				& > label {
-					margin-bottom: 2rem;
-
-					& > select {
-						margin: 0 0.5rem;
-						width: calc(100% - 1rem);
+					& .token-counter {
+						left: 50%;
+						top: 50%;
+						transform: translate(-50%, -20%);
 					}
 
-					& > .talent-card {
-						margin-bottom: 0;
+					& .title {
+						transform: rotate(180deg);
 					}
 				}
 			}
 
-			& .item-container .career-partial {
+			& .skills {
 				display: flex;
-				flex-flow: row wrap;
-				flex-grow: 1;
+				flex: 1 1 370px;
+				flex-direction: column;
+				overflow: auto;
+
+				& .skill-row {
+					font-variant-caps: small-caps;
+				}
+			}
+
+			& .stance-meter h3 {
+				align-items: center;
+				display: flex;
+				gap: 0.25rem;
 				justify-content: center;
+				margin-bottom: 0.25rem;
+			}
+		}
 
-				& .career-advancement {
-					flex: 1 1 300px;
+		&.actions,
+		&.talents {
+			gap: 0;
+		}
+	}
 
-					& h4 {
-						color: white;
-						text-align: center;
-						text-shadow:
-								-1pt -1pt 0 black,
-								-1pt 0 0 black,
-								0 -1pt 0 black,
-								-1pt 1pt 0 black,
-								1pt -1pt 0 black,
-								0 1pt 0 black,
-								1pt 0 0 black,
-								1pt 1pt 0 black;
-						font-variant-caps: small-caps;
-					}
+	& .character-sheet-title {
+		border-bottom: none;
+		display: block;
+		font: small-caps bold var(--font-size-18) var(--font-primary);
+		margin: 0;
+		text-align: center;
+	}
 
-					& > div {
-						&:first-child {
-							margin-top: 0.5rem;
-						}
+	& .item-container > .career {
+		display: flex;
+		flex-flow: row wrap;
+		flex-grow: 1;
+		justify-content: center;
 
-						&:not(:last-child) {
-							margin-bottom: 1rem;
-						}
+		& .career-advancement {
+			display: flex;
+			flex: 1 1;
+			flex-direction: column;
+			gap: 1rem;
 
-						& > *:not(:last-child) {
-							margin-bottom: 0.5rem;
-						}
-					}
+			& fieldset {
+				border: none;
+				padding: 0;
+				gap: 0.5rem;
 
-					& .career-form-div {
-						display: flex;
+				& > legend {
+					color: white;
+					text-align: center;
+					text-shadow:
+						-1pt -1pt 0 black,
+						-1pt 0 0 black,
+						0 -1pt 0 black,
+						-1pt 1pt 0 black,
+						1pt -1pt 0 black,
+						0 1pt 0 black,
+						1pt 0 0 black,
+						1pt 1pt 0 black;
+					font: var(--font-size-20) var(--font-title);
+					font-variant-caps: small-caps;
+				}
+			}
 
-						& > input[type=checkbox] {
-							flex: 0 1;
-							margin: 0.25rem;
-						}
+			& .form-group {
+				& > input[type=checkbox] {
+					align-self: baseline;
+				}
 
-						& > label {
-							flex: 1 1;
-						}
-					}
+				& > input[type=text] {
+					flex: 1 1 0;
+				}
+
+				& > label {
+					flex: 1 1;
 				}
 			}
 		}
 
-		& .character-sheet-header {
-			align-items: flex-start;
-			gap: 0.5rem;
+		& .career-sheet {
+			margin-bottom: 0;
+			margin-left: 0;
+			margin-top: 0;
 
-			& .actor-img {
-				margin-right: 0;
-			}
-
-			& > label {
-				flex-grow: 0;
-
-				&.name {
-					flex-grow: 1;
-					font: 32pt "Caslon Antique";
-					height: 100%;
-
-					& > input {
-						height: 100%;
-					}
-				}
-
-				&.experience {
-					& input {
-						width: 2.25rem;
-					}
-
-					& .input-container {
-						text-align: center;
-						width: 100%;
-					}
-				}
+			& .form-group {
+				text-align: center;
 			}
 		}
+	}
 
-		& .primary-tabs {
-			justify-content: space-between;
+	& .talent-container {
+		width: min-content;
 
-			& > * {
-				margin: 0 5px;
-			}
+		& .socket-select {
+			width: 100%;
+		}
+
+		& .talent.card {
+			margin-bottom: 0;
+		}
+	}
+}
+
+body.theme-light .application.wfrp3e.sheet .window-content {
+	& .characteristics-and-impairments .characteristics .characteristic .characteristic-container {
+		& input[name$=".rating"] {
+			background: lightcyan;
+			border-color: lightsteelblue;
+		}
+
+		& input[name$=".fortune"] {
+			background: white;
 		}
 	}
 }

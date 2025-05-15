@@ -1,165 +1,199 @@
 import WFRP3eActorSheet from "./WFRP3eActorSheet.js";
 
+/** @inheritDoc */
 export default class WFRP3ePartySheet extends WFRP3eActorSheet
 {
 	/** @inheritDoc */
-	static get defaultOptions()
+	static DEFAULT_OPTIONS = {
+		actions: {
+			addSocket: this.#addSocket,
+			adjustFortunePool: {handler: this.#adjustFortunePool, buttons: [0, 2]},
+			decreaseTensionMeter: this.#decreaseTensionMeter,
+			deleteSocket: this.#deleteSocket,
+			editEvent: this.#editEvent,
+			increaseTensionMeter: this.#increaseTensionMeter,
+			removeMember: this.#removeMember
+		},
+		classes: ["party"],
+		position: {width: 800}
+	};
+
+	/** @inheritDoc */
+	static PARTS = {
+		attributes: {
+			template: "systems/wfrp3e/templates/applications/actors/party-sheet/attributes.hbs",
+			scrollable: [".sockets"]
+		},
+		talents: {
+			template: "systems/wfrp3e/templates/applications/actors/talents.hbs",
+			scrollable: [".item-container", ".table-body"]
+		},
+		actions: {
+			template: "systems/wfrp3e/templates/applications/actors/actions.hbs",
+			scrollable: [".item-container", ".table-body"]
+		},
+		effects: {
+			template: "systems/wfrp3e/templates/applications/actors/effects.hbs",
+			scrollable: [".item-container", ".table-body"]
+		},
+		trappings: {template: "systems/wfrp3e/templates/applications/actors/trappings.hbs"},
+	};
+
+	/** @inheritDoc */
+	static TABS = {
+		sheet: {
+			tabs: [
+				{id: "attributes"},
+				{id: "talents"},
+				{id: "actions"},
+				{id: "effects"},
+				{id: "trappings"}
+			],
+			initial: "attributes",
+			labelPrefix: "PARTY.TABS"
+		}
+	};
+
+	/** @inheritDoc */
+	async _preparePartContext(partId, context)
 	{
-		return {
-			...super.defaultOptions,
-			width: 800,
-			height: 540,
-			classes: ["wfrp3e", "sheet", "actor", "party", "party-sheet"]
-		};
+		let partContext = await super._preparePartContext(partId, context);
+
+		switch(partId) {
+			case "attributes":
+				partContext = {
+					...partContext,
+					enriched: {
+						specialAbility: {
+							description: await foundry.applications.ux.TextEditor.enrichHTML(
+								this.actor.system.specialAbility.description
+							)
+						}
+					},
+					members: this.actor.system.members.map(member => fromUuidSync(member)),
+					fields: this.actor.system.schema.fields
+				};
+				break;
+		}
+
+		return partContext;
 	}
 
 	/** @inheritDoc */
-	getData()
+	_processFormData(event, form, formData)
 	{
-		return {
-			...super.getData(),
-			socketTypes: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"}
-		};
-	}
+		const data = foundry.utils.expandObject(formData.object);
 
-	/** @inheritDoc */
-	activateListeners(html)
-	{
-		super.activateListeners(html);
+		if(data.system.sockets.element.type) {
+			const socketData = data.system.sockets.element;
+			const sockets = [];
 
-		html.find(".party-sheet-tension-meter .party-sheet-tension-meter-segment").click(this._onTensionMeterSegmentClick.bind(this));
-		html.find(".party-sheet-tension-meter .party-sheet-tension-meter-plus").click(this._onTensionMeterPlusClick.bind(this));
-		html.find(".party-sheet-tension-meter .party-sheet-tension-meter-minus").click(this._onTensionMeterMinusClick.bind(this));
-		html.find(".party-sheet-members .party-sheet-member .party-sheet-member-portrait").click(this._onMemberPortraitClick.bind(this));
-		html.find(".party-sheet-members .party-sheet-member .party-sheet-member-remove").click(this._onMemberRemoveClick.bind(this));
-
-		html.find(".fortune-token")
-			.click(this._onFortunePoolClick.bind(this, 1))
-			.contextmenu(this._onFortunePoolClick.bind(this, -1));
-
-		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .socket-add").click(this._onSocketAdd.bind(this));
-		html.find(".party-sheet-footer .party-sheet-talent-socket-button-container .socket-remove").click(this._onSocketRemove.bind(this));
-	}
-
-	/** @inheritDoc */
-	async _onDrop(event)
-	{
-		super._onDrop(event);
-
-		const data = JSON.parse(event.dataTransfer.getData("text/plain"));
-		const droppedActor = await Actor.implementation.fromDropData(data);
-
-		this.actor.addNewMember(droppedActor);
-	}
-
-	/**
-	 * Performs follow-up operations clicks on a Party tension segment.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	_onTensionMeterSegmentClick(event)
-	{
-		this.actor.changePartyTensionValue($(event.target).find('input').val());
-	}
-
-	/**
-	 * Performs follow-up operations clicks on a Party tension meter's increase button.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	_onTensionMeterPlusClick(event)
-	{
-		this.actor.update({"system.tension.maximum": this.actor.system.tension.maximum + 1});
-	}
-
-	/**
-	 * Performs follow-up operations clicks on a Party tension meter's decrease button.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	_onTensionMeterMinusClick(event)
-	{
-		const newMaximumTensionValue = this.actor.system.tension.maximum - 1;
-		const tension = this.actor.system.tension;
-
-		tension.maximum--;
-		if(tension.value > tension.maximum)
-			tension.value = tension.maximum;
-
-		tension.events.forEach((event) => {
-			if(event.threshold >= this.actor.system.tension.maximum)
-				event.threshold = newMaximumTensionValue;
-		});
-
-		this.actor.update({"system.tension": tension});
-	}
-
-	/**
-	 * Performs follow-up operations clicks on a Party member's portrait.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	_onMemberPortraitClick(event)
-	{
-		game.actors.contents.find(actor => actor.id === $(event.currentTarget).parent(".party-sheet-member").data("actorId")).sheet.render(true);
-	}
-
-	/**
-	 * Performs follow-up operations clicks on a Party member's removal button.
-	 * @param event {MouseEvent}
-	 * @private
-	 */
-	async _onMemberRemoveClick(event)
-	{
-		const actorId = $(event.currentTarget).parent(".party-sheet-member").data("actorId");
-		const actorName = game.actors.get(actorId).name;
-
-		await new Dialog({
-			title: game.i18n.localize("APPLICATION.TITLE.MemberRemoval"),
-			content: "<p>" + game.i18n.format("APPLICATION.DESCRIPTION.MemberRemoval", {actor: actorName}) + "</p>",
-			buttons: {
-				confirm: {
-					icon: '<span class="fa fa-check"></span>',
-					label: game.i18n.localize("APPLICATION.BUTTON.Confirm"),
-					callback: async dlg => this.actor.removeMember(actorId)
-				},
-				cancel: {
-					icon: '<span class="fas fa-times"></span>',
-					label: game.i18n.localize("APPLICATION.BUTTON.Cancel")
+			if(Array.isArray(socketData.type))
+				for(let i = 0; i < socketData.type.length; i++) {
+					sockets.push({type: socketData.type[i]});
 				}
-			},
-			default: "confirm"
-		}).render(true);
+			else
+				sockets.push({type: socketData.type});
+
+			data.system.sockets = sockets;
+		}
+
+		return data;
+	}
+
+	/** @inheritDoc */
+	async _onDropActor(event, actor)
+	{
+		await this.actor.addNewPartyMember(actor);
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on the Fortune Pool's button.
-	 * @param {Number} amount
-	 * @param {MouseEvent} event
+	 * Adds a new socket to the Party.
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	_onFortunePoolClick(amount, event)
+	static async #addSocket()
 	{
-		this.actor.update({"system.fortunePool": this.actor.system.fortunePool + amount});
+		await this.actor.addNewSocket();
 	}
 
 	/**
-	 * Performs follow-up operations clicks on a Party socket addition button.
-	 * @param event {MouseEvent}
+	 * Either increments or decrements the amount of fortune points in the Party pool depending on the clicked button.
+	 * @param {PointerEvent} event
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onSocketAdd(event)
+	static async #adjustFortunePool(event)
 	{
-		this.actor.addNewSocket();
+		let amount = 0;
+
+		switch(event.button) {
+			case 0:
+				amount = 1;
+				break;
+			case 2:
+				amount = -1;
+				break;
+		}
+
+		await this.actor.update({"system.fortunePool": this.actor.system.fortunePool + amount});
 	}
 
 	/**
-	 * Performs follow-up operations clicks on a Party socket removal button.
-	 * @param event {MouseEvent}
+	 * Increases the Party's tension meter by one.
+	 * @param {PointerEvent} event
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onSocketRemove(event)
+	static async #increaseTensionMeter(event)
 	{
-		this.actor.removeLastSocket();
+		await this.actor.update({"system.tension.value": this.actor.system.tension.value + 1});
+	}
+
+	/**
+	 * Decreases the Party's tension meter by one.
+	 * @param {PointerEvent} event
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #decreaseTensionMeter(event)
+	{
+		await this.actor.update({"system.tension.max": this.actor.system.tension.max - 1});
+	}
+
+	/**
+	 * Deletes a specific socket of the Party.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #deleteSocket(event, target)
+	{
+		await this.actor.deleteSocket(target.closest("[data-index]").dataset.index);
+	}
+
+	/**
+	 * Opens the Party Event Editor to edit a specific Party event.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #editEvent(event, target)
+	{
+		await this.actor.editPartyEvent(target.closest(".event[data-index]").dataset.index);
+	}
+
+	/**
+	 * Removes a member from the Party's list of members.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 */
+	static async #removeMember(event, target)
+	{
+		const actorUuid = target.closest(".member[data-uuid]").dataset.uuid;
+		await this.actor.removeMember(await fromUuid(actorUuid) ?? actorUuid);
 	}
 }

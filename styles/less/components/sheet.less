@@ -274,6 +274,7 @@
 					color: var(--color-text-light-highlight);
 					display: flex;
 					font-weight: bold;
+					gap: 0.25rem;
 					padding: 0.25rem;
 					text-align: center;
 					text-shadow: 1px 1px var(--color-shadow-dark);
@@ -422,9 +423,10 @@
 	& header.sheet-header {
 		padding-bottom: 0.5rem;
 
-		& > input[name="name"] {
+		& input[name="name"] {
 			flex: 3;
 			font-family: var(--font-h1);
+			font-size: var(--font-size-32);
 			height: 100%;
 		}
 
@@ -547,16 +549,16 @@
 			& .stance-meter {
 				margin-bottom: 0.5rem;
 
-				& > .character-sheet-title .stance-meter-segment > img {
-					opacity: 50%;
-				}
-
 				& .stance-meter-segment {
 					display: block;
 					height: 27px;
 
 					&.active {
 						filter: drop-shadow(gold 0px 0px 4px);
+					}
+
+					&[data-action="adjustStanceMeter"] > img {
+						opacity: 50%;
 					}
 
 					& > img {
@@ -671,59 +673,18 @@
 						background: rgba(128, 128, 128, 0.125);
 					}
 
-					&.talent {
-						&.focus {
-							background: rgba(0, 0, 128, 0.125);
+					&.action {
+						& .details .face {
+							& > * {
+								align-items: center;
+								display: flex;
 
-							&:nth-of-type(even) {
-								background: rgba(0, 0, 255, 0.125);
-							}
-						}
-
-						&.order {
-							background: rgb(40, 28, 12, 0.125);
-
-							&:nth-of-type(even) {
-								background: rgb(80, 56, 24, 0.125);
-							}
-						}
-
-						&.reputation {
-							background: rgba(128, 0, 128, 0.125);
-
-							&:nth-of-type(even) {
-								background: rgba(255, 0, 255, 0.125);
-							}
-						}
-
-						&.tactic {
-							background: rgba(128, 0, 0, 0.125);
-
-							&:nth-of-type(even) {
-								background: rgba(255, 0, 0, 0.125);
-							}
-						}
-
-						&.trick {
-							background: rgba(0, 128, 0, 0.125);
-
-							&:nth-of-type(even) {
-								background: rgba(0, 255, 0, 0.125);
-							}
-						}
-					}
-
-					& .content {
-						align-items: center;
-						display: flex;
-						text-align: center;
-
-						&.face {
-							&:not(.active) {
-								display: none;
+								& > * {
+									flex: 1;
+								}
 							}
 
-							&.conservative {
+							&.conservative > * {
 								background: rgba(0, 128, 0, 0.125);
 
 								&:nth-of-type(even) {
@@ -731,13 +692,57 @@
 								}
 							}
 
-							&.reckless {
-								background: rgba(128, 0, 0, 0.125);
+							&.reckless > * {
+								background: rgba(64, 0, 0, 0.125);
 
 								&:nth-of-type(even) {
 									background: rgba(255, 0, 0, 0.125);
 								}
 							}
+
+						}
+					}
+
+					&.talent {
+						&.trick .content {
+							background: rgba(0, 255, 0, 0.125);
+						}
+
+						&.focus .content {
+							background: rgba(0, 0, 255, 0.125);
+						}
+
+						&.order .content {
+							background: rgb(40, 28, 12, 0.125);
+						}
+
+						&.tactic .content {
+							background: rgba(255, 0, 0, 0.125);
+						}
+
+						&.reputation .content {
+							background: rgba(255, 0, 128, 0.125);
+						}
+					}
+
+					& .content {
+						align-items: center;
+						display: flex;
+						gap: 0.25rem;
+						text-align: center;
+
+						&.face {
+							&:not(.active) {
+								display: none;
+							}
+						}
+
+						&.conservative {
+							background: rgba(0, 255, 0, 0.125);
+						}
+
+						&.reckless {
+							background: rgba(255, 0, 0, 0.125);
 						}
 					}
 				}
@@ -876,6 +881,7 @@ body.theme-light .application.wfrp3e.sheet .window-content {& a.active {
 
 	& fieldset {
 		&.inline {
+			align-items: center;
 			flex-flow: row wrap;
 			justify-content: space-between;
 

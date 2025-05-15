@@ -1,0 +1,31 @@
+<div class="item condition card" data-uuid="{{condition.uuid}}">
+	<div class="header">
+		{{#if @root.editable}}
+			<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+				{{condition.name}}
+			</a>
+		{{else}}
+			<span>{{condition.name}}</span>
+		{{/if}}
+	</div>
+
+	<div class="duration">
+		{{localize (lookup @root.durations condition.system.duration)}}
+	</div>
+
+	<div class="description">
+		{{{condition.system.description}}}
+	</div>
+
+	<div class="bottom-line">
+		{{#if @root.editable}}
+			<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+				<span class="fas fa-pen-to-square"></span>
+			</a>
+
+			<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+				<span class="fas fa-trash"></span>
+			</a>
+		{{/if}}
+	</div>
+</div>

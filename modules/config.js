@@ -102,52 +102,48 @@ export const WFRP3e = {
 	},
 	attributes: {
 		aggression: {
-			name: "ATTRIBUTE.Aggression",
-			abbreviation: "ATTRIBUTE.ABBREVIATION.Aggression"
+			name: "CREATURE.FIELDS.attributes.aggression.label",
+			abbreviation: "CREATURE.FIELDS.attributes.aggression.abbreviation"
 		},
 		cunning: {
-			name: "ATTRIBUTE.Cunning",
-			abbreviation: "ATTRIBUTE.ABBREVIATION.Cunning"
+			name: "",
+			abbreviation: "CREATURE.FIELDS.attributes.cunning.abbreviation"
 		},
 		expertise: {
-			name: "ATTRIBUTE.Expertise",
-			abbreviation: "ATTRIBUTE.ABBREVIATION.Expertise"
+			name: "CREATURE.FIELDS.attributes.expertise.label",
+			abbreviation: "CREATURE.FIELDS.attributes.expertise.abbreviation"
 		}
 	},
 	characteristics: {
 		strength: {
-			name: "CHARACTERISTICS.strength.name",
-			abbreviation: "CHARACTERISTICS.strength.abbreviation",
+			name: "ACTOR.FIELDS.characteristics.strength.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.strength.abbreviation",
 			type: "physical"
 		},
 		toughness: {
-			name: "CHARACTERISTICS.toughness.name",
-			abbreviation: "CHARACTERISTICS.toughness.abbreviation",
+			name: "ACTOR.FIELDS.characteristics.toughness.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.toughness.abbreviation",
 			type: "physical"
 		},
 		agility: {
-			name: "CHARACTERISTICS.agility.name",
-			abbreviation: "CHARACTERISTICS.agility.abbreviation",
+			name: "ACTOR.FIELDS.characteristics.agility.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.agility.abbreviation",
 			type: "physical"
 		},
 		intelligence: {
-			name: "CHARACTERISTICS.intelligence.name",
-			abbreviation: "CHARACTERISTICS.intelligence.abbreviation",
+			name: "ACTOR.FIELDS.characteristics.intelligence.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.intelligence.abbreviation",
 			type: "mental"
 		},
 		willpower: {
-			name: "CHARACTERISTICS.willpower.name",
-			abbreviation: "CHARACTERISTICS.willpower.abbreviation",
+			name: "ACTOR.FIELDS.characteristics.willpower.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.willpower.abbreviation",
 			type: "mental"
 		},
 		fellowship: {
-			name: "CHARACTERISTICS.fellowship.name",
-			abbreviation: "CHARACTERISTICS.fellowship.abbreviation",
+			name: "ACTOR.FIELDS.characteristics.fellowship.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.fellowship.abbreviation",
 			type: "mental"
-		},
-		varies: {
-			name: "CHARACTERISTICS.varies.name",
-			abbreviation: "CHARACTERISTICS.varies.abbreviation"
 		}
 	},
 	challengeLevels: {
@@ -1012,55 +1008,64 @@ export const WFRP3e = {
 			cssClass: "success",
 			name: "SYMBOL.NAMES.successes",
 			plural: "successes",
-			result: "SYMBOL.AMOUNT.successes"
+			result: "SYMBOL.AMOUNT.successes",
+			type: "positive"
 		},
 		righteousSuccess: {
 			cssClass: "righteous-success",
 			name: "SYMBOL.NAMES.righteousSuccesses",
 			plural: "righteousSuccesses",
-			result: "SYMBOL.AMOUNT.righteousSuccesses"
+			result: "SYMBOL.AMOUNT.righteousSuccesses",
+			type: "positive"
 		},
 		boon: {
 			cssClass: "boon",
 			name: "SYMBOL.NAMES.boons",
 			plural: "boons",
-			result: "SYMBOL.AMOUNT.boons"
+			result: "SYMBOL.AMOUNT.boons",
+			type: "positive"
 		},
 		sigmarsComet: {
 			cssClass: "sigmars-comet",
 			name: "SYMBOL.NAMES.sigmarsComets",
 			plural: "sigmarsComets",
-			result: "SYMBOL.AMOUNT.sigmarsComets"
+			result: "SYMBOL.AMOUNT.sigmarsComets",
+			type: "positive"
 		},
 		challenge: {
 			cssClass: "challenge",
 			name: "SYMBOL.NAMES.challenges",
 			plural: "challenges",
-			result: "SYMBOL.AMOUNT.challenges"
+			result: "SYMBOL.AMOUNT.challenges",
+			type: "negative"
 		},
 		bane: {
 			cssClass: "bane",
 			name: "SYMBOL.NAMES.banes",
 			plural: "banes",
-			result: "SYMBOL.AMOUNT.banes"
+			result: "SYMBOL.AMOUNT.banes",
+			type: "negative"
 		},
 		chaosStar: {
 			cssClass: "chaos-star",
 			name: "SYMBOL.NAMES.chaosStars",
 			plural: "chaosStars",
-			result: "SYMBOL.AMOUNT.chaosStars"
+			result: "SYMBOL.AMOUNT.chaosStars",
+			type: "negative"
 		},
 		delay: {
 			cssClass: "delay",
 			name: "SYMBOL.NAMES.delays",
 			plural: "delays",
-			result: "SYMBOL.AMOUNT.delays"
+			result: "SYMBOL.AMOUNT.delays",
+			type: "negative"
 		},
 		exertion: {
 			cssClass: "exertion",
 			name: "SYMBOL.NAMES.exertions",
 			plural: "exertions",
-			result: "SYMBOL.AMOUNT.exertions"
+			result: "SYMBOL.AMOUNT.exertions",
+			type: "negative"
 		}
 	},
 	talentTypes: {

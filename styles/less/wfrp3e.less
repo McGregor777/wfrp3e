@@ -22,20 +22,16 @@
 @import "components/typography";
 @import "components/variables";
 @import "components/weapon_sheet";
-@import "components/wound_card";
+@import "components/critical_wound_card";
 
 h3 {
 	font: 16pt var(--font-title);
-
-	&.entity-name, .encounters &, .folder-header &, #players &, #pause & {
-		background: unset;
-		border: unset !important;
-	}
 }
 
 h4 {
-	font: 16pt var(--font-title);
+	font: 16pt var(--font-primary);
 	margin: auto !important;
+	font-variant-caps: small-caps;
 }
 
 h5 {
@@ -144,6 +140,43 @@ th {
 
 .playlists-sidebar h4 {
 	height: auto;
+}
+
+.recharge-token {
+	display: block;
+	position: relative;
+
+	& > img {
+		border: none;
+		display: block;
+		height: 3rem;
+		opacity: 75%;
+	}
+
+	& > .recharge-token-counter {
+		color: black;
+		display: block;
+		font-size: 24pt;
+		position: absolute;
+		text-align: center;
+		text-shadow:
+				-1pt -1pt 0 white,
+				-1pt 0 0 white,
+				0 -1pt 0 white,
+				-1pt 1pt 0 white,
+				1pt -1pt 0 white,
+				0 1pt 0 white,
+				1pt 0 0 white,
+				1pt 1pt 0 white;
+		top: 100%;
+		transform: translateY(-100%);
+		width: 100%;
+	}
+
+	&:hover > .recharge-token-counter {
+		color: white;
+		text-shadow: 0 0 0.5rem var(--color-shadow-primary);
+	}
 }
 
 .reckless-stance-meter {

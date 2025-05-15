@@ -2,8 +2,10 @@ import ActionSelector from "../applications/ActionSelector.js";
 import CareerSelector from "../applications/CareerSelector.js";
 import CharacteristicUpgrader from "../applications/CharacteristicUpgrader.js";
 import CheckBuilder from "../applications/CheckBuilder.js";
+import PartyEventEditor from "../applications/PartyEventEditor.js";
 import TalentSelector from "../applications/TalentSelector.js";
 import TrainingSelector from "../applications/TrainingSelector.js";
+import WFRP3eEffect from "./WFRP3eEffect.js";
 import {capitalize} from "../helpers.js";
 
 /**
@@ -18,7 +20,7 @@ export default class WFRP3eActor extends Actor
 	{
 		try {
 			// Call `prepareOwned<Type>` function
-			let functionName = `_prepare${capitalize(this.type)}`;
+			let functionName = `#prepare${capitalize(this.type)}`;
 
 			if(this[`${functionName}`])
 				this[`${functionName}`]();
@@ -28,6 +30,20 @@ export default class WFRP3eActor extends Actor
 		}
 
 		super.prepareDerivedData();
+	}
+
+	/**
+	 * Creates a new WFRP3eEffect for the WFRP3eActor.
+	 * @param {Object} [data] An Object of optional data for the new WFRP3eEffect.
+	 * @returns {Promise<void>}
+	 */
+	async createEffect(data = {})
+	{
+		await WFRP3eEffect.create({
+			name: game.i18n.localize("DOCUMENT.ActiveEffect"),
+			img: "icons/svg/dice-target.svg",
+			...data
+		}, {parent: this});
 	}
 
 	performCharacteristicCheck(characteristic)
@@ -55,12 +71,93 @@ export default class WFRP3eActor extends Actor
 	/**
 	 * Adds or removes a specified amount of segments on either side on the stance meter.
 	 */
-	adjustStanceMeter(stance, amount)
+	async adjustStanceMeter(stance, amount)
 	{
 		if(this.system.stance[stance] + amount < 0)
-			ui.notifications.warn(game.i18n.localize("CHARACTER.SHEET.MinimumSegmentWarning"));
+			ui.notifications.warn(game.i18n.localize("CHARACTER.WARNINGS.minimumSegment"));
 
-		this.update({system: {stance: {[`${stance}`]: this.system.stance[stance] + amount}}});
+		await this.update({system: {stance: {[`${stance}`]: this.system.stance[stance] + amount}}});
+	}
+
+	/**
+	 * Builds up the list of Talent Sockets available for the Actor by Talent type.
+	 */
+	async buildSocketList()
+	{
+		const socketsByType = Object.fromEntries(
+				  ["any", ...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"].map(key => [key, {}])
+			  ),
+			  currentCareer = this.system.currentCareer,
+			  currentParty = this.system.currentParty
+
+		if(currentCareer) {
+			currentCareer.system.sockets.forEach((socket, index) => {
+				// Find a potential Item that would be socketed in that socket.
+				const item = this.items.search({
+					filters: [{
+						field: "system.socket",
+						operator: "is_empty",
+						negate: true
+					}, {
+						field: "system.socket",
+						operator: "equals",
+						negate: false,
+						value: `${currentCareer.uuid}_${index}`
+					}]
+				})[0];
+
+				socketsByType[socket.type][currentCareer.uuid + "_" + index] =
+					currentCareer.name + " - " + (item
+						? game.i18n.format("TALENT.SOCKET.taken", {
+							type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
+							talent: item.name
+						})
+						: game.i18n.format("TALENT.SOCKET.available", {
+							type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
+						}));
+			});
+		}
+
+		if(currentParty) {
+			for(const socketIndex in currentParty.system.sockets) {
+				const socket = currentParty.system.sockets[socketIndex];
+				let item = null;
+
+				for(const member of currentParty.system.members) {
+					// Find a potential Item that would be socketed in that socket.
+					item = await fromUuid(member).then(actor => actor?.items.search({
+						filters: [{
+							field: "system.socket",
+							operator: "is_empty",
+							negate: true
+						}, {
+							field: "system.socket",
+							operator: "equals",
+							negate: false,
+							value: `${currentParty.uuid}_${socketIndex}`
+						}]
+					})[0]);
+
+					if(item)
+						break;
+				}
+
+				socketsByType[socket.type][currentParty.uuid + "_" + socketIndex] =
+					currentParty.name + " - " + (item
+						? game.i18n.format("TALENT.SOCKET.taken", {
+							type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
+							talent: item.name
+						})
+						: game.i18n.format("TALENT.SOCKET.available", {
+							type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
+						}));
+			}
+		}
+
+		for(const itemType of Object.keys(CONFIG.WFRP3e.talentTypes))
+			Object.assign(socketsByType[itemType], socketsByType["any"]);
+
+		return socketsByType;
 	}
 
 	/**
@@ -70,8 +167,8 @@ export default class WFRP3eActor extends Actor
 	 */
 	async buyAdvance(career, type)
 	{
-		if(this.system.experience.current > 0)
-			ui.notifications.warn(game.i18n.localize("CHARACTER.SHEET.NoExperienceLeft"));
+		if(this.system.experience.current <= 0)
+			return ui.notifications.warn(game.i18n.localize("CHARACTER.WARNINGS.noExperienceLeft"));
 
 		switch(type) {
 			case "action":
@@ -91,7 +188,7 @@ export default class WFRP3eActor extends Actor
 				break;
 
 			case "wound":
-				this.update({
+				await this.update({
 					system: {
 						wounds: {
 							max: this.system.wounds.max + 1,
@@ -99,7 +196,7 @@ export default class WFRP3eActor extends Actor
 						}
 					}
 				});
-				career.update({"system.advances.wound": game.i18n.localize("CHARACTER.WoundThreshold")});
+				await career.update({"system.advances.wound": game.i18n.localize("CHARACTER.woundThreshold")});
 				break;
 
 			case "dedicationBonus":
@@ -109,7 +206,7 @@ export default class WFRP3eActor extends Actor
 
 					if(careerAbility) {
 						await Item.createDocuments([careerAbility], {parent: this});
-						career.update({"system.advances.dedicationBonus": careerAbility.name});
+						await career.update({"system.advances.dedicationBonus": careerAbility.name});
 						break;
 					}
 				}
@@ -160,7 +257,7 @@ export default class WFRP3eActor extends Actor
 						wound: {
 							label: game.i18n.localize("NEWCAREERADVANCESELECTION.BUTTONS.Wound"),
 							callback: async dlg => {
-								this.update({
+								await this.update({
 									system: {
 										wounds: {
 											max: this.system.wounds.max + 1,
@@ -169,16 +266,16 @@ export default class WFRP3eActor extends Actor
 									}
 								});
 
-								career.update({"system.advances.wound": game.i18n.localize("CHARACTER.WoundThreshold")});
+								await career.update({"system.advances.wound": game.i18n.localize("CHARACTER.woundThreshold")});
 							}
 						},
 						conservative: {
 							label: game.i18n.localize("NEWCAREERADVANCESELECTION.BUTTONS.Conservative"),
-							callback: async dlg => this.update({"system.stance.conservative": this.system.stance.conservative + 1})
+							callback: async dlg => await this.update({"system.stance.conservative": this.system.stance.conservative + 1})
 						},
 						reckless: {
 							label: game.i18n.localize("NEWCAREERADVANCESELECTION.BUTTONS.Reckless"),
-							callback: async dlg => this.update({"system.stance.reckless": this.system.stance.reckless + 1})
+							callback: async dlg => await this.update({"system.stance.reckless": this.system.stance.reckless + 1})
 						}
 					}
 				}, {classes: ["new-career-advance-selection"]}).render(true);
@@ -186,26 +283,30 @@ export default class WFRP3eActor extends Actor
 		}
 	}
 
-	removeAdvance(career, type)
-	{
-		const updates = {system: {advances: career.system.advances}};
-
-		if(isNaN(type))
-			updates.system.advances[type] = "";
-		else
-			updates.system.advances.open[type] = "";
-
-		career.update(updates);
-	}
-
 	/**
-	 * Changes the WFRP3eActor's current Career.
-	 * @param career {WFRP3eItem} The new current Career.
-	 * @see {WFRP3eItem._onCareerUpdate}  Performs follow-up
+	 * Removes a Career's advance, resetting its cost and type.
+	 * @param {WFRP3eItem} career The Career owning the advance.
+	 * @param {String} type The advance type.
+	 * @param {Number} [index] The index of the non-career advance, if relevant.
+	 * @returns {Promise<void>}
 	 */
-	changeCurrentCareer(career)
+	async removeAdvance(career, type, index = null)
 	{
-		career.update({"system.current": true});
+		switch(type) {
+			case "careerTransition":
+				await career.update({"system.advances.careerTransition": {cost: 0, newCareer: null}});
+				break;
+			case "nonCareer":
+				if(!index)
+					throw new Error("Unable to remove non-career advance without the index of the advance.");
+
+				foundry.utils.setProperty(career, `system.advances.nonCareer.${index}`, {cost: 0, type: null});
+
+				await career.update({"system.advances.nonCareer": career.system.advances.nonCareer});
+				break;
+			default:
+				await career.update({[`system.advances.${type}`]: null});
+		}
 	}
 
 	/**
@@ -213,50 +314,9 @@ export default class WFRP3eActor extends Actor
 	 * @param {String} impairment The impairment to update.
 	 * @param {Number} value The value to add to the impairment.
 	 */
-	adjustImpairment(impairment, value)
+	async adjustImpairment(impairment, value)
 	{
-		this.update({[`system.impairments.${impairment}`]: this.system.impairments[impairment] + value});
-	}
-
-	/**
-	 * Adds a WFRP3eActor as a new member of the Party.
-	 * @param {WFRP3eActor} newMember
-	 */
-	addNewMember(newMember)
-	{
-		const members = this.system.members;
-
-		if(!members.includes(newMember.id)) {
-			members.push(newMember.id);
-
-			this.update({"system.members": members});
-
-			newMember.update({"system.party": this._id});
-		}
-	}
-
-	/**
-	 * Removes a WFRP3eActor from the Party.
-	 * @param {string} quittingMemberId The Actor ID of the quitting member.
-	 */
-	removeMember(quittingMemberId)
-	{
-		const members = this.system.members;
-
-		if(members.includes(quittingMemberId)) {
-			members.splice(members.indexOf(quittingMemberId), 1);
-
-			this.update({"system.members": members});
-		}
-	}
-
-	/**
-	 * Changes the Party Tension value.
-	 * @param {Number} newValue
-	 */
-	changePartyTensionValue(newValue)
-	{
-		this.update({"system.tension.value": newValue});
+		await this.update({[`system.impairments.${impairment}`]: this.system.impairments[impairment] + value});
 	}
 
 	/**
@@ -265,7 +325,9 @@ export default class WFRP3eActor extends Actor
 	 */
 	preventMultipleItemsOnSameSocket(item)
 	{
-		const actors = this.system.currentParty ? this.system.currentParty.memberActors : [this],
+		const actors = this.system.currentParty
+				  ? this.system.currentParty.members.map(async member => fromUuidSync(member))
+				  : [this],
 			  items = actors.reduce((items, actor) => {
 				  items.push(...actor.items.search({
 					  filters: [
@@ -289,45 +351,53 @@ export default class WFRP3eActor extends Actor
 				  return items;
 			  }, []);
 
-		items.forEach(item => item.update({"system.socket": ""}));
+		for(const item of items) {
+			item.update({"system.socket": ""});
+		}
 	}
 
 	/**
-	 * Resets the socket of every Actor's which socket matches a string.
-	 * @param {string} match The string the socket must match.
+	 * Resets every matching socket available to the Actor.
+	 * @param {string} uuid The UUID of the Document owning the sockets to reset.
 	 */
-	resetSocket(match)
+	resetSockets(uuid)
 	{
-		this.items.search({
-			filters: [{
-				field: "system.socket",
-				operator: "is_empty",
-				negate: true
-			}, {
-				field: "system.socket",
-				operator: "starts_with",
-				negate: false,
-				value: match
-			}]
-		}).forEach(item => item.update({"system.socket": null}));
+		const documents = this.items.search({
+			filters: [
+				{
+					field: "system.socket",
+					operator: "is_empty",
+					negate: true
+				}, {
+					field: "system.socket",
+					operator: "starts_with",
+					negate: false,
+					value: uuid
+				}
+			]
+		});
+
+		for(const document of documents) {
+			document.update({"system.socket": null});
+		}
 	}
 
 	/**
 	 * Adds a new socket to the Actor's list of sockets.
 	 */
-	addNewSocket()
+	async addNewSocket()
 	{
-		this.update({"system.sockets": [...this.system.sockets, {item: null, type: "any"}]});
+		await this.update({"system.sockets": [...this.system.sockets, {item: null, type: "any"}]});
 	}
 
 	/**
-	 * Removes the last socket from the Actor's list of sockets.
+	 * Deletes a socket from the Actor's list of sockets.
+	 * @param {Number} index The index of the socket to remove.
 	 */
-	removeLastSocket()
+	async deleteSocket(index)
 	{
-		const sockets = this.system.sockets;
-		sockets.pop();
-		this.update({"system.sockets": sockets});
+		this.system.sockets.splice(index, 1);
+		await this.update({"system.sockets": this.system.sockets});
 	}
 
 	/**
@@ -401,7 +471,7 @@ export default class WFRP3eActor extends Actor
 
 		switch(this.type) {
 			case "party":
-				this._onPartyDelete(options, userId);
+				this.#onPartyDelete(options, userId);
 				break;
 		}
 	}
@@ -409,50 +479,92 @@ export default class WFRP3eActor extends Actor
 	/** @inheritDoc */
 	_onUpdate(changed, options, userId)
 	{
-		super._onUpdate(changed, options, userId);
-
 		switch(this.type) {
 			case "party":
-				this._onPartyUpdate(changed, options, userId);
+				this.#onPartyUpdate(changed, options, userId);
 				break;
+		}
+
+		super._onUpdate(changed, options, userId);
+	}
+
+	//#region Party methods
+
+	/**
+	 * Adds a WFRP3eActor as a new member of the Party.
+	 * @param {WFRP3eActor} actor
+	 */
+	async addNewPartyMember(actor)
+	{
+		const members = this.system.members;
+
+		if(actor.type !== "character")
+			ui.notifications.warn(game.i18n.format("PARTY.WARNINGS.notACharacter", {name: actor.name}));
+		else if(members.includes(actor.uuid))
+			ui.notifications.warn(game.i18n.format("PARTY.WARNINGS.alreadyMember", {name: actor.name}));
+		else {
+			members.push(actor.uuid);
+			await this.update({"system.members": members});
+			await actor.update({"system.party": this.uuid});
 		}
 	}
 
 	/**
-	 * Prepares Party's data.
-	 * @private
+	 * Opens the Party Event Editor to edit a Party event.
+	 * @param index {string} The index to the event to edit.
 	 */
-	_prepareParty()
+	async editPartyEvent(index)
 	{
-		this._getMembers();
+		await new PartyEventEditor({
+			data: {
+				event: this.system.tension.events[index],
+				index,
+				party: this
+			}
+		}).render(true);
 	}
 
 	/**
-	 * Fetches the Actor of each member of the Party.
-	 * @private
+	 * Prompts a Dialog to confirm the removal of a WFRP3eActor from the member list of the Party.
+	 * @param {WFRP3eActor|String} actor Either the WFRP3eActor to remove or the member's UUID.
 	 */
-	_getMembers()
+	async removeMember(actor)
 	{
-		this.memberActors = this.system.members.map(memberId => game.actors.contents.find(actor => actor.id === memberId));
+		if(actor instanceof WFRP3eActor)
+			await foundry.applications.api.DialogV2.confirm({
+				window: {title: game.i18n.localize("APPLICATION.TITLE.MemberRemoval")},
+				modal: true,
+				content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.MemberRemoval", {actor: actor.name})}</p>`,
+				submit: async (result) => {
+					if(result) {
+						const members = this.system.members,
+							  quittingMemberUuid = members.find(memberUuid => memberUuid === actor.uuid);
 
-		this.memberActors.forEach((actor) => {
-			if(actor.system.party !== this._id)
-				actor.update({"system.party": this._id});
-		});
-	}
-
-	/**
-	 * Perform follow-up operations after a Party is deleted. Post-deletion operations occur for all clients after the deletion is broadcast.
-	 * @param {any} options Additional options which modify the deletion request
-	 * @param {string} userId The id of the User requesting the document update
-	 * @private
-	 */
-	_onPartyDelete(options, userId)
-	{
-		if(Array.isArray(this.memberActors) && this.memberActors.length > 0)
-			this.memberActors.forEach((member) => {
-				member.resetSocket("party");
+						if(quittingMemberUuid) {
+							members.splice(members.indexOf(quittingMemberUuid), 1);
+							await this.update({"system.members": members});
+						}
+					}
+				}
 			});
+		else {
+			const members = this.system.members,
+				  quittingMemberUuid = members.find(memberUuid => memberUuid === actor);
+
+			if(quittingMemberUuid) {
+				members.splice(members.indexOf(quittingMemberUuid), 1);
+				await this.update({"system.members": members});
+			}
+		}
+	}
+
+	/**
+	 * Upon Party deletion, resets every Party member's sockets associated to the Party.
+	 * @private
+	 */
+	#onPartyDelete()
+	{
+		this.system.members.forEach((member) => fromUuidSync(member).resetSockets(this.uuid));
 	}
 
 	/**
@@ -462,47 +574,37 @@ export default class WFRP3eActor extends Actor
 	 * @param {string} userId The id of the User requesting the document update
 	 * @private
 	 */
-	_onPartyUpdate(changed, options, userId)
+	#onPartyUpdate(changed, options, userId)
 	{
 		if(changed.system?.members)
-			this._onPartyMembersChange(changed.system.members);
+			this.#onPartyMembersChange(changed.system.members);
 
 		if(changed.system?.sockets)
-			this._onPartySocketsChange();
+			this.#onPartySocketsChange();
 	}
 
 	/**
-	 * Performs preliminary operations before a Party's members change.
-	 * @param {Array} newMemberIdList The new Party's member list.
+	 * Upon change to the Party member list, ensures that sockets that are owned by removed members and are associated
+	 * to the Party are reset.
+	 * @param {Array} newMemberList The new Party's member list.
 	 * @private
 	 */
-	_onPartyMembersChange(newMemberIdList)
+	#onPartyMembersChange(newMemberList)
 	{
-		if(Array.isArray(this.memberActors) && this.memberActors.length > 0)
-		{
-			const missingMembers = [];
-
-			this.memberActors.forEach((currentMember) => {
-				if(!newMemberIdList.find(newMemberId => newMemberId === currentMember._id))
-					missingMembers.push(currentMember);
-			});
-
-			missingMembers.forEach((member) => {
-				member.resetSocket("party");
-			});
-		}
+		this.system.members.forEach((member) => {
+			if(!newMemberList.includes(member))
+				fromUuidSync(member).resetSockets(this.uuid);
+		});
 	}
 
 	/**
-	 * Performs check-ups following up a Party's Talent sockets change.
+	 * Upon change to the Party sockets, ensures that every members sockets that are associated to the Party are reset.
 	 * @private
 	 */
-	_onPartySocketsChange()
+	#onPartySocketsChange()
 	{
-		if(Array.isArray(this.memberActors) && this.memberActors.length > 0) {
-			this.memberActors.forEach((member) => {
-				member.resetSocket("party")
-			});
-		}
+		this.system.members.forEach((member) => {fromUuidSync(member).resetSockets(this.uuid)});
 	}
+
+	//#endregion
 }
