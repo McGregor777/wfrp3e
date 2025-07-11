@@ -1,11 +1,11 @@
 {
 	"title": "Warhammer Fantasy Roleplay - 3rd Edition",
 	"description": "<p>A game system for <em><strong>Warhammer Fantasy Roleplay - 3rd Edition</strong></em> in the Foundry Virtual Tabletop environment.</p>",
-	"version": "#{VERSION}#",
+	"version": "1.3",
 	"compatibility": {
-		"minimum": "12",
-		"verified": "12.331",
-		"maximum": "12"
+		"minimum": "13",
+		"verified": "13.346",
+		"maximum": "13"
 	},
 	"authors": [{
 		"name": "Grégory Gauthier",
@@ -77,8 +77,8 @@
 	"primaryTokenAttribute": "wounds",
 	"secondaryTokenAttribute": "fortune",
 	"url": "https://github.com/McGregor777/wfrp3e",
-	"manifest": "#{MANIFEST}#",
-	"download": "#{DOWNLOAD}#",
+	"manifest": "https://github.com/McGregor777/wfrp3e/releases//download/1.2/system.json",
+	"download": "https://github.com/McGregor777/wfrp3e/releases/download/1.2/system.zip",
 	"background": "systems/wfrp3e/assets/background.jpg",
 	"id": "wfrp3e"
 }
