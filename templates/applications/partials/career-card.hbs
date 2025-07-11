@@ -1,24 +1,24 @@
-<article class="career game-sheet">
+<article class="item career game-sheet">
 	<div class="face front active">
 		<div class="header">
 			{{#if @root.editable}}
 				<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-					{{career.name}}
+					{{item.name}}
 				</a>
 			{{else}}
 				<span class="name">
-					{{career.name}}
+					{{item.name}}
 				</span>
 			{{/if}}
 
 			<div class="race-restrictions">
-				{{#if career.system.advanced}}
+				{{#if item.system.advanced}}
 					{{localize "CAREER.SHEET.advancedCareer"}}
 				{{else}}
 					{{localize "CAREER.SHEET.basicCareer"}}
 				{{/if}}
 				:
-				{{#each career.system.raceRestrictions}}
+				{{#each item.system.raceRestrictions}}
 					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
 						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
 					{{else}}
@@ -28,7 +28,7 @@
 			</div>
 
 			<div class="traits">
-				{{career.system.traits}}
+				{{item.system.traits}}
 			</div>
 		</div>
 
@@ -40,7 +40,7 @@
 					</div>
 
 					<div class="career-aptitudes-content">
-						{{#each career.system.primaryCharacteristics}}
+						{{#each item.system.primaryCharacteristics}}
 							{{localize (lookup (lookup @root.characteristics this) "name")}}{{#unless @last}},{{/unless}}
 						{{/each}}
 					</div>
@@ -52,12 +52,12 @@
 					</div>
 
 					<div class="career-aptitudes-content">
-						{{career.system.careerSkills}}
+						{{item.system.careerSkills}}
 					</div>
 				</div>
 
 				<div class="starting-stance">
-					{{#for (multiply career.system.startingStance.conservativeSegments -1) (increment career.system.startingStance.recklessSegments 1) 1}}
+					{{#for (multiply item.system.startingStance.conservativeSegments -1) (increment item.system.startingStance.recklessSegments 1) 1}}
 						<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}"
 							 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
 					{{/for}}
@@ -75,7 +75,7 @@
 					</div>
 
 					<div class="content">
-						{{career.system.advanceOptions.action}}
+						{{item.system.advanceOptions.action}}
 					</div>
 				</div>
 
@@ -85,7 +85,7 @@
 					</div>
 
 					<div class="content">
-						{{career.system.advanceOptions.talent}}
+						{{item.system.advanceOptions.talent}}
 					</div>
 				</div>
 
@@ -95,7 +95,7 @@
 					</div>
 
 					<div class="content">
-						{{career.system.advanceOptions.skill}}
+						{{item.system.advanceOptions.skill}}
 					</div>
 				</div>
 
@@ -105,7 +105,7 @@
 					</div>
 
 					<div class="content">
-						{{career.system.advanceOptions.fortune}}
+						{{item.system.advanceOptions.fortune}}
 					</div>
 				</div>
 
@@ -115,7 +115,7 @@
 					</div>
 
 					<div class="content">
-						{{career.system.advanceOptions.conservative}}
+						{{item.system.advanceOptions.conservative}}
 					</div>
 				</div>
 
@@ -125,7 +125,7 @@
 					</div>
 
 					<div class="content">
-						{{career.system.advanceOptions.reckless}}
+						{{item.system.advanceOptions.reckless}}
 					</div>
 				</div>
 
@@ -135,27 +135,27 @@
 					</div>
 
 					<div class="content">
-						{{career.system.advanceOptions.wound}}
+						{{item.system.advanceOptions.wound}}
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<img class="art" src="{{career.img}}" />
+		<img class="art" src="{{item.img}}" />
 	</div>
 
 	<div class="face back">
 		<div class="header">
-			<span class="name">{{career.name}}</span>
+			<span class="name">{{item.name}}</span>
 
 			<div class="race-restrictions">
-				{{#if career.system.advanced}}
+				{{#if item.system.advanced}}
 					{{localize "CAREER.SHEET.advancedCareer"}}
 				{{else}}
 					{{localize "CAREER.SHEET.basicCareer"}}
 				{{/if}}
 				:
-				{{#each career.system.raceRestrictions}}
+				{{#each item.system.raceRestrictions}}
 					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
 						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
 					{{else}}
@@ -165,12 +165,12 @@
 			</div>
 
 			<div class="traits">
-				{{career.system.summary}}
+				{{item.system.summary}}
 			</div>
 		</div>
 
 		<div class="description">
-			{{{career.system.description}}}
+			{{{item.system.description}}}
 		</div>
 	</div>
 
@@ -181,15 +181,17 @@
 			</a>
 		</div>
 
-		<div class="form-group slim stacked">
-			<label>{{localize "CAREER.FIELDS.current.label"}}</label>
+		{{#if @root.editable}}
+			<div class="form-group slim stacked">
+				<label>{{localize "CAREER.FIELDS.current.label"}}</label>
 
-			<input class="item-input"
-				   name="system.current"
-				   type="radio"
-				   {{#if career.system.current}}checked{{/if}}
-				   {{#unless @root.editable}}disabled{{/unless}} />
-		</div>
+				<input class="item-input"
+					   name="system.current"
+					   type="radio"
+					   {{#if item.system.current}}checked{{/if}}
+					   {{#unless @root.editable}}disabled{{/unless}} />
+			</div>
+		{{/if}}
 
 		<div>
 			{{#if @root.editable}}

@@ -1,0 +1,73 @@
+<section>
+	{{#each characteristics as |characteristic char|}}
+		<fieldset class="characteristic {{char}}">
+			<legend>{{localize characteristic.name}}</legend>
+
+			<div class="initial">
+				<div class="rating">
+					{{characteristic.rating}}
+				</div>
+
+				<div class="fortune">
+					{{characteristic.fortune}}
+				</div>
+			</div>
+
+			<div class="buttons">
+				{{#unless @root.nonCareerAdvance}}
+					{{#with (increment characteristic.rating 1) as |newRating|}}
+						<label class="{{#if (and (equalTo upgrade.characteristic char) (equalTo upgrade.type "rating"))}}active{{/if}}">
+							{{localize "CHARACTERISTICUPGRADER.ACTIONS.increaseRating"}}
+							({{localize "CHARACTERISTICUPGRADER.experienceCost" cost=newRating}})
+
+							<input name="upgrade" value="{{char}}_rating" type="radio"
+								   {{#if (equalTo upgrade (concat char "_rating"))}}checked{{/if}} />
+						</label>
+
+						<span class="fas fa-arrow-right"></span>
+
+						<label class="{{#if (and (equalTo upgrade.characteristic char) (equalTo upgrade.type "rating"))}}active{{/if}}">
+							{{localize "CHARACTERISTICUPGRADER.ACTIONS.increaseFortune"}}
+							({{localize "CHARACTERISTICUPGRADER.experienceCost" cost=1}})
+
+							<input name="upgrade" value="{{char}}_fortune" type="radio"
+								   {{#if (equalTo upgrade (concat char "_fortune"))}}checked{{/if}} />
+						</label>
+					{{/with}}
+				{{else}}
+					{{#with (increment characteristic.rating 2) as |newRating|}}
+						<label class="{{#if (and (equalTo upgrade.characteristic char) (equalTo upgrade.type "rating"))}}active{{/if}}">
+							{{localize "CHARACTERISTICUPGRADER.ACTIONS.increaseRating"}}
+							({{localize "CHARACTERISTICUPGRADER.experienceCost" cost=newRating}})
+
+							<input name="upgrade" value="{{char}}_rating" type="radio"
+								{{#if (equalTo upgrade (concat char "_rating"))}}checked{{/if}} />
+						</label>
+
+						<span class="fas fa-arrow-right"></span>
+					{{/with}}
+				{{/unless}}
+			</div>
+
+			<div class="result">
+				<p>{{localize characteristic.label}}</p>
+
+				<div class="rating">
+					{{#if (and (equalTo @root.upgrade.characteristic char) (equalTo @root.upgrade.type "rating"))}}
+						{{@root.upgrade.value}}
+					{{else}}
+						{{characteristic.rating}}
+					{{/if}}
+				</div>
+
+				<div class="fortune">
+					{{#if (and (equalTo @root.upgrade.characteristic char) (equalTo @root.upgrade.type "fortune"))}}
+						{{@root.upgrade.value}}
+					{{else}}
+						{{characteristic.fortune}}
+					{{/if}}
+				</div>
+			</div>
+		</fieldset>
+	{{/each}}
+</section>

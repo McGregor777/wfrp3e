@@ -154,12 +154,12 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 						fortunePoints: checkData.fortunePoints ?? 0,
 						skill: await fromUuid(checkData.skill),
 						skills: actor.itemTypes.skill,
-						availableTriggeredItems: actor.findTriggeredItems(
+						availableTriggeredEffects: actor.findTriggeredEffects(
 							"onPreCheckTrigger", {
 								parameters: [actor, this.dicePool, checkData],
 								parameterNames: ["actor", "dicePool", "checkData"]
 							}),
-						triggeredItems: checkData.triggeredItems ?? []
+						triggeredEffects: checkData.triggeredEffects ?? []
 					};
 
 					if(actor.type === "character") {
@@ -266,14 +266,14 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 			if(checkData.actor)
 				await CheckHelper.triggerCheckPreparationEffects(await fromUuid(checkData.actor), checkData, dicePool);
 
-			// Execute the scripts from all selected items.
-			const triggeredItems = checkData.triggeredItems;
-			if(triggeredItems != null) {
-				if(Array.isArray(triggeredItems))
-					for(const itemUuid of triggeredItems)
-						await dicePool.executeItemEffects(itemUuid);
+			// Execute the scripts from all selected effects.
+			const triggeredEffects = checkData.triggeredEffects;
+			if(triggeredEffects != null) {
+				if(Array.isArray(triggeredEffects))
+					for(const effectUuid of triggeredEffects)
+						await dicePool.executeEffect(effectUuid);
 				else
-					await dicePool.executeItemEffects(triggeredItems);
+					await dicePool.executeEffect(triggeredEffects);
 			}
 		}
 

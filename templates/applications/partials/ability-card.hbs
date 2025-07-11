@@ -1,14 +1,14 @@
-<div class="item ability card" data-uuid="{{ability.uuid}}">
+<div class="item ability card" data-uuid="{{item.uuid}}">
 	{{#if @root.editable}}
 		<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-			{{ability.name}}
+			{{item.name}}
 		</a>
 	{{else}}
-		<span>{{ability.name}}</span>
+		<span>{{item.name}}</span>
 	{{/if}}
 
 	<div class="description">
-		{{{ability.system.description}}}
+		{{{item.system.description}}}
 	</div>
 
 	<div class="bottom-line">
@@ -24,7 +24,7 @@
 				</span>
 			</a>
 
-			{{#each ability.effects as |effect ef|}}
+			{{#each item.effects as |effect ef|}}
 				{{#if (sameAs effect.system.type "onTrigger")}}
 					<a data-action="useDocument"
 					   data-effect-uuid="{{effect.uuid}}"

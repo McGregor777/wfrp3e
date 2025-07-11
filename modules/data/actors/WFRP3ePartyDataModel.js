@@ -77,7 +77,7 @@ export default class WFRP3ePartyDataModel extends foundry.abstract.TypeDataModel
 				source.members[index] = `Actor.${member}`;
 		});
 
-		source.tension.events.forEach((event, index) => {
+		source.tension?.events.forEach((event, index) => {
 			if(!event.description && event.effects)
 				source.tension.events[index].description = event.effects;
 		});

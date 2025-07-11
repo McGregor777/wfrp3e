@@ -72,19 +72,7 @@
 
 	<section class="item-container">
 		{{#each items as |item i|}}
-			{{#if (sameAs item.type "condition")}}
-				{{>"systems/wfrp3e/templates/applications/actors/partials/condition-card.hbs" condition=item}}
-			{{else if (sameAs item.type "criticalWound")}}
-				{{>"systems/wfrp3e/templates/applications/actors/partials/critical-wound-card.hbs" criticalWound=item}}
-			{{else if (sameAs item.type "disease")}}
-				{{>"systems/wfrp3e/templates/applications/actors/partials/disease-card.hbs" disease=item}}
-			{{else if (sameAs item.type "insanity")}}
-				{{>"systems/wfrp3e/templates/applications/actors/partials/insanity-card.hbs" insanity=item}}
-			{{else if (sameAs item.type "miscast")}}
-				{{>"systems/wfrp3e/templates/applications/actors/partials/miscast-card.hbs" miscast=item}}
-			{{else if (sameAs item.type "mutation")}}
-				{{>"systems/wfrp3e/templates/applications/actors/partials/mutation-card.hbs" mutation=item}}
-			{{/if}}
+			{{>(concat "systems/wfrp3e/templates/applications/partials/" item.type "-card.hbs") item=item}}
 		{{/each}}
 	</section>
 </section>

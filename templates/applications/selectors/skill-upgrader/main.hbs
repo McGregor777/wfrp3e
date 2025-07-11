@@ -1,0 +1,94 @@
+<section>
+	<table>
+		<thead>
+			<tr>
+				<th class="left-aligned shrinked skill-acquired">
+					{{localize "SKILL.acquired"}}
+				</th>
+
+				<th class="left-aligned skill-name">
+					{{localize "Name"}}
+				</th>
+
+				<th class="center-aligned skill-characteristic">
+					{{localize "SKILL.FIELDS.characteristic.label"}}
+				</th>
+
+				<th class="center-aligned skill-training-level">
+					{{localize "SKILL.FIELDS.trainingLevel.label"}}
+				</th>
+
+				<th class="left-aligned skill-specialisations">
+					{{localize "SKILL.FIELDS.specialisations.label"}}
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{{#each items as |item i|}}
+				{{#with (lookup @root.characteristics item.system.characteristic) as |characteristic|}}
+					<tr>
+						<td class="left-aligned shrinked skill-acquired">
+							<input name="selection"
+								   value="0"
+								   type="checkbox"
+								   data-type="acquisition"
+								   data-uuid="{{item.uuid}}"
+								   {{#if (or item.parent (equalTo item.system.advanced false))}}
+									   checked disabled
+								   {{else if (lookup @root.upgrades.acquisition item.uuid)}}
+									   checked
+								   {{/if}} />
+						</td>
+
+						<td class="left-aligned skill-name">
+							{{item.name}}
+						</td>
+
+						<td class="center-aligned skill-characteristic">
+							{{localize characteristic.name}}
+						</td>
+
+						<td class="center-aligned skill-training-level">
+							{{#for 1 4 1}}
+								<label>
+									<input name="selection"
+										   value="{{this}}"
+										   type="checkbox"
+										   data-type="trainingLevel"
+										   data-uuid="{{item.uuid}}"
+										   {{#if (superiorOrEqualTo item.system.trainingLevel this)}}
+											   checked disabled
+										   {{else if (or (or
+                                               (sameAs @root.advanceType "dedicationBonus")
+											   (and item.parent (inferiorTo item.parent.system.rank this)))
+											   (notEqualTo (increment item.system.trainingLevel 1) this))}}
+											   disabled
+										   {{else if (equalTo (lookup @root.upgrades.trainingLevel item.uuid) this)}}
+											   checked
+										   {{/if}} />
+								</label>
+							{{/for}}
+						</td>
+
+						<td class="left-aligned skill-specialisations">
+							<label>
+								{{#if item.system.specialisations}}
+									<span>{{item.system.specialisations}}</span>
+								{{/if}}
+
+								{{#unless (or (equalTo @root.advanceType "nonCareer") (inferiorTo item.system.trainingLevel 1))}}
+									<input name="selection"
+										   value="{{lookup @root.upgrades.specialisation item.uuid}}"
+										   type="text"
+										   data-type="specialisation"
+										   data-uuid="{{item.uuid}}" />
+								{{/unless}}
+							</label>
+						</td>
+					</tr>
+				{{/with}}
+			{{/each}}
+		</tbody>
+	</table>
+</section>

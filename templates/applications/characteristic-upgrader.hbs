@@ -1,5 +1,5 @@
 <form>
-	<h1>{{localize "CHARACTERISTICUPGRADER.UpgradeACharacteristic"}}</h1>
+	<h1>{{localize "CHARACTERISTICUPGRADER.ACTIONS.upgradeACharacteristic"}}</h1>
 
 	<div class="characteristics body">
 		{{#each characteristics as |characteristic char|}}
@@ -29,20 +29,20 @@
                                 {{#if (superiorOrEqualTo @root.availableOpenAdvancesAmount newRating)}}
                                     {{#if (superiorOrEqualTo @root.object.system.experience.current newRating)}}
                                         <label>
-                                            {{localize "CHARACTERISTICUPGRADER.IncreaseRating"}}
-                                            ({{localize "CHARACTERISTICUPGRADER.ExperienceCost" cost=newRating}})
+                                            {{localize "CHARACTERISTICUPGRADER.increaseRating"}}
+                                            ({{localize "CHARACTERISTICUPGRADER.experienceCost" cost=newRating}})
 
                                             <input name="upgrade" value="{{char}}_rating" type="radio" />
                                         </label>
                                     {{else}}
                                         <div class="disabled">
-                                            {{localize "CHARACTERISTICUPGRADER.IncreaseRating"}}
-                                            ({{localize "CHARACTERISTICUPGRADER.ExperienceCost" cost=newRating}})
+                                            {{localize "CHARACTERISTICUPGRADER.increaseRating"}}
+                                            ({{localize "CHARACTERISTICUPGRADER.experienceCost" cost=newRating}})
                                         </div>
                                     {{/if}}
                                 {{else}}
                                     <div class="disabled">
-                                        {{localize "CHARACTERISTICUPGRADER.IncreaseRating"}}
+                                        {{localize "CHARACTERISTICUPGRADER.increaseRating"}}
                                         ({{localize "CHARACTERISTICUPGRADER.ExperienceCost" cost=newRating}})
                                     </div>
                                 {{/if}}

@@ -7,28 +7,12 @@ import {capitalize} from "../helpers.js";
 export default class WFRP3eItem extends Item
 {
 	/** @inheritDoc */
-	prepareData()
-	{
-		super.prepareData();
-
-		try {
-			const functionName = `#prepare${capitalize(this.type)}`;
-
-			if(this[functionName])
-				this[functionName]();
-		}
-		catch(error) {
-			console.error(`Something went wrong when updating the Item ${this.name} of type ${this.type}: ${error}`);
-		}
-	}
-
-	/** @inheritDoc */
 	_onUpdate(changed, options, userId)
 	{
 		super._onUpdate(changed, options, userId);
 
 		try {
-			const functionName = `#on${capitalize(this.type)}Update`;
+			const functionName = `_on${capitalize(this.type)}Update`;
 
 			if(this[functionName])
 				this[functionName](changed, options, userId);
@@ -45,7 +29,7 @@ export default class WFRP3eItem extends Item
 	 */
 	getDetails(options = {})
 	{
-		const functionName = `#get${capitalize(this.type)}Details`;
+		const functionName = `_get${capitalize(this.type)}Details`;
 
 		if(this[`${functionName}`])
 			return this[`${functionName}`](options);
@@ -59,7 +43,7 @@ export default class WFRP3eItem extends Item
 	 */
 	useItem(options = {})
 	{
-		const functionName = `#use${capitalize(this.type)}`;
+		const functionName = `_use${capitalize(this.type)}`;
 
 		if(this[`${functionName}`])
 			this[`${functionName}`](options);
@@ -89,7 +73,7 @@ export default class WFRP3eItem extends Item
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async #useAbility(options = {})
+	async _useAbility(options = {})
 	{
 		if(!options.id)
 			throw new Error("Effect ID is needed");
@@ -170,7 +154,7 @@ export default class WFRP3eItem extends Item
 	 * @returns {string}
 	 * @private
 	 */
-	#getActionDetails(options = {})
+	_getActionDetails(options = {})
 	{
 		if(!options.face)
 			return console.error("Unable to show action's details without knowing the face.");
@@ -248,7 +232,7 @@ export default class WFRP3eItem extends Item
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async #useAction(options = {})
+	async _useAction(options = {})
 	{
 		if(!options.face)
 			throw new Error("The Action face to use is needed.");
@@ -288,23 +272,48 @@ export default class WFRP3eItem extends Item
 	//#region Career methods
 
 	/**
-	 * Performs follow-up operations after a Career is updated. Post-update operations occur for all clients after the update is broadcast.
+	 * Calculates the cost of a transition from the actual WFRP3eCareer to another.
+	 * @param {WFRP3eItem} newCareer The new WFRP3eCareer which is transitioned into.
+	 * @returns {number} The cost of the career transition in experience points.
+	 */
+	calculateCareerTransitionCost(newCareer)
+	{
+		let cost = 4;
+
+		if(this.system.advances.dedicationBonus)
+			cost--;
+
+		const careerTraits = this.system.traits.toLowerCase().split(",").map(trait => trait.trim()),
+			  newCareerTraits = newCareer.system.traits.toLowerCase().split(",").map(trait => trait.trim());
+		for(const trait of careerTraits) {
+			if(trait !== game.i18n.localize("TRAITS.specialist") && newCareerTraits.includes(trait))
+				cost--;
+
+			if(cost <= 1)
+				break;
+		}
+
+		return cost;
+	}
+
+	/**
+	 * Post-process an update operation for a single WFRP3eCareer instance. Post-operation events occur for all connected clients.
 	 * @param changed {any} The differential data that was changed relative to the documents prior values
 	 * @param options {any} Additional options which modify the update request
-	 * @param userId {string} The id of the User requesting the document update
+	 * @param userId {string} The id of the User requesting the WFRP3eCareer update
 	 * @private
 	 */
-	#onCareerUpdate(changed, options, userId)
+	_onCareerUpdate(changed, options, userId)
 	{
 		if(changed.system?.current)
 			this.#onCurrentCareerChange();
 
 		if(changed.system?.sockets)
-			this.#onCareerSocketsChange();
+			this.#onCareerSocketChange(changed.system.sockets);
 	}
 
 	/**
-	 * Performs follow-up operations after a Character's current Career has changed.
+	 * Upon transitioning from a WFRP3eCareer to another, ensures that the sockets of the owner WFRP3eCharacter are reset.
 	 * @private
 	 */
 	#onCurrentCareerChange()
@@ -312,22 +321,26 @@ export default class WFRP3eItem extends Item
 		if(this.actor) {
 			const otherCareers = this.actor.itemTypes.career.filter(career => career !== this);
 
-			for(const otherCareer of otherCareers) {
-				const index = this.actor.itemTypes.career.filter(career => career !== this).indexOf(otherCareer);
+			for(const otherCareer of otherCareers)
 				otherCareer.update({"system.current": false});
-			}
 
 			this.actor.resetSockets(this.uuid);
 		}
 	}
 
 	/**
-	 * Performs follow-up operations after a Career's sockets change.
+	 * Upon change to any of the WFRP3eCareer socket's type, ensures that the sockets of the WFRP3eCharacter are reset.
+	 * @param {Object} sockets The current WFRP3eCareer sockets.
 	 * @private
 	 */
-	#onCareerSocketsChange()
+	#onCareerSocketChange(sockets)
 	{
-		this.actor?.resetSockets(this.uuid);
+		const socketedItems = sockets.map(socket => fromUuidSync(socket.item));
+
+		socketedItems.forEach((item, index) => {
+			if(item.system.type !== sockets[index].type)
+				this.actor?.resetSockets(this.uuid);
+		});
 	}
 
 	/**
@@ -357,7 +370,7 @@ export default class WFRP3eItem extends Item
 	 * @returns {String}
 	 * @private
 	 */
-	#getSkillDetails(options = {})
+	_getSkillDetails(options = {})
 	{
 		return game.i18n.format("SKILL.specialisationList", {specialisations: this.system.specialisations ?? ""});
 	}
@@ -368,7 +381,7 @@ export default class WFRP3eItem extends Item
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async #useSkill(options = {})
+	async _useSkill(options = {})
 	{
 		await CheckBuilder.prepareSkillCheck(this.actor, this);
 	}
@@ -382,16 +395,16 @@ export default class WFRP3eItem extends Item
 	}
 
 	/**
-	 * Performs follow-up operations after a Talent is updated. Post-update operations occur for all clients after the update is broadcast.
+	 * Post-process an update operation for a single WFRP3eTalent instance. Post-operation events occur for all connected clients.
 	 * @param changed {any} The differential data that was changed relative to the documents prior values
 	 * @param options {any} Additional options which modify the update request
-	 * @param userId {string} The id of the User requesting the document update
+	 * @param userId {string} The id of the User requesting the WFRP3eTalent update
 	 * @private
 	 */
-	#onTalentUpdate(changed, options, userId)
+	_onTalentUpdate(changed, options, userId)
 	{
 		if(changed.system?.socket)
-			this._onTalentSocketChange(changed.system.socket);
+			this.#onTalentSocketChange(changed.system.socket);
 	}
 
 	/**
@@ -399,7 +412,7 @@ export default class WFRP3eItem extends Item
 	 * @param newSocket {string} The new socket used by the Talent.
 	 * @private
 	 */
-	_onTalentSocketChange(newSocket)
+	#onTalentSocketChange(newSocket)
 	{
 		this.actor?.preventMultipleItemsOnSameSocket(this);
 
@@ -411,10 +424,9 @@ export default class WFRP3eItem extends Item
 		owningDocument.update({"system.sockets": owningDocumentSockets});
 
 		if(owningDocument.type === "career")
-			for(const effect of this.effects) {
+			for(const effect of this.effects)
 				if(effect.type === "onCareerSocket")
 					effect.triggerEffect();
-			}
 	}
 
 	/**
@@ -423,7 +435,7 @@ export default class WFRP3eItem extends Item
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async #useTalent(options= {})
+	async _useTalent(options= {})
 	{
 		if(!options.id)
 			throw new Error("Effect ID is needed");
@@ -456,7 +468,7 @@ export default class WFRP3eItem extends Item
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async #useWeapon(options = {})
+	async _useWeapon(options = {})
 	{
 		const weaponType = CONFIG.WFRP3e.weapon.groups[this.system.group].type;
 		let action = null;
@@ -519,7 +531,7 @@ export default class WFRP3eItem extends Item
 	 * @returns {String}
 	 * @private
 	 */
-	#getWeaponDetails(options = {})
+	_getWeaponDetails(options = {})
 	{
 		return this.system.description.concat(this.system.special);
 	}

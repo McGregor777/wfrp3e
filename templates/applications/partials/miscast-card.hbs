@@ -1,24 +1,20 @@
-<div class="item critical-wound card" data-uuid="{{criticalWound.uuid}}">
+<div class="item miscast card" data-uuid="{{item.uuid}}">
 	<div class="header">
 		{{#if @root.editable}}
 			<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-				{{criticalWound.name}}
+				{{item.name}}
 			</a>
 		{{else}}
-			<span>{{criticalWound.name}}</span>
+			<span>{{item.name}}</span>
 		{{/if}}
 	</div>
 
 	<div class="description">
-		{{{criticalWound.system.description}}}
-	</div>
-
-	<div class="severity-rating">
-		{{criticalWound.system.severityRating}}
+		{{{item.system.description}}}
 	</div>
 
 	<div class="bottom-line">
-		{{#if @root.editable}}
+		{{#>if @root.editable}}
 			<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
 				<span class="fas fa-pen-to-square"></span>
 			</a>

@@ -1,24 +1,24 @@
-<div class="item insanity card" data-uuid="{{insanity.uuid}}">
+<div class="item insanity card" data-uuid="{{item.uuid}}">
 	<div class="header">
 		{{#if @root.editable}}
 			<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-				{{insanity.name}}
+				{{item.name}}
 			</a>
 		{{else}}
-			<span>{{insanity.name}}</span>
+			<span>{{item.name}}</span>
 		{{/if}}
 
 		<div class="traits">
-			{{insanity.system.traits}}
+			{{item.system.traits}}
 		</div>
 	</div>
 
 	<div class="content">
-		{{{insanity.system.description}}}
+		{{{item.system.description}}}
 	</div>
 
 	<div class="severity-rating">
-		{{insanity.system.severityRating}}
+		{{item.system.severityRating}}
 	</div>
 
 	<div class="bottom-line">

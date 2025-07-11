@@ -1,9 +1,4 @@
-{
-	"Confirm": "Confirmer",
-	"Finish": "Terminer",
-	"Ignore": "Ignorer",
-
-	"ABILITY": {
+{"ABILITY": {
 		"ACTIONS": {
 			"update": "Enregistrer l'aptitude",
 			"trigger": "Déclencher l'aptitude'"
@@ -109,11 +104,17 @@
 		"title": "Éditeur d'effet d'action"
 	},
 
-	"ACTIONSELECTOR.ChooseANewAction": "Choisissez une nouvelle action",
-	"ACTIONSELECTOR.NoActionSelected": "Aucune",
-	"ACTIONSELECTOR.NoActionSelectedWarning": "Vous devez sélectionner une carte d'action.",
-	"ACTIONSELECTOR.SelectedAction": "Action sélectionnée :",
-	"ACTIONSELECTOR.Title": "Sélecteur d'action",
+	"ACTIONSELECTOR": {
+		"ACTIONS": {
+			"chooseTalent": "Choisir une action"
+		},
+		"HEADINGS.newAction": "Choisissez une nouvelle action",
+		"WARNINGS": {
+			"noActionSelected": "Vous devez sélectionner une carte d'action."
+		},
+		"selectedAction": "Action sélectionnée :",
+		"title": "Sélecteur d'action"
+	},
 
 	"ACTOR": {
 		"ACTIONS": {
@@ -242,17 +243,17 @@
 				"wound.label": "Promotions de Point de Blessure possibles"
 			},
 			"advances": {
-				"action": "Action",
-				"careerCompletion": "Améliorations de Fin de Carrière",
-				"careerTransition": "Transition de Carrière",
-				"dedicationBonus": "Bonus de Fin de Carrière",
-				"generalCareer": "Améliorations de Carrière",
-				"nonCareer": "Améliorations Extracurriculaires",
-				"open": "Amélioration Libre de Carrière",
-				"skill": "Formation ou Spécialisation",
-				"talent": "Talent",
-				"type": "Amélioration choisie",
-				"wound": "Plafond de Blessure"
+				"action.label": "Action",
+				"careerCompletion.label": "Améliorations de Fin de Carrière",
+				"careerTransition.label": "Transition de Carrière",
+				"dedicationBonus.label": "Bonus de Fin de Carrière",
+				"generalCareer.label": "Améliorations de Carrière",
+				"nonCareer.label": "Améliorations Extracurriculaires",
+				"open.label": "Amélioration Libre de Carrière",
+				"skill.label": "Formation ou Spécialisation",
+				"talent.label": "Talent",
+				"type.label": "Amélioration choisie",
+				"wound.label": "Plafond de Blessure"
 			},
 			"careerSkills.label": "Compétences de Carrière",
 			"current.label": "Carrière en cours",
@@ -296,17 +297,47 @@
 			"main": "Principal",
 			"setting": "Description"
 		},
+		"WARNINGS": {
+			"advanceOptionDepleted": "Cette carrière n'offre pas davantage de possibilités de promotion de ce type.",
+			"dedicationBonusCareerNotCompleted": "Il est nécessaire de compléter une carrière avant de pouvoir acheter son bonus de fin de carrière"
+		},
 		"name": "Carrière",
 		"plural": "Carrières"
 	},
 
-	"CAREERSELECTOR.ChooseANewCareer": "Choisissez une nouvelle carrière",
-	"CAREERSELECTOR.ExperienceCost": "{cost} PE",
-	"CAREERSELECTOR.NotEnoughExperiencePoint": "Vous n'avez pas assez d'expérience pour entamer cette carrière.",
-	"CAREERSELECTOR.NoCareerSelected": "Aucune",
-	"CAREERSELECTOR.NoCareerSelectedWarning": "Vous devez sélectionner une fiche de carrière.",
-	"CAREERSELECTOR.SelectedCareer": "Carrière sélectionnée :",
-	"CAREERSELECTOR.Title": "Selecteur de carrière",
+	"CAREERADVANCEDIALOG": {
+		"BUTTONS": {
+			"action": "Carte d'action",
+			"conservative": "Segment de prudence",
+			"nonCareerSkill": "Formation de compétence",
+			"nonPrimaryCharacteristic": "Caractéristique secondaire",
+			"primaryCharacteristic": "Caractéristique primaire/Dé de Fortune",
+			"reckless": "Segment de témérité",
+			"skill": "Formation de compétence ou spécialisation",
+			"talent": "Carte de talent",
+			"wound": "Plafond de Blessure"
+		},
+		"nonCareerAdvance": {
+			"content": "Choisissez une nouvelle augmentation extracurriculaire",
+			"title": "Sélection d'augmentation extracurriculaire"
+		},
+		"openAdvance": {
+			"content": "Choisissez une nouvelle augmentation de carrière",
+			"title": "Sélection d'augmentation de carrière"
+		}
+	},
+
+	"CAREERSELECTOR": {
+		"ACTIONS.chooseCareer": "Choisir la carrière",
+		"WARNINGS": {
+			"notEnoughExperiencePoint": "Vous n'avez pas assez d'expérience pour entamer cette carrière.",
+			"noCareerSelectedWarning": "Vous devez sélectionner une fiche de carrière."
+		},
+		"chooseANewCareer": "Choisissez une nouvelle carrière",
+		"noCareerSelected": "Aucune",
+		"selectedCareer": "Carrière sélectionnée :",
+		"title": "Selecteur de carrière"
+	},
 
 	"CHALLENGELEVEL": {
 		"simple": "Simple",
@@ -366,6 +397,8 @@
 		},
 		"WARNINGS": {
 			"noExperienceLeft": "Vous n'avez pas d'expérience à dépenser.",
+			"notEnoughExperienceForAdvance": "Vous n'avez pas assez d'expérience pour acheter cette augmentation.",
+			"notEnoughExperienceForNonCareerAdvance": "Vous n'avez pas assez d'expérience pour acheter une augmentation extracurriculaire.",
 			"noSkill": "<em><strong>{actor}</em></strong> ne possède aucune compétence. Souhaitez-vous donner les compétences de base à <em><strong>{actor}</em></strong> ?"
 		},
 		"woundThreshold": "Plafond de Blessures"
@@ -417,15 +450,22 @@
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Pas assez de formations de compétence.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Pas assez de spécialisations.",
 
-	"CHARACTERISTICUPGRADER.CharacteristicFortune": "Dé de Fortune {characteristic} ",
-	"CHARACTERISTICUPGRADER.CharacteristicRating": "Valeur de {characteristic}",
-	"CHARACTERISTICUPGRADER.ExperienceCost": "{cost} PE",
-	"CHARACTERISTICUPGRADER.IncreaseFortune": "Dé de Fortune +1",
-	"CHARACTERISTICUPGRADER.IncreaseRating": "Valeur +1",
-	"CHARACTERISTICUPGRADER.NoUpgradeSelected": "Aucune augmentation sélectionnée",
-	"CHARACTERISTICUPGRADER.SelectedUpgrade": "Augmentation sélectionnée : ",
-	"CHARACTERISTICUPGRADER.Title": "Améliorateur de caractéristique",
-	"CHARACTERISTICUPGRADER.UpgradeACharacteristic": "Améliorer une caractéristique",
+	"CHARACTERISTICUPGRADER": {
+		"ACTIONS": {
+			"increaseFortune": "Dé de Fortune +1",
+			"increaseRating": "Valeur +1",
+			"upgradeCharacteristic": "Améliorer une caractéristique"
+		},
+		"WARNINGS": {
+			"noUpgradeSelected": "Aucune",
+			"notEnoughOpenAdvances": "Le personnage ne dispose pas d'assez d'augmentations libres."
+		},
+		"characteristicFortune": "Dé de Fortune {characteristic} ",
+		"characteristicRating": "Valeur de {characteristic}",
+		"experienceCost": "{cost} PE",
+		"selectedUpgrade": "Augmentation sélectionnée : ",
+		"title": "Améliorateur de caractéristique"
+	},
 
 	"CHECKBUILDER": {
 		"ACTIONS": {
@@ -445,7 +485,7 @@
 			"fortunePoints": "Points de Fortune",
 			"specialisations": "Spécialisations",
 			"skill": "Compétence",
-			"triggeredItems": "Éléments activés",
+			"triggeredEffects": "Effets activés",
 			"weapon": "Arme"
 		},
 		"TABS": {
@@ -551,7 +591,7 @@
 	},
 
 	"DIALOG.TITLE.EffectDeletion": "Suppression d'effet",
-	"DIALOG.DESCRIPTION.EffectDeletion": "Souhaitez-vous vraiment supprimer cet effet ?",
+	"DIALOG.DESCRIPTION.EffectDeletion": "Souhaitez-vous vraiment supprimer cet effet ?",
 
 	"DIE": {
 		"challenge": {
@@ -770,22 +810,6 @@
 		"plural": "Mutations"
 	},
 
-	"NEWCAREERADVANCESELECTION.Content": "Choisissez une nouvelle augmentation de carrière",
-	"NEWCAREERADVANCESELECTION.Title": "Sélection d'augmentation de carrière",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Conservative": "Segment de prudence",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Reckless": "Segment de témérité",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Characteristic": "Caractéristique primaire/Dé de Fortune",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Action": "Carte d'action",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Skill": "Formation de compétence ou spécialisation",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Talent": "Carte de talent",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Wound": "Plafond de Blessure",
-
-	"NEWNONCAREERADVANCESELECTION.Content": "Choisissez une nouvelle augmentation extracurriculaire",
-	"NEWNONCAREERADVANCESELECTION.Title": "Sélection d'augmentation extracurriculaire",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Characteristic": "Caractéristique secondaire",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Skill": "Formation de compétence ou spécialisation",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Talent": "Carte de talent",
-
 	"ORIGIN.KarakAzgaraz": "Nain de Karak Azgaraz",
 	"ORIGIN.Ulthuan": "Haut Elfe d'Ulthuan",
 	"ORIGIN.Reiklander": "Reiklander",
@@ -919,6 +943,20 @@
 		"availableEffects": "Effets disponibles"
 	},
 
+	"SELECTOR": {
+		"ACTIONS.openFilters": "Ouvrir les filtres",
+		"WARNINGS": {
+			"alreadySelected": "Cet élément est déjà sélectionné.",
+			"cannotSubmit": "Impossible de valider la sélection : {error}",
+			"maximumSelectionSizeReached": "Le nombre maximum d'éléments à sélectionner a été atteint. Veuillez déselectionner un élément avant d'en sélectionner un autre.",
+			"notEnoughSelection": "Davantage d'éléments doivent être sélectionnés.",
+			"noSelection": "Aucun élément n'a été sélectionné."
+		},
+		"filters": "Filtres",
+		"noSelection": "Aucun",
+		"search": "Rechercher"
+	},
+
 	"SCRIPT": {
 		"TYPES": {
 			"onCareerSocket": "Placement sur un emplacement de talent de carrière",
@@ -950,10 +988,14 @@
 		},
 		"NAMES": {
 			"channeling": "Focalisation",
+			"charm": "Charisme",
 			"education": "Éducation",
+			"firstAid": "Premiers soins",
 			"folklore": "Folklore",
 			"intimidate": "Intimidation",
 			"intuition": "Intuition",
+			"leadership": "Commandement",
+			"medicine": "Médecine",
 			"observation": "Observation",
 			"piety": "Piété",
 			"weaponSkill": "Capacité de Combat"
@@ -962,9 +1004,21 @@
 			"effects": "Effets",
 			"main": "Principal"
 		},
+		"acquired": "Acquis",
 		"name": "Compétence",
 		"plural": "Compétences",
 		"specialisationList": "Spécialisations : {specialisations}"
+	},
+
+	"SKILLUPGRADER": {
+		"ACTIONS.chooseUpgrade": "Choisir l'amélioration",
+		"WARNINGS.singleSpecialisationOnly": "Une seule spécialisation par compétence ne peut être acquise.",
+		"acquisitionUpgrade": "{name} - Acquisition",
+		"noUpgradeSelected": "Aucune",
+		"selectedUpgrade": "Amélioration sélectionnée :",
+		"specialisationUpgrade": "{name} - Spécialisation {value}",
+		"title": "Améliorateur de compétence",
+		"trainingLevelUpgrade": "{name} - Formation {value}"
 	},
 
 	"SYMBOL": {
@@ -1040,22 +1094,9 @@
 		"WARNINGS": {
 			"noTalentSelected": "Vous devez sélectionner une carte de talent."
 		},
-		"noTalentSelected": "Aucun",
 		"selectedTalent": "Talent sélectionné :",
 		"title": "Sélecteur de talent"
 	},
-
-	"TRAININGSELECTOR.Acquired": "Acquis",
-	"TRAININGSELECTOR.Characteristic": "Caractéristique",
-	"TRAININGSELECTOR.ChooseATraining": "Choisissez une formation",
-	"TRAININGSELECTOR.NewTrainingLevel": "Niveau de formation {level}",
-	"TRAININGSELECTOR.NewSpecialisation": "Spécialisation {specialisation}",
-	"TRAININGSELECTOR.NoTrainingSelected": "Aucune",
-	"TRAININGSELECTOR.NoTrainingSelectedWarning": "Vous devez sélectionner une formation.",
-	"TRAININGSELECTOR.SelectedTraining": "Formation sélectionnée :",
-	"TRAININGSELECTOR.Specialisations": "Spécialisations",
-	"TRAININGSELECTOR.Title": "Sélecteur de formation",
-	"TRAININGSELECTOR.TrainingLevel": "Niveau de formation",
 
 	"TRAPPING": {
 		"ACTIONS.update": "Enregistrer la dotation",
@@ -1217,5 +1258,9 @@
 		"unarmed": "Mains nues",
 		"name": "Arme",
 		"plural": "Armes"
-	}
+	},
+
+	"Confirm": "Confirmer",
+	"Finish": "Terminer",
+	"Ignore": "Ignorer"
 }

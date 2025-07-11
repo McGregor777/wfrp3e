@@ -1,27 +1,27 @@
-<div class="item talent row {{talent.system.type}}" data-uuid="{{talent.uuid}}">
+<div class="item talent row {{item.system.type}}" data-uuid="{{item.uuid}}">
 	<div class="content">
 		<div class="image">
 			{{#if @root.editable}}
 				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-					<img class="type" src="{{talent.img}}" width="40" height="40" />
+					<img class="type" src="{{item.img}}" width="40" height="40" />
 				</a>
 			{{else}}
-				<span><img class="type" src="{{talent.img}}" width="40" height="40" /></span>
+				<span><img class="type" src="{{item.img}}" width="40" height="40" /></span>
 			{{/if}}
 		</div>
 
 		<div class="name">
 			{{#if @root.editable}}
 				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-					<span>{{talent.name}}</span>
+					<span>{{item.name}}</span>
 				</a>
 			{{else}}
-				<span>{{talent.name}}</span>
+				<span>{{item.name}}</span>
 			{{/if}}
 		</div>
 
 		<div class="type">
-			{{localize (lookup @root.types talent.system.type)}}
+			{{localize (lookup @root.types item.system.type)}}
 		</div>
 
 		<div class="recharge-tokens">
@@ -34,7 +34,7 @@
 						 height="40" />
 
 					<span class="recharge-token-counter">
-						{{{talent.system.rechargeTokens}}}
+						{{{item.system.rechargeTokens}}}
 					</span>
 				</a>
 			{{else}}
@@ -44,7 +44,7 @@
 						 height="40" />
 
 					<span class="recharge-token-counter">
-						{{{talent.system.rechargeTokens}}}
+						{{{item.system.rechargeTokens}}}
 					</span>
 				</span>
 			{{/if}}
@@ -52,7 +52,7 @@
 
 		<div class="buttons">
 			{{#if @root.editable}}
-				{{#each talent.effects as |effect|}}
+				{{#each item.effects as |effect|}}
 					{{#if (sameAs effect.system.type "onTrigger")}}
 						<a data-action="useDocument"
 						   data-effect-uuid="{{effect.uuid}}"

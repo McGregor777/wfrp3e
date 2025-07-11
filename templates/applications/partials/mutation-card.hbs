@@ -1,20 +1,28 @@
-<div class="item miscast card" data-uuid="{{miscast.uuid}}">
+<div class="item mutation card" data-uuid="{{item.uuid}}">
 	<div class="header">
 		{{#if @root.editable}}
 			<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-				{{miscast.name}}
+				{{item.name}}
 			</a>
 		{{else}}
-			<span>{{miscast.name}}</span>
+			<span>{{item.name}}</span>
 		{{/if}}
+
+		<div class="traits">
+			{{item.system.traits}}
+		</div>
 	</div>
 
-	<div class="description">
-		{{{miscast.system.description}}}
+	<div class="content">
+		{{{item.system.description}}}
+	</div>
+
+	<div class="severity-rating">
+		{{item.system.severityRating}}
 	</div>
 
 	<div class="bottom-line">
-		{{#>if @root.editable}}
+		{{#if @root.editable}}
 			<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
 				<span class="fas fa-pen-to-square"></span>
 			</a>

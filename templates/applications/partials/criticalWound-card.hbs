@@ -1,24 +1,20 @@
-<div class="item mutation card" data-uuid="{{mutation.uuid}}">
+<div class="item critical-wound card" data-uuid="{{item.uuid}}">
 	<div class="header">
 		{{#if @root.editable}}
 			<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-				{{mutation.name}}
+				{{item.name}}
 			</a>
 		{{else}}
-			<span>{{mutation.name}}</span>
+			<span>{{item.name}}</span>
 		{{/if}}
-
-		<div class="traits">
-			{{mutation.system.traits}}
-		</div>
 	</div>
 
-	<div class="content">
-		{{{mutation.system.description}}}
+	<div class="description">
+		{{{item.system.description}}}
 	</div>
 
 	<div class="severity-rating">
-		{{mutation.system.severityRating}}
+		{{item.system.severityRating}}
 	</div>
 
 	<div class="bottom-line">

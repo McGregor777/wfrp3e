@@ -39,11 +39,11 @@
 			{{#each items as |item i|}}
 				{{#if (sameAs item.type "talent")}}
 					<div class="talent-container">
-						{{>systems/wfrp3e/templates/applications/actors/partials/talent-card.hbs talent=item}}
+						{{>systems/wfrp3e/templates/applications/partials/talent-card.hbs item=item}}
 
-						<select class="sheet-form-select item-input socket-select"
-								data-item-id="{{item._id}}"
-								data-path="system.socket"
+						<select class="item-input socket-select"
+								name="system.socket"
+								data-uuid="{{item.uuid}}"
 								{{#unless @root.editable}}disabled{{/unless}}>
 							{{selectOptions
 									(lookup @root.socketsByType item.system.type)
@@ -53,7 +53,7 @@
 					</div>
 				{{else if (sameAs item.type "ability")}}
 					<div>
-						{{>systems/wfrp3e/templates/applications/actors/partials/ability-card.hbs ability=item}}
+						{{>systems/wfrp3e/templates/applications/partials/ability-card.hbs item=item}}
 					</div>
 				{{/if}}
 			{{/each}}
@@ -63,9 +63,9 @@
 			<div class="table-body">
 				{{#each items as |item i|}}
 					{{#if (sameAs item.type "talent")}}
-						{{>systems/wfrp3e/templates/applications/actors/partials/talent-row.hbs talent=item}}
+						{{>systems/wfrp3e/templates/applications/actors/partials/talent-row.hbs item=item}}
 					{{else if (sameAs item.type "ability")}}
-						{{>systems/wfrp3e/templates/applications/actors/partials/ability-row.hbs ability=item}}
+						{{>systems/wfrp3e/templates/applications/actors/partials/ability-row.hbs item=item}}
 					{{/if}}
 				{{/each}}
 			</div>

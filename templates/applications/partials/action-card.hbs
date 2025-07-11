@@ -1,9 +1,9 @@
-<div class="item action card" data-uuid="{{action.uuid}}">
+<div class="item action card" data-uuid="{{item.uuid}}">
 	{{#each @root.stances as |stance st|}}
-		{{#with (lookup ../action.system st) as |face|}}
+		{{#with (lookup ../item.system st) as |face|}}
 			<div class="face {{st}}{{#if (equalTo ../../currentStance st)}} active{{/if}}" data-face="{{st}}">
 				<div class="header">
-					<img class="type" src="systems/wfrp3e/assets/icons/{{../../action.system.type}}.webp" />
+					<img class="type" src="systems/wfrp3e/assets/icons/{{../../item.system.type}}.webp" />
 
 					<div class="difficulty-modifiers">
 						{{#for 0 face.difficultyModifiers.challengeDice 1}}
@@ -91,7 +91,7 @@
 							   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}">
 								<img src="systems/wfrp3e/assets/images/token-black.webp"
 									 alt="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}" />
-								<span class="recharge-token-counter">{{../../action.system.rechargeTokens}}</span>
+								<span class="recharge-token-counter">{{../../item.system.rechargeTokens}}</span>
 							</a>
 
 							<div>

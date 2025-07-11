@@ -1,5 +1,5 @@
-import TalentSelectorV2 from "./applications/TalentSelectorV2.js";
-import {capitalize, sortTalentsByType} from "./helpers.js";
+import TalentSelector from "./applications/selectors/TalentSelector.js";
+import {capitalize} from "./helpers.js";
 
 /**
  * The CheckHelper provides methods to prepare checks.
@@ -7,7 +7,7 @@ import {capitalize, sortTalentsByType} from "./helpers.js";
 export default class CheckHelper
 {
 	/**
-	 * Searches and triggers every relevant effects owned either by the Actor performing the check, or its target.
+	 * Searches and triggers every relevant effect owned either by the Actor performing the check, or its target.
 	 * @param {WFRP3eActor} actor The WFRP3eActor performing the check.
 	 * @param {Object} checkData The check data.
 	 * @param {DicePool} dicePool The dice pool.
@@ -54,14 +54,10 @@ export default class CheckHelper
 				  });
 
 		if(triggeredItems.length > 0) {
-			const sortedItems = {
-				...sortTalentsByType(triggeredItems),
-				abilities: triggeredItems.filter(item => item.type === "ability")
-			}
-			let selectedTalentUuid = await TalentSelectorV2.wait({items: sortedItems});
+			let selectedItemUuid = await TalentSelector.wait({items: triggeredItems});
 
-			if(selectedTalentUuid) {
-				const selectedTalent = await fromUuid(selectedTalentUuid),
+			if(selectedItemUuid) {
+				const selectedTalent = await fromUuid(selectedItemUuid),
 					  effects =  selectedTalent.effects.filter(effect => effect.system.type === "onPostCheckTrigger");
 
 				for(const effect of effects) {
@@ -71,7 +67,11 @@ export default class CheckHelper
 					});
 				}
 
-				chatMessage.update({"options.checkData.triggeredItems": checkData.triggeredItems ? checkData.triggeredItems.push(selectedTalentUuid) : [selectedTalentUuid]});
+				chatMessage.update({
+					"options.checkData.triggeredItems": checkData.triggeredItems
+						? checkData.triggeredItems.push(selectedItemUuid)
+						: [selectedItemUuid]}
+				);
 			}
 		}
 		else
@@ -543,7 +543,7 @@ export default class CheckHelper
 
 	/**
 	 * Draws one or several critical wounds randomly from the Critical Wounds RollTable.
-	 * @param {Number} amount The amount of critical wounds to draw.
+	 * @param {Number} amount The number of critical wounds to draw.
 	 * @returns {Promise<*[]>} The critical wounds Items owned by the target Actor.
 	 */
 	static async drawCriticalWoundsRandomly(amount)

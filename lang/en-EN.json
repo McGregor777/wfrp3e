@@ -1,8 +1,4 @@
 {
-	"Confirm": "Confirm",
-	"Finish": "Finish",
-	"Ignore": "Ignore",
-
 	"ABILITY": {
 		"ACTIONS": {
 			"update": "Save Ability",
@@ -107,11 +103,17 @@
 		"title": "Action Effect Editor"
 	},
 
-	"ACTIONSELECTOR.ChooseANewAction": "Choose a New Action",
-	"ACTIONSELECTOR.NoActionSelected": "None",
-	"ACTIONSELECTOR.NoActionSelectedWarning": "You must select an Action card.",
-	"ACTIONSELECTOR.SelectedAction": "Selected Action:",
-	"ACTIONSELECTOR.Title": "Action Selector",
+	"ACTIONSELECTOR": {
+		"ACTIONS": {
+			"chooseAction": "Choose An Action"
+		},
+		"HEADINGS.newAction": "Choose a New Action",
+		"WARNINGS": {
+			"noActionSelected": "You must select an Action card."
+		},
+		"selectedAction": "Selected Action:",
+		"title": "Action Selector"
+	},
 
 	"ACTOR": {
 		"ACTIONS": {
@@ -240,17 +242,17 @@
 				"wound.label": "Wound Advance Options"
 			},
 			"advances": {
-				"action": "Action",
-				"careerCompletion": "Career Completion Advances",
-				"careerTransition": "Career Transition",
-				"dedicationBonus": "Dedication Bonus",
-				"generalCareer": "General Career Advances",
-				"nonCareer": "Non Career Advances",
-				"open": "Open Career Advance",
-				"skill": "Skill Training or Specialty",
-				"talent": "Talent",
-				"type": "Advance Type",
-				"wound": "Light Wound Threshold"
+				"action.label": "Action",
+				"careerCompletion.label": "Career Completion Advances",
+				"careerTransition.label": "Career Transition",
+				"dedicationBonus.label": "Dedication Bonus",
+				"generalCareer.label": "General Career Advances",
+				"nonCareer.label": "Non Career Advances",
+				"open.label": "Open Career Advance",
+				"skill.label": "Skill Training or Specialty",
+				"talent.label": "Talent",
+				"type.label": "Advance Type",
+				"wound.label": "Light Wound Threshold"
 			},
 			"careerSkills.label": "Career Skills",
 			"current.label": "Current Career",
@@ -294,17 +296,47 @@
 			"main": "Main",
 			"setting": "Setting Information"
 		},
+		"WARNINGS": {
+			"advanceOptionDepleted": "This career offers no more advance option of this type.",
+			"dedicationBonusCareerNotCompleted": "You cannot buy a career's dedication bonus until it is completed."
+		},
 		"name": "Career",
 		"plural": "Careers"
 	},
 
-	"CAREERSELECTOR.ChooseANewCareer": "Choose a New Career",
-	"CAREERSELECTOR.ExperienceCost": "{cost} XP",
-	"CAREERSELECTOR.NotEnoughExperiencePoint": "You have not enough experience to move to this Career.",
-	"CAREERSELECTOR.NoCareerSelected": "None",
-	"CAREERSELECTOR.NoCareerSelectedWarning": "You must select a Career sheet.",
-	"CAREERSELECTOR.SelectedCareer": "Selected Career:",
-	"CAREERSELECTOR.Title": "Career Selector",
+	"CAREERADVANCEDIALOG": {
+		"BUTTONS": {
+			"action": "Action Card",
+			"conservative": "Conservative Piece",
+			"nonCareerSkill": "Skill Training",
+			"nonPrimaryCharacteristic": "Non-Primary Characteristic",
+			"primaryCharacteristic": "Primary Characteristic/Fortune Die",
+			"reckless": "Reckless Piece",
+			"skill": "Skill Training or Specialisation",
+			"talent": "Talent Card",
+			"wound": "Wound Threshold"
+		},
+		"nonCareerAdvance": {
+			"content": "Choose a new non-career advance",
+			"title": "New Non Career Advance Selection"
+		},
+		"openAdvance": {
+			"content": "Choose a new career advance",
+			"title": "New Career Advance Selection"
+		}
+	},
+
+	"CAREERSELECTOR": {
+		"ACTIONS.chooseCareer": "Choose Career",
+		"WARNINGS": {
+			"notEnoughExperiencePoint": "You have not enough experience to move to this Career.",
+			"noCareerSelectedWarning": "You must select a Career sheet."
+		},
+		"chooseANewCareer": "Choose a New Career",
+		"noCareerSelected": "None",
+		"selectedCareer": "Selected Career:",
+		"title": "Career Selector"
+	},
 
 	"CHALLENGELEVEL": {
 		"simple": "Simple",
@@ -366,6 +398,8 @@
 		},
 		"WARNINGS": {
 			"noExperienceLeft": "You have no Experience left.",
+			"notEnoughExperienceForAdvance": "You don't have enough Experience to buy this advance.",
+			"notEnoughExperienceForNonCareerAdvance": "You don't have enough Experience to buy a non-career advance.",
 			"noSkill": "<em><strong>{actor}</em></strong> has no skill. Do you wish to give <em><strong>{actor}</em></strong> all the basic skills?"
 		},
 		"woundThreshold": "Wound Threshold"
@@ -417,15 +451,22 @@
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Not enough Skill Training left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Not enough Specialisation left.",
 
-	"CHARACTERISTICUPGRADER.CharacteristicFortune": "{characteristic} Fortune Die",
-	"CHARACTERISTICUPGRADER.CharacteristicRating": "{characteristic} Rating",
-	"CHARACTERISTICUPGRADER.ExperienceCost": "{cost} XP",
-	"CHARACTERISTICUPGRADER.IncreaseFortune": "+1 Fortune Die",
-	"CHARACTERISTICUPGRADER.IncreaseRating": "+1 Rating",
-	"CHARACTERISTICUPGRADER.NoUpgradeSelected": "No Upgrade Selected",
-	"CHARACTERISTICUPGRADER.SelectedUpgrade": "Selected Upgrade: ",
-	"CHARACTERISTICUPGRADER.Title": "Characteristic Upgrader",
-	"CHARACTERISTICUPGRADER.UpgradeACharacteristic": "Upgrade A Characteristic",
+	"CHARACTERISTICUPGRADER": {
+		"ACTIONS": {
+			"increaseFortune": "+1 Fortune Die",
+			"increaseRating": "+1 Rating",
+			"upgradeCharacteristic": "Upgrade A Characteristic"
+		},
+		"WARNINGS": {
+			"noUpgradeSelected": "None",
+			"notEnoughOpenAdvances": "The Actor has not enough open advances available."
+		},
+		"characteristicFortune": "{characteristic} Fortune Die",
+		"characteristicRating": "{characteristic} Rating",
+		"experienceCost": "{cost} XP",
+		"selectedUpgrade": "Selected Upgrade: ",
+		"title": "Characteristic Upgrader"
+	},
 
 	"CHECKBUILDER": {
 		"ACTIONS": {
@@ -445,7 +486,7 @@
 			"fortunePoints": "Fortune Points",
 			"specialisations": "Specialisations",
 			"skill": "Skill",
-			"triggeredItems": "Triggered Items",
+			"triggeredEffects": "Triggered Effects",
 			"weapon": "Weapon"
 		},
 		"TABS": {
@@ -770,22 +811,6 @@
 		"plural": "Mutations"
 	},
 
-	"NEWCAREERADVANCESELECTION.Content": "Choose a new career advance",
-	"NEWCAREERADVANCESELECTION.Title": "New Career Advance Selection",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Conservative": "Conservative Piece",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Reckless": "Reckless Piece",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Characteristic": "Primary Characteristic/Fortune Die",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Action": "Action Card",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Skill": "Skill Training or Specialisation",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Talent": "Talent Card",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Wound": "Wound Threshold",
-
-	"NEWNONCAREERADVANCESELECTION.Content": "Choose a new non-career advance",
-	"NEWNONCAREERADVANCESELECTION.Title": "New Non Career Advance Selection",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Characteristic": "Non-Primary Characteristic",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Skill": "Skill Training or Specialisation",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Talent": "Talent Card",
-
 	"ORIGIN.KarakAzgaraz": "Dwarf of Karak Azgaraz",
 	"ORIGIN.Ulthuan": "High Elf of Ulthuan",
 	"ORIGIN.Reiklander": "Reiklander",
@@ -919,6 +944,20 @@
 		"availableEffects": "Available Effects"
 	},
 
+	"SELECTOR": {
+		"ACTIONS.openFilters": "Open Filters",
+		"WARNINGS": {
+			"alreadySelected": "This item is already selected.",
+			"cannotSubmit": "Unable to confirm selection: {error}",
+			"maximumSelectionSizeReached": "You cannot select any more item. Please deselect an item before selecting an other one.",
+			"notEnoughSelection": "You need to select more items.",
+			"noSelection": "No item has been selected."
+		},
+		"filters": "Filters",
+		"noSelection": "Aucun",
+		"search": "Search"
+	},
+
 	"SCRIPT": {
 		"TYPES": {
 			"onCareerSocket": "Career Socket",
@@ -950,10 +989,14 @@
 		},
 		"NAMES": {
 			"channeling": "Channeling",
+			"charm": "Charm",
 			"education": "Education",
+			"firstAid": "First Aid",
 			"folklore": "Folklore",
 			"intimidate": "Intimidate",
 			"intuition": "Intuition",
+			"leadership": "Leadership",
+			"medicine": "Medicine",
 			"observation": "Observation",
 			"piety": "Piety",
 			"weaponSkill": "Weapon Skill"
@@ -962,9 +1005,21 @@
 			"effects": "Effects",
 			"main": "Main"
 		},
+		"acquired": "Acquired",
 		"name": "Skill",
 		"plural": "Skills",
 		"specialisationList": "Specialisations: {specialisations}"
+	},
+
+	"SKILLUPGRADER": {
+		"ACTIONS.chooseUpgrade": "Choose Upgrade",
+		"WARNINGS.singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
+		"acquisitionUpgrade": "{name} - Acquisition",
+		"noUpgradeSelected": "None",
+		"selectedUpgrade": "Selected Upgrade:",
+		"specialisationUpgrade": "{name} - {value} Specialisation",
+		"title": "Skill Upgrader",
+		"trainingLevelUpgrade": "{name} - Training Level {value}"
 	},
 
 	"SYMBOL": {
@@ -1044,18 +1099,6 @@
 		"selectedTalent": "Selected Talent:",
 		"title": "Talent Selector"
 	},
-
-	"TRAININGSELECTOR.Acquired": "Acquired",
-	"TRAININGSELECTOR.Characteristic": "Characteristic",
-	"TRAININGSELECTOR.ChooseATraining": "Choose a Training",
-	"TRAININGSELECTOR.NewTrainingLevel": "Training Level {level}",
-	"TRAININGSELECTOR.NewSpecialisation": "{specialisation} Specialisation",
-	"TRAININGSELECTOR.NoTrainingSelected": "None",
-	"TRAININGSELECTOR.NoTrainingSelectedWarning": "You must select a Training.",
-	"TRAININGSELECTOR.SelectedTraining": "Selected Training:",
-	"TRAININGSELECTOR.Specialisations": "Specialisations",
-	"TRAININGSELECTOR.Title": "Training Selector",
-	"TRAININGSELECTOR.TrainingLevel": "Training Level",
 
 	"TRAPPING": {
 		"ACTIONS.update": "Save Trapping",
@@ -1219,5 +1262,9 @@
 		"unarmed": "Unarmed",
 		"name": "Weapon",
 		"plural": "Weapons"
-	}
+	},
+
+	"Confirm": "Confirm",
+	"Finish": "Finish",
+	"Ignore": "Ignore"
 }
