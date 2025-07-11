@@ -42,41 +42,39 @@ function watchUpdates()
 /**
  * Compile the source JSON files into compendium packs.
  * - `gulp compile` - Compile all JSON files into their LevelDB files.
+ * @param {String} [packName] The name of the pack to compile.
+ * @returns {Promise<void>}
  */
-async function compilePacks()
+async function compilePacks(packName = null)
 {
-	// Load system.json.
-	const system = JSON.parse(fs.readFileSync("./system.json", {encoding: "utf8"}));
-	// Determine which source packs to process.
-	const packs = system.packs;
+	const system = JSON.parse(fs.readFileSync("./system.json", {encoding: "utf8"})),
+		  packs = system.packs;
 
-	//if(packName !== null && packName.length !== 0)
-	//	packs.filter(pack => pack.name === packName);
+	if(packName !== null && packName.length !== 0)
+		packs.filter(pack => pack.name === packName);
 
 	for(const packInfo of packs) {
 		logger.info(`Compiling pack ${packInfo.name}`);
 		await compilePack(PACK_SOURCE + packInfo.name, packInfo.path);
-		await extractPack(packInfo.path, PACK_SOURCE + packInfo.name)
 	}
 }
 
 /**
  * Extract the contents of compendium packs to JSON files.
  * - `gulp extract` - Extract all compendium NEDB files into JSON files.
+ * @param {String} [packName] The name of the pack to extract.
  */
 async function extractPacks(packName)
 {
-	// Load system.json.
-	const system = JSON.parse(fs.readFileSync("./system.json", {encoding: "utf8"}));
-	// Determine which source packs to process.
-	const packs = system.packs;
+	const system = JSON.parse(fs.readFileSync("./system.json", {encoding: "utf8"})),
+		  packs = system.packs;
 
-	//if(packName !== null && packName.length !== 0)
-	//	packs.filter(pack => pack.name === packName);
+	if(packName !== null && packName.length !== 0)
+		packs.filter(pack => pack.name === packName);
 
 	for(const packInfo of packs) {
 		logger.info(`Extracting pack ${packInfo.name}`);
-		await extractPack(packInfo.path, PACK_SOURCE + packInfo.name)
+		await extractPack(packInfo.path, PACK_SOURCE + packInfo.name);
 	}
 }
 
