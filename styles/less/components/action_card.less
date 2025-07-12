@@ -1,9 +1,9 @@
-.action-card {
+.action.card {
 	border: 1px solid black;
-	border-radius: 24px;
+	border-radius: 1.5rem;
 	color: white;
 	height: 440px;
-	margin: 8px;
+	margin: 0.5rem;
 	position: relative;
 	text-shadow:
 		-1pt -1pt 0 black,
@@ -16,55 +16,36 @@
 		1pt 1pt 0 black;
 	width: 280px;
 
-	& .action-card-art-image {
+	& .art-image {
 		border: none;
 		display: block;
 		height: 80px;
 		width: 100%;
 	}
 
-	& .action-card-bottom-line {
-		align-items: end;
+	& .bottom-line {
+		align-items: flex-end;
 		color: white;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		line-height: 0;
-		padding: 0 4px 4px;
+		position: relative;
 		text-shadow:
-			-1pt -1pt 0 black,
-			-1pt 0 0 black,
-			0 -1pt 0 black,
-			-1pt 1pt 0 black,
-			1pt -1pt 0 black,
-			0 1pt 0 black,
-			1pt 0 0 black,
-			1pt 1pt 0 black;
-
-		& .recharge-token {
-			position: relative;
-
-			& > img {
-				border: none;
-				height: 48px;
-				opacity: 75%;
-			}
-
-			& > .recharge-token-counter {
-				font-size: 32px;
-				left: 50%;
-				position: absolute;
-				top: 70%;
-				transform: translate(-50%, -50%);
-			}
-		}
+				-1pt -1pt 0 black,
+				-1pt 0 0 black,
+				0 -1pt 0 black,
+				-1pt 1pt 0 black,
+				1pt -1pt 0 black,
+				0 1pt 0 black,
+				1pt 0 0 black,
+				1pt 1pt 0 black;
 	}
 
-	& .action-card-check {
+	& .check {
 		background-color: #201008;
 		color: white;
-		font: bold 12pt @font-title;
-		height: 20px;
+		font: bold 12pt var(--font-title);
+		height: 1.25rem;
 		text-align: center;
 		text-shadow:
 			-1pt -1pt 0 black,
@@ -78,13 +59,13 @@
 		width: 100%;
 	}
 
-	& .action-card-difficulty-modifiers {
+	& .difficulty-modifiers {
 		font-size: 8pt;
 		grid-area: action-card-difficulty-modifiers;
 		line-height: 8pt;
-		margin: auto auto auto 4px;
+		margin: auto auto auto 0.25rem;
 		text-align: center;
-		width: calc(100% - 4px);
+		width: calc(100% - 0.25rem);
 
 		& > * {
 			display: inline-block;
@@ -92,9 +73,9 @@
 		}
 	}
 
-	& .action-card-effects {
-		border: calc(8px + 3px) solid;
-		border-radius: 0 0 24px 24px;
+	& .effects {
+		border: calc(0.5rem + 0.25rem) solid;
+		border-radius: 0 0 1.5rem 1.5rem;
 		border-top: none;
 		color: black;
 		display: flex;
@@ -106,27 +87,33 @@
 		text-shadow: none;
 
 		& > table {
+			background: none;
 			border-top: none;
 			border-bottom: none;
 			flex-grow: 1;
+			margin: 0;
 			overflow-y: auto;
+
+			& th, & td {
+				padding: 0.25rem;
+			}
 		}
 	}
 
-	& .action-card-header {
-		border-radius: 24px 24px 0 0;
+	& .header {
+		border-radius: 1.5rem 1.5rem 0 0;
 		display: grid;
 		height: 70px;
 		grid-template-areas:
 			'action-card-type action-card-name action-card-recharge-rating'
 			'action-card-difficulty-modifiers action-card-traits action-card-recharge-rating';
-		grid-template-columns: 50px 1fr 50px;
-		grid-template-rows: 50px 20px;
+		grid-template-columns: 3rem 1fr 3rem;
+		grid-template-rows: 3rem 1.25rem;
 		width: 100%;
 	}
 
-	& .action-card-name {
-		font: small-caps 16pt @font-title;
+	& .name {
+		font: small-caps 16pt var(--font-title);
 		grid-area: action-card-name;
 		line-height: 16pt;
 		margin: auto;
@@ -140,21 +127,25 @@
 			0 1pt 0 black,
 			1pt 0 0 black,
 			1pt 1pt 0 black;
+
+		& > span {
+			font-size: 8pt;
+		}
 	}
 
-	& .action-card-recharge-rating {
+	& .recharge-rating {
 		background-color: cornflowerblue;
 		border-radius: 50%;
-		font: bold 16pt/1 @font-title;
+		font: bold 16pt/1 var(--font-title);
 		grid-area: action-card-recharge-rating;
-		height: 32px;
-		line-height: 32px;
-		margin: 8px 8px 0 0;
+		height: 2rem;
+		line-height: 2rem;
+		margin: 0.5rem 0.5rem 0 0;
 		text-align: center;
-		width: 32px;
+		width: 2rem;
 	}
 
-	& .action-card-requirements {
+	& .requirements {
 		background-color: #503820;
 		color: white;
 		font-size: 12pt;
@@ -172,12 +163,12 @@
 
 		& > p {
 			margin: 0;
-			padding-top: 4px;
+			padding-top: 0.25rem;
 		}
 	}
 
-	& .action-card-traits {
-		height: 20px;
+	& .traits {
+		height: 1.25rem;
 		font-size: 12pt;
 		font-style: italic;
 		font-stretch: condensed;
@@ -185,12 +176,12 @@
 		text-align: center;
 	}
 
-	& .action-card-type {
+	& .type {
 		background-color: lightgrey;
 		border: none;
 		border-radius: 100%;
 		grid-area: action-card-type;
-		margin: 8px 0 0 8px;
+		margin: 0.5rem 0 0 0.5rem;
 	}
 
 	& .face {
@@ -201,26 +192,26 @@
 
 		&.conservative {
 			background-color: #d8b880;
-			border-radius: 24px;
+			border-radius: 1.5rem;
 
-			& > .action-card-effects {
+			& > .effects {
 				border-color: sienna;
 			}
 
-			& > .action-card-header {
+			& > .header {
 				background-color: #388840;
 			}
 		}
 
 		&.reckless {
 			background-color: #e0e0e0;
-			border-radius: 24px;
+			border-radius: 1.5rem;
 
-			& > .action-card-effects {
+			& > .effects {
 				border-color: darkgrey;
 			}
 
-			& > .action-card-header {
+			& > .header {
 				background-color: #c02030;
 			}
 		}

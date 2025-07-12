@@ -1,36 +1,40 @@
-.miscast-card {
+.miscast.card {
+	background-color: #e8f0f8;
+	border: 1rem solid #385060;
+	border-radius: 0.5rem;
+	border-width: 0.5rem 0 1rem;
+	color: black;
 	display: flex;
 	flex-direction: column;
-	position: relative;
-	width: 255px;
 	height: 385px;
-	margin: 8px;
-	border: 10px solid #385060;
-	border-width: 10px 0;
-	border-radius: 10px;
+	margin: 0.5rem;
+	position: relative;
 	text-align: center;
-	background-color: #e8f0f8;
+	width: 255px;
 
-	& .miscast-card-description {
-		flex-grow: 1;
-		padding: 10px;
-
-		& p {
-			text-align: left;
-		}
+	& .bottom-line {
+		bottom: 0.5rem;
 	}
 
-	& .miscast-card-header {
+	& .description {
+		border-bottom: 0.5rem solid #606060;
+		flex-grow: 1;
+		padding: 0.5rem;
+	}
+
+	& .header {
+		background-color: #e8e8e0;
 		display: flex;
 		flex-direction: column;
-		height: 50px;
-		margin-bottom: 5px;
-		background-color: #e8e8e0;
+		height: 2rem;
+		margin-bottom: 0.25rem;
 
-		& .miscast-card-name {
-			margin: auto 0;
+		& .name {
+			border: 0.5rem solid #606060;
+			border-width: 0.5rem 0;
 			color: white;
 			font: small-caps 16pt var(--font-title);
+			margin: auto 0;
 			text-shadow:
 				-1pt -1pt 0 black,
 				-1pt 0 0 black,
@@ -42,20 +46,19 @@
 				1pt 1pt 0 black;
 
 			&:hover {
-				text-shadow: 0 0 8px var(--color-shadow-primary);
+				text-shadow: 0 0 0.5rem var(--color-shadow-primary);
 			}
 		}
 	}
 
-	& .miscast-card-severity-rating {
-		position: absolute;
-		width: 31px;
-		height: 31px;
-		bottom: 15px;
-		right: 15px;
+	& .severity-rating {
 		background-color: #703818;
+		bottom: 1rem;
 		color: white;
 		font: small-caps 20pt var(--font-title);
+		height: 2rem;
+		position: absolute;
+		right: 1rem;
 		text-shadow:
 			-1pt -1pt 0 black,
 			-1pt 0 0 black,
@@ -65,11 +68,6 @@
 			0 1pt 0 black,
 			1pt 0 0 black,
 			1pt 1pt 0 black;
-	}
-
-	& .item-delete-link {
-		position: absolute;
-		bottom: 0;
-		right: 5px;
+		width: 2rem;
 	}
 }

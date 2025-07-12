@@ -1,0 +1,116 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	<div class="characteristics-and-impairments">
+		<h3 class="character-sheet-title">{{localize "CHARACTER.TABS.attributes"}}</h3>
+
+		<div>
+			<div class="impairments">
+				{{>systems/wfrp3e/templates/applications/actors/partials/impairment.hbs
+						impairment=fields.impairments.fields.fatigue
+						token="systems/wfrp3e/assets/images/token-red.webp"}}
+
+				{{>systems/wfrp3e/templates/applications/actors/partials/impairment.hbs
+						impairment=fields.impairments.fields.stress
+						token="systems/wfrp3e/assets/images/token-blue.webp"}}
+			</div>
+
+			<div class="characteristics">
+				{{#each fields.characteristics.fields as |characteristic char|}}
+					{{>systems/wfrp3e/templates/applications/actors/partials/characteristic.hbs characteristic=characteristic}}
+				{{/each}}
+			</div>
+		</div>
+	</div>
+
+	<div class="skills">
+		<h3 class="character-sheet-title">{{localize "SKILL.plural"}}</h3>
+
+		{{#if skills}}
+			<div class="skill table">
+				<div class="table-header">
+					<div class="name">
+						{{localize "Name"}}
+					</div>
+
+					<div class="characteristic">
+						{{localize "SKILL.FIELDS.characteristic.abbreviation"}}
+					</div>
+
+					<div class="training-level">
+						{{localize "SKILL.FIELDS.trainingLevel.label"}}
+					</div>
+
+					<div class="buttons"></div>
+				</div>
+
+				<div class="table-body">
+					{{#each skills as |skill sk|}}
+						{{>systems/wfrp3e/templates/applications/actors/partials/skill-row.hbs skill=skill}}
+					{{/each}}
+				</div>
+			</div>
+		{{else}}
+			<p>{{{localize "CHARACTER.WARNINGS.noSkill" actor=source.name}}}</p>
+
+			<button data-action="addBasicSkills">
+				{{localize "CHARACTER.ACTIONS.addBasicSkills"}}
+			</button>
+		{{/if}}
+	</div>
+
+	<div class="attributes">
+		<div class="attributes-subdivision">
+			{{>systems/wfrp3e/templates/applications/actors/partials/attribute.hbs attribute=fields.wounds}}
+
+			{{>systems/wfrp3e/templates/applications/actors/partials/attribute.hbs attribute=fields.corruption}}
+
+			{{>systems/wfrp3e/templates/applications/actors/partials/attribute.hbs attribute=fields.fortune}}
+		</div>
+
+		<div class="stance-meter">
+			<h3 class="character-sheet-title">
+				<a class="stance-meter-segment"
+				   data-action="adjustStanceMeter"
+				   data-stance="conservative"
+				   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustConservativeSegment'}}">
+					<img class="stance-conservative"
+						 src="systems/wfrp3e/assets/images/stance-conservative.webp"
+						 alt="{{localize 'CHARCTER.SHEET.conservativeSegment'}}"
+						 height="27" />
+				</a>
+
+				{{localize "ACTOR.FIELDS.stance.label"}}
+
+				<a class="stance-meter-segment"
+				   data-action="adjustStanceMeter"
+				   data-stance="reckless"
+				   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustRecklessSegment'}}">
+					<img class="stance-reckless"
+						 src="systems/wfrp3e/assets/images/stance-reckless.webp"
+						 alt="{{localize 'CHARCTER.SHEET.recklessSegment'}}"
+						 height="27" />
+				</a>
+			</h3>
+
+			<div class="stance-meter-segment-container">
+				{{#for system.stanceMeter.conservative (increment system.stanceMeter.reckless 1) 1}}
+					<label class="stance-meter-segment{{#if (equalTo @root.system.stance.current this)}} active{{/if}}"
+						   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustStance'}}">
+						<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}"
+							 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}.webp" height="27" />
+
+						<input name="system.stance.current"
+							   value="{{this}}"
+							   type="radio"
+							   {{#if (equalTo @root.system.stance.current this)}}checked{{/if}}/>
+					</label>
+				{{/for}}
+			</div>
+		</div>
+
+		<div class="attributes-subdivision">
+			{{>systems/wfrp3e/templates/applications/actors/partials/attribute.hbs attribute=fields.favour}}
+
+			{{>systems/wfrp3e/templates/applications/actors/partials/attribute.hbs attribute=fields.power}}
+		</div>
+	</div>
+</section>

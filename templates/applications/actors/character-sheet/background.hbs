@@ -1,0 +1,31 @@
+<section class="tab scrollable {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	<fieldset class="inline">
+		{{formGroup fields.height value=system.height classes="stacked slim" rootId=rootId}}
+
+		{{formGroup fields.weight value=system.weight classes="stacked slim" rootId=rootId}}
+
+		{{formGroup fields.build value=system.build classes="stacked" rootId=rootId}}
+
+		{{formGroup fields.hairColour value=system.hairColour classes="stacked" rootId=rootId}}
+
+		{{formGroup fields.eyeColour value=system.eyeColour classes="stacked" rootId=rootId}}
+	</fieldset>
+
+	<fieldset class="inline">
+		{{formGroup fields.birthplace value=system.birthplace classes="stacked" rootId=rootId}}
+
+		{{formGroup fields.familyMembers value=system.familyMembers classes="stacked expanded" rootId=rootId}}
+
+		{{formGroup fields.personalGoal value=system.personalGoal classes="stacked expanded" rootId=rootId}}
+	</fieldset>
+
+	<fieldset class="inline">
+		{{formGroup fields.allies value=system.allies classes="stacked expanded" rootId=rootId}}
+
+		{{formGroup fields.enemies value=system.enemies classes="stacked expanded" rootId=rootId}}
+	</fieldset>
+
+	{{formGroup fields.biography value=system.biography toggled=true enriched=enriched.biography rootId=rootId}}
+
+	{{formGroup fields.campaignNotes value=system.campaignNotes toggled=true enriched=enriched.campaignNotes rootId=rootId}}
+</section>

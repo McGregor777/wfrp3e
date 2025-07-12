@@ -1,0 +1,65 @@
+<div class="item action row" data-uuid="{{action.uuid}}">
+	{{#each @root.stances as |stance st|}}
+		{{#with (lookup ../action.system st) as |face|}}
+			<div class="content face {{st}}{{#if (equalTo ../../currentStance st)}} active{{/if}}" data-face="{{st}}">
+				<div class="image">
+					{{#if @root.editable}}
+						<a data-action="rollItem" data-tooltip="{{localize 'ACTOR.ACTIONS.rollActionCheck'}}">
+							<img class="type" src="{{../../action.img}}" width="40" height="40" />
+						</a>
+					{{else}}
+						<span><img class="type" src="{{../../action.img}}" width="40" height="40" /></span>
+					{{/if}}
+				</div>
+
+				<div class="name">
+					{{#if @root.editable}}
+						<a data-action="rollItem" data-tooltip="{{localize 'ACTOR.ACTIONS.rollActionCheck'}}">
+							<span>{{face.name}}</span> <span class="fas fa-dice-d20"></span>
+						</a>
+					{{else}}
+						<span>{{face.name}}</span>
+					{{/if}}
+				</div>
+
+				<div class="traits">
+					<span><strong>{{face.traits}}</strong></span>
+				</div>
+
+				<div class="recharge-rating">
+					<span><strong>{{localize "ACTION.FIELDS.rechargeRating.label"}}&nbsp;:</strong></span>
+					<span><strong>{{face.rechargeRating}}</strong></span>
+				</div>
+
+				<div class="difficulty-modifiers">
+					<span><strong>{{localize "ACTION.FIELDS.difficultyModifiers.abbreviation"}}&nbsp;:</strong></span>
+
+					{{#if (and (superiorTo face.difficultyModifier.challengeDice 0)
+							   (superiorTo face.difficultyModifier.misfortuneDice 0))}}
+						{{#for 0 face.difficultyModifiers.challengeDice 1}}
+							<span class="wfrp3e-font dice challenge"></span>
+						{{/for}}
+
+						{{#for 0 face.difficultyModifiers.misfortuneDice 1}}
+							<span class="wfrp3e-font dice misfortune"></span>
+						{{/for}}
+					{{else}}
+						<span><strong>{{localize "None"}}</strong></span>
+					{{/if}}
+				</div>
+
+				<div class="buttons">
+					{{#if @root.editable}}
+						<a class="context-menu">
+							<span class="fas fa-ellipsis-vertical"></span>
+						</a>
+					{{else}}
+						<a data-action="expandDocument" data-tooltip="{{localize 'Expand'}}">
+							<span class="fas fa-chevron-down"></span>
+						</a>
+					{{/if}}
+				</div>
+			</div>
+		{{/with}}
+	{{/each}}
+</div>

@@ -1,0 +1,108 @@
+<section class="tab {{tab.id}} {{#if system.nemesis}}nemesis {{/if}}{{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	<div class="characteristics">
+		{{#each fields.characteristics.fields as |characteristic char|}}
+			{{#with (lookup @root.characteristics char) as |char|}}
+				{{>systems/wfrp3e/templates/applications/actors/partials/characteristic.hbs
+						characteristic=characteristic
+						char=char}}
+			{{/with}}
+		{{/each}}
+	</div>
+
+	<div class="image">
+		<img src="{{source.img}}" data-action="editImage" data-edit="img" alt="{{localize fields.img.label}}">
+	</div>
+
+	<div class="ratings">
+		{{>systems/wfrp3e/templates/applications/actors/partials/rating.hbs
+				ratingName="damageRating"
+				icon="systems/wfrp3e/assets/images/damage-rating.webp"}}
+
+		{{>systems/wfrp3e/templates/applications/actors/partials/rating.hbs
+				ratingName="defenceValue"
+				icon="systems/wfrp3e/assets/images/defence-value.webp"}}
+
+		{{>systems/wfrp3e/templates/applications/actors/partials/rating.hbs
+				ratingName="soakValue"
+				icon="systems/wfrp3e/assets/images/soak-value.webp"}}
+
+		{{#if system.nemesis}}
+			{{>systems/wfrp3e/templates/applications/actors/partials/impairment.hbs
+					impairment=fields.impairments.fields.fatigue
+					token="systems/wfrp3e/assets/images/token-red.webp"}}
+
+			{{>systems/wfrp3e/templates/applications/actors/partials/impairment.hbs
+					impairment=fields.impairments.fields.stress
+					token="systems/wfrp3e/assets/images/token-blue.webp"}}
+		{{/if}}
+	</div>
+
+	{{#if system.nemesis}}
+		<div class="stance-meter">
+			<div class="stance-meter-segment-container">
+				<a class="stance-meter-segment"
+				   data-action="adjustStanceMeter"
+				   data-stance="conservative"
+				   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustConservativeSegment'}}">
+					<img class="stance-conservative"
+						 src="systems/wfrp3e/assets/images/stance-conservative.webp"
+						 alt="{{localize 'CHARCTER.SHEET.conservativeSegment'}}"
+						 height="27" />
+				</a>
+
+				{{#for system.stanceMeter.conservative (increment system.stanceMeter.reckless 1) 1}}
+					<label class="stance-meter-segment{{#if (equalTo @root.system.stance.current this)}} active{{/if}}"
+						   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustStance'}}">
+						<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}"
+							 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}.webp" height="27" />
+
+						<input name="system.stance.current"
+							   value="{{this}}"
+							   type="radio"
+							   {{#if (equalTo @root.system.stance.current this)}}checked{{/if}}/>
+					</label>
+				{{/for}}
+
+				<a class="stance-meter-segment"
+				   data-action="adjustStanceMeter"
+				   data-stance="reckless"
+				   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustRecklessSegment'}}">
+					<img class="stance-reckless"
+						 src="systems/wfrp3e/assets/images/stance-reckless.webp"
+						 alt="{{localize 'CHARCTER.SHEET.recklessSegment'}}"
+						 height="27" />
+				</a>
+			</div>
+		</div>
+	{{/if}}
+
+	{{#unless system.nemesis}}
+		<a class="stance {{system.defaultStance}}"
+		   data-action="adjustStance"
+		   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustStance'}}">
+			{{#if (inferiorTo system.stance.current 0)}}
+				C{{abs system.stance.current}}
+			{{else}}
+				{{#if (superiorTo system.stance.current 0)}}
+					R{{system.stance.current}}
+				{{else}}
+					N/A
+				{{/if}}
+			{{/if}}
+		</a>
+	{{/unless}}
+
+	<div class="special-rule-summary editor-container">
+		{{formInput fields.specialRuleSummary
+					value=system.specialRuleSummary
+					toggled=true
+					enriched=enriched.specialRuleSummary}}
+	</div>
+
+	<fieldset class="inline creature-attributes">
+		{{#each fields.attributes.fields as |attribute attr|}}
+			{{>systems/wfrp3e/templates/applications/actors/partials/creature-attribute.hbs
+					attribute=attribute}}
+		{{/each}}
+	</fieldset>
+</section>

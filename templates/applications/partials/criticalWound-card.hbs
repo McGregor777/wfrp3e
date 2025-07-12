@@ -1,0 +1,31 @@
+<div class="item critical-wound card" data-uuid="{{item.uuid}}">
+	<div class="header">
+		{{#if @root.editable}}
+			<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+				{{item.name}}
+			</a>
+		{{else}}
+			<span>{{item.name}}</span>
+		{{/if}}
+	</div>
+
+	<div class="description">
+		{{{item.system.description}}}
+	</div>
+
+	<div class="severity-rating">
+		{{item.system.severityRating}}
+	</div>
+
+	<div class="bottom-line">
+		{{#if @root.editable}}
+			<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+				<span class="fas fa-pen-to-square"></span>
+			</a>
+
+			<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+				<span class="fas fa-trash"></span>
+			</a>
+		{{/if}}
+	</div>
+</div>

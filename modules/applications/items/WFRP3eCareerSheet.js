@@ -1,80 +1,112 @@
 import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
 
+/** @inheritDoc */
 export default class WFRP3eCareerSheet extends WFRP3eItemSheet
 {
-	static get defaultOptions()
-	{
-		return {
-			...super.defaultOptions,
-			height: 820,
-			classes: ["wfrp3e", "sheet", "item", "career"],
-			tabs: [{group: "primary", navSelector: ".career-sheet-tabs", contentSelector: ".career-sheet-body", initial: "header"}]
-		};
-	}
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {
+		actions: {
+			addSocket: this.#addSocket,
+			deleteSocket: this.#deleteSocket
+		},
+		classes: ["career"]
+	};
 
-	getData()
+	/** @inheritDoc */
+	static PARTS = {
+		...super.PARTS,
+		main: {template: "systems/wfrp3e/templates/applications/items/career-sheet/main.hbs"},
+		advanceOptions: {template: "systems/wfrp3e/templates/applications/items/career-sheet/advance-options.hbs"},
+		setting: {template: "systems/wfrp3e/templates/applications/items/career-sheet/setting.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+	};
+
+	/** @inheritDoc */
+	static TABS = {
+		sheet: {
+			tabs: [
+				{id: "main", icon: "fa-solid fa-book"},
+				{id: "advanceOptions", icon: "fa-solid fa-chevron-up"},
+				{id: "setting", icon: "fa-solid fa-scroll"},
+				{id: "effects", icon: "fa-fw fa-solid fa-person-rays"}
+			],
+			initial: "main",
+			labelPrefix: "CAREER.TABS"
+		}
+	};
+
+	/** @inheritDoc */
+	async _preparePartContext(partId, context)
 	{
-		return {
-			...super.getData(),
-			characteristics: CONFIG.WFRP3e.characteristics,
-			races: {...CONFIG.WFRP3e.availableRaces, any: {name: "RACE.Any"}},
-			socketTypes: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"}
-		};
+		let partContext = await super._preparePartContext(partId, context);
+
+		switch(partId) {
+			case "advanceOptions":
+				partContext = {
+					...partContext,
+					fields: this.item.system.schema.fields.advanceOptions.fields,
+					system: this.item.system.advanceOptions
+				};
+				break;
+			case "setting":
+				partContext.fields = this.item.system.schema.fields;
+				break;
+		}
+
+		return partContext;
 	}
 
 	/** @inheritDoc */
-	activateListeners(html)
+	_processFormData(event, form, formData)
 	{
-		super.activateListeners(html);
+		const data = foundry.utils.expandObject(formData.object);
 
-		html.find(".race-restriction-add").click(this._onRaceRestrictionAddClick.bind(this));
-		html.find(".race-restriction-remove").click(this._onRaceRestrictionRemoveClick.bind(this));
+		if(data.system.sockets.element.type) {
+			const socketData = data.system.sockets.element;
+			const sockets = [];
 
-		html.find(".socket-add").click(this._onSocketAddClick.bind(this));
-		html.find(".socket-remove").click(this._onSocketRemoveClick.bind(this));
+			if(Array.isArray(socketData.type))
+				for(let i = 0; i < socketData.type.length; i++) {
+					sockets.push({type: socketData.type[i]});
+				}
+			else
+				sockets.push({type: socketData.type});
+
+			data.system.sockets = sockets;
+		}
+
+		// Make sure that race restriction "any" removes every other race restriction.
+		if(data.system.raceRestrictions.includes("any") && !this.item.system.raceRestrictions.includes("any"))
+			data.system.raceRestrictions = ["any"];
+		else if(this.item.system.raceRestrictions.includes("any")
+			&& data.system.raceRestrictions.find(value => value !== "any").length)
+			data.system.raceRestrictions.splice(
+				data.system.raceRestrictions.findIndex(value => value === "any"),
+				1
+			)
+
+		return data;
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Race restriction addition icon.
-	 * @param event {Event}
+	 * Creates a new socket for the edited Career.
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onRaceRestrictionAddClick(event)
+	static async #addSocket()
 	{
-		this.item.addNewRaceRestriction();
+		await this.item.addNewSocket();
 	}
 
 	/**
-	 * Performs follow-up operations after clicks on a Race restriction removal icon.
-	 * @param event {Event}
+	 * Deletes a specific socket of the Career.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async _onRaceRestrictionRemoveClick(event)
+	static async #deleteSocket(event, target)
 	{
-		this.item.removeLastRaceRestriction();
-	}
-
-	/**
-	 * Performs follow-up operations after clicks on a Talent socket addition icon.
-	 * @param event {Event}
-	 * @returns {Promise<void>}
-	 * @private
-	 */
-	async _onSocketAddClick(event)
-	{
-		this.item.addNewSocket();
-	}
-
-	/**
-	 * Performs follow-up operations after clicks on a Talent socket removal icon.
-	 * @param event {Event}
-	 * @returns {Promise<void>}
-	 * @private
-	 */
-	async _onSocketRemoveClick(event)
-	{
-		this.item.removeLastSocket();
+		await this.item.deleteSocket(target.closest("[data-index]").dataset.index);
 	}
 }

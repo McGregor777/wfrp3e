@@ -1,141 +1,155 @@
 import {capitalize} from "../helpers.js";
 
 /** @inheritDoc */
-export default class CharacteristicUpgrader extends FormApplication
+export default class CharacteristicUpgrader extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)
 {
-	constructor(object, career, nonCareer = false, options = {})
+	/** @inheritDoc */
+	constructor(options = {})
 	{
-		super(object, options);
+		super(options);
 
-		this.career = career;
-		this.nonCareer = nonCareer;
+		if(!options.actor)
+			throw new Error("An Actor is needed.");
+		if(!options.career)
+			throw new Error("A Career is needed.");
+
+		this.actor = options.actor;
+		this.career = options.career;
+		if(options.nonCareerAdvance)
+			this.nonCareerAdvance = options.nonCareerAdvance;
 	}
 
 	/** @inheritDoc */
-	get title()
-	{
-		return game.i18n.localize("CHARACTERISTICUPGRADER.Title");
-	}
+	static DEFAULT_OPTIONS = {
+		id: "characteristic-upgrader-{id}",
+		classes: ["wfrp3e", "characteristic-upgrader"],
+		tag: "form",
+		window: {title: "CHARACTERISTICUPGRADER.title"},
+		form: {
+			handler: this.#onUpgraderFormSubmit,
+			closeOnSubmit: true
+		},
+		position: {width: 360}
+	};
 
 	/** @inheritDoc */
-	static get defaultOptions()
+	static PARTS = {
+		characteristics: {template: "systems/wfrp3e/templates/applications/characteristic-upgrader/characteristics.hbs"},
+		selection: {template: "systems/wfrp3e/templates/applications/characteristic-upgrader/selection.hbs"},
+		footer: {template: "templates/generic/form-footer.hbs"}
+	};
+
+	/**
+	 * The WFRP3eActor upgrading one of its characteristics.
+	 * @type {WFRP3eActor}
+	 */
+	actor = null;
+
+	/**
+	 * The WFRP3eCareer which data is used by the CharacteristicUpgrader.
+	 * @type {WFRP3eItem}
+	 */
+	career = null;
+
+	/**
+	 * Whether the upgraded characteristic is a career characteristic or not.
+	 * @type {Boolean}
+	 */
+	nonCareerAdvance = false;
+
+	/**
+	 * The currently selected upgrade.
+	 * @type {null}
+	 */
+	upgrade = null;
+
+	/** @inheritDoc */
+	async _prepareContext(options)
 	{
 		return {
-			...super.defaultOptions,
-			classes: ["wfrp3e", "selector", "characteristic-upgrader"],
-			template: "systems/wfrp3e/templates/applications/characteristic-upgrader.hbs",
-			width: 360
+			...await super._prepareContext(options),
+			buttons: [{type: "submit", icon: "fa-solid fa-check", label: "CHARACTERISTICUPGRADER.ACTIONS.upgradeCharacteristic"}],
+			characteristics: Object.entries(this.actor.system.characteristics).reduce(
+				(characteristics, [key, characteristic]) => {
+					if((!this.nonCareerAdvance && this.career.system.primaryCharacteristics.includes(key))
+						|| this.nonCareerAdvance && !this.career.system.primaryCharacteristics.includes(key))
+						characteristics[key] = {...characteristic, ...CONFIG.WFRP3e.characteristics[key]};
+					return characteristics;
+				}, {}),
+			upgrade: this.upgrade
 		};
 	}
 
 	/** @inheritDoc */
-	async getData()
+	async _preparePartContext(partId, context)
 	{
-		const data = {
-			...super.getData(),
-			availableOpenAdvancesAmount: this.career.system.advances.open.filter(advance => !advance).length,
-			availableNonCareerAdvancesAmount: this.career.system.advances.nonCareer.filter(advance => !advance.type).length,
-			career: this.career,
-			characteristics: Object.entries(this.object.system.characteristics).reduce((characteristics, characteristic) => {
-				if(!this.nonCareer) {
-					if(this.career.system.primaryCharacteristics.includes(characteristic[0]))
-						characteristics[characteristic[0]] = {
-							...characteristic[1],
-							...CONFIG.WFRP3e.characteristics[characteristic[0]]
-						};
-				}
-				else {
-					if(!this.career.system.primaryCharacteristics.includes(characteristic[0]))
-						characteristics[characteristic[0]] = {
-							...characteristic[1],
-							...CONFIG.WFRP3e.characteristics[characteristic[0]]
-						};
-				}
+		let partContext = await super._preparePartContext(partId, context);
 
-				return characteristics;
-			}, {}),
-			nonCareer: this.nonCareer
-		};
-
-		console.log(data);
-
-		return data;
-	}
-
-	/** @inheritDoc */
-	activateListeners(html)
-	{
-		super.activateListeners(html);
-
-		html.find("input").change(this._onCharacteristicValueChange.bind(this, html));
-	}
-
-	/** @inheritDoc */
-	async _updateObject(event, formData)
-	{
-		if(!formData.upgrade)
-			ui.notifications.warn(game.i18n.localize("CHARACTERISTICUPGRADER.NoUpgradeSelectedWarning"));
-
-		const matches = [...formData.upgrade.matchAll(new RegExp(/(^\w*)_(\w*$)/, "g"))][0];
-		const advancementName = game.i18n.format(
-			`CHARACTERISTICUPGRADER.Characteristic${capitalize(matches[2])}`, {
-			characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[matches[1]].name)
-		});
-		const actorUpdates = {};
-		actorUpdates[`system.characteristics.${matches[1] + "." + matches[2]}`] = this.object.system.characteristics[matches[1]][matches[2]] + 1;
-
-		this.object.update(actorUpdates);
-
-		if(!this.nonCareer) {
-			const careerUpdates = {"system.advances.open": this.career.system.advances.open};
-
-			if(matches[2] === "rating") {
-				let advanceCount = 0;
-
-				careerUpdates["system.advances.open"].forEach((openAdvance, index) => {
-					if(advanceCount <= this.object.system.characteristics[matches[1]].rating && !openAdvance) {
-						careerUpdates["system.advances.open"][index] = advancementName;
-						advanceCount++
-					}
-				});
-			}
-			else if(matches[2] === "fortune")
-				careerUpdates["system.advances.open"][careerUpdates["system.advances.open"].findIndex(advance => !advance)] = advancementName;
-
-			this.career.update(careerUpdates);
-		}
-		else {
-			const careerUpdates = {"system.advances.nonCareer": this.career.system.advances.nonCareer};
-			careerUpdates["system.advances.nonCareer"][careerUpdates["system.advances.nonCareer"].findIndex(advance => !advance.type)] = {
-				cost: this.object.system.characteristics[matches[1]].rating + 2,
-				type: advancementName
+		if(partId === "characteristics")
+			partContext = {
+				...partContext,
+				actor: this.actor,
+				availableOpenAdvances: this.career.system.advances.open.filter(advance => !advance),
+				availableNonCareerAdvances: this.career.system.advances.nonCareer.filter(advance => !advance.type),
+				nonCareerAdvance: this.nonCareerAdvance
 			};
 
-			this.career.update(careerUpdates);
-		}
+		return partContext;
 	}
 
-	async _onCharacteristicValueChange(html, event)
+	/** @inheritDoc */
+	async _onChangeForm(formConfig, event)
 	{
-		const labelParent = $(event.currentTarget).parents("label");
-		const matches = [...event.currentTarget.value.matchAll(new RegExp(/(^\w*)_(\w*$)/, "g"))][0];
+		const form = event.currentTarget,
+			  formData = new FormDataExtended(form),
+			  matches = [...formData.object.upgrade.matchAll(new RegExp(/(^\w*)_(\w*$)/, "g"))][0],
+			  newValue = this.actor.system.characteristics[matches[1]][matches[2]] + 1;
+		let cost = newValue;
 
-		html.find("label.active").removeClass("active");
-		Object.keys(CONFIG.WFRP3e.characteristics).forEach(characteristic => {
-			if(characteristic !== "varies") {
-				html.find(".characteristic." + characteristic + " .result .rating").text(this.object.system.characteristics[characteristic].rating);
-				html.find(".characteristic." + characteristic + " .result .fortune").text(this.object.system.characteristics[characteristic].fortune);
-			}
+		if(matches[2] === "rating" && this.nonCareerAdvance)
+			cost++;
+		else if(matches[2] === "fortune")
+			cost = 1;
+
+		if(this.actor.system.experience.current < cost)
+			return ui.notifications.warn(game.i18n.localize("CHARACTER.WARNINGS.notEnoughExperienceForAdvance"));
+
+		this.upgrade = {
+			characteristic: matches[1],
+			type: matches[2],
+			value: newValue
+		};
+
+		super._onChangeForm(formConfig, event);
+
+		this.render();
+	}
+
+	/**
+	 * Spawns a Selector and waits for it to be dismissed or submitted.
+	 * @param {ApplicationConfiguration} [options] Options used to configure the Selector instance.
+	 * @returns {Promise<any>} Resolves to the selected Item.
+	 */
+	static async wait(options = {})
+	{
+		return new Promise(async (resolve, reject) => {
+			// Wrap the submission handler with Promise resolution.
+			options.submit = async result => {resolve(result)};
+			await new this(options).render(true);
 		});
+	}
 
-		labelParent.addClass("active");
-		labelParent.parent().siblings(".result").find("." + matches[2]).text(this.object.system.characteristics[matches[1]][matches[2]] + 1);
+	/**
+	 * Processes form submission for the Selector.
+	 * @param {SubmitEvent} event The originating form submission event.
+	 * @param {HTMLFormElement} form The form element that was submitted.
+	 * @param {FormDataExtended} formData Processed data for the submitted form.
+	 */
+	static async #onUpgraderFormSubmit(event, form, formData)
+	{
+		if(!this.upgrade)
+			return ui.notifications.warn(game.i18n.localize("CHARACTERISTICUPGRADER.WARNINGS.noUpgradeSelected"));
 
-		html.find(".selection").text(
-			game.i18n.format(
-				`CHARACTERISTICUPGRADER.Characteristic${capitalize(matches[2])}`, {
-					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[matches[1]].name)
-				})
-		);
+		this.options.submit(this.upgrade);
 	}
 }

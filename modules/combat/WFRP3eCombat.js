@@ -3,21 +3,9 @@
  */
 export default class WFRP3eCombat extends Combat
 {
-	constructor(data, context)
-	{
-		super(data, context);
-
-		this.flags.encounterType = this.flags.encounterType ?? "combat";
-	}
-
 	get initiativeCharacteristic()
 	{
-		switch(this.flags.encounterType) {
-			case "combat":
-				return "agility";
-			case "social":
-				return "fellowship";
-		}
+		return CONFIG.WFRP3e.encounterTypes[this.system.type].characteristic;
 	}
 
 	/** @inheritDoc */
@@ -25,17 +13,14 @@ export default class WFRP3eCombat extends Combat
 	{
 		// Structure input data
 		ids = typeof ids === "string" ? [ids] : ids;
-		const currentId = this.combatant?.id;
-		const chatRollMode = game.settings.get("core", "rollMode");
+		const chatRollMode = game.settings.get("core", "rollMode"),
+			  updates = [],
+			  messages = [];
 
 		// Iterate over Combatants, performing an initiative roll for each
-		const updates = [];
-		const messages = [];
-
 		for(let [i, id] of ids.entries()) {
 			// Get Combatant data (non-strictly)
 			const combatant = this.combatants.get(id);
-
 			if(!combatant?.isOwner)
 				continue;
 
@@ -44,21 +29,22 @@ export default class WFRP3eCombat extends Combat
 			await roll.evaluate();
 			updates.push({_id: id, initiative: roll.totalSymbols.successes});
 
+			// If the combatant is hidden, use a private roll unless an alternative rollMode was explicitly requested
+			const rollMode = "rollMode" in messageOptions
+				? messageOptions.rollMode
+				: (combatant.hidden ? CONST.DICE_ROLL_MODES.PRIVATE : chatRollMode);
+
 			// Construct chat message data
 			let messageData = foundry.utils.mergeObject({
-				speaker: ChatMessage.getSpeaker({
+				speaker: foundry.documents.ChatMessage.implementation.getSpeaker({
 					actor: combatant.actor,
 					token: combatant.token,
 					alias: combatant.name
 				}),
-				flavor: game.i18n.format("COMBAT.RollsInitiative", {name: combatant.name}),
+				flavor: game.i18n.format("COMBAT.RollsInitiative", {name: foundry.utils.escapeHTML(combatant.name)}),
 				flags: {"core.initiativeRoll": true}
 			}, messageOptions);
-			const chatData = await roll.toMessage(messageData, {create: false});
-
-			// If the combatant is hidden, use a private roll unless an alternative rollMode was explicitly requested
-			chatData.rollMode = "rollMode" in messageOptions ? messageOptions.rollMode
-				: (combatant.hidden ? CONST.DICE_ROLL_MODES.PRIVATE : chatRollMode );
+			const chatData = await roll.toMessage(messageData, {rollMode, create: false});
 
 			// Play 1 sound for the whole rolled set
 			if(i > 0)
@@ -70,15 +56,14 @@ export default class WFRP3eCombat extends Combat
 		if(!updates.length)
 			return this;
 
-		// Update multiple combatants
+		// Update combatants and combat turn
+		const currentId = this.combatant?.id;
 		await this.updateEmbeddedDocuments("Combatant", updates);
-
-		// Ensure the turn order remains with the same combatant
 		if(updateTurn && currentId)
-			await this.update({turn: this.turns.findIndex(t => t.id === currentId)});
+			await this.update({turn: this.turns.findIndex(t => t.id === currentId)}, {turnEvents: false});
 
 		// Create multiple chat messages
-		await ChatMessage.implementation.create(messages);
+		await foundry.documents.ChatMessage.implementation.create(messages);
 		return this;
 	}
 }

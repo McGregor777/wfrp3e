@@ -11,11 +11,14 @@ export default class WFRP3eSkillDataModel extends foundry.abstract.TypeDataModel
 		return {
 			advanced: new fields.BooleanField(),
 			characteristic: new fields.StringField({
-				choices: Object.entries(CONFIG.WFRP3e.characteristics).reduce((groups, [key, group]) => {
-					groups[key] = group.name
-					return groups;
-				}, {}),
-				initial: Object.values(CONFIG.WFRP3e.characteristics)[0].name,
+				choices: {
+					...Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, [key, group]) => {
+						object[key] = group.name
+						return object;
+					}, {}),
+					varies: "ACTOR.FIELDS.characteristics.varies.label"
+				},
+				initial: Object.keys(CONFIG.WFRP3e.characteristics)[0],
 				required: true
 			}),
 			description: new fields.HTMLField(),

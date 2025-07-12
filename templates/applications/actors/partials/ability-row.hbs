@@ -1,0 +1,73 @@
+<div class="item ability row" data-uuid="{{item.uuid}}">
+	<div class="content">
+		<div class="image">
+			{{#if @root.editable}}
+				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+					<img class="type" src="{{item.img}}" width="40" height="40" />
+				</a>
+			{{else}}
+				<span><img class="type" src="{{item.img}}" width="40" height="40" /></span>
+			{{/if}}
+		</div>
+
+		<div class="name">
+			{{#if @root.editable}}
+				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+					<span>{{item.name}}</span>
+				</a>
+			{{else}}
+				<span>{{item.name}}</span>
+			{{/if}}
+		</div>
+
+		<div class="recharge-tokens">
+			{{#if @root.editable}}
+				<a class="recharge-token"
+				   data-action="adjustRechargeTokens"
+				   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}">
+					<img src="systems/wfrp3e/assets/images/token-grey.webp"
+						 alt="{{localize 'ABILITY.FIELDS.rechargeTokens.label'}}"
+						 height="40" />
+
+					<span class="recharge-token-counter">
+						{{{item.system.rechargeTokens}}}
+					</span>
+				</a>
+			{{else}}
+				<span class="recharge-token" data-tooltip="{{localize 'ABILITY.FIELDS.rechargeTokens.label'}}">
+					<img src="systems/wfrp3e/assets/images/token-grey.webp"
+						 alt="{{localize 'ABILITY.FIELDS.rechargeTokens.label'}}"
+						 height="40" />
+
+					<span class="recharge-token-counter">
+						{{{item.system.rechargeTokens}}}
+					</span>
+				</span>
+			{{/if}}
+		</div>
+
+		<div class="buttons">
+			{{#if @root.editable}}
+				{{#each item.effects as |effect|}}
+					{{#if (sameAs effect.system.type "onTrigger")}}
+						<a data-action="useDocument"
+						   data-effect-uuid="{{effect.uuid}}"
+						   data-tooltip="{{localize 'ABILITY.ACTIONS.trigger'}}" >
+							<span class="fas fa-dice-d20"></span>
+						</a>
+					{{/if}}
+				{{/each}}
+			{{/if}}
+
+			{{#if @root.editable}}
+				<a class="context-menu">
+					<span class="fas fa-ellipsis-vertical"></span>
+				</a>
+			{{else}}
+				<a data-action="expandDocument" data-tooltip="{{localize 'Expand'}}">
+					<span class="fas fa-chevron-down"></span>
+				</a>
+			{{/if}}
+		</div>
+	</div>
+</div>

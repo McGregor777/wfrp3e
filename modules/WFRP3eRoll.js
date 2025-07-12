@@ -4,8 +4,8 @@ import WFRP3eDie from "./dice/WFRP3eDie.js";
 /** @inheritDoc */
 export default class WFRP3eRoll extends Roll
 {
-	static CHAT_TEMPLATE = "systems/wfrp3e/templates/chatmessages/roll.hbs";
-	static TOOLTIP_TEMPLATE = "systems/wfrp3e/templates/chatmessages/roll-tooltip.hbs";
+	static CHAT_TEMPLATE = "systems/wfrp3e/templates/dice/roll.hbs";
+	static TOOLTIP_TEMPLATE = "systems/wfrp3e/templates/dice/tooltip.hbs";
 
 	get resultSymbols()
 	{
@@ -117,12 +117,9 @@ export default class WFRP3eRoll extends Roll
 	}
 
 	/** @inheritDoc */
-	async render({flavor, template = this.constructor.CHAT_TEMPLATE, isPrivate = false} = {})
+	async _prepareChatRenderContext({flavor, isPrivate = false, ...options} = {})
 	{
-		if(!this._evaluated)
-			await this.evaluate({allowInteractive: !isPrivate});
-
-		const chatData = {
+		const context = {
 			formula: isPrivate ? "???" : this._formula,
 			flavor: isPrivate ? null : flavor ?? this.options.flavor,
 			user: game.user.id,
@@ -145,20 +142,20 @@ export default class WFRP3eRoll extends Roll
 		const checkData = this.options.checkData;
 		if(checkData) {
 			const actor = await fromUuid(checkData.actor);
-			foundry.utils.mergeObject(chatData, {
+			foundry.utils.mergeObject(context, {
 				actorName: actor.token ? actor.token.name : actor.prototypeToken.name,
 				outcome: checkData.outcome
 			});
 
 			if(checkData.action)
-				foundry.utils.mergeObject(chatData, {
+				foundry.utils.mergeObject(context, {
 					action: await fromUuid(checkData.action),
 					effects: this.effects,
 					face: checkData.face
 				});
 
 			if(checkData.outcome?.criticalWounds && Array.isArray(checkData.outcome.criticalWounds))
-				chatData.criticalWoundLinks = checkData.outcome.criticalWounds.reduce(async (names, criticalWound) => {
+				context.criticalWoundLinks = checkData.outcome.criticalWounds.reduce(async (names, criticalWound) => {
 					const criticalWoundLink = await fromUuid(criticalWound).toAnchor().outerHTML;
 					names = names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
 					return names;
@@ -166,10 +163,10 @@ export default class WFRP3eRoll extends Roll
 
 			if(checkData.targets && checkData.targets.length > 0) {
 				const targetActor = await fromUuid(checkData.targets[0]);
-				chatData.targetActorName = targetActor.token ? targetActor.token.name : targetActor.prototypeToken.name;
+				context.targetActorName = targetActor.token ? targetActor.token.name : targetActor.prototypeToken.name;
 
 				if(checkData.outcome?.targetCriticalWounds && Array.isArray(checkData.outcome.targetCriticalWounds))
-					chatData.targetCriticalWoundLinks = checkData.outcome.targetCriticalWounds
+					context.targetCriticalWoundLinks = checkData.outcome.targetCriticalWounds
 						?.reduce((names, criticalWound) => {
 							const criticalWoundLink = fromUuidSync(criticalWound).toAnchor().outerHTML;
 							return names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
@@ -177,7 +174,7 @@ export default class WFRP3eRoll extends Roll
 			}
 		}
 
-		return renderTemplate(template, chatData);
+		return context;
 	}
 
 	/** @inheritDoc */

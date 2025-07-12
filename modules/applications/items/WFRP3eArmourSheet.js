@@ -1,19 +1,16 @@
-import WFRP3eItemSheet from "./WFRP3eItemSheet.js";
+import WFRP3eTrappingSheet from "./WFRP3eTrappingSheet.js";
 
-export default class WFRP3eArmourSheet extends WFRP3eItemSheet
+/** @inheritDoc */
+export default class WFRP3eArmourSheet extends WFRP3eTrappingSheet
 {
-	static get defaultOptions()
-	{
-		return {
-			...super.defaultOptions,
-			height: 400,
-			classes: ["wfrp3e", "sheet", "item", "trapping", "armour"],
-			tabs: [{group: "primary", navSelector: ".primary-tabs", contentSelector: ".sheet-body", initial: "main"}]
-		};
-	}
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {classes: ["armour"]};
 
-	getData()
-	{
-		return {...super.getData(), rarities: CONFIG.WFRP3e.rarities};
-	}
+	/** @inheritDoc */
+	static PARTS = {
+		...super.PARTS,
+		main: {template: "systems/wfrp3e/templates/applications/items/armour-sheet/main.hbs"},
+		details: {template: "systems/wfrp3e/templates/applications/items/details.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+	};
 }

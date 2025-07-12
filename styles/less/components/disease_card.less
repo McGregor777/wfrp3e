@@ -1,90 +1,88 @@
-.disease-card {
+.disease.card {
+	background-color: #e8f0e0;
+	border: 0.5rem solid #104020;
+	border-radius: 0.5rem;
+	color: black;
+	height: 385px;
+	margin: 0.5rem;
 	position: relative;
 	width: 255px;
-	height: 385px;
-	margin: 8px;
-	border: 10px solid #104020;
-	border-radius: 10px;
-	text-align: center;
-	background-color: #e8f0e0;
 
-	& .disease-card-content {
-		padding: 0 5px;
+	& .bottom-line {
+		justify-content: flex-end;
+	}
 
-		& .disease-card-description {
-			text-align: left;
+	& .content {
+		margin: 1rem 2rem;
+		padding: 0 0.25rem;
+
+		& .description {
+			border: 0;
 			margin-left: 0;
 			padding: 0;
-			border: 0;
-		}
-
-		& .disease-card-severity-rating {
-			width: 31px;
-			height: 31px;
-			background-color: #405848;
-			float: left;
-			color: white;
-			font: small-caps 20pt var(--font-title);
-			text-shadow:
-				-1pt -1pt 0 black,
-				-1pt 0 0 black,
-				0 -1pt 0 black,
-				-1pt 1pt 0 black,
-				1pt -1pt 0 black,
-				0 1pt 0 black,
-				1pt 0 0 black,
-				1pt 1pt 0 black;
-		}
-
-		& .disease-card-symptom {
 			text-align: left;
-
-			& .symptom-name {
-				text-transform: uppercase;
-
-				&::first-letter {
-					font-size: 16pt;
-				}
-			}
 		}
 	}
 
-	& .disease-card-header {
+	& .header {
 		display: flex;
 		flex-direction: column;
 		height: 70px;
-		margin-bottom: 5px;
+		margin-bottom: 0.25rem;
+		text-align: center;
 
-		& .disease-card-name {
-			margin: auto 0;
-			padding: 0 5px;
+		& .name {
 			color: white;
 			font: small-caps 16pt var(--font-title);
+			margin: auto 0;
+			padding: 0 0.25rem;
 			text-shadow:
-				-1pt -1pt 0 black,
-				-1pt 0 0 black,
-				0 -1pt 0 black,
-				-1pt 1pt 0 black,
-				1pt -1pt 0 black,
-				0 1pt 0 black,
-				1pt 0 0 black,
-				1pt 1pt 0 black;
+					-1pt -1pt 0 black,
+					-1pt 0 0 black,
+					0 -1pt 0 black,
+					-1pt 1pt 0 black,
+					1pt -1pt 0 black,
+					0 1pt 0 black,
+					1pt 0 0 black,
+					1pt 1pt 0 black;
 			vertical-align: middle;
 
 			&:hover {
-				text-shadow: 0 0 8px var(--color-shadow-primary);
+				text-shadow: 0 0 0.5rem var(--color-shadow-primary);
 			}
 		}
 
-		& .disease-card-traits {
-			height: 20px;
-			padding: 3px 5px;
+		& .traits {
 			background-color: #383830;
 			color: white;
 			font-size: 10pt;
 			font-style: italic;
 			font-weight: bold;
+			height: 1.25rem;
+			padding: 0.25rem 0.25rem;
 			text-shadow:
+					-1pt -1pt 0 black,
+					-1pt 0 0 black,
+					0 -1pt 0 black,
+					-1pt 1pt 0 black,
+					1pt -1pt 0 black,
+					0 1pt 0 black,
+					1pt 0 0 black,
+					1pt 1pt 0 black;
+		}
+	}
+
+	& .severity-rating {
+		background-color: #405848;
+		border-radius: 50%;
+		bottom: 1.5rem;
+		color: white;
+		font: small-caps 20pt var(--font-title);
+		height: 2rem;
+		left: 1rem;
+		position: absolute;
+		text-align: center;
+		text-shadow:
 				-1pt -1pt 0 black,
 				-1pt 0 0 black,
 				0 -1pt 0 black,
@@ -93,12 +91,17 @@
 				0 1pt 0 black,
 				1pt 0 0 black,
 				1pt 1pt 0 black;
-		}
+		width: 2rem;
 	}
 
-	& .item-delete-link {
+	& .symptom {
+		bottom: 1.5rem;
+		font-variant: small-caps;
+		left: 0;
+		margin: auto;
 		position: absolute;
-		bottom: 0;
-		right: 5px;
+		right: 0;
+		text-align: center;
+		width: fit-content;
 	}
 }

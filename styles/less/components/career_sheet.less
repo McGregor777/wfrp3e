@@ -1,44 +1,170 @@
-.career-sheet {
+.career-advance-dialog .form-footer {
+	align-items: stretch;
+	flex-direction: column;
+}
+
+.career.game-sheet {
 	color: white;
 	background-color: saddlebrown;
 	border: 1px solid black;
 	font-size: 12pt;
 	height: 635px;
-	margin: 8px;
-	padding: 20px;
+	margin: 0.5rem;
+	padding: 1.25rem;
 	position: relative;
 	width: 510px;
 
-	& .career-sheet-art {
+	& .advance-options {
+		background-color: burlywood;
+		display: grid;
+		font-variant-caps: small-caps;
+		grid-template-areas:
+			'advance-options-header advance-options-header'
+			'action-advance-options talent-advance-options'
+			'skill-advance-options fortune-advance-options'
+			'conservative-advance-options reckless-advance-options'
+			'wound-advance-options wound-advance-options';
+		grid-template-columns: 90px 90px;
+		grid-template-rows: 20px 36px 36px 36px 1fr;
+		height: 185px;
+		line-height: 10pt;
+		margin: 0 auto;
+		text-align: center;
+		text-shadow:
+				-1pt -1pt 0 black,
+				-1pt 0 0 black,
+				0 -1pt 0 black,
+				-1pt 1pt 0 black,
+				1pt -1pt 0 black,
+				0 1pt 0 black,
+				1pt 0 0 black,
+				1pt 1pt 0 black;
+		width: 180px;
+
+		& .advance-option {
+			margin-top: 0.25rem;
+
+			&.action {
+				grid-area: action-advance-options;
+			}
+
+			&.talent {
+				grid-area: talent-advance-options;
+			}
+
+			&.skill {
+				grid-area: skill-advance-options;
+			}
+
+			&.fortune {
+				grid-area: fortune-advance-options;
+			}
+
+			&.conservative {
+				grid-area: conservative-advance-options;
+			}
+
+			&.reckless {
+				grid-area: reckless-advance-options;
+			}
+
+			&.wound {
+				grid-area: wound-advance-options;
+			}
+
+			& .content {
+				color: yellow;
+				font-weight: bold;
+				line-height: 1rem;
+			}
+
+			& .title {
+				font-size: 10pt;
+				font-weight: bold;
+				line-height: 1rem;
+			}
+		}
+
+		& .header {
+			background-color: dimgrey;
+			color: white;
+			font-size: 14pt;
+			font-weight: bold;
+			grid-area: advance-options-header;
+			line-height: 1.5rem;
+		}
+	}
+
+	& .art {
 		border: none;
-		bottom: 32px;
+		bottom: 2rem;
 		max-height: 490px;
 		max-width: 260px;
 		position: absolute;
-		right: 32px;
+		right: 2rem;
 	}
 
-	& .career-sheet-description {
+	& .bottom-line {
+		align-items: flex-end;
+		justify-content: space-between;
+		margin: 0.25rem 0.75rem;
+		text-align: center;
+
+		& > .form-group {
+			display: flex;
+
+			& > * {
+				flex: auto;
+				text-align: center;
+			}
+		}
+	}
+
+	& .career-aptitudes {
+		background-color: papayawhip;
+		display: flex;
+		color: black;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 200px;
+		margin: 20px;
+		padding: 0.5rem;
+		text-align: center;
+		text-shadow: none;
+		width: 190px;
+	}
+
+	& .career-aptitudes-content {
+		font-style: italic;
+	}
+
+	& .career-aptitudes-title {
+		font-size: 14pt;
+		font-variant-caps: small-caps;
+		line-height: 14pt;
+	}
+
+	& .description {
 		background-color: antiquewhite;
 		color: black;
 		column-count: 2;
 		column-fill: auto;
-		column-gap: 20px;
+		column-gap: 1.25rem;
 		column-rule: 1px solid red;
 		font-size: 11pt;
 		height: calc(100% - 96px);
 		line-height: 11pt;
 		overflow: auto;
-		padding: 4px 8px 8px;
+		padding: 0.25rem 0.5rem 0.5rem;
 		text-align: justify;
 		text-shadow: none;
 	}
 
-	& .career-sheet-details {
+	& .details {
 		width: 240px;
 	}
 
-	& .career-sheet-header {
+	& .face > .header {
 		background-color: dimgrey;
 		margin: 0 auto;
 		text-align: center;
@@ -54,128 +180,23 @@
 		width: 385px;
 	}
 
-	& .career-sheet-name {
+	& .name {
 		font-size: 16pt;
 		font-variant-caps: small-caps;
 		font-weight: bold;
 		position: relative;
 	}
 
-	& .career-sheet-traits {
+	& .traits {
 		font-style: italic;
 	}
 
-	& .career-sheet-advance-options {
-		background-color: burlywood;
-		display: grid;
-		font-variant-caps: small-caps;
-		grid-template-areas:
-			'career-sheet-advance-options-header career-sheet-advance-options-header'
-			'career-sheet-action-advance-options career-sheet-talent-advance-options'
-			'career-sheet-skill-advance-options career-sheet-fortune-advance-options'
-			'career-sheet-conservative-advance-options career-sheet-reckless-advance-options'
-			'career-sheet-wound-advance-options career-sheet-wound-advance-options';
-		grid-template-columns: 90px 90px;
-		grid-template-rows: 20px 36px 36px 36px 1fr;
-		height: 185px;
-		line-height: 10pt;
-		margin: 0 auto;
-		text-align: center;
-		text-shadow:
-			-1pt -1pt 0 black,
-			-1pt 0 0 black,
-			0 -1pt 0 black,
-			-1pt 1pt 0 black,
-			1pt -1pt 0 black,
-			0 1pt 0 black,
-			1pt 0 0 black,
-			1pt 1pt 0 black;
-		width: 180px;
-	}
-
-	& .career-sheet-advance-options-header {
-		background-color: dimgrey;
-		color: white;
-		font-size: 14pt;
-		font-weight: bold;
-		grid-area: career-sheet-advance-options-header;
-		line-height: 24px;
-	}
-
-	& .career-sheet-advance-option {
-		margin-top: 4px;
-
-		&.action {
-			grid-area: career-sheet-action-advance-options;
-		}
-
-		&.talent {
-			grid-area: career-sheet-talent-advance-options;
-		}
-
-		&.skill {
-			grid-area: career-sheet-skill-advance-options;
-		}
-
-		&.fortune {
-			grid-area: career-sheet-fortune-advance-options;
-		}
-
-		&.conservative {
-			grid-area: career-sheet-conservative-advance-options;
-		}
-
-		&.reckless {
-			grid-area: career-sheet-reckless-advance-options;
-		}
-
-		&.wound {
-			grid-area: career-sheet-wound-advance-options;
-		}
-
-		& .career-sheet-advance-option-content {
-			color: yellow;
-			font-weight: bold;
-			line-height: 16px;
-		}
-
-		& .career-sheet-advance-option-title {
-			font-size: 10pt;
-			font-weight: bold;
-			line-height: 16px;
-		}
-	}
-
-	& .career-sheet-career-aptitudes {
-		background-color: papayawhip;
-		display: flex;
-		color: black;
-		flex-direction: column;
-		justify-content: space-between;
-		height: 200px;
-		margin: 20px;
-		padding: 8px;
-		text-align: center;
-		text-shadow: none;
-		width: 190px;
-	}
-
-	& .career-sheet-career-aptitudes-content {
-		font-style: italic;
-	}
-
-	& .career-sheet-career-aptitudes-title {
-		font-size: 14pt;
-		font-variant-caps: small-caps;
-		line-height: 14pt;
-	}
-
-	& .career-sheet-race-restrictions {
+	& .race-restrictions {
 		font-size: 11pt;
 		font-variant-caps: small-caps;
 	}
 
-	& .career-sheet-starting-stance {
+	& .starting-stance {
 		display: flex;
 		font-weight: bold;
 		justify-content: center;

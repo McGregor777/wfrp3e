@@ -1,272 +1,313 @@
-.app.creature-sheet {
-	& .window-content {
-		padding: 0;
+.application.wfrp3e.creature .window-content {
+	padding: 0;
 
-		form {
-			display: flex;
-			flex-direction: column;
+	& header.sheet-header {
+		align-items: center;
+		background: url(../assets/images/creature-sheet-header.webp) center/100% 100% no-repeat;
+		display: flex;
+		padding: 0 0.5rem;
+		text-align: center;
 
-			& .category {
-				background-color: #240000;
+		& > * {
+			flex: 0 0 6rem;
+		}
+
+		& input {
+			background: none;
+			border: none;
+			text-align: center;
+			text-shadow:
+					-1pt -1pt 0 black,
+					-1pt 0 0 black,
+					0 -1pt 0 black,
+					-1pt 1pt 0 black,
+					1pt -1pt 0 black,
+					0 1pt 0 black,
+					1pt 0 0 black,
+					1pt 1pt 0 black;
+
+			&[name="name"] {
+				color: bisque;
+				flex-grow: 1;
+				text-shadow:
+						-1pt -1pt 2pt black,
+						-1pt 0 2pt black,
+						0 -1pt 2pt black,
+						-1pt 1pt 2pt black,
+						1pt -1pt 2pt black,
+						0 1pt 2pt black,
+						1pt 0 2pt black,
+						1pt 1pt 2pt black;
+			}
+
+			&[name$="threatRating"] {
+				color: white;
+				flex: 0 0 12.5%;
+				font-size: var(--font-size-28);
+				//padding-top: 0.5rem;
+			}
+
+			&:focus {
+				box-shadow: none;;
+				text-shadow: 0 0 0.25rem var(--color-shadow-primary);
+			}
+		}
+
+		& .wounds {
+			flex-basis: 4rem;
+			& hr {
+				margin: 0 0 2px;
+			}
+
+			& input {
+				color: white;
+				font-size: var(--font-size-28);
+				padding-top: 0.5rem;
+			}
+		}
+	}
+
+	& input[name$="category"] {
+		background-color: #240000;
+		border: solid dimgray;
+		border-radius: 0;
+		border-width: 2px 0;
+		color: white;
+		font-style: italic;
+		padding-top: 0.25rem;
+		text-align: center;
+		width: 100%;
+	}
+
+	& section.tab {
+		min-height: 0;
+		padding: 0 0.5rem;
+
+		&.attributes {
+			grid-template-areas:
+			"characteristics image ratings"
+			"stance special-rule-summary special-rule-summary"
+			"creature-attributes creature-attributes creature-attributes";
+			grid-template-columns: 100px 1fr 100px;
+			grid-template-rows: 1fr 160px 64px;
+			grid-column-gap: 0.5rem;
+			flex-grow: 1;
+			padding: 0;
+
+			&.active {
+				display: grid;
+			}
+
+			&.nemesis {
+				grid-template-areas:
+				"characteristics image ratings"
+				"stance-meter stance-meter stance-meter"
+				"special-rule-summary special-rule-summary special-rule-summary"
+				"creature-attributes creature-attributes creature-attributes";
+				grid-template-rows: 1fr 40px 120px 64px;
+			}
+
+			& .characteristics {
+				display: flex;
+				flex-direction: column;
+				grid-area: characteristics;
+				padding: 0 0.5rem;
+
+				& > .characteristic {
+					align-items: center;
+					display: flex;
+					font-weight: bold;
+					gap: 0.25rem;
+					margin-bottom: 0.25rem;
+
+					& > .characteristic-title {
+						margin-right: auto;
+					}
+
+					& input[name$=".rating"] {
+						border-color: steelblue;
+						border-width: 2px;
+						padding-top: 0.25rem;
+						font-weight: bold;
+						text-align: center;
+						width: 2rem;
+					}
+
+					& input[name$=".fortune"] {
+						border-color: dimgray;
+						font-size: var(--font-size-14);
+						font-weight: bold;
+						height: 1.25rem;
+						padding: 0.25rem 0 0;
+						text-align: center;
+						width: 1.25rem;
+					}
+				}
+			}
+
+			& .creature-attributes {
+				background-color: #884832;
 				border: solid dimgray;
 				border-radius: 0;
-				border-width: 2px 0;
+				border-width: 0.25rem 1rem 0;
 				color: white;
-				font-style: italic;
-				padding-top: 0.25rem;
+				grid-area: creature-attributes;
+				justify-content: space-evenly;
+				padding: 0.25rem 0 0.5rem;
 				text-align: center;
-				width: 100%;
-			}
+				text-shadow: -1pt -1pt 0 black,
+						-1pt 0 0 black,
+						0 -1pt 0 black,
+						-1pt 1pt 0 black,
+						1pt -1pt 0 black,
+						0 1pt 0 black,
+						1pt 0 0 black,
+						1pt 1pt 0 black;
 
-			& .sheet-body {
-				flex: 1 1 0;
-				min-height: 0;
+				& .form-group {
+					gap: 0;
 
-				& > .main-tab {
-					gap: 0.5rem;
-				}
-
-				& .action-tab .actions .action-container {
-					justify-content: center;
-				}
-
-				& .main-tab > div {
-					display: flex;
-
-					&.attributes {
-						background-color: #884832;
-						border: solid dimgray;
-						border-radius: 0;
-						border-width: 4px 1rem 0;
+					& label {
 						color: white;
-						padding: 0.25rem 0 0.5rem;
-						text-align: center;
-						text-shadow:
-									-1pt -1pt 0 black,
-								-1pt 0 0 black,
-									0 -1pt 0 black,
-								-1pt 1pt 0 black,
-									1pt -1pt 0 black,
-								0 1pt 0 black,
-								1pt 0 0 black,
-								1pt 1pt 0 black;
-
-						& .attribute {
-							flex-grow: 1;
-							margin: 0 0.5rem;
-
-							& .attribute-title {
-								font-size: var(--font-size-18);
-								font-variant: small-caps;
-							}
-
-							& .attribute-input-container input {
-								color: white;
-								font-size: var(--font-size-22);
-								font-style: italic;
-								padding-top: 0.5rem;
-								text-shadow:
-											-1pt -1pt 0 black,
-										-1pt 0 0 black,
-											0 -1pt 0 black,
-										-1pt 1pt 0 black,
-											1pt -1pt 0 black,
-										0 1pt 0 black,
-										1pt 0 0 black,
-										1pt 1pt 0 black;
-								width: 2rem;
-							}
-
-							&.expertise {
-								color: yellow;
-
-								& input {
-									color: yellow;
-								}
-							}
-						}
+						font-size: var(--font-size-18);
+						font-variant: small-caps;
+						line-height: 1.5;
 					}
 
-					&.main-infos {
-						& .characteristics {
-							flex: 0 0 100px;
-							padding: 0 0.5rem;
+					& .form-fields {
+						gap: 0;
 
-							& > div {
-								align-items: center;
-								display: flex;
-								font-weight: bold;
-								margin-bottom: 0.25rem;
-
-								& > .characteristic-title {
-									margin-right: auto;
-								}
-
-								& .characteristic-rating-input {
-									background: lightcyan;
-									border-color: lightsteelblue;
-									border-width: 2px;
-									padding-top: 0.25rem;
-									font-weight: bold;
-									text-align: center;
-									width: 2rem;
-								}
-
-								& .characteristic-fortune-input {
-									background: white;
-									border-color: dimgray;
-									font-size: var(--font-size-14);
-									font-weight: bold;
-									height: 1.25rem;
-									padding-top: 0.25rem;
-									text-align: center;
-									width: 1.25rem;
-								}
-							}
-						}
-
-						& .image {
-							flex: 1 1 auto;
-
-							& > img {
-								display: block;
-								margin: auto;height: 260px;
-							}
-						}
-
-						& .ratings {
-							flex: 0 0 100px;
-							padding-left: 0.5rem;
-
-							& > .rating-container {
-								align-items: center;
-								background-color: #240000;
-								border: solid dimgrey;
-								border-radius: 2rem 0 0 2rem;
-								border-width: 2px 0;
-								display: flex;
-								margin-bottom: 0.25rem;
-
-								& > img {
-									border: none;
-								}
-
-								& > input {
-									border: none;
-									color: white;
-									font-weight: bold;
-									padding: 0.25rem 0 0 0.5rem;
-
-									&:focus {
-										box-shadow: none;
-										text-shadow: 0 0 5px var(--color-shadow-primary);
-									}
-								}
-							}
-
-							& > .impairment .token-counter {
-								left: 50%;
-								top: 50%;
-								transform: translate(-50%, -25%);
-							}
-						}
-					}
-
-					&.secondary-infos {
-						flex-grow: 1;
-						padding: 0 1rem 0;
-
-						& .special-rule-summary {
-							flex-grow: 1;
-
-							& > .editor {
-								height: 100%;
-							}
-						}
-
-						& .stance-link {
-							font-size: var(--font-size-18);
-							margin: auto 1rem 1rem 0;
-
-							&.conservative {
-								color: green;
-							}
-
-							&.reckless {
-								color: red;
-							}
-						}
-					}
-
-					&.stance-meter {
-						justify-content: center;
-						margin: 0.5rem 0;
-					}
-				}
-			}
-
-			& .sheet-header {
-				background: url(../assets/images/creature-sheet-header.webp) center/100% 100% no-repeat;
-				flex-wrap: nowrap;
-				padding: 0 0.5rem;
-				text-align: center;
-
-				& input {
-					background: none;
-					border: none;
-					text-shadow:
-							-1pt -1pt 0 black,
+						& input {
+							background: none;
+							color: white;
+							font-size: var(--font-size-22);
+							font-style: italic;
+							line-height: 1.5;
+							text-shadow: -1pt -1pt 0 black,
 							-1pt 0 0 black,
-							0 -1pt 0 black,
+								0 -1pt 0 black,
 							-1pt 1pt 0 black,
-							1pt -1pt 0 black,
+								1pt -1pt 0 black,
 							0 1pt 0 black,
 							1pt 0 0 black,
 							1pt 1pt 0 black;
-
-					&:focus {
-						box-shadow: none;
-						text-shadow: 0 0 5px var(--color-shadow-primary);
+							width: 2rem;
+						}
 					}
 
-					&.threat-rating {
-						color: white;
-						flex: 0 0 12.5%;
-						font-size: var(--font-size-28);
-						padding-top: 0.5rem;
-					}
-				}
-
-				& .name > input {
-					color: bisque;
-					text-shadow:
-							-1pt -1pt 2pt black,
-							-1pt 0 2pt black,
-							0 -1pt 2pt black,
-							-1pt 1pt 2pt black,
-							1pt -1pt 2pt black,
-							0 1pt 2pt black,
-							1pt 0 2pt black,
-							1pt 1pt 2pt black;
-				}
-
-				& .wounds {
-					flex: 0 0 3rem;
-
-					& hr {
-						margin: 0 0 2px;
-					}
-
-					& input {
-						color: white;
-						font-size: var(--font-size-28);
-						padding-top: 0.5rem;
+					&.expertise {
+						& input,
+						& label {
+							color: yellow;
+						}
 					}
 				}
 			}
 
-			& .primary-tabs {
-				border-top: none;
+			& > .image {
+				grid-area: image;
+				margin: auto;
+				max-height: 100%;
+
+				& > img {
+					display: block;
+				}
+			}
+
+			& .ratings {
+				flex: 0 0 100px;
+				grid-area: ratings;
+				padding-top: 0.5rem;
+
+				& > .rating {
+					align-items: center;
+					background-color: #240000;
+					border: solid dimgrey;
+					border-radius: 2rem 0 0 2rem;
+					border-width: 2px 0;
+					display: flex;
+					margin-bottom: 0.25rem;
+
+					& > img {
+						border: none;
+					}
+
+					& > input {
+						background: none;
+						border: none;
+						color: white;
+						font-weight: bold;
+						padding: 0.25rem 0 0 0.5rem;
+						width: 3rem;
+
+						&:focus {
+							box-shadow: none;
+							text-shadow: 0 0 0.25rem var(--color-shadow-primary);
+						}
+					}
+				}
+
+				& > .impairment .token-counter {
+					left: 50%;
+					top: 50%;
+					transform: translate(-50%, -25%);
+				}
+			}
+
+			& .special-rule-summary {
+				background: rgba(250, 240, 230, 0.5);
+				border-radius: 0.5rem;
+				grid-area: special-rule-summary;
+
+				& .editor-container,
+				& .editor-content {
+					padding: 0 0.5rem;
+				}
+			}
+
+			& .stance {
+				font-size: var(--font-size-18);
+				grid-area: stance;
+				margin: auto 1rem 1rem;
+				text-align: center;
+
+				&.conservative {
+					color: green;
+				}
+
+				&.reckless {
+					color: red;
+				}
+			}
+
+			& .stance-meter {
+				grid-area: stance-meter;
+				justify-content: center;
+			}
+		}
+
+		&.details {
+			flex-grow: 1;
+
+			& > .form-group {
+				flex-grow: 1;
+
+				&.stacked {
+					align-items: flex-start;
+					flex-flow: column;
+				}
+
+				& > * {
+					flex: 0;
+				}
+
+				& > .form-fields {
+					flex: 1;
+
+					& > prose-mirror {
+						height: 100%;
+					}
+				}
 			}
 		}
 	}

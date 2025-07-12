@@ -1,9 +1,4 @@
-{
-	"Confirm": "Confirmer",
-	"Finish": "Terminer",
-	"Ignore": "Ignorer",
-
-	"ABILITY": {
+{"ABILITY": {
 		"ACTIONS": {
 			"update": "Enregistrer l'aptitude",
 			"trigger": "Déclencher l'aptitude'"
@@ -18,7 +13,9 @@
 		},
 		"WARNINGS": {
 			"cooldown": "Cette aptitude a déjà été utilisée durant la session."
-		}
+		},
+		"name": "Aptitude",
+		"plural": "Aptitudes"
 	},
 
 	"ACTOR.GenerateACharacter": "Générer un Personnage",
@@ -52,7 +49,9 @@
 			"type.label": "Type d'action",
 			"uniqueEffect.label": "Effet seul",
 			"difficultyModifiers": {
+				"abbreviation": "Difficulté",
 				"challengeDice.label": "Dés de Défi",
+				"label": "Modificateurs de difficulté",
 				"misfortuneDice.label": "Dés d'Infortune"
 			},
 			"effects": {
@@ -75,8 +74,10 @@
 			}
 		},
 		"TABS": {
+			"conservative": "Prudence",
 			"effects": "Effets",
-			"main": "Principal"
+			"main": "Principal",
+			"reckless": "Témérité"
 		},
 		"TYPES": {
 			"melee": "Mêlée",
@@ -87,25 +88,117 @@
 		},
 		"WARNINGS": {
 			"recharging": "Vous ne pouvez pas utiliser une action en cours de rechargement."
-		}
+		},
+		"name": "Action",
+		"plural": "Actions"
 	},
 
 	"ACTIONEFFECTEDITOR": {
-		"title": "Éditeur d'effect d'action",
 		"ACTIONS": {
 			"submit": "Enregistrer l'effet"
 		},
 		"TABS": {
 			"main": "Principal",
 			"script": "Script"
-		}
+		},
+		"title": "Éditeur d'effet d'action"
 	},
 
-	"ACTIONSELECTOR.ChooseANewAction": "Choisissez une nouvelle action",
-	"ACTIONSELECTOR.NoActionSelected": "Aucune",
-	"ACTIONSELECTOR.NoActionSelectedWarning": "Vous devez sélectionner une carte d'action.",
-	"ACTIONSELECTOR.SelectedAction": "Action sélectionnée :",
-	"ACTIONSELECTOR.Title": "Sélecteur d'action",
+	"ACTIONSELECTOR": {
+		"ACTIONS": {
+			"chooseTalent": "Choisir une action"
+		},
+		"HEADINGS.newAction": "Choisissez une nouvelle action",
+		"WARNINGS": {
+			"noActionSelected": "Vous devez sélectionner une carte d'action."
+		},
+		"selectedAction": "Action sélectionnée :",
+		"title": "Sélecteur d'action"
+	},
+
+	"ACTOR": {
+		"ACTIONS": {
+			"addActiveEffect": "Ajouter un effet actif",
+			"adjustConservativeSegment": "Ajouter/retirer un segment de prudence",
+			"adjustRechargeTokens": "Ajouter/retirer un jeton de rechargement",
+			"adjustRecklessSegment": "Ajouter/retirer un segment de témérité",
+			"adjustStance": "Ajuster l'attitude",
+			"editDocument": "Éditer",
+			"flip": "Retourner",
+			"openFilters": "Ouvrir les filtres",
+			"useDocument": "Utiliser",
+			"rollActionCheck": "Faire un test d'action",
+			"rollCharacteristicCheck": "Faire un test de caractéristique",
+			"rollItem": "Faire un test",
+			"rollSkillCheck": "Faire un test de compétence"
+		},
+		"CONTROLS": {
+			"switchDisplayMode": "Basculer le mode d'affichage"
+		},
+		"FIELDS": {
+			"characteristics": {
+				"agility": {
+					"abbreviation": "Ag",
+					"label": "Agilité"
+				},
+				"fellowship": {
+					"abbreviation": "Soc",
+					"label": "Sociabilité"
+				},
+				"intelligence": {
+					"abbreviation": "Int",
+					"label": "Intelligence"
+				},
+				"strength": {
+					"abbreviation": "Fo",
+					"label": "Force"
+				},
+				"toughness": {
+					"abbreviation": "End",
+					"label": "Endurance"
+				},
+				"varies": {
+					"abbreviation": "V",
+					"label": "Varie"
+				},
+				"willpower": {
+					"abbreviation": "FM",
+					"label": "Force Mentale"
+				},
+				"fortune.label": "Dés de fortune",
+				"label": "Caractéristiques",
+				"rating.label": "Valeur"
+			},
+			"impairments": {
+				"fatigue": {
+					"label": "Fatigue",
+					"tokens": "Jetons de Fatigue"
+				},
+				"label": "Impairments",
+				"stress": {
+					"label": "Stress",
+					"tokens": "Jetons de Stress"
+				}
+			},
+			"stance": {
+				"conservative.label": "Segments de prudence",
+				"current.label": "Attitude actuelle",
+				"label": "Attitude",
+				"reckless.label": "Segments de témérité"
+			},
+			"wounds": {
+				"label": "Blessures",
+				"max.label": "Plafond",
+				"value.label": "Actuel"
+			}
+		},
+		"SHEET": {
+			"all": "Tous",
+			"filters": "Filtres",
+			"search": "Recherche"
+		},
+		"WARNINGS.minimumSegment": "Vous ne pouvez pas retirer davantage de segments."
+	},
 
 	"APPLICATION.BUTTON.DeleteItem": "Supprimer l'objet",
 	"APPLICATION.BUTTON.EditItem": "Modifier l'objet",
@@ -127,18 +220,15 @@
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
-		}
+		},
+		"name": "Armure",
+		"plural": "Armures"
 	},
-
-	"ATTRIBUTE.Aggression": "Agressivité",
-	"ATTRIBUTE.Cunning": "Astuce",
-	"ATTRIBUTE.Expertise": "Adresse",
-	"ATTRIBUTE.ABBREVIATION.Aggression": "Ag",
-	"ATTRIBUTE.ABBREVIATION.Cunning": "As",
-	"ATTRIBUTE.ABBREVIATION.Expertise": "Ad",
 
 	"CAREER": {
 		"ACTIONS": {
+			"addSocket": "Ajouter un emplacement de talent",
+			"deleteSocket": "Retirer un emplacement de talent",
 			"update": "Enregistrer la carrière"
 		},
 		"FIELDS": {
@@ -153,25 +243,31 @@
 				"wound.label": "Promotions de Point de Blessure possibles"
 			},
 			"advances": {
-				"action": "Action",
-				"careerCompletion": "Améliorations de Fin de Carrière",
-				"careerTransition": "Transition de Carrière",
-				"dedicationBonus": "Bonus de Fin de Carrière",
-				"generalCareer": "Améliorations de Carrière",
-				"nonCareer": "Améliorations Extracurriculaires",
-				"open": "Amélioration Libre de Carrière",
-				"skill": "Formation ou Spécialisation",
-				"talent": "Talent",
-				"type": "Amélioration choisie",
-				"wound": "Plafond de Blessure"
+				"action.label": "Action",
+				"careerCompletion.label": "Améliorations de Fin de Carrière",
+				"careerTransition.label": "Transition de Carrière",
+				"dedicationBonus.label": "Bonus de Fin de Carrière",
+				"generalCareer.label": "Améliorations de Carrière",
+				"nonCareer.label": "Améliorations Extracurriculaires",
+				"open.label": "Amélioration Libre de Carrière",
+				"skill.label": "Formation ou Spécialisation",
+				"talent.label": "Talent",
+				"type.label": "Amélioration choisie",
+				"wound.label": "Plafond de Blessure"
 			},
 			"careerSkills.label": "Compétences de Carrière",
 			"current.label": "Carrière en cours",
 			"description.label": "Description",
 			"primaryCharacteristics.label": "Caractéristiques Primaires",
 			"raceRestrictions.label": "Restrictions de Race",
-			"sockets.label": "Emplacements de Talent",
-			"startingStance" : {
+			"sockets": {
+				"FIELDS": {
+					"item.label": "Occupé par",
+					"type.label": "Type"
+				},
+				"label": "Emplacements de Talent"
+			},
+			"startingStance": {
 				"conservativeSegments.label": "Segments de Prudence de départ",
 				"recklessSegments.label": "Segments de Témérité de départ"
 			},
@@ -200,16 +296,48 @@
 			"header": "En-tête",
 			"main": "Principal",
 			"setting": "Description"
+		},
+		"WARNINGS": {
+			"advanceOptionDepleted": "Cette carrière n'offre pas davantage de possibilités de promotion de ce type.",
+			"dedicationBonusCareerNotCompleted": "Il est nécessaire de compléter une carrière avant de pouvoir acheter son bonus de fin de carrière"
+		},
+		"name": "Carrière",
+		"plural": "Carrières"
+	},
+
+	"CAREERADVANCEDIALOG": {
+		"BUTTONS": {
+			"action": "Carte d'action",
+			"conservative": "Segment de prudence",
+			"nonCareerSkill": "Formation de compétence",
+			"nonPrimaryCharacteristic": "Caractéristique secondaire",
+			"primaryCharacteristic": "Caractéristique primaire/Dé de Fortune",
+			"reckless": "Segment de témérité",
+			"skill": "Formation de compétence ou spécialisation",
+			"talent": "Carte de talent",
+			"wound": "Plafond de Blessure"
+		},
+		"nonCareerAdvance": {
+			"content": "Choisissez une nouvelle augmentation extracurriculaire",
+			"title": "Sélection d'augmentation extracurriculaire"
+		},
+		"openAdvance": {
+			"content": "Choisissez une nouvelle augmentation de carrière",
+			"title": "Sélection d'augmentation de carrière"
 		}
 	},
 
-	"CAREERSELECTOR.ChooseANewCareer": "Choisissez une nouvelle carrière",
-	"CAREERSELECTOR.ExperienceCost": "{cost} PE",
-	"CAREERSELECTOR.NotEnoughExperiencePoint": "Vous n'avez pas assez d'expérience pour entamer cette carrière.",
-	"CAREERSELECTOR.NoCareerSelected": "Aucune",
-	"CAREERSELECTOR.NoCareerSelectedWarning": "Vous devez sélectionner une fiche de carrière.",
-	"CAREERSELECTOR.SelectedCareer": "Carrière sélectionnée :",
-	"CAREERSELECTOR.Title": "Selecteur de carrière",
+	"CAREERSELECTOR": {
+		"ACTIONS.chooseCareer": "Choisir la carrière",
+		"WARNINGS": {
+			"notEnoughExperiencePoint": "Vous n'avez pas assez d'expérience pour entamer cette carrière.",
+			"noCareerSelectedWarning": "Vous devez sélectionner une fiche de carrière."
+		},
+		"chooseANewCareer": "Choisissez une nouvelle carrière",
+		"noCareerSelected": "Aucune",
+		"selectedCareer": "Carrière sélectionnée :",
+		"title": "Selecteur de carrière"
+	},
 
 	"CHALLENGELEVEL": {
 		"simple": "Simple",
@@ -220,47 +348,61 @@
 		"heroic": "Héroïque"
 	},
 
-	"CHARACTER.Abilities": "Aptitudes",
-	"CHARACTER.Actions": "Actions",
-	"CHARACTER.Armours": "Armures",
-	"CHARACTER.Attributes": "Attributs",
-	"CHARACTER.Background": "Historique",
-	"CHARACTER.Careers": "Carrières",
-	"CHARACTER.Characteristics": "Caractéristiques",
-	"CHARACTER.Conditions": "États",
-	"CHARACTER.Corruption": "Corruption",
-	"CHARACTER.CriticalWounds": "Blessures Critiques",
-	"CHARACTER.Current": "Actuel",
-	"CHARACTER.CurrentExperience": "Expérience actuelle",
-	"CHARACTER.Experience": "Expérience",
-	"CHARACTER.Favour": "Faveur",
-	"CHARACTER.Fortune": "Fortune",
-	"CHARACTER.Insanities": "Folies",
-	"CHARACTER.Maximum": "Maximum",
-	"CHARACTER.Origin": "Origine",
-	"CHARACTER.Power": "Énergie",
-	"CHARACTER.Skills": "Compétences",
-	"CHARACTER.Stances": "Attitude",
-	"CHARACTER.Talents": "Talents",
-	"CHARACTER.Threshold": "Plafond",
-	"CHARACTER.TotalExperience": "Expérience totale",
-	"CHARACTER.Trappings": "Dotations",
-	"CHARACTER.Miscasts": "Revers Magiques",
-	"CHARACTER.Money": "Argent",
-	"CHARACTER.Mutations": "Mutations",
-	"CHARACTER.Weapons": "Armes",
-	"CHARACTER.Wounds": "Blessures",
-	"CHARACTER.WoundThreshold": "Plafond de Blessure",
-	"CHARACTER.IMPAIRMENT.Fatigue": "Fatigue",
-	"CHARACTER.IMPAIRMENT.Stress": "Stress",
-	"CHARACTER.IMPAIRMENT.FatigueTokens": "Jetons de Fatigue",
-	"CHARACTER.IMPAIRMENT.StressTokens": "Jetons de Stress",
-	"CHARACTER.SHEET.AddBasicSkills": "Ajouter les compétences de base",
-	"CHARACTER.SHEET.AddRemoveConservativeSegment": "Ajouter/retirer un segment de prudence",
-	"CHARACTER.SHEET.AddRemoveRecklessSegment": "Ajouter/retirer un segment de témérité",
-	"CHARACTER.SHEET.MinimumSegmentWarning": "Vous ne pouvez pas retirer davantage de segments.",
-	"CHARACTER.SHEET.NoExperienceLeft": "Vous n'avez pas d'expérience à dépenser.",
-	"CHARACTER.SHEET.NoSkill": "<em><strong>{actor}</em></strong> ne possède aucune compétence. Souhaitez-vous donner les compétences de base à <em><strong>{actor}</em></strong> ?",
+	"CHARACTER": {
+		"ACTIONS.addBasicSkills": "Ajouter les compétences de base",
+		"FIELDS": {
+			"background": {
+				"allies.label": "Alliés",
+				"biography.label": "Biographie",
+				"birthplace.label": "Lieu de naissance",
+				"build.label": "Corpulence",
+				"campaignNotes.label": "Notes de la campagne",
+				"enemies.label": "Ennemis",
+				"eyeColour.label": "Couleur des yeux",
+				"familyMembers.label": "Membres de la famille",
+				"hairColour.label": "Couleur des cheveux",
+				"height.label": "Taille",
+				"label": "Historique",
+				"personalGoal.label": "Objectif personnel",
+				"weight.label": "Poids"
+			},
+			"corruption": {
+				"label": "Corruption",
+				"max.label": "Plafond",
+				"value.label": "Actuel"
+			},
+			"experience": {
+				"current.label": "Expérience actuelle",
+				"label": "Expérience",
+				"total.label": "Expérience totale"
+			},
+			"favour.label": "Faveur",
+			"fortune": {
+				"label": "Fortune",
+				"max.label": "Maximum",
+				"value.label": "Actuel"
+			},
+			"origin.label": "Origine",
+			"party.label": "Groupe",
+			"power.label": "Énergie"
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributs",
+			"background": "Historique",
+			"careers": "Carrières",
+			"effects": "Effets",
+			"talents": "Talents",
+			"trappings": "Dotations"
+		},
+		"WARNINGS": {
+			"noExperienceLeft": "Vous n'avez pas d'expérience à dépenser.",
+			"notEnoughExperienceForAdvance": "Vous n'avez pas assez d'expérience pour acheter cette augmentation.",
+			"notEnoughExperienceForNonCareerAdvance": "Vous n'avez pas assez d'expérience pour acheter une augmentation extracurriculaire.",
+			"noSkill": "<em><strong>{actor}</em></strong> ne possède aucune compétence. Souhaitez-vous donner les compétences de base à <em><strong>{actor}</em></strong> ?"
+		},
+		"woundThreshold": "Plafond de Blessures"
+	},
 
 	"CHARACTERGENERATOR.Actions": "Cartes d'action",
 	"CHARACTERGENERATOR.Acquired": "Acquis",
@@ -308,49 +450,26 @@
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Pas assez de formations de compétence.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Pas assez de spécialisations.",
 
-	"CHARACTERISTICS": {
-		"agility": {
-			"abbreviation": "Ag",
-			"name": "Agilité"
+	"CHARACTERISTICUPGRADER": {
+		"ACTIONS": {
+			"increaseFortune": "Dé de Fortune +1",
+			"increaseRating": "Valeur +1",
+			"upgradeCharacteristic": "Améliorer une caractéristique"
 		},
-		"fellowship": {
-			"abbreviation": "Soc",
-			"name": "Sociabilité"
+		"WARNINGS": {
+			"noUpgradeSelected": "Aucune",
+			"notEnoughOpenAdvances": "Le personnage ne dispose pas d'assez d'augmentations libres."
 		},
-		"intelligence": {
-			"abbreviation": "Int",
-			"name": "Intelligence"
-		},
-		"strength": {
-			"abbreviation": "Fo",
-			"name": "Force"
-		},
-		"toughness": {
-			"abbreviation": "End",
-			"name": "Endurance"
-		},
-		"varies": {
-			"abbreviation": "V",
-			"name": "Varie"
-		},
-		"willpower": {
-			"abbreviation": "FM",
-			"name": "Force Mentale"
-		}
+		"characteristicFortune": "Dé de Fortune {characteristic} ",
+		"characteristicRating": "Valeur de {characteristic}",
+		"experienceCost": "{cost} PE",
+		"selectedUpgrade": "Augmentation sélectionnée : ",
+		"title": "Améliorateur de caractéristique"
 	},
-
-	"CHARACTERISTICUPGRADER.CharacteristicFortune": "Dé de Fortune {characteristic} ",
-	"CHARACTERISTICUPGRADER.CharacteristicRating": "Valeur de {characteristic}",
-	"CHARACTERISTICUPGRADER.ExperienceCost": "{cost} PE",
-	"CHARACTERISTICUPGRADER.IncreaseFortune": "Dé de Fortune +1",
-	"CHARACTERISTICUPGRADER.IncreaseRating": "Valeur +1",
-	"CHARACTERISTICUPGRADER.NoUpgradeSelected": "Aucune augmentation sélectionnée",
-	"CHARACTERISTICUPGRADER.SelectedUpgrade": "Augmentation sélectionnée : ",
-	"CHARACTERISTICUPGRADER.Title": "Améliorateur de caractéristique",
-	"CHARACTERISTICUPGRADER.UpgradeACharacteristic": "Améliorer une caractéristique",
 
 	"CHECKBUILDER": {
 		"ACTIONS": {
+			"adjustDiceAmount": "Clic gauche pour ajouter des dés, clic droit pour en retirer.",
 			"convertConservative": "Convertir en dé de prudence",
 			"convertReckless": "Convertir en dé de témérité",
 			"rollCheck": "Lancer le test"
@@ -366,7 +485,7 @@
 			"fortunePoints": "Points de Fortune",
 			"specialisations": "Spécialisations",
 			"skill": "Compétence",
-			"triggeredItems": "Éléments activés",
+			"triggeredEffects": "Effets activés",
 			"weapon": "Arme"
 		},
 		"TABS": {
@@ -381,11 +500,10 @@
 			"skill": "Préparateur du test de {skill}"
 		},
 		"WARNINGS": {
-			"convert": "Il n'y a pas de dé de {type} à convertir.",
-			"convertBack": "Il n'y a plus de dé de {type} à reconvertir."
+			"convert": "Il n'y a pas de {type} à convertir.",
+			"convertBack": "Il n'y a plus de {type} à reconvertir."
 		},
 		"dicePool": "Réserve de dés",
-		"hint": "Clic gauche pour ajouter des dés, clic droit pour en retirer.",
 		"options": "Options",
 		"startingResults": "Pictogrammes de départ"
 	},
@@ -403,25 +521,63 @@
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
+		},
+		"name": "État",
+		"plural": "États"
+	},
+
+	"COMBAT": {
+		"FIELDS.type.label": "Type de rencontre",
+		"types": {
+			"combat": "Combat",
+			"social": "Social"
 		}
 	},
 
-	"CREATURE.Abilities": "Aptitudes",
-	"CREATURE.Actions": "Actions",
-	"CREATURE.Category": "Catégorie",
-	"CREATURE.DamageRating": "Niveaux de Dégâts",
-	"CREATURE.DefenceValue": "Valeur de Défense",
-	"CREATURE.Details": "Détails",
-	"CREATURE.Nemesis": "Nemesis",
-	"CREATURE.SoakValue": "Valeur d'Encaissement",
-	"CREATURE.Stance": "Attitude",
-	"CREATURE.ThreatRating": "Niveau de Menace",
-	"CREATURE.Trappings": "Dotations",
-	"CREATURE.WoundsThreshold": "Plafond de Blessure",
-	"CREATURE.WoundsValue": "Points de Blessures",
-	"CREATURE.ABBREVIATION.DamageRating": "ND",
-	"CREATURE.ABBREVIATION.DefenceValue": "Défence",
-	"CREATURE.ABBREVIATION.SoakValue": "Encaissement",
+	"CREATURE": {
+		"FIELDS": {
+			"attributes": {
+				"aggression": {
+					"abbreviation": "Ag",
+					"label": "Agressivité"
+				},
+				"cunning": {
+					"abbreviation": "As",
+					"label": "Astuce"
+				},
+				"expertise": {
+					"abbreviation": "Ad",
+					"label": "Adresse"
+				},
+				"max.label": "Valeur",
+				"value.label": "Budget"
+			},
+			"category.label": "Catégorie",
+			"damageRating": {
+				"abbreviation": "ND",
+				"label": "Niveaux de Dégâts"
+			},
+			"defenceValue": {
+				"abbreviation": "Defense",
+				"label": "Valeur de Défense"
+			},
+			"description.label": "Description",
+			"soakValue": {
+				"abbreviation": "Encaissement",
+				"label": "Valeur d'Encaissement"
+			},
+			"threatRating": "Niveau de Menace"
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributs",
+			"details": "Détails",
+			"effects": "Effets",
+			"talents": "Talents",
+			"trappings": "Dotations"
+		},
+		"nemesis": "Nemesis"
+	},
 
 	"CRITICALWOUND": {
 		"ACTIONS.uodate": "Enregistrer la blessure critique",
@@ -429,32 +585,51 @@
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
-		}
+		},
+		"name": "Blessure critique",
+		"plural": "Blessure critiques"
 	},
 
 	"DIALOG.TITLE.EffectDeletion": "Suppression d'effet",
-	"DIALOG.DESCRIPTION.EffectDeletion": "Souhaitez-vous vraiment supprimer cet effet ?",
+	"DIALOG.DESCRIPTION.EffectDeletion": "Souhaitez-vous vraiment supprimer cet effet ?",
 
 	"DIE": {
-		"AMOUNT": {
-			"challengeDice": "{nb} dés de défi",
-			"characteristicDice": "{nb} dés de caractéristique",
-			"conservativeDice": "{nb} dés de prudence",
-			"expertiseDice": "{nb} dés d'expertise",
-			"explodedDice": "(dont {nb} dés additionnels)",
-			"fortuneDice": "{nb} dés de fortune",
-			"misfortuneDice": "{nb} dés d'infortune",
-			"recklessDice": "{nb} dés de témérité"
+		"challenge": {
+			"amount": "{nb} dés de défi",
+			"name": "dé de défi",
+			"plural": "dés de défi"
 		},
-		"NAMES": {
-			"challengeDice": "dés de défi",
-			"characteristicDice": "dés de caractéristique",
-			"conservativeDice": "dés de prudence",
-			"expertiseDice": "dés d'expertise",
-			"fortuneDice": "dés de fortune",
-			"misfortuneDice": "dés d'infortune",
-			"recklessDice": "dés de témérité"
-		}
+		"characteristic": {
+			"amount": "{nb} dés de caractéristique",
+			"name": "dé de caractéristique",
+			"plural": "dés de caractéristique"
+		},
+		"conservative": {
+			"amount": "{nb} dés de prudence",
+			"name": "dé de prudence",
+			"plural": "dés de prudence"
+		},
+		"expertise": {
+			"amount": "{nb} dés d'expertise",
+			"name": "dé d'expertise",
+			"plural": "dés d'expertise"
+		},
+		"fortune": {
+			"amount": "{nb} dés de fortune",
+			"name": "dé de fortune",
+			"plural": "dés de fortune"
+		},
+		"misfortune": {
+			"amount": "{nb} dés d'infortune",
+			"name": "dé d'infortune",
+			"plural": "dés d'infortune"
+		},
+		"reckless": {
+			"amount": "{nb} dés de témérité",
+			"name": "dé de témérité",
+			"plural": "dés de témérité"
+		},
+		"exploded": "(dont {nb} dés additionnels)"
 	},
 
 	"DISEASE": {
@@ -502,7 +677,9 @@
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
-		}
+		},
+		"name": "Maladie",
+		"plural": "Maladies"
 	},
 
 	"EFFECT": {
@@ -526,23 +703,49 @@
 		}
 	},
 
-	"ENCOUNTER.Combat": "Combat",
-	"ENCOUNTER.Social": "Social",
-
-	"GROUP.Talents": "Talents",
-	"GROUP.TalentSockets": "Emplacements de talents",
-	"GROUP.SPECIALABILITY.Title": "Nom de la capacité spéciale",
-	"GROUP.SPECIALABILITY.Description": "Description de la capacité spéciale",
-	"GROUP.SPECIALABILITY.Edit": "Modifier la jauge de capacité",
-	"GROUP.SPECIALABILITY.Decrease": "Diminuer la jauge de capacité",
-	"GROUP.SPECIALABILITY.Increase": "Augmenter la jauge de capacité",
-	"GROUP.SPECIALABILITY.Content": "Contenu",
-	"GROUP.SPECIALABILITY.Trigger": "Déclencheur",
+	"GROUP": {
+		"ACTIONS": {
+			"decreaseAbilityTrack": "Diminuer la jauge de capacité",
+			"editAbilityTrack": "Modifier la jauge de capacité",
+			"increaseAbilityTrack": "Augmenter la jauge de capacité"
+		},
+		"FIELDS": {
+			"specialAbilities": {
+				"FIELDS": {
+					"current.label": "Actuel",
+					"description": "Description",
+					"title": "Nom",
+					"values": {
+						"FIELDS": {
+							"content.label": "Contenu",
+							"trigger.label": "Est-ce un déclencheur ?"
+						},
+						"label": "Case"
+					}
+				},
+				"label": "Capacités spéciales"
+			},
+			"sockets": {
+				"FIELDS": {
+					"item.label": "Occupé par",
+					"type.label": "Type"
+				},
+				"label": "Emplacements de Talent"
+			}
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributs",
+			"effects": "Effets",
+			"talents": "Talents",
+			"trappings": "Dotations"
+		}
+	},
 
 	"ITEM": {
 		"ACTIONS": {
-			"addEffect": "Ajouter un Effet",
-			"deleteEffect": "Supprimer l'Effet {effect}"
+			"addActiveEffect": "Ajouter un Effet",
+			"deleteActiveEffect": "Supprimer l'Effet {effect}"
 		}
 	},
 
@@ -556,7 +759,9 @@
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
-		}
+		},
+		"name": "Folie",
+		"plural": "Folies"
 	},
 
 	"MISCAST": {
@@ -567,7 +772,9 @@
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
-		}
+		},
+		"name": "Revers magique",
+		"plural": "Revers magiques"
 	},
 
 	"MONEY": {
@@ -583,7 +790,9 @@
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
-		}
+		},
+		"name": "Monnaie",
+		"plural": "Monnaies"
 	},
 
 	"MUTATION": {
@@ -596,24 +805,10 @@
 		"TABS": {
 			"effects": "Effets",
 			"main": "Principal"
-		}
+		},
+		"name": "Mutation",
+		"plural": "Mutations"
 	},
-
-	"NEWCAREERADVANCESELECTION.Content": "Choisissez une nouvelle augmentation de carrière",
-	"NEWCAREERADVANCESELECTION.Title": "Sélection d'augmentation de carrière",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Conservative": "Segment de prudence",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Reckless": "Segment de témérité",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Characteristic": "Caractéristique primaire/Dé de Fortune",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Action": "Carte d'action",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Skill": "Formation de compétence ou spécialisation",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Talent": "Carte de talent",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Wound": "Plafond de Blessure",
-
-	"NEWNONCAREERADVANCESELECTION.Content": "Choisissez une nouvelle augmentation extracurriculaire",
-	"NEWNONCAREERADVANCESELECTION.Title": "Sélection d'augmentation extracurriculaire",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Characteristic": "Caractéristique secondaire",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Skill": "Formation de compétence ou spécialisation",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Talent": "Carte de talent",
 
 	"ORIGIN.KarakAzgaraz": "Nain de Karak Azgaraz",
 	"ORIGIN.Ulthuan": "Haut Elfe d'Ulthuan",
@@ -624,17 +819,57 @@
 	"ORIGIN.INTRODUCTION.Reiklander": "Les personnages du Reikland disposent des aptitudes raciales suivantes, reflétant leur éducation et leur caractère :",
 	"ORIGIN.INTRODUCTION.AthelLoren": "Les personnages elfes sylvains bénéficient des aptitudes raciales suivantes, reflétant leur lien avec la nature et les traditions qui régissent leur culture  :",
 
-	"PARTY.FortunePool": "Réserve de Fortune",
-	"PARTY.FortuneToken": "Jeton de Fortune",
-	"PARTY.RemoveMember": "Retirer le membre du groupe",
-	"PARTY.SpecialAbility.Title": "Nom de l'Aptitude Spéciale",
-	"PARTY.TalentSockets": "Emplacements de Talent",
-	"PARTY.Traits": "Traits",
-	"PARTY.TENSIONEVENT.Effects": "Effets de l'Évènement de Tension",
-	"PARTY.TENSIONEVENT.Threshold": "Seuil de l'Évènement de Tension",
-	"PARTY.TENSIONMETER.Decrease": "Diminuer la Jauge de Tension",
-	"PARTY.TENSIONMETER.Increase": "Augmenter la Jauge de Tension",
-	"PARTY.TENSIONMETER.Title": "Jauge de Tension du Groupe",
+	"PARTY": {
+		"ACTIONS": {
+			"addSocket": "Ajouter un emplacement de talent",
+			"adjustFortunePool": "Ajouter/retirer des points de fortune",
+			"decreaseTensionMeter": "Diminuer la Jauge de Tension",
+			"deleteSocket": "Retirer un emplacement de talent",
+			"editEvent": "Éditer l'évènement",
+			"increaseTensionMeter": "Augmenter la Jauge de Tension",
+			"removeMember": "Retirer le membre du groupe"
+		},
+		"FIELDS": {
+			"fortunePool.label": "Réserve de Fortune",
+			"members.label": "Membres du groupe",
+			"sockets": {
+				"FIELDS": {
+					"item.label": "Occupé par",
+					"type.label": "Type"
+				},
+				"label": "Emplacements de Talent"
+			},
+			"specialAbility": {
+				"FIELDS": {
+					"description.label": "Description",
+					"title.label": "Nom"
+				},
+				"label": "Aptitude Spéciale"
+			},
+			"tension": {
+				"FIELDS": {
+					"events": {
+						"FIELDS": {
+							"description.label": "Effets",
+							"threshold.label": "Seuil"
+						},
+						"label": "Évènements de Tension"
+					},
+					"max.label": "Maximum",
+					"value.label": "Actuel"
+				},
+				"label": "Jauge de Tension du Groupe"
+			},
+			"traits.label": "Traits"
+		},
+		"WARNINGS.alreadyMember": "{name} est déjà un membre du groupe."
+	},
+
+	"PARTYEVENTEDITOR": {
+		"ACTIONS.submit": "Enregistrer l'évènement",
+		"TABS.main": "Principal",
+		"title": "Éditeur d'évènement de tension"
+	},
 
 	"RACE.Any": "N'importe quelle race",
 	"RACE.Dwarf": "Nain",
@@ -708,6 +943,20 @@
 		"availableEffects": "Effets disponibles"
 	},
 
+	"SELECTOR": {
+		"ACTIONS.openFilters": "Ouvrir les filtres",
+		"WARNINGS": {
+			"alreadySelected": "Cet élément est déjà sélectionné.",
+			"cannotSubmit": "Impossible de valider la sélection : {error}",
+			"maximumSelectionSizeReached": "Le nombre maximum d'éléments à sélectionner a été atteint. Veuillez déselectionner un élément avant d'en sélectionner un autre.",
+			"notEnoughSelection": "Davantage d'éléments doivent être sélectionnés.",
+			"noSelection": "Aucun élément n'a été sélectionné."
+		},
+		"filters": "Filtres",
+		"noSelection": "Aucun",
+		"search": "Rechercher"
+	},
+
 	"SCRIPT": {
 		"TYPES": {
 			"onCareerSocket": "Placement sur un emplacement de talent de carrière",
@@ -739,10 +988,14 @@
 		},
 		"NAMES": {
 			"channeling": "Focalisation",
+			"charm": "Charisme",
 			"education": "Éducation",
+			"firstAid": "Premiers soins",
 			"folklore": "Folklore",
 			"intimidate": "Intimidation",
 			"intuition": "Intuition",
+			"leadership": "Commandement",
+			"medicine": "Médecine",
 			"observation": "Observation",
 			"piety": "Piété",
 			"weaponSkill": "Capacité de Combat"
@@ -751,7 +1004,21 @@
 			"effects": "Effets",
 			"main": "Principal"
 		},
+		"acquired": "Acquis",
+		"name": "Compétence",
+		"plural": "Compétences",
 		"specialisationList": "Spécialisations : {specialisations}"
+	},
+
+	"SKILLUPGRADER": {
+		"ACTIONS.chooseUpgrade": "Choisir l'amélioration",
+		"WARNINGS.singleSpecialisationOnly": "Une seule spécialisation par compétence ne peut être acquise.",
+		"acquisitionUpgrade": "{name} - Acquisition",
+		"noUpgradeSelected": "Aucune",
+		"selectedUpgrade": "Amélioration sélectionnée :",
+		"specialisationUpgrade": "{name} - Spécialisation {value}",
+		"title": "Améliorateur de compétence",
+		"trainingLevelUpgrade": "{name} - Formation {value}"
 	},
 
 	"SYMBOL": {
@@ -811,7 +1078,9 @@
 		"WARNINGS": {
 			"notSocketed": "Vous ne pouvez pas utiliser un talent n'occupant aucun emplacement.",
 			"recharging": "Vous ne pouvez pas utiliser un talent en cours de rechargement."
-		}
+		},
+		"name": "Talent",
+		"plural": "Talents"
 	},
 
 	"TALENTSELECTOR": {
@@ -825,22 +1094,9 @@
 		"WARNINGS": {
 			"noTalentSelected": "Vous devez sélectionner une carte de talent."
 		},
-		"noTalentSelected": "Aucun",
 		"selectedTalent": "Talent sélectionné :",
 		"title": "Sélecteur de talent"
 	},
-
-	"TRAININGSELECTOR.Acquired": "Acquis",
-	"TRAININGSELECTOR.Characteristic": "Caractéristique",
-	"TRAININGSELECTOR.ChooseATraining": "Choisissez une formation",
-	"TRAININGSELECTOR.NewTrainingLevel": "Niveau de formation {level}",
-	"TRAININGSELECTOR.NewSpecialisation": "Spécialisation {specialisation}",
-	"TRAININGSELECTOR.NoTrainingSelected": "Aucune",
-	"TRAININGSELECTOR.NoTrainingSelectedWarning": "Vous devez sélectionner une formation.",
-	"TRAININGSELECTOR.SelectedTraining": "Formation sélectionnée :",
-	"TRAININGSELECTOR.Specialisations": "Spécialisations",
-	"TRAININGSELECTOR.Title": "Sélecteur de formation",
-	"TRAININGSELECTOR.TrainingLevel": "Niveau de formation",
 
 	"TRAPPING": {
 		"ACTIONS.update": "Enregistrer la dotation",
@@ -896,7 +1152,9 @@
 		"silverShillings": {
 			"abbreviation": "p",
 			"label": "Pistoles d'argent"
-		}
+		},
+		"name": "Dotation",
+		"plural": "Dotations"
 	},
 
 	"TRAITS": {
@@ -919,7 +1177,7 @@
 			"armour": "Armure",
 			"career": "Carrière",
 			"condition": "État",
-			"criticalwound": "Blessure",
+			"criticalWound": "Blessure",
 			"disease": "Maladie",
 			"insanity": "Folie",
 			"money": "Monnaie",
@@ -997,6 +1255,12 @@
 		},
 		"improvised": "Improvisé",
 		"improvisedWeapon": "Arme improvisée",
-		"unarmed": "Mains nues"
-	}
+		"unarmed": "Mains nues",
+		"name": "Arme",
+		"plural": "Armes"
+	},
+
+	"Confirm": "Confirmer",
+	"Finish": "Terminer",
+	"Ignore": "Ignorer"
 }

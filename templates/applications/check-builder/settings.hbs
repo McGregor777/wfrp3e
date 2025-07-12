@@ -1,0 +1,182 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	<div class="dice-pool-table">
+		{{#each dice as |die d|}}
+			<div class="pool-container" data-action="adjustAmount" data-type="dice" data-subtype="{{d}}"
+				 data-tooltip="{{CHECKBUILDER.ACTIONS.adjustAmount}}">
+				<label class="image" for="{{concat @root.rootId "-dice." d}}">
+					<img class="special-die" src="{{die.icon}}"
+						 width="43"
+						 height="43"
+						 alt="{{capitalize d}} die" />
+				</label>
+
+				<input id="{{concat @root.rootId "-dice." d}}"
+					   name="dice.{{d}}"
+					   type="number"
+					   min="0"
+					   value="{{lookup @root.dicePool.dice d}}"/>
+
+				<label for="{{concat @root.rootId "-dice." d}}">
+					{{localize die.plural}}
+				</label>
+			</div>
+		{{/each}}
+	</div>
+
+	<div class="convert-buttons">
+		<button data-action="convertCharacteristicDie" data-type="conservative">
+			{{localize "CHECKBUILDER.ACTIONS.convertConservative"}}
+		</button>
+
+		<button data-action="convertCharacteristicDie" data-type="reckless">
+			{{localize "CHECKBUILDER.ACTIONS.convertReckless"}}
+		</button>
+	</div>
+
+	<details class="symbols-pool-container">
+		<summary>{{localize "CHECKBUILDER.startingResults"}}</summary>
+
+		<table>
+			<tr>
+				<td>
+					<div class="pool-container" data-action="adjustAmount" data-type="symbols" data-subtype="successes">
+						<label class="wfrp3e-font symbol success" for="{{concat rootId "-symbols.successes"}}"></label>
+
+						<input id="{{concat rootId "-symbols.successes"}}"
+							   class="pool-value"
+							   name="symbols.successes"
+							   value="{{dicePool.symbols.successes}}"
+							   type="number"
+							   min="0" />
+
+						<label class="pool-text" for="{{concat rootId "-symbols.successes"}}">
+							{{localize "SYMBOL.NAMES.successes"}}
+						</label>
+					</div>
+				</td>
+
+				<td>
+					<div class="pool-container" data-action="adjustAmount" data-type="symbols" data-subtype="challenges">
+						<label class="wfrp3e-font symbol challenge" for="{{concat rootId "-symbols.challenges"}}"></label>
+
+						<input id="{{concat rootId "-symbols.challenges"}}"
+							   class="pool-value"
+							   name="symbols.challenges"
+							   value="{{dicePool.symbols.challenges}}"
+							   type="number"
+							   min="0" />
+
+						<label class="pool-text" for="{{concat rootId "-symbols.challenges"}}">
+							{{localize "SYMBOL.NAMES.challenges"}}
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="pool-container" data-action="adjustAmount" data-type="symbols" data-subtype="boons">
+						<label class="wfrp3e-font symbol boon" for="{{concat rootId "-symbols.boons"}}"></label>
+
+						<input id="{{concat rootId "-symbols.boons"}}"
+							   class="pool-value"
+							   name="symbols.boons"
+							   value="{{dicePool.symbols.boons}}"
+							   type="number"
+							   min="0" />
+
+						<label class="pool-text" for="{{concat rootId "-symbols.boons"}}">
+							{{localize "SYMBOL.NAMES.boons"}}
+						</label>
+					</div>
+				</td>
+
+				<td>
+					<div class="pool-container" data-action="adjustAmount" data-type="symbols" data-subtype="banes">
+						<label class="wfrp3e-font symbol bane" for="{{concat rootId "-symbols.banes"}}"></label>
+
+						<input id="{{concat rootId "-symbols.banes"}}"
+							   class="pool-value"
+							   name="symbols.banes"
+							   value="{{dicePool.symbols.banes}}"
+							   type="number"
+							   min="0" />
+
+						<label class="pool-text" for="{{concat rootId "-symbols.banes"}}">
+							{{localize "SYMBOL.NAMES.banes"}}
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="pool-container" data-action="adjustAmount" data-type="symbols" data-subtype="delays">
+						<label class="wfrp3e-font symbol delay" for="{{concat rootId "-symbols.delays"}}"></label>
+
+						<input id="{{concat rootId "-symbols.delays"}}"
+							   class="pool-value"
+							   name="symbols.delays"
+							   value="{{dicePool.symbols.delays}}"
+							   type="number"
+							   min="0" />
+
+						<label class="pool-text" for="{{concat rootId "-symbols.delays"}}">
+							{{localize "SYMBOL.NAMES.delays"}}
+						</label>
+					</div>
+				</td>
+
+				<td>
+					<div class="pool-container" data-action="adjustAmount" data-type="symbols" data-subtype="exertions">
+						<label class="wfrp3e-font symbol exertion" for="{{concat rootId "-symbols.exertions"}}"></label>
+
+						<input id="{{concat rootId "-symbols.exertions"}}"
+							   class="pool-value"
+							   name="symbols.exertions"
+							   value="{{dicePool.symbols.exertions}}"
+							   type="number"
+							   min="0" />
+
+						<label class="pool-text" for="{{concat rootId "-symbols.exertions"}}">
+							{{localize "SYMBOL.NAMES.exertions"}}
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="pool-container" data-action="adjustAmount" data-type="symbols" data-subtype="sigmarsComets">
+						<label class="wfrp3e-font symbol sigmars-comet" for="{{concat rootId "-symbols.sigmarsComets"}}"></label>
+
+						<input id="{{concat rootId "-symbols.sigmarsComets"}}"
+							   class="pool-value"
+							   name="symbols.sigmarsComets"
+							   value="{{dicePool.symbols.sigmarsComets}}"
+							   type="number"
+							   min="0" />
+
+						<label class="pool-text" for="{{concat rootId "-symbols.sigmarsComets"}}">
+							{{localize "SYMBOL.NAMES.sigmarsComets"}}
+						</label>
+					</div>
+				</td>
+
+				<td>
+					<div class="pool-container" data-action="adjustAmount" da²ta-type="symbols" data-subtype="chaosStars">
+						<label class="wfrp3e-font symbol chaos-star" for="{{concat rootId "-symbols.chaosStars"}}"></label>
+
+						<input id="{{concat rootId "-symbols.chaosStars"}}"
+							   class="pool-value"
+							   name="symbols.chaosStars"
+							   value="{{dicePool.symbols.chaosStars}}"
+							   type="number"
+							   min="0" />
+
+						<label class="pool-text" for="{{concat rootId "-symbols.chaosStars"}}">
+							{{localize "SYMBOL.NAMES.chaosStars"}}
+						</label>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</details>
+</section>

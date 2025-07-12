@@ -1,0 +1,85 @@
+<div class="item weapon row" data-uuid="{{weapon.uuid}}">
+	<div class="content">
+		<div class="image">
+			{{#if @root.editable}}
+				<a data-action="rollItem" data-tooltip="{{localize 'ACTOR.ACTIONS.rollItem'}}">
+					<img src="{{weapon.img}}" alt="{{weapon.name}}" width="40" height="40" />
+				</a>
+			{{else}}
+				<span><img src="{{weapon.img}}" alt="{{weapon.name}}" width="40" height="40" /></span>
+			{{/if}}
+		</div>
+
+		<div class="name">
+			{{#if @root.editable}}
+				<a data-action="rollItem" data-tooltip="{{localize 'ACTOR.ACTIONS.rollItem'}}">
+					<span>{{weapon.name}}</span> <span class="fas fa-dice-d20"></span>
+				</a>
+			{{else}}
+				<span>{{weapon.name}}</span>
+			{{/if}}
+		</div>
+
+		<hr />
+
+		<div class="damage-rating">
+			<span>{{weapon.system.damageRating}}</span>
+		</div>
+
+		<hr />
+
+		<div class="critical-rating">
+			<span>{{weapon.system.criticalRating}}</span>
+		</div>
+
+		<hr />
+
+		<div class="range">
+			<span>{{localize (lookup @root.weaponRanges weapon.system.range)}}</span>
+		</div>
+
+		<hr />
+
+		<div class="qualities">
+			<span>
+				{{#if weapon.system.qualities}}
+					{{#each weapon.system.qualities}}
+						{{localize (lookup @root.weaponQualities this.name) "name"}}{{#unless @last}}, {{else}}{{#if ../weapon.system.special}}, {{/if}}{{/unless}}
+					{{/each}}
+				{{else}}
+					—
+				{{/if}}
+
+				{{#if weapon.system.special}}
+					{{localize "WEAPON.QUALITIES.special"}}
+				{{/if}}
+			</span>
+		</div>
+
+		<hr />
+
+		<div class="group">
+			<span>{{localize (lookup (lookup @root.weaponGroups weapon.system.group) "name")}}</span>
+		</div>
+
+		<hr />
+
+		<div class="encumbrance">
+			<span>{{weapon.system.encumbrance}}</span>
+		</div>
+
+		<hr />
+
+		<div class="buttons">
+			{{#if @root.editable}}
+				<a class="context-menu">
+					<span class="fas fa-ellipsis-vertical"></span>
+				</a>
+			{{else}}
+				<a data-action="expandDocument" data-tooltip="{{localize 'Expand'}}">
+					<span class="fas fa-chevron-down"></span>
+				</a>
+			{{/if}}
+		</div>
+	</div>
+</div>

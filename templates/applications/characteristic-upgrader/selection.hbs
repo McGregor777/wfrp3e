@@ -1,0 +1,12 @@
+<p>
+	{{localize "CHARACTERISTICUPGRADER.selectedUpgrade"}}
+
+	<span class="selection">
+		{{#with (lookup characteristics upgrade.characteristic) as |characteristic|}}
+			{{localize (concat "CHARACTERISTICUPGRADER.characteristic" (capitalize @root.upgrade.type))
+					   characteristic=(localize characteristic.name)}}
+		{{else}}
+			{{localize "CHARACTERISTICUPGRADER.WARNINGS.noUpgradeSelected"}}
+		{{/with}}
+	</span>
+</p>

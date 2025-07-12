@@ -1,13 +1,15 @@
 <section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
 	{{formGroup fields.script
+				name=fields.script.name
 				value=effect.script
 				localize=true
 				rows=8}}
 
-	{{formGroup fields.immediate value=effect.immediate localize=true}}
+	{{formGroup fields.immediate name=fields.immediate.name value=effect.immediate localize=true}}
 
 	<div class="reverse-script-container" {{#unless effect.immediate}}style="display: none;"{{/unless}}>
 		{{formGroup fields.reverseScript
+					name=fields.reverseScript.name
 					value=effect.reverseScript
 					localize=true
 					rows=8}}

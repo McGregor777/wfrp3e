@@ -1,0 +1,112 @@
+.application.wfrp3e.characteristic-upgrader .window-content {
+	& p[data-application-part="selection"] {
+		text-align: center;
+
+		& > span {
+			font-style: italic;
+			font-weight: bold;
+		}
+	}
+
+	& section[data-application-part="characteristics"] {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding-bottom: 1rem;
+
+		&:not(:last-child) {
+			border-bottom: 1px solid #b4b3a4;
+		}
+
+		& > .characteristic {
+			align-items: center;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			& > div {
+				align-items: center;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+
+				&.buttons {
+					flex-direction: column;
+
+					& div {
+						opacity: 75%;
+					}
+
+					& label {
+						cursor: pointer;
+
+						&.active {
+							color: var(--color-form-label-hover);
+
+							&:hover {
+								color: var(--color-form-label-hover);
+							}
+						}
+
+						&.disabled {
+							color: var(--color-dark-6);
+						}
+
+						& > input {
+							display: none;
+						}
+					}
+
+					& span {
+						font-size: 20pt;
+					}
+				}
+
+				& .rating {
+					background: var(--color-cool-4);
+					border: 2px solid steelblue;
+					border-radius: 0.25rem;
+					font-weight: bold;
+					height: 3rem;
+					padding: 0.75rem 0.5rem;
+					text-align: center;
+					width: 2.25rem;
+				}
+
+				& .fortune {
+					background: var(--color-cool-4);
+					border: 1px solid darkgray;
+					border-radius: 0.25rem;
+					font-weight: bold;
+					height: 1.5rem;
+					margin-left: 0.5rem;
+					padding: 0.25rem;
+					text-align: center;
+					width: 1.5rem;
+
+					& > * {
+						margin: auto;
+					}
+				}
+			}
+		}
+	}
+}
+
+body.theme-light .application.wfrp3e.characteristic-upgrader .window-content {
+	& section[data-application-part="characteristics"] > .characteristic > div {
+		&.buttons label.disabled {
+			color: var(--color-light-6);
+		}
+
+		& .rating {
+			background: lightcyan;
+			border-color: lightsteelblue;
+		}
+
+		& .fortune {
+			background: white;
+			border-color: dimgray;
+		}
+	}
+}

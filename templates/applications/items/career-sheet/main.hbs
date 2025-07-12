@@ -1,0 +1,76 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	<fieldset>
+		{{formGroup fields.advanced value=system.advanced}}
+
+		<div class="form-group">
+			<label>{{localize "CAREER.FIELDS.raceRestrictions.label"}}</label>
+
+			<div class="form-fields">
+				<multi-checkbox name="system.raceRestrictions">
+					{{#each fields.raceRestrictions.element.choices as |choice ch|}}
+						<option value="{{ch}}"
+								{{#if (in ch @root.system.raceRestrictions)}}selected{{/if}}>
+							{{localize choice}}
+						</option>
+					{{/each}}
+				</multi-checkbox>
+			</div>
+		</div>
+
+		{{formGroup fields.traits value=system.traits classes="expanded"}}
+	</fieldset>
+
+	<fieldset class="sockets">
+		<legend>{{localize "CAREER.FIELDS.sockets.label"}}</legend>
+
+		{{#if (superiorTo system.sockets.length 0)}}
+			<div class="container scrollable">
+				{{#each system.sockets as |socket|}}
+					<fieldset class="content inline" data-index="{{@index}}">
+						{{formGroup @root.fields.sockets.element.fields.type
+									value=socket.type
+									name=@root.fields.sockets.element.fields.type.fieldPath
+									classes="expanded"
+									rootId=@root.rootId
+									localize=true}}
+
+						<a data-action="deleteSocket" data-tooltip="{{localize 'CAREER.ACTIONS.deleteSocket'}}">
+							<span class="fas fa-trash"></span>
+						</a>
+					</fieldset>
+				{{/each}}
+			</div>
+		{{/if}}
+
+		<a data-action="addSocket" data-tooltip="{{localize 'CAREER.ACTIONS.addSocket'}}">
+			<span class="fas fa-plus"></span>
+		</a>
+	</fieldset>
+
+	<fieldset>
+		<div class="form-group">
+			<label>{{localize "CAREER.FIELDS.primaryCharacteristics.label"}}</label>
+
+			<div class="form-fields">
+				<multi-checkbox name="system.primaryCharacteristics">
+					{{#each fields.primaryCharacteristics.element.choices as |choice ch|}}
+						<option value="{{ch}}"
+								{{#if (in ch @root.system.primaryCharacteristics)}}selected{{/if}}>
+							{{localize choice}}
+						</option>
+					{{/each}}
+				</multi-checkbox>
+			</div>
+		</div>
+
+		{{formGroup fields.careerSkills value=system.careerSkills classes="expanded"}}
+
+		{{formGroup fields.startingStance.fields.conservativeSegments
+					value=system.startingStance.conservativeSegments
+					classes="slim"}}
+
+		{{formGroup fields.startingStance.fields.recklessSegments
+					value=system.startingStance.recklessSegments
+					classes="slim"}}
+	</fieldset>
+</section>

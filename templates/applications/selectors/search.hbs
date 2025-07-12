@@ -1,0 +1,36 @@
+<nav class="search-bar">
+	<div class="form-group expanded">
+		<label for="{{concat rootId '-searchFilters.text'}}">{{localize "SELECTOR.search"}}</label>
+
+		<div class="form-fields">
+			<input id="{{concat rootId '-searchFilters.text'}}"
+				   class="search-filter"
+				   name="searchFilters.text"
+				   value="{{searchFilters.text}}"
+				   type="text">
+
+			<a data-action="openFilters" data-tooltip="{{localize 'SELECTOR.ACTIONS.openFilters'}}">
+				<span class="fas fa-filter"></span>
+			</a>
+		</div>
+	</div>
+
+	<div class="form-group stacked filter-container">
+		<label>{{localize "SELECTOR.filters"}}</label>
+
+		{{#each types as |type t|}}
+			<div class="form-group">
+				<label for="{{concat rootId '-searchFilters.type'}}">{{localize type}}</label>
+
+				<div class="form-fields">
+					<input id="{{concat rootId '-searchFilters.type'}}"
+						   class="search-filter"
+						   name="searchFilters.type"
+						   value="{{t}}"
+						   type="radio"
+						   {{#if (sameAs t @root.searchFilters.type)}}checked{{/if}} />
+				</div>
+			</div>
+		{{/each}}
+	</div>
+</nav>

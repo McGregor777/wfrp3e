@@ -1,589 +1,531 @@
 import DicePool from "../DicePool.js";
+import CheckHelper from "../CheckHelper.js";
 
 /** @inheritDoc */
-export default class CheckBuilder extends FormApplication
+export default class CheckBuilder extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)
 {
-	constructor(object = new DicePool(), options = {})
-	{
-		super(object, options);
-	}
-
 	/** @inheritDoc */
-	get title()
+	constructor(options = {})
 	{
-		if(this.object.checkData) {
-			const checkData = this.object.checkData;
+		super(options);
+		this.dicePool = options.dicePool ?? new DicePool();
 
-			if(checkData.combat)
-				return game.i18n.localize("CHECKBUILDER.TITLES.initiative");
-			else if(checkData.action)
-				return game.i18n.format("CHECKBUILDER.TITLES.action", {action: fromUuidSync(checkData.action).name});
-			else if(checkData.skill)
-				return game.i18n.format("CHECKBUILDER.TITLES.skill", {skill: checkData.skill.name});
-			else if(checkData.characteristic)
-				return game.i18n.format("CHECKBUILDER.TITLES.characteristic", {
-					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic].name)
-				});
+		if(this.dicePool.checkData?.action) {
+			const checkData = this.dicePool.checkData;
+			checkData.challengeLevel = ["melee", "ranged"].includes(fromUuidSync(checkData.action).system.type)
+				? "easy"
+				: "simple";
 		}
-
-		return game.i18n.localize("CHECKBUILDER.TITLES.checkBuilder");
 	}
 
 	/** @inheritDoc */
-	static get defaultOptions()
+	static DEFAULT_OPTIONS = {
+		id: "check-builder-{id}",
+		classes: ["wfrp3e", "check-builder"],
+		tag: "form",
+		window: {
+			contentClasses: ["standard-form"],
+			title: "CHECKBUILDER.TITLES.checkBuilder"
+		},
+		actions: {
+			adjustAmount: {handler: this.#adjustAmount, buttons: [0, 2]},
+			convertCharacteristicDie: {handler: this.#convertCharacteristicDie, buttons: [0, 2]}
+		},
+		form: {
+			handler: this.#onCheckBuilderSubmit,
+			submitOnChange: false,
+			closeOnSubmit: true
+		},
+		position: {
+			width: 500,
+			height: "auto",
+			top: 40
+		}
+	};
+
+	/** @inheritDoc */
+	static PARTS = {
+		tabs: {template: "templates/generic/tab-navigation.hbs"},
+		pools: {template: "systems/wfrp3e/templates/applications/check-builder/pools.hbs"},
+		quickSettings: {template: "systems/wfrp3e/templates/applications/check-builder/quick-settings.hbs"},
+		settings: {template: "systems/wfrp3e/templates/applications/check-builder/settings.hbs"},
+		footer: {template: "templates/generic/form-footer.hbs"}
+	};
+
+	/** @inheritDoc */
+	static TABS = {
+		sheet: {
+			tabs: [
+				{id: "quickSettings", icon: "fa-solid fa-bolt"},
+				{id: "settings", icon: "fa-solid fa-sliders"}
+			],
+			initial: "quickSettings",
+			labelPrefix: "CHECKBUILDER.TABS"
+		}
+	};
+
+	/**
+	 * @type {DicePool}
+	 */
+	dicePool;
+
+	/** @inheritDoc */
+	_preSyncPartState(partId, newElement, priorElement, state)
+	{
+		super._preSyncPartState(partId, newElement, priorElement, state);
+
+		if(partId === "settings")
+			state.symbolsPoolOpen = priorElement.querySelector("details.symbols-pool-container")?.open;
+	}
+
+	/** @inheritDoc */
+	_syncPartState(partId, newElement, priorElement, state)
+	{
+		if(state.symbolsPoolOpen)
+			newElement.querySelector("details.symbols-pool-container").open = true;
+
+		super._syncPartState(partId, newElement, priorElement, state);
+	}
+
+	/** @inheritDoc */
+	async _prepareContext(options)
 	{
 		return {
-			...super.defaultOptions,
-			classes: ["wfrp3e", "dice-pool-builder"],
-			template: "systems/wfrp3e/templates/applications/check-builder.hbs",
-			width: 640
+			...await super._prepareContext(options),
+			checkData: this.dicePool.checkData,
+			buttons: [{type: "submit", icon: "fa-solid fa-d8", label: "CHECKBUILDER.ACTIONS.rollCheck"}],
+			dice: CONFIG.WFRP3e.dice,
+			dicePool: this.dicePool,
+			rootId: this.id
 		};
 	}
 
 	/** @inheritDoc */
-	async getData()
+	async _preparePartContext(partId, context)
 	{
-		const data = {
-			...super.getData(),
-			challengeLevel: ["melee", "ranged"].includes(await fromUuid(this.object.checkData?.action).then(action => action?.system.type))
-				? "easy"
-				: "simple",
-			challengeLevels: CONFIG.WFRP3e.challengeLevels,
-			diceIcons: {
-				...Object.entries(CONFIG.WFRP3e.dice).reduce((object, dieType) => {
-					object[dieType[0]] = dieType[1].icon;
-					return object;
-				}, {})
-			},
-			flavor: this.object.flavor,
-			isGM: game.user.isGM,
-			sounds: [],
-			users: [{name: "Send To All", id: "all"}]
-		};
+		let partContext = await super._preparePartContext(partId, context);
 
-		if(game.user.isGM) {
-			game.users.contents.forEach((user) => {
-				if(user.visible && user.id !== game.user.id)
-					data.users.push({name: user.name, id: user.id});
-			});
-		}
+		if(partContext.tabs && partId in partContext.tabs)
+			partContext.tab = partContext.tabs[partId];
 
-		if(this.object.checkData) {
-			const checkData = this.object.checkData;
-			checkData.challengeLevel = data.challengeLevel;
+		switch(partId) {
+			case "pools":
+				const totalDice = Object.values(this.dicePool.dice).reduce((accumulator, dice) => accumulator + +dice, 0);
 
-			if(checkData.actor) {
-				this.actor = await fromUuid(checkData.actor);
+				// Adjust dice icons' size.
+				let height = 48;
+				let width = 48;
 
-				data.actor = this.actor;
-				data.characteristics = Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
-					if(characteristic[0] !== "varies")
-						object[characteristic[0]] = characteristic[1].name;
-					return object;
-				}, {});
-				data.skills = this.actor.itemTypes.skill;
-
-				if(this.actor.type === "character") {
-					data.maxFortunePoints = this.actor.system.fortune.value + (this.actor.system.currentParty?.system.fortunePool ?? 0);
-					data.specialisations = this.actor.itemTypes.skill
-						.filter(skill => skill.system.specialisations)
-						.reduce((specialisations, skill) => {
-							specialisations.push(
-								...skill.system.specialisations.split(",").map(specialisation => specialisation.trim()
-							)
-						);
-						return specialisations;
-					}, []);
+				if(totalDice > 15) {
+					height = 12;
+					width = 12;
 				}
-				else if(this.actor.type === "creature")
-					data.attributes = this.actor.system.attributes;
-			}
+				else if(totalDice > 10) {
+					height = 24;
+					width = 24;
+				}
+				else if(totalDice > 7) {
+					height = 36;
+					width = 36;
+				}
 
-			if(checkData.characteristic)
-				data.characteristic = checkData.characteristic;
+				partContext = {...partContext,
+					height,
+					width,
+					symbols: CONFIG.WFRP3e.symbols
+				};
+				break;
+			case "quickSettings":
+				if(this.dicePool.checkData?.actor) {
+					const checkData = this.dicePool.checkData,
+						  actor = await fromUuid(checkData.actor);
 
-			if(checkData.skill)
-				data.skill = checkData.skill;
+					partContext = {
+						...partContext,
+						actor: actor,
+						challengeLevel: checkData.challengeLevel,
+						challengeLevels: CONFIG.WFRP3e.challengeLevels,
+						characteristic: checkData.characteristic,
+						characteristics: Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
+							if(characteristic[0] !== "varies")
+								object[characteristic[0]] = characteristic[1].name;
+							return object;
+						}, {}),
+						fortunePoints: checkData.fortunePoints ?? 0,
+						skill: await fromUuid(checkData.skill),
+						skills: actor.itemTypes.skill,
+						availableTriggeredEffects: actor.findTriggeredEffects(
+							"onPreCheckTrigger", {
+								parameters: [actor, this.dicePool, checkData],
+								parameterNames: ["actor", "dicePool", "checkData"]
+							}),
+						triggeredEffects: checkData.triggeredEffects ?? []
+					};
 
-			if(checkData.characteristic)
-				data.characteristic = checkData.characteristic;
-
-			if(checkData.action) {
-				const action = await fromUuid(checkData.action);
-				data.action = action;
-
-				if(["melee", "ranged"].includes(action.system.type)) {
-					data.availableWeapons = [
-						...action.actor.itemTypes.weapon.filter(weapon => {
-							return Object.entries(CONFIG.WFRP3e.weapon.groups).reduce((array, weaponGroup) => {
-								if(weaponGroup[1].type === action.system.type)
-									array.push(weaponGroup[0]);
-								return array;
-							}, []).includes(weapon.system.group);
-						})
-					];
-
-					if(this.actor.type === "character") {
-						if(action.system.type === "melee")
-							data.availableWeapons.push(
-								CONFIG.WFRP3e.weapon.commonWeapons.improvisedWeapon,
-								CONFIG.WFRP3e.weapon.commonWeapons.unarmed
-							);
-						else
-							data.availableWeapons.push(CONFIG.WFRP3e.weapon.commonWeapons.improvised);
+					if(actor.type === "character") {
+						partContext = {
+							...partContext,
+							availableSpecialisations: actor.itemTypes.skill
+								.filter(skill => skill.system.specialisations)
+								.reduce((specialisations, skill) => {
+									specialisations.push(
+										...skill.system.specialisations.split(",").map(
+											specialisation => specialisation.trim()
+										)
+									);
+									return specialisations;
+								}, []),
+							maxFortunePoints: actor.system.fortune.value
+								+ (actor.system.currentParty?.system.fortunePool ?? 0),
+							specialisations: checkData.specialisations ?? []
+						};
 					}
+					else if(actor.type === "creature")
+						partContext.attributes = actor.system.attributes;
 
-					data.weapon = checkData.weapon ?? data.availableWeapons[0];
-					checkData.weapon = data.availableWeapons[0];
+					if(checkData.action) {
+						const action = await fromUuid(checkData.action);
+						partContext.action = action;
+
+						if(["melee", "ranged"].includes(action.system.type)) {
+							const validWeaponGroups = Object.entries(CONFIG.WFRP3e.weapon.groups)
+								.reduce((array, weaponGroup) => {
+									if(weaponGroup[1].type === action.system.type)
+										array.push(weaponGroup[0]);
+									return array;
+								}, []);
+
+							partContext.availableWeapons = [
+								...action.actor.itemTypes.weapon
+									.filter(weapon => validWeaponGroups.includes(weapon.system.group))
+							];
+
+							if(actor.type === "character") {
+								if(action.system.type === "melee")
+									partContext.availableWeapons.push(
+										CONFIG.WFRP3e.weapon.commonWeapons.improvisedWeapon,
+										CONFIG.WFRP3e.weapon.commonWeapons.unarmed
+									);
+								else
+									partContext.availableWeapons.push(CONFIG.WFRP3e.weapon.commonWeapons.improvised);
+							}
+
+							if(!checkData.weapon && partContext.availableWeapons?.length)
+								checkData.weapon = partContext.availableWeapons[0]?.uuid;
+						}
+					}
 				}
-			}
+				break;
 		}
 
-		return data;
+		return partContext;
 	}
 
 	/** @inheritDoc */
-	activateListeners(html)
+	_prepareTabs(group)
 	{
-		super.activateListeners(html);
+		let tabs = super._prepareTabs(group);
 
-		this._synchronizeInputs(html);
-
-		html.find(".pool-container")
-			.click(this._onPoolContainerInputLeftClick.bind(this, html))
-			.contextmenu(this._onPoolContainerInputRightClick.bind(this, html));
-
-		html.find(".convert-buttons button")
-			.click(this._onConversionButtonLeftClick.bind(this, html))
-			.contextmenu(this._onConversionButtonRightClick.bind(this, html));
-
-		html.find(".challenge-level-select").change(this._onChallengeLevelSelectChange.bind(this, html));
-		html.find(".characteristic-select").change(this._onCharacteristicSelectChange.bind(this, html));
-		html.find(".skill-select").change(this._onSkillSelectChange.bind(this, html));
-		html.find(".weapon-select").change(this._onWeaponSelectChange.bind(this));
-
-		html.find(".extend-button").click(this._onExtendButtonClick.bind(this));
-	}
-
-	/** @inheritDoc */
-	async _onChangeInput(event)
-	{
-		await super._onChangeInput(event);
-
-		let value = [];
-		for(const element of $(event.delegateTarget).find(`[name="${event.currentTarget.name}"]`)) {
-			if(element.type === "checkbox") {
-				if(element.checked)
-					value.push(element.value);
-			}
-			else
-				value = element.value;
-		}
-
-		foundry.utils.setProperty(this.object, event.currentTarget.name, Array.isArray(value) || isNaN(value) ? value : Number(value));
-
-		this._updatePreview();
-	}
-
-	/** @inheritDoc */
-	_updateObject()
-	{
-		// if sound was not passed search for sound dropdown value
-		if(!this.sound) {
-			const sound = this.element.find(".sound-selection")?.[0]?.value;
-
-			if(sound) {
-				this.sound = sound;
-
-				if(this?.checkData?.item) {
-					let entity;
-					let entityData;
-
-					if(!this?.check?.item?.flags?.uuid) {
-						entity = CONFIG["Actor"].documentClass.collection.get(this.check.data.actor.id);
-						entityData = {_id: this.check.item.id};
-					}
-					else {
-						const parts = this.check.item.flags.uuid.split(".");
-						const [entityName, entityId, embeddedName, embeddedId] = parts;
-						entity = CONFIG[entityName].documentClass.collection.get(entityId);
-
-						if(parts.length === 4)
-							entityData = {_id: embeddedId};
-					}
-
-					foundry.utils.setProperty(entityData, "flags.ffgsound", sound);
-					entity.updateOwnedItem(entityData);
-				}
-			}
-		}
-
-		if(!this.flavor) {
-			const flavor = this.element.find(".flavor-text")?.[0]?.value;
-
-			if(flavor)
-				this.flavor = flavor;
-		}
-
-		const sentToPlayer = this.element.find(".user-selection")?.[0]?.value;
-
-		if(sentToPlayer) {
-			let container = $(`<div class="dice-pool"></div>`)[0];
-			this.object.renderAdvancedPreview(container);
-
-			const messageText = `<div>
-					<div>${game.i18n.localize("WFRP3e.SentDicePoolRollHint")}</div>
-					${$(container).this.element()}
-					<button class="special-pool-to-player">${game.i18n.localize("WFRP3e.SentDicePoolRoll")}</button>
-				</div>`;
-
-			let chatOptions = {
-				user: game.user.id,
-				content: messageText,
-				flags: {
-					specialDice: {
-						roll: this.check,
-						dicePool: this.object,
-						description: this.description,
-					},
-				},
+		if(group === "sheet" && !this.dicePool.checkData) {
+			tabs.quickSettings = {
+				...tabs.quickSettings,
+				active: false,
+				cssClass: "hidden"
 			};
 
-			if(sentToPlayer !== "all")
-				chatOptions.whisper = [sentToPlayer];
-
-			ChatMessage.create(chatOptions);
+			tabs.settings = {
+				...tabs.settings,
+				active: true,
+				cssClass: "active"
+			};
 		}
 
-		this.object.roll();
+		return tabs;
 	}
 
-	/**
-	 * Ensures that the input values are equal to the DicePool values.
-	 * @param {any} html
-	 * @private
-	 */
-	_synchronizeInputs(html)
+	/** @inheritDoc */
+	async _onChangeForm(formConfig, event)
 	{
-		html.find(".dice-pool-table input, .symbols-pool-container input").each((key, input) => {
-			input.value = foundry.utils.getProperty(this.object, input.name);
-		});
+		const dicePool = this.dicePool,
+			  checkData = dicePool.checkData,
+			  form = event.currentTarget,
+			  formData = new FormDataExtended(form);
+		let value = formData.object[event.target.name];
 
-		this._updatePreview();
-	}
+		// Filter out null values in Arrays.
+		if(Array.isArray(value))
+			value = value.filter(value => value);
 
-	/**
-	 * Gets the clicked input element.
-	 * @param {HTMLElement} target The clicked element.
-	 * @returns {HTMLInputElement} The clicked input element.
-	 * @private
-	 */
-	_getClickedInput(target)
-	{
-		let input;
+		foundry.utils.setProperty(dicePool, event.target.name, value);
 
-		if($(target).hasClass(".pool-container"))
-			input = $(target).find(".pool-value input")[0];
-		else {
-			input = $(target).find("input")[0];
+		if(event.target.name.startsWith("checkData"))
+			dicePool.determineDicePoolFromCheckData();
 
-			if(!input)
-				input = $(target.nextElementSibling).find("input")[0];
-		}
+		if(checkData) {
+			// Execute the scripts from all OnCheckPreparation WFRP3eEffects.
+			if(checkData.actor)
+				await CheckHelper.triggerCheckPreparationEffects(await fromUuid(checkData.actor), checkData, dicePool);
 
-		return input;
-	}
-
-	/**
-	 * Performs follow-up operations after left-clicks on a pool container input.
-	 * @param {any} html
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_onPoolContainerInputLeftClick(html, event)
-	{
-		event.preventDefault();
-		event.stopPropagation();
-
-		const input = this._getClickedInput(event.currentTarget);
-
-		if(event.target !== input) {
-			input.value++;
-			foundry.utils.setProperty(this.object, input.name, parseInt(input.value));
-			this._updatePreview();
-		}
-	}
-
-	/**
-	 * Performs follow-up operations after right-clicks on a pool container input.
-	 * @param {any} html
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_onPoolContainerInputRightClick(html, event)
-	{
-		event.stopPropagation();
-
-		const input = this._getClickedInput(event.currentTarget);
-
-		if(event.target !== input && input.value > 0) {
-			input.value--;
-			foundry.utils.setProperty(this.object, input.name, parseInt(input.value));
-			this._updatePreview();
-		}
-	}
-
-	/**
-	 * Performs follow-up operations after left-clicks on a conversion button.
-	 * @param {MouseEvent} event
-	 * @param {any} html
-	 * @private
-	 */
-	_onConversionButtonLeftClick(html, event)
-	{
-		event.preventDefault();
-		event.stopPropagation();
-
-		if(event.currentTarget.classList.contains("convert-conservative"))
-			this.object.convertCharacteristicDie("conservative");
-		else if(event.currentTarget.classList.contains("convert-reckless"))
-			this.object.convertCharacteristicDie("reckless");
-
-		this._synchronizeInputs(html);
-	}
-
-	/**
-	 * Performs follow-up operations after right-clicks on a conversion button.
-	 * @param {any} html
-	 * @param {MouseEvent} event
-	 * @private
-	 */
-	_onConversionButtonRightClick(html, event)
-	{
-		event.preventDefault();
-		event.stopPropagation();
-
-		if(event.currentTarget.classList.contains("convert-conservative"))
-			this.object.convertCharacteristicDie("conservative", -1);
-		else if(event.currentTarget.classList.contains("convert-reckless"))
-			this.object.convertCharacteristicDie("reckless", -1);
-
-		this._synchronizeInputs(html);
-	}
-
-	/**
-	 * Updates the dice pool and symbol pool previews.
-	 * @private
-	 */
-	_updatePreview()
-	{
-		const dicePoolDiv = $(this.element).find(".dice-pool")[0];
-		const symbolsPoolDiv = $(this.element).find(".symbols-pool")[0];
-
-		if(this.object.dice)
-			this._renderDicePoolPreview(dicePoolDiv);
-
-		if(this.object.symbols)
-			this._renderSymbolsPoolPreview(symbolsPoolDiv);
-	}
-
-	/**
-	 * Renders a preview of the dice pool.
-	 * @param {HTMLElement} container The dice pool preview container.
-	 * @returns {HTMLElement}
-	 */
-	_renderDicePoolPreview(container)
-	{
-		container.innerHTML = "";
-
-		const totalDice = Object.values(this.object.dice).reduce((accumulator, dice) => accumulator + +dice, 0)
-			+ Object.values(this.object.creatureDice).reduce((accumulator, dice) => accumulator + +dice, 0)
-			+ this.object.fortunePoints;
-			+ this.object.specialisations.length;
-
-		// Adjust dice icons' size.
-		let height = 48;
-		let width = 48;
-
-		if(totalDice > 15) {
-			height = 12;
-			width = 12;
-		}
-		else if(totalDice > 10) {
-			height = 24;
-			width = 24;
-		}
-		else if(totalDice > 7) {
-			height = 36;
-			width = 36;
-		}
-
-		// Add as many dice icons as needed.
-		Object.entries(this.object.dice).forEach((dice, index) => {
-			if(this.object.creatureDice) {
-				if(dice[0] === "fortune")
-					dice[1] += this.object.fortunePoints
-						+ this.object.specialisations.length
-						+ this.object.creatureDice.aggression
-						+ this.object.creatureDice.cunning;
-				else if(dice[0] === "expertise")
-					dice[1] += this.object.creatureDice.expertise;
+			// Execute the scripts from all selected effects.
+			const triggeredEffects = checkData.triggeredEffects;
+			if(triggeredEffects != null) {
+				if(Array.isArray(triggeredEffects))
+					for(const effectUuid of triggeredEffects)
+						await dicePool.executeEffect(effectUuid);
+				else
+					await dicePool.executeEffect(triggeredEffects);
 			}
-
-			for(let i = 0; i < dice[1]; i++) {
-				const img = document.createElement("img");
-
-				img.classList.add("special-die", dice[0]);
-				img.src = CONFIG.WFRP3e.dice[dice[0]].icon;
-				img.width = width;
-				img.height = height;
-
-				container.appendChild(img);
-			}
-		});
-
-		return container;
-	}
-
-	/**
-	 * Renders a preview of the symbol pool.
-	 * @param {HTMLElement} container The symbol pool preview container.
-	 * @returns {HTMLElement}
-	 */
-	_renderSymbolsPoolPreview(container)
-	{
-		container.innerHTML = "";
-
-		Object.values(CONFIG.WFRP3e.symbols).forEach((symbol) => {
-			for(let i = 0; i < this.object.symbols[symbol.plural]; i++) {
-				const span = document.createElement("span");
-
-				span.classList.add("wfrp3e-font");
-				span.classList.add("symbol");
-				span.classList.add(symbol.cssClass);
-
-				container.appendChild(span);
-			}
-		});
-
-		return container;
-	}
-
-	/**
-	 * Performs follow-up operations after challenge level changes.
-	 * @param {any} html
-	 * @param {Event} event
-	 * @private
-	 */
-	async _onChallengeLevelSelectChange(html, event)
-	{
-		event.preventDefault();
-
-		const challengeLevel = CONFIG.WFRP3e.challengeLevels[event.currentTarget.value],
-			  action = await fromUuid(this.object.checkData.action);
-
-		this.object.checkData.challengeLevel = event.currentTarget.value;
-		this.object.dice.challenge = (action?.system[this.object.checkData.face].difficultyModifiers.challengeDice ?? 0)
-			+ (["melee", "ranged"].includes(action?.system.type) ? 1 : 0)
-			+ challengeLevel.challengeDice;
-
-		this._synchronizeInputs(html);
-	}
-
-	/**
-	 * Performs follow-up operations after characteristic changes.
-	 * @param {any} html
-	 * @param {Event} event
-	 * @private
-	 */
-	_onCharacteristicSelectChange(html, event)
-	{
-		event.preventDefault();
-
-		const characteristic = this.actor.system.characteristics[event.currentTarget.value],
-			  stance = this.actor.system.stance.current;
-
-		this.object.checkData.characteristic = {
-			name: event.currentTarget.value,
-			...characteristic
-		};
-
-		foundry.utils.mergeObject(this.object.dice, {
-			characteristic: characteristic.rating - Math.abs(stance),
-			fortune: characteristic.fortune,
-			conservative: stance < 0 ? Math.abs(stance) : 0,
-			reckless: stance > 0 ? stance : 0
-		});
-
-		this._synchronizeInputs(html);
-	}
-
-	/**
-	 * Performs follow-up operations after skill changes.
-	 * @param {any} html
-	 * @param {Event} event
-	 * @private
-	 */
-	_onSkillSelectChange(html, event)
-	{
-		event.preventDefault();
-
-		const skill = this.actor.itemTypes.skill.find(skill => skill._id === event.currentTarget.value);
-
-		this.object.checkData.skill = skill;
-
-		if(skill) {
-			this.object.dice.expertise = skill.system.trainingLevel;
-			html.find(".characteristic-select").val(skill.system.characteristic).trigger("change");
 		}
-		else
-			this.object.dice.expertise = 0;
 
-		this._synchronizeInputs(html);
+		await this.render();
+
+		super._onChangeForm(formConfig, event);
 	}
 
 	/**
-	 * Performs follow-up operations after weapon changes.
-	 * @param {Event} event
+	 * Adjusts the amount of dice of a specific type depending on the clicked element.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	_onWeaponSelectChange(event)
+	static async #adjustAmount(event, target)
 	{
-		event.preventDefault();
+		let amount = 0;
 
-		switch(event.currentTarget.value) {
-			case "unarmed":
-				this.object.checkData.weapon = CONFIG.WFRP3e.weapon.commonWeapons.unarmed;
+		switch(event.button) {
+			case 0:
+				amount = 1;
 				break;
-			case "improvised":
-				this.object.checkData.weapon = CONFIG.WFRP3e.weapon.commonWeapons.improvised;
-				break;
-			case "improvisedWeapon":
-				this.object.checkData.weapon = CONFIG.WFRP3e.weapon.commonWeapons.improvisedWeapon;
-				break;
-			default:
-				this.object.checkData.weapon = this.actor.itemTypes.weapon.find(weapon => weapon.id === event.currentTarget.value);
+			case 2:
+				amount = -1;
 				break;
 		}
+
+		this.dicePool[target.dataset.type][target.dataset.subtype] += amount;
+		this.render();
 	}
 
 	/**
-	 * Performs follow-up operations after left-clicks on an extend button.
-	 * @param {MouseEvent} event
+	 * Converts a characteristic die into a conservative or reckless die, or converts a conservative/reckless die into a
+	 * characteristic die depending on the button clicked.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	_onExtendButtonClick(event)
+	static async #convertCharacteristicDie(event, target)
 	{
 		event.preventDefault();
-		event.stopPropagation();
 
-		$(event.currentTarget).toggleClass("minimize");
+		let amount = 0;
 
-		const selector = $(event.currentTarget).next();
-		$(selector).toggleClass("hide");
-		$(selector).toggleClass("maximize");
+		switch(event.button) {
+			case 0:
+				amount = 1;
+				break;
+			case 2:
+				amount = -1;
+				break;
+		}
 
-		if(!$(event.currentTarget).hasClass("minimize"))
-			$(selector).val("");
+		this.dicePool.convertCharacteristicDie(target.dataset.type, amount);
+		this.render();
+	}
+
+	/**
+	 * Processes form submission for the Check Builder.
+	 * @this {CheckBuilder} The handler is called with the application as its bound scope.
+	 * @param {SubmitEvent} event The originating form submission event.
+	 * @param {HTMLFormElement} form The form element that was submitted.
+	 * @param {FormDataExtended} formData Processed data for the submitted form.
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #onCheckBuilderSubmit(event, form, formData)
+	{
+		await this.dicePool.roll();
+	}
+
+	/**
+	 * Prepares a Characteristic check then opens the Check Builder afterwards.
+	 * @param {WFRP3eActor}	actor The WFRP3eActor performing the check.
+	 * @param {Object} characteristic The Characteristic used for the check.
+	 * @param {Object} [options]
+	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
+	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
+	 * @returns {Promise<void>} The DicePool for a characteristic check.
+	 */
+	static async prepareCharacteristicCheck(actor, characteristic, {flavor = null, sound = null} = {})
+	{
+		const stance = actor.system.stance.current,
+			  checkData = {
+				  actor: actor.uuid,
+				  characteristic: characteristic.name,
+				  challengeLevel: "simple",
+				  stance,
+				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
+			  },
+			  startingPool = {
+				  dice: {
+					  characteristic: characteristic.rating - Math.abs(stance),
+					  fortune: characteristic.fortune,
+					  expertise: 0,
+					  conservative: stance < 0 ? Math.abs(stance) : 0,
+					  reckless: stance > 0 ? stance : 0,
+					  challenge: 0,
+					  misfortune: 0
+				  }
+			  };
+
+		await CheckHelper.triggerCheckPreparationEffects(actor, checkData, startingPool);
+		await new CheckBuilder({
+			dicePool: new DicePool(startingPool, {checkData, flavor, sound})
+		}).render(true);
+	}
+
+	/**
+	 * Prepares a Skill check then opens the Dice Pool Builder afterwards.
+	 * @param {WFRP3eActor}	actor The WFRP3eActor performing the check.
+	 * @param {WFRP3eItem} skill The Skill used for the check.
+	 * @param {Object} [options]
+	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
+	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
+	 * @returns {Promise<void>} The DicePool for an skill check.
+	 */
+	static async prepareSkillCheck(actor, skill, {flavor = null, sound = null} = {})
+	{
+		const characteristic = actor.system.characteristics[skill.system.characteristic],
+			  stance = actor.system.stance.current,
+			  checkData = {
+				  actor: actor.uuid,
+				  characteristic: skill.system.characteristic,
+				  challengeLevel: "simple",
+				  skill: skill.uuid,
+				  stance,
+				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
+			  },
+			  startingPool = {
+				  dice: {
+					  characteristic: characteristic.rating - Math.abs(stance),
+					  fortune: characteristic.fortune,
+					  expertise: skill.system.trainingLevel,
+					  conservative: stance < 0 ? Math.abs(stance) : 0,
+					  reckless: stance > 0 ? stance : 0,
+					  challenge: 0,
+					  misfortune: 0
+				  }
+			  };
+
+		await CheckHelper.triggerCheckPreparationEffects(actor, checkData, startingPool);
+
+		await new CheckBuilder({
+			dicePool: new DicePool(startingPool, {checkData, flavor, sound})
+		}).render(true);
+	}
+
+	/**
+	 * Prepares an Action check then opens the Dice Pool Builder afterwards.
+	 * @param {WFRP3eActor} actor The WFRP3eActor using the Action.
+	 * @param {WFRP3eItem} action The Action that is used.
+	 * @param {string} face The Action face.
+	 * @param {Object} [options]
+	 * @param {WFRP3eItem} [options.weapon] The weapon used alongside the Action.
+	 * @param {String} [options.flavor] Some flavor text to add to the Action check's outcome description.
+	 * @param {String} [options.sound] Some sound to play after the Action check completion.
+	 * @returns {Promise<void>} The DicePool for an action check.
+	 */
+	static async prepareActionCheck(actor, action, face, {weapon = null, flavor = null, sound = null} = {})
+	{
+		const match = action.system[face].check.match(new RegExp(
+			"(([\\p{L}\\s]+) \\((\\p{L}+)\\))( " +
+			game.i18n.localize("ACTION.CHECK.against") +
+			"\\.? ([\\p{L}\\s]+))?", "u")
+		);
+		let skill = null,
+			characteristicName = skill?.system.characteristic ?? "strength";
+
+		if(match) {
+			skill = actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
+			// Either get the Characteristic specified on the Action's check, or use the Characteristic used by the Skill.
+			characteristicName = Object.entries(CONFIG.WFRP3e.characteristics).find((characteristic) => {
+				return game.i18n.localize(characteristic[1].abbreviation) === match[3];
+			})[0] ?? characteristicName;
+		}
+
+		const characteristic = actor.system.characteristics[characteristicName],
+			  stance = actor.system.stance.current,
+			  checkData = {
+				  action: action.uuid,
+				  actor: actor.uuid,
+				  characteristic: characteristicName,
+				  challengeLevel: (["melee", "ranged"].includes(action.system.type) ? "easy" : "simple"),
+				  face,
+				  skill: skill?.uuid,
+				  stance,
+				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
+			  },
+			  startingPool = {
+				  dice: {
+					  characteristic: characteristic?.rating - Math.abs(stance) ?? 0,
+					  fortune: characteristic?.fortune ?? 0,
+					  expertise: skill?.system.trainingLevel ?? 0,
+					  conservative: stance < 0 ? Math.abs(stance) : 0,
+					  reckless: stance > 0 ? stance : 0,
+					  challenge: CONFIG.WFRP3e.challengeLevels[checkData.challengeLevel].challengeDice
+						  + action.system[face].difficultyModifiers.challengeDice,
+					  misfortune: action.system[face].difficultyModifiers.misfortuneDice
+						  + (match && match[5] === game.i18n.localize("ACTION.CHECK.targetDefence")
+						  	&& checkData.targets.length > 0
+								  ? await fromUuid(checkData.targets[0]).then(actor => actor.system.totalDefence)
+								  : 0)
+				  }
+			  }
+
+		if(weapon)
+			checkData.weapon = weapon;
+
+		await CheckHelper.triggerCheckPreparationEffects(actor, checkData, startingPool);
+
+		await new CheckBuilder({
+			dicePool: new DicePool(startingPool, {checkData, flavor, sound})
+		}).render(true);
+	}
+
+	/**
+	 * Prepares an initiative check.
+	 * @param {WFRP3eActor} actor The Character making the initiative check.
+	 * @param {WFRP3eCombat} combat The Combat document associated with the initiative check.
+	 * @param {Object} [options]
+	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
+	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
+	 * @returns {DicePool} The DicePool for an initiative check.
+	 */
+	static async prepareInitiativeCheck(actor, combat, {flavor = null, sound = null} = {})
+	{
+		const characteristic = actor.system.characteristics[combat.initiativeCharacteristic],
+			  stance = actor.system.stance.current ?? actor.system.stance,
+			  checkData = {
+				  actor: actor.uuid,
+				  characteristic,
+				  challengeLevel: "simple",
+				  combat,
+				  stance
+			  },
+			  startingPool = {
+				  dice: {
+					  characteristic: characteristic.rating - Math.abs(stance),
+					  fortune: characteristic.fortune,
+					  expertise: 0,
+					  conservative: stance < 0 ? Math.abs(stance) : 0,
+					  reckless: stance > 0 ? stance : 0,
+					  challenge: 0,
+					  misfortune: 0
+				  }
+			  }
+
+		await CheckHelper.triggerCheckPreparationEffects(actor, checkData, startingPool);
+
+		return new DicePool(startingPool, {checkData, flavor, sound});
 	}
 }

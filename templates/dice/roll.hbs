@@ -1,0 +1,150 @@
+<div class="wfrp3e dice-roll" data-action="expandRoll">
+	{{#if flavor}}
+		<div class="dice-flavor">{{flavor}}</div>
+	{{/if}}
+
+	<div class="dice-result">
+		{{#if hasStandardDice}}
+			<div class="dice-formula">{{formula}}</div>
+
+			<h4 class="dice-total">{{total}}</h4>
+		{{/if}}
+
+		{{#if hasSpecialDice}}
+			<div class="dice-array">
+				<ol class="dice-rolls">
+					{{#each specialDieResultLabels}}
+						<li class="roll">{{{this}}}</li>
+					{{/each}}
+				</ol>
+			</div>
+		{{/if}}
+
+		{{{tooltip}}}
+
+		{{#if hasSpecialDice}}
+			<ul>
+				{{#if totalSymbols.successes}}
+					<li class="roll-success">{{localize "ROLL.OUTCOMES.successful"}}</li>
+				{{else}}
+					<li class="roll-failure">{{localize "ROLL.OUTCOMES.failed"}}</li>
+				{{/if}}
+
+				{{#each @root.symbols as |symbol sym|}}
+					{{#with (lookup @root.totalSymbols symbol.plural)}}
+						{{#if (and (superiorTo this 0) (notEqualTo sym "righteousSuccess"))}}
+							<li class="roll-symbols">
+								{{localize symbol.result nb=this}}
+
+								{{#if (and (equalTo sym "success") (superiorTo @root.totalSymbols.righteousSuccesses 0))}}
+									{{localize @root.symbols.righteousSuccess.result nb=@root.totalSymbols.righteousSuccesses}}
+								{{/if}}
+
+								{{#for 0 (lookup @root.remainingSymbols symbol.plural) 1}}
+									<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+								{{/for}}
+							</li>
+						{{/if}}
+					{{/with}}
+				{{/each}}
+			</ul>
+		{{/if}}
+	</div>
+</div>
+
+{{#if effects}}
+	{{>systems/wfrp3e/templates/partials/action-effects.hbs
+			action=action
+			face=face
+			symbols=symbols
+			effects=effects}}
+{{/if}}
+
+{{#if outcome}}
+	<ul class="outcome">
+		{{#if (superiorTo outcome.targetDamages 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.targetDamages" actor=actorName target=targetActorName amount=outcome.targetDamages}}
+			</li>
+		{{/if}}
+
+		{{#if outcome.targetCriticalWounds}}
+			<li>
+				{{{localize "ROLL.OUTCOMES.targetCriticalWounds" actor=actorName target=targetActorName
+							criticalWounds=targetCriticalWoundLinks}}}
+			</li>
+		{{/if}}
+
+		{{#if (superiorTo outcome.targetFatigue 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.targetSufferFatigue" target=targetActorName amount=outcome.targetFatigue}}
+			</li>
+		{{else if (inferiorTo outcome.targetFatigue 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.targetRecoverFatigue" actor=actorName amount=(abs outcome.targetFatigue)}}
+			</li>
+		{{/if}}
+
+		{{#if (superiorTo outcome.targetStress 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.targetStressSuffering" target=targetActorName amount=outcome.targetFatigue}}
+			</li>
+		{{else if (inferiorTo outcome.targetStress 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.targetFatigueRecovery" actor=actorName amount=(abs outcome.targetFatigue)}}
+			</li>
+		{{/if}}
+
+		{{#if (superiorTo outcome.wounds 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.wounds" actor=actorName amount=outcome.wounds}}
+			</li>
+		{{/if}}
+
+		{{#if (superiorTo outcome.criticalWounds.length 0)}}
+			<li>
+				{{{localize "ROLL.OUTCOMES.criticalWounds" actor=actorName criticalWounds=criticalWoundLinks}}}
+			</li>
+		{{/if}}
+
+		{{#if (superiorTo outcome.fatigue 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.fatigueSuffering" actor=actorName amount=outcome.fatigue}}
+			</li>
+		{{else if (inferiorTo outcome.fatigue 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.fatigueRecovery" actor=actorName amount=(abs outcome.fatigue)}}
+			</li>
+		{{/if}}
+
+		{{#if (superiorTo outcome.stress 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.stressSuffering" actor=actorName amount=outcome.stress}}
+			</li>
+		{{else if (inferiorTo outcome.stress 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.stressRecovery" actor=actorName amount=(abs outcome.stress)}}
+			</li>
+		{{/if}}
+
+		{{#if (superiorTo outcome.favour 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.favourGain" actor=actorName amount=outcome.favour}}
+			</li>
+		{{else if (inferiorTo outcome.favour 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.favourLoss" actor=actorName amount=(abs outcome.favour)}}
+			</li>
+		{{/if}}
+
+		{{#if (superiorTo outcome.power 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.powerGain" actor=actorName amount=outcome.power}}
+			</li>
+		{{else if (inferiorTo outcome.power 0)}}
+			<li>
+				{{localize "ROLL.OUTCOMES.powerLoss" actor=actorName amount=(abs outcome.power)}}
+			</li>
+		{{/if}}
+	</ul>
+{{/if}}

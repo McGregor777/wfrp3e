@@ -1,0 +1,208 @@
+<article class="item career game-sheet">
+	<div class="face front active">
+		<div class="header">
+			{{#if @root.editable}}
+				<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+					{{item.name}}
+				</a>
+			{{else}}
+				<span class="name">
+					{{item.name}}
+				</span>
+			{{/if}}
+
+			<div class="race-restrictions">
+				{{#if item.system.advanced}}
+					{{localize "CAREER.SHEET.advancedCareer"}}
+				{{else}}
+					{{localize "CAREER.SHEET.basicCareer"}}
+				{{/if}}
+				:
+				{{#each item.system.raceRestrictions}}
+					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
+						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+					{{else}}
+						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
+					{{/if}}
+				{{/each}}
+			</div>
+
+			<div class="traits">
+				{{item.system.traits}}
+			</div>
+		</div>
+
+		<div class="details">
+			<div class="career-aptitudes">
+				<div class="primary-characteristics">
+					<div class="career-aptitudes-title">
+						{{localize "CAREER.SHEET.primaryCharacteristics"}}
+					</div>
+
+					<div class="career-aptitudes-content">
+						{{#each item.system.primaryCharacteristics}}
+							{{localize (lookup (lookup @root.characteristics this) "name")}}{{#unless @last}},{{/unless}}
+						{{/each}}
+					</div>
+				</div>
+
+				<div class="career-skills">
+					<div class="career-aptitudes-title">
+						{{localize "CAREER.SHEET.careerSkills"}}
+					</div>
+
+					<div class="career-aptitudes-content">
+						{{item.system.careerSkills}}
+					</div>
+				</div>
+
+				<div class="starting-stance">
+					{{#for (multiply item.system.startingStance.conservativeSegments -1) (increment item.system.startingStance.recklessSegments 1) 1}}
+						<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}"
+							 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
+					{{/for}}
+				</div>
+			</div>
+
+			<div class="advance-options">
+				<span class="header">
+					{{localize "CAREER.SHEET.advances"}}
+				</span>
+
+				<div class="advance-option action">
+					<div class="title">
+						{{localize "CAREER.SHEET.action"}}
+					</div>
+
+					<div class="content">
+						{{item.system.advanceOptions.action}}
+					</div>
+				</div>
+
+				<div class="advance-option talent">
+					<div class="title">
+						{{localize "CAREER.SHEET.talent"}}
+					</div>
+
+					<div class="content">
+						{{item.system.advanceOptions.talent}}
+					</div>
+				</div>
+
+				<div class="advance-option skill">
+					<div class="title">
+						{{localize "CAREER.SHEET.skill"}}
+					</div>
+
+					<div class="content">
+						{{item.system.advanceOptions.skill}}
+					</div>
+				</div>
+
+				<div class="advance-option fortune">
+					<div class="title">
+						{{localize "CAREER.SHEET.fortune"}}
+					</div>
+
+					<div class="content">
+						{{item.system.advanceOptions.fortune}}
+					</div>
+				</div>
+
+				<div class="advance-option conservative">
+					<div class="title">
+						{{localize "CAREER.SHEET.conservative"}}
+					</div>
+
+					<div class="content">
+						{{item.system.advanceOptions.conservative}}
+					</div>
+				</div>
+
+				<div class="advance-option reckless">
+					<div class="title">
+						{{localize "CAREER.SHEET.reckless"}}
+					</div>
+
+					<div class="content">
+						{{item.system.advanceOptions.reckless}}
+					</div>
+				</div>
+
+				<div class="advance-option wound">
+					<div class="title">
+						{{localize "CAREER.SHEET.wound"}}
+					</div>
+
+					<div class="content">
+						{{item.system.advanceOptions.wound}}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<img class="art" src="{{item.img}}" />
+	</div>
+
+	<div class="face back">
+		<div class="header">
+			<span class="name">{{item.name}}</span>
+
+			<div class="race-restrictions">
+				{{#if item.system.advanced}}
+					{{localize "CAREER.SHEET.advancedCareer"}}
+				{{else}}
+					{{localize "CAREER.SHEET.basicCareer"}}
+				{{/if}}
+				:
+				{{#each item.system.raceRestrictions}}
+					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
+						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+					{{else}}
+						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
+					{{/if}}
+				{{/each}}
+			</div>
+
+			<div class="traits">
+				{{item.system.summary}}
+			</div>
+		</div>
+
+		<div class="description">
+			{{{item.system.description}}}
+		</div>
+	</div>
+
+	<div class="bottom-line">
+		<div>
+			<a data-action="flip" data-tooltip="{{localize 'ACTOR.ACTIONS.flip'}}">
+				<span class="fas fa-undo"></span>
+			</a>
+		</div>
+
+		{{#if @root.editable}}
+			<div class="form-group slim stacked">
+				<label>{{localize "CAREER.FIELDS.current.label"}}</label>
+
+				<input class="item-input"
+					   name="system.current"
+					   type="radio"
+					   {{#if item.system.current}}checked{{/if}}
+					   {{#unless @root.editable}}disabled{{/unless}} />
+			</div>
+		{{/if}}
+
+		<div>
+			{{#if @root.editable}}
+					<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+						<span class="fas fa-pen-to-square"></span>
+					</a>
+
+					<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+						<span class="fas fa-trash"></span>
+					</a>
+			{{/if}}
+		</div>
+	</div>
+</article>

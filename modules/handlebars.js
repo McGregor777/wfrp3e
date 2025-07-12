@@ -3,21 +3,24 @@ import {capitalize} from "./helpers.js";
 export default function()
 {
     Hooks.on("init", () => {
-		Handlebars.registerHelper("and", (firstCondition, secondCondition) => firstCondition === true && secondCondition === true);
-		Handlebars.registerHelper("or", (firstCondition, secondCondition) => firstCondition === true || secondCondition === true);
-		Handlebars.registerHelper("superiorTo", (value, compareValue) => Number(value) > Number(compareValue));
-		Handlebars.registerHelper("inferiorTo", (value, compareValue) => Number(value) < Number(compareValue));
-		Handlebars.registerHelper("equalTo", (value, compareValue) => value == compareValue);
-		Handlebars.registerHelper("sameAs", (value, compareValue) => value === compareValue);
-		Handlebars.registerHelper("notEqualTo", (value, compareValue) => value != compareValue);
-        Handlebars.registerHelper("superiorOrEqualTo", (value, compareValue) => Number(value) >= Number(compareValue));
-		Handlebars.registerHelper("inferiorOrEqualTo", (value, compareValue) => Number(value) <= Number(compareValue));
-		Handlebars.registerHelper("increment", (value, valueToAdd) => value + parseInt(valueToAdd));
-		Handlebars.registerHelper("multiply", (value, multiplier) => value * multiplier);
-		Handlebars.registerHelper("capitalize", (string) => capitalize(string));
 		Handlebars.registerHelper("abs", (number) => Math.abs(number));
+		Handlebars.registerHelper("and", (firstCondition, secondCondition) => firstCondition && secondCondition);
+		Handlebars.registerHelper("capitalize", (string) => capitalize(string));
+		Handlebars.registerHelper("equalTo", (value, compareValue) => value == compareValue);
 		Handlebars.registerHelper("find", (value, array) => array.find(item => item === value));
+		Handlebars.registerHelper("getProperty", (object, key) => foundry.utils.getProperty(object, key));
 		Handlebars.registerHelper("in", (value, array) => array.includes(value));
+		Handlebars.registerHelper("increment", (value, valueToAdd) => value + parseInt(valueToAdd));
+		Handlebars.registerHelper("inferiorTo", (value, compareValue) => Number(value) < Number(compareValue));
+		Handlebars.registerHelper("inferiorOrEqualTo", (value, compareValue) => Number(value) <= Number(compareValue));
+		Handlebars.registerHelper("multiply", (value, multiplier) => value * multiplier);
+		Handlebars.registerHelper("notEqualTo", (value, compareValue) => value != compareValue);
+		Handlebars.registerHelper("or", (firstCondition, secondCondition) => firstCondition || secondCondition);
+		Handlebars.registerHelper("sameAs", (value, compareValue) => value === compareValue);
+		Handlebars.registerHelper("setVar", (name, value, options) => {options.data.root[name] = value});
+		Handlebars.registerHelper("superiorTo", (value, compareValue) => Number(value) > Number(compareValue));
+		Handlebars.registerHelper("superiorOrEqualTo", (value, compareValue) => Number(value) >= Number(compareValue));
+		Handlebars.registerHelper("uppercase", (string) => (string).toUpperCase());
 
 		Handlebars.registerHelper("for", (startingNumber, goalNumber, increment, block) => {
 			let accumulator = "";

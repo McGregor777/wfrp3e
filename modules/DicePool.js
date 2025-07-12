@@ -20,7 +20,7 @@ import WFRP3eRoll from "./WFRP3eRoll.js";
  * @property {Array} [specialisations]
  * @property {string} [skill]
  * @property {Array} [targets]
- * @property {Array} [triggeredItems]
+ * @property {Array} [triggeredEffects]
  * @property {string} [weapon]
  */
 
@@ -97,7 +97,7 @@ export default class DicePool
 		const checkData = this.checkData;
 		if(checkData) {
 			if(checkData.combat)
-				return game.i18n.localize(`ROLL.NAMES.${checkData.combat.tags.encounterType}EncounterInitiativeCheck`);
+				return game.i18n.localize(`ROLL.NAMES.${checkData.combat.system.type}EncounterInitiativeCheck`);
 			else if(checkData.action)
 				return game.i18n.format("ROLL.NAMES.actionCheck", {action: fromUuidSync(checkData.action).name});
 			else if(checkData.skill)
@@ -149,7 +149,9 @@ export default class DicePool
 					this.dice.characteristic++;
 				}
 				else
-					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convertBack", {type: type}));
+					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convertBack", {
+						type: game.i18n.localize(`DIE.${type}.name`)
+					}));
 			}
 			else {
 				if(this.dice.characteristic > 0) {
@@ -157,7 +159,9 @@ export default class DicePool
 					this.dice[type]++;
 				}
 				else
-					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convert", {type: "characteristic"}));
+					ui.notifications.warn(game.i18n.format("CHECKBUILDER.WARNINGS.convert", {
+						type: game.i18n.localize("DIE.characteristic.name")
+					}));
 			}
 		}
 	}
@@ -246,13 +250,13 @@ export default class DicePool
 			}
 
 			// Execute the effects from all selected items.
-			const triggeredItems = this.checkData.triggeredItems;
-			if(triggeredItems != null) {
-				if(Array.isArray(triggeredItems))
-					for(const itemUuid of triggeredItems)
-						await this.executeItemEffects(itemUuid, "postScript");
+			const triggeredEffects = this.checkData.triggeredEffects;
+			if(triggeredEffects != null) {
+				if(Array.isArray(triggeredEffects))
+					for(const effectUuid of triggeredEffects)
+						await this.executeEffect(effectUuid, "postScript");
 				else
-					await this.executeItemEffects(triggeredItems, "postScript");
+					await this.executeEffect(triggeredEffects, "postScript");
 			}
 		}
 
@@ -272,22 +276,20 @@ export default class DicePool
 	}
 
 	/**
-	 * Executes scripts from onPreCheckTrigger WFRP3eEffects contained by a WFRP3eItem.
-	 * @param {string} itemUuid The UUID of the WFRP3eItem.
+	 * Executes scripts from onPreCheckTrigger a WFRP3eEffect.
+	 * @param {string} effectUuid The UUID of the WFRP3eEffect.
 	 * @param {string} script The type of script to execute.
 	 * @returns {Promise<void>}
 	 */
-	async executeItemEffects(itemUuid, script = "script")
+	async executeEffect(effectUuid, script = "script")
 	{
 		const actor = await fromUuid(this.checkData.actor),
-			  item = await fromUuid(itemUuid),
-			  effects = item.effects.filter(effect => effect.system.type === "onPreCheckTrigger");
+			  parameters = [actor, this, this.checkData];
 
-		for(const effect of effects)
-			await effect.triggerEffect({
-				parameters: [actor, this, this.checkData],
-				parameterNames: ["actor", "dicePool", "checkData"],
-				script: script
-			});
+		await fromUuid(effectUuid).then(effect => effect.triggerEffect({
+			parameters,
+			parameterNames: ["actor", "dicePool", "checkData"],
+			script
+		}));
 	}
 }

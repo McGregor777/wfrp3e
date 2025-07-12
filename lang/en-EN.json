@@ -1,8 +1,4 @@
 {
-	"Confirm": "Confirm",
-	"Finish": "Finish",
-	"Ignore": "Ignore",
-
 	"ABILITY": {
 		"ACTIONS": {
 			"update": "Save Ability",
@@ -18,10 +14,10 @@
 		},
 		"WARNINGS": {
 			"cooldown": "This ability has been used during this session already."
-		}
+		},
+		"name": "Ability",
+		"plural": "Abilities"
 	},
-
-	"ACTOR.GenerateACharacter": "Generate a Character",
 
 	"ACTION": {
 		"ACTIONS": {
@@ -52,7 +48,9 @@
 			"type.label": "Action Type",
 			"uniqueEffect.label": "Unique Effect",
 			"difficultyModifiers": {
+				"abbreviation": "Difficulty",
 				"challengeDice.label": "Challenge Dice",
+				"label": "Difficulty Modifiers",
 				"misfortuneDice.label": "Misfortune Dice"
 			},
 			"effects": {
@@ -75,8 +73,10 @@
 			}
 		},
 		"TABS": {
+			"conservative": "Conservative",
 			"effects": "Effects",
-			"main": "Main"
+			"main": "Main",
+			"reckless": "Reckless"
 		},
 		"TYPES": {
 			"melee": "Melee",
@@ -87,25 +87,117 @@
 		},
 		"WARNINGS": {
 			"recharging": "You cannot use an Action that is recharging."
-		}
+		},
+		"name": "Action",
+		"plural": "Actions"
 	},
 
 	"ACTIONEFFECTEDITOR": {
-		"title": "Action Effect Editor",
 		"ACTIONS": {
 			"submit": "Save Effect"
 		},
 		"TABS": {
 			"main": "Main",
 			"script": "Script"
-		}
+		},
+		"title": "Action Effect Editor"
 	},
 
-	"ACTIONSELECTOR.ChooseANewAction": "Choose a New Action",
-	"ACTIONSELECTOR.NoActionSelected": "None",
-	"ACTIONSELECTOR.NoActionSelectedWarning": "You must select an Action card.",
-	"ACTIONSELECTOR.SelectedAction": "Selected Action:",
-	"ACTIONSELECTOR.Title": "Action Selector",
+	"ACTIONSELECTOR": {
+		"ACTIONS": {
+			"chooseAction": "Choose An Action"
+		},
+		"HEADINGS.newAction": "Choose a New Action",
+		"WARNINGS": {
+			"noActionSelected": "You must select an Action card."
+		},
+		"selectedAction": "Selected Action:",
+		"title": "Action Selector"
+	},
+
+	"ACTOR": {
+		"ACTIONS": {
+			"addActiveEffect": "Add Active Effect",
+			"adjustConservativeSegment": "Add/Remove Conservative Segment",
+			"adjustRechargeTokens": "Adjust Recharge Tokens",
+			"adjustRecklessSegment": "Add/Remove Reckless Segment",
+			"adjustStance": "Adjust Stance",
+			"editDocument": "Edit",
+			"flip": "Flip",
+			"openFilters": "Open Filters",
+			"useDocument": "Use",
+			"rollActionCheck": "Roll Action Check",
+			"rollCharacteristicCheck": "Roll Characteristic Check",
+			"rollItem": "Roll Item",
+			"rollSkillCheck": "Roll Skill Check"
+		},
+		"CONTROLS": {
+			"switchDisplayMode": "Switch Display Mode"
+		},
+		"FIELDS": {
+			"characteristics": {
+				"agility": {
+					"abbreviation": "Ag",
+					"label": "Agility"
+				},
+				"fellowship": {
+					"abbreviation": "Fel",
+					"label": "Fellowship"
+				},
+				"intelligence": {
+					"abbreviation": "Int",
+					"label": "Intelligence"
+				},
+				"strength": {
+					"abbreviation": "St",
+					"label": "Strength"
+				},
+				"toughness": {
+					"abbreviation": "To",
+					"label": "Toughness"
+				},
+				"varies": {
+					"abbreviation": "V",
+					"label": "Varies"
+				},
+				"willpower": {
+					"abbreviation": "WP",
+					"label": "Willpower"
+				},
+				"fortune.label": "Fortune Dice",
+				"label": "Characteristics",
+				"rating.label": "Rating"
+			},
+			"impairments": {
+				"fatigue": {
+					"label": "Fatigue",
+					"tokens": "Fatigue Tokens"
+				},
+				"label": "Impairments",
+				"stress": {
+					"label": "Stress",
+					"tokens": "Stress Tokens"
+				}
+			},
+			"stance": {
+				"conservative.label": "Conservative Segments",
+				"current.label": "Current Stance",
+				"label": "Attitude",
+				"reckless.label": "Reckless Segments"
+			},
+			"wounds": {
+				"label": "Wounds",
+				"max.label": "Threshold",
+				"value.label": "Current"
+			}
+		},
+		"SHEET": {
+			"all": "All",
+			"filters": "Filters",
+			"search": "Search"
+		},
+		"WARNINGS.minimumSegment": "You cannot remove any more segment."
+	},
 
 	"APPLICATION.BUTTON.DeleteItem": "Delete Item",
 	"APPLICATION.BUTTON.EditItem": "Edit Item",
@@ -127,18 +219,15 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Armour",
+		"plural": "Armours"
 	},
-
-	"ATTRIBUTE.Aggression": "Aggression",
-	"ATTRIBUTE.Cunning": "Cunning",
-	"ATTRIBUTE.Expertise": "Expertise",
-	"ATTRIBUTE.ABBREVIATION.Aggression": "A",
-	"ATTRIBUTE.ABBREVIATION.Cunning": "C",
-	"ATTRIBUTE.ABBREVIATION.Expertise": "E",
 
 	"CAREER": {
 		"ACTIONS": {
+			"addSocket": "Add Talent Socket",
+			"deleteSocket": "Remove Talent Socket",
 			"update": "Save Career"
 		},
 		"FIELDS": {
@@ -153,24 +242,30 @@
 				"wound.label": "Wound Advance Options"
 			},
 			"advances": {
-				"action": "Action",
-				"careerCompletion": "Career Completion Advances",
-				"careerTransition": "Career Transition",
-				"dedicationBonus": "Dedication Bonus",
-				"generalCareer": "General Career Advances",
-				"nonCareer": "Non Career Advances",
-				"open": "Open Career Advance",
-				"skill": "Skill Training or Specialty",
-				"talent": "Talent",
-				"type": "Advance Type",
-				"wound": "Light Wound Threshold"
+				"action.label": "Action",
+				"careerCompletion.label": "Career Completion Advances",
+				"careerTransition.label": "Career Transition",
+				"dedicationBonus.label": "Dedication Bonus",
+				"generalCareer.label": "General Career Advances",
+				"nonCareer.label": "Non Career Advances",
+				"open.label": "Open Career Advance",
+				"skill.label": "Skill Training or Specialty",
+				"talent.label": "Talent",
+				"type.label": "Advance Type",
+				"wound.label": "Light Wound Threshold"
 			},
 			"careerSkills.label": "Career Skills",
 			"current.label": "Current Career",
 			"description.label": "Setting Information",
 			"primaryCharacteristics.label": "Primary Characteristics",
 			"raceRestrictions.label": "Race Restrictions",
-			"sockets.label": "Talent Sockets",
+			"sockets": {
+				"FIELDS": {
+					"item.label": "Taken by",
+					"type.label": "Type"
+				},
+				"label": "Talent Sockets"
+			},
 			"startingStance" : {
 				"conservativeSegments.label": "Starting Conservative Segments",
 				"recklessSegments.label": "Starting Reckless Segments"
@@ -200,16 +295,48 @@
 			"header": "Header",
 			"main": "Main",
 			"setting": "Setting Information"
+		},
+		"WARNINGS": {
+			"advanceOptionDepleted": "This career offers no more advance option of this type.",
+			"dedicationBonusCareerNotCompleted": "You cannot buy a career's dedication bonus until it is completed."
+		},
+		"name": "Career",
+		"plural": "Careers"
+	},
+
+	"CAREERADVANCEDIALOG": {
+		"BUTTONS": {
+			"action": "Action Card",
+			"conservative": "Conservative Piece",
+			"nonCareerSkill": "Skill Training",
+			"nonPrimaryCharacteristic": "Non-Primary Characteristic",
+			"primaryCharacteristic": "Primary Characteristic/Fortune Die",
+			"reckless": "Reckless Piece",
+			"skill": "Skill Training or Specialisation",
+			"talent": "Talent Card",
+			"wound": "Wound Threshold"
+		},
+		"nonCareerAdvance": {
+			"content": "Choose a new non-career advance",
+			"title": "New Non Career Advance Selection"
+		},
+		"openAdvance": {
+			"content": "Choose a new career advance",
+			"title": "New Career Advance Selection"
 		}
 	},
 
-	"CAREERSELECTOR.ChooseANewCareer": "Choose a New Career",
-	"CAREERSELECTOR.ExperienceCost": "{cost} XP",
-	"CAREERSELECTOR.NotEnoughExperiencePoint": "You have not enough experience to move to this Career.",
-	"CAREERSELECTOR.NoCareerSelected": "None",
-	"CAREERSELECTOR.NoCareerSelectedWarning": "You must select a Career sheet.",
-	"CAREERSELECTOR.SelectedCareer": "Selected Career:",
-	"CAREERSELECTOR.Title": "Career Selector",
+	"CAREERSELECTOR": {
+		"ACTIONS.chooseCareer": "Choose Career",
+		"WARNINGS": {
+			"notEnoughExperiencePoint": "You have not enough experience to move to this Career.",
+			"noCareerSelectedWarning": "You must select a Career sheet."
+		},
+		"chooseANewCareer": "Choose a New Career",
+		"noCareerSelected": "None",
+		"selectedCareer": "Selected Career:",
+		"title": "Career Selector"
+	},
 
 	"CHALLENGELEVEL": {
 		"simple": "Simple",
@@ -220,47 +347,63 @@
 		"heroic": "Heroic"
 	},
 
-	"CHARACTER.Abilities": "Abilities",
-	"CHARACTER.Actions": "Actions",
-	"CHARACTER.Armours": "Armours",
-	"CHARACTER.Attributes": "Attributes",
-	"CHARACTER.Background": "Background",
-	"CHARACTER.Careers": "Careers",
-	"CHARACTER.Characteristics": "Characteristics",
-	"CHARACTER.Conditions": "Conditions",
-	"CHARACTER.Corruption": "Corruption",
-	"CHARACTER.CriticalWounds": "Critical Wounds",
-	"CHARACTER.Current": "Current",
-	"CHARACTER.CurrentExperience": "Current Experience",
-	"CHARACTER.Experience": "Experience",
-	"CHARACTER.Favour": "Favour",
-	"CHARACTER.Fortune": "Fortune",
-	"CHARACTER.Insanities": "Insanities",
-	"CHARACTER.Maximum": "Maximum",
-	"CHARACTER.Origin": "Origin",
-	"CHARACTER.Power": "Power",
-	"CHARACTER.Skills": "Skills",
-	"CHARACTER.Stances": "Stances",
-	"CHARACTER.Talents": "Talents",
-	"CHARACTER.Threshold": "Threshold",
-	"CHARACTER.TotalExperience": "Total Experience",
-	"CHARACTER.Trappings": "Trappings",
-	"CHARACTER.Miscasts": "Miscasts",
-	"CHARACTER.Money": "Money",
-	"CHARACTER.Mutations": "Mutations",
-	"CHARACTER.Weapons": "Weapons",
-	"CHARACTER.Wounds": "Wounds",
-	"CHARACTER.WoundThreshold": "Wound Threshold",
-	"CHARACTER.IMPAIRMENT.Fatigue": "Fatigue",
-	"CHARACTER.IMPAIRMENT.Stress": "Stress",
-	"CHARACTER.IMPAIRMENT.FatigueTokens": "Fatigue Tokens",
-	"CHARACTER.IMPAIRMENT.StressTokens": "Stress Tokens",
-	"CHARACTER.SHEET.AddBasicSkills": "Add Basic Skills",
-	"CHARACTER.SHEET.AddRemoveConservativeSegment": "Add/Remove Conservative Segment",
-	"CHARACTER.SHEET.AddRemoveRecklessSegment": "Add/Remove Reckless Segment",
-	"CHARACTER.SHEET.MinimumSegmentWarning": "You cannot remove any more segment.",
-	"CHARACTER.SHEET.NoExperienceLeft": "You have no Experience left.",
-	"CHARACTER.SHEET.NoSkill": "<em><strong>{actor}</em></strong> has no skill. Do you wish to give <em><strong>{actor}</em></strong> all the basic skills?",
+	"CHARACTER": {
+		"ACTIONS.addBasicSkills": "Add Basic Skills",
+		"FIELDS": {
+			"background": {
+				"allies.label": "Allies",
+				"biography.label": "Biography",
+				"birthplace.label": "Birth Place",
+				"build.label": "Build",
+				"campaignNotes.label": "Campaign Notes",
+				"enemies.label": "Enemies",
+				"eyeColour.label": "Eye Colour",
+				"familyMembers.label": "Family Members",
+				"hairColour.label": "Hair Colour",
+				"height.label": "Height",
+				"label": "Background",
+				"personalGoal.label": "Personal Goal",
+				"weight.label": "Weight"
+			},
+			"corruption": {
+				"FIELDS": {
+					"max.label": "Threshold",
+					"value.label": "Current"
+				},
+				"label": "Corruption"
+			},
+			"experience": {
+				"current.label": "Current Experience",
+				"label": "Experience",
+				"total.label": "Total Experience"
+			},
+			"favour.label": "Favour",
+			"fortune": {
+				"max.label": "Maximum",
+				"value.label": "Current",
+				"label": "Fortune"
+			},
+			"origin.label": "Origin",
+			"party.label": "Party",
+			"power.label": "Power"
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributes",
+			"background": "Background",
+			"careers": "Careers",
+			"effects": "Effects",
+			"talents": "Talents",
+			"trappings": "Trappings"
+		},
+		"WARNINGS": {
+			"noExperienceLeft": "You have no Experience left.",
+			"notEnoughExperienceForAdvance": "You don't have enough Experience to buy this advance.",
+			"notEnoughExperienceForNonCareerAdvance": "You don't have enough Experience to buy a non-career advance.",
+			"noSkill": "<em><strong>{actor}</em></strong> has no skill. Do you wish to give <em><strong>{actor}</em></strong> all the basic skills?"
+		},
+		"woundThreshold": "Wound Threshold"
+	},
 
 	"CHARACTERGENERATOR.Actions": "Action Cards",
 	"CHARACTERGENERATOR.Acquired": "Acquired",
@@ -308,49 +451,26 @@
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Not enough Skill Training left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Not enough Specialisation left.",
 
-	"CHARACTERISTICS": {
-		"agility": {
-			"abbreviation": "Ag",
-			"name": "Agility"
+	"CHARACTERISTICUPGRADER": {
+		"ACTIONS": {
+			"increaseFortune": "+1 Fortune Die",
+			"increaseRating": "+1 Rating",
+			"upgradeCharacteristic": "Upgrade A Characteristic"
 		},
-		"fellowship": {
-			"abbreviation": "Fel",
-			"name": "Fellowship"
+		"WARNINGS": {
+			"noUpgradeSelected": "None",
+			"notEnoughOpenAdvances": "The Actor has not enough open advances available."
 		},
-		"intelligence": {
-			"abbreviation": "Int",
-			"name": "Intelligence"
-		},
-		"strength": {
-			"abbreviation": "St",
-			"name": "Strength"
-		},
-		"toughness": {
-			"abbreviation": "To",
-			"name": "Toughness"
-		},
-		"varies": {
-			"abbreviation": "V",
-			"name": "Varies"
-		},
-		"willpower": {
-			"abbreviation": "WP",
-			"name": "Willpower"
-		}
+		"characteristicFortune": "{characteristic} Fortune Die",
+		"characteristicRating": "{characteristic} Rating",
+		"experienceCost": "{cost} XP",
+		"selectedUpgrade": "Selected Upgrade: ",
+		"title": "Characteristic Upgrader"
 	},
-
-	"CHARACTERISTICUPGRADER.CharacteristicFortune": "{characteristic} Fortune Die",
-	"CHARACTERISTICUPGRADER.CharacteristicRating": "{characteristic} Rating",
-	"CHARACTERISTICUPGRADER.ExperienceCost": "{cost} XP",
-	"CHARACTERISTICUPGRADER.IncreaseFortune": "+1 Fortune Die",
-	"CHARACTERISTICUPGRADER.IncreaseRating": "+1 Rating",
-	"CHARACTERISTICUPGRADER.NoUpgradeSelected": "No Upgrade Selected",
-	"CHARACTERISTICUPGRADER.SelectedUpgrade": "Selected Upgrade: ",
-	"CHARACTERISTICUPGRADER.Title": "Characteristic Upgrader",
-	"CHARACTERISTICUPGRADER.UpgradeACharacteristic": "Upgrade A Characteristic",
 
 	"CHECKBUILDER": {
 		"ACTIONS": {
+			"adjustDiceAmount": "Left click to increase dice, right click to decrease.",
 			"convertConservative": "Convert to conservative die",
 			"convertReckless": "Convert to reckless die",
 			"rollCheck": "Roll check"
@@ -366,7 +486,7 @@
 			"fortunePoints": "Fortune Points",
 			"specialisations": "Specialisations",
 			"skill": "Skill",
-			"triggeredItems": "Triggered Items",
+			"triggeredEffects": "Triggered Effects",
 			"weapon": "Weapon"
 		},
 		"TABS": {
@@ -381,11 +501,10 @@
 			"skill": "{skill} Check Builder"
 		},
 		"WARNINGS": {
-			"convert": "There is no {type} die to convert.",
-			"convertBack": "There is no {type} die left to convert back."
+			"convert": "There is no {type} to convert.",
+			"convertBack": "There is no {type} left to convert back."
 		},
 		"dicePool": "Dice Pool",
-		"hint": "Left click to increase dice, right click to decrease.",
 		"options": "Options",
 		"startingResults": "Starting results"
 	},
@@ -403,25 +522,63 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
+		},
+		"name": "Condition",
+		"plural": "Conditions"
+	},
+
+	"COMBAT": {
+		"FIELDS.type.label": "Encounter Type",
+		"types": {
+			"combat": "Combat",
+			"social": "Social"
 		}
 	},
 
-	"CREATURE.Abilities": "Abilities",
-	"CREATURE.Actions": "Actions",
-	"CREATURE.Category": "Category",
-	"CREATURE.DamageRating": "Damage Rating",
-	"CREATURE.DefenceValue": "Defence Value",
-	"CREATURE.Details": "Details",
-	"CREATURE.Nemesis": "Nemesis",
-	"CREATURE.SoakValue": "Soak Value",
-	"CREATURE.Stance": "Stance",
-	"CREATURE.ThreatRating": "Threat Rating",
-	"CREATURE.Trappings": "Trappings",
-	"CREATURE.WoundsThreshold": "Wounds Threshold",
-	"CREATURE.WoundsValue": "Wounds Value",
-	"CREATURE.ABBREVIATION.DamageRating": "DR",
-	"CREATURE.ABBREVIATION.DefenceValue": "Defence",
-	"CREATURE.ABBREVIATION.SoakValue": "Soak",
+	"CREATURE": {
+		"FIELDS": {
+			"attributes": {
+				"aggression": {
+					"abbreviation": "A",
+					"label": "Aggression"
+				},
+				"cunning": {
+					"abbreviation": "C",
+					"label": "Cunning"
+				},
+				"expertise": {
+					"abbreviation": "E",
+					"label": "Expertise"
+				},
+				"max.label": "Rating",
+				"value.label": "Budget"
+			},
+			"category.label": "Category",
+			"damageRating": {
+				"abbreviation": "DR",
+				"label": "Damage Rating"
+			},
+			"defenceValue": {
+				"abbreviation": "Defence",
+				"label": "Defence Value"
+			},
+			"description.label": "Description",
+			"soakValue": {
+				"abbreviation": "Soak",
+				"label": "Soak Value"
+			},
+			"threatRating": "Threat Rating"
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributes",
+			"details": "Details",
+			"effects": "Effects",
+			"talents": "Talents",
+			"trappings": "Trappings"
+		},
+		"nemesis": "Nemesis"
+	},
 
 	"CRITICALWOUND": {
 		"ACTIONS.update": "Save Critical Wound",
@@ -429,32 +586,51 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Critical Wound",
+		"plural": "Critical Wounds"
 	},
 
 	"DIALOG.TITLE.EffectDeletion": "Effect Deletion",
 	"DIALOG.DESCRIPTION.EffectDeletion": "Do you really wish to delete this effect?",
 
 	"DIE": {
-		"AMOUNT": {
-			"challengeDice": "{nb} challenge dice",
-			"characteristicDice": "{nb} characteristic dice",
-			"conservativeDice": "{nb} conservative dice",
-			"expertiseDice": "{nb} expertise dice",
-			"explodedDice": "(including {nb} exploded dice)",
-			"fortuneDice": "{nb} fortune dice",
-			"misfortuneDice": "{nb} misfortune dice",
-			"recklessDice": "{nb} reckless dice"
+		"challenge": {
+			"amount": "{nb} challenge dice",
+			"name": "challenge die",
+			"plural": "challenge dice"
 		},
-		"NAMES": {
-			"challengeDice": "challenge dice",
-			"characteristicDice": "characteristic dice",
-			"conservativeDice": "conservative dice",
-			"expertiseDice": "expertise dice",
-			"fortuneDice": "fortune dice",
-			"misfortuneDice": "misfortune dice",
-			"recklessDice": "reckless dice"
-		}
+		"characteristic": {
+			"amount": "{nb} characteristic dice",
+			"name": "characteristic die",
+			"plural": "characteristic dice"
+		},
+		"conservative": {
+			"amount": "{nb} conservative dice",
+			"name": "conservative die",
+			"plural": "conservative dice"
+		},
+		"expertise": {
+			"amount": "{nb} expertise dice",
+			"name": "expertise die",
+			"plural": "expertise dice"
+		},
+		"fortune": {
+			"amount": "{nb} fortune dice",
+			"name": "fortune die",
+			"plural": "fortune dice"
+		},
+		"misfortune": {
+			"amount": "{nb} misfortune dice",
+			"name": "misfortune die",
+			"plural": "misfortune dice"
+		},
+		"reckless": {
+			"amount": "{nb} reckless dice",
+			"name": "reckless die",
+			"plural": "reckless dice"
+		},
+		"exploded": "(including {nb} exploded dice)"
 	},
 
 	"DISEASE": {
@@ -502,7 +678,9 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Disease",
+		"plural": "Diseases"
 	},
 
 	"EFFECT": {
@@ -526,18 +704,44 @@
 		}
 	},
 
-	"ENCOUNTER.Combat": "Combat",
-	"ENCOUNTER.Social": "Social",
-
-	"GROUP.Talents": "Talents",
-	"GROUP.TalentSockets": "Talent Sockets",
-	"GROUP.SPECIALABILITY.Title": "Special Ability Title",
-	"GROUP.SPECIALABILITY.Description": "Special Ability Description",
-	"GROUP.SPECIALABILITY.Edit": "Edit Ability Track",
-	"GROUP.SPECIALABILITY.Decrease": "Decrease Ability Track",
-	"GROUP.SPECIALABILITY.Increase": "Increase Ability Track",
-	"GROUP.SPECIALABILITY.Content": "Content",
-	"GROUP.SPECIALABILITY.Trigger": "Trigger",
+	"GROUP": {
+		"ACTIONS": {
+			"decreaseAbilityTrack": "Decrease Ability Track",
+			"editAbilityTrack": "Edit Ability Track",
+			"increaseAbilityTrack": "Increase Ability Track"
+		},
+		"FIELDS": {
+			"specialAbilities": {
+				"FIELDS": {
+					"current.label": "Current",
+					"description": "Description",
+					"title": "Title",
+					"values": {
+						"FIELDS": {
+							"content.label": "Content",
+							"trigger.label": "Is Trigger?"
+						},
+						"label": "Step"
+					}
+				},
+				"label": "Special Abilities"
+			},
+			"sockets": {
+				"FIELDS": {
+					"item.label": "Taken by",
+					"type.label": "Type"
+				},
+				"label": "Talent Sockets"
+			}
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributes",
+			"effects": "Effects",
+			"talents": "Talents",
+			"trappings": "Trappings"
+		}
+	},
 
 	"INSANITY": {
 		"ACTIONS.update": "Save Insanity",
@@ -549,13 +753,15 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Insanity",
+		"plural": "Insanities"
 	},
 
 	"ITEM": {
 		"ACTIONS": {
-			"addEffect": "Add Effect",
-			"deleteEffect": "Delete {effect} Effect "
+			"addActiveEffect": "Add Effect",
+			"deleteActiveEffect": "Delete {effect} Effect "
 		}
 	},
 
@@ -567,7 +773,9 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Miscast",
+		"plural": "Miscasts"
 	},
 
 	"MONEY": {
@@ -583,7 +791,9 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Money",
+		"plural": "Moneys"
 	},
 
 	"MUTATION": {
@@ -596,24 +806,10 @@
 		"TABS": {
 			"effects": "Effects",
 			"main": "Main"
-		}
+		},
+		"name": "Mutation",
+		"plural": "Mutations"
 	},
-
-	"NEWCAREERADVANCESELECTION.Content": "Choose a new career advance",
-	"NEWCAREERADVANCESELECTION.Title": "New Career Advance Selection",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Conservative": "Conservative Piece",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Reckless": "Reckless Piece",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Characteristic": "Primary Characteristic/Fortune Die",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Action": "Action Card",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Skill": "Skill Training or Specialisation",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Talent": "Talent Card",
-	"NEWCAREERADVANCESELECTION.BUTTONS.Wound": "Wound Threshold",
-
-	"NEWNONCAREERADVANCESELECTION.Content": "Choose a new non-career advance",
-	"NEWNONCAREERADVANCESELECTION.Title": "New Non Career Advance Selection",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Characteristic": "Non-Primary Characteristic",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Skill": "Skill Training or Specialisation",
-	"NEWNONCAREERADVANCESELECTION.BUTTONS.Talent": "Talent Card",
 
 	"ORIGIN.KarakAzgaraz": "Dwarf of Karak Azgaraz",
 	"ORIGIN.Ulthuan": "High Elf of Ulthuan",
@@ -624,17 +820,57 @@
 	"ORIGIN.INTRODUCTION.Reiklander": "To reflect their upbringing and individuality, Reiklander characters have the following racial abilities:",
 	"ORIGIN.INTRODUCTION.AthelLoren": "To reflect their ties to nature and tradition-bound culture, wood elf characters have the following racial abilities:",
 
-	"PARTY.FortunePool": "Fortune Pool",
-	"PARTY.FortuneToken": "Fortune Token",
-	"PARTY.RemoveMember": "Remove Member from Party",
-	"PARTY.SpecialAbility.Title": "Special Ability's Title",
-	"PARTY.TalentSockets": "Talent Sockets",
-	"PARTY.Traits": "Traits",
-	"PARTY.TENSIONEVENT.Effects": "Tension Event Effects",
-	"PARTY.TENSIONEVENT.Threshold": "Tension Event Threshold",
-	"PARTY.TENSIONMETER.Decrease": "Decrease Tension Meter",
-	"PARTY.TENSIONMETER.Increase": "Increase Tension Meter",
-	"PARTY.TENSIONMETER.Title": "Party Tension Meter",
+	"PARTY": {
+		"ACTIONS": {
+			"addSocket": "Add Talent Socket",
+			"adjustFortunePool": "Add/Remove Fortune",
+			"decreaseTensionMeter": "Decrease Tension Meter",
+			"deleteSocket": "Remove Talent Socket",
+			"editEvent": "Edit Event",
+			"increaseTensionMeter": "Increase Tension Meter",
+			"removeMember": "Remove Member From Party"
+		},
+		"FIELDS": {
+			"fortunePool.label": "Fortune Pool",
+			"members.label": "Party Members",
+			"sockets": {
+				"FIELDS": {
+					"item.label": "Taken by",
+					"type.label": "Type"
+				},
+				"label": "Talent Sockets"
+			},
+			"specialAbility": {
+				"FIELDS": {
+					"description.label": "Description",
+					"title.label": "Name"
+				},
+				"label": "Special Ability"
+			},
+			"tension": {
+				"FIELDS": {
+					"events": {
+						"FIELDS": {
+							"description.label": "Effects",
+							"threshold.label": "Threshold"
+						},
+						"label": "Tension Event"
+					},
+					"max.label": "Maximum",
+					"value.label": "Current"
+				},
+				"label": "Party Tension Meter"
+			},
+			"traits.label": "Traits"
+		},
+		"WARNINGS.alreadyMember": "{name} is already a member of the party."
+	},
+
+	"PARTYEVENTEDITOR": {
+		"ACTIONS.submit": "Save Event",
+		"TABS.main": "Main",
+		"title": "Party Event Editor"
+	},
 
 	"RACE.Any": "Any Race",
 	"RACE.Dwarf": "Dwarf",
@@ -708,6 +944,20 @@
 		"availableEffects": "Available Effects"
 	},
 
+	"SELECTOR": {
+		"ACTIONS.openFilters": "Open Filters",
+		"WARNINGS": {
+			"alreadySelected": "This item is already selected.",
+			"cannotSubmit": "Unable to confirm selection: {error}",
+			"maximumSelectionSizeReached": "You cannot select any more item. Please deselect an item before selecting an other one.",
+			"notEnoughSelection": "You need to select more items.",
+			"noSelection": "No item has been selected."
+		},
+		"filters": "Filters",
+		"noSelection": "Aucun",
+		"search": "Search"
+	},
+
 	"SCRIPT": {
 		"TYPES": {
 			"onCareerSocket": "Career Socket",
@@ -739,10 +989,14 @@
 		},
 		"NAMES": {
 			"channeling": "Channeling",
+			"charm": "Charm",
 			"education": "Education",
+			"firstAid": "First Aid",
 			"folklore": "Folklore",
 			"intimidate": "Intimidate",
 			"intuition": "Intuition",
+			"leadership": "Leadership",
+			"medicine": "Medicine",
 			"observation": "Observation",
 			"piety": "Piety",
 			"weaponSkill": "Weapon Skill"
@@ -751,7 +1005,21 @@
 			"effects": "Effects",
 			"main": "Main"
 		},
+		"acquired": "Acquired",
+		"name": "Skill",
+		"plural": "Skills",
 		"specialisationList": "Specialisations: {specialisations}"
+	},
+
+	"SKILLUPGRADER": {
+		"ACTIONS.chooseUpgrade": "Choose Upgrade",
+		"WARNINGS.singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
+		"acquisitionUpgrade": "{name} - Acquisition",
+		"noUpgradeSelected": "None",
+		"selectedUpgrade": "Selected Upgrade:",
+		"specialisationUpgrade": "{name} - {value} Specialisation",
+		"title": "Skill Upgrader",
+		"trainingLevelUpgrade": "{name} - Training Level {value}"
 	},
 
 	"SYMBOL": {
@@ -811,7 +1079,9 @@
 		"WARNINGS": {
 			"notSocketed": "You cannot use a Talent that is not socketed.",
 			"recharging": "You cannot use a Talent that is recharging."
-		}
+		},
+		"name": "Talent",
+		"plural": "Talents"
 	},
 
 	"TALENTSELECTOR": {
@@ -829,18 +1099,6 @@
 		"selectedTalent": "Selected Talent:",
 		"title": "Talent Selector"
 	},
-
-	"TRAININGSELECTOR.Acquired": "Acquired",
-	"TRAININGSELECTOR.Characteristic": "Characteristic",
-	"TRAININGSELECTOR.ChooseATraining": "Choose a Training",
-	"TRAININGSELECTOR.NewTrainingLevel": "Training Level {level}",
-	"TRAININGSELECTOR.NewSpecialisation": "{specialisation} Specialisation",
-	"TRAININGSELECTOR.NoTrainingSelected": "None",
-	"TRAININGSELECTOR.NoTrainingSelectedWarning": "You must select a Training.",
-	"TRAININGSELECTOR.SelectedTraining": "Selected Training:",
-	"TRAININGSELECTOR.Specialisations": "Specialisations",
-	"TRAININGSELECTOR.Title": "Training Selector",
-	"TRAININGSELECTOR.TrainingLevel": "Training Level",
 
 	"TRAPPING": {
 		"ACTIONS.update": "Save Trapping",
@@ -898,7 +1156,9 @@
 		"silverShillings": {
 			"abbreviation": "g",
 			"label": "Silver Shillings"
-		}
+		},
+		"name": "Trapping",
+		"plural": "Trappings"
 	},
 
 	"TRAITS": {
@@ -921,7 +1181,7 @@
 			"armour": "Armour",
 			"career": "Career",
 			"condition": "Condition",
-			"criticalwound": "Critical Wound",
+			"criticalWound": "Critical Wound",
 			"disease": "Disease",
 			"insanity": "Insanity",
 			"money": "Money",
@@ -999,6 +1259,12 @@
 		},
 		"improvised": "Improvised",
 		"improvisedWeapon": "Improvised Weapon",
-		"unarmed": "Unarmed"
-	}
+		"unarmed": "Unarmed",
+		"name": "Weapon",
+		"plural": "Weapons"
+	},
+
+	"Confirm": "Confirm",
+	"Finish": "Finish",
+	"Ignore": "Ignore"
 }

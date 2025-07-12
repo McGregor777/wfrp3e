@@ -9,9 +9,9 @@ export default class WFRP3eTalentDataModel extends foundry.abstract.TypeDataMode
 		const fields = foundry.data.fields;
 
 		return {
-			description: new fields.HTMLField(),
+			description: new fields.HTMLField({textSearch: true}),
 			rechargeTokens: new fields.NumberField({required: true, nullable: false, integer: true, initial: 0, min: 0}),
-			socket: new fields.StringField(),
+			socket: new fields.StringField({nullable: true}),
 			type: new fields.StringField({
 				choices: CONFIG.WFRP3e.talentTypes,
 				initial: Object.keys(CONFIG.WFRP3e.talentTypes)[0],
@@ -29,15 +29,6 @@ export default class WFRP3eTalentDataModel extends foundry.abstract.TypeDataMode
 		super.prepareBaseData();
 
 		this._prepareDescription();
-	}
-
-	/** @inheritDoc */
-	static migrateData(source)
-	{
-		if(source.effect && source.effects.length <= 0)
-			source.effects.push(source.effect);
-
-		return super.migrateData(source);
 	}
 
 	/**

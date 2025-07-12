@@ -20,28 +20,30 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 				wound: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 			}),
 			advances: new fields.SchemaField({
-				action: new fields.StringField({initial: "", nullable: false, required: true}),
-				talent: new fields.StringField({initial: "", nullable: false, required: true}),
-				skill: new fields.StringField({initial: "", nullable: false, required: true}),
-				wound: new fields.StringField({initial: "", nullable: false, required: true}),
-				open: new fields.ArrayField(new fields.StringField(), {
-					initial: new Array(6).fill(""),
-					max: 6,
-					min: 6,
-					nullable: false,
-					required: true
-				}),
+				action: new fields.StringField({nullable: true}),
+				talent: new fields.StringField({nullable: true}),
+				skill: new fields.StringField({nullable: true}),
+				wound: new fields.StringField({nullable: true}),
+				open: new fields.ArrayField(
+					new fields.StringField({nullable: true}), {
+						initial: new Array(6),
+						max: 6,
+						min: 6,
+						nullable: false,
+						required: true
+					}
+				),
 				careerTransition: new fields.SchemaField({
 					cost: new fields.NumberField({initial: 0, integer: true, min: 0}),
-					newCareer: new fields.StringField()
+					newCareer: new fields.StringField({nullable: true})
 				}),
-				dedicationBonus: new fields.StringField({initial: "", nullable: false, required: true}),
+				dedicationBonus: new fields.StringField({nullable: true}),
 				nonCareer: new fields.ArrayField(
 					new fields.SchemaField({
 						cost: new fields.NumberField({initial: 0, integer: true, min: 0}),
-						type: new fields.StringField({initial: "", nullable: false, required: true})
+						type: new fields.StringField({nullable: true})
 					}), {
-					initial: new Array(2).fill({cost: 0, type: ""}),
+					initial: new Array(2).fill({cost: 0, type: null}),
 					max: 2,
 					min: 2
 				})
@@ -51,29 +53,42 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 			description: new fields.HTMLField(),
 			primaryCharacteristics: new fields.ArrayField(
 				new fields.StringField({
-					choices: CONFIG.WFRP3e.characteristics,
+					choices: Object.entries(CONFIG.WFRP3e.characteristics).reduce((choices, [key, value]) => {
+						choices[key] = value.name
+						return choices;
+					}, {}),
 					initial: "strength",
 					required: true
 				}),
-				{initial: ["strength", "ability"], required: true}
+				{initial: ["strength", "agility"], required: true}
 			),
 			raceRestrictions: new fields.ArrayField(
 				new fields.StringField({
-					choices: {any: {name: "RACE.Any"}, ...CONFIG.WFRP3e.availableRaces},
+					choices: {
+						any: "RACE.Any",
+						...Object.entries(CONFIG.WFRP3e.availableRaces).reduce((choices, [key, value]) => {
+							choices[key] = value.name
+							return choices;
+						}, {})
+					},
 					initial: "any",
 					required: true
 				}),
-				{initial: ["any"], required: true}
-			),
+				{initial: ["any"], required: true}),
 			sockets: new fields.ArrayField(
 				new fields.SchemaField({
-					item: new fields.DocumentUUIDField(),
+					item: new fields.DocumentUUIDField({label: "CAREER.FIELDS.sockets.FIELDS.item.label"}),
 					type: new fields.StringField({
 						choices: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"},
-						initial: "any",
+						initial: "focus",
+						label: "CAREER.FIELDS.sockets.FIELDS.type.label",
 						required: true
-					})}, {initial: {item: null, type: "focus"}}),
-				{initial: new Array(2).fill({item: null, type: "focus"}), required: true}
+					})}, {initial: {item: null, type: "focus"}}
+				), {
+					initial: new Array(2).fill({item: null, type: "focus"}),
+					label: "CAREER.FIELDS.sockets",
+					required: true
+				}
 			),
 			traits: new fields.StringField({initial: ", , , ", required: true}),
 			startingStance: new fields.SchemaField({
@@ -87,33 +102,37 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["CAREER"];
 
-	/** @inheritDoc */
-	static cleanData(source = {}, options = {})
+	/**
+	 * The number of open advances of each type contained by a WFRP3eCareer.
+	 * @private
+	 */
+	get openAdvanceTypeNumbers()
 	{
-		if(source.advances?.open.length < 6)
-			source.advances.open.push(
-				new Array(6 - source.advances.open.length).fill({cost: 0, type: ""})
-			);
-		else if(source.advances?.open.length > 6)
-			source.advances.open = source.advances.open.slice(0, 6);
+		return Object.entries({
+			action: `${game.i18n.localize("CAREER.SHEET.action")} -`,
+			talent: `${game.i18n.localize("CAREER.SHEET.talent")} -`,
+			skill: [
+				game.i18n.format("SKILLUPGRADER.acquisitionUpgrade", {name: ""}),
+				game.i18n.format("SKILLUPGRADER.specialisationUpgrade", {name: "", value: ""}),
+				game.i18n.format("SKILLUPGRADER.trainingLevelUpgrade", {name: "", value: ""})
+			],
+			fortune: game.i18n.format("CHARACTERISTICUPGRADER.characteristicFortune", {characteristic: ""}),
+			conservative: game.i18n.localize("STANCES.conservative"),
+			reckless: game.i18n.localize("STANCES.reckless"),
+			wound: game.i18n.localize("CHARACTER.woundThreshold")
+		}).reduce((types, [key, value]) => {
+			console.log(value)
 
-		if(source.advances?.nonCareer.length < 2)
-			source.advances.nonCareer.push(
-				new Array(2 - source.advances.nonCareer.length).fill({cost: 0, type: ""})
-			);
-		else if(source.advances?.nonCareer.length > 2)
-			source.advances.nonCareer = source.advances.nonCareer.slice(0, 2);
+			types[key] = 0;
 
-		if(source.raceRestrictions?.length === 1) {
-			const raceRestrictionKeys = ["any", ...Object.keys(CONFIG.WFRP3e.availableRaces)];
+			if(Array.isArray(value))
+				for(const val of value)
+					types[key] += this.advances.open.filter(advance => advance && advance.includes(val)).length
+			else
+				types[key] = this.advances.open.filter(advance => advance && advance.includes(value)).length;
 
-			if(!raceRestrictionKeys.includes(source.raceRestrictions[0])) {
-				const match = source.raceRestrictions[0].match(new RegExp(/^\w*/));
-				source.raceRestrictions[0] = match[0].toLowerCase();
-			}
-		}
-
-		return this.schema.clean(source, options);
+			return types;
+		}, {});
 	}
 
 	/** @inheritDoc */
@@ -121,7 +140,7 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 	{
 		super.prepareBaseData();
 
-		this._prepareDescription()
+		this._prepareDescription();
 	}
 
 	/** @inheritDoc */
@@ -138,7 +157,7 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 	}
 
 	/**
-	 * Prepares the description of the Career's description.
+	 * Prepares the description of the WFRP3eCareer's description.
 	 * @private
 	 */
 	_prepareDescription()

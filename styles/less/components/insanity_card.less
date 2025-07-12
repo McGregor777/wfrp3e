@@ -1,65 +1,46 @@
-.insanity-card {
+.insanity.card {
+	background-color: #d0d8e0;
+	border-radius: 0.5rem;
+	color: black;
+	display: flex;
+	height: 385px;
+	flex-direction: column;
+	margin: 0.5rem;
 	position: relative;
 	width: 255px;
-	height: 385px;
-	margin: 8px;
-	border: 10px solid #602018;
-	border-radius: 10px;
-	text-align: center;
-	background-color: #d0d8e0;
 
-	& .insanity-card-content {
-		padding: 0 5px;
+	& .bottom-line {
+		bottom: 0.5rem;
+		left: 0.5rem;
+		right: 3rem;
+	}
 
-		& .insanity-card-description {
-			text-align: left;
-			margin-left: 0;
-			padding: 0;
+	& .content {
+		border: 0.5rem solid #602018;
+		border-radius: 0 0 0.5rem 0.5rem ;
+		flex-grow: 1;
+		padding: 1rem 1.5rem;
+
+		& .description {
 			border: 0;
-		}
-
-		& .insanity-card-severity-rating {
-			width: 31px;
-			height: 31px;
-			background-color: #202020;
-			float: right;
-			color: white;
-			font: small-caps 20pt var(--font-title);
-			text-shadow:
-				-1pt -1pt 0 black,
-				-1pt 0 0 black,
-				0 -1pt 0 black,
-				-1pt 1pt 0 black,
-				1pt -1pt 0 black,
-				0 1pt 0 black,
-				1pt 0 0 black,
-				1pt 1pt 0 black;
-		}
-
-		& .insanity-card-symptom {
+			padding: 0;
+			margin-left: 0;
 			text-align: left;
-
-			& .symptom-name {
-				text-transform: uppercase;
-
-				&::first-letter {
-					font-size: 16pt;
-				}
-			}
 		}
 	}
 
-	& .insanity-card-header {
-		display: flex;
-		flex-direction: column;
-		height: 70px;
-		margin-bottom: 5px;
+	& .header {
+		text-align: center;
 
-		& .insanity-card-name {
-			margin: auto 0;
-			padding: 0 5px;
+		& .name {
+			border: 0.5rem solid #303030;
+			border-bottom-width: 0;
+			border-radius: 0.5rem 0.5rem 0 0;
 			color: white;
+			display: block;
 			font: small-caps 16pt var(--font-title);
+			margin: auto 0;
+			padding: 0.5rem 0;
 			text-shadow:
 				-1pt -1pt 0 black,
 				-1pt 0 0 black,
@@ -69,21 +50,20 @@
 				0 1pt 0 black,
 				1pt 0 0 black,
 				1pt 1pt 0 black;
-			vertical-align: middle;
 
 			&:hover {
-				text-shadow: 0 0 8px var(--color-shadow-primary);
+				text-shadow: 0 0 0.5rem var(--color-shadow-primary);
 			}
 		}
 
-		& .insanity-card-traits {
-			height: 20px;
-			padding: 3px 5px;
+		& .traits {
 			background-color: #303030;
 			color: white;
 			font-size: 10pt;
 			font-style: italic;
 			font-weight: bold;
+			height: 1.25rem;
+			padding: 0.25rem 0.25rem;
 			text-shadow:
 				-1pt -1pt 0 black,
 				-1pt 0 0 black,
@@ -96,9 +76,25 @@
 		}
 	}
 
-	& .item-delete-link {
+	& .severity-rating {
+		background-color: #202020;
+		border-radius: 50%;
+		bottom: 1.5rem;
+		color: white;
+		font: small-caps 20pt var(--font-title);
+		height: 2rem;
 		position: absolute;
-		bottom: 0;
-		right: 5px;
+		right: 1.5rem;
+		text-align: center;
+		text-shadow:
+					-1pt -1pt 0 black,
+				-1pt 0 0 black,
+					0 -1pt 0 black,
+				-1pt 1pt 0 black,
+					1pt -1pt 0 black,
+				0 1pt 0 black,
+				1pt 0 0 black,
+				1pt 1pt 0 black;
+		width: 2rem;
 	}
 }

@@ -1,156 +1,49 @@
-.selector {
-	& form {
-		border-bottom: 1px solid #b4b3a4;
+.application.wfrp3e.selector .window-content {
+	& section[data-application-part="main"] {
 		display: flex;
 		flex-direction: column;
-		flex-grow: 1;
+		gap: 1rem;
 		min-height: 0;
+	}
 
-		& > nav {
-			margin-top: 4px;
-			border-bottom: 1px solid var(--color-border-light-primary);
-			font: small-caps bold var(--font-size-18) var(--font-primary);
+	& p[data-application-part="selection"] {
+		text-align: center;
+
+		& > span {
+			font-style: italic;
+			font-weight: bold;
+		}
+	}
+}
+
+.application.wfrp3e.skill-upgrader .window-content {
+	& section[data-application-part="main"] {
+		display: flex;
+		flex-direction: column;
+		overflow: auto;
+
+		& > table {
+			width: auto;
+		}
+	}
+
+	& .skill-specialisations > label {
+		align-items: center;
+		display: flex;
+		gap: 0.5rem;
+
+		& > * {
+			flex: auto;
 		}
 
-		& > h1 {
-			border-bottom: 1px solid #b4b3a4;
-			font: small-caps bold 16pt "ArnoPro";
-			margin: 0.5rem 0 0;
-			text-align: center;
+		& > span {
+			flex-shrink: 0;
 		}
+	}
+}
 
-		& > h2 {
-			border-bottom: 1px solid #b4b3a4;
-			font: small-caps bold 14pt "ArnoPro";
-			margin: 0.5rem auto;
-			text-align: center;
-		}
-
-		& > p {
-			text-align: center;
-
-			& > span {
-				font-style: italic;
-				font-weight: bold;
-			}
-		}
-
-		& > .body {
-			border-bottom: 1px solid var(--color-border-light-primary);
-			flex-grow: 1;
-			min-height: 0;
-			overflow-y: auto;
-
-			&.characteristics {
-				& > div {
-					padding-bottom: 1rem;
-
-					&:not(:last-child) {
-						border-bottom: 1px solid #b4b3a4;
-					}
-
-					& > h2 {
-						border: none;
-						font: small-caps bold 12pt "ArnoPro";
-						margin: 0.5rem auto;
-						text-align: center;
-					}
-
-					& .characteristic {
-						align-items: center;
-						display: flex;
-						flex-direction: row;
-						justify-content: space-between;
-
-						& > div {
-							align-items: center;
-							display: flex;
-							flex-direction: row;
-							justify-content: space-between;
-
-							&.buttons {
-								flex-direction: column;
-
-								& div {
-									opacity: 75%;
-								}
-
-								& label {
-									cursor: pointer;
-
-									&.active {
-										text-shadow: 0 0 0.5rem orange;
-									}
-
-									&:hover {
-										text-shadow: 0 0 0.5rem var(--color-shadow-primary);
-									}
-
-									& > input {
-										display: none;
-									}
-								}
-
-								& span {
-									font-size: 20pt;
-								}
-							}
-
-							& .rating {
-								background: lightcyan;
-								border: 2px solid lightsteelblue;
-								font-weight: bold;
-								height: 45px;
-								padding: 12px 8px;
-								text-align: center;
-								width: 35px;
-							}
-
-							& .fortune {
-								background: white;
-								border: 1px solid dimgray;
-								font-weight: bold;
-								height: 25px;
-								margin-left: 10px;
-								padding: 3px;
-								text-align: center;
-								width: 25px;
-
-								& > * {
-									margin: auto;
-								}
-							}
-						}
-					}
-				}
-			}
-
-			& .career-container {
-				flex-flow: row !important;
-				padding: 0 190px;
-			}
-
-			& .tab.active {
-				display: flex;
-				flex-wrap: wrap;
-				overflow-y: auto;
-
-				& label {
-					cursor: pointer;
-
-					&.active > .item {
-						box-shadow: 0 0 0.5rem orange;
-					}
-
-					&:hover > .item {
-						box-shadow: 0 0 0.5rem var(--color-shadow-primary);
-					}
-
-					& > input {
-						display: none;
-					}
-				}
-			}
-		}
+.application.wfrp3e.talent-selector .window-content {
+	& .item-container {
+		max-height: 560px;
 	}
 }
