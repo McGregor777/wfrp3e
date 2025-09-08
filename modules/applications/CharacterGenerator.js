@@ -1,5 +1,5 @@
 import WFRP3eActor from "../documents/WFRP3eActor.js";
-import {sortTalentsByType} from "../helpers.js";
+import TalentSelector from "./selectors/TalentSelector.js";
 
 /** @inheritDoc */
 export default class CharacterGenerator extends FormApplication
@@ -691,7 +691,7 @@ export default class CharacterGenerator extends FormApplication
 		this.selectedTalents = new Map();
 
 		if(this.talentsInvestment >= 1 || this.selectedOrigin.abilities.includes("Erudite") || this.priest || this.wizard || this.zealot) {
-			const talents = sortTalentsByType(this.talents);
+			const talents = TalentSelector.sortTalentsByType(this.talents);
 			const rootElement = html.find('.step[data-step="talent-selection"] .talent-selection');
 
 			rootElement.html(
@@ -786,12 +786,11 @@ export default class CharacterGenerator extends FormApplication
 		const remainingOrderTalentsCounter = rootElement.find('.remaining-order-talents');
 		const remainingInsanityTalentsCounter = rootElement.find('.remaining-insanities');
 
-		const selectedTalentCounts = [...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"].reduce(
-			(types, talentType) => {
+		const selectedTalentCounts = [...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"]
+			.reduce((types, talentType) => {
 				types[talentType] = rootElement.find('.tab[data-tab="' + talentType + '"] input:checked').length;
 				return types;
-				}, {}
-			);
+			}, {});
 
 		// Handle free Focus Talent selection for characters owning the Composure ability.
 		if(this.selectedOrigin.abilities.includes("Composure")) {
