@@ -10,7 +10,8 @@ export default class WFRP3eCharacterSheet extends WFRP3eActorSheet
 		position: {
 			width: 992,
 			height: 853
-		}
+		},
+		window: {resizable: true}
 	};
 
 	/** @inheritDoc */
