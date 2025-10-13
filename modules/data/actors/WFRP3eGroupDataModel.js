@@ -3,21 +3,21 @@ import DataHelper from "../DataHelper.js";
 /** @inheritDoc */
 export default class WFRP3eGroupDataModel extends foundry.abstract.TypeDataModel
 {
-    /** @inheritDoc */
-    static defineSchema()
-    {
-        const fields = foundry.data.fields;
+	/** @inheritDoc */
+	static defineSchema()
+	{
+		const fields = foundry.data.fields;
 
-        return {
-            specialAbilities: new fields.ArrayField(
-                new fields.SchemaField({
+		return {
+			specialAbilities: new fields.ArrayField(
+				new fields.SchemaField({
 					current: new fields.NumberField({
 						integer: true,
 						label: "GROUP.FIELDS.specialAbilities.FIELDS.current.label",
 						nullable: false,
 						required: true
 					}),
-                    description: new fields.HTMLField({
+					description: new fields.HTMLField({
 						label: "GROUP.FIELDS.specialAbilities.FIELDS.description.label",
 						nullable: true
 					}),
@@ -25,7 +25,7 @@ export default class WFRP3eGroupDataModel extends foundry.abstract.TypeDataModel
 						label: "GROUP.FIELDS.specialAbilities.FIELDS.title.label",
 						nullable: true
 					}),
-                    values: new fields.ArrayField(
+					values: new fields.ArrayField(
 						new fields.SchemaField({
 							content: new fields.StringField({
 								label: "GROUP.FIELDS.specialAbilities.FIELDS.values.FIELDS.content.label",
@@ -36,7 +36,7 @@ export default class WFRP3eGroupDataModel extends foundry.abstract.TypeDataModel
 							})
 						})
 					)
-                }), {
+				}), {
 				initial: new Array(2).fill({
 					current: 0,
 					description: game.i18n.localize("GROUP.FIELDS.specialAbilities.FIELDS.description.label"),
@@ -66,8 +66,8 @@ export default class WFRP3eGroupDataModel extends foundry.abstract.TypeDataModel
 					})}, {initial: {item: null, type: "focus"}}
 				), {initial: [{item: null, type: "focus"}], label: "GROUP.FIELDS.sockets", required: true}
 			),
-        };
-    }
+		};
+	}
 
 	/** @inheritDoc */
 	prepareBaseData()

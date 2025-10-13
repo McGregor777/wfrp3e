@@ -1,0 +1,56 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	<nav class="search-bar">
+		<div class="form-group expanded">
+			<label>{{localize "ACTOR.SHEET.search"}}</label>
+
+			<div class="form-fields">
+				<input class="search-filter"
+					   name="searchFilters.actions.text"
+					   value="{{searchFilters.text}}"
+					   type="text">
+
+				<a data-action="openFilters" data-tooltip="{{localize 'ACTOR.ACTIONS.openFilters'}}">
+					<span class="fas fa-filter"></span>
+				</a>
+			</div>
+		</div>
+
+		<div class="form-group stacked filter-container">
+			<label>{{localize "ACTOR.SHEET.filters"}}</label>
+
+			{{#each types as |type t|}}
+				<div class="form-group">
+					<label>{{localize type}}</label>
+
+					<div class="form-fields">
+						<input class="search-filter"
+							   name="searchFilters.actions.type"
+							   value="{{t}}"
+							   type="radio"
+							   {{#if (sameAs t @root.searchFilters.type)}}checked{{/if}} />
+					</div>
+				</div>
+			{{/each}}
+		</div>
+	</nav>
+
+	{{#if (sameAs source.flags.wfrp3e.embeddedItemsDisplayMode "cards")}}
+		<section class="item-container">
+			{{#each actions as |action act|}}
+				{{>systems/wfrp3e/templates/applications/partials/action-card.hbs
+						item=action
+						currentStance=@root.defaultStance}}
+			{{/each}}
+		</section>
+	{{else}}
+		<section class="action table scrollable">
+			<div class="table-body">
+				{{#each actions as |action act|}}
+					{{>systems/wfrp3e/templates/applications/sheets/actors/partials/action-row.hbs
+							action=action
+							currentStance=@root.defaultStance}}
+				{{/each}}
+			</div>
+		</section>
+	{{/if}}
+</section>

@@ -1,19 +1,11 @@
 .action.card {
 	border: 1px solid black;
-	border-radius: 1.5rem;
+	border-radius: 24px;
 	color: white;
 	height: 440px;
-	margin: 0.5rem;
+	margin: 8px;
 	position: relative;
-	text-shadow:
-		-1pt -1pt 0 black,
-		-1pt 0 0 black,
-		0 -1pt 0 black,
-		-1pt 1pt 0 black,
-		1pt -1pt 0 black,
-		0 1pt 0 black,
-		1pt 0 0 black,
-		1pt 1pt 0 black;
+	text-shadow: var(--outline-black);
 	width: 280px;
 
 	& .art-image {
@@ -30,42 +22,26 @@
 		flex-direction: row;
 		justify-content: space-between;
 		position: relative;
-		text-shadow:
-				-1pt -1pt 0 black,
-				-1pt 0 0 black,
-				0 -1pt 0 black,
-				-1pt 1pt 0 black,
-				1pt -1pt 0 black,
-				0 1pt 0 black,
-				1pt 0 0 black,
-				1pt 1pt 0 black;
+		text-shadow: var(--outline-black);
 	}
 
 	& .check {
 		background-color: #201008;
 		color: white;
-		font: bold 12pt var(--font-title);
-		height: 1.25rem;
+		font: bold var(--font-size-16) var(--font-title);
+		height: 20px;
 		text-align: center;
-		text-shadow:
-			-1pt -1pt 0 black,
-			-1pt 0 0 black,
-			0 -1pt 0 black,
-			-1pt 1pt 0 black,
-			1pt -1pt 0 black,
-			0 1pt 0 black,
-			1pt 0 0 black,
-			1pt 1pt 0 black;
+		text-shadow: var(--outline-black);
 		width: 100%;
 	}
 
 	& .difficulty-modifiers {
-		font-size: 8pt;
+		font-size: var(--font-size-12);
 		grid-area: action-card-difficulty-modifiers;
-		line-height: 8pt;
-		margin: auto auto auto 0.25rem;
+		line-height: 1;
+		margin: auto auto auto 4px;
 		text-align: center;
-		width: calc(100% - 0.25rem);
+		width: calc(100% - 4px);
 
 		& > * {
 			display: inline-block;
@@ -74,14 +50,14 @@
 	}
 
 	& .effects {
-		border: calc(0.5rem + 0.25rem) solid;
-		border-radius: 0 0 1.5rem 1.5rem;
+		border: calc(8px + 4px) solid;
+		border-radius: 0 0 24px 24px;
 		border-top: none;
 		color: black;
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-		font-size: 10pt;
+		font-size: var(--font-size-14);
 		min-height: 232px;
 		overflow-y: auto;
 		text-shadow: none;
@@ -95,84 +71,66 @@
 			overflow-y: auto;
 
 			& th, & td {
-				padding: 0.25rem;
+				padding: 4px;
 			}
 		}
 	}
 
 	& .header {
-		border-radius: 1.5rem 1.5rem 0 0;
+		border-radius: 24px 24px 0 0;
 		display: grid;
 		height: 70px;
 		grid-template-areas:
 			'action-card-type action-card-name action-card-recharge-rating'
 			'action-card-difficulty-modifiers action-card-traits action-card-recharge-rating';
-		grid-template-columns: 3rem 1fr 3rem;
-		grid-template-rows: 3rem 1.25rem;
+		grid-template-columns: 48px 1fr 48px;
+		grid-template-rows: 48px 20px;
 		width: 100%;
 	}
 
 	& .name {
-		font: small-caps 16pt var(--font-title);
+		font: small-caps var(--font-size-20)/1 var(--font-title);
 		grid-area: action-card-name;
-		line-height: 16pt;
 		margin: auto;
 		text-align: center;
-		text-shadow:
-			-1pt -1pt 0 black,
-			-1pt 0 0 black,
-			0 -1pt 0 black,
-			-1pt 1pt 0 black,
-			1pt -1pt 0 black,
-			0 1pt 0 black,
-			1pt 0 0 black,
-			1pt 1pt 0 black;
+		text-shadow: var(--outline-black);
 
 		& > span {
-			font-size: 8pt;
+			font-size: var(--font-size-12);
 		}
 	}
 
 	& .recharge-rating {
 		background-color: cornflowerblue;
 		border-radius: 50%;
-		font: bold 16pt/1 var(--font-title);
+		font: bold var(--font-size-20)/1 var(--font-title);
 		grid-area: action-card-recharge-rating;
-		height: 2rem;
-		line-height: 2rem;
-		margin: 0.5rem 0.5rem 0 0;
+		height: 32px;
+		margin: 8px 8px 0 0;
 		text-align: center;
-		width: 2rem;
+		width: 32px;
 	}
 
 	& .requirements {
 		background-color: #503820;
 		color: white;
-		font-size: 12pt;
+		font-size: var(--font-size-16);
 		text-align: center;
-		text-shadow:
-			-1pt -1pt 0 black,
-			-1pt 0 0 black,
-			0 -1pt 0 black,
-			-1pt 1pt 0 black,
-			1pt -1pt 0 black,
-			0 1pt 0 black,
-			1pt 0 0 black,
-			1pt 1pt 0 black;
+		text-shadow: var(--outline-black);
 		width: 100%;
 
 		& > p {
 			margin: 0;
-			padding-top: 0.25rem;
+			padding-top: 4px;
 		}
 	}
 
 	& .traits {
-		height: 1.25rem;
-		font-size: 12pt;
+		font-size: var(--font-size-16);
 		font-style: italic;
 		font-stretch: condensed;
 		grid-area: action-card-traits;
+		height: 20px;
 		text-align: center;
 	}
 
@@ -181,7 +139,7 @@
 		border: none;
 		border-radius: 100%;
 		grid-area: action-card-type;
-		margin: 0.5rem 0 0 0.5rem;
+		margin: 8px 0 0 8px;
 	}
 
 	& .face {
@@ -192,7 +150,7 @@
 
 		&.conservative {
 			background-color: #d8b880;
-			border-radius: 1.5rem;
+			border-radius: 24px;
 
 			& > .effects {
 				border-color: sienna;
@@ -205,7 +163,7 @@
 
 		&.reckless {
 			background-color: #e0e0e0;
-			border-radius: 1.5rem;
+			border-radius: 24px;
 
 			& > .effects {
 				border-color: darkgrey;

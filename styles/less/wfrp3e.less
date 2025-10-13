@@ -26,34 +26,34 @@
 @import "components/critical_wound_card";
 
 h3 {
-	font: 16pt var(--font-title);
+	font: var(--font-size-28) var(--font-title);
 }
 
 h4 {
-	font: 16pt var(--font-primary);
+	font: var(--font-size-24) var(--font-primary);
 	margin: auto !important;
 	font-variant-caps: small-caps;
 }
 
 h5 {
-	font: 14pt var(--font-primary);
+	font: var(--font-size-18) var(--font-primary);
 }
 
 h6 {
-	font: 12pt var(--font-primary);
+	font: var(--font-size-16) var(--font-primary);
 }
 
 input[type="checkbox"] {
-	height: 1rem;
-	width: 1rem;
+	height: 16px;
+	width: 16px;
 }
 
 li.folder > .folder-header h3 {
-	font-size: 16pt;
+	font-size: var(--font-size-20);
 }
 
 td {
-	padding: 0.25rem;
+	padding: 4px;
 
 	&.center-aligned {
 		text-align: center;
@@ -74,7 +74,7 @@ td {
 }
 
 th {
-	padding: 0.25rem !important;
+	padding: 4px !important;
 
 	&.center-aligned {
 		text-align: center;
@@ -99,7 +99,7 @@ th {
 	bottom: 0;
 	display: flex;
 	left: 0;
-	margin: 0.25rem;
+	margin: 4px;
 	position: absolute;
 	right: 0;
 
@@ -109,7 +109,7 @@ th {
 }
 
 .combat-sidebar .combat-tracker-header .encounter-inputs {
-	font-size: 10pt;
+	font-size: var(--font-size-14);
 	text-align: center;
 
 	&:not(.combat) {
@@ -126,7 +126,7 @@ th {
 }
 
 .editor-content .symbol-container {
-	margin-right: 0.25rem;
+	margin-right: 4px;
 }
 
 .face {
@@ -150,25 +150,17 @@ th {
 	& > img {
 		border: none;
 		display: block;
-		height: 3rem;
+		height: 48px;
 		opacity: 75%;
 	}
 
 	& > .recharge-token-counter {
 		color: black;
 		display: block;
-		font-size: 24pt;
+		font-size: var(--font-size-28);
 		position: absolute;
 		text-align: center;
-		text-shadow:
-				-1pt -1pt 0 white,
-				-1pt 0 0 white,
-				0 -1pt 0 white,
-				-1pt 1pt 0 white,
-				1pt -1pt 0 white,
-				0 1pt 0 white,
-				1pt 0 0 white,
-				1pt 1pt 0 white;
+		text-shadow: var(--outline-white);
 		top: 100%;
 		transform: translateY(-100%);
 		width: 100%;
@@ -176,7 +168,7 @@ th {
 
 	&:hover > .recharge-token-counter {
 		color: white;
-		text-shadow: 0 0 0.5rem var(--color-shadow-primary);
+		text-shadow: 0 0 8px var(--color-shadow-primary);
 	}
 }
 

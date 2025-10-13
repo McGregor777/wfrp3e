@@ -1,16 +1,16 @@
 .talent.card {
 	background: #f8f0e0;
 	border: 1px solid black;
-	border-radius: 0.5rem;
+	border-radius: 8px;
 	color: black;
 	display: grid;
-	grid-template: 4rem 1fr / 3rem 1fr;
+	grid-template: 64px 1fr / 48px 1fr;
 	grid-template-areas:
 		"type name"
 		"type content"
 		"type bottom";
 	height: 255px;
-	margin: 0.5rem;
+	margin: 8px;
 	position: relative;
 	width: 385px;
 
@@ -18,53 +18,38 @@
 		align-items: flex-end;
 		grid-area: bottom;
 		justify-content: space-between;
-		margin: 0.25rem 0.5rem;
+		margin: 4px 8px;
 		position: relative;
 	}
 
 	& .content {
-		font-size: 12pt;
+		font-size: var(--font-size-16);
 		grid-area: content;
-		margin: auto 0.5rem;
+		margin: auto 8px;
 	}
 
 	& .name {
 		background: padding-box saddlebrown;
 		color: white;
-		font: 20pt var(--font-title);
+		font: var(--font-size-28) var(--font-title);
 		grid-area: name;
-		height: 3rem;
+		height: 48px;
 		margin: auto 0;
+		padding: 8px;
 		text-align: center;
-		text-shadow:
-			-1pt -1pt 0 black,
-			-1pt 0 0 black,
-			0 -1pt 0 black,
-			-1pt 1pt 0 black,
-			1pt -1pt 0 black,
-			0 1pt 0 black,
-			1pt 0 0 black,
-			1pt 1pt 0 black;
+		text-shadow: var(--outline-black);
 	}
 
 	& .type {
 		background-color: saddlebrown;
 		color: white;
 		display: block;
-		font: small-caps bold 14pt var(--font-primary);
+		font: small-caps bold var(--font-size-18) var(--font-primary);
 		grid-area: type;
-		margin: 0.5rem auto;
-		padding: 0 2px 0 0.25rem;
+		margin: 8px auto;
+		padding: 0 2px 0 4px;
 		text-align: center;
-		text-shadow:
-			-1pt -1pt 0 black,
-			-1pt 0 0 black,
-			0 -1pt 0 black,
-			-1pt 1pt 0 black,
-			1pt -1pt 0 black,
-			0 1pt 0 black,
-			1pt 0 0 black,
-			1pt 1pt 0 black;
+		text-shadow: var(--outline-black);
 		transform: rotate(180deg);
 		writing-mode: vertical-lr;
 

@@ -40,11 +40,11 @@
 							cursor: pointer;
 
 							&.active > .item {
-								box-shadow: 0 0 0.5rem orange;
+								box-shadow: 0 0 8px orange;
 							}
 
 							&:hover > .item {
-								box-shadow: 0 0 0.5rem var(--color-shadow-primary);
+								box-shadow: 0 0 8px var(--color-shadow-primary);
 							}
 
 							& > input {
@@ -62,7 +62,7 @@
 				display: flex;
 				flex-wrap: wrap;
 				justify-content: space-around;
-				padding-top: 0.25rem;
+				padding-top: 4px;
 			}
 
 			&[data-step=action-selection] {
@@ -93,14 +93,14 @@
 
 					& > label {
 						cursor: pointer;
-						margin: 0 0.5rem;
+						margin: 0 8px;
 
 						&.active {
-							filter: drop-shadow(0 0 0.5rem orange);
+							filter: drop-shadow(0 0 8px orange);
 						}
 
 						&:hover {
-							filter: drop-shadow(0 0 0.5rem var(--color-shadow-primary));
+							filter: drop-shadow(0 0 8px var(--color-shadow-primary));
 						}
 
 						& > input {
@@ -133,19 +133,19 @@
 						& label {
 							background: rgba(255, 255, 240, 0.8);
 							border: 1px solid var(--color-border-light-primary);
-							border-radius: 0.25rem;
+							border-radius: 4px;
 							cursor: pointer;
 							display: block;
 							line-height: 28px;
-							margin: 0.5rem;
+							margin: 8px;
 
 							&.active {
-								box-shadow: 0 0 0.5rem orange;
+								box-shadow: 0 0 8px orange;
 							}
 
 							&:hover, &:focus {
 								outline: none;
-								box-shadow: 0 0 0.25rem var(--color-shadow-primary);
+								box-shadow: 0 0 4px var(--color-shadow-primary);
 							}
 
 							& > input {
@@ -155,24 +155,24 @@
 
 						&.characteristics > div > div {
 							display: flex;
-							margin-bottom: 2rem;
+							margin-bottom: 32px;
 							justify-content: center;
 
 							& > button {
 								background: no-repeat;
 								border: none;
-								width: 3rem;
+								width: 48px;
 
 								&:hover, &:focus {
 									box-shadow: none;
-									text-shadow: 0 0 0.25rem var(--color-shadow-primary);
+									text-shadow: 0 0 4px var(--color-shadow-primary);
 								}
 							}
 
 							& > input {
 								height: auto;
 								padding-top: 6px;
-								width: 3rem;
+								width: 48px;
 							}
 						}
 					}
@@ -184,7 +184,7 @@
 				overflow-y: auto;
 
 				& > div:not(:first-child) {
-					margin-top: 2rem;
+					margin-top: 32px;
 				}
 
 				& h5 {
@@ -212,13 +212,13 @@
 
 						& > div {
 							background: rgba(0, 0, 0, 0.05);
-							border-radius: 0.25rem;
+							border-radius: 4px;
 							color: var(--color-text-dark-primary);
 							height: auto;
 							margin: auto;
 							min-width: 20px;
-							padding: 6px 1px 0.25rem;
-							width: 3rem;
+							padding: 6px 1px 4px;
+							width: 48px;
 						}
 					}
 				}
@@ -253,10 +253,10 @@
 					& > label {
 						cursor: pointer;
 						flex: 0 1 180px;
-						margin: 0 0.5rem;
+						margin: 0 8px;
 
 						&.active {
-							filter: drop-shadow(0 0 0.5rem orange);
+							filter: drop-shadow(0 0 8px orange);
 
 							& > img {
 								filter: none;
@@ -264,7 +264,7 @@
 						}
 
 						&:hover {
-							filter: drop-shadow(0 0 0.5rem var(--color-shadow-primary));
+							filter: drop-shadow(0 0 8px var(--color-shadow-primary));
 
 							& > img {
 								filter: none;
@@ -274,7 +274,7 @@
 						& > img {
 							border: none;
 							display: block;
-							filter: drop-shadow(0 0 0.25rem black);
+							filter: drop-shadow(0 0 4px black);
 							height: 180px;
 							margin: 0 auto;
 						}
@@ -285,11 +285,11 @@
 
 						& > .origin-name {
 							height: 40px;
-							line-height: 40px;
+							line-height: var(--font-size-48);
 
 							& > * {
 								display: inline-block;
-								line-height: 12pt;
+								line-height: var(--font-size-16);
 								vertical-align: middle;
 							}
 						}
@@ -298,7 +298,7 @@
 
 				& > .origin-description {
 					flex: 1 1 auto;
-					margin: 0 4rem;
+					margin: 0 64px;
 				}
 			}
 
@@ -366,11 +366,11 @@
 								cursor: pointer;
 
 								&.active > div {
-									box-shadow: 0 0 0.5rem orange;
+									box-shadow: 0 0 8px orange;
 								}
 
 								&:hover > div {
-									box-shadow: 0 0 0.5rem var(--color-shadow-primary);
+									box-shadow: 0 0 8px var(--color-shadow-primary);
 								}
 
 								& > input {
@@ -385,21 +385,21 @@
 			& h4 {
 				font-variant-caps: small-caps;
 				font-weight: bold;
-				margin: 0.5rem 0 0;
+				margin: 8px 0 0;
 				text-align: center;
 			}
 
 			& h5 {
 				font-variant-caps: small-caps;
 				font-weight: bold;
-				margin: 0.5rem auto;
+				margin: 8px auto;
 				text-align: center;
 			}
 
 			& h6 {
 				font-variant-caps: small-caps;
 				font-weight: bold;
-				margin: 0.5rem auto;
+				margin: 8px auto;
 				text-align: center;
 			}
 
@@ -412,7 +412,7 @@
 	& .character-creation-steps {
 		border-bottom: 1px solid var(--color-border-light-primary);
 		flex-grow: 0;
-		margin-bottom: 0.25rem;
+		margin-bottom: 4px;
 
 		& .step-names {
 			display: flex;
@@ -420,25 +420,17 @@
 			text-align: center;
 
 			& > span {
-				flex-basis: 6rem;
+				flex-basis: 96px;
 
 				&.active {
 					color: white;
-					text-shadow:
-							-1pt -1pt 0 black,
-							-1pt 0 0 black,
-							0 -1pt 0 black,
-							-1pt 1pt 0 black,
-							1pt -1pt 0 black,
-							0 1pt 0 black,
-							1pt 0 0 black,
-							1pt 1pt 0 black;
+					text-shadow: var(--outline-black);
 				}
 			}
 		}
 
 		& .step-gauge {
-			height: 0.25rem;
+			height: 4px;
 			margin: auto;
 			width: 86%;
 

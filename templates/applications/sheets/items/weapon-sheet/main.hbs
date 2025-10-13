@@ -1,0 +1,53 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{>systems/wfrp3e/templates/applications/sheets/items/partials/trapping-data.hbs}}
+
+	<fieldset class="inline">
+		{{formGroup fields.damageRating value=system.damageRating classes="slim stacked" rootId=rootId}}
+
+		{{formGroup fields.criticalRating value=system.criticalRating classes="slim stacked" rootId=rootId}}
+
+		{{formGroup fields.range value=system.range classes="stacked" rootId=rootId localize=true}}
+
+		{{formGroup fields.group value=system.group classes="stacked" rootId=rootId localize=true}}
+	</fieldset>
+
+	<fieldset class="qualities">
+		<legend>{{localize "WEAPON.FIELDS.qualities.label"}}</legend>
+
+		{{#if (superiorTo system.qualities.length 0)}}
+			<div class="container scrollable">
+				{{#each system.qualities as |quality qu|}}
+					<fieldset class="quality content inline" data-index="{{@index}}">
+						{{formGroup @root.fields.qualities.element.fields.name
+									value=quality.name
+									name=@root.fields.qualities.element.fields.name.fieldPath
+									classes="expanded"
+									rootId=rootId
+									localize=true}}
+
+						{{#if (in quality.name @root.qualitiesWithRating) }}
+							{{formGroup @root.fields.qualities.element.fields.rating
+										value=quality.rating
+										name=@root.fields.qualities.element.fields.rating.fieldPath
+										classes="slim"
+										rootId=rootId
+										localize=true}}
+						{{/if}}
+
+						<a data-action="removeQuality"
+						   data-tooltip="{{localize 'WEAPON.ACTIONS.removeQuality'
+													quality=(localize (lookup @root.fields.qualities.element.fields.name.choices quality.name))}}">
+							<span class="fas fa-trash"></span>
+						</a>
+					</fieldset>
+				{{/each}}
+			</div>
+		{{/if}}
+
+		<a data-action="addQuality" data-tooltip="{{localize 'WEAPON.ACTIONS.addQuality'}}">
+			<span class="fas fa-plus"></span>
+		</a>
+	</fieldset>
+
+	{{formGroup fields.special value=system.special rootId=rootId}}
+</section>

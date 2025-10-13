@@ -185,7 +185,7 @@ export const WFRP3e = {
 			plural: "DIE.characteristic.plural",
 			results: {
 				1: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/characteristic.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -198,7 +198,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				2: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/characteristic.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -211,7 +211,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				3: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -224,7 +224,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				4: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -237,7 +237,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				5: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -250,7 +250,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				6: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/characteristic_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -263,7 +263,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				7: {
-					label: "ROLL.RESULTS.oneBoon",
+					label: "DIE.RESULTS.oneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/characteristic_oneboon.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -276,7 +276,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				8: {
-					label: "ROLL.RESULTS.oneBoon",
+					label: "DIE.RESULTS.oneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/characteristic_oneboon.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -297,7 +297,7 @@ export const WFRP3e = {
 			plural: "DIE.fortune.plural",
 			results: {
 				1: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -310,7 +310,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				2: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -323,7 +323,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				3: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/fortune.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -336,7 +336,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				4: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/fortune_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -349,7 +349,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				5: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/fortune_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -362,7 +362,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				6: {
-					label: "ROLL.RESULTS.oneBoon",
+					label: "DIE.RESULTS.oneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/fortune_oneboon.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -383,7 +383,7 @@ export const WFRP3e = {
 			plural: "DIE.expertise.plural",
 			results: {
 				1: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/expertise.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -396,7 +396,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				2: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/expertise_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -409,7 +409,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				3: {
-					label: "ROLL.RESULTS.oneRighteousSuccess",
+					label: "DIE.RESULTS.oneRighteousSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/expertise_onerighteoussuccess.webp",
 					successes: 0,
 					righteousSuccesses: 1,
@@ -422,7 +422,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				4: {
-					label: "ROLL.RESULTS.oneBoon",
+					label: "DIE.RESULTS.oneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/expertise_oneboon.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -435,7 +435,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				5: {
-					label: "ROLL.RESULTS.oneBoon",
+					label: "DIE.RESULTS.oneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/expertise_oneboon.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -448,7 +448,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				6: {
-					label: "ROLL.RESULTS.oneSigmarsComet",
+					label: "DIE.RESULTS.oneSigmarsComet",
 					image: "systems/wfrp3e/assets/icons/dice/expertise_onesigmarscomet.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -469,7 +469,7 @@ export const WFRP3e = {
 			plural: "DIE.conservative.plural",
 			results: {
 				1: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/conservative.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -482,7 +482,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				2: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/conservative_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -495,7 +495,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				3: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/conservative_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -508,7 +508,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				4: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/conservative_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -521,7 +521,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				5: {
-					label: "ROLL.RESULTS.oneSuccess",
+					label: "DIE.RESULTS.oneSuccess",
 					image: "systems/wfrp3e/assets/icons/dice/conservative_onesuccess.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -534,7 +534,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				6: {
-					label: "ROLL.RESULTS.oneBoon",
+					label: "DIE.RESULTS.oneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/conservative_oneboon.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -547,7 +547,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				7: {
-					label: "ROLL.RESULTS.oneBoon",
+					label: "DIE.RESULTS.oneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/conservative_oneboon.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -560,7 +560,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				8: {
-					label: "ROLL.RESULTS.oneSuccessOneBoon",
+					label: "DIE.RESULTS.oneSuccessOneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/conservative_onesuccess_oneboon.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -573,7 +573,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				9: {
-					label: "ROLL.RESULTS.oneSuccessOneDelay",
+					label: "DIE.RESULTS.oneSuccessOneDelay",
 					image: "systems/wfrp3e/assets/icons/dice/conservative_onesuccess_onedelay.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -586,7 +586,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				10: {
-					label: "ROLL.RESULTS.oneSuccessOneDelay",
+					label: "DIE.RESULTS.oneSuccessOneDelay",
 					image: "systems/wfrp3e/assets/icons/dice/conservative_onesuccess_onedelay.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -607,7 +607,7 @@ export const WFRP3e = {
 			plural: "DIE.reckless.plural",
 			results: {
 				1: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/reckless.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -620,7 +620,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				2: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/reckless.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -633,7 +633,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				3: {
-					label: "ROLL.RESULTS.twoSuccesses",
+					label: "DIE.RESULTS.twoSuccesses",
 					image: "systems/wfrp3e/assets/icons/dice/reckless_twosuccesses.webp",
 					successes: 2,
 					righteousSuccesses: 0,
@@ -646,7 +646,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				4: {
-					label: "ROLL.RESULTS.twoSuccesses",
+					label: "DIE.RESULTS.twoSuccesses",
 					image: "systems/wfrp3e/assets/icons/dice/reckless_twosuccesses.webp",
 					successes: 2,
 					righteousSuccesses: 0,
@@ -659,7 +659,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				5: {
-					label: "ROLL.RESULTS.oneSuccessOneBoon",
+					label: "DIE.RESULTS.oneSuccessOneBoon",
 					image: "systems/wfrp3e/assets/icons/dice/reckless_onesuccess_oneboon.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -672,7 +672,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				6: {
-					label: "ROLL.RESULTS.twoBoons",
+					label: "DIE.RESULTS.twoBoons",
 					image: "systems/wfrp3e/assets/icons/dice/reckless_twoboons.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -685,7 +685,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				7: {
-					label: "ROLL.RESULTS.oneBane",
+					label: "DIE.RESULTS.oneBane",
 					image: "systems/wfrp3e/assets/icons/dice/reckless_onebane.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -698,7 +698,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				8: {
-					label: "ROLL.RESULTS.oneBane",
+					label: "DIE.RESULTS.oneBane",
 					image: "systems/wfrp3e/assets/icons/dice/reckless_onebane.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -711,7 +711,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				9: {
-					label: "ROLL.RESULTS.oneSuccessOneExertion",
+					label: "DIE.RESULTS.oneSuccessOneExertion",
 					image: "systems/wfrp3e/assets/icons/dice/reckless_onesuccess_oneexertion.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -724,7 +724,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				10: {
-					label: "ROLL.RESULTS.oneSuccessOneExertion",
+					label: "DIE.RESULTS.oneSuccessOneExertion",
 					image: "systems/wfrp3e/assets/icons/dice/reckless_onesuccess_oneexertion.webp",
 					successes: 1,
 					righteousSuccesses: 0,
@@ -745,7 +745,7 @@ export const WFRP3e = {
 			plural: "DIE.challenge.plural",
 			results: {
 				1: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/challenge.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -758,7 +758,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				2: {
-					label: "ROLL.RESULTS.oneChallenge",
+					label: "DIE.RESULTS.oneChallenge",
 					image: "systems/wfrp3e/assets/icons/dice/challenge_onechallenge.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -771,7 +771,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				3: {
-					label: "ROLL.RESULTS.oneChallenge",
+					label: "DIE.RESULTS.oneChallenge",
 					image: "systems/wfrp3e/assets/icons/dice/challenge_onechallenge.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -784,7 +784,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				4: {
-					label: "ROLL.RESULTS.twoChallenges",
+					label: "DIE.RESULTS.twoChallenges",
 					image: "systems/wfrp3e/assets/icons/dice/challenge_twochallenges.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -797,7 +797,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				5: {
-					label: "ROLL.RESULTS.twoChallenges",
+					label: "DIE.RESULTS.twoChallenges",
 					image: "systems/wfrp3e/assets/icons/dice/challenge_twochallenges.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -810,7 +810,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				6: {
-					label: "ROLL.RESULTS.oneBane",
+					label: "DIE.RESULTS.oneBane",
 					image: "systems/wfrp3e/assets/icons/dice/challenge_onebane.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -823,7 +823,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				7: {
-					label: "ROLL.RESULTS.twoBanes",
+					label: "DIE.RESULTS.twoBanes",
 					image: "systems/wfrp3e/assets/icons/dice/challenge_twobanes.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -836,7 +836,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				8: {
-					label: "ROLL.RESULTS.oneChaosStar",
+					label: "DIE.RESULTS.oneChaosStar",
 					image: "systems/wfrp3e/assets/icons/dice/challenge_onechaosstar.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -857,7 +857,7 @@ export const WFRP3e = {
 			plural: "DIE.misfortune.plural",
 			results: {
 				1: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -870,7 +870,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				2: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -883,7 +883,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				3: {
-					label: "ROLL.RESULTS.blank",
+					label: "DIE.RESULTS.blank",
 					image: "systems/wfrp3e/assets/icons/dice/misfortune.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -896,7 +896,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				4: {
-					label: "ROLL.RESULTS.oneChallenge",
+					label: "DIE.RESULTS.oneChallenge",
 					image: "systems/wfrp3e/assets/icons/dice/misfortune_onechallenge.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -909,7 +909,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				5: {
-					label: "ROLL.RESULTS.oneChallenge",
+					label: "DIE.RESULTS.oneChallenge",
 					image: "systems/wfrp3e/assets/icons/dice/misfortune_onechallenge.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -922,7 +922,7 @@ export const WFRP3e = {
 					chaosStars: 0
 				},
 				6: {
-					label: "ROLL.RESULTS.oneBane",
+					label: "DIE.RESULTS.oneBane",
 					image: "systems/wfrp3e/assets/icons/dice/misfortune_onebane.webp",
 					successes: 0,
 					righteousSuccesses: 0,
@@ -976,11 +976,11 @@ export const WFRP3e = {
 	encounterTypes: {
 		combat: {
 			characteristic: "agility",
-			name: "COMBAT.types.combat"
+			name: "COMBAT.TYPES.combat"
 		},
 		social: {
 			characteristic: "fellowship",
-			name: "COMBAT.types.social"
+			name: "COMBAT.TYPES.social"
 		}
 	},
 	rarities: {

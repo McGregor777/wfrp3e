@@ -9,7 +9,7 @@
 			"sockets sockets";
 		grid-template-columns: 250px 1fr;
 		grid-template-rows: auto auto 40px auto auto;
-		grid-gap: 0.5rem;
+		grid-gap: 8px;
 		flex-grow: 1;
 		padding: 0;
 
@@ -40,12 +40,12 @@
 
 			& [data-action] {
 				display: block;
-				height: 2.5rem;
+				height: 40px;
 				font-size: var(--font-size-24);
-				padding-top: 0.5rem;
+				padding-top: 8px;
 				text-align: center;
 				vertical-align: middle;
-				width: 2.5rem;
+				width: 40px;
 			}
 
 			& [data-action="editAbilityTrack"] {
@@ -59,7 +59,7 @@
 				justify-content: center;
 
 				&.edit {
-					margin-bottom: 1.25rem;
+					margin-bottom: 20px;
 
 					&.active .segment > input {
 						display: block;
@@ -74,12 +74,12 @@
 					background-color: #b0b0b8;
 					border: 1px solid #646468;
 					color: white;
-					height: 2.5rem;
-					flex: 0 0 2.5rem;
+					height: 40px;
+					flex: 0 0 40px;
 					font-size: var(--font-size-28);
 					padding-top: 2px;
 					text-align: center;
-					width: 2.5rem;
+					width: 40px;
 
 					&.trigger {
 						background-color: #006898;
@@ -99,7 +99,7 @@
 							background: none;
 							border: none;
 							height: 100%;
-							padding-top: 0.25rem;
+							padding-top: 4px;
 							text-align: center;
 							width: 100%;
 						}
@@ -114,15 +114,7 @@
 			font-size: var(--font-size-28);
 			font-variant-caps: small-caps;
 			text-align: center;
-			text-shadow:
-					-1px -1px 0 black,
-					-1px 0 0 black,
-					0 -1px 0 black,
-					-1px 1px 0 black,
-					1px -1px 0 black,
-					0 1px 0 black,
-					1px 0 0 black,
-					1px 1px 0 black;
+			text-shadow: var(--outline-black);
 		}
 
 		& .illustration {

@@ -9,7 +9,7 @@
 			"sockets sockets";
 		grid-template-columns: 1fr 250px;
 		grid-template-rows: 40px 64px auto 100px auto auto;
-		grid-gap: 0.5rem;
+		grid-gap: 8px;
 		flex-grow: 1;
 		display: grid;
 		padding: 0;
@@ -21,15 +21,7 @@
 		& .header {
 			grid-area: header;
 			margin: 0 auto;
-			text-shadow:
-					-1pt -1pt 0 black,
-					-1pt 0 0 black,
-					0 -1pt 0 black,
-					-1pt 1pt 0 black,
-					1pt -1pt 0 black,
-					0 1pt 0 black,
-					1pt 0 0 black,
-					1pt 1pt 0 black;
+			text-shadow: var(--outline-black);
 			width: 385px;
 
 			& * {
@@ -57,9 +49,9 @@
 				position: relative;
 
 				& [data-action="removeMember"] {
-					bottom: 0.25rem;
+					bottom: 4px;
 					position: absolute;
-					right: 0.25rem;
+					right: 4px;
 				}
 			}
 		}
@@ -78,12 +70,12 @@
 				align-items: center;
 				display: flex;
 				flex-wrap: nowrap;
-				gap: 1rem;
+				gap: 16px;
 				border-color: var(--color-fieldset-border);
-				border-radius: 0.5rem;
+				border-radius: 8px;
 
 				& .threshold {
-					flex: 0 0 2rem;
+					flex: 0 0 32px;
 					text-align: center;
 				}
 			}
@@ -95,14 +87,14 @@
 			position: relative;
 
 			& .fortune-token {
-				bottom: 0.5rem;
+				bottom: 8px;
 				position: absolute;
 				right: 50%;
 				transform: translate(50%);
 
 				& > img {
 					border: none;
-					height: 3rem;
+					height: 48px;
 				}
 
 				& > .fortune-counter {
@@ -111,20 +103,12 @@
 					left: 50%;
 					position: absolute;
 					bottom: 2.5%;
-					text-shadow:
-							-1px -1px 0 black,
-							-1px 0 0 black,
-							0 -1px 0 black,
-							-1px 1px 0 black,
-							1px -1px 0 black,
-							0 1px 0 black,
-							1px 0 0 black,
-							1px 1px 0 black;
+					text-shadow: var(--outline-black);
 					transform: translate(-50%);
 				}
 
 				&:hover > .fortune-counter {
-					text-shadow: 0 0 0.5rem var(--color-shadow-primary);
+					text-shadow: 0 0 8px var(--color-shadow-primary);
 				}
 			}
 		}
@@ -147,12 +131,12 @@
 
 			& [data-action] {
 				display: block;
-				height: 2.5rem;
-				font-size: var(--font-size-24);
-				padding-top: 0.5rem;
+				height: 40px;
+				font-size: var(--font-size-28);
+				padding-top: 8px;
 				text-align: center;
 				vertical-align: middle;
-				width: 2.5rem;
+				width: 40px;
 			}
 
 			& .segment-container {
@@ -163,12 +147,12 @@
 					background-color: #c06030;
 					border: 1px solid #a05040;
 					color: white;
-					height: 2.5rem;
+					height: 40px;
 					flex: 0 0 40px;
 					font-size: var(--font-size-28);
 					padding-top: 2px;
 					text-align: center;
-					width: 2.5rem;
+					width: 40px;
 
 					&.threshold,
 					&:first-child {

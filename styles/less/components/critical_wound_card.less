@@ -1,27 +1,27 @@
 .critical-wound.card {
 	background-color: #f4e0c0;
-	border-radius: 0.5rem ;
+	border-radius: 8px ;
 	color: black;
 	display: flex;
 	flex-direction: column;
 	height: 385px;
 	position: relative;
-	margin: 0.5rem;
+	margin: 8px;
 	text-align: center;
 	width: 255px;
 
 	& .bottom-line {
-		bottom: 0.5rem;
-		left: 0.5rem;
-		right: 3rem;
+		bottom: 8px;
+		left: 8px;
+		right: 48px;
 	}
 
 	& .description {
-		border: 0.5rem solid #803020;
-		border-radius: 0 0 0.5rem 0.5rem ;
+		border: 8px solid #803020;
+		border-radius: 0 0 8px 8px ;
 		border-top: 0;
 		flex-grow: 1;
-		padding: 1.5rem 2rem;
+		padding: 24px 32px;
 
 		& p {
 			text-align: left;
@@ -29,50 +29,34 @@
 	}
 
 	& .header {
-		border-bottom: 0.5rem solid #503010;
+		border-bottom: 8px solid #503010;
 
 		& .name {
 			background-color: #e0c0b0;
-			border: 0.5rem solid #2e231f;
-			border-radius: 0.5rem 0.5rem 0 0;
+			border: 8px solid #2e231f;
+			border-radius: 8px 8px 0 0;
 			color: white;
 			display: block;
-			font: small-caps 16pt var(--font-title);
+			font: small-caps var(--font-size-28) var(--font-title);
 			margin: auto 0;
-			padding: 0.5rem 0;
-			text-shadow:
-				-1pt -1pt 0 black,
-				-1pt 0 0 black,
-				0 -1pt 0 black,
-				-1pt 1pt 0 black,
-				1pt -1pt 0 black,
-				0 1pt 0 black,
-				1pt 0 0 black,
-				1pt 1pt 0 black;
+			padding: 8px 0;
+			text-shadow: var(--outline-black);
 
 			&:hover {
-				text-shadow: 0 0 0.5rem var(--color-shadow-primary);
+				text-shadow: 0 0 8px var(--color-shadow-primary);
 			}
 		}
 	}
 
 	& .severity-rating {
 		background-color: #703818;
-		bottom: 1rem;
+		bottom: 16px;
 		color: white;
-		font: small-caps 20pt var(--font-title);
-		height: 2rem;
+		font: small-caps var(--font-size-28) var(--font-title);
+		height: 32px;
 		position: absolute;
-		right: 1rem;
-		text-shadow:
-			-1pt -1pt 0 black,
-			-1pt 0 0 black,
-			0 -1pt 0 black,
-			-1pt 1pt 0 black,
-			1pt -1pt 0 black,
-			0 1pt 0 black,
-			1pt 0 0 black,
-			1pt 1pt 0 black;
-		width: 2rem;
+		right: 16px;
+		text-shadow: var(--outline-black);
+		width: 32px;
 	}
 }

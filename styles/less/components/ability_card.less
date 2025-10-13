@@ -1,7 +1,7 @@
 .ability.card {
 	background: #f8f0e0;
 	border: 1px solid black;
-	border-radius: 0.5rem;
+	border-radius: 8px;
 	color: black;
 	display: grid;
 	grid-template-areas:
@@ -9,7 +9,7 @@
 		"description"
 		"bottom";
 	height: 255px;
-	margin: 0.5rem;
+	margin: 8px;
 	position: relative;
 	width: 385px;
 
@@ -17,34 +17,26 @@
 		align-items: flex-end;
 		grid-area: bottom;
 		justify-content: space-between;
-		margin: 0.25rem 0.5rem;
+		margin: 4px 8px;
 		position: relative;
 	}
 
 	& .description {
-		font-size: 12pt;
+		font-size: var(--font-size-16);
 		grid-area: description;
-		margin: auto 2rem;
+		margin: auto 32px;
 	}
 
 	& .name {
 		background: padding-box dimgrey;
 		color: white;
-		font: 20pt var(--font-title);
+		font: var(--font-size-28) var(--font-title);
 		grid-area: name;
-		height: 3rem;
-		margin: 0.5rem auto 0;
-		padding: 0.5rem;
+		height: 48px;
+		margin: 8px auto 0;
+		padding: 8px;
 		text-align: center;
-		text-shadow:
-				-1pt -1pt 0 black,
-				-1pt 0 0 black,
-				0 -1pt 0 black,
-				-1pt 1pt 0 black,
-				1pt -1pt 0 black,
-				0 1pt 0 black,
-				1pt 0 0 black,
-				1pt 1pt 0 black;
+		text-shadow: var(--outline-black);
 		width: 100%;
 	}
 }

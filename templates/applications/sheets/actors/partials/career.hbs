@@ -1,0 +1,186 @@
+<div class="item career" data-uuid="{{career.uuid}}">
+	{{>systems/wfrp3e/templates/applications/partials/career-card.hbs item=career}}
+
+	<div class="career-advancement">
+		<fieldset>
+			<legend>{{localize "CAREER.FIELDS.advances.generalCareer.label"}}</legend>
+
+			<div class="form-group slim">
+				<input id="{{@root.rootId}}-Item-{{career._id}}-advances.action"
+					   class="advance-checkbox"
+					   type="checkbox"
+					   data-advance-type="action"
+					   {{checked career.system.advances.action}}
+					   {{#unless @root.editable}}disabled{{/unless}} />
+
+				<label for="{{@root.rootId}}-Item-{{career._id}}-advances.action">
+					{{localize "CAREER.FIELDS.advances.action.label"}}
+				</label>
+
+				<input class="item-input"
+					   name="system.advances.action"
+					   value="{{career.system.advances.action}}"
+					   type="text"
+					   {{#unless @root.editable}}disabled{{/unless}} />
+			</div>
+
+			<div class="form-group slim">
+				<input id="{{@root.rootId}}-Item-{{career._id}}-advances.talent"
+					   class="advance-checkbox"
+					   type="checkbox"
+					   data-advance-type="talent"
+					   {{checked career.system.advances.talent}}
+					   {{#unless @root.editable}}disabled{{/unless}} />
+
+				<label for="{{@root.rootId}}-Item-{{career._id}}-advances.talent">
+					{{localize "CAREER.FIELDS.advances.talent.label"}}
+				</label>
+
+				<input class="item-input"
+					   name="system.advances.talent"
+					   value="{{career.system.advances.talent}}"
+					   type="text"
+					   {{#unless @root.editable}}disabled{{/unless}} />
+			</div>
+
+			<div class="form-group slim">
+				<input id="{{@root.rootId}}-Item-{{career._id}}-advances.skill"
+					   class="advance-checkbox"
+					   type="checkbox"
+					   data-advance-type="skill"
+					   {{checked career.system.advances.skill}}
+					   {{#unless @root.editable}}disabled{{/unless}} />
+
+				<label for="{{@root.rootId}}-Item-{{career._id}}-advances.skill">
+					{{localize "CAREER.FIELDS.advances.skill.label"}}
+				</label>
+
+				<input class="item-input"
+					   name="system.advances.skill"
+					   value="{{career.system.advances.skill}}"
+					   type="text"
+					   {{#unless @root.editable}}disabled{{/unless}} />
+			</div>
+
+			<div class="form-group slim">
+				<input id="{{@root.rootId}}-Item-{{career._id}}-advances.wound"
+					   class="advance-checkbox"
+					   type="checkbox"
+					   data-advance-type="wound"
+					   {{checked career.system.advances.wound}}
+					   {{#unless @root.editable}}disabled{{/unless}} />
+
+				<label for="{{@root.rootId}}-Item-{{career._id}}-advances.wound">
+					{{localize "CAREER.FIELDS.advances.wound.label"}}
+				</label>
+
+				<input class="item-input"
+					   name="system.advances.wound"
+					   value="{{career.system.advances.wound}}"
+					   type="text"
+					   {{#unless @root.editable}}disabled{{/unless}} />
+			</div>
+
+			{{#each career.system.advances.open as |openAdvance opa|}}
+				<div class="form-group slim">
+					<input id="{{@root.rootId}}-Item-{{career._id}}-advances.open.{{opa}}"
+						   class="advance-checkbox"
+						   type="checkbox"
+						   data-advance-type="open"
+						   {{checked openAdvance}}
+						   {{#unless @root.editable}}disabled{{/unless}} />
+
+					<label for="{{@root.rootId}}-Item-{{career._id}}-advances.open.{{opa}}">
+						{{localize "CAREER.FIELDS.advances.open.label"}}
+					</label>
+
+					<input class="item-input"
+						   name="system.advances.open.{{opa}}"
+						   value="{{openAdvance}}"
+						   type="text"
+						   data-property="system.advances.open"
+						   {{#unless @root.editable}}disabled{{/unless}} />
+				</div>
+			{{/each}}
+		</fieldset>
+
+		<fieldset>
+			<legend>{{localize "CAREER.FIELDS.advances.careerCompletion.label"}}</legend>
+
+			<div class="form-group slim">
+				{{#for 1 6 1}}
+					<input id="{{@root.rootId}}-Item-{{../career._id}}-careerTransition"
+						   class="advance-checkbox"
+						   name="system.advances.careerTransition.cost"
+						   value="{{this}}"
+						   type="checkbox"
+						   data-property="system.advances.careerTransition"
+						   data-advance-type="careerTransition"
+						   {{#if (superiorOrEqualTo ../career.system.advances.careerTransition.cost this)}}checked{{/if}}
+						   {{#unless @root.editable}}disabled{{/unless}} />
+				{{/for}}
+
+				<label for="{{@root.rootId}}-Item-{{career._id}}-careerTransition">
+					{{localize "CAREER.FIELDS.advances.careerTransition.label"}}
+				</label>
+
+				<input class="item-input"
+					   name="system.advances.careerTransition.newCareer"
+					   value="{{career.system.advances.careerTransition.newCareer}}"
+					   type="text"
+					   {{#unless @root.editable}}disabled{{/unless}} />
+			</div>
+
+			<div class="form-group slim">
+				<input id="{{@root.rootId}}-Item-{{career._id}}-dedicationBonus"
+					   class="advance-checkbox"
+					   type="checkbox"
+					   data-advance-type="dedicationBonus"
+					   {{checked career.system.advances.dedicationBonus}}
+					   {{#unless @root.editable}}disabled{{/unless}} />
+
+				<label for="{{@root.rootId}}-Item-{{career._id}}-dedicationBonus">
+					{{localize "CAREER.FIELDS.advances.dedicationBonus.label"}}
+				</label>
+
+				<input class="item-input"
+					   name="system.advances.dedicationBonus"
+					   value="{{career.system.advances.dedicationBonus}}"
+					   type="text"
+					   {{#unless @root.editable}}disabled{{/unless}} />
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend>{{localize "CAREER.FIELDS.advances.nonCareer.label"}}</legend>
+
+			{{#each career.system.advances.nonCareer as |nonCareerAdvance nca|}}
+				<div class="form-group slim">
+					{{#for 1 6 1}}
+						<input id="{{@root.rootId}}-Item-{{../../career._id}}-advances.nonCareer.{{nca}}"
+							   class="advance-checkbox"
+							   name="system.advances.nonCareer.{{nca}}.cost"
+							   value="{{this}}"
+							   type="checkbox"
+							   data-index="{{nca}}"
+							   data-property="system.advances.nonCareer"
+							   data-advance-type="nonCareer"
+							   {{#if (superiorOrEqualTo nonCareerAdvance.cost this)}}checked{{/if}}
+							   {{#unless @root.editable}}disabled{{/unless}} />
+					{{/for}}
+
+					<label for="{{@root.rootId}}-Item-{{../career._id}}-advances.nonCareer.{{nca}}">
+						{{localize "CAREER.FIELDS.advances.type.label"}}
+					</label>
+
+					<input class="item-input"
+						   name="system.advances.nonCareer.{{nca}}.type"
+						   value="{{nonCareerAdvance.type}}"
+						   type="text"
+						   data-property="system.advances.nonCareer"
+						   {{#unless @root.editable}}disabled{{/unless}} />
+				</div>
+			{{/each}}
+		</fieldset>
+	</div>
+</div>

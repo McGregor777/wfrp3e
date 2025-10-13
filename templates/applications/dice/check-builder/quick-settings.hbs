@@ -1,0 +1,152 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{#if actor}}
+		{{#if skills}}
+			<div class="form-group">
+				<label for="{{concat @root.rootId '-checkData.skill'}}">
+					{{localize "CHECKBUILDER.FIELDS.skill.label"}}
+				</label>
+
+				<div class="form-fields">
+					<select id="{{concat @root.rootId '-checkData.skill'}}"
+							class="skill-select"
+							name="checkData.skill">
+						<option value=""{{#unless skill}} selected{{/unless}}></option>
+						{{selectOptions skills selected=skill.uuid valueAttr="uuid" labelAttr="name"}}
+					</select>
+				</div>
+			</div>
+		{{/if}}
+
+		<div class="form-group">
+			<label for="{{concat @root.rootId '-checkData.characteristic'}}">
+				{{localize "CHECKBUILDER.FIELDS.characteristic.label"}}
+			</label>
+
+			<div class="form-fields">
+				<select id="{{concat @root.rootId '-checkData.characteristic'}}"
+						class="characteristic-select"
+						name="checkData.characteristic">
+					{{selectOptions characteristics selected=checkData.characteristic localize=true}}
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="{{concat @root.rootId '-checkData.challengeLevel'}}">
+				{{localize "CHECKBUILDER.FIELDS.challengeLevel.label"}}
+			</label>
+
+			<div class="form-fields">
+				<select id="{{concat @root.rootId '-checkData.challengeLevel'}}"
+						class="challenge-level-select"
+						name="checkData.challengeLevel">
+					{{selectOptions challengeLevels selected=checkData.challengeLevel labelAttr="name" localize=true}}
+				</select>
+			</div>
+		</div>
+
+		{{#if maxFortunePoints}}
+			<div class="form-group">
+				<label for="{{concat @root.rootId '-checkData.fortunePoints'}}">
+					{{localize "CHECKBUILDER.FIELDS.fortunePoints.label"}}
+				</label>
+
+				<div class="form-fields">
+					<input id="{{concat @root.rootId '-checkData.fortunePoints'}}"
+						   class="pool-value"
+						   name="checkData.fortunePoints"
+						   type="number"
+						   min="0"
+						   max="{{maxFortunePoints}}"
+						   value="{{fortunePoints}}" />
+				</div>
+			</div>
+		{{/if}}
+
+		{{#if availableWeapons}}
+			<div class="form-group">
+				<label for="{{concat @root.rootId '-checkData.weapon'}}">
+					{{localize "CHECKBUILDER.FIELDS.weapon.label"}}
+				</label>
+
+				<div class="form-fields">
+					<select id="{{concat @root.rootId '-checkData.weapon'}}"
+							class="weapon-select"
+							name="checkData.weapon">
+						{{selectOptions availableWeapons
+										selected=weapon.uuid
+										valueAttr="uuid"
+										labelAttr="name"
+										localize=true}}
+					</select>
+				</div>
+			</div>
+		{{/if}}
+
+		{{#if (equalTo actor.type "character")}}
+			<fieldset class="specialisations">
+				<legend>{{localize "CHECKBUILDER.FIELDS.specialisations.label"}}</legend>
+
+				{{#if availableSpecialisations}}
+					<multi-select name="checkData.specialisations">
+						{{#each availableSpecialisations as |specialisation|}}
+							<option value="{{specialisation}}"
+									{{#if (in specialisation @root.specialisations)}}selected{{/if}}>
+								{{specialisation}}
+							</option>
+						{{/each}}
+					</multi-select>
+				{{else}}
+					None
+				{{/if}}
+			</fieldset>
+
+			<fieldset class="available-triggered-items">
+				<legend>{{localize "CHECKBUILDER.FIELDS.triggeredEffects.label"}}</legend>
+
+				{{#if availableTriggeredEffects}}
+					{{#each availableTriggeredEffects as |effect eff|}}
+						<div data-tooltip="{{effect.description}}">
+							<label for="{{concat @root.rootId '-checkData.triggeredEffects' effect.uuid}}">
+								{{effect.name}}
+							</label>
+
+							<input id="{{concat @root.rootId '-checkData.triggeredEffects'  effect.uuid}}"
+								   class="pool-value"
+								   name="checkData.triggeredEffects"
+								   type="checkbox"
+								   value="{{effect.uuid}}"
+								   {{#if (in effect.uuid @root.triggeredEffects)}}checked{{/if}} />
+						</div>
+					{{/each}}
+				{{else}}
+					None
+				{{/if}}
+			</fieldset>
+		{{/if}}
+
+		{{#if attributes}}
+			<div class="form-group expanded">
+				{{localize "CHECKBUILDER.FIELDS.attributes.label"}}
+
+				<div class="form-fields">
+					{{#each attributes as |attribute attr|}}
+						<div>
+							<label for="{{concat @root.rootId '-checkData.creatureDice.' attr}}">
+								{{localize (concat "CHECKBUILDER.FIELDS." attr "Dice.label")}}
+							</label>
+
+							<input id="{{concat @root.rootId '-checkData.creatureDice.' attr}}"
+								   class="pool-value"
+								   name="checkData.creatureDice.{{attr}}"
+								   value="{{lookup @root.checkData.creatureDice attr}}"
+								   type="number"
+								   min="0"
+								   max="{{attribute.budget}}" />
+						</div>
+					{{/each}}
+				</div>
+			</div>
+		{{/if}}
+	{{/if}}
+</section>

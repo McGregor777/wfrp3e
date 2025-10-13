@@ -476,18 +476,18 @@
 			"rollCheck": "Roll check"
 		},
 		"FIELDS": {
-			"aggressionDice": "Aggression Dice",
-			"attributes": "Creature Attributes",
-			"challengeLevel": "Challenge Level",
-			"characteristic": "Characteristic",
-			"cunningDice": "Cunning Dice",
-			"encounterType": "Encounter Type",
-			"expertiseDice": "Expertise Dice",
-			"fortunePoints": "Fortune Points",
-			"specialisations": "Specialisations",
-			"skill": "Skill",
-			"triggeredEffects": "Triggered Effects",
-			"weapon": "Weapon"
+			"aggressionDice.label": "Aggression Dice",
+			"attributes.label": "Creature Attributes",
+			"challengeLevel.label": "Challenge Level",
+			"characteristic.label": "Characteristic",
+			"cunningDice.label": "Cunning Dice",
+			"encounterType.label": "Encounter Type",
+			"expertiseDice.label": "Expertise Dice",
+			"fortunePoints.label": "Fortune Points",
+			"specialisations.label": "Specialisations",
+			"skill.label": "Skill",
+			"triggeredEffects.label": "Triggered Effects",
+			"weapon.label": "Weapon"
 		},
 		"TABS": {
 			"quickSettings": "Quick Settings",
@@ -529,7 +529,7 @@
 
 	"COMBAT": {
 		"FIELDS.type.label": "Encounter Type",
-		"types": {
+		"TYPES": {
 			"combat": "Combat",
 			"social": "Social"
 		}
@@ -595,6 +595,23 @@
 	"DIALOG.DESCRIPTION.EffectDeletion": "Do you really wish to delete this effect?",
 
 	"DIE": {
+		"RESULTS": {
+			"blank": "Blank",
+			"oneBane": "One Bane",
+			"oneBoon": "One Boon",
+			"oneChallenge": "One Challenge",
+			"oneChaosStar": "One Chaos Star",
+			"oneRighteousSuccess": "One Righteous Success",
+			"oneSigmarsComet": "One Sigmar's Comet",
+			"oneSuccess": "One Success",
+			"oneSuccessOneBoon": "One Success and one Boon",
+			"oneSuccessOneDelay": "One Success and one Delay",
+			"oneSuccessOneExertion": "One Success and one Exertion",
+			"twoBanes": "Two Banes",
+			"twoBoons": "Two Boons",
+			"twoChallenges": "Two Challenges",
+			"twoSuccesses": "Two Successes"
+		},
 		"challenge": {
 			"amount": "{nb} challenge dice",
 			"name": "challenge die",
@@ -918,23 +935,6 @@
 			"targetFatigueSuffering": "{target} suffers {amount} fatigue.",
 			"targetStressSuffering": "{target} suffers {amount} stress.",
 			"wounds": "{actor} suffers {amount} wounds."
-		},
-		"RESULTS": {
-			"blank": "Blank",
-			"oneBane": "One Bane",
-			"oneBoon": "One Boon",
-			"oneChallenge": "One Challenge",
-			"oneChaosStar": "One Chaos Star",
-			"oneRighteousSuccess": "One Righteous Success",
-			"oneSigmarsComet": "One Sigmar's Comet",
-			"oneSuccess": "One Success",
-			"oneSuccessOneBoon": "One Success and one Boon",
-			"oneSuccessOneDelay": "One Success and one Delay",
-			"oneSuccessOneExertion": "One Success and one Exertion",
-			"twoBanes": "Two Banes",
-			"twoBoons": "Two Boons",
-			"twoChallenges": "Two Challenges",
-			"twoSuccesses": "Two Successes"
 		},
 		"WARNINGS": {
 			"notAllowed": "You are not allowed to toggle effects for this check.",

@@ -475,18 +475,18 @@
 			"rollCheck": "Lancer le test"
 		},
 		"FIELDS": {
-			"aggressionDice": "Dés d'Agressivité",
-			"attributes": "Attributs de Créature",
-			"challengeLevel": "Niveau de Défi",
-			"characteristic": "Caractéristique",
-			"cunningDice": "Dés d'Astuce",
-			"encounterType": "Type de rencontre",
-			"expertiseDice": "Dés d'Adresse",
-			"fortunePoints": "Points de Fortune",
-			"specialisations": "Spécialisations",
-			"skill": "Compétence",
-			"triggeredEffects": "Effets activés",
-			"weapon": "Arme"
+			"aggressionDice.label": "Dés d'Agressivité",
+			"attributes.label": "Attributs de Créature",
+			"challengeLevel.label": "Niveau de Défi",
+			"characteristic.label": "Caractéristique",
+			"cunningDice.label": "Dés d'Astuce",
+			"encounterType.label": "Type de rencontre",
+			"expertiseDice.label": "Dés d'Adresse",
+			"fortunePoints.label": "Points de Fortune",
+			"specialisations.label": "Spécialisations",
+			"skill.label": "Compétence",
+			"triggeredEffects.label": "Effets activés",
+			"weapon.label": "Arme"
 		},
 		"TABS": {
 			"quickSettings": "Paramètres rapides",
@@ -528,7 +528,7 @@
 
 	"COMBAT": {
 		"FIELDS.type.label": "Type de rencontre",
-		"types": {
+		"TYPES": {
 			"combat": "Combat",
 			"social": "Social"
 		}
@@ -594,6 +594,23 @@
 	"DIALOG.DESCRIPTION.EffectDeletion": "Souhaitez-vous vraiment supprimer cet effet ?",
 
 	"DIE": {
+		"RESULTS": {
+			"blank": "Vierge",
+			"oneBane": "Un fléau",
+			"oneBoon": "Un bienfait",
+			"oneChallenge": "Un défi",
+			"oneChaosStar": "Une étoile du Chaos",
+			"oneRighteousSuccess": "Un succès +",
+			"oneSigmarsComet": "Une comète de Sigmar",
+			"oneSuccess": "Un succès",
+			"oneSuccessOneBoon": "Un succès et un bienfait",
+			"oneSuccessOneDelay": "Un succès et un retard",
+			"oneSuccessOneExertion": "Un succès et un effort",
+			"twoBanes": "Deux fléaux",
+			"twoBoons": "Deux bienfaits",
+			"twoChallenges": "Deux défis",
+			"twoSuccesses": "Deux succès"
+		},
 		"challenge": {
 			"amount": "{nb} dés de défi",
 			"name": "dé de défi",
@@ -917,23 +934,6 @@
 			"targetFatigueSuffering": "{target} subit {amount} fatigue.",
 			"targetStressSuffering": "{target} subit {amount} stress.",
 			"wounds": "{actor} subit {amount} blessures."
-		},
-		"RESULTS": {
-			"blank": "Vierge",
-			"oneBane": "Un fléau",
-			"oneBoon": "Un bienfait",
-			"oneChallenge": "Un défi",
-			"oneChaosStar": "Une étoile du Chaos",
-			"oneRighteousSuccess": "Un succès +",
-			"oneSigmarsComet": "Une comète de Sigmar",
-			"oneSuccess": "Un succès",
-			"oneSuccessOneBoon": "Un succès et un bienfait",
-			"oneSuccessOneDelay": "Un succès et un retard",
-			"oneSuccessOneExertion": "Un succès et un effort",
-			"twoBanes": "Deux fléaux",
-			"twoBoons": "Deux bienfaits",
-			"twoChallenges": "Deux défis",
-			"twoSuccesses": "Deux succès"
 		},
 		"WARNINGS": {
 			"notAllowed": "Vous n'êtes pas autorisé à activer des effets pour ce test.",

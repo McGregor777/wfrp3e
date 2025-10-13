@@ -1,6 +1,6 @@
-import ActionEffectEditor from "../applications/ActionEffectEditor.js";
-import CheckBuilder from "../applications/CheckBuilder.js";
-import CheckHelper from "../CheckHelper.js";
+import ActionEffectEditor from "../applications/apps/ActionEffectEditor.js";
+import CheckBuilder from "../applications/dice/CheckBuilder.js";
+import CheckHelper from "../dice/CheckHelper.js";
 import WFRP3eEffect from "./WFRP3eEffect.js";
 import {capitalize} from "../helpers.js";
 
@@ -41,14 +41,14 @@ export default class WFRP3eItem extends Item
 	 * Makes usage of the WFRP3eItem. The result depends on the type of the WFRP3eItem.
 	 * @param {Object} [options]
 	 */
-	useItem(options = {})
+	async useItem(options = {})
 	{
 		const functionName = `_use${capitalize(this.type)}`;
 
 		if(this[`${functionName}`])
 			this[`${functionName}`](options);
 		else
-			this.sheet.render(true);
+			await this.sheet.render(true);
 	}
 
 	/**

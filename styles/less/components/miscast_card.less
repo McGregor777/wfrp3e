@@ -1,73 +1,57 @@
 .miscast.card {
 	background-color: #e8f0f8;
-	border: 1rem solid #385060;
-	border-radius: 0.5rem;
-	border-width: 0.5rem 0 1rem;
+	border: 16px solid #385060;
+	border-radius: 8px;
+	border-width: 8px 0 16px;
 	color: black;
 	display: flex;
 	flex-direction: column;
 	height: 385px;
-	margin: 0.5rem;
+	margin: 8px;
 	position: relative;
 	text-align: center;
 	width: 255px;
 
 	& .bottom-line {
-		bottom: 0.5rem;
+		bottom: 8px;
 	}
 
 	& .description {
-		border-bottom: 0.5rem solid #606060;
+		border-bottom: 8px solid #606060;
 		flex-grow: 1;
-		padding: 0.5rem;
+		padding: 8px;
 	}
 
 	& .header {
 		background-color: #e8e8e0;
 		display: flex;
 		flex-direction: column;
-		height: 2rem;
-		margin-bottom: 0.25rem;
+		height: 32px;
+		margin-bottom: 4px;
 
 		& .name {
-			border: 0.5rem solid #606060;
-			border-width: 0.5rem 0;
+			border: 8px solid #606060;
+			border-width: 8px 0;
 			color: white;
-			font: small-caps 16pt var(--font-title);
+			font: small-caps var(--font-size-28) var(--font-title);
 			margin: auto 0;
-			text-shadow:
-				-1pt -1pt 0 black,
-				-1pt 0 0 black,
-				0 -1pt 0 black,
-				-1pt 1pt 0 black,
-				1pt -1pt 0 black,
-				0 1pt 0 black,
-				1pt 0 0 black,
-				1pt 1pt 0 black;
+			text-shadow: var(--outline-black);
 
 			&:hover {
-				text-shadow: 0 0 0.5rem var(--color-shadow-primary);
+				text-shadow: 0 0 8px var(--color-shadow-primary);
 			}
 		}
 	}
 
 	& .severity-rating {
 		background-color: #703818;
-		bottom: 1rem;
+		bottom: 16px;
 		color: white;
-		font: small-caps 20pt var(--font-title);
-		height: 2rem;
+		font: small-caps var(--font-size-28) var(--font-title);
+		height: 32px;
 		position: absolute;
-		right: 1rem;
-		text-shadow:
-			-1pt -1pt 0 black,
-			-1pt 0 0 black,
-			0 -1pt 0 black,
-			-1pt 1pt 0 black,
-			1pt -1pt 0 black,
-			0 1pt 0 black,
-			1pt 0 0 black,
-			1pt 1pt 0 black;
-		width: 2rem;
+		right: 16px;
+		text-shadow: var(--outline-black);
+		width: 32px;
 	}
 }

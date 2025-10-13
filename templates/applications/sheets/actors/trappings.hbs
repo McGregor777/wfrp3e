@@ -1,0 +1,183 @@
+<section class="tab scrollable {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{#if weapons}}
+		<section class="weapon table">
+			<div class="table-header title">
+				<div><span>{{localize "WEAPON.plural"}}</span></div>
+			</div>
+
+			<div class="table-header">
+				<div class="image"></div>
+
+				<div class="name">
+					<span>{{localize "TRAPPING.FIELDS.name.label"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="damage-rating">
+					<span>{{localize "WEAPON.FIELDS.damageRating.abbreviation"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="critical-rating">
+					<span>{{localize "WEAPON.FIELDS.criticalRating.abbreviation"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="range">
+					<span>{{localize "WEAPON.FIELDS.range.label"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="qualities">
+					<span>{{localize "WEAPON.FIELDS.qualities.label"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="group">
+					<span>{{localize "WEAPON.FIELDS.group.label"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="encumbrance">
+					<span>{{localize "TRAPPING.FIELDS.encumbrance.abbreviation"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="buttons"></div>
+			</div>
+
+			<div class="table-body">
+				{{#each weapons as |weapon wp|}}
+					{{>systems/wfrp3e/templates/applications/sheets/actors/partials/weapon-row.hbs weapon=weapon}}
+				{{/each}}
+			</div>
+		</section>
+	{{/if}}
+
+	{{#if armours}}
+		<section class="armour table">
+			<div class="table-header title">
+				{{localize "ARMOUR.plural"}}
+			</div>
+
+			<div class="table-header">
+				<div class="image"></div>
+
+				<div class="name">
+					<span>{{localize "TRAPPING.FIELDS.name.label"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="defence-value">
+					<span>{{localize "ARMOUR.FIELDS.defenceValue.label"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="soak-value">
+					<span>{{localize "ARMOUR.FIELDS.soakValue.label"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="encumbrance">
+					<span>{{localize "TRAPPING.FIELDS.encumbrance.abbreviation"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="buttons"></div>
+			</div>
+
+			<div class="table-body">
+				{{#each armours as |armour arm|}}
+					{{>systems/wfrp3e/templates/applications/sheets/actors/partials/armour-row.hbs armour=armour}}
+				{{/each}}
+			</div>
+		</section>
+	{{/if}}
+
+	{{#if trappings}}
+		<section class="trapping table">
+			<div class="table-header title">
+				{{localize "TRAPPING.plural"}}
+			</div>
+
+			<div class="table-header">
+				<div class="image"></div>
+
+				<div class="name">
+					<span>{{localize "TRAPPING.FIELDS.name.label"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="encumbrance">
+					<span>{{localize "TRAPPING.FIELDS.encumbrance.abbreviation"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="buttons"></div>
+			</div>
+
+			<div class="table-body">
+				{{#each trappings as |trapping trp|}}
+					{{>systems/wfrp3e/templates/applications/sheets/actors/partials/trapping-row.hbs trapping=trapping}}
+				{{/each}}
+			</div>
+		</section>
+	{{/if}}
+
+	{{#if money}}
+		<section class="money table">
+			<div class="table-header title">
+				{{localize "MONEY.plural"}}
+			</div>
+
+			<div class="money table-header">
+				<div class="image"></div>
+
+				<div class="name">
+					<span>{{localize "TRAPPING.FIELDS.name.label"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="value">
+					<span>{{localize "MONEY.FIELDS.value.label"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="quantity">
+					<span>{{localize "TRAPPING.FIELDS.quantity.abbreviation"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="encumbrance">
+					<span>{{localize "TRAPPING.FIELDS.encumbrance.abbreviation"}}</span>
+				</div>
+
+				<hr />
+
+				<div class="buttons"></div>
+			</div>
+
+			<div class="table-body">
+				{{#each money as |money mo|}}
+					{{>systems/wfrp3e/templates/applications/sheets/actors/partials/money-row.hbs money=money}}
+				{{/each}}
+			</div>
+		</section>
+	{{/if}}
+</section>
