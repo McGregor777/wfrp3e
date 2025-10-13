@@ -595,6 +595,23 @@
 	"DIALOG.DESCRIPTION.EffectDeletion": "Do you really wish to delete this effect?",
 
 	"DIE": {
+		"RESULTS": {
+			"blank": "Blank",
+			"oneBane": "One Bane",
+			"oneBoon": "One Boon",
+			"oneChallenge": "One Challenge",
+			"oneChaosStar": "One Chaos Star",
+			"oneRighteousSuccess": "One Righteous Success",
+			"oneSigmarsComet": "One Sigmar's Comet",
+			"oneSuccess": "One Success",
+			"oneSuccessOneBoon": "One Success and one Boon",
+			"oneSuccessOneDelay": "One Success and one Delay",
+			"oneSuccessOneExertion": "One Success and one Exertion",
+			"twoBanes": "Two Banes",
+			"twoBoons": "Two Boons",
+			"twoChallenges": "Two Challenges",
+			"twoSuccesses": "Two Successes"
+		},
 		"challenge": {
 			"amount": "{nb} challenge dice",
 			"name": "challenge die",
@@ -918,23 +935,6 @@
 			"targetFatigueSuffering": "{target} suffers {amount} fatigue.",
 			"targetStressSuffering": "{target} suffers {amount} stress.",
 			"wounds": "{actor} suffers {amount} wounds."
-		},
-		"RESULTS": {
-			"blank": "Blank",
-			"oneBane": "One Bane",
-			"oneBoon": "One Boon",
-			"oneChallenge": "One Challenge",
-			"oneChaosStar": "One Chaos Star",
-			"oneRighteousSuccess": "One Righteous Success",
-			"oneSigmarsComet": "One Sigmar's Comet",
-			"oneSuccess": "One Success",
-			"oneSuccessOneBoon": "One Success and one Boon",
-			"oneSuccessOneDelay": "One Success and one Delay",
-			"oneSuccessOneExertion": "One Success and one Exertion",
-			"twoBanes": "Two Banes",
-			"twoBoons": "Two Boons",
-			"twoChallenges": "Two Challenges",
-			"twoSuccesses": "Two Successes"
 		},
 		"WARNINGS": {
 			"notAllowed": "You are not allowed to toggle effects for this check.",
