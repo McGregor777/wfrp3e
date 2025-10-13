@@ -52,7 +52,7 @@
 					{{/each}}
 				</div>
 			</div>
-		{{else}}
+		{{else unless character}}
 			<p>{{{localize "CHARACTER.WARNINGS.noSkill" actor=source.name}}}</p>
 
 			<button data-action="addBasicSkills">
