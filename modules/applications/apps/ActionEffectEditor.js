@@ -29,7 +29,7 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
 		id: "action-effect-editor-{id}",
-		classes: ["wfrp3e action-effect-editor"],
+		classes: ["wfrp3e", "action-effect-editor"],
 		tag: "form",
 		window: {
 			contentClasses: ["standard-form"],
