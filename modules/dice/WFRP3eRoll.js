@@ -93,7 +93,7 @@ export default class WFRP3eRoll extends Roll
 	}
 
 	/** @inheritDoc */
-	async evaluate({minimize  = false, maximize = false, allowStrings = false, allowInteractive = true, ...options} = {})
+	async evaluate({minimize = false, maximize = false, allowStrings = false, allowInteractive = true, ...options} = {})
 	{
 		if(this._evaluated)
 			throw new Error(`The ${this.constructor.name} has already been evaluated and is now immutable`);
@@ -238,9 +238,7 @@ export default class WFRP3eRoll extends Roll
 	 */
 	static async triggerOnCheckRollEffects(actor, checkData, roll)
 	{
-		const triggeredEffects = actor.findTriggeredEffects("onCheckRoll");
-
-		for(const effect of triggeredEffects)
+		for(const effect of actor.findTriggeredEffects("onCheckRoll"))
 			await effect.triggerEffect({
 				parameters: [actor, checkData, roll],
 				parameterNames: ["actor", "checkData", "roll"]

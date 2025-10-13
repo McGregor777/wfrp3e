@@ -15,8 +15,7 @@ export default class CheckHelper
 	 */
 	static async triggerCheckPreparationEffects(actor, checkData, dicePool)
 	{
-		const triggeredEffects = actor.findTriggeredEffects("onCheckPreparation");
-		for(const effect of triggeredEffects) {
+		for(const effect of actor.findTriggeredEffects("onCheckPreparation")) {
 			await effect.triggerEffect({
 				parameters: [actor, checkData, dicePool],
 				parameterNames: ["actor", "checkData", "dicePool"]
@@ -24,16 +23,14 @@ export default class CheckHelper
 		}
 
 		if(checkData.targets?.length > 0) {
-			const targetTriggeredEffects = await fromUuid(checkData.targets[0]).then(
-				actor => actor.findTriggeredEffects("onTargettingCheckPreparation")
-			);
-
-			for(const effect of targetTriggeredEffects) {
-				await effect.triggerEffect({
-					parameters: [actor, checkData, dicePool],
-					parameterNames: ["actor", "checkData", "dicePool"]
-				});
-			}
+			await fromUuid(checkData.targets[0]).then(async actor => {
+				for(const effect of actor.findTriggeredEffects("onTargettingCheckPreparation")) {
+					await effect.triggerEffect({
+						parameters: [actor, checkData, dicePool],
+						parameterNames: ["actor", "checkData", "dicePool"]
+					});
+				}
+			});
 		}
 	}
 
