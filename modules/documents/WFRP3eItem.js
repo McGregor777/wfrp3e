@@ -41,14 +41,14 @@ export default class WFRP3eItem extends Item
 	 * Makes usage of the WFRP3eItem. The result depends on the type of the WFRP3eItem.
 	 * @param {Object} [options]
 	 */
-	useItem(options = {})
+	async useItem(options = {})
 	{
 		const functionName = `_use${capitalize(this.type)}`;
 
 		if(this[`${functionName}`])
 			this[`${functionName}`](options);
 		else
-			this.sheet.render(true);
+			await this.sheet.render(true);
 	}
 
 	/**
