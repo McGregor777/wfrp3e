@@ -16,28 +16,12 @@
 			background: none;
 			border: none;
 			text-align: center;
-			text-shadow:
-					-1pt -1pt 0 black,
-					-1pt 0 0 black,
-					0 -1pt 0 black,
-					-1pt 1pt 0 black,
-					1pt -1pt 0 black,
-					0 1pt 0 black,
-					1pt 0 0 black,
-					1pt 1pt 0 black;
+			text-shadow: var(--outline-black);
 
 			&[name="name"] {
 				color: bisque;
 				flex-grow: 1;
-				text-shadow:
-						-1pt -1pt 2pt black,
-						-1pt 0 2pt black,
-						0 -1pt 2pt black,
-						-1pt 1pt 2pt black,
-						1pt -1pt 2pt black,
-						0 1pt 2pt black,
-						1pt 0 2pt black,
-						1pt 1pt 2pt black;
+				text-shadow: var(--outline-black);
 			}
 
 			&[name$="threatRating"] {
@@ -155,14 +139,7 @@
 				justify-content: space-evenly;
 				padding: 0.25rem 0 0.5rem;
 				text-align: center;
-				text-shadow: -1pt -1pt 0 black,
-						-1pt 0 0 black,
-						0 -1pt 0 black,
-						-1pt 1pt 0 black,
-						1pt -1pt 0 black,
-						0 1pt 0 black,
-						1pt 0 0 black,
-						1pt 1pt 0 black;
+				text-shadow: var(--outline-black);
 
 				& .form-group {
 					gap: 0;
@@ -183,15 +160,8 @@
 							font-size: var(--font-size-22);
 							font-style: italic;
 							line-height: 1.5;
-							text-shadow: -1pt -1pt 0 black,
-							-1pt 0 0 black,
-								0 -1pt 0 black,
-							-1pt 1pt 0 black,
-								1pt -1pt 0 black,
-							0 1pt 0 black,
-							1pt 0 0 black,
-							1pt 1pt 0 black;
 							width: 2rem;
+							text-shadow: var(--outline-black);
 						}
 					}
 

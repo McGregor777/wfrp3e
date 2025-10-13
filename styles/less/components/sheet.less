@@ -526,14 +526,7 @@
 					& > .token-counter {
 						color: white;
 						font-size: 24pt;
-						text-shadow: -1pt -1pt 0 black,
-							-1pt 0 0 black,
-							0 -1pt 0 black,
-							-1pt 1pt 0 black,
-							1pt -1pt 0 black,
-							0 1pt 0 black,
-							1pt 0 0 black,
-							1pt 1pt 0 black;
+						text-shadow: var(--outline-black);
 					}
 				}
 
@@ -832,15 +825,7 @@
 
 body.theme-light .application.wfrp3e.sheet .window-content {& a.active {
 		color: white;
-		text-shadow:
-				-1px -1px 0 black,
-				-1px 0 0 black,
-				0 -1px 0 black,
-				-1px 1px 0 black,
-				1px -1px 0 black,
-				0 1px 0 black,
-				1px 0 0 black,
-				1px 1px 0 black !important;
+		text-shadow:  var(--outline-black) !important;
 	}
 
 	& .table {
