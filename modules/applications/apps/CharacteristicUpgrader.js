@@ -1,20 +1,19 @@
-import {capitalize} from "../helpers.js";
-
 /** @inheritDoc */
 export default class CharacteristicUpgrader extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)
 {
 	/** @inheritDoc */
-	constructor(options = {})
+	constructor(actor, career, options = {})
 	{
 		super(options);
 
-		if(!options.actor)
-			throw new Error("An Actor is needed.");
-		if(!options.career)
-			throw new Error("A Career is needed.");
+		if(!actor)
+			throw new Error("An Actor has to be specified to a Characteristic Upgrader.");
+		if(!career)
+			throw new Error("A Career has to be specified to a Characteristic Upgrader.");
 
-		this.actor = options.actor;
-		this.career = options.career;
+		this.actor = actor;
+		this.career = career;
+
 		if(options.nonCareerAdvance)
 			this.nonCareerAdvance = options.nonCareerAdvance;
 	}
@@ -122,25 +121,27 @@ export default class CharacteristicUpgrader extends foundry.applications.api.Han
 
 		super._onChangeForm(formConfig, event);
 
-		this.render();
+		await this.render();
 	}
 
 	/**
-	 * Spawns a Selector and waits for it to be dismissed or submitted.
-	 * @param {ApplicationConfiguration} [options] Options used to configure the Selector instance.
-	 * @returns {Promise<any>} Resolves to the selected Item.
+	 * Spawns a Characteristic Upgrader and waits for it to be dismissed or submitted.
+	 * @param {ApplicationConfiguration} [config]
+	 * @returns {Promise<any>} Resolves to the selected upgrade.
 	 */
-	static async wait(options = {})
+	static async wait(config = {})
 	{
 		return new Promise(async (resolve, reject) => {
 			// Wrap the submission handler with Promise resolution.
-			options.submit = async result => {resolve(result)};
-			await new this(options).render(true);
+			config.submit = async result => {resolve(result)};
+			const characteristicUpgrader = new this(...arguments);
+			characteristicUpgrader.addEventListener("close", event => reject(), {once: true});
+			await characteristicUpgrader.render({force: true});
 		});
 	}
 
 	/**
-	 * Processes form submission for the Selector.
+	 * Processes form submission for the Characteristic Upgrader.
 	 * @param {SubmitEvent} event The originating form submission event.
 	 * @param {HTMLFormElement} form The form element that was submitted.
 	 * @param {FormDataExtended} formData Processed data for the submitted form.

@@ -30,11 +30,8 @@ export default class CareerAdvanceDialog extends foundry.applications.api.Dialog
 				break;
 
 			case "characteristic":
-				CharacteristicUpgrader.wait({
-					actor: actor,
-					career: career,
-					nonCareerAdvance: type === "nonCareer"
-				}).then(upgrade => actor.buyCharacteristicAdvance(upgrade, career, type));
+				CharacteristicUpgrader.wait(actor, career, {nonCareerAdvance: type === "nonCareer"})
+					.then(upgrade => actor.buyCharacteristicAdvance(upgrade, career, type));
 				break;
 
 			case "conservative":
