@@ -1,27 +1,27 @@
 .mutation.card {
 	background-color: #f0e8e0;
-	border-radius: 0.5rem;
+	border-radius: 8px;
 	color: black;
 	display: flex;
 	flex-direction: column;
 	height: 385px;
-	margin: 0.5rem;
+	margin: 8px;
 	position: relative;
 	width: 255px;
 
 	& .bottom-line {
-		bottom: 0.5rem;
+		bottom: 8px;
 		justify-content: flex-end;
-		left: 3rem;
-		right: 0.5rem;
+		left: 48px;
+		right: 8px;
 	}
 
 	& .content {
-		border: 0.5rem solid #987060;
+		border: 8px solid #987060;
 		border-top-width: 0;
-		border-radius: 0 0 0.5rem 0.5rem ;
+		border-radius: 0 0 8px 8px ;
 		flex-grow: 1;
-		padding: 0.5rem 1rem;
+		padding: 8px 16px;
 
 		& .description {
 			border: 0;
@@ -34,7 +34,7 @@
 	& .header {
 		border-color: #808080 #e0d8c0;
 		border-style: solid;
-		border-width: 0.5rem 1.5rem 0;
+		border-width: 8px 24px 0;
 		text-align: center;
 
 		& .name {
@@ -42,11 +42,11 @@
 			display: block;
 			font: small-caps 16pt var(--font-title);
 			margin: auto 0;
-			padding: 0.5rem 0;
+			padding: 8px 0;
 			text-shadow: var(--outline-black);
 
 			&:hover {
-				text-shadow: 0 0 0.5rem var(--color-shadow-primary);
+				text-shadow: 0 0 8px var(--color-shadow-primary);
 			}
 		}
 
@@ -56,24 +56,24 @@
 			font-size: 10pt;
 			font-style: italic;
 			font-weight: bold;
-			height: 1.25rem;
-			padding: 0.25rem 0.25rem;
+			height: 20px;
+			padding: 4px 4px;
 			text-shadow: var(--outline-black);
 		}
 	}
 
 	& .severity-rating {
 		background-color: #e8e8e8;
-		outline: 0.25rem solid #808080;
+		outline: 4px solid #808080;
 		border-radius: 50%;
-		bottom: 1.5rem;
+		bottom: 24px;
 		color: white;
 		font: small-caps 20pt var(--font-title);
-		height: 2rem;
-		left: 1rem;
+		height: 32px;
+		left: 16px;
 		position: absolute;
 		text-align: center;
-		width: 2rem;
 		text-shadow: var(--outline-black);
+		width: 32px;
 	}
 }

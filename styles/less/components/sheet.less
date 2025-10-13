@@ -1,414 +1,7 @@
-.app.wfrp3e.sheet {
-	& h1 input {
-		font-family: var(--font-h1);
-	}
-
-	& form {
-		display: flex;
-		flex-direction: column;
-
-		& a.active {
-			color: white;
-			text-shadow:
-					-1px -1px 0 black,
-					-1px 0 0 black,
-					0 -1px 0 black,
-					-1px 1px 0 black,
-					1px -1px 0 black,
-					0 1px 0 black,
-					1px 0 0 black,
-					1px 1px 0 black !important;
-		}
-
-		& hr {
-			width: 100%;
-		}
-
-		& nav.primary-tabs {
-			font: small-caps bold var(--font-size-18) var(--font-primary);
-		}
-
-		& .editor-container {
-			display: flex;
-			flex-direction: column;
-			flex-grow: 1;
-		}
-
-		& .sheet-body {
-			display: flex;
-			flex: 1 1 0;
-			flex-direction: column;
-			min-height: 0;
-
-			& > .tab.active {
-				flex-flow: column nowrap;
-				height: 100%;
-				overflow: auto;
-
-				&.active {
-					display: flex;
-				}
-			}
-
-			& section > nav {
-				border-top: none;
-			}
-
-			& .editor {
-				background: rgba(250, 240, 230, 0.5);
-				border-radius: 0.5rem;
-				flex-grow: 1;
-				min-height: 200px;
-
-				& .editor-content {
-					margin: 0 0.5rem;
-				}
-			}
-
-			& .form-div {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.5rem;
-
-				& > * {
-					flex: 1 1 auto;
-				}
-
-				& input[type=number] {
-					width: 2rem;
-				}
-			}
-
-			& .form-label {
-				align-items: center;
-				display: flex;
-				gap: 0.5rem;
-
-				& > input {
-					flex-grow: 1;
-					width: unset;
-				}
-			}
-
-			& .impairment {
-				display: flex;
-				margin: auto;
-				flex: 1 1 auto;
-				flex-direction: row;
-
-				&:first-child {
-					margin-bottom: 0.5rem;
-				}
-
-				&:last-child {
-					margin-top: 0.5rem;
-				}
-
-				& > .token {
-					position: relative;
-					width: 4rem;
-
-					& > * {
-						position: absolute;
-					}
-
-
-					& > img {
-						border: none;
-						opacity: 75%;
-						top: 50%;
-						transform: translate(0, -50%);
-					}
-
-					& > .token-counter {
-						color: white;
-						font-size: 24pt;
-						text-shadow:
-								-1pt -1pt 0 black,
-								-1pt 0 0 black,
-								0 -1pt 0 black,
-								-1pt 1pt 0 black,
-								1pt -1pt 0 black,
-								0 1pt 0 black,
-								1pt 0 0 black,
-								1pt 1pt 0 black;
-					}
-				}
-
-				& .title {
-					display: block;
-					font: small-caps bold var(--font-size-18) var(--font-primary);
-					padding: 0 2px 0 0.25rem;
-					writing-mode: vertical-lr;
-					text-align: center;
-				}
-			}
-
-			& .item-container {
-				display: none;
-				flex-flow: row wrap;
-				height: 100%;
-				overflow: auto;
-
-				&.active {
-					display: flex;
-				}
-			}
-
-			& .stance-meter {
-				margin-bottom: 0.5rem;
-
-				& .stance-meter-link > img {
-					opacity: 50%;
-				}
-
-				& .stance-meter-segment {
-					cursor: pointer;
-					display: block;
-					height: 27px;
-
-					&.active {
-						filter: drop-shadow(gold 0px 0px 0.25rem);
-					}
-
-					& > img {
-						border: none;
-						width: 32px;
-
-						&.stance-neutral {
-							width: 38px;
-						}
-					}
-
-					& > input {
-						display: none;
-					}
-				}
-
-				& .stance-meter-segment-container {
-					display: flex;
-					justify-content: center;
-				}
-			}
-
-			& .tab {
-				overflow: unset;
-
-				& .tab-content {
-					min-height: 0;
-				}
-
-				& .sheet-tabs {
-					border-bottom: 1px solid #b5b3a4;
-					display: flex;
-					flex-flow: row wrap;
-					justify-content: space-around;
-
-					& > * {
-						margin: 0 0.25rem;
-					}
-				}
-			}
-
-			& .table {
-				display: flex;
-				flex-direction: column;
-				min-height: 0;
-
-				& hr {
-					margin: 0;
-				}
-
-				& > * hr {
-					border: none;
-					border-left: 1px solid var(--color-border-light-primary);
-					border-right: 1px solid var(--color-border-light-highlight);
-					height: 1rem;
-					width: 1px;
-				}
-
-				& .buttons {
-					font-size: 10pt;
-					width: 2.5rem;
-				}
-
-				& .encumbrance {
-					width: 5%;
-				}
-
-				& .quantity {
-					width: 10%;
-				}
-
-				& .row {
-					background: #D8CFC0;
-					padding: 0.25rem;
-
-					&:nth-of-type(even) {
-						background: #E9E2DB;
-					}
-
-					&.skill {
-						background: #EDE1D1;
-
-						&:nth-of-type(even) {
-							background: #E1CFB6;
-						}
-					}
-
-					& .content {
-						&:first-child {
-							align-items: center;
-							display: flex;
-							text-align: center;
-						}
-
-						& .item-name-link {
-							vertical-align: sub;
-						}
-					}
-				}
-
-				& .table-header {
-					background: #7E1518;
-					color: var(--color-text-light-highlight);
-					display: flex;
-					font-weight: bold;
-					gap: 0.25rem;
-					padding: 0.25rem;
-					text-align: center;
-					text-shadow: 1px 1px var(--color-shadow-dark);
-
-					&.skill {
-						background: initial;
-						color: initial;
-						font-variant-caps: small-caps;
-						text-shadow: initial;
-					}
-
-					&.title {
-						background: #3F0B0CFF;
-						display: block;
-					}
-
-					& hr {
-						border-right: 1px solid var(--color-border-light-primary);
-					}
-				}
-
-				& .table-body {
-					overflow: auto;
-				}
-
-				&.armour {
-					& .armour-defence-value {
-						width: 10%;
-					}
-
-					& .armour-image {
-						width: 5%;
-					}
-
-					& .armour-soak-value {
-						width: 10%;
-					}
-
-					& .armour-name {
-						text-align: initial;
-						width: 65%;
-					}
-				}
-
-				&.money {
-					& .money-name {
-						text-align: initial;
-						width: 65%;
-					}
-
-					& .money-image {
-						width: 5%;
-					}
-
-					& .money-value {
-						width: 10%;
-					}
-				}
-
-				&.skill {
-					& .buttons {
-						width: 10%;
-					}
-
-					& .skill-characteristic {
-						font-variant-caps: small-caps;
-						width: 15%;
-					}
-
-					& .skill-name {
-						font-variant-caps: small-caps;
-						text-align: initial;
-						width: 50%;
-					}
-
-					& .skill-training-level {
-						width: 25%;
-					}
-				}
-
-				&.trapping {
-					& .trapping-image {
-						width: 5%;
-					}
-
-					& .trapping-name {
-						text-align: initial;
-						width: 85%;
-					}
-				}
-
-				&.weapon {
-					& .weapon-critical-rating {
-						width: 5%;
-					}
-
-					& .weapon-damage-rating {
-						width: 5%;
-					}
-
-					& .weapon-group {
-						width: 15%;
-					}
-
-					& .weapon-image {
-						width: 5%;
-					}
-
-					& .weapon-name {
-						text-align: initial;
-						width: 20%;
-					}
-
-					& .weapon-qualities {
-						width: 35%;
-					}
-
-					& .weapon-range {
-						width: 10%;
-					}
-				}
-			}
-
-			& .trappings-tab {
-				gap: 1rem;
-			}
-		}
-	}
-}
-
 .application.wfrp3e {
 	&.item .window-content > section.tab {
 		&.effects > .effect {
-			gap: 0.5rem;
+			gap: 8px;
 
 			& > .icon {
 				flex: 40px 0 0;
@@ -416,12 +9,12 @@
 		}
 
 		&.trappings {
-			gap: 1rem;
+			gap: 16px;
 		}
 	}
 
 	& header.sheet-header {
-		padding-bottom: 0.5rem;
+		padding-bottom: 8px;
 
 		& input[name="name"] {
 			flex: 3;
@@ -459,9 +52,9 @@
 				border: 1px solid var(--color-border-light-primary);
 				display: block;
 				margin-top: 0;
-				padding: 0.5rem 1rem;
+				padding: 8px 16px;
 				position: absolute;
-				right: 1rem;
+				right: 16px;
 				top: 100%;
 				z-index: 1;
 
@@ -474,12 +67,12 @@
 		& > section {
 			&.tab > {
 				& > *:not(a, nav.tabs):first-child {
-					margin-top: 1rem;
+					margin-top: 16px;
 				}
 
 				& > a:first-child,
 				& > nav.search-bar:first-child {
-					margin-top: 0.5rem;
+					margin-top: 8px;
 				}
 			}
 
@@ -500,16 +93,16 @@
 				flex-direction: row;
 
 				&:first-child {
-					margin-bottom: 0.5rem;
+					margin-bottom: 8px;
 				}
 
 				&:last-child {
-					margin-top: 0.5rem;
+					margin-top: 8px;
 				}
 
 				& > .token {
 					position: relative;
-					width: 4rem;
+					width: 64px;
 
 					& > * {
 						position: absolute;
@@ -540,7 +133,7 @@
 			}
 
 			& .stance-meter {
-				margin-bottom: 0.5rem;
+				margin-bottom: 8px;
 
 				& .stance-meter-segment {
 					display: block;
@@ -619,15 +212,15 @@
 					border: none;
 					border-left: 1px solid var(--color-border-light-primary);
 					border-right: 1px solid var(--color-border-light-highlight);
-					height: 1rem;
+					height: 16px;
 					width: 1px;
 				}
 
 				& .buttons {
-					flex: 0 1 2.5rem !important;
 					font-size: 10pt;
+					flex: 0 1 40px !important;
 					text-align: center;
-					width: 2.5rem;
+					width: 40px;
 				}
 
 				& .critical-rating,
@@ -647,7 +240,7 @@
 				}
 
 				& .image {
-					flex: 0 1 2.5rem !important;
+					flex: 0 1 40px !important;
 				}
 
 				& .name {
@@ -655,12 +248,12 @@
 				}
 
 				& .recharge-tokens {
-					flex: 0 1 3rem !important;
+					flex: 0 1 48px !important;
 				}
 
 				& .row {
 					background: none;
-					padding: 0.25rem;
+					padding: 4px;
 
 					&:nth-of-type(even) {
 						background: rgba(128, 128, 128, 0.125);
@@ -721,7 +314,7 @@
 					& .content {
 						align-items: center;
 						display: flex;
-						gap: 0.25rem;
+						gap: 4px;
 						text-align: center;
 
 						&.face {
@@ -764,7 +357,7 @@
 					display: flex;
 					font-weight: bold;
 					overflow: hidden;
-					padding: 0.25rem;
+					padding: 4px;
 					scrollbar-gutter: stable;
 					text-align: center;
 					text-shadow: 1px 1px var(--color-shadow-dark);
@@ -795,7 +388,7 @@
 
 		& .item-container {
 			display: flex;
-			flex-flow: row wrap;
+			flex-wrap: wrap;
 			justify-content: space-evenly;
 			overflow: auto;
 
@@ -804,11 +397,11 @@
 				height: max-content;
 
 				&.active .item {
-					box-shadow: 0 0 1rem orange;
+					box-shadow: 0 0 16px orange;
 				}
 
 				&:hover .item {
-					box-shadow: 0 0 0.75rem var(--color-shadow-primary);
+					box-shadow: 0 0 12px var(--color-shadow-primary);
 				}
 
 				& .item {
@@ -823,7 +416,8 @@
 	}
 }
 
-body.theme-light .application.wfrp3e.sheet .window-content {& a.active {
+body.theme-light .application.wfrp3e.sheet .window-content {
+	& a.active {
 		color: white;
 		text-shadow:  var(--outline-black) !important;
 	}
@@ -859,7 +453,7 @@ body.theme-light .application.wfrp3e.sheet .window-content {& a.active {
 		& > a:last-child {
 			align-self: flex-end;
 			line-height: var(--form-field-height);
-			margin-left: 0.25rem;
+			margin-left: 4px;
 		}
 	}
 
@@ -926,14 +520,14 @@ body.theme-light .application.wfrp3e.sheet .window-content {& a.active {
 	& .container {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 8px;
 
 		& .content {
 			align-items: center;
 			display: flex;
-			gap: 1rem;
-			padding-bottom: 0.5rem;
-			padding-top: 0.5rem;
+			gap: 16px;
+			padding-bottom: 8px;
+			padding-top: 8px;
 		}
 	}
 
@@ -941,13 +535,13 @@ body.theme-light .application.wfrp3e.sheet .window-content {& a.active {
 		&.expanded:not(.stacked) {
 			& > label {
 				flex: 0 max-content;
-				margin-right: 0.5rem;
+				margin-right: 8px;
 			}
 		}
 
 		&.slim {
 			flex: 0 min-content;
-			gap: 0.25rem;
+			gap: 4px;
 
 			& > label {
 				width: max-content;
@@ -965,7 +559,7 @@ body.theme-light .application.wfrp3e.sheet .window-content {& a.active {
 	}
 
 	.tab {
-		gap: 0.5rem;
+		gap: 8px;
 	}
 }
 

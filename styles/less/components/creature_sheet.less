@@ -5,11 +5,11 @@
 		align-items: center;
 		background: url(../assets/images/creature-sheet-header.webp) center/100% 100% no-repeat;
 		display: flex;
-		padding: 0 0.5rem;
+		padding: 0 8px;
 		text-align: center;
 
 		& > * {
-			flex: 0 0 6rem;
+			flex: 0 0 96px;
 		}
 
 		& input {
@@ -28,17 +28,16 @@
 				color: white;
 				flex: 0 0 12.5%;
 				font-size: var(--font-size-28);
-				//padding-top: 0.5rem;
 			}
 
 			&:focus {
 				box-shadow: none;;
-				text-shadow: 0 0 0.25rem var(--color-shadow-primary);
+				text-shadow: 0 0 4px var(--color-shadow-primary);
 			}
 		}
 
 		& .wounds {
-			flex-basis: 4rem;
+			flex-basis: 64px;
 			& hr {
 				margin: 0 0 2px;
 			}
@@ -46,7 +45,7 @@
 			& input {
 				color: white;
 				font-size: var(--font-size-28);
-				padding-top: 0.5rem;
+				padding-top: 8px;
 			}
 		}
 	}
@@ -58,14 +57,14 @@
 		border-width: 2px 0;
 		color: white;
 		font-style: italic;
-		padding-top: 0.25rem;
+		padding-top: 4px;
 		text-align: center;
 		width: 100%;
 	}
 
 	& section.tab {
 		min-height: 0;
-		padding: 0 0.5rem;
+		padding: 0 8px;
 
 		&.attributes {
 			grid-template-areas:
@@ -74,7 +73,7 @@
 			"creature-attributes creature-attributes creature-attributes";
 			grid-template-columns: 100px 1fr 100px;
 			grid-template-rows: 1fr 160px 64px;
-			grid-column-gap: 0.5rem;
+			grid-column-gap: 8px;
 			flex-grow: 1;
 			padding: 0;
 
@@ -95,14 +94,14 @@
 				display: flex;
 				flex-direction: column;
 				grid-area: characteristics;
-				padding: 0 0.5rem;
+				padding: 0 8px;
 
 				& > .characteristic {
 					align-items: center;
 					display: flex;
 					font-weight: bold;
-					gap: 0.25rem;
-					margin-bottom: 0.25rem;
+					gap: 4px;
+					margin-bottom: 4px;
 
 					& > .characteristic-title {
 						margin-right: auto;
@@ -111,20 +110,20 @@
 					& input[name$=".rating"] {
 						border-color: steelblue;
 						border-width: 2px;
-						padding-top: 0.25rem;
+						padding-top: 4px;
 						font-weight: bold;
 						text-align: center;
-						width: 2rem;
+						width: 32px;
 					}
 
 					& input[name$=".fortune"] {
 						border-color: dimgray;
 						font-size: var(--font-size-14);
 						font-weight: bold;
-						height: 1.25rem;
-						padding: 0.25rem 0 0;
+						height: 20px;
+						padding: 4px 0 0;
 						text-align: center;
-						width: 1.25rem;
+						width: 20px;
 					}
 				}
 			}
@@ -133,11 +132,11 @@
 				background-color: #884832;
 				border: solid dimgray;
 				border-radius: 0;
-				border-width: 0.25rem 1rem 0;
+				border-width: 4px 16px 0;
 				color: white;
 				grid-area: creature-attributes;
 				justify-content: space-evenly;
-				padding: 0.25rem 0 0.5rem;
+				padding: 4px 0 8px;
 				text-align: center;
 				text-shadow: var(--outline-black);
 
@@ -160,8 +159,8 @@
 							font-size: var(--font-size-22);
 							font-style: italic;
 							line-height: 1.5;
-							width: 2rem;
 							text-shadow: var(--outline-black);
+							width: 32px;
 						}
 					}
 
@@ -187,16 +186,16 @@
 			& .ratings {
 				flex: 0 0 100px;
 				grid-area: ratings;
-				padding-top: 0.5rem;
+				padding-top: 8px;
 
 				& > .rating {
 					align-items: center;
 					background-color: #240000;
 					border: solid dimgrey;
-					border-radius: 2rem 0 0 2rem;
+					border-radius: 32px 0 0 32px;
 					border-width: 2px 0;
 					display: flex;
-					margin-bottom: 0.25rem;
+					margin-bottom: 4px;
 
 					& > img {
 						border: none;
@@ -207,12 +206,12 @@
 						border: none;
 						color: white;
 						font-weight: bold;
-						padding: 0.25rem 0 0 0.5rem;
-						width: 3rem;
+						padding: 4px 0 0 8px;
+						width: 48px;
 
 						&:focus {
 							box-shadow: none;
-							text-shadow: 0 0 0.25rem var(--color-shadow-primary);
+							text-shadow: 0 0 4px var(--color-shadow-primary);
 						}
 					}
 				}
@@ -226,19 +225,19 @@
 
 			& .special-rule-summary {
 				background: rgba(250, 240, 230, 0.5);
-				border-radius: 0.5rem;
+				border-radius: 8px;
 				grid-area: special-rule-summary;
 
 				& .editor-container,
 				& .editor-content {
-					padding: 0 0.5rem;
+					padding: 0 8px;
 				}
 			}
 
 			& .stance {
 				font-size: var(--font-size-18);
 				grid-area: stance;
-				margin: auto 1rem 1rem;
+				margin: auto 16px 16px;
 				text-align: center;
 
 				&.conservative {
