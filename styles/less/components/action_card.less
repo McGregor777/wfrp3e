@@ -28,7 +28,7 @@
 	& .check {
 		background-color: #201008;
 		color: white;
-		font: bold 12pt var(--font-title);
+		font: bold var(--font-size-16) var(--font-title);
 		height: 20px;
 		text-align: center;
 		text-shadow: var(--outline-black);
@@ -36,7 +36,7 @@
 	}
 
 	& .difficulty-modifiers {
-		font-size: 8pt;
+		font-size: var(--font-size-12);
 		grid-area: action-card-difficulty-modifiers;
 		line-height: 1;
 		margin: auto auto auto 4px;
@@ -57,7 +57,7 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
-		font-size: 10pt;
+		font-size: var(--font-size-14);
 		min-height: 232px;
 		overflow-y: auto;
 		text-shadow: none;
@@ -89,24 +89,22 @@
 	}
 
 	& .name {
-		font: small-caps 16pt var(--font-title);
+		font: small-caps var(--font-size-20)/1 var(--font-title);
 		grid-area: action-card-name;
-		line-height: 16pt;
 		margin: auto;
 		text-align: center;
 		text-shadow: var(--outline-black);
 
 		& > span {
-			font-size: 8pt;
+			font-size: var(--font-size-12);
 		}
 	}
 
 	& .recharge-rating {
 		background-color: cornflowerblue;
 		border-radius: 50%;
-		font: bold 16pt/1 var(--font-title);
+		font: bold var(--font-size-20)/1 var(--font-title);
 		grid-area: action-card-recharge-rating;
-		line-height: 2rem;
 		height: 32px;
 		margin: 8px 8px 0 0;
 		text-align: center;
@@ -116,7 +114,7 @@
 	& .requirements {
 		background-color: #503820;
 		color: white;
-		font-size: 12pt;
+		font-size: var(--font-size-16);
 		text-align: center;
 		text-shadow: var(--outline-black);
 		width: 100%;
@@ -128,8 +126,7 @@
 	}
 
 	& .traits {
-		height: 1.25rem;
-		font-size: 12pt;
+		font-size: var(--font-size-16);
 		font-style: italic;
 		font-stretch: condensed;
 		grid-area: action-card-traits;

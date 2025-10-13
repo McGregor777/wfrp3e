@@ -7,8 +7,9 @@
 	color: white;
 	background-color: saddlebrown;
 	border: 1px solid black;
-	font-size: 12pt;
+	font-size: var(--font-size-16);
 	height: 635px;
+	line-height: 1;
 	margin: 8px;
 	padding: 20px;
 	position: relative;
@@ -27,7 +28,7 @@
 		grid-template-columns: 90px 90px;
 		grid-template-rows: 20px 36px 36px 36px 1fr;
 		height: 185px;
-		line-height: 10pt;
+		line-height: var(--font-size-14);
 		margin: 0 auto;
 		text-align: center;
 		text-shadow: var(--outline-black);
@@ -67,23 +68,23 @@
 			& .content {
 				color: yellow;
 				font-weight: bold;
-				line-height: 16px;
+				line-height: var(--font-size-16);
 			}
 
 			& .title {
-				font-size: 10pt;
+				font-size: var(--font-size-14);
 				font-weight: bold;
-				line-height: 16px;
+				line-height: var(--font-size-16);
 			}
 		}
 
 		& .header {
 			background-color: dimgrey;
 			color: white;
-			font-size: 14pt;
+			font-size: var(--font-size-18);
 			font-weight: bold;
 			grid-area: advance-options-header;
-			line-height: 24px;
+			line-height: var(--font-size-28);
 		}
 	}
 
@@ -131,9 +132,8 @@
 	}
 
 	& .career-aptitudes-title {
-		font-size: 14pt;
+		font-size: var(--font-size-18);
 		font-variant-caps: small-caps;
-		line-height: 14pt;
 	}
 
 	& .description {
@@ -143,9 +143,8 @@
 		column-fill: auto;
 		column-gap: 20px;
 		column-rule: 1px solid red;
-		font-size: 11pt;
+		font-size: var(--font-size-16);
 		height: calc(100% - 96px);
-		line-height: 11pt;
 		overflow: auto;
 		padding: 4px 8px 8px;
 		text-align: justify;
@@ -165,7 +164,7 @@
 	}
 
 	& .name {
-		font-size: 16pt;
+		font-size: var(--font-size-20);
 		font-variant-caps: small-caps;
 		font-weight: bold;
 		position: relative;
@@ -176,7 +175,7 @@
 	}
 
 	& .race-restrictions {
-		font-size: 11pt;
+		font-size: var(--font-size-16);
 		font-variant-caps: small-caps;
 	}
 
