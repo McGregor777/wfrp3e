@@ -8,9 +8,9 @@
 			<div class="form-group slim">
 				<input id="{{@root.rootId}}-Item-{{career._id}}-advances.action"
 					   class="advance-checkbox"
-				       type="checkbox"
-				       data-advance-type="action"
-					   {{#if career.system.advances.action}}checked{{/if}}
+					   type="checkbox"
+					   data-advance-type="action"
+					   {{checked career.system.advances.action}}
 					   {{#unless @root.editable}}disabled{{/unless}} />
 
 				<label for="{{@root.rootId}}-Item-{{career._id}}-advances.action">
@@ -29,7 +29,7 @@
 					   class="advance-checkbox"
 					   type="checkbox"
 					   data-advance-type="talent"
-					   {{#if career.system.advances.talent}}checked{{/if}}
+					   {{checked career.system.advances.talent}}
 					   {{#unless @root.editable}}disabled{{/unless}} />
 
 				<label for="{{@root.rootId}}-Item-{{career._id}}-advances.talent">
@@ -46,9 +46,9 @@
 			<div class="form-group slim">
 				<input id="{{@root.rootId}}-Item-{{career._id}}-advances.skill"
 					   class="advance-checkbox"
-				       type="checkbox"
-				       data-advance-type="skill"
-					   {{#if career.system.advances.skill}}checked{{/if}}
+					   type="checkbox"
+					   data-advance-type="skill"
+					   {{checked career.system.advances.skill}}
 					   {{#unless @root.editable}}disabled{{/unless}} />
 
 				<label for="{{@root.rootId}}-Item-{{career._id}}-advances.skill">
@@ -67,7 +67,7 @@
 					   class="advance-checkbox"
 					   type="checkbox"
 					   data-advance-type="wound"
-					   {{#if career.system.advances.wound}}checked{{/if}}
+					   {{checked career.system.advances.wound}}
 					   {{#unless @root.editable}}disabled{{/unless}} />
 
 				<label for="{{@root.rootId}}-Item-{{career._id}}-advances.wound">
@@ -85,9 +85,9 @@
 				<div class="form-group slim">
 					<input id="{{@root.rootId}}-Item-{{career._id}}-advances.open.{{opa}}"
 						   class="advance-checkbox"
-					       type="checkbox"
+						   type="checkbox"
 						   data-advance-type="open"
-						   {{#if openAdvance}}checked{{/if}}
+						   {{checked openAdvance}}
 						   {{#unless @root.editable}}disabled{{/unless}} />
 
 					<label for="{{@root.rootId}}-Item-{{career._id}}-advances.open.{{opa}}">
@@ -112,8 +112,8 @@
 					<input id="{{@root.rootId}}-Item-{{../career._id}}-careerTransition"
 						   class="advance-checkbox"
 						   name="system.advances.careerTransition.cost"
-					       value="{{this}}"
-					       type="checkbox"
+						   value="{{this}}"
+						   type="checkbox"
 						   data-property="system.advances.careerTransition"
 						   data-advance-type="careerTransition"
 						   {{#if (superiorOrEqualTo ../career.system.advances.careerTransition.cost this)}}checked{{/if}}
@@ -134,9 +134,9 @@
 			<div class="form-group slim">
 				<input id="{{@root.rootId}}-Item-{{career._id}}-dedicationBonus"
 					   class="advance-checkbox"
-				       type="checkbox"
+					   type="checkbox"
 					   data-advance-type="dedicationBonus"
-					   {{#if career.system.advances.dedicationBonus}}checked{{/if}}
+					   {{checked career.system.advances.dedicationBonus}}
 					   {{#unless @root.editable}}disabled{{/unless}} />
 
 				<label for="{{@root.rootId}}-Item-{{career._id}}-dedicationBonus">
@@ -159,9 +159,9 @@
 					{{#for 1 6 1}}
 						<input id="{{@root.rootId}}-Item-{{../../career._id}}-advances.nonCareer.{{nca}}"
 							   class="advance-checkbox"
-						       name="system.advances.nonCareer.{{nca}}.cost"
-						       value="{{this}}"
-						       type="checkbox"
+							   name="system.advances.nonCareer.{{nca}}.cost"
+							   value="{{this}}"
+							   type="checkbox"
 							   data-index="{{nca}}"
 							   data-property="system.advances.nonCareer"
 							   data-advance-type="nonCareer"

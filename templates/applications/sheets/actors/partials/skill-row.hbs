@@ -16,23 +16,23 @@
 
 		<div class="training-level">
 			<input class="item-input"
-			       name="system.trainingLevel"
-			       value="1"
-			       type="checkbox"
+				   name="system.trainingLevel"
+				   value="1"
+				   type="checkbox"
 				   {{#if (superiorOrEqualTo skill.system.trainingLevel 1)}} checked{{/if}}
 				   {{#unless @root.editable}}disabled{{/unless}} />
 
 			<input class="item-input"
-			       name="system.trainingLevel"
-			       value="2"
-			       type="checkbox"
+				   name="system.trainingLevel"
+				   value="2"
+				   type="checkbox"
 				   {{#if (superiorOrEqualTo skill.system.trainingLevel 2)}} checked{{/if}}
 				   {{#unless @root.editable}}disabled{{/unless}} />
 
 			<input class="item-input"
-			       name="system.trainingLevel"
-			       value="3"
-			       type="checkbox"
+				   name="system.trainingLevel"
+				   value="3"
+				   type="checkbox"
 				   {{#if (superiorOrEqualTo skill.system.trainingLevel 3)}} checked{{/if}}
 				   {{#unless @root.editable}}disabled{{/unless}} />
 		</div>
