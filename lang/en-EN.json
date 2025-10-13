@@ -529,7 +529,7 @@
 
 	"COMBAT": {
 		"FIELDS.type.label": "Encounter Type",
-		"types": {
+		"TYPES": {
 			"combat": "Combat",
 			"social": "Social"
 		}

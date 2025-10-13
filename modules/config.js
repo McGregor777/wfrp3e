@@ -976,11 +976,11 @@ export const WFRP3e = {
 	encounterTypes: {
 		combat: {
 			characteristic: "agility",
-			name: "COMBAT.types.combat"
+			name: "COMBAT.TYPES.combat"
 		},
 		social: {
 			characteristic: "fellowship",
-			name: "COMBAT.types.social"
+			name: "COMBAT.TYPES.social"
 		}
 	},
 	rarities: {

@@ -528,7 +528,7 @@
 
 	"COMBAT": {
 		"FIELDS.type.label": "Type de rencontre",
-		"types": {
+		"TYPES": {
 			"combat": "Combat",
 			"social": "Social"
 		}
