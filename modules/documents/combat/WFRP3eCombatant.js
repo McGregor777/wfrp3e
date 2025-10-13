@@ -1,4 +1,4 @@
-import CheckBuilder from "../applications/CheckBuilder.js";
+import CheckBuilder from "../../applications/dice/CheckBuilder.js";
 
 /**
  * Extends the base Combatant document.

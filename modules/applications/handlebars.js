@@ -1,8 +1,8 @@
-import {capitalize} from "./helpers.js";
+import {capitalize} from "../helpers.js";
 
 export default function()
 {
-    Hooks.on("init", () => {
+	Hooks.on("init", () => {
 		Handlebars.registerHelper("abs", (number) => Math.abs(number));
 		Handlebars.registerHelper("and", (firstCondition, secondCondition) => firstCondition && secondCondition);
 		Handlebars.registerHelper("capitalize", (string) => capitalize(string));

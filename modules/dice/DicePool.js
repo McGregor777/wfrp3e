@@ -1,10 +1,10 @@
-import ChallengeDie from "./dice/ChallengeDie.js";
-import CharacteristicDie from "./dice/CharacteristicDie.js";
-import ConservativeDie from "./dice/ConservativeDie.js";
-import ExpertiseDie from "./dice/ExpertiseDie.js";
-import FortuneDie from "./dice/FortuneDie.js";
-import MisfortuneDie from "./dice/MisfortuneDie.js";
-import RecklessDie from "./dice/RecklessDie.js";
+import ChallengeDie from "./terms/ChallengeDie.js";
+import CharacteristicDie from "./terms/CharacteristicDie.js";
+import ConservativeDie from "./terms/ConservativeDie.js";
+import ExpertiseDie from "./terms/ExpertiseDie.js";
+import FortuneDie from "./terms/FortuneDie.js";
+import MisfortuneDie from "./terms/MisfortuneDie.js";
+import RecklessDie from "./terms/RecklessDie.js";
 import WFRP3eRoll from "./WFRP3eRoll.js";
 
 /**
@@ -27,7 +27,7 @@ import WFRP3eRoll from "./WFRP3eRoll.js";
 /**
  * @typedef {Object} CheckOutcome
  */
-
+//#TODO Merge DicePool & WFRP3eRoll (see feasibility first).
 /**
  * DicePool utility helps prepare WFRP3e's special dice pools.
  * @property {Object} dice The various dice that will be rolled.

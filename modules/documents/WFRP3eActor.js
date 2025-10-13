@@ -1,17 +1,20 @@
-import ActionSelector from "../applications/selectors/ActionSelector.js";
-import CareerSelector from "../applications/selectors/CareerSelector.js";
-import TalentSelector from "../applications/selectors/TalentSelector.js";
-import SkillUpgrader from "../applications/selectors/SkillUpgrader.js";
-import CareerAdvanceDialog from "../applications/CareerAdvanceDialog.js";
-import CheckBuilder from "../applications/CheckBuilder.js";
-import PartyEventEditor from "../applications/PartyEventEditor.js";
+import ActionSelector from "../applications/apps/selectors/ActionSelector.js";
+import CareerSelector from "../applications/apps/selectors/CareerSelector.js";
+import TalentSelector from "../applications/apps/selectors/TalentSelector.js";
+import SkillUpgrader from "../applications/apps/selectors/SkillUpgrader.js";
+import CareerAdvanceDialog from "../applications/apps/CareerAdvanceDialog.js";
+import CheckBuilder from "../applications/dice/CheckBuilder.js";
+import PartyEventEditor from "../applications/apps/PartyEventEditor.js";
 import WFRP3eEffect from "./WFRP3eEffect.js";
 import {capitalize} from "../helpers.js";
 
 /**
- * Provides the main Actor data computation and organization.
- * WFRP3eActor contains all the preparation data and methods used for preparing an actors: going through each Owned Item, preparing them for display based on characteristics.
- * @see WFRP3eCharacterSheet - Character sheet class
+ * The client-side WFRP3eActor document which extends the common Actor model.
+ * @event hookEvents.applyCompendiumArt
+   @event hookEvents.modifyTokenAttribute
+ * @mixes ClientDocumentMixin
+ * @see Actors The world-level collection of Actor documents
+ * @see WFRP3eCharacterSheet The WFRP3eActor configuration application
  */
 export default class WFRP3eActor extends Actor
 {
@@ -206,19 +209,16 @@ export default class WFRP3eActor extends Actor
 				if(career.system.advances.action)
 					throw new Error("Unable to buy the action advance: the career's action advance is unavailable.");
 
-				ActionSelector.wait({
-					items: await ActionSelector.buildAdvanceOptionsList(this)
-				}).then(action => this.buyActionAdvance(action, career, type));
+				ActionSelector.wait({items: await ActionSelector.buildOptionsList(this)})
+					.then(action => this.buyActionAdvance(action, career, type));
 				break;
 
 			case "talent":
 				if(career.system.advances.talent)
 					throw new Error("Unable to buy the talent advance: the career's talent advance is unavailable.");
 
-				TalentSelector.wait({
-					items: await TalentSelector.buildAdvanceOptionsList(this, career),
-					types: career.system.sockets.map(socket => socket.type)
-				}).then(talent => this.buyTalentAdvance(talent, career, type));
+				TalentSelector.wait({items: await TalentSelector.buildAdvanceOptionsList(this, career)})
+					.then(talent => this.buyTalentAdvance(talent, career, type));
 				break;
 
 			case "skill":

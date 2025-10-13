@@ -1,6 +1,6 @@
-import TalentSelector from "./applications/selectors/TalentSelector.js";
-import {capitalize} from "./helpers.js";
-
+import TalentSelector from "../applications/apps/selectors/TalentSelector.js";
+import {capitalize} from "../helpers.js";
+//#TODO Merge DicePool and CheckHelper (see feasibility first).
 /**
  * The CheckHelper provides methods to prepare checks.
  */
@@ -54,7 +54,7 @@ export default class CheckHelper
 				  });
 
 		if(triggeredItems.length > 0) {
-			let selectedItemUuid = await TalentSelector.wait({items: triggeredItems});
+			let selectedItemUuid = await TalentSelector.wait(triggeredItems);
 
 			if(selectedItemUuid) {
 				const selectedTalent = await fromUuid(selectedItemUuid),

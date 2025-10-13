@@ -1,5 +1,5 @@
-import CheckBuilder from "../../CheckBuilder.js";
-import CheckHelper from "../../../CheckHelper.js";
+import CheckBuilder from "../../dice/CheckBuilder.js";
+import CheckHelper from "../../../dice/CheckHelper.js";
 
 /** @inheritDoc */
 export default class WFRP3eChatLog extends foundry.applications.sidebar.tabs.ChatLog

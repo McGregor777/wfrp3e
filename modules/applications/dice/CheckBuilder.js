@@ -1,5 +1,5 @@
-import DicePool from "../DicePool.js";
-import CheckHelper from "../CheckHelper.js";
+import CheckHelper from "../../dice/CheckHelper.js";
+import DicePool from "../../dice/DicePool.js";
 
 /** @inheritDoc */
 export default class CheckBuilder extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)
@@ -46,9 +46,9 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 	/** @inheritDoc */
 	static PARTS = {
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
-		pools: {template: "systems/wfrp3e/templates/applications/check-builder/pools.hbs"},
-		quickSettings: {template: "systems/wfrp3e/templates/applications/check-builder/quick-settings.hbs"},
-		settings: {template: "systems/wfrp3e/templates/applications/check-builder/settings.hbs"},
+		pools: {template: "systems/wfrp3e/templates/applications/dice/check-builder/pools.hbs"},
+		quickSettings: {template: "systems/wfrp3e/templates/applications/dice/check-builder/quick-settings.hbs"},
+		settings: {template: "systems/wfrp3e/templates/applications/dice/check-builder/settings.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 
@@ -303,7 +303,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 		}
 
 		this.dicePool[target.dataset.type][target.dataset.subtype] += amount;
-		this.render();
+		await this.render();
 	}
 
 	/**
@@ -330,7 +330,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 		}
 
 		this.dicePool.convertCharacteristicDie(target.dataset.type, amount);
-		this.render();
+		await this.render();
 	}
 
 	/**

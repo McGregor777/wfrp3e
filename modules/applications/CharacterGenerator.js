@@ -1,5 +1,5 @@
 import WFRP3eActor from "../documents/WFRP3eActor.js";
-import TalentSelector from "./selectors/TalentSelector.js";
+import TalentSelector from "./apps/selectors/TalentSelector.js";
 
 /** @inheritDoc */
 export default class CharacterGenerator extends FormApplication

@@ -1,29 +1,29 @@
 import {WFRP3e} from "./modules/config.js";
 import CharacterGenerator from "./modules/applications/CharacterGenerator.js";
-import WFRP3eEffectConfig from "./modules/applications/WFRP3eEffectConfig.js";
-import WFRP3eCharacterSheet from "./modules/applications/actors/WFRP3eCharacterSheet.js";
-import WFRP3eCreatureSheet from "./modules/applications/actors/WFRP3eCreatureSheet.js";
-import WFRP3eGroupSheet from "./modules/applications/actors/WFRP3eGroupSheet.js";
-import WFRP3ePartySheet from "./modules/applications/actors/WFRP3ePartySheet.js";
-import WFRP3eAbilitySheet from "./modules/applications/items/WFRP3eAbilitySheet.js";
-import WFRP3eActionSheet from "./modules/applications/items/WFRP3eActionSheet.js";
-import WFRP3eArmourSheet from "./modules/applications/items/WFRP3eArmourSheet.js";
-import WFRP3eCareerSheet from "./modules/applications/items/WFRP3eCareerSheet.js";
-import WFRP3eConditionSheet from "./modules/applications/items/WFRP3eConditionSheet.js";
-import WFRP3eCriticalWoundSheet from "./modules/applications/items/WFRP3eCriticalWoundSheet.js";
-import WFRP3eDiseaseSheet from "./modules/applications/items/WFRP3eDiseaseSheet.js";
-import WFRP3eInsanitySheet from "./modules/applications/items/WFRP3eInsanitySheet.js";
-import WFRP3eMiscastSheet from "./modules/applications/items/WFRP3eMiscastSheet.js";
-import WFRP3eMoneySheet from "./modules/applications/items/WFRP3eMoneySheet.js";
-import WFRP3eMutationSheet from "./modules/applications/items/WFRP3eMutationSheet.js";
-import WFRP3eSkillSheet from "./modules/applications/items/WFRP3eSkillSheet.js";
-import WFRP3eTalentSheet from "./modules/applications/items/WFRP3eTalentSheet.js";
-import WFRP3eTrappingSheet from "./modules/applications/items/WFRP3eTrappingSheet.js";
-import WFRP3eWeaponSheet from "./modules/applications/items/WFRP3eWeaponSheet.js";
+import WFRP3eEffectConfig from "./modules/applications/sheets/WFRP3eEffectConfig.js";
+import WFRP3eCharacterSheet from "./modules/applications/sheets/actors/WFRP3eCharacterSheet.js";
+import WFRP3eCreatureSheet from "./modules/applications/sheets/actors/WFRP3eCreatureSheet.js";
+import WFRP3eGroupSheet from "./modules/applications/sheets/actors/WFRP3eGroupSheet.js";
+import WFRP3ePartySheet from "./modules/applications/sheets/actors/WFRP3ePartySheet.js";
+import WFRP3eAbilitySheet from "./modules/applications/sheets/items/WFRP3eAbilitySheet.js";
+import WFRP3eActionSheet from "./modules/applications/sheets/items/WFRP3eActionSheet.js";
+import WFRP3eArmourSheet from "./modules/applications/sheets/items/WFRP3eArmourSheet.js";
+import WFRP3eCareerSheet from "./modules/applications/sheets/items/WFRP3eCareerSheet.js";
+import WFRP3eConditionSheet from "./modules/applications/sheets/items/WFRP3eConditionSheet.js";
+import WFRP3eCriticalWoundSheet from "./modules/applications/sheets/items/WFRP3eCriticalWoundSheet.js";
+import WFRP3eDiseaseSheet from "./modules/applications/sheets/items/WFRP3eDiseaseSheet.js";
+import WFRP3eInsanitySheet from "./modules/applications/sheets/items/WFRP3eInsanitySheet.js";
+import WFRP3eMiscastSheet from "./modules/applications/sheets/items/WFRP3eMiscastSheet.js";
+import WFRP3eMoneySheet from "./modules/applications/sheets/items/WFRP3eMoneySheet.js";
+import WFRP3eMutationSheet from "./modules/applications/sheets/items/WFRP3eMutationSheet.js";
+import WFRP3eSkillSheet from "./modules/applications/sheets/items/WFRP3eSkillSheet.js";
+import WFRP3eTalentSheet from "./modules/applications/sheets/items/WFRP3eTalentSheet.js";
+import WFRP3eTrappingSheet from "./modules/applications/sheets/items/WFRP3eTrappingSheet.js";
+import WFRP3eWeaponSheet from "./modules/applications/sheets/items/WFRP3eWeaponSheet.js";
 import WFRP3eChatLog from "./modules/applications/sidebar/tabs/WFRP3eChatLog.js";
 import WFRP3eCombatTracker from "./modules/applications/sidebar/tabs/WFRP3eCombatTracker.js";
-import WFRP3eCombat from "./modules/combat/WFRP3eCombat.js";
-import WFRP3eCombatant from "./modules/combat/WFRP3eCombatant.js";
+import WFRP3eCombat from "./modules/documents/combat/WFRP3eCombat.js";
+import WFRP3eCombatant from "./modules/documents/combat/WFRP3eCombatant.js";
 import WFRP3eCharacterDataModel from "./modules/data/actors/WFRP3eCharacterDataModel.js";
 import WFRP3eCreatureDataModel from "./modules/data/actors/WFRP3eCreatureDataModel.js";
 import WFRP3eGroupDataModel from "./modules/data/actors/WFRP3eGroupDataModel.js";
@@ -45,19 +45,19 @@ import WFRP3eTrappingDataModel from "./modules/data/items/WFRP3eTrappingDataMode
 import WFRP3eWeaponDataModel from "./modules/data/items/WFRP3eWeaponDataModel.js";
 import WFRP3eCombatDataModel from "./modules/data/WFRP3eCombatDataModel.js";
 import WFRP3eEffectDataModel from "./modules/data/WFRP3eEffectDataModel.js";
-import ChallengeDie from "./modules/dice/ChallengeDie.js";
-import CharacteristicDie from "./modules/dice/CharacteristicDie.js";
-import ConservativeDie from "./modules/dice/ConservativeDie.js";
-import ExpertiseDie from "./modules/dice/ExpertiseDie.js";
-import FortuneDie from "./modules/dice/FortuneDie.js";
-import MisfortuneDie from "./modules/dice/MisfortuneDie.js";
-import RecklessDie from "./modules/dice/RecklessDie.js";
+import CheckHelper from "./modules/dice/CheckHelper.js";
+import WFRP3eRoll from "./modules/dice/WFRP3eRoll.js";
+import ChallengeDie from "./modules/dice/terms/ChallengeDie.js";
+import CharacteristicDie from "./modules/dice/terms/CharacteristicDie.js";
+import ConservativeDie from "./modules/dice/terms/ConservativeDie.js";
+import ExpertiseDie from "./modules/dice/terms/ExpertiseDie.js";
+import FortuneDie from "./modules/dice/terms/FortuneDie.js";
+import MisfortuneDie from "./modules/dice/terms/MisfortuneDie.js";
+import RecklessDie from "./modules/dice/terms/RecklessDie.js";
 import WFRP3eActor from "./modules/documents/WFRP3eActor.js"
 import WFRP3eEffect from "./modules/documents/WFRP3eEffect.js"
 import WFRP3eItem from "./modules/documents/WFRP3eItem.js"
-import CheckHelper from "./modules/CheckHelper.js";
-import WFRP3eRoll from "./modules/WFRP3eRoll.js";
-import * as handlebarsHelpers from "./modules/handlebars.js";
+import * as handlebarsHelpers from "./modules/applications/handlebars.js";
 
 async function preloadHandlebarsTemplates()
 {
@@ -100,7 +100,7 @@ async function preloadHandlebarsTemplates()
 Hooks.once("init", async () => {
 	console.log("WFRP3e | Initialising Warhammer Fantasy Roleplay - 3rd Edition System");
 
-	CONFIG.WFRP3e = WFRP3e;
+	CONFIG.WFRP3e = Object.freeze(WFRP3e);
 
 	Object.assign(CONFIG.Actor.dataModels, {
 		"character": WFRP3eCharacterDataModel,
@@ -193,10 +193,12 @@ Hooks.once("init", async () => {
 	Items.registerSheet("wfrp3e", WFRP3eTrappingSheet, {label: "Trapping Sheet", types: ["trapping"], makeDefault: true});
 
 	await preloadHandlebarsTemplates();
+
+	console.log("WFRP3e | Warhammer Fantasy Roleplay - 3rd Edition System initialized");
 });
 
-// Update chat messages with dice images
-Hooks.on("renderChatMessage", (app, html, messageData) => {
+//#TODO Transfer this behaviour into a WFRP3eChatLog (if possible).
+Hooks.on("renderChatMessage", (message, html, context) => {
 	html.find(".roll-effects:not(.disabled) .effect-toggle").click((event) => {
 		event.stopPropagation();
 

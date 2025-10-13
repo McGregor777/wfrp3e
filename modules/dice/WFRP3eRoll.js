@@ -1,5 +1,5 @@
 import CheckHelper from "./CheckHelper.js";
-import WFRP3eDie from "./dice/WFRP3eDie.js";
+import WFRP3eDie from "./terms/WFRP3eDie.js";
 
 /** @inheritDoc */
 export default class WFRP3eRoll extends Roll

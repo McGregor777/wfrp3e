@@ -1,6 +1,6 @@
-import ActionEffectEditor from "../applications/ActionEffectEditor.js";
-import CheckBuilder from "../applications/CheckBuilder.js";
-import CheckHelper from "../CheckHelper.js";
+import ActionEffectEditor from "../applications/apps/ActionEffectEditor.js";
+import CheckBuilder from "../applications/dice/CheckBuilder.js";
+import CheckHelper from "../dice/CheckHelper.js";
 import WFRP3eEffect from "./WFRP3eEffect.js";
 import {capitalize} from "../helpers.js";
 
