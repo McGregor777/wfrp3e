@@ -7,7 +7,7 @@ export default class WFRP3eChatLog extends foundry.applications.sidebar.tabs.Cha
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {actions: {rollFreeCheck: this.#rollFreeCheck}};
 
-	/** @override */
+	/** @inheritDoc */
 	static PARTS = {
 		...super.PARTS,
 		input: {template: "systems/wfrp3e/templates/sidebar/tabs/chat/input.hbs"}
@@ -22,7 +22,7 @@ export default class WFRP3eChatLog extends foundry.applications.sidebar.tabs.Cha
 				const message = game.messages.get(li.dataset.messageId);
 				return message.rolls.length > 0
 					&& message.rolls[0].options.checkData
-					&& (!Object.hasOwn(message.rolls[0].options.checkData, "outcome") || game.user.isGM);
+					&& ("outcome" in message.rolls[0].options.checkData || game.user.isGM);
 			},
 			callback: li => CheckHelper.useTalentOrAbility(li.dataset.messageId)
 		}, {
