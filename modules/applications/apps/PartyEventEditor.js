@@ -42,7 +42,7 @@ export default class PartyEventEditor extends foundry.applications.api.Handlebar
 
 	/** @inheritDoc */
 	static PARTS = {
-		main: {template: "systems/wfrp3e/templates/applications/party-event-editor/main.hbs"},
+		main: {template: "systems/wfrp3e/templates/applications/apps/party-event-editor/main.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 

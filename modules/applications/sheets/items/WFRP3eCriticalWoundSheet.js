@@ -9,8 +9,8 @@ export default class WFRP3eCriticalWoundSheet extends WFRP3eItemSheet
 	/** @inheritDoc */
 	static PARTS = {
 		...super.PARTS,
-		main: {template: "systems/wfrp3e/templates/applications/items/critical-wound-sheet/main.hbs"},
-		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+		main: {template: "systems/wfrp3e/templates/applications/sheets/items/critical-wound-sheet/main.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/sheets/items/effects.hbs"}
 	};
 
 	/** @inheritDoc */

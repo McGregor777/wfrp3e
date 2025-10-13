@@ -37,8 +37,8 @@ export default class SkillUpgrader extends AbstractSelector
 
 	/** @inheritDoc */
 	static PARTS = {
-		main: {template: "systems/wfrp3e/templates/applications/selectors/skill-upgrader/main.hbs"},
-		selection: {template: "systems/wfrp3e/templates/applications/selectors/skill-upgrader/selection.hbs"},
+		main: {template: "systems/wfrp3e/templates/applications/apps/selectors/skill-upgrader/main.hbs"},
+		selection: {template: "systems/wfrp3e/templates/applications/apps/selectors/skill-upgrader/selection.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 

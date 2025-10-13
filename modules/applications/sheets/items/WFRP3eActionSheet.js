@@ -15,11 +15,11 @@ export default class WFRP3eActionSheet extends WFRP3eItemSheet
 
 	/** @inheritDoc */
 	static PARTS = {
-		header: {template: "systems/wfrp3e/templates/applications/items/action-sheet/header.hbs"},
+		header: {template: "systems/wfrp3e/templates/applications/sheets/items/action-sheet/header.hbs"},
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
-		conservative: {template: "systems/wfrp3e/templates/applications/items/action-sheet/main.hbs"},
-		reckless: {template: "systems/wfrp3e/templates/applications/items/action-sheet/main.hbs"},
-		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+		conservative: {template: "systems/wfrp3e/templates/applications/sheets/items/action-sheet/main.hbs"},
+		reckless: {template: "systems/wfrp3e/templates/applications/sheets/items/action-sheet/main.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/sheets/items/effects.hbs"}
 	};
 
 	/** @inheritDoc */

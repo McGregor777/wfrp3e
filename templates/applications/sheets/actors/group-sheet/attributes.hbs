@@ -14,12 +14,12 @@
 	</div>
 
 	{{#each system.specialAbilities as |specialAbility spAb|}}
-		{{>systems/wfrp3e/templates/applications/actors/partials/ability-track.hbs
+		{{>systems/wfrp3e/templates/applications/sheets/actors/partials/ability-track.hbs
 				specialAbility=specialAbility
 				index=spAb
 				fields=@root.fields.specialAbilities.element.fields}}
 
-		{{>systems/wfrp3e/templates/applications/actors/partials/special-ability.hbs
+		{{>systems/wfrp3e/templates/applications/sheets/actors/partials/special-ability.hbs
 				specialAbility=specialAbility
 				index=spAb
 				fields=@root.fields.specialAbilities.element.fields}}

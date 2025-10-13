@@ -7,7 +7,7 @@ export default class WFRP3eEffectConfig extends foundry.applications.sheets.Acti
 		details: {template: "templates/sheets/active-effect/details.hbs", scrollable: [""]},
 		duration: {template: "templates/sheets/active-effect/duration.hbs"},
 		changes: {template: "templates/sheets/active-effect/changes.hbs", scrollable: ["ol[data-changes]"]},
-		scripts: {template: "systems/wfrp3e/templates/applications/active-effect-config/scripts.hbs"},
+		scripts: {template: "systems/wfrp3e/templates/applications/sheets/active-effect-config/scripts.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 

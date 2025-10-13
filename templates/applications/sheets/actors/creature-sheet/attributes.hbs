@@ -2,7 +2,7 @@
 	<div class="characteristics">
 		{{#each fields.characteristics.fields as |characteristic char|}}
 			{{#with (lookup @root.characteristics char) as |char|}}
-				{{>systems/wfrp3e/templates/applications/actors/partials/characteristic.hbs
+				{{>systems/wfrp3e/templates/applications/sheets/actors/partials/characteristic.hbs
 						characteristic=characteristic
 						char=char}}
 			{{/with}}
@@ -14,24 +14,24 @@
 	</div>
 
 	<div class="ratings">
-		{{>systems/wfrp3e/templates/applications/actors/partials/rating.hbs
+		{{>systems/wfrp3e/templates/applications/sheets/actors/partials/rating.hbs
 				ratingName="damageRating"
 				icon="systems/wfrp3e/assets/images/damage-rating.webp"}}
 
-		{{>systems/wfrp3e/templates/applications/actors/partials/rating.hbs
+		{{>systems/wfrp3e/templates/applications/sheets/actors/partials/rating.hbs
 				ratingName="defenceValue"
 				icon="systems/wfrp3e/assets/images/defence-value.webp"}}
 
-		{{>systems/wfrp3e/templates/applications/actors/partials/rating.hbs
+		{{>systems/wfrp3e/templates/applications/sheets/actors/partials/rating.hbs
 				ratingName="soakValue"
 				icon="systems/wfrp3e/assets/images/soak-value.webp"}}
 
 		{{#if system.nemesis}}
-			{{>systems/wfrp3e/templates/applications/actors/partials/impairment.hbs
+			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/impairment.hbs
 					impairment=fields.impairments.fields.fatigue
 					token="systems/wfrp3e/assets/images/token-red.webp"}}
 
-			{{>systems/wfrp3e/templates/applications/actors/partials/impairment.hbs
+			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/impairment.hbs
 					impairment=fields.impairments.fields.stress
 					token="systems/wfrp3e/assets/images/token-blue.webp"}}
 		{{/if}}
@@ -101,7 +101,7 @@
 
 	<fieldset class="inline creature-attributes">
 		{{#each fields.attributes.fields as |attribute attr|}}
-			{{>systems/wfrp3e/templates/applications/actors/partials/creature-attribute.hbs
+			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/creature-attribute.hbs
 					attribute=attribute}}
 		{{/each}}
 	</fieldset>

@@ -38,12 +38,12 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 
 	/** @inheritDoc */
 	static PARTS = {
-		search: {template: "systems/wfrp3e/templates/applications/selectors/search.hbs"},
+		search: {template: "systems/wfrp3e/templates/applications/apps/selectors/search.hbs"},
 		main: {
-			template: "systems/wfrp3e/templates/applications/selectors/main.hbs",
+			template: "systems/wfrp3e/templates/applications/apps/selectors/main.hbs",
 			scrollable: [".item-container"]
 		},
-		selection: {template: "systems/wfrp3e/templates/applications/selectors/selection.hbs"},
+		selection: {template: "systems/wfrp3e/templates/applications/apps/selectors/selection.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 

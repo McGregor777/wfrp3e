@@ -15,10 +15,10 @@ export default class WFRP3eCareerSheet extends WFRP3eItemSheet
 	/** @inheritDoc */
 	static PARTS = {
 		...super.PARTS,
-		main: {template: "systems/wfrp3e/templates/applications/items/career-sheet/main.hbs"},
-		advanceOptions: {template: "systems/wfrp3e/templates/applications/items/career-sheet/advance-options.hbs"},
-		setting: {template: "systems/wfrp3e/templates/applications/items/career-sheet/setting.hbs"},
-		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+		main: {template: "systems/wfrp3e/templates/applications/sheets/items/career-sheet/main.hbs"},
+		advanceOptions: {template: "systems/wfrp3e/templates/applications/sheets/items/career-sheet/advance-options.hbs"},
+		setting: {template: "systems/wfrp3e/templates/applications/sheets/items/career-sheet/setting.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/sheets/items/effects.hbs"}
 	};
 
 	/** @inheritDoc */

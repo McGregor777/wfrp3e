@@ -9,8 +9,8 @@ export default class WFRP3eAbilitySheet extends WFRP3eItemSheet
 	/** @inheritDoc */
 	static PARTS = {
 		...super.PARTS,
-		main: {template: "systems/wfrp3e/templates/applications/items/ability-sheet/main.hbs"},
-		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+		main: {template: "systems/wfrp3e/templates/applications/sheets/items/ability-sheet/main.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/sheets/items/effects.hbs"}
 	};
 
 	/** @inheritDoc */

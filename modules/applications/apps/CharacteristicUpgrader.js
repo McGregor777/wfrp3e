@@ -34,8 +34,8 @@ export default class CharacteristicUpgrader extends foundry.applications.api.Han
 
 	/** @inheritDoc */
 	static PARTS = {
-		characteristics: {template: "systems/wfrp3e/templates/applications/characteristic-upgrader/characteristics.hbs"},
-		selection: {template: "systems/wfrp3e/templates/applications/characteristic-upgrader/selection.hbs"},
+		characteristics: {template: "systems/wfrp3e/templates/applications/apps/characteristic-upgrader/characteristics.hbs"},
+		selection: {template: "systems/wfrp3e/templates/applications/apps/characteristic-upgrader/selection.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 

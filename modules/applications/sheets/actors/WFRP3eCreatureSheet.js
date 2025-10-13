@@ -15,27 +15,27 @@ export default class WFRP3eCreatureSheet extends WFRP3eActorSheet
 
 	/** @inheritDoc */
 	static PARTS = {
-		header: {template: "systems/wfrp3e/templates/applications/actors/creature-sheet/header.hbs"},
-		category: {template: "systems/wfrp3e/templates/applications/actors/creature-sheet/category.hbs"},
+		header: {template: "systems/wfrp3e/templates/applications/sheets/actors/creature-sheet/header.hbs"},
+		category: {template: "systems/wfrp3e/templates/applications/sheets/actors/creature-sheet/category.hbs"},
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
 		attributes: {
-			template: "systems/wfrp3e/templates/applications/actors/creature-sheet/attributes.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/creature-sheet/attributes.hbs",
 			scrollable: [".table-body"]
 		},
 		actions: {
-			template: "systems/wfrp3e/templates/applications/actors/actions.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/actions.hbs",
 			scrollable: [".item-container", ".table-body"]
 		},
 		talents: {
-			template: "systems/wfrp3e/templates/applications/actors/talents.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/talents.hbs",
 			scrollable: [".item-container", ".table-body"]
 		},
 		effects: {
-			template: "systems/wfrp3e/templates/applications/actors/effects.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/effects.hbs",
 			scrollable: [".item-container", ".table-body"]
 		},
-		trappings: {template: "systems/wfrp3e/templates/applications/actors/trappings.hbs"},
-		details: {template: "systems/wfrp3e/templates/applications/actors/creature-sheet/details.hbs"}
+		trappings: {template: "systems/wfrp3e/templates/applications/sheets/actors/trappings.hbs"},
+		details: {template: "systems/wfrp3e/templates/applications/sheets/actors/creature-sheet/details.hbs"}
 	};
 
 	/** @inheritDoc */

@@ -9,8 +9,8 @@ export default class WFRP3eInsanitySheet extends WFRP3eItemSheet
 	/** @inheritDoc */
 	static PARTS = {
 		...super.PARTS,
-		main: {template: "systems/wfrp3e/templates/applications/items/insanity-sheet/main.hbs"},
-		effects: {template: "systems/wfrp3e/templates/applications/items/effects.hbs"}
+		main: {template: "systems/wfrp3e/templates/applications/sheets/items/insanity-sheet/main.hbs"},
+		effects: {template: "systems/wfrp3e/templates/applications/sheets/items/effects.hbs"}
 	};
 
 	/** @inheritDoc */

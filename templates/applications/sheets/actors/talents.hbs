@@ -63,9 +63,9 @@
 			<div class="table-body">
 				{{#each items as |item i|}}
 					{{#if (sameAs item.type "talent")}}
-						{{>systems/wfrp3e/templates/applications/actors/partials/talent-row.hbs item=item}}
+						{{>systems/wfrp3e/templates/applications/sheets/actors/partials/talent-row.hbs item=item}}
 					{{else if (sameAs item.type "ability")}}
-						{{>systems/wfrp3e/templates/applications/actors/partials/ability-row.hbs item=item}}
+						{{>systems/wfrp3e/templates/applications/sheets/actors/partials/ability-row.hbs item=item}}
 					{{/if}}
 				{{/each}}
 			</div>

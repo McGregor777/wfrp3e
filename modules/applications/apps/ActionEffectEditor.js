@@ -46,8 +46,8 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 	/** @inheritDoc */
 	static PARTS = {
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
-		main: {template: "systems/wfrp3e/templates/applications/action-effects-editor/main.hbs"},
-		script: {template: "systems/wfrp3e/templates/applications/action-effects-editor/script.hbs"},
+		main: {template: "systems/wfrp3e/templates/applications/apps/action-effects-editor/main.hbs"},
+		script: {template: "systems/wfrp3e/templates/applications/apps/action-effects-editor/script.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 

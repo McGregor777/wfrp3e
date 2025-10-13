@@ -21,22 +21,22 @@ export default class WFRP3ePartySheet extends WFRP3eActorSheet
 	/** @inheritDoc */
 	static PARTS = {
 		attributes: {
-			template: "systems/wfrp3e/templates/applications/actors/party-sheet/attributes.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/party-sheet/attributes.hbs",
 			scrollable: [".sockets"]
 		},
 		talents: {
-			template: "systems/wfrp3e/templates/applications/actors/talents.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/talents.hbs",
 			scrollable: [".item-container", ".table-body"]
 		},
 		actions: {
-			template: "systems/wfrp3e/templates/applications/actors/actions.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/actions.hbs",
 			scrollable: [".item-container", ".table-body"]
 		},
 		effects: {
-			template: "systems/wfrp3e/templates/applications/actors/effects.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/effects.hbs",
 			scrollable: [".item-container", ".table-body"]
 		},
-		trappings: {template: "systems/wfrp3e/templates/applications/actors/trappings.hbs"},
+		trappings: {template: "systems/wfrp3e/templates/applications/sheets/actors/trappings.hbs"},
 	};
 
 	/** @inheritDoc */

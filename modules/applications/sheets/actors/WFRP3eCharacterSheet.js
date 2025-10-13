@@ -16,30 +16,30 @@ export default class WFRP3eCharacterSheet extends WFRP3eActorSheet
 
 	/** @inheritDoc */
 	static PARTS = {
-		header: {template: "systems/wfrp3e/templates/applications/actors/character-sheet/header.hbs"},
+		header: {template: "systems/wfrp3e/templates/applications/sheets/actors/character-sheet/header.hbs"},
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
 		attributes: {
-			template: "systems/wfrp3e/templates/applications/actors/character-sheet/attributes.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/character-sheet/attributes.hbs",
 			scrollable: [".table-body"]
 		},
 		careers: {
-			template: "systems/wfrp3e/templates/applications/actors/character-sheet/careers.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/character-sheet/careers.hbs",
 			scrollable: [".item-container"]
 		},
 		talents: {
-			template: "systems/wfrp3e/templates/applications/actors/talents.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/talents.hbs",
 			scrollable: [".item-container", ".table-body"]
 		},
 		actions: {
-			template: "systems/wfrp3e/templates/applications/actors/actions.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/actions.hbs",
 			scrollable: [".item-container", ".table-body"]
 		},
 		effects: {
-			template: "systems/wfrp3e/templates/applications/actors/effects.hbs",
+			template: "systems/wfrp3e/templates/applications/sheets/actors/effects.hbs",
 			scrollable: [".item-container", ".table-body"]
 		},
-		trappings: {template: "systems/wfrp3e/templates/applications/actors/trappings.hbs"},
-		background: {template: "systems/wfrp3e/templates/applications/actors/character-sheet/background.hbs"}
+		trappings: {template: "systems/wfrp3e/templates/applications/sheets/actors/trappings.hbs"},
+		background: {template: "systems/wfrp3e/templates/applications/sheets/actors/character-sheet/background.hbs"}
 	};
 
 	/** @inheritDoc */
@@ -182,7 +182,7 @@ export default class WFRP3eCharacterSheet extends WFRP3eActorSheet
 	}
 
 	/**
-	 * Adds every basic skills to the Character.
+	 * Adds every basic skill to the Character.
 	 * @returns {Promise<void>}
 	 * @private
 	 */

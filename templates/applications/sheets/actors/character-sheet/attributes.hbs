@@ -1,28 +1,32 @@
 <section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
 	<div class="characteristics-and-impairments">
-		<h3 class="character-sheet-title">{{localize "CHARACTER.TABS.attributes"}}</h3>
+		<h3 class="character-sheet-title">
+			{{localize "CHARACTER.TABS.attributes"}}
+		</h3>
 
 		<div>
 			<div class="impairments">
-				{{>systems/wfrp3e/templates/applications/actors/partials/impairment.hbs
+				{{>systems/wfrp3e/templates/applications/sheets/actors/partials/impairment.hbs
 						impairment=fields.impairments.fields.fatigue
 						token="systems/wfrp3e/assets/images/token-red.webp"}}
 
-				{{>systems/wfrp3e/templates/applications/actors/partials/impairment.hbs
+				{{>systems/wfrp3e/templates/applications/sheets/actors/partials/impairment.hbs
 						impairment=fields.impairments.fields.stress
 						token="systems/wfrp3e/assets/images/token-blue.webp"}}
 			</div>
 
 			<div class="characteristics">
 				{{#each fields.characteristics.fields as |characteristic char|}}
-					{{>systems/wfrp3e/templates/applications/actors/partials/characteristic.hbs characteristic=characteristic}}
+					{{>systems/wfrp3e/templates/applications/sheets/actors/partials/characteristic.hbs characteristic=characteristic}}
 				{{/each}}
 			</div>
 		</div>
 	</div>
 
 	<div class="skills">
-		<h3 class="character-sheet-title">{{localize "SKILL.plural"}}</h3>
+		<h3 class="character-sheet-title">
+			{{localize "SKILL.plural"}}
+		</h3>
 
 		{{#if skills}}
 			<div class="skill table">
@@ -44,7 +48,7 @@
 
 				<div class="table-body">
 					{{#each skills as |skill sk|}}
-						{{>systems/wfrp3e/templates/applications/actors/partials/skill-row.hbs skill=skill}}
+						{{>systems/wfrp3e/templates/applications/sheets/actors/partials/skill-row.hbs skill=skill}}
 					{{/each}}
 				</div>
 			</div>
@@ -59,11 +63,11 @@
 
 	<div class="attributes">
 		<div class="attributes-subdivision">
-			{{>systems/wfrp3e/templates/applications/actors/partials/attribute.hbs attribute=fields.wounds}}
+			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.wounds}}
 
-			{{>systems/wfrp3e/templates/applications/actors/partials/attribute.hbs attribute=fields.corruption}}
+			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.corruption}}
 
-			{{>systems/wfrp3e/templates/applications/actors/partials/attribute.hbs attribute=fields.fortune}}
+			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.fortune}}
 		</div>
 
 		<div class="stance-meter">
@@ -108,9 +112,9 @@
 		</div>
 
 		<div class="attributes-subdivision">
-			{{>systems/wfrp3e/templates/applications/actors/partials/attribute.hbs attribute=fields.favour}}
+			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.favour}}
 
-			{{>systems/wfrp3e/templates/applications/actors/partials/attribute.hbs attribute=fields.power}}
+			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.power}}
 		</div>
 	</div>
 </section>
