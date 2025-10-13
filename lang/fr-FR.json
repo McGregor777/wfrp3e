@@ -475,18 +475,18 @@
 			"rollCheck": "Lancer le test"
 		},
 		"FIELDS": {
-			"aggressionDice": "Dés d'Agressivité",
-			"attributes": "Attributs de Créature",
-			"challengeLevel": "Niveau de Défi",
-			"characteristic": "Caractéristique",
-			"cunningDice": "Dés d'Astuce",
-			"encounterType": "Type de rencontre",
-			"expertiseDice": "Dés d'Adresse",
-			"fortunePoints": "Points de Fortune",
-			"specialisations": "Spécialisations",
-			"skill": "Compétence",
-			"triggeredEffects": "Effets activés",
-			"weapon": "Arme"
+			"aggressionDice.label": "Dés d'Agressivité",
+			"attributes.label": "Attributs de Créature",
+			"challengeLevel.label": "Niveau de Défi",
+			"characteristic.label": "Caractéristique",
+			"cunningDice.label": "Dés d'Astuce",
+			"encounterType.label": "Type de rencontre",
+			"expertiseDice.label": "Dés d'Adresse",
+			"fortunePoints.label": "Points de Fortune",
+			"specialisations.label": "Spécialisations",
+			"skill.label": "Compétence",
+			"triggeredEffects.label": "Effets activés",
+			"weapon.label": "Arme"
 		},
 		"TABS": {
 			"quickSettings": "Paramètres rapides",

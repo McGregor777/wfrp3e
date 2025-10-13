@@ -3,7 +3,7 @@
 		{{#if skills}}
 			<div class="form-group">
 				<label for="{{concat @root.rootId '-checkData.skill'}}">
-					{{localize "CHECKBUILDER.FIELDS.skill"}}
+					{{localize "CHECKBUILDER.FIELDS.skill.label"}}
 				</label>
 
 				<div class="form-fields">
@@ -19,7 +19,7 @@
 
 		<div class="form-group">
 			<label for="{{concat @root.rootId '-checkData.characteristic'}}">
-				{{localize "CHECKBUILDER.FIELDS.characteristic"}}
+				{{localize "CHECKBUILDER.FIELDS.characteristic.label"}}
 			</label>
 
 			<div class="form-fields">
@@ -33,7 +33,7 @@
 
 		<div class="form-group">
 			<label for="{{concat @root.rootId '-checkData.challengeLevel'}}">
-				{{localize "CHECKBUILDER.FIELDS.challengeLevel"}}
+				{{localize "CHECKBUILDER.FIELDS.challengeLevel.label"}}
 			</label>
 
 			<div class="form-fields">
@@ -48,7 +48,7 @@
 		{{#if maxFortunePoints}}
 			<div class="form-group">
 				<label for="{{concat @root.rootId '-checkData.fortunePoints'}}">
-					{{localize "CHECKBUILDER.FIELDS.fortunePoints"}}
+					{{localize "CHECKBUILDER.FIELDS.fortunePoints.label"}}
 				</label>
 
 				<div class="form-fields">
@@ -66,7 +66,7 @@
 		{{#if availableWeapons}}
 			<div class="form-group">
 				<label for="{{concat @root.rootId '-checkData.weapon'}}">
-					{{localize "CHECKBUILDER.FIELDS.weapon"}}
+					{{localize "CHECKBUILDER.FIELDS.weapon.label"}}
 				</label>
 
 				<div class="form-fields">
@@ -85,7 +85,7 @@
 
 		{{#if (equalTo actor.type "character")}}
 			<fieldset class="specialisations">
-				<legend>{{localize "CHECKBUILDER.FIELDS.specialisations"}}</legend>
+				<legend>{{localize "CHECKBUILDER.FIELDS.specialisations.label"}}</legend>
 
 				{{#if availableSpecialisations}}
 					<multi-select name="checkData.specialisations">
@@ -102,7 +102,7 @@
 			</fieldset>
 
 			<fieldset class="available-triggered-items">
-				<legend>{{localize "CHECKBUILDER.FIELDS.triggeredEffects"}}</legend>
+				<legend>{{localize "CHECKBUILDER.FIELDS.triggeredEffects.label"}}</legend>
 
 				{{#if availableTriggeredEffects}}
 					{{#each availableTriggeredEffects as |effect eff|}}
@@ -127,13 +127,13 @@
 
 		{{#if attributes}}
 			<div class="form-group expanded">
-				{{localize "CHECKBUILDER.FIELDS.attributes"}}
+				{{localize "CHECKBUILDER.FIELDS.attributes.label"}}
 
 				<div class="form-fields">
 					{{#each attributes as |attribute attr|}}
 						<div>
 							<label for="{{concat @root.rootId '-checkData.creatureDice.' attr}}">
-								{{localize (concat "CHECKBUILDER.FIELDS." attr "creatureDice")}}
+								{{localize (concat "CHECKBUILDER.FIELDS." attr "Dice.label")}}
 							</label>
 
 							<input id="{{concat @root.rootId '-checkData.creatureDice.' attr}}"
