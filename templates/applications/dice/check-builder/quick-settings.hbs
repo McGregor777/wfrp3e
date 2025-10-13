@@ -2,10 +2,14 @@
 	{{#if actor}}
 		{{#if skills}}
 			<div class="form-group">
-				<label>{{localize "CHECKBUILDER.FIELDS.skill"}}</label>
+				<label for="{{concat @root.rootId '-checkData.skill'}}">
+					{{localize "CHECKBUILDER.FIELDS.skill"}}
+				</label>
 
 				<div class="form-fields">
-					<select class="skill-select" name="checkData.skill">
+					<select id="{{concat @root.rootId '-checkData.skill'}}"
+							class="skill-select"
+							name="checkData.skill">
 						<option value=""{{#unless skill}} selected{{/unless}}></option>
 						{{selectOptions skills selected=skill.uuid valueAttr="uuid" labelAttr="name"}}
 					</select>
@@ -14,20 +18,28 @@
 		{{/if}}
 
 		<div class="form-group">
-			<label>{{localize "CHECKBUILDER.FIELDS.characteristic"}}</label>
+			<label for="{{concat @root.rootId '-checkData.characteristic'}}">
+				{{localize "CHECKBUILDER.FIELDS.characteristic"}}
+			</label>
 
 			<div class="form-fields">
-				<select class="characteristic-select" name="checkData.characteristic">
+				<select id="{{concat @root.rootId '-checkData.characteristic'}}"
+						class="characteristic-select"
+						name="checkData.characteristic">
 					{{selectOptions characteristics selected=checkData.characteristic localize=true}}
 				</select>
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label>{{localize "CHECKBUILDER.FIELDS.challengeLevel"}}</label>
+			<label for="{{concat @root.rootId '-checkData.challengeLevel'}}">
+				{{localize "CHECKBUILDER.FIELDS.challengeLevel"}}
+			</label>
 
 			<div class="form-fields">
-				<select class="challenge-level-select" name="checkData.challengeLevel">
+				<select id="{{concat @root.rootId '-checkData.challengeLevel'}}"
+						class="challenge-level-select"
+						name="checkData.challengeLevel">
 					{{selectOptions challengeLevels selected=checkData.challengeLevel labelAttr="name" localize=true}}
 				</select>
 			</div>
@@ -35,10 +47,13 @@
 
 		{{#if maxFortunePoints}}
 			<div class="form-group">
-				<label>{{localize "CHECKBUILDER.FIELDS.fortunePoints"}}</label>
+				<label for="{{concat @root.rootId '-checkData.fortunePoints'}}">
+					{{localize "CHECKBUILDER.FIELDS.fortunePoints"}}
+				</label>
 
 				<div class="form-fields">
-					<input class="pool-value"
+					<input id="{{concat @root.rootId '-checkData.fortunePoints'}}"
+						   class="pool-value"
 						   name="checkData.fortunePoints"
 						   type="number"
 						   min="0"
@@ -50,10 +65,14 @@
 
 		{{#if availableWeapons}}
 			<div class="form-group">
-				<label>{{localize "CHECKBUILDER.FIELDS.weapon"}}</label>
+				<label for="{{concat @root.rootId '-checkData.weapon'}}">
+					{{localize "CHECKBUILDER.FIELDS.weapon"}}
+				</label>
 
 				<div class="form-fields">
-					<select class="weapon-select" name="checkData.weapon">
+					<select id="{{concat @root.rootId '-checkData.weapon'}}"
+							class="weapon-select"
+							name="checkData.weapon">
 						{{selectOptions availableWeapons
 										selected=weapon.uuid
 										valueAttr="uuid"
@@ -88,9 +107,12 @@
 				{{#if availableTriggeredEffects}}
 					{{#each availableTriggeredEffects as |effect eff|}}
 						<div data-tooltip="{{effect.description}}">
-							<label>{{effect.name}}</label>
+							<label for="{{concat @root.rootId '-checkData.triggeredEffects' effect.uuid}}">
+								{{effect.name}}
+							</label>
 
-							<input class="pool-value"
+							<input id="{{concat @root.rootId '-checkData.triggeredEffects'  effect.uuid}}"
+								   class="pool-value"
 								   name="checkData.triggeredEffects"
 								   type="checkbox"
 								   value="{{effect.uuid}}"
@@ -110,9 +132,12 @@
 				<div class="form-fields">
 					{{#each attributes as |attribute attr|}}
 						<div>
-							<label>{{localize (concat "CHECKBUILDER.FIELDS." attr "Dice")}}</label>
+							<label for="{{concat @root.rootId '-checkData.creatureDice.' attr}}">
+								{{localize (concat "CHECKBUILDER.FIELDS." attr "creatureDice")}}
+							</label>
 
-							<input class="pool-value"
+							<input id="{{concat @root.rootId '-checkData.creatureDice.' attr}}"
+								   class="pool-value"
 								   name="checkData.creatureDice.{{attr}}"
 								   value="{{lookup @root.checkData.creatureDice attr}}"
 								   type="number"
