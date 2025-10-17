@@ -1101,6 +1101,7 @@
 	"SKILLUPGRADER": {
 		"ACTIONS.chooseUpgrade": "Choose Upgrade",
 		"WARNINGS": {
+			"duplicateSpecialisation": "A specialisation can only be acquired once.",
 			"notEnoughSelection": {
 				"description": "There are still upgrades and/or specialisations to select.",
 				"title": "Upgrades or Specialisations Left To Select"

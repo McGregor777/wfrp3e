@@ -19,11 +19,10 @@ export default class SkillUpgrader extends AbstractSelector
 				this.size = this.items.length;
 		}
 
-		if(options.specialisationSze)
-			this.specialisationSze = options.specialisationSze;
+		if(options.specialisationSize)
+			this.specialisationSize = options.specialisationSize;
 
-		if(options.singleSpecialisation)
-			this.singleSpecialisation = options.singleSpecialisation;
+		this.singleSpecialisation = options.singleSpecialisation ?? this.singleSpecialisation;
 	}
 
 	/** @inheritDoc */
@@ -130,56 +129,62 @@ export default class SkillUpgrader extends AbstractSelector
 			return ui.notifications.warn(game.i18n.localize("CHARACTER.WARNINGS.notEnoughExperienceForAdvance"));
 
 		if(type === "specialisation") {
-			this.selection = this.selection
-				.filter(selection => selection.uuid !== uuid || selection.type !== type);
-			this.specialisationSelection = this.specialisationSelection
-				.filter(selection => selection.uuid !== uuid || selection.type !== type);
+			// Remove any specialisation upgrade for the concerned skill that already exists in any selection.
+			this.selection = this.selection.filter(upgrade => {
+				return upgrade.uuid !== uuid || upgrade.type !== type
+			});
+			this.specialisationSelection = this.specialisationSelection.filter(upgrade => {
+				return upgrade.uuid !== uuid || upgrade.type !== type
+			});
 
-			const remainingSize = this.specialisationSize > 0
-					? this.remainingSpecialisationSelectionSize
-					: this.remainingSelectionSize,
-				  regex = new RegExp(/\s*([A-Za-zÀ-ÖØ-öø-ÿ ]+\b),?/, "gu"),
+			let remainingSize, selection;
+			if(this.specialisationSize > 0) {
+				remainingSize = this.remainingSpecialisationSelectionSize;
+				selection = this.specialisationSelection;
+			}
+			else {
+				remainingSize = this.remainingSelectionSize;
+				selection = this.selection;
+			}
+
+			const regex = new RegExp(/\s*([A-Za-zÀ-ÖØ-öø-ÿ ]+\b),?/, "gu"),
 				  matches = [...value.trim().matchAll(regex)];
 
 			if(remainingSize <= 0)
 				ui.notifications.warn(game.i18n.format("SELECTOR.WARNINGS.maximumSelectionSizeReached"));
 			else if(matches.length) {
-				// If only one new specialisation per skill is allowed, remove the new specialisations following up the first.
+				// If only one new specialisation per skill is allowed, only keep the first.
 				if(this.singleSpecialisation) {
 					if(matches.length > 1)
 						ui.notifications.warn(game.i18n.format("SKILLUPGRADER.WARNINGS.singleSpecialisationOnly"));
 
 					value = {value: matches[0][1].trim(), type, uuid};
+
+					selection.push(value);
 				}
+				// Else, remove excess specialisations and keep the rest.
 				else {
-					if(matches.length > remainingSize)
+					if(matches.length > remainingSize) {
 						ui.notifications.warn(game.i18n.format("SKILLUPGRADER.WARNINGS.maximumSelectionSizeReached"));
+						matches.slice(0, remainingSize - 1);
+					}
 
-					value = matches
-						.slice(0, remainingSize - 1)
-						.map(match => Object.create({value: match[1].trim(), type, uuid}));
+					const values = [];
+					for(const match of matches) {
+						const specialisation = match[1].trim();
+
+						if(values.includes(specialisation))
+							return ui.notifications.warn(game.i18n.format("SKILLUPGRADER.WARNINGS.duplicateSpecialisation"));
+
+						values.push({value: specialisation, type, uuid});
+					}
+
+					selection.push(...values);
 				}
 			}
-
-			// If the Skill Upgrader allows additional specialisations alongside advanced skills acquisitions or skill trainings,
-			// add the specialisations to their own specific selection pool.
-			if(this.specialisationSize > 0) {
-				if((typeof value === "object" && this.specialisationSelection.map(selection => JSON.stringify(selection)).includes(JSON.stringify(value)))
-					|| this.specialisationSelection.includes(value))
-					ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.alreadySelected"));
-				else if(this.specialisationSize === 1 && !Array.isArray(value))
-					this.specialisationSelection = [value];
-				else if(this.remainingSpecialisationSelectionSize < 1
-					|| Array.isArray(value) && value.length + this.selection.length > this.remainingSpecialisationSelectionSize)
-					ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.maximumSelectionSizeReached"));
-				else
-					Array.isArray(value) ? this.specialisationSelection.push(...value) : this.specialisationSelection.push(value);
-			}
-			else if(typeof value === "object")
-				super._handleNewSelection(value, formConfig, event);
 		}
-		else if(typeof value === "object")
-			super._handleNewSelection({value, type, uuid}, formConfig, event);
+		else
+			await super._handleNewSelection({value, type, uuid}, formConfig, event);
 	}
 
 	/** @inheritDoc */
@@ -219,6 +224,17 @@ export default class SkillUpgrader extends AbstractSelector
 			return "notEnoughSelection";
 
 		return false;
+	}
+
+	/** @inheritDoc */
+	_processSelectionData(event, form, formData)
+	{
+		const selection = super._processSelectionData(event, form, formData);
+
+		if(this.specialisationSelection)
+			return [...selection, ...this.specialisationSelection];
+
+		return selection;
 	}
 
 	/**

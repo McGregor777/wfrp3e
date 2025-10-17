@@ -1103,6 +1103,7 @@
 	"SKILLUPGRADER": {
 		"ACTIONS.chooseUpgrade": "Choisir l'amélioration",
 		"WARNINGS": {
+			"duplicateSpecialisation": "Une même spécialisation ne peut être prise plusieurs fois.",
 			"notEnoughSelection": {
 				"description": "Il reste des améliorations et/ou des spécialisations à sélectionner.",
 				"title": "Améliorations ou spécialisations restantes"

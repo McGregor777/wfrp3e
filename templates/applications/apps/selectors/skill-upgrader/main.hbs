@@ -77,13 +77,15 @@
 									<span>{{item.system.specialisations}}</span>
 								{{/if}}
 
-								{{#unless (or (equalTo @root.advanceType "nonCareer") (inferiorTo item.system.trainingLevel 1))}}
+								{{#if (and (notEqualTo @root.advanceType "nonCareer") (or
+									(superiorOrEqualTo item.system.trainingLevel 1)
+									(lookup @root.upgrades.trainingLevel item.uuid)))}}
 									<input name="selection"
 										   value="{{lookup @root.upgrades.specialisation item.uuid}}"
 										   type="text"
 										   data-type="specialisation"
 										   data-uuid="{{item.uuid}}" />
-								{{/unless}}
+								{{/if}}
 							</label>
 						</td>
 					</tr>
