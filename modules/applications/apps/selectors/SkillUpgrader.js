@@ -30,6 +30,9 @@ export default class SkillUpgrader extends AbstractSelector
 			this.specialisationSize = options.specialisationSize;
 
 		this.singleSpecialisation = options.singleSpecialisation ?? this.singleSpecialisation;
+
+		if(options.startingSkillTrainings)
+			this.startingSkillTrainings = options.startingSkillTrainings;
 	}
 
 	/** @inheritDoc */
@@ -85,6 +88,12 @@ export default class SkillUpgrader extends AbstractSelector
 	 */
 	singleSpecialisation = true;
 
+	/**
+	 * Whether the Skill Upgrader is used to upgrade starting skill trainings.
+	 * @type {boolean}
+	 */
+	startingSkillTrainings = false;
+
 	/** @inheritDoc */
 	type = "skill";
 
@@ -125,6 +134,19 @@ export default class SkillUpgrader extends AbstractSelector
 				upgrades
 			};
 		}
+		else if(partId === "selection" && this.specialisationSize > 0)
+			partContext = {
+				...partContext,
+				specialisationCount: this.specialisationSize - this.remainingSpecialisationSelectionSize,
+				specialisationSelection: await Promise.all(
+					this.specialisationSelection.map(async selection => {
+						return {
+							...selection,
+							item: await fromUuid(selection.uuid)
+						};
+					})
+				),
+				specialisationSize: this.specialisationSize
 			};
 
 		return partContext;
@@ -136,13 +158,29 @@ export default class SkillUpgrader extends AbstractSelector
 		const uuid = event.target.dataset.uuid,
 			  skill = await fromUuid(event.target.dataset.uuid),
 			  type = event.target.dataset.type;
-		let cost = 1;
 
-		if(this.advanceType === "nonCareerAdvance")
-			cost = skill?.system.advanced ? 4 : 2;
+		if(!this.startingSkillTrainings) {
+			let cost = 1;
 
-		if(this.actor.system.experience.current < cost)
-			return ui.notifications.warn(game.i18n.localize("CHARACTER.WARNINGS.notEnoughExperienceForAdvance"));
+			if(this.advanceType === "nonCareerAdvance")
+				cost = skill?.system.advanced ? 4 : 2;
+
+			if(this.actor.system.experience.current < cost)
+				return ui.notifications.warn(
+					game.i18n.localize("CHARACTER.WARNINGS.notEnoughExperienceForAdvance")
+				);
+		}
+
+		// If the skill isn't already acquired nor its acquisition upgrade already selected, add an acquisition upgrade.
+		if(type === "trainingLevel"
+			&& !skill.parent
+			&& skill.system.advanced
+			&& !this.selection.find(upgrade => upgrade.uuid === uuid && upgrade.type === "acquisition")) {
+			if(this.remainingSelectionSize < 2)
+				return ui.notifications.warn(game.i18n.format("SKILLUPGRADER.WARNINGS.notEnoughTrainings"));
+
+			await super._handleNewSelection({value: "0", type: "acquisition", uuid}, formConfig, event);
+		}
 
 		if(type === "specialisation") {
 			// Remove any specialisation upgrade for the concerned skill that already exists in any selection.
@@ -201,6 +239,25 @@ export default class SkillUpgrader extends AbstractSelector
 		}
 		else
 			await super._handleNewSelection({value, type, uuid}, formConfig, event);
+	}
+
+	/** @inheritDoc */
+	_deselect(value)
+	{
+		super._deselect(value);
+
+		const upgradeTypesToExclude = ["specialisation"];
+
+		if(value.type === "acquisition")
+			upgradeTypesToExclude.push("trainingLevel");
+
+		for(const upgrade of this.selection.filter(upgrade => upgrade.uuid === value.uuid))
+			if(upgradeTypesToExclude.includes(upgrade.type))
+				this.selection.splice(this.selection.indexOf(upgrade), 1);
+
+		for(const upgrade of this.specialisationSelection.filter(upgrade => upgrade.uuid === value.uuid))
+			if(upgradeTypesToExclude.includes(upgrade.type))
+				this.specialisationSelection.splice(this.selection.indexOf(upgrade), 1);
 	}
 
 	/** @inheritDoc */
@@ -277,5 +334,41 @@ export default class SkillUpgrader extends AbstractSelector
 			return actor.itemTypes.skill.find(skill => skill.name === name)
 				?? skills.find(skill => skill.name === name);
 		});
+	}
+
+	/**
+	 * Builds an array of skill trainings eligible for a new character.
+	 * @param {WFRP3eActor} actor The new character.
+	 * @returns {Promise<WFRP3eItem[]>} An array of skill trainings eligible for a new character.
+	 */
+	static async buildNewCharacterOptionsList(actor)
+	{
+		const skills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill"}),
+			  careerSkillNames = actor.system.currentCareer.system.careerSkills.split(",").map(name => name.trim());
+
+		return careerSkillNames.map(name => {
+			return actor.itemTypes.skill.find(skill => skill.name === name)
+				?? skills.find(skill => skill.name === name);
+		});
+	}
+
+	/**
+	 * Sorts upgrades in arrays by skill, each array starting with acquisition upgrades,
+	 * followed by training level upgrades, to finish with specialisation upgrades.
+	 * @param {SkillUpgrade[]} upgrades The skill upgrades to sort.
+	 * @returns {SkillUpgrade[]} The skill upgrades sorted by type.
+	 */
+	static sortUpgrades(upgrades)
+	{
+		const order = {acquisition: 0, trainingLevel: 1, specialisation: 2},
+			  sortedUpgrades = {};
+
+		for(const upgrade of upgrades.sort((a, b) => order[a.type] - order[b.type])) {
+			if(!(upgrade.uuid in sortedUpgrades))
+				sortedUpgrades[upgrade.uuid] = [];
+			sortedUpgrades[upgrade.uuid].push(upgrade);
+		}
+
+		return sortedUpgrades;
 	}
 }

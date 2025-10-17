@@ -1,6 +1,7 @@
 import CreationPointInvestor from "../../apps/CreationPointInvestor.js";
 import CareerSelector from "../../apps/selectors/CareerSelector.js";
 import OriginSelector from "../../apps/selectors/OriginSelector.js";
+import SkillUpgrader from "../../apps/selectors/SkillUpgrader.js";
 import WFRP3eActor from "../../../documents/WFRP3eActor.js";
 import WFRP3eItem from "../../../documents/WFRP3eItem.js";
 
@@ -19,6 +20,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
 		actions: {
+			acquireSkillTrainings: this.#acquireSkillTrainings,
 			chooseStartingCareer: this.#chooseStartingCareer,
 			chooseOrigin: this.#chooseOrigin,
 			investCreationPoints: this.#investCreationPoints
@@ -284,6 +286,75 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #onCharacterGeneratorSubmit(event, form, formData)
 	{
 		await this.character.render({force: true});
+	}
+
+	/**
+	 * Shows a Skill Upgrader to select the new character's starting skill trainings and specialisations.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #acquireSkillTrainings(event, target)
+	{
+		event.preventDefault();
+
+		const character = this.character;
+		if(character.itemTypes.skill.length)
+			await WFRP3eItem.deleteDocuments(
+				character.itemTypes.skill.map(skill => skill._id),
+				{parent: character}
+			);
+
+		const investment = CONFIG.WFRP3e.creationPointInvestments.skills[this.creationPointInvestments.skills],
+			  options = {
+				  actor: character,
+				  items: await SkillUpgrader.buildNewCharacterOptionsList(character),
+				  modal: true,
+				  size: investment.size,
+				  specialisationSize: investment.specialisationSize,
+				  singleSpecialisation: false,
+				  startingSkillTrainings: true
+			  };
+
+		const upgrades = await SkillUpgrader.wait(options),
+			  skills = await game.packs.get("wfrp3e.items").getDocuments({
+				  type: "skill",
+				  system: {advanced: false}
+			  });
+
+		for(const [uuid, upgradeArray] of Object.entries(SkillUpgrader.sortUpgrades(upgrades))) {
+			const changes = {system: {}};
+			let index = skills.findIndex(skill => skill.uuid === uuid),
+				skill = skills[index];
+
+			for(const upgrade of upgradeArray) {
+				switch(upgrade.type) {
+					case "acquisition":
+						skill = await fromUuid(uuid);
+						break;
+					case "trainingLevel":
+						changes.system.trainingLevel = upgrade.value;
+						break;
+					case "specialisation":
+						changes.system.specialisations =
+							(skill.system.specialisations ? skill.system.specialisations + ", " : "")
+							+ (changes.system.specialisations ? changes.system.specialisations + ", " : "")
+							+ upgrade.value;
+						break;
+				}
+			}
+
+			// Replace the original skill with the upgraded version.
+			index !== -1
+				? skills.splice(index, 1, skill.clone(changes, {keepId: true}))
+				: skills.push(skill.clone(changes, {keepId: true}));
+		}
+
+		await WFRP3eItem.createDocuments(skills, {parent: character});
+
+		this.steps.acquireSkillTrainings = true;
+		await this.render();
 	}
 
 	/**

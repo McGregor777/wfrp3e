@@ -1,14 +1,41 @@
-<p>
-	{{localize "SKILLUPGRADER.selectedUpgrade"}}
+<div>
+	<p>
+		{{localize "SKILLUPGRADER.selectedUpgrades"}}
 
-	<span class="selection">
-		{{#if selectedItems.length}}
-			{{#each selectedItems as |item i|}}
-				{{localize (concat "SKILLUPGRADER." item.type "Upgrade") name=item.item.name value=item.value}}
-				{{#unless @last}}, {{/unless}}
-			{{/each}}
-		{{else}}
-			{{localize "SELECTOR.noSelection"}}
-		{{/if}}
-	</span>
-</p>
+		<span class="selection">
+			{{#if selectedItems.length}}
+				{{#each selectedItems as |upgrade up|}}
+					{{localize (concat "SKILLUPGRADER." upgrade.type "Upgrade") name=upgrade.item.name value=upgrade.value}}
+					{{#unless @last}}, {{/unless}}
+				{{/each}}
+			{{else}}
+				{{localize "SELECTOR.noSelection"}}
+			{{/if}}
+
+			{{#if count}}
+				({{count}}/{{size}})
+			{{/if}}
+		</span>
+	</p>
+
+	{{#if specialisationSelection}}
+		<p>
+			{{localize "SKILLUPGRADER.selectedSpecialisations"}}
+
+			<span class="selection">
+				{{#if specialisationSelection.length}}
+					{{#each specialisationSelection as |upgrade up|}}
+						{{localize (concat "SKILLUPGRADER." upgrade.type "Upgrade") name=upgrade.item.name value=upgrade.value}}
+						{{#unless @last}}, {{/unless}}
+					{{/each}}
+				{{else}}
+					{{localize "SELECTOR.noSelection"}}
+				{{/if}}
+
+				{{#if specialisationCount}}
+					({{specialisationCount}}/{{specialisationSize}})
+				{{/if}}
+			</span>
+		</p>
+	{{/if}}
+</div>

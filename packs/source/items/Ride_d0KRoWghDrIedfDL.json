@@ -5,7 +5,7 @@
   "_id": "d0KRoWghDrIedfDL",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Defines a character&rsquo;s ability to ride or care for a horse or other common mount, as well as drive and manage a wagon or carriage, and provide maintenance and care for the equipment associated with horses, mules and other riding or team animals. This skill also covers the ability to manage such animals and keep them calm under duress or spur them to greater action.</p>\n<p><em>Specialisation options:</em> horsemanship, trick riding, wagons, mounted combat, long distance travel</p>",
+    "description": "<p>Defines a character’s ability to ride or care for a horse or other common mount, as well as drive and manage a wagon or carriage, and provide maintenance and care for the equipment associated with horses, mules and other riding or team animals. This skill also covers the ability to manage such animals and keep them calm under duress or spur them to greater action.</p>\n<p><em>Specialisation options:</em> horsemanship, trick riding, wagons, mounted combat, long distance travel</p>",
     "characteristic": "agility",
     "advanced": false,
     "trainingLevel": 0,
@@ -15,13 +15,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1695317273906,
     "modifiedTime": 1699628061290,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "sort": 0,
   "ownership": {

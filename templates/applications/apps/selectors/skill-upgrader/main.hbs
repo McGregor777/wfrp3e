@@ -60,7 +60,7 @@
 										   {{#if (superiorOrEqualTo item.system.trainingLevel this)}}
 											   checked disabled
 										   {{else if (or (or
-                                               (sameAs @root.advanceType "dedicationBonus")
+											   (sameAs @root.advanceType "dedicationBonus")
 											   (and item.parent (inferiorTo item.parent.system.rank this)))
 											   (notEqualTo (increment item.system.trainingLevel 1) this))}}
 											   disabled

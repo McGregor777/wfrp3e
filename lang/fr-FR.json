@@ -409,13 +409,7 @@
 		"woundThreshold": "Plafond de Blessures"
 	},
 
-	"CHARACTERGENERATOR.Acquired": "Acquis",
-	"CHARACTERGENERATOR.Characteristic": "Caractéristique",
-	"CHARACTERGENERATOR.Specialisations": "Spécialisations",
-	"CHARACTERGENERATOR.TrainingLevel": "Niveau de formation",
 	"CHARACTERGENERATOR.RemainingActions": "Actions restantes: ",
-	"CHARACTERGENERATOR.RemainingSkillTrainings": "Formation de compétences restantes : ",
-	"CHARACTERGENERATOR.RemainingSpecialisations": "Spécialisations restantes : ",
 	"CHARACTERGENERATOR.RemainingTalents": "Talents restants : ",
 	"CHARACTERGENERATOR.RemainingFaithTalents": "Talents de Foi restants : ",
 	"CHARACTERGENERATOR.RemainingFocusTalents": "Talents d'Affinité restants : ",
@@ -426,8 +420,6 @@
 	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "Une folie a déjà été sélectionnée.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Pas assez d'actions.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughTalent": "Pas assez de talents.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Pas assez de formations de compétence.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Pas assez de spécialisations.",
 	"CHARACTERGENERATOR": {
 		"ACTIONS": {
 			"acquireActionCards": "Acquérir des cartes d'action",
@@ -1108,12 +1100,14 @@
 				"description": "Il reste des améliorations et/ou des spécialisations à sélectionner.",
 				"title": "Améliorations ou spécialisations restantes"
 			},
+			"notEnoughTrainings": "Vous n'avez pas assez de formations restantes pour effectuer cette action.",
 			"singleSpecialisationOnly": "Une seule spécialisation par compétence ne peut être acquise.",
 			"tooManySelection": "Trop de spécialisations sont actuellement sélectionnées. Veuillez en désélectionner certaines."
 		},
 		"acquisitionUpgrade": "{name} - Acquisition",
 		"noUpgradeSelected": "Aucune",
-		"selectedUpgrade": "Amélioration sélectionnée :",
+		"selectedUpgrades": "Amélioration(s) sélectionnée(s) :",
+		"selectedSpecialisations": "Spécialisation(s) sélectionnée(s) :",
 		"specialisationUpgrade": "{name} - Spécialisation {value}",
 		"title": "Améliorateur de compétence",
 		"trainingLevelUpgrade": "{name} - Formation {value}"

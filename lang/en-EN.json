@@ -407,13 +407,7 @@
 		"woundThreshold": "Wound Threshold"
 	},
 
-	"CHARACTERGENERATOR.Acquired": "Acquired",
-	"CHARACTERGENERATOR.Characteristic": "Characteristic",
-	"CHARACTERGENERATOR.Specialisations": "Specialisations",
-	"CHARACTERGENERATOR.TrainingLevel": "Training Level",
 	"CHARACTERGENERATOR.RemainingActions": "Remaining Actions: ",
-	"CHARACTERGENERATOR.RemainingSkillTrainings": "Remaining Skill Trainings: ",
-	"CHARACTERGENERATOR.RemainingSpecialisations": "Remaining Specialisations: ",
 	"CHARACTERGENERATOR.RemainingTalents": "Remaining Talents: ",
 	"CHARACTERGENERATOR.RemainingFaithTalents": "Remaining Faith Talents: ",
 	"CHARACTERGENERATOR.RemainingFocusTalents": "Remaining Focus Talents: ",
@@ -424,8 +418,6 @@
 	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "An Insanity has already been selected.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Not enough Actions left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughTalent": "Not enough Talents left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Not enough Skill Training left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Not enough Specialisation left.",
 	"CHARACTERGENERATOR": {
 		"ACTIONS": {
 			"acquireActionCards": "Acquire Action Cards",
@@ -1106,12 +1098,14 @@
 				"description": "There are still upgrades and/or specialisations to select.",
 				"title": "Upgrades or Specialisations Left To Select"
 			},
+			"notEnoughTrainings": "Not enough trainings left to proceed.",
 			"singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
 			"tooManySpecialisationSelected": "Too many selected specialisationsd. Please deselect some."
 		},
 		"acquisitionUpgrade": "{name} - Acquisition",
 		"noUpgradeSelected": "None",
-		"selectedUpgrade": "Selected Upgrade:",
+		"selectedUpgrade": "Selected Upgrade(s):",
+		"selectedSpecialisations": "Selected Specialisation(s) :",
 		"specialisationUpgrade": "{name} - {value} Specialisation",
 		"title": "Skill Upgrader",
 		"trainingLevelUpgrade": "{name} - Training Level {value}"
