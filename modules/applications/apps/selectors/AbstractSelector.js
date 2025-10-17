@@ -56,7 +56,7 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 
 	/**
 	 * The array of selected items.
-	 * @type {any[]}
+	 * @type {Array}
 	 */
 	selection = [];
 
@@ -111,12 +111,18 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 				const regex = new RegExp(RegExp.escape(this.searchFilters.text), "i");
 				partContext = {
 					...partContext,
-					items: this.items
-						.filter(item => ((!this.searchFilters.text
-								|| AbstractSelector.#searchTextFields(item, DocumentCollection.getSearchableFields(item.documentName, item.type), regex))
-							&& (this.searchFilters.type === "all" || this.searchFilters.type === item.system.type)))
-						.sort((a, b) => a.name.localeCompare(b.name)),
-					selection: this.selection
+					items: Array.isArray(this.items)
+						? this.items.filter(item => (
+							(!this.searchFilters.text || AbstractSelector.#searchTextFields(
+								item,
+								DocumentCollection.getSearchableFields(item.documentName, item.type),
+								regex
+							)) && (this.searchFilters.type === "all" || this.searchFilters.type === item.system.type)
+						)).sort((a, b) => a.name.localeCompare(b.name))
+						: this.items,
+					itemType: this.type,
+					selection: foundry.utils.deepClone(this.selection),
+					multiple: this.size > 1
 				};
 				break;
 			case "search":
@@ -125,9 +131,17 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 			case "selection":
 				partContext = {
 					...partContext,
-					selectedItems: this._getSelectedItems(),
-					type: this.type
-				}
+					selectedItems: await this._getSelectedItems(),
+					itemType: this.type,
+					selectorType: this.constructor.name
+				};
+
+				if(this.size > 1)
+					partContext = {
+						...partContext,
+						count: this.size - this.remainingSelectionSize,
+						size: this.size
+					}
 				break;
 		}
 
@@ -139,7 +153,7 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 	{
 		switch(event.target.name) {
 			case "selection":
-				this._handleNewSelection(event.target.value, formConfig, event);
+				await this._handleNewSelection(event.target.value, formConfig, event);
 				break;
 			case "searchFilters.text":
 			case "searchFilters.type":
@@ -149,7 +163,7 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 
 		super._onChangeForm(formConfig, event);
 
-		this.render();
+		await this.render();
 	}
 
 	/**
@@ -157,30 +171,84 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 	 * @param {any} value The new selection.
 	 * @param {ApplicationFormConfiguration} formConfig The form configuration for which this handler is bound.
 	 * @param {Event} event An input change event within the form.
+	 * @returns {Promise<void>}
 	 * @protected
 	 */
-	_handleNewSelection(value, formConfig, event)
+	async _handleNewSelection(value, formConfig, event)
 	{
-		if((typeof value === "object" && this.selection.map(selection => JSON.stringify(selection)).includes(JSON.stringify(value)))
-			|| this.selection.includes(value))
-			ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.alreadySelected"));
-		else if(this.size === 1 && !Array.isArray(value))
-			this.selection = [value];
-		else if(this.remainingSelectionSize < 1
-			|| Array.isArray(value) && value.length + this.selection.length > this.remainingSelectionSize)
-			ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.maximumSelectionSizeReached"));
+		if(this.size === 1)
+			this._checkValueSelection(value)
+				? ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.alreadySelected"))
+				: this._select(value);
+		else if(this._checkValueSelection(value) && !event.target.checked)
+			this._deselect(value);
+		else if(this.remainingSelectionSize >= (Array.isArray(value) ? value.length : 1))
+			this._select(value);
 		else
-			Array.isArray(value) ? this.selection.push(...value) : this.selection.push(value);
+			ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.maximumSelectionSizeReached"));
+	}
+
+	/**
+	 * Checks for the presence of a certain value in the selection pool
+	 * @param {any} value The value to look for in the selection pool.
+	 * @returns {boolean} Whether the value exists in the selection pool.
+	 * @protected
+	 */
+	_checkValueSelection(value)
+	{
+		return typeof value === "object"
+			? this.selection.map(selection => JSON.stringify(selection)).includes(JSON.stringify(value))
+			: this.selection.includes(value);
+	}
+
+	/**
+	 * Adds one or multiple values to the selection pool.
+	 * @param {any} value The value to add to the selection pool.
+	 * @protected
+	 */
+	_select(value)
+	{
+		this.size === 1
+			? this.selection = Array.isArray(value) ? value : [value]
+			: Array.isArray(value) ? this.selection.push(...value) : this.selection.push(value);
+	}
+
+	/**
+	 * Removes a value from the selection pool.
+	 * @param {any} value The value to remove from the selection pool.
+	 * @protected
+	 */
+	_deselect(value)
+	{
+		const index = typeof value === "object"
+			? this.selection.map(selection => JSON.stringify(selection)).indexOf(JSON.stringify(value))
+			: this.selection.indexOf(value);
+		this.selection.splice(index, 1);
 	}
 
 	/**
 	 * Fetches every item which UUID is in the selection.
-	 * @returns {WFRP3eItem[]}
+	 * @returns {Promise<WFRP3eItem[]>}
 	 * @protected
 	 */
-	_getSelectedItems()
+	async _getSelectedItems()
 	{
-		return this.selection.map(selection => fromUuidSync(selection));
+		return await Promise.all(this.selection.map(async selection => await fromUuid(selection)));
+	}
+
+	/**
+	 * Prepares selection data upon form submission.
+	 * This data is cleaned and validated before being returned for further processing.
+	 * @param {SubmitEvent} event The originating form submission event.
+	 * @param {HTMLFormElement} form The form element that was submitted.
+	 * @param {FormDataExtended} formData Processed data for the submitted form.
+	 * @returns {Array} Prepared submitted selection data as an array.
+	 * @throws {Error} Subclasses may throw validation errors here to prevent form submission.
+	 * @protected
+	 */
+	_processSelectionData(event, form, formData)
+	{
+		return this.selection;
 	}
 
 	/**
@@ -240,8 +308,8 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 
 	/**
 	 * Spawns a Selector and waits for it to be dismissed or submitted.
-	 * @param {ApplicationConfiguration} [config]
-	 * @returns {Promise<any>} Resolves to the selected item(s).
+	 * @param {ApplicationConfiguration} [config] Configuration of the Selector instance
+	 * @returns {Promise<any>} Resolves to the selected item(s). If the dialog was dismissed, the Promise resolves to null.
 	 */
 	static async wait(config = {})
 	{
@@ -250,7 +318,7 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 			config.submit = async result => {resolve(result)};
 			const selector = new this(config);
 			selector.addEventListener("close", event => reject(), {once: true});
-			selector.render({force: true});
+			await selector.render({force: true});
 		});
 	}
 
@@ -275,7 +343,7 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 			}));
 
 		if(!warning || await this._askConfirmation(warning)) {
-			this.options.submit(formData.object.selection);
+			this.options.submit(this._processSelectionData(event, form, formData));
 			await this.close({submitted: true});
 		}
 	}

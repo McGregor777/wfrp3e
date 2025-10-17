@@ -31,7 +31,6 @@ export default class SkillUpgrader extends AbstractSelector
 		id: "skill-upgrader-{id}",
 		classes: ["skill-upgrader"],
 		window: {title: "SKILLUPGRADER.title"},
-		form: {handler: this.#onSkillUpgraderFormSubmit},
 		position: {width: 800}
 	};
 
@@ -117,10 +116,10 @@ export default class SkillUpgrader extends AbstractSelector
 	}
 
 	/** @inheritDoc */
-	_handleNewSelection(value, formConfig, event)
+	async _handleNewSelection(value, formConfig, event)
 	{
 		const uuid = event.target.dataset.uuid,
-			  skill = fromUuidSync(event.target.dataset.uuid),
+			  skill = await fromUuid(event.target.dataset.uuid),
 			  type = event.target.dataset.type;
 		let cost = 1;
 
@@ -184,14 +183,17 @@ export default class SkillUpgrader extends AbstractSelector
 	}
 
 	/** @inheritDoc */
-	_getSelectedItems()
+	async _getSelectedItems()
 	{
-		return this.selection.map(selection => {
-			return {
-				...selection,
-				item: fromUuidSync(selection.uuid)
-			};
-		});
+		return await Promise.all(
+			this.selection.map(selection => {
+				return {
+					...selection,
+					item: fromUuidSync(selection.uuid)
+				};
+			})
+		);
+	}
 
 	/** @inheritDoc */
 	_checkForError()
@@ -217,25 +219,6 @@ export default class SkillUpgrader extends AbstractSelector
 			return "notEnoughSelection";
 
 		return false;
-	}
-
-	/**
-	 * Processes form submission for the Skill Upgrader.
-	 * @param {SubmitEvent} event The originating form submission event.
-	 * @param {HTMLFormElement} form The form element that was submitted.
-	 * @param {FormDataExtended} formData Processed data for the submitted form.
-	 */
-	static async #onSkillUpgraderFormSubmit(event, form, formData)
-	{
-		const warning = this._checkForWarnings();
-
-		if(warning && this.strictSelection)
-			return ui.notifications.warn(game.i18n.format("SELECTOR.WARNINGS.cannotSubmit", {
-				error: game.i18n.localize(`${capitalize(selectorType)}.WARNINGS.${warning}.description`)
-			}));
-
-		if(!warning || await this._askConfirmation(warning))
-			this.options.submit(this.selection);
 	}
 
 	/**
