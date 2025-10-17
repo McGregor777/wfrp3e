@@ -136,54 +136,58 @@
 		},
 		"FIELDS": {
 			"characteristics": {
-				"agility": {
-					"abbreviation": "Ag",
-					"label": "Agility"
+				"FIELDS": {
+					"agility": {
+						"abbreviation": "Ag",
+						"label": "Agility"
+					},
+					"fellowship": {
+						"abbreviation": "Fel",
+						"label": "Fellowship"
+					},
+					"intelligence": {
+						"abbreviation": "Int",
+						"label": "Intelligence"
+					},
+					"strength": {
+						"abbreviation": "St",
+						"label": "Strength"
+					},
+					"toughness": {
+						"abbreviation": "To",
+						"label": "Toughness"
+					},
+					"varies": {
+						"abbreviation": "V",
+						"label": "Varies"
+					},
+					"willpower": {
+						"abbreviation": "WP",
+						"label": "Willpower"
+					},
+					"fortune.label": "Fortune Dice",
+					"rating.label": "Rating"
 				},
-				"fellowship": {
-					"abbreviation": "Fel",
-					"label": "Fellowship"
-				},
-				"intelligence": {
-					"abbreviation": "Int",
-					"label": "Intelligence"
-				},
-				"strength": {
-					"abbreviation": "St",
-					"label": "Strength"
-				},
-				"toughness": {
-					"abbreviation": "To",
-					"label": "Toughness"
-				},
-				"varies": {
-					"abbreviation": "V",
-					"label": "Varies"
-				},
-				"willpower": {
-					"abbreviation": "WP",
-					"label": "Willpower"
-				},
-				"fortune.label": "Fortune Dice",
-				"label": "Characteristics",
-				"rating.label": "Rating"
+				"label": "Characteristics"
 			},
 			"impairments": {
 				"fatigue": {
 					"label": "Fatigue",
 					"tokens": "Fatigue Tokens"
 				},
-				"label": "Impairments",
 				"stress": {
 					"label": "Stress",
 					"tokens": "Stress Tokens"
-				}
+				},
+				"label": "Impairments"
 			},
 			"stance": {
-				"conservative.label": "Conservative Segments",
-				"current.label": "Current Stance",
-				"label": "Attitude",
-				"reckless.label": "Reckless Segments"
+				"FIELDS": {
+					"conservative.label": "Conservative Segments",
+					"current.label": "Current Stance",
+					"reckless.label": "Reckless Segments"
+				},
+				"label": "Attitude"
 			},
 			"wounds": {
 				"label": "Wounds",
@@ -366,11 +370,9 @@
 				"weight.label": "Weight"
 			},
 			"corruption": {
-				"FIELDS": {
-					"max.label": "Threshold",
-					"value.label": "Current"
-				},
-				"label": "Corruption"
+				"label": "Corruption",
+				"max.label": "Threshold",
+				"value.label": "Current"
 			},
 			"experience": {
 				"current.label": "Current Experience",
@@ -538,20 +540,22 @@
 	"CREATURE": {
 		"FIELDS": {
 			"attributes": {
-				"aggression": {
-					"abbreviation": "A",
-					"label": "Aggression"
-				},
-				"cunning": {
-					"abbreviation": "C",
-					"label": "Cunning"
-				},
-				"expertise": {
-					"abbreviation": "E",
-					"label": "Expertise"
-				},
-				"max.label": "Rating",
-				"value.label": "Budget"
+				"FIELDS": {
+					"aggression": {
+						"abbreviation": "A",
+						"label": "Aggression"
+					},
+					"cunning": {
+						"abbreviation": "C",
+						"label": "Cunning"
+					},
+					"expertise": {
+						"abbreviation": "E",
+						"label": "Expertise"
+					},
+					"max.label": "Rating",
+					"value.label": "Budget"
+				}
 			},
 			"category.label": "Category",
 			"damageRating": {
@@ -567,7 +571,7 @@
 				"abbreviation": "Soak",
 				"label": "Soak Value"
 			},
-			"threatRating": "Threat Rating"
+			"threatRating.label": "Threat Rating"
 		},
 		"TABS": {
 			"actions": "Actions",

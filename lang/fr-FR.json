@@ -1,4 +1,5 @@
-{"ABILITY": {
+{
+	"ABILITY": {
 		"ACTIONS": {
 			"update": "Enregistrer l'aptitude",
 			"trigger": "Déclencher l'aptitude'"
@@ -137,54 +138,58 @@
 		},
 		"FIELDS": {
 			"characteristics": {
-				"agility": {
-					"abbreviation": "Ag",
-					"label": "Agilité"
+				"FIELDS": {
+					"agility": {
+						"abbreviation": "Ag",
+						"label": "Agilité"
+					},
+					"fellowship": {
+						"abbreviation": "Soc",
+						"label": "Sociabilité"
+					},
+					"intelligence": {
+						"abbreviation": "Int",
+						"label": "Intelligence"
+					},
+					"strength": {
+						"abbreviation": "Fo",
+						"label": "Force"
+					},
+					"toughness": {
+						"abbreviation": "End",
+						"label": "Endurance"
+					},
+					"varies": {
+						"abbreviation": "V",
+						"label": "Varie"
+					},
+					"willpower": {
+						"abbreviation": "FM",
+						"label": "Force Mentale"
+					},
+					"fortune.label": "Dés de fortune",
+					"rating.label": "Valeur"
 				},
-				"fellowship": {
-					"abbreviation": "Soc",
-					"label": "Sociabilité"
-				},
-				"intelligence": {
-					"abbreviation": "Int",
-					"label": "Intelligence"
-				},
-				"strength": {
-					"abbreviation": "Fo",
-					"label": "Force"
-				},
-				"toughness": {
-					"abbreviation": "End",
-					"label": "Endurance"
-				},
-				"varies": {
-					"abbreviation": "V",
-					"label": "Varie"
-				},
-				"willpower": {
-					"abbreviation": "FM",
-					"label": "Force Mentale"
-				},
-				"fortune.label": "Dés de fortune",
-				"label": "Caractéristiques",
-				"rating.label": "Valeur"
+				"label": "Caractéristiques"
 			},
 			"impairments": {
 				"fatigue": {
 					"label": "Fatigue",
 					"tokens": "Jetons de Fatigue"
 				},
-				"label": "Impairments",
 				"stress": {
 					"label": "Stress",
 					"tokens": "Jetons de Stress"
-				}
+				},
+				"label": "Impairments"
 			},
 			"stance": {
-				"conservative.label": "Segments de prudence",
-				"current.label": "Attitude actuelle",
-				"label": "Attitude",
-				"reckless.label": "Segments de témérité"
+				"FIELDS": {
+					"conservative.label": "Segments de prudence",
+					"current.label": "Attitude actuelle",
+					"reckless.label": "Segments de témérité"
+				},
+				"label": "Attitude"
 			},
 			"wounds": {
 				"label": "Blessures",
@@ -537,20 +542,22 @@
 	"CREATURE": {
 		"FIELDS": {
 			"attributes": {
-				"aggression": {
-					"abbreviation": "Ag",
-					"label": "Agressivité"
-				},
-				"cunning": {
-					"abbreviation": "As",
-					"label": "Astuce"
-				},
-				"expertise": {
-					"abbreviation": "Ad",
-					"label": "Adresse"
-				},
-				"max.label": "Valeur",
-				"value.label": "Budget"
+				"FIELDS": {
+					"aggression": {
+						"abbreviation": "Ag",
+						"label": "Agressivité"
+					},
+					"cunning": {
+						"abbreviation": "As",
+						"label": "Astuce"
+					},
+					"expertise": {
+						"abbreviation": "Ad",
+						"label": "Adresse"
+					},
+					"max.label": "Valeur",
+					"value.label": "Budget"
+				}
 			},
 			"category.label": "Catégorie",
 			"damageRating": {
@@ -566,7 +573,7 @@
 				"abbreviation": "Encaissement",
 				"label": "Valeur d'Encaissement"
 			},
-			"threatRating": "Niveau de Menace"
+			"threatRating.label": "Niveau de Menace"
 		},
 		"TABS": {
 			"actions": "Actions",

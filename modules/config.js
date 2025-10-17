@@ -102,48 +102,16 @@ export const WFRP3e = {
 	},
 	attributes: {
 		aggression: {
-			name: "CREATURE.FIELDS.attributes.aggression.label",
-			abbreviation: "CREATURE.FIELDS.attributes.aggression.abbreviation"
+			name: "CREATURE.FIELDS.attributes.FIELDS.aggression.label",
+			abbreviation: "CREATURE.FIELDS.attributes.FIELDS.aggression.abbreviation"
 		},
 		cunning: {
-			name: "",
-			abbreviation: "CREATURE.FIELDS.attributes.cunning.abbreviation"
+			name: "CREATURE.FIELDS.attributes.FIELDS.cunning.label",
+			abbreviation: "CREATURE.FIELDS.attributes.FIELDS.cunning.abbreviation"
 		},
 		expertise: {
-			name: "CREATURE.FIELDS.attributes.expertise.label",
-			abbreviation: "CREATURE.FIELDS.attributes.expertise.abbreviation"
-		}
-	},
-	characteristics: {
-		strength: {
-			name: "ACTOR.FIELDS.characteristics.strength.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.strength.abbreviation",
-			type: "physical"
-		},
-		toughness: {
-			name: "ACTOR.FIELDS.characteristics.toughness.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.toughness.abbreviation",
-			type: "physical"
-		},
-		agility: {
-			name: "ACTOR.FIELDS.characteristics.agility.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.agility.abbreviation",
-			type: "physical"
-		},
-		intelligence: {
-			name: "ACTOR.FIELDS.characteristics.intelligence.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.intelligence.abbreviation",
-			type: "mental"
-		},
-		willpower: {
-			name: "ACTOR.FIELDS.characteristics.willpower.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.willpower.abbreviation",
-			type: "mental"
-		},
-		fellowship: {
-			name: "ACTOR.FIELDS.characteristics.fellowship.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.fellowship.abbreviation",
-			type: "mental"
+			name: "CREATURE.FIELDS.attributes.FIELDS.expertise.label",
+			abbreviation: "CREATURE.FIELDS.attributes.FIELDS.expertise.abbreviation"
 		}
 	},
 	challengeLevels: {
@@ -170,6 +138,38 @@ export const WFRP3e = {
 		heroic: {
 			challengeDice: 5,
 			name: "CHALLENGELEVEL.heroic"
+		}
+	},
+	characteristics: {
+		strength: {
+			name: "ACTOR.FIELDS.characteristics.FIELDS.strength.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.strength.abbreviation",
+			type: "physical"
+		},
+		toughness: {
+			name: "ACTOR.FIELDS.characteristics.FIELDS.toughness.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.toughness.abbreviation",
+			type: "physical"
+		},
+		agility: {
+			name: "ACTOR.FIELDS.characteristics.FIELDS.agility.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.agility.abbreviation",
+			type: "physical"
+		},
+		intelligence: {
+			name: "ACTOR.FIELDS.characteristics.FIELDS.intelligence.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.intelligence.abbreviation",
+			type: "mental"
+		},
+		willpower: {
+			name: "ACTOR.FIELDS.characteristics.FIELDS.willpower.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.willpower.abbreviation",
+			type: "mental"
+		},
+		fellowship: {
+			name: "ACTOR.FIELDS.characteristics.FIELDS.fellowship.label",
+			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.fellowship.abbreviation",
+			type: "mental"
 		}
 	},
 	conditionDurations: {
