@@ -192,17 +192,37 @@ export default class SkillUpgrader extends AbstractSelector
 				item: fromUuidSync(selection.uuid)
 			};
 		});
+
+	/** @inheritDoc */
+	_checkForWarning()
+	{
+		let error = super._checkForWarning();
+
+		if(error)
+			return error;
+		else if(this.remainingSpecialisationSelectionSize !== 0)
+			return "notEnoughSelection";
+
+		return false;
 	}
 
 	/**
-	 * Processes form submission for the Selector.
+	 * Processes form submission for the Skill Upgrader.
 	 * @param {SubmitEvent} event The originating form submission event.
 	 * @param {HTMLFormElement} form The form element that was submitted.
 	 * @param {FormDataExtended} formData Processed data for the submitted form.
 	 */
 	static async #onSkillUpgraderFormSubmit(event, form, formData)
 	{
-		this.options.submit(this.selection);
+		const warning = this._checkForWarnings();
+
+		if(warning && this.strictSelection)
+			return ui.notifications.warn(game.i18n.format("SELECTOR.WARNINGS.cannotSubmit", {
+				error: game.i18n.localize(`${capitalize(selectorType)}.WARNINGS.${warning}.description`)
+			}));
+
+		if(!warning || await this._askConfirmation(warning))
+			this.options.submit(this.selection);
 	}
 
 	/**

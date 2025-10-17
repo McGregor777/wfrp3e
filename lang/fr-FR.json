@@ -978,11 +978,18 @@
 			"alreadySelected": "Cet élément est déjà sélectionné.",
 			"cannotSubmit": "Impossible de valider la sélection : {error}",
 			"maximumSelectionSizeReached": "Le nombre maximum d'éléments à sélectionner a été atteint. Veuillez déselectionner un élément avant d'en sélectionner un autre.",
-			"notEnoughSelection": "Davantage d'éléments doivent être sélectionnés.",
-			"noSelection": "Aucun élément n'a été sélectionné."
+			"notEnoughSelection": {
+				"description": "Il reste des éléments à sélectionner.",
+				"title": "Éléments restants"
+			},
+			"noSelection": {
+				"description": "Aucun élément n'a été sélectionné.",
+				"title": "Aucun élément sélectionné"
+			}
 		},
 		"filters": "Filtres",
 		"noSelection": "Aucun",
+		"proceedDialog": "Souhaitez-vous tout de même poursuivre ?",
 		"search": "Rechercher"
 	},
 

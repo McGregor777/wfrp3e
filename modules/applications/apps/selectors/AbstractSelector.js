@@ -1,3 +1,5 @@
+import {capitalize} from "../../../helpers.js";
+
 /**
  * @inheritDoc
  * @abstract
@@ -10,11 +12,13 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 		super(options);
 
 		if(!options.items)
-			throw new Error("An Array of WFRP3eItems is needed for any Selector.");
-
+			throw new Error("An Array of Objects is needed for any Selector.");
 		this.items = options.items;
+
 		if(options.size)
 			this.size = options.size;
+
+		this.strictSelection = !(options.strictSelection ?? this.size > 1);
 
 		this.searchFilters = {text: "", type: "all"};
 	}
@@ -29,10 +33,7 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 			contentClasses: ["standard-form"],
 			title: "SELECTOR.title"
 		},
-		form: {
-			handler: this.#onSelectorFormSubmit,
-			closeOnSubmit: true
-		},
+		form: {handler: this.#onSelectorFormSubmit},
 		position: {width: 850}
 	};
 
@@ -63,10 +64,18 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 	 * The number of items to select.
 	 * @type {number}
 	 */
-	size= 1;
+	size = 1;
 
 	/**
-	 * The type of WFRP3eItem concerned by the Selector.
+	 * Whether selection has to be thoroughly completed to submit it.
+	 * If true, a warning is raised on submission of an incomplete selection.
+	 * If false, the user is prompted to confirm the submission of an incomplete selection.
+	 * @type {boolean}
+	 */
+	strictSelection = true;
+
+	/**
+	 * The type of the Selector.
 	 * @type {string}
 	 */
 	type = "";
@@ -104,7 +113,7 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 					...partContext,
 					items: this.items
 						.filter(item => ((!this.searchFilters.text
-							|| AbstractSelector.#searchTextFields(item, DocumentCollection.getSearchableFields(item.documentName, item.type), regex))
+								|| AbstractSelector.#searchTextFields(item, DocumentCollection.getSearchableFields(item.documentName, item.type), regex))
 							&& (this.searchFilters.type === "all" || this.searchFilters.type === item.system.type)))
 						.sort((a, b) => a.name.localeCompare(b.name)),
 					selection: this.selection
@@ -175,6 +184,48 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 	}
 
 	/**
+	 * Checks for any warning in the current selection and returns the type warning if any is found.
+	 * @returns {string|false} The type of warning, or false if no warning has been found.
+	 * @protected
+	 */
+	_checkForWarning()
+	{
+		if(!this.selection.length)
+			return "noSelection";
+		else if(this.remainingSelectionSize !== 0)
+			return "notEnoughSelection";
+
+		return false;
+	}
+
+	/**
+	 * Prompts the user to confirm the selection submission.
+	 * @param {string} [warning] The type of warning described in the dialog.
+	 * @returns {Promise<boolean>} {} The choice of the user, true if confirmed, false otherwise.
+	 */
+	async _askConfirmation(warning)
+	{
+		const selectorType = this.constructor.name,
+			  warningKey = `${capitalize(selectorType)}.WARNINGS.${warning}`;
+		let title = game.i18n.localize(`${warningKey}.title`),
+			content = game.i18n.localize(`${warningKey}.description`);
+
+		// Ensure that the Dialog's title and content have a fallback translation.
+		if(title === `${warningKey}.title`)
+			title = game.i18n.localize(`SELECTOR.WARNINGS.${warning}.title`);
+		if(content === `${warningKey}.description`)
+			content = game.i18n.localize(`SELECTOR.WARNINGS.${warning}.description`);
+
+		content = `<p>${content} ${game.i18n.localize("SELECTOR.proceedDialog")}</p>`;
+
+		return await foundry.applications.api.DialogV2.confirm({
+			window: {title},
+			modal: true,
+			content
+		});
+	}
+
+	/**
 	 * Spawns a Selector and waits for it to be dismissed or submitted.
 	 * @param {ApplicationConfiguration} [config]
 	 * @returns {Promise<any>} Resolves to the selected item(s).
@@ -198,16 +249,16 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 	 */
 	static async #onSelectorFormSubmit(event, form, formData)
 	{
-		if(!this.selection.length)
+		const warning = this._checkForWarning();
+		if(warning && this.strictSelection)
 			return ui.notifications.warn(game.i18n.format("SELECTOR.WARNINGS.cannotSubmit", {
-				error: game.i18n.localize("SELECTOR.WARNINGS.noSelection")
+				error: game.i18n.localize(`${capitalize(this.constructor.name)}.WARNINGS.${warning}.description`)
 			}));
-		else if(this.selection.length < this.size)
-			return ui.notifications.warn(game.i18n.format("SELECTOR.WARNINGS.cannotSubmit", {
-				error: game.i18n.localize("SELECTOR.WARNINGS.notEnoughSelection")
-			}));
-		else
+
+		if(!warning || await this._askConfirmation(warning)) {
 			this.options.submit(formData.object.selection);
+			await this.close({submitted: true});
+		}
 	}
 
 	/**

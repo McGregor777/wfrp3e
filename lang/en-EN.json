@@ -976,11 +976,18 @@
 			"alreadySelected": "This item is already selected.",
 			"cannotSubmit": "Unable to confirm selection: {error}",
 			"maximumSelectionSizeReached": "You cannot select any more item. Please deselect an item before selecting an other one.",
-			"notEnoughSelection": "You need to select more items.",
-			"noSelection": "No item has been selected."
+			"notEnoughSelection": {
+				"description": "There are still items to select",
+				"title": "Items Left To Select"
+			},
+			"noSelection": {
+				"description": "No item has been selected.",
+				"title": "No Item Selected"
+			}
 		},
 		"filters": "Filters",
 		"noSelection": "Aucun",
+		"proceedDialog": "Would you still like to proceed?",
 		"search": "Search"
 	},
 
