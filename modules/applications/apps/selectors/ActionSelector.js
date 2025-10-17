@@ -8,11 +8,9 @@ export default class ActionSelector extends AbstractSelector
 	{
 		super(options);
 
-		this.actionTypes = Object.entries(CONFIG.WFRP3e.actionTypes).reduce((types, [key, value]) => {
+		for(const [key, type] of Object.entries(CONFIG.WFRP3e.actionTypes))
 			if(options.items.find(action => action.system.type === key))
-				types[key] = value;
-			return types;
-		}, {});
+				this.types[key] = type;
 	}
 
 	/** @inheritDoc */
@@ -26,6 +24,13 @@ export default class ActionSelector extends AbstractSelector
 
 	/** @inheritDoc */
 	type = "action";
+
+	/**
+	 * The type of actions that are present among the selectable items.
+	 * @type {Object}
+	 */
+	types = {};
+
 
 	/** @inheritDoc */
 	async _prepareContext(options)
@@ -62,7 +67,7 @@ export default class ActionSelector extends AbstractSelector
 				};
 				break;
 			case "search":
-				partContext.types = {all: "SELECTOR.all", ...this.actionTypes};
+				partContext.types = {all: "SELECTOR.all", ...this.types};
 				break;
 		}
 

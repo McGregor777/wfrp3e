@@ -24,9 +24,8 @@ export default class CareerAdvanceDialog extends foundry.applications.api.Dialog
 				if(career.system.openAdvanceTypeNumbers.action >= career.system.advanceOptions.action)
 					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
 
-				ActionSelector.wait({
-					items: await ActionSelector.buildAdvanceOptionsList(actor)
-				}).then(action => actor.buyActionAdvance(action, career, type));
+				ActionSelector.wait({items: await ActionSelector.buildOptionsList(actor)})
+					.then(action => actor.buyActionAdvance(action, career, type));
 				break;
 
 			case "characteristic":
@@ -67,10 +66,8 @@ export default class CareerAdvanceDialog extends foundry.applications.api.Dialog
 				if(career.system.openAdvanceTypeNumbers.talent >= career.system.advanceOptions.talent)
 					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
 
-				TalentSelector.wait({
-					items: await TalentSelector.buildAdvanceOptionsList(actor, career),
-					types: career.system.sockets.map(socket => socket.type)
-				}).then(talent => actor.buyTalentAdvance(talent, career, type));
+				TalentSelector.wait({items: await TalentSelector.buildAdvanceOptionsList(actor, career)})
+					.then(talent => actor.buyTalentAdvance(talent, career, type));
 				break;
 
 			case "wound":

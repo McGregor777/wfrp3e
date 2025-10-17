@@ -8,11 +8,11 @@ export default class TalentSelector extends AbstractSelector
 	{
 		super(options);
 
-		this.talentTypes = Object.entries(CONFIG.WFRP3e.talentTypes).reduce((types, [key, value]) => {
-			if(options.types.includes(key))
-				types[key] = value;
-			return types;
-		}, {});
+		for(const [key, type] of Object.entries(CONFIG.WFRP3e.talentTypes))
+			if(options.items.find(item => item.system.type === key)) {
+				this.types[key] = type;
+				this.regularTypes.push(key);
+			}
 	}
 
 	/** @inheritDoc */
@@ -24,6 +24,12 @@ export default class TalentSelector extends AbstractSelector
 
 	/** @inheritDoc */
 	type = "talent";
+
+	/**
+	 * The talent types that are present among the selectable items.
+	 * @type {Object}
+	 */
+	types = {};
 
 	/** @inheritDoc */
 	async _prepareContext(options)
@@ -40,7 +46,7 @@ export default class TalentSelector extends AbstractSelector
 		let partContext = await super._preparePartContext(partId, context);
 
 		if(partId === "search")
-			partContext.types = {all: "SELECTOR.all", ...this.talentTypes};
+				partContext.types = {all: "SELECTOR.all", ...this.types};
 
 		return partContext;
 	}
