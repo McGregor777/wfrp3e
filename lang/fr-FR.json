@@ -1252,8 +1252,7 @@
 	"TRAITS": {
 		"basic": "Base",
 		"greyOrder": "Ordre Gris",
-		"rankZero": "Rang 0",
-		"rankOne": "Rang 1"
+		"rank": "Rang {number}"
 	},
 	
 	"TYPES": {

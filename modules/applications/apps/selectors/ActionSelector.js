@@ -75,11 +75,11 @@ export default class ActionSelector extends AbstractSelector
 	}
 
 	/**
-	 * Builds an array of Actions eligible for an Advance, whether non-career or not.
-	 * @param {WFRP3eActor} actor The Actor buying the advance.
-	 * @returns {Promise<WFRP3eItem[]>}
+	 * Builds an array of action cards to select depending on the actor.
+	 * @param {WFRP3eActor} actor The actor acquiring new action cards.
+	 * @returns {Promise<WFRP3eItem[]>} An array of action cards to select from.
 	 */
-	static async buildAdvanceOptionsList(actor)
+	static async buildOptionsList(actor)
 	{
 		let faithName = null,
 			orderName = null;
@@ -100,31 +100,30 @@ export default class ActionSelector extends AbstractSelector
 				orderName = match[2] ?? match[1];
 		}
 
-		const ownedActionNames = actor.itemTypes.action.map(action => action.name);
+		const ownedActionNames = actor.itemTypes.action.map(action => action.name),
+			  actions = [];
 
-		return game.packs.filter(pack => pack.documentName === "Item").reduce(async (actions, pack) => {
-			return [
-				...await actions,
-				...await pack.getDocuments({type: "action"}).then(foundActions => {
-					const actions = foundActions.filter(action => {
-						return ["melee", "ranged", "support"].includes(action.system.type)
-							&& !ownedActionNames.includes(action.name)
+		console.log(game.i18n.format("TRAITS.rank"))
+
+		for(const pack of game.packs.filter(pack => pack.documentName === "Item"))
+			actions.push(
+				...pack.getDocuments({type: "action"}).then(actions => {
+					return actions.filter(action => {
+						return !ownedActionNames.includes(action.name)
+							&& (["melee", "ranged", "support"].includes(action.system.type)
+								|| (action.system.type === "blessing"
+									&& actor.system.priest
+									&& faithName
+									&& action.system.reckless.traits.includes(faithName))
+								|| (action.system.type === "spell"
+									&& actor.system.wizard
+									&& orderName
+									&& action.system.reckless.traits.includes(orderName)))
 					});
-
-					if(actor.system.priest && faithName)
-						actions.push(...foundActions.filter(action => action.system.type === "blessing"
-							&& action.system.reckless.traits.includes(faithName)
-							&& !ownedActionNames.includes(action.name)));
-
-					if(actor.system.wizard && orderName)
-						actions.push(...foundActions.filter(action => action.system.type === "spell"
-							&& action.system.reckless.traits.includes(orderName)
-							&& !ownedActionNames.includes(action.name)));
-
-					return actions;
 				})
-			];
-		}, []);
+			);
+
+		return actions;
 	}
 
 	/**
