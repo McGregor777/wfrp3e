@@ -1,5 +1,12 @@
 import AbstractSelector from "./AbstractSelector.js";
 
+/**
+ * @typedef {Object} SkillUpgrade
+ * @property {string} type The type of skill upgrade.
+ * @property {string} uuid The UUID of the skill to upgrade.
+ * @property {string|number|boolean} value The new value of the upgraded skill property.
+ */
+
 /** @inheritDoc */
 export default class SkillUpgrader extends AbstractSelector
 {
@@ -10,8 +17,8 @@ export default class SkillUpgrader extends AbstractSelector
 
 		if(!options.actor)
 			throw new Error("An Actor is needed.");
-
 		this.actor = options.actor;
+
 		if(options.advanceType) {
 			this.advanceType = options.advanceType;
 
@@ -41,16 +48,22 @@ export default class SkillUpgrader extends AbstractSelector
 	};
 
 	/**
-	 * The WFRP3eActor upgrading one of its characteristics.
+	 * The actor upgrading their skill.
 	 * @type {WFRP3eActor}
 	 */
 	actor = null;
 
 	/**
-	 * The type of advance concerned by the Selector.
-	 * @type {string}
+	 * The type of advance concerned by the Skill Upgrader.
+	 * @type {string|null}
 	 */
 	advanceType = null;
+
+	/**
+	 * The array of selected skill upgrades.
+	 * @type {SkillUpgrade[]}
+	 */
+	selection = [];
 
 	/**
 	 * The array of selected specialisations.
@@ -61,7 +74,7 @@ export default class SkillUpgrader extends AbstractSelector
 	/**
 	 * The number of specialisations to select in addition to the other type of upgrades.
 	 * If this number is superior to 0, specialisations will only be added to the specialisation selection,
-	 * and not added as regular upgrades any more.
+	 * and not added as regular upgrades anymore.
 	 * @type {number}
 	 */
 	specialisationSize = 0;
@@ -98,17 +111,20 @@ export default class SkillUpgrader extends AbstractSelector
 	{
 		let partContext = await super._preparePartContext(partId, context);
 
-		if(partId === "main")
+		if(partId === "main") {
+			const upgrades = {acquisition: {}, trainingLevel: {}, specialisation: {}};
+			for(const upgrade of [...this.selection, ...this.specialisationSelection])
+				upgrade.type === "specialisation" && upgrade.uuid in upgrades[upgrade.type]
+					? upgrades[upgrade.type][upgrade.uuid] += `, ${upgrade.value}`
+					: upgrades[upgrade.type][upgrade.uuid] = upgrade.value;
+
 			partContext = {
 				...partContext,
 				characteristics: CONFIG.WFRP3e.characteristics,
 				advanceType: this.advanceType,
-				upgrades: this.selection.reduce((upgrades, selection) => {
-					selection.type in upgrades
-						? upgrades[selection.type][selection.uuid] = selection.value
-						: upgrades[selection.type] = {[selection.uuid]: selection.value};
-					return upgrades;
-				}, {})
+				upgrades
+			};
+		}
 			};
 
 		return partContext;
@@ -238,11 +254,11 @@ export default class SkillUpgrader extends AbstractSelector
 	}
 
 	/**
-	 * Builds an array of WFRP3eSkill trainings eligible for an advance, whether non-career or not.
-	 * @param {WFRP3eActor} actor The WFRP3eActor buying the advance.
-	 * @param {WFRP3eItem} career The WFRP3eCareer owning the advance.
+	 * Builds an array of skill trainings eligible for an advance, whether non-career or not.
+	 * @param {WFRP3eActor} actor The actor buying the advance.²
+	 * @param {WFRP3eItem} career The career owning the advance.
 	 * @param {Boolean} [nonCareerAdvance] Whether the advance is a non-career one.
-	 * @returns {Promise<WFRP3eItem[]>}
+	 * @returns {Promise<WFRP3eItem[]>} An array of skill trainings eligible for an advance.
 	 */
 	static async buildAdvanceOptionsList(actor, career, nonCareerAdvance = false)
 	{
@@ -259,7 +275,7 @@ export default class SkillUpgrader extends AbstractSelector
 
 		return careerSkillNames.map(name => {
 			return actor.itemTypes.skill.find(skill => skill.name === name)
-			 ?? skills.find(skill => skill.name === name);
+				?? skills.find(skill => skill.name === name);
 		});
 	}
 }
