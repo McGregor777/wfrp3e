@@ -409,7 +409,6 @@
 
 	"CHARACTERGENERATOR.Actions": "Action Cards",
 	"CHARACTERGENERATOR.Acquired": "Acquired",
-	"CHARACTERGENERATOR.Career": "Career",
 	"CHARACTERGENERATOR.Characteristic": "Characteristic",
 	"CHARACTERGENERATOR.Characteristics": "Characteristics",
 	"CHARACTERGENERATOR.CreationPoints": "Creation Points",
@@ -418,7 +417,6 @@
 	"CHARACTERGENERATOR.Talents": "Talents",
 	"CHARACTERGENERATOR.TrainingLevel": "Training Level",
 	"CHARACTERGENERATOR.Wealth": "Wealth",
-	"CHARACTERGENERATOR.CurrentlySelectedCareer": "Currently selected Career: ",
 	"CHARACTERGENERATOR.RemainingActions": "Remaining Actions: ",
 	"CHARACTERGENERATOR.RemainingCreationPoints": "Remaining Creation Points: ",
 	"CHARACTERGENERATOR.RemainingSkillTrainings": "Remaining Skill Trainings: ",

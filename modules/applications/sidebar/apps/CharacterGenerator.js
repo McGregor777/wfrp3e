@@ -1,3 +1,4 @@
+import CareerSelector from "../../apps/selectors/CareerSelector.js";
 import OriginSelector from "../../apps/selectors/OriginSelector.js";
 import WFRP3eActor from "../../../documents/WFRP3eActor.js";
 import WFRP3eItem from "../../../documents/WFRP3eItem.js";
@@ -16,7 +17,10 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
-		actions: {chooseOrigin: this.#chooseOrigin},
+		actions: {
+			chooseStartingCareer: this.#chooseStartingCareer,
+			chooseOrigin: this.#chooseOrigin
+		},
 		id: "character-generator-{id}",
 		classes: ["wfrp3e", "character-generator", "character"],
 		tag: "form",
@@ -259,6 +263,39 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #onCharacterGeneratorSubmit(event, form, formData)
 	{
 		await this.character.render({force: true});
+	}
+
+	/**
+	 * Shows a Career Selector to select the new character's starting career.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #chooseStartingCareer(event, target)
+	{
+		event.preventDefault();
+
+		const character = this.character;
+		if(character.itemTypes.career.length)
+			await WFRP3eItem.deleteDocuments(
+				character.itemTypes.career.map(career => career._id),
+				{parent: character}
+			);
+
+		const careerUuid = await CareerSelector.wait({
+				  items: await CareerSelector.buildStartingCareerList(character),
+				  modal: true
+			  }),
+			  career = await fromUuid(careerUuid);
+
+		await WFRP3eItem.createDocuments(
+			[career.clone({"system.current": true}, {keepId: true})],
+			{parent: character}
+		);
+
+		this.steps.chooseStartingCareer = true;
+		await this.render();
 	}
 
 	/**
