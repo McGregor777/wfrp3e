@@ -408,16 +408,7 @@
 	},
 
 	"CHARACTERGENERATOR.RemainingActions": "Remaining Actions: ",
-	"CHARACTERGENERATOR.RemainingTalents": "Remaining Talents: ",
-	"CHARACTERGENERATOR.RemainingFaithTalents": "Remaining Faith Talents: ",
-	"CHARACTERGENERATOR.RemainingFocusTalents": "Remaining Focus Talents: ",
-	"CHARACTERGENERATOR.RemainingOrderTalents": "Remaining Order Talents: ",
-	"CHARACTERGENERATOR.RemainingInsanityTalents": "Remaining Insanities: ",
-	"CHARACTERGENERATOR.WARNING.FaithTalentAlreadySelected": "A Faith Talent has already been selected.",
-	"CHARACTERGENERATOR.WARNING.OrderTalentAlreadySelected": "An Order Talent has already been selected.",
-	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "An Insanity has already been selected.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Not enough Actions left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughTalent": "Not enough Talents left.",
 	"CHARACTERGENERATOR": {
 		"ACTIONS": {
 			"acquireActionCards": "Acquire Action Cards",
@@ -1182,10 +1173,44 @@
 			"triggerTalent": "Choose a Talent to Use"
 		},
 		"WARNINGS": {
-			"noTalentSelected": "You must select a Talent card."
+			"missingFaithTalent": {
+				"description": "No Faith talent has been selected.",
+				"title": "Missing Faith Talent"
+			},
+			"missingFreeFocusTalent": {
+				"description": "The Free Focus talent has not been selected.",
+				"title": "Missing Free Focus Talent"
+			},
+			"missingInsanity": {
+				"description": "No insanity has been selected.",
+				"title": "Missing Insanity"
+			},
+			"missingOrderTalent": {
+				"description": "No Order talent has been selected.",
+				"title": "Missing Order Talent"
+			},
+			"notEnoughSelection": {
+				"description": "There are still talents to select.",
+				"title": "Talents Left To Select"
+			},
+			"noSelection": {
+				"description": "No talent has been selected.",
+				"title": "No Talent Selected"
+			}
 		},
-		"noTalentSelected": "None",
-		"selectedTalent": "Selected Talent:",
+		"remainingInsanities": "Remaining Insanities: ",
+		"remainingFaithTalents": "Remaining Faith Talents: ",
+		"remainingFocusTalents": "Remaining Focus Talents: ",
+		"remainingOrderTalents": "Remaining Order Talents: ",
+		"remainingTalents": "Remaining Talents: ",
+		"selectedFaith": "Selected Free Faith Talent:",
+		"selectedFocus": "Selected Free Focus Talent:",
+		"selectedInsanity": "Selected Free Insanity:",
+		"selectedOrder": "Selected Free Order Talent:",
+		"selectedReputation": "Selected Free Reputation Talent:",
+		"selectedTactic": "Selected Free Tactic Talent:",
+		"selectedTalent": "Selected(s) Talent(s):",
+		"selectedTricks": "Selected Free Tricks Talent:",
 		"title": "Talent Selector"
 	},
 

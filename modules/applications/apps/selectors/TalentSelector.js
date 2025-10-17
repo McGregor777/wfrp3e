@@ -77,4 +77,30 @@ export default class TalentSelector extends AbstractSelector
 
 		return talents;
 	}
+
+	/**
+	 * Builds an array of talents eligible for a new character.
+	 * @param {WFRP3eActor} character The new character.
+	 * @param {Object} options Optional parameters for option list building.
+	 * @returns {Promise<WFRP3eItem[]>} An array of talents eligible for a new character.
+	 */
+	static async buildNewCharacterOptionsList(character, options = {})
+	{
+		const talentTypeFilter = Object.keys(CONFIG.WFRP3e.talentTypes).filter(type => {
+				  return character.system.currentCareer.system.sockets.map(socket => socket.type).includes(type);
+			  }),
+			  itemTypes = ["talent"],
+			  itemPacks = game.packs.filter(pack => pack.documentName === "Item"),
+			  items = [];
+
+		for(const pack of itemPacks)
+			items.push(
+				...await pack.getDocuments({
+					type__in: itemTypes,
+					system: {type__in: talentTypeFilter}
+				})
+			);
+
+		return items;
+	}
 }

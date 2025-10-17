@@ -2,6 +2,7 @@ import CreationPointInvestor from "../../apps/CreationPointInvestor.js";
 import CareerSelector from "../../apps/selectors/CareerSelector.js";
 import OriginSelector from "../../apps/selectors/OriginSelector.js";
 import SkillUpgrader from "../../apps/selectors/SkillUpgrader.js";
+import TalentSelector from "../../apps/selectors/TalentSelector.js";
 import WFRP3eActor from "../../../documents/WFRP3eActor.js";
 import WFRP3eItem from "../../../documents/WFRP3eItem.js";
 
@@ -21,6 +22,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static DEFAULT_OPTIONS = {
 		actions: {
 			acquireSkillTrainings: this.#acquireSkillTrainings,
+			acquireTalents: this.#acquireTalents,
 			chooseStartingCareer: this.#chooseStartingCareer,
 			chooseOrigin: this.#chooseOrigin,
 			investCreationPoints: this.#investCreationPoints
@@ -354,6 +356,45 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		await WFRP3eItem.createDocuments(skills, {parent: character});
 
 		this.steps.acquireSkillTrainings = true;
+		await this.render();
+	}
+
+	/**
+	 * Shows a Talent Selector to select the new character's starting talents.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #acquireTalents(event, target)
+	{
+		event.preventDefault();
+
+		const character = this.character;
+		if(character.itemTypes.talent.length)
+			await WFRP3eItem.deleteDocuments([
+				character.itemTypes.insanity.map(insanity => insanity._id),
+				character.itemTypes.talent.map(talent => talent._id)
+			], {parent: character});
+
+		const investment = CONFIG.WFRP3e.creationPointInvestments.talents[this.creationPointInvestments.talents],
+			  options = {
+				  actor: character,
+				  modal: true,
+				  size: investment.size
+			  };
+		options.items = await TalentSelector.buildNewCharacterOptionsList(character, options);
+
+		let talentUuids = await TalentSelector.wait(options);
+		if(!Array.isArray(talentUuids))
+			talentUuids = [talentUuids];
+
+		await WFRP3eItem.createDocuments(
+			await Promise.all(talentUuids.map(async uuid => await fromUuid(uuid))),
+			{parent: character}
+		);
+
+		this.steps.acquireTalents = true;
 		await this.render();
 	}
 

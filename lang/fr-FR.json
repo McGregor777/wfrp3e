@@ -410,16 +410,7 @@
 	},
 
 	"CHARACTERGENERATOR.RemainingActions": "Actions restantes: ",
-	"CHARACTERGENERATOR.RemainingTalents": "Talents restants : ",
-	"CHARACTERGENERATOR.RemainingFaithTalents": "Talents de Foi restants : ",
-	"CHARACTERGENERATOR.RemainingFocusTalents": "Talents d'Affinité restants : ",
-	"CHARACTERGENERATOR.RemainingOrderTalents": "Talents d'Ordre restants : ",
-	"CHARACTERGENERATOR.RemainingInsanityTalents": "Folies restantes: ",
-	"CHARACTERGENERATOR.WARNING.FaithTalentAlreadySelected": "Un talent de Foi a déjà été sélectionné.",
-	"CHARACTERGENERATOR.WARNING.OrderTalentAlreadySelected": "Un talent d'Ordre a déjà été sélectionné.",
-	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "Une folie a déjà été sélectionnée.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Pas assez d'actions.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughTalent": "Pas assez de talents.",
 	"CHARACTERGENERATOR": {
 		"ACTIONS": {
 			"acquireActionCards": "Acquérir des cartes d'action",
@@ -1184,9 +1175,44 @@
 			"triggerTalent": "Choisissez un talent à utiliser"
 		},
 		"WARNINGS": {
-			"noTalentSelected": "Vous devez sélectionner une carte de talent."
+			"missingFaithTalent": {
+				"description": "Aucun talent de Foi n'a été sélectionné.",
+				"title": "Talent de Foi manquant"
+			},
+			"missingFreeFocusTalent": {
+				"description": "Le talent d'Affinité gratuit n'a pas été sélectionné.",
+				"title": "Talent d'Affinité gratuit manquant"
+			},
+			"missingInsanity": {
+				"description": "Aucune folie n'a été sélectionnée.",
+				"title": "Folie manquante"
+			},
+			"missingOrderTalent": {
+				"description": "Aucun talent d'Ordre n'a été sélectionné.",
+				"title": "Talent d'Ordre manquant"
+			},
+			"notEnoughSelection": {
+				"description": "Il reste des talents à sélectionner.",
+				"title": "Talents restants"
+			},
+			"noSelection": {
+				"description": "Aucun talent n'a été sélectionné.",
+				"title": "Aucun talent sélectionné"
+			}
 		},
-		"selectedTalent": "Talent sélectionné :",
+		"remainingInsanities": "Folies restantes: ",
+		"remainingFaithTalents": "Talents de Foi restants : ",
+		"remainingFocusTalents": "Talents d'Affinité restants : ",
+		"remainingOrderTalents": "Talents d'Ordre restants : ",
+		"remainingTalents": "Talents restants : ",
+		"selectedFaith": "Talent de Foi gratuit sélectionné :",
+		"selectedFocus": "Talent d'Affinité gratuit sélectionné :",
+		"selectedInsanity": "Folie gratuite sélectionnée :",
+		"selectedOrder": "Talent d'Ordre gratuit sélectionné :",
+		"selectedReputation": "Talent de Réputation gratuit sélectionné :",
+		"selectedTactic": "Talent de Tactique gratuit sélectionné :",
+		"selectedTalent": "Talent(s) sélectionné(s) :",
+		"selectedTricks": "Talent de Familier gratuit sélectionné :",
 		"title": "Sélecteur de talent"
 	},
 
