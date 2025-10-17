@@ -1,4 +1,4 @@
-import CharacterGenerator from "../../CharacterGenerator.js";
+import CharacterGenerator from "../apps/CharacterGenerator.js";
 
 /** @inheritDoc */
 export default class WFRP3eActorDirectory extends foundry.applications.sidebar.tabs.ActorDirectory
@@ -19,6 +19,6 @@ export default class WFRP3eActorDirectory extends foundry.applications.sidebar.t
 	 */
 	static async #generateCharacter()
 	{
-		await new CharacterGenerator().render(true);
+		await CharacterGenerator.start();
 	}
 }

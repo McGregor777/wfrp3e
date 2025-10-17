@@ -413,13 +413,11 @@
 	"CHARACTERGENERATOR.Characteristic": "Characteristic",
 	"CHARACTERGENERATOR.Characteristics": "Characteristics",
 	"CHARACTERGENERATOR.CreationPoints": "Creation Points",
-	"CHARACTERGENERATOR.NewCharacter": "New Character",
 	"CHARACTERGENERATOR.Origin": "Origin",
 	"CHARACTERGENERATOR.Skills": "Skills",
 	"CHARACTERGENERATOR.Specialisations": "Specialisations",
 	"CHARACTERGENERATOR.Talents": "Talents",
 	"CHARACTERGENERATOR.TrainingLevel": "Training Level",
-	"CHARACTERGENERATOR.Title": "Character Generator",
 	"CHARACTERGENERATOR.Wealth": "Wealth",
 	"CHARACTERGENERATOR.CorruptionThreshold": "Corruption Threshold: ",
 	"CHARACTERGENERATOR.WoundThreshold": "Wound Threshold: ",
@@ -435,13 +433,6 @@
 	"CHARACTERGENERATOR.RemainingFocusTalents": "Remaining Focus Talents: ",
 	"CHARACTERGENERATOR.RemainingOrderTalents": "Remaining Order Talents: ",
 	"CHARACTERGENERATOR.RemainingInsanityTalents": "Remaining Insanities: ",
-	"CHARACTERGENERATOR.STEP.ActionsSelection": "Select Your Action Cards",
-	"CHARACTERGENERATOR.STEP.CareerSelection": "Select Your Career",
-	"CHARACTERGENERATOR.STEP.Confirm": "Does Your Character Suits You?",
-	"CHARACTERGENERATOR.STEP.CreationPointsInvestment": "Invest Your Creation Points",
-	"CHARACTERGENERATOR.STEP.OriginSelection": "Select Your Origin",
-	"CHARACTERGENERATOR.STEP.SkillTraining": "Train Your Skills",
-	"CHARACTERGENERATOR.STEP.TalentSelection": "Select Your Talents",
 	"CHARACTERGENERATOR.WARNING.FaithTalentAlreadySelected": "A Faith Talent has already been selected.",
 	"CHARACTERGENERATOR.WARNING.OrderTalentAlreadySelected": "An Order Talent has already been selected.",
 	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "An Insanity has already been selected.",
@@ -452,6 +443,19 @@
 	"CHARACTERGENERATOR.WARNING.NotEnoughCreationPoints": "Not enough Creation Point left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Not enough Skill Training left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Not enough Specialisation left.",
+	"CHARACTERGENERATOR": {
+		"ACTIONS": {
+			"acquireActionCards": "Acquire Action Cards",
+			"acquireSkillTrainings": "Acquire Skill Trainings",
+			"acquireTalents": "Acquire Talents",
+			"chooseStartingCareer": "Choose Starting Career",
+			"chooseOrigin": "Choose Origin",
+			"investCreationPoints": "Invest Creation Points",
+			"submit": "Generate Character"
+		},
+		"newCharacter": "New Character",
+		"title": "Character Generator"
+	},
 
 	"CHARACTERISTICUPGRADER": {
 		"ACTIONS": {

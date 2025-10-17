@@ -408,6 +408,7 @@
 					transition: box-shadow 0.5s ease;
 				}
 
+				& > input[type="checkbox"],
 				& > input[type="radio"] {
 					display: none;
 				}
@@ -563,15 +564,13 @@ body.theme-light .application.wfrp3e.sheet .window-content {
 	}
 }
 
-nav {
-	&.tabs {
-		border-bottom-color: var(--color-tabs-border);
-		line-height: 2;
+nav.tabs {
+	border-bottom-color: var(--color-tabs-border);
+	line-height: 2;
 
-		&.sheet-tabs {
-			font-size: var(--font-size-18);
-			font-weight: bold;
-			font-variant-caps: small-caps;
-		}
+	&.sheet-tabs {
+		font-size: var(--font-size-18);
+		font-weight: bold;
+		font-variant-caps: small-caps;
 	}
 }

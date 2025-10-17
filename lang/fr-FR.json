@@ -415,13 +415,11 @@
 	"CHARACTERGENERATOR.Characteristic": "Caractéristique",
 	"CHARACTERGENERATOR.Characteristics": "Caractéristiques",
 	"CHARACTERGENERATOR.CreationPoints": "Points de création",
-	"CHARACTERGENERATOR.NewCharacter": "Nouveau personnage",
 	"CHARACTERGENERATOR.Origin": "Origine",
 	"CHARACTERGENERATOR.Skills": "Compétences",
 	"CHARACTERGENERATOR.Specialisations": "Spécialisations",
 	"CHARACTERGENERATOR.Talents": "Talents",
 	"CHARACTERGENERATOR.TrainingLevel": "Niveau de formation",
-	"CHARACTERGENERATOR.Title": "Générateur de personnage",
 	"CHARACTERGENERATOR.Wealth": "Richesse",
 	"CHARACTERGENERATOR.CorruptionThreshold": "Plafond de Corruption : ",
 	"CHARACTERGENERATOR.WoundThreshold": "Plafond de Blessures : ",
@@ -437,13 +435,6 @@
 	"CHARACTERGENERATOR.RemainingFocusTalents": "Talents d'Affinité restants : ",
 	"CHARACTERGENERATOR.RemainingOrderTalents": "Talents d'Ordre restants : ",
 	"CHARACTERGENERATOR.RemainingInsanityTalents": "Folies restantes: ",
-	"CHARACTERGENERATOR.STEP.ActionsSelection": "Choisissez vos cartes d'action",
-	"CHARACTERGENERATOR.STEP.CareerSelection": "Choisissez votre carrière",
-	"CHARACTERGENERATOR.STEP.Confirm": "Votre personnage vous convient-il ?",
-	"CHARACTERGENERATOR.STEP.CreationPointsInvestment": "Distribuez vos points de création",
-	"CHARACTERGENERATOR.STEP.OriginSelection": "Choisissez votre origine",
-	"CHARACTERGENERATOR.STEP.SkillTraining": "Entraînez vos compétences",
-	"CHARACTERGENERATOR.STEP.TalentSelection": "Choisissez vos talents",
 	"CHARACTERGENERATOR.WARNING.FaithTalentAlreadySelected": "Un talent de Foi a déjà été sélectionné.",
 	"CHARACTERGENERATOR.WARNING.OrderTalentAlreadySelected": "Un talent d'Ordre a déjà été sélectionné.",
 	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "Une folie a déjà été sélectionnée.",
@@ -454,6 +445,19 @@
 	"CHARACTERGENERATOR.WARNING.NotEnoughCreationPoints": "Pas assez de points de création.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Pas assez de formations de compétence.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Pas assez de spécialisations.",
+	"CHARACTERGENERATOR": {
+		"ACTIONS": {
+			"acquireActionCards": "Acquérir des cartes d'action",
+			"acquireSkillTrainings": "Acquérir des compétences",
+			"acquireTalents": "Acquérir des talents",
+			"chooseStartingCareer": "Choisir la carrière de départ",
+			"chooseOrigin": "Choisir l'origine",
+			"investCreationPoints": "Investir les points de création",
+			"submit": "Générer le personnage"
+		},
+		"newCharacter": "Nouveau personnage",
+		"title": "Générateur de personnage"
+	},
 
 	"CHARACTERISTICUPGRADER": {
 		"ACTIONS": {

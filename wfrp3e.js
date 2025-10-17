@@ -72,8 +72,6 @@ async function preloadHandlebarsTemplates()
 		"systems/wfrp3e/templates/applications/partials/miscast-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/mutation-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/talent-card.hbs",
-		"systems/wfrp3e/templates/partials/character-generator-origin-description.hbs",
-		"systems/wfrp3e/templates/partials/character-generator-talent-card.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/ability-row.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/ability-track.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/action-row.hbs",
