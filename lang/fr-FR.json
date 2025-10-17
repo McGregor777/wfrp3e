@@ -107,7 +107,7 @@
 
 	"ACTIONSELECTOR": {
 		"ACTIONS": {
-			"chooseTalent": "Choisir une action"
+			"chooseAction": "Choisir une action"
 		},
 		"HEADINGS.newAction": "Choisissez une nouvelle action",
 		"WARNINGS": {
