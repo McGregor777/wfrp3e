@@ -1046,6 +1046,7 @@
 			"onPostCheckTrigger": "Déclenchement manuel après un test",
 			"onPreCheckTrigger": "Sélection manuelle avant un test",
 			"onStartingSkillTrainingSelection": "Sélection des formations des compétences de départ",
+			"onStartingTalentSelection": "Sélection des talents de départ",
 			"onTargettingCheckPreparation": "Préparation d'un test ciblant",
 			"onTrigger": "Déclenchement manuel"
 		}

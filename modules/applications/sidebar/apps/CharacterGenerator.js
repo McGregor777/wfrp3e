@@ -439,8 +439,16 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			  options = {
 				  actor: character,
 				  modal: true,
-				  size: investment.size
+				  size: investment.size,
+				  freeItemTypes: []
 			  };
+
+		for(const effect of character.findTriggeredEffects("onStartingTalentSelection"))
+			await effect.triggerEffect({
+				parameters: [options],
+				parameterNames: ["options"]
+			});
+
 		options.items = await TalentSelector.buildNewCharacterOptionsList(character, options);
 
 		let talentUuids = await TalentSelector.wait(options);

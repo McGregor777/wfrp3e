@@ -19,7 +19,7 @@
 
 	{{#each freeItems as |item it|}}
 		<p>
-			{{localize (concat (uppercase selectorType) ".selected" (capitalize it))}}
+			{{localize (concat (uppercase @root.selectorType) ".selected" (capitalize it))}}
 
 			<span class="selection">
 				{{#if item}}

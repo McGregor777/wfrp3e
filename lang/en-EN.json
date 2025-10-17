@@ -1044,6 +1044,7 @@
 			"onPostCheckTrigger": "Manual Trigger Post Check",
 			"onPreCheckTrigger": "Manual Selection Pre Check",
 			"onStartingSkillTrainingSelection": "Starting Skill Training Selection",
+			"onStartingTalentSelection": "Starting Talent Selection",
 			"onTargettingCheckPreparation": "Targetting Check Preparation",
 			"onTrigger": "Manual Trigger"
 		}
