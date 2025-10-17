@@ -1,5 +1,3 @@
-import DataHelper from "../DataHelper.js";
-
 /** @inheritDoc */
 export default class WFRP3eInsanityDataModel extends foundry.abstract.TypeDataModel
 {
@@ -17,24 +15,4 @@ export default class WFRP3eInsanityDataModel extends foundry.abstract.TypeDataMo
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["INSANITY"];
-
-	/** @inheritDoc */
-	prepareBaseData()
-	{
-		super.prepareBaseData();
-
-		this._prepareDescription();
-	}
-
-	/**
-	 * Prepares the description of the Insanity's description.
-	 * @private
-	 */
-	_prepareDescription()
-	{
-		const cleanedUpDescription = DataHelper._getCleanedupDescription(this.description);
-
-		if(cleanedUpDescription)
-			this.updateSource({description: cleanedUpDescription});
-	}
 }

@@ -1,5 +1,3 @@
-import DataHelper from "../DataHelper.js";
-
 /** @inheritDoc */
 export default class WFRP3eAbilityDataModel extends foundry.abstract.TypeDataModel
 {
@@ -16,24 +14,4 @@ export default class WFRP3eAbilityDataModel extends foundry.abstract.TypeDataMod
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["ABILITY"];
-
-	/** @inheritDoc */
-	prepareBaseData()
-	{
-		super.prepareBaseData();
-
-		this._prepareDescription();
-	}
-
-	/**
-	 * Prepares the description of the Ability's description.
-	 * @private
-	 */
-	_prepareDescription()
-	{
-		const cleanedUpDescription = DataHelper._getCleanedupDescription(this.description);
-
-		if(cleanedUpDescription)
-			this.updateSource({description: cleanedUpDescription});
-	}
 }

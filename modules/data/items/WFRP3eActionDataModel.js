@@ -1,5 +1,3 @@
-import DataHelper from "../DataHelper.js";
-
 /**
  * @typedef {Object} ActionEffect
  * @property {string} description
@@ -112,58 +110,4 @@ export default class WFRP3eActionDataModel extends foundry.abstract.TypeDataMode
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["ACTION"];
-
-	/** @inheritDoc */
-	prepareBaseData()
-	{
-		super.prepareBaseData();
-
-		this._prepareEffectDescriptions();
-	}
-
-	/**
-	 * Prepares the descriptions of the Action's effects.
-	 * @private
-	 */
-	_prepareEffectDescriptions()
-	{
-		const changes = {
-			...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
-				object[stance] = {
-					effects: Object.keys(CONFIG.WFRP3e.symbols).reduce((object, symbol) => {
-						object[symbol] = this[stance].effects[symbol];
-						return object;
-					}, {})
-				}
-				return object;
-			}, {})
-		};
-
-		Object.keys(CONFIG.WFRP3e.stances).forEach((stance, index) => {
-			if(this[stance].special) {
-				const newDescription = DataHelper._getCleanedupDescription(this[stance].special);
-
-				if(newDescription)
-					changes[stance].special = newDescription;
-			}
-
-			if(this[stance].uniqueEffect) {
-				const newDescription = DataHelper._getCleanedupDescription(this[stance].uniqueEffect);
-
-				if(newDescription)
-					changes[stance].uniqueEffect = newDescription;
-			}
-
-			Object.keys(CONFIG.WFRP3e.symbols).forEach((symbol, index) => {
-				this[stance].effects[symbol].forEach((effect, index) => {
-					const newDescription = DataHelper._getCleanedupDescription(effect.description);
-
-					if(newDescription)
-						changes[stance].effects[symbol][index].description = newDescription;
-				});
-			});
-		});
-
-		this.updateSource(changes);
-	}
 }
