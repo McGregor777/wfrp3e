@@ -21,7 +21,7 @@
         "boon": [
           {
             "symbolAmount": 2,
-            "description": "<p>Ignore your target&rsquo;s armour soak value for this attack</p>"
+            "description": "<p>Ignore your target’s armour soak value for this attack</p>"
           }
         ],
         "sigmarsComet": [
@@ -64,7 +64,7 @@
         "boon": [
           {
             "symbolAmount": 2,
-            "description": "<p>Ignore your target&rsquo;s armour soak value for this attack</p>"
+            "description": "<p>Ignore your target’s armour soak value for this attack</p>"
           }
         ],
         "sigmarsComet": [

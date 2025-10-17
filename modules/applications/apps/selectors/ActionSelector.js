@@ -77,9 +77,10 @@ export default class ActionSelector extends AbstractSelector
 	/**
 	 * Builds an array of action cards to select depending on the actor.
 	 * @param {WFRP3eActor} actor The actor acquiring new action cards.
+	 * @param {Object} options
 	 * @returns {Promise<WFRP3eItem[]>} An array of action cards to select from.
 	 */
-	static async buildOptionsList(actor)
+	static async buildOptionsList(actor, options)
 	{
 		let faithName = null,
 			orderName = null;
@@ -103,13 +104,12 @@ export default class ActionSelector extends AbstractSelector
 		const ownedActionNames = actor.itemTypes.action.map(action => action.name),
 			  actions = [];
 
-		console.log(game.i18n.format("TRAITS.rank"))
-
 		for(const pack of game.packs.filter(pack => pack.documentName === "Item"))
 			actions.push(
 				...pack.getDocuments({type: "action"}).then(actions => {
 					return actions.filter(action => {
-						return !ownedActionNames.includes(action.name)
+						return (options.basic === false && !action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic"))
+							&& !ownedActionNames.includes(action.name)
 							&& (["melee", "ranged", "support"].includes(action.system.type)
 								|| (action.system.type === "blessing"
 									&& actor.system.priest

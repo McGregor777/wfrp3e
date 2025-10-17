@@ -1,4 +1,5 @@
 import CreationPointInvestor from "../../apps/CreationPointInvestor.js";
+import ActionSelector from "../../apps/selectors/ActionSelector.js";
 import CareerSelector from "../../apps/selectors/CareerSelector.js";
 import OriginSelector from "../../apps/selectors/OriginSelector.js";
 import SkillUpgrader from "../../apps/selectors/SkillUpgrader.js";
@@ -21,6 +22,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
 		actions: {
+			acquireActionCards: this.#acquireActionCards,
 			acquireSkillTrainings: this.#acquireSkillTrainings,
 			acquireTalents: this.#acquireTalents,
 			chooseStartingCareer: this.#chooseStartingCareer,
@@ -288,6 +290,54 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #onCharacterGeneratorSubmit(event, form, formData)
 	{
 		await this.character.render({force: true});
+	}
+
+	/**
+	 * Shows an Action Selector to select the new character's starting action cards.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #acquireActionCards(event, target)
+	{
+		event.preventDefault();
+
+		const character = this.character;
+		if(character.itemTypes.action.length)
+			await WFRP3eItem.deleteDocuments(
+				character.itemTypes.action.map(action => action._id),
+				{parent: character}
+			);
+
+		const investment = CONFIG.WFRP3e.creationPointInvestments.actionCards[this.creationPointInvestments.actionCards];
+		let actionUuids = await ActionSelector.wait({
+			actor: character,
+			items: await ActionSelector.buildOptionsList(character, {basic: false}),
+			modal: true,
+			size: investment.size
+		});
+
+		if(!Array.isArray(actionUuids))
+			actionUuids = [actionUuids];
+
+		const basicActions = [],
+			  ownedActionNames = character.itemTypes.action.map(action => action.name),
+			  foundActions = await game.packs.get("wfrp3e.items").getDocuments({type: "action"});
+
+		for(const action of foundActions)
+			if(action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic"))
+				&& await action.checkRequirements({actor: character})
+				&& !ownedActionNames.includes(action.name))
+				basicActions.push(action);
+
+		await WFRP3eItem.createDocuments([
+			...basicActions,
+			...await Promise.all(actionUuids.map(async uuid => await fromUuid(uuid)))
+		], {parent: character});
+
+		this.steps.acquireActionCards = true;
+		await this.render();
 	}
 
 	/**

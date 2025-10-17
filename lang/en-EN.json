@@ -407,8 +407,6 @@
 		"woundThreshold": "Wound Threshold"
 	},
 
-	"CHARACTERGENERATOR.RemainingActions": "Remaining Actions: ",
-	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Not enough Actions left.",
 	"CHARACTERGENERATOR": {
 		"ACTIONS": {
 			"acquireActionCards": "Acquire Action Cards",

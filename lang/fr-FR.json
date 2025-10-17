@@ -409,8 +409,6 @@
 		"woundThreshold": "Plafond de Blessures"
 	},
 
-	"CHARACTERGENERATOR.RemainingActions": "Actions restantes: ",
-	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Pas assez d'actions.",
 	"CHARACTERGENERATOR": {
 		"ACTIONS": {
 			"acquireActionCards": "Acquérir des cartes d'action",
