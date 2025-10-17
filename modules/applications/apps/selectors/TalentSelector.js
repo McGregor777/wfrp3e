@@ -52,27 +52,29 @@ export default class TalentSelector extends AbstractSelector
 	}
 
 	/**
-	 * Builds an array of WFRP3eTalents eligible for an advance, whether non-career or not.
-	 * @param {WFRP3eActor} actor The WFRP3eActor buying the advance.
-	 * @param {WFRP3eItem} career The WFRP3eCareer owning the advance.
+	 * Builds an array of talents eligible for an advance, whether non-career or not.
+	 * @param {WFRP3eActor} actor The actor buying the advance.
+	 * @param {WFRP3eItem} career The career owning the advance.
 	 * @param {Boolean} [nonCareerAdvance] Whether the advance is a non-career one or not.
-	 * @returns {Promise<WFRP3eItem[]>}
+	 * @returns {Promise<WFRP3eItem[]>} An array of talents to select from.
 	 */
 	static async buildAdvanceOptionsList(actor, career, nonCareerAdvance = false)
 	{
 		const talentTypeFilter = ["focus", "reputation", "tactic", "tricks"].filter(type => {
-				return career.system.sockets.map(socket => socket.type).includes(type) !== nonCareerAdvance;
-			}),
-			  ownedTalentNames = actor.itemTypes.talent.map(talent => talent.name);
+				  return career.system.sockets.map(socket => socket.type).includes(type) !== nonCareerAdvance;
+			  }),
+			  ownedTalentNames = actor.itemTypes.talent.map(talent => talent.name),
+			  talents = [];
 
-		return game.packs.filter(pack => pack.documentName === "Item").reduce(async (talents, pack) => {
-			return [
-				...await talents,
-				...await pack.getDocuments({type: "talent"})
-					.then(foundTalents => foundTalents
-						.filter(talent => talentTypeFilter.includes(talent.system.type)
-							&& !ownedTalentNames.includes(talent.name)))
-			];
-		}, []);
+		for(const pack of game.packs.filter(pack => pack.documentName === "Item"))
+			talents.push(
+				...await pack.getDocuments({
+					type: "talent",
+					name__nin: ownedTalentNames,
+					system: {type__in: talentTypeFilter}
+				})
+			);
+
+		return talents;
 	}
 }
