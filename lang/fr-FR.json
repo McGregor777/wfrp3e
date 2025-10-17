@@ -976,6 +976,8 @@
 		}
 	},
 
+	"SIDEBAR.ACTIONS.generateCharacter": "Générer un personnage",
+
 	"STANCES": {
 		"conservative": "Prudence",
 		"reckless": "Téméraire"

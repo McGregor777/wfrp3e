@@ -1,5 +1,4 @@
 import {WFRP3e} from "./modules/config.js";
-import CharacterGenerator from "./modules/applications/CharacterGenerator.js";
 import WFRP3eEffectConfig from "./modules/applications/sheets/WFRP3eEffectConfig.js";
 import WFRP3eCharacterSheet from "./modules/applications/sheets/actors/WFRP3eCharacterSheet.js";
 import WFRP3eCreatureSheet from "./modules/applications/sheets/actors/WFRP3eCreatureSheet.js";
@@ -20,6 +19,7 @@ import WFRP3eSkillSheet from "./modules/applications/sheets/items/WFRP3eSkillShe
 import WFRP3eTalentSheet from "./modules/applications/sheets/items/WFRP3eTalentSheet.js";
 import WFRP3eTrappingSheet from "./modules/applications/sheets/items/WFRP3eTrappingSheet.js";
 import WFRP3eWeaponSheet from "./modules/applications/sheets/items/WFRP3eWeaponSheet.js";
+import WFRP3eActorDirectory from "./modules/applications/sidebar/tabs/WFRP3eActorDirectory.js";
 import WFRP3eChatLog from "./modules/applications/sidebar/tabs/WFRP3eChatLog.js";
 import WFRP3eCombatTracker from "./modules/applications/sidebar/tabs/WFRP3eCombatTracker.js";
 import WFRP3eCombat from "./modules/documents/combat/WFRP3eCombat.js";
@@ -166,6 +166,7 @@ Hooks.once("init", async () => {
 	};
 	CONFIG.fontDefinitions["Caslon Antique"] = {editor: true, fonts: []};
 
+	CONFIG.ui.actors = WFRP3eActorDirectory;
 	CONFIG.ui.chat = WFRP3eChatLog;
 	CONFIG.ui.combat = WFRP3eCombatTracker;
 
@@ -207,20 +208,6 @@ Hooks.on("renderChatMessage", (message, html, context) => {
 			event.currentTarget.dataset.symbol,
 			event.currentTarget.dataset.index
 		);
-	});
-});
-
-Hooks.on("renderActorDirectory", (app, html, data) => {
-	// Add a button to start the Character Generator.
-	html.find(".directory-header .header-actions").append(
-		'<button class="character-generator">' +
-		' <span class="fas fa-user"></span> ' + game.i18n.localize("ACTOR.GenerateACharacter") +
-		'</button>'
-	);
-
-	html.find(".character-generator").click(async(event) => {
-		event.preventDefault();
-		new CharacterGenerator().render(true);
 	});
 });
 

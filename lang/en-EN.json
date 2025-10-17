@@ -974,6 +974,8 @@
 		}
 	},
 
+	"SIDEBAR.ACTIONS.generateCharacter": "Generate Character",
+
 	"STANCES": {
 		"conservative": "Conservative",
 		"reckless": "Reckless"
