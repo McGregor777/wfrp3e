@@ -1048,7 +1048,8 @@
 			"onStartingSkillTrainingSelection": "Sélection des formations des compétences de départ",
 			"onStartingTalentSelection": "Sélection des talents de départ",
 			"onTargettingCheckPreparation": "Préparation d'un test ciblant",
-			"onTrigger": "Déclenchement manuel"
+			"onTrigger": "Déclenchement manuel",
+			"requirementCheck": "Vérification des conditions"
 		}
 	},
 
@@ -1288,9 +1289,27 @@
 	},
 
 	"TRAITS": {
+		"amberOrder": "Ordre d'Ambre",
+		"amethystOrder": "Ordre d'Améthyste",
 		"basic": "Base",
+		"brightOrder": "Ordre Flamboyant",
+		"celestialOrder": "Ordre Céleste",
+		"darkMagic": "Magie Noire",
 		"greyOrder": "Ordre Gris",
-		"rank": "Rang {number}"
+		"goldOrder": "Ordre Doré",
+		"jadeOrder": "Ordre de Jade",
+		"lightOrder": "Ordre Lumineux",
+		"manann": "Manann",
+		"morr": "Morr",
+		"myrmidia": "Myrmidia",
+		"ranald": "Ranald",
+		"rank": "Rang {number}",
+		"rhya": "Rhya",
+		"shallya": "Shallya",
+		"sigmar": "Sigmar",
+		"taal": "Taal",
+		"ulric": "Ulric",
+		"venera": "Verena"
 	},
 	
 	"TYPES": {

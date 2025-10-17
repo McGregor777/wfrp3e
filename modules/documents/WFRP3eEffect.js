@@ -12,7 +12,7 @@ export default class WFRP3eEffect extends ActiveEffect
 	{
 		try {
 			const fn = new foundry.utils.AsyncFunction(...parameterNames, this.system[script]);
-			await fn.call(this, ...parameters);
+			return await fn.call(this, ...parameters);
 		}
 		catch(error) {
 			console.error(error);

@@ -82,46 +82,18 @@ export default class ActionSelector extends AbstractSelector
 	 */
 	static async buildOptionsList(actor, options)
 	{
-		let faithName = null,
-			orderName = null;
-
-		if(actor.system.priest) {
-			const faithTalent = actor.itemTypes.talent.find(talent => talent.type === "faith"),
-				  match = faithTalent.name.match(new RegExp(/([\w\s]+),?/));
-
-			if(match)
-				faithName = match[1];
-		}
-
-		if(actor.system.wizard) {
-			const orderTalent = actor.itemTypes.talent.find(talent => talent.type === "order"),
-				  match = orderTalent.name.match(new RegExp(/([\w\s]+), ?[\w\s]+, ?([\w\s]+)/));
-
-			if(match)
-				orderName = match[2] ?? match[1];
-		}
-
 		const ownedActionNames = actor.itemTypes.action.map(action => action.name),
 			  actions = [];
 
-		for(const pack of game.packs.filter(pack => pack.documentName === "Item"))
-			actions.push(
-				...pack.getDocuments({type: "action"}).then(actions => {
-					return actions.filter(action => {
-						return (options.basic === false && !action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic"))
-							&& !ownedActionNames.includes(action.name)
-							&& (["melee", "ranged", "support"].includes(action.system.type)
-								|| (action.system.type === "blessing"
-									&& actor.system.priest
-									&& faithName
-									&& action.system.reckless.traits.includes(faithName))
-								|| (action.system.type === "spell"
-									&& actor.system.wizard
-									&& orderName
-									&& action.system.reckless.traits.includes(orderName)))
-					});
-				})
-			);
+		for(const pack of game.packs.filter(pack => pack.documentName === "Item")) {
+			const foundActions = await pack.getDocuments({type: "action"});
+
+			for(const action of foundActions)
+				if((options.basic === false && !action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic")))
+					&& await action.checkRequirements({actor})
+					&& !ownedActionNames.includes(action.name))
+					actions.push(action);
+		}
 
 		return actions;
 	}

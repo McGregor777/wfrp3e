@@ -90,22 +90,6 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	static LOCALIZATION_PREFIXES = ["ACTOR", "CHARACTER"];
 
 	/**
-	 * Whether the character owns a Faith talent.
-	 * @returns {Boolean}
-	 */
-	get priest() {
-		return this.parent.itemTypes.talent.find(talent => talent.system.type === "faith") != null;
-	}
-
-	/**
-	 * Whether the character owns an Order talent.
-	 * @returns {Boolean}
-	 */
-	get wizard() {
-		return this.parent.itemTypes.talent.find(talent => talent.system.type === "order") != null;
-	}
-
-	/**
 	 * The character's current career.
 	 * @returns {WFRP3eItem}
 	 */
@@ -149,6 +133,14 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 			id: this.origin,
 			...this.race.origins[this.origin]
 		};
+	}
+
+	/**
+	 * Whether the character owns a Faith talent.
+	 * @returns {Boolean}
+	 */
+	get priest() {
+		return this.parent.itemTypes.talent.find(talent => talent.system.type === "faith") != null;
 	}
 
 	/**
@@ -214,6 +206,14 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	get totalSoak()
 	{
 		return this.parent.itemTypes.armour.reduce((value, armour) => value + armour.system.soakValue, 0);
+	}
+
+	/**
+	 * Whether the character owns an Order talent.
+	 * @returns {Boolean}
+	 */
+	get wizard() {
+		return this.parent.itemTypes.talent.find(talent => talent.system.type === "order") != null;
 	}
 
 	/** @inheritDoc */

@@ -1046,7 +1046,8 @@
 			"onStartingSkillTrainingSelection": "Starting Skill Training Selection",
 			"onStartingTalentSelection": "Starting Talent Selection",
 			"onTargettingCheckPreparation": "Targetting Check Preparation",
-			"onTrigger": "Manual Trigger"
+			"onTrigger": "Manual Trigger",
+			"requirementCheck": "Requirement Check"
 		}
 	},
 
@@ -1286,9 +1287,27 @@
 	},
 
 	"TRAITS": {
+		"amberOrder": "Amber Order",
+		"amethystOrder": "Amethyst Order",
 		"basic": "Basic",
+		"brightOrder": "Bright Order",
+		"celestialOrder": "Celestial Order",
+		"darkMagic": "Dark Magic",
 		"greyOrder": "Grey Order",
-		"rank": "Rank {number}"
+		"goldOrder": "Gold Order",
+		"jadeOrder": "Jade Order",
+		"lightOrder": "Light Order",
+		"manann": "Manann",
+		"morr": "Morr",
+		"myrmidia": "Myrmidia",
+		"ranald": "Ranald",
+		"rank": "Rank {number}",
+		"rhya": "Rhya",
+		"shallya": "Shallya",
+		"sigmar": "Sigmar",
+		"taal": "Taal",
+		"ulric": "Ulric",
+		"venera": "Verena"
 	},
 	
 	"TYPES": {
