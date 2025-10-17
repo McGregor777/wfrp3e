@@ -65,7 +65,7 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 			raceRestrictions: new fields.ArrayField(
 				new fields.StringField({
 					choices: {
-						any: "RACE.Any",
+						any: "RACE.any",
 						...Object.entries(CONFIG.WFRP3e.availableRaces).reduce((choices, [key, value]) => {
 							choices[key] = value.name
 							return choices;

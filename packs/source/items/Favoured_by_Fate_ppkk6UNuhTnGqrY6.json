@@ -5,7 +5,7 @@
   "_id": "ppkk6UNuhTnGqrY6",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Once per session, a Reiklander may add two fortune dice [[DF]][[DF]] to any single check.</p>"
+    "description": "<p>Once per session, a Reiklander may add two fortune dice [[DF]] [[DF]] to any single check.</p>"
   },
   "effects": [],
   "sort": 0,
@@ -15,13 +15,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "12.350",
     "createdTime": 1700158755958,
-    "modifiedTime": 1701195755161,
+    "modifiedTime": 1761033657686,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_key": "!items!ppkk6UNuhTnGqrY6"
 }

@@ -8,6 +8,7 @@ export const WFRP3e = {
 	},
 	availableRaces: {
 		human: {
+			art: "systems/wfrp3e/assets/images/races/empire.webp",
 			creationPoints: 25,
 			defaultRatings: {
 				strength: 2,
@@ -17,20 +18,25 @@ export const WFRP3e = {
 				willpower: 2,
 				fellowship: 2
 			},
-			name: "RACE.Human",
+			name: "RACE.human",
 			origins: {
 				reiklander: {
-					abilities: ["Adaptable", "Diversity", "Favoured by Fate"],
-					wound: 9,
+					abilities: [
+						"Compendium.wfrp3e.items.Item.vsdlb2SFSFDnt4r6",
+						"Compendium.wfrp3e.items.Item.gToY5Bonw9mAVzkU",
+						"Compendium.wfrp3e.items.Item.ppkk6UNuhTnGqrY6"
+					],
+					art: "systems/wfrp3e/assets/images/races/empire.webp",
 					corruption: 5,
-					name: "ORIGIN.Reiklander",
-					introduction: "ORIGIN.INTRODUCTION.Reiklander",
-					startingCareerRollTableId: "PoY76It3s6IkTr3g",
-					art: "systems/wfrp3e/assets/images/races/empire.webp"
+					introduction: "ORIGIN.reiklander.introduction",
+					name: "ORIGIN.reiklander.name",
+					wound: 9
 				}
-			}
+			},
+			startingCareerRollTableUuid: "Compendium.wfrp3e.roll-tables.PoY76It3s6IkTr3g"
 		},
 		dwarf: {
+			art: "systems/wfrp3e/assets/images/races/dwarf.webp",
 			creationPoints: 20,
 			defaultRatings: {
 				strength: 3,
@@ -40,20 +46,26 @@ export const WFRP3e = {
 				willpower: 2,
 				fellowship: 2
 			},
-			name: "RACE.Dwarf",
+			name: "RACE.dwarf",
 			origins: {
 				karakAzgaraz: {
-					abilities: ["Children of Grungni", "Grudge", "Sturdy", "Night Vision"],
-					wound: 10,
+					abilities: [
+						"Compendium.wfrp3e.items.Item.1LsUZDU1mnADiZyh",
+						"Compendium.wfrp3e.items.Item.ATznsFp414qzofcJ",
+						"Compendium.wfrp3e.items.Item.5zLg7T9FTNvgtJp1",
+						"Compendium.wfrp3e.items.Item.VHiON3EQ7VMe41jT"
+					],
+					art: "systems/wfrp3e/assets/images/races/dwarf.webp",
 					corruption: 10,
-					name: "ORIGIN.KarakAzgaraz",
-					introduction: "ORIGIN.INTRODUCTION.KarakAzgaraz",
-					startingCareerRollTableId: "Clr8Gwsfs7VkMFjd",
-					art: "systems/wfrp3e/assets/images/races/dwarf.webp"
+					introduction: "ORIGIN.karakAzgaraz.introduction",
+					name: "ORIGIN.karakAzgaraz.name",
+					wound: 10
 				}
-			}
+			},
+			startingCareerRollTableUuid: "Compendium.wfrp3e.roll-tables.RollTable.Clr8Gwsfs7VkMFjd"
 		},
 		highElf: {
+			art: "systems/wfrp3e/assets/images/races/high_elf.webp",
 			creationPoints: 20,
 			defaultRatings: {
 				strength: 2,
@@ -63,20 +75,26 @@ export const WFRP3e = {
 				willpower: 2,
 				fellowship: 2
 			},
-			name: "RACE.HighElf",
+			name: "RACE.highElf",
 			origins: {
 				ulthuan: {
-					abilities: ["Composure", "Erudite", "Isha's Chosen", "Night Vision"],
-					wound: 8,
+					abilities: [
+						"Compendium.wfrp3e.items.Item.tJc6iH8pOllVO9Go",
+						"Compendium.wfrp3e.items.Item.h0pAI8aricmNHCke",
+						"Compendium.wfrp3e.items.Item.zvzzGw8UBrM5GNfL",
+						"Compendium.wfrp3e.items.Item.VHiON3EQ7VMe41jT"
+					],
+					art: "systems/wfrp3e/assets/images/races/high_elf.webp",
 					corruption: 10,
-					name: "ORIGIN.Ulthuan",
-					introduction: "ORIGIN.INTRODUCTION.Ulthuan",
-					startingCareerRollTableId: "tJU9IvQGkcIIBPce",
-					art: "systems/wfrp3e/assets/images/races/high_elf.webp"
+					introduction: "ORIGIN.ulthuan.introduction",
+					name: "ORIGIN.ulthuan.name",
+					wound: 8
 				}
-			}
+			},
+			startingCareerRollTableUuid: "Compendium.wfrp3e.roll-tables.tJU9IvQGkcIIBPce"
 		},
 		woodElf: {
+			art: "systems/wfrp3e/assets/images/races/wood_elf.webp",
 			creationPoints: 20,
 			defaultRatings: {
 				strength: 2,
@@ -86,18 +104,23 @@ export const WFRP3e = {
 				willpower: 3,
 				fellowship: 2
 			},
-			name: "RACE.WoodElf",
+			name: "RACE.woodElf",
 			origins: {
 				athelLoren: {
-					abilities: ["Forest Walk", "Nature Bond", "Orion's Favoured", "Night Vision"],
-					wound: 8,
+					abilities: [
+						"Compendium.wfrp3e.items.Item.0MdYpo3lvvLgPwvZ",
+						"Compendium.wfrp3e.items.Item.MFNBzJvfpOsp2G3z",
+						"Compendium.wfrp3e.items.Item.djj9tirxRkjnPrBp",
+						"Compendium.wfrp3e.items.Item.VHiON3EQ7VMe41jT"
+					],
+					art: "systems/wfrp3e/assets/images/races/wood_elf.webp",
 					corruption: 10,
-					name: "ORIGIN.AthelLoren",
-					introduction: "ORIGIN.INTRODUCTION.AthelLoren",
-					startingCareerRollTableId: "DuENZYjzQuelc4Yl",
-					art: "systems/wfrp3e/assets/images/races/wood_elf.webp"
+					introduction: "ORIGIN.athelLoren.introduction",
+					name: "ORIGIN.athelLoren.name",
+					wound: 8
 				}
-			}
+			},
+			startingCareerRollTableUuid: "Compendium.wfrp3e.roll-tables.DuENZYjzQuelc4Yl"
 		}
 	},
 	attributes: {

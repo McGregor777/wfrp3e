@@ -413,17 +413,12 @@
 	"CHARACTERGENERATOR.Characteristic": "Characteristic",
 	"CHARACTERGENERATOR.Characteristics": "Characteristics",
 	"CHARACTERGENERATOR.CreationPoints": "Creation Points",
-	"CHARACTERGENERATOR.Origin": "Origin",
 	"CHARACTERGENERATOR.Skills": "Skills",
 	"CHARACTERGENERATOR.Specialisations": "Specialisations",
 	"CHARACTERGENERATOR.Talents": "Talents",
 	"CHARACTERGENERATOR.TrainingLevel": "Training Level",
 	"CHARACTERGENERATOR.Wealth": "Wealth",
-	"CHARACTERGENERATOR.CorruptionThreshold": "Corruption Threshold: ",
-	"CHARACTERGENERATOR.WoundThreshold": "Wound Threshold: ",
-	"CHARACTERGENERATOR.PlusToughnessRating": "{value} + Toughness rating",
 	"CHARACTERGENERATOR.CurrentlySelectedCareer": "Currently selected Career: ",
-	"CHARACTERGENERATOR.CurrentlySelectedOrigin": "Currently selected Origin: ",
 	"CHARACTERGENERATOR.RemainingActions": "Remaining Actions: ",
 	"CHARACTERGENERATOR.RemainingCreationPoints": "Remaining Creation Points: ",
 	"CHARACTERGENERATOR.RemainingSkillTrainings": "Remaining Skill Trainings: ",
@@ -836,14 +831,37 @@
 		"plural": "Mutations"
 	},
 
-	"ORIGIN.KarakAzgaraz": "Dwarf of Karak Azgaraz",
-	"ORIGIN.Ulthuan": "High Elf of Ulthuan",
-	"ORIGIN.Reiklander": "Reiklander",
-	"ORIGIN.AthelLoren": "Wood Elf of Athel Loren",
-	"ORIGIN.INTRODUCTION.KarakAzgaraz": "To reflect their fierce spirit and proud traditions, Karak Azgaraz dwarf characters have the following racial abilities:",
-	"ORIGIN.INTRODUCTION.Ulthuan": "To reflect their cultured upbringing and rich history, high elf characters have the following racial abilities:",
-	"ORIGIN.INTRODUCTION.Reiklander": "To reflect their upbringing and individuality, Reiklander characters have the following racial abilities:",
-	"ORIGIN.INTRODUCTION.AthelLoren": "To reflect their ties to nature and tradition-bound culture, wood elf characters have the following racial abilities:",
+	"ORIGIN": {
+		"athelLoren": {
+			"introduction": "To reflect their ties to nature and tradition-bound culture, wood elf characters have the following racial abilities:",
+			"name": "Wood Elf of Athel Loren"
+		},
+		"karakAzgaraz": {
+			"introduction": "To reflect their fierce spirit and proud traditions, Karak Azgaraz dwarf characters have the following racial abilities:",
+			"name": "Dwarf of Karak Azgaraz"
+		},
+		"reiklander": {
+			"introduction": "To reflect their upbringing and individuality, Reiklander characters have the following racial abilities:",
+			"name": "Reiklander"
+		},
+		"ulthuan": {
+			"introduction": "To reflect their cultured upbringing and rich history, high elf characters have the following racial abilities:",
+			"name": "High Elf of Ulthuan"
+		}
+	},
+
+	"ORIGINSELECTOR": {
+		"ACTIONS.chooseOrigin": "Choose Origin",
+		"WARNINGS.noSelection": {
+			"description": "No origin has been selected.",
+			"title": "No Origin Selected"
+		},
+		"corruptionThreshold": "Corruption Threshold: ",
+		"title": "Origin Selector",
+		"plusToughnessRating": "{value} + Toughness rating",
+		"selectedOrigin": "Selected Origin: ",
+		"woundThreshold": "Wound Threshold: "
+	},
 
 	"PARTY": {
 		"ACTIONS": {
@@ -897,11 +915,13 @@
 		"title": "Party Event Editor"
 	},
 
-	"RACE.Any": "Any Race",
-	"RACE.Dwarf": "Dwarf",
-	"RACE.HighElf": "High Elf",
-	"RACE.Human": "Human",
-	"RACE.WoodElf": "Wood Elf",
+	"RACE": {
+		"any": "Any Race",
+		"dwarf": "Dwarf",
+		"highElf": "High Elf",
+		"human": "Human",
+		"woodElf": "Wood Elf"
+	},
 
 	"ROLL": {
 		"ACTIONS": {

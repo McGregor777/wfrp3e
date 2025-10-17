@@ -5,7 +5,7 @@
   "_id": "VHiON3EQ7VMe41jT",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Two fewer [[DM]][[DM]] misfortune dice are added to your dice pool for any effects from darkness or lack of sufficient light.</p>"
+    "description": "<p>Two fewer [[DM]] [[DM]] misfortune dice are added to your dice pool for any effects from darkness or lack of sufficient light.</p>"
   },
   "effects": [],
   "sort": 0,
@@ -15,13 +15,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "12.350",
     "createdTime": 1700165750479,
     "modifiedTime": 1701256153198,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_key": "!items!VHiON3EQ7VMe41jT"
 }

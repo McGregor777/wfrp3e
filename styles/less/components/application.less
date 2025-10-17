@@ -392,6 +392,34 @@
 			justify-content: space-evenly;
 			overflow: auto;
 
+			&.origin {
+				flex-wrap: nowrap;
+
+				& > * {
+					font: var(--font-size-16) var(--font-title) small-caps;
+					text-align: center;
+					width: 100px;
+
+					& img {
+						margin-bottom: 16px;
+					}
+				}
+			}
+
+			&.race {
+				flex-wrap: nowrap;
+
+				& > * {
+					font: var(--font-size-24) var(--font-title) small-caps;
+					text-align: center;
+					width: 200px;
+
+					& img {
+						margin-bottom: 16px;
+					}
+				}
+			}
+
 			& label {
 				cursor: pointer;
 				height: max-content;

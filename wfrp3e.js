@@ -71,6 +71,7 @@ async function preloadHandlebarsTemplates()
 		"systems/wfrp3e/templates/applications/partials/insanity-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/miscast-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/mutation-card.hbs",
+		"systems/wfrp3e/templates/applications/partials/origin-race.hbs",
 		"systems/wfrp3e/templates/applications/partials/talent-card.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/ability-row.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/ability-track.hbs",

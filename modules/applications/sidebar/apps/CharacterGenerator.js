@@ -1,4 +1,6 @@
+import OriginSelector from "../../apps/selectors/OriginSelector.js";
 import WFRP3eActor from "../../../documents/WFRP3eActor.js";
+import WFRP3eItem from "../../../documents/WFRP3eItem.js";
 
 /** @inheritDoc */
 export default class CharacterGenerator extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)
@@ -14,6 +16,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
+		actions: {chooseOrigin: this.#chooseOrigin},
 		id: "character-generator-{id}",
 		classes: ["wfrp3e", "character-generator", "character"],
 		tag: "form",
@@ -256,5 +259,39 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #onCharacterGeneratorSubmit(event, form, formData)
 	{
 		await this.character.render({force: true});
+	}
+
+	/**
+	 * Shows an Origin Selector to select the new character's origin.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #chooseOrigin(event, target)
+	{
+		event.preventDefault();
+
+		const character = this.character;
+		if(character.itemTypes.ability.length)
+			await WFRP3eItem.deleteDocuments(
+				character.itemTypes.ability.map(ability => ability._id),
+				{parent: character}
+			);
+
+		await character.update({
+			"system.origin": await OriginSelector.wait({
+				items: await OriginSelector.buildRaceList(),
+				modal: true
+			})
+		});
+
+		await WFRP3eItem.createDocuments(
+			await Promise.all(character.system.originData.abilities.map(async uuid => await fromUuid(uuid))),
+			{parent: character}
+		);
+
+		this.steps.chooseOrigin = true;
+		await this.render();
 	}
 }

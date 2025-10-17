@@ -415,17 +415,12 @@
 	"CHARACTERGENERATOR.Characteristic": "Caractéristique",
 	"CHARACTERGENERATOR.Characteristics": "Caractéristiques",
 	"CHARACTERGENERATOR.CreationPoints": "Points de création",
-	"CHARACTERGENERATOR.Origin": "Origine",
 	"CHARACTERGENERATOR.Skills": "Compétences",
 	"CHARACTERGENERATOR.Specialisations": "Spécialisations",
 	"CHARACTERGENERATOR.Talents": "Talents",
 	"CHARACTERGENERATOR.TrainingLevel": "Niveau de formation",
 	"CHARACTERGENERATOR.Wealth": "Richesse",
-	"CHARACTERGENERATOR.CorruptionThreshold": "Plafond de Corruption : ",
-	"CHARACTERGENERATOR.WoundThreshold": "Plafond de Blessures : ",
-	"CHARACTERGENERATOR.PlusToughnessRating": "{value} + Toughness rating",
 	"CHARACTERGENERATOR.CurrentlySelectedCareer": "Carrière sélectionnée : ",
-	"CHARACTERGENERATOR.CurrentlySelectedOrigin": "Origine sélectionnée : ",
 	"CHARACTERGENERATOR.RemainingActions": "Actions restantes: ",
 	"CHARACTERGENERATOR.RemainingCreationPoints": "Points de création restants : ",
 	"CHARACTERGENERATOR.RemainingSkillTrainings": "Formation de compétences restantes : ",
@@ -838,14 +833,37 @@
 		"plural": "Mutations"
 	},
 
-	"ORIGIN.KarakAzgaraz": "Nain de Karak Azgaraz",
-	"ORIGIN.Ulthuan": "Haut Elfe d'Ulthuan",
-	"ORIGIN.Reiklander": "Reiklander",
-	"ORIGIN.AthelLoren": "Elfe Sylvain d'Athel Loren",
-	"ORIGIN.INTRODUCTION.KarakAzgaraz": "Les nains de Karak Azgaraz bénéficient des aptitudes raciales suivantes, reflétant leur témérité et leurs fières traditions :",
-	"ORIGIN.INTRODUCTION.Ulthuan": "Les personnages hauts elfes bénéficient des aptitudes raciales suivantes, qui représentent leur éducation ainsi que leur riche histoire :",
-	"ORIGIN.INTRODUCTION.Reiklander": "Les personnages du Reikland disposent des aptitudes raciales suivantes, reflétant leur éducation et leur caractère :",
-	"ORIGIN.INTRODUCTION.AthelLoren": "Les personnages elfes sylvains bénéficient des aptitudes raciales suivantes, reflétant leur lien avec la nature et les traditions qui régissent leur culture  :",
+	"ORIGIN": {
+		"athelLoren": {
+			"introduction": "Les personnages elfes sylvains bénéficient des aptitudes raciales suivantes, reflétant leur lien avec la nature et les traditions qui régissent leur culture :",
+			"name": "Elfe Sylvain d'Athel Loren"
+		},
+		"karakAzgaraz": {
+			"introduction": "Les nains de Karak Azgaraz bénéficient des aptitudes raciales suivantes, reflétant leur témérité et leurs fières traditions :",
+			"name": "Nain de Karak Azgaraz"
+		},
+		"reiklander": {
+			"introduction": "Les personnages du Reikland disposent des aptitudes raciales suivantes, reflétant leur éducation et leur caractère :",
+			"name": "Reiklander"
+		},
+		"ulthuan": {
+			"introduction": "Les personnages hauts elfes bénéficient des aptitudes raciales suivantes, qui représentent leur éducation ainsi que leur riche histoire :",
+			"name": "Haut Elfe d'Ulthuan"
+		}
+	},
+
+	"ORIGINSELECTOR": {
+		"ACTIONS.chooseOrigin": "Choisir une origine",
+		"WARNINGS.noSelection": {
+			"description": "Aucune origine n'a été sélectionnée.",
+			"title": "Aucune origine Sélectionnée"
+		},
+		"corruptionThreshold": "Plafond de Corruption : ",
+		"title": "Sélecteur d'origine",
+		"plusToughnessRating": "Endurance + {value}",
+		"selectedOrigin": "Origine sélectionnée : ",
+		"woundThreshold": "Plafond de Blessures : "
+	},
 
 	"PARTY": {
 		"ACTIONS": {
@@ -899,11 +917,13 @@
 		"title": "Éditeur d'évènement de tension"
 	},
 
-	"RACE.Any": "N'importe quelle race",
-	"RACE.Dwarf": "Nain",
-	"RACE.HighElf": "Haut Elfe",
-	"RACE.Human": "Humain",
-	"RACE.WoodElf": "Elfe Sylvain",
+	"RACE": {
+		"any": "N'importe quelle race",
+		"dwarf": "Nain",
+		"highElf": "Haut Elfe",
+		"human": "Humain",
+		"woodElf": "Elfe Sylvain"
+	},
 
 	"ROLL": {
 		"ACTIONS": {

@@ -140,14 +140,15 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	}
 
 	/**
-	 * The sum of the encumbrance of every armour, trapping and weapon owned by the character.
-	 * @returns {Number} The total of the encumbrance.
+	 * The character's origin complete data.
+	 * @returns {Object} The data from the character's origin.
 	 */
-	get totalEncumbrance()
+	get originData()
 	{
-		return this.parent.items
-			.filter((item) => ["armour", "trapping", "weapon"].includes(item.type))
-			.reduce((totalEncumbrance, item) => totalEncumbrance + item.system.encumbrance, 0);
+		return {
+			id: this.origin,
+			...this.race.origins[this.origin]
+		};
 	}
 
 	/**
@@ -193,6 +194,17 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	get totalDefence()
 	{
 		return this.parent.itemTypes.armour.reduce((value, armour) => value + armour.system.defenceValue, 0);
+	}
+
+	/**
+	 * The sum of the encumbrance of every armour, trapping and weapon owned by the character.
+	 * @returns {Number} The total of the encumbrance.
+	 */
+	get totalEncumbrance()
+	{
+		return this.parent.items
+			.filter((item) => ["armour", "trapping", "weapon"].includes(item.type))
+			.reduce((totalEncumbrance, item) => totalEncumbrance + item.system.encumbrance, 0);
 	}
 
 	/**
