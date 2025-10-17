@@ -1043,6 +1043,7 @@
 			"onCreationPointInvestment": "On Creation Point Investment",
 			"onPostCheckTrigger": "Manual Trigger Post Check",
 			"onPreCheckTrigger": "Manual Selection Pre Check",
+			"onStartingSkillTrainingSelection": "Starting Skill Training Selection",
 			"onTargettingCheckPreparation": "Targetting Check Preparation",
 			"onTrigger": "Manual Trigger"
 		}

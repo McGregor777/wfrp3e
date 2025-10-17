@@ -4,7 +4,6 @@ export default function()
 {
 	Hooks.on("init", () => {
 		Handlebars.registerHelper("abs", (number) => Math.abs(number));
-		Handlebars.registerHelper("and", (firstCondition, secondCondition) => firstCondition && secondCondition);
 		Handlebars.registerHelper("capitalize", (string) => capitalize(string));
 		Handlebars.registerHelper("equalTo", (value, compareValue) => value == compareValue);
 		Handlebars.registerHelper("find", (value, array) => array.find(item => item === value));
@@ -15,7 +14,6 @@ export default function()
 		Handlebars.registerHelper("inferiorOrEqualTo", (value, compareValue) => Number(value) <= Number(compareValue));
 		Handlebars.registerHelper("multiply", (value, multiplier) => value * multiplier);
 		Handlebars.registerHelper("notEqualTo", (value, compareValue) => value != compareValue);
-		Handlebars.registerHelper("or", (firstCondition, secondCondition) => firstCondition || secondCondition);
 		Handlebars.registerHelper("sameAs", (value, compareValue) => value === compareValue);
 		Handlebars.registerHelper("setVar", (name, value, options) => {options.data.root[name] = value});
 		Handlebars.registerHelper("superiorTo", (value, compareValue) => Number(value) > Number(compareValue));

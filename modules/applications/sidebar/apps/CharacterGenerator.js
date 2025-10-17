@@ -361,6 +361,8 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		const investment = CONFIG.WFRP3e.creationPointInvestments.skills[this.creationPointInvestments.skills],
 			  options = {
 				  actor: character,
+				  freeAcquisitions: [],
+				  freeTrainings: [],
 				  items: await SkillUpgrader.buildNewCharacterOptionsList(character),
 				  modal: true,
 				  size: investment.size,
@@ -368,6 +370,12 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 				  singleSpecialisation: false,
 				  startingSkillTrainings: true
 			  };
+
+		for(const effect of character.findTriggeredEffects("onStartingSkillTrainingSelection"))
+			await effect.triggerEffect({
+				parameters: [options],
+				parameterNames: ["options"]
+			});
 
 		const upgrades = await SkillUpgrader.wait(options),
 			  skills = await game.packs.get("wfrp3e.items").getDocuments({

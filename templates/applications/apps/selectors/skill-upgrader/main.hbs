@@ -34,7 +34,9 @@
 								   type="checkbox"
 								   data-type="acquisition"
 								   data-uuid="{{item.uuid}}"
-								   {{#if (or item.parent (equalTo item.system.advanced false))}}
+								   {{#if (or item.parent
+									   (equalTo item.system.advanced false)
+									   (in item.uuid @root.freeAcquisitions ))}}
 									   checked disabled
 								   {{else if (lookup @root.upgrades.acquisition item.uuid)}}
 									   checked
@@ -57,12 +59,14 @@
 										   type="checkbox"
 										   data-type="trainingLevel"
 										   data-uuid="{{item.uuid}}"
-										   {{#if (superiorOrEqualTo item.system.trainingLevel this)}}
+										   {{#if (or
+											   (superiorOrEqualTo item.system.trainingLevel this)
+											   (and (equalTo this 1) (in item.uuid @root.freeTrainings)))}}
 											   checked disabled
-										   {{else if (or (or
-											   (sameAs @root.advanceType "dedicationBonus")
-											   (and item.parent (inferiorTo item.parent.system.rank this)))
-											   (notEqualTo (increment item.system.trainingLevel 1) this))}}
+										   {{else unless (and (notEqualTo @root.advanceType "dedicationBonus") (or
+											   (and item.parent (superiorOrEqualTo item.parent.system.rank this))
+											   (sameAs (increment item.system.trainingLevel 1) this)
+											   (and (equalTo this 1) (in item.uuid @root.freeAcquisitions))))}}
 											   disabled
 										   {{else if (equalTo (lookup @root.upgrades.trainingLevel item.uuid) this)}}
 											   checked
@@ -79,7 +83,8 @@
 
 								{{#if (and (notEqualTo @root.advanceType "nonCareer") (or
 									(superiorOrEqualTo item.system.trainingLevel 1)
-									(lookup @root.upgrades.trainingLevel item.uuid)))}}
+									(lookup @root.upgrades.trainingLevel item.uuid)
+									(in item.uuid @root.freeTrainings)))}}
 									<input name="selection"
 										   value="{{lookup @root.upgrades.specialisation item.uuid}}"
 										   type="text"

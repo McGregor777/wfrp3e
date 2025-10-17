@@ -1090,6 +1090,7 @@ export const WFRP3e = {
 		onCreationPointInvestment: "SCRIPT.TYPES.onCreationPointInvestment",
 		onPostCheckTrigger: "SCRIPT.TYPES.onPostCheckTrigger",
 		onPreCheckTrigger: "SCRIPT.TYPES.onPreCheckTrigger",
+		onStartingSkillTrainingSelection: "SCRIPT.TYPES.onStartingSkillTrainingSelection",
 		onTargettingCheckPreparation: "SCRIPT.TYPES.onTargettingCheckPreparation",
 		onTrigger: "SCRIPT.TYPES.onTrigger"
 	},

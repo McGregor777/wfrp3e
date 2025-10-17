@@ -1045,6 +1045,7 @@
 			"onCreationPointInvestment": "Investissement des points de création",
 			"onPostCheckTrigger": "Déclenchement manuel après un test",
 			"onPreCheckTrigger": "Sélection manuelle avant un test",
+			"onStartingSkillTrainingSelection": "Sélection des formations des compétences de départ",
 			"onTargettingCheckPreparation": "Préparation d'un test ciblant",
 			"onTrigger": "Déclenchement manuel"
 		}

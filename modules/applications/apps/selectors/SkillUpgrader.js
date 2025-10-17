@@ -26,6 +26,12 @@ export default class SkillUpgrader extends AbstractSelector
 				this.size = this.items.length;
 		}
 
+		if(options.freeAcquisitions)
+			this.freeAcquisitions = options.freeAcquisitions;
+
+		if(options.freeTrainings)
+			this.freeTrainings = options.freeTrainings;
+
 		if(options.specialisationSize)
 			this.specialisationSize = options.specialisationSize;
 
@@ -61,6 +67,19 @@ export default class SkillUpgrader extends AbstractSelector
 	 * @type {string|null}
 	 */
 	advanceType = null;
+
+	/**
+	 * The UUIDs of the skills that will be acquired for free.
+	 * @type {string[]}
+	 */
+	freeAcquisitions = [];
+
+
+	/**
+	 * The UUIDs of the skills that will be trained for free.
+	 * @type {string[]}
+	 */
+	freeTrainings = [];
 
 	/**
 	 * The array of selected skill upgrades.
@@ -129,8 +148,10 @@ export default class SkillUpgrader extends AbstractSelector
 
 			partContext = {
 				...partContext,
-				characteristics: CONFIG.WFRP3e.characteristics,
 				advanceType: this.advanceType,
+				characteristics: CONFIG.WFRP3e.characteristics,
+				freeAcquisitions: this.freeAcquisitions,
+				freeTrainings: this.freeTrainings,
 				upgrades
 			};
 		}
