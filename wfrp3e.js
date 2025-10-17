@@ -62,6 +62,7 @@ import * as handlebarsHelpers from "./modules/applications/handlebars.js";
 async function preloadHandlebarsTemplates()
 {
 	const templatePaths = [
+		"systems/wfrp3e/templates/applications/apps/creation-point-investor/partial.hbs",
 		"systems/wfrp3e/templates/applications/partials/ability-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/action-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/career-card.hbs",

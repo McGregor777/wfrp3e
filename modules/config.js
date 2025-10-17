@@ -200,6 +200,76 @@ export const WFRP3e = {
 		dependent: "CONDITION.DURATIONS.dependent",
 		lingering: "CONDITION.DURATIONS.lingering"
 	},
+	creationPointInvestments: {
+		actionCards: [{
+			name: "CREATIONPOINTINVESTOR.ACTIONCARDS.CHOICES.one",
+			size: 1,
+			value: 0
+		}, {
+			name: "CREATIONPOINTINVESTOR.ACTIONCARDS.CHOICES.two",
+			size: 2,
+			value: 1
+		}, {
+			name: "CREATIONPOINTINVESTOR.ACTIONCARDS.CHOICES.three",
+			size: 3,
+			value: 2
+		}, {
+			name: "CREATIONPOINTINVESTOR.ACTIONCARDS.CHOICES.four",
+			size: 4,
+			value: 3
+		}],
+		skills: [{
+			name: "CREATIONPOINTINVESTOR.SKILLS.CHOICES.one",
+			size: 1,
+			specialisationSize: 0,
+			value: 0
+		}, {
+			name: "CREATIONPOINTINVESTOR.SKILLS.CHOICES.two",
+			size: 2,
+			specialisationSize: 0,
+			value: 1
+		}, {
+			name: "CREATIONPOINTINVESTOR.SKILLS.CHOICES.threePlusOneSpecialisation",
+			size: 3,
+			specialisationSize: 1,
+			value: 2
+		}, {
+			name: "CREATIONPOINTINVESTOR.SKILLS.CHOICES.fourPlusTwoSpecialisations",
+			size: 4,
+			specialisationSize: 2,
+			value: 3
+		}],
+		talents: [{
+			name: "CREATIONPOINTINVESTOR.TALENTS.CHOICES.zero",
+			size: 0,
+			value: 0
+		}, {
+			name: "CREATIONPOINTINVESTOR.TALENTS.CHOICES.one",
+			size: 1,
+			value: 1
+		}, {
+			name: "CREATIONPOINTINVESTOR.TALENTS.CHOICES.two",
+			size: 2,
+			value: 2
+		}, {
+			name: "CREATIONPOINTINVESTOR.TALENTS.CHOICES.three",
+			size: 3,
+			value: 3
+		}],
+		wealth: [{
+			name: "CREATIONPOINTINVESTOR.WEALTH.CHOICES.broke",
+			value: 0
+		}, {
+			name: "CREATIONPOINTINVESTOR.WEALTH.CHOICES.poor",
+			value: 1
+		}, {
+			name: "CREATIONPOINTINVESTOR.WEALTH.CHOICES.comfortable",
+			value: 2
+		}, {
+			name: "CREATIONPOINTINVESTOR.WEALTH.CHOICES.affluent",
+			value: 3
+		}]
+	},
 	dice: {
 		characteristic: {
 			amount: "DIE.characteristic.amount",
@@ -1017,6 +1087,7 @@ export const WFRP3e = {
 		onCareerSocket: "SCRIPT.TYPES.onCareerSocket",
 		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
 		onCheckRoll: "SCRIPT.TYPES.onCheckRoll",
+		onCreationPointInvestment: "SCRIPT.TYPES.onCreationPointInvestment",
 		onPostCheckTrigger: "SCRIPT.TYPES.onPostCheckTrigger",
 		onPreCheckTrigger: "SCRIPT.TYPES.onPreCheckTrigger",
 		onTargettingCheckPreparation: "SCRIPT.TYPES.onTargettingCheckPreparation",

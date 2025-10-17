@@ -1,3 +1,4 @@
+import CreationPointInvestor from "../../apps/CreationPointInvestor.js";
 import CareerSelector from "../../apps/selectors/CareerSelector.js";
 import OriginSelector from "../../apps/selectors/OriginSelector.js";
 import WFRP3eActor from "../../../documents/WFRP3eActor.js";
@@ -19,7 +20,8 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static DEFAULT_OPTIONS = {
 		actions: {
 			chooseStartingCareer: this.#chooseStartingCareer,
-			chooseOrigin: this.#chooseOrigin
+			chooseOrigin: this.#chooseOrigin,
+			investCreationPoints: this.#investCreationPoints
 		},
 		id: "character-generator-{id}",
 		classes: ["wfrp3e", "character-generator", "character"],
@@ -76,6 +78,25 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			initial: "attributes",
 			labelPrefix: "CHARACTER.TABS"
 		}
+	};
+
+	/**
+	 * The current selection of Creation Points investments.
+	 * @type {CreationPointInvestments}
+	 */
+	creationPointInvestments = {
+		characteristics: {
+			strength: 2,
+			toughness: 2,
+			agility: 2,
+			intelligence: 2,
+			willpower: 2,
+			fellowship: 2
+		},
+		wealth: 0,
+		skills: 0,
+		talents: 0,
+		actionCards: 0
 	};
 
 	/**
@@ -329,6 +350,54 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		);
 
 		this.steps.chooseOrigin = true;
+		await this.render();
+	}
+
+	/**
+	 * Shows a Creation Point Investor to invest the new character's creation points.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #investCreationPoints(event, target)
+	{
+		event.preventDefault();
+
+		const character = this.character,
+			  options = {
+				  modal: true,
+				  race: character.system.race,
+				  startingCreationPoints: 20
+			  };
+
+		for(const effect of character.findTriggeredEffects("onCreationPointInvestment"))
+			await effect.triggerEffect({
+				parameters: [options],
+				parameterNames: ["options"]
+			});
+
+		const investments = await CreationPointInvestor.wait(options),
+			  originData = character.system.originData,
+			  characteristicRatings = investments.characteristics,
+			  characteristics = {};
+
+		for(const [key, rating] of Object.entries(characteristicRatings))
+			characteristics[key] = {rating};
+
+		await character.update({
+			system: {
+				characteristics,
+				corruption: {max: characteristicRatings.toughness + originData.corruption},
+				wounds: {
+					max: characteristicRatings.toughness + originData.wound,
+					value: characteristicRatings.toughness + originData.wound
+				}
+			}
+		});
+
+		this.creationPointInvestments = investments;
+		this.steps.investCreationPoints = true;
 		await this.render();
 	}
 }

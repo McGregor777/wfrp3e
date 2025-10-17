@@ -1,0 +1,14 @@
+<div class="{{key}}">
+	<h5>{{localize (concat "CREATIONPOINTINVESTOR." (uppercase key) ".label")}}</h5>
+
+	{{#each values}}
+		<label {{#if (equalTo (lookup @root.creationPointInvestments ../key) this.value)}}class="active"{{/if}}>
+			{{localize this.name}}
+
+			<input name="creationPointInvestments.{{../key}}"
+					type="radio"
+					value="{{this.value}}"
+					{{#if (equalTo (lookup @root.creationPointInvestments ../key) this.value)}}checked{{/if}} />
+		</label>
+	{{/each}}
+</div>

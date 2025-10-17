@@ -409,18 +409,11 @@
 		"woundThreshold": "Plafond de Blessures"
 	},
 
-	"CHARACTERGENERATOR.Actions": "Cartes d'action",
 	"CHARACTERGENERATOR.Acquired": "Acquis",
 	"CHARACTERGENERATOR.Characteristic": "Caractéristique",
-	"CHARACTERGENERATOR.Characteristics": "Caractéristiques",
-	"CHARACTERGENERATOR.CreationPoints": "Points de création",
-	"CHARACTERGENERATOR.Skills": "Compétences",
 	"CHARACTERGENERATOR.Specialisations": "Spécialisations",
-	"CHARACTERGENERATOR.Talents": "Talents",
 	"CHARACTERGENERATOR.TrainingLevel": "Niveau de formation",
-	"CHARACTERGENERATOR.Wealth": "Richesse",
 	"CHARACTERGENERATOR.RemainingActions": "Actions restantes: ",
-	"CHARACTERGENERATOR.RemainingCreationPoints": "Points de création restants : ",
 	"CHARACTERGENERATOR.RemainingSkillTrainings": "Formation de compétences restantes : ",
 	"CHARACTERGENERATOR.RemainingSpecialisations": "Spécialisations restantes : ",
 	"CHARACTERGENERATOR.RemainingTalents": "Talents restants : ",
@@ -431,11 +424,8 @@
 	"CHARACTERGENERATOR.WARNING.FaithTalentAlreadySelected": "Un talent de Foi a déjà été sélectionné.",
 	"CHARACTERGENERATOR.WARNING.OrderTalentAlreadySelected": "Un talent d'Ordre a déjà été sélectionné.",
 	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "Une folie a déjà été sélectionnée.",
-	"CHARACTERGENERATOR.WARNING.MaximumRatingReached": "La valeur maximale de cette caractéristique a été atteinte.",
-	"CHARACTERGENERATOR.WARNING.MinimumRatingReached": "La valeur minimale de cette caractéristique a été atteinte.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Pas assez d'actions.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughTalent": "Pas assez de talents.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughCreationPoints": "Pas assez de points de création.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Pas assez de formations de compétence.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Pas assez de spécialisations.",
 	"CHARACTERGENERATOR": {
@@ -534,6 +524,66 @@
 			"combat": "Combat",
 			"social": "Social"
 		}
+	},
+
+	"CREATIONPOINTINVESTOR": {
+		"ACTIONCARDS": {
+			"CHOICES": {
+				"one": "1",
+				"two": "2",
+				"three": "3",
+				"four": "4"
+			},
+			"label": "Cartes d'actions"
+		},
+		"ACTIONS": {
+			"decrementCharacteristicRating": "Diminuer la valeur de {characteristic} de 1",
+			"incrementCharacteristicRating": "Augmenter la valeur de {characteristic} de 1",
+			"submit": "Valider l'investissement des points de création"
+		},
+		"CHARACTERISTICS.label": "Caractéristiques",
+		"SKILLS": {
+			"CHOICES": {
+				"one": "1",
+				"two": "2",
+				"threePlusOneSpecialisation": "3 + 1 spécialisation",
+				"fourPlusTwoSpecialisations": "4 + 2 spécialisations"
+			},
+			"label": "Compétences"
+		},
+		"TALENTS": {
+			"CHOICES": {
+				"zero": "0",
+				"one": "1",
+				"two": "2",
+				"three": "3"
+			},
+			"label": "Talents"
+		},
+		"WARNINGS": {
+			"unspentCreationPoints": {
+				"description": "Il vous reste des points de création à dépenser. Tout point de création non dépensé sera perdu.",
+				"title": "Points de création non dépensés"
+			},
+			"cannotInvestLessThanZero": "Il est impossible d'investir moins de 0 point de création dans une catégorie.",
+			"cannotInvestMoreThanFour": "Il est impossible d'investir plus de 4 points de création dans une catégorie.",
+			"maximumRatingReached": "La valeur maximale de cette caractéristique a été atteinte.",
+			"minimumRatingReached": "La valeur minimale de cette caractéristique a été atteinte.",
+			"notEnoughCreationPoints": "Pas assez de points de création.",
+			"tooManyCreationPointSpent": "Vous avez dépensé plus de points de création que vous n'en disposer. Veuillez réduire votre montant de dépense en modifiant vos investissements."
+		},
+		"WEALTH": {
+			"CHOICES": {
+				"broke": "Miséreux",
+				"poor": "Pauvre",
+				"comfortable": "Aisé",
+				"affluent": "Fortuné"
+			},
+			"label": "Richesse"
+		},
+		"count": "{amount} / {total}",
+		"creationPointsLeft": "Points de création restants : ",
+		"title": "Distributeur de points de création"
 	},
 
 	"CREATURE": {
@@ -999,6 +1049,7 @@
 			"onCareerSocket": "Placement sur un emplacement de talent de carrière",
 			"onCheckPreparation": "Préparation d'un test",
 			"onCheckRoll": "Réalisation d'un test",
+			"onCreationPointInvestment": "Investissement des points de création",
 			"onPostCheckTrigger": "Déclenchement manuel après un test",
 			"onPreCheckTrigger": "Sélection manuelle avant un test",
 			"onTargettingCheckPreparation": "Préparation d'un test ciblant",

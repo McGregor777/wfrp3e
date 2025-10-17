@@ -407,18 +407,11 @@
 		"woundThreshold": "Wound Threshold"
 	},
 
-	"CHARACTERGENERATOR.Actions": "Action Cards",
 	"CHARACTERGENERATOR.Acquired": "Acquired",
 	"CHARACTERGENERATOR.Characteristic": "Characteristic",
-	"CHARACTERGENERATOR.Characteristics": "Characteristics",
-	"CHARACTERGENERATOR.CreationPoints": "Creation Points",
-	"CHARACTERGENERATOR.Skills": "Skills",
 	"CHARACTERGENERATOR.Specialisations": "Specialisations",
-	"CHARACTERGENERATOR.Talents": "Talents",
 	"CHARACTERGENERATOR.TrainingLevel": "Training Level",
-	"CHARACTERGENERATOR.Wealth": "Wealth",
 	"CHARACTERGENERATOR.RemainingActions": "Remaining Actions: ",
-	"CHARACTERGENERATOR.RemainingCreationPoints": "Remaining Creation Points: ",
 	"CHARACTERGENERATOR.RemainingSkillTrainings": "Remaining Skill Trainings: ",
 	"CHARACTERGENERATOR.RemainingSpecialisations": "Remaining Specialisations: ",
 	"CHARACTERGENERATOR.RemainingTalents": "Remaining Talents: ",
@@ -429,11 +422,8 @@
 	"CHARACTERGENERATOR.WARNING.FaithTalentAlreadySelected": "A Faith Talent has already been selected.",
 	"CHARACTERGENERATOR.WARNING.OrderTalentAlreadySelected": "An Order Talent has already been selected.",
 	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "An Insanity has already been selected.",
-	"CHARACTERGENERATOR.WARNING.MaximumRatingReached": "The maximum Characteristic Rating has been reached.",
-	"CHARACTERGENERATOR.WARNING.MinimumRatingReached": "The minimum Characteristic Rating has been reached.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Not enough Actions left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughTalent": "Not enough Talents left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughCreationPoints": "Not enough Creation Point left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Not enough Skill Training left.",
 	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Not enough Specialisation left.",
 	"CHARACTERGENERATOR": {
@@ -532,6 +522,66 @@
 			"combat": "Combat",
 			"social": "Social"
 		}
+	},
+
+	"CREATIONPOINTINVESTOR": {
+		"ACTIONCARDS": {
+			"CHOICES": {
+				"one": "1",
+				"two": "2",
+				"three": "3",
+				"four": "4"
+			},
+			"label": "Action Cards"
+		},
+		"ACTIONS": {
+			"decrementCharacteristicRating": "Decrease {characteristic} Rating By 1",
+			"incrementCharacteristicRating": "Increase {characteristic} Rating By 1",
+			"submit": "Confirm Creation Point Investment"
+		},
+		"CHARACTERISTICS.label": "Characteristics",
+		"SKILLS": {
+			"CHOICES": {
+				"one": "1",
+				"two": "2",
+				"threePlusOneSpecialisation": "3 + 1 Specialisation",
+				"fourPlusTwoSpecialisations": "4 + 2 Specialisations"
+			},
+			"label": "Skills"
+		},
+		"TALENTS": {
+			"CHOICES": {
+				"zero": "0",
+				"one": "1",
+				"two": "2",
+				"three": "3"
+			},
+			"label": "Talents"
+		},
+		"WARNINGS": {
+			"unspentCreationPoints": {
+				"description": "You have creation points left to spend. Any unspent creation point will be lost.",
+				"title": "Unspent Creation Points"
+			},
+			"cannotInvestLessThanZero": "You cannot invest less than 0 creation points in any category.",
+			"cannotInvestMoreThanFour": "You cannot invest more than 4 creation points in any category",
+			"maximumRatingReached": "The maximum characteristic rating has been reached.",
+			"minimumRatingReached": "The minimum characteristic rating has been reached.",
+			"notEnoughCreationPoints": "Not enough creation point left.",
+			"tooManyCreationPointSpent": "You have spent more creation points than available. Please reduce your expenditure by modifying your investments."
+		},
+		"WEALTH": {
+			"CHOICES": {
+				"broke": "Broke",
+				"poor": "Poor",
+				"comfortable": "Comfortable",
+				"affluent": "Affluent"
+			},
+			"label": "Wealth"
+		},
+		"count": "{amount} / {total}",
+		"creationPointsLeft": "Creation Points Left: ",
+		"title": "Creation Point Investor"
 	},
 
 	"CREATURE": {
@@ -997,6 +1047,7 @@
 			"onCareerSocket": "Career Socket",
 			"onCheckPreparation": "Check Preparation",
 			"onCheckRoll": "Check Roll",
+			"onCreationPointInvestment": "On Creation Point Investment",
 			"onPostCheckTrigger": "Manual Trigger Post Check",
 			"onPreCheckTrigger": "Manual Selection Pre Check",
 			"onTargettingCheckPreparation": "Targetting Check Preparation",
@@ -1055,7 +1106,7 @@
 				"title": "Upgrades or Specialisations Left To Select"
 			},
 			"singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
-			"tooManySpecialisationSelected": "Too many selected specialisations. Please deselect some."
+			"tooManySpecialisationSelected": "Too many selected specialisationsd. Please deselect some."
 		},
 		"acquisitionUpgrade": "{name} - Acquisition",
 		"noUpgradeSelected": "None",
