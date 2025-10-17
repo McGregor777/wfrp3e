@@ -102,6 +102,20 @@ Hooks.once("init", async () => {
 
 	CONFIG.WFRP3e = Object.freeze(WFRP3e);
 
+	game.settings.register("wfrp3e", "startingCareerDrawingMethod", {
+		name: "SETTINGS.startingCareerDrawingMethod.name",
+		hint: "SETTINGS.startingCareerDrawingMethod.hint",
+		scope: "world",
+		config: true,
+		type: String,
+		choices: {
+			"drawThree": "SETTINGS.startingCareerDrawingMethod.CHOICES.drawThree",
+			"rollTable": "SETTINGS.startingCareerDrawingMethod.CHOICES.rollTable",
+			"freeChoice": "SETTINGS.startingCareerDrawingMethod.CHOICES.freeChoice",
+		},
+		default: "drawThree"
+	});
+
 	Object.assign(CONFIG.Actor.dataModels, {
 		"character": WFRP3eCharacterDataModel,
 		"creature": WFRP3eCreatureDataModel,

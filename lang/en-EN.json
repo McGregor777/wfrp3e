@@ -1023,6 +1023,18 @@
 		"search": "Search"
 	},
 
+	"SETTINGS": {
+		"startingCareerDrawingMethod": {
+			"CHOICES": {
+				"freeChoice": "Free Choice",
+				"drawThree": "Draw Three",
+				"rollTable": "Roll Table"
+			},
+			"name": "Starting Career Drawing Method",
+			"hint": "Defines the way a new character's starting career is drawn with the Character Generator.\n– Draw Three: Three basic careers are drawn amongst those existing within the world and its compendium.\n– Roll Table: One single basic career is drawn from the Starting Career Table.\n– Free Choice: The starting career can be chosen amongst every available basic career within the world and its compendium."
+		}
+	},
+
 	"SCRIPT": {
 		"TYPES": {
 			"onCareerSocket": "Career Socket",

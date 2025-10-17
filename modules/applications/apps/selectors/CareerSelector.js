@@ -69,7 +69,27 @@ export default class CareerSelector extends AbstractSelector
 			}));
 		}
 
-		return careers;
+		switch(game.settings.get("wfrp3e", "startingCareerDrawingMethod")) {
+			case "drawThree":
+				const drawnCareers = [];
+
+				for(let i = 0; i < 3; i++)
+					drawnCareers.push(careers[Math.floor(Math.random() * careers.length)]);
+
+				return drawnCareers;
+
+			case "rollTable":
+				//#TODO Doesn't work
+				return fromUuid(this.character.system.race.startingCareerRollTableUuid)
+					.then(async rollTable => {
+						return rollTable.draw({displayChat: false})
+							//#TODO Check how TableResult allows to get a linked Document's UUID.
+							.then(result => result.results.map(async result => await fromUuid(result.documentUuid)));
+					});
+
+			case "freeChoice":
+				return careers;
+		}
 	}
 
 	/**

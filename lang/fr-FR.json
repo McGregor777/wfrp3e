@@ -1025,6 +1025,18 @@
 		"search": "Rechercher"
 	},
 
+	"SETTINGS": {
+		"startingCareerDrawingMethod": {
+			"CHOICES": {
+				"freeChoice": "Choix libre",
+				"drawThree": "Triple tirage",
+				"rollTable": "Tirage au tableau"
+			},
+			"name": "Méthode de détermination de la carrière de départ",
+			"hint": "Définit la façon dont la carrière de départ d'un nouveau personnage est déterminée grâce au Générateur de personnage.\n– Triple tirage : Trois carrière de base sont tirées au hasard parmi celles existants dans le monde et les compendiums.\n– Tirage au tableau : Une carrière de base est tirée au hasard à partir de la table de carrière de départ.\n– Choix libre : la carrière de départ peut être librement choisie parmi les carrières de base disponibles dans le monde et les compendiums."
+		}
+	},
+
 	"SCRIPT": {
 		"TYPES": {
 			"onCareerSocket": "Placement sur un emplacement de talent de carrière",
