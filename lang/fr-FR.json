@@ -1019,6 +1019,7 @@
 			},
 			"tooManySelection": "Trop d'élements sont actuellement sélectionnés. Veuillez en désélectionner certains."
 		},
+		"all": "Tous",
 		"filters": "Filtres",
 		"noSelection": "Aucun",
 		"proceedDialog": "Souhaitez-vous tout de même poursuivre ?",

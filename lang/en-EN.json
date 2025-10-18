@@ -1017,6 +1017,7 @@
 			},
 			"tooManySelection": "Too many selected items. Please deselect some."
 		},
+		"all": "All",
 		"filters": "Filters",
 		"noSelection": "Aucun",
 		"proceedDialog": "Would you still like to proceed?",
