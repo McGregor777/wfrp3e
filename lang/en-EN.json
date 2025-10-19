@@ -1104,20 +1104,18 @@
 		"ACTIONS.update": "Save Trapping",
 		"FIELDS": {
 			"cost": {
-				"cost": {
-					"brass": {
-						"abbreviation": "b",
-						"label": "Brass"
-					},
-					"gold": {
-						"abbreviation": "g",
-						"label": "Gold"
-					},
-					"label": "Cost",
-					"silver": {
-						"abbreviation": "s",
-						"label": "Silver"
-					}
+				"brass": {
+					"abbreviation": "b",
+					"label": "Brass"
+				},
+				"gold": {
+					"abbreviation": "g",
+					"label": "Gold"
+				},
+				"label": "Cost",
+				"silver": {
+					"abbreviation": "s",
+					"label": "Silver"
 				}
 			},
 			"encumbrance": {
