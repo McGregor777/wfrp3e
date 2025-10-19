@@ -16,7 +16,7 @@ export default class WFRP3eItemSheet extends foundry.applications.api.Handlebars
 
 	/** @inheritDoc */
 	static PARTS = {
-		header: {template: "systems/wfrp3e/templates/applications/header.hbs"},
+		header: {template: "systems/wfrp3e/templates/applications/sheets/header.hbs"},
 		tabs: {template: "templates/generic/tab-navigation.hbs"}
 	};
 
