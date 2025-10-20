@@ -147,6 +147,9 @@ export default class WFRP3eRoll extends Roll
 				outcome: checkData.outcome
 			});
 
+			if(checkData.disabled)
+				context.disabled = checkData.disabled;
+
 			if(checkData.action)
 				foundry.utils.mergeObject(context, {
 					action: await fromUuid(checkData.action),
@@ -227,6 +230,60 @@ export default class WFRP3eRoll extends Roll
 		await WFRP3eRoll.triggerOnCheckRollEffects(actor, checkData, this);
 
 		return this;
+	}
+
+	/**
+	 * Rerolls specific dice from a roll.
+	 * @param {string[]} diceTypes The list of dice types to reroll.
+	 * @param {object} [options] Chat message options.
+	 * @returns {Promise<WFRP3eRoll>} The rerolled roll.
+	 */
+	async rerollDice(diceTypes, options = {})
+	{
+		const wrongType = diceTypes.find(type => typeof type !== "string");
+		if(wrongType)
+			throw Error(`diceTypes needs to be an array of strings. ${wrongType} found`);
+
+		let formula = "";
+		for(const type of diceTypes) {
+			const denomination = Object.values(CONFIG.Dice.terms).find(term => term.NAME === type).DENOMINATION,
+				  match = this.formula.match(new RegExp(`(\\d+d${denomination})`));
+
+			if(match)
+				formula = formula === "" ? match[0] : `${formula} + ${match[0]}`;
+		}
+
+		const reroll = await WFRP3eRoll.create(formula, {}).roll(),
+			  terms = foundry.utils.deepClone(this.terms);
+		for(const newTerm of reroll.terms) {
+			const termIndex = terms.findIndex(oldTerm => {
+				return oldTerm.constructor.name === newTerm.constructor.name;
+			});
+
+			terms.splice(termIndex, 1, newTerm);
+		}
+
+		const newRoll = await WFRP3eRoll.fromTerms(terms, this.options);
+		newRoll.effects = this.effects;
+
+		// If Dice So Nice! module is enabled, hide irrelevant dice from the 3D roll.
+		for(const diceTerm of newRoll.dice)
+			if(!diceTypes.includes(diceTerm.constructor.NAME))
+				for(const result of diceTerm.results)
+					result.hidden = true;
+
+		const flavor = game.i18n.localize("ROLL.NAMES.reroll");
+		await newRoll.toMessage({
+			flavor: options.flavor ? `${options.flavor} (${flavor})` : flavor,
+			speaker: {actor: await fromUuid(this.options.checkData.actor)}
+		});
+
+		if(options.chatMessage && this.options.checkData) {
+			this.options.checkData.disabled = true;
+			await options.chatMessage.update({rolls: [this]});
+		}
+
+		return newRoll;
 	}
 
 	/**

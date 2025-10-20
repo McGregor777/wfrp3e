@@ -22,6 +22,7 @@ export default class WFRP3eChatLog extends foundry.applications.sidebar.tabs.Cha
 				const message = game.messages.get(li.dataset.messageId);
 				return message.rolls.length > 0
 					&& message.rolls[0].options.checkData
+					&& !message.rolls[0].options.checkData.disabled
 					&& ("outcome" in message.rolls[0].options.checkData || game.user.isGM);
 			},
 			callback: li => CheckHelper.useTalentOrAbility(li.dataset.messageId)
@@ -31,9 +32,10 @@ export default class WFRP3eChatLog extends foundry.applications.sidebar.tabs.Cha
 			condition: li => {
 				const message = game.messages.get(li.dataset.messageId);
 				return message.rolls.length > 0
+					&& !message.rolls[0].options.checkData?.disabled
 					&& message.rolls[0].effects
 					&& Object.values(message.rolls[0].effects).find(symbol => symbol.length > 0).length > 0
-					&& (!Object.hasOwn(message.rolls[0].options?.checkData, "outcome") || game.user.isGM);
+					&& (!("outcome" in message.rolls[0].options.checkData) || game.user.isGM);
 			},
 			callback: li => CheckHelper.triggerActionEffects(li.dataset.messageId)
 		}, ...super._getEntryContextOptions()];
