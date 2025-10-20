@@ -194,6 +194,19 @@ export default class SkillUpgrader extends AbstractSelector
 		});
 
 	/** @inheritDoc */
+	_checkForError()
+	{
+		let error = super._checkForWarning();
+
+		if(error)
+			return error;
+		else if(this.remainingSpecialisationSelectionSize < 0)
+			return "tooManySpecialisationSelected";
+
+		return false;
+	}
+
+	/** @inheritDoc */
 	_checkForWarning()
 	{
 		let error = super._checkForWarning();

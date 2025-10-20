@@ -985,7 +985,8 @@
 			"noSelection": {
 				"description": "Aucun élément n'a été sélectionné.",
 				"title": "Aucun élément sélectionné"
-			}
+			},
+			"tooManySelection": "Trop d'élements sont actuellement sélectionnés. Veuillez en désélectionner certains."
 		},
 		"filters": "Filtres",
 		"noSelection": "Aucun",
@@ -1050,7 +1051,14 @@
 
 	"SKILLUPGRADER": {
 		"ACTIONS.chooseUpgrade": "Choisir l'amélioration",
-		"WARNINGS.singleSpecialisationOnly": "Une seule spécialisation par compétence ne peut être acquise.",
+		"WARNINGS": {
+			"notEnoughSelection": {
+				"description": "Il reste des améliorations et/ou des spécialisations à sélectionner.",
+				"title": "Améliorations ou spécialisations restantes"
+			},
+			"singleSpecialisationOnly": "Une seule spécialisation par compétence ne peut être acquise.",
+			"tooManySelection": "Trop de spécialisations sont actuellement sélectionnées. Veuillez en désélectionner certaines."
+		},
 		"acquisitionUpgrade": "{name} - Acquisition",
 		"noUpgradeSelected": "Aucune",
 		"selectedUpgrade": "Amélioration sélectionnée :",

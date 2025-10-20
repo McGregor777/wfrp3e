@@ -983,7 +983,8 @@
 			"noSelection": {
 				"description": "No item has been selected.",
 				"title": "No Item Selected"
-			}
+			},
+			"tooManySelection": "Too many selected items. Please deselect some."
 		},
 		"filters": "Filters",
 		"noSelection": "Aucun",
@@ -1048,7 +1049,14 @@
 
 	"SKILLUPGRADER": {
 		"ACTIONS.chooseUpgrade": "Choose Upgrade",
-		"WARNINGS.singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
+		"WARNINGS": {
+			"notEnoughSelection": {
+				"description": "There are still upgrades and/or specialisations to select.",
+				"title": "Upgrades or Specialisations Left To Select"
+			},
+			"singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
+			"tooManySpecialisationSelected": "Too many selected specialisations. Please deselect some."
+		},
 		"acquisitionUpgrade": "{name} - Acquisition",
 		"noUpgradeSelected": "None",
 		"selectedUpgrade": "Selected Upgrade:",

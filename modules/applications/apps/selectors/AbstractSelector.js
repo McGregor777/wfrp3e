@@ -184,6 +184,19 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 	}
 
 	/**
+	 * Checks for any error in the current selection and returns the type error if any is found.
+	 * @returns {string|false} The type of error, or false if no error has been found.
+	 * @protected
+	 */
+	_checkForError()
+	{
+		if(this.remainingSelectionSize < 0)
+			return "tooManySelection";
+
+		return false;
+	}
+
+	/**
 	 * Checks for any warning in the current selection and returns the type warning if any is found.
 	 * @returns {string|false} The type of warning, or false if no warning has been found.
 	 * @protected
@@ -249,6 +262,12 @@ export default class AbstractSelector extends foundry.applications.api.Handlebar
 	 */
 	static async #onSelectorFormSubmit(event, form, formData)
 	{
+		const error = this._checkForError();
+		if(error)
+			return ui.notifications.error(game.i18n.format("SELECTOR.WARNINGS.cannotSubmit", {
+				error: game.i18n.localize(`${capitalize(this.constructor.name)}.WARNINGS.${error}`)
+			}));
+
 		const warning = this._checkForWarning();
 		if(warning && this.strictSelection)
 			return ui.notifications.warn(game.i18n.format("SELECTOR.WARNINGS.cannotSubmit", {
