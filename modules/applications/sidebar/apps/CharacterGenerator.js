@@ -263,6 +263,116 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	}
 
 	/**
+	 * Undo the changes made after the creation point investments step.
+	 * @returns {Promise<void>}
+	 */
+	async resetCreationPointInvestments()
+	{
+		const character = this.character,
+			  race = character.system.race,
+			  characteristics = {};
+
+		this.creationPointInvestments = {
+			characteristics: {},
+			wealth: 0,
+			skills: 0,
+			talents: 0,
+			actions: 0
+		};
+
+		for(const [characteristic, rating] of Object.entries(race.defaultRatings)) {
+			characteristics[characteristic] = {rating};
+			this.creationPointInvestments[characteristic] = rating;
+		}
+
+		await character.update({
+			system: {
+				characteristics,
+				corruption: {max: 7},
+				wounds: {
+					max: 10,
+					value: 10
+				}
+			}
+		});
+
+		this.steps.investCreationPoints = false;
+	}
+
+	/**
+	 * Undo the changes made after the origin step.
+	 * @returns {Promise<void>}
+	 */
+	async resetOrigin()
+	{
+		const character = this.character;
+		if(character.itemTypes.ability.length) {
+			await WFRP3eItem.deleteDocuments(
+				character.itemTypes.ability.map(ability => ability._id),
+				{parent: character}
+			);
+
+			this.steps.chooseOrigin = false;
+		}
+	}
+
+	/**
+	 * Undo the changes made after the starting action cards step.
+	 * @returns {Promise<void>}
+	 */
+	async resetStartingActionCards()
+	{
+		const character = this.character;
+		if(character.itemTypes.action.length) {
+			await WFRP3eItem.deleteDocuments(character.itemTypes.action.map(action => action._id), {parent: character});
+			this.steps.acquireActionCards = false;
+		}
+	}
+
+	/**
+	 * Undo the changes made after the starting career step.
+	 * @returns {Promise<void>}
+	 */
+	async resetStartingCareer()
+	{
+		const character = this.character;
+		if(character.itemTypes.career.length) {
+			await WFRP3eItem.deleteDocuments(character.itemTypes.career.map(career => career._id), {parent: character});
+			this.steps.chooseStartingCareer = false;
+		}
+	}
+
+	/**
+	 * Undo the changes made after the starting skill trainings step.
+	 * @returns {Promise<void>}
+	 */
+	async resetStartingSkillTrainings()
+	{
+		const character = this.character;
+		if(character.itemTypes.skill.length) {
+			await WFRP3eItem.deleteDocuments(character.itemTypes.skill.map(skill => skill._id), {parent: character});
+			this.steps.acquireSkillTrainings = false;
+		}
+	}
+
+	/**
+	 * Undo the changes made after the starting talents step.
+	 * @returns {Promise<void>}
+	 */
+	async resetStartingTalents()
+	{
+		const character = this.character;
+		if(character.itemTypes.talent.length || character.itemTypes.insanity.length) {
+			await WFRP3eItem.deleteDocuments([
+				character.itemTypes.insanity.map(insanity => insanity._id),
+				character.itemTypes.talent.map(talent => talent._id)
+			], {parent: character});
+
+			this.steps.acquireTalents = false;
+		}
+	}
+
+	/**
 	 * Spawns a Character Generator and creates a new character to generate.
 	 * @param {ApplicationConfiguration} [config] Configuration of the Character Generator instance
 	 * @returns {Promise<any>} Resolves to the selected item(s). If the dialog was dismissed, the Promise resolves to null.
@@ -302,15 +412,10 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #acquireActionCards(event, target)
 	{
 		event.preventDefault();
+		await this.resetStartingActionCards();
 
-		const character = this.character;
-		if(character.itemTypes.action.length)
-			await WFRP3eItem.deleteDocuments(
-				character.itemTypes.action.map(action => action._id),
-				{parent: character}
-			);
-
-		const investment = CONFIG.WFRP3e.creationPointInvestments.actionCards[this.creationPointInvestments.actionCards];
+		const character = this.character,
+			  investment = CONFIG.WFRP3e.creationPointInvestments.actionCards[this.creationPointInvestments.actionCards];
 		let actionUuids = await ActionSelector.wait({
 			actor: character,
 			items: await ActionSelector.buildOptionsList(character, {basic: false}),
@@ -318,25 +423,28 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			size: investment.size
 		});
 
-		if(!Array.isArray(actionUuids))
-			actionUuids = [actionUuids];
+		if(actionUuids) {
+			if(!Array.isArray(actionUuids))
+				actionUuids = [actionUuids];
 
-		const basicActions = [],
-			  ownedActionNames = character.itemTypes.action.map(action => action.name),
-			  foundActions = await game.packs.get("wfrp3e.items").getDocuments({type: "action"});
+			const basicActions = [],
+				  ownedActionNames = character.itemTypes.action.map(action => action.name),
+				  foundActions = await game.packs.get("wfrp3e.items").getDocuments({type: "action"});
 
-		for(const action of foundActions)
-			if(action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic"))
-				&& await action.checkRequirements({actor: character})
-				&& !ownedActionNames.includes(action.name))
-				basicActions.push(action);
+			for(const action of foundActions)
+				if(action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic"))
+					&& await action.checkRequirements({actor: character})
+					&& !ownedActionNames.includes(action.name))
+					basicActions.push(action);
 
-		await WFRP3eItem.createDocuments([
-			...basicActions,
-			...await Promise.all(actionUuids.map(async uuid => await fromUuid(uuid)))
-		], {parent: character});
+			await WFRP3eItem.createDocuments([
+				...basicActions,
+				...await Promise.all(actionUuids.map(async uuid => await fromUuid(uuid)))
+			], {parent: character});
 
-		this.steps.acquireActionCards = true;
+			this.steps.acquireActionCards = true;
+		}
+
 		await this.render();
 	}
 
@@ -350,15 +458,11 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #acquireSkillTrainings(event, target)
 	{
 		event.preventDefault();
+		await this.resetStartingActionCards();
+		await this.resetStartingSkillTrainings();
 
-		const character = this.character;
-		if(character.itemTypes.skill.length)
-			await WFRP3eItem.deleteDocuments(
-				character.itemTypes.skill.map(skill => skill._id),
-				{parent: character}
-			);
-
-		const investment = CONFIG.WFRP3e.creationPointInvestments.skills[this.creationPointInvestments.skills],
+		const character = this.character,
+			  investment = CONFIG.WFRP3e.creationPointInvestments.skills[this.creationPointInvestments.skills],
 			  options = {
 				  actor: character,
 				  freeAcquisitions: [],
@@ -383,37 +487,40 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 				  system: {advanced: false}
 			  });
 
-		for(const [uuid, upgradeArray] of Object.entries(SkillUpgrader.sortUpgrades(upgrades))) {
-			const changes = {system: {}};
-			let index = skills.findIndex(skill => skill.uuid === uuid),
-				skill = skills[index];
+		if(skills) {
+			for(const [uuid, upgradeArray] of Object.entries(SkillUpgrader.sortUpgrades(upgrades))) {
+				const changes = {system: {}};
+				let index = skills.findIndex(skill => skill.uuid === uuid),
+					skill = skills[index];
 
-			for(const upgrade of upgradeArray) {
-				switch(upgrade.type) {
-					case "acquisition":
-						skill = await fromUuid(uuid);
-						break;
-					case "trainingLevel":
-						changes.system.trainingLevel = upgrade.value;
-						break;
-					case "specialisation":
-						changes.system.specialisations =
-							(skill.system.specialisations ? skill.system.specialisations + ", " : "")
-							+ (changes.system.specialisations ? changes.system.specialisations + ", " : "")
-							+ upgrade.value;
-						break;
+				for(const upgrade of upgradeArray) {
+					switch(upgrade.type) {
+						case "acquisition":
+							skill = await fromUuid(uuid);
+							break;
+						case "trainingLevel":
+							changes.system.trainingLevel = upgrade.value;
+							break;
+						case "specialisation":
+							changes.system.specialisations =
+								(skill.system.specialisations ? skill.system.specialisations + ", " : "")
+								+ (changes.system.specialisations ? changes.system.specialisations + ", " : "")
+								+ upgrade.value;
+							break;
+					}
 				}
+
+				// Replace the original skill with the upgraded version.
+				index !== -1
+					? skills.splice(index, 1, skill.clone(changes, {keepId: true}))
+					: skills.push(skill.clone(changes, {keepId: true}));
 			}
 
-			// Replace the original skill with the upgraded version.
-			index !== -1
-				? skills.splice(index, 1, skill.clone(changes, {keepId: true}))
-				: skills.push(skill.clone(changes, {keepId: true}));
+			await WFRP3eItem.createDocuments(skills, {parent: character});
+
+			this.steps.acquireSkillTrainings = true;
 		}
 
-		await WFRP3eItem.createDocuments(skills, {parent: character});
-
-		this.steps.acquireSkillTrainings = true;
 		await this.render();
 	}
 
@@ -427,15 +534,11 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #acquireTalents(event, target)
 	{
 		event.preventDefault();
+		await this.resetStartingActionCards();
+		await this.resetStartingTalents();
 
-		const character = this.character;
-		if(character.itemTypes.talent.length)
-			await WFRP3eItem.deleteDocuments([
-				character.itemTypes.insanity.map(insanity => insanity._id),
-				character.itemTypes.talent.map(talent => talent._id)
-			], {parent: character});
-
-		const investment = CONFIG.WFRP3e.creationPointInvestments.talents[this.creationPointInvestments.talents],
+		const character = this.character,
+			  investment = CONFIG.WFRP3e.creationPointInvestments.talents[this.creationPointInvestments.talents],
 			  options = {
 				  actor: character,
 				  modal: true,
@@ -452,15 +555,19 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		options.items = await TalentSelector.buildNewCharacterOptionsList(character, options);
 
 		let talentUuids = await TalentSelector.wait(options);
-		if(!Array.isArray(talentUuids))
-			talentUuids = [talentUuids];
 
-		await WFRP3eItem.createDocuments(
-			await Promise.all(talentUuids.map(async uuid => await fromUuid(uuid))),
-			{parent: character}
-		);
+		if(talentUuids) {
+			if(!Array.isArray(talentUuids))
+				talentUuids = [talentUuids];
 
-		this.steps.acquireTalents = true;
+			await WFRP3eItem.createDocuments(
+				await Promise.all(talentUuids.map(async uuid => await fromUuid(uuid))),
+				{parent: character}
+			);
+
+			this.steps.acquireTalents = true;
+		}
+
 		await this.render();
 	}
 
@@ -474,26 +581,29 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #chooseStartingCareer(event, target)
 	{
 		event.preventDefault();
+		await this.resetStartingActionCards();
+		await this.resetStartingSkillTrainings();
+		await this.resetStartingTalents();
+		await this.resetCreationPointInvestments();
+		await this.resetStartingCareer();
 
-		const character = this.character;
-		if(character.itemTypes.career.length)
-			await WFRP3eItem.deleteDocuments(
-				character.itemTypes.career.map(career => career._id),
+		const character = this.character,
+			  careerUuids = await CareerSelector.wait({
+				  items: await CareerSelector.buildStartingCareerList(character),
+				  modal: true
+			  });
+
+		if(careerUuids[0]) {
+			const career = await fromUuid(careerUuids[0]);
+
+			await WFRP3eItem.createDocuments(
+				[career.clone({"system.current": true}, {keepId: true})],
 				{parent: character}
 			);
 
-		const careerUuid = await CareerSelector.wait({
-				  items: await CareerSelector.buildStartingCareerList(character),
-				  modal: true
-			  }),
-			  career = await fromUuid(careerUuid);
+			this.steps.chooseStartingCareer = true;
+		}
 
-		await WFRP3eItem.createDocuments(
-			[career.clone({"system.current": true}, {keepId: true})],
-			{parent: character}
-		);
-
-		this.steps.chooseStartingCareer = true;
 		await this.render();
 	}
 
@@ -507,13 +617,14 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #chooseOrigin(event, target)
 	{
 		event.preventDefault();
+		await this.resetStartingActionCards();
+		await this.resetStartingTalents();
+		await this.resetStartingSkillTrainings();
+		await this.resetCreationPointInvestments();
+		await this.resetStartingCareer();
+		await this.resetOrigin();
 
 		const character = this.character;
-		if(character.itemTypes.ability.length)
-			await WFRP3eItem.deleteDocuments(
-				character.itemTypes.ability.map(ability => ability._id),
-				{parent: character}
-			);
 
 		await character.update({
 			"system.origin": await OriginSelector.wait({
@@ -541,6 +652,10 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #investCreationPoints(event, target)
 	{
 		event.preventDefault();
+		await this.resetStartingActionCards();
+		await this.resetStartingTalents();
+		await this.resetStartingSkillTrainings();
+		await this.resetCreationPointInvestments();
 
 		const character = this.character,
 			  options = {
@@ -555,27 +670,30 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 				parameterNames: ["options"]
 			});
 
-		const investments = await CreationPointInvestor.wait(options),
-			  originData = character.system.originData,
-			  characteristicRatings = investments.characteristics,
-			  characteristics = {};
+		const investments = await CreationPointInvestor.wait(options);
+		if(investments) {
+			const originData = character.system.originData,
+				  characteristicRatings = investments.characteristics,
+				  characteristics = {};
 
-		for(const [key, rating] of Object.entries(characteristicRatings))
-			characteristics[key] = {rating};
+			for(const [key, rating] of Object.entries(characteristicRatings))
+				characteristics[key] = {rating};
 
-		await character.update({
-			system: {
-				characteristics,
-				corruption: {max: characteristicRatings.toughness + originData.corruption},
-				wounds: {
-					max: characteristicRatings.toughness + originData.wound,
-					value: characteristicRatings.toughness + originData.wound
+			await character.update({
+				system: {
+					characteristics,
+					corruption: {max: characteristicRatings.toughness + originData.corruption},
+					wounds: {
+						max: characteristicRatings.toughness + originData.wound,
+						value: characteristicRatings.toughness + originData.wound
+					}
 				}
-			}
-		});
+			});
 
-		this.creationPointInvestments = investments;
-		this.steps.investCreationPoints = true;
+			this.creationPointInvestments = investments;
+			this.steps.investCreationPoints = true;
+		}
+
 		await this.render();
 	}
 }
