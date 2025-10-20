@@ -550,6 +550,7 @@ export default class CheckHelper
 		await game.packs.get("wfrp3e.roll-tables").getDocument("KpiwJKBdJ8qAyQjs").then(async table => {
 			await table.drawMany(amount, {displayChat: false}).then(async rollTableDraw => {
 				for(const result of rollTableDraw.results) {
+					//#TODO Move this logic into a Macro embedded into the Critical Wounds RollTable.
 					// Roll Twice and select the critical wound with the higher severity rating (if tied, GM chooses)
 					if(result.id === "uZIgluknIsZ428Cn") {
 						const criticalWounds = [];
@@ -592,6 +593,7 @@ export default class CheckHelper
 						else
 							allCriticalWounds.push(highestCriticalWound);
 					}
+					//#TODO Move this logic into a Macro embedded into the Critical Wounds RollTable.
 					// Roll Twice and apply both results! You poor sod...
 					else if(result.id === "aJ0a8gzJbFSPS7xY") {
 						for(let j = 0; j < 2; j++) {
