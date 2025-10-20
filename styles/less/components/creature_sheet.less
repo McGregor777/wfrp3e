@@ -91,39 +91,40 @@
 			}
 
 			& .characteristics {
-				display: flex;
-				flex-direction: column;
 				grid-area: characteristics;
-				padding: 0 8px;
+				justify-content: initial;
 
 				& > .characteristic {
-					align-items: center;
+					align-items: baseline;
 					display: flex;
 					font-weight: bold;
-					gap: 4px;
 					margin-bottom: 4px;
+					width: initial;
+
+					& > .characteristic-container {
+						flex-wrap: nowrap;
+						gap: 4px;
+
+						& input[name$=".fortune"] {
+							border-color: dimgray;
+							font-size: var(--font-size-14);
+							height: 20px;
+							padding: 4px 0 0;
+							width: 20px;
+						}
+
+						& input[name$=".rating"] {
+							padding: 4px 4px 0;
+							height: 32px;
+							width: 32px;
+						}
+					}
 
 					& > .characteristic-title {
-						margin-right: auto;
-					}
-
-					& input[name$=".rating"] {
-						border-color: steelblue;
-						border-width: 2px;
-						padding-top: 4px;
-						font-weight: bold;
-						text-align: center;
-						width: 32px;
-					}
-
-					& input[name$=".fortune"] {
-						border-color: dimgray;
 						font-size: var(--font-size-14);
-						font-weight: bold;
-						height: 20px;
-						padding: 4px 0 0;
-						text-align: center;
-						width: 20px;
+						font-variant: initial;
+						margin-right: auto;
+						text-align: initial;
 					}
 				}
 			}

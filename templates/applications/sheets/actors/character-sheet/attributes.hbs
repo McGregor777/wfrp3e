@@ -112,9 +112,13 @@
 		</div>
 
 		<div class="attributes-subdivision">
-			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.favour}}
+			{{#if system.priest}}
+				{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.favour}}
+			{{/if}}
 
-			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.power}}
+			{{#if system.wizard}}
+				{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.power}}
+			{{/if}}
 		</div>
 	</div>
 </section>

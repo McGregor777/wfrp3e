@@ -30,7 +30,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			investCreationPoints: this.#investCreationPoints
 		},
 		id: "character-generator-{id}",
-		classes: ["wfrp3e", "character-generator", "character"],
+		classes: ["wfrp3e", "character-generator"],
 		tag: "form",
 		window: {
 			contentClasses: ["standard-form"],
@@ -51,13 +51,12 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static PARTS = {
 		buttons: {template: "systems/wfrp3e/templates/applications/sidebar/apps/character-generator/buttons.hbs"},
 		tabs: {template: "templates/generic/tab-navigation.hbs"},
-		attributes: {
-			template: "systems/wfrp3e/templates/applications/sheets/actors/character-sheet/attributes.hbs",
+		origin: {template: "systems/wfrp3e/templates/applications/sidebar/apps/character-generator/origin.hbs"},
+		career: {template: "systems/wfrp3e/templates/applications/sidebar/apps/character-generator/career.hbs"},
+		attributes: {template: "systems/wfrp3e/templates/applications/sidebar/apps/character-generator/attributes.hbs"},
+		skills: {
+			template: "systems/wfrp3e/templates/applications/sidebar/apps/character-generator/skills.hbs",
 			scrollable: [".table-body"]
-		},
-		careers: {
-			template: "systems/wfrp3e/templates/applications/sheets/actors/character-sheet/careers.hbs",
-			scrollable: [".item-container"]
 		},
 		talents: {
 			template: "systems/wfrp3e/templates/applications/sheets/actors/talents.hbs",
@@ -73,16 +72,18 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 	/** @inheritDoc */
 	static TABS = {
-		sheet: {
+		main: {
 			tabs: [
+				{id: "origin"},
+				{id: "career"},
 				{id: "attributes"},
-				{id: "careers"},
+				{id: "skills"},
 				{id: "talents"},
 				{id: "actions"},
 				{id: "background"}
 			],
-			initial: "attributes",
-			labelPrefix: "CHARACTER.TABS"
+			initial: "origin",
+			labelPrefix: "CHARACTERGENERATOR.TABS"
 		}
 	};
 
@@ -148,24 +149,35 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			case "buttons":
 				partContext.steps = this.steps;
 				break;
+			case "origin":
+				const originData = character.system.originData;
+				partContext = {
+					...partContext,
+					origin: originData,
+					originAbilities: await Promise.all(originData.abilities.map(async uuid => await fromUuid(uuid))),
+					race: character.system.race,
+					step: this.steps.chooseOrigin
+				};
+				break;
 			case "attributes":
 				partContext = {
 					...partContext,
-					character,
 					characteristics: CONFIG.WFRP3e.characteristics,
 					fields: character.system.schema.fields,
+				};
+				break;
+			case "skills":
+				partContext = {
+					...partContext,
 					skills: character.itemTypes.skill.sort((a, b) => a.name.localeCompare(b.name))
 				};
 				break;
-			case "careers":
-				const sortedCareers = character.itemTypes.career.sort((a, b) => a.name.localeCompare(b.name));
-
+			case "career":
 				partContext = {
 					...partContext,
-					careers: sortedCareers,
+					career: character.system.currentCareer,
 					characteristics: CONFIG.WFRP3e.characteristics,
-					fields: character.system.schema.fields,
-					tabs: this._prepareTabs(partId)
+					fields: character.system.schema.fields
 				};
 				break;
 			case "talents":
@@ -173,14 +185,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 					...partContext,
 					fields: character.system.schema.fields,
 					items: [...character.itemTypes.talent, ...character.itemTypes.ability]
-						.sort((a, b) => a.name.localeCompare(b.name)),
-					searchFilters: this.searchFilters?.talents,
-					socketsByType: await character.buildSocketList(),
-					types: {
-						all: "ACTOR.SHEET.all",
-						ability: "ABILITY.plural",
-						...CONFIG.WFRP3e.talentTypes
-					}
+						.sort((a, b) => a.name.localeCompare(b.name))
 				};
 				break;
 			case "actions":
@@ -189,13 +194,8 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 					actions: character.itemTypes.action.sort((a, b) => a.name.localeCompare(b.name)),
 					defaultStance: character.system.defaultStance,
 					fields: character.system.schema.fields,
-					searchFilters: this.searchFilters?.actions,
 					stances: CONFIG.WFRP3e.stances,
-					symbols: CONFIG.WFRP3e.symbols,
-					types: {
-						all: "ACTOR.SHEET.all",
-						...CONFIG.WFRP3e.actionTypes
-					}
+					symbols: CONFIG.WFRP3e.symbols
 				};
 				break;
 			case "background":
@@ -224,40 +224,25 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		let tabs = [];
 
 		const character = this.character;
-		if(group === "sheet") {
-			tabs = super._prepareTabs(group);
+		tabs = super._prepareTabs(group);
 
-			if((character.itemTypes.ability.length + character.itemTypes.talent.length) <= 0)
-				tabs.talents.cssClass += " hidden";
+		if(!this.steps.chooseOrigin)
+			tabs.origin.cssClass += " hidden";
 
-			if(character.itemTypes.action.length <= 0)
-				tabs.actions.cssClass += " hidden";
+		if(!this.steps.investCreationPoints)
+			tabs.attributes.cssClass += " hidden";
 
-			if(character.itemTypes.career.length <= 0)
-				tabs.careers.cssClass += " hidden";
-		}
-		else if(group === "careers") {
-			for(const [index, career] of character.itemTypes.career.entries()) {
-				let tab = {
-					id: career.id,
-					group: group,
-					label: career.name
-				};
+		if((character.itemTypes.ability.length + character.itemTypes.talent.length) <= 0)
+			tabs.talents.cssClass += " hidden";
 
-				if(career.system.current)
-					tab.icon = "fa fa-check";
+		if(character.itemTypes.action.length <= 0)
+			tabs.actions.cssClass += " hidden";
 
-				if(career.system.current || index === 0 && !character.system.currentCareer) {
-					tab = {
-						...tab,
-						active: true,
-						cssClass: "active"
-					};
-				}
+		if(character.itemTypes.career.length <= 0)
+			tabs.career.cssClass += " hidden";
 
-				tabs.push(tab);
-			}
-		}
+		if(character.itemTypes.skill.length <= 0)
+			tabs.skills.cssClass += " hidden";
 
 		return tabs;
 	}
@@ -443,6 +428,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			], {parent: character});
 
 			this.steps.acquireActionCards = true;
+			this.changeTab("actions", "main");
 		}
 
 		await this.render();
@@ -519,6 +505,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			await WFRP3eItem.createDocuments(skills, {parent: character});
 
 			this.steps.acquireSkillTrainings = true;
+			this.changeTab("skills", "main");
 		}
 
 		await this.render();
@@ -566,6 +553,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			);
 
 			this.steps.acquireTalents = true;
+			this.changeTab("talents", "main");
 		}
 
 		await this.render();
@@ -602,6 +590,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			);
 
 			this.steps.chooseStartingCareer = true;
+			this.changeTab("career", "main");
 		}
 
 		await this.render();
@@ -639,6 +628,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		);
 
 		this.steps.chooseOrigin = true;
+		this.changeTab("origin", "main");
 		await this.render();
 	}
 
@@ -692,6 +682,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 			this.creationPointInvestments = investments;
 			this.steps.investCreationPoints = true;
+			this.changeTab("attributes", "main");
 		}
 
 		await this.render();

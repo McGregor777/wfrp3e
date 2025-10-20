@@ -419,6 +419,15 @@
 			"investCreationPoints": "Investir les points de création",
 			"submit": "Générer le personnage"
 		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributs",
+			"background": "Historique",
+			"career": "Carrière",
+			"origin": "Origine",
+			"skills": "Compétences",
+			"talents": "Talents"
+		},
 		"newCharacter": "Nouveau personnage",
 		"title": "Générateur de personnage"
 	},

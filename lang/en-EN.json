@@ -417,6 +417,15 @@
 			"investCreationPoints": "Invest Creation Points",
 			"submit": "Generate Character"
 		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributes",
+			"background": "Background",
+			"career": "Career",
+			"origin": "Origin",
+			"skills": "Skills",
+			"talents": "Talents"
+		},
 		"newCharacter": "New Character",
 		"title": "Character Generator"
 	},

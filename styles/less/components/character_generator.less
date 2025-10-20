@@ -1,34 +1,88 @@
 .application.wfrp3e.character-generator .window-content {
 	display: grid;
+	gap: 0 16px;
 	grid-template-areas:
 			'buttons tabs'
 			'buttons sheet'
 			'footer footer';
-	grid-template-columns: auto 2fr;
+	grid-template-columns: auto 1fr;
 	grid-template-rows: auto 1fr auto;
 
 	& footer {
 		grid-area: footer;
 	}
 
-	& section[data-application-part="buttons"] {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		grid-area: buttons;
-
-		& > div {
-			align-items: center;
-			display: flex;
-			gap: 8px;
+	& section {
+		&[data-application-part="attributes"] {
+			flex-direction: row;
 		}
-	}
 
-	& .tab {
-		grid-area: sheet;
-	}
+		&[data-application-part="buttons"] {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+			grid-area: buttons;
 
-	& .tabs {
-		grid-area: tabs;
+			width: max-content;
+
+			& > div {
+				align-items: center;
+				display: flex;
+				gap: 8px;
+			}
+		}
+
+		& .tab {
+			grid-area: sheet;
+		}
+
+		& .tabs {
+			grid-area: tabs;
+		}
+
+		&[data-application-part="origin"] {
+			& > div {
+				display: grid;
+				gap: 0 16px;
+				grid-template-areas:
+						'race-image race-name race-name'
+						'race-image origin-image origin-name';
+				grid-template-columns: 200px 100px auto;
+				grid-template-rows: 100px 100px;
+
+				& .origin-img {
+					grid-area: origin-image;
+				}
+
+				& .origin-name {
+					font: var(--font-size-32) var(--font-title);
+					grid-area: origin-name;
+					margin: auto 0;
+				}
+
+				& .race-img {
+					grid-area: race-image;
+				}
+
+				& .race-name {
+					font: var(--font-size-48) var(--font-title);
+					grid-area: race-name;
+					margin: auto 0;
+				}
+			}
+		}
+
+		&[data-application-part="skills"] {
+			& .skills {
+				display: flex;
+				flex: 1 1 370px;
+				flex-direction: column;
+				overflow: auto;
+
+				& .skill-row {
+					font-variant-caps: small-caps;
+				}
+			}
+		}
 	}
 }

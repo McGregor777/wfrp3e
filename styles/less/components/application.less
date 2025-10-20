@@ -86,6 +86,81 @@
 				}
 			}
 
+			& .attributes {
+				display: flex;
+				flex: 1 1 240px;
+				flex-direction: column;
+				gap: 16px;
+
+				& > .attributes-subdivision {
+					display: flex;
+					flex-flow: row wrap;
+
+					& fieldset.attribute {
+						border: none;
+						flex: 1 0 80px;
+						gap: 4px;
+						padding: 4px;
+						text-align: center;
+
+						& .form-group {
+							display: flex;
+							flex-direction: column;
+
+							& input {
+								height: 64px;
+								text-align: center;
+							}
+						}
+					}
+				}
+			}
+
+			& .characteristics {
+				display: flex;
+				flex: 1 1 auto;
+				flex-direction: column;
+				justify-content: space-around;
+				padding: 0 8px;
+
+				& > .characteristic {
+					width: 130px;
+
+					& > .characteristic-container {
+						align-items: center;
+						display: flex;
+						flex-flow: row wrap;
+						gap: 8px;
+						justify-content: flex-end;
+
+						& input[name$=".fortune"] {
+							border-color: darkgray;
+							font-weight: bold;
+							height: 24px;
+							padding: 4px;
+							text-align: center;
+							width: 24px;
+						}
+
+						& input[name$=".rating"] {
+							border-color: steelblue;
+							border-width: 2px;
+							display: block;
+							font-weight: bold;
+							height: 45px;
+							padding: 4px;
+							text-align: center;
+							width: 35px;
+						}
+					}
+
+					& > .characteristic-title {
+						font: small-caps bold var(--font-size-18) var(--font-primary);
+						text-align: center;
+					}
+				}
+			}
+
 			& .impairment {
 				display: flex;
 				margin: auto;
@@ -124,11 +199,8 @@
 				}
 
 				& .title {
-					display: block;
-					font: small-caps bold var(--font-size-18) var(--font-primary);
 					padding: 0 2px 0 4px;
 					writing-mode: vertical-lr;
-					text-align: center;
 				}
 			}
 
@@ -379,6 +451,14 @@
 						border-right: 1px solid var(--color-border-light-primary);
 					}
 				}
+			}
+
+			& .title {
+				border-bottom: none;
+				display: block;
+				font: small-caps bold var(--font-size-18) var(--font-primary);
+				margin: 0;
+				text-align: center;
 			}
 		}
 
