@@ -15,15 +15,15 @@
 
 	<div class="ratings">
 		{{>systems/wfrp3e/templates/applications/sheets/actors/partials/rating.hbs
-				ratingName="damageRating"
+				rating=fields.damageRating
 				icon="systems/wfrp3e/assets/images/damage-rating.webp"}}
 
 		{{>systems/wfrp3e/templates/applications/sheets/actors/partials/rating.hbs
-				ratingName="defenceValue"
+				rating=fields.defenceValue
 				icon="systems/wfrp3e/assets/images/defence-value.webp"}}
 
 		{{>systems/wfrp3e/templates/applications/sheets/actors/partials/rating.hbs
-				ratingName="soakValue"
+				rating=fields.soakValue
 				icon="systems/wfrp3e/assets/images/soak-value.webp"}}
 
 		{{#if system.nemesis}}
