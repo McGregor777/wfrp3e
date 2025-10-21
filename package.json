@@ -13,12 +13,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@foundryvtt/foundryvtt-cli": "^1.0.2",
+    "@foundryvtt/foundryvtt-cli": "^3.0.0",
     "fancy-log": "^2.0.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
+    "gulp": "^5.0.1",
+    "gulp-autoprefixer": "^10.0.0",
     "gulp-less": "^5.0.0",
     "path": "^0.12.7",
-    "yargs": "^17.5.1"
+    "yargs": "^18.0.0"
   }
 }
