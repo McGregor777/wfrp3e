@@ -63,4 +63,15 @@
 			<span class="fa-solid fa-check"></span>
 		{{/if}}
 	</div>
+
+	<div>
+		<button {{#unless steps.acquireActionCards}}disabled{{/unless}}
+				data-action="playGameOfTwentyQuestions">
+			{{localize "CHARACTERGENERATOR.ACTIONS.playGameOfTwentyQuestions"}}
+		</button>
+
+		{{#if steps.gameOfTwentyQuestions}}
+			<span class="fa-solid fa-check"></span>
+		{{/if}}
+	</div>
 </section>

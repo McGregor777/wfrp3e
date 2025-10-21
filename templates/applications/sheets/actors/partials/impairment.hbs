@@ -1,9 +1,7 @@
 <div class="impairment {{impairment.name}}">
-	{{#if (sameAs source.type "creature")}}
-		<span class="title">
-			{{impairment.label}}
-		</span>
-	{{/if}}
+	<h2 class="sheet-title">
+		{{impairment.label}}
+	</h2>
 
 	<a class="token"
 	   data-action="adjustImpairment"
@@ -15,10 +13,4 @@
 			{{getProperty source impairment.fieldPath}}
 		</span>
 	</a>
-
-	{{#if (sameAs source.type "character")}}
-		<span class="title">
-			{{impairment.label}}
-		</span>
-	{{/if}}
 </div>

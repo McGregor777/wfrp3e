@@ -1,8 +1,8 @@
 <section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
 	<div class="characteristics-and-impairments">
-		<h3 class="character-sheet-title">
+		<h2 class="sheet-title">
 			{{localize "CHARACTER.TABS.attributes"}}
-		</h3>
+		</h2>
 
 		<div>
 			<div class="impairments">
@@ -24,9 +24,9 @@
 	</div>
 
 	<div class="skills">
-		<h3 class="character-sheet-title">
+		<h2 class="sheet-title">
 			{{localize "SKILL.plural"}}
-		</h3>
+		</h2>
 
 		{{#if skills}}
 			<div class="skill table">
@@ -71,7 +71,7 @@
 		</div>
 
 		<div class="stance-meter">
-			<h3 class="character-sheet-title">
+			<h2 class="sheet-title">
 				<a class="stance-meter-segment"
 				   data-action="adjustStanceMeter"
 				   data-stance="conservative"
@@ -93,7 +93,7 @@
 						 alt="{{localize 'CHARCTER.SHEET.recklessSegment'}}"
 						 height="27" />
 				</a>
-			</h3>
+			</h2>
 
 			<div class="stance-meter-segment-container">
 				{{#for system.stanceMeter.conservative (increment system.stanceMeter.reckless 1) 1}}

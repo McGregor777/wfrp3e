@@ -1,4 +1,5 @@
 import CreationPointInvestor from "../../apps/CreationPointInvestor.js";
+import GameOfTwentyQuestions from "../../apps/GameOfTwentyQuestions.js";
 import ActionSelector from "../../apps/selectors/ActionSelector.js";
 import CareerSelector from "../../apps/selectors/CareerSelector.js";
 import OriginSelector from "../../apps/selectors/OriginSelector.js";
@@ -27,7 +28,8 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			acquireTalents: this.#acquireTalents,
 			chooseStartingCareer: this.#chooseStartingCareer,
 			chooseOrigin: this.#chooseOrigin,
-			investCreationPoints: this.#investCreationPoints
+			investCreationPoints: this.#investCreationPoints,
+			playGameOfTwentyQuestions: this.#playGameOfTwentyQuestions
 		},
 		id: "character-generator-{id}",
 		classes: ["wfrp3e", "character-generator"],
@@ -108,7 +110,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 	/**
 	 * The state of each step in the Character Generator (*true* if done, false otherwise).
-	 * @type {{chooseOrigin: boolean, chooseStartingCareer: boolean, investCreationPoints: boolean, acquireSkillTrainings: boolean, acquireTalents: boolean, acquireActionCards: boolean}}
+	 * @type {{chooseOrigin: boolean, chooseStartingCareer: boolean, investCreationPoints: boolean, acquireSkillTrainings: boolean, acquireTalents: boolean, acquireActionCards: boolean, gameOfTwentyQuestions: boolean}}
 	 */
 	steps = {
 		chooseOrigin: false,
@@ -116,7 +118,8 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		investCreationPoints: false,
 		acquireSkillTrainings: false,
 		acquireTalents: false,
-		acquireActionCards: false
+		acquireActionCards: false,
+		gameOfTwentyQuestions: false
 	};
 
 	/** @inheritDoc */
@@ -231,6 +234,9 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 		if(!this.steps.investCreationPoints)
 			tabs.attributes.cssClass += " hidden";
+
+		if(this.steps.gameOfTwentyQuestions)
+			tabs.background.cssClass += " hidden";
 
 		if((character.itemTypes.ability.length + character.itemTypes.talent.length) <= 0)
 			tabs.talents.cssClass += " hidden";
@@ -385,6 +391,27 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #onCharacterGeneratorSubmit(event, form, formData)
 	{
 		await this.character.render({force: true});
+	}
+
+	/**
+	 * Shows a game of 20 questions to edit the new character's background.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #playGameOfTwentyQuestions(event, target)
+	{
+		event.preventDefault();
+
+		const answers = await GameOfTwentyQuestions.wait(),
+			  biography = Object.values(answers).reduce((biography, answer) => biography += answer, "");
+
+		this.character.update({"system.background.biography": biography});
+
+		this.steps.gameOfTwentyQuestions = true;
+		this.changeTab("background", "main");
+		await this.render();
 	}
 
 	/**

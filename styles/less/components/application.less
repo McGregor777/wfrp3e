@@ -65,6 +65,11 @@
 		}
 
 		& > section {
+			&.overflow {
+				min-height: 0;
+				overflow-y: auto;
+			}
+
 			&.tab > {
 				& > *:not(a, nav.tabs):first-child {
 					margin-top: 16px;
@@ -198,7 +203,7 @@
 					}
 				}
 
-				& .title {
+				& .sheet-title {
 					padding: 0 2px 0 4px;
 					writing-mode: vertical-lr;
 				}
@@ -453,9 +458,7 @@
 				}
 			}
 
-			& .title {
-				border-bottom: none;
-				display: block;
+			& .sheet-title {
 				font: small-caps bold var(--font-size-18) var(--font-primary);
 				margin: 0;
 				text-align: center;

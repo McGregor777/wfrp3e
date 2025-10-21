@@ -417,6 +417,7 @@
 			"chooseStartingCareer": "Choisir la carrière de départ",
 			"chooseOrigin": "Choisir l'origine",
 			"investCreationPoints": "Investir les points de création",
+			"playGameOfTwentyQuestions": "Touche finale",
 			"submit": "Générer le personnage"
 		},
 		"TABS": {
@@ -762,6 +763,37 @@
 		"TABS": {
 			"scripts": "Scripts"
 		}
+	},
+
+	"GAMEOFTWENTYQUESTIONS": {
+		"ACTIONS.submit": "Valider vos réponses",
+		"FIELDS": {
+			"ability.label": "De quelle façon vos statistiques définissent votre personnalité ?",
+			"ambition.label": "Quelle est votre plus grande ambition ?",
+			"appearance.label": "À quoi ressemblez-vous ?",
+			"birthplace.label": "D'où venez-vous ?",
+			"career.label": "Comment avez-vous commencé votre carrière ?",
+			"companions.label": "Que pensez-vous de vos compagnons ?",
+			"enemy.label": "Qui est votre pire ennemi ?",
+			"event.label": "Quel est l'évenèment le plus important de votre vie ?",
+			"factions.label": "Êtes-vous membre d'une ou plusieurs factions ?",
+			"family.label": "Quelle est votre famille ?",
+			"fear.label": "Quelle est votre plus grande peur ?",
+			"flaw.label": "Quelle est votre pire défaut ?",
+			"morality.label": "Quelle est votre alignement ?",
+			"motivation.label": "Qu'est-ce-qui vous motive ?",
+			"prejudice.label": "Que détestez-vous par-dessus tout chez les autres ?",
+			"regret.label": "Quelle est la pire chose que vous ayez faites ?",
+			"relax.label": "Comment est-ce-que vous vous détendez ?",
+			"secret.label": "Quel est votre plus grand secret ?",
+			"voice.label": "Quelle est votre voix ?",
+			"worship.label": "Qui vénérez-vous ?"
+		},
+		"WARNINGS.incompleteAnswers": {
+			"description": "Vous n'avez pas répondu à toutes les questions posées.",
+			"title": "Réponses incomplètes"
+		},
+		"title": "Jeu des vingt questions"
 	},
 
 	"GROUP": {

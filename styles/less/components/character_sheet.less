@@ -12,8 +12,6 @@
 
 	& > section.tab {
 		flex-grow: 1;
-		min-height: 0;
-		overflow-y: auto;
 
 		&.attributes {
 			flex-direction: row !important;
@@ -38,14 +36,18 @@
 					display: flex;
 					flex-direction: column;
 
-					& .token-counter {
-						left: 50%;
-						top: 50%;
-						transform: translate(-50%, -20%);
-					}
+					& > .impairment {
+						flex-direction: row-reverse;
 
-					& .title {
-						transform: rotate(180deg);
+						& >.sheet-title {
+							transform: rotate(180deg);
+						}
+
+						& .token-counter {
+							left: 50%;
+							top: 50%;
+							transform: translate(-50%, -20%);
+						}
 					}
 				}
 			}
@@ -61,7 +63,7 @@
 				}
 			}
 
-			& .stance-meter h3 {
+			& .stance-meter .sheet-title {
 				align-items: center;
 				display: flex;
 				gap: 4px;
