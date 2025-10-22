@@ -386,11 +386,22 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	 * @param {SubmitEvent} event The originating form submission event.
 	 * @param {HTMLFormElement} form The form element that was submitted.
 	 * @param {FormDataExtended} formData Processed data for the submitted form.
+	 * @returns {Promise<void>}
 	 * @private
 	 */
 	static async #onCharacterGeneratorSubmit(event, form, formData)
 	{
-		await this.character.render({force: true});
+		let proceed = true;
+
+		if(Object.values(this.steps).includes(false))
+			proceed = await foundry.applications.api.DialogV2.confirm({
+				window: {title: game.i18n.localize("CHARACTERGENERATOR.WARNINGS.unfinishedGeneration.title")},
+				modal: true,
+				content: game.i18n.localize("CHARACTERGENERATOR.WARNINGS.unfinishedGeneration.description")
+			});
+
+		if(proceed)
+			await this.character.render({force: true});
 	}
 
 	/**

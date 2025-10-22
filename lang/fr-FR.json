@@ -429,6 +429,10 @@
 			"skills": "Compétences",
 			"talents": "Talents"
 		},
+		"WARNINGS.unfinishedGeneration": {
+			"description": "La génération du personnage n'est pas terminée. Si vous choisissez de poursuivre, vous pourrez toujours la compléter manuellement. Souhaitez-vous poursuivre ?",
+			"title": "Génération de personnage incomplète"
+		},
 		"newCharacter": "Nouveau personnage",
 		"title": "Générateur de personnage"
 	},

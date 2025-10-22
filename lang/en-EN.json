@@ -427,6 +427,10 @@
 			"skills": "Skills",
 			"talents": "Talents"
 		},
+		"WARNINGS.unfinishedGeneration": {
+			"description": "The character generation is not finished. If you proceed, you will still be able to complete it manually. Do you wish to proceed?",
+			"title": "Unfinished Character Generation"
+		},
 		"newCharacter": "New Character",
 		"title": "Character Generator"
 	},
