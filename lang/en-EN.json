@@ -1087,11 +1087,11 @@
 			"onCheckPreparation": "Check Preparation",
 			"onCheckRoll": "Check Roll",
 			"onCreationPointInvestment": "On Creation Point Investment",
-			"onPostCheckTrigger": "Manual Trigger Post Check",
-			"onPreCheckTrigger": "Manual Selection Pre Check",
+			"onPostCheckTrigger": "Post Check Manual Trigger",
+			"onPreCheckTrigger": "Pre Check Manual Selection",
 			"onStartingSkillTrainingSelection": "Starting Skill Training Selection",
 			"onStartingTalentSelection": "Starting Talent Selection",
-			"onTargettingCheckPreparation": "Targetting Check Preparation",
+			"onTargetingCheckPreparation": "Targeting Check Preparation",
 			"onTrigger": "Manual Trigger",
 			"requirementCheck": "Requirement Check"
 		}

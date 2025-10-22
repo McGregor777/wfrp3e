@@ -21,4 +21,13 @@ export default class WFRP3eEffectDataModel extends foundry.abstract.TypeDataMode
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["EFFECT"];
+
+	/** @inheritDoc */
+	static migrateData(source)
+	{
+		if(source.type === "onTargettingCheckPreparation")
+			source.type = "onTargetingCheckPreparation";
+
+		return super.migrateData(source);
+	}
 }

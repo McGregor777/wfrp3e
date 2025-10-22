@@ -1093,7 +1093,7 @@
 			"onPreCheckTrigger": "Sélection manuelle avant un test",
 			"onStartingSkillTrainingSelection": "Sélection des formations des compétences de départ",
 			"onStartingTalentSelection": "Sélection des talents de départ",
-			"onTargettingCheckPreparation": "Préparation d'un test ciblant",
+			"onTargetingCheckPreparation": "Préparation d'un test ciblant",
 			"onTrigger": "Déclenchement manuel",
 			"requirementCheck": "Vérification des conditions"
 		}
