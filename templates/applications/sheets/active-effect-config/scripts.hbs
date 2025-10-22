@@ -2,12 +2,12 @@
 	{{formGroup fields.type value=system.type rootId=rootId localize=true}}
 
 	{{#if (or (sameAs system.type "onPreCheckTrigger") (sameAs system.type "onPostCheckTrigger"))}}
-		{{formGroup fields.conditionScript value=system.conditionScript rootId=rootId rows=4}}
+		{{formGroup fields.conditionScript value=system.conditionScript rootId=rootId}}
 	{{/if}}
 
-	{{formGroup fields.script value=system.script rootId=rootId rows=4}}
+	{{formGroup fields.script value=system.script rootId=rootId}}
 
 	{{#if (or (sameAs system.type "onPreCheckTrigger"))}}
-		{{formGroup fields.postScript value=system.postScript rootId=rootId rows=4}}
+		{{formGroup fields.postScript value=system.postScript rootId=rootId}}
 	{{/if}}
 </section>
