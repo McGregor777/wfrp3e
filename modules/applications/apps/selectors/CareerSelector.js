@@ -35,22 +35,61 @@ export default class CareerSelector extends AbstractSelector
 	}
 
 	/**
-	 * Builds an array of Careers eligible for a transition.
-	 * @param {WFRP3eActor} actor The Actor changing career.
-	 * @returns {Promise<WFRP3eItem[]>}
+	 * Builds an array of careers eligible for a transition.
+	 * @param {WFRP3eActor} actor The actor changing career.
+	 * @returns {Promise<WFRP3eItem[]>} An array of careers eligible for a transition.
 	 */
 	static async buildAdvanceOptionsList(actor)
 	{
-		return game.packs.filter(pack => pack.documentName === "Item").reduce(async (careers, pack) => {
-			return [
-				...await careers,
-				...await pack.getDocuments({type: "career"})
-					.then(foundCareers => foundCareers
-						.filter(career => career.name !== actor.system.currentCareer.name
-							&& career.system.raceRestrictions.includes(actor.system.race.id)
-							&& (!career.system.advanced || actor.system.rank > 1)))
-			];
-		}, []);
+		const careers = [];
+		for(const pack of game.packs.filter(pack => pack.documentName === "Item")) {
+			const foundCareers = pack.getDocuments({type: "career"})
+				.then(foundCareers => foundCareers.filter(career => career.name !== actor.system.currentCareer.name
+						&& career.system.raceRestrictions.includes(actor.system.race.id)
+						&& (!career.system.advanced || actor.system.rank > 1)));
+			careers.push(...foundCareers);
+		}
+
+		return careers;
+	}
+
+	/**
+	 * Builds an array of careers eligible for a new character.
+	 * @param {WFRP3eActor} character The new character.
+	 * @returns {Promise<WFRP3eItem[]>} An array of careers eligible for a new character.
+	 */
+	static async buildStartingCareerList(character)
+	{
+		const careers = [];
+		for(const pack of game.packs.filter(pack => pack.documentName === "Item")) {
+			const basicCareers = await pack.getDocuments({type: "career", system: {advanced: false}});
+
+			careers.push(...basicCareers.filter(career => {
+				return career.system.raceRestrictions.includes(character.system.race.id)
+			}));
+		}
+
+		switch(game.settings.get("wfrp3e", "startingCareerDrawingMethod")) {
+			case "drawThree":
+				const drawnCareers = [];
+
+				for(let i = 0; i < 3; i++)
+					drawnCareers.push(careers[Math.floor(Math.random() * careers.length)]);
+
+				return drawnCareers;
+
+			case "rollTable":
+				//#TODO Doesn't work
+				return fromUuid(this.character.system.race.startingCareerRollTableUuid)
+					.then(async rollTable => {
+						return rollTable.draw({displayChat: false})
+							//#TODO Check how TableResult allows to get a linked Document's UUID.
+							.then(result => result.results.map(async result => await fromUuid(result.documentUuid)));
+					});
+
+			case "freeChoice":
+				return careers;
+		}
 	}
 
 	/**

@@ -15,13 +15,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "12.350",
     "createdTime": 1700165695002,
-    "modifiedTime": 1701195763169,
+    "modifiedTime": 1761037773766,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_key": "!items!ATznsFp414qzofcJ"
 }

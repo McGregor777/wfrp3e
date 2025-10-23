@@ -1,0 +1,25 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	<div class="skill table">
+		<div class="table-header">
+			<div class="name">
+				{{localize "Name"}}
+			</div>
+
+			<div class="characteristic">
+				{{localize "SKILL.FIELDS.characteristic.abbreviation"}}
+			</div>
+
+			<div class="training-level">
+				{{localize "SKILL.FIELDS.trainingLevel.label"}}
+			</div>
+
+			<div class="buttons"></div>
+		</div>
+
+		<div class="table-body">
+			{{#each skills as |skill sk|}}
+				{{>systems/wfrp3e/templates/applications/sheets/actors/partials/skill-row.hbs skill=skill}}
+			{{/each}}
+		</div>
+	</div>
+</section>

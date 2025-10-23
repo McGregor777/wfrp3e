@@ -8,11 +8,9 @@ export default class ActionSelector extends AbstractSelector
 	{
 		super(options);
 
-		this.actionTypes = Object.entries(CONFIG.WFRP3e.actionTypes).reduce((types, [key, value]) => {
+		for(const [key, type] of Object.entries(CONFIG.WFRP3e.actionTypes))
 			if(options.items.find(action => action.system.type === key))
-				types[key] = value;
-			return types;
-		}, {});
+				this.types[key] = type;
 	}
 
 	/** @inheritDoc */
@@ -26,6 +24,13 @@ export default class ActionSelector extends AbstractSelector
 
 	/** @inheritDoc */
 	type = "action";
+
+	/**
+	 * The type of actions that are present among the selectable items.
+	 * @type {Object}
+	 */
+	types = {};
+
 
 	/** @inheritDoc */
 	async _prepareContext(options)
@@ -62,7 +67,7 @@ export default class ActionSelector extends AbstractSelector
 				};
 				break;
 			case "search":
-				partContext.types = {all: "SELECTOR.all", ...this.actionTypes};
+				partContext.types = {all: "SELECTOR.all", ...this.types};
 				break;
 		}
 
@@ -70,56 +75,27 @@ export default class ActionSelector extends AbstractSelector
 	}
 
 	/**
-	 * Builds an array of Actions eligible for an Advance, whether non-career or not.
-	 * @param {WFRP3eActor} actor The Actor buying the advance.
-	 * @returns {Promise<WFRP3eItem[]>}
+	 * Builds an array of action cards to select depending on the actor.
+	 * @param {WFRP3eActor} actor The actor acquiring new action cards.
+	 * @param {Object} options
+	 * @returns {Promise<WFRP3eItem[]>} An array of action cards to select from.
 	 */
-	static async buildAdvanceOptionsList(actor)
+	static async buildOptionsList(actor, options)
 	{
-		let faithName = null,
-			orderName = null;
+		const ownedActionNames = actor.itemTypes.action.map(action => action.name),
+			  actions = [];
 
-		if(actor.system.priest) {
-			const faithTalent = actor.itemTypes.talent.find(talent => talent.type === "faith"),
-				  match = faithTalent.name.match(new RegExp(/([\w\s]+),?/));
+		for(const pack of game.packs.filter(pack => pack.documentName === "Item")) {
+			const foundActions = await pack.getDocuments({type: "action"});
 
-			if(match)
-				faithName = match[1];
+			for(const action of foundActions)
+				if((options.basic === false && !action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic")))
+					&& await action.checkRequirements({actor})
+					&& !ownedActionNames.includes(action.name))
+					actions.push(action);
 		}
 
-		if(actor.system.wizard) {
-			const orderTalent = actor.itemTypes.talent.find(talent => talent.type === "order"),
-				  match = orderTalent.name.match(new RegExp(/([\w\s]+), ?[\w\s]+, ?([\w\s]+)/));
-
-			if(match)
-				orderName = match[2] ?? match[1];
-		}
-
-		const ownedActionNames = actor.itemTypes.action.map(action => action.name);
-
-		return game.packs.filter(pack => pack.documentName === "Item").reduce(async (actions, pack) => {
-			return [
-				...await actions,
-				...await pack.getDocuments({type: "action"}).then(foundActions => {
-					const actions = foundActions.filter(action => {
-						return ["melee", "ranged", "support"].includes(action.system.type)
-							&& !ownedActionNames.includes(action.name)
-					});
-
-					if(actor.system.priest && faithName)
-						actions.push(...foundActions.filter(action => action.system.type === "blessing"
-							&& action.system.reckless.traits.includes(faithName)
-							&& !ownedActionNames.includes(action.name)));
-
-					if(actor.system.wizard && orderName)
-						actions.push(...foundActions.filter(action => action.system.type === "spell"
-							&& action.system.reckless.traits.includes(orderName)
-							&& !ownedActionNames.includes(action.name)));
-
-					return actions;
-				})
-			];
-		}, []);
+		return actions;
 	}
 
 	/**

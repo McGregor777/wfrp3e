@@ -1,5 +1,4 @@
 import {WFRP3e} from "./modules/config.js";
-import CharacterGenerator from "./modules/applications/CharacterGenerator.js";
 import WFRP3eEffectConfig from "./modules/applications/sheets/WFRP3eEffectConfig.js";
 import WFRP3eCharacterSheet from "./modules/applications/sheets/actors/WFRP3eCharacterSheet.js";
 import WFRP3eCreatureSheet from "./modules/applications/sheets/actors/WFRP3eCreatureSheet.js";
@@ -20,6 +19,7 @@ import WFRP3eSkillSheet from "./modules/applications/sheets/items/WFRP3eSkillShe
 import WFRP3eTalentSheet from "./modules/applications/sheets/items/WFRP3eTalentSheet.js";
 import WFRP3eTrappingSheet from "./modules/applications/sheets/items/WFRP3eTrappingSheet.js";
 import WFRP3eWeaponSheet from "./modules/applications/sheets/items/WFRP3eWeaponSheet.js";
+import WFRP3eActorDirectory from "./modules/applications/sidebar/tabs/WFRP3eActorDirectory.js";
 import WFRP3eChatLog from "./modules/applications/sidebar/tabs/WFRP3eChatLog.js";
 import WFRP3eCombatTracker from "./modules/applications/sidebar/tabs/WFRP3eCombatTracker.js";
 import WFRP3eCombat from "./modules/documents/combat/WFRP3eCombat.js";
@@ -62,6 +62,7 @@ import * as handlebarsHelpers from "./modules/applications/handlebars.js";
 async function preloadHandlebarsTemplates()
 {
 	const templatePaths = [
+		"systems/wfrp3e/templates/applications/apps/creation-point-investor/partial.hbs",
 		"systems/wfrp3e/templates/applications/partials/ability-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/action-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/career-card.hbs",
@@ -71,9 +72,8 @@ async function preloadHandlebarsTemplates()
 		"systems/wfrp3e/templates/applications/partials/insanity-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/miscast-card.hbs",
 		"systems/wfrp3e/templates/applications/partials/mutation-card.hbs",
+		"systems/wfrp3e/templates/applications/partials/origin-race.hbs",
 		"systems/wfrp3e/templates/applications/partials/talent-card.hbs",
-		"systems/wfrp3e/templates/partials/character-generator-origin-description.hbs",
-		"systems/wfrp3e/templates/partials/character-generator-talent-card.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/ability-row.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/ability-track.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/action-row.hbs",
@@ -101,6 +101,20 @@ Hooks.once("init", async () => {
 	console.log("WFRP3e | Initialising Warhammer Fantasy Roleplay - 3rd Edition System");
 
 	CONFIG.WFRP3e = Object.freeze(WFRP3e);
+
+	game.settings.register("wfrp3e", "startingCareerDrawingMethod", {
+		name: "SETTINGS.startingCareerDrawingMethod.name",
+		hint: "SETTINGS.startingCareerDrawingMethod.hint",
+		scope: "world",
+		config: true,
+		type: String,
+		choices: {
+			"drawThree": "SETTINGS.startingCareerDrawingMethod.CHOICES.drawThree",
+			"rollTable": "SETTINGS.startingCareerDrawingMethod.CHOICES.rollTable",
+			"freeChoice": "SETTINGS.startingCareerDrawingMethod.CHOICES.freeChoice",
+		},
+		default: "drawThree"
+	});
 
 	Object.assign(CONFIG.Actor.dataModels, {
 		"character": WFRP3eCharacterDataModel,
@@ -166,6 +180,7 @@ Hooks.once("init", async () => {
 	};
 	CONFIG.fontDefinitions["Caslon Antique"] = {editor: true, fonts: []};
 
+	CONFIG.ui.actors = WFRP3eActorDirectory;
 	CONFIG.ui.chat = WFRP3eChatLog;
 	CONFIG.ui.combat = WFRP3eCombatTracker;
 
@@ -207,20 +222,6 @@ Hooks.on("renderChatMessage", (message, html, context) => {
 			event.currentTarget.dataset.symbol,
 			event.currentTarget.dataset.index
 		);
-	});
-});
-
-Hooks.on("renderActorDirectory", (app, html, data) => {
-	// Add a button to start the Character Generator.
-	html.find(".directory-header .header-actions").append(
-		'<button class="character-generator">' +
-		' <span class="fas fa-user"></span> ' + game.i18n.localize("ACTOR.GenerateACharacter") +
-		'</button>'
-	);
-
-	html.find(".character-generator").click(async(event) => {
-		event.preventDefault();
-		new CharacterGenerator().render(true);
 	});
 });
 

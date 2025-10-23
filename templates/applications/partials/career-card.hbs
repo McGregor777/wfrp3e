@@ -22,7 +22,7 @@
 					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
 						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
 					{{else}}
-						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
+						{{localize (concat "RACE." this)}}{{#unless @last}}, {{/unless}}
 					{{/if}}
 				{{/each}}
 			</div>
@@ -188,7 +188,7 @@
 				<input class="item-input"
 					   name="system.current"
 					   type="radio"
-					   {{#if item.system.current}}checked{{/if}}
+					   {{checked item.system.current}}
 					   {{#unless @root.editable}}disabled{{/unless}} />
 			</div>
 		{{/if}}

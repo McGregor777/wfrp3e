@@ -1,4 +1,5 @@
-{"ABILITY": {
+{
+	"ABILITY": {
 		"ACTIONS": {
 			"update": "Enregistrer l'aptitude",
 			"trigger": "Déclencher l'aptitude'"
@@ -106,7 +107,7 @@
 
 	"ACTIONSELECTOR": {
 		"ACTIONS": {
-			"chooseTalent": "Choisir une action"
+			"chooseAction": "Choisir une action"
 		},
 		"HEADINGS.newAction": "Choisissez une nouvelle action",
 		"WARNINGS": {
@@ -137,54 +138,58 @@
 		},
 		"FIELDS": {
 			"characteristics": {
-				"agility": {
-					"abbreviation": "Ag",
-					"label": "Agilité"
+				"FIELDS": {
+					"agility": {
+						"abbreviation": "Ag",
+						"label": "Agilité"
+					},
+					"fellowship": {
+						"abbreviation": "Soc",
+						"label": "Sociabilité"
+					},
+					"intelligence": {
+						"abbreviation": "Int",
+						"label": "Intelligence"
+					},
+					"strength": {
+						"abbreviation": "Fo",
+						"label": "Force"
+					},
+					"toughness": {
+						"abbreviation": "End",
+						"label": "Endurance"
+					},
+					"varies": {
+						"abbreviation": "V",
+						"label": "Varie"
+					},
+					"willpower": {
+						"abbreviation": "FM",
+						"label": "Force Mentale"
+					},
+					"fortune.label": "Dés de fortune",
+					"rating.label": "Valeur"
 				},
-				"fellowship": {
-					"abbreviation": "Soc",
-					"label": "Sociabilité"
-				},
-				"intelligence": {
-					"abbreviation": "Int",
-					"label": "Intelligence"
-				},
-				"strength": {
-					"abbreviation": "Fo",
-					"label": "Force"
-				},
-				"toughness": {
-					"abbreviation": "End",
-					"label": "Endurance"
-				},
-				"varies": {
-					"abbreviation": "V",
-					"label": "Varie"
-				},
-				"willpower": {
-					"abbreviation": "FM",
-					"label": "Force Mentale"
-				},
-				"fortune.label": "Dés de fortune",
-				"label": "Caractéristiques",
-				"rating.label": "Valeur"
+				"label": "Caractéristiques"
 			},
 			"impairments": {
 				"fatigue": {
 					"label": "Fatigue",
 					"tokens": "Jetons de Fatigue"
 				},
-				"label": "Impairments",
 				"stress": {
 					"label": "Stress",
 					"tokens": "Jetons de Stress"
-				}
+				},
+				"label": "Impairments"
 			},
 			"stance": {
-				"conservative.label": "Segments de prudence",
-				"current.label": "Attitude actuelle",
-				"label": "Attitude",
-				"reckless.label": "Segments de témérité"
+				"FIELDS": {
+					"conservative.label": "Segments de prudence",
+					"current.label": "Attitude actuelle",
+					"reckless.label": "Segments de témérité"
+				},
+				"label": "Attitude"
 			},
 			"wounds": {
 				"label": "Blessures",
@@ -404,51 +409,33 @@
 		"woundThreshold": "Plafond de Blessures"
 	},
 
-	"CHARACTERGENERATOR.Actions": "Cartes d'action",
-	"CHARACTERGENERATOR.Acquired": "Acquis",
-	"CHARACTERGENERATOR.Career": "Carrière",
-	"CHARACTERGENERATOR.Characteristic": "Caractéristique",
-	"CHARACTERGENERATOR.Characteristics": "Caractéristiques",
-	"CHARACTERGENERATOR.CreationPoints": "Points de création",
-	"CHARACTERGENERATOR.NewCharacter": "Nouveau personnage",
-	"CHARACTERGENERATOR.Origin": "Origine",
-	"CHARACTERGENERATOR.Skills": "Compétences",
-	"CHARACTERGENERATOR.Specialisations": "Spécialisations",
-	"CHARACTERGENERATOR.Talents": "Talents",
-	"CHARACTERGENERATOR.TrainingLevel": "Niveau de formation",
-	"CHARACTERGENERATOR.Title": "Générateur de personnage",
-	"CHARACTERGENERATOR.Wealth": "Richesse",
-	"CHARACTERGENERATOR.CorruptionThreshold": "Plafond de Corruption : ",
-	"CHARACTERGENERATOR.WoundThreshold": "Plafond de Blessures : ",
-	"CHARACTERGENERATOR.PlusToughnessRating": "{value} + Toughness rating",
-	"CHARACTERGENERATOR.CurrentlySelectedCareer": "Carrière sélectionnée : ",
-	"CHARACTERGENERATOR.CurrentlySelectedOrigin": "Origine sélectionnée : ",
-	"CHARACTERGENERATOR.RemainingActions": "Actions restantes: ",
-	"CHARACTERGENERATOR.RemainingCreationPoints": "Points de création restants : ",
-	"CHARACTERGENERATOR.RemainingSkillTrainings": "Formation de compétences restantes : ",
-	"CHARACTERGENERATOR.RemainingSpecialisations": "Spécialisations restantes : ",
-	"CHARACTERGENERATOR.RemainingTalents": "Talents restants : ",
-	"CHARACTERGENERATOR.RemainingFaithTalents": "Talents de Foi restants : ",
-	"CHARACTERGENERATOR.RemainingFocusTalents": "Talents d'Affinité restants : ",
-	"CHARACTERGENERATOR.RemainingOrderTalents": "Talents d'Ordre restants : ",
-	"CHARACTERGENERATOR.RemainingInsanityTalents": "Folies restantes: ",
-	"CHARACTERGENERATOR.STEP.ActionsSelection": "Choisissez vos cartes d'action",
-	"CHARACTERGENERATOR.STEP.CareerSelection": "Choisissez votre carrière",
-	"CHARACTERGENERATOR.STEP.Confirm": "Votre personnage vous convient-il ?",
-	"CHARACTERGENERATOR.STEP.CreationPointsInvestment": "Distribuez vos points de création",
-	"CHARACTERGENERATOR.STEP.OriginSelection": "Choisissez votre origine",
-	"CHARACTERGENERATOR.STEP.SkillTraining": "Entraînez vos compétences",
-	"CHARACTERGENERATOR.STEP.TalentSelection": "Choisissez vos talents",
-	"CHARACTERGENERATOR.WARNING.FaithTalentAlreadySelected": "Un talent de Foi a déjà été sélectionné.",
-	"CHARACTERGENERATOR.WARNING.OrderTalentAlreadySelected": "Un talent d'Ordre a déjà été sélectionné.",
-	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "Une folie a déjà été sélectionnée.",
-	"CHARACTERGENERATOR.WARNING.MaximumRatingReached": "La valeur maximale de cette caractéristique a été atteinte.",
-	"CHARACTERGENERATOR.WARNING.MinimumRatingReached": "La valeur minimale de cette caractéristique a été atteinte.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Pas assez d'actions.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughTalent": "Pas assez de talents.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughCreationPoints": "Pas assez de points de création.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Pas assez de formations de compétence.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Pas assez de spécialisations.",
+	"CHARACTERGENERATOR": {
+		"ACTIONS": {
+			"acquireActionCards": "Acquérir des cartes d'action",
+			"acquireSkillTrainings": "Acquérir des compétences",
+			"acquireTalents": "Acquérir des talents",
+			"chooseStartingCareer": "Choisir la carrière de départ",
+			"chooseOrigin": "Choisir l'origine",
+			"investCreationPoints": "Investir les points de création",
+			"playGameOfTwentyQuestions": "Touche finale",
+			"submit": "Générer le personnage"
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributs",
+			"background": "Historique",
+			"career": "Carrière",
+			"origin": "Origine",
+			"skills": "Compétences",
+			"talents": "Talents"
+		},
+		"WARNINGS.unfinishedGeneration": {
+			"description": "La génération du personnage n'est pas terminée. Si vous choisissez de poursuivre, vous pourrez toujours la compléter manuellement. Souhaitez-vous poursuivre ?",
+			"title": "Génération de personnage incomplète"
+		},
+		"newCharacter": "Nouveau personnage",
+		"title": "Générateur de personnage"
+	},
 
 	"CHARACTERISTICUPGRADER": {
 		"ACTIONS": {
@@ -534,23 +521,85 @@
 		}
 	},
 
+	"CREATIONPOINTINVESTOR": {
+		"ACTIONCARDS": {
+			"CHOICES": {
+				"one": "1",
+				"two": "2",
+				"three": "3",
+				"four": "4"
+			},
+			"label": "Cartes d'actions"
+		},
+		"ACTIONS": {
+			"decrementCharacteristicRating": "Diminuer la valeur de {characteristic} de 1",
+			"incrementCharacteristicRating": "Augmenter la valeur de {characteristic} de 1",
+			"submit": "Valider l'investissement des points de création"
+		},
+		"CHARACTERISTICS.label": "Caractéristiques",
+		"SKILLS": {
+			"CHOICES": {
+				"one": "1",
+				"two": "2",
+				"threePlusOneSpecialisation": "3 + 1 spécialisation",
+				"fourPlusTwoSpecialisations": "4 + 2 spécialisations"
+			},
+			"label": "Compétences"
+		},
+		"TALENTS": {
+			"CHOICES": {
+				"zero": "0",
+				"one": "1",
+				"two": "2",
+				"three": "3"
+			},
+			"label": "Talents"
+		},
+		"WARNINGS": {
+			"unspentCreationPoints": {
+				"description": "Il vous reste des points de création à dépenser. Tout point de création non dépensé sera perdu.",
+				"title": "Points de création non dépensés"
+			},
+			"cannotInvestLessThanZero": "Il est impossible d'investir moins de 0 point de création dans une catégorie.",
+			"cannotInvestMoreThanFour": "Il est impossible d'investir plus de 4 points de création dans une catégorie.",
+			"maximumRatingReached": "La valeur maximale de cette caractéristique a été atteinte.",
+			"minimumRatingReached": "La valeur minimale de cette caractéristique a été atteinte.",
+			"notEnoughCreationPoints": "Pas assez de points de création.",
+			"tooManyCreationPointSpent": "Vous avez dépensé plus de points de création que vous n'en disposer. Veuillez réduire votre montant de dépense en modifiant vos investissements."
+		},
+		"WEALTH": {
+			"CHOICES": {
+				"broke": "Miséreux",
+				"poor": "Pauvre",
+				"comfortable": "Aisé",
+				"affluent": "Fortuné"
+			},
+			"label": "Richesse"
+		},
+		"count": "{amount} / {total}",
+		"creationPointsLeft": "Points de création restants : ",
+		"title": "Distributeur de points de création"
+	},
+
 	"CREATURE": {
 		"FIELDS": {
 			"attributes": {
-				"aggression": {
-					"abbreviation": "Ag",
-					"label": "Agressivité"
-				},
-				"cunning": {
-					"abbreviation": "As",
-					"label": "Astuce"
-				},
-				"expertise": {
-					"abbreviation": "Ad",
-					"label": "Adresse"
-				},
-				"max.label": "Valeur",
-				"value.label": "Budget"
+				"FIELDS": {
+					"aggression": {
+						"abbreviation": "Ag",
+						"label": "Agressivité"
+					},
+					"cunning": {
+						"abbreviation": "As",
+						"label": "Astuce"
+					},
+					"expertise": {
+						"abbreviation": "Ad",
+						"label": "Adresse"
+					},
+					"max.label": "Valeur",
+					"value.label": "Budget"
+				}
 			},
 			"category.label": "Catégorie",
 			"damageRating": {
@@ -566,7 +615,7 @@
 				"abbreviation": "Encaissement",
 				"label": "Valeur d'Encaissement"
 			},
-			"threatRating": "Niveau de Menace"
+			"threatRating.label": "Niveau de Menace"
 		},
 		"TABS": {
 			"actions": "Actions",
@@ -720,6 +769,37 @@
 		}
 	},
 
+	"GAMEOFTWENTYQUESTIONS": {
+		"ACTIONS.submit": "Valider vos réponses",
+		"FIELDS": {
+			"ability.label": "De quelle façon vos statistiques définissent votre personnalité ?",
+			"ambition.label": "Quelle est votre plus grande ambition ?",
+			"appearance.label": "À quoi ressemblez-vous ?",
+			"birthplace.label": "D'où venez-vous ?",
+			"career.label": "Comment avez-vous commencé votre carrière ?",
+			"companions.label": "Que pensez-vous de vos compagnons ?",
+			"enemy.label": "Qui est votre pire ennemi ?",
+			"event.label": "Quel est l'évenèment le plus important de votre vie ?",
+			"factions.label": "Êtes-vous membre d'une ou plusieurs factions ?",
+			"family.label": "Quelle est votre famille ?",
+			"fear.label": "Quelle est votre plus grande peur ?",
+			"flaw.label": "Quelle est votre pire défaut ?",
+			"morality.label": "Quelle est votre alignement ?",
+			"motivation.label": "Qu'est-ce-qui vous motive ?",
+			"prejudice.label": "Que détestez-vous par-dessus tout chez les autres ?",
+			"regret.label": "Quelle est la pire chose que vous ayez faites ?",
+			"relax.label": "Comment est-ce-que vous vous détendez ?",
+			"secret.label": "Quel est votre plus grand secret ?",
+			"voice.label": "Quelle est votre voix ?",
+			"worship.label": "Qui vénérez-vous ?"
+		},
+		"WARNINGS.incompleteAnswers": {
+			"description": "Vous n'avez pas répondu à toutes les questions posées.",
+			"title": "Réponses incomplètes"
+		},
+		"title": "Jeu des vingt questions"
+	},
+
 	"GROUP": {
 		"ACTIONS": {
 			"decreaseAbilityTrack": "Diminuer la jauge de capacité",
@@ -827,14 +907,37 @@
 		"plural": "Mutations"
 	},
 
-	"ORIGIN.KarakAzgaraz": "Nain de Karak Azgaraz",
-	"ORIGIN.Ulthuan": "Haut Elfe d'Ulthuan",
-	"ORIGIN.Reiklander": "Reiklander",
-	"ORIGIN.AthelLoren": "Elfe Sylvain d'Athel Loren",
-	"ORIGIN.INTRODUCTION.KarakAzgaraz": "Les nains de Karak Azgaraz bénéficient des aptitudes raciales suivantes, reflétant leur témérité et leurs fières traditions :",
-	"ORIGIN.INTRODUCTION.Ulthuan": "Les personnages hauts elfes bénéficient des aptitudes raciales suivantes, qui représentent leur éducation ainsi que leur riche histoire :",
-	"ORIGIN.INTRODUCTION.Reiklander": "Les personnages du Reikland disposent des aptitudes raciales suivantes, reflétant leur éducation et leur caractère :",
-	"ORIGIN.INTRODUCTION.AthelLoren": "Les personnages elfes sylvains bénéficient des aptitudes raciales suivantes, reflétant leur lien avec la nature et les traditions qui régissent leur culture  :",
+	"ORIGIN": {
+		"athelLoren": {
+			"introduction": "Les personnages elfes sylvains bénéficient des aptitudes raciales suivantes, reflétant leur lien avec la nature et les traditions qui régissent leur culture :",
+			"name": "Elfe Sylvain d'Athel Loren"
+		},
+		"karakAzgaraz": {
+			"introduction": "Les nains de Karak Azgaraz bénéficient des aptitudes raciales suivantes, reflétant leur témérité et leurs fières traditions :",
+			"name": "Nain de Karak Azgaraz"
+		},
+		"reiklander": {
+			"introduction": "Les personnages du Reikland disposent des aptitudes raciales suivantes, reflétant leur éducation et leur caractère :",
+			"name": "Reiklander"
+		},
+		"ulthuan": {
+			"introduction": "Les personnages hauts elfes bénéficient des aptitudes raciales suivantes, qui représentent leur éducation ainsi que leur riche histoire :",
+			"name": "Haut Elfe d'Ulthuan"
+		}
+	},
+
+	"ORIGINSELECTOR": {
+		"ACTIONS.chooseOrigin": "Choisir une origine",
+		"WARNINGS.noSelection": {
+			"description": "Aucune origine n'a été sélectionnée.",
+			"title": "Aucune origine Sélectionnée"
+		},
+		"corruptionThreshold": "Plafond de Corruption : ",
+		"title": "Sélecteur d'origine",
+		"plusToughnessRating": "Endurance + {value}",
+		"selectedOrigin": "Origine sélectionnée : ",
+		"woundThreshold": "Plafond de Blessures : "
+	},
 
 	"PARTY": {
 		"ACTIONS": {
@@ -888,11 +991,13 @@
 		"title": "Éditeur d'évènement de tension"
 	},
 
-	"RACE.Any": "N'importe quelle race",
-	"RACE.Dwarf": "Nain",
-	"RACE.HighElf": "Haut Elfe",
-	"RACE.Human": "Humain",
-	"RACE.WoodElf": "Elfe Sylvain",
+	"RACE": {
+		"any": "N'importe quelle race",
+		"dwarf": "Nain",
+		"highElf": "Haut Elfe",
+		"human": "Humain",
+		"woodElf": "Elfe Sylvain"
+	},
 
 	"ROLL": {
 		"ACTIONS": {
@@ -949,12 +1054,33 @@
 			"alreadySelected": "Cet élément est déjà sélectionné.",
 			"cannotSubmit": "Impossible de valider la sélection : {error}",
 			"maximumSelectionSizeReached": "Le nombre maximum d'éléments à sélectionner a été atteint. Veuillez déselectionner un élément avant d'en sélectionner un autre.",
-			"notEnoughSelection": "Davantage d'éléments doivent être sélectionnés.",
-			"noSelection": "Aucun élément n'a été sélectionné."
+			"notEnoughSelection": {
+				"description": "Il reste des éléments à sélectionner.",
+				"title": "Éléments restants"
+			},
+			"noSelection": {
+				"description": "Aucun élément n'a été sélectionné.",
+				"title": "Aucun élément sélectionné"
+			},
+			"tooManySelection": "Trop d'élements sont actuellement sélectionnés. Veuillez en désélectionner certains."
 		},
+		"all": "Tous",
 		"filters": "Filtres",
 		"noSelection": "Aucun",
+		"proceedDialog": "Souhaitez-vous tout de même poursuivre ?",
 		"search": "Rechercher"
+	},
+
+	"SETTINGS": {
+		"startingCareerDrawingMethod": {
+			"CHOICES": {
+				"freeChoice": "Choix libre",
+				"drawThree": "Triple tirage",
+				"rollTable": "Tirage au tableau"
+			},
+			"name": "Méthode de détermination de la carrière de départ",
+			"hint": "Définit la façon dont la carrière de départ d'un nouveau personnage est déterminée grâce au Générateur de personnage.\n– Triple tirage : Trois carrière de base sont tirées au hasard parmi celles existants dans le monde et les compendiums.\n– Tirage au tableau : Une carrière de base est tirée au hasard à partir de la table de carrière de départ.\n– Choix libre : la carrière de départ peut être librement choisie parmi les carrières de base disponibles dans le monde et les compendiums."
+		}
 	},
 
 	"SCRIPT": {
@@ -962,12 +1088,18 @@
 			"onCareerSocket": "Placement sur un emplacement de talent de carrière",
 			"onCheckPreparation": "Préparation d'un test",
 			"onCheckRoll": "Réalisation d'un test",
+			"onCreationPointInvestment": "Investissement des points de création",
 			"onPostCheckTrigger": "Déclenchement manuel après un test",
 			"onPreCheckTrigger": "Sélection manuelle avant un test",
+			"onStartingSkillTrainingSelection": "Sélection des formations des compétences de départ",
+			"onStartingTalentSelection": "Sélection des talents de départ",
 			"onTargettingCheckPreparation": "Préparation d'un test ciblant",
-			"onTrigger": "Déclenchement manuel"
+			"onTrigger": "Déclenchement manuel",
+			"requirementCheck": "Vérification des conditions"
 		}
 	},
+
+	"SIDEBAR.ACTIONS.generateCharacter": "Générer un personnage",
 
 	"STANCES": {
 		"conservative": "Prudence",
@@ -1012,10 +1144,20 @@
 
 	"SKILLUPGRADER": {
 		"ACTIONS.chooseUpgrade": "Choisir l'amélioration",
-		"WARNINGS.singleSpecialisationOnly": "Une seule spécialisation par compétence ne peut être acquise.",
+		"WARNINGS": {
+			"duplicateSpecialisation": "Une même spécialisation ne peut être prise plusieurs fois.",
+			"notEnoughSelection": {
+				"description": "Il reste des améliorations et/ou des spécialisations à sélectionner.",
+				"title": "Améliorations ou spécialisations restantes"
+			},
+			"notEnoughTrainings": "Vous n'avez pas assez de formations restantes pour effectuer cette action.",
+			"singleSpecialisationOnly": "Une seule spécialisation par compétence ne peut être acquise.",
+			"tooManySelection": "Trop de spécialisations sont actuellement sélectionnées. Veuillez en désélectionner certaines."
+		},
 		"acquisitionUpgrade": "{name} - Acquisition",
 		"noUpgradeSelected": "Aucune",
-		"selectedUpgrade": "Amélioration sélectionnée :",
+		"selectedUpgrades": "Amélioration(s) sélectionnée(s) :",
+		"selectedSpecialisations": "Spécialisation(s) sélectionnée(s) :",
 		"specialisationUpgrade": "{name} - Spécialisation {value}",
 		"title": "Améliorateur de compétence",
 		"trainingLevelUpgrade": "{name} - Formation {value}"
@@ -1092,9 +1234,44 @@
 			"triggerTalent": "Choisissez un talent à utiliser"
 		},
 		"WARNINGS": {
-			"noTalentSelected": "Vous devez sélectionner une carte de talent."
+			"missingFaithTalent": {
+				"description": "Aucun talent de Foi n'a été sélectionné.",
+				"title": "Talent de Foi manquant"
+			},
+			"missingFreeFocusTalent": {
+				"description": "Le talent d'Affinité gratuit n'a pas été sélectionné.",
+				"title": "Talent d'Affinité gratuit manquant"
+			},
+			"missingInsanity": {
+				"description": "Aucune folie n'a été sélectionnée.",
+				"title": "Folie manquante"
+			},
+			"missingOrderTalent": {
+				"description": "Aucun talent d'Ordre n'a été sélectionné.",
+				"title": "Talent d'Ordre manquant"
+			},
+			"notEnoughSelection": {
+				"description": "Il reste des talents à sélectionner.",
+				"title": "Talents restants"
+			},
+			"noSelection": {
+				"description": "Aucun talent n'a été sélectionné.",
+				"title": "Aucun talent sélectionné"
+			}
 		},
-		"selectedTalent": "Talent sélectionné :",
+		"remainingInsanities": "Folies restantes: ",
+		"remainingFaithTalents": "Talents de Foi restants : ",
+		"remainingFocusTalents": "Talents d'Affinité restants : ",
+		"remainingOrderTalents": "Talents d'Ordre restants : ",
+		"remainingTalents": "Talents restants : ",
+		"selectedFaith": "Talent de Foi gratuit sélectionné :",
+		"selectedFocus": "Talent d'Affinité gratuit sélectionné :",
+		"selectedInsanity": "Folie gratuite sélectionnée :",
+		"selectedOrder": "Talent d'Ordre gratuit sélectionné :",
+		"selectedReputation": "Talent de Réputation gratuit sélectionné :",
+		"selectedTactic": "Talent de Tactique gratuit sélectionné :",
+		"selectedTalent": "Talent(s) sélectionné(s) :",
+		"selectedTricks": "Talent de Familier gratuit sélectionné :",
 		"title": "Sélecteur de talent"
 	},
 
@@ -1158,10 +1335,27 @@
 	},
 
 	"TRAITS": {
+		"amberOrder": "Ordre d'Ambre",
+		"amethystOrder": "Ordre d'Améthyste",
 		"basic": "Base",
+		"brightOrder": "Ordre Flamboyant",
+		"celestialOrder": "Ordre Céleste",
+		"darkMagic": "Magie Noire",
 		"greyOrder": "Ordre Gris",
-		"rankZero": "Rang 0",
-		"rankOne": "Rang 1"
+		"goldOrder": "Ordre Doré",
+		"jadeOrder": "Ordre de Jade",
+		"lightOrder": "Ordre Lumineux",
+		"manann": "Manann",
+		"morr": "Morr",
+		"myrmidia": "Myrmidia",
+		"ranald": "Ranald",
+		"rank": "Rang {number}",
+		"rhya": "Rhya",
+		"shallya": "Shallya",
+		"sigmar": "Sigmar",
+		"taal": "Taal",
+		"ulric": "Ulric",
+		"venera": "Verena"
 	},
 	
 	"TYPES": {

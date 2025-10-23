@@ -2,19 +2,106 @@
   "name": "Apprentice Wizard",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/apprentice_wizard.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Apprentice Wizard",
+      "img": "icons/svg/dice-target.svg",
+      "_id": "zTujMF5uWbaeEXUK",
+      "type": "base",
+      "system": {
+        "conditionScript": "",
+        "postScript": "",
+        "reverseScript": "",
+        "script": "if(!checkData.action)\n\treturn false;\n\nconst action = await fromUuid(checkData.action),\n\t  traits = action.system[checkData.face].traits;\nconsole.log(action, game.i18n.localize(\"ACTION.TRAITS.rankOne\"))\nif(action.system.type === \"spell\" && (traits.includes(game.i18n.localize(\"TRAITS.rankZero\")) || traits.includes(game.i18n.localize(\"TRAITS.rankOne\"))))\n\tdicePool.dice.fortune++;",
+        "type": "onCheckPreparation"
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.350",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.2",
+        "createdTime": 1761212325319,
+        "modifiedTime": 1761212349450,
+        "lastModifiedBy": "Bq3CTOvANoOneedB",
+        "exportSource": null
+      },
+      "_key": "!items.effects!H5UFKTDpDN9gdFVp.zTujMF5uWbaeEXUK"
+    },
+    {
+      "name": "Starting Order Talent",
+      "img": "icons/svg/dice-target.svg",
+      "_id": "XK61rnPFXztCewPr",
+      "type": "base",
+      "system": {
+        "conditionScript": "",
+        "postScript": "",
+        "reverseScript": "",
+        "script": "options.freeItemTypes.push(\"order\");",
+        "type": "onStartingTalentSelection"
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.2",
+        "createdTime": 1761039593993,
+        "modifiedTime": 1761039606094,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!H5UFKTDpDN9gdFVp.XK61rnPFXztCewPr"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>Those who can perceive and manipulate the Winds of Magic are treated with fear and suspicion by most folk, and wayward magic users are persecuted. Should a person develop some awareness of magical potential, they are required by Imperial law to apply to join one of the eight Colleges of Magic devoted to the study of arcane lore in Altdorf. The alternative for not doing so usually culminates in a fiery end at the hands of a witch hunter.</p>\n<p>The life of an apprentice is one of hard work with a little learning thrown in. He spends most of his time serving his master &ndash; cleaning and preparing ingredients or ritual equipment. The remaining time is spent in lectures or solitary study in the College library.</p>\n<p>Towards the end of this apprenticeship, an aspirant wizard may be allowed to leave the College for some time. After a long period of study closeted away from the world outside, the masters of the Colleges deem it wise to allow their apprentices to rediscover what life is like outside. However, the apprentice wizard is not free to do simply as he pleases during this time. His master will typically set him some sort of task, such as searching out arcane lore or finding a magical artefact. The apprentice will also be given a deadline, by which time he must return to the College and complete his training. Given the nature of these tasks, it is not uncommon for these apprentices to join parties of adventurers. Such companions usually tolerate arcane abilities, and sometimes even appreciate them.</p>\n<p><strong>Special:</strong> If you are playing an apprentice wizard, you must choose one College of Magic to belong to when starting this career.</p>\n<p><strong>Typical Trappings:</strong> An apprentice wizard is given a talismanic item by his master, usually a staff to help him attune to the Winds of Magic. He wears the robes of his College to identify him, and carries a letter from his master granting him permission to travel. An apprentice wizard will also carry a book filled with essays and study-notes on spell casting.</p>\n<p><strong>Career Ability:</strong> Spellcraft checks for Rank 1 or lower spells gain <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼</span></p>",
+    "description": "<p>Those who can perceive and manipulate the Winds of Magic are treated with fear and suspicion by most folk, and wayward magic users are persecuted. Should a person develop some awareness of magical potential, they are required by Imperial law to apply to join one of the eight Colleges of Magic devoted to the study of arcane lore in Altdorf. The alternative for not doing so usually culminates in a fiery end at the hands of a witch hunter.</p><p>The life of an apprentice is one of hard work with a little learning thrown in. He spends most of his time serving his master – cleaning and preparing ingredients or ritual equipment. The remaining time is spent in lectures or solitary study in the College library.</p><p>Towards the end of this apprenticeship, an aspirant wizard may be allowed to leave the College for some time. After a long period of study closeted away from the world outside, the masters of the Colleges deem it wise to allow their apprentices to rediscover what life is like outside. However, the apprentice wizard is not free to do simply as he pleases during this time. His master will typically set him some sort of task, such as searching out arcane lore or finding a magical artefact. The apprentice will also be given a deadline, by which time he must return to the College and complete his training. Given the nature of these tasks, it is not uncommon for these apprentices to join parties of adventurers. Such companions usually tolerate arcane abilities, and sometimes even appreciate them.</p><p><strong>Special:</strong> If you are playing an apprentice wizard, you must choose one College of Magic to belong to when starting this career.</p><p><strong>Typical Trappings:</strong> An apprentice wizard is given a talismanic item by his master, usually a staff to help him attune to the Winds of Magic. He wears the robes of his College to identify him, and carries a letter from his master granting him permission to travel. An apprentice wizard will also carry a book filled with essays and study-notes on spell casting.</p><p><strong>Career Ability:</strong> Spellcraft checks for Rank 1 or lower spells gain [[DF]]</p>",
     "advanced": false,
     "raceRestrictions": [
       "human"
     ],
     "traits": "Academic, Arcane, Basic, Wizard",
     "primaryCharacteristics": [
-      "intelligence",
-      "toughness"
+      "toughness",
+      "intelligence"
     ],
     "careerSkills": "Channelling, Discipline, Education, Intuition, Magical Sight, Observation, Spellcraft",
     "startingStance": {
@@ -74,13 +161,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1699549807472,
-    "modifiedTime": 1734396563711,
+    "modifiedTime": 1761039495451,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "H5UFKTDpDN9gdFVp",
   "sort": 2300000,

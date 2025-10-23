@@ -1,0 +1,11 @@
+<p>
+	{{localize (concat (uppercase selectorType) ".selected" (capitalize itemType))}}
+
+	<span class="selection">
+		{{#if origin}}
+			{{localize origin.name}}
+		{{else}}
+			{{localize "SELECTOR.noSelection"}}
+		{{/if}}
+	</span>
+</p>

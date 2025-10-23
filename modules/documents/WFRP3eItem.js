@@ -87,6 +87,25 @@ export default class WFRP3eItem extends Item
 	//#region Action methods
 
 	/**
+	 * Checks if the action's requirements are met by the potential future owner.
+	 * @param {Object} parameters The parameters that will be used by the requirement check script.
+	 * @returns {Promise<boolean>}
+	 */
+	async checkRequirements(parameters)
+	{
+		const effects = this.effects.filter(effect => effect.system.type === "requirementCheck");
+		let result = true;
+
+		for(const effect of effects)
+			result = await effect.triggerEffect({
+				parameters: [parameters.actor ?? this.parent],
+				parameterNames: ["actor"]
+			});
+
+		return result;
+	}
+
+	/**
 	 * Creates a new effect for the Action and opens the Action Effect Editor to edit it.
 	 * @param face {string} The Action's face which receives the new effect.
 	 */

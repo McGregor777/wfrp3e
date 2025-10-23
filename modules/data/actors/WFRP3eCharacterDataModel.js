@@ -21,13 +21,12 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 				enemies: new fields.StringField({nullable: true}),
 				campaignNotes: new fields.HTMLField({nullable: true})
 			}),
-			characteristics: new fields.SchemaField(Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, [key, value]) => {
-				if(key !== "varies")
+			characteristics: new fields.SchemaField(
+				Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, [key, value]) => {
 					object[key] = new fields.SchemaField({
 						rating: new fields.NumberField({
 							initial: 2,
 							integer: true,
-							label: "ACTOR.FIELDS.characteristics.rating.label",
 							min: 0,
 							nullable: false,
 							required: true
@@ -35,15 +34,14 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 						fortune: new fields.NumberField({
 							initial: 0,
 							integer: true,
-							label: "ACTOR.FIELDS.characteristics.fortune.label",
 							min: 0,
 							nullable: false,
 							required: true
 						})
 					}, {label: value.name});
-
-				return object;
-			}, {})),
+					return object;
+				}, {})
+			),
 			corruption: new fields.SchemaField({
 				max: new fields.NumberField({initial: 7, integer: true, min: 0, nullable: false, required: true}),
 				value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
@@ -92,23 +90,7 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	static LOCALIZATION_PREFIXES = ["ACTOR", "CHARACTER"];
 
 	/**
-	 * Whether the WFRP3eCharacter owns a Faith Talent.
-	 * @returns {Boolean}
-	 */
-	get priest() {
-		return this.parent.itemTypes.talent.find(talent => talent.system.type === "faith") != null;
-	}
-
-	/**
-	 * Whether the WFRP3eCharacter owns an Order Talent.
-	 * @returns {Boolean}
-	 */
-	get wizard() {
-		return this.parent.itemTypes.talent.find(talent => talent.system.type === "order") != null;
-	}
-
-	/**
-	 * The WFRP3eCharacter's current WFRP3eCareer.
+	 * The character's current career.
 	 * @returns {WFRP3eItem}
 	 */
 	get currentCareer()
@@ -117,7 +99,7 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	}
 
 	/**
-	 * The WFRP3eCharacter's WFRP3eParty.
+	 * The character's party.
 	 * @returns {WFRP3eActor}
 	 */
 	get currentParty()
@@ -126,7 +108,7 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	}
 
 	/**
-	 * The WFRP3eCharacter's default stance, depending on the largest side of their stance meter.
+	 * The character's default stance, depending on the largest side of their stance meter.
 	 * @private
 	 */
 	get defaultStance()
@@ -142,19 +124,28 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	}
 
 	/**
-	 * The sum of the encumbrance of every WFRP3eArmour, WFRP3eTrapping and WRP3eWeapon owned by the WFRP3eCharacter.
-	 * @returns {Number} The total of the encumbrance.
+	 * The character's origin complete data.
+	 * @returns {Object} The data from the character's origin.
 	 */
-	get totalEncumbrance()
+	get originData()
 	{
-		return this.parent.items
-			.filter((item) => ["armour", "trapping", "weapon"].includes(item.type))
-			.reduce((totalEncumbrance, item) => totalEncumbrance + item.system.encumbrance, 0);
+		return {
+			id: this.origin,
+			...this.race.origins[this.origin]
+		};
 	}
 
 	/**
-	 * The WFRP3eCharacter's race depending on their origin.
-	 * @returns {Object} The WFRP3eCharacter's race.
+	 * Whether the character owns a Faith talent.
+	 * @returns {Boolean}
+	 */
+	get priest() {
+		return this.parent.itemTypes.talent.find(talent => talent.system.type === "faith") != null;
+	}
+
+	/**
+	 * The character's race depending on their origin.
+	 * @returns {Object} The character's race.
 	 */
 	get race()
 	{
@@ -168,8 +159,8 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	}
 
 	/**
-	 * The WFRP3eCharacter's rank, which is the WFRP3eCharacter's total experience divided by 10 + 1.
-	 * @returns {Number} The WFRP3eCharacter's rank.
+	 * The character's rank, which is the character's total experience divided by 10 + 1.
+	 * @returns {Number} The character's rank.
 	 */
 	get rank()
 	{
@@ -177,7 +168,7 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	}
 
 	/**
-	 * The WFRP3eCharacter's stance meter, depending on their own stance segments plus their current WFRP3eCareer ones.
+	 * The character's stance meter, depending on their own stance segments plus their current career ones.
 	 * @returns {Object}
 	 */
 	get stanceMeter()
@@ -189,7 +180,7 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	}
 
 	/**
-	 * The sum of the defence value of every WFRP3eArmour owned by the WFRP3eCharacter plus their own defence value.
+	 * The sum of the defence value of every armour owned by the character plus their own defence value.
 	 * @returns {Number}
 	 */
 	get totalDefence()
@@ -198,12 +189,31 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	}
 
 	/**
-	 * The sum of the soak value of every WFRP3eArmour owned by the WFRP3eCharacter plus their own soak value.
+	 * The sum of the encumbrance of every armour, trapping and weapon owned by the character.
+	 * @returns {Number} The total of the encumbrance.
+	 */
+	get totalEncumbrance()
+	{
+		return this.parent.items
+			.filter((item) => ["armour", "trapping", "weapon"].includes(item.type))
+			.reduce((totalEncumbrance, item) => totalEncumbrance + item.system.encumbrance, 0);
+	}
+
+	/**
+	 * The sum of the soak value of every armour owned by the character plus their own soak value.
 	 * @returns {Number}
 	 */
 	get totalSoak()
 	{
 		return this.parent.itemTypes.armour.reduce((value, armour) => value + armour.system.soakValue, 0);
+	}
+
+	/**
+	 * Whether the character owns an Order talent.
+	 * @returns {Boolean}
+	 */
+	get wizard() {
+		return this.parent.itemTypes.talent.find(talent => talent.system.type === "order") != null;
 	}
 
 	/** @inheritDoc */
@@ -213,7 +223,7 @@ export default class WFRP3eCharacterDataModel extends foundry.abstract.TypeDataM
 	}
 
 	/**
-	 * Calculates the remaining experience points of the WFRP3eCharacter, depending on the number of spent advances.
+	 * Calculates the remaining experience points of the character, depending on the number of spent advances.
 	 * @private
 	 */
 	_calculateCurrentExperience()

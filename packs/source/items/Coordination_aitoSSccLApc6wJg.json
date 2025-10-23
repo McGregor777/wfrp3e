@@ -5,7 +5,7 @@
   "_id": "aitoSSccLApc6wJg",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Applying one&rsquo;s manual dexterity and fine motor skills to specific tasks. Use this skill to perform feats of acrobatics, balance along narrow surfaces, or slip from bonds. It also reflects delicacy and precision while manipulating objects.</p>\n<p><em>Specialisation options:</em>&nbsp;dodge, balance, acrobatics, juggling, dance,&nbsp;knots &amp; ropework</p>",
+    "description": "<p>Applying one’s manual dexterity and fine motor skills to specific tasks. Use this skill to perform feats of acrobatics, balance along narrow surfaces, or slip from bonds. It also reflects delicacy and precision while manipulating objects.</p>\n<p><em>Specialisation options:</em>&nbsp;dodge, balance, acrobatics, juggling, dance,&nbsp;knots &amp; ropework</p>",
     "characteristic": "agility",
     "advanced": false,
     "trainingLevel": 0,
@@ -15,13 +15,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1695317056615,
     "modifiedTime": 1699628061290,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "sort": 0,
   "ownership": {

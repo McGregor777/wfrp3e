@@ -1,0 +1,31 @@
+<section>
+	<section class="item-container race">
+		{{#each races as |race ra|}}
+			<label {{#if (equalTo ra @root.race)}}class="active"{{/if}}>
+				{{>"systems/wfrp3e/templates/applications/partials/origin-race.hbs" item=race}}
+
+				<input name="selection"
+					   value="{{ra}}"
+					   type="radio"
+					   data-type="race"
+					   {{checked (equalTo ra @root.race)}} />
+			</label>
+		{{/each}}
+	</section>
+
+	{{#if race}}
+		<section class="item-container origin">
+			{{#each race.origins as |origin or|}}
+				<label {{#if (in or @root.selection)}}class="active"{{/if}}>
+					{{>"systems/wfrp3e/templates/applications/partials/origin-race.hbs" item=origin}}
+
+					<input name="selection"
+						   value="{{or}}"
+						   type="radio"
+						   data-type="origin"
+						   {{checked (in or @root.selection)}}/>
+				</label>
+			{{/each}}
+		</section>
+	{{/if}}
+</section>

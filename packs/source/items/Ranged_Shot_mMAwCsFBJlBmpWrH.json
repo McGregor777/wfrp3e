@@ -24,13 +24,17 @@
         "success": [
           {
             "description": "<p>You hit the target for normal damage</p>",
+            "immediate": false,
+            "reverseScript": "",
             "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0);",
             "symbolAmount": 1
           },
           {
-            "symbolAmount": 3,
             "description": "<p>You hit the target for +2 damage</p>",
-            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0) + 2;"
+            "immediate": false,
+            "reverseScript": "",
+            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0) + 2;",
+            "symbolAmount": 3
           }
         ],
         "boon": [
@@ -71,13 +75,17 @@
         "success": [
           {
             "description": "<p>You hit the target for normal damage</p>",
+            "immediate": false,
+            "reverseScript": "",
             "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0);",
             "symbolAmount": 1
           },
           {
-            "symbolAmount": 3,
             "description": "<p>You hit the target for +2 damage</p>",
-            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0) + 2;"
+            "immediate": false,
+            "reverseScript": "",
+            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0) + 2;",
+            "symbolAmount": 3
           }
         ],
         "boon": [
@@ -105,13 +113,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1696334694650,
     "modifiedTime": 1732983013430,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "mMAwCsFBJlBmpWrH",
   "sort": 100000,

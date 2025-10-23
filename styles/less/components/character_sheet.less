@@ -12,8 +12,6 @@
 
 	& > section.tab {
 		flex-grow: 1;
-		min-height: 0;
-		overflow-y: auto;
 
 		&.attributes {
 			flex-direction: row !important;
@@ -21,44 +19,6 @@
 
 			& > *:first-child {
 				margin-top: 0 !important;
-			}
-
-			& .attributes {
-				display: flex;
-				flex: 1 1 240px;
-				flex-direction: column;
-				gap: 16px;
-
-				& > .attributes-subdivision {
-					display: flex;
-					flex-flow: row wrap;
-
-					& fieldset.attribute {
-						border: none;
-						flex: 1 0 80px;
-						gap: 4px;
-						padding: 4px;
-						text-align: center;
-
-						& .form-group {
-							display: flex;
-							flex-direction: column;
-
-							& input {
-								height: 64px;
-								text-align: center;
-							}
-						}
-					}
-				}
-
-				& .cards {
-					overflow-y: scroll;
-
-					& > div:not(:last-child) .card {
-						margin-bottom: 20px;
-					}
-				}
 			}
 
 			& .characteristics-and-impairments {
@@ -72,63 +32,22 @@
 					flex-grow: 1;
 				}
 
-				& .characteristics {
-					display: flex;
-					flex: 1 1 auto;
-					flex-direction: column;
-					justify-content: space-around;
-					padding: 0 8px;
-
-					& .characteristic {
-						width: 130px;
-
-						& .characteristic-container {
-							align-items: center;
-							display: flex;
-							flex-flow: row wrap;
-							justify-content: flex-end;
-
-							& input[name$=".rating"] {
-								border-color: steelblue;
-								border-width: 2px;
-								display: block;
-								font-weight: bold;
-								height: 45px;
-								padding: 4px;
-								text-align: center;
-								width: 35px;
-							}
-
-							& input[name$=".fortune"] {
-								border-color: darkgray;
-								font-weight: bold;
-								height: 24px;
-								margin-left: 8px;
-								padding: 4px;
-								text-align: center;
-								width: 24px;
-							}
-						}
-
-						& .characteristic-title {
-							font: small-caps bold var(--font-size-18) var(--font-primary);
-							text-align: center;
-						}
-					}
-				}
-
 				& .impairments {
 					display: flex;
 					flex-direction: column;
 
-					& .token-counter {
-						left: 50%;
-						top: 50%;
-						transform: translate(-50%, -20%);
-					}
+					& > .impairment {
+						flex-direction: row-reverse;
 
-					& .title {
-						transform: rotate(180deg);
+						& >.sheet-title {
+							transform: rotate(180deg);
+						}
+
+						& .token-counter {
+							left: 50%;
+							top: 50%;
+							transform: translate(-50%, -20%);
+						}
 					}
 				}
 			}
@@ -144,7 +63,7 @@
 				}
 			}
 
-			& .stance-meter h3 {
+			& .stance-meter .sheet-title {
 				align-items: center;
 				display: flex;
 				gap: 4px;
@@ -157,14 +76,6 @@
 		&.talents {
 			gap: 0;
 		}
-	}
-
-	& .character-sheet-title {
-		border-bottom: none;
-		display: block;
-		font: small-caps bold var(--font-size-18) var(--font-primary);
-		margin: 0;
-		text-align: center;
 	}
 
 	& .item-container > .career {
@@ -232,7 +143,7 @@
 	}
 }
 
-body.theme-light .application.wfrp3e.sheet .window-content {
+body.theme-light .application.wfrp3e.character .window-content {
 	& .characteristics-and-impairments .characteristics .characteristic .characteristic-container {
 		& input[name$=".rating"] {
 			background: lightcyan;

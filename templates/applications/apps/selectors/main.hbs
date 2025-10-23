@@ -1,13 +1,14 @@
-<section>
-	<section class="item-container">
+<section class="overflow">
+	<section class="item-container {{itemType}}">
 		{{#each items as |item i|}}
 			<label {{#if (in item.uuid @root.selection)}}class="active"{{/if}}>
 				{{>(concat "systems/wfrp3e/templates/applications/partials/" item.type "-card.hbs")
 						currentStance="conservative"
 						item=item}}
 
-				<input name="selection" value="{{item.uuid}}" type="radio"
-					{{#if (in item.uuid @root.selection)}}checked{{/if}}/>
+				<input name="selection" value="{{item.uuid}}"
+					   type="{{#if @root.multiple}}checkbox{{else}}radio{{/if}}"
+					   {{#if (in item.uuid @root.selection)}}checked{{/if}}/>
 			</label>
 		{{/each}}
 	</section>

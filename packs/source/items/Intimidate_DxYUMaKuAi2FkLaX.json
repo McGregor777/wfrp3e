@@ -5,7 +5,7 @@
   "_id": "DxYUMaKuAi2FkLaX",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>A character&rsquo;s ability to cow, unnerve, or bully someone. Also covers the ability to convey a sense of dominance or superiority over others. Often carries the implied or overt threat of physical violence. Can escalate a tense situation into hostility, or possibly cause someone to back down if properly cowed.</p>\n<p><em>Specialisation options:</em>&nbsp;violence, combat, interrogation, politics</p>",
+    "description": "<p>A character’s ability to cow, unnerve, or bully someone. Also covers the ability to convey a sense of dominance or superiority over others. Often carries the implied or overt threat of physical violence. Can escalate a tense situation into hostility, or possibly cause someone to back down if properly cowed.</p>\n<p><em>Specialisation options:</em>&nbsp;violence, combat, interrogation, politics</p>",
     "characteristic": "strength",
     "advanced": false,
     "trainingLevel": 0,
@@ -15,13 +15,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1695317161432,
     "modifiedTime": 1699628061290,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "sort": 0,
   "ownership": {

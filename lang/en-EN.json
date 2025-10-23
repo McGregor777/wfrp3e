@@ -136,54 +136,58 @@
 		},
 		"FIELDS": {
 			"characteristics": {
-				"agility": {
-					"abbreviation": "Ag",
-					"label": "Agility"
+				"FIELDS": {
+					"agility": {
+						"abbreviation": "Ag",
+						"label": "Agility"
+					},
+					"fellowship": {
+						"abbreviation": "Fel",
+						"label": "Fellowship"
+					},
+					"intelligence": {
+						"abbreviation": "Int",
+						"label": "Intelligence"
+					},
+					"strength": {
+						"abbreviation": "St",
+						"label": "Strength"
+					},
+					"toughness": {
+						"abbreviation": "To",
+						"label": "Toughness"
+					},
+					"varies": {
+						"abbreviation": "V",
+						"label": "Varies"
+					},
+					"willpower": {
+						"abbreviation": "WP",
+						"label": "Willpower"
+					},
+					"fortune.label": "Fortune Dice",
+					"rating.label": "Rating"
 				},
-				"fellowship": {
-					"abbreviation": "Fel",
-					"label": "Fellowship"
-				},
-				"intelligence": {
-					"abbreviation": "Int",
-					"label": "Intelligence"
-				},
-				"strength": {
-					"abbreviation": "St",
-					"label": "Strength"
-				},
-				"toughness": {
-					"abbreviation": "To",
-					"label": "Toughness"
-				},
-				"varies": {
-					"abbreviation": "V",
-					"label": "Varies"
-				},
-				"willpower": {
-					"abbreviation": "WP",
-					"label": "Willpower"
-				},
-				"fortune.label": "Fortune Dice",
-				"label": "Characteristics",
-				"rating.label": "Rating"
+				"label": "Characteristics"
 			},
 			"impairments": {
 				"fatigue": {
 					"label": "Fatigue",
 					"tokens": "Fatigue Tokens"
 				},
-				"label": "Impairments",
 				"stress": {
 					"label": "Stress",
 					"tokens": "Stress Tokens"
-				}
+				},
+				"label": "Impairments"
 			},
 			"stance": {
-				"conservative.label": "Conservative Segments",
-				"current.label": "Current Stance",
-				"label": "Attitude",
-				"reckless.label": "Reckless Segments"
+				"FIELDS": {
+					"conservative.label": "Conservative Segments",
+					"current.label": "Current Stance",
+					"reckless.label": "Reckless Segments"
+				},
+				"label": "Attitude"
 			},
 			"wounds": {
 				"label": "Wounds",
@@ -366,11 +370,9 @@
 				"weight.label": "Weight"
 			},
 			"corruption": {
-				"FIELDS": {
-					"max.label": "Threshold",
-					"value.label": "Current"
-				},
-				"label": "Corruption"
+				"label": "Corruption",
+				"max.label": "Threshold",
+				"value.label": "Current"
 			},
 			"experience": {
 				"current.label": "Current Experience",
@@ -405,51 +407,33 @@
 		"woundThreshold": "Wound Threshold"
 	},
 
-	"CHARACTERGENERATOR.Actions": "Action Cards",
-	"CHARACTERGENERATOR.Acquired": "Acquired",
-	"CHARACTERGENERATOR.Career": "Career",
-	"CHARACTERGENERATOR.Characteristic": "Characteristic",
-	"CHARACTERGENERATOR.Characteristics": "Characteristics",
-	"CHARACTERGENERATOR.CreationPoints": "Creation Points",
-	"CHARACTERGENERATOR.NewCharacter": "New Character",
-	"CHARACTERGENERATOR.Origin": "Origin",
-	"CHARACTERGENERATOR.Skills": "Skills",
-	"CHARACTERGENERATOR.Specialisations": "Specialisations",
-	"CHARACTERGENERATOR.Talents": "Talents",
-	"CHARACTERGENERATOR.TrainingLevel": "Training Level",
-	"CHARACTERGENERATOR.Title": "Character Generator",
-	"CHARACTERGENERATOR.Wealth": "Wealth",
-	"CHARACTERGENERATOR.CorruptionThreshold": "Corruption Threshold: ",
-	"CHARACTERGENERATOR.WoundThreshold": "Wound Threshold: ",
-	"CHARACTERGENERATOR.PlusToughnessRating": "{value} + Toughness rating",
-	"CHARACTERGENERATOR.CurrentlySelectedCareer": "Currently selected Career: ",
-	"CHARACTERGENERATOR.CurrentlySelectedOrigin": "Currently selected Origin: ",
-	"CHARACTERGENERATOR.RemainingActions": "Remaining Actions: ",
-	"CHARACTERGENERATOR.RemainingCreationPoints": "Remaining Creation Points: ",
-	"CHARACTERGENERATOR.RemainingSkillTrainings": "Remaining Skill Trainings: ",
-	"CHARACTERGENERATOR.RemainingSpecialisations": "Remaining Specialisations: ",
-	"CHARACTERGENERATOR.RemainingTalents": "Remaining Talents: ",
-	"CHARACTERGENERATOR.RemainingFaithTalents": "Remaining Faith Talents: ",
-	"CHARACTERGENERATOR.RemainingFocusTalents": "Remaining Focus Talents: ",
-	"CHARACTERGENERATOR.RemainingOrderTalents": "Remaining Order Talents: ",
-	"CHARACTERGENERATOR.RemainingInsanityTalents": "Remaining Insanities: ",
-	"CHARACTERGENERATOR.STEP.ActionsSelection": "Select Your Action Cards",
-	"CHARACTERGENERATOR.STEP.CareerSelection": "Select Your Career",
-	"CHARACTERGENERATOR.STEP.Confirm": "Does Your Character Suits You?",
-	"CHARACTERGENERATOR.STEP.CreationPointsInvestment": "Invest Your Creation Points",
-	"CHARACTERGENERATOR.STEP.OriginSelection": "Select Your Origin",
-	"CHARACTERGENERATOR.STEP.SkillTraining": "Train Your Skills",
-	"CHARACTERGENERATOR.STEP.TalentSelection": "Select Your Talents",
-	"CHARACTERGENERATOR.WARNING.FaithTalentAlreadySelected": "A Faith Talent has already been selected.",
-	"CHARACTERGENERATOR.WARNING.OrderTalentAlreadySelected": "An Order Talent has already been selected.",
-	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "An Insanity has already been selected.",
-	"CHARACTERGENERATOR.WARNING.MaximumRatingReached": "The maximum Characteristic Rating has been reached.",
-	"CHARACTERGENERATOR.WARNING.MinimumRatingReached": "The minimum Characteristic Rating has been reached.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Not enough Actions left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughTalent": "Not enough Talents left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughCreationPoints": "Not enough Creation Point left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Not enough Skill Training left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Not enough Specialisation left.",
+	"CHARACTERGENERATOR": {
+		"ACTIONS": {
+			"acquireActionCards": "Acquire Action Cards",
+			"acquireSkillTrainings": "Acquire Skill Trainings",
+			"acquireTalents": "Acquire Talents",
+			"chooseStartingCareer": "Choose Starting Career",
+			"chooseOrigin": "Choose Origin",
+			"investCreationPoints": "Invest Creation Points",
+			"playGameOfTwentyQuestions": "Final Touches",
+			"submit": "Generate Character"
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributes",
+			"background": "Background",
+			"career": "Career",
+			"origin": "Origin",
+			"skills": "Skills",
+			"talents": "Talents"
+		},
+		"WARNINGS.unfinishedGeneration": {
+			"description": "The character generation is not finished. If you proceed, you will still be able to complete it manually. Do you wish to proceed?",
+			"title": "Unfinished Character Generation"
+		},
+		"newCharacter": "New Character",
+		"title": "Character Generator"
+	},
 
 	"CHARACTERISTICUPGRADER": {
 		"ACTIONS": {
@@ -535,23 +519,85 @@
 		}
 	},
 
+	"CREATIONPOINTINVESTOR": {
+		"ACTIONCARDS": {
+			"CHOICES": {
+				"one": "1",
+				"two": "2",
+				"three": "3",
+				"four": "4"
+			},
+			"label": "Action Cards"
+		},
+		"ACTIONS": {
+			"decrementCharacteristicRating": "Decrease {characteristic} Rating By 1",
+			"incrementCharacteristicRating": "Increase {characteristic} Rating By 1",
+			"submit": "Confirm Creation Point Investment"
+		},
+		"CHARACTERISTICS.label": "Characteristics",
+		"SKILLS": {
+			"CHOICES": {
+				"one": "1",
+				"two": "2",
+				"threePlusOneSpecialisation": "3 + 1 Specialisation",
+				"fourPlusTwoSpecialisations": "4 + 2 Specialisations"
+			},
+			"label": "Skills"
+		},
+		"TALENTS": {
+			"CHOICES": {
+				"zero": "0",
+				"one": "1",
+				"two": "2",
+				"three": "3"
+			},
+			"label": "Talents"
+		},
+		"WARNINGS": {
+			"unspentCreationPoints": {
+				"description": "You have creation points left to spend. Any unspent creation point will be lost.",
+				"title": "Unspent Creation Points"
+			},
+			"cannotInvestLessThanZero": "You cannot invest less than 0 creation points in any category.",
+			"cannotInvestMoreThanFour": "You cannot invest more than 4 creation points in any category",
+			"maximumRatingReached": "The maximum characteristic rating has been reached.",
+			"minimumRatingReached": "The minimum characteristic rating has been reached.",
+			"notEnoughCreationPoints": "Not enough creation point left.",
+			"tooManyCreationPointSpent": "You have spent more creation points than available. Please reduce your expenditure by modifying your investments."
+		},
+		"WEALTH": {
+			"CHOICES": {
+				"broke": "Broke",
+				"poor": "Poor",
+				"comfortable": "Comfortable",
+				"affluent": "Affluent"
+			},
+			"label": "Wealth"
+		},
+		"count": "{amount} / {total}",
+		"creationPointsLeft": "Creation Points Left: ",
+		"title": "Creation Point Investor"
+	},
+
 	"CREATURE": {
 		"FIELDS": {
 			"attributes": {
-				"aggression": {
-					"abbreviation": "A",
-					"label": "Aggression"
-				},
-				"cunning": {
-					"abbreviation": "C",
-					"label": "Cunning"
-				},
-				"expertise": {
-					"abbreviation": "E",
-					"label": "Expertise"
-				},
-				"max.label": "Rating",
-				"value.label": "Budget"
+				"FIELDS": {
+					"aggression": {
+						"abbreviation": "A",
+						"label": "Aggression"
+					},
+					"cunning": {
+						"abbreviation": "C",
+						"label": "Cunning"
+					},
+					"expertise": {
+						"abbreviation": "E",
+						"label": "Expertise"
+					},
+					"max.label": "Rating",
+					"value.label": "Budget"
+				}
 			},
 			"category.label": "Category",
 			"damageRating": {
@@ -567,7 +613,7 @@
 				"abbreviation": "Soak",
 				"label": "Soak Value"
 			},
-			"threatRating": "Threat Rating"
+			"threatRating.label": "Threat Rating"
 		},
 		"TABS": {
 			"actions": "Actions",
@@ -721,6 +767,37 @@
 		}
 	},
 
+	"GAMEOFTWENTYQUESTIONS": {
+		"ACTIONS.submit": "Submit Answers",
+		"FIELDS": {
+			"ability.label": "How do your ability scores define your personality?",
+			"ambition.label": "What is your greatest ambition?",
+			"appearance.label": "What do you look like?",
+			"birthplace.label": "Where do you hail from?",
+			"career.label": "How did you fall into your profession?",
+			"companions.label": "What do you think of your companions?",
+			"enemy.label": "Who is your greatest enemy?",
+			"event.label": "What is the most important event of your life so far?",
+			"factions.label": "Are you a member of any factions?",
+			"family.label": "Who are your family?",
+			"fear.label": "What is your greatest fear?",
+			"flaw.label": "What is your biggest flaw?",
+			"morality.label": "What is your alignment?",
+			"motivation.label": "What motivates you?",
+			"prejudice.label": "What do you most despise in others?",
+			"regret.label": "What is the worst thing you have ever done?",
+			"relax.label": "How do you relax?",
+			"secret.label": "What is your greatest secret?",
+			"voice.label": "What is your voice?",
+			"worship.label": "Who do you worship?"
+		},
+		"WARNINGS.incompleteAnswers": {
+			"description": "You have not answered every questions.",
+			"title": "Incomplete Answers"
+		},
+		"title": "Game of Twenty Questions"
+	},
+
 	"GROUP": {
 		"ACTIONS": {
 			"decreaseAbilityTrack": "Decrease Ability Track",
@@ -828,14 +905,37 @@
 		"plural": "Mutations"
 	},
 
-	"ORIGIN.KarakAzgaraz": "Dwarf of Karak Azgaraz",
-	"ORIGIN.Ulthuan": "High Elf of Ulthuan",
-	"ORIGIN.Reiklander": "Reiklander",
-	"ORIGIN.AthelLoren": "Wood Elf of Athel Loren",
-	"ORIGIN.INTRODUCTION.KarakAzgaraz": "To reflect their fierce spirit and proud traditions, Karak Azgaraz dwarf characters have the following racial abilities:",
-	"ORIGIN.INTRODUCTION.Ulthuan": "To reflect their cultured upbringing and rich history, high elf characters have the following racial abilities:",
-	"ORIGIN.INTRODUCTION.Reiklander": "To reflect their upbringing and individuality, Reiklander characters have the following racial abilities:",
-	"ORIGIN.INTRODUCTION.AthelLoren": "To reflect their ties to nature and tradition-bound culture, wood elf characters have the following racial abilities:",
+	"ORIGIN": {
+		"athelLoren": {
+			"introduction": "To reflect their ties to nature and tradition-bound culture, wood elf characters have the following racial abilities:",
+			"name": "Wood Elf of Athel Loren"
+		},
+		"karakAzgaraz": {
+			"introduction": "To reflect their fierce spirit and proud traditions, Karak Azgaraz dwarf characters have the following racial abilities:",
+			"name": "Dwarf of Karak Azgaraz"
+		},
+		"reiklander": {
+			"introduction": "To reflect their upbringing and individuality, Reiklander characters have the following racial abilities:",
+			"name": "Reiklander"
+		},
+		"ulthuan": {
+			"introduction": "To reflect their cultured upbringing and rich history, high elf characters have the following racial abilities:",
+			"name": "High Elf of Ulthuan"
+		}
+	},
+
+	"ORIGINSELECTOR": {
+		"ACTIONS.chooseOrigin": "Choose Origin",
+		"WARNINGS.noSelection": {
+			"description": "No origin has been selected.",
+			"title": "No Origin Selected"
+		},
+		"corruptionThreshold": "Corruption Threshold: ",
+		"title": "Origin Selector",
+		"plusToughnessRating": "{value} + Toughness rating",
+		"selectedOrigin": "Selected Origin: ",
+		"woundThreshold": "Wound Threshold: "
+	},
 
 	"PARTY": {
 		"ACTIONS": {
@@ -889,11 +989,13 @@
 		"title": "Party Event Editor"
 	},
 
-	"RACE.Any": "Any Race",
-	"RACE.Dwarf": "Dwarf",
-	"RACE.HighElf": "High Elf",
-	"RACE.Human": "Human",
-	"RACE.WoodElf": "Wood Elf",
+	"RACE": {
+		"any": "Any Race",
+		"dwarf": "Dwarf",
+		"highElf": "High Elf",
+		"human": "Human",
+		"woodElf": "Wood Elf"
+	},
 
 	"ROLL": {
 		"ACTIONS": {
@@ -950,12 +1052,33 @@
 			"alreadySelected": "This item is already selected.",
 			"cannotSubmit": "Unable to confirm selection: {error}",
 			"maximumSelectionSizeReached": "You cannot select any more item. Please deselect an item before selecting an other one.",
-			"notEnoughSelection": "You need to select more items.",
-			"noSelection": "No item has been selected."
+			"notEnoughSelection": {
+				"description": "There are still items to select",
+				"title": "Items Left To Select"
+			},
+			"noSelection": {
+				"description": "No item has been selected.",
+				"title": "No Item Selected"
+			},
+			"tooManySelection": "Too many selected items. Please deselect some."
 		},
+		"all": "All",
 		"filters": "Filters",
 		"noSelection": "Aucun",
+		"proceedDialog": "Would you still like to proceed?",
 		"search": "Search"
+	},
+
+	"SETTINGS": {
+		"startingCareerDrawingMethod": {
+			"CHOICES": {
+				"freeChoice": "Free Choice",
+				"drawThree": "Draw Three",
+				"rollTable": "Roll Table"
+			},
+			"name": "Starting Career Drawing Method",
+			"hint": "Defines the way a new character's starting career is drawn with the Character Generator.\n– Draw Three: Three basic careers are drawn amongst those existing within the world and its compendium.\n– Roll Table: One single basic career is drawn from the Starting Career Table.\n– Free Choice: The starting career can be chosen amongst every available basic career within the world and its compendium."
+		}
 	},
 
 	"SCRIPT": {
@@ -963,12 +1086,18 @@
 			"onCareerSocket": "Career Socket",
 			"onCheckPreparation": "Check Preparation",
 			"onCheckRoll": "Check Roll",
+			"onCreationPointInvestment": "On Creation Point Investment",
 			"onPostCheckTrigger": "Manual Trigger Post Check",
 			"onPreCheckTrigger": "Manual Selection Pre Check",
+			"onStartingSkillTrainingSelection": "Starting Skill Training Selection",
+			"onStartingTalentSelection": "Starting Talent Selection",
 			"onTargettingCheckPreparation": "Targetting Check Preparation",
-			"onTrigger": "Manual Trigger"
+			"onTrigger": "Manual Trigger",
+			"requirementCheck": "Requirement Check"
 		}
 	},
+
+	"SIDEBAR.ACTIONS.generateCharacter": "Generate Character",
 
 	"STANCES": {
 		"conservative": "Conservative",
@@ -1013,10 +1142,20 @@
 
 	"SKILLUPGRADER": {
 		"ACTIONS.chooseUpgrade": "Choose Upgrade",
-		"WARNINGS.singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
+		"WARNINGS": {
+			"duplicateSpecialisation": "A specialisation can only be acquired once.",
+			"notEnoughSelection": {
+				"description": "There are still upgrades and/or specialisations to select.",
+				"title": "Upgrades or Specialisations Left To Select"
+			},
+			"notEnoughTrainings": "Not enough trainings left to proceed.",
+			"singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
+			"tooManySpecialisationSelected": "Too many selected specialisationsd. Please deselect some."
+		},
 		"acquisitionUpgrade": "{name} - Acquisition",
 		"noUpgradeSelected": "None",
-		"selectedUpgrade": "Selected Upgrade:",
+		"selectedUpgrade": "Selected Upgrade(s):",
+		"selectedSpecialisations": "Selected Specialisation(s) :",
 		"specialisationUpgrade": "{name} - {value} Specialisation",
 		"title": "Skill Upgrader",
 		"trainingLevelUpgrade": "{name} - Training Level {value}"
@@ -1093,10 +1232,44 @@
 			"triggerTalent": "Choose a Talent to Use"
 		},
 		"WARNINGS": {
-			"noTalentSelected": "You must select a Talent card."
+			"missingFaithTalent": {
+				"description": "No Faith talent has been selected.",
+				"title": "Missing Faith Talent"
+			},
+			"missingFreeFocusTalent": {
+				"description": "The Free Focus talent has not been selected.",
+				"title": "Missing Free Focus Talent"
+			},
+			"missingInsanity": {
+				"description": "No insanity has been selected.",
+				"title": "Missing Insanity"
+			},
+			"missingOrderTalent": {
+				"description": "No Order talent has been selected.",
+				"title": "Missing Order Talent"
+			},
+			"notEnoughSelection": {
+				"description": "There are still talents to select.",
+				"title": "Talents Left To Select"
+			},
+			"noSelection": {
+				"description": "No talent has been selected.",
+				"title": "No Talent Selected"
+			}
 		},
-		"noTalentSelected": "None",
-		"selectedTalent": "Selected Talent:",
+		"remainingInsanities": "Remaining Insanities: ",
+		"remainingFaithTalents": "Remaining Faith Talents: ",
+		"remainingFocusTalents": "Remaining Focus Talents: ",
+		"remainingOrderTalents": "Remaining Order Talents: ",
+		"remainingTalents": "Remaining Talents: ",
+		"selectedFaith": "Selected Free Faith Talent:",
+		"selectedFocus": "Selected Free Focus Talent:",
+		"selectedInsanity": "Selected Free Insanity:",
+		"selectedOrder": "Selected Free Order Talent:",
+		"selectedReputation": "Selected Free Reputation Talent:",
+		"selectedTactic": "Selected Free Tactic Talent:",
+		"selectedTalent": "Selected(s) Talent(s):",
+		"selectedTricks": "Selected Free Tricks Talent:",
 		"title": "Talent Selector"
 	},
 
@@ -1160,10 +1333,27 @@
 	},
 
 	"TRAITS": {
+		"amberOrder": "Amber Order",
+		"amethystOrder": "Amethyst Order",
 		"basic": "Basic",
+		"brightOrder": "Bright Order",
+		"celestialOrder": "Celestial Order",
+		"darkMagic": "Dark Magic",
 		"greyOrder": "Grey Order",
-		"rankZero": "Rank 0",
-		"rankOne": "Rank 1"
+		"goldOrder": "Gold Order",
+		"jadeOrder": "Jade Order",
+		"lightOrder": "Light Order",
+		"manann": "Manann",
+		"morr": "Morr",
+		"myrmidia": "Myrmidia",
+		"ranald": "Ranald",
+		"rank": "Rank {number}",
+		"rhya": "Rhya",
+		"shallya": "Shallya",
+		"sigmar": "Sigmar",
+		"taal": "Taal",
+		"ulric": "Ulric",
+		"venera": "Verena"
 	},
 	
 	"TYPES": {

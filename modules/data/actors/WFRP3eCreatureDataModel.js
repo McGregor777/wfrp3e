@@ -9,51 +9,51 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 		const fields = foundry.data.fields;
 
 		return {
-			attributes: new fields.SchemaField(Object.entries(CONFIG.WFRP3e.attributes).reduce((object, [key, value]) => {
-				object[key] = new fields.SchemaField({
-					max: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						label: "CREATURE.FIELDS.attributes.max.label",
-						min: 0,
-						nullable: false,
-						required: true
-					}),
-					value: new fields.NumberField({
-						initial: 0,
-						integer: true,
-						label: "CREATURE.FIELDS.attributes.value.label",
-						min: 0,
-						nullable: false,
-						required: true
-					})
-				}, {label: value.name});
-
-				return object;
-			}, {})),
-			characteristics: new fields.SchemaField(Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, [key, value]) => {
-				if(key !== "varies")
+			attributes: new fields.SchemaField(
+				Object.entries(CONFIG.WFRP3e.attributes).reduce((object, [key, value]) => {
 					object[key] = new fields.SchemaField({
-						rating: new fields.NumberField({
-							initial: 2,
+						max: new fields.NumberField({
+							initial: 0,
 							integer: true,
-							label: "ACTOR.FIELDS.characteristics.rating.label",
 							min: 0,
 							nullable: false,
 							required: true
 						}),
-						fortune: new fields.NumberField({
+						value: new fields.NumberField({
 							initial: 0,
 							integer: true,
-							label: "ACTOR.FIELDS.characteristics.fortune.label",
 							min: 0,
 							nullable: false,
 							required: true
 						})
 					}, {label: value.name});
 
-				return object;
-			}, {})),
+					return object;
+				}, {})
+			),
+			characteristics: new fields.SchemaField(
+				Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, [key, value]) => {
+					if(key !== "varies")
+						object[key] = new fields.SchemaField({
+							rating: new fields.NumberField({
+								initial: 2,
+								integer: true,
+								min: 0,
+								nullable: false,
+								required: true
+							}),
+							fortune: new fields.NumberField({
+								initial: 0,
+								integer: true,
+								min: 0,
+								nullable: false,
+								required: true
+							})
+						}, {label: value.name});
+
+					return object;
+				}, {})
+			),
 			category: new fields.StringField({nullable: true}),
 			damageRating: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			defenceValue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),

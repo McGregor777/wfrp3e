@@ -65,7 +65,7 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 			raceRestrictions: new fields.ArrayField(
 				new fields.StringField({
 					choices: {
-						any: "RACE.Any",
+						any: "RACE.any",
 						...Object.entries(CONFIG.WFRP3e.availableRaces).reduce((choices, [key, value]) => {
 							choices[key] = value.name
 							return choices;
@@ -77,11 +77,10 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 				{initial: ["any"], required: true}),
 			sockets: new fields.ArrayField(
 				new fields.SchemaField({
-					item: new fields.DocumentUUIDField({label: "CAREER.FIELDS.sockets.FIELDS.item.label"}),
+					item: new fields.DocumentUUIDField(),
 					type: new fields.StringField({
 						choices: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"},
 						initial: "focus",
-						label: "CAREER.FIELDS.sockets.FIELDS.type.label",
 						required: true
 					})}, {initial: {item: null, type: "focus"}}
 				), {

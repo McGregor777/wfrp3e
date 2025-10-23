@@ -1,5 +1,12 @@
 import AbstractSelector from "./AbstractSelector.js";
 
+/**
+ * @typedef {Object} SkillUpgrade
+ * @property {string} type The type of skill upgrade.
+ * @property {string} uuid The UUID of the skill to upgrade.
+ * @property {string|number|boolean} value The new value of the upgraded skill property.
+ */
+
 /** @inheritDoc */
 export default class SkillUpgrader extends AbstractSelector
 {
@@ -10,8 +17,8 @@ export default class SkillUpgrader extends AbstractSelector
 
 		if(!options.actor)
 			throw new Error("An Actor is needed.");
-
 		this.actor = options.actor;
+
 		if(options.advanceType) {
 			this.advanceType = options.advanceType;
 
@@ -19,11 +26,19 @@ export default class SkillUpgrader extends AbstractSelector
 				this.size = this.items.length;
 		}
 
-		if(options.specialisationSze)
-			this.specialisationSze = options.specialisationSze;
+		if(options.freeAcquisitions)
+			this.freeAcquisitions = options.freeAcquisitions;
 
-		if(options.singleSpecialisation)
-			this.singleSpecialisation = options.singleSpecialisation;
+		if(options.freeTrainings)
+			this.freeTrainings = options.freeTrainings;
+
+		if(options.specialisationSize)
+			this.specialisationSize = options.specialisationSize;
+
+		this.singleSpecialisation = options.singleSpecialisation ?? this.singleSpecialisation;
+
+		if(options.startingSkillTrainings)
+			this.startingSkillTrainings = options.startingSkillTrainings;
 	}
 
 	/** @inheritDoc */
@@ -31,7 +46,6 @@ export default class SkillUpgrader extends AbstractSelector
 		id: "skill-upgrader-{id}",
 		classes: ["skill-upgrader"],
 		window: {title: "SKILLUPGRADER.title"},
-		form: {handler: this.#onSkillUpgraderFormSubmit},
 		position: {width: 800}
 	};
 
@@ -43,16 +57,35 @@ export default class SkillUpgrader extends AbstractSelector
 	};
 
 	/**
-	 * The WFRP3eActor upgrading one of its characteristics.
+	 * The actor upgrading their skill.
 	 * @type {WFRP3eActor}
 	 */
 	actor = null;
 
 	/**
-	 * The type of advance concerned by the Selector.
-	 * @type {string}
+	 * The type of advance concerned by the Skill Upgrader.
+	 * @type {string|null}
 	 */
 	advanceType = null;
+
+	/**
+	 * The UUIDs of the skills that will be acquired for free.
+	 * @type {string[]}
+	 */
+	freeAcquisitions = [];
+
+
+	/**
+	 * The UUIDs of the skills that will be trained for free.
+	 * @type {string[]}
+	 */
+	freeTrainings = [];
+
+	/**
+	 * The array of selected skill upgrades.
+	 * @type {SkillUpgrade[]}
+	 */
+	selection = [];
 
 	/**
 	 * The array of selected specialisations.
@@ -63,7 +96,7 @@ export default class SkillUpgrader extends AbstractSelector
 	/**
 	 * The number of specialisations to select in addition to the other type of upgrades.
 	 * If this number is superior to 0, specialisations will only be added to the specialisation selection,
-	 * and not added as regular upgrades any more.
+	 * and not added as regular upgrades anymore.
 	 * @type {number}
 	 */
 	specialisationSize = 0;
@@ -73,6 +106,12 @@ export default class SkillUpgrader extends AbstractSelector
 	 * @type {boolean}
 	 */
 	singleSpecialisation = true;
+
+	/**
+	 * Whether the Skill Upgrader is used to upgrade starting skill trainings.
+	 * @type {boolean}
+	 */
+	startingSkillTrainings = false;
 
 	/** @inheritDoc */
 	type = "skill";
@@ -100,117 +139,204 @@ export default class SkillUpgrader extends AbstractSelector
 	{
 		let partContext = await super._preparePartContext(partId, context);
 
-		if(partId === "main")
+		if(partId === "main") {
+			const upgrades = {acquisition: {}, trainingLevel: {}, specialisation: {}};
+			for(const upgrade of [...this.selection, ...this.specialisationSelection])
+				upgrade.type === "specialisation" && upgrade.uuid in upgrades[upgrade.type]
+					? upgrades[upgrade.type][upgrade.uuid] += `, ${upgrade.value}`
+					: upgrades[upgrade.type][upgrade.uuid] = upgrade.value;
+
 			partContext = {
 				...partContext,
-				characteristics: CONFIG.WFRP3e.characteristics,
 				advanceType: this.advanceType,
-				upgrades: this.selection.reduce((upgrades, selection) => {
-					selection.type in upgrades
-						? upgrades[selection.type][selection.uuid] = selection.value
-						: upgrades[selection.type] = {[selection.uuid]: selection.value};
-					return upgrades;
-				}, {})
+				characteristics: CONFIG.WFRP3e.characteristics,
+				freeAcquisitions: this.freeAcquisitions,
+				freeTrainings: this.freeTrainings,
+				upgrades
+			};
+		}
+		else if(partId === "selection" && this.specialisationSize > 0)
+			partContext = {
+				...partContext,
+				specialisationCount: this.specialisationSize - this.remainingSpecialisationSelectionSize,
+				specialisationSelection: await Promise.all(
+					this.specialisationSelection.map(async selection => {
+						return {
+							...selection,
+							item: await fromUuid(selection.uuid)
+						};
+					})
+				),
+				specialisationSize: this.specialisationSize
 			};
 
 		return partContext;
 	}
 
 	/** @inheritDoc */
-	_handleNewSelection(value, formConfig, event)
+	async _handleNewSelection(value, formConfig, event)
 	{
 		const uuid = event.target.dataset.uuid,
-			  skill = fromUuidSync(event.target.dataset.uuid),
+			  skill = await fromUuid(event.target.dataset.uuid),
 			  type = event.target.dataset.type;
-		let cost = 1;
 
-		if(this.advanceType === "nonCareerAdvance")
-			cost = skill?.system.advanced ? 4 : 2;
+		if(!this.startingSkillTrainings) {
+			let cost = 1;
 
-		if(this.actor.system.experience.current < cost)
-			return ui.notifications.warn(game.i18n.localize("CHARACTER.WARNINGS.notEnoughExperienceForAdvance"));
+			if(this.advanceType === "nonCareerAdvance")
+				cost = skill?.system.advanced ? 4 : 2;
+
+			if(this.actor.system.experience.current < cost)
+				return ui.notifications.warn(
+					game.i18n.localize("CHARACTER.WARNINGS.notEnoughExperienceForAdvance")
+				);
+		}
+
+		// If the skill isn't already acquired nor its acquisition upgrade already selected, add an acquisition upgrade.
+		if(type === "trainingLevel"
+			&& !skill.parent
+			&& skill.system.advanced
+			&& !this.selection.find(upgrade => upgrade.uuid === uuid && upgrade.type === "acquisition")) {
+			if(this.remainingSelectionSize < 2)
+				return ui.notifications.warn(game.i18n.format("SKILLUPGRADER.WARNINGS.notEnoughTrainings"));
+
+			await super._handleNewSelection({value: "0", type: "acquisition", uuid}, formConfig, event);
+		}
 
 		if(type === "specialisation") {
-			this.selection = this.selection
-				.filter(selection => selection.uuid !== uuid || selection.type !== type);
-			this.specialisationSelection = this.specialisationSelection
-				.filter(selection => selection.uuid !== uuid || selection.type !== type);
+			// Remove any specialisation upgrade for the concerned skill that already exists in any selection.
+			this.selection = this.selection.filter(upgrade => {
+				return upgrade.uuid !== uuid || upgrade.type !== type
+			});
+			this.specialisationSelection = this.specialisationSelection.filter(upgrade => {
+				return upgrade.uuid !== uuid || upgrade.type !== type
+			});
 
-			const remainingSize = this.specialisationSize > 0
-					? this.remainingSpecialisationSelectionSize
-					: this.remainingSelectionSize,
-				  regex = new RegExp(/\s*([A-Za-zÀ-ÖØ-öø-ÿ ]+\b),?/, "gu"),
+			let remainingSize, selection;
+			if(this.specialisationSize > 0) {
+				remainingSize = this.remainingSpecialisationSelectionSize;
+				selection = this.specialisationSelection;
+			}
+			else {
+				remainingSize = this.remainingSelectionSize;
+				selection = this.selection;
+			}
+
+			const regex = new RegExp(/\s*([A-Za-zÀ-ÖØ-öø-ÿ ]+\b),?/, "gu"),
 				  matches = [...value.trim().matchAll(regex)];
 
 			if(remainingSize <= 0)
 				ui.notifications.warn(game.i18n.format("SELECTOR.WARNINGS.maximumSelectionSizeReached"));
 			else if(matches.length) {
-				// If only one new specialisation per skill is allowed, remove the new specialisations following up the first.
+				// If only one new specialisation per skill is allowed, only keep the first.
 				if(this.singleSpecialisation) {
 					if(matches.length > 1)
 						ui.notifications.warn(game.i18n.format("SKILLUPGRADER.WARNINGS.singleSpecialisationOnly"));
 
 					value = {value: matches[0][1].trim(), type, uuid};
+
+					selection.push(value);
 				}
+				// Else, remove excess specialisations and keep the rest.
 				else {
-					if(matches.length > remainingSize)
+					if(matches.length > remainingSize) {
 						ui.notifications.warn(game.i18n.format("SKILLUPGRADER.WARNINGS.maximumSelectionSizeReached"));
+						matches.slice(0, remainingSize - 1);
+					}
 
-					value = matches
-						.slice(0, remainingSize - 1)
-						.map(match => Object.create({value: match[1].trim(), type, uuid}));
+					const values = [];
+					for(const match of matches) {
+						const specialisation = match[1].trim();
+
+						if(values.includes(specialisation))
+							return ui.notifications.warn(game.i18n.format("SKILLUPGRADER.WARNINGS.duplicateSpecialisation"));
+
+						values.push({value: specialisation, type, uuid});
+					}
+
+					selection.push(...values);
 				}
 			}
-
-			// If the Skill Upgrader allows additional specialisations alongside advanced skills acquisitions or skill trainings,
-			// add the specialisations to their own specific selection pool.
-			if(this.specialisationSize > 0) {
-				if((typeof value === "object" && this.specialisationSelection.map(selection => JSON.stringify(selection)).includes(JSON.stringify(value)))
-					|| this.specialisationSelection.includes(value))
-					ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.alreadySelected"));
-				else if(this.specialisationSize === 1 && !Array.isArray(value))
-					this.specialisationSelection = [value];
-				else if(this.remainingSpecialisationSelectionSize < 1
-					|| Array.isArray(value) && value.length + this.selection.length > this.remainingSpecialisationSelectionSize)
-					ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.maximumSelectionSizeReached"));
-				else
-					Array.isArray(value) ? this.specialisationSelection.push(...value) : this.specialisationSelection.push(value);
-			}
-			else if(typeof value === "object")
-				super._handleNewSelection(value, formConfig, event);
 		}
-		else if(typeof value === "object")
-			super._handleNewSelection({value, type, uuid}, formConfig, event);
+		else
+			await super._handleNewSelection({value, type, uuid}, formConfig, event);
 	}
 
 	/** @inheritDoc */
-	_getSelectedItems()
+	_deselect(value)
 	{
-		return this.selection.map(selection => {
-			return {
-				...selection,
-				item: fromUuidSync(selection.uuid)
-			};
-		});
+		super._deselect(value);
+
+		const upgradeTypesToExclude = ["specialisation"];
+
+		if(value.type === "acquisition")
+			upgradeTypesToExclude.push("trainingLevel");
+
+		for(const upgrade of this.selection.filter(upgrade => upgrade.uuid === value.uuid))
+			if(upgradeTypesToExclude.includes(upgrade.type))
+				this.selection.splice(this.selection.indexOf(upgrade), 1);
+
+		for(const upgrade of this.specialisationSelection.filter(upgrade => upgrade.uuid === value.uuid))
+			if(upgradeTypesToExclude.includes(upgrade.type))
+				this.specialisationSelection.splice(this.selection.indexOf(upgrade), 1);
+	}
+
+	/** @inheritDoc */
+	async _getSelectedItems()
+	{
+		return await Promise.all(
+			this.selection.map(selection => {
+				return {
+					...selection,
+					item: fromUuidSync(selection.uuid)
+				};
+			})
+		);
+	}
+
+	/** @inheritDoc */
+	_checkForError()
+	{
+		let error = super._checkForWarning();
+
+		if(error)
+			return error;
+		else if(this.remainingSpecialisationSelectionSize < 0)
+			return "tooManySpecialisationSelected";
+
+		return false;
+	}
+
+	/** @inheritDoc */
+	_checkForWarning()
+	{
+		let error = super._checkForWarning();
+
+		if(error)
+			return error;
+		else if(this.remainingSpecialisationSelectionSize !== 0)
+			return "notEnoughSelection";
+
+		return false;
+	}
+
+	/** @inheritDoc */
+	_processSelectionData(event, form, formData)
+	{
+		const selection = super._processSelectionData(event, form, formData);
+
+		if(this.specialisationSelection)
+			return [...selection, ...this.specialisationSelection];
+
+		return selection;
 	}
 
 	/**
-	 * Processes form submission for the Selector.
-	 * @param {SubmitEvent} event The originating form submission event.
-	 * @param {HTMLFormElement} form The form element that was submitted.
-	 * @param {FormDataExtended} formData Processed data for the submitted form.
-	 */
-	static async #onSkillUpgraderFormSubmit(event, form, formData)
-	{
-		this.options.submit(this.selection);
-	}
-
-	/**
-	 * Builds an array of WFRP3eSkill trainings eligible for an advance, whether non-career or not.
-	 * @param {WFRP3eActor} actor The WFRP3eActor buying the advance.
-	 * @param {WFRP3eItem} career The WFRP3eCareer owning the advance.
+	 * Builds an array of skill trainings eligible for an advance, whether non-career or not.
+	 * @param {WFRP3eActor} actor The actor buying the advance.²
+	 * @param {WFRP3eItem} career The career owning the advance.
 	 * @param {Boolean} [nonCareerAdvance] Whether the advance is a non-career one.
-	 * @returns {Promise<WFRP3eItem[]>}
+	 * @returns {Promise<WFRP3eItem[]>} An array of skill trainings eligible for an advance.
 	 */
 	static async buildAdvanceOptionsList(actor, career, nonCareerAdvance = false)
 	{
@@ -227,7 +353,43 @@ export default class SkillUpgrader extends AbstractSelector
 
 		return careerSkillNames.map(name => {
 			return actor.itemTypes.skill.find(skill => skill.name === name)
-			 ?? skills.find(skill => skill.name === name);
+				?? skills.find(skill => skill.name === name);
 		});
+	}
+
+	/**
+	 * Builds an array of skill trainings eligible for a new character.
+	 * @param {WFRP3eActor} actor The new character.
+	 * @returns {Promise<WFRP3eItem[]>} An array of skill trainings eligible for a new character.
+	 */
+	static async buildNewCharacterOptionsList(actor)
+	{
+		const skills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill"}),
+			  careerSkillNames = actor.system.currentCareer.system.careerSkills.split(",").map(name => name.trim());
+
+		return careerSkillNames.map(name => {
+			return actor.itemTypes.skill.find(skill => skill.name === name)
+				?? skills.find(skill => skill.name === name);
+		});
+	}
+
+	/**
+	 * Sorts upgrades in arrays by skill, each array starting with acquisition upgrades,
+	 * followed by training level upgrades, to finish with specialisation upgrades.
+	 * @param {SkillUpgrade[]} upgrades The skill upgrades to sort.
+	 * @returns {SkillUpgrade[]} The skill upgrades sorted by type.
+	 */
+	static sortUpgrades(upgrades)
+	{
+		const order = {acquisition: 0, trainingLevel: 1, specialisation: 2},
+			  sortedUpgrades = {};
+
+		for(const upgrade of upgrades.sort((a, b) => order[a.type] - order[b.type])) {
+			if(!(upgrade.uuid in sortedUpgrades))
+				sortedUpgrades[upgrade.uuid] = [];
+			sortedUpgrades[upgrade.uuid].push(upgrade);
+		}
+
+		return sortedUpgrades;
 	}
 }
