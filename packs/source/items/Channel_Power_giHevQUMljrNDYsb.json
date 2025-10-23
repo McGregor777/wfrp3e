@@ -59,7 +59,7 @@
       "traits": "Basic, Rally",
       "check": "Channelling (WP)",
       "art": null,
-      "requirements": "<p>Your current power is less than twice your Willpower. If you are engaged with an<br>enemy, add [[DM]] to your dice pool</p>"
+      "requirements": "<p>Your current power is less than twice your Willpower. If you are engaged with an<br>enemy, add {Dm} to your dice pool</p>"
     },
     "reckless": {
       "rechargeRating": 0,
@@ -116,7 +116,7 @@
       "traits": "Basic, Rally",
       "check": "Channelling (WP)",
       "art": null,
-      "requirements": "<p>Your current power is less than twice your Willpower. If you are engaged with an enemy, add [[DM]] to your dice pool</p>"
+      "requirements": "<p>Your current power is less than twice your Willpower. If you are engaged with an enemy, add {Dm} to your dice pool</p>"
     },
     "rechargeTokens": 0,
     "type": "spell"

@@ -25,16 +25,17 @@ export default class WFRP3eItem extends Item
 	/**
 	 * Fetches the details of the WFRP3eItem, depending on its type.
 	 * @param {Object} [options]
-	 * @returns {*}
+	 * @returns {Promise<string>}
+	 * @protected
 	 */
-	getDetails(options = {})
+	async getDetails(options = {})
 	{
 		const functionName = `_get${capitalize(this.type)}Details`;
 
 		if(this[`${functionName}`])
-			return this[`${functionName}`](options);
+			return await this[`${functionName}`](options);
 		else
-			return this.system.description;
+			return await foundry.applications.ux.TextEditor.implementation.enrichHTML(this.system.description);
 	}
 
 	/**
@@ -170,10 +171,10 @@ export default class WFRP3eItem extends Item
 	/**
 	 * Fetches the details of the Action.
 	 * @param {Object} [options]
-	 * @returns {string}
-	 * @private
+	 * @returns {Promise<string>}
+	 * @protected
 	 */
-	_getActionDetails(options = {})
+	async _getActionDetails(options = {})
 	{
 		if(!options.face)
 			return console.error("Unable to show action's details without knowing the face.");
@@ -187,42 +188,36 @@ export default class WFRP3eItem extends Item
 						 <div>${face.requirements}</div>
 					 </div>`;
 
-			const effects = Object.entries(CONFIG.WFRP3e.symbols).reduce((object, [key, symbol]) => {
-				  object[key] = {
-					  descriptions: face.effects[key].reduce((descriptions, effect) => {
-						  if(effect.symbolAmount > 0) {
-							  const match = effect.description.match(new RegExp(/<\w+>/));
-							  descriptions += match[0]
-								  + '<span class="symbol-container">'
-								  + `	<span class="wfrp3e-font symbol ${symbol.cssClass}"></span>`.repeat(effect.symbolAmount)
-								  + "</span> "
-								  + effect.description.slice(
-									  match.index + match[0].length,
-									  effect.description.length
-								  );
-						  }
-						  else
-							  descriptions += effect.description;
-						  return descriptions
-					  }, ""),
-					  type: symbol.type
-				  };
-				  return object;
-			  }, {}),
-			  positiveEffects = Object.values(effects).filter(effect => effect.type === "positive"),
-			  negativeEffects = Object.values(effects).filter(effect => effect.type === "negative");
+			const effects = {};
+			for(const [key, symbol] of Object.entries(CONFIG.WFRP3e.symbols)) {
+				effects[key] = {
+					descriptions: "",
+					type: symbol.type
+				};
+
+				for(const effect of face.effects[key])
+					if(effect.symbolAmount > 0) {
+						const match = effect.description.match(new RegExp(/<\w+>/));
+
+						effects[key].descriptions += match[0]
+							+ '<span class="symbol-container">'
+							+ ` <span class="wfrp3e-font symbol ${symbol.cssClass}"></span>`.repeat(effect.symbolAmount)
+							+ "</span> "
+							+ effect.description.slice(match.index + match[0].length, effect.description.length);
+					}
+					else
+						effects[key].descriptions += effect.description;
+			}
+
+			const positiveEffects = Object.values(effects).filter(effect => effect.type === "positive"),
+				  negativeEffects = Object.values(effects).filter(effect => effect.type === "negative");
 
 			if(face.special || face.uniqueEffect)
-				content += `<div>
-							 ${face.special}
-							 ${face.uniqueEffect}
-						 </div>`;
+				content += `<div>${face.special} ${face.uniqueEffect}</div>`;
 
 			for(const nextPositiveEffect of positiveEffects) {
 				if(nextPositiveEffect.descriptions && !nextPositiveEffect.shown) {
-					const nextNegativeEffect = negativeEffects.find(
-						effect => effect.descriptions && !effect.shown
-					);
+					const nextNegativeEffect = negativeEffects.find(effect => effect.descriptions && !effect.shown);
 					let rightSideEffectDescriptions = "";
 
 					if(nextNegativeEffect) {
@@ -231,9 +226,9 @@ export default class WFRP3eItem extends Item
 					}
 
 					content += `<div>
-								 <div>${nextPositiveEffect.descriptions}</div>
-								 <div>${rightSideEffectDescriptions}</div>
-							 </div>`;
+						<div>${nextPositiveEffect.descriptions}</div>
+						<div>${rightSideEffectDescriptions}</div>
+					 </div>`;
 
 					nextPositiveEffect.shown = true;
 				}
@@ -242,7 +237,7 @@ export default class WFRP3eItem extends Item
 			html += `<div class="face ${stance + (options.face === stance ? " active" : "")}">${content}</div>`;
 		}
 
-		return html;
+		return await foundry.applications.ux.TextEditor.implementation.enrichHTML(html);
 	}
 
 	/**
@@ -386,10 +381,10 @@ export default class WFRP3eItem extends Item
 	/**
 	 * Fetches the details of the Skill.
 	 * @param {Object} [options]
-	 * @returns {String}
-	 * @private
+	 * @returns {Promise<string>}
+	 * @protected
 	 */
-	_getSkillDetails(options = {})
+	async _getSkillDetails(options = {})
 	{
 		return game.i18n.format("SKILL.specialisationList", {specialisations: this.system.specialisations ?? ""});
 	}
@@ -547,12 +542,15 @@ export default class WFRP3eItem extends Item
 	/**
 	 * Fetches the details of the Weapon.
 	 * @param {Object} [options]
-	 * @returns {String}
-	 * @private
+	 * @param options
+	 * @returns {Promise<string>}
+	 * @protected
 	 */
-	_getWeaponDetails(options = {})
+	async _getWeaponDetails(options = {})
 	{
-		return this.system.description.concat(this.system.special);
+		return await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+			`${this.system.description}${this.system.special}`
+		);
 	}
 
 	//#endregion

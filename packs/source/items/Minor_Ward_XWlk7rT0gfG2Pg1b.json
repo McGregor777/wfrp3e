@@ -45,7 +45,7 @@
       "art": null,
       "traits": "Basic, Minor, Ongoing, Rank 0",
       "check": "Invocation (Fel)",
-      "requirements": "<p>3 favour, target within close range (you may target yourself). Add [[DChal]] to your dice pool if you are engaged with an enemy</p>",
+      "requirements": "<p>3 favour, target within close range (you may target yourself). Add {Dchal} to your dice pool if you are engaged with an enemy</p>",
       "uniqueEffect": "<p><strong>Effect:</strong> Your target is protected by a radiant glow. While this card is recharging, his soak value is increased by 1</p>"
     },
     "reckless": {
@@ -89,7 +89,7 @@
       "art": null,
       "traits": "Basic, Minor, Ongoing, Rank 0",
       "check": "Invocation (Fel)",
-      "requirements": "<p>3 favour, target within close range (you may target yourself). Add [[DChal]] to your dice pool if you are engaged with an enemy</p>",
+      "requirements": "<p>3 favour, target within close range (you may target yourself). Add {Dchal} to your dice pool if you are engaged with an enemy</p>",
       "uniqueEffect": "<p><strong>Effect:</strong> Your target is protected by a radiant glow. While this card is recharging, his soak value is increased by 1</p>"
     },
     "rechargeTokens": 0,

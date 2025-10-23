@@ -1,5 +1,3 @@
-import DataHelper from "../DataHelper.js";
-
 /** @inheritDoc */
 export default class WFRP3eGroupDataModel extends foundry.abstract.TypeDataModel
 {
@@ -67,32 +65,5 @@ export default class WFRP3eGroupDataModel extends foundry.abstract.TypeDataModel
 				), {initial: [{item: null, type: "focus"}], label: "GROUP.FIELDS.sockets", required: true}
 			),
 		};
-	}
-
-	/** @inheritDoc */
-	prepareBaseData()
-	{
-		super.prepareBaseData();
-
-		this._prepareSpecialAbilitiesDescription();
-	}
-
-	/**
-	 * Prepares the descriptions of the Special Abilities.
-	 * @private
-	 */
-	_prepareSpecialAbilitiesDescription()
-	{
-		const updates = {specialAbilities: this.specialAbilities};
-
-		this.specialAbilities.forEach((specialAbility, index) => {
-			updates.specialAbilities[index].description = DataHelper._getCleanedupDescription(specialAbility.description);
-
-			specialAbility.values.forEach((value, index2) => {
-				updates.specialAbilities[index].values[index2].content = DataHelper._getCleanedupDescription(value.content)
-			});
-		});
-
-		this.updateSource(updates);
 	}
 }

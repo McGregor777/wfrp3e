@@ -1,4 +1,3 @@
-import DataHelper from "../DataHelper.js";
 import WFRP3eTrappingDataModel from "./WFRP3eTrappingDataModel.js";
 
 /** @inheritDoc */
@@ -47,24 +46,4 @@ export default class WFRP3eWeaponDataModel extends WFRP3eTrappingDataModel
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["TRAPPING", "WEAPON"];
-
-	/** @inheritDoc */
-	prepareBaseData()
-	{
-		super.prepareBaseData();
-
-		this._prepareSpecialQualityDescription();
-	}
-
-	/**
-	 * Prepares the description of the Weapon's special quality description.
-	 * @private
-	 */
-	_prepareSpecialQualityDescription()
-	{
-		const cleanedUpDescription = DataHelper._getCleanedupDescription(this.special);
-
-		if(cleanedUpDescription)
-			this.updateSource({special: cleanedUpDescription});
-	}
 }

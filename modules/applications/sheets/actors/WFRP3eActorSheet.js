@@ -58,6 +58,8 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 		if(partContext.tabs && partId in partContext.tabs)
 			partContext.tab = partContext.tabs[partId];
 
+		const textEditor = foundry.applications.ux.TextEditor.implementation,
+			  enrichment = {};
 		switch(partId) {
 			case "talents":
 				let items = [...this.actor.itemTypes.talent, ...this.actor.itemTypes.ability];
@@ -85,8 +87,15 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 					items = this.actor.items.search({query: this.searchFilters.talents.text ?? "", filters});
 				}
 
+				if(this.actor.getFlag("wfrp3e", "embeddedItemsDisplayMode") === "cards")
+					for(const item of items)
+						enrichment[item.uuid] = await textEditor.enrichHTML(
+							item.system.description
+						);
+
 				partContext = {
 					...partContext,
+					enrichment,
 					fields: this.actor.system.schema.fields,
 					items: items.sort((a, b) => a.name.localeCompare(b.name)),
 					searchFilters: this.searchFilters?.talents,
@@ -118,10 +127,36 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 					actions = this.actor.items.search({query: this.searchFilters.actions.text ?? "", filters});
 				}
 
+				if(this.actor.getFlag("wfrp3e", "embeddedItemsDisplayMode") === "cards")
+					for(const action of actions)
+						for(const stance of Object.keys(CONFIG.WFRP3e.stances)) {
+							if(action.system[stance].requirements)
+								enrichment[`${action.uuid}-${stance}.requirements`] = await textEditor.enrichHTML(
+									action.system[stance].requirements
+								);
+
+							if(action.system[stance].special)
+								enrichment[`${action.uuid}-${stance}.special`] = await textEditor.enrichHTML(
+									action.system[stance].special
+								);
+
+							if(action.system[stance].uniqueEffect)
+								enrichment[`${action.uuid}-${stance}.uniqueEffect`] = await textEditor.enrichHTML(
+									action.system[stance].uniqueEffect
+								);
+
+							for(const symbol of Object.keys(CONFIG.WFRP3e.symbols))
+								for(const [key, effect] of Object.entries(action.system[stance].effects[symbol]))
+									enrichment[`${action.uuid}-${stance}.${symbol}.${key}`] = await textEditor.enrichHTML(
+										effect.description
+									);
+						}
+
 				partContext = {
 					...partContext,
 					actions: actions.sort((a, b) => a.name.localeCompare(b.name)),
 					defaultStance: this.actor.system.defaultStance,
+					enrichment,
 					fields: this.actor.system.schema.fields,
 					searchFilters: this.searchFilters?.actions,
 					stances: CONFIG.WFRP3e.stances,
@@ -294,29 +329,29 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 			icon: '<i class="fa-solid fa-chevron-down"></i>',
 			condition: li => li.closest(".row"),
 			callback: async li => {
-				const documentElement = li.closest(".item[data-uuid]");
+				const itemElement = li.closest(".item[data-uuid]");
 
-				if(documentElement.classList.contains("expanded")) {
+				if(itemElement.classList.contains("expanded")) {
 					// Toggle expansion for an item
-					const detailsElement = documentElement.querySelector(".details");
+					const detailsElement = itemElement.querySelector(".details");
 
 					$(detailsElement).slideUp(200, () => detailsElement.remove());
 				}
 				else {
 					try {
 						// Add a div with the item's details below the row.
-						const detailsElement = document.createElement("div"),
+						const item = await fromUuid(itemElement.dataset.uuid),
+							  detailsElement = document.createElement("div"),
 							  options = {},
-							  activeFace = documentElement.querySelector(".active[data-face]")?.dataset.face;
+							  activeFace = itemElement.querySelector(".active[data-face]")?.dataset.face;
 
 						if(activeFace)
 							options.face = activeFace;
 
 						detailsElement.classList.add("details");
-						detailsElement.innerHTML = await fromUuid(documentElement.dataset.uuid)
-							.then(document => document.getDetails(options));
+						detailsElement.innerHTML = await item.getDetails(options);
 
-						documentElement.append(detailsElement);
+						itemElement.append(detailsElement);
 						$(detailsElement).hide();
 						$(detailsElement).slideDown(200);
 					}
@@ -325,7 +360,7 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 					}
 				}
 
-				documentElement.classList.toggle("expanded");
+				itemElement.classList.toggle("expanded");
 			}
 		}, {
 			name: "ACTOR.ACTIONS.flip",

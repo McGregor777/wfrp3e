@@ -50,6 +50,18 @@ export default class OriginSelector extends AbstractSelector
 				};
 				break;
 			case "introduction":
+				if(this.selection.length) {
+					const origin = this.#getOrigin(),
+						  enrichment = {};
+
+					for(const ability of origin.abilities)
+						enrichment[ability.uuid] = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+							ability.system.description
+						);
+
+					partContext = {...partContext, origin, enrichment};
+				}
+				break;
 			case "selection":
 				partContext.origin = this.#getOrigin();
 				break;

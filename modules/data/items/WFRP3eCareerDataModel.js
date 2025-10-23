@@ -1,7 +1,7 @@
-import DataHelper from "../DataHelper.js";
+import WFRP3eItemDataModel from "./WFRP3eItemDataModel.js";
 
 /** @inheritDoc */
-export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataModel
+export default class WFRP3eCareerDataModel extends WFRP3eItemDataModel
 {
 	/** @inheritDoc */
 	static defineSchema()
@@ -135,14 +135,6 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 	}
 
 	/** @inheritDoc */
-	prepareBaseData()
-	{
-		super.prepareBaseData();
-
-		this._prepareDescription();
-	}
-
-	/** @inheritDoc */
 	static migrateData(source)
 	{
 		if(source.talentSockets)
@@ -153,17 +145,5 @@ export default class WFRP3eCareerDataModel extends foundry.abstract.TypeDataMode
 			});
 
 		return super.migrateData(source);
-	}
-
-	/**
-	 * Prepares the description of the WFRP3eCareer's description.
-	 * @private
-	 */
-	_prepareDescription()
-	{
-		const cleanedUpDescription = DataHelper._getCleanedupDescription(this.description);
-
-		if(cleanedUpDescription)
-			this.updateSource({description: cleanedUpDescription});
 	}
 }

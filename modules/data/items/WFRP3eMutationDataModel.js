@@ -1,7 +1,7 @@
-import DataHelper from "../DataHelper.js";
+import WFRP3eItemDataModel from "./WFRP3eItemDataModel.js";
 
 /** @inheritDoc */
-export default class WFRP3eMutationDataModel extends foundry.abstract.TypeDataModel
+export default class WFRP3eMutationDataModel extends WFRP3eItemDataModel
 {
 	/** @inheritDoc */
 	static defineSchema()
@@ -17,24 +17,4 @@ export default class WFRP3eMutationDataModel extends foundry.abstract.TypeDataMo
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["MUTATION"];
-
-	/** @inheritDoc */
-	prepareBaseData()
-	{
-		super.prepareBaseData();
-
-		this._prepareDescription();
-	}
-
-	/**
-	 * Prepares the description of the Mutation's description.
-	 * @private
-	 */
-	_prepareDescription()
-	{
-		const cleanedUpDescription = DataHelper._getCleanedupDescription(this.description);
-
-		if(cleanedUpDescription)
-			this.updateSource({description: cleanedUpDescription});
-	}
 }

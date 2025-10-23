@@ -5,7 +5,7 @@
   "_id": "MFNBzJvfpOsp2G3z",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Wood elves gain a [[DF]] fortune die to combat initiative, as well as to Observation and Stealth checks while they are in woodland terrain.</p>"
+    "description": "<p>Wood elves gain a {Df} fortune die to combat initiative, as well as to Observation and Stealth checks while they are in woodland terrain.</p>"
   },
   "effects": [],
   "sort": 0,

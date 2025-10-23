@@ -5,7 +5,7 @@
   "_id": "VHiON3EQ7VMe41jT",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Two fewer [[DM]] [[DM]] misfortune dice are added to your dice pool for any effects from darkness or lack of sufficient light.</p>"
+    "description": "<p>Two fewer {Dm} {Dm} misfortune dice are added to your dice pool for any effects from darkness or lack of sufficient light.</p>"
   },
   "effects": [],
   "sort": 0,

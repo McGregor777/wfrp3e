@@ -53,7 +53,7 @@
       "art": null,
       "traits": "Basic, Divine, Rally",
       "check": "Piety (WP)",
-      "requirements": "<p>You have successfully invoked a blessing, but have less favour than the blessing requires. If you are engaged with an enemy, add [[DM]] to your dice pool</p>"
+      "requirements": "<p>You have successfully invoked a blessing, but have less favour than the blessing requires. If you are engaged with an enemy, add {Dm} to your dice pool</p>"
     },
     "reckless": {
       "rechargeRating": 0,
@@ -109,7 +109,7 @@
       "art": null,
       "traits": "Basic, Divine, Rally",
       "check": "Piety (WP)",
-      "requirements": "<p>You have successfully invoked a blessing, but have less favour than the blessing requires. If you are engaged with an enemy, add [[DM]] to your dice pool</p>"
+      "requirements": "<p>You have successfully invoked a blessing, but have less favour than the blessing requires. If you are engaged with an enemy, add {Dm} to your dice pool</p>"
     },
     "rechargeTokens": 0,
     "type": "blessing"

@@ -1,5 +1,3 @@
-import DataHelper from "../DataHelper.js";
-
 /** @inheritDoc */
 export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataModel
 {
@@ -91,21 +89,6 @@ export default class WFRP3eCreatureDataModel extends foundry.abstract.TypeDataMo
 		this._prepareDefaultStance();
 		this._prepareNemesis();
 		this._prepareStanceMeter();
-
-		if(this.specialRuleSummary)
-			this._prepareSpecialRuleSummary();
-	}
-
-	/**
-	 * Prepares the descriptions of the Action's effects.
-	 * @private
-	 */
-	_prepareSpecialRuleSummary()
-	{
-		const cleanedUpDescription = DataHelper._getCleanedupDescription(this.specialRuleSummary);
-
-		if(cleanedUpDescription)
-			this.updateSource({specialRuleSummary: cleanedUpDescription});
 	}
 
 	/**

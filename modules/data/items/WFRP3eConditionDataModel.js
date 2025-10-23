@@ -1,7 +1,7 @@
-import DataHelper from "../DataHelper.js";
+import WFRP3eItemDataModel from "./WFRP3eItemDataModel.js";
 
 /** @inheritDoc */
-export default class WFRP3eConditionDataModel extends foundry.abstract.TypeDataModel
+export default class WFRP3eConditionDataModel extends WFRP3eItemDataModel
 {
 	/** @inheritDoc */
 	static defineSchema()
@@ -20,24 +20,4 @@ export default class WFRP3eConditionDataModel extends foundry.abstract.TypeDataM
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["CONDITION"];
-
-	/** @inheritDoc */
-	prepareBaseData()
-	{
-		super.prepareBaseData();
-
-		this._prepareDescription();
-	}
-
-	/**
-	 * Prepares the description of the Condition's description.
-	 * @private
-	 */
-	_prepareDescription()
-	{
-		const cleanedUpDescription = DataHelper._getCleanedupDescription(this.description);
-
-		if(cleanedUpDescription)
-			this.updateSource({description: cleanedUpDescription});
-	}
 }

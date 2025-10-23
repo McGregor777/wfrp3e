@@ -1,7 +1,7 @@
-import DataHelper from "../DataHelper.js";
+import WFRP3eItemDataModel from "./WFRP3eItemDataModel.js";
 
 /** @inheritDoc */
-export default class WFRP3eCriticalWoundDataModel extends foundry.abstract.TypeDataModel
+export default class WFRP3eCriticalWoundDataModel extends WFRP3eItemDataModel
 {
 	/** @inheritDoc */
 	static defineSchema()
@@ -16,24 +16,4 @@ export default class WFRP3eCriticalWoundDataModel extends foundry.abstract.TypeD
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["CRITICALWOUND"];
-
-	/** @inheritDoc */
-	prepareBaseData()
-	{
-		super.prepareBaseData();
-
-		this._prepareDescription();
-	}
-
-	/**
-	 * Prepares the description of the Critical Wound's description.
-	 * @private
-	 */
-	_prepareDescription()
-	{
-		const cleanedUpDescription = DataHelper._getCleanedupDescription(this.description);
-
-		if(cleanedUpDescription)
-			this.updateSource({description: cleanedUpDescription});
-	}
 }

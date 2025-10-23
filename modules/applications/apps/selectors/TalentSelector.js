@@ -99,6 +99,13 @@ export default class TalentSelector extends AbstractSelector
 
 		switch(partId) {
 			case "main":
+				const enrichment = {};
+				for(const item of this.items)
+					enrichment[item.uuid] = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+						item.system.description
+					);
+				partContext.enrichment = enrichment;
+
 				const freeItems = await Promise.all(
 					Object.values(this.freeItems).filter(value => value).map(async uuid => await fromUuid(uuid))
 				);
