@@ -1,5 +1,7 @@
+import WFRP3eItemDataModel from "./WFRP3eItemDataModel.js";
+
 /** @inheritDoc */
-export default class WFRP3eMiscastDataModel extends foundry.abstract.TypeDataModel
+export default class WFRP3eMiscastDataModel extends WFRP3eItemDataModel
 {
 	/** @inheritDoc */
 	static defineSchema()

@@ -1,5 +1,7 @@
+import WFRP3eItemDataModel from "./WFRP3eItemDataModel.js";
+
 /** @inheritDoc */
-export default class WFRP3eDiseaseDataModel extends foundry.abstract.TypeDataModel
+export default class WFRP3eDiseaseDataModel extends WFRP3eItemDataModel
 {
 	/** @inheritDoc */
 	static defineSchema()

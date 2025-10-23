@@ -1,5 +1,7 @@
+import WFRP3eItemDataModel from "./WFRP3eItemDataModel.js";
+
 /** @inheritDoc */
-export default class WFRP3eMoneyDataModel extends foundry.abstract.TypeDataModel
+export default class WFRP3eMoneyDataModel extends WFRP3eItemDataModel
 {
 	/** @inheritDoc */
 	static defineSchema()
