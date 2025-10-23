@@ -28,8 +28,19 @@ export default class CareerSelector extends AbstractSelector
 	{
 		let partContext = await super._preparePartContext(partId, context);
 
-		if(partId === "main")
-			partContext.characteristics = CONFIG.WFRP3e.characteristics;
+		if(partId === "main") {
+			const enrichment = {};
+			for(const career of this.items)
+				enrichment[career.uuid] = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+					career.system.description
+				);
+
+			partContext = {
+				...partContext,
+				characteristics: CONFIG.WFRP3e.characteristics,
+				enrichment
+			};
+		}
 
 		return partContext;
 	}

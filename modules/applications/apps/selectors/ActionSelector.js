@@ -48,10 +48,36 @@ export default class ActionSelector extends AbstractSelector
 
 		switch(partId) {
 			case "main":
-				const basicTrait = game.i18n.localize("TRAITS.basic");
+				const textEditor = foundry.applications.ux.TextEditor.implementation,
+					  basicTrait = game.i18n.localize("TRAITS.basic"),
+					  enrichment = {};
+				for(const action of this.items)
+					for(const stance of Object.keys(CONFIG.WFRP3e.stances)) {
+						if(action.system[stance].requirements)
+							enrichment[`${action.uuid}-${stance}.requirements`] = await textEditor.enrichHTML(
+								action.system[stance].requirements
+							);
+
+						if(action.system[stance].special)
+							enrichment[`${action.uuid}-${stance}.special`] = await textEditor.enrichHTML(
+								action.system[stance].special
+							);
+
+						if(action.system[stance].uniqueEffect)
+							enrichment[`${action.uuid}-${stance}.uniqueEffect`] = await textEditor.enrichHTML(
+								action.system[stance].uniqueEffect
+							);
+
+						for(const symbol of Object.keys(CONFIG.WFRP3e.symbols))
+							for(const [key, effect] of Object.entries(action.system[stance].effects[symbol]))
+								enrichment[`${action.uuid}-${stance}.${symbol}.${key}`] = await textEditor.enrichHTML(
+									effect.description
+								);
+					}
 
 				partContext = {
 					...partContext,
+					enrichment,
 					items: partContext.items.sort((a, b) => {
 						if(a.system.conservative.traits?.includes(basicTrait)
 							&& !b.system.conservative.traits?.includes(basicTrait))
