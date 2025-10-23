@@ -2,7 +2,50 @@
   "name": "Mercenary",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/mercenary.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Mercenary",
+      "img": "systems/wfrp3e/assets/images/careers/mercenary.webp",
+      "_id": "jsTnJjbsaMgVIFsC",
+      "type": "base",
+      "system": {
+        "conditionScript": "return checkData.skill && fromUuidSync(checkData.skill).name === game.i18n.localize(\"SKILL.NAMES.weaponSkill\");",
+        "reverseScript": "",
+        "script": "dicePool.dice.expertise++;",
+        "type": "onPreCheckTrigger"
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Once per session, you may add {De} to any single Weapon Skill check you make</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.345",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.2",
+        "createdTime": null,
+        "modifiedTime": 1750779541575,
+        "lastModifiedBy": "Bq3CTOvANoOneedB",
+        "exportSource": null
+      },
+      "_key": "!items.effects!gEwfpE9KtyCloYF7.jsTnJjbsaMgVIFsC"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
