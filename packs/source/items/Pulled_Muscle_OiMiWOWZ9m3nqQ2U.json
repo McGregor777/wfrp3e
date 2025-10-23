@@ -1,0 +1,34 @@
+{
+  "folder": "VUMz1tBRkXXXUVEt",
+  "name": "Pulled Muscle",
+  "type": "criticalWound",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Add <span style=\"color: purple; -webkit-text-stroke: 1pt black;\">⧫</span> to initiative checks.</p>",
+    "severityRating": 2
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "52c2b6e880868e9d1e9a351b2c30dc585deb6828"
+    }
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "1.0.1-alpha",
+    "coreVersion": "13.341",
+    "createdTime": 1682264544162,
+    "modifiedTime": 1715380997987,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "OiMiWOWZ9m3nqQ2U",
+  "_key": "!items!OiMiWOWZ9m3nqQ2U"
+}

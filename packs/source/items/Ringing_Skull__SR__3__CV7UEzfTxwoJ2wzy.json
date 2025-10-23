@@ -1,0 +1,34 @@
+{
+  "folder": "VUMz1tBRkXXXUVEt",
+  "name": "Ringing Skull (SR: 3)",
+  "type": "criticalWound",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>During your End of Turn phase: The GM must add or remove one recharge token from one of your recharging action cards. Lose 1 power. Lose 1 favour.</p>",
+    "severityRating": 3
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "7e701afec25e7d418f6592ca2f8fc4bcc6aefd3f"
+    }
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "1.0.1-alpha",
+    "coreVersion": "13.341",
+    "createdTime": 1682264544162,
+    "modifiedTime": 1715380997987,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "CV7UEzfTxwoJ2wzy",
+  "_key": "!items!CV7UEzfTxwoJ2wzy"
+}

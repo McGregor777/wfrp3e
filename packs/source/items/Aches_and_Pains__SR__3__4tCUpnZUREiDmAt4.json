@@ -1,0 +1,34 @@
+{
+  "name": "Aches and Pains (SR: 3)",
+  "type": "criticalWound",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>At the end of each encounter, or after a full night&rsquo;s rest, you recover 1 less stress and 1 less fatigue than normal.</p>",
+    "severityRating": 3
+  },
+  "effects": [],
+  "folder": "VUMz1tBRkXXXUVEt",
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "892138594d97deab5d328f4dbe1737f684e66c7b"
+    }
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "1.0.1-alpha",
+    "coreVersion": "13.341",
+    "createdTime": 1682261461291,
+    "modifiedTime": 1715380997987,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "4tCUpnZUREiDmAt4",
+  "_key": "!items!4tCUpnZUREiDmAt4"
+}

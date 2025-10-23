@@ -1,0 +1,34 @@
+{
+  "folder": "VUMz1tBRkXXXUVEt",
+  "name": "Mangled Limb",
+  "type": "criticalWound",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Your Strength and Agility are reduced by 1. The damaged limb (GM&rsquo;s choice) does not function properly until this critical wound is healed. Add <span style=\"color: purple; -webkit-text-stroke: 1pt black;\">⧫</span> to all checks requiring use of the limb.</p>",
+    "severityRating": 2
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "4372ecaaed64faa265a91bb6082dc6b26bd2e125"
+    }
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "1.0.1-alpha",
+    "coreVersion": "13.341",
+    "createdTime": 1682264544162,
+    "modifiedTime": 1715380997987,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "HwMsFhT25Da1YIbf",
+  "_key": "!items!HwMsFhT25Da1YIbf"
+}
