@@ -76,10 +76,17 @@ export default class WFRP3eCharacterSheet extends WFRP3eActorSheet
 			case "careers":
 				const sortedCareers = this.actor.itemTypes.career.sort((a, b) => a.name.localeCompare(b.name));
 
+				const enrichment = {};
+				for(const career of sortedCareers)
+					enrichment[career.uuid] = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+						career.system.description
+					);
+
 				partContext = {
 					...partContext,
 					careers: sortedCareers,
 					characteristics: CONFIG.WFRP3e.characteristics,
+					enrichment,
 					fields: this.actor.system.schema.fields,
 					tabs: this._prepareTabs(partId)
 				};

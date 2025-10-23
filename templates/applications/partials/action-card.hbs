@@ -41,18 +41,22 @@
 				{{/if}}
 
 				<div class="requirements">
-					{{{face.requirements}}}
+					{{{lookup @root.enrichment (concat ../../item.uuid "-" st ".requirements")}}}
 				</div>
 
 				<div class="effects">
 					<table>
 						<tbody>
 							{{#if face.special}}
-								<tr><td>{{{striptags face.special "p"}}}</td></tr>
+								<tr><td>
+									{{{striptags (lookup @root.enrichment (concat ../../item.uuid "-" st ".special")) "p"}}}
+								</td></tr>
 							{{/if}}
 
 							{{#if face.uniqueEffect}}
-								<tr><td>{{{striptags face.uniqueEffect "p"}}}</td></tr>
+								<tr><td>
+									{{{striptags (lookup @root.enrichment (concat ../../item.uuid "-" st ".uniqueEffect")) "p"}}}
+								</td></tr>
 							{{/if}}
 
 							{{#each @root.symbols as |symbol sym|}}
@@ -69,7 +73,7 @@
 														{{/unless}}
 													{{/for}}
 
-													{{{striptags effect.description "p"}}}
+													{{{striptags (lookup @root.enrichment (concat ../../../../../item.uuid "-" st "." sym "." ef)) "p"}}}
 												</div>
 											{{/each}}
 										</td></tr>
