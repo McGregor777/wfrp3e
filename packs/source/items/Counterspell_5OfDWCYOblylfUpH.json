@@ -26,7 +26,7 @@
       "check": "No Check Required",
       "art": null,
       "requirements": "<p>Willpower 3+, sufficient power (see below)</p>",
-      "special": "<p><strong>Special:</strong> After you are declared as a target of a <em>Supernatural</em> or <em>Spell</em> action, you may place 2 recharge tokens on this card to add [[DM]] to that action’s dice pool If you have Channelling trained, you may add an additional to the dice pool</p><p>You must spend 1 power per added to the pool in this way</p>"
+      "special": "<p><strong>Special:</strong> After you are declared as a target of a <em>Supernatural</em> or <em>Spell</em> action, you may place 2 recharge tokens on this card to add {Dm} to that action’s dice pool If you have Channelling trained, you may add an additional to the dice pool</p><p>You must spend 1 power per added to the pool in this way</p>"
     },
     "reckless": {
       "rechargeRating": 2,
@@ -50,7 +50,7 @@
       "check": "No Check Required",
       "art": null,
       "requirements": "<p>Willpower 3+, sufficient power (see below)</p>",
-      "special": "<p><strong>Special:</strong> After you are declared as a target of a <em>Supernatural</em> or <em>Spell</em> action, you may place 2 recharge tokens on this card to add [[DM]] to that action’s dice pool If you have Channelling trained, you may add an additional to the dice pool</p><p>You must spend 1 power per added to the pool in this way</p>"
+      "special": "<p><strong>Special:</strong> After you are declared as a target of a <em>Supernatural</em> or <em>Spell</em> action, you may place 2 recharge tokens on this card to add {Dm} to that action’s dice pool If you have Channelling trained, you may add an additional to the dice pool</p><p>You must spend 1 power per added to the pool in this way</p>"
     },
     "rechargeTokens": 0,
     "type": "spell"

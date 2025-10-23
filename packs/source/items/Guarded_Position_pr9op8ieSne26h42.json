@@ -24,11 +24,11 @@
         "success": [
           {
             "symbolAmount": 1,
-            "description": "<p>Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+            "description": "<p>Until the start of your next turn, add {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
           },
           {
             "symbolAmount": 3,
-            "description": "<p>Until the start of your next turn, add [[DM]] [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+            "description": "<p>Until the start of your next turn, add {Dm} {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
           }
         ],
         "boon": [
@@ -69,11 +69,11 @@
         "success": [
           {
             "symbolAmount": 1,
-            "description": "<p>Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+            "description": "<p>Until the start of your next turn, add {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
           },
           {
             "symbolAmount": 3,
-            "description": "<p>Until the start of your next turn, add [[DM]] [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+            "description": "<p>Until the start of your next turn, add {Dm} {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
           }
         ],
         "boon": [

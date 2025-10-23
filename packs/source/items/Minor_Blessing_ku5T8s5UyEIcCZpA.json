@@ -26,7 +26,7 @@
       "traits": "Basic, Minor, Rank 0, Reaction",
       "check": "No Check Required",
       "requirements": "<p>2 favour, not engaged with an enemy</p>",
-      "special": "<p><strong>Special:</strong> After an ally within close range declares an action, you may spend 2 favour and place 2 recharge tokens on this card to add [[DF]] to his dice pool</p>",
+      "special": "<p><strong>Special:</strong> After an ally within close range declares an action, you may spend 2 favour and place 2 recharge tokens on this card to add {Df} to his dice pool</p>",
       "uniqueEffect": "<p><strong>Effect:</strong> You whisper a prayer for an ally, invoking good fortune on whatever he attempts</p>"
     },
     "reckless": {
@@ -51,7 +51,7 @@
       "traits": "Basic, Minor, Rank 0, Reaction",
       "check": "No Check Required",
       "requirements": "<p>2 favour, not engaged with an enemy</p>",
-      "special": "<p><strong>Special:</strong> After an ally within close range declares an action, you may spend 2 favour and place 2 recharge tokens on this card to add [[DF]] to his dice pool</p>",
+      "special": "<p><strong>Special:</strong> After an ally within close range declares an action, you may spend 2 favour and place 2 recharge tokens on this card to add {Df} to his dice pool</p>",
       "uniqueEffect": "<p><strong>Effect:</strong> You whisper a prayer for an ally, invoking good fortune on whatever he attempts</p>"
     },
     "rechargeTokens": 0,

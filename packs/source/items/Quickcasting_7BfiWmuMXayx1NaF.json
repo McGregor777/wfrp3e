@@ -26,7 +26,7 @@
       "traits": "Basic",
       "check": "No Check Required",
       "requirements": "<p>This special ability is available to all wizards and does not need to be acquired specially</p>",
-      "special": "<p><strong>Special:</strong> Normally, a character can only perform the action listed on one action card during his turn. However, spellcasters can attempt to both channel power and cast a spell on the same turn, if they are willing to accept more risk. For a character to cast a spell during the same turn the character channels, the player must add one extra challenge die [[DChal]] to the check to cast the spell</p>"
+      "special": "<p><strong>Special:</strong> Normally, a character can only perform the action listed on one action card during his turn. However, spellcasters can attempt to both channel power and cast a spell on the same turn, if they are willing to accept more risk. For a character to cast a spell during the same turn the character channels, the player must add one extra challenge die {Dchal} to the check to cast the spell</p>"
     },
     "reckless": {
       "rechargeRating": 0,
@@ -50,7 +50,7 @@
       "traits": "Basic",
       "check": "No Check Required",
       "requirements": "<p>This special ability is available to all wizards and does not need to be acquired specially</p>",
-      "special": "<p><strong>Special:</strong> Normally, a character can only perform the action listed on one action card during his turn. However, spellcasters can attempt to both channel power and cast a spell on the same turn, if they are willing to accept more risk. For a character to cast a spell during the same turn the character channels, the player must add one extra challenge die [[DChal]] to the check to cast the spell</p>"
+      "special": "<p><strong>Special:</strong> Normally, a character can only perform the action listed on one action card during his turn. However, spellcasters can attempt to both channel power and cast a spell on the same turn, if they are willing to accept more risk. For a character to cast a spell during the same turn the character channels, the player must add one extra challenge die {Dchal} to the check to cast the spell</p>"
     },
     "rechargeTokens": 0,
     "type": "spell"

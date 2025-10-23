@@ -5,7 +5,7 @@
   "_id": "0MdYpo3lvvLgPwvZ",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Wood elves may ignore terrain-based manoeuvre penalties and up to [[DM]] [[DM]] misfortune penalties to movement and actions performed while in woodland terrain.</p>"
+    "description": "<p>Wood elves may ignore terrain-based manoeuvre penalties and up to {Dm} {Dm} misfortune penalties to movement and actions performed while in woodland terrain.</p>"
   },
   "effects": [],
   "sort": 0,

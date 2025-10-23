@@ -18,13 +18,13 @@
       },
       "check": "Intuition (Int)",
       "requirements": "<p>None</p>",
-      "special": "<p><strong>Special:</strong> Add [[DChal]] to this action’s dice pool if you are engaged with an enemy</p>",
+      "special": "<p><strong>Special:</strong> Add {Dchal} to this action’s dice pool if you are engaged with an enemy</p>",
       "uniqueEffect": "",
       "effects": {
         "success": [
           {
             "symbolAmount": 1,
-            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
+            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
             "script": "outcome.fatigue--;\noutcome.stress--;"
           }
         ],
@@ -60,13 +60,13 @@
       },
       "check": "Intuition (Int)",
       "requirements": "<p>None</p>",
-      "special": "<p><strong>Special:</strong> Add [[DChal]] to this action’s dice pool if you are engaged with an enemy</p>",
+      "special": "<p><strong>Special:</strong> Add {Dchal} to this action’s dice pool if you are engaged with an enemy</p>",
       "uniqueEffect": "",
       "effects": {
         "success": [
           {
             "symbolAmount": 1,
-            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add [[DM]] to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
+            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
             "script": "outcome.fatigue--;\noutcome.stress--;"
           }
         ],

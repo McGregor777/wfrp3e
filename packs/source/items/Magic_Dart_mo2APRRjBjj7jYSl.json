@@ -45,7 +45,7 @@
       "art": null,
       "traits": "Petty Magic, Basic",
       "check": "Spellcraft (Int)",
-      "requirements": "<p>3 power, target within medium range. If you are engaged with an enemy, add [[dchal]] to your dice pool</p>"
+      "requirements": "<p>3 power, target within medium range. If you are engaged with an enemy, add {dchal]] to your dice pool</p>"
     },
     "reckless": {
       "rechargeRating": 0,
@@ -88,7 +88,7 @@
       "art": null,
       "traits": "Petty Magic, Basic",
       "check": "Spellcraft (Int)",
-      "requirements": "<p>3 power, target within medium range. If you are engaged with an enemy, add [[dchal]] to your dice pool</p>"
+      "requirements": "<p>3 power, target within medium range. If you are engaged with an enemy, add {dchal]] to your dice pool</p>"
     },
     "rechargeTokens": 0,
     "type": "spell"
