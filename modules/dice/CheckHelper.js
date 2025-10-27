@@ -503,7 +503,7 @@ export default class CheckHelper
 					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetStress};
 			}
 
-			targetActor.update(targetUpdates);
+			await targetActor.update(targetUpdates);
 		}
 
 		if(actor) {
@@ -528,14 +528,14 @@ export default class CheckHelper
 			if(outcome.power > 0 || outcome.power < 0)
 				actorUpdates.system.power = actor.system.power + outcome.power;
 
-			actor.update(actorUpdates);
+			await actor.update(actorUpdates);
 		}
 
 		chatMessageUpdates.rolls[0].options.checkData.outcome = outcome;
-		chatMessage.update(chatMessageUpdates);
+		await chatMessage.update(chatMessageUpdates);
 
 		if(roll.totalSymbols.successes && checkData?.action)
-			await fromUuid(checkData.action).then(action => action.exhaustAction(checkData.face));
+			await fromUuid(checkData.action).then(async action => await action.exhaustAction(checkData.face));
 	}
 
 	/**
