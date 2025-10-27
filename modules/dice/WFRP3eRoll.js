@@ -233,6 +233,52 @@ export default class WFRP3eRoll extends Roll
 	}
 
 	/**
+	 * Adds a dice pool to the roll, adding the new results to the existing ones.
+	 * @param {DicePool} dicePool The dice pool to add to the roll.
+	 * @param {object} [options]
+	 * @returns {Promise<WFRP3eRoll>} The modified roll.
+	 */
+	async addDicePool(dicePool, options = {})
+	{
+		const addRoll = await WFRP3eRoll.create(dicePool.formula, {}).roll(),
+			  terms = foundry.utils.deepClone(this.terms);
+		for(const addDiceTerm of addRoll.dice) {
+			const newResults = addDiceTerm.results,
+				  termIndex = terms.findIndex(oldTerm => {
+					  return oldTerm.constructor.name === addDiceTerm.constructor.name;
+				  });
+
+			if(termIndex !== -1) {
+				newResults.unshift(...terms[termIndex].results);
+				terms.splice(termIndex, 1, new addDiceTerm.constructor({number: newResults.length, results: newResults}));
+			}
+			else {
+				if(terms.length > 0)
+					terms.push(new OperatorTerm({operator: "+"}));
+
+				terms.push(new addDiceTerm.constructor({number: newResults.length, results: newResults}));
+			}
+		}
+
+		const newRoll = await WFRP3eRoll.fromTerms(terms, this.options);
+		newRoll.effects = this.effects;
+
+		// If Dice So Nice! module is enabled, hide irrelevant dice from the 3D roll.
+		for(const diceTerm of newRoll.dice) {
+			const additionalDiceAmount = dicePool.dice[diceTerm.constructor.NAME];
+
+			for(let i = 0; i < diceTerm.results.length - additionalDiceAmount; i++)
+				diceTerm.results[i].hidden = true;
+		}
+		game.dice3d.showForRoll(newRoll);
+
+		if(options.chatMessage)
+			await options.chatMessage.update({rolls: [newRoll]});
+
+		return newRoll;
+	}
+
+	/**
 	 * Rerolls specific dice from a roll.
 	 * @param {string[]} diceTypes The list of dice types to reroll.
 	 * @param {object} [options] Chat message options.
