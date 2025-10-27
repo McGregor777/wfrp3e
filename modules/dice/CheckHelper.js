@@ -51,10 +51,10 @@ export default class CheckHelper
 				  });
 
 		if(triggeredItems.length > 0) {
-			let selectedItemUuid = await TalentSelector.wait(triggeredItems);
+			const selectedItemUuids = await TalentSelector.wait({items: triggeredItems});
 
-			if(selectedItemUuid) {
-				const selectedTalent = await fromUuid(selectedItemUuid),
+			if(selectedItemUuids[0]) {
+				const selectedTalent = await fromUuid(selectedItemUuids[0]),
 					  effects =  selectedTalent.effects.filter(effect => effect.system.type === "onPostCheckTrigger");
 
 				for(const effect of effects) {
@@ -66,8 +66,8 @@ export default class CheckHelper
 
 				chatMessage.update({
 					"options.checkData.triggeredItems": checkData.triggeredItems
-						? checkData.triggeredItems.push(selectedItemUuid)
-						: [selectedItemUuid]}
+						? checkData.triggeredItems.push(selectedItemUuids[0])
+						: [selectedItemUuids[0]]}
 				);
 			}
 		}
