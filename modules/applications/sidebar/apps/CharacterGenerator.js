@@ -235,7 +235,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		if(!this.steps.investCreationPoints)
 			tabs.attributes.cssClass += " hidden";
 
-		if(this.steps.gameOfTwentyQuestions)
+		if(!this.steps.gameOfTwentyQuestions)
 			tabs.background.cssClass += " hidden";
 
 		if((character.itemTypes.ability.length + character.itemTypes.talent.length) <= 0)
