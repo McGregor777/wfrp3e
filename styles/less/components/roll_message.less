@@ -17,6 +17,20 @@
 				& .roll {
 					float: left;
 					width: 52px;
+
+					& > .add-dice-pool {
+						color: var(--color-dark-3);
+						border: 2px solid var(--color-dark-6);
+						border-radius: 8px;
+						display: block;
+						text-align: center;
+
+						&:after {
+							content: "+";
+							font-size: var(--font-size-48);
+							line-height: 48px;
+						}
+					}
 				}
 			}
 		}

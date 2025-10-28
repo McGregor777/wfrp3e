@@ -21,19 +21,20 @@ export default class TalentSelector extends AbstractSelector
 		super(options);
 
 		for(const [key, type] of Object.entries(CONFIG.WFRP3e.talentTypes))
-			if(options.freeItemTypes.includes(key))
+			if(options.freeItemTypes?.includes(key))
 				this.types[key] = type;
 			else if(options.items.find(item => item.system.type === key)){
 				this.types[key] = type;
 				this.regularTypes.push(key);
 			}
 
-		for(const type of options.freeItemTypes) {
-			this.freeItems[type] = null;
+		if(Array.isArray(options.freeItemTypes))
+			for(const type of options.freeItemTypes) {
+				this.freeItems[type] = null;
 
-			if(type === "insanity")
-				this.types.insanity = "INSANITY.plural";
-		}
+				if(type === "insanity")
+					this.types.insanity = "INSANITY.plural";
+			}
 	}
 
 	/** @inheritDoc */

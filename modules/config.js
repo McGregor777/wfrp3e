@@ -1092,7 +1092,7 @@ export const WFRP3e = {
 		onPreCheckTrigger: "SCRIPT.TYPES.onPreCheckTrigger",
 		onStartingSkillTrainingSelection: "SCRIPT.TYPES.onStartingSkillTrainingSelection",
 		onStartingTalentSelection: "SCRIPT.TYPES.onStartingTalentSelection",
-		onTargettingCheckPreparation: "SCRIPT.TYPES.onTargettingCheckPreparation",
+		onTargetingCheckPreparation: "SCRIPT.TYPES.onTargetingCheckPreparation",
 		onTrigger: "SCRIPT.TYPES.onTrigger",
 		requirementCheck: "SCRIPT.TYPES.requirementCheck"
 	},

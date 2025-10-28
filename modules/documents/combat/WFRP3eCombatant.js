@@ -1,4 +1,4 @@
-import CheckBuilder from "../../applications/dice/CheckBuilder.js";
+import DicePool from "../../dice/DicePool.js";
 
 /**
  * Extends the base Combatant document.
@@ -29,7 +29,7 @@ export default class WFRP3eCombatant extends Combatant
 		return String(
 			CONFIG.Combat.initiative.formula
 			|| game.system.initiative
-			|| (await CheckBuilder.prepareInitiativeCheck(this.actor, this.combat)).formula
+			|| (await DicePool.createFromInitiative(this.actor, this.combat)).formula
 		);
 	}
 }
