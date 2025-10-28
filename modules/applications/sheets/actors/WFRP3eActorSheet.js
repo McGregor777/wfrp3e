@@ -20,13 +20,13 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 			adjustStanceMeter: {handler: this.#adjustStanceMeter, buttons: [0, 2]},
 			deleteDocument: this.#deleteDocument,
 			editDocument: this.#editDocument,
-			expandDocument: this.#expandDocument,
 			flip: this.#flip,
 			openFilters: this.#openFilters,
 			rollCharacteristicCheck: this.#rollCharacteristicCheck,
 			rollItem: this.#rollItem,
 			useDocument: {handler:  this.#useDocument, buttons: [0, 2]},
-			switchDisplayMode: this.#switchItemsDisplayMode
+			switchDisplayMode: this.#switchItemsDisplayMode,
+			toggleItemDetails: this.#toggleItemDetails
 		},
 		classes: ["wfrp3e", "sheet", "actor"],
 		form: {submitOnChange: true},
@@ -327,41 +327,13 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 		}, {
 			name: "Expand",
 			icon: '<i class="fa-solid fa-chevron-down"></i>',
-			condition: html => html.closest(".row"),
-			callback: async html => {
-				const itemElement = html.closest(".item[data-uuid]");
-
-				if(itemElement.classList.contains("expanded")) {
-					// Toggle expansion for an item
-					const detailsElement = itemElement.querySelector(".details");
-
-					$(detailsElement).slideUp(200, () => detailsElement.remove());
-				}
-				else {
-					try {
-						// Add a div with the item's details below the row.
-						const item = await fromUuid(itemElement.dataset.uuid),
-							  detailsElement = document.createElement("div"),
-							  options = {},
-							  activeFace = itemElement.querySelector(".active[data-face]")?.dataset.face;
-
-						if(activeFace)
-							options.face = activeFace;
-
-						detailsElement.classList.add("details");
-						detailsElement.innerHTML = await item.getDetails(options);
-
-						itemElement.append(detailsElement);
-						$(detailsElement).hide();
-						$(detailsElement).slideDown(200);
-					}
-					catch(error) {
-						console.error(error);
-					}
-				}
-
-				itemElement.classList.toggle("expanded");
-			}
+			condition: html => html.closest(".row:not(.expanded)"),
+			callback: async html => WFRP3eActorSheet.#toggleItemDetails(null, html)
+		}, {
+			name: "Collapse",
+			icon: '<i class="fa-solid fa-chevron-up"></i>',
+			condition: html => html.closest(".row.expanded"),
+			callback: async html => WFRP3eActorSheet.#toggleItemDetails(null, html)
 		}, {
 			name: "ACTOR.ACTIONS.flip",
 			icon: '<i class="fa-solid fa-undo"></i>',
@@ -548,48 +520,47 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 	}
 
 	/**
-	 * Appends an element with additional details about a Document, or removes the element if it already exists.
+	 * Appends an element with additional details about an item, or removes the element if it already exists.
 	 * @param {PointerEvent} event
 	 * @param {HTMLElement} target
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	static async #expandDocument(event, target)
+	static async #toggleItemDetails(event, target)
 	{
-		const documentElement = target.closest(".item");
+		const itemElement = target.closest(".item[data-uuid]"),
+			  toggleLinks = itemElement.querySelectorAll('a[data-action="#toggleItemDetails"]');
 
-		if(documentElement.classList.contains("row")) {
-			const icon = documentElement.querySelector('[data-action="expandDocument"] .fas');
+		if(itemElement.classList.contains("expanded")) {
+			// Toggle expansion for an item
+			const detailsElement = itemElement.querySelector(".details");
+			$(detailsElement).slideUp(200, () => detailsElement.remove());
 
-			if(documentElement.classList.contains("expanded")) {
-				// Toggle expansion for an item
-				const detailsElement = documentElement.querySelector(".details");
-
-				$(detailsElement).slideUp(200, () => detailsElement.remove());
-
-				icon.classList.remove("fa-chevron-up");
-				icon.classList.add("fa-chevron-down");
-			}
-			else {
-				// Add a div with the item's details below the row.
-				const detailsElement = document.createElement("div");
-				detailsElement.classList.add("details");
-				detailsElement.appendChild(
-					document.createTextNode(
-						await this._getByUuid(event).then(document => document.getDetails())
-					)
-				);
-
-				documentElement.append(detailsElement);
-				$(detailsElement).hide();
-				$(detailsElement).slideDown(200);
-
-				icon.classList.remove("fa-chevron-down");
-				icon.classList.add("fa-chevron-up")
-			}
-
-			documentElement.classList.toggle("expanded");
+			for(const element of toggleLinks)
+				element.dataset.tooltip = game.i18n.localize("Expand");
 		}
+		else {
+			// Add the item details below the row.
+			const item = await fromUuid(itemElement.dataset.uuid),
+				  detailsElement = document.createElement("div"),
+				  options = {},
+				  activeFace = itemElement.querySelector(".active[data-face]")?.dataset.face;
+
+			if(activeFace)
+				options.face = activeFace;
+
+			detailsElement.classList.add("details");
+			detailsElement.innerHTML = await item.getDetails(options);
+
+			itemElement.append(detailsElement);
+			$(detailsElement).hide();
+			$(detailsElement).slideDown(200);
+
+			for(const element of toggleLinks)
+				element.dataset.tooltip = game.i18n.localize("Collapse");
+		}
+
+		itemElement.classList.toggle("expanded");
 	}
 
 	/**

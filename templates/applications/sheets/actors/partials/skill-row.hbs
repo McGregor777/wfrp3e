@@ -1,12 +1,14 @@
 <div class="item skill row" data-uuid="{{skill.uuid}}">
 	<div class="content">
 		<div class="name">
-			{{#if @root.editable}}
-				<a data-action="rollItem" data-tooltip="{{localize 'ACTOR.ACTIONS.rollSkillCheck'}}">
-					<span>{{skill.name}}</span> <span class="fas fa-dice-d20"></span>
-				</a>
-			{{else}}
+			<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
 				<span>{{skill.name}}</span>
+			</a>
+
+			{{#if @root.editable}}
+				<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
+					<span class="fas fa-dice-d20"></span>
+				</a>
 			{{/if}}
 		</div>
 
@@ -43,7 +45,7 @@
 					<span class="fas fa-ellipsis-vertical"></span>
 				</a>
 			{{else}}
-				<a data-action="expandDocument" data-tooltip="{{localize 'Expand'}}">
+				<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
 					<span class="fas fa-chevron-down"></span>
 				</a>
 			{{/if}}

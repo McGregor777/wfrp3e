@@ -1,22 +1,20 @@
 <div class="item weapon row" data-uuid="{{weapon.uuid}}">
 	<div class="content">
 		<div class="image">
-			{{#if @root.editable}}
-				<a data-action="rollItem" data-tooltip="{{localize 'ACTOR.ACTIONS.rollItem'}}">
-					<img src="{{weapon.img}}" alt="{{weapon.name}}" width="40" height="40" />
-				</a>
-			{{else}}
-				<span><img src="{{weapon.img}}" alt="{{weapon.name}}" width="40" height="40" /></span>
-			{{/if}}
+			<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
+				<img src="{{weapon.img}}" alt="{{weapon.name}}" width="40" height="40" />
+			</a>
 		</div>
 
 		<div class="name">
+			<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
+				<span>{{weapon.name}}</span>
+			</a>
+
 			{{#if @root.editable}}
 				<a data-action="rollItem" data-tooltip="{{localize 'ACTOR.ACTIONS.rollItem'}}">
-					<span>{{weapon.name}}</span> <span class="fas fa-dice-d20"></span>
+					<span class="fas fa-dice-d20"></span>
 				</a>
-			{{else}}
-				<span>{{weapon.name}}</span>
 			{{/if}}
 		</div>
 
@@ -76,7 +74,7 @@
 					<span class="fas fa-ellipsis-vertical"></span>
 				</a>
 			{{else}}
-				<a data-action="expandDocument" data-tooltip="{{localize 'Expand'}}">
+				<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
 					<span class="fas fa-chevron-down"></span>
 				</a>
 			{{/if}}

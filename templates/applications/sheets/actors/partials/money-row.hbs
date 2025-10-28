@@ -1,23 +1,15 @@
 <div class="item money row" data-uuid="{{money.uuid}}">
 	<div class="content">
 		<div class="image">
-			{{#if @root.editable}}
-				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-					<img class="type" src="{{money.img}}" alt="{{money.name}}" width="40" height="40" />
-				</a>
-			{{else}}
-				<span><img class="type" src="{{money.img}}" alt="{{money.name}}" width="40" height="40" /></span>
-			{{/if}}
+			<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
+				<img class="type" src="{{money.img}}" alt="{{money.name}}" width="40" height="40" />
+			</a>
 		</div>
 
 		<div class="name">
-			{{#if @root.editable}}
-				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-					<span>{{money.name}}</span>
-				</a>
-			{{else}}
+			<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
 				<span>{{money.name}}</span>
-			{{/if}}
+			</a>
 		</div>
 
 		<hr />
@@ -46,7 +38,7 @@
 					<span class="fas fa-ellipsis-vertical"></span>
 				</a>
 			{{else}}
-				<a data-action="expandDocument" data-tooltip="{{localize 'Expand'}}">
+				<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
 					<span class="fas fa-chevron-down"></span>
 				</a>
 			{{/if}}
