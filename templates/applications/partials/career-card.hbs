@@ -20,7 +20,7 @@
 				:
 				{{#each item.system.raceRestrictions}}
 					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
-						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." this))}}
 					{{else}}
 						{{localize (concat "RACE." this)}}{{#unless @last}}, {{/unless}}
 					{{/if}}
@@ -157,7 +157,7 @@
 				:
 				{{#each item.system.raceRestrictions}}
 					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
-						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." this))}}
 					{{else}}
 						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
 					{{/if}}
