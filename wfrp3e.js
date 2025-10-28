@@ -1,4 +1,5 @@
 import {WFRP3e} from "./modules/config.js";
+import CheckBuilder from "./modules/applications/dice/CheckBuilder.js";
 import WFRP3eEffectConfig from "./modules/applications/sheets/WFRP3eEffectConfig.js";
 import WFRP3eCharacterSheet from "./modules/applications/sheets/actors/WFRP3eCharacterSheet.js";
 import WFRP3eCreatureSheet from "./modules/applications/sheets/actors/WFRP3eCreatureSheet.js";
@@ -214,6 +215,11 @@ Hooks.once("init", async () => {
 
 //#TODO Transfer this behaviour into a WFRP3eChatLog (if possible).
 Hooks.on("renderChatMessage", (message, html, context) => {
+	html.find(".dice-rolls .add-dice-pool").click(async (event) => {
+		event.stopPropagation();
+		message.rolls[0].addDicePool(await CheckBuilder.wait(), {chatMessage: message});
+	});
+
 	html.find(".roll-effects:not(.disabled) .effect-toggle").click((event) => {
 		event.stopPropagation();
 
