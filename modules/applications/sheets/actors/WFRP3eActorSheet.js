@@ -308,16 +308,16 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 		return [{
 			name: "ACTOR.ACTIONS.rollItem",
 			icon: '<i class="fa-solid fa-dice-d20"></i>',
-			condition: async li => {
-				const document = await fromUuidSync(li.closest("[data-uuid]").dataset.uuid);
+			condition: async html => {
+				const document = await fromUuid(html.closest("[data-uuid]").dataset.uuid);
 				return this.isEditable
 					&& document.canUserModify(game.user, "update")
 					&& ["action", "skill", "weapon"].includes(document.type)
 			},
-			callback: async li => {
-				const documentElement = li.closest("[data-uuid]"),
+			callback: async html => {
+				const documentElement = html.closest("[data-uuid]"),
 					  options = {},
-					  face = li.closest(".face")?.dataset.face;
+					  face = html.querySelector(".face")?.dataset.face;
 
 				if(face)
 					options.face = face;
@@ -327,9 +327,9 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 		}, {
 			name: "Expand",
 			icon: '<i class="fa-solid fa-chevron-down"></i>',
-			condition: li => li.closest(".row"),
-			callback: async li => {
-				const itemElement = li.closest(".item[data-uuid]");
+			condition: html => html.closest(".row"),
+			callback: async html => {
+				const itemElement = html.closest(".item[data-uuid]");
 
 				if(itemElement.classList.contains("expanded")) {
 					// Toggle expansion for an item
@@ -365,29 +365,29 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 		}, {
 			name: "ACTOR.ACTIONS.flip",
 			icon: '<i class="fa-solid fa-undo"></i>',
-			condition: li => li.closest(".face") || li.querySelector(".face"),
-			callback: async li => {
-				const documentElement = li.closest(".item"),
+			condition: html => html.closest(".face") || html.querySelector(".face"),
+			callback: async html => {
+				const documentElement = html.closest(".item"),
 					  activeFaceElements = documentElement.querySelectorAll(".face.active"),
 					  inactiveFaceElements = documentElement.querySelectorAll(".face:not(.active)");
 
-				activeFaceElements.forEach(element => element.classList.remove("active"));
-				inactiveFaceElements.forEach(element => element.classList.add("active"));
+				activeFaceElements.forEach(html => html.classList.remove("active"));
+				inactiveFaceElements.forEach(html => html.classList.add("active"));
 			}
 		}, {
 			name: "ACTOR.ACTIONS.editDocument",
 			icon: '<i class="fa-solid fa-pen-to-square"></i>',
-			condition: li => this.isEditable
-				&& fromUuidSync(li.closest("[data-uuid]").dataset.uuid).canUserModify(game.user, "update"),
-			callback: async li => await fromUuid(li.closest("[data-uuid]").dataset.uuid)
+			condition: html => this.isEditable
+				&& fromUuidSync(html.closest("[data-uuid]").dataset.uuid).canUserModify(game.user, "update"),
+			callback: async html => await fromUuid(html.closest("[data-uuid]").dataset.uuid)
 				.then(document => document.sheet.render(true))
 		}, {
 			name: "Delete",
 			icon: '<i class="fa-solid fa-trash"></i>',
-			condition: li => this.isEditable
-				&& fromUuidSync(li.closest("[data-uuid]").dataset.uuid).canUserModify(game.user, "update"),
-			callback: async li => {
-				const document = await fromUuid(li.closest("[data-uuid]").dataset.uuid);
+			condition: html => this.isEditable
+				&& fromUuidSync(html.closest("[data-uuid]").dataset.uuid).canUserModify(game.user, "update"),
+			callback: async html => {
+				const document = await fromUuid(html.closest("[data-uuid]").dataset.uuid);
 
 				await foundry.applications.api.DialogV2.confirm({
 					window: {title: game.i18n.localize("APPLICATION.TITLE.DeleteItem")},
