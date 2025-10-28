@@ -626,9 +626,9 @@ export default class WFRP3eActorSheet extends foundry.applications.api.Handlebar
 	 * @param {HTMLElement} target
 	 * @private
 	 */
-	static #rollCharacteristicCheck(event, target)
+	static async #rollCharacteristicCheck(event, target)
 	{
-		this.actor.performCharacteristicCheck(target.dataset.characteristic);
+		await this.actor.performCharacteristicCheck(target.dataset.characteristic);
 	}
 
 	/**

@@ -65,6 +65,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 	};
 
 	/**
+	 * The dice pool that is being built by the Check Builder.
 	 * @type {DicePool}
 	 */
 	dicePool;
@@ -339,193 +340,27 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 	 * @param {SubmitEvent} event The originating form submission event.
 	 * @param {HTMLFormElement} form The form element that was submitted.
 	 * @param {FormDataExtended} formData Processed data for the submitted form.
-	 * @returns {Promise<void>}
+	 * @returns {DicePool} The built dice pool.
 	 * @private
 	 */
-	static async #onCheckBuilderSubmit(event, form, formData)
+	static #onCheckBuilderSubmit(event, form, formData)
 	{
-		await this.dicePool.roll();
+		this.options.submit(this.dicePool);
 	}
 
 	/**
-	 * Prepares a Characteristic check then opens the Check Builder afterwards.
-	 * @param {WFRP3eActor}	actor The WFRP3eActor performing the check.
-	 * @param {Object} characteristic The Characteristic used for the check.
-	 * @param {Object} [options]
-	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {Promise<void>} The DicePool for a characteristic check.
+	 * Spawns a Check Builder and waits for it to be dismissed or submitted.
+	 * @param {ApplicationConfiguration} [config] Configuration of the Check Builder instance
+	 * @returns {Promise<any>} Resolves to the built dice pool. If the dialog was dismissed, the Promise resolves to null.
 	 */
-	static async prepareCharacteristicCheck(actor, characteristic, {flavor = null, sound = null} = {})
+	static async wait(config = {})
 	{
-		const stance = actor.system.stance.current,
-			  checkData = {
-				  actor: actor.uuid,
-				  characteristic: characteristic.name,
-				  challengeLevel: "simple",
-				  stance,
-				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
-			  },
-			  startingPool = {
-				  dice: {
-					  characteristic: characteristic.rating - Math.abs(stance),
-					  fortune: characteristic.fortune,
-					  expertise: 0,
-					  conservative: stance < 0 ? Math.abs(stance) : 0,
-					  reckless: stance > 0 ? stance : 0,
-					  challenge: 0,
-					  misfortune: 0
-				  }
-			  };
-
-		await CheckHelper.triggerCheckPreparationEffects(actor, checkData, startingPool);
-		await new CheckBuilder({
-			dicePool: new DicePool(startingPool, {checkData, flavor, sound})
-		}).render(true);
-	}
-
-	/**
-	 * Prepares a Skill check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor}	actor The WFRP3eActor performing the check.
-	 * @param {WFRP3eItem} skill The Skill used for the check.
-	 * @param {Object} [options]
-	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {Promise<void>} The DicePool for an skill check.
-	 */
-	static async prepareSkillCheck(actor, skill, {flavor = null, sound = null} = {})
-	{
-		const characteristic = actor.system.characteristics[skill.system.characteristic],
-			  stance = actor.system.stance.current,
-			  checkData = {
-				  actor: actor.uuid,
-				  characteristic: skill.system.characteristic,
-				  challengeLevel: "simple",
-				  skill: skill.uuid,
-				  stance,
-				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
-			  },
-			  startingPool = {
-				  dice: {
-					  characteristic: characteristic.rating - Math.abs(stance),
-					  fortune: characteristic.fortune,
-					  expertise: skill.system.trainingLevel,
-					  conservative: stance < 0 ? Math.abs(stance) : 0,
-					  reckless: stance > 0 ? stance : 0,
-					  challenge: 0,
-					  misfortune: 0
-				  }
-			  };
-
-		await CheckHelper.triggerCheckPreparationEffects(actor, checkData, startingPool);
-
-		await new CheckBuilder({
-			dicePool: new DicePool(startingPool, {checkData, flavor, sound})
-		}).render(true);
-	}
-
-	/**
-	 * Prepares an Action check then opens the Dice Pool Builder afterwards.
-	 * @param {WFRP3eActor} actor The WFRP3eActor using the Action.
-	 * @param {WFRP3eItem} action The Action that is used.
-	 * @param {string} face The Action face.
-	 * @param {Object} [options]
-	 * @param {WFRP3eItem} [options.weapon] The weapon used alongside the Action.
-	 * @param {String} [options.flavor] Some flavor text to add to the Action check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Action check completion.
-	 * @returns {Promise<void>} The DicePool for an action check.
-	 */
-	static async prepareActionCheck(actor, action, face, {weapon = null, flavor = null, sound = null} = {})
-	{
-		const match = action.system[face].check.match(new RegExp(
-			"(([\\p{L}\\s]+) \\((\\p{L}+)\\))( " +
-			game.i18n.localize("ACTION.CHECK.against") +
-			"\\.? ([\\p{L}\\s]+))?", "u")
-		);
-		let skill = null,
-			characteristicName = skill?.system.characteristic ?? "strength";
-
-		if(match) {
-			skill = actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
-			// Either get the Characteristic specified on the Action's check, or use the Characteristic used by the Skill.
-			characteristicName = Object.entries(CONFIG.WFRP3e.characteristics).find((characteristic) => {
-				return game.i18n.localize(characteristic[1].abbreviation) === match[3];
-			})[0] ?? characteristicName;
-		}
-
-		const characteristic = actor.system.characteristics[characteristicName],
-			  stance = actor.system.stance.current,
-			  checkData = {
-				  action: action.uuid,
-				  actor: actor.uuid,
-				  characteristic: characteristicName,
-				  challengeLevel: (["melee", "ranged"].includes(action.system.type) ? "easy" : "simple"),
-				  face,
-				  skill: skill?.uuid,
-				  stance,
-				  targets: [...game.user.targets].map(target => target.document.actor.uuid)
-			  },
-			  startingPool = {
-				  dice: {
-					  characteristic: characteristic?.rating - Math.abs(stance) ?? 0,
-					  fortune: characteristic?.fortune ?? 0,
-					  expertise: skill?.system.trainingLevel ?? 0,
-					  conservative: stance < 0 ? Math.abs(stance) : 0,
-					  reckless: stance > 0 ? stance : 0,
-					  challenge: CONFIG.WFRP3e.challengeLevels[checkData.challengeLevel].challengeDice
-						  + action.system[face].difficultyModifiers.challengeDice,
-					  misfortune: action.system[face].difficultyModifiers.misfortuneDice
-						  + (match && match[5] === game.i18n.localize("ACTION.CHECK.targetDefence")
-						  	&& checkData.targets.length > 0
-								  ? await fromUuid(checkData.targets[0]).then(actor => actor.system.totalDefence)
-								  : 0)
-				  }
-			  }
-
-		if(weapon)
-			checkData.weapon = weapon;
-
-		await CheckHelper.triggerCheckPreparationEffects(actor, checkData, startingPool);
-
-		await new CheckBuilder({
-			dicePool: new DicePool(startingPool, {checkData, flavor, sound})
-		}).render(true);
-	}
-
-	/**
-	 * Prepares an initiative check.
-	 * @param {WFRP3eActor} actor The Character making the initiative check.
-	 * @param {WFRP3eCombat} combat The Combat document associated with the initiative check.
-	 * @param {Object} [options]
-	 * @param {String} [options.flavor] Some flavor text to add to the Skill check's outcome description.
-	 * @param {String} [options.sound] Some sound to play after the Skill check completion.
-	 * @returns {DicePool} The DicePool for an initiative check.
-	 */
-	static async prepareInitiativeCheck(actor, combat, {flavor = null, sound = null} = {})
-	{
-		const characteristic = actor.system.characteristics[combat.initiativeCharacteristic],
-			  stance = actor.system.stance.current ?? actor.system.stance,
-			  checkData = {
-				  actor: actor.uuid,
-				  characteristic,
-				  challengeLevel: "simple",
-				  combat,
-				  stance
-			  },
-			  startingPool = {
-				  dice: {
-					  characteristic: characteristic.rating - Math.abs(stance),
-					  fortune: characteristic.fortune,
-					  expertise: 0,
-					  conservative: stance < 0 ? Math.abs(stance) : 0,
-					  reckless: stance > 0 ? stance : 0,
-					  challenge: 0,
-					  misfortune: 0
-				  }
-			  }
-
-		await CheckHelper.triggerCheckPreparationEffects(actor, checkData, startingPool);
-
-		return new DicePool(startingPool, {checkData, flavor, sound});
+		return new Promise(async (resolve, reject) => {
+			// Wrap the submission handler with Promise resolution.
+			config.submit = async result => {resolve(result)};
+			const builder = new this(config);
+			builder.addEventListener("close", event => reject(), {once: true});
+			await builder.render({force: true});
+		});
 	}
 }

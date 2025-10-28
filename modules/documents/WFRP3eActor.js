@@ -5,6 +5,7 @@ import SkillUpgrader from "../applications/apps/selectors/SkillUpgrader.js";
 import CareerAdvanceDialog from "../applications/apps/CareerAdvanceDialog.js";
 import CheckBuilder from "../applications/dice/CheckBuilder.js";
 import PartyEventEditor from "../applications/apps/PartyEventEditor.js";
+import DicePool from "../dice/DicePool.js";
 import WFRP3eEffect from "./WFRP3eEffect.js";
 import {capitalize} from "../helpers.js";
 
@@ -80,12 +81,15 @@ export default class WFRP3eActor extends Actor
 		}, {parent: this});
 	}
 
-	performCharacteristicCheck(characteristic)
+	async performCharacteristicCheck(characteristic)
 	{
-		CheckBuilder.prepareCharacteristicCheck(
-			this,
-			{name: characteristic, ...this.system.characteristics[characteristic]}
-		);
+		const dicePool = await CheckBuilder.wait({
+			dicePool: await DicePool.createFromCharacteristic(
+				this,
+				{name: characteristic, ...this.system.characteristics[characteristic]}
+			)
+		});
+		await dicePool.roll();
 	}
 
 	/**

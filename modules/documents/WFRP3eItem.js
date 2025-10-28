@@ -1,6 +1,7 @@
 import ActionEffectEditor from "../applications/apps/ActionEffectEditor.js";
 import CheckBuilder from "../applications/dice/CheckBuilder.js";
 import CheckHelper from "../dice/CheckHelper.js";
+import DicePool from "../dice/DicePool.js";
 import WFRP3eEffect from "./WFRP3eEffect.js";
 import {capitalize} from "../helpers.js";
 
@@ -278,8 +279,12 @@ export default class WFRP3eItem extends Item
 					}
 				}
 			});
-		else
-			await CheckBuilder.prepareActionCheck(this.actor, this, options.face);
+		else {
+			const dicePool = await CheckBuilder.wait({
+				dicePool: await DicePool.createFromAction(this.actor, this, options.face)
+			});
+			await dicePool.roll();
+		}
 	}
 
 	//#endregion
@@ -397,7 +402,10 @@ export default class WFRP3eItem extends Item
 	 */
 	async _useSkill(options = {})
 	{
-		await CheckBuilder.prepareSkillCheck(this.actor, this);
+		const dicePool = await CheckBuilder.wait({
+			dicePool: await DicePool.createFromSkill(this.actor, this)
+		});
+		await dicePool.roll();
 	}
 
 	//#endregion
@@ -497,7 +505,14 @@ export default class WFRP3eItem extends Item
 		if(!action)
 			throw new Error("Unable to find the relevant basic Action.");
 
-		await CheckBuilder.prepareActionCheck(this.actor, action, this.actor.getCurrentStanceName(), {weapon: this.uuid});
+		const dicePool = await CheckBuilder.wait({
+			dicePool: await DicePool.createFromAction(
+				this.actor, action,
+				this.actor.getCurrentStanceName(),
+				{weapon: this.uuid}
+			)
+		});
+		await dicePool.roll();
 	}
 
 	/**

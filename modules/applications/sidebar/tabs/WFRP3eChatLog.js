@@ -48,6 +48,7 @@ export default class WFRP3eChatLog extends foundry.applications.sidebar.tabs.Cha
 	 */
 	static async #rollFreeCheck()
 	{
-		await new CheckBuilder().render(true);
+		const dicePool = await CheckBuilder.wait();
+		await dicePool.roll();
 	}
 }
