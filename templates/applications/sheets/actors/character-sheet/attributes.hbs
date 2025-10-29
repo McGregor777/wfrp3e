@@ -97,15 +97,15 @@
 
 			<div class="stance-meter-segment-container">
 				{{#for system.stanceMeter.conservative (increment system.stanceMeter.reckless 1) 1}}
-					<label class="stance-meter-segment{{#if (equalTo @root.system.stance.current this)}} active{{/if}}"
+					<label class="stance-meter-segment{{#if (eq @root.system.stance.current this)}} active{{/if}}"
 						   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustStance'}}">
-						<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}"
-							 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}.webp" height="27" />
+						<img class="stance-{{#if (lt this 0)}}conservative{{else if (gt this 0)}}reckless{{else}}neutral{{/if}}"
+							 src="systems/wfrp3e/assets/images/stance-{{#if (lt this 0)}}conservative{{else if (gt this 0)}}reckless{{else}}neutral{{/if}}.webp" height="27" />
 
 						<input name="system.stance.current"
 							   value="{{this}}"
 							   type="radio"
-							   {{#if (equalTo @root.system.stance.current this)}}checked{{/if}}/>
+							   {{checked (eq @root.system.stance.current this)}}/>
 					</label>
 				{{/for}}
 			</div>

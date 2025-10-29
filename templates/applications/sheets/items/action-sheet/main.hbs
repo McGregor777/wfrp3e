@@ -71,14 +71,14 @@
 					{{#each (lookup @root.system.effects sym) as |effect ef|}}
 						<div class="effect" data-index="{{ef}}">
 							{{#for 0 effect.symbolAmount 1}}
-								{{#unless (and (or (sameAs sym "delay") (sameAs sym "exertion")) (superiorTo this 0))}}
+								{{#unless (and (or (eq sym "delay") (eq sym "exertion")) (gt this 0))}}
 									<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
 								{{else}}
 									<span class="wfrp3e-font symbol {{@root.symbols.bane.cssClass}}"></span>
 								{{/unless}}
 							{{/for}}
 
-							{{{striptags effect.description "p"}}}
+							{{{stripTags effect.description "p"}}}
 
 							<a data-action="editActionEffect">
 								<span class="fas fa-pen-to-square" ></span>

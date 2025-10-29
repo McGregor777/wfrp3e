@@ -27,14 +27,14 @@
 							   name="searchFilters.actions.type"
 							   value="{{t}}"
 							   type="radio"
-							   {{#if (sameAs t @root.searchFilters.type)}}checked{{/if}} />
+							   {{checked (eq t @root.searchFilters.type)}} />
 					</div>
 				</div>
 			{{/each}}
 		</div>
 	</nav>
 
-	{{#if (sameAs source.flags.wfrp3e.embeddedItemsDisplayMode "cards")}}
+	{{#if (eq source.flags.wfrp3e.embeddedItemsDisplayMode "cards")}}
 		<section class="item-container">
 			{{#each actions as |action act|}}
 				{{>systems/wfrp3e/templates/applications/partials/action-card.hbs

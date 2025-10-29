@@ -35,8 +35,8 @@
 								   data-type="acquisition"
 								   data-uuid="{{item.uuid}}"
 								   {{#if (or item.parent
-									   (equalTo item.system.advanced false)
-									   (in item.uuid @root.freeAcquisitions ))}}
+									   (eq item.system.advanced false)
+									   (includes item.uuid @root.freeAcquisitions ))}}
 									   checked disabled
 								   {{else if (lookup @root.upgrades.acquisition item.uuid)}}
 									   checked
@@ -60,15 +60,15 @@
 										   data-type="trainingLevel"
 										   data-uuid="{{item.uuid}}"
 										   {{#if (or
-											   (superiorOrEqualTo item.system.trainingLevel this)
-											   (and (equalTo this 1) (in item.uuid @root.freeTrainings)))}}
+											   (gte item.system.trainingLevel this)
+											   (and (eq this 1) (includes item.uuid @root.freeTrainings)))}}
 											   checked disabled
-										   {{else unless (and (notEqualTo @root.advanceType "dedicationBonus") (or
-											   (and item.parent (superiorOrEqualTo item.parent.system.rank this))
-											   (sameAs (increment item.system.trainingLevel 1) this)
-											   (and (equalTo this 1) (in item.uuid @root.freeAcquisitions))))}}
+										   {{else unless (and (ne @root.advanceType "dedicationBonus") (or
+											   (and item.parent (gte item.parent.system.rank this))
+											   (eq (increment item.system.trainingLevel 1) this)
+											   (and (eq this 1) (includes item.uuid @root.freeAcquisitions))))}}
 											   disabled
-										   {{else if (equalTo (lookup @root.upgrades.trainingLevel item.uuid) this)}}
+										   {{else if (eq (lookup @root.upgrades.trainingLevel item.uuid) this)}}
 											   checked
 										   {{/if}} />
 								</label>
@@ -81,10 +81,10 @@
 									<span>{{item.system.specialisations}}</span>
 								{{/if}}
 
-								{{#if (and (notEqualTo @root.advanceType "nonCareer") (or
-									(superiorOrEqualTo item.system.trainingLevel 1)
+								{{#if (and (ne @root.advanceType "nonCareer") (or
+									(gte item.system.trainingLevel 1)
 									(lookup @root.upgrades.trainingLevel item.uuid)
-									(in item.uuid @root.freeTrainings)))}}
+									(includes item.uuid @root.freeTrainings)))}}
 									<input name="selection"
 										   value="{{lookup @root.upgrades.specialisation item.uuid}}"
 										   type="text"

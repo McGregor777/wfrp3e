@@ -1,7 +1,7 @@
 <div class="item action row" data-uuid="{{action.uuid}}">
 	{{#each @root.stances as |stance st|}}
 		{{#with (lookup ../action.system st) as |face|}}
-			<div class="content face {{st}}{{#if (equalTo ../../currentStance st)}} active{{/if}}" data-face="{{st}}">
+			<div class="content face {{st}}{{#if (eq ../../currentStance st)}} active{{/if}}" data-face="{{st}}">
 				<div class="image">
 					<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
 						<img class="type" src="{{../../action.img}}" width="40" height="40" />
@@ -32,8 +32,8 @@
 				<div class="difficulty-modifiers">
 					<span><strong>{{localize "ACTION.FIELDS.difficultyModifiers.abbreviation"}}&nbsp;:</strong></span>
 
-					{{#if (and (superiorTo face.difficultyModifier.challengeDice 0)
-							   (superiorTo face.difficultyModifier.misfortuneDice 0))}}
+					{{#if (and (gt face.difficultyModifier.challengeDice 0)
+							   (gt face.difficultyModifier.misfortuneDice 0))}}
 						{{#for 0 face.difficultyModifiers.challengeDice 1}}
 							<span class="wfrp3e-font dice challenge"></span>
 						{{/for}}

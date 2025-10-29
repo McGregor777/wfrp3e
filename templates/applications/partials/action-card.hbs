@@ -1,7 +1,7 @@
 <div class="item action card" data-uuid="{{item.uuid}}">
 	{{#each @root.stances as |stance st|}}
 		{{#with (lookup ../item.system st) as |face|}}
-			<div class="face {{st}}{{#if (equalTo ../../currentStance st)}} active{{/if}}" data-face="{{st}}">
+			<div class="face {{st}}{{#if (eq ../../currentStance st)}} active{{/if}}" data-face="{{st}}">
 				<div class="header">
 					<img class="type" src="systems/wfrp3e/assets/icons/{{../../item.system.type}}.webp" />
 
@@ -49,13 +49,13 @@
 						<tbody>
 							{{#if face.special}}
 								<tr><td>
-									{{{striptags (lookup @root.enrichment (concat ../../item.uuid "-" st ".special")) "p"}}}
+									{{{stripTags (lookup @root.enrichment (concat ../../item.uuid "-" st ".special")) "p"}}}
 								</td></tr>
 							{{/if}}
 
 							{{#if face.uniqueEffect}}
 								<tr><td>
-									{{{striptags (lookup @root.enrichment (concat ../../item.uuid "-" st ".uniqueEffect")) "p"}}}
+									{{{stripTags (lookup @root.enrichment (concat ../../item.uuid "-" st ".uniqueEffect")) "p"}}}
 								</td></tr>
 							{{/if}}
 
@@ -66,14 +66,14 @@
 											{{#each effects as |effect ef|}}
 												<div>
 													{{#for 0 effect.symbolAmount 1}}
-														{{#unless (and (or (sameAs sym "delay") (sameAs sym "exertion")) (superiorTo this 0))}}
+														{{#unless (and (or (eq sym "delay") (eq sym "exertion")) (gt this 0))}}
 															<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
 														{{else}}
 															<span class="wfrp3e-font symbol {{@root.symbols.bane.cssClass}}"></span>
 														{{/unless}}
 													{{/for}}
 
-													{{{striptags (lookup @root.enrichment (concat ../../../../../item.uuid "-" st "." sym "." ef)) "p"}}}
+													{{{stripTags (lookup @root.enrichment (concat ../../../../../item.uuid "-" st "." sym "." ef)) "p"}}}
 												</div>
 											{{/each}}
 										</td></tr>

@@ -83,7 +83,7 @@
 			</div>
 		{{/if}}
 
-		{{#if (equalTo actor.type "character")}}
+		{{#if (eq actor.type "character")}}
 			<fieldset class="specialisations">
 				<legend>{{localize "CHECKBUILDER.FIELDS.specialisations.label"}}</legend>
 
@@ -91,7 +91,7 @@
 					<multi-select name="checkData.specialisations">
 						{{#each availableSpecialisations as |specialisation|}}
 							<option value="{{specialisation}}"
-									{{#if (in specialisation @root.specialisations)}}selected{{/if}}>
+									{{#if (includes specialisation @root.specialisations)}}selected{{/if}}>
 								{{specialisation}}
 							</option>
 						{{/each}}
@@ -116,7 +116,7 @@
 								   name="checkData.triggeredEffects"
 								   type="checkbox"
 								   value="{{effect.uuid}}"
-								   {{#if (in effect.uuid @root.triggeredEffects)}}checked{{/if}} />
+								   {{checked (includes effect.uuid @root.triggeredEffects)}} />
 						</div>
 					{{/each}}
 				{{else}}

@@ -34,7 +34,7 @@
 			</a>
 		</h4>
 
-		{{#if (superiorTo system.sockets.length 0)}}
+		{{#if (gt system.sockets.length 0)}}
 			<div class="flexrow">
 				{{#each system.sockets as |socket|}}
 					<fieldset class="socket inline" data-index="{{@index}}">

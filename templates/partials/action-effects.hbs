@@ -5,11 +5,11 @@
 		<tbody>
 			{{#with (lookup action.system face) as |face|}}
 				{{#if face.special}}
-					<tr><td>{{{striptags face.special 'p'}}}</td></tr>
+					<tr><td>{{{stripTags face.special 'p'}}}</td></tr>
 				{{/if}}
 
 				{{#if face.uniqueEffect}}
-					<tr><td>{{{striptags face.uniqueEffect 'p'}}}</td></tr>
+					<tr><td>{{{stripTags face.uniqueEffect 'p'}}}</td></tr>
 				{{/if}}
 
 				{{#each ../symbols as |symbol sym|}}
@@ -19,14 +19,14 @@
 								{{#each effects as |effect ef|}}
 									<a class="effect-toggle{{#if effect.active}} active{{/if}}" data-symbol="{{sym}}" data-index="{{@index}}">
 										{{#for 0 effect.symbolAmount 1}}
-											{{#unless (and (or (sameAs sym "delay") (sameAs sym "exertion")) (superiorTo this 0))}}
+											{{#unless (and (or (eq sym "delay") (eq sym "exertion")) (gt this 0))}}
 												<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
 											{{else}}
 												<span class="wfrp3e-font symbol {{../../../../../symbols.bane.cssClass}}"></span>
 											{{/unless}}
 										{{/for}}
 
-										{{{striptags effect.description 'p'}}}
+										{{{stripTags effect.description 'p'}}}
 									</a>
 								{{/each}}
 							</td></tr>

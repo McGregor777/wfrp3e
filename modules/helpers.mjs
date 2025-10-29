@@ -1,0 +1,9 @@
+/**
+ * Replaces the first letter of a string with its capital.
+ * @param {string} string The string to capitalize.
+ * @returns {string}
+ */
+export function capitalize(string)
+{
+	return string[0].toUpperCase() + string.slice(1);
+}

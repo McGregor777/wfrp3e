@@ -36,11 +36,11 @@
 
 				{{#each @root.symbols as |symbol sym|}}
 					{{#with (lookup @root.totalSymbols symbol.plural)}}
-						{{#if (and (superiorTo this 0) (notEqualTo sym "righteousSuccess"))}}
+						{{#if (and (gt this 0) (ne sym "righteousSuccess"))}}
 							<li class="roll-symbols">
 								{{localize symbol.result nb=this}}
 
-								{{#if (and (equalTo sym "success") (superiorTo @root.totalSymbols.righteousSuccesses 0))}}
+								{{#if (and (eq sym "success") (gt @root.totalSymbols.righteousSuccesses 0))}}
 									{{localize @root.symbols.righteousSuccess.result nb=@root.totalSymbols.righteousSuccesses}}
 								{{/if}}
 
@@ -66,7 +66,7 @@
 
 {{#if outcome}}
 	<ul class="outcome">
-		{{#if (superiorTo outcome.targetDamages 0)}}
+		{{#if (gt outcome.targetDamages 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.targetDamages" actor=actorName target=targetActorName amount=outcome.targetDamages}}
 			</li>
@@ -79,73 +79,73 @@
 			</li>
 		{{/if}}
 
-		{{#if (superiorTo outcome.targetFatigue 0)}}
+		{{#if (gt outcome.targetFatigue 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.targetSufferFatigue" target=targetActorName amount=outcome.targetFatigue}}
 			</li>
-		{{else if (inferiorTo outcome.targetFatigue 0)}}
+		{{else if (lt outcome.targetFatigue 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.targetRecoverFatigue" actor=actorName amount=(abs outcome.targetFatigue)}}
 			</li>
 		{{/if}}
 
-		{{#if (superiorTo outcome.targetStress 0)}}
+		{{#if (gt outcome.targetStress 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.targetStressSuffering" target=targetActorName amount=outcome.targetFatigue}}
 			</li>
-		{{else if (inferiorTo outcome.targetStress 0)}}
+		{{else if (lt outcome.targetStress 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.targetFatigueRecovery" actor=actorName amount=(abs outcome.targetFatigue)}}
 			</li>
 		{{/if}}
 
-		{{#if (superiorTo outcome.wounds 0)}}
+		{{#if (gt outcome.wounds 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.wounds" actor=actorName amount=outcome.wounds}}
 			</li>
 		{{/if}}
 
-		{{#if (superiorTo outcome.criticalWounds.length 0)}}
+		{{#if (gt outcome.criticalWounds.length 0)}}
 			<li>
 				{{{localize "ROLL.OUTCOMES.criticalWounds" actor=actorName criticalWounds=criticalWoundLinks}}}
 			</li>
 		{{/if}}
 
-		{{#if (superiorTo outcome.fatigue 0)}}
+		{{#if (gt outcome.fatigue 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.fatigueSuffering" actor=actorName amount=outcome.fatigue}}
 			</li>
-		{{else if (inferiorTo outcome.fatigue 0)}}
+		{{else if (lt outcome.fatigue 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.fatigueRecovery" actor=actorName amount=(abs outcome.fatigue)}}
 			</li>
 		{{/if}}
 
-		{{#if (superiorTo outcome.stress 0)}}
+		{{#if (gt outcome.stress 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.stressSuffering" actor=actorName amount=outcome.stress}}
 			</li>
-		{{else if (inferiorTo outcome.stress 0)}}
+		{{else if (lt outcome.stress 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.stressRecovery" actor=actorName amount=(abs outcome.stress)}}
 			</li>
 		{{/if}}
 
-		{{#if (superiorTo outcome.favour 0)}}
+		{{#if (gt outcome.favour 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.favourGain" actor=actorName amount=outcome.favour}}
 			</li>
-		{{else if (inferiorTo outcome.favour 0)}}
+		{{else if (lt outcome.favour 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.favourLoss" actor=actorName amount=(abs outcome.favour)}}
 			</li>
 		{{/if}}
 
-		{{#if (superiorTo outcome.power 0)}}
+		{{#if (gt outcome.power 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.powerGain" actor=actorName amount=outcome.power}}
 			</li>
-		{{else if (inferiorTo outcome.power 0)}}
+		{{else if (lt outcome.power 0)}}
 			<li>
 				{{localize "ROLL.OUTCOMES.powerLoss" actor=actorName amount=(abs outcome.power)}}
 			</li>

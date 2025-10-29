@@ -11,7 +11,7 @@
       "system": {
         "conditionScript": "return checkData.skill && fromUuidSync(checkData.skill).name === game.i18n.localize(\"SKILL.NAMES.weaponSkill\");",
         "reverseScript": "",
-        "script": "dicePool.dice.expertise++;",
+        "script": "diePool.dice.expertise++;",
         "type": "onPreCheckTrigger"
       },
       "changes": [],

@@ -4,7 +4,7 @@
 		<a data-action="rollCharacteristicCheck"
 		   data-characteristic="{{characteristic.name}}"
 		   data-tooltip="{{localize 'ACTOR.ACTIONS.rollCharacteristicCheck'}}">
-			{{#if (equalTo @root.source.type "creature")}}
+			{{#if (eq @root.source.type "creature")}}
 				{{localize char.abbreviation}}
 			{{else}}
 				{{localize characteristic.label}}

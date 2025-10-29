@@ -30,7 +30,7 @@
 				</a>
 
 				{{#each item.effects as |effect|}}
-					{{#if (sameAs effect.system.type "onTrigger")}}
+					{{#if (eq effect.system.type "onTrigger")}}
 						<a data-action="useDocument"
 						   data-effect-uuid="{{effect.uuid}}"
 						   data-tooltip="{{localize 'TALENT.ACTIONS.trigger'}}" >

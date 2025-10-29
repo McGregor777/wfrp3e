@@ -6,7 +6,7 @@
 	<div class="segment-container regular">
 		{{#each specialAbility.values as |value val|}}
 			<label class="segment{{#if value.trigger}} trigger{{/if}}">
-				{{#if (equalTo ../specialAbility.current val)}}
+				{{#if (eq ../specialAbility.current val)}}
 					<img src="systems/wfrp3e/assets/images/token-black.webp" />
 				{{else}}
 					{{{value.content}}}
@@ -15,7 +15,7 @@
 				<input name="{{replace ../fields.current.fieldPath "element" ../index}}"
 					   value="{{val}}"
 					   type="radio"
-					   {{#if (equalTo ../specialAbility.current val)}}checked{{/if}} />
+					   {{checked (eq ../specialAbility.current val)}} />
 			</label>
 		{{/each}}
 	</div>

@@ -62,7 +62,7 @@
 						   value="{{type}}"
 						   type="radio"
 						   data-action="switchEncounterType"
-						{{#if (equalTo @root.combat.system.type type)}}checked{{/if}}
+						{{checked (eq @root.combat.system.type type)}}
 						{{#unless @root.user.isGM}}disabled{{/unless}} />
 				</div>
 			</div>

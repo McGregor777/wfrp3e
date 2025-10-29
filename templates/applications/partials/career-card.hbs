@@ -19,7 +19,7 @@
 				{{/if}}
 				:
 				{{#each item.system.raceRestrictions}}
-					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
+					{{#if (and (eq @first true) (eq @last true) (ne this "any"))}}
 						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." this))}}
 					{{else}}
 						{{localize (concat "RACE." this)}}{{#unless @last}}, {{/unless}}
@@ -58,8 +58,8 @@
 
 				<div class="starting-stance">
 					{{#for (multiply item.system.startingStance.conservativeSegments -1) (increment item.system.startingStance.recklessSegments 1) 1}}
-						<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}"
-							 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
+						<img class="stance-{{#if (lt this 0)}}conservative{{else if (gt this 0)}}reckless{{else}}neutral{{/if}}"
+							 src="systems/wfrp3e/assets/images/stance-{{#if (lt this 0)}}conservative{{else if (gt this 0)}}reckless{{else}}neutral{{/if}}.webp" height="27" />
 					{{/for}}
 				</div>
 			</div>
@@ -156,7 +156,7 @@
 				{{/if}}
 				:
 				{{#each item.system.raceRestrictions}}
-					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
+					{{#if (and (eq @first true) (eq @last true) (ne this "any"))}}
 						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." this))}}
 					{{else}}
 						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
