@@ -21,13 +21,17 @@ export default class CareerAdvanceDialog extends foundry.applications.api.Dialog
 				if(career.system.openAdvanceTypeNumbers.action >= career.system.advanceOptions.action)
 					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
 
-				ActionSelector.wait({items: await ActionSelector.buildOptionsList(actor)})
-					.then(action => actor.buyActionAdvance(action, career, type));
+				const actions = await ActionSelector.wait({items: await ActionSelector.buildOptionsList(actor)});
+				await actor.buyActionAdvance(actions[0], career, type);
 				break;
 
 			case "characteristic":
-				wfrp3e.applications.apps.CharacteristicUpgrader.wait(actor, career, {nonCareerAdvance: type === "nonCareer"})
-					.then(upgrade => actor.buyCharacteristicAdvance(upgrade, career, type));
+				const upgrade = await wfrp3e.applications.apps.CharacteristicUpgrader.wait({
+					actor,
+					career,
+					nonCareerAdvance: type === "nonCareer"
+				});
+				await actor.buyCharacteristicAdvance(upgrade, career, type);
 				break;
 
 			case "conservative":
@@ -50,15 +54,12 @@ export default class CareerAdvanceDialog extends foundry.applications.api.Dialog
 				if(career.system.openAdvanceTypeNumbers.skill >= career.system.advanceOptions.skill)
 					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
 
-				wfrp3e.applications.apps.selectors.SkillUpgrader.wait({
+				const upgrades = await wfrp3e.applications.apps.selectors.SkillUpgrader.wait({
 					actor: actor,
 					advanceType: type,
-					items: await SkillUpgrader.buildAdvanceOptionsList(
-						actor,
-						career,
-						type === "nonCareer"
-					)
-				}).then(upgrade => actor.buySkillAdvance(upgrade, career, type));
+					items: await SkillUpgrader.buildAdvanceOptionsList(actor, career, type === "nonCareer")
+				});
+				await actor.buySkillAdvance(upgrades[0], career, type);
 				break;
 
 			case "talent":
@@ -67,8 +68,10 @@ export default class CareerAdvanceDialog extends foundry.applications.api.Dialog
 				if(career.system.openAdvanceTypeNumbers.talent >= career.system.advanceOptions.talent)
 					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
 
-				TalentSelector.wait({items: await TalentSelector.buildAdvanceOptionsList(actor, career)})
-					.then(talent => actor.buyTalentAdvance(talent, career, type));
+				const talents = await TalentSelector.wait({
+					items: await TalentSelector.buildAdvanceOptionsList(actor, career)
+				});
+				await actor.buyTalentAdvance(talents[0], career, type);
 				break;
 
 			case "wound":

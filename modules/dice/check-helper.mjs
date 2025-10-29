@@ -22,14 +22,13 @@ export default class CheckHelper
 		}
 
 		if(checkData.targets?.length > 0) {
-			await fromUuid(checkData.targets[0]).then(async actor => {
-				for(const effect of actor.findTriggeredEffects("onTargetingCheckPreparation")) {
-					await effect.triggerEffect({
-						parameters: [actor, checkData, diePool],
-						parameterNames: ["actor", "checkData", "diePool"]
-					});
-				}
-			});
+			const actor = await fromUuid(checkData.targets[0]);
+			for(const effect of actor.findTriggeredEffects("onTargetingCheckPreparation")) {
+				await effect.triggerEffect({
+					parameters: [actor, checkData, diePool],
+					parameterNames: ["actor", "checkData", "diePool"]
+				});
+			}
 		}
 	}
 
@@ -473,19 +472,21 @@ export default class CheckHelper
 				if(outcome.targetDamages > 0 && outcome.targetDamages > targetActor.system.wounds.value) {
 					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetDamages};
 
-					outcome.targetCriticalWounds = await Item.createDocuments(
+					const criticalWounds = await Item.createDocuments(
 						await this.drawCriticalWoundsRandomly(outcome.targetCriticalWounds + 1),
 						{parent: targetActor}
-					).then(documents => documents.map(document => document.uuid));
+					);
+					outcome.targetCriticalWounds = criticalWounds.map(criticalWound => criticalWound.uuid);
 				}
 				else if(outcome.targetDamages > 0) {
 					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetDamages};
 
 					if(outcome.targetCriticalWounds > 0) {
-						outcome.targetCriticalWounds = await Item.createDocuments(
+						const criticalWounds = await Item.createDocuments(
 							await this.drawCriticalWoundsRandomly(outcome.targetCriticalWounds),
 							{parent: targetActor}
-						).then(documents => documents.map(document => document.uuid));
+						);
+						outcome.targetCriticalWounds = criticalWounds.map(criticalWound => criticalWound.uuid);
 					}
 				}
 				// If the attack inflicts 0 damages in spite of hitting the target, the target still suffers one damage
@@ -521,11 +522,13 @@ export default class CheckHelper
 			if(outcome.wounds > 0)
 				actorUpdates.system.wounds = actor.system.wounds.value - outcome.wounds;
 
-			if(outcome.criticalWounds > 0)
-				outcome.criticalWounds = await Item.createDocuments(
+			if(outcome.criticalWounds > 0) {
+				const criticalWounds = await Item.createDocuments(
 					await this.drawCriticalWoundsRandomly(outcome.criticalWounds),
 					{parent: actor}
-				).then(documents => documents.map(document => document.uuid));
+				);
+				outcome.criticalWounds = criticalWounds.map(criticalWound => criticalWound.uuid);
+			}
 
 			if(outcome.fatigue > 0 || outcome.fatigue < 0)
 				actorUpdates.system.impairments = {fatigue: actor.system.impairments.fatigue + outcome.fatigue};
@@ -545,8 +548,10 @@ export default class CheckHelper
 		chatMessageUpdates.rolls[0].options.checkData.outcome = outcome;
 		await chatMessage.update(chatMessageUpdates);
 
-		if(roll.totalSymbols.successes && checkData?.action)
-			await fromUuid(checkData.action).then(async action => await action.exhaustAction(checkData.face));
+		if(roll.totalSymbols.successes && checkData?.action) {
+			const action = await fromUuid(checkData.action);
+			await action.exhaustAction(checkData.face);
+		}
 	}
 
 	/**
@@ -556,74 +561,71 @@ export default class CheckHelper
 	 */
 	static async drawCriticalWoundsRandomly(amount)
 	{
-		const allCriticalWounds = [];
+		const allCriticalWounds = [],
+			  criticalWoundRollTable = await game.packs.get("wfrp3e.roll-tables").getDocument("KpiwJKBdJ8qAyQjs"),
+			  drawnResult = await criticalWoundRollTable.drawMany(amount, {displayChat: false});
 
-		await game.packs.get("wfrp3e.roll-tables").getDocument("KpiwJKBdJ8qAyQjs").then(async table => {
-			await table.drawMany(amount, {displayChat: false}).then(async rollTableDraw => {
-				for(const result of rollTableDraw.results) {
-					//#TODO Move this logic into a Macro embedded into the Critical Wounds RollTable.
-					// Roll twice and select the critical wound with the higher severity rating (if tied, GM chooses)
-					if(result.id === "uZIgluknIsZ428Cn") {
-						const criticalWounds = [];
-						let highestCriticalWound = null;
+		for(const result of drawnResult.results) {
+			//#TODO Move this logic into a Macro embedded into the Critical Wounds RollTable.
+			// Roll twice and select the critical wound with the higher severity rating (if tied, GM chooses)
+			if(result.id === "uZIgluknIsZ428Cn") {
+				const criticalWounds = [];
+				let highestCriticalWound = null;
 
-						for(let i = 0; i < 2; i++) {
-							let rollTableDraw = null,
-								criticalWound = null
+				for(let i = 0; i < 2; i++) {
+					let rollTableDraw = null,
+						criticalWound = null
 
-							while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
-								rollTableDraw = await table.draw({displayChat: false});
+					while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
+						rollTableDraw = await table.draw({displayChat: false});
 
-							criticalWound = await game.packs.get(rollTableDraw.results[0].documentCollection)
-								.getDocument(rollTableDraw.results[0].documentId);
-							criticalWounds.push(criticalWound);
+					criticalWound = await game.packs.get(rollTableDraw.results[0].documentCollection)
+						.getDocument(rollTableDraw.results[0].documentId);
+					criticalWounds.push(criticalWound);
 
-							if(!highestCriticalWound || highestCriticalWound.system.severityRating < criticalWound.system.severityRating)
-								highestCriticalWound = criticalWound;
-						}
-
-						if(criticalWounds[0].system.severityRating === criticalWounds[1].system.severityRating)
-							await new Dialog({
-								title: game.i18n.localize("APPLICATION.TITLE.ChooseACriticalWound"),
-								content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.ChooseACriticalWound")}</p>`,
-								buttons: {
-									one: {
-										label: criticalWounds[0].name,
-										callback: async dlg => {
-											allCriticalWounds.push(criticalWounds[0]);
-										}
-									},
-									two: {
-										label: criticalWounds[1].name,
-										callback: async dlg => {
-											allCriticalWounds.push(criticalWounds[1]);
-										}
-									},
-								}
-							}).render(true);
-						else
-							allCriticalWounds.push(highestCriticalWound);
-					}
-					//#TODO Move this logic into a Macro embedded into the Critical Wounds RollTable.
-					// Roll twice and apply both results! You poor sod...
-					else if(result.id === "aJ0a8gzJbFSPS7xY") {
-						for(let j = 0; j < 2; j++) {
-							let rollTableDraw = null;
-
-							while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
-								rollTableDraw = await table.draw({displayChat: false});
-
-							allCriticalWounds.push(await game.packs.get(rollTableDraw.results[0].documentCollection)
-								.getDocument(rollTableDraw.results[0].documentId));
-						}
-					}
-					// Default.
-					else
-						allCriticalWounds.push(await game.packs.get(result.documentCollection)
-							.getDocument(result.documentId));
+					if(!highestCriticalWound || highestCriticalWound.system.severityRating < criticalWound.system.severityRating)
+						highestCriticalWound = criticalWound;
 				}
-			});
-		});
+
+				if(criticalWounds[0].system.severityRating === criticalWounds[1].system.severityRating)
+					await new Dialog({
+						title: game.i18n.localize("APPLICATION.TITLE.ChooseACriticalWound"),
+						content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.ChooseACriticalWound")}</p>`,
+						buttons: {
+							one: {
+								label: criticalWounds[0].name,
+								callback: async dlg => {
+									allCriticalWounds.push(criticalWounds[0]);
+								}
+							},
+							two: {
+								label: criticalWounds[1].name,
+								callback: async dlg => {
+									allCriticalWounds.push(criticalWounds[1]);
+								}
+							},
+						}
+					}).render(true);
+				else
+					allCriticalWounds.push(highestCriticalWound);
+			}
+			//#TODO Move this logic into a Macro embedded into the Critical Wounds RollTable.
+			// Roll twice and apply both results! You poor sod...
+			else if(result.id === "aJ0a8gzJbFSPS7xY") {
+				for(let j = 0; j < 2; j++) {
+					let rollTableDraw = null;
+
+					while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
+						rollTableDraw = await table.draw({displayChat: false});
+
+					allCriticalWounds.push(await game.packs.get(rollTableDraw.results[0].documentCollection)
+						.getDocument(rollTableDraw.results[0].documentId));
+				}
+			}
+			// Default.
+			else
+				allCriticalWounds.push(await game.packs.get(result.documentCollection).getDocument(result.documentId));
+		}
 
 		return allCriticalWounds;
 	}

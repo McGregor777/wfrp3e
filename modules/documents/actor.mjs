@@ -164,7 +164,9 @@ export default class Actor extends foundry.documents.Actor
 
 				for(const member of currentParty.system.members) {
 					// Find a potential Item that would be socketed in that socket.
-					item = await fromUuid(member).then(actor => actor?.items.search({
+					const actor = await fromUuid(member);
+
+					item = actor?.items.search({
 						filters: [{
 							field: "system.socket",
 							operator: "is_empty",
@@ -175,7 +177,7 @@ export default class Actor extends foundry.documents.Actor
 							negate: false,
 							value: `${currentParty.uuid}_${socketIndex}`
 						}]
-					})[0]);
+					})[0];
 
 					if(item)
 						break;
@@ -215,22 +217,26 @@ export default class Actor extends foundry.documents.Actor
 		switch(type) {
 			case "action":
 				const {ActionSelector} = wfrp3e.applications.apps.selectors;
+				const actions = await ActionSelector.wait({
+					items: await ActionSelector.buildOptionsList(this)
+				});
 
 				if(career.system.advances.action)
 					throw new Error("Unable to buy the action advance: the career's action advance is unavailable.");
 
-				ActionSelector.wait({items: await ActionSelector.buildOptionsList(this)})
-					.then(action => this.buyActionAdvance(action, career, type));
+				await this.buyActionAdvance(actions[0], career, type);
 				break;
 
 			case "talent":
 				const {TalentSelector} = wfrp3e.applications.apps.selectors;
+				const talents = await TalentSelector.wait({
+					items: await TalentSelector.buildAdvanceOptionsList(this, career)
+				});
 
 				if(career.system.advances.talent)
 					throw new Error("Unable to buy the talent advance: the career's talent advance is unavailable.");
 
-				TalentSelector.wait({items: await TalentSelector.buildAdvanceOptionsList(this, career)})
-					.then(talent => this.buyTalentAdvance(talent, career, type));
+				await this.buyTalentAdvance(talents[0], career, type);
 				break;
 
 			case "skill":
@@ -239,11 +245,12 @@ export default class Actor extends foundry.documents.Actor
 				if(career.system.advances.skill)
 					throw new Error("Unable to buy the skill upgrade advance: the career's skill advance is unavailable.");
 
-				SkillUpgrader.wait({
+				const upgrades = await SkillUpgrader.wait({
 					actor: this,
 					advanceType: type,
 					items: await SkillUpgrader.buildAdvanceOptionsList(this, career)
-				}).then(upgrade => this.buySkillAdvance(upgrade, career, type));
+				});
+				await this.buySkillAdvance(upgrades[0], career, type);
 				break;
 
 			case "careerTransition":
@@ -252,10 +259,11 @@ export default class Actor extends foundry.documents.Actor
 				if(career.system.advances.careerTransition.newCareer)
 					throw new Error("Unable to buy the advance: the career's transition advance is already used.");
 
-				CareerSelector.wait({
+				const careers = await CareerSelector.wait({
 					actor: this,
-					items: await CareerSelector.buildAdvanceOptionsList(this, career)
-				}).then(newCareer => this.changeCareer(newCareer, career, type));
+					items: await CareerSelector.buildAdvanceOptionsList(this)
+				});
+				await this.changeCareer(careers[0], career);
 				break;
 
 			case "wound":
@@ -360,7 +368,7 @@ export default class Actor extends foundry.documents.Actor
 			await career.update({"system.advances.open": career.system.advances.open});
 		}
 
-		await Item.createDocuments([action], {parent: this});
+		await wfrp3e.documents.Item.createDocuments([action], {parent: this});
 	}
 
 	/**
@@ -460,22 +468,17 @@ export default class Actor extends foundry.documents.Actor
 				  .map(advance => this.itemTypes.skill.find(skill => skill.name === advance[1]));
 
 		// Let the user select one new specialisation for each skill that has been trained as a career advance.
-		wfrp3e.applications.apps.selectors.SkillUpgrader.wait({
+		const upgrades = wfrp3e.applications.apps.selectors.SkillUpgrader.wait({
 			actor: this, items: trainedSkills, advanceType: type, size: trainedSkills.length
-		}).then(async specialisations => {
-			for(const specialisation of specialisations)
-				fromUuid(specialisation.uuid).then(async skill => await skill.update({
-					"system.specialisations": skill.system.specialisations
-						? skill.system.specialisations + specialisation.value
-						: specialisation.value
-				}));
 		});
-
-		// Add the related career ability to the actor.
-		await Item.createDocuments([
-			await game.packs.get("wfrp3e.items").getDocuments({type: "ability"})
-				.then(abilities => abilities.find(ability => ability.name === career.name))
-		], {parent: this});
+		for(const upgrade of upgrades) {
+			const skill = await fromUuid(upgrade.uuid);
+			await skill.update({
+				"system.specialisations": skill.system.specialisations
+					? skill.system.specialisations + specialisation.value
+					: specialisation.value
+			});
+		}
 
 		// Mark the dedication bonus as acquired.
 		await career.update({"system.advances.dedicationBonus": game.i18n.localize("CAREER.FIELDS.dedicationBonus.label")});
@@ -508,7 +511,6 @@ export default class Actor extends foundry.documents.Actor
 	 */
 	async buySkillAdvance(skillUpgrade, career, type)
 	{
-		skillUpgrade = skillUpgrade[0];
 		const skill = await fromUuid(skillUpgrade.uuid);
 		let advanceSlotIndex = null;
 
@@ -557,7 +559,7 @@ export default class Actor extends foundry.documents.Actor
 
 		switch(skillUpgrade.type) {
 			case "acquisition":
-				await Item.createDocuments([skill], {parent: this});
+				await wfrp3e.documents.Item.createDocuments([skill], {parent: this});
 				break;
 			case "trainingLevel":
 				await skill.update({"system.trainingLevel": skillUpgrade.value});
@@ -617,7 +619,7 @@ export default class Actor extends foundry.documents.Actor
 				break;
 		}
 
-		await Item.createDocuments([talent], {parent: this});
+		await wfrp3e.documents.Item.createDocuments([talent], {parent: this});
 	}
 
 	/**
@@ -662,15 +664,19 @@ export default class Actor extends foundry.documents.Actor
 		if(career.system.advances.careerTransition.newCareer)
 			throw new Error("Unable to buy the advance: the career's transition advance is already used.");
 
-		const newCareer = await fromUuid(newCareerUuid)
-		let cost = career.calculateCareerTransitionCost(newCareer);
-		await Item.createDocuments([newCareer], {parent: this}).then(career => career[0].update({"system.current": true}));
+		let newCareer = await fromUuid(newCareerUuid),
+			cost = career.calculateCareerTransitionCost(newCareer);
+
+		newCareer = await wfrp3e.documents.Item.createDocuments([newCareer], {parent: this});
+		await newCareer.update({"system.current": true});
 		//TODO: Add Execute onCareerTransition scripts here.
 
-		await career.update({"system.advances.careerTransition": {
-			cost,
-			newCareer: newCareer.name
-		}});
+		await career.update({
+			"system.advances.careerTransition": {
+				cost,
+				newCareer: newCareer.name
+			}
+		});
 	}
 
 	/**

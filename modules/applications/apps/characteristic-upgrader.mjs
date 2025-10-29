@@ -2,17 +2,17 @@
 export default class CharacteristicUpgrader extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)
 {
 	/** @inheritDoc */
-	constructor(actor, career, options = {})
+	constructor(options = {})
 	{
 		super(options);
 
-		if(!actor)
+		if(!options.actor)
 			throw new Error("An Actor has to be specified to a Characteristic Upgrader.");
-		if(!career)
+		if(!options.career)
 			throw new Error("A Career has to be specified to a Characteristic Upgrader.");
 
-		this.actor = actor;
-		this.career = career;
+		this.actor = options.actor;
+		this.career = options.career;
 
 		if(options.nonCareerAdvance)
 			this.nonCareerAdvance = options.nonCareerAdvance;

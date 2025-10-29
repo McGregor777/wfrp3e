@@ -89,7 +89,8 @@ async function initialize()
 	if(fs.existsSync("foundry-config.yaml")) {
 		let fileRoot = "";
 		try {
-			const foundryConfig = await fs.promises.readFile("foundry-config.yaml", "utf-8").then(file => yaml.load(file)),
+			const configFile = await fs.promises.readFile("foundry-config.yaml", "utf-8"),
+				  foundryConfig = yaml.load(configFile),
 				  // As of 13.338, the Node install is *not* nested but electron installs *are*.
 				  nested = fs.existsSync(path.join(foundryConfig.installPath, "resources", "app"));
 

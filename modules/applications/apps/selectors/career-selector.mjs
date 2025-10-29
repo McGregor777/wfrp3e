@@ -54,10 +54,14 @@ export default class CareerSelector extends Selector
 	{
 		const careers = [];
 		for(const pack of game.packs.filter(pack => pack.documentName === "Item")) {
-			const foundCareers = pack.getDocuments({type: "career"})
-				.then(foundCareers => foundCareers.filter(career => career.name !== actor.system.currentCareer.name
-						&& career.system.raceRestrictions.includes(actor.system.race.id)
-						&& (!career.system.advanced || actor.system.rank > 1)));
+			const foundCareers = pack.getDocuments({type: "career"});
+
+			foundCareers.filter(career => {
+				return career.name !== actor.system.currentCareer.name
+					&& career.system.raceRestrictions.includes(actor.system.race.id)
+					&& (!career.system.advanced || actor.system.rank > 1)
+			});
+
 			careers.push(...foundCareers);
 		}
 
@@ -90,13 +94,10 @@ export default class CareerSelector extends Selector
 				return drawnCareers;
 
 			case "rollTable":
-				//#TODO Doesn't work
-				return fromUuid(this.character.system.race.startingCareerRollTableUuid)
-					.then(async rollTable => {
-						return rollTable.draw({displayChat: false})
-							//#TODO Check how TableResult allows to get a linked Document's UUID.
-							.then(result => result.results.map(async result => await fromUuid(result.documentUuid)));
-					});
+				const rollTable = await fromUuid(this.character.system.race.startingCareerRollTableUuid),
+					  result = rollTable.draw({displayChat: false});
+				//#TODO Check how TableResult allows to get a linked Document's UUID.
+				return await Promise.all(result.results.map(async result => await fromUuid(result.documentUuid)));
 
 			case "freeChoice":
 				return careers;

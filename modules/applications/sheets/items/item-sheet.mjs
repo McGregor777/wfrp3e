@@ -80,9 +80,8 @@ export default class ItemSheet extends foundry.applications.api.HandlebarsApplic
 	 */
 	static async #editEffect(event, target)
 	{
-		await fromUuid(target.closest(".effect[data-uuid]").dataset.uuid).then(
-			effect => effect.sheet.render(true)
-		);
+		const effect = await fromUuid(target.closest(".effect[data-uuid]").dataset.uuid);
+		await effect.sheet.render({force: true});
 	}
 
 	/**
@@ -99,10 +98,10 @@ export default class ItemSheet extends foundry.applications.api.HandlebarsApplic
 			modal: true,
 			content: `<p>${game.i18n.localize("DIALOG.DESCRIPTION.EffectDeletion")}</p>`,
 			submit: async (result) => {
-				if(result)
-					await fromUuid(target.closest(".effect[data-uuid]").dataset.uuid).then(
-						effect => effect.delete()
-					);
+				if(result) {
+					const effect = await fromUuid(target.closest(".effect[data-uuid]").dataset.uuid)
+					await effect.delete();
+				}
 			}
 		});
 	}

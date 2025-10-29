@@ -268,7 +268,6 @@ export default class Item extends foundry.documents.Item
 					if(result) {
 						await this.exhaustAction(options.face);
 
-						//#TODO Check if ChatMessage doesn't allow a more straightforward method for a creation process.
 						return ChatMessage.create({
 							content: await foundry.applications.handlebars.renderTemplate(
 								"systems/wfrp3e/templates/partials/action-effects.hbs", {

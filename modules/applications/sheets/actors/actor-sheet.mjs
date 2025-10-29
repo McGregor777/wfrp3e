@@ -309,20 +309,21 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			name: "ACTOR.ACTIONS.rollItem",
 			icon: '<i class="fa-solid fa-dice-d20"></i>',
 			condition: async html => {
-				const document = await fromUuid(html.closest("[data-uuid]").dataset.uuid);
+				const item = await fromUuid(html.closest("[data-uuid]").dataset.uuid);
 				return this.isEditable
-					&& document.canUserModify(game.user, "update")
-					&& ["action", "skill", "weapon"].includes(document.type)
+					&& item.canUserModify(game.user, "update")
+					&& ["action", "skill", "weapon"].includes(item.type)
 			},
 			callback: async html => {
-				const documentElement = html.closest("[data-uuid]"),
+				const itemElement = html.closest("[data-uuid]"),
 					  options = {},
 					  face = html.querySelector(".face")?.dataset.face;
 
 				if(face)
 					options.face = face;
 
-				await fromUuid(documentElement.dataset.uuid).then(item => item.useItem(options));
+				const item = await fromUuid(itemElement.dataset.uuid);
+				await item.useItem(options);
 			}
 		}, {
 			name: "Expand",
@@ -351,8 +352,10 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			icon: '<i class="fa-solid fa-pen-to-square"></i>',
 			condition: html => this.isEditable
 				&& fromUuidSync(html.closest("[data-uuid]").dataset.uuid).canUserModify(game.user, "update"),
-			callback: async html => await fromUuid(html.closest("[data-uuid]").dataset.uuid)
-				.then(document => document.sheet.render(true))
+			callback: async html => {
+				const document = await fromUuid(html.closest("[data-uuid]").dataset.uuid);
+				await document.sheet.render({force: true});
+			}
 		}, {
 			name: "Delete",
 			icon: '<i class="fa-solid fa-trash"></i>',
@@ -516,7 +519,8 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	 */
 	static async #editDocument(event)
 	{
-		await this._getByUuid(event).then(document => document.sheet.render(true));
+		const document= await this._getByUuid(event);
+		await document.sheet.render({force: true});
 	}
 
 	/**
@@ -617,7 +621,8 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 		if(face)
 			options.face = face;
 
-		await this._getByUuid(event).then(item => item.useItem(options));
+		const item = await this._getByUuid(event);
+		await item.useItem(options);
 	}
 
 	/**

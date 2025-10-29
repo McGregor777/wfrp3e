@@ -277,11 +277,12 @@ export default class DiePool
 		const actor = await fromUuid(this.checkData.actor),
 			  parameters = [actor, this, this.checkData];
 
-		await fromUuid(effectUuid).then(effect => effect.triggerEffect({
+		const effect = await fromUuid(effectUuid);
+		await effect.triggerEffect({
 			parameters,
 			parameterNames: ["actor", "diePool", "checkData"],
 			script
-		}));
+		});
 	}
 
 
