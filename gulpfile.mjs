@@ -1,9 +1,10 @@
+import logger from "fancy-log";
 import fs from "fs";
 import gulp from "gulp";
-import logger from "fancy-log";
-import path from "path";
 import prefix from "gulp-autoprefixer";
 import less from "gulp-less";
+import yaml from "js-yaml";
+import path from "path";
 import yargs from "yargs";
 import {compilePack, extractPack} from "@foundryvtt/foundryvtt-cli";
 
@@ -78,9 +79,62 @@ async function extractPacks(packName)
 	}
 }
 
+/**
+ * Initializes the Foundry VTT system by creating symlinks to the Foundry VTT source files.
+ * - `gulp init` - Initialize the Foundry VTT system.
+ * @returns {Promise<void>}
+ */
+async function initialize()
+{
+	if(fs.existsSync("foundry-config.yaml")) {
+		let fileRoot = "";
+		try {
+			const foundryConfig = await fs.promises.readFile("foundry-config.yaml", "utf-8").then(file => yaml.load(file)),
+				  // As of 13.338, the Node install is *not* nested but electron installs *are*.
+				  nested = fs.existsSync(path.join(foundryConfig.installPath, "resources", "app"));
+
+			fileRoot = nested
+				? path.join(foundryConfig.installPath, "resources", "app")
+				: foundryConfig.installPath;
+		}
+		catch(error) {
+			console.error(`Error reading foundry-config.yaml: ${error}`);
+		}
+
+		try {
+			await fs.promises.mkdir("foundry");
+		}
+		catch(error) {
+			if(error.code !== "EEXIST")
+				throw error;
+		}
+
+		// Javascript files
+		for(const p of ["client", "common", "tsconfig.json"]) {
+			try {
+				await fs.promises.symlink(path.join(fileRoot, p), path.join("foundry", p));
+			}
+			catch(error) {
+				if(error.code !== "EEXIST")
+					throw error;
+			}
+		}
+
+		// Language files
+		try {
+			await fs.promises.symlink(path.join(fileRoot, "public", "lang"), path.join("foundry", "lang"));
+		}
+		catch(error) {
+			if(error.code !== "EEXIST")
+				throw error;
+		}
+	}
+}
+
 export default gulp.series(gulp.parallel(compileLess), watchUpdates);
 export const build = gulp.parallel(compileLess, /*javascript.compile, */compilePacks);
 export const css = gulp.series(compileLess);
 export const compile = gulp.series(compilePacks);
 export const extract = gulp.series(extractPacks);
+export const init = gulp.series(initialize);
 export const watch = gulp.series(gulp.parallel(compileLess), watchUpdates);
