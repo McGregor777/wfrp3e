@@ -46,4 +46,14 @@ export default class Weapon extends Trapping
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["TRAPPING", "WEAPON"];
+
+	/** @inheritDoc */
+	static migrateData(source)
+	{
+		for(const [index, quality] in source.qualities.entries())
+			if(quality.name === "twohanded")
+				source.qualities[index].name = "twoHanded";
+
+		return super.migrateData(source);
+	}
 }

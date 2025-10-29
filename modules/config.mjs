@@ -1277,7 +1277,7 @@ export const WFRP3e = Object.freeze({
 			reload: "WEAPON.QUALITIES.reload",
 			slow: "WEAPON.QUALITIES.slow",
 			thrown: "WEAPON.QUALITIES.thrown",
-			twohanded: "WEAPON.QUALITIES.twoHanded",
+			twoHanded: "WEAPON.QUALITIES.twoHanded",
 			unreliable: "WEAPON.QUALITIES.unreliable",
 			vicious: "WEAPON.QUALITIES.vicious"
 		},
