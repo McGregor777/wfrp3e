@@ -16,7 +16,7 @@
       "system": {
         "conditionScript": "return checkData.action && [\"melee\", \"ranged\"].includes(fromUuidSync(checkData.action)?.system.type);",
         "reverseScript": "",
-        "script": "dicePool.dice.fortune++;",
+        "script": "diePool.dice.fortune++;",
         "type": "onPreCheckTrigger"
       },
       "changes": [],

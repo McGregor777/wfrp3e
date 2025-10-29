@@ -16,7 +16,7 @@
       "system": {
         "conditionScript": "",
         "reverseScript": "",
-        "script": "dicePool.dice.misfortune -= 2;",
+        "script": "diePool.dice.misfortune -= 2;",
         "type": "onPreCheckTrigger"
       },
       "changes": [],

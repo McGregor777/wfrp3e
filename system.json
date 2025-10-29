@@ -13,7 +13,7 @@
 		"flags": {}
 	}],
 	"esmodules": [
-		"wfrp3e.js"
+		"wfrp3e.mjs"
 	],
 	"styles": [
 		"styles/wfrp3e.css"
