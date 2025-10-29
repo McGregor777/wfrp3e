@@ -23,7 +23,7 @@ export default class CheckHelper
 
 		if(checkData.targets?.length > 0) {
 			await fromUuid(checkData.targets[0]).then(async actor => {
-				for(const effect of actor.findTriggeredEffects("onTargettingCheckPreparation")) {
+				for(const effect of actor.findTriggeredEffects("onTargetingCheckPreparation")) {
 					await effect.triggerEffect({
 						parameters: [actor, checkData, diePool],
 						parameterNames: ["actor", "checkData", "diePool"]
