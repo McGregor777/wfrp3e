@@ -76,14 +76,12 @@ export default class CareerSheet extends ItemSheet
 		}
 
 		// Make sure that race restriction "any" removes every other race restriction.
-		if(data.system.raceRestrictions.includes("any") && !this.item.system.raceRestrictions.includes("any"))
+		const raceRestrictions = data.system.raceRestrictions,
+			  careerCurrentlyForAny = this.item.system.raceRestrictions.includes("any");
+		if(!careerCurrentlyForAny && raceRestrictions.includes("any"))
 			data.system.raceRestrictions = ["any"];
-		else if(this.item.system.raceRestrictions.includes("any")
-			&& data.system.raceRestrictions.find(value => value !== "any").length)
-			data.system.raceRestrictions.splice(
-				data.system.raceRestrictions.findIndex(value => value === "any"),
-				1
-			)
+		else if(careerCurrentlyForAny && raceRestrictions.find(value => value !== "any")?.length)
+			data.system.raceRestrictions.splice(raceRestrictions.indexOf("any"), 1);
 
 		return data;
 	}
