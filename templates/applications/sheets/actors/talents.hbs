@@ -27,17 +27,17 @@
 							   name="searchFilters.talents.type"
 							   value="{{t}}"
 							   type="radio"
-							   {{#if (sameAs t @root.searchFilters.type)}}checked{{/if}} />
+							   {{checked (eq t @root.searchFilters.type)}} />
 					</div>
 				</div>
 			{{/each}}
 		</div>
 	</nav>
 
-	{{#if (sameAs source.flags.wfrp3e.embeddedItemsDisplayMode "cards")}}
+	{{#if (eq source.flags.wfrp3e.embeddedItemsDisplayMode "cards")}}
 		<section class="item-container">
 			{{#each items as |item i|}}
-				{{#if (sameAs item.type "talent")}}
+				{{#if (eq item.type "talent")}}
 					<div class="talent-container">
 						{{>systems/wfrp3e/templates/applications/partials/talent-card.hbs item=item}}
 
@@ -51,7 +51,7 @@
 									blank=(localize "TALENT.SOCKET.none")}}
 						</select>
 					</div>
-				{{else if (sameAs item.type "ability")}}
+				{{else if (eq item.type "ability")}}
 					<div>
 						{{>systems/wfrp3e/templates/applications/partials/ability-card.hbs item=item}}
 					</div>
@@ -62,9 +62,9 @@
 		<section class="talent table scrollable">
 			<div class="table-body">
 				{{#each items as |item i|}}
-					{{#if (sameAs item.type "talent")}}
+					{{#if (eq item.type "talent")}}
 						{{>systems/wfrp3e/templates/applications/sheets/actors/partials/talent-row.hbs item=item}}
-					{{else if (sameAs item.type "ability")}}
+					{{else if (eq item.type "ability")}}
 						{{>systems/wfrp3e/templates/applications/sheets/actors/partials/ability-row.hbs item=item}}
 					{{/if}}
 				{{/each}}

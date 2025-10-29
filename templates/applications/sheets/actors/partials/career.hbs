@@ -116,7 +116,7 @@
 						   type="checkbox"
 						   data-property="system.advances.careerTransition"
 						   data-advance-type="careerTransition"
-						   {{#if (superiorOrEqualTo ../career.system.advances.careerTransition.cost this)}}checked{{/if}}
+						   {{checked (gte ../career.system.advances.careerTransition.cost this)}}
 						   {{#unless @root.editable}}disabled{{/unless}} />
 				{{/for}}
 
@@ -165,7 +165,7 @@
 							   data-index="{{nca}}"
 							   data-property="system.advances.nonCareer"
 							   data-advance-type="nonCareer"
-							   {{#if (superiorOrEqualTo nonCareerAdvance.cost this)}}checked{{/if}}
+							   {{checked (gte nonCareerAdvance.cost this)}}
 							   {{#unless @root.editable}}disabled{{/unless}} />
 					{{/for}}
 

@@ -9,7 +9,7 @@
 				<multi-checkbox name="system.raceRestrictions">
 					{{#each fields.raceRestrictions.element.choices as |choice ch|}}
 						<option value="{{ch}}"
-								{{#if (in ch @root.system.raceRestrictions)}}selected{{/if}}>
+								{{#if (includes ch @root.system.raceRestrictions)}}selected{{/if}}>
 							{{localize choice}}
 						</option>
 					{{/each}}
@@ -23,7 +23,7 @@
 	<fieldset class="sockets">
 		<legend>{{localize "CAREER.FIELDS.sockets.label"}}</legend>
 
-		{{#if (superiorTo system.sockets.length 0)}}
+		{{#if (gt system.sockets.length 0)}}
 			<div class="container scrollable">
 				{{#each system.sockets as |socket|}}
 					<fieldset class="content inline" data-index="{{@index}}">
@@ -55,7 +55,7 @@
 				<multi-checkbox name="system.primaryCharacteristics">
 					{{#each fields.primaryCharacteristics.element.choices as |choice ch|}}
 						<option value="{{ch}}"
-								{{#if (in ch @root.system.primaryCharacteristics)}}selected{{/if}}>
+								{{#if (includes ch @root.system.primaryCharacteristics)}}selected{{/if}}>
 							{{localize choice}}
 						</option>
 					{{/each}}

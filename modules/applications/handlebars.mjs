@@ -38,24 +38,51 @@ export function preloadTemplates()
 
 export function initializeHelpers()
 {
-	Handlebars.registerHelper("abs", (number) => Math.abs(number));
-	Handlebars.registerHelper("capitalize", (string) => capitalize(string));
-	Handlebars.registerHelper("equalTo", (value, compareValue) => value == compareValue);
-	Handlebars.registerHelper("find", (value, array) => array.find(item => item === value));
-	Handlebars.registerHelper("getProperty", (object, key) => foundry.utils.getProperty(object, key));
-	Handlebars.registerHelper("in", (value, array) => array.includes(value));
-	Handlebars.registerHelper("increment", (value, valueToAdd) => value + parseInt(valueToAdd));
-	Handlebars.registerHelper("inferiorTo", (value, compareValue) => Number(value) < Number(compareValue));
-	Handlebars.registerHelper("inferiorOrEqualTo", (value, compareValue) => Number(value) <= Number(compareValue));
-	Handlebars.registerHelper("multiply", (value, multiplier) => value * multiplier);
-	Handlebars.registerHelper("notEqualTo", (value, compareValue) => value != compareValue);
-	Handlebars.registerHelper("sameAs", (value, compareValue) => value === compareValue);
-	Handlebars.registerHelper("setVar", (name, value, options) => {options.data.root[name] = value});
-	Handlebars.registerHelper("superiorTo", (value, compareValue) => Number(value) > Number(compareValue));
-	Handlebars.registerHelper("superiorOrEqualTo", (value, compareValue) => Number(value) >= Number(compareValue));
-	Handlebars.registerHelper("uppercase", (string) => (string).toUpperCase());
+	Handlebars.registerHelper({
+		abs,
+		find,
+		getProperty,
+		includes,
+		increment,
+		multiply,
+		replace,
+		stripTags,
+		uppercase,
+		"capitalize": (string) => capitalize(string),
+		"for": (startingNumber, goalNumber, increment, block) => forLoop(startingNumber, goalNumber, increment, block),
+	});
 
-	Handlebars.registerHelper("for", (startingNumber, goalNumber, increment, block) => {
+	/**
+	 * Returns the absolute value of a number.
+	 * @param {number} number The number to get the absolute value of.
+	 * @returns {number} The absolute value of the number.
+	 */
+	function abs(number)
+	{
+		return Math.abs(number);
+	}
+
+	/**
+	 * Finds an item in an array.
+	 * @param {any} value The value to find in the array.
+	 * @param {Array} array The array to search in.
+	 * @returns {any} The found item, or undefined if not found.
+	 */
+	function find(value, array)
+	{
+		return array.find(item => item === value);
+	}
+
+	/**
+	 * Creates a for loop in Handlebars to instantiate a block a number of times.
+	 * @param {number} startingNumber The starting number of the loop.
+	 * @param {number} goalNumber The goal number of the loop.
+	 * @param {number} increment The increment of the loop.
+	 * @param {any} block The block to instantiate.
+	 * @returns {string} The accumulated string.
+	 */
+	function forLoop(startingNumber, goalNumber, increment, block)
+	{
 		let accumulator = "";
 
 		if(startingNumber <= goalNumber) {
@@ -74,28 +101,90 @@ export function initializeHelpers()
 		}
 
 		return accumulator;
-	});
+	}
 
-	Handlebars.registerHelper("include", (needle, haystack) => {
+	/**
+	 * Returns a property of an object.
+	 * @param {any} object The object to get the property from.
+	 * @param {string} key The key of the property to get.
+	 * @returns {any} The property of the object.
+	 */
+	function getProperty(object, key)
+	{
+		return foundry.utils.getProperty(object, key);
+	}
+
+	/**
+	 * Checks if a value is included in an array or string.
+	 * @param {Array|string} needle The value to check for.
+	 * @param {any} haystack The array or string to search in.
+	 * @returns {boolean} True if the value is included in the array or string, false otherwise.
+	 */
+	function includes(needle, haystack)
+	{
 		if(haystack instanceof String || haystack instanceof Array)
 			return haystack.includes(needle);
 		else
 			throw new Error("Haystack is not of a valid type.");
-	});
+	}
 
-	Handlebars.registerHelper("replace", (string, match, replacement) => {
-		if(string.includes(match))
-			return string.replace(match, replacement);
-		else
-			throw new Error("Unable to find match in the string.");
-	});
+	/**
+	 * Increments a value by a given amount.
+	 * @param {number} value The value to increment.
+	 * @param {number} valueToAdd The amount to increment by.
+	 * @returns {number} The incremented value.
+	 */
+	function increment(value, valueToAdd)
+	{
+		return value + parseInt(valueToAdd);
+	}
 
-	Handlebars.registerHelper("striptags", (value, tag) => {
+	/**
+	 * Multiplies a value by a given multiplier.
+	 * @param {number} value The value to multiply.
+	 * @param {number} multiplier The multiplier to multiply by.
+	 * @returns {number} The multiplied value.
+	 */
+	function multiply(value, multiplier)
+	{
+		return value * multiplier;
+	}
+
+	/**
+	 * Replaces a match in a string with a replacement.
+	 * @param {string} string The string to replace the match in.
+	 * @param {string} match The match to replace.
+	 * @param {string} replacement The replacement for the match.
+	 * @returns {string} The string with the match replaced.
+	 */
+	function replace(string, match, replacement)
+	{
+		return string.replace(match, replacement);
+	}
+
+	/**
+	 * Removes HTML tags from a string.
+	 * @param {string} value The string to remove HTML tags from.
+	 * @param {string} tag The tag to remove.
+	 * @returns {string} The string with HTML tags removed.
+	 */
+	function stripTags(value, tag)
+	{
 		const matches = [...value.matchAll(new RegExp("(<" + tag + "*.>).*(</" + tag + ">)", "g"))];
 
 		for(let i = 1; i < matches[0]?.length; i++)
 			value = value.replace(matches[0][i], "");
 
 		return value;
-	});
+	}
+
+	/**
+	 * Converts a string to uppercase.
+	 * @param {string} string The string to convert to uppercase.
+	 * @returns {string} The uppercased string.
+	 */
+	function uppercase(string)
+	{
+		return (string).toUpperCase();
+	}
 }

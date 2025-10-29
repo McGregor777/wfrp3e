@@ -28,7 +28,7 @@
 						   name="searchFilters.type"
 						   value="{{t}}"
 						   type="radio"
-						   {{#if (sameAs t @root.searchFilters.type)}}checked{{/if}} />
+						   {{checked (eq t @root.searchFilters.type)}} />
 				</div>
 			</div>
 		{{/each}}

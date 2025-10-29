@@ -7,9 +7,9 @@
 		<div class="segment-container">
 			{{#for 0 (increment system.tension.max 1) 1}}
 				<label class="segment
-					{{#if (or (equalTo @root.system.tension.events.0.threshold this)
-							  (equalTo @root.system.tension.events.1.threshold this))}}threshold{{/if}}">
-					{{#if (equalTo @root.system.tension.value this)}}
+					{{#if (or (eq @root.system.tension.events.0.threshold this)
+							  (eq @root.system.tension.events.1.threshold this))}}threshold{{/if}}">
+					{{#if (eq @root.system.tension.value this)}}
 						<img src="systems/wfrp3e/assets/images/token-grey.webp"/>
 					{{else}}
 						{{this}}
@@ -18,7 +18,7 @@
 					<input name="system.tension.value"
 						   type="radio"
 						   value="{{this}}"
-						{{#if (equalTo @root.system.tension.value this)}}checked{{/if}} />
+						{{checked (eq @root.system.tension.value this)}} />
 				</label>
 			{{/for}}
 		</div>
@@ -102,7 +102,7 @@
 			</a>
 		</h4>
 
-		{{#if (superiorTo system.sockets.length 0)}}
+		{{#if (gt system.sockets.length 0)}}
 			<div class="flexrow">
 				{{#each system.sockets as |socket|}}
 					<fieldset class="socket inline" data-index="{{@index}}">
