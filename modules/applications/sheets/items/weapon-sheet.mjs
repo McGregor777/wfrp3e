@@ -45,10 +45,12 @@ export default class WeaponSheet extends TrappingSheet
 
 			if(Array.isArray(qualityData.name))
 				for(let i = 0; i < qualityData.name.length; i++) {
-					qualities.push({
-						name: qualityData.name[i],
-						rating: qualityData.rating[i]
-					});
+					const quality = {name: qualityData.name[i]};
+
+					if(quality.rating?.length)
+						quality.rating = qualityData.name[i];
+
+					qualities.push(quality);
 				}
 			else
 				qualities.push({

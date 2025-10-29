@@ -50,7 +50,7 @@ export default class Weapon extends Trapping
 	/** @inheritDoc */
 	static migrateData(source)
 	{
-		for(const [index, quality] in source.qualities.entries())
+		for(const [index, quality] of source.qualities.entries())
 			if(quality.name === "twohanded")
 				source.qualities[index].name = "twoHanded";
 
