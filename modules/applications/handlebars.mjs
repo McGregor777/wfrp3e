@@ -50,6 +50,7 @@ export function initializeHelpers()
 		uppercase,
 		"capitalize": (string) => capitalize(string),
 		"for": (startingNumber, goalNumber, increment, block) => forLoop(startingNumber, goalNumber, increment, block),
+		same: (v1, v2) => v1 == v2,
 	});
 
 	/**

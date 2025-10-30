@@ -61,14 +61,14 @@
 										   data-uuid="{{item.uuid}}"
 										   {{#if (or
 											   (gte item.system.trainingLevel this)
-											   (and (eq this 1) (includes item.uuid @root.freeTrainings)))}}
+											   (and (same this 1) (includes item.uuid @root.freeTrainings)))}}
 											   checked disabled
 										   {{else unless (and (ne @root.advanceType "dedicationBonus") (or
 											   (and item.parent (gte item.parent.system.rank this))
-											   (eq (increment item.system.trainingLevel 1) this)
-											   (and (eq this 1) (includes item.uuid @root.freeAcquisitions))))}}
+											   (same (increment item.system.trainingLevel 1) this)
+											   (and (same this 1) (includes item.uuid @root.freeAcquisitions))))}}
 											   disabled
-										   {{else if (eq (lookup @root.upgrades.trainingLevel item.uuid) this)}}
+										   {{else if (same (lookup @root.upgrades.trainingLevel item.uuid) this)}}
 											   checked
 										   {{/if}} />
 								</label>
