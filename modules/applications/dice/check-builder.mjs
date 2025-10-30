@@ -186,20 +186,22 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 								if(weaponGroup.type === action.system.type)
 									validWeaponGroups.push(key);
 
-							partContext.availableWeapons = [
-								...action.actor.itemTypes.weapon
-									.filter(weapon => validWeaponGroups.includes(weapon.system.group))
-							];
+							partContext.availableWeapons = action.actor.items.search({
+								filters: [{
+									field: "type",
+									operator: "equals",
+									value: "weapon"
+								}, {
+									field: "system.group",
+									operator: "contains",
+									value: validWeaponGroups
+								}]
+							});
 
-							if(actor.type === "character") {
-								if(action.system.type === "melee")
-									partContext.availableWeapons.push(
-										CONFIG.WFRP3e.weapon.commonWeapons.improvisedWeapon,
-										CONFIG.WFRP3e.weapon.commonWeapons.unarmed
-									);
-								else
-									partContext.availableWeapons.push(CONFIG.WFRP3e.weapon.commonWeapons.improvised);
-							}
+							if(actor.type === "character")
+								for(const commonWeapon of Object.values(CONFIG.WFRP3e.weapon.commonWeapons))
+									if(validWeaponGroups.includes(commonWeapon.system.type))
+										partContext.availableWeapons.push(commonWeapon);
 
 							if(!checkData.weapon && partContext.availableWeapons?.length)
 								checkData.weapon = partContext.availableWeapons[0]?.uuid;
