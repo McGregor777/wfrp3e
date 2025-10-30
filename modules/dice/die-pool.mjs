@@ -277,14 +277,9 @@ export default class DiePool
 	async executeEffect(effectUuid, script = "script")
 	{
 		const actor = await fromUuid(this.checkData.actor),
-			  parameters = [actor, this, this.checkData];
+			  effect = await fromUuid(effectUuid);
 
-		const effect = await fromUuid(effectUuid);
-		await effect.triggerEffect({
-			parameters,
-			parameterNames: ["actor", "diePool", "checkData"],
-			script
-		});
+		await effect.triggerEffect({actor, diePool: this, checkData: this.checkData}, script);
 	}
 
 

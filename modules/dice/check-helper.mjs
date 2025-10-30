@@ -14,21 +14,13 @@ export default class CheckHelper
 	 */
 	static async triggerCheckPreparationEffects(actor, checkData, diePool)
 	{
-		for(const effect of actor.findTriggeredEffects("onCheckPreparation")) {
-			await effect.triggerEffect({
-				parameters: [actor, checkData, diePool],
-				parameterNames: ["actor", "checkData", "diePool"]
-			});
-		}
+		for(const effect of actor.findTriggeredEffects("onCheckPreparation"))
+			await effect.triggerEffect({actor, checkData, diePool});
 
 		if(checkData.targets?.length > 0) {
 			const actor = await fromUuid(checkData.targets[0]);
-			for(const effect of actor.findTriggeredEffects("onTargetingCheckPreparation")) {
-				await effect.triggerEffect({
-					parameters: [actor, checkData, diePool],
-					parameterNames: ["actor", "checkData", "diePool"]
-				});
-			}
+			for(const effect of actor.findTriggeredEffects("onTargetingCheckPreparation"))
+				await effect.triggerEffect({actor, checkData, diePool});
 		}
 	}
 
@@ -43,10 +35,9 @@ export default class CheckHelper
 			  checkData = checkRoll.options.checkData,
 			  actor = await fromUuid(checkData.actor),
 			  triggeredItems = actor.findTriggeredItems(
-				  "onPostCheckTrigger",{
-					  parameters: [actor, chatMessage, checkData, checkRoll],
-					  parameterNames: ["actor", "chatMessage", "checkData", "roll"]
-				  });
+				  "onPostCheckTrigger",
+				  {actor, chatMessage, checkData, checkRoll}
+			  );
 
 		if(triggeredItems.length > 0) {
 			const selectedItemUuids = await wfrp3e.applications.apps.selectors.TalentSelector.wait({items: triggeredItems});
@@ -56,10 +47,7 @@ export default class CheckHelper
 
 				for(const effect of selectedTalent.effects)
 					if(effect.system.type === "onPostCheckTrigger")
-						await effect.triggerEffect({
-							parameters: [actor, chatMessage, checkData, checkRoll],
-							parameterNames: ["actor", "chatMessage", "checkData", "checkRoll"]
-						});
+						await effect.triggerEffect({actor, chatMessage, checkData, checkRoll});
 
 				chatMessage.update({
 					"options.checkData.triggeredItems": checkData.triggeredItems

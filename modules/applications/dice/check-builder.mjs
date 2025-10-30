@@ -152,10 +152,9 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 						skill: await fromUuid(checkData.skill),
 						skills: actor.itemTypes.skill,
 						availableTriggeredEffects: actor.findTriggeredEffects(
-							"onPreCheckTrigger", {
-								parameters: [actor, this.diePool, checkData],
-								parameterNames: ["actor", "diePool", "checkData"]
-							}),
+							"onPreCheckTrigger",
+							{actor, diePool: this.diePool, checkData}
+						),
 						triggeredEffects: checkData.triggeredEffects ?? []
 					};
 

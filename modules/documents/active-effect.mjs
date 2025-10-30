@@ -2,17 +2,15 @@ export default class ActiveEffect extends foundry.documents.ActiveEffect
 {
 	/**
 	 * Triggers the script of the active effect.
-	 * @param {Object} options
-	 * @param {Object[]} [options.parameters]
-	 * @param {string[]} [options.parameterNames]
-	 * @param {string} [options.script]
-	 * @returns {Promise<void>}
+	 * @param {Object} [parameters] The parameters passed to the script.
+	 * @param {string} [script] Which script is executed.
+	 * @returns {Promise<any>}
 	 */
-	async triggerEffect({parameters = [], parameterNames = [], script = "script"} = {})
+	async triggerEffect(parameters = {}, script = "script")
 	{
 		try {
-			const fn = new foundry.utils.AsyncFunction(...parameterNames, this.system[script]);
-			return await fn.call(this, ...parameters);
+			const fn = new foundry.utils.AsyncFunction(...Object.keys(parameters), this.system[script]);
+			return await fn.call(this, ...Object.values(parameters));
 		}
 		catch(error) {
 			console.error(error);
@@ -21,17 +19,17 @@ export default class ActiveEffect extends foundry.documents.ActiveEffect
 
 	/**
 	 * Checks the condition script of the active effect.
-	 * @param {Object} options
-	 * @param {Object[]} [options.parameters]
-	 * @param {string[]} [options.parameterNames]
-	 * @returns {Promise<boolean>} Whether the condition script was passed.
-	 * @private
+	 * @param {Object} [parameters] The parameters passed to the condition script.
+	 * @returns {boolean} Whether the condition script was passed.
 	 */
-	checkEffectConditionScript({parameters = [], parameterNames = []} = {})
+	checkConditionScript(parameters = {})
 	{
+		if(!this.system.conditionScript)
+			return true;
+
 		try {
-			const fn = new Function(...parameterNames, this.system.conditionScript);
-			return fn.call(this, ...parameters);
+			const fn = new Function(...Object.keys(parameters), this.system.conditionScript);
+			return fn.call(this, ...Object.values(parameters));
 		}
 		catch(error) {
 			console.error(error);

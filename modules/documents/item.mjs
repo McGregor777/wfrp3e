@@ -100,10 +100,7 @@ export default class Item extends foundry.documents.Item
 
 		for(const effect of this.effects)
 			if(effect.system.type === "requirementCheck")
-				result = await effect.triggerEffect({
-					parameters: [parameters.actor ?? this.parent],
-					parameterNames: ["actor"]
-				});
+				result = await effect.triggerEffect({actor: parameters.actor ?? this.parent});
 
 		return result;
 	}

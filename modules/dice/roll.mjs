@@ -362,9 +362,6 @@ export default class CheckRoll extends foundry.dice.Roll
 	static async triggerOnCheckRollEffects(actor, checkData, checkRoll)
 	{
 		for(const effect of actor.findTriggeredEffects("onCheckRoll"))
-			await effect.triggerEffect({
-				parameters: [actor, checkData, checkRoll],
-				parameterNames: ["actor", "checkData", "checkRoll"]
-			});
+			await effect.triggerEffect({actor, checkData, checkRoll});
 	}
 }

@@ -490,10 +490,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			  };
 
 		for(const effect of character.findTriggeredEffects("onStartingSkillTrainingSelection"))
-			await effect.triggerEffect({
-				parameters: [options],
-				parameterNames: ["options"]
-			});
+			await effect.triggerEffect({options});
 
 		const upgrades = await SkillUpgrader.wait(options),
 			  skills = await game.packs.get("wfrp3e.items").getDocuments({
@@ -563,10 +560,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			  };
 
 		for(const effect of character.findTriggeredEffects("onStartingTalentSelection"))
-			await effect.triggerEffect({
-				parameters: [options],
-				parameterNames: ["options"]
-			});
+			await effect.triggerEffect({options});
 
 		options.items = await TalentSelector.buildNewCharacterOptionsList(character, options);
 
@@ -686,10 +680,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			  };
 
 		for(const effect of character.findTriggeredEffects("onCreationPointInvestment"))
-			await effect.triggerEffect({
-				parameters: [options],
-				parameterNames: ["options"]
-			});
+			await effect.triggerEffect({options});
 
 		const investments = await wfrp3e.applications.apps.CreationPointInvestor.wait(options);
 		if(investments) {
