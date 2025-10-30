@@ -828,15 +828,16 @@ export default class Actor extends foundry.documents.Actor
 					negate: true
 				}]
 			}),
+			this.system.currentCareer,
 			...this.items.search({
 				filters: [{
 					field: "type",
 					operator: "equals",
 					value: "career"
 				}, {
-					field: "system.current",
-					operator: "equals",
-					value: true
+					field: "system.dedicationBonus",
+					operator: "is_empty",
+					negate: true
 				}, {
 					field: "effects",
 					operator: "is_empty",
