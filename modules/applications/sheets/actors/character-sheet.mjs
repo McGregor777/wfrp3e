@@ -114,36 +114,37 @@ export default class CharacterSheet extends ActorSheet
 	/** @inheritDoc */
 	_prepareTabs(group)
 	{
+		let tabs = [];
 		if(group === "sheet") {
-			const tabs = super._prepareTabs(group);
+			tabs = super._prepareTabs(group);
 
 			if(this.actor.itemTypes.career.length <= 0)
 				tabs.careers.cssClass += " hidden";
-
-			return tabs;
 		}
-		else if(group === "careers")
-			return this.actor.itemTypes.career.reduce((tabs, career, index) => {
+		else if(group === "careers") {
+			for(const index in this.actor.itemTypes.career) {
+				const career = this.actor.itemTypes.career[index];
 				let tab = {
 					id: career.id,
-					group: group,
+					group,
 					label: career.name
 				};
 
 				if(career.system.current)
 					tab.icon = "fa fa-check";
 
-				if(career.system.current || index === 0 && !this.actor.system.currentCareer) {
+				if(career.system.current || !this.actor.system.currentCareer && index === 0)
 					tab = {
 						...tab,
 						active: true,
 						cssClass: "active"
 					};
-				}
 
 				tabs.push(tab);
-				return tabs;
-			}, []);
+			}
+		}
+
+		return tabs;
 	}
 
 	/** @inheritDoc */

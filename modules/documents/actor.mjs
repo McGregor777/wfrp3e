@@ -724,30 +724,30 @@ export default class Actor extends foundry.documents.Actor
 	{
 		const actors = this.system.currentParty
 				  ? this.system.currentParty.system.members.map(member => fromUuidSync(member))
-				  : [this],
-			  items = actors.reduce((items, actor) => {
-				  items.push(...actor.items.search({
-					  filters: [{
-						  field: "system.socket",
-						  operator: "is_empty",
-						  negate: true
-					  }, {
-						  field: "uuid",
-						  operator: "equals",
-						  negate: true,
-						  value: item.uuid
-					  }, {
-						  field: "system.socket",
-						  operator: "equals",
-						  negate: false,
-						  value: item.system.socket
-					  }]
-				  }));
-				  return items;
-			  }, []);
+				  : [this];
 
-		for(const item of items)
-			item.update({"system.socket": ""});
+		for(const actor of actors) {
+			const foundItems = actor.items.search({
+				filters: [{
+					field: "system.socket",
+					operator: "is_empty",
+					negate: true
+				}, {
+					field: "uuid",
+					operator: "equals",
+					negate: true,
+					value: item.uuid
+				}, {
+					field: "system.socket",
+					operator: "equals",
+					negate: false,
+					value: item.system.socket
+				}]
+			});
+
+			for(const foundItem of foundItems)
+				foundItem.update({"system.socket": null});
+		}
 	}
 
 	/**

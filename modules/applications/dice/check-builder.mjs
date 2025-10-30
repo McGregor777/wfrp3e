@@ -108,7 +108,9 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 
 		switch(partId) {
 			case "pools":
-				const totalDice = Object.values(this.diePool.dice).reduce((accumulator, dice) => accumulator + +dice, 0);
+				let totalDice = 0;
+				for(const dice of Object.values(this.diePool.dice))
+					totalDice += +dice;
 
 				// Adjust dice icons' size.
 				let height = 48;
@@ -144,11 +146,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 						challengeLevel: checkData.challengeLevel,
 						challengeLevels: CONFIG.WFRP3e.challengeLevels,
 						characteristic: checkData.characteristic,
-						characteristics: Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, characteristic) => {
-							if(characteristic[0] !== "varies")
-								object[characteristic[0]] = characteristic[1].name;
-							return object;
-						}, {}),
+						characteristics: CONFIG.WFRP3e.characteristics,
 						fortunePoints: checkData.fortunePoints ?? 0,
 						skill: await fromUuid(checkData.skill),
 						skills: actor.itemTypes.skill,
@@ -161,18 +159,15 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 					};
 
 					if(actor.type === "character") {
+						const availableSpecialisations = [];
+						for(const skill of actor.itemTypes.skill.filter(skill => skill.system.specialisations))
+							availableSpecialisations.push(
+								...skill.system.specialisations.split(",").map(specialisation => specialisation.trim())
+							);
+
 						partContext = {
 							...partContext,
-							availableSpecialisations: actor.itemTypes.skill
-								.filter(skill => skill.system.specialisations)
-								.reduce((specialisations, skill) => {
-									specialisations.push(
-										...skill.system.specialisations.split(",").map(
-											specialisation => specialisation.trim()
-										)
-									);
-									return specialisations;
-								}, []),
+							availableSpecialisations,
 							maxFortunePoints: actor.system.fortune.value
 								+ (actor.system.currentParty?.system.fortunePool ?? 0),
 							specialisations: checkData.specialisations ?? []
@@ -186,12 +181,10 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 						partContext.action = action;
 
 						if(["melee", "ranged"].includes(action.system.type)) {
-							const validWeaponGroups = Object.entries(CONFIG.WFRP3e.weapon.groups)
-								.reduce((array, weaponGroup) => {
-									if(weaponGroup[1].type === action.system.type)
-										array.push(weaponGroup[0]);
-									return array;
-								}, []);
+							const validWeaponGroups = [];
+							for(const [key, weaponGroup] of Object.entries(CONFIG.WFRP3e.weapon.groups))
+								if(weaponGroup.type === action.system.type)
+									validWeaponGroups.push(key);
 
 							partContext.availableWeapons = [
 								...action.actor.itemTypes.weapon

@@ -6,12 +6,10 @@ export default class CheckRoll extends foundry.dice.Roll
 
 	get resultSymbols()
 	{
-		const resultSymbols = Object.entries(CONFIG.WFRP3e.symbols).reduce((object, [key, value]) => {
+		const resultSymbols = {};
+		for(const [key, symbol] of Object.entries(CONFIG.WFRP3e.symbols))
 			if(key !== "righteousSuccess")
-				object[value.plural] = 0;
-
-			return object;
-		}, {});
+				resultSymbols[symbol.plural] = 0;
 
 		this.terms.filter(term => term instanceof wfrp3e.dice.terms.Die).forEach(term => {
 			term.results.forEach(result => {
@@ -57,36 +55,36 @@ export default class CheckRoll extends foundry.dice.Roll
 
 	get remainingSymbols()
 	{
-		const totalSymbols = {...this.totalSymbols};
+		const remainingSymbols = {...this.totalSymbols};
 
-		if(this.effects)
+		if(this.effects) {
 			Object.entries(this.effects).forEach(([symbolName, effects]) => {
-				const plural = CONFIG.WFRP3e.symbols[symbolName].plural;
+				const plural = CONFIG.WFRP3e.symbols[symbolName].plural,
+					  activeActionEffects = effects.filter(effect => effect.active);
 
-				totalSymbols[plural] = effects.filter(effect => effect.active).reduce((remainingSymbols, effect) => {
+				for(const effect of activeActionEffects) {
 					if(["delay", "exertion"].includes(symbolName)) {
-						remainingSymbols--;
+						remainingSymbols[plural]--;
 
 						if(effect.symbolAmount > 1)
-							totalSymbols.banes -= effect.symbolAmount - 1;
+							remainingSymbols.banes -= effect.symbolAmount - 1;
 					}
-					else if(remainingSymbols < effect.symbolAmount) {
+					else if(remainingSymbols[plural] < effect.symbolAmount) {
 						if(["success", "boon"].includes(symbolName)
-							&& (remainingSymbols + totalSymbols.sigmarsComets >= effect.symbolAmount)) {
-							totalSymbols.sigmarsComets += remainingSymbols - effect.symbolAmount;
+							&& (remainingSymbols[plural] + remainingSymbols.sigmarsComets >= effect.symbolAmount)) {
+							remainingSymbols.sigmarsComets += remainingSymbols[plural] - effect.symbolAmount;
 							return 0;
 						}
 
 						throw new Error(`The remaining number of ${symbolName} cannot be negative.`);
 					}
 					else
-						remainingSymbols -= effect.symbolAmount;
-
-					return remainingSymbols;
-				}, totalSymbols[plural]);
+						remainingSymbols[plural] -= effect.symbolAmount;
+				}
 			});
+		}
 
-		return totalSymbols;
+		return remainingSymbols;
 	}
 
 	/** @inheritDoc */
@@ -117,27 +115,28 @@ export default class CheckRoll extends foundry.dice.Roll
 	async _prepareChatRenderContext({flavor, isPrivate = false, ...options} = {})
 	{
 		const {Die} = wfrp3e.dice.terms.Die,
-			  context = {
-				  formula: isPrivate ? "???" : this._formula,
-				  flavor: isPrivate ? null : flavor ?? this.options.flavor,
-				  user: game.user.id,
-				  tooltip: isPrivate ? "" : await this.getTooltip(),
-				 total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-				  totalSymbols: this.totalSymbols,
-				  hasSpecialDice: !!this.terms.find(term => term instanceof Die),
-				  hasStandardDice: !!this.terms.find(term => !(term instanceof Die)
-					  && term instanceof foundry.dice.terms.DiceTerm),
-				  publicRoll: !isPrivate,
-				  remainingSymbols: isPrivate ? {} : this.remainingSymbols,
-				  specialDieResultLabels: isPrivate
-					  ? {}
-					  : this.dice.filter(die => die instanceof Die).reduce((resultLabels, die) => {
-						  die.results.forEach(result => resultLabels.push(die.getResultLabel(result)));
-						  return resultLabels;
-					  }, []),
-				  symbols: CONFIG.WFRP3e.symbols
-			  },
-			  checkData = this.options.checkData;
+			  checkData = this.options.checkData,
+			  specialDieResultLabels = [];
+
+		if(!isPrivate)
+			for(const die of this.dice)
+				if(die instanceof Die)
+					die.results.forEach(result => specialDieResultLabels.push(die.getResultLabel(result)));
+
+		let context = {
+			formula: isPrivate ? "???" : this._formula,
+			flavor: isPrivate ? null : flavor ?? this.options.flavor,
+			user: game.user.id,
+			tooltip: isPrivate ? "" : await this.getTooltip(),
+			total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
+			totalSymbols: this.totalSymbols,
+			hasSpecialDice: !!this.terms.find(term => term instanceof Die),
+			hasStandardDice: !!this.terms.find(term => !(term instanceof Die) && term instanceof foundry.dice.terms.DiceTerm),
+			publicRoll: !isPrivate,
+			remainingSymbols: isPrivate ? {} : this.remainingSymbols,
+			specialDieResultLabels,
+			symbols: CONFIG.WFRP3e.symbols
+		};
 
 		if(checkData) {
 			const actor = await fromUuid(checkData.actor);
@@ -156,23 +155,15 @@ export default class CheckRoll extends foundry.dice.Roll
 					face: checkData.face
 				});
 
-			if(checkData.outcome?.criticalWounds && Array.isArray(checkData.outcome.criticalWounds))
-				context.criticalWoundLinks = checkData.outcome.criticalWounds.reduce(async (names, criticalWound) => {
-					const criticalWoundLink = await fromUuid(criticalWound).toAnchor().outerHTML;
-					names = names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
-					return names;
-				}, "")
+			if(Array.isArray(checkData.outcome?.criticalWounds))
+				context.criticalWoundLinks = this._prepareCriticalWoundLinks(checkData.outcome.criticalWounds);
 
 			if(checkData.targets && checkData.targets.length > 0) {
 				const targetActor = await fromUuid(checkData.targets[0]);
 				context.targetActorName = targetActor.token ? targetActor.token.name : targetActor.prototypeToken.name;
 
-				if(checkData.outcome?.targetCriticalWounds && Array.isArray(checkData.outcome.targetCriticalWounds))
-					context.targetCriticalWoundLinks = checkData.outcome.targetCriticalWounds
-						?.reduce((names, criticalWound) => {
-							const criticalWoundLink = fromUuidSync(criticalWound).toAnchor().outerHTML;
-							return names === "" ? criticalWoundLink : names + `, ${criticalWoundLink}`;
-						}, "");
+				if(Array.isArray(checkData.outcome?.targetCriticalWounds))
+					context.targetCriticalWoundLinks = this._prepareCriticalWoundLinks(checkData.outcome.targetCriticalWounds);
 			}
 		}
 
@@ -205,20 +196,13 @@ export default class CheckRoll extends foundry.dice.Roll
 			  characteristic = checkData.characteristic,
 			  weapon = await fromUuid(checkData.weapon);
 
-		this.effects = {
-			...Object.entries(structuredClone(action.system[checkData.face].effects))
-				.reduce((allEffects, [symbol, effects]) => {
-					effects.map((effect) => effect.active = false);
-					allEffects[symbol] = effects;
-					return allEffects;
-				}, {})
-		};
-		this.effects.boon.push(CheckHelper.getUniversalBoonEffect(
-			CONFIG.WFRP3e.characteristics[characteristic].type === "mental")
-		);
-		this.effects.bane.push(CheckHelper.getUniversalBaneEffect(
-			CONFIG.WFRP3e.characteristics[characteristic].type === "mental")
-		);
+		this.effects = foundry.utils.deepClone(action.system[checkData.face].effects);
+		for(const effects of Object.values(this.effects))
+			for(const effect of effects)
+				effect.active = false;
+
+		this.effects.boon.push(CheckHelper.getUniversalBoonEffect(isCharacteristicMental));
+		this.effects.bane.push(CheckHelper.getUniversalBaneEffect(isCharacteristicMental));
 
 		if(["melee", "ranged"].includes(action.system.type)) {
 			if(weapon)
@@ -230,6 +214,25 @@ export default class CheckRoll extends foundry.dice.Roll
 		await CheckRoll.triggerOnCheckRollEffects(actor, checkData, this);
 
 		return this;
+	}
+
+	/**
+	 * Fetches critical wounds by their uuid before returning a concatenation of their anchor links.
+	 * @param {string[]} uuids A list of critical wound uuids to fetch.
+	 * @returns {Promise<string>}
+	 * @protected
+	 */
+	async _prepareCriticalWoundLinks(uuids)
+	{
+		let links = null;
+		for(const uuid of uuids) {
+			const criticalWound = await fromUuid(uuid),
+				  link = criticalWound.toAnchor().outerHTML;
+
+			links = links ? `${links}, ${link}` : link;
+		}
+
+		return links;
 	}
 
 	/**

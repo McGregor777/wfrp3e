@@ -4,54 +4,29 @@ export default class Creature extends foundry.abstract.TypeDataModel
 	/** @inheritDoc */
 	static defineSchema()
 	{
-		const fields = foundry.data.fields;
+		const fields = foundry.data.fields,
+			  attributes = {},
+			  characteristics = {},
+			  stance = {};
+
+		for(const [key, attribute] of Object.entries(CONFIG.WFRP3e.attributes))
+			attributes[key] = new fields.SchemaField({
+				max: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
+				value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
+			}, {label: attribute.name});
+
+		for(const [key, characteristic] of Object.entries(CONFIG.WFRP3e.characteristics))
+			characteristics[key] = new fields.SchemaField({
+				rating: new fields.NumberField({initial: 2, integer: true, min: 0, nullable: false, required: true}),
+				fortune: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
+			}, {label: characteristic.name});
+
+		for(const key of Object.keys(CONFIG.WFRP3e.stances))
+			stance[key] = new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true});
 
 		return {
-			attributes: new fields.SchemaField(
-				Object.entries(CONFIG.WFRP3e.attributes).reduce((object, [key, value]) => {
-					object[key] = new fields.SchemaField({
-						max: new fields.NumberField({
-							initial: 0,
-							integer: true,
-							min: 0,
-							nullable: false,
-							required: true
-						}),
-						value: new fields.NumberField({
-							initial: 0,
-							integer: true,
-							min: 0,
-							nullable: false,
-							required: true
-						})
-					}, {label: value.name});
-
-					return object;
-				}, {})
-			),
-			characteristics: new fields.SchemaField(
-				Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, [key, value]) => {
-					if(key !== "varies")
-						object[key] = new fields.SchemaField({
-							rating: new fields.NumberField({
-								initial: 2,
-								integer: true,
-								min: 0,
-								nullable: false,
-								required: true
-							}),
-							fortune: new fields.NumberField({
-								initial: 0,
-								integer: true,
-								min: 0,
-								nullable: false,
-								required: true
-							})
-						}, {label: value.name});
-
-					return object;
-				}, {})
-			),
+			attributes: new fields.SchemaField(attributes),
+			characteristics: new fields.SchemaField(characteristics),
 			category: new fields.StringField({nullable: true}),
 			damageRating: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			defenceValue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
@@ -63,10 +38,7 @@ export default class Creature extends foundry.abstract.TypeDataModel
 			specialRuleSummary: new fields.HTMLField({nullable: true}),
 			soakValue: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			stance: new fields.SchemaField({
-				...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
-					object[stance] = new fields.NumberField({initial: 1, integer: true, min: 0, nullable: false, required: true});
-					return object;
-				}, {}),
+				...stance,
 				current: new fields.NumberField({initial: 0, integer: true, nullable: false, required: true})
 			}),
 			threatRating: new fields.NumberField({initial: 1, integer: true, min: 1, nullable: false, required: true}),

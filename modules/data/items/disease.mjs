@@ -6,16 +6,17 @@ export default class Disease extends Item
 	/** @inheritDoc */
 	static defineSchema()
 	{
-		const fields = foundry.data.fields;
+		const fields = foundry.data.fields,
+			  symptoms = {};
+
+		for(const [key, symptom] of Object.entries(CONFIG.WFRP3e.disease.symptoms))
+			symptoms[key] = symptom.name;
 
 		return {
 			description: new fields.HTMLField(),
 			severityRating: new fields.NumberField({initial: 1, integer: true, min: 1, nullable: false, required: true}),
 			symptom: new fields.StringField({
-				choices: Object.entries(CONFIG.WFRP3e.disease.symptoms).reduce((groups, [key, group]) => {
-					groups[key] = group.name
-					return groups;
-				}, {}),
+				choices: symptoms,
 				initial: Object.keys(CONFIG.WFRP3e.disease.symptoms)[0],
 				required: true
 			}),

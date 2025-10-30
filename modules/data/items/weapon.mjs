@@ -6,16 +6,17 @@ export default class Weapon extends Trapping
 	/** @inheritDoc */
 	static defineSchema()
 	{
-		const fields = foundry.data.fields;
+		const fields = foundry.data.fields,
+			  groups = {};
+
+		for(const [key, group] of Object.entries(CONFIG.WFRP3e.weapon.groups))
+			groups[key] = group.name;
 
 		return Object.assign({
 			criticalRating: new fields.NumberField({initial: 5, integer: true, min: 0, nullable: false, required: true}),
 			damageRating: new fields.NumberField({initial: 3, integer: true, min: 0, nullable: false, required: true}),
 			group: new fields.StringField({
-				choices: Object.entries(CONFIG.WFRP3e.weapon.groups).reduce((groups, [key, group]) => {
-					groups[key] = group.name
-					return groups;
-				}, {}),
+				choices: groups,
 				initial: Object.keys(CONFIG.WFRP3e.weapon.groups)[0],
 				required: true
 			}),

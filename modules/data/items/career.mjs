@@ -6,7 +6,15 @@ export default class Career extends Item
 	/** @inheritDoc */
 	static defineSchema()
 	{
-		const fields = foundry.data.fields;
+		const fields = foundry.data.fields,
+			  characteristics = {},
+			  races = {}
+
+		for(const [key, characteristic] of Object.entries(CONFIG.WFRP3e.characteristics))
+			characteristics[key] = characteristic.name;
+
+		for(const [key, race] of Object.entries(CONFIG.WFRP3e.availableRaces))
+			races[key] = race.name;
 
 		return {
 			advanced: new fields.BooleanField(),
@@ -53,10 +61,7 @@ export default class Career extends Item
 			description: new fields.HTMLField(),
 			primaryCharacteristics: new fields.ArrayField(
 				new fields.StringField({
-					choices: Object.entries(CONFIG.WFRP3e.characteristics).reduce((choices, [key, value]) => {
-						choices[key] = value.name
-						return choices;
-					}, {}),
+					choices: characteristics,
 					initial: "strength",
 					required: true
 				}),
@@ -64,13 +69,7 @@ export default class Career extends Item
 			),
 			raceRestrictions: new fields.ArrayField(
 				new fields.StringField({
-					choices: {
-						any: "RACE.any",
-						...Object.entries(CONFIG.WFRP3e.availableRaces).reduce((choices, [key, value]) => {
-							choices[key] = value.name
-							return choices;
-						}, {})
-					},
+					choices: {any: "RACE.any", ...races},
 					initial: "any",
 					required: true
 				}),
@@ -101,39 +100,6 @@ export default class Career extends Item
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["CAREER"];
 
-	/**
-	 * The number of open advances of each type contained by a career.
-	 * @private
-	 */
-	get openAdvanceTypeNumbers()
-	{
-		return Object.entries({
-			action: `${game.i18n.localize("CAREER.SHEET.action")} -`,
-			talent: `${game.i18n.localize("CAREER.SHEET.talent")} -`,
-			skill: [
-				game.i18n.format("SKILLUPGRADER.acquisitionUpgrade", {name: ""}),
-				game.i18n.format("SKILLUPGRADER.specialisationUpgrade", {name: "", value: ""}),
-				game.i18n.format("SKILLUPGRADER.trainingLevelUpgrade", {name: "", value: ""})
-			],
-			fortune: game.i18n.format("CHARACTERISTICUPGRADER.characteristicFortune", {characteristic: ""}),
-			conservative: game.i18n.localize("STANCES.conservative"),
-			reckless: game.i18n.localize("STANCES.reckless"),
-			wound: game.i18n.localize("CHARACTER.woundThreshold")
-		}).reduce((types, [key, value]) => {
-			console.log(value)
-
-			types[key] = 0;
-
-			if(Array.isArray(value))
-				for(const val of value)
-					types[key] += this.advances.open.filter(advance => advance && advance.includes(val)).length
-			else
-				types[key] = this.advances.open.filter(advance => advance && advance.includes(value)).length;
-
-			return types;
-		}, {});
-	}
-
 	/** @inheritDoc */
 	static migrateData(source)
 	{
@@ -145,5 +111,45 @@ export default class Career extends Item
 			});
 
 		return super.migrateData(source);
+	}
+
+	//#TODO Add a "type" property to open advances so an open advance type doesn't require to be guessed anymore.
+	//#TODO Reverse the logic by returning the number of open advance still available by type.
+	/**
+	 * The number of open advances of each type that has been bought during a career.
+	 * @private
+	 */
+	get openAdvanceTypeNumbers()
+	{
+		const advanceTypeLabels = {
+				  action: game.i18n.localize("CAREER.SHEET.action"),
+				  talent: game.i18n.localize("CAREER.SHEET.talent"),
+				  skill: [
+					  game.i18n.format("SKILLUPGRADER.acquisitionUpgrade", {name: ""}),
+					  game.i18n.format("SKILLUPGRADER.specialisationUpgrade", {name: "", value: ""}),
+					  game.i18n.format("SKILLUPGRADER.trainingLevelUpgrade", {name: "", value: ""})
+				  ],
+				  fortune: game.i18n.format("CHARACTERISTICUPGRADER.characteristicFortune", {characteristic: ""}),
+				  conservative: game.i18n.localize("STANCES.conservative"),
+				  reckless: game.i18n.localize("STANCES.reckless"),
+				  wound: game.i18n.localize("CHARACTER.woundThreshold")
+			  },
+			  advancesBought = {};
+
+		// Each open advance label is tested in order to determine which type of open advance it is.
+		// For example, if an open advance is labelled "Education - Acquisition", then we know that it is
+		// a skill open advance and that there is minus one skill advance left to be taken as an open advance.
+		for(const [key, label] of Object.entries(advanceTypeLabels)) {
+			advancesBought[key] = 0;
+
+			// Skill advances come in different form of upgrades, so each form has to be tested.
+			if(Array.isArray(label))
+				for(const val of label)
+					advancesBought[key] += this.advances.open.filter(advance => advance?.includes(label)).length
+			else
+				advancesBought[key] = this.advances.open.filter(advance => advance?.includes(label)).length;
+		}
+
+		return advancesBought;
 	}
 }

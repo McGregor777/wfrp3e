@@ -65,16 +65,18 @@ export default class CharacteristicUpgrader extends foundry.applications.api.Han
 	/** @inheritDoc */
 	async _prepareContext(options)
 	{
+		// Either show primary or non-primary characteristics depending on if the advance is a regular or a non-career one.
+		const primaryCharacteristics = this.career.system.primaryCharacteristics,
+			  characteristics = {};
+		for(const [key, characteristic] of Object.entries(this.actor.system.characteristics))
+			if((!this.nonCareerAdvance && primaryCharacteristics.includes(key))
+				|| this.nonCareerAdvance && !primaryCharacteristics.includes(key))
+				characteristics[key] = {...characteristic, ...CONFIG.WFRP3e.characteristics[key]};
+
 		return {
 			...await super._prepareContext(options),
 			buttons: [{type: "submit", icon: "fa-solid fa-check", label: "CHARACTERISTICUPGRADER.ACTIONS.upgradeCharacteristic"}],
-			characteristics: Object.entries(this.actor.system.characteristics).reduce(
-				(characteristics, [key, characteristic]) => {
-					if((!this.nonCareerAdvance && this.career.system.primaryCharacteristics.includes(key))
-						|| this.nonCareerAdvance && !this.career.system.primaryCharacteristics.includes(key))
-						characteristics[key] = {...characteristic, ...CONFIG.WFRP3e.characteristics[key]};
-					return characteristics;
-				}, {}),
+			characteristics,
 			upgrade: this.upgrade
 		};
 	}

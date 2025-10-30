@@ -38,15 +38,15 @@ export default class DiePool
 	 */
 	constructor(startingPool = {}, options = {checkData: null, flavor: null, sound: null})
 	{
-		this.dice = Object.keys(CONFIG.WFRP3e.dice).reduce((dice, dieName) => {
-			dice[dieName] = startingPool.dice ? startingPool.dice[dieName] ?? 0 : 0;
-			return dice;
-		}, {});
+		this.dice = {};
+		if(typeof startingPool.dice === "object")
+			for(const key of Object.keys(startingPool.dice))
+				this.dice[key] = +startingPool.dice[key] || 0;
 
-		this.symbols = Object.values(CONFIG.WFRP3e.symbols).reduce((symbols, symbol) => {
-			symbols[symbol.plural] = startingPool.symbols ? startingPool.symbols[symbol.plural] ?? 0 : 0;
-			return symbols;
-		}, {});
+		this.symbols = {};
+		if(typeof startingPool.symbols === "object")
+			for(const key of Object.keys(startingPool.symbols))
+				this.symbols[key] = +startingPool.symbols[key] || 0;
 
 		const checkData = options.checkData;
 		if(checkData?.actor) {

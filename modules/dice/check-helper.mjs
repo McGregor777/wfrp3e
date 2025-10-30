@@ -377,14 +377,13 @@ export default class CheckHelper
 	 * @param {ActionEffect} effect The action effect which script is executed.
 	 * @param {string} script The action effect script to execute.
 	 * @param {CheckRoll} checkRoll The check roll with which the toggled action effect is associated.
-	 * @param {Object} [options] Optional parameters to pass to the action effect script.
-	 * @param {CheckData|null} [options.checkData] The check data.
-	 * @param {Actor|null} [options.actor] The actor performing the check.
-	 * @param {CheckOutcome|null} [options.outcome] The outcome of the check.
-	 * @param {Actor|null} [options.targetActor] The target of the check.
+	 * @param {CheckData} [checkData] The check data.
+	 * @param {Actor} [actor] The actor performing the check.
+	 * @param {CheckOutcome} [outcome] The outcome of the check.
+	 * @param {Actor} [targetActor] The target of the check.
 	 * @returns {Promise<void>}
 	 */
-	static async executeActionEffectScript(effect, script, checkRoll, {checkData = null, actor = null, outcome = null, targetActor = null} = {})
+	static async executeActionEffectScript(effect, script, checkRoll, checkData = null, actor = null, outcome = null, targetActor = null)
 	{
 		if(checkData === null)
 			checkData = checkRoll.options.checkData;
@@ -435,10 +434,6 @@ export default class CheckHelper
 			  checkData = roll.options.checkData,
 			  actor = await fromUuid(checkData.actor),
 			  targetActor = checkData.targets?.length > 0 ? await fromUuid(checkData.targets[0]) : null,
-			  toggledEffects = Object.values(structuredClone(roll.effects)).reduce((symbol, allEffects) => {
-				  allEffects.push(...symbol.filter(effect => effect.active));
-				  return allEffects;
-			  }, []),
 			  outcome = {
 				  targetDamages: 0,
 				  targetCriticalWounds: 0,
@@ -459,8 +454,18 @@ export default class CheckHelper
 			  targetUpdates = {system: {}},
 			  chatMessageUpdates = {rolls: chatMessage.rolls};
 
-		for(const effect of toggledEffects)
-			await CheckHelper.executeActionEffectScript(effect, effect.script, roll, {checkData, actor, outcome, targetActor})
+		for(const effects of Object.values(foundry.utils.deepClone(roll.effects)))
+			for(const effect of effects)
+				if(effect.active)
+					await CheckHelper.executeActionEffectScript(
+						effect,
+						effect.script,
+						roll,
+						checkData,
+						actor,
+						outcome,
+						targetActor
+					)
 
 		if(targetActor) {
 			// If the attack inflicts damages, reduce them by Toughness and Soak values.

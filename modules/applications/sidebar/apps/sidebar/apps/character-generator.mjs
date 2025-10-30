@@ -405,10 +405,8 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	{
 		event.preventDefault();
 
-		const answers = await GameOfTwentyQuestions.wait(),
-			  biography = Object.values(answers).reduce((biography, answer) => biography += answer, "");
-
-		this.character.update({"system.background.biography": biography});
+		const answers = await GameOfTwentyQuestions.wait();
+		this.character.update({"system.background.biography": Object.values(answers).join()});
 
 		this.steps.gameOfTwentyQuestions = true;
 		this.changeTab("background", "main");

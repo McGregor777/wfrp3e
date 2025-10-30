@@ -4,7 +4,36 @@ export default class Character extends foundry.abstract.TypeDataModel
 	/** @inheritDoc */
 	static defineSchema()
 	{
-		const fields = foundry.data.fields;
+		const fields = foundry.data.fields,
+			  characteristics = {},
+			  originChoices = {},
+			  stance = {};
+
+		for(const [key, characteristic] of Object.entries(CONFIG.WFRP3e.characteristics))
+			characteristics[key] = new fields.SchemaField({
+				rating: new fields.NumberField({
+					initial: 2,
+					integer: true,
+					min: 0,
+					nullable: false,
+					required: true
+				}),
+				fortune: new fields.NumberField({
+					initial: 0,
+					integer: true,
+					min: 0,
+					nullable: false,
+					required: true
+				})
+			}, {label: characteristic.name});
+
+		for(const race of Object.values(CONFIG.WFRP3e.availableRaces))
+			Object.entries(race.origins).forEach(([key, origin]) => {
+				originChoices[key] = origin.name;
+			});
+
+		for(const key of Object.keys(CONFIG.WFRP3e.stances))
+			stance[key] = new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true});
 
 		return {
 			background: new fields.SchemaField({
@@ -21,27 +50,7 @@ export default class Character extends foundry.abstract.TypeDataModel
 				enemies: new fields.StringField({nullable: true}),
 				campaignNotes: new fields.HTMLField({nullable: true})
 			}),
-			characteristics: new fields.SchemaField(
-				Object.entries(CONFIG.WFRP3e.characteristics).reduce((object, [key, value]) => {
-					object[key] = new fields.SchemaField({
-						rating: new fields.NumberField({
-							initial: 2,
-							integer: true,
-							min: 0,
-							nullable: false,
-							required: true
-						}),
-						fortune: new fields.NumberField({
-							initial: 0,
-							integer: true,
-							min: 0,
-							nullable: false,
-							required: true
-						})
-					}, {label: value.name});
-					return object;
-				}, {})
-			),
+			characteristics: new fields.SchemaField(characteristics),
 			corruption: new fields.SchemaField({
 				max: new fields.NumberField({initial: 7, integer: true, min: 0, nullable: false, required: true}),
 				value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
@@ -60,12 +69,7 @@ export default class Character extends foundry.abstract.TypeDataModel
 				stress: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 			}),
 			origin: new fields.StringField({
-				choices: Object.entries(CONFIG.WFRP3e.availableRaces).reduce((origins, [key, race]) => {
-					Object.entries(race.origins).forEach(([key, origin]) => {
-						origins[key] = origin.name;
-					});
-					return origins;
-				}, {}),
+				choices: originChoices,
 				initial: "reiklander",
 				nullable: false,
 				required: true
@@ -73,10 +77,7 @@ export default class Character extends foundry.abstract.TypeDataModel
 			party: new fields.DocumentIdField(),
 			power: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			stance: new fields.SchemaField({
-				...Object.keys(CONFIG.WFRP3e.stances).reduce((object, stance) => {
-					object[stance] = new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true});
-					return object;
-				}, {}),
+				...stance,
 				current: new fields.NumberField({initial: 0, integer: true, nullable: false, required: true})
 			}),
 			wounds: new fields.SchemaField({
@@ -185,7 +186,12 @@ export default class Character extends foundry.abstract.TypeDataModel
 	 */
 	get totalDefence()
 	{
-		return this.parent.itemTypes.armour.reduce((value, armour) => value + armour.system.defenceValue, 0);
+		let totalDefence = 0;
+
+		for(const armour of this.parent.itemTypes.armour)
+			totalDefence += armour.system.defenceValue;
+
+		return totalDefence;
 	}
 
 	/**
@@ -194,9 +200,13 @@ export default class Character extends foundry.abstract.TypeDataModel
 	 */
 	get totalEncumbrance()
 	{
-		return this.parent.items
-			.filter((item) => ["armour", "trapping", "weapon"].includes(item.type))
-			.reduce((totalEncumbrance, item) => totalEncumbrance + item.system.encumbrance, 0);
+		let totalEncumbrance = 0;
+
+		for(const item of this.parent.items)
+			if(["armour", "trapping", "weapon"].includes(item.type))
+				totalEncumbrance += item.system.encumbrance;
+
+		return totalEncumbrance;
 	}
 
 	/**
@@ -205,7 +215,12 @@ export default class Character extends foundry.abstract.TypeDataModel
 	 */
 	get totalSoak()
 	{
-		return this.parent.itemTypes.armour.reduce((value, armour) => value + armour.system.soakValue, 0);
+		let totalSoak = 0;
+
+		for(const armour of this.parent.itemTypes.armour)
+			totalSoak += armour.system.soakValue;
+
+		return totalSoak;
 	}
 
 	/**
@@ -228,17 +243,20 @@ export default class Character extends foundry.abstract.TypeDataModel
 	 */
 	_calculateCurrentExperience()
 	{
-		this.experience.current = this.experience.total - this.parent.itemTypes.career.reduce(
-			(totalAdvancesSpent, career) => totalAdvancesSpent +
-				(career.system.advances.action?.length > 0 ? 1 : 0) +
-				(career.system.advances.talent?.length > 0 ? 1 : 0) +
-				(career.system.advances.skill?.length > 0 ? 1 : 0) +
-				(career.system.advances.wound?.length > 0 ? 1 : 0) +
-				(career.system.advances.open?.filter(openAdvance => openAdvance?.length > 0)).length +
-				career.system.advances.careerTransition.cost +
-				(career.system.advances.dedicationBonus?.length > 0 ? 1 : 0) +
-				Object.values(career.system.advances.nonCareer)
-					.reduce((advancesSpent, nonCareerAdvance) => advancesSpent + nonCareerAdvance.cost, 0),
-			0);
+		this.experience.current = this.experience.total;
+
+		//#TODO Add a method to the career data model to calculate the total experience spent on one career.
+		for(const career of this.parent.itemTypes.career) {
+			this.experience.current -= (career.system.advances.action ? 1 : 0)
+				+ (career.system.advances.talent ? 1 : 0)
+				+ (career.system.advances.skill ? 1 : 0)
+				+ (career.system.advances.wound ? 1 : 0)
+				+ (career.system.advances.open?.filter(openAdvance => openAdvance)).length
+				+ career.system.advances.careerTransition.cost
+				+ (career.system.advances.dedicationBonus ? 1 : 0);
+
+			for(const nonCareerAdvance of Object.values(career.system.advances.nonCareer))
+				this.experience.current -= nonCareerAdvance.cost;
+		}
 	}
 }
