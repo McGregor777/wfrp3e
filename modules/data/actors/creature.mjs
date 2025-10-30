@@ -65,7 +65,7 @@ export default class Creature extends foundry.abstract.TypeDataModel
 
 	/**
 	 * Prepares the total defence and soak of the creature.
-	 * @private
+	 * @protected
 	 */
 	_prepareDefenceAndSoak()
 	{
@@ -86,7 +86,7 @@ export default class Creature extends foundry.abstract.TypeDataModel
 
 	/**
 	 * Prepares the default stance of the creature.
-	 * @private
+	 * @protected
 	 */
 	_prepareDefaultStance()
 	{
@@ -98,7 +98,7 @@ export default class Creature extends foundry.abstract.TypeDataModel
 
 	/**
 	 * Prepares the Nemesis status of the creature.
-	 * @private
+	 * @protected
 	 */
 	_prepareNemesis()
 	{
@@ -107,13 +107,15 @@ export default class Creature extends foundry.abstract.TypeDataModel
 
 	/**
 	 * Prepares the stance meter of the creature.
-	 * @private
+	 * @protected
 	 */
 	_prepareStanceMeter()
 	{
 		this.stanceMeter = {
-			conservative: -this.stance.conservative - (this.parent.system.currentCareer?.system.startingStance.conservativeSegments ?? 0),
-			reckless: this.stance.reckless + (this.parent.system.currentCareer?.system.startingStance.recklessSegments ?? 0)
+			conservative: -this.stance.conservative
+				- (this.parent.system.currentCareer?.system.startingStance.conservativeSegments ?? 0),
+			reckless: this.stance.reckless
+				+ (this.parent.system.currentCareer?.system.startingStance.recklessSegments ?? 0)
 		};
 	}
 }
