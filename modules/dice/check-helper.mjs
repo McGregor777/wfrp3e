@@ -245,11 +245,11 @@ export default class CheckHelper
 	static async toggleOnSuccessActionEffect(toggledEffect, checkRoll, symbol = "success")
 	{
 		let result = CheckHelper.checkSuccessEffectToggleable(toggledEffect, symbol, checkRoll);
-
 		if(result === "") {
-			checkRoll.effects.success.forEach(effect => effect.active = false);
-			toggledEffect.active = true;
+			for(const effect of checkRoll.effects.success)
+				effect.active = false;
 
+			toggledEffect.active = true;
 			if(toggledEffect.immediate)
 				await CheckHelper.executeActionEffectScript(toggledEffect, toggledEffect.script, checkRoll);
 		}

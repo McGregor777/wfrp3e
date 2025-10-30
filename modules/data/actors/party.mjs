@@ -72,15 +72,19 @@ export default class Party extends foundry.abstract.TypeDataModel
 	/** @inheritDoc */
 	static migrateData(source)
 	{
-		source.members?.forEach((member, index) => {
+		for(const index in source.members) {
+			const member = source.members[index];
+
 			if(!member.startsWith("Actor."))
 				source.members[index] = `Actor.${member}`;
-		});
+		}
 
-		source.tension?.events.forEach((event, index) => {
+		for(const index in source.tension?.events) {
+			const event = source.tension.events[index];
+
 			if(!event.description && event.effects)
 				source.tension.events[index].description = event.effects;
-		});
+		}
 
 		return super.migrateData(source);
 	}

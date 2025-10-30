@@ -127,37 +127,34 @@ export default class Actor extends foundry.documents.Actor
 				  ["any", ...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"].map(key => [key, {}])
 			  ),
 			  currentCareer = this.system.currentCareer,
-			  currentParty = this.system.currentParty
+			  currentParty = this.system.currentParty;
 
 		if(currentCareer) {
-			currentCareer.system.sockets.forEach((socket, index) => {
-				// Find a potential Item that would be socketed in that socket.
-				const item = this.items.search({
-					filters: [{
-						field: "system.socket",
-						operator: "is_empty",
-						negate: true
-					}, {
-						field: "system.socket",
-						operator: "equals",
-						negate: false,
-						value: `${currentCareer.uuid}_${index}`
-					}]
-				})[0];
-
-				socketsByType[socket.type][currentCareer.uuid + "_" + index] =
-					currentCareer.name + " - " + (item
-						? game.i18n.format("TALENT.SOCKET.taken", {
-							type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
-							talent: item.name
-						})
-						: game.i18n.format("TALENT.SOCKET.available", {
-							type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
-						}));
+			const socketedItems = this.items.search({
+				filters: [{
+					field: "system.socket",
+					operator: "is_empty",
+					negate: true
+				}]
 			});
+
+			for(const index in currentCareer.system.sockets) {
+				const socket = currentCareer.system.sockets[index],
+					  // Find a potential Item that would be socketed in that socket.
+					  item   = socketedItems.find(item => item.system.socket === `${currentCareer.uuid}_${index}`);
+
+				socketsByType[socket.type][currentCareer.uuid + "_" + index] = `${currentCareer.name} - ${item
+					? game.i18n.format("TALENT.SOCKET.taken", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
+						talent: item.name
+					})
+					: game.i18n.format("TALENT.SOCKET.available", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
+					})}`;
+			}
 		}
 
-		if(currentParty) {
+		if(currentParty)
 			for(const socketIndex in currentParty.system.sockets) {
 				const socket = currentParty.system.sockets[socketIndex];
 				let item = null;
@@ -183,17 +180,15 @@ export default class Actor extends foundry.documents.Actor
 						break;
 				}
 
-				socketsByType[socket.type][currentParty.uuid + "_" + socketIndex] =
-					currentParty.name + " - " + (item
+				socketsByType[socket.type][currentParty.uuid + "_" + socketIndex] = `${currentParty.name} - ${item
 						? game.i18n.format("TALENT.SOCKET.taken", {
 							type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
 							talent: item.name
 						})
 						: game.i18n.format("TALENT.SOCKET.available", {
 							type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
-						}));
+						})}`;
 			}
-		}
 
 		for(const itemType of Object.keys(CONFIG.WFRP3e.talentTypes))
 			Object.assign(socketsByType[itemType], socketsByType["any"]);
@@ -924,7 +919,8 @@ export default class Actor extends foundry.documents.Actor
 	 */
 	_onPartyDelete(options, userId)
 	{
-		this.system.members.forEach((member) => fromUuidSync(member).resetSockets(this.uuid));
+		for(const member of this.system.members)
+			fromUuidSync(member).resetSockets(this.uuid);
 	}
 
 	/**
@@ -951,10 +947,9 @@ export default class Actor extends foundry.documents.Actor
 	 */
 	#onPartyMembersChange(newMemberList)
 	{
-		this.system.members.forEach((member) => {
+		for(const member of this.system.members)
 			if(!newMemberList.includes(member))
 				fromUuidSync(member).resetSockets(this.uuid);
-		});
 	}
 
 	/**
@@ -964,12 +959,13 @@ export default class Actor extends foundry.documents.Actor
 	 */
 	#onPartySocketsChange(sockets)
 	{
-		const socketedItems = sockets.map(socket => fromUuidSync(socket.item));
+		for(const index in sockets) {
+			const socket = sockets[index];
 
-		socketedItems.forEach((item, index) => {
-			if(item.system.type !== sockets[index].type)
-				this.system.members.forEach((member) => {fromUuidSync(member).resetSockets(this.uuid)});
-		});
+			if(fromUuidSync(socket.item)?.system.type !== socket.type)
+				for(const member of this.system.members)
+					fromUuidSync(member).resetSockets(this.uuid);
+		}
 	}
 
 	/**

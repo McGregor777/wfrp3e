@@ -28,9 +28,8 @@ export default class Character extends foundry.abstract.TypeDataModel
 			}, {label: characteristic.name});
 
 		for(const race of Object.values(CONFIG.WFRP3e.availableRaces))
-			Object.entries(race.origins).forEach(([key, origin]) => {
+			for(const [key, origin] of Object.entries(race.origins))
 				originChoices[key] = origin.name;
-			});
 
 		for(const key of Object.keys(CONFIG.WFRP3e.stances))
 			stance[key] = new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true});

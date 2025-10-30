@@ -330,11 +330,13 @@ export default class Item extends foundry.documents.Item
 	 */
 	_onCareerUpdate(changed, options, userId)
 	{
-		if(changed.system?.current)
-			this.#onCurrentCareerChange();
+		if(this.actor) {
+			if(changed.system?.current)
+				this.#onCurrentCareerChange();
 
-		if(changed.system?.sockets)
-			this.#onCareerSocketChange(changed.system.sockets);
+			if(changed.system?.sockets)
+				this.#onCareerSocketChange(changed.system.sockets);
+		}
 	}
 
 	/**
@@ -343,14 +345,11 @@ export default class Item extends foundry.documents.Item
 	 */
 	#onCurrentCareerChange()
 	{
-		if(this.actor) {
-			const otherCareers = this.actor.itemTypes.career.filter(career => career !== this);
+		for(const career of this.actor.itemTypes.career)
+			if(career !== this)
+				career.update({"system.current": false});
 
-			for(const otherCareer of otherCareers)
-				otherCareer.update({"system.current": false});
-
-			this.actor.resetSockets(this.uuid);
-		}
+		this.actor.resetSockets(this.uuid);
 	}
 
 	/**
@@ -360,12 +359,9 @@ export default class Item extends foundry.documents.Item
 	 */
 	#onCareerSocketChange(sockets)
 	{
-		const socketedItems = sockets.map(socket => fromUuidSync(socket.item));
-
-		socketedItems.forEach((item, index) => {
-			if(item.system.type !== sockets[index].type)
-				this.actor?.resetSockets(this.uuid);
-		});
+		for(const socket of sockets)
+			if(fromUuidSync(socket.item)?.system.type !== socket.type)
+				this.actor.resetSockets(this.uuid);
 	}
 
 	/**

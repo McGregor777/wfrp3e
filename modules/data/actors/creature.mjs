@@ -72,10 +72,10 @@ export default class Creature extends foundry.abstract.TypeDataModel
 		this.totalDefence = 0;
 		this.totalSoak = 0;
 
-		this.parent.itemTypes.armour.forEach((armour) => {
+		for(const armour of this.parent.itemTypes.armour) {
 			this.totalDefence += armour.system.defenceValue;
 			this.totalSoak += armour.system.soakValue;
-		});
+		}
 
 		if(this.totalDefence === 0)
 			this.totalDefence = this.defenceValue;

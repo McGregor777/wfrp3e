@@ -15,15 +15,15 @@ export default class CheckRoll extends foundry.dice.Roll
 			if(key !== "righteousSuccess")
 				resultSymbols[symbol.plural] = 0;
 
-		this.terms.filter(term => term instanceof wfrp3e.dice.terms.Die).forEach(term => {
-			term.results.forEach(result => {
-				Object.keys(resultSymbols).forEach(symbolName => {
-					resultSymbols[symbolName] += parseInt(result.symbols[symbolName]);
-				});
+		for(const term of this.terms) {
+			if(term instanceof wfrp3e.dice.terms.Die)
+				for(const result of term.results) {
+					for(const key of Object.keys(result.symbols))
+						resultSymbols[key] += parseInt(result.symbols[key]);
 
-				resultSymbols.successes += parseInt(result.symbols.righteousSuccesses);
-			});
-		});
+					resultSymbols.successes += parseInt(result.symbols.righteousSuccesses);
+				}
+		}
 
 		return resultSymbols;
 	}
@@ -69,32 +69,30 @@ export default class CheckRoll extends foundry.dice.Roll
 	{
 		const remainingSymbols = {...this.totalSymbols};
 
-		if(this.effects) {
-			Object.entries(this.effects).forEach(([symbolName, effects]) => {
-				const plural = CONFIG.WFRP3e.symbols[symbolName].plural,
-					  activeActionEffects = effects.filter(effect => effect.active);
+		if(this.effects)
+			for(const [symbolName, effects] of Object.entries(this.effects)) {
+				const plural = CONFIG.WFRP3e.symbols[symbolName].plural;
 
-				for(const effect of activeActionEffects) {
-					if(["delay", "exertion"].includes(symbolName)) {
-						remainingSymbols[plural]--;
+				for(const effect of effects)
+					if(effect.active)
+						if(["delay", "exertion"].includes(symbolName)) {
+							remainingSymbols[plural]--;
 
-						if(effect.symbolAmount > 1)
-							remainingSymbols.banes -= effect.symbolAmount - 1;
-					}
-					else if(remainingSymbols[plural] < effect.symbolAmount) {
-						if(["success", "boon"].includes(symbolName)
-							&& (remainingSymbols[plural] + remainingSymbols.sigmarsComets >= effect.symbolAmount)) {
-							remainingSymbols.sigmarsComets += remainingSymbols[plural] - effect.symbolAmount;
-							return 0;
+							if(effect.symbolAmount > 1)
+								remainingSymbols.banes -= effect.symbolAmount - 1;
 						}
+						else if(remainingSymbols[plural] < effect.symbolAmount) {
+							if(["success", "boon"].includes(symbolName)
+								&& (remainingSymbols[plural] + remainingSymbols.sigmarsComets >= effect.symbolAmount)) {
+								remainingSymbols.sigmarsComets += remainingSymbols[plural] - effect.symbolAmount;
+								return 0;
+							}
 
-						throw new Error(`The remaining number of ${symbolName} cannot be negative.`);
-					}
-					else
-						remainingSymbols[plural] -= effect.symbolAmount;
-				}
-			});
-		}
+							throw new Error(`The remaining number of ${plural} cannot be negative.`);
+						}
+						else
+							remainingSymbols[plural] -= effect.symbolAmount;
+			}
 
 		return remainingSymbols;
 	}
@@ -133,7 +131,8 @@ export default class CheckRoll extends foundry.dice.Roll
 		if(!isPrivate)
 			for(const die of this.dice)
 				if(die instanceof Die)
-					die.results.forEach(result => specialDieResultLabels.push(die.getResultLabel(result)));
+					for(const result of die.results)
+						specialDieResultLabels.push(die.getResultLabel(result));
 
 		let context = {
 			formula: isPrivate ? "???" : this._formula,

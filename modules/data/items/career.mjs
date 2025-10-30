@@ -104,11 +104,13 @@ export default class Career extends Item
 	static migrateData(source)
 	{
 		if(source.talentSockets)
-			source.talentSockets.forEach((talentSocket, index) => {
+			for(const index in source.talentSockets) {
+				const oldSocket = source.talentSockets[index];
+
 				source.sockets[index] === undefined
-					? source.sockets.push({item: null, type: talentSocket})
-					: source.sockets[index].type = talentSocket;
-			});
+					? source.sockets.push({item: null, type: oldSocket})
+					: source.sockets[index].type = oldSocket;
+			}
 
 		return super.migrateData(source);
 	}
