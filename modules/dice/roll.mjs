@@ -152,20 +152,22 @@ export default class CheckRoll extends foundry.dice.Roll
 
 		if(checkData) {
 			const actor = await fromUuid(checkData.actor);
-			foundry.utils.mergeObject(context, {
+			context = {
+				...context,
 				actorName: actor.token ? actor.token.name : actor.prototypeToken.name,
 				outcome: checkData.outcome
-			});
+			};
 
 			if(checkData.disabled)
 				context.disabled = checkData.disabled;
 
 			if(checkData.action)
-				foundry.utils.mergeObject(context, {
+				context = {
+					...context,
 					action: await fromUuid(checkData.action),
 					effects: this.effects,
 					face: checkData.face
-				});
+				};
 
 			if(Array.isArray(checkData.outcome?.criticalWounds))
 				context.criticalWoundLinks = this._prepareCriticalWoundLinks(checkData.outcome.criticalWounds);
@@ -185,13 +187,13 @@ export default class CheckRoll extends foundry.dice.Roll
 	/** @inheritDoc */
 	toJSON()
 	{
-		return foundry.utils.mergeObject(super.toJSON(), {effects: this.effects});
+		return {...super.toJSON(), effects: this.effects};
 	}
 
 	/** @inheritDoc */
 	static fromData(data)
 	{
-		return foundry.utils.mergeObject(super.fromData(data), {effects: data.effects});
+		return {...super.fromData(data), effects: data.effects};
 	}
 
 	/**

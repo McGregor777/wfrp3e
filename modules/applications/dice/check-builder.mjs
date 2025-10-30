@@ -129,7 +129,8 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 					width = 36;
 				}
 
-				partContext = {...partContext,
+				partContext = {
+					...partContext,
 					height,
 					width,
 					symbols: CONFIG.WFRP3e.symbols
