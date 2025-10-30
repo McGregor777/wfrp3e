@@ -628,6 +628,12 @@
 
 	"CRITICALWOUND": {
 		"ACTIONS.update": "Save Critical Wound",
+		"DIALOG": {
+			"choose": {
+				"description": "You must choose which critical wound to inflict between these two: {links}",
+				"title": "Choose A Critical Wound"
+			}
+		},
 		"FIELDS.severityRating.label": "Severity Rating",
 		"TABS": {
 			"effects": "Effects",

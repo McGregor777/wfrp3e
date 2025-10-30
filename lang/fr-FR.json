@@ -630,6 +630,12 @@
 
 	"CRITICALWOUND": {
 		"ACTIONS.uodate": "Enregistrer la blessure critique",
+		"DIALOG": {
+			"choose": {
+				"description": "Vous devez choisir quelle blessure critique infliger entre ces deux suivantes : {links}",
+				"title": "Choisir une blessure critique"
+			}
+		},
 		"FIELDS.severityRating.label": "Niveau de Gravité",
 		"TABS": {
 			"effects": "Effets",

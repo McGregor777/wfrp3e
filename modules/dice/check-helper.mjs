@@ -587,25 +587,34 @@ export default class CheckHelper
 						highestCriticalWound = criticalWound;
 				}
 
-				if(criticalWounds[0].system.severityRating === criticalWounds[1].system.severityRating)
-					await new Dialog({
-						title: game.i18n.localize("APPLICATION.TITLE.ChooseACriticalWound"),
-						content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.ChooseACriticalWound")}</p>`,
-						buttons: {
-							one: {
-								label: criticalWounds[0].name,
-								callback: async dlg => {
-									allCriticalWounds.push(criticalWounds[0]);
-								}
-							},
-							two: {
-								label: criticalWounds[1].name,
-								callback: async dlg => {
-									allCriticalWounds.push(criticalWounds[1]);
-								}
-							},
+				if(criticalWounds[0].system.severityRating === criticalWounds[1].system.severityRating) {
+					let criticalWoundLinks = null;
+					const buttons = {};
+
+					for(const criticalWound of criticalWounds) {
+						criticalWoundLinks = criticalWoundLinks
+							? criticalWound.toAnchor().outerHTML
+							: `${criticalWoundLinks} ${criticalWound.toAnchor().outerHTML}`;
+
+						buttons[criticalWound.uuid] = {
+							label: criticalWound.name,
+							callback: async (event, button, dialog) => criticalWound
+						};
+					}
+
+					await foundry.applications.api.DialogV2.wait({
+						title: game.i18n.localize("CRITICALWOUND.DIALOG.choose.title"),
+						content: `<p>${game.i18n.format(
+							"CRITICALWOUND.DIALOG.choose.description",
+							{links: criticalWoundLinks}
+						)}</p>`,
+						buttons,
+						submit: async (result) => {
+							if(result)
+								allCriticalWounds.push(result);
 						}
-					}).render(true);
+					});
+				}
 				else
 					allCriticalWounds.push(highestCriticalWound);
 			}
