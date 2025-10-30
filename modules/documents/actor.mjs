@@ -717,8 +717,8 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Checks for Items sharing the same socket and removes all except the current one.
-	 * @param {Item} item
+	 * Searches for items sharing the same socket as the one passed as parameter. If any found, removes its socket value.
+	 * @param {Item} item The item which socket  must be matched.
 	 */
 	preventMultipleItemsOnSameSocket(item)
 	{
