@@ -161,10 +161,11 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 
 					if(actor.type === "character") {
 						const availableSpecialisations = [];
-						for(const skill of actor.itemTypes.skill.filter(skill => skill.system.specialisations))
-							availableSpecialisations.push(
-								...skill.system.specialisations.split(",").map(specialisation => specialisation.trim())
-							);
+						for(const skill of actor.itemTypes.skill)
+							if(skill.system.specialisations)
+								availableSpecialisations.push(
+									...skill.system.specialisations.split(",").map(specialisation => specialisation.trim())
+								);
 
 						partContext = {
 							...partContext,

@@ -69,7 +69,7 @@ export default class DiePool
 	 */
 	get formula()
 	{
-		return [
+		const diceFormulas = [
 			this.dice.characteristic + "d" + wfrp3e.dice.terms.CharacteristicDie.DENOMINATION,
 			this.dice.fortune + "d" + wfrp3e.dice.terms.FortuneDie.DENOMINATION,
 			this.dice.expertise + "d" + wfrp3e.dice.terms.ExpertiseDie.DENOMINATION,
@@ -77,10 +77,14 @@ export default class DiePool
 			this.dice.reckless + "d" + wfrp3e.dice.terms.RecklessDie.DENOMINATION,
 			this.dice.challenge + "d" + wfrp3e.dice.terms.ChallengeDie.DENOMINATION,
 			this.dice.misfortune + "d" + wfrp3e.dice.terms.MisfortuneDie.DENOMINATION
-		].filter((d) => {
-			const test = d.split(/([0-9]+)/);
-			return test[1] > 0;
-		}).join("+");
+		];
+		let formula = "";
+
+		for(const diceFormula of diceFormulas)
+			if(diceFormula.split(/([0-9]+)/)[1] > 0)
+				formula = formula ? `${formula} + ${diceFormula}` : diceFormula;
+
+		return formula;
 	}
 
 	get name()

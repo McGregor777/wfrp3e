@@ -272,12 +272,12 @@ export default class SkillUpgrader extends Selector
 		if(value.type === "acquisition")
 			upgradeTypesToExclude.push("trainingLevel");
 
-		for(const upgrade of this.selection.filter(upgrade => upgrade.uuid === value.uuid))
-			if(upgradeTypesToExclude.includes(upgrade.type))
+		for(const upgrade of this.selection)
+			if(upgrade.uuid === value.uuid && upgradeTypesToExclude.includes(upgrade.type))
 				this.selection.splice(this.selection.indexOf(upgrade), 1);
 
-		for(const upgrade of this.specialisationSelection.filter(upgrade => upgrade.uuid === value.uuid))
-			if(upgradeTypesToExclude.includes(upgrade.type))
+		for(const upgrade of this.specialisationSelection)
+			if(upgrade.uuid === value.uuid && upgradeTypesToExclude.includes(upgrade.type))
 				this.specialisationSelection.splice(this.selection.indexOf(upgrade), 1);
 	}
 
@@ -340,20 +340,29 @@ export default class SkillUpgrader extends Selector
 	 */
 	static async buildAdvanceOptionsList(actor, career, nonCareerAdvance = false)
 	{
-		const skills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill"}),
+		const packSkills = await game.packs.get("wfrp3e.items").getDocuments({type: "skill"}),
 			  careerSkillNames = career.system.careerSkills.split(",").map(name => name.trim());
 
 		if(nonCareerAdvance) {
-			const availableSkills = actor.itemTypes.skill.filter(skill => !careerSkillNames.includes(skill.name)),
-				  availableSkillNames = availableSkills.map(skill => skill.name);
+			const availableSkills = [],
+				  availableSkillNames = [];
 
-			availableSkills.push(...skills.filter(skill => ![...careerSkillNames, ...availableSkillNames].includes(skill.name)));
+			for(const skill of actor.itemTypes.skill)
+				if(!careerSkillNames.includes(skill.name)) {
+					availableSkills.push(skill);
+					availableSkillNames.push(skill.name);
+				}
+
+			for(const skill of packSkills)
+				if(!availableSkillNames.includes(skill.name))
+					availableSkills.push(skill);
+
 			return availableSkills;
 		}
 
 		return careerSkillNames.map(name => {
 			return actor.itemTypes.skill.find(skill => skill.name === name)
-				?? skills.find(skill => skill.name === name);
+				?? packSkills.find(skill => skill.name === name);
 		});
 	}
 

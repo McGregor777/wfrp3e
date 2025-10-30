@@ -452,20 +452,29 @@ export default class Actor extends foundry.documents.Actor
 
 		// Fetch the skills that have been trained as a career advance.
 		const regex = new RegExp(
-				`([A-Za-zÀ-ÖØ-öø-ÿ ]+\\b).*(${game.i18n.localize("SKILL.FIELDS.trainingLevel.label")})`,
-				"gui"
-			),
-			  trainedSkills = [
+				  `([A-Za-zÀ-ÖØ-öø-ÿ ]+\\b).* (${game.i18n.localize("SKILL.FIELDS.trainingLevel.label")})`,
+				  "ui"
+			  ),
+			  skillAdvances = [
 				  career.system.advances.skill,
-				  ...career.system.advances.open.filter(advance => advance?.length)
-			  ].map(advance => [...advance?.matchAll(regex)][0])
-				  .filter(advance => advance?.length)
-				  .map(advance => this.itemTypes.skill.find(skill => skill.name === advance[1]));
+				  ...career.system.advances.open.filter(advance => advance)
+			  ],
+			  trainedSkills = [];
+
+		for(const advance of skillAdvances) {
+			const matches = advance?.match(regex);
+			if(matches)
+				trainedSkills.push(this.itemTypes.skill.find(skill => skill.name === matches[1]));
+		}
 
 		// Let the user select one new specialisation for each skill that has been trained as a career advance.
-		const upgrades = wfrp3e.applications.apps.selectors.SkillUpgrader.wait({
-			actor: this, items: trainedSkills, advanceType: type, size: trainedSkills.length
+		const upgrades = await wfrp3e.applications.apps.selectors.SkillUpgrader.wait({
+			actor: this,
+			items: trainedSkills,
+			advanceType: type,
+			size: trainedSkills.length
 		});
+
 		for(const upgrade of upgrades) {
 			const skill = await fromUuid(upgrade.uuid);
 			await skill.update({
@@ -476,7 +485,9 @@ export default class Actor extends foundry.documents.Actor
 		}
 
 		// Mark the dedication bonus as acquired.
-		await career.update({"system.advances.dedicationBonus": game.i18n.localize("CAREER.FIELDS.dedicationBonus.label")});
+		await career.update({
+			"system.advances.dedicationBonus": game.i18n.localize("CAREER.FIELDS.dedicationBonus.label")
+		});
 	}
 
 	/**
@@ -846,14 +857,14 @@ export default class Actor extends foundry.documents.Actor
 					negate: true
 				}]
 			})
-		].filter(item => item.effects.filter(
+		].filter(item => item.effects.find(
 			effect => {
 				// Check if the trigger type of the active effect  matches, and if it has a condition script, that it returns true.
 				return !(effect.system.type !== triggerType
 					|| effect.system.conditionScript
 						&& !effect.checkEffectConditionScript({parameters, parameterNames}));
-			}).length > 0
-		);
+			}
+		));
 	}
 
 	/**

@@ -96,14 +96,14 @@ export default class Item extends foundry.documents.Item
 	 */
 	async checkRequirements(parameters)
 	{
-		const effects = this.effects.filter(effect => effect.system.type === "requirementCheck");
 		let result = true;
 
-		for(const effect of effects)
-			result = await effect.triggerEffect({
-				parameters: [parameters.actor ?? this.parent],
-				parameterNames: ["actor"]
-			});
+		for(const effect of this.effects)
+			if(effect.system.type === "requirementCheck")
+				result = await effect.triggerEffect({
+					parameters: [parameters.actor ?? this.parent],
+					parameterNames: ["actor"]
+				});
 
 		return result;
 	}
@@ -215,8 +215,12 @@ export default class Item extends foundry.documents.Item
 						effects[key].descriptions += effect.description;
 			}
 
-			const positiveEffects = Object.values(effects).filter(effect => effect.type === "positive"),
-				  negativeEffects = Object.values(effects).filter(effect => effect.type === "negative");
+			const positiveEffects = [], negativeEffects = [];
+			for(const effect of Object.values(effects))
+				if(effect.type === "positive")
+					positiveEffects.push(effect);
+				else if(effect.type === "negative")
+					negativeEffects.push(effect);
 
 			if(face.special || face.uniqueEffect)
 				content += `<div>${face.special} ${face.uniqueEffect}</div>`;

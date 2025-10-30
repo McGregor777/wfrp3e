@@ -52,15 +52,14 @@ export default class CheckHelper
 			const selectedItemUuids = await wfrp3e.applications.apps.selectors.TalentSelector.wait({items: triggeredItems});
 
 			if(selectedItemUuids[0]) {
-				const selectedTalent = await fromUuid(selectedItemUuids[0]),
-					  effects =  selectedTalent.effects.filter(effect => effect.system.type === "onPostCheckTrigger");
+				const selectedTalent = await fromUuid(selectedItemUuids[0]);
 
-				for(const effect of effects) {
-					await effect.triggerEffect({
-						parameters: [actor, chatMessage, checkData, checkRoll],
-						parameterNames: ["actor", "chatMessage", "checkData", "checkRoll"]
-					});
-				}
+				for(const effect of selectedTalent.effects)
+					if(effect.system.type === "onPostCheckTrigger")
+						await effect.triggerEffect({
+							parameters: [actor, chatMessage, checkData, checkRoll],
+							parameterNames: ["actor", "chatMessage", "checkData", "checkRoll"]
+						});
 
 				chatMessage.update({
 					"options.checkData.triggeredItems": checkData.triggeredItems

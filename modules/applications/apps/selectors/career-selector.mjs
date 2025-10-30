@@ -53,17 +53,15 @@ export default class CareerSelector extends Selector
 	static async buildAdvanceOptionsList(actor)
 	{
 		const careers = [];
-		for(const pack of game.packs.filter(pack => pack.documentName === "Item")) {
-			const foundCareers = pack.getDocuments({type: "career"});
 
-			foundCareers.filter(career => {
-				return career.name !== actor.system.currentCareer.name
-					&& career.system.raceRestrictions.includes(actor.system.race.id)
-					&& (!career.system.advanced || actor.system.rank > 1)
-			});
-
-			careers.push(...foundCareers);
-		}
+		for(const pack of game.packs)
+			if(pack.documentName === "Item") {
+				for(const career of await pack.getDocuments({type: "career"}))
+					if(career.name !== actor.system.currentCareer.name
+						&& career.system.raceRestrictions.includes(actor.system.race.id)
+						&& (!career.system.advanced || actor.system.rank > 1))
+						careers.push(career);
+			}
 
 		return careers;
 	}
@@ -76,13 +74,12 @@ export default class CareerSelector extends Selector
 	static async buildStartingCareerList(character)
 	{
 		const careers = [];
-		for(const pack of game.packs.filter(pack => pack.documentName === "Item")) {
-			const basicCareers = await pack.getDocuments({type: "career", system: {advanced: false}});
 
-			careers.push(...basicCareers.filter(career => {
-				return career.system.raceRestrictions.includes(character.system.race.id)
-			}));
-		}
+		for(const pack of game.packs)
+			if(pack.documentName === "Item")
+				for(const basicCareer of await pack.getDocuments({type: "career", system: {advanced: false}}))
+					if(basicCareer.system.raceRestrictions.includes(character.system.race.id))
+						careers.push(basicCareer);
 
 		switch(game.settings.get("wfrp3e", "startingCareerDrawingMethod")) {
 			case "drawThree":

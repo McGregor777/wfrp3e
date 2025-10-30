@@ -111,15 +111,13 @@ export default class ActionSelector extends Selector
 		const ownedActionNames = actor.itemTypes.action.map(action => action.name),
 			  actions = [];
 
-		for(const pack of game.packs.filter(pack => pack.documentName === "Item")) {
-			const foundActions = await pack.getDocuments({type: "action"});
-
-			for(const action of foundActions)
-				if((options.basic === false && !action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic")))
-					&& await action.checkRequirements({actor})
-					&& !ownedActionNames.includes(action.name))
-					actions.push(action);
-		}
+		for(const pack of game.packs)
+			if(pack.documentName === "Item")
+				for(const action of await pack.getDocuments({type: "action"}))
+					if((options.basic === false && !action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic")))
+						&& await action.checkRequirements({actor})
+						&& !ownedActionNames.includes(action.name))
+						actions.push(action);
 
 		return actions;
 	}

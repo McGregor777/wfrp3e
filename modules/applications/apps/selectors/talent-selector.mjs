@@ -107,9 +107,10 @@ export default class TalentSelector extends Selector
 					);
 				partContext.enrichment = enrichment;
 
-				const freeItems = await Promise.all(
-					Object.values(this.freeItems).filter(value => value).map(async uuid => await fromUuid(uuid))
-				);
+				const freeItems = [];
+				for(const uuid of Object.values(this.freeItems))
+					if(uuid)
+						freeItems.push(await fromUuid(uuid));
 				partContext.selection.push(...freeItems);
 				break;
 			case "search":
@@ -218,14 +219,15 @@ export default class TalentSelector extends Selector
 			  ownedTalentNames = actor.itemTypes.talent.map(talent => talent.name),
 			  talents = [];
 
-		for(const pack of game.packs.filter(pack => pack.documentName === "Item"))
-			talents.push(
-				...await pack.getDocuments({
-					type: "talent",
-					name__nin: ownedTalentNames,
-					system: {type__in: talentTypeFilter}
-				})
-			);
+		for(const pack of game.packs)
+			if(pack.documentName === "Item")
+				talents.push(
+					...await pack.getDocuments({
+						type: "talent",
+						name__nin: ownedTalentNames,
+						system: {type__in: talentTypeFilter}
+					})
+				);
 
 		return talents;
 	}
@@ -243,19 +245,19 @@ export default class TalentSelector extends Selector
 					  || options.freeItemTypes?.includes(type);
 			  }),
 			  itemTypes = ["talent"],
-			  itemPacks = game.packs.filter(pack => pack.documentName === "Item"),
 			  items = [];
 
 		if(options.freeItemTypes.includes("insanity"))
 			itemTypes.push("insanity");
 
-		for(const pack of itemPacks)
-			items.push(
-				...await pack.getDocuments({
-					type__in: itemTypes,
-					system: {type__in: talentTypeFilter}
-				})
-			);
+		for(const pack of game.packs)
+			if(pack.documentName === "Item")
+				items.push(
+					...await pack.getDocuments({
+						type__in: itemTypes,
+						system: {type__in: talentTypeFilter}
+					})
+				);
 
 		return items;
 	}
