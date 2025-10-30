@@ -4,6 +4,10 @@ export default class CheckRoll extends foundry.dice.Roll
 	static CHAT_TEMPLATE = "systems/wfrp3e/templates/dice/roll.hbs";
 	static TOOLTIP_TEMPLATE = "systems/wfrp3e/templates/dice/tooltip.hbs";
 
+	/**
+	 * The number of each symbol obtained by the check roll.
+	 * @returns {{success: number, righteousSuccess: number, boon: number, sigmarsComet: number, challenge: number, bane: number, chaosStar: number, delay: number, exertion: number}}
+	 */
 	get resultSymbols()
 	{
 		const resultSymbols = {};
@@ -24,6 +28,10 @@ export default class CheckRoll extends foundry.dice.Roll
 		return resultSymbols;
 	}
 
+	/**
+	 * The total number of each symbol with both those obtained by the check roll and those coming from the starting pool.
+	 * @returns {{success: number, righteousSuccess: number, boon: number, sigmarsComet: number, challenge: number, bane: number, chaosStar: number, delay: number, exertion: number}}
+	 */
 	get totalSymbols()
 	{
 		const totalSymbols = this.resultSymbols;
@@ -53,6 +61,10 @@ export default class CheckRoll extends foundry.dice.Roll
 		return totalSymbols;
 	}
 
+	/**
+	 * The number of each symbol left unused.
+	 * @returns {{success: number, righteousSuccess: number, boon: number, sigmarsComet: number, challenge: number, bane: number, chaosStar: number, delay: number, exertion: number}}
+	 */
 	get remainingSymbols()
 	{
 		const remainingSymbols = {...this.totalSymbols};
@@ -183,9 +195,9 @@ export default class CheckRoll extends foundry.dice.Roll
 	}
 
 	/**
-	 * Prepares all the effects of the check.
+	 * Prepares all the action effects associated with the check.
 	 * @returns {Promise<CheckRoll>}
-	 * @private
+	 * @protected
 	 */
 	async _prepareEffects()
 	{
