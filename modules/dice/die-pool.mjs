@@ -31,12 +31,11 @@ export default class DiePool
 {
 	/**
 	 * @param {Object} [startingPool]
-	 * @param {Object} [options]
-	 * @param {CheckData} [options.checkData] Contains various data concerning the check of the die pool.
-	 * @param {string} [options.flavor] A flavor text.
-	 * @param {string} [options.sound] An audio file path.
+	 * @param {CheckData} [checkData] Contains various data concerning the check of the die pool.
+	 * @param {string} [flavor] A flavor text.
+	 * @param {string} [sound] An audio file path.
 	 */
-	constructor(startingPool = {}, options = {checkData: null, flavor: null, sound: null})
+	constructor(startingPool = {}, checkData = null, flavor = null, sound = null)
 	{
 		this.dice = {};
 		if(typeof startingPool.dice === "object")
@@ -48,7 +47,6 @@ export default class DiePool
 			for(const key of Object.keys(startingPool.symbols))
 				this.symbols[key] = +startingPool.symbols[key] || 0;
 
-		const checkData = options.checkData;
 		if(checkData?.actor) {
 			const actor = fromUuidSync(checkData.actor);
 
@@ -60,7 +58,9 @@ export default class DiePool
 				}
 		}
 
-		foundry.utils.mergeObject(this, options);
+		this.checkData = checkData;
+		this.flavor = flavor;
+		this.sound = sound;
 	}
 
 	/**
@@ -312,7 +312,7 @@ export default class DiePool
 					  conservative: stance < 0 ? Math.abs(stance) : 0,
 					  reckless: stance > 0 ? stance : 0
 				  }
-			  }, {checkData, flavor, sound})
+			  }, checkData, flavor, sound)
 
 		await wfrp3e.dice.CheckHelper.triggerCheckPreparationEffects(actor, checkData, diePool);
 		
@@ -348,7 +348,7 @@ export default class DiePool
 					  conservative: stance < 0 ? Math.abs(stance) : 0,
 					  reckless: stance > 0 ? stance : 0
 				  }
-			  }, {checkData, flavor, sound});
+			  }, checkData, flavor, sound);
 
 		await wfrp3e.dice.CheckHelper.triggerCheckPreparationEffects(actor, checkData, diePool);
 
@@ -415,7 +415,7 @@ export default class DiePool
 							  ? target.system.totalDefence
 							  : 0)
 				  }
-			  }, {checkData, flavor, sound});
+			  }, checkData, flavor, sound);
 
 		await wfrp3e.dice.CheckHelper.triggerCheckPreparationEffects(actor, checkData, diePool);
 
@@ -449,7 +449,7 @@ export default class DiePool
 					  conservative: stance < 0 ? Math.abs(stance) : 0,
 					  reckless: stance > 0 ? stance : 0
 				  }
-			  }, {checkData, flavor, sound})
+			  }, checkData, flavor, sound)
 
 		await wfrp3e.dice.CheckHelper.triggerCheckPreparationEffects(actor, checkData, diePool);
 
