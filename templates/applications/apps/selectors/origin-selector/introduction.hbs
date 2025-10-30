@@ -5,7 +5,7 @@
 		<ul>
 			{{#each origin.abilities as |ability ab|}}
 				<li data-uuid="{{ability.uuid}}">
-					<strong>{{ability.name}}:</strong> <span>{{{striptags (lookup @root.enrichment ability.uuid) "p"}}}</span>
+					<strong>{{ability.name}}:</strong> <span>{{{stripTags (lookup @root.enrichment ability.uuid) "p"}}}</span>
 				</li>
 			{{/each}}
 
