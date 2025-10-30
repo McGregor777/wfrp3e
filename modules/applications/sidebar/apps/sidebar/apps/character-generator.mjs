@@ -361,7 +361,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async start(config = {})
 	{
 		const name = game.i18n.localize("CHARACTERGENERATOR.newCharacter"),
-			  character = await WFRP3eActor.create({
+			  character = await wfrp3e.documents.Actor.create({
 				  name,
 				  type: "character",
 				  prototypeToken: {name}

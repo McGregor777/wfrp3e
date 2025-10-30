@@ -17,6 +17,6 @@ export default class ActorDirectory extends foundry.applications.sidebar.tabs.Ac
 	 */
 	static async #generateCharacter()
 	{
-		await new wfrp3e.applications.sidebar.apps.CharacterGenerator.start();
+		await wfrp3e.applications.sidebar.apps.CharacterGenerator.start();
 	}
 }
