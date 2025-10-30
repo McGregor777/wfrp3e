@@ -413,7 +413,7 @@ export default class CheckHelper
 				checkData,
 				actor,
 				actor.token,
-				options.outcome,
+				outcome,
 				targetActor,
 				targetActor ? targetActor?.token : null
 			);
