@@ -415,7 +415,7 @@
 			"chooseStartingCareer": "Choose Starting Career",
 			"chooseOrigin": "Choose Origin",
 			"investCreationPoints": "Invest Creation Points",
-			"playGameOfTwentyQuestions": "Final Touches",
+			"playGameOfTenQuestions": "Finishing Touches",
 			"submit": "Generate Character"
 		},
 		"TABS": {
@@ -773,35 +773,56 @@
 		}
 	},
 
-	"GAMEOFTWENTYQUESTIONS": {
+	"GAMEOFTENQUESTIONS": {
 		"ACTIONS.submit": "Submit Answers",
 		"FIELDS": {
-			"ability.label": "How do your ability scores define your personality?",
-			"ambition.label": "What is your greatest ambition?",
-			"appearance.label": "What do you look like?",
-			"birthplace.label": "Where do you hail from?",
-			"career.label": "How did you fall into your profession?",
-			"companions.label": "What do you think of your companions?",
-			"enemy.label": "Who is your greatest enemy?",
-			"event.label": "What is the most important event of your life so far?",
-			"factions.label": "Are you a member of any factions?",
-			"family.label": "Who are your family?",
-			"fear.label": "What is your greatest fear?",
-			"flaw.label": "What is your biggest flaw?",
-			"morality.label": "What is your alignment?",
-			"motivation.label": "What motivates you?",
-			"prejudice.label": "What do you most despise in others?",
-			"regret.label": "What is the worst thing you have ever done?",
-			"relax.label": "How do you relax?",
-			"secret.label": "What is your greatest secret?",
-			"voice.label": "What is your voice?",
-			"worship.label": "Who do you worship?"
+			"adventure": {
+				"label": "Why Did You Become an Adventurer?",
+				"hint": "An adventurer’s life is dangerous. So what was it that made you choose this life of peril? Are you on a personal or political crusade? Are you out to get vengeance on those who ruined or murdered your family? Are you a thrill seeker or gold chaser?"
+			},
+			"family": {
+				"label": "What is Your Family Like?",
+				"hint": "Are you an only child or do you have brothers and sisters? What’s your place in the family? Are you parents still alive? If not, how did they die?"
+			},
+			"friendsFoes": {
+				"label": "Who are Your Friends and Enemies?",
+				"hint": "The other player characters may well be your best friends, but this isn’t necessarily the case. You may not even know each other when play begins. So what friends do you have and where do they live? Are you on good terms or have you had a falling out? Similarly, do you have any enemies? If so, how did it happen? Friends can help you out in a pinch or turn into your most bitter enemies. GMs looking to make an adventure more meaningful can involve your character's personal enemies."
+			},
+			"loveHate": {
+				"label": "Who do You Love/Hate?",
+				"hint": "Love and hate are the strongest of emotions. What place do they have in your life? Are you in love with someone? On the flipside, who do you hate and why? Vengeance is a strong motivation and often linked to hatred. You may hate individuals (such as your enemies) or whole classes of people or creatures. If your wife was slain by Beastmen, for example, you might hate them above all other foes. Perhaps an unscrupulous bailiff caused your family to lose its home and now you are convinced that all nobles are crooks and scoundrels."
+			},
+			"loyalty": {
+				"label": "Who are You Loyal to?",
+				"hint": "Real loners are rare in the Old World. It is too dangerous a place to get by without allies. Are there any people or organizations that you are loyal to? Your career might suggest an answer to this question, such as the Colleges of Magic or the Cult of Sigmar, but you might just as easily be loyal to an important person from your past."
+			},
+			"origin": {
+				"label": "Where are You From?",
+				"hint": "This is the most fundamental question for your character. Are you from a big city, like Altdorf, or a tiny farming hamlet? If you're a dwarf, are you karak-born, or from an outlying community or hold?"
+			},
+			"past": {
+				"label": "What Did You Do Before You Became an Adventurer?",
+				"hint": "This is an important question. Your career provides a basic answer, but you refine this further. Try to figure out exactly what you did before you became an adventurer. The details you’ve already worked out and the skills you chose during character creation can help you make some decisions."
+			},
+			"piety": {
+				"label": "How Religious are You?",
+				"hint": "Some folk are more pious than others. Are you particularly religious? If so, is there a God you favour? Are you constantly seeking answers or at peace with your faith? Initiates and Priests, of course, must make this decision early on."
+			},
+			"possessions": {
+				"label": "What are Your Prized Possessions?",
+				"hint": "Do you have any items of sentimental value? These need not be items of monetary value, but they should have special meaning for you. Is the rusty sword you wield the only thing your father ever gave you? Is the copper ring you wear a remembrance of your slain husband? You might also discuss with the GM important things that you’ve already lost and would do anything to get back."
+			},
+			"socialClass": {
+				"label": "What is Your Social Class?",
+				"hint": "Some careers, such as Commoner and Burgher, have an implied social class. Others can work with a variety of social classes. Where in the social strata does your family fall? Have you moved up, socially, or fallen from grace?"
+			}
 		},
 		"WARNINGS.incompleteAnswers": {
 			"description": "You have not answered every questions.",
 			"title": "Incomplete Answers"
 		},
-		"title": "Game of Twenty Questions"
+		"description": "If you need some help fleshing out your character, try answering these ten questions. They should allow you to focus your thoughts on your emerging alter ego.",
+		"title": "Game of Ten Questions"
 	},
 
 	"GROUP": {

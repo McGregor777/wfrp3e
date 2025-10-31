@@ -19,7 +19,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			chooseStartingCareer: this.#chooseStartingCareer,
 			chooseOrigin: this.#chooseOrigin,
 			investCreationPoints: this.#investCreationPoints,
-			playGameOfTwentyQuestions: this.#playGameOfTwentyQuestions
+			playGameOfTenQuestions: this.#playGameOfTenQuestions
 		},
 		id: "character-generator-{id}",
 		classes: ["wfrp3e", "character-generator"],
@@ -100,7 +100,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 	/**
 	 * The state of each step in the Character Generator (*true* if done, false otherwise).
-	 * @type {{chooseOrigin: boolean, chooseStartingCareer: boolean, investCreationPoints: boolean, acquireSkillTrainings: boolean, acquireTalents: boolean, acquireActionCards: boolean, gameOfTwentyQuestions: boolean}}
+	 * @type {{chooseOrigin: boolean, chooseStartingCareer: boolean, investCreationPoints: boolean, acquireSkillTrainings: boolean, acquireTalents: boolean, acquireActionCards: boolean, gameOfTenQuestions: boolean}}
 	 */
 	steps = {
 		chooseOrigin: false,
@@ -109,7 +109,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		acquireSkillTrainings: false,
 		acquireTalents: false,
 		acquireActionCards: false,
-		gameOfTwentyQuestions: false
+		gameOfTenQuestions: false
 	};
 
 	/** @inheritDoc */
@@ -225,7 +225,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		if(!this.steps.investCreationPoints)
 			tabs.attributes.cssClass += " hidden";
 
-		if(!this.steps.gameOfTwentyQuestions)
+		if(!this.steps.gameOfTenQuestions)
 			tabs.background.cssClass += " hidden";
 
 		if((character.itemTypes.ability.length + character.itemTypes.talent.length) <= 0)
@@ -401,14 +401,14 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	static async #playGameOfTwentyQuestions(event, target)
+	static async #playGameOfTenQuestions(event, target)
 	{
 		event.preventDefault();
 
-		const answers = await wfrp3e.applications.apps.GameOfTwentyQuestions.wait();
+		const answers = await wfrp3e.applications.apps.GameOfTenQuestions.wait();
 		this.character.update({"system.background.biography": Object.values(answers).join()});
 
-		this.steps.gameOfTwentyQuestions = true;
+		this.steps.gameOfTenQuestions = true;
 		this.changeTab("background", "main");
 		await this.render();
 	}

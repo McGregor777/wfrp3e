@@ -1,6 +1,6 @@
 import {capitalize} from "../../helpers.mjs";
 
-export default class GameOfTwentyQuestions extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)
+export default class GameOfTenQuestions extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2)
 {
 	/** @inheritDoc */
 	constructor(options = {})
@@ -10,20 +10,20 @@ export default class GameOfTwentyQuestions extends foundry.applications.api.Hand
 
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
-		id: "game-of-twenty-questions-{id}",
-		classes: ["wfrp3e", "game-of-twenty-questions"],
+		id: "game-of-ten-questions-{id}",
+		classes: ["wfrp3e", "game-of-ten-questions"],
 		tag: "form",
 		window: {
 			contentClasses: ["standard-form"],
-			title: "GAMEOFTWENTYQUESTIONS.title"
+			title: "GAMEOFTENQUESTIONS.title"
 		},
-		form: {handler: this.#onGameOfTwentyQuestionsSubmit},
+		form: {handler: this.#onGameOfTenQuestionsSubmit},
 		position: {height: 600}
 	};
 
 	/** @inheritDoc */
 	static PARTS = {
-		main: {template: "systems/wfrp3e/templates/applications/apps/game-of-twenty-questions/main.hbs"},
+		main: {template: "systems/wfrp3e/templates/applications/apps/game-of-ten-questions/main.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 
@@ -32,7 +32,7 @@ export default class GameOfTwentyQuestions extends foundry.applications.api.Hand
 	{
 		return {
 			...await super._prepareContext(options),
-			buttons: [{type: "submit", icon: "fa-solid fa-save", label: "GAMEOFTWENTYQUESTIONS.ACTIONS.submit"}],
+			buttons: [{type: "submit", icon: "fa-solid fa-save", label: "GAMEOFTENQUESTIONS.ACTIONS.submit"}],
 			rootId: this.id
 		};
 	}
@@ -68,9 +68,9 @@ export default class GameOfTwentyQuestions extends foundry.applications.api.Hand
 
 		// Ensure that the Dialog's title and content have a fallback translation.
 		if(title === `${warningKey}.title`)
-			title = game.i18n.localize(`GAMEOFTWENTYQUESTIONS.WARNINGS.${warning}.title`);
+			title = game.i18n.localize(`GAMEOFTENQUESTIONS.WARNINGS.${warning}.title`);
 		if(content === `${warningKey}.description`)
-			content = game.i18n.localize(`GAMEOFTWENTYQUESTIONS.WARNINGS.${warning}.description`);
+			content = game.i18n.localize(`GAMEOFTENQUESTIONS.WARNINGS.${warning}.description`);
 
 		content = `<p>${content} ${game.i18n.localize("SELECTOR.proceedDialog")}</p>`;
 
@@ -82,7 +82,7 @@ export default class GameOfTwentyQuestions extends foundry.applications.api.Hand
 	}
 
 	/**
-	 * Spawns a Game of Twenty Questions and waits for it to be dismissed or submitted.
+	 * Spawns a Game of Ten Questions and waits for it to be dismissed or submitted.
 	 * @param {ApplicationConfiguration} [config] Configuration of the Selector instance
 	 * @returns {Promise<any>} Resolves to the selected item(s). If the dialog was dismissed, the Promise resolves to null.
 	 */
@@ -98,15 +98,15 @@ export default class GameOfTwentyQuestions extends foundry.applications.api.Hand
 	}
 
 	/**
-	 * Processes form submission for the Game of Twenty Questions.
-	 * @this {GameOfTwentyQuestions} The handler is called with the application as its bound scope.
+	 * Processes form submission for the Game of Ten Questions.
+	 * @this {GameOfTenQuestions} The handler is called with the application as its bound scope.
 	 * @param {SubmitEvent} event The originating form submission event.
 	 * @param {HTMLFormElement} form The form element that was submitted.
 	 * @param {FormDataExtended} formData Processed data for the submitted form.
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	static async #onGameOfTwentyQuestionsSubmit(event, form, formData)
+	static async #onGameOfTenQuestionsSubmit(event, form, formData)
 	{
 		const data = foundry.utils.expandObject(formData.object),
 			  warning = this._checkForWarning(event, form, formData, data);
