@@ -73,32 +73,49 @@ export default class CareerSelector extends Selector
 	 */
 	static async buildStartingCareerList(character)
 	{
-		const careers = [];
-
-		for(const pack of game.packs)
-			if(pack.documentName === "Item")
-				for(const basicCareer of await pack.getDocuments({type: "career", system: {advanced: false}}))
-					if(basicCareer.system.raceRestrictions.includes(character.system.race.id))
-						careers.push(basicCareer);
+		let drawnCareers = [];
 
 		switch(game.settings.get("wfrp3e", "startingCareerDrawingMethod")) {
 			case "drawThree":
-				const drawnCareers = [];
-
+				const careers = await CareerSelector.#getBasicCareerList(character);
 				for(let i = 0; i < 3; i++)
 					drawnCareers.push(careers[Math.floor(Math.random() * careers.length)]);
-
-				return drawnCareers;
+				break;
 
 			case "rollTable":
-				const rollTable = await fromUuid(this.character.system.race.startingCareerRollTableUuid),
-					  result = rollTable.draw({displayChat: false});
-				//#TODO Check how TableResult allows to get a linked Document's UUID.
-				return await Promise.all(result.results.map(async result => await fromUuid(result.documentUuid)));
+				const rollTable = await fromUuid(character.system.race.startingCareerRollTableUuid),
+					  drawnResult = await rollTable.draw({displayChat: false});
+
+				// If Dice So Nice! module is enabled, show the roll.
+				game.dice3d.showForRoll(drawnResult.roll);
+				for(const result of drawnResult.results) {
+					// "Choose any career you are eligible for" has been drawn, every basic career are available.
+					if(result.type === "text") {
+						await foundry.applications.api.DialogV2.prompt({
+							content: "CAREERSELECTOR.DIALOG.chooseAnyCareer.description",
+							window: {title: "CAREERSELECTOR.DIALOG.chooseAnyCareer.title"}
+						})
+
+						return await CareerSelector.#getBasicCareerList(character);
+					}
+
+					const doc = await fromUuid(result.documentUuid);
+					if(doc.type === "career")
+						drawnCareers.push(doc);
+
+					if(drawnCareers.length > 1)
+						await foundry.applications.api.DialogV2.prompt({
+							content: "CAREERSELECTOR.DIALOG.moreThanOneCareer.description",
+							window: {title: "CAREERSELECTOR.DIALOG.moreThanOneCareer.title"}
+						})
+				}
+				break;
 
 			case "freeChoice":
-				return careers;
+				return await CareerSelector.#getBasicCareerList(character);
 		}
+
+		return drawnCareers;
 	}
 
 	/**
@@ -116,5 +133,23 @@ export default class CareerSelector extends Selector
 
 		activeFace.classList.remove("active");
 		inactiveFace.classList.add("active");
+	}
+
+	/**
+	 * Get a list of every basic career available as a starting career for a new character.
+	 * @param {Actor} character The new character.
+	 * @returns {Promise<Item[]>} An array of basic careers eligible as a starting career for a new character.
+	 */
+	static async #getBasicCareerList(character)
+	{
+		const basicCareers = [];
+
+		for(const pack of game.packs)
+			if(pack.documentName === "Item")
+				for(const basicCareer of await pack.getDocuments({type: "career", system: {advanced: false}}))
+					if(basicCareer.system.raceRestrictions.includes(character.system.race.id))
+						basicCareers.push(basicCareer);
+
+		return basicCareers;
 	}
 }

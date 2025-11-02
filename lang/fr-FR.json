@@ -334,6 +334,16 @@
 
 	"CAREERSELECTOR": {
 		"ACTIONS.chooseCareer": "Choisir la carrière",
+		"DIALOG": {
+			"chooseAnyCareer": {
+				"description": "Vous pouvez choisir la carrière de départ parmi toutes les carrières de base disponibles.",
+				"title": "Vous avez obtenu 100"
+			},
+			"moreThanOneCareer": {
+				"description": "Vous pouvez choisir la carrière de départ parmi plusieurs carrières de base disponible.",
+				"title": "Vous avez obtenu une relance"
+			}
+		},
 		"WARNINGS": {
 			"notEnoughExperiencePoint": "Vous n'avez pas assez d'expérience pour entamer cette carrière.",
 			"noCareerSelectedWarning": "Vous devez sélectionner une fiche de carrière."

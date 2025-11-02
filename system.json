@@ -52,6 +52,14 @@
 		"system": "wfrp3e",
 		"flags": {}
 	}, {
+		"label": "Macros",
+		"type": "Macro",
+		"name": "macros",
+		"path": "packs/macros",
+		"private": false,
+		"system": "wfrp3e",
+		"flags": {}
+	}, {
 		"label": "RollTables",
 		"type": "RollTable",
 		"name": "roll-tables",

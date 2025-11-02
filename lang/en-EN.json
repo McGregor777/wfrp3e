@@ -332,6 +332,16 @@
 
 	"CAREERSELECTOR": {
 		"ACTIONS.chooseCareer": "Choose Career",
+		"DIALOG": {
+			"chooseAnyCareer": {
+				"description": "You may choose a starting career among every available basic careers.",
+				"title": "You Rolled 100"
+			},
+			"moreThanOneCareer": {
+				"description": "You may choose a starting career among all the available basic careers.",
+				"title": "You Have Obtained A Reroll"
+			}
+		},
 		"WARNINGS": {
 			"notEnoughExperiencePoint": "You have not enough experience to move to this Career.",
 			"noCareerSelectedWarning": "You must select a Career sheet."

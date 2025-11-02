@@ -436,7 +436,7 @@
       "_key": "!tables.results!DuENZYjzQuelc4Yl.gsy0EAJYePAaPrKy"
     },
     {
-      "type": "text",
+      "type": "document",
       "weight": 9,
       "range": [
         91,
@@ -445,20 +445,21 @@
       "drawn": false,
       "_id": "1m2icEh2oxtYMHdo",
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
+      "img": "icons/svg/dice-target.svg",
       "_stats": {
-        "coreVersion": "13.341",
+        "coreVersion": "13.350",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1762121582948,
+        "lastModifiedBy": "Bq3CTOvANoOneedB",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "Roll twice and choose one career",
-      "name": "",
+      "description": "",
+      "name": "Roll Twice Choose One Career",
+      "documentUuid": "Compendium.wfrp3e.macros.Macro.Z6PlhBzAChUnDyog",
       "_key": "!tables.results!DuENZYjzQuelc4Yl.1m2icEh2oxtYMHdo"
     },
     {
@@ -471,20 +472,21 @@
       "drawn": false,
       "_id": "TaiL0bpK5qXS2YwA",
       "flags": {},
-      "img": "icons/svg/d20-black.svg",
+      "img": "icons/svg/d20.svg",
       "_stats": {
-        "coreVersion": "13.341",
+        "coreVersion": "13.350",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1762119715574,
+        "lastModifiedBy": "Bq3CTOvANoOneedB",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "Choose any career you are eligible for",
-      "name": "",
+      "description": "",
+      "name": "Choose any career you are eligible for",
+      "documentUuid": null,
       "_key": "!tables.results!DuENZYjzQuelc4Yl.TaiL0bpK5qXS2YwA"
     }
   ],
