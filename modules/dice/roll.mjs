@@ -192,7 +192,7 @@ export default class CheckRoll extends foundry.dice.Roll
 	/** @inheritDoc */
 	static fromData(data)
 	{
-		return {...super.fromData(data), effects: data.effects};
+		return foundry.utils.mergeObject(super.fromData(data), {effects: data.effects});
 	}
 
 	/**
