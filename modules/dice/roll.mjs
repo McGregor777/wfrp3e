@@ -288,7 +288,7 @@ export default class CheckRoll extends foundry.dice.Roll
 			for(let i = 0; i < diceTerm.results.length - additionalDiceAmount; i++)
 				diceTerm.results[i].hidden = true;
 		}
-		game.dice3d.showForRoll(newCheckRoll);
+		game.dice3d?.showForRoll(newCheckRoll);
 
 		if(chatMessage)
 			await chatMessage.update({rolls: [newCheckRoll]});

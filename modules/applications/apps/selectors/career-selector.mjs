@@ -87,7 +87,7 @@ export default class CareerSelector extends Selector
 					  drawnResult = await rollTable.draw({displayChat: false});
 
 				// If Dice So Nice! module is enabled, show the roll.
-				game.dice3d.showForRoll(drawnResult.roll);
+				game.dice3d?.showForRoll(drawnResult.roll);
 				for(const result of drawnResult.results) {
 					// "Choose any career you are eligible for" has been drawn, every basic career are available.
 					if(result.type === "text") {
