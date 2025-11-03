@@ -1,5 +1,3 @@
-import {capitalize} from "../../../helpers.mjs";
-
 /**
  * @inheritDoc
  * @abstract
@@ -296,7 +294,7 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 	async _askConfirmation(warning)
 	{
 		const selectorType = this.constructor.name,
-			  warningKey = `${capitalize(selectorType)}.WARNINGS.${warning}`;
+			  warningKey = `${selectorType.toUpperCase()}.WARNINGS.${warning}`;
 		let title = game.i18n.localize(`${warningKey}.title`),
 			content = game.i18n.localize(`${warningKey}.description`);
 
@@ -342,13 +340,13 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 		const error = this._checkForError();
 		if(error)
 			return ui.notifications.error(game.i18n.format("SELECTOR.WARNINGS.cannotSubmit", {
-				error: game.i18n.localize(`${capitalize(this.constructor.name)}.WARNINGS.${error}`)
+				error: game.i18n.localize(`${this.constructor.name.toUpperCase()}.WARNINGS.${error}`)
 			}));
 
 		const warning = this._checkForWarning();
 		if(warning && this.strictSelection)
 			return ui.notifications.warn(game.i18n.format("SELECTOR.WARNINGS.cannotSubmit", {
-				error: game.i18n.localize(`${capitalize(this.constructor.name)}.WARNINGS.${warning}.description`)
+				error: game.i18n.localize(`${this.constructor.name.toUpperCase()}.WARNINGS.${warning}.description`)
 			}));
 
 		if(!warning || await this._askConfirmation(warning)) {
