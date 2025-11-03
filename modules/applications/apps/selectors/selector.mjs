@@ -15,7 +15,7 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 			throw new Error("An Array of Objects is needed for any Selector.");
 		this.items = options.items;
 
-		if(options.size)
+		if(options.size !== undefined)
 			this.size = options.size;
 
 		this.strictSelection = !(options.strictSelection ?? this.size > 1);
@@ -185,7 +185,7 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 	 */
 	async _handleNewSelection(value, formConfig, event)
 	{
-		if(this.trueSize === 1)
+		if(this.trueSize === 1 && this.size !== 0)
 			this._checkValueSelection(value)
 				? ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.alreadySelected"))
 				: this._select(value);
@@ -280,7 +280,7 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 	 */
 	_checkForWarning()
 	{
-		if(!this.selection.length)
+		if(!this.selection.length && this.size > 0)
 			return "noSelection";
 		else if(this.remainingSelectionSize !== 0)
 			return "notEnoughSelection";

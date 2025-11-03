@@ -546,11 +546,17 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	static async #acquireTalents(event, target)
 	{
 		event.preventDefault();
+
+		const character = this.character,
+			  onStartingTalentSelectionEffects = character.findTriggeredEffects("onStartingTalentSelection");
+
+		if(+this.creationPointInvestments.talents === 0 && !onStartingTalentSelectionEffects.length)
+			return ui.notifications.warn(game.i18n.localize("CHARACTERGENERATOR.WARNINGS.noStartingTalent"));
+
 		await this.resetStartingActionCards();
 		await this.resetStartingTalents();
 
 		const {TalentSelector} = wfrp3e.applications.apps.selectors,
-			  character = this.character,
 			  investment = CONFIG.WFRP3e.creationPointInvestments.talents[this.creationPointInvestments.talents],
 			  options = {
 				  actor: character,
@@ -559,7 +565,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 				  freeItemTypes: []
 			  };
 
-		for(const effect of character.findTriggeredEffects("onStartingTalentSelection"))
+		for(const effect of onStartingTalentSelectionEffects)
 			await effect.triggerEffect({options});
 
 		options.items = await TalentSelector.buildNewCharacterOptionsList(character, options);
@@ -704,6 +710,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 			this.creationPointInvestments = investments;
 			this.steps.investCreationPoints = true;
+			this.steps.acquireTalents = +investments.talents === 0 && !character.findTriggeredEffects("onStartingTalentSelection").length;
 			this.changeTab("attributes", "main");
 		}
 
