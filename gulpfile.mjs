@@ -1,12 +1,13 @@
+import {spawn} from "child_process";
 import logger from "fancy-log";
+import {compilePack, extractPack} from "@foundryvtt/foundryvtt-cli";
+import Config from "@foundryvtt/foundryvtt-cli/config.mjs";
 import fs from "fs";
 import gulp from "gulp";
 import prefix from "gulp-autoprefixer";
 import less from "gulp-less";
 import yaml from "js-yaml";
 import path from "path";
-import yargs from "yargs";
-import {compilePack, extractPack} from "@foundryvtt/foundryvtt-cli";
 
 /**
  * Folder where the compiled compendium packs should be located relative to the system folder.
@@ -132,10 +133,68 @@ async function initialize()
 	}
 }
 
+/**
+ * Launches Foundry VTT.
+ * @param {string} world The world to launch Foundry VTT with.
+ * @param {string} [adminKey] The admin key to secure Foundry VTT's Setup screen with.
+ * @param {boolean} [demo] Launch Foundry VTT in demo mode.
+ * @param {number} [port] The port to launch Foundry VTT on.
+ * @param {boolean} [noupnp] Disable UPnP port forwarding.
+ * @param {boolean} [noupdate] Disable automatic update checking.
+ */
+function launchWorld(world, adminKey = null, demo = false, port = 30000, noupnp = false, noupdate = false)
+{
+	// Determine the installation path
+	const installPath = Config.instance.get("installPath");
+	if(!installPath) {
+		console.error("The installation path is not set. Use `configure set installPath <path>` to set it. "
+			+ "Install paths look like `C:/Program Files/Foundry Virtual Tabletop`");
+		process.exitCode = 1;
+		return;
+	}
+
+	// Determine the data path
+	const dataPath = Config.instance.get("dataPath");
+	if(!dataPath) {
+		console.error("The data path is not set. Use `configure set dataPath <path>` to set it. "
+			+ "Data paths look like `C:/Users/Example/AppData/Local/FoundryVTT/Data`");
+		process.exitCode = 1;
+		return;
+	}
+
+	// Figure out if we are running the fvtt application or nodejs version
+	const electronPath = path.normalize(path.join(installPath, "resources", "app", "main.js")),
+		  nodePath = path.normalize(path.join(installPath, "main.js")),
+		  fvttPath = fs.existsSync(electronPath) ? electronPath : nodePath;
+
+	if(!fs.existsSync(fvttPath)) {
+		console.error("Unable to find a valid launch path at '%s' or '%s'.", nodePath, electronPath);
+		process.exitCode = 1;
+		return;
+	}
+
+	// Launch Foundry VTT
+	const foundry = spawn("node", [
+		fvttPath,
+		`--dataPath=${dataPath}`,
+		`--port=${port}`,
+		demo,
+		world,
+		noupnp,
+		noupdate,
+		adminKey
+	]);
+
+	foundry.stdout.on("data", data => console.log(data.toString()));
+	foundry.stderr.on("data", data => console.error(data.toString()));
+	foundry.on("close", code => console.log(`Foundry VTT exited with code ${code}`));
+}
+
 export default gulp.series(gulp.parallel(compileLess), watchUpdates);
 export const build = gulp.parallel(compileLess, /*javascript.compile, */compilePacks);
 export const css = gulp.series(compileLess);
 export const compile = gulp.series(compilePacks);
 export const extract = gulp.series(extractPacks);
 export const init = gulp.series(initialize);
+export const launch = gulp.series(launchWorld);
 export const watch = gulp.series(gulp.parallel(compileLess), watchUpdates);
