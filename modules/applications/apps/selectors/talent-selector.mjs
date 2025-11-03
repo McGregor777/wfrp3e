@@ -156,13 +156,17 @@ export default class TalentSelector extends Selector
 			else {
 				// If the clicked item is already selected as a free item, try to replace it with another item
 				// of the same type that is currently selected and pull this very item off of the selection pool.
+				const selectedItems = await this._getSelectedItems()
 				let replacementIndex, replacement;
-				for(const [index, selection] of this._getSelectedItems())
+
+				for(const index in selectedItems) {
+					const selection = selectedItems[index];
 					if(selection.system.type === item.system.type) {
 						replacementIndex = index;
 						replacement = selection;
 						break;
 					}
+				}
 
 				if(replacementIndex) {
 					this.selection.splice(this.selection[replacementIndex], 1);
