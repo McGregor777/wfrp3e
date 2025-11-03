@@ -89,6 +89,15 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 		return this.size - this.selection.length;
 	}
 
+	/**
+	 * Return the number of items to select, including potential free items.
+	 * @type {number}
+	 */
+	get trueSize()
+	{
+		return this.size;
+	}
+
 	/** @inheritDoc */
 	async _prepareContext(options)
 	{
@@ -122,7 +131,7 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 						: this.items,
 					itemType: this.type,
 					selection: foundry.utils.deepClone(this.selection),
-					multiple: this.size > 1
+					multiple: this.trueSize > 1
 				};
 				break;
 			case "search":
@@ -176,7 +185,7 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 	 */
 	async _handleNewSelection(value, formConfig, event)
 	{
-		if(this.size === 1)
+		if(this.trueSize === 1)
 			this._checkValueSelection(value)
 				? ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.alreadySelected"))
 				: this._select(value);

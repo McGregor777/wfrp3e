@@ -21,12 +21,12 @@ export default class TalentSelector extends Selector
 		super(options);
 
 		for(const [key, type] of Object.entries(CONFIG.WFRP3e.talentTypes))
-			if(options.freeItemTypes?.includes(key))
-				this.types[key] = type;
-			else if(options.items.find(item => item.system.type === key)){
+			if(options.items.find(item => item.system.type === key)){
 				this.types[key] = type;
 				this.regularTypes.push(key);
 			}
+			else if(options.freeItemTypes?.includes(key))
+				this.types[key] = type;
 
 		if(Array.isArray(options.freeItemTypes))
 			for(const type of options.freeItemTypes) {
@@ -84,6 +84,15 @@ export default class TalentSelector extends Selector
 	 */
 	regularTypes = [];
 
+	/**
+	 * Return the number of items to select, including potential free items.
+	 * @type {number}
+	 */
+	get trueSize()
+	{
+		return super.trueSize + Object.values(this.freeItems).filter(value => value !== false).length;
+	}
+
 	/** @inheritDoc */
 	async _prepareContext(options)
 	{
@@ -135,13 +144,12 @@ export default class TalentSelector extends Selector
 			  isOfRegularType = this.regularTypes.includes(type),
 			  freeItem = this.freeItems[type];
 
-		if(freeItem === false) {
+		if(freeItem === false || freeItem !== null) {
 			if(!isOfRegularType)
 				throw new Error(`No ${item.system.type ? capitalize(item.system.type) + " " + item.type : item.type} is expected to be selected.`);
 			else
 				await super._handleNewSelection(value, formConfig, event);
 		}
-		//#TODO Test and fix this
 		else if(freeItem === value) {
 			if(!isOfRegularType)
 				ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.alreadySelected"));
