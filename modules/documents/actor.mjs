@@ -88,21 +88,6 @@ export default class Actor extends foundry.documents.Actor
 		await diePool.roll();
 	}
 
-	//#TODO Move this method in ActorDataModel.
-	/**
-	 * Gets the name of character's current stance.
-	 * @returns {string}
-	 */
-	getCurrentStanceName()
-	{
-		if(this.system.stance.current < 0)
-			return "conservative";
-		else if(this.system.stance.current > 0)
-			return "reckless";
-
-		return this.system.defaultStance;
-	}
-
 	/**
 	 * Adds or removes a specified number of segments on either side on the stance meter.
 	 * @param {string} stance The name of the stance meter part that is getting adjusted.

@@ -512,8 +512,9 @@ export default class Item extends foundry.documents.Item
 
 		const diePool = await wfrp3e.applications.dice.CheckBuilder.wait({
 			diePool: await wfrp3e.dice.DiePool.createFromAction(
-				this.actor, action,
-				this.actor.getCurrentStanceName(),
+				this.actor,
+				action,
+				this.actor.system.currentStanceName,
 				{weapon: this.uuid}
 			)
 		});

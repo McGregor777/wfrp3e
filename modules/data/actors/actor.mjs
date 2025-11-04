@@ -93,6 +93,20 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	}
 
 	/**
+	 * The name of the actor's current stance.
+	 * @returns {string}
+	 */
+	get currentStanceName()
+	{
+		if(this.stance.current < 0)
+			return "conservative";
+		else if(this.stance.current > 0)
+			return "reckless";
+
+		return this.defaultStance;
+	}
+
+	/**
 	 * The actor's stance meter, depending on their own stance segments plus their current career ones.
 	 * @returns {Object}
 	 */
