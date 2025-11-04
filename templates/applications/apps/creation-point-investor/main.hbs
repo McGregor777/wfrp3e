@@ -4,7 +4,7 @@
 
 		{{#each characteristics as |characteristic char|}}
 			<div data-characteristic="{{char}}">
-				<label for="{{concat @root.rootId '-creationPointInvestments.' char}}">
+				<label for="{{concat @root.rootId '-currentInvestments.' char}}">
 					{{localize characteristic.name}}
 				</label>
 
@@ -15,9 +15,9 @@
 						<span class="fa fa-minus"></span>
 					</button>
 
-					<input id="{{concat @root.rootId '-creationPointInvestments.' char}}"
-						   name="creationPointInvestments.characteristics.{{char}}"
-						   value="{{lookup @root.creationPointInvestments.characteristics char}}"
+					<input id="{{concat @root.rootId '-currentInvestments.' char}}"
+						   name="currentInvestments.characteristics.{{char}}"
+						   value="{{lookup @root.currentInvestments.characteristics char}}"
 						   type="number"
 						   min="{{characteristic.defaultRating}}"
 						   max="5"
@@ -33,19 +33,11 @@
 		{{/each}}
 	</div>
 
-	{{>systems/wfrp3e/templates/applications/apps/creation-point-investor/partial.hbs
-			values=creationPointInvestmentCategories.wealth
-			key="wealth"}}
+	{{>systems/wfrp3e/templates/applications/apps/creation-point-investor/partial.hbs key="wealth"}}
 
-	{{>systems/wfrp3e/templates/applications/apps/creation-point-investor/partial.hbs
-			values=creationPointInvestmentCategories.skills
-			key="skills"}}
+	{{>systems/wfrp3e/templates/applications/apps/creation-point-investor/partial.hbs key="skills"}}
 
-	{{>systems/wfrp3e/templates/applications/apps/creation-point-investor/partial.hbs
-			values=creationPointInvestmentCategories.talents
-			key="talents"}}
+	{{>systems/wfrp3e/templates/applications/apps/creation-point-investor/partial.hbs key="talents"}}
 
-	{{>systems/wfrp3e/templates/applications/apps/creation-point-investor/partial.hbs
-			values=creationPointInvestmentCategories.actionCards
-			key="actionCards"}}
+	{{>systems/wfrp3e/templates/applications/apps/creation-point-investor/partial.hbs key="actionCards"}}
 </section>

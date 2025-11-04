@@ -31,7 +31,7 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 			throw new Error("Defining a pool of starting creation points is needed for the Creation Point Investor.");
 		this.startingCreationPoints = options.startingCreationPoints;
 
-		this.creationPointInvestments.characteristics = foundry.utils.deepClone(options.race.defaultRatings);
+		this.currentInvestments.characteristics = foundry.utils.deepClone(options.race.defaultRatings);
 	}
 
 	/** @inheritDoc */
@@ -58,6 +58,61 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 
+	static INVESTMENTS = {
+		actionCards: [{
+			name: "CREATIONPOINTINVESTOR.ACTIONCARDS.CHOICES.one",
+			size: 1
+		}, {
+			name: "CREATIONPOINTINVESTOR.ACTIONCARDS.CHOICES.two",
+			size: 2
+		}, {
+			name: "CREATIONPOINTINVESTOR.ACTIONCARDS.CHOICES.three",
+			size: 3
+		}, {
+			name: "CREATIONPOINTINVESTOR.ACTIONCARDS.CHOICES.four",
+			size: 4
+		}],
+		skills: [{
+			name: "CREATIONPOINTINVESTOR.SKILLS.CHOICES.one",
+			size: 1,
+			specialisationSize: 0
+		}, {
+			name: "CREATIONPOINTINVESTOR.SKILLS.CHOICES.two",
+			size: 2,
+			specialisationSize: 0
+		}, {
+			name: "CREATIONPOINTINVESTOR.SKILLS.CHOICES.threePlusOneSpecialisation",
+			size: 3,
+			specialisationSize: 1
+		}, {
+			name: "CREATIONPOINTINVESTOR.SKILLS.CHOICES.fourPlusTwoSpecialisations",
+			size: 4,
+			specialisationSize: 2
+		}],
+		talents: [{
+			name: "CREATIONPOINTINVESTOR.TALENTS.CHOICES.zero",
+			size: 0
+		}, {
+			name: "CREATIONPOINTINVESTOR.TALENTS.CHOICES.one",
+			size: 1
+		}, {
+			name: "CREATIONPOINTINVESTOR.TALENTS.CHOICES.two",
+			size: 2
+		}, {
+			name: "CREATIONPOINTINVESTOR.TALENTS.CHOICES.three",
+			size: 3
+		}],
+		wealth: [{
+			name: "CREATIONPOINTINVESTOR.WEALTH.CHOICES.broke"
+		}, {
+			name: "CREATIONPOINTINVESTOR.WEALTH.CHOICES.poor"
+		}, {
+			name: "CREATIONPOINTINVESTOR.WEALTH.CHOICES.comfortable"
+		}, {
+			name: "CREATIONPOINTINVESTOR.WEALTH.CHOICES.affluent"
+		}]
+	};
+
 	/**
 	 * The race defining which rules are used by the Creation Point Investor.
 	 * @type {Object}
@@ -68,7 +123,7 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 	 * The current investments of Creation Points.
 	 * @type {CreationPointInvestments}
 	 */
-	creationPointInvestments = {
+	currentInvestments = {
 		characteristics: {
 			strength: 2,
 			toughness: 2,
@@ -93,12 +148,12 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 	get remainingCreationPoints()
 	{
 		let remainingCreationPoints= this.startingCreationPoints
-			- this.creationPointInvestments.wealth
-			- this.creationPointInvestments.skills
-			- this.creationPointInvestments.talents
-			- this.creationPointInvestments.actionCards;
+			- this.currentInvestments.wealth
+			- this.currentInvestments.skills
+			- this.currentInvestments.talents
+			- this.currentInvestments.actionCards;
 
-		for(const [key, rating] of Object.entries(this.creationPointInvestments.characteristics)) {
+		for(const [key, rating] of Object.entries(this.currentInvestments.characteristics)) {
 			// Each increment of a characteristic rating increases the number of used Creation Points
 			// by the increment value.
 			for(let i = this.race.defaultRatings[key] + 1; i <= rating; i++)
@@ -137,8 +192,8 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 				partContext = {
 					...partContext,
 					characteristics,
-					creationPointInvestments: this.creationPointInvestments,
-					creationPointInvestmentCategories: CONFIG.WFRP3e.creationPointInvestments
+					currentInvestments: this.currentInvestments,
+					investments: this.constructor.INVESTMENTS
 				};
 
 				break;
@@ -269,17 +324,17 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 
 		const key = target.closest("[data-characteristic]").dataset.characteristic,
 			  defaultRating = this.race.defaultRatings[key];
-		
-		if(this.creationPointInvestments.characteristics[key] <= defaultRating)	{
-			this.creationPointInvestments.characteristics[key] = defaultRating;
+
+		if(this.currentInvestments.characteristics[key] <= defaultRating)	{
+			this.currentInvestments.characteristics[key] = defaultRating;
 
 			return ui.notifications.warn(
 				game.i18n.localize("CREATIONPOINTINVESTOR.WARNINGS.minimumRatingReached")
 			);
 		}
 
-		this.creationPointInvestments.characteristics[key]--;
-		
+		+this.currentInvestments.characteristics[key]--;
+
 		await this.render();
 	}
 
@@ -296,10 +351,10 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 		event.preventDefault();
 
 		const key = target.closest("[data-characteristic]").dataset.characteristic,
-			  currentInvestment = this.creationPointInvestments.characteristics[key];
+			  currentInvestment = this.currentInvestments.characteristics[key];
 		
 		if(currentInvestment >= 5)	{
-			this.creationPointInvestments.characteristics[key] = 5;
+			this.currentInvestments.characteristics[key] = 5;
 
 			return ui.notifications.warn(
 				game.i18n.localize("CREATIONPOINTINVESTOR.WARNINGS.maximumRatingReached")
@@ -310,7 +365,7 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 				game.i18n.localize("CREATIONPOINTINVESTOR.WARNINGS.notEnoughCreationPoints")
 			);
 
-		this.creationPointInvestments.characteristics[key]++;
+		+this.currentInvestments.characteristics[key]++;
 
 		await this.render();
 	}
@@ -347,7 +402,7 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 
 		const warning = this._checkForWarning();
 		if(!warning || await this._askConfirmation(warning)) {
-			this.options.submit(foundry.utils.expandObject(formData.object).creationPointInvestments);
+			this.options.submit(foundry.utils.expandObject(formData.object).currentInvestments);
 			await this.close({submitted: true});
 		}
 	}

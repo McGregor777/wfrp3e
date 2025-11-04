@@ -427,7 +427,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 		const {ActionSelector} = wfrp3e.applications.apps.selectors,
 			  character = this.character,
-			  investment = CONFIG.WFRP3e.creationPointInvestments.actionCards[this.creationPointInvestments.actionCards];
+			  investment = wfrp3e.applications.apps.CreationPointInvestor.INVESTMENTS.actionCards[this.creationPointInvestments.actionCards];
 		let actionUuids = await ActionSelector.wait({
 			actor: character,
 			items: await ActionSelector.buildOptionsList(character, {basic: false}),
@@ -476,7 +476,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 		const {SkillUpgrader} = wfrp3e.applications.apps.selectors,
 			  character = this.character,
-			  investment = CONFIG.WFRP3e.creationPointInvestments.skills[this.creationPointInvestments.skills],
+			  investment = wfrp3e.applications.apps.CreationPointInvestor.INVESTMENTS.skills[this.creationPointInvestments.skills],
 			  options = {
 				  actor: character,
 				  freeAcquisitions: [],
@@ -557,7 +557,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		await this.resetStartingTalents();
 
 		const {TalentSelector} = wfrp3e.applications.apps.selectors,
-			  investment = CONFIG.WFRP3e.creationPointInvestments.talents[this.creationPointInvestments.talents],
+			  investment = wfrp3e.applications.apps.CreationPointInvestor.INVESTMENTS.talents[this.creationPointInvestments.talents],
 			  options = {
 				  actor: character,
 				  modal: true,
