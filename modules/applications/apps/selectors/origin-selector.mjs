@@ -75,7 +75,7 @@ export default class OriginSelector extends Selector
 	{
 		if(event.target.dataset.type === "race") {
 			this.race = value;
-			this.selection = [Object.keys(CONFIG.WFRP3e.availableRaces[value].origins)[0]];
+			this.selection = [Object.keys(wfrp3e.data.actors.Character.RACES[value].origins)[0]];
 		}
 		else
 			await super._handleNewSelection(value, formConfig, event);
@@ -97,7 +97,7 @@ export default class OriginSelector extends Selector
 	 */
 	static async buildRaceList()
 	{
-		const races = foundry.utils.deepClone(CONFIG.WFRP3e.availableRaces);
+		const races = foundry.utils.deepClone(wfrp3e.data.actors.Character.RACES);
 
 		for(const race of Object.values(races))
 			for(const origin of Object.values(race.origins))
