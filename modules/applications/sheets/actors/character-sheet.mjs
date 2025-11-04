@@ -68,7 +68,7 @@ export default class CharacterSheet extends ActorSheet
 			case "attributes":
 				partContext = {
 					...partContext,
-					characteristics: CONFIG.WFRP3e.characteristics,
+					characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
 					fields: this.actor.system.schema.fields,
 					skills: this.actor.itemTypes.skill.sort((a, b) => a.name.localeCompare(b.name))
 				};
@@ -85,7 +85,7 @@ export default class CharacterSheet extends ActorSheet
 				partContext = {
 					...partContext,
 					careers: sortedCareers,
-					characteristics: CONFIG.WFRP3e.characteristics,
+					characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
 					enrichment,
 					fields: this.actor.system.schema.fields,
 					tabs: this._prepareTabs(partId)

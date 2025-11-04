@@ -184,7 +184,7 @@ export default class Item extends foundry.documents.Item
 
 		let html = "";
 
-		for(const stance of Object.keys(CONFIG.WFRP3e.stances)) {
+		for(const stance of Object.keys(wfrp3e.data.actors.Actor.STANCES)) {
 			let face = this.system[stance],
 				content = `<div>
 						 <div><p>${face.check}</p></div>

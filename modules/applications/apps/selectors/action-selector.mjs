@@ -48,11 +48,13 @@ export default class ActionSelector extends Selector
 
 		switch(partId) {
 			case "main":
-				const textEditor = foundry.applications.ux.TextEditor.implementation,
+				const stances = wfrp3e.data.actors.Actor.STANCES,
+					  textEditor = foundry.applications.ux.TextEditor.implementation,
 					  basicTrait = game.i18n.localize("TRAITS.basic"),
 					  enrichment = {};
+
 				for(const action of this.items)
-					for(const stance of Object.keys(CONFIG.WFRP3e.stances)) {
+					for(const stance of Object.keys(stances)) {
 						if(action.system[stance].requirements)
 							enrichment[`${action.uuid}-${stance}.requirements`] = await textEditor.enrichHTML(
 								action.system[stance].requirements
@@ -88,7 +90,7 @@ export default class ActionSelector extends Selector
 						else
 							return a.name.localeCompare(b.name);
 					}),
-					stances: CONFIG.WFRP3e.stances,
+					stances,
 					symbols: CONFIG.WFRP3e.symbols
 				};
 				break;

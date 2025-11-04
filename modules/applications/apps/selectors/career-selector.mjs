@@ -37,7 +37,7 @@ export default class CareerSelector extends Selector
 
 			partContext = {
 				...partContext,
-				characteristics: CONFIG.WFRP3e.characteristics,
+				characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
 				enrichment
 			};
 		}

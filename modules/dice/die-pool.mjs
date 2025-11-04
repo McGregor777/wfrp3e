@@ -99,7 +99,7 @@ export default class DiePool
 				return game.i18n.format("ROLL.NAMES.skillCheck", {skill: fromUuidSync(checkData.skill).name});
 			else if(checkData.characteristic)
 				return game.i18n.format("ROLL.NAMES.characteristicCheck", {
-					characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[checkData.characteristic].name)
+					characteristic: game.i18n.localize(wfrp3e.data.actors.Actor.CHARACTERISTICS[checkData.characteristic].name)
 				});
 		}
 
@@ -377,7 +377,7 @@ export default class DiePool
 			skill = actor.itemTypes.skill.find((skill) => skill.name === match[2]) ?? skill;
 			// Either use the characteristic specified on the action's check,
 			// or the characteristic the skill is based upon.
-			characteristicName = Object.entries(CONFIG.WFRP3e.characteristics)
+			characteristicName = Object.entries(wfrp3e.data.actors.Actor.CHARACTERISTICS)
 				.find((characteristic) => {
 					return game.i18n.localize(characteristic[1].abbreviation) === match[3];
 				})[0] ?? characteristicName;

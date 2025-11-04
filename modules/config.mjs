@@ -25,42 +25,6 @@ export const WFRP3e = Object.freeze({
 			name: "CHALLENGELEVEL.heroic"
 		}
 	},
-	characteristics: {
-		strength: {
-			name: "ACTOR.FIELDS.characteristics.FIELDS.strength.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.strength.abbreviation",
-			type: "physical"
-		},
-		toughness: {
-			name: "ACTOR.FIELDS.characteristics.FIELDS.toughness.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.toughness.abbreviation",
-			type: "physical"
-		},
-		agility: {
-			name: "ACTOR.FIELDS.characteristics.FIELDS.agility.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.agility.abbreviation",
-			type: "physical"
-		},
-		intelligence: {
-			name: "ACTOR.FIELDS.characteristics.FIELDS.intelligence.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.intelligence.abbreviation",
-			type: "mental"
-		},
-		willpower: {
-			name: "ACTOR.FIELDS.characteristics.FIELDS.willpower.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.willpower.abbreviation",
-			type: "mental"
-		},
-		fellowship: {
-			name: "ACTOR.FIELDS.characteristics.FIELDS.fellowship.label",
-			abbreviation: "ACTOR.FIELDS.characteristics.FIELDS.fellowship.abbreviation",
-			type: "mental"
-		}
-	},
-	stances: {
-		conservative: "STANCES.conservative",
-		reckless: "STANCES.reckless"
-	},
 	symbols: {
 		success: {
 			cssClass: "success",

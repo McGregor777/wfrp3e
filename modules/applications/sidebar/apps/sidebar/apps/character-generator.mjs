@@ -155,7 +155,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			case "attributes":
 				partContext = {
 					...partContext,
-					characteristics: CONFIG.WFRP3e.characteristics,
+					characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
 					fields: character.system.schema.fields,
 				};
 				break;
@@ -169,7 +169,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 				partContext = {
 					...partContext,
 					career: character.system.currentCareer,
-					characteristics: CONFIG.WFRP3e.characteristics,
+					characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
 					fields: character.system.schema.fields
 				};
 				break;
@@ -187,7 +187,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 					actions: character.itemTypes.action.sort((a, b) => a.name.localeCompare(b.name)),
 					defaultStance: character.system.defaultStance,
 					fields: character.system.schema.fields,
-					stances: CONFIG.WFRP3e.stances,
+					stances: wfrp3e.data.actors.Actor.STANCES,
 					symbols: CONFIG.WFRP3e.symbols
 				};
 				break;

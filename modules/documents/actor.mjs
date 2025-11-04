@@ -377,7 +377,7 @@ export default class Actor extends foundry.documents.Actor
 	async buyCharacteristicAdvance(upgrade, career, type)
 	{
 		const advancementName = game.i18n.format(`CHARACTERISTICUPGRADER.characteristic${capitalize(upgrade.type)}`, {
-				  characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[upgrade.characteristic].name)
+				  characteristic: game.i18n.localize(wfrp3e.data.actors.Actor.CHARACTERISTICS[upgrade.characteristic].name)
 			  }),
 			  characteristic = this.system.characteristics[upgrade.characteristic];
 

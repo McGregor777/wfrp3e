@@ -109,6 +109,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 				};
 				break;
 			case "actions":
+				const stances = wfrp3e.data.actors.Actor.STANCES;
 				let actions = this.actor.itemTypes.action;
 
 				if(this.searchFilters.actions.text || this.searchFilters.actions.type !== "all") {
@@ -130,7 +131,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 
 				if(this.actor.getFlag("wfrp3e", "embeddedItemsDisplayMode") === "cards")
 					for(const action of actions)
-						for(const stance of Object.keys(CONFIG.WFRP3e.stances)) {
+						for(const stance of Object.keys(stances)) {
 							if(action.system[stance].requirements)
 								enrichment[`${action.uuid}-${stance}.requirements`] = await textEditor.enrichHTML(
 									action.system[stance].requirements
@@ -160,7 +161,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 					enrichment,
 					fields: this.actor.system.schema.fields,
 					searchFilters: this.searchFilters?.actions,
-					stances: CONFIG.WFRP3e.stances,
+					stances,
 					symbols: CONFIG.WFRP3e.symbols,
 					types: {
 						all: "ACTOR.SHEET.all",

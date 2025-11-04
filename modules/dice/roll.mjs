@@ -209,7 +209,7 @@ export default class CheckRoll extends foundry.dice.Roll
 			  action = await fromUuid(checkData.action),
 			  characteristic = checkData.characteristic,
 			  weapon = await fromUuid(checkData.weapon),
-			  isCharacteristicMental = CONFIG.WFRP3e.characteristics[characteristic].type === "mental";
+			  isCharacteristicMental = wfrp3e.data.actors.Actor.CHARACTERISTICS[characteristic].type === "mental";
 
 		this.effects = foundry.utils.deepClone(action.system[checkData.face].effects);
 		for(const effects of Object.values(this.effects))

@@ -7,16 +7,17 @@ export default class Skill extends Item
 	static defineSchema()
 	{
 		const fields = foundry.data.fields,
+			  characteristicsData = wfrp3e.data.actors.Actor.CHARACTERISTICS,
 			  characteristics = {};
 
-		for(const [key, characteristic] of Object.entries(CONFIG.WFRP3e.characteristics))
+		for(const [key, characteristic] of Object.entries(characteristicsData))
 			characteristics[key] = characteristic.name;
 
 		return {
 			advanced: new fields.BooleanField(),
 			characteristic: new fields.StringField({
 				choices: {...characteristics, varies: "ACTOR.FIELDS.characteristics.varies.label"},
-				initial: Object.keys(CONFIG.WFRP3e.characteristics)[0],
+				initial: Object.keys(characteristicsData)[0],
 				required: true
 			}),
 			description: new fields.HTMLField(),

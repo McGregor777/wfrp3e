@@ -10,7 +10,7 @@ export default class Career extends Item
 			  characteristics = {},
 			  races = {}
 
-		for(const [key, characteristic] of Object.entries(CONFIG.WFRP3e.characteristics))
+		for(const [key, characteristic] of Object.entries(wfrp3e.data.actors.Actor.CHARACTERISTICS))
 			characteristics[key] = characteristic.name;
 
 		for(const [key, race] of Object.entries(wfrp3e.data.actors.Character.RACES))

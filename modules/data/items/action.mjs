@@ -18,7 +18,7 @@ export default class Action extends foundry.abstract.TypeDataModel
 		const fields = foundry.data.fields,
 			  faces = {};
 
-		for(const face of Object.keys(CONFIG.WFRP3e.stances)) {
+		for(const face of Object.keys(wfrp3e.data.actors.Actor.STANCES)) {
 			const effects = {};
 			for(const symbol of Object.keys(CONFIG.WFRP3e.symbols))
 				effects[symbol] = new fields.ArrayField(

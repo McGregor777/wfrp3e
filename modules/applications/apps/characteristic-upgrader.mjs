@@ -71,7 +71,7 @@ export default class CharacteristicUpgrader extends foundry.applications.api.Han
 		for(const [key, characteristic] of Object.entries(this.actor.system.characteristics))
 			if((!this.nonCareerAdvance && primaryCharacteristics.includes(key))
 				|| this.nonCareerAdvance && !primaryCharacteristics.includes(key))
-				characteristics[key] = {...characteristic, ...CONFIG.WFRP3e.characteristics[key]};
+				characteristics[key] = {...characteristic, ...wfrp3e.data.actors.Actor.CHARACTERISTICS[key]};
 
 		return {
 			...await super._prepareContext(options),

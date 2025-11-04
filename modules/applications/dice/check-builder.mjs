@@ -147,7 +147,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 						challengeLevel: checkData.challengeLevel,
 						challengeLevels: CONFIG.WFRP3e.challengeLevels,
 						characteristic: checkData.characteristic,
-						characteristics: CONFIG.WFRP3e.characteristics,
+						characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
 						fortunePoints: checkData.fortunePoints || 0,
 						skill: await fromUuid(checkData.skill),
 						skills: actor.itemTypes.skill,

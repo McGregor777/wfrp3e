@@ -149,7 +149,7 @@ export default class SkillUpgrader extends Selector
 			partContext = {
 				...partContext,
 				advanceType: this.advanceType,
-				characteristics: CONFIG.WFRP3e.characteristics,
+				characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
 				freeAcquisitions: this.freeAcquisitions,
 				freeTrainings: this.freeTrainings,
 				upgrades

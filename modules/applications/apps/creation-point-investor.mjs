@@ -180,7 +180,7 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 
 		switch(partId) {
 			case "main":
-				const characteristics = foundry.utils.deepClone(CONFIG.WFRP3e.characteristics);
+				const characteristics = wfrp3e.data.actors.Actor.CHARACTERISTICS;
 
 				for(const key of Object.keys(characteristics)) {
 					characteristics[key] = {
@@ -232,7 +232,7 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 			if(value < minimumRating)
 				return ui.notifications.warn(game.i18n.format(
 					"CREATIONPOINTINVESTOR.WARNINGs.minimumRatingReached", {
-						characteristic: game.i18n.localize(CONFIG.WFRP3e.characteristics[key].name),
+						characteristic: game.i18n.localize(wfrp3e.data.actors.Actor.CHARACTERISTICS[key].name),
 						race: game.i18n.localize(this.race.name),
 						rating: minimumRating
 					}

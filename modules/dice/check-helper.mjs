@@ -416,7 +416,8 @@ export default class CheckHelper
 	 */
 	static async triggerActionEffects(chatMessageId)
 	{
-		const chatMessage = game.messages.get(chatMessageId),
+		const characteristics = wfrp3e.data.actors.Actor.CHARACTERISTICS,
+			  chatMessage = game.messages.get(chatMessageId),
 			  roll = chatMessage.rolls[0],
 			  checkData = roll.options.checkData,
 			  actor = await fromUuid(checkData.actor),
@@ -428,10 +429,10 @@ export default class CheckHelper
 				  targetStress: 0,
 				  wounds: 0,
 				  criticalWounds: 0,
-				  fatigue: CONFIG.WFRP3e.characteristics[checkData.characteristic].type === "physical"
+				  fatigue: characteristics[checkData.characteristic].type === "physical"
 					  ? roll.remainingSymbols.exertions
 					  : 0,
-				  stress: CONFIG.WFRP3e.characteristics[checkData.characteristic].type === "mental"
+				  stress: characteristics[checkData.characteristic].type === "mental"
 					  ? roll.remainingSymbols.exertions
 					  : 0,
 				  favour: 0,
