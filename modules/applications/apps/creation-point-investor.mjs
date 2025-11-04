@@ -228,10 +228,6 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 		if(name.includes("characteristics")) {
 			const key = event.target.dataset.characteristic,
 				  minimumRating = this.race.defaultRatings[key];
-			let investment = value;
-
-			for(let i = value - 1; i > currentValue; i--)
-				investment += i;
 
 			if(value < minimumRating)
 				return ui.notifications.warn(game.i18n.format(
@@ -245,10 +241,16 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 				return ui.notifications.warn(
 					game.i18n.localize("CREATIONPOINTINVESTOR.WARNINGS.maximumRatingReached")
 				);
-			else if(investment > this.remainingCreationPoints)
-				return ui.notifications.warn(
-					game.i18n.localize("CREATIONPOINTINVESTOR.WARNINGS.notEnoughCreationPoints")
-				);
+			else {
+				let investment = +value;
+				for(let i = +value - 1; i > currentValue; i--)
+					investment += i;
+
+				if(investment > this.remainingCreationPoints)
+					return ui.notifications.warn(
+						game.i18n.localize("CREATIONPOINTINVESTOR.WARNINGS.notEnoughCreationPoints")
+					);
+			}
 		}
 		else if(value < 0)
 			return ui.notifications.warn(
@@ -262,8 +264,8 @@ export default class CreationPointInvestor extends foundry.applications.api.Hand
 			return ui.notifications.warn(
 				game.i18n.localize("CREATIONPOINTINVESTOR.WARNINGS.notEnoughCreationPoints")
 			);
-		
-		foundry.utils.setProperty(this, name, event.target.value);
+
+		foundry.utils.setProperty(this, name, +value);
 	}
 
 	/**
