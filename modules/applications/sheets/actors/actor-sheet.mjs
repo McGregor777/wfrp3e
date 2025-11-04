@@ -193,7 +193,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 						...this.actor.itemTypes.miscast,
 						...this.actor.itemTypes.mutation
 					].sort((a, b) => a.name.localeCompare(b.name)),
-					symptoms: CONFIG.WFRP3e.disease.symptoms,
+					symptoms: wfrp3e.data.items.Disease.SYMPTOMS,
 					types: {
 						all: "ACTOR.SHEET.all",
 						condition: "CONDITION.plural",

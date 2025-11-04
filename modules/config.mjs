@@ -174,42 +174,6 @@ export const WFRP3e = Object.freeze({
 			type: "mental"
 		}
 	},
-	disease: {
-		symptoms: {
-			delirium: {
-				description: "DISEASE.SYMPTOMS.delirium.description",
-				name: "DISEASE.SYMPTOMS.delirium.name"
-			},
-			fever: {
-				description: "DISEASE.SYMPTOMS.fever.description",
-				name: "DISEASE.SYMPTOMS.fever.name"
-			},
-			infectious: {
-				description: "DISEASE.SYMPTOMS.infectious.description",
-				name: "DISEASE.SYMPTOMS.infectious.name"
-			},
-			lethal: {
-				description: "DISEASE.SYMPTOMS.lethal.description",
-				name: "DISEASE.SYMPTOMS.lethal.name"
-			},
-			painful: {
-				description: "DISEASE.SYMPTOMS.painful.description",
-				name: "DISEASE.SYMPTOMS.painful.name"
-			},
-			tiring: {
-				description: "DISEASE.SYMPTOMS.tiring.description",
-				name: "DISEASE.SYMPTOMS.tiring.name"
-			},
-			virulent: {
-				description: "DISEASE.SYMPTOMS.virulent.description",
-				name: "DISEASE.SYMPTOMS.virulent.name"
-			},
-			weary: {
-				description: "DISEASE.SYMPTOMS.weary.description",
-				name: "DISEASE.SYMPTOMS.weary.name"
-			}
-		}
-	},
 	encounterTypes: {
 		combat: {
 			characteristic: "agility",
