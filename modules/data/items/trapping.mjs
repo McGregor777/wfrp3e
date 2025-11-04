@@ -17,8 +17,8 @@ export default class Trapping extends Item
 			description: new fields.HTMLField(),
 			encumbrance: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			rarity: new fields.StringField({
-				choices: CONFIG.WFRP3e.rarities,
-				initial: Object.keys(CONFIG.WFRP3e.rarities)[0],
+				choices: this.RARITIES,
+				initial: Object.keys(this.RARITIES)[0],
 				required: true
 			})
 		};
@@ -26,4 +26,12 @@ export default class Trapping extends Item
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["TRAPPING"];
+
+	static RARITIES = {
+		abundant: "TRAPPING.RARITIES.abundant",
+		plentiful: "TRAPPING.RARITIES.plentiful",
+		common: "TRAPPING.RARITIES.common",
+		rare: "TRAPPING.RARITIES.rare",
+		exotic: "TRAPPING.RARITIES.exotic"
+	};
 }

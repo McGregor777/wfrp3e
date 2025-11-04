@@ -184,13 +184,6 @@ export const WFRP3e = Object.freeze({
 			name: "COMBAT.TYPES.social"
 		}
 	},
-	rarities: {
-		abundant: "TRAPPING.RARITIES.abundant",
-		plentiful: "TRAPPING.RARITIES.plentiful",
-		common: "TRAPPING.RARITIES.common",
-		rare: "TRAPPING.RARITIES.rare",
-		exotic: "TRAPPING.RARITIES.exotic"
-	},
 	scriptTypes: {
 		onCareerSocket: "SCRIPT.TYPES.onCareerSocket",
 		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
