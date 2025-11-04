@@ -69,7 +69,7 @@ export default class ActionSheet extends ItemSheet
 					...partContext,
 					fields: this.item.system.schema.fields[partId].fields,
 					stance: partId,
-					symbols: {...CONFIG.WFRP3e.symbols},
+					symbols: {...wfrp3e.dice.terms.Die.SYMBOLS},
 					system: this.item.system[partId],
 					tabs: this._prepareTabs(partId)
 				};

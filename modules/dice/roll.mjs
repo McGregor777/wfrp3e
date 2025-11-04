@@ -11,7 +11,7 @@ export default class CheckRoll extends foundry.dice.Roll
 	get resultSymbols()
 	{
 		const resultSymbols = {};
-		for(const symbol of Object.values(CONFIG.WFRP3e.symbols))
+		for(const symbol of Object.values(wfrp3e.dice.terms.Die.SYMBOLS))
 			resultSymbols[symbol.plural] = 0;
 
 		for(const die of this.dice) {
@@ -72,7 +72,7 @@ export default class CheckRoll extends foundry.dice.Roll
 
 		if(this.effects)
 			for(const [symbolName, effects] of Object.entries(this.effects)) {
-				const plural = CONFIG.WFRP3e.symbols[symbolName].plural;
+				const plural = wfrp3e.dice.terms.Die.SYMBOLS[symbolName].plural;
 
 				for(const effect of effects)
 					if(effect.active)
@@ -147,7 +147,7 @@ export default class CheckRoll extends foundry.dice.Roll
 			publicRoll: !isPrivate,
 			remainingSymbols: isPrivate ? {} : this.remainingSymbols,
 			specialDieResultLabels,
-			symbols: CONFIG.WFRP3e.symbols
+			symbols: wfrp3e.dice.terms.Die.SYMBOLS
 		};
 
 		if(checkData) {

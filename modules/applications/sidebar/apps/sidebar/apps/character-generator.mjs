@@ -188,7 +188,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 					defaultStance: character.system.defaultStance,
 					fields: character.system.schema.fields,
 					stances: wfrp3e.data.actors.Actor.STANCES,
-					symbols: CONFIG.WFRP3e.symbols
+					symbols: wfrp3e.dice.terms.Die.SYMBOLS
 				};
 				break;
 			case "background":

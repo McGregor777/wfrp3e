@@ -5,6 +5,72 @@ export default class Die extends foundry.dice.terms.Die
 
 	static RESULTS = {};
 
+	static SYMBOLS = {
+		success: {
+			cssClass: "success",
+			name: "SYMBOL.NAMES.successes",
+			plural: "successes",
+			result: "SYMBOL.AMOUNT.successes",
+			type: "positive"
+		},
+		righteousSuccess: {
+			cssClass: "righteous-success",
+			name: "SYMBOL.NAMES.righteousSuccesses",
+			plural: "righteousSuccesses",
+			result: "SYMBOL.AMOUNT.righteousSuccesses",
+			type: "positive"
+		},
+		boon: {
+			cssClass: "boon",
+			name: "SYMBOL.NAMES.boons",
+			plural: "boons",
+			result: "SYMBOL.AMOUNT.boons",
+			type: "positive"
+		},
+		sigmarsComet: {
+			cssClass: "sigmars-comet",
+			name: "SYMBOL.NAMES.sigmarsComets",
+			plural: "sigmarsComets",
+			result: "SYMBOL.AMOUNT.sigmarsComets",
+			type: "positive"
+		},
+		challenge: {
+			cssClass: "challenge",
+			name: "SYMBOL.NAMES.challenges",
+			plural: "challenges",
+			result: "SYMBOL.AMOUNT.challenges",
+			type: "negative"
+		},
+		bane: {
+			cssClass: "bane",
+			name: "SYMBOL.NAMES.banes",
+			plural: "banes",
+			result: "SYMBOL.AMOUNT.banes",
+			type: "negative"
+		},
+		chaosStar: {
+			cssClass: "chaos-star",
+			name: "SYMBOL.NAMES.chaosStars",
+			plural: "chaosStars",
+			result: "SYMBOL.AMOUNT.chaosStars",
+			type: "negative"
+		},
+		delay: {
+			cssClass: "delay",
+			name: "SYMBOL.NAMES.delays",
+			plural: "delays",
+			result: "SYMBOL.AMOUNT.delays",
+			type: "negative"
+		},
+		exertion: {
+			cssClass: "exertion",
+			name: "SYMBOL.NAMES.exertions",
+			plural: "exertions",
+			result: "SYMBOL.AMOUNT.exertions",
+			type: "negative"
+		}
+	};
+
 	static get amount()
 	{
 		return `DIE.${this.NAME}.amount`;

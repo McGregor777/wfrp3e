@@ -133,7 +133,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 					...partContext,
 					height,
 					width,
-					symbols: CONFIG.WFRP3e.symbols
+					symbols: wfrp3e.dice.terms.Die.SYMBOLS
 				};
 				break;
 			case "quickSettings":

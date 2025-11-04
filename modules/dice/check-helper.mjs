@@ -253,14 +253,13 @@ export default class CheckHelper
 	 */
 	static checkEffectToggleable(toggledEffect, checkRoll, symbol)
 	{
-		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+		const symbols = wfrp3e.dice.terms.Die.SYMBOLS,
+			  plural = symbols[symbol].plural;
 
 		if(checkRoll.remainingSymbols[plural] >= toggledEffect.symbolAmount)
 			return "";
 
-		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
-		});
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {symbol: game.i18n.localize(symbols[symbol].name)});
 	}
 
 	/**
@@ -272,14 +271,13 @@ export default class CheckHelper
 	 */
 	static checkBoonEffectToggleable(toggledEffect, checkRoll, symbol = "boon")
 	{
-		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+		const symbols = wfrp3e.dice.terms.Die.SYMBOLS,
+			  plural = wfrp3e.dice.terms.Die.SYMBOLS[symbol].plural;
 
 		if(checkRoll.remainingSymbols[plural] + checkRoll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)
 			return "";
 
-		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
-		});
+		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {symbol: game.i18n.localize(symbols[symbol].name)});
 	}
 
 	/**
@@ -291,7 +289,8 @@ export default class CheckHelper
 	 */
 	static checkDelayEffectToggleable(toggledEffect, checkRoll, symbol = "delay")
 	{
-		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+		const symbols = wfrp3e.dice.terms.Die.SYMBOLS,
+			  plural = symbols[symbol].plural;
 
 		if(checkRoll.remainingSymbols[plural] > 0) {
 			if(toggledEffect.symbolAmount > 1) {
@@ -299,7 +298,7 @@ export default class CheckHelper
 					return "";
 				else
 					return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-						symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
+						symbol: game.i18n.localize(symbols.bane.name)
 					});
 			}
 			else
@@ -307,7 +306,7 @@ export default class CheckHelper
 		}
 
 		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+			symbol: game.i18n.localize(symbols[symbol].name)
 		});
 	}
 
@@ -320,7 +319,8 @@ export default class CheckHelper
 	 */
 	static checkExertionEffectToggleable(toggledEffect, checkRoll, symbol = "exertion")
 	{
-		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+		const symbols = wfrp3e.dice.terms.Die.SYMBOLS,
+			  plural = symbols[symbol].plural;
 
 		if(checkRoll.remainingSymbols[plural] > 0) {
 			if(toggledEffect.symbolAmount > 1) {
@@ -328,7 +328,7 @@ export default class CheckHelper
 					return "";
 				else
 					return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-						symbol: game.i18n.localize(CONFIG.WFRP3e.symbols.bane.name)
+						symbol: game.i18n.localize(symbols.bane.name)
 					});
 			}
 			else
@@ -336,7 +336,7 @@ export default class CheckHelper
 		}
 
 		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+			symbol: game.i18n.localize(symbols[symbol].name)
 		});
 	}
 
@@ -349,13 +349,14 @@ export default class CheckHelper
 	 */
 	static checkSuccessEffectToggleable(toggledEffect, checkRoll, symbol = "symbol")
 	{
-		const plural = CONFIG.WFRP3e.symbols[symbol].plural;
+		const symbols = wfrp3e.dice.terms.Die.SYMBOLS,
+			  plural = symbols[symbol].plural;
 
 		if(checkRoll.totalSymbols[plural] + checkRoll.remainingSymbols.sigmarsComets >= toggledEffect.symbolAmount)
 			return "";
 
 		return game.i18n.format("ROLL.WARNINGS.notEnoughSymbol", {
-			symbol: game.i18n.localize(CONFIG.WFRP3e.symbols[symbol].name)
+			symbol: game.i18n.localize(symbols[symbol].name)
 		});
 	}
 

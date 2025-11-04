@@ -20,7 +20,7 @@ export default class Action extends foundry.abstract.TypeDataModel
 
 		for(const face of Object.keys(wfrp3e.data.actors.Actor.STANCES)) {
 			const effects = {};
-			for(const symbol of Object.keys(CONFIG.WFRP3e.symbols))
+			for(const symbol of Object.keys(wfrp3e.dice.terms.Die.SYMBOLS))
 				effects[symbol] = new fields.ArrayField(
 					new fields.SchemaField({
 						description: new fields.HTMLField({

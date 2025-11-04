@@ -114,7 +114,7 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 				enrichedDescription: await this._prepareEnrichedDescription(),
 				index: this.data.index,
 				symbol: this.effect.symbol ?? this.data.symbol,
-				symbols: {...CONFIG.WFRP3e.symbols}
+				symbols: {...wfrp3e.dice.terms.Die.SYMBOLS}
 			};
 
 			// Remove irrelevant symbols from symbol type selection.
@@ -148,7 +148,7 @@ export default class ActionEffectEditor extends foundry.applications.api.Handleb
 	{
 		let enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.effect.description);
 		const symbolElements = '<span class="symbol-container">'
-			+ `<span class="wfrp3e-font symbol ${CONFIG.WFRP3e.symbols[this.effect.symbol ?? this.data.symbol ?? "success"].cssClass}"></span>`.repeat(this.effect.symbolAmount)
+			+ `<span class="wfrp3e-font symbol ${wfrp3e.dice.terms.Die.SYMBOLS[this.effect.symbol ?? this.data.symbol ?? "success"].cssClass}"></span>`.repeat(this.effect.symbolAmount)
 			+ "</span>";
 
 		if(this.effect.description.length > 0) {

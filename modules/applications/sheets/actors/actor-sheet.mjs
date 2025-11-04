@@ -109,7 +109,8 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 				};
 				break;
 			case "actions":
-				const stances = wfrp3e.data.actors.Actor.STANCES;
+				const symbols = wfrp3e.dice.terms.Die.SYMBOLS,
+					  stances = wfrp3e.data.actors.Actor.STANCES;
 				let actions = this.actor.itemTypes.action;
 
 				if(this.searchFilters.actions.text || this.searchFilters.actions.type !== "all") {
@@ -147,7 +148,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 									action.system[stance].uniqueEffect
 								);
 
-							for(const symbol of Object.keys(CONFIG.WFRP3e.symbols))
+							for(const symbol of Object.keys(symbols))
 								for(const [key, effect] of Object.entries(action.system[stance].effects[symbol]))
 									enrichment[`${action.uuid}-${stance}.${symbol}.${key}`] = await textEditor.enrichHTML(
 										effect.description
@@ -162,7 +163,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 					fields: this.actor.system.schema.fields,
 					searchFilters: this.searchFilters?.actions,
 					stances,
-					symbols: CONFIG.WFRP3e.symbols,
+					symbols,
 					types: {
 						all: "ACTOR.SHEET.all",
 						...wfrp3e.data.items.Action.TYPES

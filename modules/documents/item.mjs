@@ -192,7 +192,7 @@ export default class Item extends foundry.documents.Item
 					 </div>`;
 
 			const effects = {};
-			for(const [key, symbol] of Object.entries(CONFIG.WFRP3e.symbols)) {
+			for(const [key, symbol] of Object.entries(wfrp3e.dice.terms.Die.SYMBOLS)) {
 				effects[key] = {
 					descriptions: "",
 					type: symbol.type
@@ -274,7 +274,7 @@ export default class Item extends foundry.documents.Item
 								"systems/wfrp3e/templates/partials/action-effects.hbs", {
 									action: this,
 									face: options.face,
-									symbols: CONFIG.WFRP3e.symbols,
+									symbols: wfrp3e.dice.terms.Die.SYMBOLS,
 									effects: this.system[options.face].effects
 								}),
 							flavor: game.i18n.format("ACTION.ACTIONS.usage", {

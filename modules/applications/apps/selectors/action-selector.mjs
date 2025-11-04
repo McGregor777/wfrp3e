@@ -49,6 +49,7 @@ export default class ActionSelector extends Selector
 		switch(partId) {
 			case "main":
 				const stances = wfrp3e.data.actors.Actor.STANCES,
+					  symbols = wfrp3e.dice.terms.Die.SYMBOLS,
 					  textEditor = foundry.applications.ux.TextEditor.implementation,
 					  basicTrait = game.i18n.localize("TRAITS.basic"),
 					  enrichment = {};
@@ -70,7 +71,7 @@ export default class ActionSelector extends Selector
 								action.system[stance].uniqueEffect
 							);
 
-						for(const symbol of Object.keys(CONFIG.WFRP3e.symbols))
+						for(const symbol of Object.keys(symbols))
 							for(const [key, effect] of Object.entries(action.system[stance].effects[symbol]))
 								enrichment[`${action.uuid}-${stance}.${symbol}.${key}`] = await textEditor.enrichHTML(
 									effect.description
@@ -91,7 +92,7 @@ export default class ActionSelector extends Selector
 							return a.name.localeCompare(b.name);
 					}),
 					stances,
-					symbols: CONFIG.WFRP3e.symbols
+					symbols
 				};
 				break;
 			case "search":
