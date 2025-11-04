@@ -266,14 +266,6 @@ export const WFRP3e = Object.freeze({
 			type: "negative"
 		}
 	},
-	talentTypes: {
-		focus: "TALENT.TYPES.focus",
-		reputation: "TALENT.TYPES.reputation",
-		tactic: "TALENT.TYPES.tactic",
-		faith: "TALENT.TYPES.faith",
-		order: "TALENT.TYPES.order",
-		tricks: "TALENT.TYPES.tricks"
-	},
 	weapon: {
 		commonWeapons: {
 			improvised: {

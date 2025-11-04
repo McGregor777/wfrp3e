@@ -62,12 +62,13 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			  enrichment = {};
 		switch(partId) {
 			case "talents":
+				const talentTypes = wfrp3e.data.items.Talent.TYPES;
 				let items = [...this.actor.itemTypes.talent, ...this.actor.itemTypes.ability];
 
 				if(this.searchFilters.talents.text || this.searchFilters.talents.type !== "all") {
 					const filters = [];
 
-					if(this.searchFilters.talents.type in CONFIG.WFRP3e.talentTypes)
+					if(this.searchFilters.talents.type in talentTypes)
 						filters.push({
 							field: "type",
 							operator: "contains",
@@ -103,7 +104,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 					types: {
 						all: "ACTOR.SHEET.all",
 						ability: "ABILITY.plural",
-						...CONFIG.WFRP3e.talentTypes
+						...talentTypes
 					}
 				};
 				break;

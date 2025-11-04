@@ -13,8 +13,8 @@ export default class Talent extends Item
 			rechargeTokens: new fields.NumberField({required: true, nullable: false, integer: true, initial: 0, min: 0}),
 			socket: new fields.StringField({nullable: true}),
 			type: new fields.StringField({
-				choices: CONFIG.WFRP3e.talentTypes,
-				initial: Object.keys(CONFIG.WFRP3e.talentTypes)[0],
+				choices: this.TYPES,
+				initial: Object.keys(this.TYPES)[0],
 				required: true
 			})
 		};
@@ -22,4 +22,13 @@ export default class Talent extends Item
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["TALENT"];
+
+	static TYPES = {
+		focus: "TALENT.TYPES.focus",
+		reputation: "TALENT.TYPES.reputation",
+		tactic: "TALENT.TYPES.tactic",
+		faith: "TALENT.TYPES.faith",
+		order: "TALENT.TYPES.order",
+		tricks: "TALENT.TYPES.tricks"
+	};
 }

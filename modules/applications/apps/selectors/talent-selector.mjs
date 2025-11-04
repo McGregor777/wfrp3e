@@ -20,7 +20,7 @@ export default class TalentSelector extends Selector
 	{
 		super(options);
 
-		for(const [key, type] of Object.entries(CONFIG.WFRP3e.talentTypes))
+		for(const [key, type] of Object.entries(wfrp3e.data.items.Talent.TYPES))
 			if(options.items.find(item => item.system.type === key)){
 				this.types[key] = type;
 				this.regularTypes.push(key);
@@ -252,7 +252,7 @@ export default class TalentSelector extends Selector
 	 */
 	static async buildNewCharacterOptionsList(character, options = {})
 	{
-		const talentTypeFilter = Object.keys(CONFIG.WFRP3e.talentTypes).filter(type => {
+		const talentTypeFilter = Object.keys(wfrp3e.data.items.Talent.TYPES).filter(type => {
 				  return character.system.currentCareer.system.sockets.map(socket => socket.type).includes(type)
 					  || options.freeItemTypes?.includes(type);
 			  }),

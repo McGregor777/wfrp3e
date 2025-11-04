@@ -19,7 +19,7 @@ export default class Party extends foundry.abstract.TypeDataModel
 				new fields.SchemaField({
 					item: new fields.DocumentUUIDField({label: "PARTY.FIELDS.sockets.FIELDS.item.label"}),
 					type: new fields.StringField({
-						choices: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"},
+						choices: {any: "TALENT.TYPES.any", ...wfrp3e.data.items.Talent.TYPES, insanity: "TALENT.TYPES.insanity"},
 						initial: "focus",
 						label: "PARTY.FIELDS.sockets.FIELDS.type.label",
 						required: true

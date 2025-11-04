@@ -78,7 +78,7 @@ export default class Career extends Item
 				new fields.SchemaField({
 					item: new fields.DocumentUUIDField(),
 					type: new fields.StringField({
-						choices: {any: "TALENT.TYPES.any", ...CONFIG.WFRP3e.talentTypes, insanity: "TALENT.TYPES.insanity"},
+						choices: {any: "TALENT.TYPES.any", ...wfrp3e.data.items.Talent.TYPES, insanity: "TALENT.TYPES.insanity"},
 						initial: "focus",
 						required: true
 					})}, {initial: {item: null, type: "focus"}}

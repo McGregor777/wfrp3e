@@ -123,8 +123,9 @@ export default class Actor extends foundry.documents.Actor
 	 */
 	async buildSocketList()
 	{
-		const socketsByType = Object.fromEntries(
-				  ["any", ...Object.keys(CONFIG.WFRP3e.talentTypes), "insanity"].map(key => [key, {}])
+		const talentTypes = wfrp3e.data.items.Talent.TYPES,
+			  socketsByType = Object.fromEntries(
+				  ["any", ...Object.keys(talentTypes), "insanity"].map(key => [key, {}])
 			  ),
 			  currentCareer = this.system.currentCareer,
 			  currentParty = this.system.currentParty;
@@ -190,7 +191,7 @@ export default class Actor extends foundry.documents.Actor
 						})}`;
 			}
 
-		for(const itemType of Object.keys(CONFIG.WFRP3e.talentTypes))
+		for(const itemType of Object.keys(talentTypes))
 			Object.assign(socketsByType[itemType], socketsByType["any"]);
 
 		return socketsByType;
