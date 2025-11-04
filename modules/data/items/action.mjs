@@ -106,8 +106,8 @@ export default class Action extends foundry.abstract.TypeDataModel
 			...faces,
 			rechargeTokens: new fields.NumberField({integer: true, initial: 0, min: 0, nullable: false, required: true}),
 			type: new fields.StringField({
-				choices: CONFIG.WFRP3e.actionTypes,
-				initial: Object.keys(CONFIG.WFRP3e.actionTypes)[0],
+				choices: this.TYPES,
+				initial: Object.keys(this.TYPES)[0],
 				required: true
 			})
 		};
@@ -115,4 +115,12 @@ export default class Action extends foundry.abstract.TypeDataModel
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["ACTION"];
+	
+	static TYPES = {
+		melee: "ACTION.TYPES.melee",
+		ranged: "ACTION.TYPES.ranged",
+		support: "ACTION.TYPES.support",
+		blessing: "ACTION.TYPES.blessing",
+		spell: "ACTION.TYPES.spell"
+	};
 }

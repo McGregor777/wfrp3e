@@ -8,7 +8,7 @@ export default class ActionSelector extends Selector
 	{
 		super(options);
 
-		for(const [key, type] of Object.entries(CONFIG.WFRP3e.actionTypes))
+		for(const [key, type] of Object.entries(wfrp3e.data.items.Action.TYPES))
 			if(options.items.find(action => action.system.type === key))
 				this.types[key] = type;
 	}

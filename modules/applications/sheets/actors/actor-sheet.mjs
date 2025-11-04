@@ -163,7 +163,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 					symbols: CONFIG.WFRP3e.symbols,
 					types: {
 						all: "ACTOR.SHEET.all",
-						...CONFIG.WFRP3e.actionTypes
+						...wfrp3e.data.items.Action.TYPES
 					}
 				};
 				break;

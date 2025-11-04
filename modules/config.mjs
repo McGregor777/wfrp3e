@@ -1,11 +1,4 @@
 export const WFRP3e = Object.freeze({
-	actionTypes: {
-		melee: "ACTION.TYPES.melee",
-		ranged: "ACTION.TYPES.ranged",
-		support: "ACTION.TYPES.support",
-		blessing: "ACTION.TYPES.blessing",
-		spell: "ACTION.TYPES.spell"
-	},
 	availableRaces: {
 		human: {
 			art: "systems/wfrp3e/assets/images/races/empire.webp",
