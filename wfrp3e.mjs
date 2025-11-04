@@ -8,6 +8,7 @@
  */
 
 import * as wfrp3e from "./modules/_module.mjs";
+import {initialiseHandlebars} from "./modules/applications/_module.mjs";
 globalThis.wfrp3e = wfrp3e;
 
 Hooks.once("init", async () => {
@@ -38,7 +39,8 @@ Hooks.once("init", async () => {
 	};
 	CONFIG.fontDefinitions["Caslon Antique"] = {editor: true, fonts: []};
 
-	wfrp3e.applications.initializeHandlebars();
+	wfrp3e.applications.initialiseHandlebars();
+	wfrp3e.applications.initialiseTextEnrichers();
 	wfrp3e.applications.sheets.registerSheets();
 	wfrp3e.applications.sidebar.tabs.configureTabs();
 	wfrp3e.data.assignDataModels();

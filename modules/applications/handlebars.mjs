@@ -36,7 +36,7 @@ export function preloadTemplates()
 	]);
 }
 
-export function initializeHelpers()
+export function initialiseHelpers()
 {
 	Handlebars.registerHelper({
 		abs,
