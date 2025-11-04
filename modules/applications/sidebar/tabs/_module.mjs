@@ -9,5 +9,4 @@ export function configureTabs()
 	CONFIG.ui.actors = ActorDirectory;
 	CONFIG.ui.chat = ChatLog;
 	CONFIG.ui.combat = CombatTracker;
-	console.log(CONFIG.ui);
 }
