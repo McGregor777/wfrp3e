@@ -63,7 +63,7 @@ export default class CreatureSheet extends ActorSheet
 			case "attributes":
 				partContext = {
 					...partContext,
-					attributes: CONFIG.WFRP3e.attributes,
+					attributes: wfrp3e.data.actors.Creature.ATTRIBUTES,
 					characteristics: CONFIG.WFRP3e.characteristics,
 					enriched: {
 						specialRuleSummary: await foundry.applications.ux.TextEditor.enrichHTML(

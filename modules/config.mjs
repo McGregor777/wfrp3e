@@ -116,20 +116,6 @@ export const WFRP3e = Object.freeze({
 			startingCareerRollTableUuid: "Compendium.wfrp3e.roll-tables.DuENZYjzQuelc4Yl"
 		}
 	},
-	attributes: {
-		aggression: {
-			name: "CREATURE.FIELDS.attributes.FIELDS.aggression.label",
-			abbreviation: "CREATURE.FIELDS.attributes.FIELDS.aggression.abbreviation"
-		},
-		cunning: {
-			name: "CREATURE.FIELDS.attributes.FIELDS.cunning.label",
-			abbreviation: "CREATURE.FIELDS.attributes.FIELDS.cunning.abbreviation"
-		},
-		expertise: {
-			name: "CREATURE.FIELDS.attributes.FIELDS.expertise.label",
-			abbreviation: "CREATURE.FIELDS.attributes.FIELDS.expertise.abbreviation"
-		}
-	},
 	challengeLevels: {
 		simple: {
 			challengeDice: 0,

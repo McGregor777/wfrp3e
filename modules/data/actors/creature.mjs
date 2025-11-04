@@ -9,7 +9,7 @@ export default class Creature extends foundry.abstract.TypeDataModel
 			  characteristics = {},
 			  stance = {};
 
-		for(const [key, attribute] of Object.entries(CONFIG.WFRP3e.attributes))
+		for(const [key, attribute] of Object.entries(this.ATTRIBUTES))
 			attributes[key] = new fields.SchemaField({
 				max: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 				value: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
@@ -51,6 +51,21 @@ export default class Creature extends foundry.abstract.TypeDataModel
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["ACTOR", "CREATURE"];
+
+	static ATTRIBUTES = {
+		aggression: {
+			abbreviation: "CREATURE.FIELDS.attributes.FIELDS.aggression.abbreviation",
+			name: "CREATURE.FIELDS.attributes.FIELDS.aggression.label"
+		},
+		cunning: {
+			abbreviation: "CREATURE.FIELDS.attributes.FIELDS.expertise.abbreviation",
+			name: "CREATURE.FIELDS.attributes.FIELDS.cunning.label"
+		},
+		expertise: {
+			abbreviation: "CREATURE.FIELDS.attributes.FIELDS.expertise.abbreviation",
+			name: "CREATURE.FIELDS.attributes.FIELDS.expertise.label"
+		}
+	};
 
 	/** @inheritDoc */
 	prepareBaseData()
