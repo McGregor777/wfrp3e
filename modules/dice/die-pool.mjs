@@ -399,9 +399,9 @@ export default class DiePool
 			  target = game.user.targets[0],
 			  diePool = new DiePool({
 				  dice: {
-					  characteristic: characteristic?.rating - Math.abs(stance) ?? 0,
-					  fortune: characteristic?.fortune ?? 0,
-					  expertise: skill?.system.trainingLevel ?? 0,
+					  characteristic: characteristic?.rating - Math.abs(stance) || 0,
+					  fortune: characteristic?.fortune || 0,
+					  expertise: skill?.system.trainingLevel || 0,
 					  conservative: stance < 0 ? Math.abs(stance) : 0,
 					  reckless: stance > 0 ? stance : 0,
 					  challenge: CONFIG.WFRP3e.challengeLevels[checkData.challengeLevel].challengeDice

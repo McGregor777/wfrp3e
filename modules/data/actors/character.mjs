@@ -174,8 +174,8 @@ export default class Character extends foundry.abstract.TypeDataModel
 	get stanceMeter()
 	{
 		return {
-			conservative: -this.stance.conservative - (this.currentCareer?.system.startingStance.conservativeSegments ?? 0),
-			reckless: this.stance.reckless + (this.currentCareer?.system.startingStance.recklessSegments ?? 0)
+			conservative: -this.stance.conservative - (this.currentCareer?.system.startingStance.conservativeSegments || 0),
+			reckless: this.stance.reckless + (this.currentCareer?.system.startingStance.recklessSegments || 0)
 		};
 	}
 

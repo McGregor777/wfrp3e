@@ -148,7 +148,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 						challengeLevels: CONFIG.WFRP3e.challengeLevels,
 						characteristic: checkData.characteristic,
 						characteristics: CONFIG.WFRP3e.characteristics,
-						fortunePoints: checkData.fortunePoints ?? 0,
+						fortunePoints: checkData.fortunePoints || 0,
 						skill: await fromUuid(checkData.skill),
 						skills: actor.itemTypes.skill,
 						availableTriggeredEffects: actor.findTriggeredEffects(
@@ -170,7 +170,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 							...partContext,
 							availableSpecialisations,
 							maxFortunePoints: actor.system.fortune.value
-								+ (actor.system.currentParty?.system.fortunePool ?? 0),
+								+ (actor.system.currentParty?.system.fortunePool || 0),
 							specialisations: checkData.specialisations ?? []
 						};
 					}

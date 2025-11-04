@@ -113,9 +113,9 @@ export default class Creature extends foundry.abstract.TypeDataModel
 	{
 		this.stanceMeter = {
 			conservative: -this.stance.conservative
-				- (this.parent.system.currentCareer?.system.startingStance.conservativeSegments ?? 0),
+				- (this.parent.system.currentCareer?.system.startingStance.conservativeSegments || 0),
 			reckless: this.stance.reckless
-				+ (this.parent.system.currentCareer?.system.startingStance.recklessSegments ?? 0)
+				+ (this.parent.system.currentCareer?.system.startingStance.recklessSegments || 0)
 		};
 	}
 }
