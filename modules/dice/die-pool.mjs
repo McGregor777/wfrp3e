@@ -161,13 +161,14 @@ export default class DiePool
 
 	/**
 	 * Determines the number of dice of each type depending on the check data.
+	 * @returns {Promise<void>}
 	 */
-	determineDiePoolFromCheckData()
+	async determineFromCheckData()
 	{
 		const checkData = this.checkData;
 		if(checkData.actor) {
-			const actor = fromUuidSync(checkData.actor),
-				  action = fromUuidSync(checkData.action),
+			const actor = await fromUuid(checkData.actor),
+				  action = await fromUuid(checkData.action),
 				  characteristic = actor.system.characteristics[checkData.characteristic],
 				  face = checkData.face,
 				  stance = actor.system.stance.current ?? actor.system.stance,
@@ -180,20 +181,20 @@ export default class DiePool
 			this.dice = {
 				characteristic: characteristic.rating - Math.abs(stance),
 				fortune: characteristic.fortune
-					+ (checkData.fortunePoints ?? 0)
-					+ (checkData.specialisations?.length ?? 0)
-					+ (checkData.creatureDice?.aggression ?? 0)
-					+ (checkData.creatureDice?.cunning ?? 0),
-				expertise: (fromUuidSync(checkData.skill)?.system.trainingLevel ?? 0)
-					+ (checkData.creatureDice?.expertise ?? 0),
+					+ (checkData.fortunePoints || 0)
+					+ (checkData.specialisations?.length || 0)
+					+ (checkData.creatureDice?.aggression || 0)
+					+ (checkData.creatureDice?.cunning || 0),
+				expertise: (await fromUuid(checkData.skill)?.system.trainingLevel || 0)
+					+ (checkData.creatureDice?.expertise || 0),
 				conservative: stance < 0 ? Math.abs(stance) : 0,
 				reckless: stance > 0 ? stance : 0,
 				challenge: CONFIG.WFRP3e.challengeLevels[checkData.challengeLevel].challengeDice
-					+ (action?.system[face].difficultyModifiers.challengeDice ?? 0),
+					+ (action?.system[face].difficultyModifiers.challengeDice || 0),
 				misfortune: action?.system[face].difficultyModifiers.misfortuneDice
 					+ match && match[5] === game.i18n.localize("ACTION.CHECK.targetDefence")
 						&& checkData.targets?.length > 0
-							? fromUuidSync(checkData.targets[0]).system.totalDefence
+							? await fromUuid(checkData.targets[0]).system.totalDefence
 							: 0
 			}
 		}

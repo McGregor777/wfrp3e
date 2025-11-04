@@ -253,7 +253,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 		foundry.utils.setProperty(diePool, event.target.name, value);
 
 		if(event.target.name.startsWith("checkData"))
-			diePool.determineDiePoolFromCheckData();
+			await diePool.determineFromCheckData();
 
 		if(checkData) {
 			// Execute the scripts from all onCheckPreparation action effects.
