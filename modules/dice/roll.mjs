@@ -124,7 +124,7 @@ export default class CheckRoll extends foundry.dice.Roll
 	/** @inheritDoc */
 	async _prepareChatRenderContext({flavor, isPrivate = false, ...options} = {})
 	{
-		const {Die} = wfrp3e.dice.terms.Die,
+		const Die = wfrp3e.dice.terms.Die,
 			  checkData = this.options.checkData,
 			  specialDieResultLabels = [];
 
