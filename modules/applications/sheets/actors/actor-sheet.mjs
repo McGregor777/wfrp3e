@@ -183,7 +183,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			case "effects":
 				partContext = {
 					...partContext,
-					durations: CONFIG.WFRP3e.conditionDurations,
+					durations: wfrp3e.data.items.Condition.DURATIONS,
 					effects: this.actor.effects,
 					items: [
 						...this.actor.itemTypes.condition,

@@ -11,8 +11,8 @@ export default class Condition extends Item
 		return {
 			description: new fields.HTMLField(),
 			duration: new fields.StringField({
-				choices: CONFIG.WFRP3e.conditionDurations,
-				initial: Object.keys(CONFIG.WFRP3e.conditionDurations)[0],
+				choices: this.DURATIONS,
+				initial: Object.keys(this.DURATIONS)[0],
 				required: true
 			})
 		};
@@ -20,4 +20,10 @@ export default class Condition extends Item
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["CONDITION"];
+	
+	static DURATIONS = {
+		brief: "CONDITION.DURATIONS.brief",
+		dependent: "CONDITION.DURATIONS.dependent",
+		lingering: "CONDITION.DURATIONS.lingering"
+	};
 }

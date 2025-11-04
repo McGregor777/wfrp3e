@@ -174,11 +174,6 @@ export const WFRP3e = Object.freeze({
 			type: "mental"
 		}
 	},
-	conditionDurations: {
-		brief: "CONDITION.DURATIONS.brief",
-		dependent: "CONDITION.DURATIONS.dependent",
-		lingering: "CONDITION.DURATIONS.lingering"
-	},
 	disease: {
 		symptoms: {
 			delirium: {
