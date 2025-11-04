@@ -260,7 +260,7 @@ export default class Item extends foundry.documents.Item
 
 		if(this.system.rechargeTokens > 0)
 			ui.notifications.warn(game.i18n.localize("ACTION.WARNINGS.recharging"));
-		else if(CheckHelper.doesRequireNoCheck(this.system[options.face].check))
+		else if(wfrp3e.dice.CheckHelper.doesRequireNoCheck(this.system[options.face].check))
 			await foundry.applications.api.DialogV2.confirm({
 				window: {title: game.i18n.localize("APPLICATION.TITLE.ActionUsage")},
 				modal: true,
