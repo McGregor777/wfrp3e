@@ -14,4 +14,28 @@ export default class ExpertiseDie extends Die
 	static DENOMINATION = "e";
 
 	static NAME = "expertise";
+
+	static RESULTS = {
+		1: {name: "blank"},
+		2: {
+			name: "oneSuccess",
+			symbols: {successes: 1}
+		},
+		3: {
+			name: "oneRighteousSuccess",
+			symbols: {righteousSuccesses: 1}
+		},
+		4: {
+			name: "oneBoon",
+			symbols: {boons: 1}
+		},
+		5: {
+			name: "oneBoon",
+			symbols: {boons: 1}
+		},
+		6: {
+			name: "oneSigmarsComet",
+			symbols: {sigmarsComets: 1}
+		}
+	};
 }

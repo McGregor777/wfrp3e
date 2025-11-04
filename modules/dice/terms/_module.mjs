@@ -19,3 +19,20 @@ export function assignTerms()
 	CONFIG.Dice.terms["m"] = MisfortuneDie;
 	CONFIG.Dice.terms["r"] = RecklessDie;
 }
+
+/**
+ * Returns the special die classes sorted in canonical order.
+ * @returns {{characteristic: CharacteristicDie, fortune: FortuneDie, expertise: ExpertiseDie, conservative: ConservativeDie, reckless: RecklessDie, challenge: ChallengeDie, misfortune: MisfortuneDie}}
+ */
+export function getSpecialDieClasses()
+{
+	return {
+		characteristic: CharacteristicDie,
+		fortune: FortuneDie,
+		expertise: ExpertiseDie,
+		conservative: ConservativeDie,
+		reckless: RecklessDie,
+		challenge: ChallengeDie,
+		misfortune: MisfortuneDie
+	}
+}

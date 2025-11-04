@@ -112,13 +112,13 @@ export default class DiePool
 	 */
 	addDiePool(otherDiePool)
 	{
-		if(otherDiePool.dice)
-			for(const key of Object.keys(CONFIG.WFRP3e.dice))
-				this.dice[key] += otherDiePool.dice[key];
+		if(typeof otherDiePool.dice === "object")
+			for(const key of Object.keys(otherDiePool.dice))
+				this.dice[key] += +otherDiePool.dice[key] || 0;
 
-		if(otherDiePool.symbols)
-			for(const symbol of Object.values(CONFIG.WFRP3e.symbols))
-				this.symbols[symbol.plural] += otherDiePool.symbols[symbol.plural];
+		if(typeof otherDiePool.symbols === "object")
+			for(const key of Object.keys(otherDiePool.symbols))
+				this.symbols[key] += +otherDiePool.symbols[key] || 0;
 	}
 
 	/**

@@ -13,4 +13,22 @@ export default class FortuneDie extends Die
 	static DENOMINATION = "f";
 
 	static NAME = "fortune";
+
+	static RESULTS = {
+		1: {name: "blank"},
+		2: {name: "blank"},
+		3: {name: "blank"},
+		4: {
+			name: "oneSuccess",
+			symbols: {successes: 1}
+		},
+		5: {
+			name: "oneSuccess",
+			symbols: {successes: 1}
+		},
+		6: {
+			name: "oneBoon",
+			symbols: {boons: 1}
+		}
+	};
 }

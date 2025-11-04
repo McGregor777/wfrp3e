@@ -11,18 +11,18 @@ export default class CheckRoll extends foundry.dice.Roll
 	get resultSymbols()
 	{
 		const resultSymbols = {};
-		for(const [key, symbol] of Object.entries(CONFIG.WFRP3e.symbols))
-			if(key !== "righteousSuccess")
-				resultSymbols[symbol.plural] = 0;
+		for(const symbol of Object.values(CONFIG.WFRP3e.symbols))
+			resultSymbols[symbol.plural] = 0;
 
-		for(const term of this.terms) {
-			if(term instanceof wfrp3e.dice.terms.Die)
-				for(const result of term.results) {
-					for(const key of Object.keys(result.symbols))
-						resultSymbols[key] += parseInt(result.symbols[key]);
+		for(const die of this.dice) {
+			if(die instanceof wfrp3e.dice.terms.Die)
+				for(const result of die.results)
+					if(typeof result.symbols === "object") {
+						for(const key of Object.keys(result.symbols))
+							resultSymbols[key] += +result.symbols[key] || 0;
 
-					resultSymbols.successes += parseInt(result.symbols.righteousSuccesses);
-				}
+						resultSymbols.successes += +result.symbols.righteousSuccesses || 0;
+					}
 		}
 
 		return resultSymbols;
@@ -30,31 +30,32 @@ export default class CheckRoll extends foundry.dice.Roll
 
 	/**
 	 * The total number of each symbol with both those obtained by the check roll and those coming from the starting pool.
+	 * Challenges are subtracted from successes and banes are subtracted from boons.
 	 * @returns {{success: number, righteousSuccess: number, boon: number, sigmarsComet: number, challenge: number, bane: number, chaosStar: number, delay: number, exertion: number}}
 	 */
 	get totalSymbols()
 	{
-		const totalSymbols = this.resultSymbols;
+		const totalSymbols = foundry.utils.deepClone(this.resultSymbols);
 
 		if(this.options.startingSymbols)
 			for(const key of Object.keys(totalSymbols))
-				totalSymbols[key] += this.options.startingSymbols[key];
+				totalSymbols[key] += +this.options.startingSymbols[key] || 0;
 
 		if(totalSymbols.successes < totalSymbols.challenges) {
-			totalSymbols.challenges -= totalSymbols.successes < 0 ? 0 : parseInt(totalSymbols.successes);
+			totalSymbols.challenges -= totalSymbols.successes < 0 ? 0 : +totalSymbols.successes || 0;
 			totalSymbols.successes = 0;
 		}
 		else {
-			totalSymbols.successes -= totalSymbols.challenges < 0 ? 0 : parseInt(totalSymbols.challenges);
+			totalSymbols.successes -= totalSymbols.challenges < 0 ? 0 : +totalSymbols.challenges || 0;
 			totalSymbols.challenges = 0;
 		}
 
 		if(totalSymbols.boons < totalSymbols.banes) {
-			totalSymbols.banes -= totalSymbols.boons < 0 ? 0 : parseInt(totalSymbols.boons);
+			totalSymbols.banes -= totalSymbols.boons < 0 ? 0 : +totalSymbols.boons || 0;
 			totalSymbols.boons = 0;
 		}
 		else {
-			totalSymbols.boons -= totalSymbols.banes < 0 ? 0 : parseInt(totalSymbols.banes);
+			totalSymbols.boons -= totalSymbols.banes < 0 ? 0 : +totalSymbols.banes || 0;
 			totalSymbols.banes = 0;
 		}
 
@@ -67,7 +68,7 @@ export default class CheckRoll extends foundry.dice.Roll
 	 */
 	get remainingSymbols()
 	{
-		const remainingSymbols = {...this.totalSymbols};
+		const remainingSymbols = foundry.utils.deepClone(this.totalSymbols);
 
 		if(this.effects)
 			for(const [symbolName, effects] of Object.entries(this.effects)) {

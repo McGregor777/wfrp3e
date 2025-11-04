@@ -92,7 +92,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 			...await super._prepareContext(options),
 			checkData: this.diePool.checkData,
 			buttons: [{type: "submit", icon: "fa-solid fa-d8", label: "CHECKBUILDER.ACTIONS.rollCheck"}],
-			dice: CONFIG.WFRP3e.dice,
+			dice: wfrp3e.dice.terms.getSpecialDieClasses(),
 			diePool: this.diePool,
 			rootId: this.id
 		};
