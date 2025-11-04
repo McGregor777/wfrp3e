@@ -188,13 +188,27 @@ export default class CheckRoll extends foundry.dice.Roll
 			if(checkData.disabled)
 				context.disabled = checkData.disabled;
 
-			if(checkData.action)
+			if(checkData.action) {
+				const textEditor = foundry.applications.ux.TextEditor.implementation,
+					  action = await fromUuid(checkData.action),
+					  face = checkData.face,
+					  effects = foundry.utils.deepClone(this.effects);
+
+				for(const symbol of Object.values(effects))
+					for(const effect of symbol)
+						effect.enrichment = {description: await textEditor.enrichHTML(effect.description)};
+
 				context = {
 					...context,
-					action: await fromUuid(checkData.action),
-					effects: this.effects,
-					face: checkData.face
+					action,
+					face,
+					effects,
+					enrichment: {
+						special: await textEditor.enrichHTML(action.system[face].special),
+						uniqueEffect: await textEditor.enrichHTML(action.system[face].uniqueEffect)
+					}
 				};
+			}
 
 			if(Array.isArray(checkData.outcome?.criticalWounds))
 				context.criticalWoundLinks = this._prepareCriticalWoundLinks(checkData.outcome.criticalWounds);
