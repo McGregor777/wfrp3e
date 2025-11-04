@@ -3,7 +3,7 @@
   "name": "Orion's Favoured",
   "type": "ability",
   "_id": "djj9tirxRkjnPrBp",
-  "img": "icons/svg/item-bag.svg",
+  "img": "systems/wfrp3e/assets/images/races/wood_elf.webp",
   "system": {
     "description": "<p>Before investing any creation points, a wood elf may train one of the following skills – Ballistic Skill, Nature Lore, Observation, or Stealth.</p>"
   },
@@ -62,7 +62,7 @@
     "systemVersion": "1.3.2",
     "coreVersion": "13.350",
     "createdTime": 1700165892766,
-    "modifiedTime": 1761210891174,
+    "modifiedTime": 1761250709187,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null,

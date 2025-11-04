@@ -3,7 +3,7 @@
   "name": "Composure",
   "type": "ability",
   "_id": "tJc6iH8pOllVO9Go",
-  "img": "icons/svg/item-bag.svg",
+  "img": "systems/wfrp3e/assets/images/races/high_elf.webp",
   "system": {
     "description": "<p>During character creation, a high elf may choose one Focus talent for free. This does not use any of the high elf ’s creation points.</p>"
   },
@@ -62,7 +62,7 @@
     "systemVersion": "1.3.2",
     "coreVersion": "13.350",
     "createdTime": 1700165792057,
-    "modifiedTime": 1761039669196,
+    "modifiedTime": 1761250754627,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null,
