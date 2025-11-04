@@ -115,6 +115,26 @@ export default class Career extends Item
 		return super.migrateData(source);
 	}
 
+	/**
+	 * Getter method to retrieve the total amount of experience spent on the career.
+	 * @returns {number} - The total experience spent.
+	 */
+	get experienceSpent()
+	{
+		let experienceSpent = this.advances.careerTransition.cost
+			+ (this.advances.action ? 1 : 0)
+			+ (this.advances.talent ? 1 : 0)
+			+ (this.advances.skill ? 1 : 0)
+			+ (this.advances.wound ? 1 : 0)
+			+ (this.advances.dedicationBonus ? 1 : 0)
+			+ (this.advances.open?.filter(openAdvance => openAdvance)).length;
+
+		for(const nonCareerAdvance of Object.values(this.advances.nonCareer))
+			experienceSpent += nonCareerAdvance.cost;
+
+		return experienceSpent;
+	}
+
 	//#TODO Add a "type" property to open advances so an open advance type doesn't require to be guessed anymore.
 	//#TODO Reverse the logic by returning the number of open advance still available by type.
 	/**

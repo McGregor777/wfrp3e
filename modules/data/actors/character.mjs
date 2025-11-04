@@ -269,18 +269,7 @@ export default class Character extends Actor
 	{
 		this.experience.current = this.experience.total;
 
-		//#TODO Add a method to the career data model to calculate the total experience spent on one career.
-		for(const career of this.parent.itemTypes.career) {
-			this.experience.current -= (career.system.advances.action ? 1 : 0)
-				+ (career.system.advances.talent ? 1 : 0)
-				+ (career.system.advances.skill ? 1 : 0)
-				+ (career.system.advances.wound ? 1 : 0)
-				+ (career.system.advances.open?.filter(openAdvance => openAdvance)).length
-				+ career.system.advances.careerTransition.cost
-				+ (career.system.advances.dedicationBonus ? 1 : 0);
-
-			for(const nonCareerAdvance of Object.values(career.system.advances.nonCareer))
-				this.experience.current -= nonCareerAdvance.cost;
-		}
+		for(const career of this.parent.itemTypes.career)
+			this.experience.current -= career.system.experienceSpent;
 	}
 }
