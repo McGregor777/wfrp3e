@@ -5,7 +5,7 @@ export default class Combat extends foundry.documents.Combat
 {
 	get initiativeCharacteristic()
 	{
-		return CONFIG.WFRP3e.encounterTypes[this.system.type].characteristic;
+		return wfrp3e.data.Combat.TYPES[this.system.type].characteristic;
 	}
 
 	/** @inheritDoc */

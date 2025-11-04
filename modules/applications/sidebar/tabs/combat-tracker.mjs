@@ -16,7 +16,7 @@ export default class CombatTracker extends foundry.applications.sidebar.tabs.Com
 		const partContext = await super._preparePartContext(partId, context);
 
 		if(partId === "header")
-			partContext.encounterTypes = CONFIG.WFRP3e.encounterTypes;
+			partContext.encounterTypes = wfrp3e.data.Combat.TYPES;
 
 		return partContext;
 	}

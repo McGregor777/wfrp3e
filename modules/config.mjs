@@ -174,16 +174,6 @@ export const WFRP3e = Object.freeze({
 			type: "mental"
 		}
 	},
-	encounterTypes: {
-		combat: {
-			characteristic: "agility",
-			name: "COMBAT.TYPES.combat"
-		},
-		social: {
-			characteristic: "fellowship",
-			name: "COMBAT.TYPES.social"
-		}
-	},
 	scriptTypes: {
 		onCareerSocket: "SCRIPT.TYPES.onCareerSocket",
 		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
