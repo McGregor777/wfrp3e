@@ -497,7 +497,7 @@ export default class Item extends foundry.documents.Item
 	 */
 	async _useWeapon(options = {})
 	{
-		const weaponType = CONFIG.WFRP3e.weapon.groups[this.system.group].type;
+		const weaponType = wfrp3e.data.items.Weapon.GROUPS[this.system.group].type;
 		let action = null;
 
 		if(weaponType === "melee")

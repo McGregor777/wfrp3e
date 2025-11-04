@@ -169,14 +169,15 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 				};
 				break;
 			case "trappings":
+				const Weapon = wfrp3e.data.items.Weapon;
 				partContext = {
 					...partContext,
 					armours: this.actor.itemTypes.armour.sort((a, b) => a.name.localeCompare(b.name)),
 					fields: this.actor.system.schema.fields,
 					money: this.actor.itemTypes.money.sort((a, b) => a.name.localeCompare(b.name)),
-					weaponGroups: CONFIG.WFRP3e.weapon.groups,
-					weaponQualities: CONFIG.WFRP3e.weapon.qualities,
-					weaponRanges: CONFIG.WFRP3e.weapon.ranges,
+					weaponGroups: Weapon.GROUPS,
+					weaponQualities: Weapon.QUALITIES,
+					weaponRanges: Weapon.RANGES,
 					trappings: this.actor.itemTypes.trapping.sort((a, b) => a.name.localeCompare(b.name)),
 					weapons: this.actor.itemTypes.weapon.sort((a, b) => a.name.localeCompare(b.name))
 				};

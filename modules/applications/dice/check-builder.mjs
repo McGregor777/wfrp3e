@@ -182,8 +182,9 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 						partContext.action = action;
 
 						if(["melee", "ranged"].includes(action.system.type)) {
-							const validWeaponGroups = [];
-							for(const [key, weaponGroup] of Object.entries(CONFIG.WFRP3e.weapon.groups))
+							const Weapon = wfrp3e.data.items.Weapon,
+								  validWeaponGroups = [];
+							for(const [key, weaponGroup] of Object.entries(Weapon.GROUPS))
 								if(weaponGroup.type === action.system.type)
 									validWeaponGroups.push(key);
 
@@ -200,7 +201,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 							});
 
 							if(actor.type === "character")
-								for(const commonWeapon of Object.values(CONFIG.WFRP3e.weapon.commonWeapons))
+								for(const commonWeapon of Object.values(Weapon.COMMON_WEAPONS))
 									if(validWeaponGroups.includes(commonWeapon.system.type))
 										partContext.availableWeapons.push(commonWeapon);
 
