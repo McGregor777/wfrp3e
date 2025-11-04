@@ -4,6 +4,33 @@ export default class CheckRoll extends foundry.dice.Roll
 	static CHAT_TEMPLATE = "systems/wfrp3e/templates/dice/roll.hbs";
 	static TOOLTIP_TEMPLATE = "systems/wfrp3e/templates/dice/tooltip.hbs";
 
+	static CHALLENGE_LEVELS = {
+		simple: {
+			challengeDice: 0,
+			name: "CHALLENGELEVEL.simple"
+		},
+		easy: {
+			challengeDice: 1,
+			name: "CHALLENGELEVEL.easy"
+		},
+		average: {
+			challengeDice: 2,
+			name: "CHALLENGELEVEL.average"
+		},
+		hard: {
+			challengeDice: 3,
+			name: "CHALLENGELEVEL.hard"
+		},
+		daunting: {
+			challengeDice: 4,
+			name: "CHALLENGELEVEL.daunting"
+		},
+		heroic: {
+			challengeDice: 5,
+			name: "CHALLENGELEVEL.heroic"
+		}
+	}
+
 	/**
 	 * The number of each symbol obtained by the check roll.
 	 * @returns {{success: number, righteousSuccess: number, boon: number, sigmarsComet: number, challenge: number, bane: number, chaosStar: number, delay: number, exertion: number}}

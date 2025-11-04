@@ -189,7 +189,7 @@ export default class DiePool
 					+ (checkData.creatureDice?.expertise || 0),
 				conservative: stance < 0 ? Math.abs(stance) : 0,
 				reckless: stance > 0 ? stance : 0,
-				challenge: CONFIG.WFRP3e.challengeLevels[checkData.challengeLevel].challengeDice
+				challenge: wfrp3e.dice.CheckRoll.CHALLENGE_LEVELS[checkData.challengeLevel].challengeDice
 					+ (action?.system[face].difficultyModifiers.challengeDice || 0),
 				misfortune: action?.system[face].difficultyModifiers.misfortuneDice
 					+ match && match[5] === game.i18n.localize("ACTION.CHECK.targetDefence")
@@ -404,7 +404,7 @@ export default class DiePool
 					  expertise: skill?.system.trainingLevel || 0,
 					  conservative: stance < 0 ? Math.abs(stance) : 0,
 					  reckless: stance > 0 ? stance : 0,
-					  challenge: CONFIG.WFRP3e.challengeLevels[checkData.challengeLevel].challengeDice
+					  challenge: wfrp3e.dice.CheckRoll.CHALLENGE_LEVELS[checkData.challengeLevel].challengeDice
 						  + action.system[face].difficultyModifiers.challengeDice,
 					  // Add misfortune dice to the pool if the action is checked against a target's defence,
 					  // the check has a target and this target has defence.

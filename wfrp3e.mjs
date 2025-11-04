@@ -7,14 +7,11 @@
  * Issue Tracker: https://github.com/foundryvtt/wfrp3e/issues
  */
 
-import {WFRP3e} from "./modules/config.mjs";
 import * as wfrp3e from "./modules/_module.mjs";
 globalThis.wfrp3e = wfrp3e;
 
 Hooks.once("init", async () => {
 	console.log("WFRP3e | Initialising Game System");
-
-	CONFIG.WFRP3e = WFRP3e;
 
 	game.settings.register("wfrp3e", "startingCareerDrawingMethod", {
 		name: "SETTINGS.startingCareerDrawingMethod.name",

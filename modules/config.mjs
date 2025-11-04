@@ -1,32 +1,3 @@
-export const WFRP3e = Object.freeze({
-	challengeLevels: {
-		simple: {
-			challengeDice: 0,
-			name: "CHALLENGELEVEL.simple"
-		},
-		easy: {
-			challengeDice: 1,
-			name: "CHALLENGELEVEL.easy"
-		},
-		average: {
-			challengeDice: 2,
-			name: "CHALLENGELEVEL.average"
-		},
-		hard: {
-			challengeDice: 3,
-			name: "CHALLENGELEVEL.hard"
-		},
-		daunting: {
-			challengeDice: 4,
-			name: "CHALLENGELEVEL.daunting"
-		},
-		heroic: {
-			challengeDice: 5,
-			name: "CHALLENGELEVEL.heroic"
-		}
-	}
-});
-
 CONFIG.TextEditor.enrichers = CONFIG.TextEditor.enrichers.concat([{
 	pattern : /\{D([a-zA-Z]+)}/gmi,
 	enricher : (match, options) => {
