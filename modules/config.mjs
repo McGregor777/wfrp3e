@@ -174,19 +174,6 @@ export const WFRP3e = Object.freeze({
 			type: "mental"
 		}
 	},
-	scriptTypes: {
-		onCareerSocket: "SCRIPT.TYPES.onCareerSocket",
-		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
-		onCheckRoll: "SCRIPT.TYPES.onCheckRoll",
-		onCreationPointInvestment: "SCRIPT.TYPES.onCreationPointInvestment",
-		onPostCheckTrigger: "SCRIPT.TYPES.onPostCheckTrigger",
-		onPreCheckTrigger: "SCRIPT.TYPES.onPreCheckTrigger",
-		onStartingSkillTrainingSelection: "SCRIPT.TYPES.onStartingSkillTrainingSelection",
-		onStartingTalentSelection: "SCRIPT.TYPES.onStartingTalentSelection",
-		onTargetingCheckPreparation: "SCRIPT.TYPES.onTargetingCheckPreparation",
-		onTrigger: "SCRIPT.TYPES.onTrigger",
-		requirementCheck: "SCRIPT.TYPES.requirementCheck"
-	},
 	stances: {
 		conservative: "STANCES.conservative",
 		reckless: "STANCES.reckless"

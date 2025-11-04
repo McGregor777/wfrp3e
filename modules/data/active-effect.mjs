@@ -12,8 +12,8 @@ export default class ActiveEffect extends foundry.abstract.TypeDataModel
 			reverseScript: new fields.JavaScriptField({async: true}),
 			script: new fields.JavaScriptField({async: true}),
 			type: new fields.StringField({
-				choices: CONFIG.WFRP3e.scriptTypes,
-				initial: Object.keys(CONFIG.WFRP3e.scriptTypes)[0],
+				choices: this.SCRIPT_TYPES,
+				initial: Object.keys(this.SCRIPT_TYPES)[0],
 				required: true
 			})
 		};
@@ -21,6 +21,20 @@ export default class ActiveEffect extends foundry.abstract.TypeDataModel
 
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["EFFECT"];
+
+	static SCRIPT_TYPES = {
+		onCareerSocket: "SCRIPT.TYPES.onCareerSocket",
+		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
+		onCheckRoll: "SCRIPT.TYPES.onCheckRoll",
+		onCreationPointInvestment: "SCRIPT.TYPES.onCreationPointInvestment",
+		onPostCheckTrigger: "SCRIPT.TYPES.onPostCheckTrigger",
+		onPreCheckTrigger: "SCRIPT.TYPES.onPreCheckTrigger",
+		onStartingSkillTrainingSelection: "SCRIPT.TYPES.onStartingSkillTrainingSelection",
+		onStartingTalentSelection: "SCRIPT.TYPES.onStartingTalentSelection",
+		onTargetingCheckPreparation: "SCRIPT.TYPES.onTargetingCheckPreparation",
+		onTrigger: "SCRIPT.TYPES.onTrigger",
+		requirementCheck: "SCRIPT.TYPES.requirementCheck"
+	};
 
 	/** @inheritDoc */
 	static migrateData(source)
