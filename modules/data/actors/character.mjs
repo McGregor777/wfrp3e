@@ -170,9 +170,18 @@ export default class Character extends Actor
 				nullable: false,
 				required: true
 			}),
-			party: new fields.DocumentIdField(),
+			party: new fields.DocumentUUIDField(),
 			power: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true})
 		};
+	}
+
+	/** @inheritDoc */
+	static migrateData(source)
+	{
+		if(source.party && !source.party.startsWith("Actor."))
+			source.party = `Actor.${source.party}`;
+
+		return super.migrateData(source);
 	}
 
 	/**
