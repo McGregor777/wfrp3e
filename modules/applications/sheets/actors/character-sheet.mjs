@@ -62,6 +62,7 @@ export default class CharacterSheet extends ActorSheet
 	/** @inheritDoc */
 	async _preparePartContext(partId, context)
 	{
+		const textEditor = foundry.applications.ux.TextEditor;
 		let partContext = await super._preparePartContext(partId, context);
 
 		switch(partId) {
@@ -74,13 +75,11 @@ export default class CharacterSheet extends ActorSheet
 				};
 				break;
 			case "careers":
-				const sortedCareers = this.actor.itemTypes.career.sort((a, b) => a.name.localeCompare(b.name));
+				const sortedCareers = this.actor.itemTypes.career.sort((a, b) => a.name.localeCompare(b.name)),
+					  enrichment = {};
 
-				const enrichment = {};
 				for(const career of sortedCareers)
-					enrichment[career.uuid] = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-						career.system.description
-					);
+					enrichment[career.uuid] = await textEditor.enrichHTML(career.system.description);
 
 				partContext = {
 					...partContext,
@@ -95,12 +94,8 @@ export default class CharacterSheet extends ActorSheet
 				partContext = {
 					...partContext,
 					enriched: {
-						campaignNotes: await foundry.applications.ux.TextEditor.enrichHTML(
-							this.actor.system.background.campaignNotes
-						),
-						biography: await foundry.applications.ux.TextEditor.enrichHTML(
-							this.actor.system.background.biography
-						)
+						campaignNotes: await textEditor.enrichHTML(this.actor.system.background.campaignNotes),
+						biography: await textEditor.enrichHTML(this.actor.system.background.biography)
 					},
 					fields: this.actor.system.schema.fields.background.fields,
 					system: this.actor.system.background
