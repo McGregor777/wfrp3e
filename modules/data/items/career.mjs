@@ -139,7 +139,7 @@ export default class Career extends Item
 	//#TODO Reverse the logic by returning the number of open advance still available by type.
 	/**
 	 * The number of open advances of each type that has been bought during a career.
-	 * @private
+	 * @returns {Object} The number of advances of each bought during the career.
 	 */
 	get openAdvanceTypeNumbers()
 	{
