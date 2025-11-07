@@ -117,7 +117,7 @@ export default class ActionSelector extends Selector
 		for(const pack of game.packs)
 			if(pack.documentName === "Item")
 				for(const action of await pack.getDocuments({type: "action"}))
-					if((options.basic === false && !action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic")))
+					if((options?.basic === true || !action.system.reckless.traits.includes(game.i18n.localize("TRAITS.basic")))
 						&& await action.checkRequirements({actor})
 						&& !ownedActionNames.includes(action.name))
 						actions.push(action);
