@@ -234,6 +234,42 @@
 			"deleteSocket": "Remove Talent Socket",
 			"update": "Save Career"
 		},
+		"ADVANCES": {
+			"action": {
+				"label": "Action",
+				"output": "Action - {action}"
+			},
+			"conservative": {
+				"label": "Conservative",
+				"output": "Conservative Piece"
+			},
+			"fortune": {
+				"label": "Fortune",
+				"output": "{characteristic} Fortune Die"
+			},
+			"rating": {
+				"label": "Characteristic",
+				"output": "{characteristic} Rating"
+			},
+			"reckless": {
+				"label": "Reckless",
+				"output": "Reckless Piece"
+			},
+			"skill": {
+				"label": "Skill",
+				"acquisition.output": "{skill} Acquisition",
+				"specialisation.output": "{skill} Specialisation - {value}",
+				"trainingLevel.output": "{skill} Training - {value}"
+			},
+			"talent": {
+				"label": "Talent",
+				"output": "Talent - {talent}"
+			},
+			"wound": {
+				"label": "Wound",
+				"output": "Wound Threshold"
+			}
+		},
 		"FIELDS": {
 			"advanced.label": "Advanced Career",
 			"advanceOptions": {
@@ -293,6 +329,7 @@
 			"wound": "Wound"
 		},
 		"TABS": {
+			"advances": "Advances",
 			"advanceOptions": "Advance Options",
 			"aptitudes": "Career Aptitudes",
 			"effects": "Effects",
@@ -302,7 +339,8 @@
 		},
 		"WARNINGS": {
 			"advanceOptionDepleted": "This career offers no more advance option of this type.",
-			"dedicationBonusCareerNotCompleted": "You cannot buy a career's dedication bonus until it is completed."
+			"dedicationBonusCareerNotCompleted": "You cannot buy a career's dedication bonus until it is completed.",
+			"notEnoughOpenAdvances": "The Actor has not enough open advances available."
 		},
 		"name": "Career",
 		"plural": "Careers"
@@ -454,12 +492,7 @@
 			"increaseRating": "+1 Rating",
 			"upgradeCharacteristic": "Upgrade A Characteristic"
 		},
-		"WARNINGS": {
-			"noUpgradeSelected": "None",
-			"notEnoughOpenAdvances": "The Actor has not enough open advances available."
-		},
-		"characteristicFortune": "{characteristic} Fortune Die",
-		"characteristicRating": "{characteristic} Rating",
+		"WARNINGS.noUpgradeSelected": "None",
 		"experienceCost": "{cost} XP",
 		"selectedUpgrade": "Selected Upgrade: ",
 		"title": "Characteristic Upgrader"
@@ -1190,15 +1223,12 @@
 			},
 			"notEnoughTrainings": "Not enough trainings left to proceed.",
 			"singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
-			"tooManySpecialisationSelected": "Too many selected specialisationsd. Please deselect some."
+			"tooManySpecialisationSelected": "Too many selected specialisations. Please deselect some."
 		},
-		"acquisitionUpgrade": "{name} - Acquisition",
 		"noUpgradeSelected": "None",
 		"selectedUpgrade": "Selected Upgrade(s):",
-		"selectedSpecialisations": "Selected Specialisation(s) :",
-		"specialisationUpgrade": "{name} - {value} Specialisation",
-		"title": "Skill Upgrader",
-		"trainingLevelUpgrade": "{name} - Training Level {value}"
+		"selectedSpecialisations": "Selected Specialisation(s):",
+		"title": "Skill Upgrader"
 	},
 
 	"SYMBOL": {

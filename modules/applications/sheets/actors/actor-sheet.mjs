@@ -253,8 +253,11 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 		for(const element of this.element.querySelectorAll(".search-bar input.search-filter"))
 			element.addEventListener("change", this._onSearchChange.bind(this, options));
 
-		for(const element of this.element.querySelectorAll("input[data-item-id], select[data-item-id], [data-item-id] input, [data-item-id] select"))
-			element.addEventListener("change", this._onItemInput.bind(this, options));
+		for(const element of this.element.querySelectorAll("input[data-item-id], select[data-item-id], [data-item-id] input, [data-item-id] select")) {
+			const listener = this._onItemInput.bind(this, options);
+			element.addEventListener("change", listener);
+			element.changeListener = listener;
+		}
 	}
 
 	/**
@@ -443,6 +446,8 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			.changeQuantity(event.ctrlKey ? amount * 10 : amount);
 	}
 
+	//#TODO Make sure context menu doesn't prevent from interacting with recharge tokens
+	//#TODO Move the logic to the item document class
 	/**
 	 * Either adds or removes a recharge token on an item depending on the clicked button.
 	 * @param {PointerEvent} event
@@ -662,6 +667,6 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			await item.use(options);
 		}
 		else
-			await item.sheet.render(true);
+			await item.sheet.render({force: true});
 	}
 }

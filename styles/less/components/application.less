@@ -113,6 +113,34 @@
 				}
 			}
 
+			& .career-advancement {
+				display: flex;
+				flex: 400px;
+				flex-direction: column;
+				gap: 16px;
+
+				& fieldset {
+					border: none;
+					padding: 0;
+					gap: 8px;
+
+					& > legend {
+						color: white;
+						text-align: center;
+						text-shadow: var(--outline-black);
+						font: var(--font-size-24) var(--font-title);
+						font-variant-caps: small-caps;
+					}
+				}
+
+				& .form-group {
+					& > label {
+						flex: 0 100px;
+						line-height: 1;
+					}
+				}
+			}
+
 			& .characteristics {
 				display: flex;
 				flex: 1 1 auto;
@@ -660,10 +688,18 @@ body.theme-light .application.wfrp3e.sheet .window-content {
 		& > span {
 			flex: 0;
 		}
-	}
 
-	& .form-fields > a {
-		flex: 0;
+		& > .form-fields {
+			& > a {
+				flex: 0;
+			}
+
+			& > input, & select  {
+				&.slim {
+					flex: 0 76px;
+				}
+			}
+		}
 	}
 
 	& .tab {

@@ -5,7 +5,7 @@
 		<span class="selection">
 			{{#if selectedItems.length}}
 				{{#each selectedItems as |upgrade up|}}
-					{{localize (concat "SKILLUPGRADER." upgrade.type "Upgrade") name=upgrade.item.name value=upgrade.value}}
+					{{localize (concat "CAREER.ADVANCES.skill." upgrade.type ".output") name=upgrade.item.name value=upgrade.value}}
 					{{#unless @last}}, {{/unless}}
 				{{/each}}
 			{{else}}
@@ -25,7 +25,7 @@
 			<span class="selection">
 				{{#if specialisationSelection.length}}
 					{{#each specialisationSelection as |upgrade up|}}
-						{{localize (concat "SKILLUPGRADER." upgrade.type "Upgrade") name=upgrade.item.name value=upgrade.value}}
+						{{localize (concat "CAREER.ADVANCES.skill." upgrade.type ".output") name=upgrade.item.name value=upgrade.value}}
 						{{#unless @last}}, {{/unless}}
 					{{/each}}
 				{{else}}

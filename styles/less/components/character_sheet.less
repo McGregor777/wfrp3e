@@ -78,46 +78,12 @@
 		}
 	}
 
-	& .item-container > .career {
+	& .tab > .career {
 		display: flex;
 		flex-flow: row wrap;
 		flex-grow: 1;
 		justify-content: center;
-
-		& .career-advancement {
-			display: flex;
-			flex: 1 1;
-			flex-direction: column;
-			gap: 16px;
-
-			& fieldset {
-				border: none;
-				padding: 0;
-				gap: 8px;
-
-				& > legend {
-					color: white;
-					text-align: center;
-					text-shadow: var(--outline-black);
-					font: var(--font-size-24) var(--font-title);
-					font-variant-caps: small-caps;
-				}
-			}
-
-			& .form-group {
-				& > input[type=checkbox] {
-					align-self: baseline;
-				}
-
-				& > input[type=text] {
-					flex: 1 1 0;
-				}
-
-				& > label {
-					flex: 1 1;
-				}
-			}
-		}
+		overflow-y: auto;
 
 		& .career-sheet {
 			margin-bottom: 0;

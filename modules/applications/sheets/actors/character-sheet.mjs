@@ -147,43 +147,38 @@ export default class CharacterSheet extends ActorSheet
 	{
 		await super._onRender(context, options);
 
-		for(const element of this.element.querySelectorAll(".advance-checkbox"))
-			element.addEventListener("change", this.#onAdvanceChange.bind(this, options));
+		for(const element of this.element.querySelectorAll('input[type="checkbox"][name^="system.advances."]')) {
+			element.removeEventListener("change", element.changeListener);
+			element.addEventListener("change", this.#onAdvanceCheckboxChange.bind(this, options));
+		}
 	}
 
 	/**
 	 * Performs follow-up operations after changes on a career advance checkbox.
-	 * @param {Object} options
-	 * @param {Event} event
+	 * @param {RenderOptions} options Provided render options.
+	 * @param {Event} event The triggering event.
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	async #onAdvanceChange(options, event)
+	async #onAdvanceCheckboxChange(options, event)
 	{
 		event.preventDefault();
 
-		const career = this.actor.items.get(event.target.closest["data-item-id"].dataset.itemId),
+		const career = this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId),
 			  input = event.target,
-			  value = Number(input.value),
-			  advanceType = input.dataset.advanceType;
+			  matches = input.name.match(new RegExp(/^system.advances.(\w+)/)),
+			  advanceType = matches[1],
+			  index = +event.target.closest("[data-index]")?.dataset.index;
 
-		if(value === 1 && input.defaultChecked
-			&& (advanceType === "careerTransition" && foundry.utils.getProperty(career, `system.advances.careerTransition.cost`) === value
-				|| advanceType === "nonCareer" && foundry.utils.getProperty(career, `system.advances.nonCareer.${input.dataset.index}.cost`) === value))
-			await this.actor.removeAdvance(career, advanceType, input.dataset.index);
-		// If the advance is a career transition or a non-career one, and its type is already set, checkboxes are used to define the advance's cost.
-		else if(advanceType === "careerTransition" && foundry.utils.getProperty(career, `system.advances.careerTransition.newCareer`)
-			|| advanceType === "nonCareer" && foundry.utils.getProperty(career, `system.advances.nonCareer.${input.dataset.index}.type`))
-			await this._onItemInput(options, event);
-		// Otherwise, the checkbox is either used to buy an advance, or to remove if it has been bought already.
-		else if(input.defaultChecked)
-			await this.actor.removeAdvance(career, advanceType, input.dataset.index);
+		if(input.defaultChecked)
+			await career.parent.disableAdvance(career, advanceType, index);
 		else {
 			input.checked = false;
-			await this.actor.buyAdvance(career, advanceType);
+			await career.system.buyAdvance(advanceType);
 		}
 	}
 
+	//#TODO Move the logic of this method to the actor document class.
 	/**
 	 * Adds every basic skill to the Character.
 	 * @returns {Promise<void>}

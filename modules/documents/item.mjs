@@ -298,31 +298,6 @@ export default class Item extends foundry.documents.Item
 	//#region Career methods
 
 	/**
-	 * Calculates the cost of a transition from the actual career to another.
-	 * @param {Item} newCareer The new career which is transitioned into.
-	 * @returns {number} The cost of the career transition in experience points.
-	 */
-	calculateCareerTransitionCost(newCareer)
-	{
-		let cost = 4;
-
-		if(this.system.advances.dedicationBonus)
-			cost--;
-
-		const careerTraits = this.system.traits.toLowerCase().split(",").map(trait => trait.trim()),
-			  newCareerTraits = newCareer.system.traits.toLowerCase().split(",").map(trait => trait.trim());
-		for(const trait of careerTraits) {
-			if(trait !== game.i18n.localize("TRAITS.specialist") && newCareerTraits.includes(trait))
-				cost--;
-
-			if(cost <= 1)
-				break;
-		}
-
-		return cost;
-	}
-
-	/**
 	 * Post-process an update operation for a single career instance. Post-operation events occur for all connected clients.
 	 * @param changed {any} The differential data that was changed relative to the documents prior values
 	 * @param options {any} Additional options which modify the update request

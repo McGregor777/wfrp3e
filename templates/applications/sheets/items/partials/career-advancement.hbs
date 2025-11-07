@@ -1,0 +1,149 @@
+<div class="career-advancement">
+	<fieldset>
+		<legend>{{localize "CAREER.FIELDS.advances.generalCareer.label"}}</legend>
+
+		<div class="form-group">
+			<label for="{{rootId}}-{{fields.action.fields.active.fieldPath}}">
+				{{localize fields.action.label}}
+			</label>
+
+			<div class="form-fields">
+				{{formInput fields.action.fields.active
+							id=(concat rootId "-" fields.action.fields.active.fieldPath)
+							value=system.action.active}}
+
+				{{formInput fields.action.fields.uuid value=system.action.uuid}}
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="{{rootId}}-{{fields.talent.fields.active.fieldPath}}">
+				{{localize fields.talent.label}}
+			</label>
+
+			<div class="form-fields">
+				{{formInput fields.talent.fields.active
+							id=(concat rootId "-" fields.talent.fields.active.fieldPath)
+							value=system.talent.active}}
+
+				{{formInput fields.talent.fields.uuid value=system.talent.uuid}}
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="{{rootId}}-{{fields.skill.fields.active.fieldPath}}">
+				{{localize fields.skill.label}}
+			</label>
+
+			<div class="form-fields">
+				{{formInput fields.skill.fields.active
+							id=(concat rootId "-" fields.skill.fields.active.fieldPath)
+							value=system.skill.active}}
+
+				{{formInput fields.skill.fields.uuid
+							id=(concat rootId "-" fields.wound.fields.uuid.fieldPath)
+							value=system.skill.uuid}}
+
+				{{formInput fields.skill.fields.upgradeType
+							id=(concat rootId "-" fields.wound.fields.upgradeType.fieldPath)
+							localize=true
+							value=system.skill.upgradeType}}
+
+				{{formInput fields.skill.fields.value
+							classes="slim"
+							id=(concat rootId "-" fields.wound.fields.value.fieldPath)
+							value=system.skill.value}}
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="{{rootId}}-{{fields.wound.fields.active.fieldPath}}">
+				{{localize fields.wound.label}}
+			</label>
+
+			<div class="form-fields">
+				{{formInput fields.wound.fields.active
+							id=(concat rootId "-" fields.wound.fields.active.fieldPath)
+							value=system.wound.active}}
+			</div>
+		</div>
+
+		{{#each system.open as |openAdvance opa|}}
+			<div class="form-group" data-index="{{opa}}">
+				<label for="{{../rootId}}-{{openAdvance.schema.fields.active.fieldPath}}.{{opa}}.active">
+					{{localize ../fields.open.label}}
+				</label>
+
+				<div class="form-fields">
+					{{#each openAdvance.schema.fields as |field f|}}
+						{{formInput field
+									classes=(ifThen (and (gt (length openAdvance.schema.fields) 3) (eq f "value")) "slim" "")
+									id=(concat rootId "-" ../../fields.open.fieldPath "." opa "." f)
+									localize=true
+									name=(concat ../../fields.open.fieldPath ".element." f)
+									value=(lookup openAdvance f)}}
+					{{/each}}
+				</div>
+			</div>
+		{{/each}}
+	</fieldset>
+
+	<fieldset>
+		<legend>{{localize "CAREER.FIELDS.advances.careerCompletion.label"}}</legend>
+
+		<div class="form-group">
+			<label for="{{rootId}}-{{fields.careerTransition.fields.cost.fieldPath}}">
+				{{localize fields.careerTransition.label}}
+			</label>
+
+			<div class="form-fields">
+				{{formInput fields.careerTransition.fields.active
+							classes="slim"
+							id=(concat rootId "-" fields.careerTransition.fields.active.fieldPath)
+							value=system.careerTransition.active}}
+
+				{{formInput fields.careerTransition.fields.cost
+							classes="slim"
+							id=(concat rootId "-" fields.careerTransition.fields.cost.fieldPath)
+							value=system.careerTransition.cost}}
+
+				{{formInput fields.careerTransition.fields.uuid
+							id=(concat rootId "-" fields.careerTransition.fields.uuid.fieldPath)
+							value=system.careerTransition.uuid}}
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="{{rootId}}-{{fields.dedicationBonus.fieldPath}}">
+				{{localize fields.dedicationBonus.label}}
+			</label>
+
+			<div class="form-fields">
+				{{formInput fields.dedicationBonus value=system.dedicationBonus}}
+			</div>
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<legend>{{localize "CAREER.FIELDS.advances.nonCareer.label"}}</legend>
+
+		{{#each system.nonCareer as |nonCareerAdvance nca|}}
+			<div class="form-group" data-index="{{nca}}">
+				<label for="{{../rootId}}-{{../fields.nonCareer.fieldPath}}.{{nca}}.cost">
+					{{localize "CAREER.FIELDS.advances.type.label"}}
+				</label>
+
+				<div class="form-fields">
+					{{#each nonCareerAdvance.schema.fields as |field f|}}
+						{{formInput field
+									classes=(ifThen (and (gt (length nonCareerAdvance.schema.fields) 3) (or (eq f "cost") (eq f "value"))) "slim" "")
+									id=(concat rootId "-" ../../fields.nonCareer.fieldPath "." nca "." f)
+									localize=true
+									name=(concat ../../fields.nonCareer.fieldPath ".element." f)
+									value=(lookup nonCareerAdvance f)}}
+					{{/each}}
+				</div>
+			</div>
+		{{/each}}
+	</fieldset>
+</div>

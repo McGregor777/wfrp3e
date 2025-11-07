@@ -34,31 +34,75 @@
     },
     "summary": "A rugged bloke, adept at handling boats and barges",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -79,7 +123,7 @@
     "systemVersion": "1.3.2",
     "coreVersion": "13.350",
     "createdTime": 1699549812004,
-    "modifiedTime": 1734396572864,
+    "modifiedTime": 1764321760894,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null,

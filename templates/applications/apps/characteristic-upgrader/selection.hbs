@@ -3,7 +3,7 @@
 
 	<span class="selection">
 		{{#with (lookup characteristics upgrade.characteristic) as |characteristic|}}
-			{{localize (concat "CHARACTERISTICUPGRADER.characteristic" (capitalize @root.upgrade.type))
+			{{localize (concat "CAREER.ADVANCES." @root.upgrade.type ".output")
 					   characteristic=(localize characteristic.name)}}
 		{{else}}
 			{{localize "CHARACTERISTICUPGRADER.WARNINGS.noUpgradeSelected"}}

@@ -1,85 +1,124 @@
+import {capitalize} from "../../helpers.mjs";
+
 /** @inheritDoc */
 export default class CareerAdvanceDialog extends foundry.applications.api.DialogV2
 {
 	/** @inheritDoc */
-	static DEFAULT_OPTIONS = {classes: ["career-advance-dialog"]};
+	constructor(options = {})
+	{
+		super(options);
+
+		if(!options.actor)
+			throw new Error("An actor is required.");
+		this.actor = options.actor;
+
+		if(!options.career)
+			throw new Error("A career is required.");
+		this.career = options.career;
+
+		if(options.advanceType)
+			this.advanceType = options.advanceType;
+	}
+
+	/** @inheritDoc */
+	static DEFAULT_OPTIONS = {
+		id: "career-advance-dialog-{id}",
+		classes: ["career-advance-dialog"],
+		submit: CareerAdvanceDialog.#careerAdvanceDialogSubmit
+	};
+
+	static LOCALISATION_PREFIX = "CAREERADVANCEDIALOG";
+
+	/**
+	 * The actor buying the advance.
+	 * @type {Actor}
+	 */
+	actor;
+
+	/**
+	 * The type of career advance.
+	 * @type {string}
+	 */
+	advanceType = "open";
+
+	/**
+	 * The career owning the advance.
+	 * @type {Item}
+	 */
+	career;
+
+	/** @inheritDoc */
+	get title()
+	{
+		return game.i18n.localize(`${this.constructor.LOCALISATION_PREFIX}.${this.advanceType}Advance.title`);
+	}
+
+	/** @inheritDoc */
+	_initializeApplicationOptions(options)
+	{
+		if(!options.content)
+			options.content = `<p>${game.i18n.format(`${this.constructor.LOCALISATION_PREFIX}.${options.advanceType ?? this.advanceType}Advance.content`)}</p>`;
+
+		if(!options.buttons)
+			options.buttons = CareerAdvanceDialog.#initializeButtons(options.advanceType ?? this.advanceType);
+
+		return super._initializeApplicationOptions(options);
+	}
+
+	/**
+	 * Builds the list of buttons depending on the career advance.
+	 * @param {string} advanceType The type of career advance.
+	 * @returns {DialogV2Button[]}
+	 * @private
+	 */
+	static #initializeButtons(advanceType)
+	{
+		switch(advanceType) {
+			case "nonCareer":
+				return [{
+					action: wfrp3e.data.items.career.NonPrimaryCharacteristicAdvance.TYPE,
+					label: game.i18n.localize(`${this.LOCALISATION_PREFIX}.BUTTONS.nonPrimaryCharacteristic`)
+				}, {
+					action: wfrp3e.data.items.career.NonCareerSkillAdvance.TYPE,
+					label: game.i18n.localize(`${this.LOCALISATION_PREFIX}.BUTTONS.nonCareerSkill`)
+				}, {
+					action: wfrp3e.data.items.career.NonCareerTalentAdvance.TYPE,
+					label: game.i18n.localize(`${this.LOCALISATION_PREFIX}.BUTTONS.talent`)
+				}];
+			default:
+				return [{
+					action: wfrp3e.data.items.career.RatingAdvance.TYPE,
+					label: game.i18n.localize(`${this.LOCALISATION_PREFIX}.BUTTONS.primaryCharacteristic`)
+				}, {
+					action: wfrp3e.data.items.career.ActionAdvance.TYPE,
+					label: game.i18n.localize(`${this.LOCALISATION_PREFIX}.BUTTONS.action`)
+				}, {
+					action: wfrp3e.data.items.career.SkillAdvance.TYPE,
+					label: game.i18n.localize(`${this.LOCALISATION_PREFIX}.BUTTONS.skill`)
+				}, {
+					action: wfrp3e.data.items.career.TalentAdvance.TYPE,
+					label: game.i18n.localize(`${this.LOCALISATION_PREFIX}.BUTTONS.talent`)
+				}, {
+					action: wfrp3e.data.items.career.WoundAdvance.TYPE,
+					label: game.i18n.localize(`${this.LOCALISATION_PREFIX}.BUTTONS.wound`)
+				}, {
+					action: wfrp3e.data.items.career.ConservativeAdvance.TYPE,
+					label: game.i18n.localize(`${this.LOCALISATION_PREFIX}.BUTTONS.conservative`)
+				}, {
+					action: wfrp3e.data.items.career.RecklessAdvance.TYPE,
+					label: game.i18n.localize(`${this.LOCALISATION_PREFIX}.BUTTONS.reckless`)
+				}];
+		}
+	}
 
 	/**
 	 * Proceeds to buying a new career advance depending on the selected type.
-	 * @param {string} result The nature of the advance selected.
-	 * @param {Actor} actor The actor buying the advance.
-	 * @param {Item} career The career owning the advance.
-	 * @param {string} type The type of advance.
+	 * @param {string} result Either the identifier of the button that was clicked to submit the dialog, or the result returned by that button's callback.
+	 * @param {CareerAdvanceDialog} dialog The Career Advance Dialog instance.
 	 * @returns {Promise<void>}
 	 */
-	static async careerAdvanceSelection(result, actor, career, type)
+	static async #careerAdvanceDialogSubmit(result, dialog)
 	{
-		switch(result) {
-			case "action":
-				const {ActionSelector} = wfrp3e.applications.apps.selectors;
-
-				if(career.system.openAdvanceTypeNumbers.action >= career.system.advanceOptions.action)
-					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
-
-				const actions = await ActionSelector.wait({items: await ActionSelector.buildOptionsList(actor)});
-				await actor.buyActionAdvance(actions[0], career, type);
-				break;
-
-			case "characteristic":
-				const upgrade = await wfrp3e.applications.apps.CharacteristicUpgrader.wait({
-					actor,
-					career,
-					nonCareerAdvance: type === "nonCareer"
-				});
-				await actor.buyCharacteristicAdvance(upgrade, career, type);
-				break;
-
-			case "conservative":
-				if(career.system.openAdvanceTypeNumbers.conservative >= career.system.advanceOptions.conservative)
-					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
-
-				await actor.buyConservativeAdvance(career);
-				break;
-
-			case "reckless":
-				if(career.system.openAdvanceTypeNumbers.reckless >= career.system.advanceOptions.reckless)
-					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
-
-				await actor.buyRecklessAdvance(career);
-				break;
-
-			case "skill":
-				const {SkillUpgrader} = wfrp3e.applications.apps.selectors;
-
-				if(career.system.openAdvanceTypeNumbers.skill >= career.system.advanceOptions.skill)
-					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
-
-				const upgrades = await wfrp3e.applications.apps.selectors.SkillUpgrader.wait({
-					actor: actor,
-					advanceType: type,
-					items: await SkillUpgrader.buildAdvanceOptionsList(actor, career, type === "nonCareer")
-				});
-				await actor.buySkillAdvance(upgrades[0], career, type);
-				break;
-
-			case "talent":
-				const {TalentSelector} = wfrp3e.applications.apps.selectors;
-
-				if(career.system.openAdvanceTypeNumbers.talent >= career.system.advanceOptions.talent)
-					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
-
-				const talents = await TalentSelector.wait({
-					items: await TalentSelector.buildAdvanceOptionsList(actor, career)
-				});
-				await actor.buyTalentAdvance(talents[0], career, type);
-				break;
-
-			case "wound":
-				if(career.system.openAdvanceTypeNumbers.wound >= career.system.advanceOptions.wound)
-					return ui.notifications.warn(game.i18n.localize("CAREER.WARNINGS.advanceOptionDepleted"));
-
-				await actor.buyWoundAdvance(career, type);
-				break;
-		}
+		wfrp3e.data.items.career[`${capitalize(result)}Advance`].buyAdvance(dialog.career, true);
 	}
 }

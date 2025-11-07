@@ -2,7 +2,7 @@ import Selector from "./selector.mjs";
 
 /**
  * @typedef {Object} SkillUpgrade
- * @property {string} type The type of skill upgrade.
+ * @property {"acquisition"|"trainingLevel"|"specialisation"} type The type of skill upgrade.
  * @property {string} uuid The UUID of the skill to upgrade.
  * @property {string|number|boolean} value The new value of the upgraded skill property.
  */

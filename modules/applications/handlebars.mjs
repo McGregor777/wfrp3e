@@ -21,6 +21,7 @@ export function preloadTemplates()
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/armour-row.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/career.hbs",
+		"systems/wfrp3e/templates/applications/sheets/actors/partials/career-advancement.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/characteristic.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/creature-attribute.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/impairment.hbs",
@@ -31,6 +32,7 @@ export function preloadTemplates()
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/talent-row.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/trapping-row.hbs",
 		"systems/wfrp3e/templates/applications/sheets/actors/partials/weapon-row.hbs",
+		"systems/wfrp3e/templates/applications/sheets/items/partials/career-advancement.hbs",
 		"systems/wfrp3e/templates/applications/sheets/items/partials/trapping-data.hbs",
 		"systems/wfrp3e/templates/partials/action-effects.hbs"
 	]);
@@ -44,6 +46,7 @@ export function initialiseHelpers()
 		getProperty,
 		includes,
 		increment,
+		length,
 		multiply,
 		replace,
 		stripTags,
@@ -138,6 +141,16 @@ export function initialiseHelpers()
 	function increment(value, valueToAdd)
 	{
 		return value + parseInt(valueToAdd);
+	}
+
+	/**
+	 * Gets the number of properties in an object.
+	 * @param {Object} object The value to increment.
+	 * @returns {number} The incremented value.
+	 */
+	function length(object)
+	{
+		return Object.keys(object).length;
 	}
 
 	/**

@@ -101,15 +101,16 @@ export default class CharacteristicUpgrader extends foundry.applications.api.Han
 	/** @inheritDoc */
 	async _onChangeForm(formConfig, event)
 	{
-		const form = event.currentTarget,
+		const {FortuneAdvance, RatingAdvance} = wfrp3e.data.items.career,
+			  form = event.currentTarget,
 			  formData = new FormDataExtended(form),
 			  matches = [...formData.object.upgrade.matchAll(new RegExp(/(^\w*)_(\w*$)/, "g"))][0],
 			  newValue = this.actor.system.characteristics[matches[1]][matches[2]] + 1;
 		let cost = newValue;
 
-		if(matches[2] === "rating" && this.nonCareerAdvance)
+		if(matches[2] === RatingAdvance && this.nonCareerAdvance)
 			cost++;
-		else if(matches[2] === "fortune")
+		else if(matches[2] === FortuneAdvance)
 			cost = 1;
 
 		if(this.actor.system.experience.current < cost)

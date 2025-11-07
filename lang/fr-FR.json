@@ -236,6 +236,42 @@
 			"deleteSocket": "Retirer un emplacement de talent",
 			"update": "Enregistrer la carrière"
 		},
+		"ADVANCES": {
+			"action": {
+				"label": "Action",
+				"output": "Action - {action}"
+			},
+			"conservative": {
+				"label": "Prudence",
+				"output": "Segment de prudence"
+			},
+			"fortune": {
+				"label": "Fortune",
+				"output": "Dé de Fortune de {characteristic}"
+			},
+			"rating": {
+				"label": "Caractéristique",
+				"output": "Valeur de {characteristic}"
+			},
+			"reckless": {
+				"label": "Témérité",
+				"output": "Segment de témérité"
+			},
+			"skill": {
+				"label": "Compétence",
+				"acquisition.output": "Acquisition de {skill}",
+				"specialisation.output": "Spécialisation de {skill} - {value}",
+				"trainingLevel.output": "Formation de {skill} - {value}"
+			},
+			"talent": {
+				"label": "Talent",
+				"output": "Talent - {talent}"
+			},
+			"wound": {
+				"label": "Point de Blessure",
+				"output": "Point de Blessure"
+			}
+		},
 		"FIELDS": {
 			"advanced.label": "Carrière Avancée",
 			"advanceOptions": {
@@ -295,6 +331,7 @@
 			"wound": "Point de Blessure"
 		},
 		"TABS": {
+			"advances": "Avancements",
 			"advanceOptions": "Options d'Avancement",
 			"aptitudes": "Aptitudes de Carrière",
 			"effects": "Effets",
@@ -304,7 +341,8 @@
 		},
 		"WARNINGS": {
 			"advanceOptionDepleted": "Cette carrière n'offre pas davantage de possibilités de promotion de ce type.",
-			"dedicationBonusCareerNotCompleted": "Il est nécessaire de compléter une carrière avant de pouvoir acheter son bonus de fin de carrière"
+			"dedicationBonusCareerNotCompleted": "Il est nécessaire de compléter une carrière avant de pouvoir acheter son bonus de fin de carrière",
+			"notEnoughOpenAdvances": "Le personnage ne dispose pas d'assez d'augmentations libres."
 		},
 		"name": "Carrière",
 		"plural": "Carrières"
@@ -456,12 +494,7 @@
 			"increaseRating": "Valeur +1",
 			"upgradeCharacteristic": "Améliorer une caractéristique"
 		},
-		"WARNINGS": {
-			"noUpgradeSelected": "Aucune",
-			"notEnoughOpenAdvances": "Le personnage ne dispose pas d'assez d'augmentations libres."
-		},
-		"characteristicFortune": "Dé de Fortune {characteristic} ",
-		"characteristicRating": "Valeur de {characteristic}",
+		"WARNINGS.noUpgradeSelected": "Aucune",
 		"experienceCost": "{cost} PE",
 		"selectedUpgrade": "Augmentation sélectionnée : ",
 		"title": "Améliorateur de caractéristique"
@@ -1194,13 +1227,10 @@
 			"singleSpecialisationOnly": "Une seule spécialisation par compétence ne peut être acquise.",
 			"tooManySelection": "Trop de spécialisations sont actuellement sélectionnées. Veuillez en désélectionner certaines."
 		},
-		"acquisitionUpgrade": "{name} - Acquisition",
 		"noUpgradeSelected": "Aucune",
 		"selectedUpgrades": "Amélioration(s) sélectionnée(s) :",
 		"selectedSpecialisations": "Spécialisation(s) sélectionnée(s) :",
-		"specialisationUpgrade": "{name} - Spécialisation {value}",
-		"title": "Améliorateur de compétence",
-		"trainingLevelUpgrade": "{name} - Formation {value}"
+		"title": "Améliorateur de compétence"
 	},
 
 	"SYMBOL": {

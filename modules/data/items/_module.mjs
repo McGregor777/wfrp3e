@@ -14,6 +14,7 @@ import Talent from "./talent.mjs";
 import Trapping from "./trapping.mjs";
 import Weapon from "./weapon.mjs";
 
+export * as career from "./career/_module.mjs";
 export {default as Item} from "./item.mjs";
 export {
 	Ability,
