@@ -97,7 +97,7 @@ export default class Actor extends foundry.documents.Actor
 	async adjustStanceMeter(stance, amount)
 	{
 		if(this.system.stance[stance] + amount < 0)
-			ui.notifications.warn(game.i18n.localize("CHARACTER.WARNINGS.minimumSegment"));
+			ui.notifications.warn(game.i18n.localize("ACTOR.WARNINGS.minimumSegment"));
 
 		await this.update({system: {stance: {[`${stance}`]: this.system.stance[stance] + amount}}});
 	}
