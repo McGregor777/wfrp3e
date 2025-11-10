@@ -1,4 +1,4 @@
-<div class="item action row" data-uuid="{{action.uuid}}">
+<div class="draggable action item row" data-item-id="{{action._id}}">
 	{{#each @root.stances as |stance st|}}
 		{{#with (lookup ../action.system st) as |face|}}
 			<div class="content face {{st}}{{#if (eq ../../currentStance st)}} active{{/if}}" data-face="{{st}}">

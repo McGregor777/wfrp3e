@@ -1,7 +1,7 @@
-<div class="item critical-wound card" data-uuid="{{item.uuid}}">
+<div class="draggable critical-wound item card" data-item-id="{{item._id}}">
 	<div class="header">
 		{{#if @root.editable}}
-			<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+			<a class="name" data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 				{{item.name}}
 			</a>
 		{{else}}
@@ -19,11 +19,11 @@
 
 	<div class="bottom-line">
 		{{#if @root.editable}}
-			<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+			<a data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 				<span class="fas fa-pen-to-square"></span>
 			</a>
 
-			<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+			<a data-action="deleteItem" data-tooltip="{{localize 'Delete'}}">
 				<span class="fas fa-trash"></span>
 			</a>
 		{{/if}}

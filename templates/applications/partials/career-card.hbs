@@ -1,8 +1,8 @@
-<article class="item career game-sheet">
+<article class="draggable career item game-sheet" data-item-id="{{item._id}}">
 	<div class="face front active">
 		<div class="header">
 			{{#if @root.editable}}
-				<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+				<a class="name" data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 					{{item.name}}
 				</a>
 			{{else}}
@@ -195,11 +195,11 @@
 
 		<div>
 			{{#if @root.editable}}
-					<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+					<a data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 						<span class="fas fa-pen-to-square"></span>
 					</a>
 
-					<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+					<a data-action="deleteItem" data-tooltip="{{localize 'Delete'}}">
 						<span class="fas fa-trash"></span>
 					</a>
 			{{/if}}

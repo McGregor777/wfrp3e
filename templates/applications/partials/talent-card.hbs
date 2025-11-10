@@ -1,10 +1,10 @@
-<div class="item talent card" data-uuid="{{item.uuid}}">
+<div class="draggable talent item card" data-item-id="{{item._id}}">
 	<span class="type {{item.system.type}}">
 		{{localize item.system.type}}
 	</span>
 
 	{{#if @root.editable}}
-		<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+		<a class="name" data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 			{{item.name}}
 		</a>
 	{{else}}
@@ -31,7 +31,7 @@
 
 				{{#each item.effects as |effect|}}
 					{{#if (eq effect.system.type "onTrigger")}}
-						<a data-action="useDocument"
+						<a data-action="useItem"
 						   data-effect-uuid="{{effect.uuid}}"
 						   data-tooltip="{{localize 'TALENT.ACTIONS.trigger'}}" >
 							{{localize "TALENT.ACTIONS.trigger"}}
@@ -40,11 +40,11 @@
 				{{/each}}
 
 				<div>
-					<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+					<a data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 						<span class="fas fa-pen-to-square"></span>
 					</a>
 
-					<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+					<a data-action="deleteItem" data-tooltip="{{localize 'Delete'}}">
 						<span class="fas fa-trash"></span>
 					</a>
 				</div>

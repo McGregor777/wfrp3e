@@ -1,4 +1,4 @@
-<div class="item ability row" data-uuid="{{item.uuid}}">
+<div class="draggable ability item row" data-item-id="{{item._id}}">
 	<div class="content">
 		<div class="image">
 			<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
@@ -42,7 +42,7 @@
 			{{#if @root.editable}}
 				{{#each item.effects as |effect|}}
 					{{#if (eq effect.system.type "onTrigger")}}
-						<a data-action="useDocument"
+						<a data-action="useItem"
 						   data-effect-uuid="{{effect.uuid}}"
 						   data-tooltip="{{localize 'ABILITY.ACTIONS.trigger'}}" >
 							<span class="fas fa-dice-d20"></span>

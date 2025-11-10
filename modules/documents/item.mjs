@@ -44,14 +44,14 @@ export default class Item extends foundry.documents.Item
 	 * @param {Object} [options]
 	 * @returns {Promise<void>}
 	 */
-	async useItem(options = {})
+	async use(options = {})
 	{
 		const functionName = `_use${capitalize(this.type)}`;
 
 		if(this[`${functionName}`])
 			this[`${functionName}`](options);
 		else
-			await this.sheet.render(true);
+			await this.sheet.render({force: true});
 	}
 
 	/**

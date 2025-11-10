@@ -1,8 +1,8 @@
-<div class="item talent row {{item.system.type}}" data-uuid="{{item.uuid}}">
+<div class="draggable talent item row {{item.system.type}}" data-item-id="{{item._id}}">
 	<div class="content">
 		<div class="image">
 			<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
-				<img class="type" src="{{item.img}}" width="40" height="40" />
+				<img class="type" src="{{item.img}}" alt="{{item.name}}" width="40" height="40" />
 			</a>
 		</div>
 
@@ -46,7 +46,7 @@
 			{{#if @root.editable}}
 				{{#each item.effects as |effect|}}
 					{{#if (eq effect.system.type "onTrigger")}}
-						<a data-action="useDocument"
+						<a data-action="useItem"
 						   data-effect-uuid="{{effect.uuid}}"
 						   data-tooltip="{{localize 'TALENT.ACTIONS.trigger'}}" >
 							<span class="fas fa-dice-d20"></span>

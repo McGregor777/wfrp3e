@@ -162,7 +162,7 @@ export default class CharacterSheet extends ActorSheet
 	{
 		event.preventDefault();
 
-		const career = await this._getByUuid(event),
+		const career = this.actor.items.get(event.target.closest["data-item-id"].dataset.itemId),
 			  input = event.target,
 			  value = Number(input.value),
 			  advanceType = input.dataset.advanceType;

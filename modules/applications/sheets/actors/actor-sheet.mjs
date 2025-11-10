@@ -18,13 +18,13 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			adjustQuantity: {handler: this.#adjustQuantity, buttons: [0, 2]},
 			adjustRechargeTokens: {handler: this.#adjustRechargeTokens, buttons: [0, 2]},
 			adjustStanceMeter: {handler: this.#adjustStanceMeter, buttons: [0, 2]},
-			deleteDocument: this.#deleteDocument,
-			editDocument: this.#editDocument,
+			deleteItem: this.#deleteItem,
+			editItem: this.#editItem,
 			flip: this.#flip,
 			openFilters: this.#openFilters,
 			rollCharacteristicCheck: this.#rollCharacteristicCheck,
 			rollItem: this.#rollItem,
-			useDocument: {handler:  this.#useDocument, buttons: [0, 2]},
+			useItem: {handler:  this.#useItem, buttons: [0, 2]},
 			switchDisplayMode: this.#switchItemsDisplayMode,
 			toggleItemDetails: this.#toggleItemDetails
 		},
@@ -274,13 +274,98 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 		await this.render(options);
 	}
 
+	/**
+	 * Get the set of ContextMenu options which should be used for journal entry pages in the sidebar.
+	 * @returns {ContextMenuEntry[]}
+	 * @protected
+	 */
+	_getContextMenuOptions()
+	{
+		return [{
+			name: "ACTOR.ACTIONS.rollItem",
+			icon: '<i class="fa-solid fa-dice-d20"></i>',
+			condition: async html => {
+				const item = this.actor.items.get(html.closest("[data-item-id]").dataset.itemId);
+				return this.isEditable
+					&& item.canUserModify(game.user, "update")
+					&& ["action", "skill", "weapon"].includes(item.type)
+			},
+			callback: async html => {
+				const itemElement = html.closest("[data-item-id]"),
+					  options = {},
+					  face = html.querySelector(".face")?.dataset.face;
+
+				if(face)
+					options.face = face;
+
+				await this.actor.items.get(itemElement.dataset.itemId).use(options);
+			}
+		}, {
+			name: "Expand",
+			icon: '<i class="fa-solid fa-chevron-down"></i>',
+			condition: html => html.closest(".row:not(.expanded)"),
+			callback: async html => WFRP3eActorSheet.#toggleItemDetails(null, html)
+		}, {
+			name: "Collapse",
+			icon: '<i class="fa-solid fa-chevron-up"></i>',
+			condition: html => html.closest(".row.expanded"),
+			callback: async html => WFRP3eActorSheet.#toggleItemDetails(null, html)
+		}, {
+			name: "ACTOR.ACTIONS.flip",
+			icon: '<i class="fa-solid fa-undo"></i>',
+			condition: html => html.closest(".face") || html.querySelector(".face"),
+			callback: async html => {
+				const itemElement = html.closest(".item");
+
+				for(const element of itemElement.querySelectorAll(".face.active"))
+					element.classList.remove("active");
+
+				for(const element of itemElement.querySelectorAll(".face:not(.active)"))
+					element.classList.add("active");
+			}
+		}, {
+			name: "ACTOR.ACTIONS.editItem",
+			icon: '<i class="fa-solid fa-pen-to-square"></i>',
+			condition: html => this.isEditable
+				&& this.actor.items.get(html.closest("[data-item-id]").dataset.itemId).canUserModify(game.user, "update"),
+			callback: async html => {
+				await this.actor.items.get(html.closest("[data-item-id]").dataset.itemId).sheet.render({force: true});
+			}
+		}, {
+			name: "Delete",
+			icon: '<i class="fa-solid fa-trash"></i>',
+			condition: html => this.isEditable
+				&& this.actor.items.get(html.closest("[data-item-id]").dataset.itemId).canUserModify(game.user, "update"),
+			callback: async html => {
+				const item = this.actor.items.get(html.closest("[data-item-id]").dataset.itemId);
+
+				await foundry.applications.api.DialogV2.confirm({
+					window: {title: game.i18n.localize("APPLICATION.TITLE.DeleteItem")},
+					modal: true,
+					content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: item.name})}</p>`,
+					submit: async (result) => {
+						if(result)
+							await this.actor.deleteEmbeddedDocuments("Item", [item._id]);
+					}
+				});
+			}
+		}];
+	}
+
+	/**
+	 * Updates an embedded item whenever an input that is linked to some is changed.
+	 * @param {RenderOptions} options
+	 * @param {Event} event
+	 * @returns {Promise<void>}
+	 * @protected
+	 */
 	async _onItemInput(options, event)
 	{
 		event.preventDefault();
 		event.stopPropagation();
 
-		const item = await this._getByUuid(event),
-			  input = event.target,
+		const input = event.target,
+			  item = this.actor.items.get(input.closest("[data-item-id]").dataset.itemId),
 			  name = input.name,
 			  property = input.dataset.property;
 		let value = input.value;
@@ -300,97 +385,6 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 		}
 		else
 			await item.update({[name]: value});
-	}
-
-	/**
-	 * Get the set of ContextMenu options which should be used for journal entry pages in the sidebar.
-	 * @returns {ContextMenuEntry[]}
-	 * @protected
-	 */
-	_getContextMenuOptions()
-	{
-		return [{
-			name: "ACTOR.ACTIONS.rollItem",
-			icon: '<i class="fa-solid fa-dice-d20"></i>',
-			condition: async html => {
-				const item = await fromUuid(html.closest("[data-uuid]").dataset.uuid);
-				return this.isEditable
-					&& item.canUserModify(game.user, "update")
-					&& ["action", "skill", "weapon"].includes(item.type)
-			},
-			callback: async html => {
-				const itemElement = html.closest("[data-uuid]"),
-					  options = {},
-					  face = html.querySelector(".face")?.dataset.face;
-
-				if(face)
-					options.face = face;
-
-				const item = await fromUuid(itemElement.dataset.uuid);
-				await item.useItem(options);
-			}
-		}, {
-			name: "Expand",
-			icon: '<i class="fa-solid fa-chevron-down"></i>',
-			condition: html => html.closest(".row:not(.expanded)"),
-			callback: async html => WFRP3eActorSheet.#toggleItemDetails(null, html)
-		}, {
-			name: "Collapse",
-			icon: '<i class="fa-solid fa-chevron-up"></i>',
-			condition: html => html.closest(".row.expanded"),
-			callback: async html => WFRP3eActorSheet.#toggleItemDetails(null, html)
-		}, {
-			name: "ACTOR.ACTIONS.flip",
-			icon: '<i class="fa-solid fa-undo"></i>',
-			condition: html => html.closest(".face") || html.querySelector(".face"),
-			callback: async html => {
-				const documentElement = html.closest(".item");
-
-				for(const element of documentElement.querySelectorAll(".face.active"))
-					element.classList.remove("active");
-
-				for(const element of documentElement.querySelectorAll(".face:not(.active)"))
-					element.classList.add("active");
-			}
-		}, {
-			name: "ACTOR.ACTIONS.editDocument",
-			icon: '<i class="fa-solid fa-pen-to-square"></i>',
-			condition: html => this.isEditable
-				&& fromUuidSync(html.closest("[data-uuid]").dataset.uuid).canUserModify(game.user, "update"),
-			callback: async html => {
-				const document = await fromUuid(html.closest("[data-uuid]").dataset.uuid);
-				await document.sheet.render({force: true});
-			}
-		}, {
-			name: "Delete",
-			icon: '<i class="fa-solid fa-trash"></i>',
-			condition: html => this.isEditable
-				&& fromUuidSync(html.closest("[data-uuid]").dataset.uuid).canUserModify(game.user, "update"),
-			callback: async html => {
-				const document = await fromUuid(html.closest("[data-uuid]").dataset.uuid);
-
-				await foundry.applications.api.DialogV2.confirm({
-					window: {title: game.i18n.localize("APPLICATION.TITLE.DeleteItem")},
-					modal: true,
-					content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: document.name})}</p>`,
-					submit: async (result) => {
-						if(result)
-							await this.actor.deleteEmbeddedDocuments("Item", [document._id]);
-					}
-				});
-			}
-		}];
-	}
-
-	/**
-	 * Get a document from its uuid.
-	 * @param {Event} event
-	 * @returns {Promise<Document>}
-	 * @protected
-	 */
-	async _getByUuid(event)
-	{
-		return await fromUuid(event.target.closest("[data-uuid]").dataset.uuid);
 	}
 
 	/**
@@ -445,7 +439,8 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 				break;
 		}
 
-		await this._getByUuid(event).changeQuantity(event.ctrlKey ? amount * 10 : amount);
+		await this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId)
+			.changeQuantity(event.ctrlKey ? amount * 10 : amount);
 	}
 
 	/**
@@ -456,9 +451,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	 */
 	static async #adjustRechargeTokens(event)
 	{
-		const item = await this._getByUuid(event);
 		let amount = 0;
-
 		switch(event.button) {
 			case 0:
 				amount = 1;
@@ -468,7 +461,8 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 				break;
 		}
 
-		await item.update({"system.rechargeTokens": item.system.rechargeTokens + amount});
+		await this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId)
+			.update({"system.rechargeTokens": item.system.rechargeTokens + amount});
 	}
 
 	/**
@@ -496,36 +490,36 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	}
 
 	/**
-	 * Asks for confirmation for a specific document definitive removal.
+	 * Asks for confirmation for a specific item definitive removal.
 	 * @param {PointerEvent} event
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	static async #deleteDocument(event)
+	static async #deleteItem(event)
 	{
-		const document = await this._getByUuid(event);
+		const item = this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId);
 
 		await foundry.applications.api.DialogV2.confirm({
 			window: {title: game.i18n.localize("APPLICATION.TITLE.DeleteItem")},
 			modal: true,
-			content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: document.name})}</p>`,
+			content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: item.name})}</p>`,
 			submit: async (result) => {
 				if(result)
-					await this.actor.deleteEmbeddedDocuments("Item", [document._id]);
+					await this.actor.deleteEmbeddedDocuments("Item", [item._id]);
 			}
 		});
 	}
 
 	/**
-	 * Opens a document's sheet.
+	 * Opens an item's sheet.
 	 * @param {PointerEvent} event
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	static async #editDocument(event)
+	static async #editItem(event)
 	{
-		const document= await this._getByUuid(event);
-		await document.sheet.render({force: true});
+		await this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId)
+			.sheet.render({force: true});
 	}
 
 	/**
@@ -537,7 +531,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	 */
 	static async #toggleItemDetails(event, target)
 	{
-		const itemElement = target.closest(".item[data-uuid]"),
+		const itemElement = target.closest(".item[data-item-id]"),
 			  toggleLinks = itemElement.querySelectorAll('a[data-action="#toggleItemDetails"]');
 
 		if(itemElement.classList.contains("expanded")) {
@@ -550,7 +544,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 		}
 		else {
 			// Add the item details below the row.
-			const item = await fromUuid(itemElement.dataset.uuid),
+			const item = this.actor.items.get(itemElement.dataset.itemId),
 				  detailsElement = document.createElement("div"),
 				  options = {},
 				  activeFace = itemElement.querySelector(".active[data-face]")?.dataset.face;
@@ -626,8 +620,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 		if(face)
 			options.face = face;
 
-		const item = await this._getByUuid(event);
-		await item.useItem(options);
+		await this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId).use(options);
 	}
 
 	/**
@@ -651,20 +644,20 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	static async #useDocument(event, target)
+	static async #useItem(event, target)
 	{
-		const document = await this._getByUuid(event);
+		const item = this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId);
 
-		if(event.button === 0 && ["ability", "action", "skill", "talent", "weapon"].includes(document.type)) {
+		if(event.button === 0 && ["ability", "action", "skill", "talent", "weapon"].includes(item.type)) {
 			const options = {},
 				  face = target.closest(".face")?.dataset.face;
 
 			if(face)
 				options.face = face;
 
-			document.useItem(options);
+			await item.use(options);
 		}
 		else
-			await document.sheet.render(true);
+			await item.sheet.render(true);
 	}
 }
