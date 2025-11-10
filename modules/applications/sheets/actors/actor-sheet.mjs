@@ -304,12 +304,12 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			name: "Expand",
 			icon: '<i class="fa-solid fa-chevron-down"></i>',
 			condition: html => html.closest(".row:not(.expanded)"),
-			callback: async html => WFRP3eActorSheet.#toggleItemDetails(null, html)
+			callback: async html => ActorSheet.#toggleItemDetails(null, html, this.actor)
 		}, {
 			name: "Collapse",
 			icon: '<i class="fa-solid fa-chevron-up"></i>',
 			condition: html => html.closest(".row.expanded"),
-			callback: async html => WFRP3eActorSheet.#toggleItemDetails(null, html)
+			callback: async html => ActorSheet.#toggleItemDetails(null, html, this.actor)
 		}, {
 			name: "ACTOR.ACTIONS.flip",
 			icon: '<i class="fa-solid fa-undo"></i>',
@@ -526,11 +526,15 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	 * Appends an element with additional details about an item, or removes the element if it already exists.
 	 * @param {PointerEvent} event
 	 * @param {HTMLElement} target
+	 * @param {Actor} actor The actor owning the embedded item.
 	 * @returns {Promise<void>}
 	 * @private
 	 */
-	static async #toggleItemDetails(event, target)
+	static async #toggleItemDetails(event, target, actor = null)
 	{
+		if(!actor)
+			actor = this.actor;
+
 		const itemElement = target.closest(".item[data-item-id]"),
 			  toggleLinks = itemElement.querySelectorAll('a[data-action="#toggleItemDetails"]');
 
@@ -544,7 +548,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 		}
 		else {
 			// Add the item details below the row.
-			const item = this.actor.items.get(itemElement.dataset.itemId),
+			const item = actor.items.get(itemElement.dataset.itemId),
 				  detailsElement = document.createElement("div"),
 				  options = {},
 				  activeFace = itemElement.querySelector(".active[data-face]")?.dataset.face;
