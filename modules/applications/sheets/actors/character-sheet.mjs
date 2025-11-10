@@ -24,7 +24,7 @@ export default class CharacterSheet extends ActorSheet
 		},
 		careers: {
 			template: "systems/wfrp3e/templates/applications/sheets/actors/character-sheet/careers.hbs",
-			scrollable: [".item-container"]
+			scrollable: ["div.career.item"]
 		},
 		talents: {
 			template: "systems/wfrp3e/templates/applications/sheets/actors/talents.hbs",

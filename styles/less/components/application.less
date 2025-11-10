@@ -65,18 +65,10 @@
 		}
 
 		& > section {
-			&.overflow {
-				min-height: 0;
-				overflow-y: auto;
-			}
+			min-height: 0;
 
 			&.tab > {
 				& > *:not(a, nav.tabs):first-child {
-					margin-top: 16px;
-				}
-
-				& > a:first-child,
-				& > nav.search-bar:first-child {
 					margin-top: 8px;
 				}
 			}
@@ -674,8 +666,10 @@ body.theme-light .application.wfrp3e.sheet .window-content {
 		flex: 0;
 	}
 
-	.tab {
+	& .tab {
 		gap: 8px;
+		min-height: 0;
+		overflow-y: auto;
 	}
 }
 
