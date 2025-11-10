@@ -187,7 +187,7 @@
 					"current.label": "Current Stance",
 					"reckless.label": "Reckless Segments"
 				},
-				"label": "Attitude"
+				"label": "Stance"
 			},
 			"wounds": {
 				"label": "Wounds",
