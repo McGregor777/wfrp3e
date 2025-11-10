@@ -253,7 +253,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 		for(const element of this.element.querySelectorAll(".search-bar input.search-filter"))
 			element.addEventListener("change", this._onSearchChange.bind(this, options));
 
-		for(const element of this.element.querySelectorAll(".item-input"))
+		for(const element of this.element.querySelectorAll("input[data-item-id], select[data-item-id], [data-item-id] input, [data-item-id] select"))
 			element.addEventListener("change", this._onItemInput.bind(this, options));
 	}
 

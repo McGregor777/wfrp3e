@@ -17,22 +17,19 @@
 		</div>
 
 		<div class="training-level">
-			<input class="item-input"
-				   name="system.trainingLevel"
+			<input name="system.trainingLevel"
 				   value="1"
 				   type="checkbox"
 				   {{checked (gte skill.system.trainingLevel 1)}}
 				   {{#unless @root.editable}}disabled{{/unless}} />
 
-			<input class="item-input"
-				   name="system.trainingLevel"
+			<input name="system.trainingLevel"
 				   value="2"
 				   type="checkbox"
 				   {{checked (gte skill.system.trainingLevel 2)}}
 				   {{#unless @root.editable}}disabled{{/unless}} />
 
-			<input class="item-input"
-				   name="system.trainingLevel"
+			<input name="system.trainingLevel"
 				   value="3"
 				   type="checkbox"
 				   {{checked (gte skill.system.trainingLevel 3)}}
