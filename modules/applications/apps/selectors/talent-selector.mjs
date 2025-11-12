@@ -226,7 +226,7 @@ export default class TalentSelector extends Selector
 	static async buildAdvanceOptionsList(actor, career, nonCareerAdvance = false)
 	{
 		const talentTypeFilter = ["focus", "reputation", "tactic", "tricks"].filter(type => {
-				  return career.system.sockets.map(socket => socket.type).includes(type) !== nonCareerAdvance;
+				  return career.system.sockets.some(socket => socket.type === type) !== nonCareerAdvance;
 			  }),
 			  ownedTalentNames = actor.itemTypes.talent.map(talent => talent.name),
 			  talents = [];
@@ -253,7 +253,7 @@ export default class TalentSelector extends Selector
 	static async buildNewCharacterOptionsList(character, options = {})
 	{
 		const talentTypeFilter = Object.keys(wfrp3e.data.items.Talent.TYPES).filter(type => {
-				  return character.system.currentCareer.system.sockets.map(socket => socket.type).includes(type)
+				  return character.system.currentCareer.system.sockets.some(socket => socket.type === type)
 					  || options.freeItemTypes?.includes(type);
 			  }),
 			  itemTypes = ["talent"],
