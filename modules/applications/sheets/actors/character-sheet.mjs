@@ -75,15 +75,15 @@ export default class CharacterSheet extends ActorSheet
 				};
 				break;
 			case "careers":
-				const sortedCareers = this.actor.itemTypes.career.sort((a, b) => a.name.localeCompare(b.name)),
+				const careers = this.actor.itemTypes.career.sort((a, b) => a.name.localeCompare(b.name)),
 					  enrichment = {};
 
-				for(const career of sortedCareers)
+				for(const career of careers)
 					enrichment[career.uuid] = await textEditor.enrichHTML(career.system.description);
 
 				partContext = {
 					...partContext,
-					careers: sortedCareers,
+					careers,
 					characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
 					enrichment,
 					fields: this.actor.system.schema.fields,
