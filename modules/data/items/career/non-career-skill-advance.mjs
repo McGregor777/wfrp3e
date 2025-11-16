@@ -9,6 +9,16 @@ import NonCareerAdvance from "./non-career-advance.mjs";
  */
 export default class NonCareerSkillAdvance extends NonCareerAdvance
 {
+	/**
+	 * The default values for a non-career skill advance.
+	 * @returns {{cost: 0, type: "nonCareerSkill", uuid: null, upgradeType: "acquisition", value: null}}
+	 * @protected
+	 */
+	static get _defaults()
+	{
+		return Object.assign(super._defaults, {uuid: null, upgradeType: "acquisition", value: null});
+	}
+
 	static {
 		Object.defineProperty(this, "TYPE", {value: "nonCareerSkill"});
 	}
@@ -89,5 +99,37 @@ export default class NonCareerSkillAdvance extends NonCareerAdvance
 			uuid: skill.uuid,
 			value: upgrade.value
 		};
+	}
+
+	/** @inheritDoc */
+	async cancelChanges()
+	{
+		const skill = await fromUuid(this.uuid),
+			  upgradeType = this.upgradeType;
+
+		if(upgradeType === "acquisition")
+			try {
+				await this.parent.parent.parent.deleteEmbeddedDocuments("Item", [skill._id]);
+			}
+			catch(error) {
+				ui.notifications.error(error);
+			}
+		else {
+			const propertyPath = `system.${upgradeType}`,
+				  currentValue = foundry.utils.getProperty(skill, propertyPath);
+
+			if(upgradeType === "trainingLevel")
+				await skill.update({[propertyPath]: currentValue - 1});
+			else if(upgradeType === "specialisation") {
+				const match = currentValue.match(new RegExp(`(, )?(${this.value})`));
+				match
+					? await skill.update({[propertyPath]: currentValue.replace(match[0], "")})
+					: ui.notifications.error(
+						game.i18n.format("CAREER.WARNINGS.specialisationNotFound", {specialisation: this.value})
+					);
+			}
+			else
+				throw new Error(`Unknown upgrade type: ${upgradeType}`);
+		}
 	}
 }

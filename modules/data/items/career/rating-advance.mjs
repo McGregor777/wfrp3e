@@ -8,6 +8,18 @@ import CareerAdvance from "./career-advance.mjs";
  */
 export default class RatingAdvance extends CareerAdvance
 {
+	/**
+	 * The default values for a rating advance.
+	 * @returns {{active: false, type: "rating", characteristic: string}}
+	 * @protected
+	 */
+	static get _defaults()
+	{
+		return Object.assign(super._defaults, {
+			characteristic: Object.keys(wfrp3e.data.actors.Actor.CHARACTERISTICS)[0]
+		});
+	}
+
 	static {
 		Object.defineProperty(this, "TYPE", {value: "rating"});
 	}
@@ -122,5 +134,14 @@ export default class RatingAdvance extends CareerAdvance
 		}
 
 		return super._checkForError(career, {index});
+	}
+
+	/** @inheritDoc */
+	async cancelChanges()
+	{
+		const actor = this.parent.parent.parent,
+			  propertyPath = `system.characteristics.${this.characteristic}.${this.TYPE}`;
+
+		await actor.update({[propertyPath]: +foundry.utils.getProperty(actor, propertyPath) - 1});
 	}
 }

@@ -165,14 +165,17 @@ export default class CharacterSheet extends ActorSheet
 		event.preventDefault();
 
 		const career = this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId),
-			  input = event.target,
-			  matches = input.name.match(new RegExp(/^system.advances.(\w+)/)),
-			  advanceType = matches[1],
-			  index = +event.target.closest("[data-index]")?.dataset.index;
+			  input = event.target;
 
-		if(input.defaultChecked)
-			await career.parent.disableAdvance(career, advanceType, index);
+		if(input.defaultChecked) {
+			const matches = input.name.match(new RegExp(/^(system.advances.\w+).?(\d+)?/)),
+				  advance = foundry.utils.getProperty(career, matches[1]);
+			await advance.cancelAdvance(matches[2]);
+		}
 		else {
+			const matches = input.name.match(new RegExp(/^system.advances.(\w+)/)),
+				  advanceType = matches[1];
+
 			input.checked = false;
 			await career.system.buyAdvance(advanceType);
 		}

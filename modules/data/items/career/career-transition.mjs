@@ -7,6 +7,16 @@
 export default class CareerTransition extends foundry.abstract.DataModel
 {
 	/**
+	 * The default values for a career transition advance.
+	 * @returns {{active: false, cost: 0, uuid: null}}
+	 * @protected
+	 */
+	static get _defaults()
+	{
+		return {active: false, cost: 0, uuid: null};
+	}
+
+	/**
 	 * The type of this advance.
 	 * @type {string}
 	 */
@@ -69,5 +79,26 @@ export default class CareerTransition extends foundry.abstract.DataModel
 		/** @see wfrp3e.documents.Item._onCareerUpdate */
 		await newCareer.update({"system.current": true});
 		await career.parent.update({"system.advances.careerTransition": {active: true, cost, uuid: newCareer.uuid}});
+	}
+
+	/**
+	 * Asks for confirmation to cancel a career transition advance alongside its changes.
+	 * @returns {Promise<void>}
+	 */
+	async cancelAdvance()
+	{
+		if(!this.active)
+			return ui.notifications.error("Unable to cancel the advance: it is not bought.");
+
+		const proceed = await foundry.applications.api.DialogV2.confirm({
+			window: {title: game.i18n.localize("CAREER.DIALOG.cancelAdvance.title")},
+			modal: true,
+			content: game.i18n.localize("CAREER.DIALOG.cancelAdvance.description")
+		});
+
+		if(proceed) {
+			await this.parent.parent.parent.deleteEmbeddedDocuments("Item", [foundry.utils.parseUuid(this.uuid).id]);
+			await this.parent.parent.update({[`system.advances.${this.constructor.TYPE}`]: this.constructor._defaults});
+		}
 	}
 }

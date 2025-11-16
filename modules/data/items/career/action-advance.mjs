@@ -8,6 +8,16 @@ import CareerAdvance from "./career-advance.mjs";
  */
 export default class ActionAdvance extends CareerAdvance
 {
+	/**
+	 * The default values for an action advance.
+	 * @returns {{active: false, type: "action", uuid: null}}
+	 * @protected
+	 */
+	static get _defaults()
+	{
+		return Object.assign(super._defaults, {uuid: null});
+	}
+
 	static {
 		Object.defineProperty(this, "TYPE", {value: "action"});
 	}
@@ -47,5 +57,16 @@ export default class ActionAdvance extends CareerAdvance
 
 		const actions = await actor.createEmbeddedDocuments("Item", [await fromUuid(selectedActionUuids[0])]);
 		return {...await super._operateChanges(career, index), uuid: actions[0].uuid};
+	}
+
+	/** @inheritDoc */
+	async cancelChanges()
+	{
+		try {
+			await this.parent.parent.parent.deleteEmbeddedDocuments("Item", [foundry.utils.parseUuid(this.uuid).id]);
+		}
+		catch(error) {
+			ui.notifications.error(error);
+		}
 	}
 }

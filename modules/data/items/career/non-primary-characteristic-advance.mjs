@@ -8,6 +8,18 @@ import NonCareerAdvance from "./non-career-advance.mjs";
  */
 export default class NonPrimaryCharacteristicAdvance extends NonCareerAdvance
 {
+	/**
+	 * The default values for a rating advance.
+	 * @returns {{cost: 0, type: "nonPrimaryCharacteristic", characteristic: string}}
+	 * @protected
+	 */
+	static get _defaults()
+	{
+		return Object.assign(super._defaults, {
+			characteristic: Object.keys(wfrp3e.data.actors.Actor.CHARACTERISTICS)[0]
+		});
+	}
+
 	static {
 		Object.defineProperty(this, "TYPE", {value: "nonPrimaryCharacteristic"});
 	}
@@ -59,5 +71,14 @@ export default class NonPrimaryCharacteristicAdvance extends NonCareerAdvance
 			characteristic: upgrade.characteristic,
 			type: this.TYPE
 		};
+	}
+
+	/** @inheritDoc */
+	async cancelChanges()
+	{
+		const actor = this.parent.parent.parent,
+			  propertyPath = `system.characteristics.${this.characteristic}.${this.TYPE}`;
+
+		await actor.update({[propertyPath]: +foundry.utils.getProperty(actor, propertyPath) - 1});
 	}
 }

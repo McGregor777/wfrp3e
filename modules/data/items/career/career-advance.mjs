@@ -7,6 +7,16 @@
 export default class CareerAdvance extends foundry.abstract.DataModel
 {
 	/**
+	 * The default values for a career advance.
+	 * @returns {{active: false, type: string}}
+	 * @protected
+	 */
+	static get _defaults()
+	{
+		return {active: false, type: Object.keys(this.TYPES)[0]};
+	}
+
+	/**
 	 * The types of open career advance.
 	 * @type {Readonly<{
 	 *   action: ActionAdvance
@@ -126,8 +136,7 @@ export default class CareerAdvance extends foundry.abstract.DataModel
 	}
 
 	/**
-	 * Asks the user for specific selection if needed, then builds an object of changes that may be used
-	 * to activate an advance.
+	 * Asks the user for specific selection if needed, then builds an object of changes that may be used to activate an advance.
 	 * @param {Career} career The career containing the advance.
 	 * @param {number} [index] The index of the concerned advance if it is an open one.
 	 * @returns {Object} An object of relevant changes for the advance.
@@ -159,4 +168,40 @@ export default class CareerAdvance extends foundry.abstract.DataModel
 
 		return false;
 	}
+
+	/**
+	 * Asks for confirmation to cancel a career advance alongside its changes.
+	 * @param {Number} [index] The index of the open advance, null otherwise.
+	 * @returns {Promise<void>}
+	 */
+	async cancelAdvance(index)
+	{
+		if(!this.active)
+			return ui.notifications.error("Unable to cancel the advance: it is not bought.");
+
+		const proceed = await foundry.applications.api.DialogV2.confirm({
+			window: {title: game.i18n.localize("CAREER.DIALOG.cancelAdvance.title")},
+			modal: true,
+			content: game.i18n.localize("CAREER.DIALOG.cancelAdvance.description")
+		});
+
+		if(proceed) {
+			await this.cancelChanges();
+
+			if(index) {
+				const openAdvances = this.parent.simpleOpenAdvances;
+				openAdvances[index] = this.constructor._defaults;
+
+				await this.parent.parent.update({"system.advances.open": openAdvances});
+			}
+			else
+				await this.parent.parent.update({[`system.advances.${this.constructor.TYPE}`]: this.constructor._defaults});
+		}
+	}
+
+	/**
+	 * Cancels any changes made by the advance to the actor.
+	 * @returns {Promise<void>}
+	 */
+	async cancelChanges() {}
 }

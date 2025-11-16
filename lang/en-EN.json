@@ -270,6 +270,10 @@
 				"output": "Wound Threshold"
 			}
 		},
+		"DIALOG.cancelAdvance": {
+			"description": "Do you wish to cancel the advance? All the changes it implied will be cancelled.",
+			"title": "Cancel Advance"
+		},
 		"FIELDS": {
 			"advanced.label": "Advanced Career",
 			"advanceOptions": {

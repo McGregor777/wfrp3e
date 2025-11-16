@@ -272,6 +272,10 @@
 				"output": "Point de Blessure"
 			}
 		},
+		"DIALOG.cancelAdvance": {
+			"description": "Souhaitez-vous annuler l'augmentation ? Tous les changements qu'elle implique seront également annulés.",
+			"title": "Annulation de l'augmentation"
+		},
 		"FIELDS": {
 			"advanced.label": "Carrière Avancée",
 			"advanceOptions": {

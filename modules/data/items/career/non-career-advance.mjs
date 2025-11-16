@@ -7,6 +7,16 @@
 export default class NonCareerAdvance extends foundry.abstract.DataModel
 {
 	/**
+	 * The default values for a non-career advance.
+	 * @returns {{cost: 0, type: "nonCareer"}}
+	 * @protected
+	 */
+	static get _defaults()
+	{
+		return Object.assign(super._defaults, {cost: 0, type: Object.keys(this.TYPES)[0]});
+	}
+
+	/**
 	 * The types of non-career advance.
 	 * @type {Readonly<{
 	 *   nonPrimaryCharacteristic: NonPrimaryCharacteristicAdvance
@@ -102,4 +112,36 @@ export default class NonCareerAdvance extends foundry.abstract.DataModel
 
 		return false;
 	}
+
+	/**
+	 * Asks for confirmation to cancel a non-career advance alongside its changes.
+	 * @param {Number} index The index of the non-career advance.
+	 * @returns {Promise<void>}
+	 */
+	async cancelAdvance(index)
+	{
+		if(!this.cost)
+			return ui.notifications.error("Unable to cancel the advance: it is not bought.");
+
+		const proceed = await foundry.applications.api.DialogV2.confirm({
+			window: {title: game.i18n.localize("CAREER.DIALOG.cancelAdvance.title")},
+			modal: true,
+			content: game.i18n.localize("CAREER.DIALOG.cancelAdvance.description")
+		});
+
+		if(proceed) {
+			await this.cancelChanges();
+
+			const openAdvances = this.parent.simpleOpenAdvances;
+			openAdvances[index] = this.constructor._defaults;
+
+			await this.parent.parent.update({"system.advances.open": openAdvances});
+		}
+	}
+
+	/**
+	 * Cancels any changes made by the advance to the actor.
+	 * @returns {Promise<void>}
+	 */
+	async cancelChanges() {}
 }

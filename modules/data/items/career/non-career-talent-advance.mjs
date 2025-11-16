@@ -8,6 +8,16 @@ import NonCareerAdvance from "./non-career-advance.mjs";
  */
 export default class NonCareerTalentAdvance extends NonCareerAdvance
 {
+	/**
+	 * The default values for a non-career talent advance.
+	 * @returns {{cost: 0, type: "nonCareerTalent", uuid: null}}
+	 * @protected
+	 */
+	static get _defaults()
+	{
+		return Object.assign(super._defaults, {uuid: null});
+	}
+
 	static {
 		Object.defineProperty(this, "TYPE", {value: "nonCareerTalent"});
 	}
@@ -51,5 +61,16 @@ export default class NonCareerTalentAdvance extends NonCareerAdvance
 
 		const talents = await actor.createEmbeddedDocuments("Item", [await fromUuid(selectedTalentUuids[0])]);
 		return {...await super._operateChanges(career, index), uuid: talents[0].uuid};
+	}
+
+	/** @inheritDoc */
+	async cancelChanges()
+	{
+		try {
+			await this.parent.parent.parent.deleteEmbeddedDocuments("Item", [foundry.utils.parseUuid(this.uuid).id]);
+		}
+		catch(error) {
+			ui.notifications.error(error);
+		}
 	}
 }

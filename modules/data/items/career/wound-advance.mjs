@@ -25,4 +25,27 @@ export default class WoundAdvance extends CareerAdvance
 		await actor.update(changes);
 		return await super._operateChanges(career, index);
 	}
+
+	/** @inheritDoc */
+	async cancelChanges()
+	{
+		await this.changeWoundThreshold(-1);
+	}
+
+	/**
+	 * Changes the wound threshold of the actor owning this career advance.
+	 * @param {number} change The number by which to change the wound threshold.
+	 */
+	async changeWoundThreshold(change)
+	{
+		const actor = this.parent.parent.parent,
+			  propertyPath = "system.wounds",
+			  wounds =  foundry.utils.getProperty(actor, propertyPath),
+			  changes = {[propertyPath]: {max: actor.system.wounds.max + change}};
+
+		if(wounds.value === wounds.max)
+			changes[propertyPath].value = changes[propertyPath].max;
+
+		await actor.update(changes);
+	}
 }

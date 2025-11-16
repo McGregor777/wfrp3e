@@ -22,4 +22,22 @@ export default class StanceAdvance extends CareerAdvance
 
 		return await super._operateChanges(career, index);
 	}
+
+	/** @inheritDoc */
+	async cancelChanges()
+	{
+		await this.changeWoundThreshold(-1);
+	}
+
+	/**
+	 * Changes the stance meter of the actor owning this career advance.
+	 * @param {number} change The number by which to change the wound threshold.
+	 */
+	async changeStanceMeter(change)
+	{
+		const actor = this.parent.parent.parent,
+			  propertyPath = `system.stance.${this.TYPE}`;
+
+		await actor.update({[propertyPath]: +foundry.utils.getProperty(actor, propertyPath) + change});
+	}
 }
