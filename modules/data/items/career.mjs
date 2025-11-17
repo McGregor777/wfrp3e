@@ -162,6 +162,40 @@ export default class Career extends Item
 	}
 
 	/**
+	 * Reassigns proper uuids upon cloning a career to have them pointing to the cloned actor-embedded items instead of the old actor ones.
+	 * @param {Object} career The career data.
+	 * @param {string} newOwnerId The id of the new actor owning the career.
+	 */
+	static postCloningCleanup(career, newOwnerId)
+	{
+		this.checkAdvanceUuids(Object.values(career.system.advances), career, newOwnerId);
+	}
+
+	/**
+	 * Checks the uuid value of a list of advances and replaces the uuid if required.
+	 * @param {Array[Object]|Object} advances Either a list of advances or a single advance to check up.
+	 * @param {Object} career The career data.
+	 * @param {string} newOwnerId The id of the new actor owning the career.
+	 * @param {string|null} [formerOwnerId] The id of the former actor owning the career.
+	 */
+	static checkAdvanceUuids(advances, career, newOwnerId, formerOwnerId = null)
+	{
+		for(const advance of advances)
+			if(Array.isArray(advance))
+				this.checkAdvanceUuids(advance, career, newOwnerId, formerOwnerId);
+			else if((advance.active || advance.cost) && advance.uuid) {
+				if(formerOwnerId === null) {
+					formerOwnerId = advance.uuid.match(/^Actor.([\d\w]{16}).Item.[\d\w]{16}$/)[1];
+
+					if(newOwnerId === formerOwnerId)
+						return;
+				}
+
+				advance.uuid = advance.uuid.replace(formerOwnerId, newOwnerId);
+			}
+	}
+
+	/**
 	 * Getter method to retrieve the total amount of experience spent on the career.
 	 * @returns {number} - The total experience spent.
 	 */
@@ -362,5 +396,39 @@ export default class Career extends Item
 		}
 
 		return cost;
+	}
+
+	/**
+	 * Reassigns proper uuids upon cloning a career to have them pointing to the cloned actor embedded items instead of the old actor ones.
+	 * @param {Object} career The career data.
+	 * @param {string} newOwnerId The id of the new actor owning the career.
+	 */
+	static postCloningCleanup(career, newOwnerId)
+	{
+		this.checkAdvanceUuids(Object.values(career.system.advances), career, newOwnerId);
+	}
+
+	/**
+	 * Checks the uuid value of a list of advances and replaces the uuid if required.
+	 * @param advances A list of advances to check up.
+	 * @param {Object} career The career data.
+	 * @param {string} newOwnerId The id of the new actor owning the career.
+	 * @param {string|null} [formerOwnerId] The id of the former actor owning the career.
+	 */
+	static checkAdvanceUuids(advances, career, newOwnerId, formerOwnerId = null)
+	{
+		for(const advance of advances)
+			if(Array.isArray(advance))
+				this.checkAdvanceUuids(advance, career, newOwnerId, formerOwnerId);
+			else if((advance.active || advance.cost) && advance.uuid) {
+				if(formerOwnerId === null) {
+					formerOwnerId = advance.uuid.match(/^Actor.([\d\w]{16}).Item.[\d\w]{16}$/)[1];
+
+					if(newOwnerId === formerOwnerId)
+						return;
+				}
+
+				advance.uuid = advance.uuid.replace(formerOwnerId, newOwnerId);
+			}
 	}
 }

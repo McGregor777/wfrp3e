@@ -22,7 +22,7 @@ export default class Actor extends foundry.documents.Actor
 				this[functionName](data, options, userId);
 		}
 		catch(exception) {
-			console.error(`Something went wrong when updating the Item ${this.name} of type ${this.type}: ${exception}`);
+			console.error(`Something went wrong when updating the Actor ${this.name} of type ${this.type}: ${exception}`);
 		}
 	}
 
@@ -38,7 +38,7 @@ export default class Actor extends foundry.documents.Actor
 				this[functionName](options, userId);
 		}
 		catch(exception) {
-			console.error(`Something went wrong when updating the Item ${this.name} of type ${this.type}: ${exception}`);
+			console.error(`Something went wrong when updating the Actor ${this.name} of type ${this.type}: ${exception}`);
 		}
 	}
 
@@ -54,7 +54,7 @@ export default class Actor extends foundry.documents.Actor
 				this[functionName](changed, options, userId);
 		}
 		catch(exception) {
-			console.error(`Something went wrong when updating the Item ${this.name} of type ${this.type}: ${exception}`);
+			console.error(`Something went wrong when updating the Actor ${this.name} of type ${this.type}: ${exception}`);
 		}
 	}
 
@@ -371,16 +371,20 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	//#region Character methods
-	
+
 	/**
 	 * Post-process a creation operation for a single character instance. Post-operation events occur for all connected clients.
-	 * @param {Object} data The initial data object provided to the document creation request
-	 * @param {Object} options Additional options which modify the creation request
-	 * @param {string} userId The id of the user requesting the document update
+	 * @param {Object} data The initial data object provided to the character creation request.
+	 * @param {Object} options Additional options which modify the creation request.
+	 * @param {string} userId The id of the User requesting the character update.
 	 * @protected
 	 */
 	_onCharacterCreate(data, options, userId)
 	{
+		for(const item of data.items)
+			if(item.type === "career")
+				wfrp3e.data.items.Career.postCloningCleanup(item, data._id);
+
 		if(this.system.party)
 			this.update({"system.party": null});
 	}

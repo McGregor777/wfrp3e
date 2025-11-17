@@ -9,6 +9,22 @@ import {capitalize} from "../helpers.mjs";
 export default class Item extends foundry.documents.Item
 {
 	/** @inheritDoc */
+	_onCreate(data, options, userId)
+	{
+		super._onCreate(data, options, userId);
+
+		try {
+			const functionName = `_on${capitalize(this.type)}Create`;
+
+			if(this[functionName])
+				this[functionName](data, options, userId);
+		}
+		catch(exception) {
+			console.error(`Something went wrong when creating the Item ${this.name} of type ${this.type}: ${exception}`);
+		}
+	}
+
+	/** @inheritDoc */
 	_onUpdate(changed, options, userId)
 	{
 		super._onUpdate(changed, options, userId);
@@ -298,10 +314,23 @@ export default class Item extends foundry.documents.Item
 	//#region Career methods
 
 	/**
+	 * Post-process a creation operation for a single career instance. Post-operation events occur for all connected clients.
+	 * @param data The initial data object provided to the career creation request.
+	 * @param options Additional options which modify the creation request.
+	 * @param userId The id of the User requesting the career update.
+	 * @protected
+	 */
+	_onCareerCreate(data, options, userId)
+	{
+		if(data.parent)
+			this.system.postCloningCleanup(data, data.parent._id);
+	}
+
+	/**
 	 * Post-process an update operation for a single career instance. Post-operation events occur for all connected clients.
-	 * @param changed {any} The differential data that was changed relative to the documents prior values
-	 * @param options {any} Additional options which modify the update request
-	 * @param userId {string} The id of the user requesting the career update
+	 * @param {Object} changed The differential data that was changed relative to the career's prior values.
+	 * @param {Object} options Additional options which modify the update request.
+	 * @param {string} userId The id of the User requesting the career update.
 	 * @protected
 	 */
 	_onCareerUpdate(changed, options, userId)
