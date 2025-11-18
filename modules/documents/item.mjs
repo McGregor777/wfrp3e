@@ -25,6 +25,22 @@ export default class Item extends foundry.documents.Item
 	}
 
 	/** @inheritDoc */
+	_onDelete(options, userId)
+	{
+		super._onDelete(options, userId);
+
+		try {
+			const functionName = `_on${capitalize(this.type)}Delete`;
+
+			if(this[functionName])
+				this[functionName](options, userId);
+		}
+		catch(exception) {
+			console.error(`Something went wrong when deleting the Item ${this.name} of type ${this.type}: ${exception}`);
+		}
+	}
+
+	/** @inheritDoc */
 	_onUpdate(changed, options, userId)
 	{
 		super._onUpdate(changed, options, userId);
@@ -338,6 +354,18 @@ export default class Item extends foundry.documents.Item
 
 	/**
 	 * Post-process an update operation for a single career instance. Post-operation events occur for all connected clients.
+	 * @param {Object} options Additional options which modify the update request.
+	 * @param {string} userId The id of the User requesting the career update.
+	 * @protected
+	 */
+	_onCareerDelete(options, userId)
+	{
+		if(this.actor && this.system.current)
+			this.#onCurrentCareerDelete();
+	}
+
+	/**
+	 * Post-process an update operation for a single career instance. Post-operation events occur for all connected clients.
 	 * @param {Object} changed The differential data that was changed relative to the career's prior values.
 	 * @param {Object} options Additional options which modify the update request.
 	 * @param {string} userId The id of the User requesting the career update.
@@ -352,6 +380,20 @@ export default class Item extends foundry.documents.Item
 			if(changed.system?.sockets)
 				this.#onCareerSocketChange(changed.system.sockets);
 		}
+	}
+
+	/**
+	 * Defines the second last career of the character as the current career when the actual one is deleted.
+	 * Also resets the talent sockets.
+	 */
+	#onCurrentCareerDelete()
+	{
+		const careerList = this.actor.itemTypes.career;
+		for(let i = careerList.length; i <= 0; i--)
+			if(careerList[i] !== this)
+				careerList[i].update({"system.current": false});
+
+		this.actor.resetSockets(this.uuid);
 	}
 
 	/**
