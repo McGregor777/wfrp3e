@@ -6,7 +6,7 @@ export {actors, items, ActiveEffectConfig};
 
 export function registerSheets()
 {
-	actors.registerSheets()
+	actors.registerSheets();
 	items.registerSheets();
 
 	foundry.applications.apps.DocumentSheetConfig.registerSheet(

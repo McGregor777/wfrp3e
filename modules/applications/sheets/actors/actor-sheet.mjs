@@ -446,7 +446,6 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			.changeQuantity(event.ctrlKey ? amount * 10 : amount);
 	}
 
-	//#TODO Make sure context menu doesn't prevent from interacting with recharge tokens
 	/**
 	 * Either adds or removes a recharge token on an item depending on the clicked button.
 	 * @param {PointerEvent} event

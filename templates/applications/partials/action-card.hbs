@@ -91,7 +91,8 @@
 						</div>
 
 						{{#if @root.editable}}
-							<a class="recharge-token" data-action="adjustRechargeTokens"
+							<a class="recharge-token prevent-context"
+							   data-action="adjustRechargeTokens"
 							   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}">
 								<img src="systems/wfrp3e/assets/images/token-black.webp"
 									 alt="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}" />

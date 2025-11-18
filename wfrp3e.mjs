@@ -43,6 +43,7 @@ Hooks.once("init", async () => {
 	wfrp3e.applications.initialiseTextEnrichers();
 	wfrp3e.applications.sheets.registerSheets();
 	wfrp3e.applications.sidebar.tabs.configureTabs();
+	wfrp3e.applications.ux.replaceContextMenu();
 	wfrp3e.data.assignDataModels();
 	wfrp3e.dice.assignRollClasses();
 	wfrp3e.dice.terms.assignTerms();
