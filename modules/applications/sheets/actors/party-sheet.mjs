@@ -70,7 +70,7 @@ export default class PartySheet extends ActorSheet
 							)
 						}
 					},
-					members: this.actor.system.members.map(member => fromUuidSync(member)),
+					members: this.actor.system.members.map(uuid => fromUuidSync(uuid) ?? {uuid}),
 					fields: this.actor.system.schema.fields
 				};
 				break;
