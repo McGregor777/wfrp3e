@@ -117,6 +117,8 @@ export default class CharacterSheet extends ActorSheet
 				tabs.careers.cssClass += " hidden";
 		}
 		else if(group === "careers") {
+			let currentCareer = this.actor.system.currentCareer;
+
 			for(const index in this.actor.itemTypes.career) {
 				const career = this.actor.itemTypes.career[index];
 				let tab = {
@@ -125,10 +127,14 @@ export default class CharacterSheet extends ActorSheet
 					label: career.name
 				};
 
-				if(career.system.current)
-					tab.icon = "fa fa-check";
-
-				if(career.system.current || !this.actor.system.currentCareer && index === 0)
+				if(career === currentCareer)
+					tab = {
+						...tab,
+						active: true,
+						cssClass: "active",
+						icon: "fa fa-check"
+					};
+				else if(!currentCareer && index === 0)
 					tab = {
 						...tab,
 						active: true,
