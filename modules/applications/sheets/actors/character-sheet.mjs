@@ -187,17 +187,13 @@ export default class CharacterSheet extends ActorSheet
 		}
 	}
 
-	//#TODO Move the logic of this method to the actor document class.
 	/**
-	 * Adds every basic skill to the Character.
+	 * Adds every basic skill to the character.
 	 * @returns {Promise<void>}
 	 * @private
 	 */
 	static async #addBasicSkills()
 	{
-		await Item.createDocuments(
-			await game.packs.get("wfrp3e.items").getDocuments({type: "skill", system: {advanced: false}}),
-			{parent: this.actor}
-		);
+		await this.actor.addBasicSkills();
 	}
 }

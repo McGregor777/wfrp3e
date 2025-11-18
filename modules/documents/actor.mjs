@@ -389,6 +389,18 @@ export default class Actor extends foundry.documents.Actor
 			this.update({"system.party": null});
 	}
 
+	/**
+	 * Adds every basic skill to the character.
+	 * @returns {Promise<void>}
+	 */
+	async addBasicSkills()
+	{
+		await this.createEmbeddedDocuments(
+			"Item",
+			await game.packs.get("wfrp3e.items").getDocuments({type: "skill", system: {advanced: false}})
+		);
+	}
+
 	//#endregion
 	//#region Party methods
 
