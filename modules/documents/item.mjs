@@ -84,6 +84,16 @@ export default class Item extends foundry.documents.Item
 		}, {parent: this});
 	}
 
+	/**
+	 * Either adds or removes a recharge token on an item.
+	 * @param {number} amount The number of recharge token to add or remove.
+	 * @returns {Promise<void>}
+	 */
+	async adjustRechargeTokens(amount)
+	{
+		await this.update({"system.rechargeTokens": this.system.rechargeTokens + amount});
+	}
+
 	//#region Ability methods
 
 	/**

@@ -447,7 +447,6 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	}
 
 	//#TODO Make sure context menu doesn't prevent from interacting with recharge tokens
-	//#TODO Move the logic to the item document class
 	/**
 	 * Either adds or removes a recharge token on an item depending on the clicked button.
 	 * @param {PointerEvent} event
@@ -466,8 +465,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 				break;
 		}
 
-		await this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId)
-			.update({"system.rechargeTokens": item.system.rechargeTokens + amount});
+		await this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId).adjustRechargeTokens(amount);
 	}
 
 	/**
