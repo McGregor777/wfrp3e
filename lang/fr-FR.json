@@ -458,6 +458,7 @@
 			"notEnoughExperienceForNonCareerAdvance": "Vous n'avez pas assez d'expérience pour acheter une augmentation extracurriculaire.",
 			"noSkill": "<em><strong>{actor}</em></strong> ne possède aucune compétence. Souhaitez-vous donner les compétences de base à <em><strong>{actor}</em></strong> ?"
 		},
+		"rank": "Rang : {rank}",
 		"woundThreshold": "Plafond de Blessures"
 	},
 

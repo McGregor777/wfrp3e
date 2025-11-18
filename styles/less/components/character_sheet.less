@@ -1,12 +1,40 @@
 .application.wfrp3e.character .window-content {
-	& > header.sheet-header > .form-group.experience {
-		& input {
-			width: 36px;
+	& > header.sheet-header {
+		& > .rank {
+			display: grid;
+			grid-template-areas:
+				'race-image rank'
+				'race-image origin-image';
+			grid-template-columns: 64px auto;
+			grid-template-rows: min-content 42px;
+
+			& > div {
+				font: small-caps bold var(--font-size-18) var(--font-primary);
+				grid-area: rank;
+			}
+
+			& .origin-img {
+				grid-area: origin-image;
+				height: 100%;
+				margin: auto;
+			}
+
+			& .race-img {
+				grid-area: race-image;
+				height: 100%;
+				margin: auto;
+			}
 		}
 
-		& .form-fields {
-			text-align: center;
-			width: 100%;
+		& > .form-group.experience {
+			& input {
+				width: 36px;
+			}
+
+			& .form-fields {
+				text-align: center;
+				width: 100%;
+			}
 		}
 	}
 

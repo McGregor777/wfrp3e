@@ -27,7 +27,7 @@ export default class Character extends Actor
 						"Compendium.wfrp3e.items.Item.gToY5Bonw9mAVzkU",
 						"Compendium.wfrp3e.items.Item.ppkk6UNuhTnGqrY6"
 					],
-					art: "systems/wfrp3e/assets/images/races/empire.webp",
+					art: "systems/wfrp3e/assets/images/origins/reikland.webp",
 					corruption: 5,
 					introduction: "ORIGIN.reiklander.introduction",
 					name: "ORIGIN.reiklander.name",
@@ -56,7 +56,7 @@ export default class Character extends Actor
 						"Compendium.wfrp3e.items.Item.5zLg7T9FTNvgtJp1",
 						"Compendium.wfrp3e.items.Item.VHiON3EQ7VMe41jT"
 					],
-					art: "systems/wfrp3e/assets/images/races/dwarf.webp",
+					art: "systems/wfrp3e/assets/images/origins/karak_azgaraz.jpg",
 					corruption: 10,
 					introduction: "ORIGIN.karakAzgaraz.introduction",
 					name: "ORIGIN.karakAzgaraz.name",
@@ -85,7 +85,7 @@ export default class Character extends Actor
 						"Compendium.wfrp3e.items.Item.zvzzGw8UBrM5GNfL",
 						"Compendium.wfrp3e.items.Item.VHiON3EQ7VMe41jT"
 					],
-					art: "systems/wfrp3e/assets/images/races/high_elf.webp",
+					art: "systems/wfrp3e/assets/images/origins/ulthuan.webp",
 					corruption: 10,
 					introduction: "ORIGIN.ulthuan.introduction",
 					name: "ORIGIN.ulthuan.name",
@@ -114,7 +114,7 @@ export default class Character extends Actor
 						"Compendium.wfrp3e.items.Item.djj9tirxRkjnPrBp",
 						"Compendium.wfrp3e.items.Item.VHiON3EQ7VMe41jT"
 					],
-					art: "systems/wfrp3e/assets/images/races/wood_elf.webp",
+					art: "systems/wfrp3e/assets/images/origins/athel_loren.webp",
 					corruption: 10,
 					introduction: "ORIGIN.athelLoren.introduction",
 					name: "ORIGIN.athelLoren.name",

@@ -456,6 +456,7 @@
 			"notEnoughExperienceForNonCareerAdvance": "You don't have enough Experience to buy a non-career advance.",
 			"noSkill": "<em><strong>{actor}</em></strong> has no skill. Do you wish to give <em><strong>{actor}</em></strong> all the basic skills?"
 		},
+		"rank": "Rank: {rank}",
 		"woundThreshold": "Wound Threshold"
 	},
 
