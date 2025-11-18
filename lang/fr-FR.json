@@ -1163,6 +1163,7 @@
 	"SCRIPT": {
 		"TYPES": {
 			"onCareerSocket": "Placement sur un emplacement de talent de carrière",
+			"onCareerTransition": "Transition de carrière",
 			"onCheckPreparation": "Préparation d'un test",
 			"onCheckRoll": "Réalisation d'un test",
 			"onCreationPointInvestment": "Investissement des points de création",

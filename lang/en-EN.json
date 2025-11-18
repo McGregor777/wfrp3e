@@ -1161,6 +1161,7 @@
 	"SCRIPT": {
 		"TYPES": {
 			"onCareerSocket": "Career Socket",
+			"onCareerTransition": "Career Transition",
 			"onCheckPreparation": "Check Preparation",
 			"onCheckRoll": "Check Roll",
 			"onCreationPointInvestment": "On Creation Point Investment",

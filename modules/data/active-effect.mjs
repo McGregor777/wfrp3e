@@ -24,6 +24,7 @@ export default class ActiveEffect extends foundry.abstract.TypeDataModel
 
 	static SCRIPT_TYPES = {
 		onCareerSocket: "SCRIPT.TYPES.onCareerSocket",
+		onCareerTransition: "SCRIPT.TYPES.onCareerTransition",
 		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
 		onCheckRoll: "SCRIPT.TYPES.onCheckRoll",
 		onCreationPointInvestment: "SCRIPT.TYPES.onCreationPointInvestment",
