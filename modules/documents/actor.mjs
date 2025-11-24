@@ -167,13 +167,13 @@ export default class Actor extends foundry.documents.Actor
 				}
 
 				socketsByType[socket.type][currentParty.uuid + "_" + socketIndex] = `${currentParty.name} - ${item
-						? game.i18n.format("TALENT.SOCKET.taken", {
-							type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
-							talent: item.name
-						})
-						: game.i18n.format("TALENT.SOCKET.available", {
-							type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
-						})}`;
+					? game.i18n.format("TALENT.SOCKET.taken", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
+						talent: item.name
+					})
+					: game.i18n.format("TALENT.SOCKET.available", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
+					})}`;
 			}
 
 		for(const itemType of Object.keys(talentTypes))
@@ -194,14 +194,14 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Searches for items sharing the same socket as the one passed as parameter. If any found, removes its socket value.
-	 * @param {Item} item The item which socket  must be matched.
+	 * Searches for items sharing the same socket as the one passed as parameter. If any is found, removes its socket value.
+	 * @param {Item} item The item which socket must be matched.
 	 */
 	preventMultipleItemsOnSameSocket(item)
 	{
 		const actors = this.system.currentParty
-				  ? this.system.currentParty.system.members.map(member => fromUuidSync(member))
-				  : [this];
+			? this.system.currentParty.system.members.map(member => fromUuidSync(member))
+			: [this];
 
 		for(const actor of actors) {
 			const foundItems = actor.items.search({
@@ -229,11 +229,11 @@ export default class Actor extends foundry.documents.Actor
 
 	/**
 	 * Resets every matching socket available to the actor.
-	 * @param {string} uuid The UUID of the Document owning the sockets to reset.
+	 * @param {string} uuid The uuid of the Item owning the sockets to reset.
 	 */
 	resetSockets(uuid)
 	{
-		const documents = this.items.search({
+		const items = this.items.search({
 			filters: [{
 				field: "system.socket",
 				operator: "is_empty",
@@ -246,9 +246,8 @@ export default class Actor extends foundry.documents.Actor
 			}]
 		});
 
-		for(const document of documents) {
-			document.update({"system.socket": null});
-		}
+		for(const item of items)
+			item.update({"system.socket": null});
 	}
 
 	/**
@@ -406,21 +405,21 @@ export default class Actor extends foundry.documents.Actor
 
 	/**
 	 * Post-process a deletion operation for a single party instance. Post-operation events occur for all connected clients.
-	 * @param {any} options Additional options which modify the deletion request.
+	 * @param {Object} options Additional options which modify the deletion request.
 	 * @param {string} userId The id of the user requesting the party deletion.
 	 * @protected
 	 */
 	_onPartyDelete(options, userId)
 	{
 		for(const member of this.system.members)
-			fromUuidSync(member).resetSockets(this.uuid);
+			fromUuidSync(member)?.resetSockets(this.uuid);
 	}
 
 	/**
 	 * Post-process an update operation for a single party instance. Post-operation events occur for all connected clients.
-	 * @param {any} changed The differential data that was changed relative to the documents prior values.
-	 * @param {any} options Additional options which modify the update request.
-	 * @param {string} userId The id of the user requesting the party update.
+	 * @param {Object} changed The differential data that was changed relative to the party's prior values.
+	 * @param {Object} options Additional options which modify the update request.
+	 * @param {string} userId The id of the User requesting the party update.
 	 * @protected
 	 */
 	_onPartyUpdate(changed, options, userId)
@@ -494,7 +493,7 @@ export default class Actor extends foundry.documents.Actor
 				index,
 				party: this
 			}
-		}).render(true);
+		}).render({force: true});
 	}
 
 	/**
