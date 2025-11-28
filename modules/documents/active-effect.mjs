@@ -13,7 +13,7 @@ export default class ActiveEffect extends foundry.documents.ActiveEffect
 			return await fn.call(this, ...Object.values(parameters));
 		}
 		catch(error) {
-			console.error(error);
+			ui.notifications.error(`Unable to execute the effect of ${this.name}: ${error}`);
 		}
 	}
 
@@ -32,7 +32,7 @@ export default class ActiveEffect extends foundry.documents.ActiveEffect
 			return fn.call(this, ...Object.values(parameters));
 		}
 		catch(error) {
-			console.error(error);
+			ui.notifications.error(`Unable to execute the condition script of ${this.name}: ${error}`);
 		}
 	}
 }
