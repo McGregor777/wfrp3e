@@ -124,7 +124,8 @@
 			"adjustRechargeTokens": "Ajouter/retirer un jeton de rechargement",
 			"adjustRecklessSegment": "Ajouter/retirer un segment de témérité",
 			"adjustStance": "Ajuster l'attitude",
-			"editItem": "Éditer",
+			"editEffect": "Éditer l'effet",
+			"editItem": "Éditer l'objet",
 			"flip": "Retourner",
 			"openFilters": "Ouvrir les filtres",
 			"useItem": "Utiliser",
@@ -205,15 +206,11 @@
 		"WARNINGS.minimumSegment": "Vous ne pouvez pas retirer davantage de segments."
 	},
 
-	"APPLICATION.BUTTON.DeleteItem": "Supprimer l'objet",
-	"APPLICATION.BUTTON.EditItem": "Modifier l'objet",
 	"APPLICATION.BUTTON.Expand": "Plus",
 	"APPLICATION.BUTTON.RollItem": "Faire un test",
 	"APPLICATION.TITLE.ActionUsage": "Confirmation de l'utilisation de l'action",
-	"APPLICATION.TITLE.DeleteItem": "Confirmation de la suppression de l'objet",
 	"APPLICATION.TITLE.MemberRemoval": "Confirmation du retrait du membre",
 	"APPLICATION.DESCRIPTION.ActionUsage": "Souhaitez-vous vraiment utiliser {action} ?",
-	"APPLICATION.DESCRIPTION.DeleteItem": "Souhaitez-vous vraiment supprimer <em><strong>{item}</em></strong> ?",
 	"APPLICATION.DESCRIPTION.MemberRemoval": "Souhaitez-vous vraiment retirer <em><strong>{actor}</em></strong> du groupe ?",
 
 	"ARMOUR": {
@@ -696,8 +693,16 @@
 		"plural": "Blessure critiques"
 	},
 
-	"DIALOG.TITLE.EffectDeletion": "Suppression d'effet",
-	"DIALOG.DESCRIPTION.EffectDeletion": "Souhaitez-vous vraiment supprimer cet effet ?",
+	"DIALOG": {
+		"deleteEffect": {
+			"description": "Souhaitez-vous vraiment supprimer l'effet actif <em><strong>{effect}</strong></em> ? Cette action est irréversible.",
+			"title": "Supprimer l'effet actif"
+		},
+		"deleteItem": {
+			"description": "Souhaitez-vous vraiment supprimer l'objet <em><strong>{item}</em></strong> ? Cette action est irréversible.",
+			"title": "Supprimer l'objet"
+		}
+	},
 
 	"DIE": {
 		"RESULTS": {

@@ -122,7 +122,8 @@
 			"adjustRechargeTokens": "Adjust Recharge Tokens",
 			"adjustRecklessSegment": "Add/Remove Reckless Segment",
 			"adjustStance": "Adjust Stance",
-			"editItem": "Edit",
+			"editEffect": "Edit Effect",
+			"editItem": "Edit Item",
 			"flip": "Flip",
 			"openFilters": "Open Filters",
 			"useItem": "Use",
@@ -203,15 +204,11 @@
 		"WARNINGS.minimumSegment": "You cannot remove any more segment."
 	},
 
-	"APPLICATION.BUTTON.DeleteItem": "Delete Item",
-	"APPLICATION.BUTTON.EditItem": "Edit Item",
 	"APPLICATION.BUTTON.Expand": "More",
 	"APPLICATION.BUTTON.RollItem": "Roll Item",
 	"APPLICATION.TITLE.ActionUsage": "Action Usage Confirmation",
-	"APPLICATION.TITLE.DeleteItem": "Delete Item Confirmation",
 	"APPLICATION.TITLE.MemberRemoval": "Member Removal Confirmation",
 	"APPLICATION.DESCRIPTION.ActionUsage": "Do you really want to use {action}?",
-	"APPLICATION.DESCRIPTION.DeleteItem": "Do you really want to delete <em><strong>{item}</em></strong>?",
 	"APPLICATION.DESCRIPTION.MemberRemoval": "Do you really wish to remove <em><strong>{actor}</em></strong> from the party?",
 
 	"ARMOUR": {
@@ -694,8 +691,16 @@
 		"plural": "Critical Wounds"
 	},
 
-	"DIALOG.TITLE.EffectDeletion": "Effect Deletion",
-	"DIALOG.DESCRIPTION.EffectDeletion": "Do you really wish to delete this effect?",
+	"DIALOG": {
+		"deleteEffect": {
+			"description": "Do you really wish to delete the <em><strong>{effect}</strong></em> active effect? This action cannot be undone.",
+			"title": "Delete Active Effect"
+		},
+		"deleteItem": {
+			"description": "Do you really wish to delete the <em><strong>{item}</em></strong> item? This action cannot be undone.",
+			"title": "Delete Item"
+		}
+	},
 
 	"DIE": {
 		"RESULTS": {

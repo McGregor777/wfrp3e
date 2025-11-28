@@ -94,9 +94,9 @@ export default class ItemSheet extends foundry.applications.api.HandlebarsApplic
 	static #removeEffect(event, target)
 	{
 		foundry.applications.api.DialogV2.confirm({
-			window: {title: game.i18n.localize("DIALOG.TITLE.EffectDeletion")},
+			window: {title: game.i18n.localize("DIALOG.deleteEffect.title")},
 			modal: true,
-			content: `<p>${game.i18n.localize("DIALOG.DESCRIPTION.EffectDeletion")}</p>`,
+			content: `<p>${game.i18n.localize("DIALOG.deleteEffect.description")}</p>`,
 			submit: async (result) => {
 				if(result) {
 					const effect = await fromUuid(target.closest(".effect[data-uuid]").dataset.uuid)

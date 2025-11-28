@@ -18,7 +18,9 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			adjustQuantity: {handler: this.#adjustQuantity, buttons: [0, 2]},
 			adjustRechargeTokens: {handler: this.#adjustRechargeTokens, buttons: [0, 2]},
 			adjustStanceMeter: {handler: this.#adjustStanceMeter, buttons: [0, 2]},
+			deleteEffect: this.#deleteEffect,
 			deleteItem: this.#deleteItem,
+			editEffect: this.#editEffect,
 			editItem: this.#editItem,
 			flip: this.#flip,
 			openFilters: this.#openFilters,
@@ -492,6 +494,27 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	}
 
 	/**
+	 * Asks for confirmation for a specific active effect definitive removal.
+	 * @param {PointerEvent} event
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #deleteEffect(event)
+	{
+		const effect = this.actor.effects.get(event.target.closest("[data-effect-id]").dataset.effectId);
+
+		await foundry.applications.api.DialogV2.confirm({
+			window: {title: game.i18n.localize("DIALOG.deleteEffect.title")},
+			modal: true,
+			content: `<p>${game.i18n.format("DIALOG.deleteEffect.description", {effect: effect.name})}</p>`,
+			submit: async (result) => {
+				if(result)
+					await this.actor.deleteEmbeddedDocuments("ActiveEffect", [effect._id]);
+			}
+		});
+	}
+
+	/**
 	 * Asks for confirmation for a specific item definitive removal.
 	 * @param {PointerEvent} event
 	 * @returns {Promise<void>}
@@ -502,14 +525,26 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 		const item = this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId);
 
 		await foundry.applications.api.DialogV2.confirm({
-			window: {title: game.i18n.localize("APPLICATION.TITLE.DeleteItem")},
+			window: {title: game.i18n.localize("DIALOG.deleteItem.title")},
 			modal: true,
-			content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: item.name})}</p>`,
+			content: `<p>${game.i18n.format("DIALOG.deleteItem.description", {item: item.name})}</p>`,
 			submit: async (result) => {
 				if(result)
 					await this.actor.deleteEmbeddedDocuments("Item", [item._id]);
 			}
 		});
+	}
+
+	/**
+	 * Opens an active effect's sheet.
+	 * @param {PointerEvent} event
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #editEffect(event)
+	{
+		await this.actor.effects.get(event.target.closest("[data-effect-id]").dataset.effectId)
+			.sheet.render({force: true});
 	}
 
 	/**

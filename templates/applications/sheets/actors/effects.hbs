@@ -25,22 +25,22 @@
 
 		<div class="table-body">
 			{{#each effects as |effect eff|}}
-				<div class="active-effect row" data-uuid="{{effect.uuid}}">
+				<div class="active-effect row" data-effect-id="{{effect._id}}">
 					<div class="content">
 						<div class="image">
-							<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+							<a data-action="editEffect" data-tooltip="{{localize 'ACTOR.ACTIONS.editEffect'}}">
 								<img src="{{effect.img}}" alt="{{effect.name}}" width="40" height="40" />
 							</a>
 						</div>
 
 						<div class="name">
-							<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+							<a data-action="editEffect" data-tooltip="{{localize 'ACTOR.ACTIONS.editEffect'}}">
 								{{effect.name}}
 							</a>
 						</div>
 
 						<div class="source" data-uuid="{{effect.origin}}">
-							<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+							<a data-action="editEffect" data-tooltip="{{localize 'ACTOR.ACTIONS.editEffect'}}">
 								{{effect._source.name}}
 							</a>
 						</div>
@@ -55,11 +55,11 @@
 
 						<div class="buttons">
 							{{#if @root.editable}}
-								<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+								<a data-action="editEffect" data-tooltip="{{localize 'ACTOR.ACTIONS.editEffect'}}">
 									<span class="fas fa-pen-to-square"></span>
 								</a>
 
-								<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+								<a data-action="deleteEffect" data-tooltip="{{localize 'Delete'}}">
 									<span class="fas fa-trash"></span>
 								</a>
 							{{/if}}
