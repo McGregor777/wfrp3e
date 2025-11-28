@@ -478,9 +478,9 @@ export default class Item extends foundry.documents.Item
 
 	/**
 	 * Post-process an update operation for a single talent instance. Post-operation events occur for all connected clients.
-	 * @param changed {any} The differential data that was changed relative to the documents prior values
-	 * @param options {any} Additional options which modify the update request
-	 * @param userId {string} The id of the User requesting the talent update
+	 * @param {Object} changed The differential data that was changed relative to the documents prior values.
+	 * @param {Object} options Additional options which modify the update request.
+	 * @param {string} userId The id of the User requesting the talent update.
 	 * @protected
 	 */
 	_onTalentUpdate(changed, options, userId)
