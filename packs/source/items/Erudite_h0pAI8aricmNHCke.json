@@ -17,7 +17,7 @@
         "conditionScript": "",
         "postScript": "",
         "reverseScript": "",
-        "script": "options.freeAcquisitions.push(\"Compendium.wfrp3e-items.Item.zkAmp7J3kXPnrGDE\");",
+        "script": "options.freeAcquisitions.push(\"Compendium.wfrp3e.items.Item.zkAmp7J3kXPnrGDE\");",
         "type": "onStartingSkillTrainingSelection"
       },
       "changes": [],
