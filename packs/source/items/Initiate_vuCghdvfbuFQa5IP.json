@@ -12,7 +12,7 @@
         "conditionScript": "",
         "postScript": "",
         "reverseScript": "",
-        "script": "if(!checkData.action)\n\treturn false;\n\nconst action = await fromUuid(checkData.action),\n\t  traits = action.system[checkData.face].traits;\nconsole.log(action, game.i18n.localize(\"ACTION.TRAITS.rankOne\"))\nif(action.system.type === \"blessing\" && (traits.includes(game.i18n.localize(\"TRAITS.rankZero\")) || traits.includes(game.i18n.localize(\"TRAITS.rankOne\"))))\n\tdiePool.dice.fortune++;",
+        "script": "if(!checkData.action)\n\treturn false;\n\nconst action = await fromUuid(checkData.action),\n\t  traits = action.system[checkData.face].traits;\nif(action.system.type === \"blessing\" && (traits.includes(game.i18n.localize(\"TRAITS.rankZero\")) || traits.includes(game.i18n.localize(\"TRAITS.rankOne\"))))\n\tdiePool.dice.fortune++;",
         "type": "onCheckPreparation"
       },
       "changes": [],
@@ -29,7 +29,7 @@
       "description": "",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": true,
+      "transfer": false,
       "statuses": [],
       "sort": 0,
       "flags": {},
@@ -39,7 +39,7 @@
         "exportSource": null,
         "coreVersion": "13.350",
         "systemId": "wfrp3e",
-        "systemVersion": "1.3.2",
+        "systemVersion": "1.3.3",
         "createdTime": 1761212359309,
         "modifiedTime": 1761212388140,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
@@ -72,7 +72,7 @@
       "description": "",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": true,
+      "transfer": false,
       "statuses": [],
       "sort": 0,
       "flags": {},
@@ -82,7 +82,7 @@
         "exportSource": null,
         "coreVersion": "13.350",
         "systemId": "wfrp3e",
-        "systemVersion": "1.3.2",
+        "systemVersion": "1.3.3",
         "createdTime": 1761039508561,
         "modifiedTime": 1761039584173,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
@@ -204,7 +204,7 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
+    "systemVersion": "1.3.3",
     "coreVersion": "13.350",
     "createdTime": 1699549839211,
     "modifiedTime": 1764321760894,

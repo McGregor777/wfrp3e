@@ -82,7 +82,7 @@
       "description": "",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": true,
+      "transfer": false,
       "statuses": [],
       "sort": 0,
       "flags": {},
@@ -92,7 +92,7 @@
         "exportSource": null,
         "coreVersion": "13.350",
         "systemId": "wfrp3e",
-        "systemVersion": "1.3.2",
+        "systemVersion": "1.3.3",
         "createdTime": 1761211981329,
         "modifiedTime": 1761212217810,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
@@ -106,7 +106,7 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
+    "systemVersion": "1.3.3",
     "coreVersion": "13.350",
     "createdTime": 1701868149808,
     "modifiedTime": 1761211990932,
