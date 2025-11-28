@@ -289,7 +289,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 		return [{
 			name: "ACTOR.ACTIONS.rollItem",
 			icon: '<i class="fa-solid fa-dice-d20"></i>',
-			condition: async html => {
+			condition: html => {
 				const item = this.actor.items.get(html.closest("[data-item-id]").dataset.itemId);
 				return this.isEditable
 					&& item.canUserModify(game.user, "update")
