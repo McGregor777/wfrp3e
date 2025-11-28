@@ -164,7 +164,7 @@ export default class Item extends foundry.documents.Item
 					script: ""
 				}
 			}
-		}).render(true);
+		}).render({force: true});
 	}
 
 	/**
@@ -184,7 +184,7 @@ export default class Item extends foundry.documents.Item
 				symbol,
 				index
 			}
-		}).render(true);
+		}).render({force: true});
 	}
 
 	/**
