@@ -382,7 +382,7 @@ export default class CheckRoll extends foundry.dice.Roll
 					result.hidden = true;
 
 		await newCheckRoll.toMessage({
-			flavor: flavor ? `${options.flavor} (${game.i18n.localize("ROLL.NAMES.reroll")})` : flavor,
+			flavor: `${flavor ?? chatMessage.flavor} (${game.i18n.localize("ROLL.NAMES.reroll")})`,
 			speaker: {actor: await fromUuid(this.options.checkData.actor)}
 		});
 

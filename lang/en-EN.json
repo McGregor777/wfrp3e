@@ -1093,6 +1093,7 @@
 			"characteristicCheck": "{characteristic} Check",
 			"combatEncounterInitiativeCheck": "Combat Encounter Initiative Check",
 			"freeCheck": "Free Check",
+			"reroll": "Reroll",
 			"skillCheck": "{skill} Check",
 			"socialEncounterInitiativeCheck": "Social Encounter Initiative Check"
 		},

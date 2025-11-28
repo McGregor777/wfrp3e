@@ -1095,6 +1095,7 @@
 			"characteristicCheck": "Test de {characteristic}",
 			"combatEncounterInitiativeCheck": "Test d'initiative de rencontre de combat",
 			"freeCheck": "Test libre",
+			"reroll": "Relance",
 			"skillCheck": "Test de {skill}",
 			"socialEncounterInitiativeCheck": "Test d'initiative de rencontre sociale"
 		},
