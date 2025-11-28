@@ -62,7 +62,7 @@ Hooks.on("renderChatMessage", (message, html, context) => {
 	html.find(".roll-effects:not(.disabled) .effect-toggle").click((event) => {
 		event.stopPropagation();
 
-		wfrp3e.dice.CheckHelper.toggleActionEffect(
+		wfrp3e.dice.CheckRoll.toggleActionEffect(
 			$(event.currentTarget).parents(".chat-message").data("messageId"),
 			event.currentTarget.dataset.symbol,
 			event.currentTarget.dataset.index

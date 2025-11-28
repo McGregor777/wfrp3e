@@ -22,7 +22,7 @@ export default class ChatLog extends foundry.applications.sidebar.tabs.ChatLog
 					&& !message.rolls[0].options.checkData.disabled
 					&& ("outcome" in message.rolls[0].options.checkData || game.user.isGM);
 			},
-			callback: li => wfrp3e.dice.CheckHelper.useTalentOrAbility(li.dataset.messageId)
+			callback: li => wfrp3e.dice.CheckRoll.useTalentOrAbility(game.messages.get(li.dataset.messageId))
 		}, {
 			name: "ROLL.ACTIONS.applyToggledEffects",
 			icon: '<i class="fa-solid fa-check fa-fw"></i>',
@@ -34,7 +34,7 @@ export default class ChatLog extends foundry.applications.sidebar.tabs.ChatLog
 					&& Object.values(message.rolls[0].effects).find(symbol => symbol.length > 0).length > 0
 					&& (!("outcome" in message.rolls[0].options.checkData) || game.user.isGM);
 			},
-			callback: li => wfrp3e.dice.CheckHelper.triggerActionEffects(li.dataset.messageId)
+			callback: li => wfrp3e.dice.CheckRoll.triggerActionEffects(game.messages.get(li.dataset.messageId))
 		}, ...super._getEntryContextOptions()];
 	}
 

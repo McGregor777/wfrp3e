@@ -312,7 +312,7 @@ export default class DiePool
 				  }
 			  }, checkData, flavor, sound)
 
-		await wfrp3e.dice.CheckHelper.triggerCheckPreparationEffects(actor, checkData, diePool);
+		await wfrp3e.dice.CheckRoll.triggerCheckPreparationEffects(actor, checkData, diePool);
 		
 		return diePool;
 	}
@@ -348,7 +348,7 @@ export default class DiePool
 				  }
 			  }, checkData, flavor, sound);
 
-		await wfrp3e.dice.CheckHelper.triggerCheckPreparationEffects(actor, checkData, diePool);
+		await wfrp3e.dice.CheckRoll.triggerCheckPreparationEffects(actor, checkData, diePool);
 
 		return diePool;
 	}
@@ -415,7 +415,7 @@ export default class DiePool
 				  }
 			  }, checkData, flavor, sound);
 
-		await wfrp3e.dice.CheckHelper.triggerCheckPreparationEffects(actor, checkData, diePool);
+		await wfrp3e.dice.CheckRoll.triggerCheckPreparationEffects(actor, checkData, diePool);
 
 		return diePool;
 	}
@@ -449,7 +449,7 @@ export default class DiePool
 				  }
 			  }, checkData, flavor, sound)
 
-		await wfrp3e.dice.CheckHelper.triggerCheckPreparationEffects(actor, checkData, diePool);
+		await wfrp3e.dice.CheckRoll.triggerCheckPreparationEffects(actor, checkData, diePool);
 
 		return diePool;
 	}

@@ -259,7 +259,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 		if(checkData) {
 			// Execute the scripts from all onCheckPreparation action effects.
 			if(checkData.actor)
-				await wfrp3e.dice.CheckHelper.triggerCheckPreparationEffects(
+				await wfrp3e.dice.CheckRoll.triggerCheckPreparationEffects(
 					await fromUuid(checkData.actor), checkData, diePool
 				);
 

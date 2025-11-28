@@ -3,7 +3,6 @@
 import CheckRoll from "./roll.mjs";
 
 export * as terms from "./terms/_module.mjs";
-export {default as CheckHelper} from "./check-helper.mjs";
 export {default as DiePool} from "./die-pool.mjs";
 export {CheckRoll};
 
