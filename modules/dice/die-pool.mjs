@@ -167,8 +167,14 @@ export default class DiePool
 	{
 		const checkData = this.checkData;
 		if(checkData.actor) {
+				  /** @var {Actor} actor */
 			const actor = await fromUuid(checkData.actor),
+				  /** @var {Item} action */
 				  action = await fromUuid(checkData.action),
+				  /** @var {Item} skill */
+				  skill = await fromUuid(checkData.skill),
+				  /** @var {Actor} target */
+				  target = await fromUuid(checkData.targets[0]),
 				  characteristic = actor.system.characteristics[checkData.characteristic],
 				  face = checkData.face,
 				  stance = actor.system.stance.current ?? actor.system.stance,
@@ -185,17 +191,14 @@ export default class DiePool
 					+ (checkData.specialisations?.length || 0)
 					+ (checkData.creatureDice?.aggression || 0)
 					+ (checkData.creatureDice?.cunning || 0),
-				expertise: (await fromUuid(checkData.skill)?.system.trainingLevel || 0)
-					+ (checkData.creatureDice?.expertise || 0),
+				expertise: +skill?.system.trainingLevel + (checkData.creatureDice?.expertise || 0),
 				conservative: stance < 0 ? Math.abs(stance) : 0,
 				reckless: stance > 0 ? stance : 0,
 				challenge: wfrp3e.dice.CheckRoll.CHALLENGE_LEVELS[checkData.challengeLevel].challengeDice
 					+ (action?.system[face].difficultyModifiers.challengeDice || 0),
 				misfortune: action?.system[face].difficultyModifiers.misfortuneDice
-					+ match && match[5] === game.i18n.localize("ACTION.CHECK.targetDefence")
-						&& checkData.targets?.length > 0
-							? await fromUuid(checkData.targets[0]).system.totalDefence
-							: 0
+					+ (match && match[5] === game.i18n.localize("ACTION.CHECK.targetDefence")
+							 && checkData.targets?.length > 0 ? +target?.system.totalDefence : 0)
 			}
 		}
 		else
