@@ -10,14 +10,16 @@
   "effects": [
     {
       "name": "Grudge",
-      "img": "icons/svg/dice-target.svg",
+      "img": "systems/wfrp3e/assets/images/races/dwarf.webp",
       "_id": "Rxky2HsFZ6LCR8ir",
       "type": "base",
       "system": {
-        "conditionScript": "return checkData.action && [\"melee\", \"ranged\"].includes(fromUuidSync(checkData.action)?.system.type);",
-        "reverseScript": "",
-        "script": "diePool.dice.fortune++;",
-        "type": "onPreCheckTrigger"
+        "macro": {
+          "script": "diePool.dice.fortune++;",
+          "type": "manualPreCheckRoll",
+          "conditionalScript": "return checkData.action && [\"melee\", \"ranged\"].includes(fromUuidSync(checkData.action)?.system.type);",
+          "postRollScript": ""
+        }
       },
       "changes": [],
       "disabled": false,
@@ -40,12 +42,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.341",
+        "coreVersion": "13.350",
         "systemId": "wfrp3e",
         "systemVersion": "1.2",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1764751637206,
+        "lastModifiedBy": "Bq3CTOvANoOneedB",
         "exportSource": null
       },
       "_key": "!items.effects!ATznsFp414qzofcJ.Rxky2HsFZ6LCR8ir"

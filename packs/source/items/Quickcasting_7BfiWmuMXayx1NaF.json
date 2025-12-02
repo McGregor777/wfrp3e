@@ -57,16 +57,15 @@
   },
   "effects": [
     {
-      "name": "Requirement Check",
-      "img": "icons/svg/dice-target.svg",
+      "name": "Check Requirements",
+      "img": "icons/magic/control/sihouette-hold-beam-green.webp",
       "_id": "SL13bXXb672EkPch",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "postScript": "",
-        "reverseScript": "",
-        "script": "return actor.system.wizard;",
-        "type": "requirementCheck"
+        "macro": {
+          "script": "return actor.system.wizard;",
+          "type": "requirement"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -94,7 +93,7 @@
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": 1761211981329,
-        "modifiedTime": 1761212217810,
+        "modifiedTime": 1764751206622,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!7BfiWmuMXayx1NaF.SL13bXXb672EkPch"

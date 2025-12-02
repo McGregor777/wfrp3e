@@ -248,9 +248,9 @@ export default class DiePool
 			if(triggeredEffects != null) {
 				if(Array.isArray(triggeredEffects))
 					for(const effectUuid of triggeredEffects)
-						await this.executeEffect(effectUuid, "postScript");
+						await this.executeActiveEffectMacro(effectUuid, "postRollScript");
 				else
-					await this.executeEffect(triggeredEffects, "postScript");
+					await this.executeActiveEffectMacro(triggeredEffects, "postRollScript");
 			}
 		}
 
@@ -270,23 +270,24 @@ export default class DiePool
 	}
 
 	/**
-	 * Executes scripts from onPreCheckTrigger an active effect.
-	 * @param {string} effectUuid The uuid of the active effect.
+	 * Executes the Manual Pre Check Roll Macro from an Active Effect.
+	 * @param {string} effectUuid The uuid of the Active Effect.
 	 * @param {string} script The type of script to execute.
 	 * @returns {Promise<void>}
 	 */
-	async executeEffect(effectUuid, script = "script")
+	async executeActiveEffectMacro(effectUuid, script = "script")
 	{
 		const actor = await fromUuid(this.checkData.actor),
+			  /** @var {ActiveEffect} effect */
 			  effect = await fromUuid(effectUuid);
 
-		await effect.triggerEffect({actor, diePool: this, checkData: this.checkData}, script);
+		await effect.triggerMacro({actor, checkData: this.checkData, diePool: this}, script);
 	}
 
 
 	/**
 	 * Prepares a die pool for a characteristic check.
-	 * @param {Actor}	actor The actor performing the check.
+	 * @param {Actor} actor The actor performing the check.
 	 * @param {Object} characteristic The checked characteristic.
 	 * @param {Object} [options]
 	 * @param {string} [options.flavor] Flavor text to add to the outcome description of the check.

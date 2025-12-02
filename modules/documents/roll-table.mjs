@@ -23,10 +23,9 @@ export default class RollTable extends foundry.documents.RollTable
 	}
 
 	/**
-	 * Executes the macro scripts obtained from previously drawn results, then add the script results to the originally
-	 * drawn results.
+	 * Executes the Macros obtained from previously drawn results, then add the results to the originally drawn results.
 	 * @param {RollTableDraw} drawnResult The previous drawn results to complete.
-	 * @param {object} [options={}] Optional arguments which customize the draw behavior.
+	 * @param {object} [options={}] Optional arguments which customise the draw behaviour.
 	 * @param {Roll} [options.roll] An existing Roll instance to use for drawing from the table.
 	 * @param {boolean} [options.recursive=true] Allow drawing recursively from inner RollTable results.
 	 * @param {TableResult[]} [options.results] One or more table results which have been drawn.

@@ -268,7 +268,7 @@ export default class CheckRoll extends foundry.dice.Roll
 			this.effects.sigmarsComet.push(this.constructor.getUniversalSigmarsCometEffect());
 		}
 
-		await CheckRoll.triggerOnCheckRollEffects(actor, checkData, this);
+		await CheckRoll.triggerCheckRollMacros(actor, checkData, this);
 
 		return this;
 	}
@@ -704,7 +704,7 @@ export default class CheckRoll extends foundry.dice.Roll
 			  checkData = checkRoll.options.checkData,
 			  actor = await fromUuid(checkData.actor),
 			  triggeredItems = actor.findTriggeredItems(
-				  "onPostCheckTrigger",
+				  wfrp3e.data.macros.ManualPostCheckRollMacro.TYPE,
 				  {actor, chatMessage, checkData, checkRoll}
 			  );
 
@@ -715,8 +715,8 @@ export default class CheckRoll extends foundry.dice.Roll
 				const selectedTalent = await fromUuid(selectedItemUuids[0]);
 
 				for(const effect of selectedTalent.effects)
-					if(effect.system.type === "onPostCheckTrigger")
-						await effect.triggerEffect({actor, chatMessage, checkData, checkRoll});
+					if(effect.system.macro.type === wfrp3e.data.macros.ManualPostCheckRollMacro.TYPE)
+						await effect.triggerMacro({actor, chatMessage, checkData, checkRoll});
 
 				await chatMessage.update({
 					"options.checkData.triggeredItems": checkData.triggeredItems
@@ -1002,7 +1002,7 @@ export default class CheckRoll extends foundry.dice.Roll
 	}
 
 	/**
-	 * Searches and triggers every relevant effect owned either by the actor performing the check, or its target.
+	 * Searches and executes every relevant Active Effect Macros owned either by the actor performing the check, or its target.
 	 * @param {Actor} actor The actor performing the check.
 	 * @param {Object} checkData The check data.
 	 * @param {DiePool} diePool The die pool.
@@ -1010,27 +1010,26 @@ export default class CheckRoll extends foundry.dice.Roll
 	 */
 	static async triggerCheckPreparationEffects(actor, checkData, diePool)
 	{
-		for(const effect of actor.findTriggeredEffects("onCheckPreparation"))
-			await effect.triggerEffect({actor, checkData, diePool});
+		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.CheckPreparationMacro.TYPE))
+			await effect.triggerMacro({actor, checkData, diePool});
 
 		if(checkData.targets?.length > 0) {
 			const actor = await fromUuid(checkData.targets[0]);
-			for(const effect of actor.findTriggeredEffects("onTargetingCheckPreparation"))
-				await effect.triggerEffect({actor, checkData, diePool});
+			for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.TargetingCheckPreparationMacro.TYPE))
+				await effect.triggerMacro({actor, checkData, diePool});
 		}
 	}
 
 	/**
-	 * Searches and triggers every effect that are supposed to be triggered on a check roll and that belong to an item
-	 * owned by the actor.
-	 * @param {Actor} actor The actor performing the check.
+	 * Searches and triggers every Check Roll Macros that belong to an Actor's embedded Item.
+	 * @param {Actor} actor The Actor performing the check.
 	 * @param {Object} checkData The check data.
 	 * @param {CheckRoll} checkRoll The check roll.
 	 * @returns {Promise<void>}
 	 */
-	static async triggerOnCheckRollEffects(actor, checkData, checkRoll)
+	static async triggerCheckRollMacros(actor, checkData, checkRoll)
 	{
-		for(const effect of actor.findTriggeredEffects("onCheckRoll"))
-			await effect.triggerEffect({actor, checkData, checkRoll});
+		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.CheckRollMacro.TYPE))
+			await effect.triggerMacro({actor, checkData, checkRoll});
 	}
 }

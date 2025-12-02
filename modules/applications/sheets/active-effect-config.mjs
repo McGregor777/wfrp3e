@@ -7,7 +7,7 @@ export default class ActiveEffectConfig extends foundry.applications.sheets.Acti
 		details: {template: "templates/sheets/active-effect/details.hbs", scrollable: [""]},
 		duration: {template: "templates/sheets/active-effect/duration.hbs"},
 		changes: {template: "templates/sheets/active-effect/changes.hbs", scrollable: ["ol[data-changes]"]},
-		scripts: {template: "systems/wfrp3e/templates/applications/sheets/active-effect-config/scripts.hbs"},
+		macro: {template: "systems/wfrp3e/templates/applications/sheets/active-effect-config/macro.hbs"},
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 
@@ -18,7 +18,7 @@ export default class ActiveEffectConfig extends foundry.applications.sheets.Acti
 				{id: "details", icon: "fa-solid fa-book"},
 				{id: "duration", icon: "fa-solid fa-clock"},
 				{id: "changes", icon: "fa-solid fa-gears"},
-				{id: "scripts", icon: "fa-solid fa-code"}
+				{id: "macro", icon: "fa-solid fa-code"}
 			],
 			initial: "details",
 			labelPrefix: "EFFECT.TABS"
@@ -30,11 +30,11 @@ export default class ActiveEffectConfig extends foundry.applications.sheets.Acti
 	{
 		let partContext = await super._preparePartContext(partId, context);
 
-		if(partId === "scripts") {
+		if(partId === "macro") {
 			partContext = {
 				...partContext,
-				fields: this.document.system.schema.fields,
-				system: this.document.system
+				fields: this.document.system.macro.schema.fields,
+				system: this.document.system.macro
 			};
 		}
 
@@ -46,7 +46,7 @@ export default class ActiveEffectConfig extends foundry.applications.sheets.Acti
 	{
 		await super._onRender(context, options);
 
-		for(const element of this.element.querySelectorAll('[name="system.type"]'))
+		for(const element of this.element.querySelectorAll('[name="system.macro.type"]'))
 			element.addEventListener("change", this._onTypeChange.bind(this, options));
 	}
 
@@ -59,11 +59,20 @@ export default class ActiveEffectConfig extends foundry.applications.sheets.Acti
 	 */
 	async _onTypeChange(options, event)
 	{
-		foundry.utils.setProperty(this.document, event.target.name, event.target.value);
-
 		await this.submit({
 			preventClose: true,
-			updateData: {"system.type": this.document.system.type}
+			updateData: {
+				"system.macro": {
+					script: this.form.querySelector('[name="system.macro.script"]').value
+						?? this.document.system.macro.script,
+					type: event.target.value,
+					conditionalScript: this.form.querySelector('[name="system.macro.conditionalScript"]')?.value
+						?? this.document.system.macro.conditionalScript,
+					postRollScript: this.form.querySelector('[name="system.macro.postRollScript"]')?.value
+						?? this.document.system.macro.postRollScript
+				}
+			},
+			recursive: false
 		});
 	}
 }

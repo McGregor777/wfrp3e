@@ -10,14 +10,16 @@
   "effects": [
     {
       "name": "Favoured by Fate",
-      "img": "icons/svg/dice-target.svg",
+      "img": "systems/wfrp3e/assets/images/races/empire.webp",
       "_id": "mLMJRjnzwKNhHhqj",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "reverseScript": "",
-        "script": "diePool.dice.fortune += 2;",
-        "type": "onPreCheckTrigger"
+        "macro": {
+          "script": "diePool.dice.fortune += 2;",
+          "type": "manualPreCheckRoll",
+          "conditionalScript": "",
+          "postRollScript": "this.parent.exhaustAbility();"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -40,11 +42,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.345",
+        "coreVersion": "13.350",
         "systemId": "wfrp3e",
         "systemVersion": "1.2",
         "createdTime": null,
-        "modifiedTime": 1750780674239,
+        "modifiedTime": 1764751610865,
         "lastModifiedBy": "Bq3CTOvANoOneedB",
         "exportSource": null
       },

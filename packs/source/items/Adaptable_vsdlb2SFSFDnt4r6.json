@@ -10,15 +10,14 @@
   "effects": [
     {
       "name": "Adaptable",
-      "img": "icons/svg/dice-target.svg",
+      "img": "systems/wfrp3e/assets/images/races/empire.webp",
       "_id": "npPcUKdZS94tjwPR",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "postScript": "",
-        "reverseScript": "",
-        "script": "return cost - 1;",
-        "type": "onCareerTransition"
+        "macro": {
+          "script": "return cost - 1;",
+          "type": "careerTransition"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -45,7 +44,8 @@
         "coreVersion": "13.350",
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
-        "lastModifiedBy": null
+        "lastModifiedBy": "Bq3CTOvANoOneedB",
+        "modifiedTime": 1764751573428
       },
       "_key": "!items.effects!vsdlb2SFSFDnt4r6.npPcUKdZS94tjwPR"
     }

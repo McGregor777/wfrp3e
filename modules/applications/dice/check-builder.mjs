@@ -152,8 +152,8 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 						skill: await fromUuid(checkData.skill),
 						skills: actor.itemTypes.skill,
 						availableTriggeredEffects: actor.findTriggeredEffects(
-							"onPreCheckTrigger",
-							{actor, diePool: this.diePool, checkData}
+							wfrp3e.data.macros.ManualPreCheckRollMacro.TYPE,
+							{actor, checkData, diePool: this.diePool}
 						),
 						triggeredEffects: checkData.triggeredEffects ?? []
 					};
@@ -257,20 +257,20 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 			await diePool.determineFromCheckData();
 
 		if(checkData) {
-			// Execute the scripts from all onCheckPreparation action effects.
+			// Execute every Check Preparation Macros.
 			if(checkData.actor)
 				await wfrp3e.dice.CheckRoll.triggerCheckPreparationEffects(
 					await fromUuid(checkData.actor), checkData, diePool
 				);
 
-			// Execute the scripts from all selected effects.
+			// Execute every selected Manual Pre-Check Roll Macros.
 			const triggeredEffects = checkData.triggeredEffects;
 			if(triggeredEffects != null) {
 				if(Array.isArray(triggeredEffects))
 					for(const effectUuid of triggeredEffects)
-						await diePool.executeEffect(effectUuid);
+						await diePool.executeActiveEffectMacro(effectUuid);
 				else
-					await diePool.executeEffect(triggeredEffects);
+					await diePool.executeActiveEffectMacro(triggeredEffects);
 			}
 		}
 

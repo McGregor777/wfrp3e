@@ -125,7 +125,7 @@ export default class Item extends foundry.documents.Item
 		if(this.system.cooldown)
 			ui.notifications.warn(game.i18n.localize("ABILITY.WARNINGS.cooldown"));
 		else
-			await this.effects.get(options.id).triggerEffect();
+			await this.effects.get(options.id).triggerMacro();
 	}
 
 	//#endregion
@@ -141,8 +141,8 @@ export default class Item extends foundry.documents.Item
 		let result = true;
 
 		for(const effect of this.effects)
-			if(effect.system.type === "requirementCheck")
-				result = await effect.triggerEffect({actor: parameters.actor ?? this.parent});
+			if(effect.system.macro.type === wfrp3e.data.macros.RequirementMacro.TYPE)
+				result = await effect.triggerMacro({actor: parameters.actor ?? this.parent});
 
 		return result;
 	}
@@ -507,8 +507,8 @@ export default class Item extends foundry.documents.Item
 
 		if(owningDocument.type === "career")
 			for(const effect of this.effects)
-				if(effect.type === "onCareerSocket")
-					effect.triggerEffect();
+				if(effect.macro.type === wfrp3e.data.macros.CareerSocketMacro.TYPE)
+					effect.triggerMacro();
 	}
 
 	/**
@@ -526,7 +526,7 @@ export default class Item extends foundry.documents.Item
 		else if(this.system.socket == null)
 			ui.notifications.warn(game.i18n.localize("TALENT.WARNINGS.notSocketed"));
 		else
-			await this.effects.get(options.id).triggerEffect();
+			await this.effects.get(options.id).triggerMacro();
 	}
 
 	//#endregion

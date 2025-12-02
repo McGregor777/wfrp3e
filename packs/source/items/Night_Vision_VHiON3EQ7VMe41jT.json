@@ -10,14 +10,16 @@
   "effects": [
     {
       "name": "Night Vision",
-      "img": "icons/svg/dice-target.svg",
+      "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
       "_id": "vBs1IrJHaHmhnGI2",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "reverseScript": "",
-        "script": "diePool.dice.misfortune -= 2;",
-        "type": "onPreCheckTrigger"
+        "macro": {
+          "script": "diePool.dice.misfortune -= 2;",
+          "type": "manualPreCheckRoll",
+          "conditionalScript": "",
+          "postRollScript": ""
+        }
       },
       "changes": [],
       "disabled": false,
@@ -40,12 +42,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.341",
+        "coreVersion": "13.350",
         "systemId": "wfrp3e",
         "systemVersion": "1.2",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1764751729536,
+        "lastModifiedBy": "Bq3CTOvANoOneedB",
         "exportSource": null
       },
       "_key": "!items.effects!VHiON3EQ7VMe41jT.vBs1IrJHaHmhnGI2"

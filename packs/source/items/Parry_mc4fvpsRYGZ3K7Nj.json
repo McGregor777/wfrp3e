@@ -4,16 +4,15 @@
   "img": "systems/wfrp3e/assets/images/actions/parry.jpg",
   "effects": [
     {
-      "name": "Requirement Check",
-      "img": "icons/svg/dice-target.svg",
+      "name": "Check Requirements",
+      "img": "systems/wfrp3e/assets/images/actions/parry.jpg",
       "_id": "7Qvsr3xEka00UY8m",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "postScript": "",
-        "reverseScript": "",
-        "script": "return actor.system.characteristics.strength.rating >= 3;",
-        "type": "requirementCheck"
+        "macro": {
+          "script": "return actor.system.characteristics.strength.rating >= 3;",
+          "type": "requirement"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -41,7 +40,7 @@
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": 1761211995159,
-        "modifiedTime": 1761212225932,
+        "modifiedTime": 1764751190912,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!mc4fvpsRYGZ3K7Nj.7Qvsr3xEka00UY8m"

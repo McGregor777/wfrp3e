@@ -809,23 +809,111 @@
 	},
 
 	"EFFECT": {
-		"FIELDS": {
-			"conditionScript": {
-				"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Talent.\nMust return a boolean, true if condition is met, false if not.",
-				"label": "Condition Script"
+		"MACROS": {
+			"FIELDS.type.label": "Macro Type",
+			"careerSocket": {
+				"FIELDS.script": {
+					"hint": "This script is executed each time the related Item is socketed onto a Career.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.",
+					"label": "Script"
+				},
+				"label": "Career Socket"
 			},
-			"reverseScript": {
-				"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Talent.",
-				"label": "Reverse Script"
+			"careerTransition": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor transitions from a Career to another.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that is transitioning careers.\n\t- {Career} previousCareer: The previous Career.\n\t- {Career} nextCareer: The new current career.\n\t- {number} cost: The current cost of the transition.",
+					"label": "Script"
+				},
+				"label": "Career Transition"
 			},
-			"script": {
-				"hint": "Arguments:\n\t- this: The triggered Talent.",
-				"label": "Script"
+			"checkPreparation": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time a check is being prepared or re-prepared.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor preparing the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {DiePool} diePool: The current die pool of the check.",
+					"label": "Script"
+				},
+				"label": "Check Preparation"
 			},
-			"type.label": "Script Trigger"
+			"checkRoll": {
+				"FIELDS.script": {
+					"hint": "This script is executed at the creation of a Check Roll.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that is performing the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The concerned Check Roll.",
+					"label": "Script"
+				},
+				"label": "Check Roll"
+			},
+			"creationPointInvestment": {
+				"FIELDS.script": {
+					"hint": "This script is executed before Creation Point Investment starts during Character Generation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {number} options.startingCreationPoints: The total number of creation points to spend.",
+					"label": "Script"
+				},
+				"label": "Creation Point Investment"
+			},
+			"manual": {
+				"FIELDS.script": {
+					"hint": "This script is executed on the User action only.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.",
+					"label": "Script"
+				},
+				"label": "Manual Trigger"
+			},
+			"manualPostCheckRoll": {
+				"FIELDS": {
+					"conditionalScript": {
+						"hint": "This script verifies that this Active Effect can be triggered depending on the check context.\nArguments:\n\t- {ActiveEffect} this: The Active Effect which macro is being tested.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {ChatMessage} chatMessage: The Chat Message containing the Check Roll.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The concerned Check Roll.\n\tReturn value: Must be a boolean, true if conditions are met, false otherwise.",
+						"label": "Conditional Script"
+					},
+					"script": {
+						"hint": "This script is executed whenever the Item is triggered in order to perform changes to a rolled check.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {ChatMessage} chatMessage: The Chat Message containing the Check Roll.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The concerned Check Roll.",
+						"label": "Script"
+					}
+				},
+				"label": "Manual Post Check Roll"
+			},
+			"manualPreCheckRoll": {
+				"FIELDS": {
+					"conditionalScript": {
+						"hint": "This script verifies that this Active Effect can be triggered depending on the check context.\nArguments:\n\t- {ActiveEffect} this: The Active Effect which macro is being tested.\n\t- {Actor} actor: The Actor preparing the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {DiePool} diePool: The current die pool of the check.\n\tReturn value: Must be a boolean, true if conditions are met, false otherwise.",
+						"label": "Conditional Script"
+					},
+					"postRollScript": {
+						"hint": "This script is executed once the check has been rolled in order to perform follow-up operations on the related Item.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {DiePool} diePool: The die pool of the rolled check.\n\t- {CheckData} checkData: Various data related to the check.",
+						"label": "Post-Roll Script"
+					},
+					"script": {
+						"hint": "This script is executed every time a check is being prepared or re-prepared if selected.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor preparing the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {DiePool} diePool: The current die pool of the check.",
+						"label": "Script"
+					}
+				},
+				"label": "Manual Pre Check Roll"
+			},
+			"requirement": {
+				"FIELDS.script": {
+					"hint": "This script verifies whether the Item can be acquired during Character Generation or as part of Career Advances.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that may (or may not) acquire the Item.",
+					"label": "Script"
+				},
+				"label": "Requirement"
+			},
+			"startingSkillTrainingSelection": {
+				"FIELDS.script": {
+					"hint": "This script is executed before Starting Skill Training Selection starts during Character Generation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Array} options.freeAcquisitions: The UUIDs of the skills acquired for free.\n\t- {Array} options.freeTrainings: The UUIDs of the skills trained for free.",
+					"label": "Script"
+				},
+				"label": "Starting Skill Training Selection"
+			},
+			"startingTalentSelection": {
+				"FIELDS.script": {
+					"hint": "This script is executed before Starting Talent Selection starts during Character Generation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Array} options.freeItemTypes: The various types of Item currently available to select one copy of during Starting Talent Selection.",
+					"label": "Script"
+				},
+				"label": "Starting Talent Selection"
+			},
+			"targetingCheckPreparation": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time a check targeting another Actor is being prepared or re-prepared.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor targeted by the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {DiePool} diePool: The current die pool of the check.",
+					"label": "Script"
+				},
+				"label": "Targeting Check Preparation"
+			}
 		},
 		"TABS": {
-			"scripts": "Scripts"
+			"macro": "Macro"
 		}
 	},
 
@@ -1162,23 +1250,6 @@
 			},
 			"name": "Starting Career Drawing Method",
 			"hint": "Defines the way a new character's starting career is drawn with the Character Generator.\n– Draw Three: Three basic careers are drawn amongst those existing within the world and its compendium.\n– Roll Table: One single basic career is drawn from the Starting Career Table.\n– Free Choice: The starting career can be chosen amongst every available basic career within the world and its compendium."
-		}
-	},
-
-	"SCRIPT": {
-		"TYPES": {
-			"onCareerSocket": "Career Socket",
-			"onCareerTransition": "Career Transition",
-			"onCheckPreparation": "Check Preparation",
-			"onCheckRoll": "Check Roll",
-			"onCreationPointInvestment": "On Creation Point Investment",
-			"onPostCheckTrigger": "Post Check Manual Trigger",
-			"onPreCheckTrigger": "Pre Check Manual Selection",
-			"onStartingSkillTrainingSelection": "Starting Skill Training Selection",
-			"onStartingTalentSelection": "Starting Talent Selection",
-			"onTargetingCheckPreparation": "Targeting Check Preparation",
-			"onTrigger": "Manual Trigger",
-			"requirementCheck": "Requirement Check"
 		}
 	},
 

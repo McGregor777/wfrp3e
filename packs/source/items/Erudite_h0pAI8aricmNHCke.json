@@ -10,15 +10,14 @@
   "effects": [
     {
       "name": "Erudite",
-      "img": "icons/svg/dice-target.svg",
+      "img": "systems/wfrp3e/assets/images/races/high_elf.webp",
       "_id": "y0SWCHA0WDHlgr5D",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "postScript": "",
-        "reverseScript": "",
-        "script": "options.freeAcquisitions.push(\"Compendium.wfrp3e.items.Item.zkAmp7J3kXPnrGDE\");",
-        "type": "onStartingSkillTrainingSelection"
+        "macro": {
+          "script": "options.freeAcquisitions.push(\"Compendium.wfrp3e.items.Item.zkAmp7J3kXPnrGDE\");",
+          "type": "startingSkillTrainingSelection"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -46,7 +45,7 @@
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": 1761210810344,
-        "modifiedTime": 1761210822775,
+        "modifiedTime": 1764751597024,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!h0pAI8aricmNHCke.y0SWCHA0WDHlgr5D"

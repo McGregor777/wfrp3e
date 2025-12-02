@@ -97,16 +97,15 @@
   },
   "effects": [
     {
-      "name": "Requirement Check",
-      "img": "icons/svg/dice-target.svg",
+      "name": "Check Requirements",
+      "img": "icons/magic/defensive/barrier-shield-dome-blue-purple.webp",
       "_id": "P0h8WoUPBRY1Dkzd",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "postScript": "",
-        "reverseScript": "",
-        "script": "return actor.system.priest;",
-        "type": "requirementCheck"
+        "macro": {
+          "script": "return actor.system.priest;",
+          "type": "requirement"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -134,7 +133,7 @@
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": 1761212014479,
-        "modifiedTime": 1761212230200,
+        "modifiedTime": 1764751212045,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!XWlk7rT0gfG2Pg1b.P0h8WoUPBRY1Dkzd"

@@ -68,8 +68,8 @@ export default class CareerTransition extends foundry.abstract.DataModel
 			  selectedCareer = await fromUuid(selectedCareerUuids[0]);
 		let cost = career.calculateCareerTransitionCost(selectedCareer);
 
-		for(const effect of actor.findTriggeredEffects("onCareerTransition"))
-			cost = await effect.triggerEffect({actor, previousCareer: career, nextCareer: selectedCareer, cost});
+		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.CareerTransitionMacro.TYPE))
+			cost = await effect.triggerMacro({actor, previousCareer: career, nextCareer: selectedCareer, cost});
 
 		if(actor.system.experience.current < cost)
 			return ui.notifications.warn(game.i18n.localize("CHARACTER.WARNINGS.notEnoughExperienceForAdvance"));

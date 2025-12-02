@@ -10,14 +10,14 @@
   "effects": [
     {
       "name": "Sturdy",
-      "img": "icons/svg/dice-target.svg",
+      "img": "systems/wfrp3e/assets/images/races/dwarf.webp",
       "_id": "fa4ZxXtlwNghw9Ff",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "reverseScript": "",
-        "script": "",
-        "type": "onCareerSocket"
+        "macro": {
+          "type": "manual",
+          "script": ""
+        }
       },
       "changes": [
         {
@@ -51,8 +51,8 @@
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null,
+        "modifiedTime": 1764751702689,
+        "lastModifiedBy": "Bq3CTOvANoOneedB",
         "exportSource": null
       },
       "_key": "!items.effects!5zLg7T9FTNvgtJp1.fa4ZxXtlwNghw9Ff"

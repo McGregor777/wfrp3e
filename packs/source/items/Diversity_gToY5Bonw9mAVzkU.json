@@ -10,15 +10,14 @@
   "effects": [
     {
       "name": "Diversity",
-      "img": "icons/svg/dice-target.svg",
+      "img": "systems/wfrp3e/assets/images/races/empire.webp",
       "_id": "RwffkYRxp0ScIh3N",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "postScript": "",
-        "reverseScript": "",
-        "script": "options.startingCreationPoints = 25;",
-        "type": "onCreationPointInvestment"
+        "macro": {
+          "script": "options.startingCreationPoints = 25;",
+          "type": "creationPointInvestment"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -46,7 +45,7 @@
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": 1761210792571,
-        "modifiedTime": 1761210805256,
+        "modifiedTime": 1764751584023,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!gToY5Bonw9mAVzkU.RwffkYRxp0ScIh3N"

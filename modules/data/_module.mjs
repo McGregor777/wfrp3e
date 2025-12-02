@@ -5,6 +5,7 @@ import * as items from "./items/_module.mjs";
 import ActiveEffect from "./active-effect.mjs";
 import Combat from "./combat.mjs";
 
+export * as macros from "./macros/_module.mjs";
 export {actors, items, Combat, ActiveEffect};
 
 export function assignDataModels()

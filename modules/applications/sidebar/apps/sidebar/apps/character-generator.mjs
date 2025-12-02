@@ -477,22 +477,21 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		const {SkillUpgrader} = wfrp3e.applications.apps.selectors,
 			  character = this.character,
 			  investment = wfrp3e.applications.apps.CreationPointInvestor.INVESTMENTS.skills[this.creationPointInvestments.skills],
-			  options = {
+			  options = {freeAcquisitions: [], freeTrainings: []};
+
+		for(const effect of character.findTriggeredEffects(wfrp3e.data.macros.StartingSkillTrainingSelectionMacro.TYPE))
+			await effect.triggerMacro({options});
+
+		const upgrades = await SkillUpgrader.wait({
+				  ...options,
 				  actor: character,
-				  freeAcquisitions: [],
-				  freeTrainings: [],
 				  items: await SkillUpgrader.buildNewCharacterOptionsList(character),
 				  modal: true,
 				  size: investment.size,
 				  specialisationSize: investment.specialisationSize,
 				  singleSpecialisation: false,
 				  startingSkillTrainings: true
-			  };
-
-		for(const effect of character.findTriggeredEffects("onStartingSkillTrainingSelection"))
-			await effect.triggerEffect({options});
-
-		const upgrades = await SkillUpgrader.wait(options),
+			  }),
 			  skills = await game.packs.get("wfrp3e.items").getDocuments({
 				  type: "skill",
 				  system: {advanced: false}
@@ -548,7 +547,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		event.preventDefault();
 
 		const character = this.character,
-			  onStartingTalentSelectionEffects = character.findTriggeredEffects("onStartingTalentSelection");
+			  onStartingTalentSelectionEffects = character.findTriggeredEffects(wfrp3e.data.macros.StartingTalentSelectionMacro.TYPE);
 
 		if(+this.creationPointInvestments.talents === 0 && !onStartingTalentSelectionEffects.length)
 			return ui.notifications.warn(game.i18n.localize("CHARACTERGENERATOR.WARNINGS.noStartingTalent"));
@@ -558,17 +557,18 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 		const {TalentSelector} = wfrp3e.applications.apps.selectors,
 			  investment = wfrp3e.applications.apps.CreationPointInvestor.INVESTMENTS.talents[this.creationPointInvestments.talents],
-			  options = {
-				  actor: character,
-				  modal: true,
-				  size: investment.size,
-				  freeItemTypes: []
-			  };
+			  options = {freeItemTypes: []};
 
 		for(const effect of onStartingTalentSelectionEffects)
-			await effect.triggerEffect({options});
+			await effect.triggerMacro({options});
 
-		options.items = await TalentSelector.buildNewCharacterOptionsList(character, options);
+		options.items = await TalentSelector.buildNewCharacterOptionsList(character, {
+			...options,
+			actor: character,
+			modal: true,
+			size: investment.size,
+			freeItemTypes: []
+		});
 
 		let talentUuids = await TalentSelector.wait(options);
 
@@ -679,16 +679,17 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		await this.resetCreationPointInvestments();
 
 		const character = this.character,
-			  options = {
-				  modal: true,
-				  race: character.system.race,
-				  startingCreationPoints: 20
-			  };
+			  options = {startingCreationPoints: 20};
 
-		for(const effect of character.findTriggeredEffects("onCreationPointInvestment"))
-			await effect.triggerEffect({options});
+		for(const effect of character.findTriggeredEffects(wfrp3e.data.macros.CreationPointInvestmentMacro.TYPE))
+			await effect.triggerMacro({options});
 
-		const investments = await wfrp3e.applications.apps.CreationPointInvestor.wait(options);
+		const investments = await wfrp3e.applications.apps.CreationPointInvestor.wait({
+			...options,
+			race: character.system.race,
+			modal: true
+		});
+
 		if(investments) {
 			const originData = character.system.originData,
 				  characteristicRatings = investments.characteristics,
@@ -710,7 +711,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 			this.creationPointInvestments = investments;
 			this.steps.investCreationPoints = true;
-			this.steps.acquireTalents = +investments.talents === 0 && !character.findTriggeredEffects("onStartingTalentSelection").length;
+			this.steps.acquireTalents = +investments.talents === 0 && !character.findTriggeredEffects(wfrp3e.data.macros.StartingTalentSelectionMacro.TYPE).length;
 			this.changeTab("attributes", "main");
 		}
 

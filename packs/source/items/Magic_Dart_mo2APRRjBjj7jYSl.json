@@ -95,16 +95,15 @@
   },
   "effects": [
     {
-      "name": "Requirement Check",
-      "img": "icons/svg/dice-target.svg",
+      "name": "Check Requirements",
+      "img": "icons/magic/lightning/strike-arrow-spear-red.webp",
       "_id": "vyG1FtOQS0LjhSir",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "postScript": "",
-        "reverseScript": "",
-        "script": "return actor.system.wizard;",
-        "type": "requirementCheck"
+        "macro": {
+          "script": "return actor.system.wizard;",
+          "type": "requirement"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -132,7 +131,7 @@
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": 1761212064508,
-        "modifiedTime": 1761212240062,
+        "modifiedTime": 1764751219182,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!mo2APRRjBjj7jYSl.vyG1FtOQS0LjhSir"

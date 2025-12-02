@@ -59,7 +59,7 @@
 		<div class="buttons">
 			{{#if @root.editable}}
 				{{#each item.effects as |effect|}}
-					{{#if (eq effect.system.type "onTrigger")}}
+					{{#if (eq effect.system.macro.type "manualTrigger")}}
 						<a data-action="useItem"
 						   data-effect-uuid="{{effect.uuid}}"
 						   data-tooltip="{{localize 'TALENT.ACTIONS.trigger'}}" >

@@ -5,15 +5,14 @@
   "effects": [
     {
       "name": "Initiate",
-      "img": "icons/svg/dice-target.svg",
+      "img": "systems/wfrp3e/assets/images/careers/initiate.webp",
       "_id": "fQUvQUOOclsV0ee3",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "postScript": "",
-        "reverseScript": "",
-        "script": "if(!checkData.action)\n\treturn false;\n\nconst action = await fromUuid(checkData.action),\n\t  traits = action.system[checkData.face].traits;\nif(action.system.type === \"blessing\" && (traits.includes(game.i18n.localize(\"TRAITS.rankZero\")) || traits.includes(game.i18n.localize(\"TRAITS.rankOne\"))))\n\tdiePool.dice.fortune++;",
-        "type": "onCheckPreparation"
+        "macro": {
+          "script": "if(!checkData.action)\n\treturn false;\n\nconst action = await fromUuid(checkData.action),\n\t  traits = action.system[checkData.face].traits;\nif(action.system.type === \"blessing\" && (traits.includes(game.i18n.localize(\"TRAITS.rankZero\")) || traits.includes(game.i18n.localize(\"TRAITS.rankOne\"))))\n\tdiePool.dice.fortune++;",
+          "type": "checkPreparation"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -41,22 +40,21 @@
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": 1761212359309,
-        "modifiedTime": 1761212388140,
+        "modifiedTime": 1764751774498,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!vuCghdvfbuFQa5IP.fQUvQUOOclsV0ee3"
     },
     {
       "name": "Starting Faith Talent",
-      "img": "icons/svg/dice-target.svg",
+      "img": "systems/wfrp3e/assets/images/careers/initiate.webp",
       "_id": "GKJJnHBjBB6lolzv",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "postScript": "",
-        "reverseScript": "",
-        "script": "options.freeItemTypes.push(\"faith\");",
-        "type": "onStartingTalentSelection"
+        "macro": {
+          "script": "options.freeItemTypes.push(\"faith\");",
+          "type": "startingTalentSelection"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -84,7 +82,7 @@
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": 1761039508561,
-        "modifiedTime": 1761039584173,
+        "modifiedTime": 1764751779156,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!vuCghdvfbuFQa5IP.GKJJnHBjBB6lolzv"

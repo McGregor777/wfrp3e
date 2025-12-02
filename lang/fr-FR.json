@@ -811,23 +811,111 @@
 	},
 
 	"EFFECT": {
-		"FIELDS": {
-			"conditionScript": {
-				"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Talent.\nMust return a boolean, true if condition is met, false if not.",
-				"label": "Script conditionnel"
+		"MACROS": {
+			"FIELDS.type.label": "Type de macro",
+			"careerSocket": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que l'objet est placé sur un emplacement de talent de carrière.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.",
+					"label": "Script"
+				},
+				"label": "Placement sur un emplacement de talent de carrière"
 			},
-			"reverseScript": {
-				"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Talent.",
-				"label": "Script inverse"
+			"careerTransition": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois qu'un acteur effectue une transition de carrière.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur effectuant la transition de carrière.\n\t- {Career} previousCareer: La précédente carrière.\n\t- {Career} nextCareer: La nouvelle carrière.\n\t- {number} cost: Le coût actuel de la transition.",
+					"label": "Script"
+				},
+				"label": "Transition de carrière"
 			},
-			"script": {
-				"hint": "Arguments:\n\t- this: The triggered Talent.",
-				"label": "Script"
+			"checkPreparation": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois qu'un test est préparé ou re-préparé.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur préparant le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {DiePool} diePool: La réserve de dés actuelle du test.",
+					"label": "Script"
+				},
+				"label": "Préparation d'un test"
 			},
-			"type.label": "Déclenchement du script"
+			"checkRoll": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté après qu'un test ne soit lancé.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur accomplissant le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le test concerné.",
+					"label": "Script"
+				},
+				"label": "Réalisation d'un test"
+			},
+			"creationPointInvestment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté avant que l'investissement des points de création ne démarre durant la génération de personnage.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {number} options.startingCreationPoints: The total number of creation points to spend.",
+					"label": "Script"
+				},
+				"label": "Investissement des points de création"
+			},
+			"manual": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté sur commande de l'utilisateur uniquement.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.",
+					"label": "Script"
+				},
+				"label": "Déclenchement manuel"
+			},
+			"manualPostCheckRoll": {
+				"FIELDS": {
+					"conditionalScript": {
+						"hint": "Ce script vérifie que cet effet actif soit applicable dans le contexte du test.\nArguments:\n\t- {ActiveEffect} this: L'effet actif dont la macro est testée.\n\t- {Actor} actor: L'acteur ayant accompli le test.\n\t- {ChatMessage} chatMessage: Le message contenant le résultat du test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le test concerné.\n\tValeur de retour: Doit être un booléen, true si les conditions sont vérifiées, sinon false.",
+						"label": "Script conditionnel"
+					},
+					"script": {
+						"hint": "Ce script est exécuté chaque fois qu'un objet est manuellement activé afin d'altérer un test déjà lancé.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur ayant accompli le test.\n\t- {ChatMessage} chatMessage: Le message contenant le résultat du test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le test concerné.",
+						"label": "Script"
+					}
+				},
+				"label": "Déclenchement manuel après un test"
+			},
+			"manualPreCheckRoll": {
+				"FIELDS": {
+					"conditionalScript": {
+						"hint": "Ce script vérifie que cet effet actif soit applicable dans le contexte du test.\nArguments:\n\t- {ActiveEffect} this: L'effet actif dont la macro est testée.\n\t- {Actor} actor: L'acteur préparant le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {DiePool} diePool: La réserve de dés actuelle du test.\n\tValeur de retour: Doit être un booléen, true si les conditions sont vérifiées, sinon false.",
+						"label": "Script conditionnel"
+					},
+					"postRollScript": {
+						"hint": "Ce script est exécuté une fois que le test a été lancé afin d'accomplir des opérations consécutives sur l'objet concerné.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur ayant accompli le test.\n\t- {DiePool} diePool: La réserve de dé lancé pour le test.\n\t- {CheckData} checkData: Diverses données concernant le test.",
+						"label": "Script post-lancer"
+					},
+					"script": {
+						"hint": "Ce script est exécuté chaque fois qu'un test est préparé ou re-préparé à condition d'avoir été préalablement sélectionné.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur préparant le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {DiePool} diePool: La réserve de dés actuelle du test.",
+						"label": "Script"
+					}
+				},
+				"label": "Déclenchement manuel avant un test"
+			},
+			"requirement": {
+				"FIELDS.script": {
+					"hint": "Ce script vérifie si l'objet peut être acquis durant la génération de personnage ou durant une augmentation de carrière.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur pouvant potentiellement acquérir l'objet.\n\tValeur de retour: Doit être un booléen, true si les conditions sont vérifiées, sinon false.",
+					"label": "Script"
+				},
+				"label": "Vérification des conditions"
+			},
+			"startingSkillTrainingSelection": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté avant que la sélection des formations de compétences de départ ne démarre durant la génération de personnage.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Array} options.freeAcquisitions: Les UUIDs des compétences acquises gratuitement.\n\t- {Array} options.freeTrainings: Les UUIDs des compétences entraînées gratuitement.",
+					"label": "Script"
+				},
+				"label": "Sélection des formations des compétences de départ"
+			},
+			"startingTalentSelection": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté avant que la sélection des talents de départ ne démarre durant la génération de personnage.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Array} options.freeItemTypes: Les différents types d'objet dont il est possible de sélectionner un exemplaire durant la sélection des talents de départ.",
+					"label": "Script"
+				},
+				"label": "Sélection des talents de départ"
+			},
+			"targetingCheckPreparation": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois qu'un test ciblant un autre acteur est préparé ou re-préparé.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: The Actor targeted by the check.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {DiePool} diePool: La réserve de dés actuelle du test.",
+					"label": "Script"
+				},
+				"label": "Préparation d'un test ciblant"
+			}
 		},
 		"TABS": {
-			"scripts": "Scripts"
+			"macro": "Macro"
 		}
 	},
 
@@ -859,8 +947,8 @@
 				"hint": "This is the most fundamental question for your character. Are you from a big city, like Altdorf, or a tiny farming hamlet? If you're a dwarf, are you karak-born, or from an outlying community or hold?"
 			},
 			"past": {
-				"label": "What Did You Do Before You Became an Adventurer?",
-				"hint": "This is an important question. Your career provides a basic answer, but you refine this further. Try to figure out exactly what you did before you became an adventurer. The details you’ve already worked out and the skills you chose during character creation can help you make some decisions."
+				"label": "What Did You Do avant que la sélection des  You Became an Adventurer?",
+				"hint": "This is an important question. Your career provides a basic answer, but you refine this further. Try to figure out exactly what you did avant que la sélection des  you became an adventurer. The details you’ve already worked out and the skills you chose during character creation can help you make some decisions."
 			},
 			"piety": {
 				"label": "How Religious are You?",
@@ -1164,23 +1252,6 @@
 			},
 			"name": "Méthode de détermination de la carrière de départ",
 			"hint": "Définit la façon dont la carrière de départ d'un nouveau personnage est déterminée grâce au Générateur de personnage.\n– Triple tirage : Trois carrière de base sont tirées au hasard parmi celles existants dans le monde et les compendiums.\n– Tirage au tableau : Une carrière de base est tirée au hasard à partir de la table de carrière de départ.\n– Choix libre : la carrière de départ peut être librement choisie parmi les carrières de base disponibles dans le monde et les compendiums."
-		}
-	},
-
-	"SCRIPT": {
-		"TYPES": {
-			"onCareerSocket": "Placement sur un emplacement de talent de carrière",
-			"onCareerTransition": "Transition de carrière",
-			"onCheckPreparation": "Préparation d'un test",
-			"onCheckRoll": "Réalisation d'un test",
-			"onCreationPointInvestment": "Investissement des points de création",
-			"onPostCheckTrigger": "Déclenchement manuel après un test",
-			"onPreCheckTrigger": "Sélection manuelle avant un test",
-			"onStartingSkillTrainingSelection": "Sélection des formations des compétences de départ",
-			"onStartingTalentSelection": "Sélection des talents de départ",
-			"onTargetingCheckPreparation": "Préparation d'un test ciblant",
-			"onTrigger": "Déclenchement manuel",
-			"requirementCheck": "Vérification des conditions"
 		}
 	},
 

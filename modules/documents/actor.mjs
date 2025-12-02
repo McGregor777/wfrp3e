@@ -271,12 +271,12 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Finds every Item owned by the actor with an effect triggered.
-	 * @param {string} triggerType The trigger type of the effect.
-	 * @param {Object} [parameters] The parameters passed to the condition script.
-	 * @returns {Item[]} An Array of triggered items.
+	 * Finds every Item owned by the actor with a triggered Active Effect Macro.
+	 * @param {string} macroType The type of Active Effect Macro.
+	 * @param {Object} [parameters] The parameters passed to the conditional scripts.
+	 * @returns {Item[]} An Array of Items with triggered Active Effect Macro.
 	 */
-	findTriggeredItems(triggerType, parameters = {})
+	findTriggeredItems(macroType, parameters = {})
 	{
 		return [
 			...this.items.search({
@@ -328,22 +328,21 @@ export default class Actor extends foundry.documents.Actor
 			})
 		].filter(item => item.effects.find(
 			effect => {
-				// Check for a match with the active effects trigger type, and if the condition script (if any) is passed.
-				return effect.system.type === triggerType && effect.checkConditionScript(parameters);
+				return effect.system.macro.type === macroType && effect.checkConditionalScript(parameters);
 			}
 		));
 	}
 
 	/**
-	 * Finds every effect triggered by a specific script trigger.
-	 * @param {string} triggerType The trigger type of the effect.
-	 * @param {Object} [parameters] The parameters passed to the condition script.
-	 * @returns {ActiveEffect[]} An array of triggered active effects.
+	 * Finds every Active Effect with a relevant Active Effect Macro.
+	 * @param {string} macroType The type of the Active Effect Macro.
+	 * @param {Object} [parameters] The parameters passed to the conditional scripts.
+	 * @returns {ActiveEffect[]} An array of triggered Active Effects.
 	 */
-	findTriggeredEffects(triggerType, parameters = {})
+	findTriggeredEffects(macroType, parameters = {})
 	{
-		return this.findTriggeredItems(triggerType, parameters).map(item => {
-			return item.effects.find(effect => effect.system.type === triggerType)
+		return this.findTriggeredItems(macroType, parameters).map(item => {
+			return item.effects.find(effect => effect.system.macro.type === macroType)
 		});
 	}
 

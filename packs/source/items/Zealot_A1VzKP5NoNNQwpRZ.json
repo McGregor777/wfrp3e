@@ -5,15 +5,14 @@
   "effects": [
     {
       "name": "Starting Insanity",
-      "img": "icons/svg/dice-target.svg",
+      "img": "systems/wfrp3e/assets/images/careers/zealot.webp",
       "_id": "O0krF0BM6QkwU9Jt",
       "type": "base",
       "system": {
-        "conditionScript": "",
-        "postScript": "",
-        "reverseScript": "",
-        "script": "options.freeItemTypes.push(\"insanity\");",
-        "type": "onStartingTalentSelection"
+        "macro": {
+          "script": "options.freeItemTypes.push(\"insanity\");",
+          "type": "startingTalentSelection"
+        }
       },
       "changes": [],
       "disabled": false,
@@ -41,7 +40,7 @@
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": 1761039612913,
-        "modifiedTime": 1761039635833,
+        "modifiedTime": 1764751792351,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!A1VzKP5NoNNQwpRZ.O0krF0BM6QkwU9Jt"
