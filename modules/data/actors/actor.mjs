@@ -77,6 +77,11 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	}
 
 	/**
+	 * @type {number} The encumbrance limit modifier for the Actor.
+	 */
+	encumbranceLimitModifier = 0;
+
+	/**
 	 * The actor's default stance, depending on the largest side of their stance meter.
 	 * @returns {string}
 	 */
@@ -104,6 +109,16 @@ export default class Actor extends foundry.abstract.TypeDataModel
 			return "reckless";
 
 		return this.defaultStance;
+	}
+
+	/**
+	 * @returns {number} The encumbrance limit the Actor.
+	 */
+	get encumbranceLimit()
+	{
+		return this.characteristics.strength.rating * 5
+			+ this.characteristics.strength.fortune
+			+ this.encumbranceLimitModifier;
 	}
 
 	/**
