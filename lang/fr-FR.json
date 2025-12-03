@@ -203,7 +203,10 @@
 			"filters": "Filtres",
 			"search": "Recherche"
 		},
-		"WARNINGS.minimumSegment": "Vous ne pouvez pas retirer davantage de segments."
+		"WARNINGS": {
+			"maximumFortuneReached": "L'acteur ne peut pas disposer de plus de {max} points de fortune à la fois.",
+			"minimumSegment": "Vous ne pouvez pas retirer davantage de segments."
+		}
 	},
 
 	"APPLICATION.BUTTON.Expand": "Plus",

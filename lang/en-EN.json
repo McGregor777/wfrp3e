@@ -201,7 +201,10 @@
 			"filters": "Filters",
 			"search": "Search"
 		},
-		"WARNINGS.minimumSegment": "You cannot remove any more segment."
+		"WARNINGS": {
+			"maximumFortuneReached": "The Actor cannot have more than {max} fortune points at once.",
+			"minimumSegment": "You cannot remove any more segment."
+		}
 	},
 
 	"APPLICATION.BUTTON.Expand": "More",

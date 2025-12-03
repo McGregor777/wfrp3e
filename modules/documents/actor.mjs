@@ -183,6 +183,32 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
+	 * Adjusts the fortune pool of the Actor.
+	 * @param {Number} value The value to add to the fortune pool.
+	 * @returns {Promise<void>}
+	 */
+	async adjustFortune(value)
+	{
+		switch(this.type) {
+			case "character":
+				const newValue = this.system.fortune.value + value;
+
+				if(newValue > this.system.fortune.max)
+					ui.notifications.error(game.i18n.format("ACTOR.WARNINGS.maximumFortuneReached", {
+						max: this.system.fortune.max
+					}));
+
+				await this.update({"system.fortune.value": newValue});
+				break;
+			case "party":
+				await this.update({"system.fortunePool": this.system.fortunePool + value});
+				break;
+			default:
+				return ui.notifications.error(`Unable to adjust the fortune pool of an Actor of type ${this.type}.`);
+		}
+	}
+
+	/**
 	 * Adjusts one of the Actor's impairment values.
 	 * @param {string} impairment The impairment to update.
 	 * @param {Number} value The value to add to the impairment.
