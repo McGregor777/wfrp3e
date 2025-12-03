@@ -25,7 +25,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Spellcraft checks for Rank 1 or lower spells gain {Df}</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": false,
@@ -35,11 +35,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "13.351",
         "systemId": "wfrp3e",
         "systemVersion": "1.3.2",
         "createdTime": 1761212325319,
-        "modifiedTime": 1764751760245,
+        "modifiedTime": 1764772827582,
         "lastModifiedBy": "Bq3CTOvANoOneedB",
         "exportSource": null
       },
@@ -67,7 +67,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Wizard characters have a slot devoted to their Order of Magic</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": false,
@@ -78,11 +78,11 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "13.351",
         "systemId": "wfrp3e",
         "systemVersion": "1.3.2",
         "createdTime": 1761039593993,
-        "modifiedTime": 1764751764069,
+        "modifiedTime": 1764772821353,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!H5UFKTDpDN9gdFVp.XK61rnPFXztCewPr"
