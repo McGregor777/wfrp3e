@@ -72,6 +72,24 @@ export default class Item extends foundry.documents.Item
 	}
 
 	/**
+	 * Adds a number of recharge tokens to the Item depending on its type.
+	 * @param {Object} [options]
+	 * @returns {Promise<void>}
+	 */
+	async exhaust(options = {})
+	{
+		try {
+			const functionName = `_exhaust${capitalize(this.type)}`;
+
+			if(this[`${functionName}`])
+				this[`${functionName}`](options);
+		}
+		catch(exception) {
+			console.error(`Unable to exhaust the Item ${this.name} of type ${this.type}: ${exception}`);
+		}
+	}
+
+	/**
 	 * Makes usage of the item. The result depends on the type of the item.
 	 * @param {Object} [options]
 	 * @returns {Promise<void>}
@@ -111,6 +129,16 @@ export default class Item extends foundry.documents.Item
 	}
 
 	//#region Ability methods
+
+	/**
+	 * Adds a recharge token to the Ability.
+	 * @param {Object} [options]
+	 * @returns {Promise<void>}
+	 */
+	async _exhaustAbility(options = {})
+	{
+		await this.update({"system.rechargeTokens": this.system.rechargeRating + 1});
+	}
 
 	/**
 	 * Makes usage of the ability by triggering one of its active effect.
@@ -188,13 +216,16 @@ export default class Item extends foundry.documents.Item
 	}
 
 	/**
-	 * Adds recharge tokens to an action equal to its recharge rating.
-	 * @param {string} face The action face used to determine the recharge rating.
+	 * Adds recharge tokens to an Action equal to its recharge rating.
+	 * @param {string} options.face The Action face used to determine the recharge rating.
 	 * @returns {Promise<void>}
 	 */
-	async exhaustAction(face)
+	async _exhaustAction(options = {})
 	{
-		await this.update({"system.rechargeTokens": this.system[face].rechargeRating});
+		if(!options.face)
+			throw ui.notifications.error("Exhausting an Action requires to know which face is concerned.");
+
+		await this.update({"system.rechargeTokens": this.system[options.face].rechargeRating});
 	}
 
 	/**
@@ -309,7 +340,7 @@ export default class Item extends foundry.documents.Item
 				content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.ActionUsage", {action: this.system[options.face].name})}</p>`,
 				submit: async (result) => {
 					if(result) {
-						await this.exhaustAction(options.face);
+						await this.exhaust(options);
 
 						return ChatMessage.create({
 							content: await foundry.applications.handlebars.renderTemplate(
@@ -338,6 +369,16 @@ export default class Item extends foundry.documents.Item
 
 	//#endregion
 	//#region Career methods
+
+	/**
+	 * Adds a recharge token to the Career.
+	 * @param {Object} [options]
+	 * @returns {Promise<void>}
+	 */
+	async _exhaustCareer(options = {})
+	{
+		await this.update({"system.rechargeTokens": this.system.rechargeRating + 1});
+	}
 
 	/**
 	 * Post-process a creation operation for a single career instance. Post-operation events occur for all connected clients.
@@ -471,7 +512,12 @@ export default class Item extends foundry.documents.Item
 	//#endregion
 	//#region Talent methods
 
-	async exhaustTalent()
+	/**
+	 * Adds 4 recharge tokens to a Talent.
+	 * @param {Object} [options]
+	 * @returns {Promise<void>}
+	 */
+	async _exhaustTalent(options = {})
 	{
 		await this.update({"system.rechargeTokens": 4});
 	}

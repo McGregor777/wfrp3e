@@ -2,7 +2,50 @@
   "name": "Waywatcher",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/waywatcher.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Waywatcher",
+      "img": "systems/wfrp3e/assets/images/careers/waywatcher.webp",
+      "_id": "ZKnbuU3T5TTFTBWf",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "if(checkData.combat?.system.type === \"combat\")\n  diePool.dice.fortune += 2;"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your combat initiative checks gain {Df} {Df}</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764780438131,
+        "modifiedTime": 1764780484829,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!X78U8bxkc9wJzclF.ZKnbuU3T5TTFTBWf"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -118,10 +161,10 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
+    "systemVersion": "1.3.3",
     "coreVersion": "13.350",
     "createdTime": 1699549887285,
-    "modifiedTime": 1764321760894,
+    "modifiedTime": 1764755907713,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null,

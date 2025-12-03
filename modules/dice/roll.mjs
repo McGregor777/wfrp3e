@@ -861,8 +861,9 @@ export default class CheckRoll extends foundry.dice.Roll
 		await chatMessage.update(chatMessageUpdates);
 
 		if(roll.totalSymbols.successes && checkData?.action) {
+			/** @type {Item} action */
 			const action = await fromUuid(checkData.action);
-			await action.exhaustAction(checkData.face);
+			await action.exhaust({face: checkData.face});
 		}
 	}
 

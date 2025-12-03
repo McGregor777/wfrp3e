@@ -13,7 +13,7 @@
           "script": "diePool.dice.expertise++;",
           "type": "manualPreCheckRoll",
           "conditionalScript": "return checkData.skill && fromUuidSync(checkData.skill).name === game.i18n.localize(\"SKILL.NAMES.weaponSkill\");",
-          "postRollScript": ""
+          "postRollScript": "await this.parent.exhaust();"
         }
       },
       "changes": [],

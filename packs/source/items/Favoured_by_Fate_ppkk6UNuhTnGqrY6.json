@@ -18,7 +18,7 @@
           "script": "diePool.dice.fortune += 2;",
           "type": "manualPreCheckRoll",
           "conditionalScript": "",
-          "postRollScript": "this.parent.exhaustAbility();"
+          "postRollScript": "await this.parent.exhaust();"
         }
       },
       "changes": [],
