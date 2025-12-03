@@ -183,7 +183,7 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Updates one of the character impairment values.
+	 * Adjusts one of the Actor's impairment values.
 	 * @param {string} impairment The impairment to update.
 	 * @param {Number} value The value to add to the impairment.
 	 * @returns {Promise<void>}
@@ -344,28 +344,6 @@ export default class Actor extends foundry.documents.Actor
 		return this.findTriggeredItems(macroType, parameters).map(item => {
 			return item.effects.find(effect => effect.system.macro.type === macroType)
 		});
-	}
-
-	/**
-	 * Inflicts a certain amount of fatigue to the actor.
-	 * @param {Number} amount The amount of fatigue to inflict.
-	 * @returns {Promise<void>}
-	 */
-	async inflictFatigue(amount)
-	{
-		if(this.system.impairments.fatigue !== undefined)
-			await this.update({"system.impairments.fatigue": this.system.impairments.fatigue + amount});
-	}
-
-	/**
-	 * Inflicts a certain amount of stress on the actor.
-	 * @param {Number} amount The amount of stress to inflict.
-	 * @returns {Promise<void>}
-	 */
-	async inflictStress(amount)
-	{
-		if(this.system.impairments.stress !== undefined)
-			await this.update({"system.impairments.stress": this.system.impairments.stress + amount});
 	}
 
 	//#region Character methods

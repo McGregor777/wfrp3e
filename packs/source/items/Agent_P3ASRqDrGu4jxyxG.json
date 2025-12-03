@@ -13,7 +13,7 @@
           "type": "manualPreCheckRoll",
           "script": "diePool.dice.expertise++;",
           "conditionalScript": "",
-          "postRollScript": "await actor.inflictFatigue(1);\nawait actor.inflictStress(1);\nawait this.parent.exhaust();"
+          "postRollScript": "await actor.adjustImpairment(\"fatigue\", 1);\nawait actor.adjustImpairment(\"stress\", 1);\nawait this.parent.exhaust();"
         }
       },
       "changes": [],
