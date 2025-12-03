@@ -5,7 +5,7 @@
   "_id": "4QGiNcsL15d2x1kD",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Covers the ability to handle and care for domesticated animals, as well as get them to respond to training and commands. Animal handling can also be used to try and calm an aggressive animal, or get a sense of an animal’s disposition.</p>\n<p><em>Specialisation options:</em> command, train, sense disposition, calm animal, recover obedience</p>",
+    "description": "<p>Covers the ability to handle and care for domesticated animals, as well as get them to respond to training and commands. Animal handling can also be used to try and calm an aggressive animal, or get a sense of an animal’s disposition.</p><p><em>Specialisation options:</em> command, train, sense disposition, calm animal, recover obedience</p>",
     "characteristic": "fellowship",
     "advanced": true,
     "trainingLevel": 0,

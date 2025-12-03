@@ -5,7 +5,7 @@
   "_id": "dXAUMEf7ip16mmIL",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Covers general physical prowess and applying strength and conditioning to a task. This skill is used when trying to perform tasks relying on physical conditioning and athleticism, such as climbing, swimming, or jumping. It reflects a combination of fitness and the training to apply strength in a precise manner.</p>\n<p><em>Specialisation options:</em> climbing, swimming, jumping, rowing, running, lifting</p>",
+    "description": "<p>Covers general physical prowess and applying strength and conditioning to a task. This skill is used when trying to perform tasks relying on physical conditioning and athleticism, such as climbing, swimming, or jumping. It reflects a combination of fitness and the training to apply strength in a precise manner.</p><p><em>Specialisation options:</em> climbing, swimming, jumping, rowing, running, lifting</p>",
     "characteristic": "strength",
     "advanced": false,
     "trainingLevel": 0,

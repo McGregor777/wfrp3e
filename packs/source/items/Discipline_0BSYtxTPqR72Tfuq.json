@@ -5,7 +5,7 @@
   "_id": "0BSYtxTPqR72Tfuq",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>This skill is used to resist the startling effects of surprising events, show resolve in the face of danger, and maintain composure when confronted by supernatural or terrifying situations. Discipline is also the ability to maintain one’s state of mind and resist the rigours of stress or attempts to manipulate one’s thoughts or feelings.</p>\n<p><em>Specialisation options:</em>&nbsp;resist charm, resist guile, resist intimidation, resist fear, resist terror, resist torture</p>",
+    "description": "<p>This skill is used to resist the startling effects of surprising events, show resolve in the face of danger, and maintain composure when confronted by supernatural or terrifying situations. Discipline is also the ability to maintain one’s state of mind and resist the rigours of stress or attempts to manipulate one’s thoughts or feelings.</p><p><em>Specialisation options:</em> resist charm, resist guile, resist intimidation, resist fear, resist terror, resist torture</p>",
     "characteristic": "willpower",
     "advanced": false,
     "trainingLevel": 0,

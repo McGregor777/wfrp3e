@@ -5,7 +5,7 @@
   "_id": "dRbgJBwpkPzAAof4",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>A character’s ability to lead, motivate, direct, and manage the actions of others. Whether done by chastisement, ridicule, or camaraderie, leadership can help coordinate efforts among groups of people. If the leadership attempt would require a person to do something strongly against their nature, or is under especially dire circumstances, it may be opposed by the target’s Discipline.</p>\n<p><em>Specialisation options:</em>&nbsp;military leadership, politician, logistics,&nbsp;spiritual leader</p>",
+    "description": "<p>A character’s ability to lead, motivate, direct, and manage the actions of others. Whether done by chastisement, ridicule, or camaraderie, leadership can help coordinate efforts among groups of people. If the leadership attempt would require a person to do something strongly against their nature, or is under especially dire circumstances, it may be opposed by the target’s Discipline.</p><p><em>Specialisation options:</em> military leadership, politician, logistics, spiritual leader</p>",
     "characteristic": "fellowship",
     "advanced": false,
     "trainingLevel": 0,

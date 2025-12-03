@@ -3,7 +3,7 @@
   "type": "criticalWound",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>At the end of each encounter, or after a full night&rsquo;s rest, you recover 1 less stress and 1 less fatigue than normal.</p>",
+    "description": "<p>At the end of each encounter, or after a full night’s rest, you recover 1 less stress and 1 less fatigue than normal.</p>",
     "severityRating": 2
   },
   "effects": [],

@@ -5,7 +5,7 @@
   "_id": "ud3VIku7SIKfHljT",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>A blend of knowledge and intuition on what will be pleasing and appropriate to the gods. Also reflects a character’s ability to successfully curry favour with his chosen god, generating the favour needed to fuel divine blessings. The divine equivalent of the arcane skill channelling.</p>\n<p><em>Specialisation options:</em> below capacity, conservative, reckless, In Dire Need, traditions, tenets</p>",
+    "description": "<p>A blend of knowledge and intuition on what will be pleasing and appropriate to the gods. Also reflects a character’s ability to successfully curry favour with his chosen god, generating the favour needed to fuel divine blessings. The divine equivalent of the arcane skill channelling.</p><p><em>Specialisation options:</em> below capacity, conservative, reckless, In Dire Need, traditions, tenets</p>",
     "characteristic": "willpower",
     "advanced": true,
     "trainingLevel": 0,

@@ -5,7 +5,7 @@
   "_id": "vlBpGrYW1HuTdNou",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>The knowledge of the mortal body and how to care for it when seriously injured. This skill takes healing and treatment beyond the scope of First Aid, and can produce more dramatic results. Also covers rudiments of surgery, amputations, cauterisation, treating poisons and disease, suturing and long-term medical care.</p>\n<p><em>Specialisation options:</em> critical wounds, poison, disease, long-term care, surgery</p>",
+    "description": "<p>The knowledge of the mortal body and how to care for it when seriously injured. This skill takes healing and treatment beyond the scope of First Aid, and can produce more dramatic results. Also covers rudiments of surgery, amputations, cauterisation, treating poisons and disease, suturing and long-term medical care.</p><p><em>Specialisation options:</em> critical wounds, poison, disease, long-term care, surgery</p>",
     "characteristic": "intelligence",
     "advanced": true,
     "trainingLevel": 0,

@@ -5,7 +5,7 @@
   "_id": "xIkIYMUHDtUrqjY8",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Covers the basic use, care and maintenance of a variety of melee weapons. Weapon skill is a broad category and governs fighting unarmed to using small weapons like knives or clubs to larger weapons like two-handed swords, great axes or halberds. The ability to parry with an equipped melee weapon is also based on a character’s Weapon Skill.</p>\n<p><em>Specialisation options:</em> hand weapons, great weapons, polearms, parry with hand weapon, parry with great weapon</p>",
+    "description": "<p>Covers the basic use, care and maintenance of a variety of melee weapons. Weapon skill is a broad category and governs fighting unarmed to using small weapons like knives or clubs to larger weapons like two-handed swords, great axes or halberds. The ability to parry with an equipped melee weapon is also based on a character’s Weapon Skill.</p><p><em>Specialisation options:</em> hand weapons, great weapons, polearms, parry with hand weapon, parry with great weapon</p>",
     "characteristic": "strength",
     "advanced": false,
     "trainingLevel": 0,

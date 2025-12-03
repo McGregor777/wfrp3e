@@ -5,7 +5,7 @@
   "_id": "rcpijNvlSTrQUTaE",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Covers the basics in rendering care, tending to injury, splinting, and helping someone survive until better care is available, as well as evaluating the severity of wounds or trying to identify infections or sources of injuries. The more seriously injured the target is, the more challenging it is to treat them.</p>\n<p><em>Specialisation options:</em> combat surgery, long term care, tending critical wounds, tending normal wounds</p>",
+    "description": "<p>Covers the basics in rendering care, tending to injury, splinting, and helping someone survive until better care is available, as well as evaluating the severity of wounds or trying to identify infections or sources of injuries. The more seriously injured the target is, the more challenging it is to treat them.</p><p><em>Specialisation options:</em> combat surgery, long term care, tending critical wounds, tending normal wounds</p>",
     "characteristic": "intelligence",
     "advanced": false,
     "trainingLevel": 0,

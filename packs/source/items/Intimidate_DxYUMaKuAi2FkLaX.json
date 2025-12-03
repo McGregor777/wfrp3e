@@ -5,7 +5,7 @@
   "_id": "DxYUMaKuAi2FkLaX",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>A character’s ability to cow, unnerve, or bully someone. Also covers the ability to convey a sense of dominance or superiority over others. Often carries the implied or overt threat of physical violence. Can escalate a tense situation into hostility, or possibly cause someone to back down if properly cowed.</p>\n<p><em>Specialisation options:</em>&nbsp;violence, combat, interrogation, politics</p>",
+    "description": "<p>A character’s ability to cow, unnerve, or bully someone. Also covers the ability to convey a sense of dominance or superiority over others. Often carries the implied or overt threat of physical violence. Can escalate a tense situation into hostility, or possibly cause someone to back down if properly cowed.</p><p><em>Specialisation options:</em> violence, combat, interrogation, politics</p>",
     "characteristic": "strength",
     "advanced": false,
     "trainingLevel": 0,

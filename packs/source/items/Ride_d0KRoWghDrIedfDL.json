@@ -5,7 +5,7 @@
   "_id": "d0KRoWghDrIedfDL",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Defines a character’s ability to ride or care for a horse or other common mount, as well as drive and manage a wagon or carriage, and provide maintenance and care for the equipment associated with horses, mules and other riding or team animals. This skill also covers the ability to manage such animals and keep them calm under duress or spur them to greater action.</p>\n<p><em>Specialisation options:</em> horsemanship, trick riding, wagons, mounted combat, long distance travel</p>",
+    "description": "<p>Defines a character’s ability to ride or care for a horse or other common mount, as well as drive and manage a wagon or carriage, and provide maintenance and care for the equipment associated with horses, mules and other riding or team animals. This skill also covers the ability to manage such animals and keep them calm under duress or spur them to greater action.</p><p><em>Specialisation options:</em> horsemanship, trick riding, wagons, mounted combat, long distance travel</p>",
     "characteristic": "agility",
     "advanced": false,
     "trainingLevel": 0,

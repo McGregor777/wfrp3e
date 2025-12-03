@@ -5,7 +5,7 @@
   "_id": "nkkwx38S2RAEW0ay",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Charisma and interaction on a friendly level. Charm can be used to manipulate others, create a favourable impression or interact good-naturedly with others. Charm can also be used to change the minds of individuals and small groups, to cajole, flatter, and gossip to glean information. Charm also includes seduction. Checks that involve convincing someone to do something unusual or against his nature are generally opposed by the target’s Discipline.</p>\n<p><em>Specialisation options:</em> etiquette, gossip, diplomacy, haggling,&nbsp;seduction</p>",
+    "description": "<p>Charisma and interaction on a friendly level. Charm can be used to manipulate others, create a favourable impression or interact good-naturedly with others. Charm can also be used to change the minds of individuals and small groups, to cajole, flatter, and gossip to glean information. Charm also includes seduction. Checks that involve convincing someone to do something unusual or against his nature are generally opposed by the target’s Discipline.</p><p><em>Specialisation options:</em> etiquette, gossip, diplomacy, haggling, seduction</p>",
     "characteristic": "fellowship",
     "advanced": false,
     "trainingLevel": 0,

@@ -5,7 +5,7 @@
   "_id": "zkAmp7J3kXPnrGDE",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>This skill is a broad category covering a variety of knowledges and disciplines. Training in education confers basic literacy. This skill is used to recall facts about specific topics, rely on book-learned knowledge, or show appreciation and understanding of various schools of thought or philosophies.</p>\n<p><em>Specialisation options:</em> history, geography, reason, language skills, philosophy</p>",
+    "description": "<p>This skill is a broad category covering a variety of knowledges and disciplines. Training in education confers basic literacy. This skill is used to recall facts about specific topics, rely on book-learned knowledge, or show appreciation and understanding of various schools of thought or philosophies.</p><p><em>Specialisation options:</em> history, geography, reason, language skills, philosophy</p>",
     "characteristic": "intelligence",
     "advanced": true,
     "trainingLevel": 0,

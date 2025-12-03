@@ -5,7 +5,7 @@
   "_id": "6hyilRndUzF1D6EF",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Reflects a character’s ability to successfully harness the Winds of Magic to glean power to fuel arcane spells. The arcane equivalent of the divine skill Piety.</p>\n<p><em>Specialisation options:</em> below capacity, overchannelling, conservative, reckless, by college order</p>",
+    "description": "<p>Reflects a character’s ability to successfully harness the Winds of Magic to glean power to fuel arcane spells. The arcane equivalent of the divine skill Piety.</p><p><em>Specialisation options:</em> below capacity, overchannelling, conservative, reckless, by college order</p>",
     "characteristic": "willpower",
     "advanced": true,
     "trainingLevel": 0,
