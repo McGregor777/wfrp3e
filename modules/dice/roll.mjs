@@ -924,78 +924,18 @@ export default class CheckRoll extends foundry.dice.Roll
 	static async drawCriticalWoundsRandomly(amount)
 	{
 		const allCriticalWounds = [],
-			  criticalWoundRollTable = await game.packs.get("wfrp3e.roll-tables").getDocument("KpiwJKBdJ8qAyQjs"),
+			  /** @var {RollTable} criticalWoundRollTable */
+			  criticalWoundRollTable = await fromUuid("Compendium.wfrp3e.roll-tables.RollTable.KpiwJKBdJ8qAyQjs"),
 			  drawnResult = await criticalWoundRollTable.drawMany(amount, {displayChat: false});
 
+		// If Dice So Nice! module is enabled, show the roll.
+		game.dice3d?.showForRoll(drawnResult.roll);
 		for(const result of drawnResult.results) {
-			//#TODO Move this logic into a Macro embedded into the Critical Wounds RollTable.
-			// Roll twice and select the critical wound with the higher severity rating (if tied, GM chooses)
-			if(result.id === "uZIgluknIsZ428Cn") {
-				const criticalWounds = [];
-				let highestCriticalWound = null;
-
-				for(let i = 0; i < 2; i++) {
-					let rollTableDraw = null,
-						criticalWound = null
-
-					while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
-						rollTableDraw = await table.draw({displayChat: false});
-
-					criticalWound = await game.packs.get(rollTableDraw.results[0].documentCollection)
-						.getDocument(rollTableDraw.results[0].documentId);
-					criticalWounds.push(criticalWound);
-
-					if(!highestCriticalWound || highestCriticalWound.system.severityRating < criticalWound.system.severityRating)
-						highestCriticalWound = criticalWound;
-				}
-
-				if(criticalWounds[0].system.severityRating === criticalWounds[1].system.severityRating) {
-					let criticalWoundLinks = null;
-					const buttons = {};
-
-					for(const criticalWound of criticalWounds) {
-						criticalWoundLinks = criticalWoundLinks
-							? criticalWound.toAnchor().outerHTML
-							: `${criticalWoundLinks} ${criticalWound.toAnchor().outerHTML}`;
-
-						buttons[criticalWound.uuid] = {
-							label: criticalWound.name,
-							callback: async (event, button, dialog) => criticalWound
-						};
-					}
-
-					await foundry.applications.api.DialogV2.wait({
-						title: game.i18n.localize("CRITICALWOUND.DIALOG.choose.title"),
-						content: `<p>${game.i18n.format(
-							"CRITICALWOUND.DIALOG.choose.description",
-							{links: criticalWoundLinks}
-						)}</p>`,
-						buttons,
-						submit: async (result) => {
-							if(result)
-								allCriticalWounds.push(result);
-						}
-					});
-				}
-				else
-					allCriticalWounds.push(highestCriticalWound);
-			}
-			//#TODO Move this logic into a Macro embedded into the Critical Wounds RollTable.
-			// Roll twice and apply both results! You poor sod...
-			else if(result.id === "aJ0a8gzJbFSPS7xY") {
-				for(let j = 0; j < 2; j++) {
-					let rollTableDraw = null;
-
-					while(!rollTableDraw || ["uZIgluknIsZ428Cn", "aJ0a8gzJbFSPS7xY"].includes(rollTableDraw.results[0].id))
-						rollTableDraw = await table.draw({displayChat: false});
-
-					allCriticalWounds.push(await game.packs.get(rollTableDraw.results[0].documentCollection)
-						.getDocument(rollTableDraw.results[0].documentId));
-				}
-			}
-			// Default.
+			const document = await fromUuid(result.documentUuid);
+			if(document.type === "criticalWound")
+				allCriticalWounds.push(document);
 			else
-				allCriticalWounds.push(await game.packs.get(result.documentCollection).getDocument(result.documentId));
+				ui.notifications.info(result.description);
 		}
 
 		return allCriticalWounds;

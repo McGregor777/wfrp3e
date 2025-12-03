@@ -852,18 +852,18 @@
       "flags": {},
       "img": "icons/svg/dice-target.svg",
       "_stats": {
-        "coreVersion": "13.350",
+        "coreVersion": "13.351",
         "systemId": null,
         "systemVersion": null,
         "createdTime": null,
-        "modifiedTime": 1762121567441,
+        "modifiedTime": 1764757893435,
         "lastModifiedBy": "Bq3CTOvANoOneedB",
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null
       },
-      "description": "",
-      "name": "Roll Twice Choose One Career",
+      "description": "<p>Roll twice and choose one career</p>",
+      "name": "Roll Twice",
       "documentUuid": "Compendium.wfrp3e.macros.Macro.Z6PlhBzAChUnDyog",
       "_key": "!tables.results!Clr8Gwsfs7VkMFjd.1m2icEh2oxtYMHdo"
     },

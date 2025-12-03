@@ -6,7 +6,7 @@ export default class RollTable extends foundry.documents.RollTable
 	{
 		const drawnResult = await super.draw({roll, recursive, results, displayChat, rollMode});
 
-		if(!displayChat)
+		if(!displayChat && recursive)
 			await this._executeDrawnScripts(drawnResult, {roll, results, recursive, displayChat, rollMode});
 
 		return drawnResult;
@@ -16,7 +16,7 @@ export default class RollTable extends foundry.documents.RollTable
 	{
 		let drawnResult = await super.drawMany(number, {roll, recursive, displayChat, rollMode});
 
-		if(!displayChat)
+		if(!displayChat && recursive)
 			await this._executeDrawnScripts(drawnResult, {roll, recursive, displayChat, rollMode});
 
 		return drawnResult;
@@ -31,8 +31,7 @@ export default class RollTable extends foundry.documents.RollTable
 	 * @param {TableResult[]} [options.results] One or more table results which have been drawn.
 	 * @param {boolean} [options.displayChat=true] Whether to automatically display the results in chat.
 	 * @param {string} [options.rollMode] The chat roll mode to use when displaying the result.
-	 * @returns {Promise<{RollTableDraw}>}  A Promise which resolves to an object containing the executed roll and the
-	 *                                      produced results.
+	 * @returns {Promise<{RollTableDraw}>}  A Promise which resolves to an object containing the executed roll and the produced results.
 	 * @protected
 	 */
 	async _executeDrawnScripts(drawnResult, {roll, recursive = true, results = [], displayChat = true, rollMode} = {})

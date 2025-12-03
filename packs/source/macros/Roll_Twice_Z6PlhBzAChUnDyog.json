@@ -1,5 +1,5 @@
 {
-  "name": "Roll Twice Choose One Career",
+  "name": "Roll Twice",
   "type": "script",
   "_id": "Z6PlhBzAChUnDyog",
   "author": "Bq3CTOvANoOneedB",
@@ -17,11 +17,11 @@
     "compendiumSource": null,
     "duplicateSource": null,
     "exportSource": null,
-    "coreVersion": "13.350",
+    "coreVersion": "13.351",
     "systemId": "wfrp3e",
     "systemVersion": "1.3.2",
     "createdTime": 1761988810991,
-    "modifiedTime": 1762078823267,
+    "modifiedTime": 1764757811982,
     "lastModifiedBy": "Bq3CTOvANoOneedB"
   },
   "_key": "!macros!Z6PlhBzAChUnDyog"
