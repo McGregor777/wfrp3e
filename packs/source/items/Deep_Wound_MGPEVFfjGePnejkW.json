@@ -2,7 +2,7 @@
   "folder": "VUMz1tBRkXXXUVEt",
   "name": "Deep Wound",
   "type": "criticalWound",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/wounds/injury-stitched-flesh-red.webp",
   "system": {
     "description": "<p>This wound has no special effect aside from its high severity.</p>",
     "severityRating": 5
@@ -21,9 +21,9 @@
   "_stats": {
     "systemId": "wfrp3e",
     "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.341",
+    "coreVersion": "13.351",
     "createdTime": 1682264544162,
-    "modifiedTime": 1715380997987,
+    "modifiedTime": 1764840385857,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null,
