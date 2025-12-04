@@ -918,6 +918,13 @@
 				},
 				"label": "Déclenchement manuel avant un test"
 			},
+			"powerFavourAdjustment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que l'énergie ou la faveur d'un acteur est ajusté(e) en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont l'énergie ou la faveur est sur le point d'être ajusté(e).\n\t- {number} current: La quantité actuelle d'énergie/faveur de l'acteur.\n\t- {\"favour\"|\"power\"} type: Quelle valeur est ajustée entre l'énergie (« power ») et la faveur (« favour »).\n\t- {number} value: La valeur d'ajustement de l'énergie ou de la faveur actuellement calculée.",
+					"label": "Script"
+				},
+				"label": "Ajustement de l'énergie ou de la faveur"
+			},
 			"requirement": {
 				"FIELDS.script": {
 					"hint": "Ce script vérifie si l'objet peut être acquis durant la génération de personnage ou durant une augmentation de carrière.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur pouvant potentiellement acquérir l'objet.\n\tValeur de retour: Doit être un booléen, true si les conditions sont vérifiées, sinon false.",

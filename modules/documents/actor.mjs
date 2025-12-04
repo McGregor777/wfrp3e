@@ -183,6 +183,38 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
+	 * Adjusts the Actor's power.
+	 * @param {Number} value The value to add to the power pool.
+	 * @returns {Promise<void>}
+	 */
+	async adjustPower(value)
+	{
+		const propertyPath = "system.power",
+			  power = foundry.utils.getProperty(this, propertyPath);
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.PowerFavourAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, current: power, type: "power", value});
+
+		await this.update({[propertyPath]: power + value});
+	}
+
+	/**
+	 * Adjusts the Actor's favour.
+	 * @param {Number} value The value to add to the favour pool.
+	 * @returns {Promise<void>}
+	 */
+	async adjustFavour(value)
+	{
+		const propertyPath = "system.favour",
+			  favour = foundry.utils.getProperty(this, propertyPath);
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.PowerFavourAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, current: favour, type: "favour", value});
+
+		await this.update({[propertyPath]: favour + value});
+	}
+
+	/**
 	 * Adds or removes a specified number of segments on either side on the stance meter.
 	 * @param {string} stance The name of the stance meter part that is getting adjusted.
 	 * @param {number} number The number of segments added or removed.

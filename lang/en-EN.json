@@ -918,6 +918,13 @@
 				},
 				"label": "Manual Pre Check Roll"
 			},
+			"powerFavourAdjustment": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor's power or favour is adjusted from outside the Actor's sheet.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose power or favour is being adjusted.\n\t- {number} current: The Actor's current amount of power/favour.\n\t- {\"favour\"|\"power\"} type: Which value is being adjusted between power and favour.\n\t- {number} value: The currently calculated adjustment value for the power or favour.",
+					"label": "Script"
+				},
+				"label": "Power or Favour Adjustment"
+			},
 			"requirement": {
 				"FIELDS.script": {
 					"hint": "This script verifies whether the Item can be acquired during Character Generation or as part of Career Advances.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that may (or may not) acquire the Item.",
