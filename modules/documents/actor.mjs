@@ -117,12 +117,53 @@ export default class Actor extends foundry.documents.Actor
 	/**
 	 * Adjusts one of the Actor's impairment values.
 	 * @param {string} impairment The impairment to update.
-	 * @param {Number} value The value to add to the impairment.
+	 * @param {Number} value The value to add to the impairment
 	 * @returns {Promise<void>}
+	 * @deprecated
 	 */
 	async adjustImpairment(impairment, value)
 	{
-		await this.update({[`system.impairments.${impairment}`]: this.system.impairments[impairment] + value});
+		try {
+			const functionName = `adjust${capitalize(impairment)}`;
+
+			if(this.actor[functionName])
+				await this[functionName](value);
+		}
+		catch(exception) {
+			console.error(`Something went wrong when updating the Actor's (${this.name}) ${impairment}`);
+		}
+	}
+
+	/**
+	 * Adjusts the Actor's fatigue.
+	 * @param {Number} value The value to add to the fatigue.
+	 * @returns {Promise<void>}
+	 */
+	async adjustFatigue(value)
+	{
+		const propertyPath = "system.impairments.fatigue",
+			  fatigue = foundry.utils.getProperty(this, propertyPath);
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.FatigueAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, fatigue, value});
+
+		await this.update({[propertyPath]: fatigue + value});
+	}
+
+	/**
+	 * Adjusts the Actor's stress.
+	 * @param {Number} value The value to add to the stress.
+	 * @returns {Promise<void>}
+	 */
+	async adjustStress(value)
+	{
+		const propertyPath = "system.impairments.stress",
+			  stress = foundry.utils.getProperty(this, propertyPath);
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.StressAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, stress, value});
+
+		await this.update({[propertyPath]: stress + value});
 	}
 
 	/**

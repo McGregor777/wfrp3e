@@ -856,6 +856,13 @@
 				},
 				"label": "Investissement des points de création"
 			},
+			"fatigueAdjustment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que la fatigue d'un acteur est ajustée en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont la fatigue est sur le point d'être ajustée.\n\t- {number} fatigue: La fatigue actuelle de l'acteur.\n\t- {number} value: La valeur d'ajustement de la fatigue actuellement calculée.",
+					"label": "Script"
+				},
+				"label": "Ajustement de la fatigue"
+			},
 			"manual": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté sur commande de l'utilisateur uniquement.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.",
@@ -913,6 +920,13 @@
 					"label": "Script"
 				},
 				"label": "Sélection des talents de départ"
+			},
+			"stressAdjustment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que le stress d'un acteur est ajusté en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont le stress est sur le point d'être ajusté.\n\t- {number} stress: Le stress actuel de l'acteur.\n\t- {number} value: La valeur d'ajustement du stress actuellement calculée.",
+					"label": "Script"
+				},
+				"label": "Ajustement du stress"
 			},
 			"targetingCheckPreparation": {
 				"FIELDS.script": {

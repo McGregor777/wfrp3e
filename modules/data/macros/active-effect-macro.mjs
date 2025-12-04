@@ -28,37 +28,26 @@ export default class ActiveEffectMacro extends foundry.abstract.DataModel
 	 *   checkPreparation: CheckPreparationMacro
 	 *   checkRoll: CheckRollMacro
 	 *   creationPointInvestment: CreationPointInvestmentMacro
+	 *   fatigueAdjustement: FatigueAdjustementMacro
 	 *   manualPostCheck: ManualPostCheckRollMacro
 	 *   manualPreCheck: ManualPreCheckRollMacro
 	 *   manual: ManualMacro
 	 *   requirement: RequirementMacro
 	 *   startingSkillTrainingSelection: StartingSkillTrainingSelectionMacro
 	 *   startingTalentSelection: StartingTalentSelectionMacro
+	 *   stressAdjustement: StressAdjustementMacro
 	 *   targetingCheckPreparation: TargetingCheckPreparationMacro
 	 * }>}
 	 */
 	static get TYPES()
 	{
-		const {ActionUsageMacro, CareerSocketMacro, CareerTransitionMacro, CheckPreparationMacro, CheckRollMacro,
-			   CreationPointInvestmentMacro, ManualMacro, ManualPostCheckRollMacro, ManualPreCheckRollMacro,
-			   RequirementMacro, StartingSkillTrainingSelectionMacro, StartingTalentSelectionMacro,
-			   TargetingCheckPreparationMacro} = wfrp3e.data.macros;
+		const macros = {};
 
-		return Object.freeze({
-			[ActionUsageMacro.TYPE]: ActionUsageMacro,
-			[CareerSocketMacro.TYPE]: CareerSocketMacro,
-			[CareerTransitionMacro.TYPE]: CareerTransitionMacro,
-			[CheckPreparationMacro.TYPE]: CheckPreparationMacro,
-			[CheckRollMacro.TYPE]: CheckRollMacro,
-			[CreationPointInvestmentMacro.TYPE]: CreationPointInvestmentMacro,
-			[ManualPostCheckRollMacro.TYPE]: ManualPostCheckRollMacro,
-			[ManualPreCheckRollMacro.TYPE]: ManualPreCheckRollMacro,
-			[ManualMacro.TYPE]: ManualMacro,
-			[RequirementMacro.TYPE]: RequirementMacro,
-			[StartingSkillTrainingSelectionMacro.TYPE]: StartingSkillTrainingSelectionMacro,
-			[StartingTalentSelectionMacro.TYPE]: StartingTalentSelectionMacro,
-			[TargetingCheckPreparationMacro.TYPE]: TargetingCheckPreparationMacro
-		});
+		for(const macro of Object.values(wfrp3e.data.macros))
+			if(macro !== ActiveEffectMacro)
+				macros[macro.TYPE] = macro;
+
+		return macros;
 	};
 
 	/**

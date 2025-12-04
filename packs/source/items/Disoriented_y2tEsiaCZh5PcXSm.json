@@ -16,7 +16,7 @@
       "system": {
         "macro": {
           "type": "checkRoll",
-          "script": "if(wfrp3e.data.actors.Actor.CHARACTERISTICS[checkData.characteristic].type === \"mental\")\n  checkRoll.effects?.bane.push({\n    description: \"<p>Suffer 1 stress</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"await actor.adjustImpairment(\\\"stress\\\", 1);\",\n    symbolAmount: 1\n  });"
+          "script": "if(wfrp3e.data.actors.Actor.CHARACTERISTICS[checkData.characteristic].type === \"mental\")\n  checkRoll.effects?.bane.push({\n    description: \"<p>Suffer 1 stress</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"await actor.adjustStress(1);\",\n    symbolAmount: 1\n  });"
         }
       },
       "changes": [],
@@ -43,7 +43,7 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "wfrp3e",
-        "systemVersion": "1.3.3",
+        "systemVersion": "1.3.4",
         "createdTime": 1764841241694,
         "modifiedTime": 1764857101515,
         "lastModifiedBy": "Bq3CTOvANoOneedB"

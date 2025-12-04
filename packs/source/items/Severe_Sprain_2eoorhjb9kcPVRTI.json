@@ -16,7 +16,7 @@
       "system": {
         "macro": {
           "type": "checkRoll",
-          "script": "if(wfrp3e.data.actors.Actor.CHARACTERISTICS[checkData.characteristic].type === \"physical\")\n  checkRoll.effects?.bane.push({\n    description: \"<p>Suffer 1 fatigue</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"await actor.adjustImpairment(\\\"fatigue\\\", 1);\",\n    symbolAmount: 1\n  });"
+          "script": "if(wfrp3e.data.actors.Actor.CHARACTERISTICS[checkData.characteristic].type === \"physical\")\n  checkRoll.effects?.bane.push({\n    description: \"<p>Suffer 1 fatigue</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"await actor.adjustFatigue(1);\",\n    symbolAmount: 1\n  });"
         }
       },
       "changes": [],
@@ -43,7 +43,7 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "wfrp3e",
-        "systemVersion": "1.3.3",
+        "systemVersion": "1.3.4",
         "createdTime": 1764845641014,
         "modifiedTime": 1764858497477,
         "lastModifiedBy": "Bq3CTOvANoOneedB"

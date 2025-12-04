@@ -856,6 +856,13 @@
 				},
 				"label": "Creation Point Investment"
 			},
+			"fatigueAdjustment": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor's fatigue is adjusted from outside the Actor's sheet.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose fatigue is being adjusted.\n\t- {number} fatigue: The current fatigue of the Actor.\n\t- {number} value: The currently calculated adjustment value for the fatigue.",
+					"label": "Script"
+				},
+				"label": "Fatigue Adjustment"
+			},
 			"manual": {
 				"FIELDS.script": {
 					"hint": "This script is executed on the User action only.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.",
@@ -913,6 +920,13 @@
 					"label": "Script"
 				},
 				"label": "Starting Talent Selection"
+			},
+			"stressAdjustment": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor's stress is adjusted from outside the Actor's sheet.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose stress is being adjusted.\n\t- {number} stress: The current stress of the Actor.\n\t- {number} value: The currently calculated adjustment value for the stress.",
+					"label": "Script"
+				},
+				"label": "Stress Adjustment"
 			},
 			"targetingCheckPreparation": {
 				"FIELDS.script": {

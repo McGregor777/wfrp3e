@@ -16,7 +16,7 @@
       "system": {
         "macro": {
           "type": "actionUsage",
-          "script": "if(action.system[face].traits.includes(\"TRAITS.activeDefence\"))\n  await actor.adjustImpairment(\"fatigue\", 1);"
+          "script": "if(action.system[face].traits.includes(\"TRAITS.activeDefence\"))\n  await actor.adjustFatigue(1);"
         }
       },
       "changes": [],
@@ -43,7 +43,7 @@
         "exportSource": null,
         "coreVersion": "13.351",
         "systemId": "wfrp3e",
-        "systemVersion": "1.3.3",
+        "systemVersion": "1.3.4",
         "createdTime": 1764842539316,
         "modifiedTime": 1764858634289,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
