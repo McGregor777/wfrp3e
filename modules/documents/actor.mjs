@@ -89,17 +89,64 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Adds or removes a specified number of segments on either side on the stance meter.
-	 * @param {string} stance The name of the stance meter part that is getting adjusted.
-	 * @param {number} amount The amount of segments added or removed.
+	 * Adjusts the fortune pool of the Actor.
+	 * @param {Number} value The value to add to the fortune pool or to remove from it.
 	 * @returns {Promise<void>}
 	 */
-	async adjustStanceMeter(stance, amount)
+	async adjustFortune(value)
 	{
-		if(this.system.stance[stance] + amount < 0)
+		switch(this.type) {
+			case "character":
+				const newValue = this.system.fortune.value + value;
+
+				if(newValue > this.system.fortune.max)
+					ui.notifications.error(game.i18n.format("ACTOR.WARNINGS.maximumFortuneReached", {
+						max: this.system.fortune.max
+					}));
+
+				await this.update({"system.fortune.value": newValue});
+				break;
+			case "party":
+				await this.update({"system.fortunePool": this.system.fortunePool + value});
+				break;
+			default:
+				return ui.notifications.error(`Unable to adjust the fortune pool of an Actor of type ${this.type}.`);
+		}
+	}
+
+	/**
+	 * Adjusts one of the Actor's impairment values.
+	 * @param {string} impairment The impairment to update.
+	 * @param {Number} value The value to add to the impairment.
+	 * @returns {Promise<void>}
+	 */
+	async adjustImpairment(impairment, value)
+	{
+		await this.update({[`system.impairments.${impairment}`]: this.system.impairments[impairment] + value});
+	}
+
+	/**
+	 * Adds or removes a specified number of segments on either side on the stance meter.
+	 * @param {string} stance The name of the stance meter part that is getting adjusted.
+	 * @param {number} number The number of segments added or removed.
+	 * @returns {Promise<void>}
+	 */
+	async adjustStanceMeter(stance, number)
+	{
+		if(this.system.stance[stance] + number < 0)
 			ui.notifications.warn(game.i18n.localize("ACTOR.WARNINGS.minimumSegment"));
 
-		await this.update({system: {stance: {[`${stance}`]: this.system.stance[stance] + amount}}});
+		await this.update({[`system.stance.${stance}`]: this.system.stance[stance] + number});
+	}
+
+	/**
+	 * Adjusts one of the Actor's number of wounds.
+	 * @param {Number} number The number of wounds to add or remove.
+	 * @returns {Promise<void>}
+	 */
+	async adjustWounds(number)
+	{
+		await this.update({"system.wounds.value": this.system.wounds.value + number});
 	}
 
 	/**
@@ -180,43 +227,6 @@ export default class Actor extends foundry.documents.Actor
 			Object.assign(socketsByType[itemType], socketsByType["any"]);
 
 		return socketsByType;
-	}
-
-	/**
-	 * Adjusts the fortune pool of the Actor.
-	 * @param {Number} value The value to add to the fortune pool.
-	 * @returns {Promise<void>}
-	 */
-	async adjustFortune(value)
-	{
-		switch(this.type) {
-			case "character":
-				const newValue = this.system.fortune.value + value;
-
-				if(newValue > this.system.fortune.max)
-					ui.notifications.error(game.i18n.format("ACTOR.WARNINGS.maximumFortuneReached", {
-						max: this.system.fortune.max
-					}));
-
-				await this.update({"system.fortune.value": newValue});
-				break;
-			case "party":
-				await this.update({"system.fortunePool": this.system.fortunePool + value});
-				break;
-			default:
-				return ui.notifications.error(`Unable to adjust the fortune pool of an Actor of type ${this.type}.`);
-		}
-	}
-
-	/**
-	 * Adjusts one of the Actor's impairment values.
-	 * @param {string} impairment The impairment to update.
-	 * @param {Number} value The value to add to the impairment.
-	 * @returns {Promise<void>}
-	 */
-	async adjustImpairment(impairment, value)
-	{
-		await this.update({[`system.impairments.${impairment}`]: this.system.impairments[impairment] + value});
 	}
 
 	/**
