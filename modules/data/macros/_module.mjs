@@ -14,3 +14,4 @@ export {default as StartingSkillTrainingSelectionMacro} from "./starting-skill-t
 export {default as StartingTalentSelectionMacro} from "./starting-talent-selection-macro.mjs";
 export {default as StressAdjustmentMacro} from "./stress-adjustment-macro.mjs";
 export {default as TargetingCheckPreparationMacro} from "./targeting-check-preparation-macro.mjs";
+export {default as WoundsAdjustmentMacro} from "./wounds-adjustment-macro.mjs";

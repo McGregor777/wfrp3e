@@ -683,6 +683,10 @@
 			"choose": {
 				"description": "You must choose which critical wound to inflict between these two: {links}",
 				"title": "Choose A Critical Wound"
+			},
+			"lowBlow": {
+				"description": "You may add or remove one recharge token from one of {actor}'s currently recharging cards.",
+				"title": "Low Blow"
 			}
 		},
 		"FIELDS.severityRating.label": "Severity Rating",
@@ -934,6 +938,13 @@
 					"label": "Script"
 				},
 				"label": "Targeting Check Preparation"
+			},
+			"woundsAdjustment": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor's wounds are adjusted from outside the Actor's sheet.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose wounds are being adjusted.\n\t- {number} stress: The Actor's current number of wounds.\n\t- {number} value: The currently calculated adjustment value for the wounds.",
+					"label": "Script"
+				},
+				"label": "Wounds Adjustment"
 			}
 		},
 		"TABS": {

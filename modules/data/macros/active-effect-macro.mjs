@@ -37,6 +37,7 @@ export default class ActiveEffectMacro extends foundry.abstract.DataModel
 	 *   startingTalentSelection: StartingTalentSelectionMacro
 	 *   stressAdjustement: StressAdjustementMacro
 	 *   targetingCheckPreparation: TargetingCheckPreparationMacro
+	 *   woundsAdjustement: WoundssAdjustementMacro
 	 * }>}
 	 */
 	static get TYPES()

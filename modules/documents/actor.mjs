@@ -181,13 +181,19 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Adjusts one of the Actor's number of wounds.
+	 * Adjusts the Actor's number of wounds.
 	 * @param {Number} number The number of wounds to add or remove.
 	 * @returns {Promise<void>}
 	 */
 	async adjustWounds(number)
 	{
-		await this.update({"system.wounds.value": this.system.wounds.value + number});
+		const propertyPath = "system.wounds.value",
+			  wounds = foundry.utils.getProperty(this, propertyPath);
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.WoundsAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, wounds, number});
+
+		await this.update({[propertyPath]: wounds + number});
 	}
 
 	/**

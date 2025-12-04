@@ -683,6 +683,10 @@
 			"choose": {
 				"description": "Vous devez choisir quelle blessure critique infliger entre ces deux suivantes : {links}",
 				"title": "Choisir une blessure critique"
+			},
+			"lowBlow": {
+				"description": "Vous pouvez ajouter ou retirer un jeton de recharge de l'une des cartes en rechargement de {actor}.",
+				"title": "Coup bas"
 			}
 		},
 		"FIELDS.severityRating.label": "Niveau de Gravité",
@@ -934,6 +938,13 @@
 					"label": "Script"
 				},
 				"label": "Préparation d'un test ciblant"
+			},
+			"woundsAdjustment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que les blessures d'un acteur sont ajustées en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont les blessures sont sur le point d'être ajustées.\n\t- {number} stress: Le nombre de blessures actuel de l'acteur.\n\t- {number} value: La valeur d'ajustement des blessures actuellement calculée.",
+					"label": "Script"
+				},
+				"label": "Ajustement des blessures"
 			}
 		},
 		"TABS": {
