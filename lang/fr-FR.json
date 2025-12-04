@@ -19,8 +19,6 @@
 		"plural": "Aptitudes"
 	},
 
-	"ACTOR.GenerateACharacter": "Générer un Personnage",
-
 	"ACTION": {
 		"ACTIONS": {
 			"update": "Enregistrer l'action",
