@@ -860,6 +860,13 @@
 				},
 				"label": "Investissement des points de création"
 			},
+			"embeddedItemCreation": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois qu'un ou plusieurs objet(s) sont soit ajoutés à un acteur, soit directement créés pour lui/elle.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur recevant les nouveaux objet(s).\n\t- {Array} items: Les nouveaux objet(s).",
+					"label": "Script"
+				},
+				"label": "Création d'un objet inclus"
+			},
 			"fatigueAdjustment": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté chaque fois que la fatigue d'un acteur est ajustée en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont la fatigue est sur le point d'être ajustée.\n\t- {number} fatigue: La fatigue actuelle de l'acteur.\n\t- {number} value: La valeur d'ajustement de la fatigue actuellement calculée.",

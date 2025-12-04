@@ -28,6 +28,7 @@ export default class ActiveEffectMacro extends foundry.abstract.DataModel
 	 *   checkPreparation: CheckPreparationMacro
 	 *   checkRoll: CheckRollMacro
 	 *   creationPointInvestment: CreationPointInvestmentMacro
+	 *   embeddedItemCreation: EmbeddedItemCreationMacro
 	 *   fatigueAdjustement: FatigueAdjustementMacro
 	 *   manualPostCheck: ManualPostCheckRollMacro
 	 *   manualPreCheck: ManualPreCheckRollMacro

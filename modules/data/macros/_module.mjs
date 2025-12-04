@@ -5,6 +5,7 @@ export {default as CareerTransitionMacro} from "./career-transition-macro.mjs";
 export {default as CheckPreparationMacro} from "./check-preparation-macro.mjs";
 export {default as CheckRollMacro} from "./check-roll-macro.mjs";
 export {default as CreationPointInvestmentMacro} from "./creation-point-investment-macro.mjs";
+export {default as EmbeddedItemCreationMacro} from "./embedded-item-creation-macro.mjs";
 export {default as FatigueAdjustmentMacro} from "./fatigue-adjustment-macro.mjs";
 export {default as ManualPostCheckRollMacro} from "./manual-post-check-roll-macro.mjs";
 export {default as ManualPreCheckRollMacro} from "./manual-pre-check-roll-macro.mjs";

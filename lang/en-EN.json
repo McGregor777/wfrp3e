@@ -860,6 +860,13 @@
 				},
 				"label": "Creation Point Investment"
 			},
+			"embeddedItemCreation": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time one or several new item(s) are either added to an Actor or directly created for him/her.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor receiving new item(s).\n\t- {Array} items: The new item(s).",
+					"label": "Script"
+				},
+				"label": "Embedded Item Creation"
+			},
 			"fatigueAdjustment": {
 				"FIELDS.script": {
 					"hint": "This script is executed every time the Actor's fatigue is adjusted from outside the Actor's sheet.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose fatigue is being adjusted.\n\t- {number} fatigue: The current fatigue of the Actor.\n\t- {number} value: The currently calculated adjustment value for the fatigue.",
