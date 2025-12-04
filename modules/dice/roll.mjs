@@ -146,7 +146,7 @@ export default class CheckRoll extends foundry.dice.Roll
 		await this._evaluate({minimize, maximize, allowStrings, allowInteractive});
 
 		if(this.options.checkData?.action)
-			return this._prepareEffects();
+			return this._finishCheckRoll();
 
 		return this;
 	}
@@ -240,11 +240,11 @@ export default class CheckRoll extends foundry.dice.Roll
 	}
 
 	/**
-	 * Prepares all the action effects associated with the check.
+	 * Completes the post-evaluation preparations required for a Check Roll.
 	 * @returns {Promise<CheckRoll>}
 	 * @protected
 	 */
-	async _prepareEffects()
+	async _finishCheckRoll()
 	{
 		const checkData = this.options.checkData,
 			  actor = await fromUuid(checkData.actor),
@@ -268,7 +268,11 @@ export default class CheckRoll extends foundry.dice.Roll
 			this.effects.sigmarsComet.push(this.constructor.getUniversalSigmarsCometEffect());
 		}
 
-		await CheckRoll.triggerCheckRollMacros(actor, checkData, this);
+		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.CheckRollMacro.TYPE))
+			await effect.triggerMacro({actor, checkData, checkRoll: this});
+
+		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.ActionUsageMacro.TYPE))
+			await effect.triggerMacro({action, actor, face: checkData.face});
 
 		return this;
 	}
@@ -959,18 +963,5 @@ export default class CheckRoll extends foundry.dice.Roll
 			for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.TargetingCheckPreparationMacro.TYPE))
 				await effect.triggerMacro({actor, checkData, diePool});
 		}
-	}
-
-	/**
-	 * Searches and triggers every Check Roll Macros that belong to an Actor's embedded Item.
-	 * @param {Actor} actor The Actor performing the check.
-	 * @param {Object} checkData The check data.
-	 * @param {CheckRoll} checkRoll The check roll.
-	 * @returns {Promise<void>}
-	 */
-	static async triggerCheckRollMacros(actor, checkData, checkRoll)
-	{
-		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.CheckRollMacro.TYPE))
-			await effect.triggerMacro({actor, checkData, checkRoll});
 	}
 }

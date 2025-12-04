@@ -814,6 +814,13 @@
 	"EFFECT": {
 		"MACROS": {
 			"FIELDS.type.label": "Type de macro",
+			"actionUsage": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois qu'une action est utilisée, lors d'un test ou d'une simple activation.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Item} action: L'action ayant été utilisée.\n\t- {Actor} actor: L'acteur ayant utilisé l'action.\n\t- {string} face: Quel côté de l'action a été utilisé, soit \"conservative\" pour le côté prudence, soit \"reckless\" pour le côté témérité.",
+					"label": "Script"
+				},
+				"label": "Utilisation d'une action"
+			},
 			"careerSocket": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté chaque fois que l'objet est placé sur un emplacement de talent de carrière.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.",
@@ -1493,6 +1500,7 @@
 	},
 
 	"TRAITS": {
+		"activeDefence": "Défense Active",
 		"amberOrder": "Ordre d'Ambre",
 		"amethystOrder": "Ordre d'Améthyste",
 		"basic": "Base",

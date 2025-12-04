@@ -22,6 +22,7 @@ export default class ActiveEffectMacro extends foundry.abstract.DataModel
 	/**
 	 * The types of Active Effect Macros.
 	 * @type {Readonly<{
+	 *   actionUsage: ActionUsageMacro
 	 *   careerSocket: CareerSocketMacro
 	 *   careerTransition: CareerTransitionMacro
 	 *   checkPreparation: CheckPreparationMacro
@@ -38,22 +39,13 @@ export default class ActiveEffectMacro extends foundry.abstract.DataModel
 	 */
 	static get TYPES()
 	{
-		const {
-			CareerSocketMacro,
-			CareerTransitionMacro,
-			CheckPreparationMacro,
-			CheckRollMacro,
-			CreationPointInvestmentMacro,
-			ManualMacro,
-			ManualPostCheckRollMacro,
-			ManualPreCheckRollMacro,
-			RequirementMacro,
-			StartingSkillTrainingSelectionMacro,
-			StartingTalentSelectionMacro,
-			TargetingCheckPreparationMacro
-		} = wfrp3e.data.macros;
+		const {ActionUsageMacro, CareerSocketMacro, CareerTransitionMacro, CheckPreparationMacro, CheckRollMacro,
+			   CreationPointInvestmentMacro, ManualMacro, ManualPostCheckRollMacro, ManualPreCheckRollMacro,
+			   RequirementMacro, StartingSkillTrainingSelectionMacro, StartingTalentSelectionMacro,
+			   TargetingCheckPreparationMacro} = wfrp3e.data.macros;
 
 		return Object.freeze({
+			[ActionUsageMacro.TYPE]: ActionUsageMacro,
 			[CareerSocketMacro.TYPE]: CareerSocketMacro,
 			[CareerTransitionMacro.TYPE]: CareerTransitionMacro,
 			[CheckPreparationMacro.TYPE]: CheckPreparationMacro,

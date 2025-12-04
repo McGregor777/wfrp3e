@@ -321,8 +321,8 @@ export default class Item extends foundry.documents.Item
 	}
 
 	/**
-	 * Makes usage of the action by preparing an action check.
-	 * @param {string} options.face The face of the action to use.
+	 * Makes usage of the Action by preparing an Action check.
+	 * @param {string} options.face The face of the Action to use.
 	 * @returns {Promise<void>}
 	 * @protected
 	 */
@@ -341,6 +341,9 @@ export default class Item extends foundry.documents.Item
 				submit: async (result) => {
 					if(result) {
 						await this.exhaust(options);
+
+						for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.ActionUsageMacro.TYPE))
+							await effect.triggerMacro({action: this, actor: this.actor, face: options.face});
 
 						return ChatMessage.create({
 							content: await foundry.applications.handlebars.renderTemplate(

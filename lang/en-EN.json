@@ -814,6 +814,13 @@
 	"EFFECT": {
 		"MACROS": {
 			"FIELDS.type.label": "Macro Type",
+			"actionUsage": {
+				"FIELDS.script": {
+					"hint": "This script is executed whenever an Action is used, either after a check roll or a simple activation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Item} action: The Action that has been used.\n\t- {Actor} actor: The Actor that used the Action.\n\t- {string} face: Which face of the Action card was used, either \"conservative\" or \"reckless\".",
+					"label": "Script"
+				},
+				"label": "Action Usage"
+			},
 			"careerSocket": {
 				"FIELDS.script": {
 					"hint": "This script is executed each time the related Item is socketed onto a Career.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.",
@@ -1493,6 +1500,7 @@
 	},
 
 	"TRAITS": {
+		"activeDefence": "Active Defence",
 		"amberOrder": "Amber Order",
 		"amethystOrder": "Amethyst Order",
 		"basic": "Basic",
