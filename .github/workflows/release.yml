@@ -26,7 +26,7 @@ jobs:
       - name: Build
         run: |
           npm install
-          gulp build
+          npm run build
 
       # Modify system.json with values specific to the release.
       - name: Modify System Manifest
