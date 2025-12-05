@@ -2,11 +2,56 @@
   "name": "Performer",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/performer.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Performer",
+      "img": "systems/wfrp3e/assets/images/careers/performer.webp",
+      "_id": "GEwZdFO5gZ0Pmo1b",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune -= checkData.fortunePoints;\ndiePool.dice.expertise += checkData.fortunePoints;",
+          "conditionalScript": "return checkData.skill && [\"SKILL.NAMES.intuition\", \"SKILL.NAMES.observation\"].map(key => game.i18n.localize(key)).includes(fromUuidSync(checkData.skill)?.name);",
+          "postRollScript": ""
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When spending fortune points on an Intuition or Observation check, add {De} instead of {Df} for each fortune point spent</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764776330666,
+        "modifiedTime": 1764776527026,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!iQWkAtG4zmsMzbuj.GEwZdFO5gZ0Pmo1b"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>The Empire is considered a most cultured nation, at least by those who live within its borders. Citizens of the Empire lead hard lives, and diversions such as a good play, energetic dance, or rousing concert are welcome. Performers seek to earn a living entertaining the public.</p>\n<p>Theatre-going is quite popular at all social tiers, whether it is a mummers&rsquo; show depicting legends of gods and heroes, or sophisticated tragedies performed in sumptuous theatres. Most actors eke out a meagre living on the wages they earn, but they live in hope of winning a starring role to bring them fame and fortune. Playwrights like Detlef Sierck and Jacopo Tarradasch are infamous, and good actors are able to quote their most moving monologues from memory.</p>\n<p>Other performers are buskers, who sit in the streets or taverns of the Empire&rsquo;s towns playing music. Loud, shrill instruments, such as the shawm and hurdygurdy, are popular because the raucous noise they produce cuts easily through the hubbub in market squares and tavern rooms. Successful musicians learn a number of well-known songs, such as &ldquo;The Drakwald Lament&rdquo; or &ldquo;Sigmar&rsquo;s Silver Hammer&rdquo;, and can improvise a quick jig if people are in the mood to dance.</p>\n<p>However, only the luckiest and most talented of performers strike it rich. Performers have even been known to join adventuring parties to make ends meet, or to have unusual experiences that may help them hone their art.</p>\n<p><strong>Typical Trappings:</strong> A performer requires little in the way of equipment outside a costume. Most theatres supply their own costumes and make-up, but an actor is well advised to keep a good set of old fashioned clothing and some make-up at the ready to wear for auditions. A musician just needs an instrument and useful accessories such as spare strings, reeds, or rosin.</p>\n<p><strong>Career Ability:</strong> When spending fortune points on an Intuition or Observation check, add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> instead of <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼</span> for each fortune point spent</p>",
+    "description": "<p>The Empire is considered a most cultured nation, at least by those who live within its borders. Citizens of the Empire lead hard lives, and diversions such as a good play, energetic dance, or rousing concert are welcome. Performers seek to earn a living entertaining the public.</p><p>Theatre-going is quite popular at all social tiers, whether it is a mummers’ show depicting legends of gods and heroes, or sophisticated tragedies performed in sumptuous theatres. Most actors eke out a meagre living on the wages they earn, but they live in hope of winning a starring role to bring them fame and fortune. Playwrights like Detlef Sierck and Jacopo Tarradasch are infamous, and good actors are able to quote their most moving monologues from memory.</p><p>Other performers are buskers, who sit in the streets or taverns of the Empire’s towns playing music. Loud, shrill instruments, such as the shawm and hurdygurdy, are popular because the raucous noise they produce cuts easily through the hubbub in market squares and tavern rooms. Successful musicians learn a number of well-known songs, such as “The Drakwald Lament” or “Sigmar’s Silver Hammer”, and can improvise a quick jig if people are in the mood to dance.</p><p>However, only the luckiest and most talented of performers strike it rich. Performers have even been known to join adventuring parties to make ends meet, or to have unusual experiences that may help them hone their art.</p><p><strong>Typical Trappings:</strong> A performer requires little in the way of equipment outside a costume. Most theatres supply their own costumes and make-up, but an actor is well advised to keep a good set of old fashioned clothing and some make-up at the ready to wear for auditions. A musician just needs an instrument and useful accessories such as spare strings, reeds, or rosin.</p><p><strong>Career Ability:</strong> When spending fortune points on an Intuition or Observation check, add {De} instead of {Df} for each fortune point spent</p>",
     "advanced": false,
     "raceRestrictions": [
       "any"
@@ -32,31 +77,75 @@
     },
     "summary": "A professional entertainer who knows how to please a crowd",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -74,13 +163,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1699549855362,
-    "modifiedTime": 1734396646032,
+    "modifiedTime": 1764755879551,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "iQWkAtG4zmsMzbuj",
   "sort": 600000,

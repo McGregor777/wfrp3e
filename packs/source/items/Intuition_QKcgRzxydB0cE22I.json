@@ -5,7 +5,7 @@
   "_id": "QKcgRzxydB0cE22I",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>The ability to trust instincts about people, places, and things. The gut feeling that lets a character know if someone is lying, or if there&rsquo;s a subtle threat implied in someone&rsquo;s tone or posture. Also covers the ability to make reasonably accurate estimations and evaluate an item&rsquo;s worth or purpose. Can be used to size up an opponent and get a general sense of their abilities or intentions, in which case it is opposed by the target&rsquo;s Discipline.</p>\n<p><em>Specialisation options:</em> detect lies, estimate sums, evaluation, gauge opponent</p>",
+    "description": "<p>The ability to trust instincts about people, places, and things. The gut feeling that lets a character know if someone is lying, or if there’s a subtle threat implied in someone’s tone or posture. Also covers the ability to make reasonably accurate estimations and evaluate an item’s worth or purpose. Can be used to size up an opponent and get a general sense of their abilities or intentions, in which case it is opposed by the target’s Discipline.</p><p><em>Specialisation options:</em> detect lies, estimate sums, evaluation, gauge opponent</p>",
     "characteristic": "intelligence",
     "advanced": false,
     "trainingLevel": 0,
@@ -15,13 +15,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1695317173616,
     "modifiedTime": 1699628061290,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "sort": 0,
   "ownership": {

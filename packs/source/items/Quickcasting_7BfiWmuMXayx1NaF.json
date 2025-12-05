@@ -26,7 +26,7 @@
       "traits": "Basic",
       "check": "No Check Required",
       "requirements": "<p>This special ability is available to all wizards and does not need to be acquired specially</p>",
-      "special": "<p><strong>Special:</strong> Normally, a character can only perform the action listed on one action card during his turn. However, spellcasters can attempt to both channel power and cast a spell on the same turn, if they are willing to accept more risk. For a character to cast a spell during the same turn the character channels, the player must add one extra challenge die [[DChal]] to the check to cast the spell</p>"
+      "special": "<p><strong>Special:</strong> Normally, a character can only perform the action listed on one action card during his turn. However, spellcasters can attempt to both channel power and cast a spell on the same turn, if they are willing to accept more risk. For a character to cast a spell during the same turn the character channels, the player must add one extra challenge die {Dchal} to the check to cast the spell</p>"
     },
     "reckless": {
       "rechargeRating": 0,
@@ -50,25 +50,69 @@
       "traits": "Basic",
       "check": "No Check Required",
       "requirements": "<p>This special ability is available to all wizards and does not need to be acquired specially</p>",
-      "special": "<p><strong>Special:</strong> Normally, a character can only perform the action listed on one action card during his turn. However, spellcasters can attempt to both channel power and cast a spell on the same turn, if they are willing to accept more risk. For a character to cast a spell during the same turn the character channels, the player must add one extra challenge die [[DChal]] to the check to cast the spell</p>"
+      "special": "<p><strong>Special:</strong> Normally, a character can only perform the action listed on one action card during his turn. However, spellcasters can attempt to both channel power and cast a spell on the same turn, if they are willing to accept more risk. For a character to cast a spell during the same turn the character channels, the player must add one extra challenge die {Dchal} to the check to cast the spell</p>"
     },
     "rechargeTokens": 0,
     "type": "spell"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Check Requirements",
+      "img": "icons/magic/control/sihouette-hold-beam-green.webp",
+      "_id": "SL13bXXb672EkPch",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "return actor.system.wizard;",
+          "type": "requirement"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1761211981329,
+        "modifiedTime": 1764751206622,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!7BfiWmuMXayx1NaF.SL13bXXb672EkPch"
+    }
+  ],
   "ownership": {
     "default": 0
   },
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1701868149808,
-    "modifiedTime": 1703178529087,
+    "modifiedTime": 1761211990932,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "7BfiWmuMXayx1NaF",
   "sort": 300000,

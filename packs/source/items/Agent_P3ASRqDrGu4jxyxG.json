@@ -2,11 +2,56 @@
   "name": "Agent",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/agent.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Agent",
+      "img": "systems/wfrp3e/assets/images/careers/agent.webp",
+      "_id": "Pg48tSjcM5GCgHfP",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.expertise++;",
+          "conditionalScript": "",
+          "postRollScript": "await actor.adjustImpairment(\"fatigue\", 1);\nawait actor.adjustImpairment(\"stress\", 1);\nawait this.parent.exhaust();"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Once per session, you may suffer one stress and one fatigue to add {De} to any skill check</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764772466926,
+        "modifiedTime": 1764772624409,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!P3ASRqDrGu4jxyxG.Pg48tSjcM5GCgHfP"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>There are so many demands on the time of powerful people and organisations that they struggle to look after all their interests, especially those that may be in geographically remote places, politically sensitive, or strictly confidential. As a consequence, many powerful people and organisations make use of agents: skilled individuals who act on behalf of their &gt;employer.</p>\n<p>Most agents work exclusively for a single employer over the long term. Their day-to-day responsibilities may change, but their loyalty remains fixed. These agents proudly wear the badge of the noble house, Imperial cult, or guild that employs them, and use it as a means of getting ahead in the world.</p>\n<p>Agents are tasked with a broad variety of assignments. Whether negotiating a new trade agreement, evaluating prospective members of a guild, or recovering missing relics, the agent is trusted to oversee his employer&rsquo;s interests&hellip; sometimes by any means necessary. A smaller number of agents, particularly in cosmopolitan places such as Altdorf, perform a more restricted set of tasks on a contracted basis for whoever hires them. They may act as go-betweens for ship captains and merchant houses, or specialise in finding missing people, or acquiring rare works of art.</p>\n<p>For every type of agent, the line between adventuring and discharging their normal duties may become blurred. Some set off on an adventure on behalf of their patron, whereas others grow tired of their responsibilities and put their skills to use for their own ends after becoming disillusioned with a patron or getting a taste for the adventuring life.</p>\n<p><strong>Typical Trappings:</strong> An agent travels with two sets of clothing, one formal and one nondescript for travelling incognito. He often bears a badge, seal, or letter authorising him to act on his employer&rsquo;s behalf (though an agent employed in clandestine work will forego this item). He carries an easily concealed weapon such as a dagger, and perhaps a less subtle weapon, such as a blackpowder pistol.</p>\n<p><strong>Career Ability:</strong> Once per session, you may suffer one stress and one fatigue to add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to any skill check</p>",
+    "description": "<p>There are so many demands on the time of powerful people and organisations that they struggle to look after all their interests, especially those that may be in geographically remote places, politically sensitive, or strictly confidential. As a consequence, many powerful people and organisations make use of agents: skilled individuals who act on behalf of their employer.</p><p>Most agents work exclusively for a single employer over the long term. Their day-to-day responsibilities may change, but their loyalty remains fixed. These agents proudly wear the badge of the noble house, Imperial cult, or guild that employs them, and use it as a means of getting ahead in the world.</p><p>Agents are tasked with a broad variety of assignments. Whether negotiating a new trade agreement, evaluating prospective members of a guild, or recovering missing relics, the agent is trusted to oversee his employer’s interests… sometimes by any means necessary. A smaller number of agents, particularly in cosmopolitan places such as Altdorf, perform a more restricted set of tasks on a contracted basis for whoever hires them. They may act as go-betweens for ship captains and merchant houses, or specialise in finding missing people, or acquiring rare works of art.</p><p>For every type of agent, the line between adventuring and discharging their normal duties may become blurred. Some set off on an adventure on behalf of their patron, whereas others grow tired of their responsibilities and put their skills to use for their own ends after becoming disillusioned with a patron or getting a taste for the adventuring life.</p><p><strong>Typical Trappings:</strong> An agent travels with two sets of clothing, one formal and one nondescript for travelling incognito. He often bears a badge, seal, or letter authorising him to act on his employer’s behalf (though an agent employed in clandestine work will forego this item). He carries an easily concealed weapon such as a dagger, and perhaps a less subtle weapon, such as a blackpowder pistol.</p><p><strong>Career Ability:</strong> Once per session, you may suffer one stress and one fatigue to add {De} to any skill check</p>",
     "advanced": false,
     "raceRestrictions": [
       "human",
@@ -33,31 +78,74 @@
     },
     "summary": "Resourceful and slightly dangerous, he excels at getting jobs done",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition"
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -75,13 +163,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1699549805099,
-    "modifiedTime": 1734396554711,
+    "modifiedTime": 1764321760894,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "P3ASRqDrGu4jxyxG",
   "sort": 2600000,

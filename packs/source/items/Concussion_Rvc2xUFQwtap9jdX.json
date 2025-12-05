@@ -1,0 +1,34 @@
+{
+  "folder": "VUMz1tBRkXXXUVEt",
+  "name": "Concussion",
+  "type": "criticalWound",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Add <span style=\"-webkit-text-stroke: 1pt black;\">◼</span> to all your checks while you have any cards recharging. If you ever acquire two Concussions, you collapse unconscious until one of them is healed.</p>",
+    "severityRating": 1
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "a51c38a823567402a319c2d4a159ae08bc6295b4"
+    }
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "1.0.1-alpha",
+    "coreVersion": "13.341",
+    "createdTime": 1682264544162,
+    "modifiedTime": 1715380997987,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "Rvc2xUFQwtap9jdX",
+  "_key": "!items!Rvc2xUFQwtap9jdX"
+}

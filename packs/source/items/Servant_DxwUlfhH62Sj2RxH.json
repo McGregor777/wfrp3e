@@ -6,7 +6,7 @@
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>Running a great house, or a business, or a university is no easy task. Whilst the Empire is a centre for innovations both magical and mechanical, menial chores are performed largely by hand.</p>\n<p>Every institution of any size therefore employs a cadre of servants to cook food, clean rooms and attend to the wishes of their masters. Servants perform a seemingly unending number of laborious tasks for their employers, whether they be nobles, innkeepers or merchants. In the universities servants clean the corridors and lecture rooms.</p>\n<p>Some servants work closely with particular scholars, and can become learned in a particular subject. They help set up equipment and demonstrate the more straightforward theories, techniques or experiments.</p>\n<p>In the Colleges of Magic many of the tasks normally performed by servants are undertaken by apprentice wizards, though some roles in the colleges require more permanent staff. Likewise, the great temples and facilities of the Empire&rsquo;s Cult&rsquo;s also require tending, maintenance, and care. Areas such as the kitchens and the purser&rsquo;s office employ servants of their own.</p>\n<p>Unlike an apprentice a servant is considered to have no valuable skills. Servants receive very little in the way of payment, and whilst most are treated decently by their employers they occupy a social rank little better than that of a slave. If a servant performs years of loyal service, and works hard and well, they may be promoted to the position of valet, or even steward.</p>\n<p>However, to the scullion, serving wench or stable boy a life of adventure might seem like the only dream they can hope to fulfil, and many of them leave their master&rsquo;s service and seek out more exciting lives.</p>\n<p><strong>Typical Trappings:</strong> Servants have few possessions, though those with a rich employer may wear a good set of clothing decorated with the livery of the noble family or merchant house they work for.</p>\n<p><strong>Career Ability:</strong> You may choose to socket a Focus talent in your Reputation slot</p>",
+    "description": "<p>Running a great house, or a business, or a university is no easy task. Whilst the Empire is a centre for innovations both magical and mechanical, menial chores are performed largely by hand.</p><p>Every institution of any size therefore employs a cadre of servants to cook food, clean rooms and attend to the wishes of their masters. Servants perform a seemingly unending number of laborious tasks for their employers, whether they be nobles, innkeepers or merchants. In the universities servants clean the corridors and lecture rooms.</p><p>Some servants work closely with particular scholars, and can become learned in a particular subject. They help set up equipment and demonstrate the more straightforward theories, techniques or experiments.</p><p>In the Colleges of Magic many of the tasks normally performed by servants are undertaken by apprentice wizards, though some roles in the colleges require more permanent staff. Likewise, the great temples and facilities of the Empire’s Cult’s also require tending, maintenance, and care. Areas such as the kitchens and the purser’s office employ servants of their own.</p><p>Unlike an apprentice a servant is considered to have no valuable skills. Servants receive very little in the way of payment, and whilst most are treated decently by their employers they occupy a social rank little better than that of a slave. If a servant performs years of loyal service, and works hard and well, they may be promoted to the position of valet, or even steward.</p><p>However, to the scullion, serving wench or stable boy a life of adventure might seem like the only dream they can hope to fulfil, and many of them leave their master’s service and seek out more exciting lives.</p><p><strong>Typical Trappings:</strong> Servants have few possessions, though those with a rich employer may wear a good set of clothing decorated with the livery of the noble family or merchant house they work for.</p><p><strong>Career Ability:</strong> You may choose to socket a Focus talent in your Reputation slot</p>",
     "advanced": false,
     "raceRestrictions": [
       "any"
@@ -32,31 +32,75 @@
     },
     "summary": "Hard working and reliable, with dreams of a better life",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -74,13 +118,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1699549872149,
-    "modifiedTime": 1734396663117,
+    "modifiedTime": 1764321760894,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "DxwUlfhH62Sj2RxH",
   "sort": 2800000,

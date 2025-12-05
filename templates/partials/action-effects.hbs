@@ -1,39 +1,37 @@
-<div class="roll-effects {{#if outcome}}disabled{{/if}}">
+<div class="roll-effects {{#if (or disabled outcome)}}disabled{{/if}}">
 	<h5>{{localize "ROLL.availableEffects"}}</h5>
 
 	<table>
 		<tbody>
-			{{#with (lookup action.system face) as |face|}}
-				{{#if face.special}}
-					<tr><td>{{{striptags face.special 'p'}}}</td></tr>
-				{{/if}}
+			{{#if enrichment.special}}
+				<tr><td>{{{stripTags enrichment.special 'p'}}}</td></tr>
+			{{/if}}
 
-				{{#if face.uniqueEffect}}
-					<tr><td>{{{striptags face.uniqueEffect 'p'}}}</td></tr>
-				{{/if}}
+			{{#if enrichment.uniqueEffect}}
+				<tr><td>{{{stripTags enrichment.uniqueEffect 'p'}}}</td></tr>
+			{{/if}}
 
-				{{#each ../symbols as |symbol sym|}}
-					{{#with (lookup ../../effects sym) as |effects|}}
-						{{#if effects}}
-							<tr><td>
-								{{#each effects as |effect ef|}}
-									<a class="effect-toggle{{#if effect.active}} active{{/if}}" data-symbol="{{sym}}" data-index="{{@index}}">
-										{{#for 0 effect.symbolAmount 1}}
-											{{#unless (and (or (sameAs sym "delay") (sameAs sym "exertion")) (superiorTo this 0))}}
-												<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
-											{{else}}
-												<span class="wfrp3e-font symbol {{../../../../../symbols.bane.cssClass}}"></span>
-											{{/unless}}
-										{{/for}}
+			{{#each symbols as |symbol sym|}}
+				{{#with (lookup ../effects sym) as |effects|}}
+					{{#if effects}}
+						<tr><td>
+							{{#each effects as |effect ef|}}
+								<a class="effect-toggle{{#if effect.active}} active{{/if}}" data-symbol="{{sym}}" data-index="{{@index}}">
+									{{#for 0 effect.symbolAmount 1}}
+										{{#unless (and (or (eq sym "delay") (eq sym "exertion")) (gt this 0))}}
+											<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
+										{{else}}
+											<span class="wfrp3e-font symbol {{@root.symbols.bane.cssClass}}"></span>
+										{{/unless}}
+									{{/for}}
 
-										{{{striptags effect.description 'p'}}}
-									</a>
-								{{/each}}
-							</td></tr>
-						{{/if}}
-					{{/with}}
-				{{/each}}
-			{{/with}}
+									{{{stripTags effect.enrichment.description 'p'}}}
+								</a>
+							{{/each}}
+						</td></tr>
+					{{/if}}
+				{{/with}}
+			{{/each}}
 		</tbody>
 	</table>
 </div>

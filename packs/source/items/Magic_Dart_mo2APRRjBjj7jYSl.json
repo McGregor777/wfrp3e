@@ -21,7 +21,7 @@
         "boon": [
           {
             "symbolAmount": 2,
-            "description": "<p>Ignore your target&rsquo;s armour soak value for this attack</p>"
+            "description": "<p>Ignore your target’s armour soak value for this attack</p>"
           }
         ],
         "sigmarsComet": [
@@ -45,7 +45,7 @@
       "art": null,
       "traits": "Petty Magic, Basic",
       "check": "Spellcraft (Int)",
-      "requirements": "<p>3 power, target within medium range. If you are engaged with an enemy, add [[dchal]] to your dice pool</p>"
+      "requirements": "<p>3 power, target within medium range. If you are engaged with an enemy, add {dchal]] to your dice pool</p>"
     },
     "reckless": {
       "rechargeRating": 0,
@@ -64,7 +64,7 @@
         "boon": [
           {
             "symbolAmount": 2,
-            "description": "<p>Ignore your target&rsquo;s armour soak value for this attack</p>"
+            "description": "<p>Ignore your target’s armour soak value for this attack</p>"
           }
         ],
         "sigmarsComet": [
@@ -88,25 +88,69 @@
       "art": null,
       "traits": "Petty Magic, Basic",
       "check": "Spellcraft (Int)",
-      "requirements": "<p>3 power, target within medium range. If you are engaged with an enemy, add [[dchal]] to your dice pool</p>"
+      "requirements": "<p>3 power, target within medium range. If you are engaged with an enemy, add {dchal]] to your dice pool</p>"
     },
     "rechargeTokens": 0,
     "type": "spell"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Check Requirements",
+      "img": "icons/magic/lightning/strike-arrow-spear-red.webp",
+      "_id": "vyG1FtOQS0LjhSir",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "return actor.system.wizard;",
+          "type": "requirement"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.350",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1761212064508,
+        "modifiedTime": 1764751219182,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!mo2APRRjBjj7jYSl.vyG1FtOQS0LjhSir"
+    }
+  ],
   "ownership": {
     "default": 0
   },
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1701867885135,
     "modifiedTime": 1701868776710,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "mo2APRRjBjj7jYSl",
   "sort": 600000,

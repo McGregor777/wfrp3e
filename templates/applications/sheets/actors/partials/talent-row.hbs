@@ -1,32 +1,38 @@
-<div class="item talent row {{item.system.type}}" data-uuid="{{item.uuid}}">
+<div class="draggable talent item row {{item.system.type}}" data-item-id="{{item._id}}">
 	<div class="content">
 		<div class="image">
-			{{#if @root.editable}}
-				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-					<img class="type" src="{{item.img}}" width="40" height="40" />
-				</a>
-			{{else}}
-				<span><img class="type" src="{{item.img}}" width="40" height="40" /></span>
-			{{/if}}
+			<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
+				<img class="type" src="{{item.img}}" alt="{{item.name}}" width="40" height="40" />
+			</a>
 		</div>
 
 		<div class="name">
-			{{#if @root.editable}}
-				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
-					<span>{{item.name}}</span>
-				</a>
-			{{else}}
+			<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
 				<span>{{item.name}}</span>
-			{{/if}}
+			</a>
 		</div>
 
-		<div class="type">
+		<label class="type"
+			   for="{{concat @root.rootId '-Item-' item._id '-' item.system.schema.fields.socket.fieldPath}}">
 			{{localize (lookup @root.types item.system.type)}}
+		</label>
+
+		<div class="socket">
+			<select id="{{concat @root.rootId '-Item-' item._id '-' item.system.schema.fields.socket.fieldPath}}"
+					class="socket-select"
+					name="system.socket"
+					data-item-id="{{item._id}}"
+					{{#unless @root.editable}}disabled{{/unless}}>
+				{{selectOptions
+						(lookup @root.socketsByType item.system.type)
+						selected=item.system.socket
+						blank=(localize "TALENT.SOCKET.none")}}
+			</select>
 		</div>
 
 		<div class="recharge-tokens">
 			{{#if @root.editable}}
-				<a class="recharge-token"
+				<a class="recharge-token prevent-context"
 				   data-action="adjustRechargeTokens"
 				   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}">
 					<img src="systems/wfrp3e/assets/images/token-grey.webp"
@@ -53,8 +59,8 @@
 		<div class="buttons">
 			{{#if @root.editable}}
 				{{#each item.effects as |effect|}}
-					{{#if (sameAs effect.system.type "onTrigger")}}
-						<a data-action="useDocument"
+					{{#if (eq effect.system.macro.type "manualTrigger")}}
+						<a data-action="useItem"
 						   data-effect-uuid="{{effect.uuid}}"
 						   data-tooltip="{{localize 'TALENT.ACTIONS.trigger'}}" >
 							<span class="fas fa-dice-d20"></span>
@@ -68,7 +74,7 @@
 					<span class="fas fa-ellipsis-vertical"></span>
 				</a>
 			{{else}}
-				<a data-action="expandDocument" data-tooltip="{{localize 'Expand'}}">
+				<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
 					<span class="fas fa-chevron-down"></span>
 				</a>
 			{{/if}}

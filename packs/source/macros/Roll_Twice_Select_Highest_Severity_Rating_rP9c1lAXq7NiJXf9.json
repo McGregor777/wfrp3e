@@ -1,0 +1,33 @@
+{
+  "name": "Roll Twice Select Highest Severity Rating",
+  "type": "script",
+  "author": "Bq3CTOvANoOneedB",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "let leastSevereCriticalWound = null, leastSevereCriticalWoundIndex = 0;\nconst drawnResult = await rollTable.drawMany(2, {roll, recursive: false, displayChat, rollMode}), criticalWounds = [];\n\nfor(const index in drawnResult.results) {\n  let result = drawnResult.results[index], document = await fromUuid(result.documentUuid);\n\n  while(document.type !== \"criticalWound\") {\n    const newResult = await rollTable.draw({roll, recursive: false, displayChat, rollMode});\n    drawnResult.results.splice(index, 1, newResult.results[0]);\n    result = drawnResult.results[index];\n    document = await fromUuid(result.documentUuid);\n  }\n\n  criticalWounds.push(document);\n\n  if(!leastSevereCriticalWound || document.system.severityRating < leastSevereCriticalWound.system.severityRating) {\n    leastSevereCriticalWound = document;\n    leastSevereCriticalWoundIndex = index;\n  }\n}\n\nif(criticalWounds.length === 2 && criticalWounds[0] !== criticalWounds[1] && criticalWounds[0].system.severityRating === criticalWounds[1].system.severityRating) {\n  let criticalWoundLinks = null;\n  const buttons = [];\n\n  for(const index in criticalWounds) {\n    const criticalWound = criticalWounds[index];\n    criticalWoundLinks = criticalWoundLinks ? `${criticalWoundLinks} ${criticalWound.toAnchor().outerHTML}` :criticalWound.toAnchor().outerHTML;\n    buttons.push({action: criticalWound.uuid, label: criticalWound.name, callback: async (event, button, dialog) => criticalWound});\n  }\n\n  await foundry.applications.api.DialogV2.query(game.users.activeGM, \"wait\", {\n    title: game.i18n.localize(\"CRITICALWOUND.DIALOG.choose.title\"),\n    content: `<p>${game.i18n.format(\"CRITICALWOUND.DIALOG.choose.description\", {links: criticalWoundLinks})}</p>`,\n    buttons,\n    submit: async (criticalWound) => {\n      const criticalWoundIndex = drawnResult.results.findIndex(result => result.documentUuid !== criticalWound.uuid); \n      drawnResult.results.splice(criticalWoundIndex, 1);\n    }\n  });\n}\nelse\n  drawnResult.results.splice(leastSevereCriticalWoundIndex, 1);\n\nreturn drawnResult;",
+  "folder": null,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "60512800c354ff2caa4bf0d843b07f2d06158371",
+      "sourceId": "Macro.q1Yh7XCyktOLF8bz"
+    }
+  },
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "wfrp3e",
+    "systemVersion": "1.3.3",
+    "createdTime": 1764758324113,
+    "modifiedTime": 1764770831518,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_id": "rP9c1lAXq7NiJXf9",
+  "sort": 0,
+  "_key": "!macros!rP9c1lAXq7NiJXf9"
+}

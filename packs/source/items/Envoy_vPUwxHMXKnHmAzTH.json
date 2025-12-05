@@ -2,13 +2,56 @@
   "name": "Envoy",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/envoy.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Envoy",
+      "img": "systems/wfrp3e/assets/images/careers/envoy.webp",
+      "_id": "PDJRxsjWOQUaKpxB",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.characteristic++;",
+          "conditionalScript": "return checkData.characteristic === \"fellowship\";",
+          "postRollScript": "await this.parent.exhaust();"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Once per session, you may treat your Fellowship characteristic as if it were one point higher</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764775039191,
+        "modifiedTime": 1764775142875,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!vPUwxHMXKnHmAzTH.PDJRxsjWOQUaKpxB"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
-  "flags": {
-    "core": {}
-  },
+  "flags": {},
   "system": {
-    "description": "<p>Relations between the elves and the men of the Empire are generally cordial. The two peoples face common enemies and have formed military alliances on many occasions. However, humans and elves do not always see eye to eye. Elves often dismiss men as a short-lived and reckless race, whereas humans tend to see elves as haughty and inscrutable whilst envying their longevity and grace.</p>\n<p>Various elven kingdoms and institutions nurture diplomatic relations with noble courts and important businesses in the Empire. These envoys are usually young elves as they have an easier time relating to the race of men. Envoys from the high elf kingdoms usually act as the public face of great elven mercantile families. They negotiate contracts, make deals, and try to soothe areas of contention with the humans of trading hubs such as Altdorf or B&ouml;genhafen.</p>\n<p>Envoys from the wood elf realms are rare and their motivations are much harder to discern. There is little trade between the Empire and Athel Loren, and many humans feel there is something fey and unnerving about wood elves. Nevertheless, where there is a common interest, or a potential for conflict, wood elf envoys do sometimes approach human courts to state their case. These individuals are afforded a degree of respect, but generally mistrusted. They are commonly regarded as being little more than spies.</p>\n<p>One thing that these elves and the men of the Empire stand firmly together on is thwarting the powers of Chaos, and should an elf hear rumours of the Ruinous Powers, he will usually wish to investigate. Elves can also find life amongst the humans rather claustrophobic and intellectually stifling. For such reasons, envoys who have no pressing matters to attend to may take up a life of adventure.</p>\n<p><strong>Typical Trappings:</strong> An envoy will be finely dressed in most circumstances, and will usually have two sets of good quality clothes. He will often carry a pen, ink, and parchment to note his observations and send messages to interested parties.</p>\n<p><strong>Career Ability:</strong> Once per session, you may treat your Fellowship characteristic as if it were one point higher</p>",
+    "description": "<p>Relations between the elves and the men of the Empire are generally cordial. The two peoples face common enemies and have formed military alliances on many occasions. However, humans and elves do not always see eye to eye. Elves often dismiss men as a short-lived and reckless race, whereas humans tend to see elves as haughty and inscrutable whilst envying their longevity and grace.</p><p>Various elven kingdoms and institutions nurture diplomatic relations with noble courts and important businesses in the Empire. These envoys are usually young elves as they have an easier time relating to the race of men. Envoys from the high elf kingdoms usually act as the public face of great elven mercantile families. They negotiate contracts, make deals, and try to soothe areas of contention with the humans of trading hubs such as Altdorf or Bögenhafen.</p><p>Envoys from the wood elf realms are rare and their motivations are much harder to discern. There is little trade between the Empire and Athel Loren, and many humans feel there is something fey and unnerving about wood elves. Nevertheless, where there is a common interest, or a potential for conflict, wood elf envoys do sometimes approach human courts to state their case. These individuals are afforded a degree of respect, but generally mistrusted. They are commonly regarded as being little more than spies.</p><p>One thing that these elves and the men of the Empire stand firmly together on is thwarting the powers of Chaos, and should an elf hear rumours of the Ruinous Powers, he will usually wish to investigate. Elves can also find life amongst the humans rather claustrophobic and intellectually stifling. For such reasons, envoys who have no pressing matters to attend to may take up a life of adventure.</p><p><strong>Typical Trappings:</strong> An envoy will be finely dressed in most circumstances, and will usually have two sets of good quality clothes. He will often carry a pen, ink, and parchment to note his observations and send messages to interested parties.</p><p><strong>Career Ability:</strong> Once per session, you may treat your Fellowship characteristic as if it were one point higher</p>",
     "advanced": false,
     "raceRestrictions": [
       "highElf",
@@ -35,31 +78,75 @@
     },
     "summary": "A socially savvy, well-spoken representative of the elf people",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -77,13 +164,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1699549828957,
-    "modifiedTime": 1734396606464,
+    "modifiedTime": 1764755861940,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "vPUwxHMXKnHmAzTH",
   "sort": 1600000,

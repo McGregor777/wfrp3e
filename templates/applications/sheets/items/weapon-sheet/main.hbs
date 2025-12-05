@@ -14,7 +14,7 @@
 	<fieldset class="qualities">
 		<legend>{{localize "WEAPON.FIELDS.qualities.label"}}</legend>
 
-		{{#if (superiorTo system.qualities.length 0)}}
+		{{#if (gt system.qualities.length 0)}}
 			<div class="container scrollable">
 				{{#each system.qualities as |quality qu|}}
 					<fieldset class="quality content inline" data-index="{{@index}}">
@@ -25,7 +25,7 @@
 									rootId=rootId
 									localize=true}}
 
-						{{#if (in quality.name @root.qualitiesWithRating) }}
+						{{#if (includes quality.name @root.qualitiesWithRating) }}
 							{{formGroup @root.fields.qualities.element.fields.rating
 										value=quality.rating
 										name=@root.fields.qualities.element.fields.rating.fieldPath

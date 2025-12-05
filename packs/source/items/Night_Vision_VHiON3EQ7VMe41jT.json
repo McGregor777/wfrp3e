@@ -3,11 +3,56 @@
   "name": "Night Vision",
   "type": "ability",
   "_id": "VHiON3EQ7VMe41jT",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
   "system": {
-    "description": "<p>Two fewer [[DM]][[DM]] misfortune dice are added to your dice pool for any effects from darkness or lack of sufficient light.</p>"
+    "description": "<p>Two fewer {Dm} {Dm} misfortune dice are added to your dice pool for any effects from darkness or lack of sufficient light.</p>"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Night Vision",
+      "img": "icons/creatures/eyes/lizard-single-slit-blue.webp",
+      "_id": "vBs1IrJHaHmhnGI2",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "diePool.dice.misfortune -= 2;",
+          "type": "manualPreCheckRoll",
+          "conditionalScript": "",
+          "postRollScript": ""
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.350",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.2",
+        "createdTime": null,
+        "modifiedTime": 1764751729536,
+        "lastModifiedBy": "Bq3CTOvANoOneedB",
+        "exportSource": null
+      },
+      "_key": "!items.effects!VHiON3EQ7VMe41jT.vBs1IrJHaHmhnGI2"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0
@@ -15,13 +60,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1700165750479,
-    "modifiedTime": 1701256153198,
+    "modifiedTime": 1761250897458,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_key": "!items!VHiON3EQ7VMe41jT"
 }

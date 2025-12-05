@@ -4,7 +4,7 @@
 	"version": "#{VERSION}#",
 	"compatibility": {
 		"minimum": "13",
-		"verified": "13.350",
+		"verified": "13.351",
 		"maximum": "13"
 	},
 	"authors": [{
@@ -13,7 +13,7 @@
 		"flags": {}
 	}],
 	"esmodules": [
-		"wfrp3e.js"
+		"wfrp3e.mjs"
 	],
 	"styles": [
 		"styles/wfrp3e.css"
@@ -48,6 +48,14 @@
 		"type": "Item",
 		"name": "items",
 		"path": "packs/items",
+		"private": false,
+		"system": "wfrp3e",
+		"flags": {}
+	}, {
+		"label": "Macros",
+		"type": "Macro",
+		"name": "macros",
+		"path": "packs/macros",
 		"private": false,
 		"system": "wfrp3e",
 		"flags": {}

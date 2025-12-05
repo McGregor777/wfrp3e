@@ -1,6 +1,6 @@
-<div class="item ability card" data-uuid="{{item.uuid}}">
+<div class="draggable ability item card" data-item-id="{{item._id}}">
 	{{#if @root.editable}}
-		<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+		<a class="name" data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 			{{item.name}}
 		</a>
 	{{else}}
@@ -8,12 +8,12 @@
 	{{/if}}
 
 	<div class="description">
-		{{{item.system.description}}}
+		{{{lookup @root.enrichment item.uuid }}}
 	</div>
 
 	<div class="bottom-line">
 		{{#if @root.editable}}
-			<a class="recharge-token"
+			<a class="recharge-token prevent-context"
 			   data-action="adjustRechargeTokens"
 			   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}">
 				<img src="systems/wfrp3e/assets/images/token-grey.webp"
@@ -25,8 +25,8 @@
 			</a>
 
 			{{#each item.effects as |effect ef|}}
-				{{#if (sameAs effect.system.type "onTrigger")}}
-					<a data-action="useDocument"
+				{{#if (eq effect.system.macro.type "manualTrigger")}}
+					<a data-action="useItem"
 					   data-effect-uuid="{{effect.uuid}}"
 					   data-tooltip="{{localize 'ABILITY.ACTIONS.trigger'}}" >
 						{{localize "ABILITY.ACTIONS.trigger"}}
@@ -35,11 +35,11 @@
 			{{/each}}
 
 			<div>
-				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+				<a data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 					<span class="fas fa-pen-to-square"></span>
 				</a>
 
-				<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+				<a data-action="deleteItem" data-tooltip="{{localize 'Delete'}}">
 					<span class="fas fa-trash"></span>
 				</a>
 			</div>

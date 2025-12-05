@@ -1,12 +1,14 @@
-<div class="item skill row" data-uuid="{{skill.uuid}}">
+<div class="draggable skill item row" data-item-id="{{skill._id}}">
 	<div class="content">
 		<div class="name">
-			{{#if @root.editable}}
-				<a data-action="rollItem" data-tooltip="{{localize 'ACTOR.ACTIONS.rollSkillCheck'}}">
-					<span>{{skill.name}}</span> <span class="fas fa-dice-d20"></span>
-				</a>
-			{{else}}
+			<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
 				<span>{{skill.name}}</span>
+			</a>
+
+			{{#if @root.editable}}
+				<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
+					<span class="fas fa-dice-d20"></span>
+				</a>
 			{{/if}}
 		</div>
 
@@ -15,25 +17,22 @@
 		</div>
 
 		<div class="training-level">
-			<input class="item-input"
-				   name="system.trainingLevel"
+			<input name="system.trainingLevel"
 				   value="1"
 				   type="checkbox"
-				   {{#if (superiorOrEqualTo skill.system.trainingLevel 1)}} checked{{/if}}
+				   {{checked (gte skill.system.trainingLevel 1)}}
 				   {{#unless @root.editable}}disabled{{/unless}} />
 
-			<input class="item-input"
-				   name="system.trainingLevel"
+			<input name="system.trainingLevel"
 				   value="2"
 				   type="checkbox"
-				   {{#if (superiorOrEqualTo skill.system.trainingLevel 2)}} checked{{/if}}
+				   {{checked (gte skill.system.trainingLevel 2)}}
 				   {{#unless @root.editable}}disabled{{/unless}} />
 
-			<input class="item-input"
-				   name="system.trainingLevel"
+			<input name="system.trainingLevel"
 				   value="3"
 				   type="checkbox"
-				   {{#if (superiorOrEqualTo skill.system.trainingLevel 3)}} checked{{/if}}
+				   {{checked (gte skill.system.trainingLevel 3)}}
 				   {{#unless @root.editable}}disabled{{/unless}} />
 		</div>
 
@@ -43,7 +42,7 @@
 					<span class="fas fa-ellipsis-vertical"></span>
 				</a>
 			{{else}}
-				<a data-action="expandDocument" data-tooltip="{{localize 'Expand'}}">
+				<a data-action="toggleItemDetails" data-tooltip="{{localize 'Expand'}}">
 					<span class="fas fa-chevron-down"></span>
 				</a>
 			{{/if}}

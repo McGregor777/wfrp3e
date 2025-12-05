@@ -1,11 +1,10 @@
 <div class="characteristic {{characteristic.name}}">
 	<label class="characteristic-title"
-		   for="{{concat @root.rootId "-" (getProperty @root.fields characteristic.fields.rating.fieldPath)}}">
-		<a
-		   data-action="rollCharacteristicCheck"
+		   for="{{concat @root.rootId "-" characteristic.fields.rating.fieldPath}}">
+		<a data-action="rollCharacteristicCheck"
 		   data-characteristic="{{characteristic.name}}"
 		   data-tooltip="{{localize 'ACTOR.ACTIONS.rollCharacteristicCheck'}}">
-			{{#if (equalTo @root.source.type "creature")}}
+			{{#if (eq @root.source.type "creature")}}
 				{{localize char.abbreviation}}
 			{{else}}
 				{{localize characteristic.label}}
@@ -16,10 +15,10 @@
 	<div class="characteristic-container">
 		{{formInput characteristic.fields.rating
 					value=(getProperty @root.source characteristic.fields.rating.fieldPath)
-					id=(concat @root.rootId "-" (getProperty @root.fields characteristic.fields.rating.fieldPath))}}
+					id=(concat @root.rootId "-" characteristic.fields.rating.fieldPath)}}
 
 		{{formInput characteristic.fields.fortune
 					value=(getProperty @root.source characteristic.fields.fortune.fieldPath)
-					id=(concat @root.rootId "-" (getProperty @root.fields characteristic.fields.fortune.fieldPath))}}
+					id=(concat @root.rootId "-" characteristic.fields.fortune.fieldPath)}}
 	</div>
 </div>

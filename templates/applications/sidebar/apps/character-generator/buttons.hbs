@@ -1,0 +1,77 @@
+<section>
+	<div>
+		<button data-action="chooseOrigin">
+			{{localize "CHARACTERGENERATOR.ACTIONS.chooseOrigin"}}
+		</button>
+
+		{{#if steps.chooseOrigin}}
+			<span class="fa-solid fa-check"></span>
+		{{/if}}
+	</div>
+
+	<div>
+		<button {{#unless steps.chooseOrigin}}disabled{{/unless}}
+				data-action="chooseStartingCareer">
+			{{localize "CHARACTERGENERATOR.ACTIONS.chooseStartingCareer"}}
+		</button>
+
+		{{#if steps.chooseStartingCareer}}
+			<span class="fa-solid fa-check"></span>
+		{{/if}}
+	</div>
+
+	<div>
+		<button {{#unless steps.chooseStartingCareer}}disabled{{/unless}}
+				data-action="investCreationPoints">
+			{{localize "CHARACTERGENERATOR.ACTIONS.investCreationPoints"}}
+		</button>
+
+		{{#if steps.investCreationPoints}}
+			<span class="fa-solid fa-check"></span>
+		{{/if}}
+	</div>
+
+	<div>
+		<button {{#unless steps.investCreationPoints}}disabled{{/unless}}
+				data-action="acquireSkillTrainings">
+			{{localize "CHARACTERGENERATOR.ACTIONS.acquireSkillTrainings"}}
+		</button>
+
+		{{#if steps.acquireSkillTrainings}}
+			<span class="fa-solid fa-check"></span>
+		{{/if}}
+	</div>
+
+	<div>
+		<button {{#unless steps.investCreationPoints}}disabled{{/unless}}
+				data-action="acquireTalents">
+			{{localize "CHARACTERGENERATOR.ACTIONS.acquireTalents"}}
+		</button>
+
+		{{#if steps.acquireTalents}}
+			<span class="fa-solid fa-check"></span>
+		{{/if}}
+	</div>
+
+	<div>
+		<button {{#unless (and steps.acquireSkillTrainings steps.acquireTalents)}}disabled{{/unless}}
+				data-action="acquireActionCards">
+			{{localize "CHARACTERGENERATOR.ACTIONS.acquireActionCards"}}
+		</button>
+
+		{{#if steps.acquireActionCards}}
+			<span class="fa-solid fa-check"></span>
+		{{/if}}
+	</div>
+
+	<div>
+		<button {{#unless steps.acquireActionCards}}disabled{{/unless}}
+				data-action="playGameOfTenQuestions">
+			{{localize "CHARACTERGENERATOR.ACTIONS.playGameOfTenQuestions"}}
+		</button>
+
+		{{#if steps.gameOfTenQuestions}}
+			<span class="fa-solid fa-check"></span>
+		{{/if}}
+	</div>
+</section>

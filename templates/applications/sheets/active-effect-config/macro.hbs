@@ -1,0 +1,13 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{formGroup fields.type name="system.macro.type" value=system.type rootId=rootId localize=true}}
+
+	{{formGroup fields.script name="system.macro.script" value=system.script rootId=rootId}}
+
+	{{#if fields.conditionalScript}}
+		{{formGroup fields.conditionalScript name="system.macro.conditionalScript" value=system.conditionalScript rootId=rootId}}
+	{{/if}}
+
+	{{#if fields.postRollScript}}
+		{{formGroup fields.postRollScript name="system.macro.postRollScript" value=system.postRollScript rootId=rootId}}
+	{{/if}}
+</section>

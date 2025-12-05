@@ -2,11 +2,56 @@
   "name": "Roadwarden",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/roadwarden.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Roadwarden",
+      "img": "systems/wfrp3e/assets/images/careers/roadwarden.webp",
+      "_id": "pYqze9tBtICfJhzK",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.expertise++;",
+          "conditionalScript": "return checkData.skill && [\"SKILL.NAMES.intimidate\", \"SKILL.NAMES.ride\"].map(key => game.i18n.localize(key)).includes(fromUuidSync(checkData.skill)?.name);",
+          "postRollScript": "await this.parent.exhaust();"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Once per session, you may add {De} to any Intimidate or Ride check</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764778748716,
+        "modifiedTime": 1764778798990,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!oV7d4qpxEcZISJcu.pYqze9tBtICfJhzK"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>It is dangerous to travel the roads of the Empire. The highways between cities wind through tracts of wilderness where greenskins and beastmen hunt travellers, and voracious monsters search for easy pickings. Nearer civilisation, highwaymen hold up coaches and outlaws rob travelling parties. Criminals use the roads as secluded places to do business, smugglers intercept cargoes far from the eyes of the bailiffs, and thieves with hot property meet fences at coaching inns.</p>\n<p>Nobles and burgomeisters raise patrols of roadwardens to protect travellers and prosecute those who use the roads for illegal purposes. These lawmen ride in groups along the roads of their jurisdiction, which tend to be all the roads in an area ruled by a particular noble, or along a particular trade route. If they come across criminals or bandits they will fight them, and may try to take prisoners. Should they confront an enemy that proves too strong for them, they attempt to ride to the nearest settlement and organise a militia to meet the threat. Roadwardens are required to operate within the bounds of their jurisdiction, which can limit their effectiveness. Those who stray into another jurisdiction are likely to be treated as reavers and may find themselves faced down by another roadwarden patrol in their turn.</p>\n<p>Some roadwardens tire of this life and seek to escape their dangerous and thankless tasks. They can even go so far as to take up a life of adventure. Those that do so will be wise to escape the notice of their former employers, who may take umbrage at resources such as pistols and horses being used in the pursuit of private profiteering.</p>\n<p><strong>Typical Trappings:</strong> A roadwarden will be armed with a hand weapon, and will usually wear leather armour. His employers provide him with a pistol and ammunition for a dozen shots, or he might carry a crossbow with a dozen quarrels. They also provide him with a sturdy horse, saddled and harnessed. He will carry a rope or manacles to restrain any prisoners he arrests.</p>\n<p><strong>Career Ability:</strong> Once per session, you may add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to any Intimidate or Ride check</p>",
+    "description": "<p>It is dangerous to travel the roads of the Empire. The highways between cities wind through tracts of wilderness where greenskins and beastmen hunt travellers, and voracious monsters search for easy pickings. Nearer civilisation, highwaymen hold up coaches and outlaws rob travelling parties. Criminals use the roads as secluded places to do business, smugglers intercept cargoes far from the eyes of the bailiffs, and thieves with hot property meet fences at coaching inns.</p><p>Nobles and burgomeisters raise patrols of roadwardens to protect travellers and prosecute those who use the roads for illegal purposes. These lawmen ride in groups along the roads of their jurisdiction, which tend to be all the roads in an area ruled by a particular noble, or along a particular trade route. If they come across criminals or bandits they will fight them, and may try to take prisoners. Should they confront an enemy that proves too strong for them, they attempt to ride to the nearest settlement and organise a militia to meet the threat. Roadwardens are required to operate within the bounds of their jurisdiction, which can limit their effectiveness. Those who stray into another jurisdiction are likely to be treated as reavers and may find themselves faced down by another roadwarden patrol in their turn.</p><p>Some roadwardens tire of this life and seek to escape their dangerous and thankless tasks. They can even go so far as to take up a life of adventure. Those that do so will be wise to escape the notice of their former employers, who may take umbrage at resources such as pistols and horses being used in the pursuit of private profiteering.</p><p><strong>Typical Trappings:</strong> A roadwarden will be armed with a hand weapon, and will usually wear leather armour. His employers provide him with a pistol and ammunition for a dozen shots, or he might carry a crossbow with a dozen quarrels. They also provide him with a sturdy horse, saddled and harnessed. He will carry a rope or manacles to restrain any prisoners he arrests.</p><p><strong>Career Ability:</strong> Once per session, you may add {De} to any Intimidate or Ride check</p>",
     "advanced": false,
     "raceRestrictions": [
       "human"
@@ -32,31 +77,75 @@
     },
     "summary": "Tough and resolute, enforcing the Empire’s laws",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -74,13 +163,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1699549864461,
-    "modifiedTime": 1734396655265,
+    "modifiedTime": 1764755876806,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "oV7d4qpxEcZISJcu",
   "sort": 512500,

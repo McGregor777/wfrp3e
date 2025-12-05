@@ -1,8 +1,8 @@
-<article class="item career game-sheet">
+<article class="draggable career item game-sheet" data-item-id="{{item._id}}">
 	<div class="face front active">
 		<div class="header">
 			{{#if @root.editable}}
-				<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+				<a class="name" data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 					{{item.name}}
 				</a>
 			{{else}}
@@ -19,10 +19,10 @@
 				{{/if}}
 				:
 				{{#each item.system.raceRestrictions}}
-					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
-						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+					{{#if (and (eq @first true) (eq @last true) (ne this "any"))}}
+						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." this))}}
 					{{else}}
-						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
+						{{localize (concat "RACE." this)}}{{#unless @last}}, {{/unless}}
 					{{/if}}
 				{{/each}}
 			</div>
@@ -58,8 +58,8 @@
 
 				<div class="starting-stance">
 					{{#for (multiply item.system.startingStance.conservativeSegments -1) (increment item.system.startingStance.recklessSegments 1) 1}}
-						<img class="stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}"
-							 src="systems/wfrp3e/assets/images/stance-{{#if (inferiorTo this 0)}}conservative{{else}}{{#if (superiorTo this 0)}}reckless{{else}}neutral{{/if}}{{/if}}.webp" height="27" />
+						<img class="stance-{{#if (lt this 0)}}conservative{{else if (gt this 0)}}reckless{{else}}neutral{{/if}}"
+							 src="systems/wfrp3e/assets/images/stance-{{#if (lt this 0)}}conservative{{else if (gt this 0)}}reckless{{else}}neutral{{/if}}.webp" height="27" />
 					{{/for}}
 				</div>
 			</div>
@@ -156,8 +156,8 @@
 				{{/if}}
 				:
 				{{#each item.system.raceRestrictions}}
-					{{#if (and (and (sameAs @first true) (sameAs @last true)) (notEqualTo this "any"))}}
-						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." (capitalize this)))}}
+					{{#if (and (eq @first true) (eq @last true) (ne this "any"))}}
+						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." this))}}
 					{{else}}
 						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
 					{{/if}}
@@ -170,7 +170,7 @@
 		</div>
 
 		<div class="description">
-			{{{item.system.description}}}
+			{{{lookup @root.enrichment item.uuid }}}
 		</div>
 	</div>
 
@@ -185,21 +185,20 @@
 			<div class="form-group slim stacked">
 				<label>{{localize "CAREER.FIELDS.current.label"}}</label>
 
-				<input class="item-input"
-					   name="system.current"
+				<input name="system.current"
 					   type="radio"
-					   {{#if item.system.current}}checked{{/if}}
+					   {{checked item.system.current}}
 					   {{#unless @root.editable}}disabled{{/unless}} />
 			</div>
 		{{/if}}
 
 		<div>
 			{{#if @root.editable}}
-					<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+					<a data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 						<span class="fas fa-pen-to-square"></span>
 					</a>
 
-					<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+					<a data-action="deleteItem" data-tooltip="{{localize 'Delete'}}">
 						<span class="fas fa-trash"></span>
 					</a>
 			{{/if}}

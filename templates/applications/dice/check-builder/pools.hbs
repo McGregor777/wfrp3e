@@ -1,9 +1,13 @@
 <section>
 	<div class="dice-pool">
 		{{#each dice as |die d|}}
-			{{#if (superiorTo (lookup @root.dicePool.dice d) 0)}}
-				{{#for 0 (lookup @root.dicePool.dice d) 1}}
-					<img class="special-die {{d}}" src="{{die.icon}}" width="{{@root.width}}" height="{{@root.height}}" />
+			{{#if (gt (lookup @root.diePool.dice d) 0)}}
+				{{#for 0 (lookup @root.diePool.dice d) 1}}
+					<img class="special-die {{d}}"
+						 src="{{die.icon}}"
+						 width="{{@root.width}}"
+						 height="{{@root.height}}"
+						 alt="{{localize die.name}}" />
 				{{/for}}
 			{{/if}}
 		{{/each}}
@@ -11,8 +15,8 @@
 
 	<div class="symbols-pool">
 		{{#each symbols as |symbol sym|}}
-			{{#if (superiorTo (lookup @root.dicePool.symbols symbol.plural) 0)}}
-				{{#for 0 (lookup @root.dicePool.symbols symbol.plural) 1}}
+			{{#if (gt (lookup @root.diePool.symbols symbol.plural) 0)}}
+				{{#for 0 (lookup @root.diePool.symbols symbol.plural) 1}}
 					<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
 				{{/for}}
 			{{/if}}

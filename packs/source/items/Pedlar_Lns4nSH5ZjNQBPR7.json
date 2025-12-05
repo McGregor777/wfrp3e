@@ -6,7 +6,7 @@
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>Many people in the Empire live in isolated settlements that have little contact with the larger towns and cities. Some smaller villages have no shoppes or regular trading markets of their own, depending on travelling tradesmen who make regular visits selling various goods.</p>\n<p>Pedlars buy their wares from craftsmen and merchants at markets in cities and towns and then travel from village to village, selling their goods and carrying news and gossip from the towns. A pedlar&rsquo;s wares can be anything that is easily carried, such as pots, pans, knives, and so on. Some of them even operate a limited message delivery service, or hawk hot food in busy city streets. In more settled areas, some pedlars may even be licensed, or choose to form their own guild to protect their interests and discourage outsiders from poaching their trade.</p>\n<p>For good or ill, pedlars are strongly associated with the Strigany, who traverse the Empire in colourful wagons or barges. The Strigany claim to be heirs of an ancient civilisation, but they are now a landless and nomadic people. Many folk in the Empire regard the Strigany as criminals and they are almost universally distrusted, especially by roadwardens and watchmen. This bad reputation and the persecutions that sometimes result from it are largely undeserved, though some Strigany purport to serve &lsquo;old masters&rsquo; about whom stories of blood sacrifice are whispered. Some pedlars fall in with groups of adventurers. Their itinerant lifestyles have much in common, and pedlars are often poor folk who can be tempted away from their profession by talk of wealth and glory.</p>\n<p><strong>Typical Trappings:</strong> Pedlars wear durable travelling gear and often carry stout walking sticks. Their kit might include a tent, tinderbox, and lantern, and they may transport their goods in a large backpack or on a horse-drawn wagon. The type of goods a pedlar sells includes pots, pins, pegs, cutlery, blankets, and lucky charms.</p>\n<p><strong>Career Ability:</strong> When haggling over Abundant goods, gain <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼&nbsp;◼</span> to your skill check</p>\n<p>When haggling over Plentiful goods, gain <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼</span> to your skill check</p>",
+    "description": "<p>Many people in the Empire live in isolated settlements that have little contact with the larger towns and cities. Some smaller villages have no shoppes or regular trading markets of their own, depending on travelling tradesmen who make regular visits selling various goods.</p><p>Pedlars buy their wares from craftsmen and merchants at markets in cities and towns and then travel from village to village, selling their goods and carrying news and gossip from the towns. A pedlar’s wares can be anything that is easily carried, such as pots, pans, knives, and so on. Some of them even operate a limited message delivery service, or hawk hot food in busy city streets. In more settled areas, some pedlars may even be licensed, or choose to form their own guild to protect their interests and discourage outsiders from poaching their trade.</p><p>For good or ill, pedlars are strongly associated with the Strigany, who traverse the Empire in colourful wagons or barges. The Strigany claim to be heirs of an ancient civilisation, but they are now a landless and nomadic people. Many folk in the Empire regard the Strigany as criminals and they are almost universally distrusted, especially by roadwardens and watchmen. This bad reputation and the persecutions that sometimes result from it are largely undeserved, though some Strigany purport to serve ‘old masters’ about whom stories of blood sacrifice are whispered. Some pedlars fall in with groups of adventurers. Their itinerant lifestyles have much in common, and pedlars are often poor folk who can be tempted away from their profession by talk of wealth and glory.</p><p><strong>Typical Trappings:</strong> Pedlars wear durable travelling gear and often carry stout walking sticks. Their kit might include a tent, tinderbox, and lantern, and they may transport their goods in a large backpack or on a horse-drawn wagon. The type of goods a pedlar sells includes pots, pins, pegs, cutlery, blankets, and lucky charms.</p><p><strong>Career Ability:</strong> When haggling over Abundant goods, gain {Df} {Df} to your skill check</p><p>When haggling over Plentiful goods, gain {Df} to your skill check</p>",
     "advanced": false,
     "raceRestrictions": [
       "human",
@@ -33,31 +33,75 @@
     },
     "summary": "A resourceful individual used to looking after himself",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -75,13 +119,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1699549854117,
-    "modifiedTime": 1734396642116,
+    "modifiedTime": 1764321760894,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "Lns4nSH5ZjNQBPR7",
   "sort": 700000,

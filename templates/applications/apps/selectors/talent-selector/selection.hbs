@@ -1,0 +1,33 @@
+<div>
+	<p>
+		{{localize (concat (uppercase selectorType) ".selected" (capitalize itemType))}}
+
+		<span class="selection">
+			{{#if selectedItems.length}}
+				{{#each selectedItems as |item i|}}
+					{{localize item.name}}{{#unless @last}}, {{/unless}}
+				{{/each}}
+			{{else}}
+				{{localize "SELECTOR.noSelection"}}
+			{{/if}}
+
+			{{#if count}}
+				({{count}}/{{size}})
+			{{/if}}
+		</span>
+	</p>
+
+	{{#each freeItems as |item it|}}
+		<p>
+			{{localize (concat (uppercase @root.selectorType) ".selected" (capitalize it))}}
+
+			<span class="selection">
+				{{#if item}}
+					{{localize item.name}}
+				{{else}}
+					{{localize "SELECTOR.noSelection"}}
+				{{/if}}
+			</span>
+		</p>
+	{{/each}}
+</div>

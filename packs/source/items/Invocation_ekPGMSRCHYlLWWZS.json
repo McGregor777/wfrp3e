@@ -5,7 +5,7 @@
   "_id": "ekPGMSRCHYlLWWZS",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Invocation is an important aspect to performing divine miracles; characters use Invocation to intercede with patron gods to perform works on their behalf. The divine equivalent of the arcane skill spellcraft.</p>\n<p><em>Specialisation options:</em> each deity has its own specialisation, ritual invocation, group invocation</p>",
+    "description": "<p>Invocation is an important aspect to performing divine miracles; characters use Invocation to intercede with patron gods to perform works on their behalf. The divine equivalent of the arcane skill spellcraft.</p><p><em>Specialisation options:</em> each deity has its own specialisation, ritual invocation, group invocation</p>",
     "characteristic": "fellowship",
     "advanced": true,
     "trainingLevel": 0,
@@ -15,13 +15,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1695317503644,
     "modifiedTime": 1699628063201,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "sort": 0,
   "ownership": {

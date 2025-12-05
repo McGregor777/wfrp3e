@@ -122,10 +122,11 @@
 			"adjustRechargeTokens": "Adjust Recharge Tokens",
 			"adjustRecklessSegment": "Add/Remove Reckless Segment",
 			"adjustStance": "Adjust Stance",
-			"editDocument": "Edit",
+			"editEffect": "Edit Effect",
+			"editItem": "Edit Item",
 			"flip": "Flip",
 			"openFilters": "Open Filters",
-			"useDocument": "Use",
+			"useItem": "Use",
 			"rollActionCheck": "Roll Action Check",
 			"rollCharacteristicCheck": "Roll Characteristic Check",
 			"rollItem": "Roll Item",
@@ -136,54 +137,58 @@
 		},
 		"FIELDS": {
 			"characteristics": {
-				"agility": {
-					"abbreviation": "Ag",
-					"label": "Agility"
+				"FIELDS": {
+					"agility": {
+						"abbreviation": "Ag",
+						"label": "Agility"
+					},
+					"fellowship": {
+						"abbreviation": "Fel",
+						"label": "Fellowship"
+					},
+					"intelligence": {
+						"abbreviation": "Int",
+						"label": "Intelligence"
+					},
+					"strength": {
+						"abbreviation": "St",
+						"label": "Strength"
+					},
+					"toughness": {
+						"abbreviation": "To",
+						"label": "Toughness"
+					},
+					"varies": {
+						"abbreviation": "V",
+						"label": "Varies"
+					},
+					"willpower": {
+						"abbreviation": "WP",
+						"label": "Willpower"
+					},
+					"fortune.label": "Fortune Dice",
+					"rating.label": "Rating"
 				},
-				"fellowship": {
-					"abbreviation": "Fel",
-					"label": "Fellowship"
-				},
-				"intelligence": {
-					"abbreviation": "Int",
-					"label": "Intelligence"
-				},
-				"strength": {
-					"abbreviation": "St",
-					"label": "Strength"
-				},
-				"toughness": {
-					"abbreviation": "To",
-					"label": "Toughness"
-				},
-				"varies": {
-					"abbreviation": "V",
-					"label": "Varies"
-				},
-				"willpower": {
-					"abbreviation": "WP",
-					"label": "Willpower"
-				},
-				"fortune.label": "Fortune Dice",
-				"label": "Characteristics",
-				"rating.label": "Rating"
+				"label": "Characteristics"
 			},
 			"impairments": {
 				"fatigue": {
 					"label": "Fatigue",
 					"tokens": "Fatigue Tokens"
 				},
-				"label": "Impairments",
 				"stress": {
 					"label": "Stress",
 					"tokens": "Stress Tokens"
-				}
+				},
+				"label": "Impairments"
 			},
 			"stance": {
-				"conservative.label": "Conservative Segments",
-				"current.label": "Current Stance",
-				"label": "Attitude",
-				"reckless.label": "Reckless Segments"
+				"FIELDS": {
+					"conservative.label": "Conservative Segments",
+					"current.label": "Current Stance",
+					"reckless.label": "Reckless Segments"
+				},
+				"label": "Stance"
 			},
 			"wounds": {
 				"label": "Wounds",
@@ -196,18 +201,17 @@
 			"filters": "Filters",
 			"search": "Search"
 		},
-		"WARNINGS.minimumSegment": "You cannot remove any more segment."
+		"WARNINGS": {
+			"maximumFortuneReached": "The Actor cannot have more than {max} fortune points at once.",
+			"minimumSegment": "You cannot remove any more segment."
+		}
 	},
 
-	"APPLICATION.BUTTON.DeleteItem": "Delete Item",
-	"APPLICATION.BUTTON.EditItem": "Edit Item",
 	"APPLICATION.BUTTON.Expand": "More",
 	"APPLICATION.BUTTON.RollItem": "Roll Item",
 	"APPLICATION.TITLE.ActionUsage": "Action Usage Confirmation",
-	"APPLICATION.TITLE.DeleteItem": "Delete Item Confirmation",
 	"APPLICATION.TITLE.MemberRemoval": "Member Removal Confirmation",
 	"APPLICATION.DESCRIPTION.ActionUsage": "Do you really want to use {action}?",
-	"APPLICATION.DESCRIPTION.DeleteItem": "Do you really want to delete <em><strong>{item}</em></strong>?",
 	"APPLICATION.DESCRIPTION.MemberRemoval": "Do you really wish to remove <em><strong>{actor}</em></strong> from the party?",
 
 	"ARMOUR": {
@@ -229,6 +233,46 @@
 			"addSocket": "Add Talent Socket",
 			"deleteSocket": "Remove Talent Socket",
 			"update": "Save Career"
+		},
+		"ADVANCES": {
+			"action": {
+				"label": "Action",
+				"output": "Action - {action}"
+			},
+			"conservative": {
+				"label": "Conservative",
+				"output": "Conservative Piece"
+			},
+			"fortune": {
+				"label": "Fortune",
+				"output": "{characteristic} Fortune Die"
+			},
+			"rating": {
+				"label": "Characteristic",
+				"output": "{characteristic} Rating"
+			},
+			"reckless": {
+				"label": "Reckless",
+				"output": "Reckless Piece"
+			},
+			"skill": {
+				"label": "Skill",
+				"acquisition.output": "{skill} Acquisition",
+				"specialisation.output": "{skill} Specialisation - {value}",
+				"trainingLevel.output": "{skill} Training - {value}"
+			},
+			"talent": {
+				"label": "Talent",
+				"output": "Talent - {talent}"
+			},
+			"wound": {
+				"label": "Wound",
+				"output": "Wound Threshold"
+			}
+		},
+		"DIALOG.cancelAdvance": {
+			"description": "Do you wish to cancel the advance? All the changes it implied will be cancelled.",
+			"title": "Cancel Advance"
 		},
 		"FIELDS": {
 			"advanced.label": "Advanced Career",
@@ -289,6 +333,7 @@
 			"wound": "Wound"
 		},
 		"TABS": {
+			"advances": "Advances",
 			"advanceOptions": "Advance Options",
 			"aptitudes": "Career Aptitudes",
 			"effects": "Effects",
@@ -298,7 +343,8 @@
 		},
 		"WARNINGS": {
 			"advanceOptionDepleted": "This career offers no more advance option of this type.",
-			"dedicationBonusCareerNotCompleted": "You cannot buy a career's dedication bonus until it is completed."
+			"dedicationBonusCareerNotCompleted": "You cannot buy a career's dedication bonus until it is completed.",
+			"notEnoughOpenAdvances": "The Actor has not enough open advances available."
 		},
 		"name": "Career",
 		"plural": "Careers"
@@ -328,6 +374,16 @@
 
 	"CAREERSELECTOR": {
 		"ACTIONS.chooseCareer": "Choose Career",
+		"DIALOG": {
+			"chooseAnyCareer": {
+				"description": "You may choose a starting career among every available basic careers.",
+				"title": "You Rolled 100"
+			},
+			"moreThanOneCareer": {
+				"description": "You may choose a starting career among all the available basic careers.",
+				"title": "You Have Obtained A Reroll"
+			}
+		},
 		"WARNINGS": {
 			"notEnoughExperiencePoint": "You have not enough experience to move to this Career.",
 			"noCareerSelectedWarning": "You must select a Career sheet."
@@ -366,11 +422,9 @@
 				"weight.label": "Weight"
 			},
 			"corruption": {
-				"FIELDS": {
-					"max.label": "Threshold",
-					"value.label": "Current"
-				},
-				"label": "Corruption"
+				"label": "Corruption",
+				"max.label": "Threshold",
+				"value.label": "Current"
 			},
 			"experience": {
 				"current.label": "Current Experience",
@@ -402,54 +456,40 @@
 			"notEnoughExperienceForNonCareerAdvance": "You don't have enough Experience to buy a non-career advance.",
 			"noSkill": "<em><strong>{actor}</em></strong> has no skill. Do you wish to give <em><strong>{actor}</em></strong> all the basic skills?"
 		},
+		"rank": "Rank: {rank}",
 		"woundThreshold": "Wound Threshold"
 	},
 
-	"CHARACTERGENERATOR.Actions": "Action Cards",
-	"CHARACTERGENERATOR.Acquired": "Acquired",
-	"CHARACTERGENERATOR.Career": "Career",
-	"CHARACTERGENERATOR.Characteristic": "Characteristic",
-	"CHARACTERGENERATOR.Characteristics": "Characteristics",
-	"CHARACTERGENERATOR.CreationPoints": "Creation Points",
-	"CHARACTERGENERATOR.NewCharacter": "New Character",
-	"CHARACTERGENERATOR.Origin": "Origin",
-	"CHARACTERGENERATOR.Skills": "Skills",
-	"CHARACTERGENERATOR.Specialisations": "Specialisations",
-	"CHARACTERGENERATOR.Talents": "Talents",
-	"CHARACTERGENERATOR.TrainingLevel": "Training Level",
-	"CHARACTERGENERATOR.Title": "Character Generator",
-	"CHARACTERGENERATOR.Wealth": "Wealth",
-	"CHARACTERGENERATOR.CorruptionThreshold": "Corruption Threshold: ",
-	"CHARACTERGENERATOR.WoundThreshold": "Wound Threshold: ",
-	"CHARACTERGENERATOR.PlusToughnessRating": "{value} + Toughness rating",
-	"CHARACTERGENERATOR.CurrentlySelectedCareer": "Currently selected Career: ",
-	"CHARACTERGENERATOR.CurrentlySelectedOrigin": "Currently selected Origin: ",
-	"CHARACTERGENERATOR.RemainingActions": "Remaining Actions: ",
-	"CHARACTERGENERATOR.RemainingCreationPoints": "Remaining Creation Points: ",
-	"CHARACTERGENERATOR.RemainingSkillTrainings": "Remaining Skill Trainings: ",
-	"CHARACTERGENERATOR.RemainingSpecialisations": "Remaining Specialisations: ",
-	"CHARACTERGENERATOR.RemainingTalents": "Remaining Talents: ",
-	"CHARACTERGENERATOR.RemainingFaithTalents": "Remaining Faith Talents: ",
-	"CHARACTERGENERATOR.RemainingFocusTalents": "Remaining Focus Talents: ",
-	"CHARACTERGENERATOR.RemainingOrderTalents": "Remaining Order Talents: ",
-	"CHARACTERGENERATOR.RemainingInsanityTalents": "Remaining Insanities: ",
-	"CHARACTERGENERATOR.STEP.ActionsSelection": "Select Your Action Cards",
-	"CHARACTERGENERATOR.STEP.CareerSelection": "Select Your Career",
-	"CHARACTERGENERATOR.STEP.Confirm": "Does Your Character Suits You?",
-	"CHARACTERGENERATOR.STEP.CreationPointsInvestment": "Invest Your Creation Points",
-	"CHARACTERGENERATOR.STEP.OriginSelection": "Select Your Origin",
-	"CHARACTERGENERATOR.STEP.SkillTraining": "Train Your Skills",
-	"CHARACTERGENERATOR.STEP.TalentSelection": "Select Your Talents",
-	"CHARACTERGENERATOR.WARNING.FaithTalentAlreadySelected": "A Faith Talent has already been selected.",
-	"CHARACTERGENERATOR.WARNING.OrderTalentAlreadySelected": "An Order Talent has already been selected.",
-	"CHARACTERGENERATOR.WARNING.InsanityAlreadySelected": "An Insanity has already been selected.",
-	"CHARACTERGENERATOR.WARNING.MaximumRatingReached": "The maximum Characteristic Rating has been reached.",
-	"CHARACTERGENERATOR.WARNING.MinimumRatingReached": "The minimum Characteristic Rating has been reached.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughActions": "Not enough Actions left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughTalent": "Not enough Talents left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughCreationPoints": "Not enough Creation Point left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughSkillTrainings": "Not enough Skill Training left.",
-	"CHARACTERGENERATOR.WARNING.NotEnoughSpecialisations": "Not enough Specialisation left.",
+	"CHARACTERGENERATOR": {
+		"ACTIONS": {
+			"acquireActionCards": "Acquire Action Cards",
+			"acquireSkillTrainings": "Acquire Skill Trainings",
+			"acquireTalents": "Acquire Talents",
+			"chooseStartingCareer": "Choose Starting Career",
+			"chooseOrigin": "Choose Origin",
+			"investCreationPoints": "Invest Creation Points",
+			"playGameOfTenQuestions": "Finishing Touches",
+			"submit": "Generate Character"
+		},
+		"TABS": {
+			"actions": "Actions",
+			"attributes": "Attributes",
+			"background": "Background",
+			"career": "Career",
+			"origin": "Origin",
+			"skills": "Skills",
+			"talents": "Talents"
+		},
+		"WARNINGS": {
+			"noStartingTalents": "The Actor has no starting talent to select.",
+			"unfinishedGeneration": {
+				"description": "The character generation is not finished. If you proceed, you will still be able to complete it manually. Do you wish to proceed?",
+				"title": "Unfinished Character Generation"
+			}
+		},
+		"newCharacter": "New Character",
+		"title": "Character Generator"
+	},
 
 	"CHARACTERISTICUPGRADER": {
 		"ACTIONS": {
@@ -457,12 +497,7 @@
 			"increaseRating": "+1 Rating",
 			"upgradeCharacteristic": "Upgrade A Characteristic"
 		},
-		"WARNINGS": {
-			"noUpgradeSelected": "None",
-			"notEnoughOpenAdvances": "The Actor has not enough open advances available."
-		},
-		"characteristicFortune": "{characteristic} Fortune Die",
-		"characteristicRating": "{characteristic} Rating",
+		"WARNINGS.noUpgradeSelected": "None",
 		"experienceCost": "{cost} XP",
 		"selectedUpgrade": "Selected Upgrade: ",
 		"title": "Characteristic Upgrader"
@@ -535,23 +570,85 @@
 		}
 	},
 
+	"CREATIONPOINTINVESTOR": {
+		"ACTIONCARDS": {
+			"CHOICES": {
+				"one": "1",
+				"two": "2",
+				"three": "3",
+				"four": "4"
+			},
+			"label": "Action Cards"
+		},
+		"ACTIONS": {
+			"decrementCharacteristicRating": "Decrease {characteristic} Rating By 1",
+			"incrementCharacteristicRating": "Increase {characteristic} Rating By 1",
+			"submit": "Confirm Creation Point Investment"
+		},
+		"CHARACTERISTICS.label": "Characteristics",
+		"SKILLS": {
+			"CHOICES": {
+				"one": "1",
+				"two": "2",
+				"threePlusOneSpecialisation": "3 + 1 Specialisation",
+				"fourPlusTwoSpecialisations": "4 + 2 Specialisations"
+			},
+			"label": "Skills"
+		},
+		"TALENTS": {
+			"CHOICES": {
+				"zero": "0",
+				"one": "1",
+				"two": "2",
+				"three": "3"
+			},
+			"label": "Talents"
+		},
+		"WARNINGS": {
+			"unspentCreationPoints": {
+				"description": "You have creation points left to spend. Any unspent creation point will be lost.",
+				"title": "Unspent Creation Points"
+			},
+			"cannotInvestLessThanZero": "You cannot invest less than 0 creation points in any category.",
+			"cannotInvestMoreThanFour": "You cannot invest more than 4 creation points in any category",
+			"maximumRatingReached": "The maximum characteristic rating has been reached.",
+			"minimumRatingReached": "The minimum characteristic rating has been reached.",
+			"notEnoughCreationPoints": "Not enough creation point left.",
+			"tooManyCreationPointSpent": "You have spent more creation points than available. Please reduce your expenditure by modifying your investments."
+		},
+		"WEALTH": {
+			"CHOICES": {
+				"broke": "Broke",
+				"poor": "Poor",
+				"comfortable": "Comfortable",
+				"affluent": "Affluent"
+			},
+			"label": "Wealth"
+		},
+		"count": "{amount} / {total}",
+		"creationPointsLeft": "Creation Points Left: ",
+		"title": "Creation Point Investor"
+	},
+
 	"CREATURE": {
 		"FIELDS": {
 			"attributes": {
-				"aggression": {
-					"abbreviation": "A",
-					"label": "Aggression"
-				},
-				"cunning": {
-					"abbreviation": "C",
-					"label": "Cunning"
-				},
-				"expertise": {
-					"abbreviation": "E",
-					"label": "Expertise"
-				},
-				"max.label": "Rating",
-				"value.label": "Budget"
+				"FIELDS": {
+					"aggression": {
+						"abbreviation": "A",
+						"label": "Aggression"
+					},
+					"cunning": {
+						"abbreviation": "C",
+						"label": "Cunning"
+					},
+					"expertise": {
+						"abbreviation": "E",
+						"label": "Expertise"
+					},
+					"max.label": "Rating",
+					"value.label": "Budget"
+				}
 			},
 			"category.label": "Category",
 			"damageRating": {
@@ -567,7 +664,7 @@
 				"abbreviation": "Soak",
 				"label": "Soak Value"
 			},
-			"threatRating": "Threat Rating"
+			"threatRating.label": "Threat Rating"
 		},
 		"TABS": {
 			"actions": "Actions",
@@ -582,6 +679,12 @@
 
 	"CRITICALWOUND": {
 		"ACTIONS.update": "Save Critical Wound",
+		"DIALOG": {
+			"choose": {
+				"description": "You must choose which critical wound to inflict between these two: {links}",
+				"title": "Choose A Critical Wound"
+			}
+		},
 		"FIELDS.severityRating.label": "Severity Rating",
 		"TABS": {
 			"effects": "Effects",
@@ -591,8 +694,16 @@
 		"plural": "Critical Wounds"
 	},
 
-	"DIALOG.TITLE.EffectDeletion": "Effect Deletion",
-	"DIALOG.DESCRIPTION.EffectDeletion": "Do you really wish to delete this effect?",
+	"DIALOG": {
+		"deleteEffect": {
+			"description": "Do you really wish to delete the <em><strong>{effect}</strong></em> active effect? This action cannot be undone.",
+			"title": "Delete Active Effect"
+		},
+		"deleteItem": {
+			"description": "Do you really wish to delete the <em><strong>{item}</em></strong> item? This action cannot be undone.",
+			"title": "Delete Item"
+		}
+	},
 
 	"DIE": {
 		"RESULTS": {
@@ -701,24 +812,171 @@
 	},
 
 	"EFFECT": {
-		"FIELDS": {
-			"conditionScript": {
-				"hint": "This script verifies if the effect is usable in the context.\nArguments:\n\t- this: The triggered Talent.\nMust return a boolean, true if condition is met, false if not.",
-				"label": "Condition Script"
+		"MACROS": {
+			"FIELDS.type.label": "Macro Type",
+			"actionUsage": {
+				"FIELDS.script": {
+					"hint": "This script is executed whenever an Action is used, either after a check roll or a simple activation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Item} action: The Action that has been used.\n\t- {Actor} actor: The Actor that used the Action.\n\t- {string} face: Which face of the Action card was used, either \"conservative\" or \"reckless\".",
+					"label": "Script"
+				},
+				"label": "Action Usage"
 			},
-			"reverseScript": {
-				"hint": "This script is executed when the effect is deselected.\nArguments:\n\t- this: The triggered Talent.",
-				"label": "Reverse Script"
+			"careerSocket": {
+				"FIELDS.script": {
+					"hint": "This script is executed each time the related Item is socketed onto a Career.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.",
+					"label": "Script"
+				},
+				"label": "Career Socket"
 			},
-			"script": {
-				"hint": "Arguments:\n\t- this: The triggered Talent.",
-				"label": "Script"
+			"careerTransition": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor transitions from a Career to another.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that is transitioning careers.\n\t- {Career} previousCareer: The previous Career.\n\t- {Career} nextCareer: The new current career.\n\t- {number} cost: The current cost of the transition.",
+					"label": "Script"
+				},
+				"label": "Career Transition"
 			},
-			"type.label": "Script Trigger"
+			"checkPreparation": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time a check is being prepared or re-prepared.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor preparing the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {DiePool} diePool: The current die pool of the check.",
+					"label": "Script"
+				},
+				"label": "Check Preparation"
+			},
+			"checkRoll": {
+				"FIELDS.script": {
+					"hint": "This script is executed at the creation of a Check Roll.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that is performing the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The concerned Check Roll.",
+					"label": "Script"
+				},
+				"label": "Check Roll"
+			},
+			"creationPointInvestment": {
+				"FIELDS.script": {
+					"hint": "This script is executed before Creation Point Investment starts during Character Generation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {number} options.startingCreationPoints: The total number of creation points to spend.",
+					"label": "Script"
+				},
+				"label": "Creation Point Investment"
+			},
+			"manual": {
+				"FIELDS.script": {
+					"hint": "This script is executed on the User action only.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.",
+					"label": "Script"
+				},
+				"label": "Manual Trigger"
+			},
+			"manualPostCheckRoll": {
+				"FIELDS": {
+					"conditionalScript": {
+						"hint": "This script verifies that this Active Effect can be triggered depending on the check context.\nArguments:\n\t- {ActiveEffect} this: The Active Effect which macro is being tested.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {ChatMessage} chatMessage: The Chat Message containing the Check Roll.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The concerned Check Roll.\n\tReturn value: Must be a boolean, true if conditions are met, false otherwise.",
+						"label": "Conditional Script"
+					},
+					"script": {
+						"hint": "This script is executed whenever the Item is triggered in order to perform changes to a rolled check.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {ChatMessage} chatMessage: The Chat Message containing the Check Roll.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The concerned Check Roll.",
+						"label": "Script"
+					}
+				},
+				"label": "Manual Post Check Roll"
+			},
+			"manualPreCheckRoll": {
+				"FIELDS": {
+					"conditionalScript": {
+						"hint": "This script verifies that this Active Effect can be triggered depending on the check context.\nArguments:\n\t- {ActiveEffect} this: The Active Effect which macro is being tested.\n\t- {Actor} actor: The Actor preparing the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {DiePool} diePool: The current die pool of the check.\n\tReturn value: Must be a boolean, true if conditions are met, false otherwise.",
+						"label": "Conditional Script"
+					},
+					"postRollScript": {
+						"hint": "This script is executed once the check has been rolled in order to perform follow-up operations on the related Item.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {DiePool} diePool: The die pool of the rolled check.\n\t- {CheckData} checkData: Various data related to the check.",
+						"label": "Post-Roll Script"
+					},
+					"script": {
+						"hint": "This script is executed every time a check is being prepared or re-prepared if selected.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor preparing the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {DiePool} diePool: The current die pool of the check.",
+						"label": "Script"
+					}
+				},
+				"label": "Manual Pre Check Roll"
+			},
+			"requirement": {
+				"FIELDS.script": {
+					"hint": "This script verifies whether the Item can be acquired during Character Generation or as part of Career Advances.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that may (or may not) acquire the Item.",
+					"label": "Script"
+				},
+				"label": "Requirement"
+			},
+			"startingSkillTrainingSelection": {
+				"FIELDS.script": {
+					"hint": "This script is executed before Starting Skill Training Selection starts during Character Generation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Array} options.freeAcquisitions: The UUIDs of the skills acquired for free.\n\t- {Array} options.freeTrainings: The UUIDs of the skills trained for free.",
+					"label": "Script"
+				},
+				"label": "Starting Skill Training Selection"
+			},
+			"startingTalentSelection": {
+				"FIELDS.script": {
+					"hint": "This script is executed before Starting Talent Selection starts during Character Generation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Array} options.freeItemTypes: The various types of Item currently available to select one copy of during Starting Talent Selection.",
+					"label": "Script"
+				},
+				"label": "Starting Talent Selection"
+			},
+			"targetingCheckPreparation": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time a check targeting another Actor is being prepared or re-prepared.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor targeted by the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {DiePool} diePool: The current die pool of the check.",
+					"label": "Script"
+				},
+				"label": "Targeting Check Preparation"
+			}
 		},
 		"TABS": {
-			"scripts": "Scripts"
+			"macro": "Macro"
 		}
+	},
+
+	"GAMEOFTENQUESTIONS": {
+		"ACTIONS.submit": "Submit Answers",
+		"FIELDS": {
+			"adventure": {
+				"label": "Why Did You Become an Adventurer?",
+				"hint": "An adventurer’s life is dangerous. So what was it that made you choose this life of peril? Are you on a personal or political crusade? Are you out to get vengeance on those who ruined or murdered your family? Are you a thrill seeker or gold chaser?"
+			},
+			"family": {
+				"label": "What is Your Family Like?",
+				"hint": "Are you an only child or do you have brothers and sisters? What’s your place in the family? Are you parents still alive? If not, how did they die?"
+			},
+			"friendsFoes": {
+				"label": "Who are Your Friends and Enemies?",
+				"hint": "The other player characters may well be your best friends, but this isn’t necessarily the case. You may not even know each other when play begins. So what friends do you have and where do they live? Are you on good terms or have you had a falling out? Similarly, do you have any enemies? If so, how did it happen? Friends can help you out in a pinch or turn into your most bitter enemies. GMs looking to make an adventure more meaningful can involve your character's personal enemies."
+			},
+			"loveHate": {
+				"label": "Who do You Love/Hate?",
+				"hint": "Love and hate are the strongest of emotions. What place do they have in your life? Are you in love with someone? On the flipside, who do you hate and why? Vengeance is a strong motivation and often linked to hatred. You may hate individuals (such as your enemies) or whole classes of people or creatures. If your wife was slain by Beastmen, for example, you might hate them above all other foes. Perhaps an unscrupulous bailiff caused your family to lose its home and now you are convinced that all nobles are crooks and scoundrels."
+			},
+			"loyalty": {
+				"label": "Who are You Loyal to?",
+				"hint": "Real loners are rare in the Old World. It is too dangerous a place to get by without allies. Are there any people or organizations that you are loyal to? Your career might suggest an answer to this question, such as the Colleges of Magic or the Cult of Sigmar, but you might just as easily be loyal to an important person from your past."
+			},
+			"origin": {
+				"label": "Where are You From?",
+				"hint": "This is the most fundamental question for your character. Are you from a big city, like Altdorf, or a tiny farming hamlet? If you're a dwarf, are you karak-born, or from an outlying community or hold?"
+			},
+			"past": {
+				"label": "What Did You Do Before You Became an Adventurer?",
+				"hint": "This is an important question. Your career provides a basic answer, but you refine this further. Try to figure out exactly what you did before you became an adventurer. The details you’ve already worked out and the skills you chose during character creation can help you make some decisions."
+			},
+			"piety": {
+				"label": "How Religious are You?",
+				"hint": "Some folk are more pious than others. Are you particularly religious? If so, is there a God you favour? Are you constantly seeking answers or at peace with your faith? Initiates and Priests, of course, must make this decision early on."
+			},
+			"possessions": {
+				"label": "What are Your Prized Possessions?",
+				"hint": "Do you have any items of sentimental value? These need not be items of monetary value, but they should have special meaning for you. Is the rusty sword you wield the only thing your father ever gave you? Is the copper ring you wear a remembrance of your slain husband? You might also discuss with the GM important things that you’ve already lost and would do anything to get back."
+			},
+			"socialClass": {
+				"label": "What is Your Social Class?",
+				"hint": "Some careers, such as Commoner and Burgher, have an implied social class. Others can work with a variety of social classes. Where in the social strata does your family fall? Have you moved up, socially, or fallen from grace?"
+			}
+		},
+		"WARNINGS.incompleteAnswers": {
+			"description": "You have not answered every questions.",
+			"title": "Incomplete Answers"
+		},
+		"description": "If you need some help fleshing out your character, try answering these ten questions. They should allow you to focus your thoughts on your emerging alter ego.",
+		"title": "Game of Ten Questions"
 	},
 
 	"GROUP": {
@@ -828,14 +1086,37 @@
 		"plural": "Mutations"
 	},
 
-	"ORIGIN.KarakAzgaraz": "Dwarf of Karak Azgaraz",
-	"ORIGIN.Ulthuan": "High Elf of Ulthuan",
-	"ORIGIN.Reiklander": "Reiklander",
-	"ORIGIN.AthelLoren": "Wood Elf of Athel Loren",
-	"ORIGIN.INTRODUCTION.KarakAzgaraz": "To reflect their fierce spirit and proud traditions, Karak Azgaraz dwarf characters have the following racial abilities:",
-	"ORIGIN.INTRODUCTION.Ulthuan": "To reflect their cultured upbringing and rich history, high elf characters have the following racial abilities:",
-	"ORIGIN.INTRODUCTION.Reiklander": "To reflect their upbringing and individuality, Reiklander characters have the following racial abilities:",
-	"ORIGIN.INTRODUCTION.AthelLoren": "To reflect their ties to nature and tradition-bound culture, wood elf characters have the following racial abilities:",
+	"ORIGIN": {
+		"athelLoren": {
+			"introduction": "To reflect their ties to nature and tradition-bound culture, wood elf characters have the following racial abilities:",
+			"name": "Wood Elf of Athel Loren"
+		},
+		"karakAzgaraz": {
+			"introduction": "To reflect their fierce spirit and proud traditions, Karak Azgaraz dwarf characters have the following racial abilities:",
+			"name": "Dwarf of Karak Azgaraz"
+		},
+		"reiklander": {
+			"introduction": "To reflect their upbringing and individuality, Reiklander characters have the following racial abilities:",
+			"name": "Reiklander"
+		},
+		"ulthuan": {
+			"introduction": "To reflect their cultured upbringing and rich history, high elf characters have the following racial abilities:",
+			"name": "High Elf of Ulthuan"
+		}
+	},
+
+	"ORIGINSELECTOR": {
+		"ACTIONS.chooseOrigin": "Choose Origin",
+		"WARNINGS.noSelection": {
+			"description": "No origin has been selected.",
+			"title": "No Origin Selected"
+		},
+		"corruptionThreshold": "Corruption Threshold: ",
+		"title": "Origin Selector",
+		"plusToughnessRating": "{value} + Toughness rating",
+		"selectedOrigin": "Selected Origin: ",
+		"woundThreshold": "Wound Threshold: "
+	},
 
 	"PARTY": {
 		"ACTIONS": {
@@ -889,11 +1170,13 @@
 		"title": "Party Event Editor"
 	},
 
-	"RACE.Any": "Any Race",
-	"RACE.Dwarf": "Dwarf",
-	"RACE.HighElf": "High Elf",
-	"RACE.Human": "Human",
-	"RACE.WoodElf": "Wood Elf",
+	"RACE": {
+		"any": "Any Race",
+		"dwarf": "Dwarf",
+		"highElf": "High Elf",
+		"human": "Human",
+		"woodElf": "Wood Elf"
+	},
 
 	"ROLL": {
 		"ACTIONS": {
@@ -913,6 +1196,7 @@
 			"characteristicCheck": "{characteristic} Check",
 			"combatEncounterInitiativeCheck": "Combat Encounter Initiative Check",
 			"freeCheck": "Free Check",
+			"reroll": "Reroll",
 			"skillCheck": "{skill} Check",
 			"socialEncounterInitiativeCheck": "Social Encounter Initiative Check"
 		},
@@ -950,25 +1234,36 @@
 			"alreadySelected": "This item is already selected.",
 			"cannotSubmit": "Unable to confirm selection: {error}",
 			"maximumSelectionSizeReached": "You cannot select any more item. Please deselect an item before selecting an other one.",
-			"notEnoughSelection": "You need to select more items.",
-			"noSelection": "No item has been selected."
+			"notEnoughSelection": {
+				"description": "There are still items to select",
+				"title": "Items Left To Select"
+			},
+			"noSelection": {
+				"description": "No item has been selected.",
+				"title": "No Item Selected"
+			},
+			"tooManySelection": "Too many selected items. Please deselect some."
 		},
+		"all": "All",
 		"filters": "Filters",
 		"noSelection": "Aucun",
+		"proceedDialog": "Would you still like to proceed?",
 		"search": "Search"
 	},
 
-	"SCRIPT": {
-		"TYPES": {
-			"onCareerSocket": "Career Socket",
-			"onCheckPreparation": "Check Preparation",
-			"onCheckRoll": "Check Roll",
-			"onPostCheckTrigger": "Manual Trigger Post Check",
-			"onPreCheckTrigger": "Manual Selection Pre Check",
-			"onTargettingCheckPreparation": "Targetting Check Preparation",
-			"onTrigger": "Manual Trigger"
+	"SETTINGS": {
+		"startingCareerDrawingMethod": {
+			"CHOICES": {
+				"freeChoice": "Free Choice",
+				"drawThree": "Draw Three",
+				"rollTable": "Roll Table"
+			},
+			"name": "Starting Career Drawing Method",
+			"hint": "Defines the way a new character's starting career is drawn with the Character Generator.\n– Draw Three: Three basic careers are drawn amongst those existing within the world and its compendium.\n– Roll Table: One single basic career is drawn from the Starting Career Table.\n– Free Choice: The starting career can be chosen amongst every available basic career within the world and its compendium."
 		}
 	},
+
+	"SIDEBAR.ACTIONS.generateCharacter": "Generate Character",
 
 	"STANCES": {
 		"conservative": "Conservative",
@@ -993,12 +1288,16 @@
 			"education": "Education",
 			"firstAid": "First Aid",
 			"folklore": "Folklore",
+			"guile": "Guile",
 			"intimidate": "Intimidate",
 			"intuition": "Intuition",
 			"leadership": "Leadership",
 			"medicine": "Medicine",
 			"observation": "Observation",
 			"piety": "Piety",
+			"ride": "Ride",
+			"skulduggery": "Skulduggery",
+			"stealth": "Stealth",
 			"weaponSkill": "Weapon Skill"
 		},
 		"TABS": {
@@ -1013,13 +1312,20 @@
 
 	"SKILLUPGRADER": {
 		"ACTIONS.chooseUpgrade": "Choose Upgrade",
-		"WARNINGS.singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
-		"acquisitionUpgrade": "{name} - Acquisition",
+		"WARNINGS": {
+			"duplicateSpecialisation": "A specialisation can only be acquired once.",
+			"notEnoughSelection": {
+				"description": "There are still upgrades and/or specialisations to select.",
+				"title": "Upgrades or Specialisations Left To Select"
+			},
+			"notEnoughTrainings": "Not enough trainings left to proceed.",
+			"singleSpecialisationOnly": "Only one specialisation per skill is allowed.",
+			"tooManySpecialisationSelected": "Too many selected specialisations. Please deselect some."
+		},
 		"noUpgradeSelected": "None",
-		"selectedUpgrade": "Selected Upgrade:",
-		"specialisationUpgrade": "{name} - {value} Specialisation",
-		"title": "Skill Upgrader",
-		"trainingLevelUpgrade": "{name} - Training Level {value}"
+		"selectedUpgrade": "Selected Upgrade(s):",
+		"selectedSpecialisations": "Selected Specialisation(s):",
+		"title": "Skill Upgrader"
 	},
 
 	"SYMBOL": {
@@ -1093,10 +1399,44 @@
 			"triggerTalent": "Choose a Talent to Use"
 		},
 		"WARNINGS": {
-			"noTalentSelected": "You must select a Talent card."
+			"missingFaithTalent": {
+				"description": "No Faith talent has been selected.",
+				"title": "Missing Faith Talent"
+			},
+			"missingFreeFocusTalent": {
+				"description": "The Free Focus talent has not been selected.",
+				"title": "Missing Free Focus Talent"
+			},
+			"missingInsanity": {
+				"description": "No insanity has been selected.",
+				"title": "Missing Insanity"
+			},
+			"missingOrderTalent": {
+				"description": "No Order talent has been selected.",
+				"title": "Missing Order Talent"
+			},
+			"notEnoughSelection": {
+				"description": "There are still talents to select.",
+				"title": "Talents Left To Select"
+			},
+			"noSelection": {
+				"description": "No talent has been selected.",
+				"title": "No Talent Selected"
+			}
 		},
-		"noTalentSelected": "None",
-		"selectedTalent": "Selected Talent:",
+		"remainingInsanities": "Remaining Insanities: ",
+		"remainingFaithTalents": "Remaining Faith Talents: ",
+		"remainingFocusTalents": "Remaining Focus Talents: ",
+		"remainingOrderTalents": "Remaining Order Talents: ",
+		"remainingTalents": "Remaining Talents: ",
+		"selectedFaith": "Selected Free Faith Talent:",
+		"selectedFocus": "Selected Free Focus Talent:",
+		"selectedInsanity": "Selected Free Insanity:",
+		"selectedOrder": "Selected Free Order Talent:",
+		"selectedReputation": "Selected Free Reputation Talent:",
+		"selectedTactic": "Selected Free Tactic Talent:",
+		"selectedTalent": "Selected(s) Talent(s):",
+		"selectedTricks": "Selected Free Tricks Talent:",
 		"title": "Talent Selector"
 	},
 
@@ -1104,20 +1444,18 @@
 		"ACTIONS.update": "Save Trapping",
 		"FIELDS": {
 			"cost": {
-				"cost": {
-					"brass": {
-						"abbreviation": "b",
-						"label": "Brass"
-					},
-					"gold": {
-						"abbreviation": "g",
-						"label": "Gold"
-					},
-					"label": "Cost",
-					"silver": {
-						"abbreviation": "s",
-						"label": "Silver"
-					}
+				"brass": {
+					"abbreviation": "b",
+					"label": "Brass"
+				},
+				"gold": {
+					"abbreviation": "g",
+					"label": "Gold"
+				},
+				"label": "Cost",
+				"silver": {
+					"abbreviation": "s",
+					"label": "Silver"
 				}
 			},
 			"encumbrance": {
@@ -1162,10 +1500,29 @@
 	},
 
 	"TRAITS": {
+		"activeDefence": "Active Defence",
+		"amberOrder": "Amber Order",
+		"amethystOrder": "Amethyst Order",
 		"basic": "Basic",
+		"brightOrder": "Bright Order",
+		"celestialOrder": "Celestial Order",
+		"darkMagic": "Dark Magic",
 		"greyOrder": "Grey Order",
-		"rankZero": "Rank 0",
-		"rankOne": "Rank 1"
+		"goldOrder": "Gold Order",
+		"jadeOrder": "Jade Order",
+		"lightOrder": "Light Order",
+		"manann": "Manann",
+		"morr": "Morr",
+		"myrmidia": "Myrmidia",
+		"ranald": "Ranald",
+		"rank": "Rank {number}",
+		"rhya": "Rhya",
+		"shallya": "Shallya",
+		"sigmar": "Sigmar",
+		"social": "Social",
+		"taal": "Taal",
+		"ulric": "Ulric",
+		"venera": "Verena"
 	},
 	
 	"TYPES": {

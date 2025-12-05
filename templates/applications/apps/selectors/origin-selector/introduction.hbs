@@ -1,0 +1,21 @@
+<section>
+	{{#if origin}}
+		<p class="introduction">{{localize origin.introduction}}</p>
+
+		<ul>
+			{{#each origin.abilities as |ability ab|}}
+				<li data-uuid="{{ability.uuid}}">
+					<strong>{{ability.name}}:</strong> <span>{{{stripTags (lookup @root.enrichment ability.uuid) "p"}}}</span>
+				</li>
+			{{/each}}
+
+			<li class="wound-threshold">
+				<strong>{{localize "ORIGINSELECTOR.woundThreshold"}}</strong> <span>{{localize "ORIGINSELECTOR.plusToughnessRating" value=origin.wound}}</span>
+			</li>
+
+			<li class="corruption-threshold">
+				<strong>{{localize "ORIGINSELECTOR.corruptionThreshold"}}</strong> <span>{{localize "ORIGINSELECTOR.plusToughnessRating" value=origin.corruption}}</span>
+			</li>
+		</ul>
+	{{/if}}
+</section>

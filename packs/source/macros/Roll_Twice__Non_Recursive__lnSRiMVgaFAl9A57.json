@@ -1,0 +1,32 @@
+{
+  "name": "Roll Twice (Non-Recursive)",
+  "type": "script",
+  "_id": "lnSRiMVgaFAl9A57",
+  "author": "Bq3CTOvANoOneedB",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "const drawnResult = await rollTable.drawMany(2, {roll, recursive: false, displayChat, rollMode});\n\nfor(const index in drawnResult.results) {\n  let result = drawnResult.results[index], document = await fromUuid(result.documentUuid);\n\n  while(document.documentName !== \"Item\") {\n    const newResult = await rollTable.draw({roll, recursive: false, displayChat, rollMode});\n    drawnResult.results.splice(index, 1, newResult.results[0]);\n    result = drawnResult.results[index];\n    document = await fromUuid(result.documentUuid);\n  }\n}\n\nreturn drawnResult;",
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "48afde8db92ba267f35d8f8b091deec241c24a73"
+    }
+  },
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null,
+    "coreVersion": "13.351",
+    "systemId": "wfrp3e",
+    "systemVersion": "1.3.3",
+    "createdTime": 1764770314348,
+    "modifiedTime": 1764770643960,
+    "lastModifiedBy": "Bq3CTOvANoOneedB"
+  },
+  "_key": "!macros!lnSRiMVgaFAl9A57"
+}

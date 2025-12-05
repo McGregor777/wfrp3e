@@ -6,7 +6,7 @@
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>Many people in the Empire are superstitious and fatalistic, believing the future to be already determined by the will of the gods. Some seek easy answers to explain their purpose, and a gifted mystic can easily make a living catering to their hopes and fears.</p>\n<p>Mystics tread a fine line. Some rashly claim to have a personal relationship with the gods, and if they aren&rsquo;t careful, those with a real knack for the art may be seen as witches. Many have been burned at the stake over the years having been declared heretics. Some mystics insist that they are able to read the future through studying the casting of runes, the turning of cards, or the appearance of an animal&rsquo;s spilt guts.</p>\n<p>These fortune tellers insist that they take an academic approach to their work, though most are simple entertainers who are better at reading people than the future. They are nevertheless perceptive and intuitive, able to quickly gauge their patrons&rsquo; feelings, fears, and desires. A few mystics may be genuinely touched with a gift for premonition. Such sensitive people may be the recipients of disturbing dreams, or are perhaps able to perceive shifts in the Winds of Magic in an unusual manner.</p>\n<p>Elves are less credulous than humans, and more at home with the existence of magic. They still take premonitions and oracles seriously, however, so there is sometimes a place in their society for a true mystic, though they won&rsquo;t tolerate charlatans for long.</p>\n<p><strong>Special:</strong> Upon entering this career, choose Charm or Guile. The chosen skill becomes a career skill; the other skill remains a non-career skill.</p>\n<p><strong>Typical Trappings:</strong> Mystics typically cultivate a somewhat casual or rustic appearance and employ equipment such as a crystal ball, tarot cards, or a set of bones carved with runes.</p>\n<p><strong>Career Ability:</strong> You may spend your fortune points to add <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼</span> to the dice pool of any ally within close range</p>",
+    "description": "<p>Many people in the Empire are superstitious and fatalistic, believing the future to be already determined by the will of the gods. Some seek easy answers to explain their purpose, and a gifted mystic can easily make a living catering to their hopes and fears.</p><p>Mystics tread a fine line. Some rashly claim to have a personal relationship with the gods, and if they aren’t careful, those with a real knack for the art may be seen as witches. Many have been burned at the stake over the years having been declared heretics. Some mystics insist that they are able to read the future through studying the casting of runes, the turning of cards, or the appearance of an animal’s spilt guts.</p><p>These fortune tellers insist that they take an academic approach to their work, though most are simple entertainers who are better at reading people than the future. They are nevertheless perceptive and intuitive, able to quickly gauge their patrons’ feelings, fears, and desires. A few mystics may be genuinely touched with a gift for premonition. Such sensitive people may be the recipients of disturbing dreams, or are perhaps able to perceive shifts in the Winds of Magic in an unusual manner.</p><p>Elves are less credulous than humans, and more at home with the existence of magic. They still take premonitions and oracles seriously, however, so there is sometimes a place in their society for a true mystic, though they won’t tolerate charlatans for long.</p><p><strong>Special:</strong> Upon entering this career, choose Charm or Guile. The chosen skill becomes a career skill; the other skill remains a non-career skill.</p><p><strong>Typical Trappings:</strong> Mystics typically cultivate a somewhat casual or rustic appearance and employ equipment such as a crystal ball, tarot cards, or a set of bones carved with runes.</p><p><strong>Career Ability:</strong> You may spend your fortune points to add {Df} to the dice pool of any ally within close range</p>",
     "advanced": false,
     "raceRestrictions": [
       "human",
@@ -34,31 +34,74 @@
     },
     "summary": "A sociable individual with an eerie talent for premonition",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition"
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -76,13 +119,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1699549849301,
-    "modifiedTime": 1734396635127,
+    "modifiedTime": 1764321760894,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "lMbdEc9qiqSUVxje",
   "sort": 900000,

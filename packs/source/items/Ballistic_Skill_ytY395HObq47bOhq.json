@@ -5,7 +5,7 @@
   "_id": "ytY395HObq47bOhq",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>Covers the basic use, care and&nbsp;maintenance of ranged weapons. This includes thrown weapons,&nbsp;like balanced knives and javelins, as well as bows, crossbows, and&nbsp;slings. Also covers the basics of blackpowder weapon care and&nbsp;operation. It is a combination of hand-eye coordination, accuracy,&nbsp;and training with ranged items.</p>\n<p><em>Specialisation options:</em>&nbsp;bow, crossbow, thrown weapons, blackpowder&nbsp;weapons</p>",
+    "description": "<p>Covers the basic use, care and maintenance of ranged weapons. This includes thrown weapons, like balanced knives and javelins, as well as bows, crossbows, and slings. Also covers the basics of blackpowder weapon care and operation. It is a combination of hand-eye coordination, accuracy, and training with ranged items.</p><p><em>Specialisation options:</em> bow, crossbow, thrown weapons, blackpowder weapons</p>",
     "characteristic": "agility",
     "advanced": false,
     "trainingLevel": 0,
@@ -15,13 +15,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1695317018941,
     "modifiedTime": 1699628061290,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "sort": 0,
   "ownership": {

@@ -2,11 +2,54 @@
   "name": "Waywatcher",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/waywatcher.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Waywatcher",
+      "img": "systems/wfrp3e/assets/images/careers/waywatcher.webp",
+      "_id": "ZKnbuU3T5TTFTBWf",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "if(checkData.combat?.system.type === \"combat\")\n  diePool.dice.fortune += 2;"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your combat initiative checks gain {Df} {Df}</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764780438131,
+        "modifiedTime": 1764780484829,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!X78U8bxkc9wJzclF.ZKnbuU3T5TTFTBWf"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>Whilst many men of the Empire might think that all 1 the lands beyondtheir western border as Bretonnia, the inhabitants of Athel Loren certainly do not see themselves as the vassals of that nation. These are the Asrai, a society of elves who did not return to Ulthuan after the War of the Beard.</p>\n<p>Over the millenia, the wood elves have become insular and capricious. They do not welcome visitors to their woodland realm, and a grisly sight can be found on the periphery of Athel Loren: skeletons, many of them human, litter the outskirts of the forest, arrows protruding from the eye sockets. This is the work of the waywatchers, masters of concealment and silent, deadly sentinels of the forest realms.</p>\n<p>Waywatchers guard the paths leading into Athel Loren, and intercept intruders. Those with whom the wood elves have no quarrel are met with warning shots, and led out of the forest by these taciturn figures. However, most uninvited visitors are shot on sight. In times of war, the waywatchers serve as skirmishers in wood elf forces, repulsing invaders with an unerring stream of arrows. Most waywatchers are solitary warriors, sniping and ambushing their foes in preference to fighting open battle. They are rarely seen in the Empire.</p>\n<p>Some waywatchers develop a curiosity about life outside the forest and are permitted to leave in order to experience the nations of the Old World and beyond. Others may answer their queen&rsquo;s instructions to lend support to the Empire, and travel where she demands. Travelling wood elves are treated with mistrust by many citizens of the Empire, who are perhaps aware of the frosty reception they would receive if they trespassed in the woodland realm. Such wandering waywatchers sometimes join groups of adventurers, who are typically more tolerant of such unusual companions.</p>\n<p><strong>Typical Trappings:</strong> Waywatchers carry finely crafted elf longbows and a dozen arrows. They typically wear some form of very light armour, such as leather strappings.</p>\n<p><strong>Career Ability:</strong> Your combat initiative checks gain <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼&nbsp;◼</span></p>",
+    "description": "<p>Whilst many men of the Empire might think that all 1 the lands beyondtheir western border as Bretonnia, the inhabitants of Athel Loren certainly do not see themselves as the vassals of that nation. These are the Asrai, a society of elves who did not return to Ulthuan after the War of the Beard.</p><p>Over the millenia, the wood elves have become insular and capricious. They do not welcome visitors to their woodland realm, and a grisly sight can be found on the periphery of Athel Loren: skeletons, many of them human, litter the outskirts of the forest, arrows protruding from the eye sockets. This is the work of the waywatchers, masters of concealment and silent, deadly sentinels of the forest realms.</p><p>Waywatchers guard the paths leading into Athel Loren, and intercept intruders. Those with whom the wood elves have no quarrel are met with warning shots, and led out of the forest by these taciturn figures. However, most uninvited visitors are shot on sight. In times of war, the waywatchers serve as skirmishers in wood elf forces, repulsing invaders with an unerring stream of arrows. Most waywatchers are solitary warriors, sniping and ambushing their foes in preference to fighting open battle. They are rarely seen in the Empire.</p><p>Some waywatchers develop a curiosity about life outside the forest and are permitted to leave in order to experience the nations of the Old World and beyond. Others may answer their queen’s instructions to lend support to the Empire, and travel where she demands. Travelling wood elves are treated with mistrust by many citizens of the Empire, who are perhaps aware of the frosty reception they would receive if they trespassed in the woodland realm. Such wandering waywatchers sometimes join groups of adventurers, who are typically more tolerant of such unusual companions.</p><p><strong>Typical Trappings:</strong> Waywatchers carry finely crafted elf longbows and a dozen arrows. They typically wear some form of very light armour, such as leather strappings.</p><p><strong>Career Ability:</strong> Your combat initiative checks gain {Df} {Df}</p>",
     "advanced": false,
     "raceRestrictions": [
       "woodElf"
@@ -32,31 +75,75 @@
     },
     "summary": "A superb elf scout and expert archer on the path of the Watcher",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -74,13 +161,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1699549887285,
-    "modifiedTime": 1734396698240,
+    "modifiedTime": 1764755907713,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "X78U8bxkc9wJzclF",
   "sort": 3800000,

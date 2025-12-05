@@ -24,11 +24,11 @@
         "success": [
           {
             "symbolAmount": 1,
-            "description": "<p>Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+            "description": "<p>Until the start of your next turn, add {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
           },
           {
             "symbolAmount": 3,
-            "description": "<p>Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span><span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+            "description": "<p>Until the start of your next turn, add {Dm} {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
           }
         ],
         "boon": [
@@ -69,11 +69,11 @@
         "success": [
           {
             "symbolAmount": 1,
-            "description": "<p>Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+            "description": "<p>Until the start of your next turn, add {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
           },
           {
             "symbolAmount": 3,
-            "description": "<p>Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span><span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
+            "description": "<p>Until the start of your next turn, add {Dm} {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you or any allies in the same engagement as you</p>"
           }
         ],
         "boon": [
@@ -101,13 +101,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1696334694650,
     "modifiedTime": 1701883626467,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "pr9op8ieSne26h42",
   "sort": 800000,

@@ -34,7 +34,9 @@
 								   type="checkbox"
 								   data-type="acquisition"
 								   data-uuid="{{item.uuid}}"
-								   {{#if (or item.parent (equalTo item.system.advanced false))}}
+								   {{#if (or (not item.system.advanced)
+											 item.parent
+											 (includes item.uuid @root.freeAcquisitions))}}
 									   checked disabled
 								   {{else if (lookup @root.upgrades.acquisition item.uuid)}}
 									   checked
@@ -57,14 +59,18 @@
 										   type="checkbox"
 										   data-type="trainingLevel"
 										   data-uuid="{{item.uuid}}"
-										   {{#if (superiorOrEqualTo item.system.trainingLevel this)}}
+										   {{#if (or (gte item.system.trainingLevel this)
+											  		 (and (same this 1) (includes item.uuid @root.freeTrainings)))}}
 											   checked disabled
-										   {{else if (or (or
-                                               (sameAs @root.advanceType "dedicationBonus")
-											   (and item.parent (inferiorTo item.parent.system.rank this)))
-											   (notEqualTo (increment item.system.trainingLevel 1) this))}}
+										   {{else if (or (eq @root.advanceType "dedicationBonus")
+														 (and item.parent (lt item.parent.system.rank this))
+														 (and item.system.advanced
+															  (not item.parent)
+															  (not (includes item.uuid @root.freeAcquisitions))
+															  (not (lookup @root.upgrades.acquisition item.uuid)))
+										   				 (lt (increment item.system.trainingLevel 1) this))}}
 											   disabled
-										   {{else if (equalTo (lookup @root.upgrades.trainingLevel item.uuid) this)}}
+										   {{else if (same (lookup @root.upgrades.trainingLevel item.uuid) this)}}
 											   checked
 										   {{/if}} />
 								</label>
@@ -77,13 +83,16 @@
 									<span>{{item.system.specialisations}}</span>
 								{{/if}}
 
-								{{#unless (or (equalTo @root.advanceType "nonCareer") (inferiorTo item.system.trainingLevel 1))}}
+								{{#if (and (ne @root.advanceType "nonCareer")
+										   (or (gte item.system.trainingLevel 1)
+											   (lookup @root.upgrades.trainingLevel item.uuid)
+											   (includes item.uuid @root.freeTrainings)))}}
 									<input name="selection"
 										   value="{{lookup @root.upgrades.specialisation item.uuid}}"
 										   type="text"
 										   data-type="specialisation"
 										   data-uuid="{{item.uuid}}" />
-								{{/unless}}
+								{{/if}}
 							</label>
 						</td>
 					</tr>

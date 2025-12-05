@@ -1,0 +1,35 @@
+{
+  "name": "Aggravated Wound",
+  "type": "criticalWound",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Your stance is considered one space closer to neutral.</p>",
+    "severityRating": 2
+  },
+  "effects": [],
+  "folder": "VUMz1tBRkXXXUVEt",
+  "sort": 100000,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "core": {},
+    "scene-packer": {
+      "hash": "645956ab99b80014938f29946d45f3c571cf878b"
+    }
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "1.0.1-alpha",
+    "coreVersion": "13.341",
+    "createdTime": 1682261461291,
+    "modifiedTime": 1715380997987,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": "Item.MRNR11HzgwX6fHrg",
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "LDePyFaC0Owqclw1",
+  "_key": "!items!LDePyFaC0Owqclw1"
+}

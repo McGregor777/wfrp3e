@@ -1,24 +1,26 @@
 {
   "name": "wfrp3e",
-  "description": "",
-  "version": "1.0.0",
+  "description": "A **_Foundry VTT_** Game System for **_Warhammer Fantasy Roleplay - 3rd Edition_**.",
+  "version": "1.3.2",
   "main": "index.js",
   "scripts": {
-    "build": "gulp build",
-    "build:css": "gulp css",
-    "build:db": "gulp compile",
-    "build:json": "gulp extract",
-    "build:watch": "gulp watch"
+    "build": "node cli.mjs build",
+    "css": "node cli.mjs css",
+    "compile": "node cli.mjs compile",
+    "extract": "node cli.mjs extract",
+    "init": "node cli.mjs init",
+    "launch": "node cli.mjs launch",
+    "watch": "node cli.mjs watch"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@foundryvtt/foundryvtt-cli": "^1.0.2",
+    "@foundryvtt/foundryvtt-cli": "^3.0.2",
+    "autoprefixer": "^10.4.22",
     "fancy-log": "^2.0.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
-    "gulp-less": "^5.0.0",
-    "path": "^0.12.7",
-    "yargs": "^17.5.1"
+    "js-yaml": "^4.1.1",
+    "less": "^4.4.2",
+    "postcss": "^8.5.6",
+    "yargs": "^18.0.0"
   }
 }

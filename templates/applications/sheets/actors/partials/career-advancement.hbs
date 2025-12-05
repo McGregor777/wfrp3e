@@ -1,0 +1,128 @@
+<div class="career-advancement">
+	<fieldset>
+		<legend>{{localize "CAREER.FIELDS.advances.generalCareer.label"}}</legend>
+
+		<div class="form-group">
+			{{formInput fields.action.fields.active
+						id=(concat rootId "-" fields.action.fields.active.fieldPath)
+						value=system.action.active}}
+
+			<label for="{{rootId}}-{{fields.action.fields.active.fieldPath}}">
+				{{localize fields.action.label}}
+			</label>
+
+			<input type="text" value="{{system.action.output}}" disabled />
+		</div>
+
+		<div class="form-group">
+			{{formInput fields.talent.fields.active
+						id=(concat rootId "-" fields.talent.fields.active.fieldPath)
+						value=system.talent.active}}
+
+			<label for="{{rootId}}-{{fields.talent.fields.active.fieldPath}}">
+				{{localize fields.talent.label}}
+			</label>
+
+			<input type="text" value="{{system.talent.output}}" disabled />
+		</div>
+
+		<div class="form-group">
+			{{formInput fields.skill.fields.active
+						id=(concat rootId "-" fields.skill.fields.active.fieldPath)
+						value=system.skill.active}}
+
+			<label for="{{rootId}}-{{fields.skill.fields.active.fieldPath}}">
+				{{localize fields.skill.label}}
+			</label>
+
+			<input type="text" value="{{system.skill.output}}" disabled />
+		</div>
+
+		<div class="form-group">
+			{{formInput fields.wound.fields.active
+						id=(concat rootId "-" fields.wound.fields.active.fieldPath)
+						value=system.wound.active}}
+
+			<label for="{{rootId}}-{{fields.wound.fields.active.fieldPath}}">
+				{{localize fields.wound.label}}
+			</label>
+
+			<input type="text" value="{{system.wound.output}}" disabled />
+		</div>
+
+		{{#each system.open as |openAdvance opa|}}
+			<div class="form-group" data-index="{{opa}}">
+				{{formInput openAdvance.schema.fields.active
+							id=(concat ../rootId "-" openAdvance.schema.fields.active.fieldPath "." opa)
+							name=(concat ../fields.open.fieldPath "." opa ".active")
+							value=openAdvance.active}}
+
+				<label for="{{../rootId}}-{{openAdvance.schema.fields.active.fieldPath}}.{{opa}}">
+					{{localize ../fields.open.label}}
+				</label>
+
+				<input type="text" value="{{openAdvance.output}}" disabled />
+			</div>
+		{{/each}}
+	</fieldset>
+
+	<fieldset>
+		<legend>{{localize "CAREER.FIELDS.advances.careerCompletion.label"}}</legend>
+
+		<div class="form-group">
+			{{#for 1 6 1}}
+				<input id="{{../rootId}}-{{../fields.careerTransition.fields.cost.fieldPath}}.{{this}}"
+					   name="system.advances.careerTransition.cost"
+					   value="{{this}}"
+					   type="checkbox"
+					   {{checked (gte ../career.system.advances.careerTransition.cost this)}}
+					   {{#unless @root.editable}}disabled{{/unless}} />
+			{{/for}}
+
+			<label for="{{rootId}}-{{fields.careerTransition.fields.cost.fieldPath}}.1">
+				{{localize fields.careerTransition.label}}
+			</label>
+
+			<input type="text" value="{{system.careerTransition.output}}" disabled />
+		</div>
+
+		<div class="form-group">
+			<input id="{{rootId}}-{{fields.dedicationBonus.fieldPath}}"
+				   class="advance-checkbox"
+				   type="checkbox"
+				   data-advance-type="dedicationBonus"
+				   {{checked system.dedicationBonus}}
+				   {{#unless @root.editable}}disabled{{/unless}} />
+
+			<label for="{{rootId}}-{{fields.dedicationBonus.fieldPath}}">
+				{{localize fields.dedicationBonus.label}}
+			</label>
+
+			<input type="text" value="{{ifThen system.dedicationBonus system.dedicationBonus ''}}" disabled />
+		</div>
+	</fieldset>
+
+	<fieldset>
+		<legend>{{localize "CAREER.FIELDS.advances.nonCareer.label"}}</legend>
+
+		{{#each system.nonCareer as |nonCareerAdvance nca|}}
+			<div class="form-group" data-index="{{nca}}">
+				{{#for 1 6 1}}
+					<input id="{{../../rootId}}-{{../../fields.nonCareer.fieldPath}}.{{nca}}.cost.{{this}}"
+						   name="system.advances.nonCareer.{{nca}}.cost"
+						   value="{{this}}"
+						   type="checkbox"
+						   data-property="system.advances.nonCareer"
+						   {{checked (gte nonCareerAdvance.cost this)}}
+						   {{#unless @root.editable}}disabled{{/unless}} />
+				{{/for}}
+
+				<label for="{{../rootId}}-{{../fields.nonCareer.fieldPath}}.{{nca}}.cost.1">
+					{{localize "CAREER.FIELDS.advances.type.label"}}
+				</label>
+
+				<input type="text" value="{{nonCareerAdvance.output}}" disabled />
+			</div>
+		{{/each}}
+	</fieldset>
+</div>

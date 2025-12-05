@@ -16,32 +16,32 @@
 			<div class="buttons">
 				{{#unless @root.nonCareerAdvance}}
 					{{#with (increment characteristic.rating 1) as |newRating|}}
-						<label class="{{#if (and (equalTo upgrade.characteristic char) (equalTo upgrade.type "rating"))}}active{{/if}}">
+						<label class="{{#if (and (eq upgrade.characteristic char) (eq upgrade.type "rating"))}}active{{/if}}">
 							{{localize "CHARACTERISTICUPGRADER.ACTIONS.increaseRating"}}
 							({{localize "CHARACTERISTICUPGRADER.experienceCost" cost=newRating}})
 
 							<input name="upgrade" value="{{char}}_rating" type="radio"
-								   {{#if (equalTo upgrade (concat char "_rating"))}}checked{{/if}} />
+								   {{checked (eq upgrade (concat char "_rating"))}} />
 						</label>
 
 						<span class="fas fa-arrow-right"></span>
 
-						<label class="{{#if (and (equalTo upgrade.characteristic char) (equalTo upgrade.type "rating"))}}active{{/if}}">
+						<label class="{{#if (and (eq upgrade.characteristic char) (eq upgrade.type "rating"))}}active{{/if}}">
 							{{localize "CHARACTERISTICUPGRADER.ACTIONS.increaseFortune"}}
 							({{localize "CHARACTERISTICUPGRADER.experienceCost" cost=1}})
 
 							<input name="upgrade" value="{{char}}_fortune" type="radio"
-								   {{#if (equalTo upgrade (concat char "_fortune"))}}checked{{/if}} />
+								   {{checked (eq upgrade (concat char "_fortune"))}} />
 						</label>
 					{{/with}}
 				{{else}}
 					{{#with (increment characteristic.rating 2) as |newRating|}}
-						<label class="{{#if (and (equalTo upgrade.characteristic char) (equalTo upgrade.type "rating"))}}active{{/if}}">
+						<label class="{{#if (and (eq upgrade.characteristic char) (eq upgrade.type "rating"))}}active{{/if}}">
 							{{localize "CHARACTERISTICUPGRADER.ACTIONS.increaseRating"}}
 							({{localize "CHARACTERISTICUPGRADER.experienceCost" cost=newRating}})
 
 							<input name="upgrade" value="{{char}}_rating" type="radio"
-								{{#if (equalTo upgrade (concat char "_rating"))}}checked{{/if}} />
+								{{checked (eq upgrade (concat char "_rating"))}} />
 						</label>
 
 						<span class="fas fa-arrow-right"></span>
@@ -53,7 +53,7 @@
 				<p>{{localize characteristic.label}}</p>
 
 				<div class="rating">
-					{{#if (and (equalTo @root.upgrade.characteristic char) (equalTo @root.upgrade.type "rating"))}}
+					{{#if (and (eq @root.upgrade.characteristic char) (eq @root.upgrade.type "rating"))}}
 						{{@root.upgrade.value}}
 					{{else}}
 						{{characteristic.rating}}
@@ -61,7 +61,7 @@
 				</div>
 
 				<div class="fortune">
-					{{#if (and (equalTo @root.upgrade.characteristic char) (equalTo @root.upgrade.type "fortune"))}}
+					{{#if (and (eq @root.upgrade.characteristic char) (eq @root.upgrade.type "fortune"))}}
 						{{@root.upgrade.value}}
 					{{else}}
 						{{characteristic.fortune}}

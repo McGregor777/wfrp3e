@@ -1,0 +1,34 @@
+{
+  "folder": "VUMz1tBRkXXXUVEt",
+  "name": "Festering Wound",
+  "type": "criticalWound",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Until this critical wound is healed, its Severity Rating increases by 1 each day, to a maximum Severity of 5.</p>",
+    "severityRating": 1
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "f98242479f6a19a9ffe7be4c26fef458e5585364"
+    }
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "1.0.1-alpha",
+    "coreVersion": "13.341",
+    "createdTime": 1682264544162,
+    "modifiedTime": 1715380997987,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "EpE7x4y75R7NRgmI",
+  "_key": "!items!EpE7x4y75R7NRgmI"
+}

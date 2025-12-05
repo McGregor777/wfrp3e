@@ -5,7 +5,7 @@
   "_id": "LjSfvJxmSzqkU7NV",
   "img": "icons/svg/item-bag.svg",
   "system": {
-    "description": "<p>A character&rsquo;s fitness, vigour, and ability&nbsp;to bounce back from strain and damage. Also covers use of a shield&nbsp;to bear the brunt of an attack and absorb the punishment. Resilience&nbsp;is often used to recover from wounds or fatigue over time,&nbsp;such as after bed rest. Recovering from wounds is covered in detail&nbsp;on page 87.</p>\n<p><em>Specialisation options:</em>&nbsp;block, recover fatigue, resist disease, resist&nbsp;poison, resist starvation</p>",
+    "description": "<p>A character’s fitness, vigour, and ability to bounce back from strain and damage. Also covers use of a shield to bear the brunt of an attack and absorb the punishment. Resilience is often used to recover from wounds or fatigue over time, such as after bed rest. Recovering from wounds is covered in detail on page 87.</p><p><em>Specialisation options:</em> block, recover fatigue, resist disease, resist poison, resist starvation</p>",
     "characteristic": "toughness",
     "advanced": false,
     "trainingLevel": 0,
@@ -15,13 +15,14 @@
   "flags": {},
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1695317246732,
     "modifiedTime": 1699628061290,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "sort": 0,
   "ownership": {

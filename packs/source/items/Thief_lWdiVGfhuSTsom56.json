@@ -2,11 +2,56 @@
   "name": "Thief",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/thief.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Thief",
+      "img": "systems/wfrp3e/assets/images/careers/thief.webp",
+      "_id": "ghJ89gEZ3zAWlEMB",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.expertise++;",
+          "conditionalScript": "return checkData.skill && [\"SKILL.NAMES.guile\", \"SKILL.NAMES.skulduggery\"].map(key => game.i18n.localize(key)).includes(fromUuidSync(checkData.skill)?.name);",
+          "postRollScript": "await this.parent.exhaust();"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Once per session, you may add {De} to any Guile or Skulduggery check</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764779576298,
+        "modifiedTime": 1764779619102,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!lWdiVGfhuSTsom56.ghJ89gEZ3zAWlEMB"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>The Empire is a prosperous and populous nation. From bustling city streets to markets on village greens, all manner of people gather to trade wares and services. Such affluence attracts crime, and whilst many Old Worlders may be guilty of occasional petty filching, some indulge in larceny whenever circumstances allow. These thieves are usually opportunistic jacks of all trades, though they may specialise as embezzlers, coin clippers, blackmailers or rustlers of livestock. Many thieves earn their living as cutpurses, picking the pockets of passersby in streets and market squares. Other thieves prefer housebreaking &ndash; entering buildings at night and making off with the residents&rsquo; valuables.</p>\n<p>Authorities take a dim view of robbery. If thieves are arrested, they can expect a hefty fine and a period in gaol or the local pillory. Often local councils or nobles decide to take a tougher stance on such crimes, and frequently the sentences for theft can mean exile, mutilation, or even death. Thieves also need to keep on the right side of local crime lords. A thief who operates without permission from organised criminals in the area can receive a harsh beating, or worse. However, if a thief loyally pays a tithe of his loot to the bosses operating in the area, he can reap benefits such as the use of nearby safe houses, contacts with a reliable fence, and tip-offs about likely looking marks.</p>\n<p>Some thieves draw too much heat from the law, or fall out of favour with crime lords. In such cases it is wise for a thief to relocate. Thieves sometimes join bands of adventurers, who find that their skills with locked doors and traps can come in very handy.</p>\n<p><strong>Typical Trappings:</strong> A thief will often wear a leather jerkin for protection. If he has a talent for burglary, he will carry a sack to place stolen objects in, a set of hooked wires for picking locks, and lengths of rope to help scale sheer surfaces. A cutpurse will tend to wear a large coat with hidden pockets, and several discreet knives tucked away inside</p>\n<p><strong>Career Ability:</strong> Once per session, you may add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to any Guile or Skulduggery check</p>",
+    "description": "<p>The Empire is a prosperous and populous nation. From bustling city streets to markets on village greens, all manner of people gather to trade wares and services. Such affluence attracts crime, and whilst many Old Worlders may be guilty of occasional petty filching, some indulge in larceny whenever circumstances allow. These thieves are usually opportunistic jacks of all trades, though they may specialise as embezzlers, coin clippers, blackmailers or rustlers of livestock. Many thieves earn their living as cutpurses, picking the pockets of passersby in streets and market squares. Other thieves prefer housebreaking – entering buildings at night and making off with the residents’ valuables.</p><p>Authorities take a dim view of robbery. If thieves are arrested, they can expect a hefty fine and a period in gaol or the local pillory. Often local councils or nobles decide to take a tougher stance on such crimes, and frequently the sentences for theft can mean exile, mutilation, or even death. Thieves also need to keep on the right side of local crime lords. A thief who operates without permission from organised criminals in the area can receive a harsh beating, or worse. However, if a thief loyally pays a tithe of his loot to the bosses operating in the area, he can reap benefits such as the use of nearby safe houses, contacts with a reliable fence, and tip-offs about likely looking marks.</p><p>Some thieves draw too much heat from the law, or fall out of favour with crime lords. In such cases it is wise for a thief to relocate. Thieves sometimes join bands of adventurers, who find that their skills with locked doors and traps can come in very handy.</p><p><strong>Typical Trappings:</strong> A thief will often wear a leather jerkin for protection. If he has a talent for burglary, he will carry a sack to place stolen objects in, a set of hooked wires for picking locks, and lengths of rope to help scale sheer surfaces. A cutpurse will tend to wear a large coat with hidden pockets, and several discreet knives tucked away inside</p><p><strong>Career Ability:</strong> Once per session, you may add {De} to any Guile or Skulduggery check</p>",
     "advanced": false,
     "raceRestrictions": [
       "human",
@@ -35,31 +80,75 @@
     },
     "summary": "Nimble and dextrous, with a knack for getting into (and out of) trouble",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -77,13 +166,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1699549878844,
-    "modifiedTime": 1734396683388,
+    "modifiedTime": 1764755913581,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "lWdiVGfhuSTsom56",
   "sort": 3300000,

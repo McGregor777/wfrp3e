@@ -1,0 +1,77 @@
+{
+  "folder": "VUMz1tBRkXXXUVEt",
+  "name": "Minor Nuisance (Agility)",
+  "type": "criticalWound",
+  "img": "icons/skills/wounds/anatomy-organ-heart-red.webp",
+  "system": {
+    "description": "<p>Add {Dm} to Agility checks.</p>",
+    "severityRating": 2
+  },
+  "effects": [
+    {
+      "name": "Minor Nuisance (Agility)",
+      "img": "icons/skills/wounds/anatomy-organ-heart-red.webp",
+      "_id": "JH6lZK6WzQdH6coB",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "if(checkData.characteristic === \"agility\")\n  diePool.dice.misfortune++;"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add {Dm} to Agility checks.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764842798680,
+        "modifiedTime": 1764860400974,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!nn6DGH7B0qAvtmSj.JH6lZK6WzQdH6coB"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "60c9a7c2e51fcfab5cbe1b65b77617131ff1f5cd"
+    }
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.351",
+    "createdTime": 1682264544162,
+    "modifiedTime": 1764842944790,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "nn6DGH7B0qAvtmSj",
+  "_key": "!items!nn6DGH7B0qAvtmSj"
+}

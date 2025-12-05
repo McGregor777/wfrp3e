@@ -1,8 +1,8 @@
-<div class="item disease card" data-uuid="{{item.uuid}}">
+<div class="draggable disease item card" data-item-id="{{item._id}}">
 	{{#with (lookup @root.symptoms item.system.symptom) as |symptom|}}
 		<div class="header">
 			{{#if @root.editable}}
-				<a class="name" data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+				<a class="name" data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 					{{../item.name}}
 				</a>
 			{{else}}
@@ -16,7 +16,7 @@
 
 		<div class="content">
 			<blockquote class="description">
-				{{{localize ../item.system.description}}}
+				{{{lookup @root.enrichment ../item.uuid}}}
 			</blockquote>
 
 			<p>{{{localize symptom.description}}}</p>
@@ -32,11 +32,11 @@
 
 		<div class="bottom-line">
 			{{#if @root.editable}}
-				<a data-action="editDocument" data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+				<a data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 					<span class="fas fa-pen-to-square"></span>
 				</a>
 
-				<a data-action="deleteDocument" data-tooltip="{{localize 'Delete'}}">
+				<a data-action="deleteItem" data-tooltip="{{localize 'Delete'}}">
 					<span class="fas fa-trash"></span>
 				</a>
 			{{/if}}

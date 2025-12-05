@@ -1,0 +1,34 @@
+{
+  "folder": "VUMz1tBRkXXXUVEt",
+  "name": "Hideous Injury",
+  "type": "criticalWound",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>The Severity Rating of every critical wound affecting you increases by 1.</p>",
+    "severityRating": 2
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "24af003989e3faae8f7f5ae2f4f87b40c724a04b"
+    }
+  },
+  "_stats": {
+    "systemId": "wfrp3e",
+    "systemVersion": "1.0.1-alpha",
+    "coreVersion": "13.341",
+    "createdTime": 1682264544162,
+    "modifiedTime": 1715380997987,
+    "lastModifiedBy": "Bq3CTOvANoOneedB",
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "exportSource": null
+  },
+  "_id": "Lrfj0U90zkZ8W1Sj",
+  "_key": "!items!Lrfj0U90zkZ8W1Sj"
+}

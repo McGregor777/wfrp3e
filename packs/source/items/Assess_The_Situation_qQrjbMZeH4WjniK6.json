@@ -18,13 +18,13 @@
       },
       "check": "Intuition (Int)",
       "requirements": "<p>None</p>",
-      "special": "<p><strong>Special:</strong> Add <span class=\"wfrp3e-font dice challenge\"></span> to this action&rsquo;s dice pool if you are engaged with an enemy</p>",
+      "special": "<p><strong>Special:</strong> Add {Dchal} to this action’s dice pool if you are engaged with an enemy</p>",
       "uniqueEffect": "",
       "effects": {
         "success": [
           {
             "symbolAmount": 1,
-            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
+            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
             "script": "outcome.fatigue--;\noutcome.stress--;"
           }
         ],
@@ -60,13 +60,13 @@
       },
       "check": "Intuition (Int)",
       "requirements": "<p>None</p>",
-      "special": "<p><strong>Special:</strong> Add <span class=\"wfrp3e-font dice challenge\"></span> to this action&rsquo;s dice pool if you are engaged with an enemy</p>",
+      "special": "<p><strong>Special:</strong> Add {Dchal} to this action’s dice pool if you are engaged with an enemy</p>",
       "uniqueEffect": "",
       "effects": {
         "success": [
           {
             "symbolAmount": 1,
-            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add <span class=\"wfrp3e-font dice misfortune\"></span> to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
+            "description": "<p>Recover 1 fatigue and 1 stress. Until the start of your next turn, add {Dm} to any <em>Melee Attack</em> or <em>Ranged Attack</em> actions targeting you</p>",
             "script": "outcome.fatigue--;\noutcome.stress--;"
           }
         ],
@@ -95,13 +95,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.2",
+    "coreVersion": "13.350",
     "createdTime": 1696334694650,
     "modifiedTime": 1724076944243,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "qQrjbMZeH4WjniK6",
   "sort": 1200000,

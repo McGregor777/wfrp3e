@@ -2,11 +2,54 @@
   "name": "Soldier",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/soldier.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Soldier",
+      "img": "systems/wfrp3e/assets/images/careers/soldier.webp",
+      "_id": "HlRVhBooS7f6DOpr",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "await this.target.adjustImpairment(\"fatigue\", -1);\nawait this.target.adjustImpairment(\"stress\", -1);",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>During each Rally Step in combat, recover 1 fatigue and 1 stress</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764779348812,
+        "modifiedTime": 1764779405700,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!XAdlB98RkG09FRoH.HlRVhBooS7f6DOpr"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>A multitude of enemies threaten to conquer or de- 2 spoil the lands of the Empire, and the nation has gone to war many times in its long and glorious history. Every city state and province in the Empire equips and trains its own regiments of soldiers. Together, these forces make up the Imperial army. Such soldiers are armed in a variety of ways as regiments are raised to fight with handguns, crossbows, halberds, spears, or swords. Uniforms differ from province to province. For example, state troops from Reikland wear white uniforms, though certain regiments adopt different colours such as those raised in Altdorf, which wear red and blue clothing.</p>\n<p>It is possible for a regular soldier to rise through the ranks if he shows enough talent and discipline. However, most of the officers are drawn from the noble class. Aristocratic blood is regarded as a prerequisite for military leadership. Dwarf soldiers sometimes accompany human armies to war. They typically wear heavier armour crafted by their skilled smiths. High elf soldiers are rarely seen in the Old World, though on occasion their archers or armoured spearmen escort travelling dignitaries from Ulthuan. Wood elf soldiers may be deployed to protect ancient cairns or patrol their forests, but often have little interest in the affairs of the rest of the Empire.</p>\n<p>Soldiers sometimes join up with adventurers. They may have deserted from the army, or found themselves isolated after a battle, or be at a loose end during a time of peace. Whatever the reason for adventuring, they make a good addition to adventuring parties, who appreciate their disciplined combat skills.</p>\n<p><strong>Typical Trappings:</strong> Soldiers of all races are usually equipped with a uniform, a suit of armour typical to their unit (leather for humans and wood elves, mail for dwarves, scale for high elves), and either a missile weapon such as a handgun, a crossbow, or a longbow or a close-quarters weapon such as a spear, halberd, or hand weapon and shield. Soldiers also carry a bedroll and mess kit when on campaign.</p>\n<p><strong>Career Ability:</strong> During each Rally Step in combat, recover 1 fatigue and 1 stress</p>",
+    "description": "<p>A multitude of enemies threaten to conquer or de- 2 spoil the lands of the Empire, and the nation has gone to war many times in its long and glorious history. Every city state and province in the Empire equips and trains its own regiments of soldiers. Together, these forces make up the Imperial army. Such soldiers are armed in a variety of ways as regiments are raised to fight with handguns, crossbows, halberds, spears, or swords. Uniforms differ from province to province. For example, state troops from Reikland wear white uniforms, though certain regiments adopt different colours such as those raised in Altdorf, which wear red and blue clothing.</p><p>It is possible for a regular soldier to rise through the ranks if he shows enough talent and discipline. However, most of the officers are drawn from the noble class. Aristocratic blood is regarded as a prerequisite for military leadership. Dwarf soldiers sometimes accompany human armies to war. They typically wear heavier armour crafted by their skilled smiths. High elf soldiers are rarely seen in the Old World, though on occasion their archers or armoured spearmen escort travelling dignitaries from Ulthuan. Wood elf soldiers may be deployed to protect ancient cairns or patrol their forests, but often have little interest in the affairs of the rest of the Empire.</p><p>Soldiers sometimes join up with adventurers. They may have deserted from the army, or found themselves isolated after a battle, or be at a loose end during a time of peace. Whatever the reason for adventuring, they make a good addition to adventuring parties, who appreciate their disciplined combat skills.</p><p><strong>Typical Trappings:</strong> Soldiers of all races are usually equipped with a uniform, a suit of armour typical to their unit (leather for humans and wood elves, mail for dwarves, scale for high elves), and either a missile weapon such as a handgun, a crossbow, or a longbow or a close-quarters weapon such as a spear, halberd, or hand weapon and shield. Soldiers also carry a bedroll and mess kit when on campaign.</p><p><strong>Career Ability:</strong> During each Rally Step in combat, recover 1 fatigue and 1 stress</p>",
     "advanced": false,
     "raceRestrictions": [
       "human",
@@ -35,31 +78,75 @@
     },
     "summary": "A warrior with special training and well-practised discipline",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -77,13 +164,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1699549874507,
-    "modifiedTime": 1734396673339,
+    "modifiedTime": 1764755919556,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "XAdlB98RkG09FRoH",
   "sort": 3000000,

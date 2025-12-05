@@ -1,0 +1,14 @@
+<div class="{{key}}">
+	<h5>{{localize (concat "CREATIONPOINTINVESTOR." (uppercase key) ".label")}}</h5>
+
+	{{#each (lookup investments key) as |value val|}}
+		<label {{#if (same (lookup @root.currentInvestments ../key) val)}}class="active"{{/if}}>
+			{{localize value.name}}
+
+			<input name="currentInvestments.{{../key}}"
+				   type="radio"
+				   value="{{val}}"
+				   {{checked (same (lookup @root.currentInvestments ../key) val)}} />
+		</label>
+	{{/each}}
+</div>

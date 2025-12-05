@@ -1,7 +1,7 @@
-<div class="item action card" data-uuid="{{item.uuid}}">
+<div class="draggable action item card" data-item-id="{{item._id}}">
 	{{#each @root.stances as |stance st|}}
 		{{#with (lookup ../item.system st) as |face|}}
-			<div class="face {{st}}{{#if (equalTo ../../currentStance st)}} active{{/if}}" data-face="{{st}}">
+			<div class="face {{st}}{{#if (eq ../../currentStance st)}} active{{/if}}" data-face="{{st}}">
 				<div class="header">
 					<img class="type" src="systems/wfrp3e/assets/icons/{{../../item.system.type}}.webp" />
 
@@ -41,18 +41,22 @@
 				{{/if}}
 
 				<div class="requirements">
-					{{{face.requirements}}}
+					{{{lookup @root.enrichment (concat ../../item.uuid "-" st ".requirements")}}}
 				</div>
 
 				<div class="effects">
 					<table>
 						<tbody>
 							{{#if face.special}}
-								<tr><td>{{{striptags face.special "p"}}}</td></tr>
+								<tr><td>
+									{{{stripTags (lookup @root.enrichment (concat ../../item.uuid "-" st ".special")) "p"}}}
+								</td></tr>
 							{{/if}}
 
 							{{#if face.uniqueEffect}}
-								<tr><td>{{{striptags face.uniqueEffect "p"}}}</td></tr>
+								<tr><td>
+									{{{stripTags (lookup @root.enrichment (concat ../../item.uuid "-" st ".uniqueEffect")) "p"}}}
+								</td></tr>
 							{{/if}}
 
 							{{#each @root.symbols as |symbol sym|}}
@@ -62,14 +66,14 @@
 											{{#each effects as |effect ef|}}
 												<div>
 													{{#for 0 effect.symbolAmount 1}}
-														{{#unless (and (or (sameAs sym "delay") (sameAs sym "exertion")) (superiorTo this 0))}}
+														{{#unless (and (or (eq sym "delay") (eq sym "exertion")) (gt this 0))}}
 															<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>
 														{{else}}
 															<span class="wfrp3e-font symbol {{@root.symbols.bane.cssClass}}"></span>
 														{{/unless}}
 													{{/for}}
 
-													{{{striptags effect.description "p"}}}
+													{{{stripTags (lookup @root.enrichment (concat ../../../../../item.uuid "-" st "." sym "." ef)) "p"}}}
 												</div>
 											{{/each}}
 										</td></tr>
@@ -87,7 +91,8 @@
 						</div>
 
 						{{#if @root.editable}}
-							<a class="recharge-token" data-action="adjustRechargeTokens"
+							<a class="recharge-token prevent-context"
+							   data-action="adjustRechargeTokens"
 							   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}">
 								<img src="systems/wfrp3e/assets/images/token-black.webp"
 									 alt="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}" />
@@ -95,13 +100,11 @@
 							</a>
 
 							<div>
-								<a data-action="editDocument"
-								   data-tooltip="{{localize 'ACTOR.ACTIONS.editDocument'}}">
+								<a data-action="editItem" data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
 									<span class="fas fa-pen-to-square"></span>
 								</a>
 
-								<a data-action="deleteDocument"
-								   data-tooltip="{{localize 'Delete'}}">
+								<a data-action="deleteItem" data-tooltip="{{localize 'Delete'}}">
 									<span class="fas fa-trash"></span>
 								</a>
 							</div>

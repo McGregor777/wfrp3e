@@ -2,11 +2,54 @@
   "name": "Commoner",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/commoner.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Commoner",
+      "img": "systems/wfrp3e/assets/images/careers/commoner.webp",
+      "_id": "9l7W5mimtzO9BHdS",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "await this.target.adjustImpairment(\"fatigue\", -1);",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Whenever fortune refreshes, recover one fatigue</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764774754293,
+        "modifiedTime": 1764774893150,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!RGdH1TiDYcMBbGCY.9l7W5mimtzO9BHdS"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>The social structure of the Empire is strict and rigid. At the top of the social order are the nobles, families of aristocrats who can often trace their lineage back to the time of Sigmar and the founding of the nation. The priests of the Empire interpret the will of the gods, and the increasingly powerful burghers manage trade and wealth. Commoners tend to be the largest but least influential of the social groups. They are rustic farmers, labourers, and herdsmen in the main, though many commoners also take on other tasks if the opportunity presents itself. They may gather leeches for physicians or learn a skill such as thatching. What meagre money is made from their work is quickly used up to pay taxes, rent, and other expenses. In years when the harvest is good, commoners enjoy a small surplus, and life is bearable for a short while. When the harvest is poor, they face a long cold winter and the risk of starvation.</p>\n<p>Whilst commoners generally receive no formal military training, at times a retired soldier will cover the most basic combat techniques. These drills are usually held at a weekly muster organised by local priests of Ulric, Myrmidia, or Sigmar. These practises are in order to help them form some kind of effective defence should their village or farmstead be attacked by raiding beastmen or goblins. In times of war, commoners are mustered into ragtag groups of militia who march alongside professional soldiers in order to bulk up the armies. Most commoners nurse a healthy aversion to violence, but some of them get a taste for fighting. The lot of a commoner is hard and unrewarding, and a few brave souls migh decide to leave their lives of drudgery for adventure, hoping to find fame and fortune.</p>\n<p><strong>Typical Trappings:</strong> A commoner will carry a stout quarterstaff for protection, or rely on a farming implement such as a pitchfork or rake (these count as improvised weapons). He might also have a sling with a dozens pieces of shot for keeping predators away from his animals. He will carry a leather flask to drink from whilst at work in the fields.</p>\n<p><strong>Career Ability:</strong> Whenever fortune refreshes, recover one fatigue</p>",
+    "description": "<p>The social structure of the Empire is strict and rigid. At the top of the social order are the nobles, families of aristocrats who can often trace their lineage back to the time of Sigmar and the founding of the nation. The priests of the Empire interpret the will of the gods, and the increasingly powerful burghers manage trade and wealth. Commoners tend to be the largest but least influential of the social groups. They are rustic farmers, labourers, and herdsmen in the main, though many commoners also take on other tasks if the opportunity presents itself. They may gather leeches for physicians or learn a skill such as thatching. What meagre money is made from their work is quickly used up to pay taxes, rent, and other expenses. In years when the harvest is good, commoners enjoy a small surplus, and life is bearable for a short while. When the harvest is poor, they face a long cold winter and the risk of starvation.</p><p>Whilst commoners generally receive no formal military training, at times a retired soldier will cover the most basic combat techniques. These drills are usually held at a weekly muster organised by local priests of Ulric, Myrmidia, or Sigmar. These practises are in order to help them form some kind of effective defence should their village or farmstead be attacked by raiding beastmen or goblins. In times of war, commoners are mustered into ragtag groups of militia who march alongside professional soldiers in order to bulk up the armies. Most commoners nurse a healthy aversion to violence, but some of them get a taste for fighting. The lot of a commoner is hard and unrewarding, and a few brave souls migh decide to leave their lives of drudgery for adventure, hoping to find fame and fortune.</p><p><strong>Typical Trappings:</strong> A commoner will carry a stout quarterstaff for protection, or rely on a farming implement such as a pitchfork or rake (these count as improvised weapons). He might also have a sling with a dozens pieces of shot for keeping predators away from his animals. He will carry a leather flask to drink from whilst at work in the fields.</p><p><strong>Career Ability:</strong> Whenever fortune refreshes, recover one fatigue</p>",
     "advanced": false,
     "raceRestrictions": [
       "human",
@@ -33,31 +76,75 @@
     },
     "summary": "Self sufficient jack of all trades with an assortment of skills",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -75,13 +162,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1699549825016,
-    "modifiedTime": 1734396594034,
+    "modifiedTime": 1764755864878,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "RGdH1TiDYcMBbGCY",
   "sort": 1800000,

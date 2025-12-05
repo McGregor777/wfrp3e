@@ -1,3 +1,8 @@
+# Foundry VTT
+foundry-config.yaml
+foundry/
+.d.ts
+
 # NeDB database cache directories
 packs/**/
 !packs/source
@@ -12,3 +17,5 @@ styles/wfrp3e.css
 .vs/
 
 node_modules/
+package-lock.json
+pnpm-lock.yaml

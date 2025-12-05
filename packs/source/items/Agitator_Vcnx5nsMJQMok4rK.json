@@ -2,11 +2,54 @@
   "name": "Agitator",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/agitator.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Agitator",
+      "img": "systems/wfrp3e/assets/images/careers/agitator.webp",
+      "_id": "VRnphKndiIescDJQ",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "if(checkData.combat?.system.type === \"social\")\n  diePool.dice.fortune += 2;"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your social initiative checks gain {Df} {Df}</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764772643060,
+        "modifiedTime": 1764772722753,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!Vcnx5nsMJQMok4rK.VRnphKndiIescDJQ"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>The Empire has stood firm against its enemies for more than 2,500 years. It has prospered in that time to become the most powerful nation in the Old World. The noble and religious leaders are quick to take the credit for this.</p>\n<p>There are those who feel that progress has not happened fast enough. They regard the nobility as parasites living in luxury off the labours of the poor. They declaim the priests as hypocrites who preach virtues they fail to practice. Whilst many people hold such views, usually they content themselves by grumbling over a pint of ale. However, some nurse such vehemence against the social order that they make a career out of calling for change. These agitators take to the streets of the Empire&rsquo;s cities, shouting their grievances in the hope of gathering an audience.</p>\n<p>The issues they complain about are usually local concerns such as a new tax, a military draft, or the state of the drains. Some agitators deal with more controversial matters such as the dangers posed by Chaos. A few are lunatic conspiracists who rant about &ldquo;ratmen&rdquo; in the sewers plotting to topple the Empire. There is little money to be made from preaching change in this manner, though enterprising agitators produce scurrilous pamphlets that interested parties can purchase for a small amount.</p>\n<p>The authorities do not take kindly to criticism, and agitators have to take care that their rabble-rousing does not end in the cells of the nearest watch station. The penalties for those found guilty of sedition can be harsh, and the heads of unlucky agitators adorn bridges and city gates throughout the Empire. For this reason, many agitators keep on the move. The pressing need to relocate, and the need to supplement their meagre income should an opportunity arise, means that agitators are often willing to take up a life of adventure.</p>\n<p><strong>Typical Trappings:</strong> An agitator usually wears a tough leather jacket to protect him in the streets. Many agitators carry bundles of printed pamphlets to help spread their message.</p>\n<p><strong>Career Ability:</strong> Your social initiative checks gain <span style=\"color: white; -webkit-text-stroke: 1pt black;\">◼&nbsp;◼</span></p>",
+    "description": "<p>The Empire has stood firm against its enemies for more than 2,500 years. It has prospered in that time to become the most powerful nation in the Old World. The noble and religious leaders are quick to take the credit for this.</p><p>There are those who feel that progress has not happened fast enough. They regard the nobility as parasites living in luxury off the labours of the poor. They declaim the priests as hypocrites who preach virtues they fail to practice. Whilst many people hold such views, usually they content themselves by grumbling over a pint of ale. However, some nurse such vehemence against the social order that they make a career out of calling for change. These agitators take to the streets of the Empire’s cities, shouting their grievances in the hope of gathering an audience.</p><p>The issues they complain about are usually local concerns such as a new tax, a military draft, or the state of the drains. Some agitators deal with more controversial matters such as the dangers posed by Chaos. A few are lunatic conspiracists who rant about “ratmen” in the sewers plotting to topple the Empire. There is little money to be made from preaching change in this manner, though enterprising agitators produce scurrilous pamphlets that interested parties can purchase for a small amount.</p><p>The authorities do not take kindly to criticism, and agitators have to take care that their rabble-rousing does not end in the cells of the nearest watch station. The penalties for those found guilty of sedition can be harsh, and the heads of unlucky agitators adorn bridges and city gates throughout the Empire. For this reason, many agitators keep on the move. The pressing need to relocate, and the need to supplement their meagre income should an opportunity arise, means that agitators are often willing to take up a life of adventure.</p><p><strong>Typical Trappings:</strong> An agitator usually wears a tough leather jacket to protect him in the streets. Many agitators carry bundles of printed pamphlets to help spread their message.</p><p><strong>Career Ability:</strong> Your social initiative checks gain {Df} {Df}</p>",
     "advanced": false,
     "raceRestrictions": [
       "human",
@@ -33,31 +76,75 @@
     },
     "summary": "A tough and wilful individual with streetwise social skills",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -75,13 +162,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1699549805887,
-    "modifiedTime": 1734396551598,
+    "modifiedTime": 1764755844312,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "Vcnx5nsMJQMok4rK",
   "sort": 2400000,

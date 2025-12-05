@@ -2,11 +2,56 @@
   "name": "Mercenary",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/mercenary.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Mercenary",
+      "img": "systems/wfrp3e/assets/images/careers/mercenary.webp",
+      "_id": "jsTnJjbsaMgVIFsC",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "diePool.dice.expertise++;",
+          "type": "manualPreCheckRoll",
+          "conditionalScript": "return checkData.skill && fromUuidSync(checkData.skill).name === game.i18n.localize(\"SKILL.NAMES.weaponSkill\");",
+          "postRollScript": "await this.parent.exhaust();"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Once per session, you may add {De} to any single Weapon Skill check you make</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "13.350",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": null,
+        "modifiedTime": 1764751079556,
+        "lastModifiedBy": "Bq3CTOvANoOneedB",
+        "exportSource": null
+      },
+      "_key": "!items.effects!gEwfpE9KtyCloYF7.jsTnJjbsaMgVIFsC"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
-    "description": "<p>The Empire has repelled invasions from foreign powers and has stood steadfast in the face of marauding greenskins or barbarians from the northlands. At other times, the Empire has been riven with internal divisions, such as the wars during the Time of Three Emperors or the bloody siege of 1865 prosecuted by the Count of Middenland against his rival in the city of Carroburg.</p>\n<p>Even in periods of relative peace, or in areas that have not seen conflict for years, there is always a job available for a fighting man. Nobles often hire mercenaries to garrison their holdings, to provide muscle for expeditions, or to pursue a feud with a rival. Merchant houses employ mercenaries to guard caravans and warehouses, while priests hire them as bodyguards or to provide security for temples. Guild masters, wizards from the Colleges of Magic, organised criminals, and even the agents of Chaos have all commissioned sell-swords at times.</p>\n<p>Most of the mercenaries in the Empire are men who once fought as militia alongside the Imperial army. Such men often find they develop a taste for conflict and bloodshed, and so join mercenary bands known as Free Companies.</p>\n<p>Even in the heart of the Empire, mercenaries often originate from foreign lands. Tilean mercenaries have a reputation for professionalism that other sell-swords do not. Other foreign mercenaries, such as kossars from Kislev, the almost feral berserkers from Norsca, or the enormous ogres who ply their trade in the Empire are often viewed with distrust if not open hostility.</p>\n<p>The life of a mercenary is not so different from that of an adventurer, and they often join adventuring parties in pursuit of rumours of riches.</p>\n<p><strong>Typical Trappings:</strong> Mercenaries use all sorts of armour and equipment, but most wear at least a mail shirt and leather jack for protection. Many mercenaries favour the crossbow and carry one of these weapons with a quiver of a dozen bolts. Mercenaries often carry a healing draught to fortify them on campaign.</p>\n<p><strong>Career Ability:</strong> Once per session, you may add <span style=\"color: yellow; -webkit-text-stroke: 1pt black;\">◼</span> to any single Weapon Skill check you make</p>",
+    "description": "<p>The Empire has repelled invasions from foreign powers and has stood steadfast in the face of marauding greenskins or barbarians from the northlands. At other times, the Empire has been riven with internal divisions, such as the wars during the Time of Three Emperors or the bloody siege of 1865 prosecuted by the Count of Middenland against his rival in the city of Carroburg.</p><p>Even in periods of relative peace, or in areas that have not seen conflict for years, there is always a job available for a fighting man. Nobles often hire mercenaries to garrison their holdings, to provide muscle for expeditions, or to pursue a feud with a rival. Merchant houses employ mercenaries to guard caravans and warehouses, while priests hire them as bodyguards or to provide security for temples. Guild masters, wizards from the Colleges of Magic, organised criminals, and even the agents of Chaos have all commissioned sell-swords at times.</p><p>Most of the mercenaries in the Empire are men who once fought as militia alongside the Imperial army. Such men often find they develop a taste for conflict and bloodshed, and so join mercenary bands known as Free Companies.</p><p>Even in the heart of the Empire, mercenaries often originate from foreign lands. Tilean mercenaries have a reputation for professionalism that other sell-swords do not. Other foreign mercenaries, such as kossars from Kislev, the almost feral berserkers from Norsca, or the enormous ogres who ply their trade in the Empire are often viewed with distrust if not open hostility.</p><p>The life of a mercenary is not so different from that of an adventurer, and they often join adventuring parties in pursuit of rumours of riches.</p><p><strong>Typical Trappings:</strong> Mercenaries use all sorts of armour and equipment, but most wear at least a mail shirt and leather jack for protection. Many mercenaries favour the crossbow and carry one of these weapons with a quiver of a dozen bolts. Mercenaries often carry a healing draught to fortify them on campaign.</p><p><strong>Career Ability:</strong> Once per session, you may add {De} to any single Weapon Skill check you make</p>",
     "advanced": false,
     "raceRestrictions": [
       "human",
@@ -35,31 +80,75 @@
     },
     "summary": "A versatile, professional fighter who sells his skills",
     "advances": {
-      "action": null,
-      "talent": null,
-      "skill": null,
-      "wound": null,
+      "action": {
+        "active": false,
+        "type": "action",
+        "uuid": null
+      },
+      "talent": {
+        "active": false,
+        "type": "talent",
+        "uuid": null
+      },
+      "skill": {
+        "active": false,
+        "type": "skill",
+        "uuid": null,
+        "upgradeType": "acquisition",
+        "value": ""
+      },
+      "wound": {
+        "active": false,
+        "type": "wound"
+      },
       "open": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        },
+        {
+          "active": false,
+          "type": "action",
+          "uuid": null
+        }
       ],
       "careerTransition": {
         "cost": 0,
-        "newCareer": null
+        "active": false,
+        "uuid": null
       },
-      "dedicationBonus": null,
+      "dedicationBonus": false,
       "nonCareer": [
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         },
         {
           "cost": 0,
-          "nature": null
+          "type": "nonPrimaryCharacteristic",
+          "characteristic": "strength"
         }
       ]
     },
@@ -77,13 +166,14 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.2",
-    "coreVersion": "12.331",
+    "systemVersion": "1.3.3",
+    "coreVersion": "13.350",
     "createdTime": 1699549904463,
-    "modifiedTime": 1734396630067,
+    "modifiedTime": 1764684453214,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
-    "duplicateSource": null
+    "duplicateSource": null,
+    "exportSource": null
   },
   "_id": "gEwfpE9KtyCloYF7",
   "sort": 1100000,

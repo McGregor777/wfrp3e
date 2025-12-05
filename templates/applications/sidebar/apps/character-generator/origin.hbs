@@ -1,0 +1,35 @@
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+	{{#if step}}
+		<div>
+			<img class="race-img" src="{{race.art}}" alt="{{localize race.name}}"/>
+
+			<div class="race-name">
+				<span>{{localize race.name}}</span>
+			</div>
+
+			<img class="origin-img" src="{{origin.art}}" alt="{{localize origin.name}}"/>
+
+			<div class="origin-name">
+				<span>{{localize origin.name}}</span>
+			</div>
+		</div>
+
+		<p class="introduction">{{localize origin.introduction}}</p>
+
+		<ul>
+			{{#each originAbilities as |ability ab|}}
+				<li data-uuid="{{ability.uuid}}">
+					<strong>{{ability.name}}:</strong> <span>{{{stripTags ability.system.description "p"}}}</span>
+				</li>
+			{{/each}}
+
+			<li class="wound-threshold">
+				<strong>{{localize "ORIGINSELECTOR.woundThreshold"}}</strong> <span>{{localize "ORIGINSELECTOR.plusToughnessRating" value=origin.wound}}</span>
+			</li>
+
+			<li class="corruption-threshold">
+				<strong>{{localize "ORIGINSELECTOR.corruptionThreshold"}}</strong> <span>{{localize "ORIGINSELECTOR.plusToughnessRating" value=origin.corruption}}</span>
+			</li>
+		</ul>
+	{{/if}}
+</section>
