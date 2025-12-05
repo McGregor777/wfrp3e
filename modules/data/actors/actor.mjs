@@ -112,6 +112,14 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	}
 
 	/**
+	 * @returns {number} The damage reduction of the Actor, adding the Actor's total soak value and toughness rating.
+	 */
+	get damageReduction()
+	{
+		return this.system.characteristics.toughness.rating + this.system.totalSoak;
+	}
+
+	/**
 	 * @returns {number} The encumbrance limit the Actor.
 	 */
 	get encumbranceLimit()
