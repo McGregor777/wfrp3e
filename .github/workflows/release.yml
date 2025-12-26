@@ -46,6 +46,7 @@ jobs:
             system.json                     \
             template.json                   \
             wfrp3e.js                       \
+            wfrp3e.mjs                      \
             assets/                         \
             lang/                           \
             modules/                        \
