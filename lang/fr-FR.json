@@ -874,6 +874,13 @@
 				},
 				"label": "Ajustement de la fatigue"
 			},
+			"itemAddition": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté dès que l'objet contenant cet effet actif est ajouté à un acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur recevant l'objet.\n\t- {Item} item: L'objet ajouté.",
+					"label": "Script"
+				},
+				"label": "Ajout de l'objet"
+			},
 			"manual": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté sur commande de l'utilisateur uniquement.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.",

@@ -874,6 +874,13 @@
 				},
 				"label": "Fatigue Adjustment"
 			},
+			"itemAddition": {
+				"FIELDS.script": {
+					"hint": "This script is executed whenever the item owning this Active Effect is added to an Actor.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor receiving the item.\n\t- {Item} item: The added item.",
+					"label": "Script"
+				},
+				"label": "Item Addition"
+			},
 			"manual": {
 				"FIELDS.script": {
 					"hint": "This script is executed on the User action only.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.",

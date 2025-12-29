@@ -7,6 +7,7 @@ export {default as CheckRollMacro} from "./check-roll-macro.mjs";
 export {default as CreationPointInvestmentMacro} from "./creation-point-investment-macro.mjs";
 export {default as EmbeddedItemCreationMacro} from "./embedded-item-creation-macro.mjs";
 export {default as FatigueAdjustmentMacro} from "./fatigue-adjustment-macro.mjs";
+export {default as ItemAdditionMacro} from "./item-addition-macro.mjs";
 export {default as ManualPostCheckRollMacro} from "./manual-post-check-roll-macro.mjs";
 export {default as ManualPreCheckRollMacro} from "./manual-pre-check-roll-macro.mjs";
 export {default as ManualMacro} from "./manual-macro.mjs";

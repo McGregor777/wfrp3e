@@ -63,9 +63,15 @@ export default class Actor extends foundry.documents.Actor
 	{
 		super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
 
-		if(collection === "items")
+		if(collection === "items") {
+			for(const item of data)
+				for(const effect of item.effects)
+					if(effect.macro.type === wfrp3e.data.macros.ItemAdditionMacro.TYPE)
+						effect.triggerMacro({actor: parent, item});
+
 			for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.EmbeddedItemCreationMacro.TYPE))
 				effect.triggerMacro({actor: parent, items: data});
+		}
 	}
 
 	/**
