@@ -2,7 +2,50 @@
   "name": "Pit Fighter",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/pit_fighter.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Pit Fighter",
+      "img": "systems/wfrp3e/assets/images/careers/pit_fighter.webp",
+      "_id": "FERpNOdjPvqwAzW8",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": ""
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add {Df} to your Melee Attacks whenever you are in an engagement with more than two combatants</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764776542244,
+        "modifiedTime": 1764776568536,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!dYrCt5JU85qNp5nr.FERpNOdjPvqwAzW8"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -120,10 +163,10 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
+    "systemVersion": "1.3.3",
     "coreVersion": "13.350",
     "createdTime": 1699549859215,
-    "modifiedTime": 1764321760894,
+    "modifiedTime": 1764755878651,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null,

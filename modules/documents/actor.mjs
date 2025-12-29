@@ -150,6 +150,63 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
+	 * Adds a certain number of damages to the Actor, converted into wounds, even adding Critical Wounds if too many damages are inflicted.
+	 * @param {number} damages The damages inflicted.
+	 * @param {number} criticalDamages The critical damages inflicted.
+	 * @returns {Promise<{damages: number, criticalWounds: Item[]|number}>} The total number of damages inflicted, alonside the Critical Wounds
+	 */
+	async sufferDamages(damages, criticalDamages)
+	{
+		let criticalWounds = null;
+		damages -= this.system.damageReduction;
+
+		// If the attack inflicts 0 damages in spite of hitting the Actor, the target still suffers one damage
+		// plus the initial number of critical damages that was supposed to be inflicted
+		// (no critical wounds are inflicted though).
+		if(damages <= 0)
+			damages = 1 + criticalDamages;
+		else if(damages > 0) {
+			// If the attack inflicts more damages than the target's wound threshold, one damage becomes critical.
+			if(damages > this.system.wounds.value)
+				criticalDamages++;
+
+			if(criticalDamages > 0)
+				criticalWounds = await this.createEmbeddedDocuments(
+					"Item",
+					await this.drawCriticalWoundsRandomly(criticalDamages)
+				);
+		}
+
+		await this.update({"system.wounds.value": this.system.wounds.value - damages});
+		return {damages, criticalWounds: criticalWounds ?? criticalDamages};
+	}
+
+	/**
+	 * Draws one or several Critical Wounds randomly from the Critical Wounds roll table.
+	 * @param {Number} number The number of Critical Wounds to draw.
+	 * @returns {Promise<Item[]>} The Critical Wounds inflicted to the Actor.
+	 */
+	static async drawCriticalWoundsRandomly(number)
+	{
+		const criticalWounds = [],
+			  /** @var {RollTable} criticalWoundRollTable */
+			  criticalWoundRollTable = await fromUuid("Compendium.wfrp3e.roll-tables.RollTable.KpiwJKBdJ8qAyQjs"),
+			  drawnResult = await criticalWoundRollTable.drawMany(number, {displayChat: false});
+
+		// If Dice So Nice! module is enabled, show the roll.
+		game.dice3d?.showForRoll(drawnResult.roll);
+
+		for(const result of drawnResult.results) {
+			const document = await fromUuid(result.documentUuid);
+			document.type === "criticalWound"
+				? criticalWounds.push(document)
+				: ui.notifications.info(result.description);
+		}
+
+		return criticalWounds;
+	}
+
+	/**
 	 * Builds up the list of talent sockets available for the actor by talent type.
 	 * @returns {Promise<void>}
 	 */

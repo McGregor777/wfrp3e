@@ -25,7 +25,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>A Zealot can acquire an Insanity during character creation as one of that character’s talent choices</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": false,
@@ -36,14 +36,56 @@
         "compendiumSource": null,
         "duplicateSource": null,
         "exportSource": null,
-        "coreVersion": "13.350",
+        "coreVersion": "13.351",
         "systemId": "wfrp3e",
         "systemVersion": "1.3.3",
         "createdTime": 1761039612913,
-        "modifiedTime": 1764751792351,
+        "modifiedTime": 1764780664069,
         "lastModifiedBy": "Bq3CTOvANoOneedB"
       },
       "_key": "!items.effects!A1VzKP5NoNNQwpRZ.O0krF0BM6QkwU9Jt"
+    },
+    {
+      "name": "Zealot",
+      "img": "systems/wfrp3e/assets/images/careers/zealot.webp",
+      "_id": "8FdRSgKNmBNwtn91",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Once per session, you may exhaust your insanity talent to add fortune dice to any check equal to the severity of the insanity. The insanity automatically refreshes at the end of the current act</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764780556712,
+        "modifiedTime": 1764780573618,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!A1VzKP5NoNNQwpRZ.8FdRSgKNmBNwtn91"
     }
   ],
   "folder": "m8G9zWMGUYpKI5Hg",

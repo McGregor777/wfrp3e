@@ -94,9 +94,7 @@ export default class SkillUpgrader extends Selector
 	specialisationSelection = [];
 
 	/**
-	 * The number of specialisations to select in addition to the other type of upgrades.
-	 * If this number is superior to 0, specialisations will only be added to the specialisation selection,
-	 * and not added as regular upgrades anymore.
+	 * The number of specialisations to select in addition to the other type of upgrades. If this number is superior to 0, specialisations will only be added to the specialisation selection and not added as regular upgrades any more.
 	 * @type {number}
 	 */
 	specialisationSize = 0;
@@ -383,8 +381,7 @@ export default class SkillUpgrader extends Selector
 	}
 
 	/**
-	 * Sorts upgrades in arrays by skill, each array starting with acquisition upgrades,
-	 * followed by training level upgrades, to finish with specialisation upgrades.
+	 * Sorts upgrades in arrays by skill, each array starting with acquisition upgrades, followed by training level upgrades, to finish with specialisation upgrades.
 	 * @param {SkillUpgrade[]} upgrades The skill upgrades to sort.
 	 * @returns {SkillUpgrade[]} The skill upgrades sorted by type.
 	 */

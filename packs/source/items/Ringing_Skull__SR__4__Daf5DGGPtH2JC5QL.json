@@ -2,12 +2,55 @@
   "folder": "VUMz1tBRkXXXUVEt",
   "name": "Ringing Skull (SR: 4)",
   "type": "criticalWound",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/wounds/injury-face-impact-orange.webp",
   "system": {
     "description": "<p>During your End of Turn phase: The GM must add or remove one recharge token from one of your recharging action cards. Lose 1 power. Lose 1 favour.</p>",
     "severityRating": 4
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Ringing Skull (SR: 4)",
+      "img": "icons/skills/wounds/injury-face-impact-orange.webp",
+      "_id": "yMMQrlBz2O1xc9xP",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764842975011,
+        "modifiedTime": 1764843021349,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!Daf5DGGPtH2JC5QL.yMMQrlBz2O1xc9xP"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0,
@@ -21,9 +64,9 @@
   "_stats": {
     "systemId": "wfrp3e",
     "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.341",
+    "coreVersion": "13.351",
     "createdTime": 1682264544162,
-    "modifiedTime": 1715380997987,
+    "modifiedTime": 1764843011337,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null,

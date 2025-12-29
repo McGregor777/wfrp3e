@@ -2,7 +2,50 @@
   "name": "Thug",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/thug.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Thug",
+      "img": "systems/wfrp3e/assets/images/careers/thug.webp",
+      "_id": "NF4aBLZhPOv4CETf",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "if(targetActor.system.traits.includes(\"Henchman\") || actor.system.characteristic.strength.rating > targetActor.system.characteristic.strength.rating)\n  outcome.targetDamages++;"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You inflict +1 damage against henchmen and against any target with a lower Strength than yours</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764779680475,
+        "modifiedTime": 1764779896775,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!a2Gdbwtk8NsAshKL.NF4aBLZhPOv4CETf"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -119,10 +162,10 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
+    "systemVersion": "1.3.3",
     "coreVersion": "13.350",
     "createdTime": 1699549879961,
-    "modifiedTime": 1764321760894,
+    "modifiedTime": 1764755912061,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null,

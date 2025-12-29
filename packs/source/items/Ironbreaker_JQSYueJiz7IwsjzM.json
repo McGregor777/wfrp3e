@@ -2,7 +2,50 @@
   "name": "Ironbreaker",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/ironbreaker.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Ironbreaker",
+      "img": "systems/wfrp3e/assets/images/careers/ironbreaker.webp",
+      "_id": "BAg4TuICROFgN9hQ",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "creationPointInvestment",
+          "script": ""
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You have a set of Gromril Plate Armour. Take the Gromil Plate Armour item card. You cannot give away, sell, lend, or trade this armour</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "1.3.3",
+        "createdTime": 1764775994288,
+        "modifiedTime": 1764776047596,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!JQSYueJiz7IwsjzM.BAg4TuICROFgN9hQ"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -118,10 +161,10 @@
   },
   "_stats": {
     "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
+    "systemVersion": "1.3.3",
     "coreVersion": "13.350",
     "createdTime": 1699549843109,
-    "modifiedTime": 1764321760894,
+    "modifiedTime": 1764755885589,
     "lastModifiedBy": "Bq3CTOvANoOneedB",
     "compendiumSource": null,
     "duplicateSource": null,
