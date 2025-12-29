@@ -743,7 +743,9 @@ export default class CheckRoll extends foundry.dice.Roll
 		const characteristics = wfrp3e.data.actors.Actor.CHARACTERISTICS,
 			  roll = chatMessage.rolls[0],
 			  checkData = roll.options.checkData,
+			  /** @var {Actor} actor */
 			  actor = await fromUuid(checkData.actor),
+			  /** @var {Actor} targetActor */
 			  targetActor = checkData.targets?.length > 0 ? await fromUuid(checkData.targets[0]) : null,
 			  outcome = {
 				  targetDamages: 0,
@@ -779,56 +781,20 @@ export default class CheckRoll extends foundry.dice.Roll
 					)
 
 		if(targetActor) {
-			// If the attack inflicts damages, reduce them by Toughness and Soak values.
+			if(targetActor.type === "creature" && !targetActor.system.nemesis)
+				outcome.targetDamages += outcome.targetFatigue + outcome.targetStress;
+			else {
+				if(outcome.targetFatigue > 0 || outcome.targetFatigue < 0)
+					await targetActor.adjustFatigue(-outcome.targetFatigue);
+
+				if(outcome.targetStress > 0 || outcome.targetStress < 0)
+					await targetActor.adjustStress(outcome.targetStress);
+			}
+
 			if(outcome.targetDamages > 0) {
-				outcome.targetDamages -= targetActor.system.characteristics.toughness.rating + targetActor.system.totalSoak;
-
-				// If the attack still inflicts more damages than the target's wound threshold, the target suffers from a critical wound
-				// (in addition to those coming from effects).
-				if(outcome.targetDamages > 0 && outcome.targetDamages > targetActor.system.wounds.value) {
-					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetDamages};
-
-					const criticalWounds = await Item.createDocuments(
-						await this.drawCriticalWoundsRandomly(outcome.targetCriticalWounds + 1),
-						{parent: targetActor}
-					);
-					outcome.targetCriticalWounds = criticalWounds.map(criticalWound => criticalWound.uuid);
-				}
-				else if(outcome.targetDamages > 0) {
-					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetDamages};
-
-					if(outcome.targetCriticalWounds > 0) {
-						const criticalWounds = await Item.createDocuments(
-							await this.drawCriticalWoundsRandomly(outcome.targetCriticalWounds),
-							{parent: targetActor}
-						);
-						outcome.targetCriticalWounds = criticalWounds.map(criticalWound => criticalWound.uuid);
-					}
-				}
-					// If the attack inflicts 0 damages in spite of hitting the target, the target still suffers one damage
-				// (no critical wounds are inflicted though).
-				else {
-					outcome.targetDamages = 1
-					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - 1};
-				}
-			}
-
-			if(outcome.targetFatigue > 0 || outcome.targetFatigue < 0) {
-				if(targetActor.type === "creature" && !targetActor.system.nemesis)
-					targetUpdates.system.impairments = {fatigue: targetActor.system.impairments.fatigue + outcome.targetFatigue};
-				else if(targetActor.system.wounds.value)
-					targetUpdates.system.wounds.value -= outcome.targetFatigue;
-				else
-					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetFatigue};
-			}
-
-			if(outcome.targetStress > 0 || outcome.targetStress < 0) {
-				if(targetActor.type === "creature" && !targetActor.system.nemesis)
-					targetUpdates.system.impairments = {stress: targetActor.system.impairments.stress + outcome.targetStress};
-				else if(targetActor.system.wounds.value)
-					targetUpdates.system.wounds.value -= outcome.targetStress;
-				else
-					targetUpdates.system.wounds = {value: targetActor.system.wounds.value - outcome.targetStress};
+				const {damages, criticalWounds} = await targetActor.sufferDamages(outcome.targetDamages, outcome.targetCriticalWounds);
+				outcome.targetDamages = damages;
+				outcome.targetCriticalWounds = criticalWounds;
 			}
 
 			await targetActor.update(targetUpdates);
@@ -836,27 +802,27 @@ export default class CheckRoll extends foundry.dice.Roll
 
 		if(actor) {
 			if(outcome.wounds > 0)
-				actorUpdates.system.wounds = actor.system.wounds.value - outcome.wounds;
+				await actor.adjustWounds(outcome.wounds);
 
 			if(outcome.criticalWounds > 0) {
-				const criticalWounds = await Item.createDocuments(
-					await this.drawCriticalWoundsRandomly(outcome.criticalWounds),
-					{parent: actor}
+				const criticalWounds = await this.createEmbeddedDocuments(
+					"Item",
+					await this.drawCriticalWoundsRandomly(outcome.criticalWounds)
 				);
 				outcome.criticalWounds = criticalWounds.map(criticalWound => criticalWound.uuid);
 			}
 
 			if(outcome.fatigue > 0 || outcome.fatigue < 0)
-				actorUpdates.system.impairments = {fatigue: actor.system.impairments.fatigue + outcome.fatigue};
+				await actor.adjustFatigue(outcome.fatigue);
 
 			if(outcome.stress > 0 || outcome.stress < 0)
-				actorUpdates.system.impairments = {stress: actor.system.impairments.stress + outcome.stress};
+				await actor.adjustStress(outcome.stress);
 
 			if(outcome.favour > 0 || outcome.favour < 0)
-				actorUpdates.system.favour = actor.system.favour + outcome.favour;
+				await actor.adjustFavour(outcome.favour);
 
 			if(outcome.power > 0 || outcome.power < 0)
-				actorUpdates.system.power = actor.system.power + outcome.power;
+				await actor.adjustPower(outcome.power);
 
 			await actor.update(actorUpdates);
 		}
@@ -919,31 +885,6 @@ export default class CheckRoll extends foundry.dice.Roll
 		catch(error) {
 			ui.notifications.error(`Unable to execute the effect ${effect.description}: ${error}`);
 		}
-	}
-
-	/**
-	 * Draws one or several critical wounds randomly from the critical wounds roll table.
-	 * @param {Number} amount The number of critical wounds to draw.
-	 * @returns {Promise<Item[]>} The critical wounds items owned by the target actor.
-	 */
-	static async drawCriticalWoundsRandomly(amount)
-	{
-		const allCriticalWounds = [],
-			  /** @var {RollTable} criticalWoundRollTable */
-			  criticalWoundRollTable = await fromUuid("Compendium.wfrp3e.roll-tables.RollTable.KpiwJKBdJ8qAyQjs"),
-			  drawnResult = await criticalWoundRollTable.drawMany(amount, {displayChat: false});
-
-		// If Dice So Nice! module is enabled, show the roll.
-		game.dice3d?.showForRoll(drawnResult.roll);
-		for(const result of drawnResult.results) {
-			const document = await fromUuid(result.documentUuid);
-			if(document.type === "criticalWound")
-				allCriticalWounds.push(document);
-			else
-				ui.notifications.info(result.description);
-		}
-
-		return allCriticalWounds;
 	}
 
 	/**

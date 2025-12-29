@@ -15,21 +15,6 @@ export default class ActiveEffect extends foundry.abstract.TypeDataModel
 	/** @inheritDoc */
 	static LOCALIZATION_PREFIXES = ["EFFECT"];
 
-	static SCRIPT_TYPES = {
-		onCareerSocket: "SCRIPT.TYPES.onCareerSocket",
-		onCareerTransition: "SCRIPT.TYPES.onCareerTransition",
-		onCheckPreparation: "SCRIPT.TYPES.onCheckPreparation",
-		onCheckRoll: "SCRIPT.TYPES.onCheckRoll",
-		onCreationPointInvestment: "SCRIPT.TYPES.onCreationPointInvestment",
-		onPostCheckTrigger: "SCRIPT.TYPES.onPostCheckTrigger",
-		onPreCheckTrigger: "SCRIPT.TYPES.onPreCheckTrigger",
-		onStartingSkillTrainingSelection: "SCRIPT.TYPES.onStartingSkillTrainingSelection",
-		onStartingTalentSelection: "SCRIPT.TYPES.onStartingTalentSelection",
-		onTargetingCheckPreparation: "SCRIPT.TYPES.onTargetingCheckPreparation",
-		onTrigger: "SCRIPT.TYPES.onTrigger",
-		requirementCheck: "SCRIPT.TYPES.requirementCheck"
-	};
-
 	/** @inheritDoc */
 	static migrateData(source)
 	{

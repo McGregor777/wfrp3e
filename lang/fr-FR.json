@@ -683,6 +683,10 @@
 			"choose": {
 				"description": "Vous devez choisir quelle blessure critique infliger entre ces deux suivantes : {links}",
 				"title": "Choisir une blessure critique"
+			},
+			"lowBlow": {
+				"description": "Vous pouvez ajouter ou retirer un jeton de recharge de l'une des cartes en rechargement de {actor}.",
+				"title": "Coup bas"
 			}
 		},
 		"FIELDS.severityRating.label": "Niveau de Gravité",
@@ -856,6 +860,27 @@
 				},
 				"label": "Investissement des points de création"
 			},
+			"embeddedItemCreation": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois qu'un ou plusieurs objet(s) sont soit ajoutés à un acteur, soit directement créés pour lui/elle.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur recevant les nouveaux objet(s).\n\t- {Array} items: Les nouveaux objet(s).",
+					"label": "Script"
+				},
+				"label": "Création d'un objet inclus"
+			},
+			"fatigueAdjustment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que la fatigue d'un acteur est ajustée en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont la fatigue est sur le point d'être ajustée.\n\t- {number} fatigue: La fatigue actuelle de l'acteur.\n\t- {number} value: La valeur d'ajustement de la fatigue actuellement calculée.",
+					"label": "Script"
+				},
+				"label": "Ajustement de la fatigue"
+			},
+			"itemAddition": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté dès que l'objet contenant cet effet actif est ajouté à un acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur recevant l'objet.\n\t- {Item} item: L'objet ajouté.",
+					"label": "Script"
+				},
+				"label": "Ajout de l'objet"
+			},
 			"manual": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté sur commande de l'utilisateur uniquement.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.",
@@ -893,6 +918,13 @@
 				},
 				"label": "Déclenchement manuel avant un test"
 			},
+			"powerFavourAdjustment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que l'énergie ou la faveur d'un acteur est ajusté(e) en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont l'énergie ou la faveur est sur le point d'être ajusté(e).\n\t- {number} current: La quantité actuelle d'énergie/faveur de l'acteur.\n\t- {\"favour\"|\"power\"} type: Quelle valeur est ajustée entre l'énergie (« power ») et la faveur (« favour »).\n\t- {number} value: La valeur d'ajustement de l'énergie ou de la faveur actuellement calculée.",
+					"label": "Script"
+				},
+				"label": "Ajustement de l'énergie ou de la faveur"
+			},
 			"requirement": {
 				"FIELDS.script": {
 					"hint": "Ce script vérifie si l'objet peut être acquis durant la génération de personnage ou durant une augmentation de carrière.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur pouvant potentiellement acquérir l'objet.\n\tValeur de retour: Doit être un booléen, true si les conditions sont vérifiées, sinon false.",
@@ -914,12 +946,26 @@
 				},
 				"label": "Sélection des talents de départ"
 			},
+			"stressAdjustment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que le stress d'un acteur est ajusté en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont le stress est sur le point d'être ajusté.\n\t- {number} stress: Le stress actuel de l'acteur.\n\t- {number} value: La valeur d'ajustement du stress actuellement calculée.",
+					"label": "Script"
+				},
+				"label": "Ajustement du stress"
+			},
 			"targetingCheckPreparation": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté chaque fois qu'un test ciblant un autre acteur est préparé ou re-préparé.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: The Actor targeted by the check.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {DiePool} diePool: La réserve de dés actuelle du test.",
 					"label": "Script"
 				},
 				"label": "Préparation d'un test ciblant"
+			},
+			"woundsAdjustment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que les blessures d'un acteur sont ajustées en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont les blessures sont sur le point d'être ajustées.\n\t- {number} stress: Le nombre de blessures actuel de l'acteur.\n\t- {number} value: La valeur d'ajustement des blessures actuellement calculée.",
+					"label": "Script"
+				},
+				"label": "Ajustement des blessures"
 			}
 		},
 		"TABS": {

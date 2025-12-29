@@ -58,6 +58,22 @@ export default class Actor extends foundry.documents.Actor
 		}
 	}
 
+	/** @inheritDoc */
+	_onCreateDescendantDocuments(parent, collection, documents, data, options, userId)
+	{
+		super._onCreateDescendantDocuments(parent, collection, documents, data, options, userId);
+
+		if(collection === "items") {
+			for(const item of data)
+				for(const effect of item.effects)
+					if(effect.macro.type === wfrp3e.data.macros.ItemAdditionMacro.TYPE)
+						effect.triggerMacro({actor: parent, item});
+
+			for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.EmbeddedItemCreationMacro.TYPE))
+				effect.triggerMacro({actor: parent, items: data});
+		}
+	}
+
 	/**
 	 * Creates a new active effect for the actor.
 	 * @param {Object} [data] An Object of optional data for the new active effect.
@@ -117,12 +133,85 @@ export default class Actor extends foundry.documents.Actor
 	/**
 	 * Adjusts one of the Actor's impairment values.
 	 * @param {string} impairment The impairment to update.
-	 * @param {Number} value The value to add to the impairment.
+	 * @param {Number} value The value to add to the impairment
 	 * @returns {Promise<void>}
+	 * @deprecated
 	 */
 	async adjustImpairment(impairment, value)
 	{
-		await this.update({[`system.impairments.${impairment}`]: this.system.impairments[impairment] + value});
+		try {
+			const functionName = `adjust${capitalize(impairment)}`;
+
+			if(this.actor[functionName])
+				await this[functionName](value);
+		}
+		catch(exception) {
+			console.error(`Something went wrong when updating the Actor's (${this.name}) ${impairment}`);
+		}
+	}
+
+	/**
+	 * Adjusts the Actor's fatigue.
+	 * @param {Number} value The value to add to the fatigue.
+	 * @returns {Promise<void>}
+	 */
+	async adjustFatigue(value)
+	{
+		const propertyPath = "system.impairments.fatigue",
+			  fatigue = foundry.utils.getProperty(this, propertyPath);
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.FatigueAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, fatigue, value});
+
+		await this.update({[propertyPath]: fatigue + value});
+	}
+
+	/**
+	 * Adjusts the Actor's stress.
+	 * @param {Number} value The value to add to the stress.
+	 * @returns {Promise<void>}
+	 */
+	async adjustStress(value)
+	{
+		const propertyPath = "system.impairments.stress",
+			  stress = foundry.utils.getProperty(this, propertyPath);
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.StressAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, stress, value});
+
+		await this.update({[propertyPath]: stress + value});
+	}
+
+	/**
+	 * Adjusts the Actor's power.
+	 * @param {Number} value The value to add to the power pool.
+	 * @returns {Promise<void>}
+	 */
+	async adjustPower(value)
+	{
+		const propertyPath = "system.power",
+			  power = foundry.utils.getProperty(this, propertyPath);
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.PowerFavourAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, current: power, type: "power", value});
+
+		await this.update({[propertyPath]: power + value});
+	}
+
+	/**
+	 * Adjusts the Actor's favour.
+	 * @param {Number} value The value to add to the favour pool.
+	 * @returns {Promise<void>}
+	 */
+	async adjustFavour(value)
+	{
+		const propertyPath = "system.favour",
+			  favour = foundry.utils.getProperty(this, propertyPath);
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.PowerFavourAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, current: favour, type: "favour", value});
+
+		await this.update({[propertyPath]: favour + value});
 	}
 
 	/**
@@ -140,13 +229,81 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Adjusts one of the Actor's number of wounds.
+	 * Adjusts the Actor's number of wounds.
 	 * @param {Number} number The number of wounds to add or remove.
 	 * @returns {Promise<void>}
 	 */
 	async adjustWounds(number)
 	{
-		await this.update({"system.wounds.value": this.system.wounds.value + number});
+		const propertyPath = "system.wounds.value",
+			  wounds = foundry.utils.getProperty(this, propertyPath);
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.WoundsAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, wounds, number});
+
+		await this.update({[propertyPath]: wounds + number});
+	}
+
+	/**
+	 * Adds a certain number of damages to the Actor, converted into wounds, even adding Critical Wounds if too many damages are inflicted.
+	 * @param {number} damages The damages inflicted.
+	 * @param {number} criticalDamages The critical damages inflicted.
+	 * @returns {Promise<{damages: number, criticalWounds: Item[]|number}>} The total number of damages inflicted, alongside the Critical Wounds.
+	 */
+	async sufferDamages(damages, criticalDamages)
+	{
+		const propertyPath = "system.wounds.value",
+			  wounds = foundry.utils.getProperty(this, propertyPath);
+		let criticalWounds = null;
+		damages -= this.system.damageReduction;
+
+		// If the attack inflicts 0 damages in spite of hitting the Actor, the target still suffers one damage
+		// plus the initial number of critical damages that was supposed to be inflicted
+		// (no critical wounds are inflicted though).
+		if(damages <= 0)
+			damages = 1 + criticalDamages;
+		else if(damages > 0) {
+			// If the attack inflicts more damages than the target's wound threshold, one damage becomes critical.
+			if(damages > this.system.wounds.value)
+				criticalDamages++;
+
+			if(criticalDamages > 0)
+				criticalWounds = await this.createEmbeddedDocuments(
+					"Item",
+					await this.drawCriticalWoundsRandomly(criticalDamages)
+				);
+		}
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.WoundsAdjustmentMacro.TYPE))
+			await effect.triggerMacro({actor: this, wounds, number: damages});
+
+		await this.update({[propertyPath]: wounds - damages});
+		return {damages, criticalWounds: criticalWounds ?? criticalDamages};
+	}
+
+	/**
+	 * Draws one or several Critical Wounds randomly from the Critical Wounds roll table.
+	 * @param {Number} number The number of Critical Wounds to draw.
+	 * @returns {Promise<Item[]>} The Critical Wounds inflicted to the Actor.
+	 */
+	static async drawCriticalWoundsRandomly(number)
+	{
+		const criticalWounds = [],
+			  /** @var {RollTable} criticalWoundRollTable */
+			  criticalWoundRollTable = await fromUuid("Compendium.wfrp3e.roll-tables.RollTable.KpiwJKBdJ8qAyQjs"),
+			  drawnResult = await criticalWoundRollTable.drawMany(number, {displayChat: false});
+
+		// If Dice So Nice! module is enabled, show the roll.
+		game.dice3d?.showForRoll(drawnResult.roll);
+
+		for(const result of drawnResult.results) {
+			const document = await fromUuid(result.documentUuid);
+			document.type === "criticalWound"
+				? criticalWounds.push(document)
+				: ui.notifications.info(result.description);
+		}
+
+		return criticalWounds;
 	}
 
 	/**

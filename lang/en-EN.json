@@ -683,6 +683,10 @@
 			"choose": {
 				"description": "You must choose which critical wound to inflict between these two: {links}",
 				"title": "Choose A Critical Wound"
+			},
+			"lowBlow": {
+				"description": "You may add or remove one recharge token from one of {actor}'s currently recharging cards.",
+				"title": "Low Blow"
 			}
 		},
 		"FIELDS.severityRating.label": "Severity Rating",
@@ -856,6 +860,27 @@
 				},
 				"label": "Creation Point Investment"
 			},
+			"embeddedItemCreation": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time one or several new item(s) are either added to an Actor or directly created for him/her.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor receiving new item(s).\n\t- {Array} items: The new item(s).",
+					"label": "Script"
+				},
+				"label": "Embedded Item Creation"
+			},
+			"fatigueAdjustment": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor's fatigue is adjusted from outside the Actor's sheet.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose fatigue is being adjusted.\n\t- {number} fatigue: The current fatigue of the Actor.\n\t- {number} value: The currently calculated adjustment value for the fatigue.",
+					"label": "Script"
+				},
+				"label": "Fatigue Adjustment"
+			},
+			"itemAddition": {
+				"FIELDS.script": {
+					"hint": "This script is executed whenever the item owning this Active Effect is added to an Actor.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor receiving the item.\n\t- {Item} item: The added item.",
+					"label": "Script"
+				},
+				"label": "Item Addition"
+			},
 			"manual": {
 				"FIELDS.script": {
 					"hint": "This script is executed on the User action only.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.",
@@ -893,6 +918,13 @@
 				},
 				"label": "Manual Pre Check Roll"
 			},
+			"powerFavourAdjustment": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor's power or favour is adjusted from outside the Actor's sheet.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose power or favour is being adjusted.\n\t- {number} current: The Actor's current amount of power/favour.\n\t- {\"favour\"|\"power\"} type: Which value is being adjusted between power and favour.\n\t- {number} value: The currently calculated adjustment value for the power or favour.",
+					"label": "Script"
+				},
+				"label": "Power or Favour Adjustment"
+			},
 			"requirement": {
 				"FIELDS.script": {
 					"hint": "This script verifies whether the Item can be acquired during Character Generation or as part of Career Advances.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that may (or may not) acquire the Item.",
@@ -914,12 +946,26 @@
 				},
 				"label": "Starting Talent Selection"
 			},
+			"stressAdjustment": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor's stress is adjusted from outside the Actor's sheet.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose stress is being adjusted.\n\t- {number} stress: The current stress of the Actor.\n\t- {number} value: The currently calculated adjustment value for the stress.",
+					"label": "Script"
+				},
+				"label": "Stress Adjustment"
+			},
 			"targetingCheckPreparation": {
 				"FIELDS.script": {
 					"hint": "This script is executed every time a check targeting another Actor is being prepared or re-prepared.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor targeted by the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {DiePool} diePool: The current die pool of the check.",
 					"label": "Script"
 				},
 				"label": "Targeting Check Preparation"
+			},
+			"woundsAdjustment": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor's wounds are adjusted from outside the Actor's sheet.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose wounds are being adjusted.\n\t- {number} stress: The Actor's current number of wounds.\n\t- {number} value: The currently calculated adjustment value for the wounds.",
+					"label": "Script"
+				},
+				"label": "Wounds Adjustment"
 			}
 		},
 		"TABS": {

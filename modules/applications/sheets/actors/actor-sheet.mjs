@@ -1,3 +1,5 @@
+import {capitalize} from "../../../helpers.mjs";
+
 /** @inheritDoc */
 export default class ActorSheet extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.sheets.ActorSheetV2)
 {
@@ -411,6 +413,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	 */
 	static async #adjustImpairment(event, target)
 	{
+		const propertyPath = `system.impairments.${target.closest("[data-impairment]").dataset.impairment}`;
 		let amount = 0;
 
 		switch(event.button) {
@@ -422,7 +425,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 				break;
 		}
 
-		await this.actor.adjustImpairment(target.closest("[data-impairment]").dataset.impairment, amount);
+		await this.actor.update({[propertyPath]: foundry.utils.getProperty(this.actor, propertyPath) + amount});
 	}
 
 	/**
