@@ -45,7 +45,7 @@ jobs:
           zip --recurse-paths ./system.zip  \
             system.json                     \
             template.json                   \
-            wfrp3e.js                       \
+            wfrp3e.mjs                      \
             assets/                         \
             lang/                           \
             modules/                        \
