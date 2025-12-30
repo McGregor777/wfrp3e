@@ -6,22 +6,7 @@
   "description": "",
   "sort": 400000,
   "color": null,
-  "flags": {
-    "scene-packer": {
-      "hash": "db76848fe025fbbe5854cb5dc404e0f394468722"
-    }
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.348",
-    "createdTime": 1715380997818,
-    "modifiedTime": 1759651041156,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
-  },
+  "flags": {},
   "_id": "VUMz1tBRkXXXUVEt",
   "_key": "!folders!VUMz1tBRkXXXUVEt"
 }

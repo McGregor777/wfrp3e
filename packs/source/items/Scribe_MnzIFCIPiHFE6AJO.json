@@ -32,17 +32,6 @@
       "statuses": [],
       "sort": 0,
       "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.351",
-        "systemId": "wfrp3e",
-        "systemVersion": "1.3.3",
-        "createdTime": 1764778908825,
-        "modifiedTime": 1764779193658,
-        "lastModifiedBy": "Bq3CTOvANoOneedB"
-      },
       "_key": "!items.effects!MnzIFCIPiHFE6AJO.b1liptXbFeDgUgVA"
     }
   ],
@@ -160,17 +149,6 @@
         "item": null
       }
     ]
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.3.3",
-    "coreVersion": "13.351",
-    "createdTime": 1699549867777,
-    "modifiedTime": 1764778891926,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
   },
   "_id": "MnzIFCIPiHFE6AJO",
   "sort": 2700000,

@@ -123,17 +123,6 @@
       "statuses": [],
       "sort": 0,
       "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.350",
-        "systemId": "wfrp3e",
-        "systemVersion": "1.3.3",
-        "createdTime": 1761212064508,
-        "modifiedTime": 1764751219182,
-        "lastModifiedBy": "Bq3CTOvANoOneedB"
-      },
       "_key": "!items.effects!mo2APRRjBjj7jYSl.vyG1FtOQS0LjhSir"
     }
   ],
@@ -141,17 +130,6 @@
     "default": 0
   },
   "flags": {},
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.3.3",
-    "coreVersion": "13.350",
-    "createdTime": 1701867885135,
-    "modifiedTime": 1701868776710,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
-  },
   "_id": "mo2APRRjBjj7jYSl",
   "sort": 600000,
   "_key": "!items!mo2APRRjBjj7jYSl"
