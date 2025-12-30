@@ -16,7 +16,7 @@
       "system": {
         "macro": {
           "type": "woundsAdjustment",
-          "script": "await foundry.applications.api.DialogV2.query({\n  user: game.users.activeGM,\n  type: \"prompt\",\n  config: {\n    content: game.i18n.format(\"CRITICALWOUND.DIALOG.lowBlow.description\", {actor: actor.toAnchor().innerHTML}),\n    window: {title: \"CAREERSELECTOR.DIALOG.lowBlow.title\"}\n  }\n});"
+          "script": "await foundry.applications.api.DialogV2.query(\n  game.users.activeGM,\n  \"prompt\", {\n  content: game.i18n.format(\"CRITICALWOUND.DIALOG.lowBlow.description\", {actor: actor.toAnchor().innerHTML}),\n  window: {title: \"CAREERSELECTOR.DIALOG.lowBlow.title\"}\n});"
         }
       },
       "changes": [],
