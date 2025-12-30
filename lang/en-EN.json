@@ -537,7 +537,8 @@
 		},
 		"WARNINGS": {
 			"convert": "There is no {type} to convert.",
-			"convertBack": "There is no {type} left to convert back."
+			"convertBack": "There is no {type} left to convert back.",
+			"notEnoughFortune": "The actor has not enough fortune tokens."
 		},
 		"dicePool": "Dice Pool",
 		"options": "Options",
@@ -908,7 +909,7 @@
 						"label": "Conditional Script"
 					},
 					"postRollScript": {
-						"hint": "This script is executed once the check has been rolled in order to perform follow-up operations on the related Item.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {DiePool} diePool: The die pool of the rolled check.\n\t- {CheckData} checkData: Various data related to the check.",
+						"hint": "This script is executed once the check has been rolled in order to perform follow-up operations on the related Item.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {DiePool} diePool: The die pool of the rolled check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The resulting check roll.",
 						"label": "Post-Roll Script"
 					},
 					"script": {
@@ -1173,6 +1174,14 @@
 			"editEvent": "Edit Event",
 			"increaseTensionMeter": "Increase Tension Meter",
 			"removeMember": "Remove Member From Party"
+		},
+		"DIALOG.fortuneRefreshment": {
+			"BUTTONS": {
+				"recoverFortuneToken": "Recover Fortune Token",
+				"removeRechargeToken": "Remove Recharge Token"
+			},
+			"description": "Your party's fortune have just refreshed. You can recover one fortune token or remove a recharge token from one of your cards currently on cooldown.",
+			"title": "Party Fortune Refreshed"
 		},
 		"FIELDS": {
 			"fortunePool.label": "Fortune Pool",

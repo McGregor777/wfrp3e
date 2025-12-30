@@ -219,16 +219,15 @@ export default class DiePool
 				const fortunePoints = this.checkData.fortunePoints;
 				actor = await fromUuid(checkData.actor);
 
-				// Remove the fortune points spent on the check from the actor and/or party.
+				// Remove the fortune points spent on the check from the actor.
 				if(actor.type === "character" && fortunePoints > 0) {
-					const updates = {"system.fortune.value": Math.max(actor.system.fortune.value - fortunePoints, 0)};
+					const propertyPath = "system.fortune.value",
+						  currentFortune = foundry.utils.getProperty(actor, propertyPath);
 
-					if(fortunePoints > actor.system.fortune.value) {
-						const party = actor.system.currentParty;
-						party.update({"system.fortunePool": Math.max(party.system.fortunePool - (fortunePoints - actor.system.fortune.value), 0)})
-					}
+					if(fortunePoints > currentFortune)
+						throw ui.notifications.error(game.i18n.localize("CHECKBUILDER.WARNINGS.notEnoughFortune"));
 
-					actor.update(updates);
+					await actor.update({[propertyPath]: Math.max(actor.system.fortune.value - fortunePoints, 0)});
 				}
 				// Remove the attribute dice spent on the check from the creature.
 				else if(actor.type === "creature" && checkData.creatureDice) {
@@ -242,18 +241,8 @@ export default class DiePool
 					}
 
 					if(Object.keys(updates.system.attributes).length > 0)
-						actor.update(updates);
+						await actor.update(updates);
 				}
-			}
-
-			// Execute the effects from all selected items.
-			const triggeredEffects = this.checkData.triggeredEffects;
-			if(triggeredEffects != null) {
-				if(Array.isArray(triggeredEffects))
-					for(const effectUuid of triggeredEffects)
-						await this.executeActiveEffectMacro(effectUuid, "postRollScript");
-				else
-					await this.executeActiveEffectMacro(triggeredEffects, "postRollScript");
 			}
 		}
 
@@ -266,6 +255,16 @@ export default class DiePool
 			speaker: {actor}
 		});
 
+		// Execute the effects from all selected items.
+		const triggeredEffects = this.checkData.triggeredEffects;
+		if(triggeredEffects != null) {
+			if(Array.isArray(triggeredEffects))
+				for(const effectUuid of triggeredEffects)
+					await this.executeActiveEffectMacro(effectUuid, "postRollScript", {checkRoll});
+			else
+				await this.executeActiveEffectMacro(triggeredEffects, "postRollScript", {checkRoll});
+		}
+
 		if(this.sound)
 			AudioHelper.play({src: this.sound}, true);
 
@@ -276,15 +275,16 @@ export default class DiePool
 	 * Executes the Manual Pre Check Roll Macro from an Active Effect.
 	 * @param {string} effectUuid The uuid of the Active Effect.
 	 * @param {string} script The type of script to execute.
+	 * @param {Object} options Additional parameters to pass as parameters for the Active Effect Macro's script.
 	 * @returns {Promise<void>}
 	 */
-	async executeActiveEffectMacro(effectUuid, script = "script")
+	async executeActiveEffectMacro(effectUuid, script = "script", options = {})
 	{
 		const actor = await fromUuid(this.checkData.actor),
 			  /** @var {ActiveEffect} effect */
 			  effect = await fromUuid(effectUuid);
 
-		await effect.triggerMacro({actor, checkData: this.checkData, diePool: this}, script);
+		await effect.triggerMacro({actor, checkData: this.checkData, diePool: this, ...options}, script);
 	}
 
 

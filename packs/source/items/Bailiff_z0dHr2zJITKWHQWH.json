@@ -2,7 +2,39 @@
   "name": "Bailiff",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/bailiff.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Bailiff",
+      "img": "systems/wfrp3e/assets/images/careers/bailiff.webp",
+      "_id": "pZw2AoL1yJLbxc8T",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "if(game.combats.active && this.getFlag(\"wfrp3e\", \"encounter\") !== game.combats.active.uuid) {\n  await actor.system.currentParty.adjustFortune(1);\n  await this.setFlag(\"wfrp3e\", \"encounter\", game.combats.active.uuid);\n}",
+          "type": "stressAdjustment"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add 1 fortune point to the party’s fortune pool the first time you suffer stress during an encounter</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!z0dHr2zJITKWHQWH.pZw2AoL1yJLbxc8T"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -116,17 +148,6 @@
         "item": null
       }
     ]
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
-    "coreVersion": "13.350",
-    "createdTime": 1699549809236,
-    "modifiedTime": 1764321760894,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
   },
   "_id": "z0dHr2zJITKWHQWH",
   "sort": 200000,
