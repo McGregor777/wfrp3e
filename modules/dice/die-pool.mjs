@@ -219,16 +219,15 @@ export default class DiePool
 				const fortunePoints = this.checkData.fortunePoints;
 				actor = await fromUuid(checkData.actor);
 
-				// Remove the fortune points spent on the check from the actor and/or party.
+				// Remove the fortune points spent on the check from the actor.
 				if(actor.type === "character" && fortunePoints > 0) {
-					const updates = {"system.fortune.value": Math.max(actor.system.fortune.value - fortunePoints, 0)};
+					const propertyPath = "system.fortune.value",
+						  currentFortune = foundry.utils.getProperty(actor, propertyPath);
 
-					if(fortunePoints > actor.system.fortune.value) {
-						const party = actor.system.currentParty;
-						party.update({"system.fortunePool": Math.max(party.system.fortunePool - (fortunePoints - actor.system.fortune.value), 0)})
-					}
+					if(fortunePoints > currentFortune)
+						throw ui.notifications.error(game.i18n.localize("CHECKBUILDER.WARNINGS.notEnoughFortune"));
 
-					actor.update(updates);
+					await actor.update({[propertyPath]: Math.max(actor.system.fortune.value - fortunePoints, 0)});
 				}
 				// Remove the attribute dice spent on the check from the creature.
 				else if(actor.type === "creature" && checkData.creatureDice) {
@@ -242,7 +241,7 @@ export default class DiePool
 					}
 
 					if(Object.keys(updates.system.attributes).length > 0)
-						actor.update(updates);
+						await actor.update(updates);
 				}
 			}
 		}

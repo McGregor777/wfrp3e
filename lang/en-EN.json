@@ -537,7 +537,8 @@
 		},
 		"WARNINGS": {
 			"convert": "There is no {type} to convert.",
-			"convertBack": "There is no {type} left to convert back."
+			"convertBack": "There is no {type} left to convert back.",
+			"notEnoughFortune": "The actor has not enough fortune tokens."
 		},
 		"dicePool": "Dice Pool",
 		"options": "Options",

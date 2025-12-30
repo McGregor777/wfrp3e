@@ -537,7 +537,8 @@
 		},
 		"WARNINGS": {
 			"convert": "Il n'y a pas de {type} à convertir.",
-			"convertBack": "Il n'y a plus de {type} à reconvertir."
+			"convertBack": "Il n'y a plus de {type} à reconvertir.",
+			"notEnoughFortune": "L'acteur ne dispose pas d'assez de points de fortune."
 		},
 		"dicePool": "Réserve de dés",
 		"options": "Options",
