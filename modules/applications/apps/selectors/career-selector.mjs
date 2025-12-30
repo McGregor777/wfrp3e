@@ -1,18 +1,17 @@
-import Selector from "./selector.mjs";
+import ItemSelector from "./item-selector.mjs";
 
 /** @inheritDoc */
-export default class CareerSelector extends Selector
+export default class CareerSelector extends ItemSelector
 {
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
 		id: "career-selector-{id}",
-		actions: {flip: this.#flip},
 		classes: ["career-selector"],
 		window: {title: "CAREERSELECTOR.title"}
 	};
 
 	/** @inheritDoc */
-	type = "career";
+	static type = "career";
 
 	/** @inheritDoc */
 	async _prepareContext(options)
@@ -28,19 +27,8 @@ export default class CareerSelector extends Selector
 	{
 		let partContext = await super._preparePartContext(partId, context);
 
-		if(partId === "main") {
-			const enrichment = {};
-			for(const career of this.items)
-				enrichment[career.uuid] = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-					career.system.description
-				);
-
-			partContext = {
-				...partContext,
-				characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
-				enrichment
-			};
-		}
+		if(partId === "main")
+			partContext.characteristics = wfrp3e.data.actors.Actor.CHARACTERISTICS;
 
 		return partContext;
 	}
@@ -94,7 +82,7 @@ export default class CareerSelector extends Selector
 						await foundry.applications.api.DialogV2.prompt({
 							content: "CAREERSELECTOR.DIALOG.chooseAnyCareer.description",
 							window: {title: "CAREERSELECTOR.DIALOG.chooseAnyCareer.title"}
-						})
+						});
 
 						return await CareerSelector.#getBasicCareerList(character);
 					}
@@ -107,7 +95,7 @@ export default class CareerSelector extends Selector
 						await foundry.applications.api.DialogV2.prompt({
 							content: "CAREERSELECTOR.DIALOG.moreThanOneCareer.description",
 							window: {title: "CAREERSELECTOR.DIALOG.moreThanOneCareer.title"}
-						})
+						});
 				}
 				break;
 
@@ -116,23 +104,6 @@ export default class CareerSelector extends Selector
 		}
 
 		return drawnCareers;
-	}
-
-	/**
-	 * Switches between two faces of a Document.
-	 * @param {PointerEvent} event
-	 * @param {HTMLElement} target
-	 * @returns {Promise<void>}
-	 * @private
-	 */
-	static async #flip(event, target)
-	{
-		const itemElement = target.closest(".item"),
-			  activeFace = itemElement.querySelector(".face.active"),
-			  inactiveFace = itemElement.querySelector(".face:not(.active)");
-
-		activeFace.classList.remove("active");
-		inactiveFace.classList.add("active");
 	}
 
 	/**

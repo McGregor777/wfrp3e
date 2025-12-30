@@ -1087,6 +1087,12 @@
 		}
 	},
 
+	"ITEMSELECTOR": {
+		"ACTIONS.chooseItem": "Choose Item",
+		"selectedItem": "Selected Item",
+		"title": "Item Selector"
+	},
+
 	"MISCAST": {
 		"ACTIONS.update": "Save Miscast",
 		"FIELDS": {
@@ -1174,6 +1180,14 @@
 			"editEvent": "Edit Event",
 			"increaseTensionMeter": "Increase Tension Meter",
 			"removeMember": "Remove Member From Party"
+		},
+		"DIALOG.fortuneRefresh": {
+			"BUTTONS": {
+				"recoverFortuneToken": "Recover Fortune Token",
+				"removeRechargeToken": "Remove Recharge Token"
+			},
+			"description": "Your party's fortune have just refreshed. You can recover one fortune token or remove a recharge token from one of your cards currently on cooldown.",
+			"title": "Party Fortune Refreshed"
 		},
 		"FIELDS": {
 			"fortunePool.label": "Fortune Pool",

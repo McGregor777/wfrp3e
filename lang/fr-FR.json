@@ -1072,6 +1072,12 @@
 		}
 	},
 
+	"ITEMSELECTOR": {
+		"ACTIONS.chooseItem": "Choisir l'objet",
+		"selectedItem": "Objet sélectionné :",
+		"title": "Sélecteur d'objet"
+	},
+
 	"INSANITY": {
 		"ACTIONS.update": "Enregistrer la folie",
 		"FIELDS": {
@@ -1174,6 +1180,14 @@
 			"editEvent": "Éditer l'évènement",
 			"increaseTensionMeter": "Augmenter la Jauge de Tension",
 			"removeMember": "Retirer le membre du groupe"
+		},
+		"DIALOG.fortuneRefresh": {
+			"BUTTONS": {
+				"recoverFortuneToken": "Récupérer un point de fortune",
+				"removeRechargeToken": "Retirer un jeton de rechargement"
+			},
+			"description": "Les points de fortune de votre groupe viennent d'être rafraîchis. Vous pouvez récupérer un point de fortune ou retirer un jeton de l'une de vos cartes en cours de rechargement.",
+			"title": "Rafraîchissement des points de fortune du groupe"
 		},
 		"FIELDS": {
 			"fortunePool.label": "Réserve de Fortune",

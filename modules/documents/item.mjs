@@ -120,7 +120,7 @@ export default class Item extends foundry.documents.Item
 
 	/**
 	 * Either adds or removes a recharge token on an item.
-	 * @param {number} amount The number of recharge token to add or remove.
+	 * @param {number} amount The number of recharge tokens to add or remove.
 	 * @returns {Promise<void>}
 	 */
 	async adjustRechargeTokens(amount)
