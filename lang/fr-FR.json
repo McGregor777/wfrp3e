@@ -908,7 +908,7 @@
 						"label": "Script conditionnel"
 					},
 					"postRollScript": {
-						"hint": "Ce script est exécuté une fois que le test a été lancé afin d'accomplir des opérations consécutives sur l'objet concerné.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur ayant accompli le test.\n\t- {DiePool} diePool: La réserve de dé lancé pour le test.\n\t- {CheckData} checkData: Diverses données concernant le test.",
+						"hint": "Ce script est exécuté une fois que le test a été lancé afin d'accomplir des opérations consécutives sur l'objet concerné.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur ayant accompli le test.\n\t- {DiePool} diePool: La réserve de dé lancé pour le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le résultat du jet de dés.",
 						"label": "Script post-lancer"
 					},
 					"script": {

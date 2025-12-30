@@ -908,7 +908,7 @@
 						"label": "Conditional Script"
 					},
 					"postRollScript": {
-						"hint": "This script is executed once the check has been rolled in order to perform follow-up operations on the related Item.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {DiePool} diePool: The die pool of the rolled check.\n\t- {CheckData} checkData: Various data related to the check.",
+						"hint": "This script is executed once the check has been rolled in order to perform follow-up operations on the related Item.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {DiePool} diePool: The die pool of the rolled check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The resulting check roll.",
 						"label": "Post-Roll Script"
 					},
 					"script": {

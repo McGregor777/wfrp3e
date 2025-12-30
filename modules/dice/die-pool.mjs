@@ -245,16 +245,6 @@ export default class DiePool
 						actor.update(updates);
 				}
 			}
-
-			// Execute the effects from all selected items.
-			const triggeredEffects = this.checkData.triggeredEffects;
-			if(triggeredEffects != null) {
-				if(Array.isArray(triggeredEffects))
-					for(const effectUuid of triggeredEffects)
-						await this.executeActiveEffectMacro(effectUuid, "postRollScript");
-				else
-					await this.executeActiveEffectMacro(triggeredEffects, "postRollScript");
-			}
 		}
 
 		const checkRoll = await wfrp3e.dice.CheckRoll.create(
@@ -266,6 +256,16 @@ export default class DiePool
 			speaker: {actor}
 		});
 
+		// Execute the effects from all selected items.
+		const triggeredEffects = this.checkData.triggeredEffects;
+		if(triggeredEffects != null) {
+			if(Array.isArray(triggeredEffects))
+				for(const effectUuid of triggeredEffects)
+					await this.executeActiveEffectMacro(effectUuid, "postRollScript", {checkRoll});
+			else
+				await this.executeActiveEffectMacro(triggeredEffects, "postRollScript", {checkRoll});
+		}
+
 		if(this.sound)
 			AudioHelper.play({src: this.sound}, true);
 
@@ -276,15 +276,16 @@ export default class DiePool
 	 * Executes the Manual Pre Check Roll Macro from an Active Effect.
 	 * @param {string} effectUuid The uuid of the Active Effect.
 	 * @param {string} script The type of script to execute.
+	 * @param {Object} options Additional parameters to pass as parameters for the Active Effect Macro's script.
 	 * @returns {Promise<void>}
 	 */
-	async executeActiveEffectMacro(effectUuid, script = "script")
+	async executeActiveEffectMacro(effectUuid, script = "script", options = {})
 	{
 		const actor = await fromUuid(this.checkData.actor),
 			  /** @var {ActiveEffect} effect */
 			  effect = await fromUuid(effectUuid);
 
-		await effect.triggerMacro({actor, checkData: this.checkData, diePool: this}, script);
+		await effect.triggerMacro({actor, checkData: this.checkData, diePool: this, ...options}, script);
 	}
 
 
