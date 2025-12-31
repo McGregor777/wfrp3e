@@ -2,33 +2,49 @@
   "folder": "VUMz1tBRkXXXUVEt",
   "name": "Hideous Injury",
   "type": "criticalWound",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/wounds/blood-drip-droplet-red.webp",
   "system": {
     "description": "<p>The Severity Rating of every critical wound affecting you increases by 1.</p>",
     "severityRating": 2
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Hideous Injury",
+      "img": "icons/skills/wounds/blood-drip-droplet-red.webp",
+      "_id": "a7fn4yhdXvKRBS43",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>The Severity Rating of every critical wound affecting you increases by 1.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!Lrfj0U90zkZ8W1Sj.a7fn4yhdXvKRBS43"
+    }
+  ],
   "sort": 0,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
-  "flags": {
-    "scene-packer": {
-      "hash": "24af003989e3faae8f7f5ae2f4f87b40c724a04b"
-    }
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.341",
-    "createdTime": 1682264544162,
-    "modifiedTime": 1715380997987,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
-  },
+  "flags": {},
   "_id": "Lrfj0U90zkZ8W1Sj",
   "_key": "!items!Lrfj0U90zkZ8W1Sj"
 }
