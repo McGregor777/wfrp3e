@@ -778,7 +778,10 @@ export default class CheckRoll extends foundry.dice.Roll
 						actor,
 						outcome,
 						targetActor
-					)
+					);
+
+		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.CheckOutcomeMacro.TYPE))
+			await effect.triggerMacro({actor, checkData, checkRoll: this, outcome, target: targetActor});
 
 		if(targetActor) {
 			if(targetActor.type === "creature" && !targetActor.system.nemesis)

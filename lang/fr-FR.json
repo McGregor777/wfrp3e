@@ -840,6 +840,13 @@
 				},
 				"label": "Transition de carrière"
 			},
+			"checkOutcome": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté durant le calcul du résultat d'un test.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur ayant accompli le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le test concerné dont le résultat est calculé.\n\t- {CheckOutcome} outcome: L'addition de tous les changements à appliquer à l'acteur et à la cible.\n\t- {Actor} target: L'acteur ciblé par le test.",
+					"label": "Script"
+				},
+				"label": "Calcul du résultat d'un test"
+			},
 			"checkPreparation": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté chaque fois qu'un test est préparé ou re-préparé.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur préparant le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {DiePool} diePool: La réserve de dés actuelle du test.",

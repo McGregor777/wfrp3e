@@ -2,33 +2,49 @@
   "folder": "VUMz1tBRkXXXUVEt",
   "name": "Dislocated Shoulder",
   "type": "criticalWound",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/wounds/bone-broken-knee-beam.webp",
   "system": {
-    "description": "<p>You inflict &ndash;2 damage with <em>Melee Attacks</em> and <em>Ranged Attacks</em>.</p>",
+    "description": "<p>You inflict –2 damage with <em>Melee Attacks</em> and <em>Ranged Attacks</em>.</p>",
     "severityRating": 3
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Dislocated Shoulder",
+      "img": "icons/skills/wounds/bone-broken-knee-beam.webp",
+      "_id": "zKPY94PHEN4FCRXf",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "const action = await fromUuid(checkData.action);\nif([\"melee\", \"ranged\"].includes(checkData.action.system[checkData.face].type))\n  outcome.targetDamages -= 2;",
+          "type": "checkOutcome"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You inflict –2 damage with <em>Melee Attacks</em> and <em>Ranged Attacks</em>.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!JOD9Z13bxGFYQt35.zKPY94PHEN4FCRXf"
+    }
+  ],
   "sort": 0,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
-  "flags": {
-    "scene-packer": {
-      "hash": "44fb4311dcc8f8099188d90867226ab4b1db136b"
-    }
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.341",
-    "createdTime": 1682264544162,
-    "modifiedTime": 1715380997987,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
-  },
+  "flags": {},
   "_id": "JOD9Z13bxGFYQt35",
   "_key": "!items!JOD9Z13bxGFYQt35"
 }

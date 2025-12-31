@@ -25,6 +25,7 @@ export default class ActiveEffectMacro extends foundry.abstract.DataModel
 	 *   actionUsage: ActionUsageMacro
 	 *   careerSocket: CareerSocketMacro
 	 *   careerTransition: CareerTransitionMacro
+	 *   checkOutcome: CheckOutcomeMacro
 	 *   checkPreparation: CheckPreparationMacro
 	 *   checkRoll: CheckRollMacro
 	 *   creationPointInvestment: CreationPointInvestmentMacro

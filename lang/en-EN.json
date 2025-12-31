@@ -840,6 +840,13 @@
 				},
 				"label": "Career Transition"
 			},
+			"checkOutcome": {
+				"FIELDS.script": {
+					"hint": "This script is executed during a check outcome calculation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The concerned Check Roll which outcome is being calculated.\n\t- {CheckOutcome} outcome: The sum-up of the changes to be applied to both the actor and the target.\n\t- {Actor} target: The Actor targeted by the check.",
+					"label": "Script"
+				},
+				"label": "Check Outcome"
+			},
 			"checkPreparation": {
 				"FIELDS.script": {
 					"hint": "This script is executed every time a check is being prepared or re-prepared.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor preparing the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {DiePool} diePool: The current die pool of the check.",

@@ -2,6 +2,7 @@ export {default as ActionUsageMacro} from "./action-usage-macro.mjs";
 export {default as ActiveEffectMacro} from "./active-effect-macro.mjs";
 export {default as CareerSocketMacro} from "./career-socket-macro.mjs";
 export {default as CareerTransitionMacro} from "./career-transition-macro.mjs";
+export {default as CheckOutcomeMacro} from "./check-outcome-macro.mjs";
 export {default as CheckPreparationMacro} from "./check-preparation-macro.mjs";
 export {default as CheckRollMacro} from "./check-roll-macro.mjs";
 export {default as CreationPointInvestmentMacro} from "./creation-point-investment-macro.mjs";
