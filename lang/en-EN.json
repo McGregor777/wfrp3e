@@ -875,6 +875,13 @@
 				},
 				"label": "Fatigue Adjustment"
 			},
+			"fortuneRefresh": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the fortune of the Actor's party refreshes.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose party has its fortune refreshing.\n\t- {number} party: The party which fortune is refreshing.",
+					"label": "Script"
+				},
+				"label": "Fortune Refresh"
+			},
 			"itemAddition": {
 				"FIELDS.script": {
 					"hint": "This script is executed whenever the item owning this Active Effect is added to an Actor.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor receiving the item.\n\t- {Item} item: The added item.",

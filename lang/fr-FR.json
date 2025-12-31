@@ -875,6 +875,13 @@
 				},
 				"label": "Ajustement de la fatigue"
 			},
+			"fortuneRefresh": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que le groupe d'aventuriers dont l'acteur fait partie voit la fortune se rafraîchir.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont le groupe d'aventuriers voit la fortune se rafraîchir.\n\t- {number} party: Le groupe d'aventuriers dont la fortune se rafraîchit.",
+					"label": "Script"
+				},
+				"label": "Rafraîchissement de la fortune"
+			},
 			"itemAddition": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté dès que l'objet contenant cet effet actif est ajouté à un acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur recevant l'objet.\n\t- {Item} item: L'objet ajouté.",

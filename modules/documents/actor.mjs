@@ -780,6 +780,9 @@ export default class Actor extends foundry.documents.Actor
 							await this.adjustFortune(-1);
 						}
 					});
+
+					for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.FortuneRefreshMacro.TYPE))
+						await effect.triggerMacro({actor: memberActor, party: this});
 				}
 			}
 	}
