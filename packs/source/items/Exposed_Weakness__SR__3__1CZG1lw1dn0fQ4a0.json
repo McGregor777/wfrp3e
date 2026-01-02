@@ -2,33 +2,56 @@
   "folder": "VUMz1tBRkXXXUVEt",
   "name": "Exposed Weakness (SR: 3)",
   "type": "criticalWound",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/wounds/injury-body-pain-gray.webp",
   "system": {
     "description": "<p>Reduce your Soak Value by 1.</p>",
     "severityRating": 3
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Exposed Weakness",
+      "img": "icons/skills/wounds/injury-body-pain-gray.webp",
+      "_id": "PM5A379BFMxx10eA",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [
+        {
+          "key": "system.soakModifier",
+          "mode": 2,
+          "value": "1",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Reduce your Soak Value by 1.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!1CZG1lw1dn0fQ4a0.PM5A379BFMxx10eA"
+    }
+  ],
   "sort": 0,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
-  "flags": {
-    "scene-packer": {
-      "hash": "97cc3e09d64dda407481b5e811a82a7494ed6c7c"
-    }
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.341",
-    "createdTime": 1682264544162,
-    "modifiedTime": 1715380997987,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
-  },
+  "flags": {},
   "_id": "1CZG1lw1dn0fQ4a0",
   "_key": "!items!1CZG1lw1dn0fQ4a0"
 }

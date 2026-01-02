@@ -82,6 +82,11 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	encumbranceLimitModifier = 0;
 
 	/**
+	 * @type {number} The soak modifier for the Actor.
+	 */
+	soakModifier = 0;
+
+	/**
 	 * The actor's default stance, depending on the largest side of their stance meter.
 	 * @returns {string}
 	 */
@@ -161,7 +166,7 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	 */
 	get totalSoak()
 	{
-		let totalSoak = 0;
+		let totalSoak = this.soakModifier;
 
 		for(const armour of this.parent.itemTypes.armour)
 			totalSoak += armour.system.soakValue;

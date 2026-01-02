@@ -58,8 +58,9 @@ export default class Creature extends Actor
 	/** @inheritDoc */
 	get totalSoak()
 	{
-		if(super.totalSoak === 0)
-			return this.soakValue;
+		return this.parent.itemTypes.armour.length > 0
+			? super.totalSoak
+			: this.soakValue + this.soakModifier;
 	}
 
 	/**
