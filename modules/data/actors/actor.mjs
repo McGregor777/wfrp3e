@@ -67,7 +67,7 @@ export default class Actor extends foundry.abstract.TypeDataModel
 			}),
 			stance: new fields.SchemaField({
 				...stance,
-				current: new fields.NumberField(requiredNonNullablePositiveInteger)
+				current: new fields.NumberField({...requiredNonNullablePositiveInteger, min: undefined})
 			}),
 			wounds: new fields.SchemaField({
 				max: new fields.NumberField({...requiredNonNullablePositiveInteger, initial: 10}),
