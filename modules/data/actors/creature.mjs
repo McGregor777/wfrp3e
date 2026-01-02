@@ -51,8 +51,9 @@ export default class Creature extends Actor
 	/** @inheritDoc */
 	get totalDefence()
 	{
-		if(super.totalDefence === 0)
-			return this.defenceValue;
+		return this.parent.itemTypes.armour.length > 0
+			? super.totalDefence
+			: this.defenceValue + this.defenceModifier;
 	}
 
 	/** @inheritDoc */

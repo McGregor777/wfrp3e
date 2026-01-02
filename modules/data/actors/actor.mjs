@@ -77,6 +77,11 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	}
 
 	/**
+	 * @type {number} The defence modifier for the Actor.
+	 */
+	defenceModifier = 0;
+
+	/**
 	 * @type {number} The encumbrance limit modifier for the Actor.
 	 */
 	encumbranceLimitModifier = 0;
@@ -152,7 +157,7 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	 */
 	get totalDefence()
 	{
-		let totalDefence = 0;
+		let totalDefence = this.defenceModifier;
 
 		for(const armour of this.parent.itemTypes.armour)
 			totalDefence += armour.system.defenceValue;
