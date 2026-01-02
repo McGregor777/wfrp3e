@@ -15,6 +15,7 @@ export {default as ManualPreCheckRollMacro} from "./manual-pre-check-roll-macro.
 export {default as ManualMacro} from "./manual-macro.mjs";
 export {default as PowerFavourAdjustmentMacro} from "./power-favour-adjustment-macro.mjs";
 export {default as RequirementMacro} from "./requirement-macro.mjs";
+export {default as StanceAdjustmentMacro} from "./stance-adjustment-macro.mjs";
 export {default as StartingSkillTrainingSelectionMacro} from "./starting-skill-training-selection-macro.mjs";
 export {default as StartingTalentSelectionMacro} from "./starting-talent-selection-macro.mjs";
 export {default as StressAdjustmentMacro} from "./stress-adjustment-macro.mjs";

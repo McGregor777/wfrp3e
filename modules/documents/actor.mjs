@@ -47,6 +47,9 @@ export default class Actor extends foundry.documents.Actor
 	{
 		super._onUpdate(changed, options, userId);
 
+		if(changed.system?.stance?.current)
+			this.#onStanceChange(changed.system.stance.current);
+
 		try {
 			const functionName = `_on${capitalize(this.type)}Update`;
 
@@ -72,6 +75,17 @@ export default class Actor extends foundry.documents.Actor
 			for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.EmbeddedItemCreationMacro.TYPE))
 				effect.triggerMacro({actor: parent, items: data});
 		}
+	}
+
+	/**
+	 * Upon change to the Actor's stance, execute relevant On Stance Adjustment Macros.
+	 * @param {number} newStance The new stance value.
+	 * @private
+	 */
+	#onStanceChange(newStance)
+	{
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.StanceAdjustmentMacro.TYPE))
+			effect.triggerMacro({actor: this, current: this.system.stance.current, value: newStance});
 	}
 
 	/**

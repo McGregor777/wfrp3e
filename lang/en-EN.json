@@ -947,6 +947,13 @@
 				},
 				"label": "Requirement"
 			},
+			"stanceAdjustment": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor's stance is adjusted.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose stance is being adjusted.\n\t- {number} current: The current stance of the Actor.\n\t- {number} value: The new stance value of the Actor.",
+					"label": "Script"
+				},
+				"label": "Stance Adjustment"
+			},
 			"startingSkillTrainingSelection": {
 				"FIELDS.script": {
 					"hint": "This script is executed before Starting Skill Training Selection starts during Character Generation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Array} options.freeAcquisitions: The UUIDs of the skills acquired for free.\n\t- {Array} options.freeTrainings: The UUIDs of the skills trained for free.",

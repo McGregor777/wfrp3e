@@ -38,6 +38,7 @@ export default class ActiveEffectMacro extends foundry.abstract.DataModel
 	 *   manual: ManualMacro
 	 *   powerFavourAdjustment: PowerFavourAdjustmentMacro
 	 *   requirement: RequirementMacro
+	 *   stanceAdjustment: StanceAdjustmentMacro
 	 *   startingSkillTrainingSelection: StartingSkillTrainingSelectionMacro
 	 *   startingTalentSelection: StartingTalentSelectionMacro
 	 *   stressAdjustement: StressAdjustementMacro

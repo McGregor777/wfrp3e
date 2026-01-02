@@ -947,6 +947,13 @@
 				},
 				"label": "Vérification des conditions"
 			},
+			"stanceAdjustment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que l'attitude d'un acteur est ajustée en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont l'attitude est sur le point d'être ajustée.\n\t- {number} current: L'attitude actuelle de l'acteur.\n\t- {number} value: La nouvelle valeur de l'attitude.",
+					"label": "Script"
+				},
+				"label": "Ajustement de l'attitude"
+			},
 			"startingSkillTrainingSelection": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté avant que la sélection des formations de compétences de départ ne démarre durant la génération de personnage.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Array} options.freeAcquisitions: Les UUIDs des compétences acquises gratuitement.\n\t- {Array} options.freeTrainings: Les UUIDs des compétences entraînées gratuitement.",
