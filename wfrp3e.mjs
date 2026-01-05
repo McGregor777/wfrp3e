@@ -70,6 +70,10 @@ Hooks.on("renderChatMessage", (message, html, context) => {
 	});
 });
 
+Hooks.on("applyActiveEffect", (actor, change, current, delta, object) => {
+	foundry.utils.setProperty(actor, change.key, current - Math.sign(current) * delta);
+});
+
 // Register all WFRP3e special dice to Dice So Nice!
 Hooks.once("diceSoNiceReady", (dice3d) => {
 	dice3d.addSystem({id: "wfrp3e", name: "Warhammer Fantasy Roleplay - 3rd Edition"}, "preferred");

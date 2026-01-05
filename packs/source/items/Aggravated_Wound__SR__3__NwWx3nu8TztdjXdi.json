@@ -1,35 +1,57 @@
 {
   "name": "Aggravated Wound (SR: 3)",
   "type": "criticalWound",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/wounds/injury-stitched-flesh-red.webp",
   "system": {
     "description": "<p>Your stance is considered one space closer to neutral.</p>",
     "severityRating": 3
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Aggravated Wound",
+      "img": "icons/skills/wounds/injury-stitched-flesh-red.webp",
+      "_id": "FidDhhNZ3tLKUg0c",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [
+        {
+          "key": "system.stance.current",
+          "mode": 0,
+          "value": "1",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your stance is considered one space closer to neutral.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!NwWx3nu8TztdjXdi.FidDhhNZ3tLKUg0c"
+    }
+  ],
   "folder": "VUMz1tBRkXXXUVEt",
   "sort": 100000,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
-  "flags": {
-    "core": {},
-    "scene-packer": {
-      "hash": "aaab02e58cd32cf312e2872762beb24aa6d27b90"
-    }
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.341",
-    "createdTime": 1682261461291,
-    "modifiedTime": 1715380997987,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": "Item.MRNR11HzgwX6fHrg",
-    "duplicateSource": null,
-    "exportSource": null
-  },
+  "flags": {},
   "_id": "NwWx3nu8TztdjXdi",
   "_key": "!items!NwWx3nu8TztdjXdi"
 }
