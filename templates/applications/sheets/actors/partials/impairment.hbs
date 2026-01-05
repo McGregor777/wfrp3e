@@ -10,7 +10,7 @@
 		<img src="{{token}}" alt="{{localize (concat 'ACTOR.FIELDS.impairments.' impairment.name '.tokens')}}" />
 
 		<span class="token-counter">
-			{{getProperty source impairment.fieldPath}}
+			{{getProperty @root.document impairment.fieldPath}}
 		</span>
 	</a>
 </div>
