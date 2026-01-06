@@ -30,7 +30,7 @@
       "description": "<p>When spending fortune points on an Intuition or Observation check, add {De} instead of {Df} for each fortune point spent</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

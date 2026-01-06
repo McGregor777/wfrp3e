@@ -30,7 +30,7 @@
       "description": "<p>Once per session, you may treat your Fellowship characteristic as if it were one point higher</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

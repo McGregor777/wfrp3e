@@ -28,7 +28,7 @@
       "description": "<p>You inflict +1 damage against henchmen and against any target with a lower Strength than yours</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

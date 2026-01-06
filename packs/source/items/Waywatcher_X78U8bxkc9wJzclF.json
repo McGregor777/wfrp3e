@@ -28,7 +28,7 @@
       "description": "<p>Your combat initiative checks gain {Df} {Df}</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

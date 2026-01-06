@@ -29,7 +29,7 @@
       "description": "<p>Once per session, you may re-roll the entire dice pool for any single check. Dice cannot be changed or added to the pool. You must accept the new result</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

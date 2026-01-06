@@ -28,7 +28,7 @@
       "description": "<p>Your Education checks gain:</p><p>{Sbo}{Sbo} Add 1 fortune to the party fortune pool</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

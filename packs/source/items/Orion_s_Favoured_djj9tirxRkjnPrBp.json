@@ -33,7 +33,7 @@
       "description": "<p>Before investing any creation points, a wood elf may train one of the following skills – Ballistic Skill, Nature Lore, Observation, or Stealth.</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

@@ -30,7 +30,7 @@
       "description": "<p>Illegal activites you perform that require a skill check gain:</p><p>{Sbo} Recover 1 stress</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

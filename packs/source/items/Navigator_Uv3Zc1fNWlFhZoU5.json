@@ -30,7 +30,7 @@
       "description": "<p>You may spend one fortune point to get your bearings when lost, discern true north, or add {Df} {Df} to a check to navigate in foreign terrain</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

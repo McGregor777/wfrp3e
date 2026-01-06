@@ -35,7 +35,7 @@
       "description": "<p>Wood elves gain a {Df} fortune die to combat initiative, as well as to Observation and Stealth checks while they are in woodland terrain.</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

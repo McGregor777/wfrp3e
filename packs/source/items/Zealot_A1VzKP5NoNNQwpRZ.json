@@ -25,10 +25,10 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>A Zealot can acquire an Insanity during character creation as one of that character’s talent choices</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

@@ -30,7 +30,7 @@
       "description": "<p>Once per session, you may add {De} to a Ride check or to a Ballistic Skill check made while mounted or while on a moving vehicle</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

@@ -33,7 +33,7 @@
       "description": "<p>High elves acquire (but do not train) the advanced skill Education for free during character creation.</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

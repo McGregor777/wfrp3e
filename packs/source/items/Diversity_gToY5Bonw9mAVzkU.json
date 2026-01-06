@@ -33,7 +33,7 @@
       "description": "<p>At character creation, Reiklanders begin with 25 creation points.</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

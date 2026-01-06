@@ -33,7 +33,7 @@
       "description": "<p>If your character does not rely on power or favour, suffer 1 fatigue when this wound is acquired.</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

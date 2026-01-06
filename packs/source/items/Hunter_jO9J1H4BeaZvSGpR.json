@@ -30,7 +30,7 @@
       "description": "<p>You gain {Df} to Nature Lore checks to track animals and beasts, Observation checks to notice animals and beasts, and Ballistic Skill checks to attack animals and beasts</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

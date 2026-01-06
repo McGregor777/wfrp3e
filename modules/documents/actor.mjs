@@ -494,18 +494,13 @@ export default class Actor extends foundry.documents.Actor
 	 */
 	findTriggeredItems(macroType, parameters = {})
 	{
-		const items = [];
-		for(const item of this.items)
-			if(item.effects.size > 0
-				&& (item.system.rechargeTokens === undefined || item.system.rechargeTokens <= 0)
-				&& (item.system.socket === undefined || item.system.socket)
-				&& (item.system.current
-					|| item.system.advances?.dedicationBonus === undefined
-					|| item.system.advances.dedicationBonus)
+		return this.items.filter(item => {
+			return item.effects.size > 0
 				&& item.effects.some(effect => effect.system.macro.type === macroType
-					&& effect.checkConditionalScript(parameters)))
-				items.push(item);
-		return items;
+					&& !effect.isSuppressed
+					&& effect.checkConditionalScript(parameters)
+			)
+		});
 	}
 
 	/**
@@ -516,12 +511,24 @@ export default class Actor extends foundry.documents.Actor
 	 */
 	findTriggeredEffects(macroType, parameters = {})
 	{
-		return [
-			...this.effects.filter(effect => effect.system.macro.type === macroType && effect.checkConditionalScript()),
-			...this.findTriggeredItems(macroType, parameters).map(item => {
-				return item.effects.find(effect => effect.system.macro.type === macroType)
-			})
-		];
+		const effects = this.appliedEffects.filter(effect => {
+			return effect.system.macro.type === macroType
+				&& !effect.isSuppressed
+				&& effect.checkConditionalScript(parameters)
+		});
+
+		for(const item of this.items) {
+			const effect = item.effects.find(effect => {
+				return effect.system.macro.type === macroType
+					&& !effect.transfer
+					&& !effect.isSuppressed
+					&& effect.checkConditionalScript(parameters)
+			});
+			if(effect)
+				effects.push(effect);
+		}
+
+		return effects;
 	}
 
 	//#region Character methods

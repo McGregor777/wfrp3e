@@ -35,7 +35,7 @@
       "description": "<p>Once per session, a Reiklander may add two fortune dice {Df} {Df} to any single check.</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

@@ -28,7 +28,7 @@
       "description": "<p>Whenever fortune refreshes, recover one fatigue</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

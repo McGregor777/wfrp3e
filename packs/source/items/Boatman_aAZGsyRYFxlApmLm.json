@@ -30,7 +30,7 @@
       "description": "<p>You may remove {Dm} from your dice pool when attempting Athletics, Coordination, Stealth, or Discipline checks while on a boat, ship, or unstable surface</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

@@ -28,7 +28,7 @@
       "description": "<p>Add 1 fortune point to the party’s fortune pool the first time you suffer stress during an encounter</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

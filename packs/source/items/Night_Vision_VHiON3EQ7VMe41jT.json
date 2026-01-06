@@ -35,7 +35,7 @@
       "description": "<p>Two fewer {Dm} {Dm} misfortune dice are added to your dice pool for any effects from darkness or lack of sufficient light.</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},

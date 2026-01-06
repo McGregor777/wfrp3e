@@ -28,7 +28,7 @@
       "description": "<p>Each time fortune refreshes, you may immediately perform a free manoeuvre</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},
