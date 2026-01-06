@@ -347,9 +347,9 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 				const item = this.actor.items.get(html.closest("[data-item-id]").dataset.itemId);
 
 				await foundry.applications.api.DialogV2.confirm({
-					window: {title: game.i18n.localize("APPLICATION.TITLE.DeleteItem")},
+					window: {title: game.i18n.localize("DIALOG.deleteItem.title")},
 					modal: true,
-					content: `<p>${game.i18n.format("APPLICATION.DESCRIPTION.DeleteItem", {item: item.name})}</p>`,
+					content: `<p>${game.i18n.format("DIALOG.deleteItem.description", {item: item.name})}</p>`,
 					submit: async (result) => {
 						if(result)
 							await this.actor.deleteEmbeddedDocuments("Item", [item._id]);
