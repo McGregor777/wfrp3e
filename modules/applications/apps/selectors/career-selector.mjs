@@ -27,8 +27,13 @@ export default class CareerSelector extends ItemSelector
 	{
 		let partContext = await super._preparePartContext(partId, context);
 
-		if(partId === "main")
-			partContext.characteristics = wfrp3e.data.actors.Actor.CHARACTERISTICS;
+		if(partId === "main") {
+			partContext = {
+				...partContext,
+				characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
+				types: wfrp3e.data.items.Talent.TYPES
+			};
+		}
 
 		return partContext;
 	}

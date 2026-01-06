@@ -141,6 +141,26 @@
 			</div>
 		</div>
 
+		<div class="socket-container">
+			{{#each system.sockets as |socket sckt|}}
+				{{#if socket.item}}
+					{{#with (fromUuid socket.item) as |socketedItem|}}
+						<a class="socket {{socketedItem.system.type}}"
+						   data-item-id="{{socketedItem._id}}"
+						   data-action="editItem"
+						   data-tooltip="{{localize 'ACTOR.ACTIONS.editItem'}}">
+							{{socketedItem.name}}
+							<span class="fa-solid fa-pen-to-square"></span>
+						</a>
+					{{/with}}
+				{{else}}
+					<div class="socket {{socket.type}}">
+						{{localize (lookup @root.types socket.type)}}
+					</div>
+				{{/if}}
+			{{/each}}
+		</div>
+
 		<img class="art" src="{{item.img}}" />
 	</div>
 

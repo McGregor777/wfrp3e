@@ -43,6 +43,7 @@ export function initialiseHelpers()
 	Handlebars.registerHelper({
 		abs,
 		find,
+		fromUuid,
 		getProperty,
 		includes,
 		increment,
@@ -75,6 +76,16 @@ export function initialiseHelpers()
 	function find(value, array)
 	{
 		return array.find(item => item === value);
+	}
+
+	/**
+	 * Fetches a document by its uuid.
+	 * @param {string} uuid The uuid of the document to fetch.
+	 * @returns {Document} The fetched document, or undefined if none has been found.
+	 */
+	function fromUuid(uuid)
+	{
+		return fromUuidSync(uuid);
 	}
 
 	/**
