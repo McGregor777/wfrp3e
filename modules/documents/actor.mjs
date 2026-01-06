@@ -516,9 +516,12 @@ export default class Actor extends foundry.documents.Actor
 	 */
 	findTriggeredEffects(macroType, parameters = {})
 	{
-		return this.findTriggeredItems(macroType, parameters).map(item => {
-			return item.effects.find(effect => effect.system.macro.type === macroType)
-		});
+		return [
+			...this.effects.filter(effect => effect.system.macro.type === macroType && effect.checkConditionalScript()),
+			...this.findTriggeredItems(macroType, parameters).map(item => {
+				return item.effects.find(effect => effect.system.macro.type === macroType)
+			})
+		];
 	}
 
 	//#region Character methods
