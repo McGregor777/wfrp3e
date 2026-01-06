@@ -556,7 +556,7 @@ export default class Item extends foundry.documents.Item
 
 		if(owningDocument.type === "career")
 			for(const effect of this.effects)
-				if(effect.macro.type === wfrp3e.data.macros.CareerSocketMacro.TYPE)
+				if(effect.system.macro.type === wfrp3e.data.macros.CareerSocketMacro.TYPE)
 					effect.triggerMacro();
 	}
 
