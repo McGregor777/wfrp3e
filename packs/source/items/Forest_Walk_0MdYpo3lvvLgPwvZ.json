@@ -32,7 +32,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>Wood elves may ignore terrain-based manoeuvre penalties and up to {Dm} {Dm} misfortune penalties to movement and actions performed while in woodland terrain.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": false,

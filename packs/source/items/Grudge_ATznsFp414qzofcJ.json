@@ -32,7 +32,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>A Karak Azgaraz dwarf gains {Df} to all Melee Attack and Ranged Attack actions against Greenskins, and against any target that has wounded him. This bonus lasts until the end of the encounter.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": false,

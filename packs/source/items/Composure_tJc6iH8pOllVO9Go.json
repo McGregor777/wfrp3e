@@ -30,7 +30,7 @@
         "startRound": null,
         "startTurn": null
       },
-      "description": "",
+      "description": "<p>During character creation, a high elf may choose one Focus talent for free. This does not use any of the high elf ’s creation points.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": false,
