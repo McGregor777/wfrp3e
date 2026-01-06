@@ -321,15 +321,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			name: "ACTOR.ACTIONS.flip",
 			icon: '<i class="fa-solid fa-undo"></i>',
 			condition: html => html.closest(".face") || html.querySelector(".face"),
-			callback: async html => {
-				const itemElement = html.closest(".item");
-
-				for(const element of itemElement.querySelectorAll(".face.active"))
-					element.classList.remove("active");
-
-				for(const element of itemElement.querySelectorAll(".face:not(.active)"))
-					element.classList.add("active");
-			}
+			callback: async html => ActorSheet.#flip(null, html)
 		}, {
 			name: "ACTOR.ACTIONS.editItem",
 			icon: '<i class="fa-solid fa-pen-to-square"></i>',
