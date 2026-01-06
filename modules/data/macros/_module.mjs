@@ -1,5 +1,6 @@
 export {default as ActionUsageMacro} from "./action-usage-macro.mjs";
 export {default as ActiveEffectMacro} from "./active-effect-macro.mjs";
+export {default as ActorPreparationMacro} from "./actor-preparation-macro.mjs";
 export {default as CareerSocketMacro} from "./career-socket-macro.mjs";
 export {default as CareerTransitionMacro} from "./career-transition-macro.mjs";
 export {default as CheckOutcomeMacro} from "./check-outcome-macro.mjs";

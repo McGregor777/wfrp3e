@@ -2,7 +2,39 @@
   "name": "Troll Slayer",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/troll_slayer.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Troll Slayer",
+      "img": "systems/wfrp3e/assets/images/careers/troll_slayer.webp",
+      "_id": "s6OtZb1QVs9lLGps",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "const slayerTrait = game.i18n.localize(\"TRAITS.slayer\");\nif(actor.system.currentCareer.system.traits.includes(slayerTrait)) {\n\tactor.system.defenceValue = 1;\n\tactor.system.soakValue = 1;\n\tfor(const career of actor.itemTypes.career)\n\t\tif(career.system.traits.includes(slayerTrait) && career.system.dedicationBonus)\n\t\t\tactor.system.soakValue++;\n\n\tfoundry.utils.mergeObject(actor.overrides, {system: {defenceValue: actor.system.defenceValue, soakValue: actor.system.soakValue}});\n}",
+          "type": "actorPreparation"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>While in a Slayer career, you cannot wear armour, but have a natural Defence of 1 and a natural soak value equal to 1+ the number of Slayer careers you have completed</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!n2FM1U06rByiyYRo.s6OtZb1QVs9lLGps"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -115,17 +147,6 @@
         "item": null
       }
     ]
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
-    "coreVersion": "13.350",
-    "createdTime": 1699549880862,
-    "modifiedTime": 1764321760894,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
   },
   "_id": "n2FM1U06rByiyYRo",
   "sort": 3500000,

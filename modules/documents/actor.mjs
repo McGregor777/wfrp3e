@@ -77,6 +77,15 @@ export default class Actor extends foundry.documents.Actor
 		}
 	}
 
+	/** @inheritDoc */
+	prepareDerivedData()
+	{
+		super.prepareDerivedData();
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.ActorPreparationMacro.TYPE))
+			effect.triggerMacro({actor: this});
+	}
+
 	/**
 	 * Upon change to the Actor's stance, execute relevant On Stance Adjustment Macros.
 	 * @param {number} newStance The new stance value.
@@ -478,66 +487,25 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Finds every Item owned by the actor with a triggered Active Effect Macro.
+	 * Finds every Embedded Item of an Actor with a triggered Active Effect Macro.
 	 * @param {string} macroType The type of Active Effect Macro.
 	 * @param {Object} [parameters] The parameters passed to the conditional scripts.
-	 * @returns {Item[]} An Array of Items with triggered Active Effect Macro.
+	 * @returns {Item[]} An Array of Embedded Items with a triggered Active Effect Macro.
 	 */
 	findTriggeredItems(macroType, parameters = {})
 	{
-		return [
-			...this.items.search({
-				filters: [{
-					field: "type",
-					operator: "equals",
-					value: "talent"
-				}, {
-					field: "system.rechargeTokens",
-					operator: "equals",
-					value: 0
-				}, {
-					field: "system.socket",
-					operator: "is_empty",
-					negate: true
-				}, {
-					field: "effects",
-					operator: "is_empty",
-					negate: true
-				}]
-			}),
-			this.system.currentCareer,
-			...this.items.search({
-				filters: [{
-					field: "type",
-					operator: "equals",
-					value: "career"
-				}, {
-					field: "system.dedicationBonus",
-					operator: "is_empty",
-					negate: true
-				}, {
-					field: "effects",
-					operator: "is_empty",
-					negate: true
-				}]
-			}),
-			...this.items.search({
-				filters: [{
-					field: "type",
-					operator: "contains",
-					value: ["career", "talent"],
-					negate: true
-				}, {
-					field: "effects",
-					operator: "is_empty",
-					negate: true
-				}]
-			})
-		].filter(item => item.effects.find(
-			effect => {
-				return effect.system.macro.type === macroType && effect.checkConditionalScript(parameters);
-			}
-		));
+		const items = [];
+		for(const item of this.items)
+			if(item.effects.size > 0
+				&& (item.system.rechargeTokens === undefined || item.system.rechargeTokens <= 0)
+				&& (item.system.socket === undefined || item.system.socket)
+				&& (item.system.current
+					|| item.system.advances?.dedicationBonus === undefined
+					|| item.system.advances.dedicationBonus)
+				&& item.effects.some(effect => effect.system.macro.type === macroType
+					&& effect.checkConditionalScript(parameters)))
+				items.push(item);
+		return items;
 	}
 
 	/**

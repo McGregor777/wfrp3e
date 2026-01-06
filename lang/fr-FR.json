@@ -171,6 +171,7 @@
 				},
 				"label": "Caractéristiques"
 			},
+			"defenceValue.label": "Défense",
 			"impairments": {
 				"fatigue": {
 					"label": "Fatigue",
@@ -182,6 +183,7 @@
 				},
 				"label": "Impairments"
 			},
+			"soakValue.label": "Encaissement",
 			"stance": {
 				"FIELDS": {
 					"conservative.label": "Segments de prudence",
@@ -825,6 +827,13 @@
 					"label": "Script"
 				},
 				"label": "Utilisation d'une action"
+			},
+			"actorPreparation": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté à chaque préparation d'un acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur en cours de préparation.",
+					"label": "Script"
+				},
+				"label": "Préparation d'un acteur"
 			},
 			"careerSocket": {
 				"FIELDS.script": {
@@ -1601,6 +1610,7 @@
 		"rhya": "Rhya",
 		"shallya": "Shallya",
 		"sigmar": "Sigmar",
+		"slayer": "Tueur",
 		"social": "Social",
 		"taal": "Taal",
 		"ulric": "Ulric",

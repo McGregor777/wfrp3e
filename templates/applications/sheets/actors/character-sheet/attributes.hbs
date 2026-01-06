@@ -70,6 +70,20 @@
 			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.fortune}}
 		</div>
 
+		<div class="attributes-subdivision">
+			<fieldset class="attribute {{attribute.name}}">
+				<legend>{{localize "ACTOR.FIELDS.defenceValue.label"}}</legend>
+
+				<p>{{system.totalDefence}}</p>
+			</fieldset>
+
+			<fieldset class="attribute {{attribute.name}}">
+				<legend>{{localize "ACTOR.FIELDS.soakValue.label"}}</legend>
+
+				<p>{{system.totalSoak}}</p>
+			</fieldset>
+		</div>
+
 		<div class="stance-meter">
 			<h2 class="sheet-title">
 				<a class="stance-meter-segment"

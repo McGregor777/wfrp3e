@@ -171,6 +171,7 @@
 				},
 				"label": "Characteristics"
 			},
+			"defenceValue.label": "Defence",
 			"impairments": {
 				"fatigue": {
 					"label": "Fatigue",
@@ -182,6 +183,7 @@
 				},
 				"label": "Impairments"
 			},
+			"soakValue.label": "Soak Value",
 			"stance": {
 				"FIELDS": {
 					"conservative.label": "Conservative Segments",
@@ -825,6 +827,13 @@
 					"label": "Script"
 				},
 				"label": "Action Usage"
+			},
+			"actorPreparation": {
+				"FIELDS.script": {
+					"hint": "This script is executed each time an Actor is being prepared.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor being prepared.",
+					"label": "Script"
+				},
+				"label": "Actor Preparation"
 			},
 			"careerSocket": {
 				"FIELDS.script": {
@@ -1601,6 +1610,7 @@
 		"rhya": "Rhya",
 		"shallya": "Shallya",
 		"sigmar": "Sigmar",
+		"slayer": "Slayer",
 		"social": "Social",
 		"taal": "Taal",
 		"ulric": "Ulric",

@@ -23,6 +23,7 @@ export default class ActiveEffectMacro extends foundry.abstract.DataModel
 	 * The types of Active Effect Macros.
 	 * @type {Readonly<{
 	 *   actionUsage: ActionUsageMacro
+	 *   actorPreparation: ActorPreparationMacro
 	 *   careerSocket: CareerSocketMacro
 	 *   careerTransition: CareerTransitionMacro
 	 *   checkOutcome: CheckOutcomeMacro
