@@ -41,7 +41,7 @@
 		<div class="buttons">
 			{{#if @root.editable}}
 				{{#each item.effects as |effect|}}
-					{{#if (eq effect.system.macro.type "manualTrigger")}}
+					{{#if (and (eq effect.system.macro.type "manual") effect.system.macro.script (not effect.isSuppressed))}}
 						<a data-action="useItem"
 						   data-effect-uuid="{{effect.uuid}}"
 						   data-tooltip="{{localize 'ABILITY.ACTIONS.trigger'}}" >
