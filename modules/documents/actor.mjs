@@ -69,7 +69,7 @@ export default class Actor extends foundry.documents.Actor
 		if(collection === "items") {
 			for(const item of data)
 				for(const effect of item.effects)
-					if(effect.macro.type === wfrp3e.data.macros.ItemAdditionMacro.TYPE)
+					if(effect.system.macro.type === wfrp3e.data.macros.ItemAdditionMacro.TYPE)
 						effect.triggerMacro({actor: parent, item});
 
 			for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.EmbeddedItemCreationMacro.TYPE))
