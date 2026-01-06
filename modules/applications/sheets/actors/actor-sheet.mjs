@@ -300,7 +300,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			callback: async html => {
 				const itemElement = html.closest("[data-item-id]"),
 					  options = {},
-					  face = html.querySelector(".face")?.dataset.face;
+					  face = itemElement.querySelector(".face")?.dataset.face;
 
 				if(face)
 					options.face = face;
