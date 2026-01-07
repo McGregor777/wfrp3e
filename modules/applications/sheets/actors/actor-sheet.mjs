@@ -93,9 +93,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 
 				if(this.actor.getFlag("wfrp3e", "embeddedItemsDisplayMode") === "cards")
 					for(const item of items)
-						enrichment[item.uuid] = await textEditor.enrichHTML(
-							item.system.description
-						);
+						enrichment[item.uuid] = await textEditor.enrichHTML(item.system.description);
 
 				partContext = {
 					...partContext,
@@ -194,12 +192,16 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 					const effect = item.effects.find(effect => effect.transfer && !effect.isSuppressed);
 					if(effect)
 						effects.push(effect);
+
+					if(["condition", "criticalWound", "disease", "insanity", "miscast", "mutation"].includes(item.type))
+						enrichment[item.uuid] = await textEditor.enrichHTML(item.system.description);
 				}
 
 				partContext = {
 					...partContext,
 					durations: wfrp3e.data.items.Condition.DURATIONS,
 					effects,
+					enrichment,
 					items: [
 						...this.actor.itemTypes.condition,
 						...this.actor.itemTypes.criticalWound,
