@@ -75,4 +75,16 @@ export default class ActiveEffect extends foundry.abstract.TypeDataModel
 
 		return super.migrateData(source);
 	}
+
+	get isSuppressed()
+	{
+		/** @var {Item|null} item */
+		const item = this.parent.parent instanceof foundry.documents.Item ? this.parent.parent : null;
+
+		return !(!item || (
+			(item.system.rechargeTokens === undefined || item.system.rechargeTokens <= 0)
+			&& (item.system.socket === undefined || item.system.socket)
+			&& (item.system.current || item.system.advances?.dedicationBonus === undefined || item.system.advances.dedicationBonus)
+		));
+	}
 }

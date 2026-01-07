@@ -169,8 +169,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 						partContext = {
 							...partContext,
 							availableSpecialisations,
-							maxFortunePoints: actor.system.fortune.value
-								+ (actor.system.currentParty?.system.fortunePool || 0),
+							maxFortunePoints: actor.system.fortune.value,
 							specialisations: checkData.specialisations ?? []
 						};
 					}

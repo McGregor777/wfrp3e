@@ -10,25 +10,9 @@
   "effects": [],
   "sort": 0,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
-  "flags": {
-    "scene-packer": {
-      "hash": "7ee59805ea9c56bfd948efdbf892210c605a6c6f"
-    }
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.351",
-    "createdTime": 1682264544162,
-    "modifiedTime": 1764840385857,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
-  },
+  "flags": {},
   "_id": "MGPEVFfjGePnejkW",
   "_key": "!items!MGPEVFfjGePnejkW"
 }

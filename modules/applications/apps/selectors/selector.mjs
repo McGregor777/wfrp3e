@@ -47,6 +47,12 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 	};
 
 	/**
+	 * The type of the Selector.
+	 * @type {string}
+	 */
+	static type = "";
+
+	/**
 	 * The array of Item the Selector allows to choose from.
 	 * @type {Item[]}
 	 */
@@ -71,12 +77,6 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 	 * @type {boolean}
 	 */
 	strictSelection = true;
-
-	/**
-	 * The type of the Selector.
-	 * @type {string}
-	 */
-	type = "";
 
 	/**
 	 * Returns the number of specialisations remaining to select.
@@ -127,7 +127,7 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 							)) && (this.searchFilters.type === "all" || this.searchFilters.type === item.system.type)
 						)).sort((a, b) => a.name.localeCompare(b.name))
 						: this.items,
-					itemType: this.type,
+					itemType: this.constructor.type,
 					selection: foundry.utils.deepClone(this.selection),
 					multiple: this.trueSize > 1
 				};
@@ -139,7 +139,7 @@ export default class Selector extends foundry.applications.api.HandlebarsApplica
 				partContext = {
 					...partContext,
 					selectedItems: await this._getSelectedItems(),
-					itemType: this.type,
+					itemType: this.constructor.type,
 					selectorType: this.constructor.name
 				};
 

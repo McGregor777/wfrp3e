@@ -22,6 +22,7 @@ export default class ManualPreCheckRollMacro extends ActiveEffectMacro
 	static {
 		Object.defineProperty(this, "TYPE", {value: "manualPreCheckRoll"});
 	}
+
 	/** @override */
 	static LOCALIZATION_PREFIXES = ["EFFECT.MACROS.manualPreCheckRoll", "EFFECT.MACROS"];
 

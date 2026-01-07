@@ -67,7 +67,7 @@ export default class Actor extends foundry.abstract.TypeDataModel
 			}),
 			stance: new fields.SchemaField({
 				...stance,
-				current: new fields.NumberField(requiredNonNullablePositiveInteger)
+				current: new fields.NumberField({...requiredNonNullablePositiveInteger, min: undefined})
 			}),
 			wounds: new fields.SchemaField({
 				max: new fields.NumberField({...requiredNonNullablePositiveInteger, initial: 10}),
@@ -77,9 +77,29 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	}
 
 	/**
+	 * @type {number} The defence value of the Actor.
+	 */
+	defenceValue = 0;
+
+	/**
+	 * @type {number} The defence modifier for the Actor.
+	 */
+	defenceModifier = 0;
+
+	/**
 	 * @type {number} The encumbrance limit modifier for the Actor.
 	 */
 	encumbranceLimitModifier = 0;
+
+	/**
+	 * @type {number} The soak value of the Actor.
+	 */
+	soakValue = 0;
+
+	/**
+	 * @type {number} The soak modifier for the Actor.
+	 */
+	soakModifier = 0;
 
 	/**
 	 * The actor's default stance, depending on the largest side of their stance meter.
@@ -147,11 +167,12 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	 */
 	get totalDefence()
 	{
-		let totalDefence = 0;
+		if(this.defenceValue)
+			return this.defenceValue + this.defenceModifier;
 
+		let totalDefence = this.defenceModifier;
 		for(const armour of this.parent.itemTypes.armour)
 			totalDefence += armour.system.defenceValue;
-
 		return totalDefence;
 	}
 
@@ -161,11 +182,12 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	 */
 	get totalSoak()
 	{
-		let totalSoak = 0;
+		if(this.soakValue)
+			return this.soakValue + this.soakModifier;
 
+		let totalSoak = this.soakModifier;
 		for(const armour of this.parent.itemTypes.armour)
 			totalSoak += armour.system.soakValue;
-
 		return totalSoak;
 	}
 }

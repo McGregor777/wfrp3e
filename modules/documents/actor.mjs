@@ -47,6 +47,9 @@ export default class Actor extends foundry.documents.Actor
 	{
 		super._onUpdate(changed, options, userId);
 
+		if(changed.system?.stance?.current)
+			this.#onStanceChange(changed.system.stance.current);
+
 		try {
 			const functionName = `_on${capitalize(this.type)}Update`;
 
@@ -66,12 +69,32 @@ export default class Actor extends foundry.documents.Actor
 		if(collection === "items") {
 			for(const item of data)
 				for(const effect of item.effects)
-					if(effect.macro.type === wfrp3e.data.macros.ItemAdditionMacro.TYPE)
+					if(effect.system.macro.type === wfrp3e.data.macros.ItemAdditionMacro.TYPE)
 						effect.triggerMacro({actor: parent, item});
 
 			for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.EmbeddedItemCreationMacro.TYPE))
 				effect.triggerMacro({actor: parent, items: data});
 		}
+	}
+
+	/** @inheritDoc */
+	prepareDerivedData()
+	{
+		super.prepareDerivedData();
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.ActorPreparationMacro.TYPE))
+			effect.triggerMacro({actor: this});
+	}
+
+	/**
+	 * Upon change to the Actor's stance, execute relevant On Stance Adjustment Macros.
+	 * @param {number} newStance The new stance value.
+	 * @private
+	 */
+	#onStanceChange(newStance)
+	{
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.StanceAdjustmentMacro.TYPE))
+			effect.triggerMacro({actor: this, current: this.system.stance.current, value: newStance});
 	}
 
 	/**
@@ -464,66 +487,20 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Finds every Item owned by the actor with a triggered Active Effect Macro.
+	 * Finds every Embedded Item of an Actor with a triggered Active Effect Macro.
 	 * @param {string} macroType The type of Active Effect Macro.
 	 * @param {Object} [parameters] The parameters passed to the conditional scripts.
-	 * @returns {Item[]} An Array of Items with triggered Active Effect Macro.
+	 * @returns {Item[]} An Array of Embedded Items with a triggered Active Effect Macro.
 	 */
 	findTriggeredItems(macroType, parameters = {})
 	{
-		return [
-			...this.items.search({
-				filters: [{
-					field: "type",
-					operator: "equals",
-					value: "talent"
-				}, {
-					field: "system.rechargeTokens",
-					operator: "equals",
-					value: 0
-				}, {
-					field: "system.socket",
-					operator: "is_empty",
-					negate: true
-				}, {
-					field: "effects",
-					operator: "is_empty",
-					negate: true
-				}]
-			}),
-			this.system.currentCareer,
-			...this.items.search({
-				filters: [{
-					field: "type",
-					operator: "equals",
-					value: "career"
-				}, {
-					field: "system.dedicationBonus",
-					operator: "is_empty",
-					negate: true
-				}, {
-					field: "effects",
-					operator: "is_empty",
-					negate: true
-				}]
-			}),
-			...this.items.search({
-				filters: [{
-					field: "type",
-					operator: "contains",
-					value: ["career", "talent"],
-					negate: true
-				}, {
-					field: "effects",
-					operator: "is_empty",
-					negate: true
-				}]
-			})
-		].filter(item => item.effects.find(
-			effect => {
-				return effect.system.macro.type === macroType && effect.checkConditionalScript(parameters);
-			}
-		));
+		return this.items.filter(item => {
+			return item.effects.size > 0
+				&& item.effects.some(effect => effect.system.macro.type === macroType
+					&& !effect.isSuppressed
+					&& effect.checkConditionalScript(parameters)
+			)
+		});
 	}
 
 	/**
@@ -534,9 +511,24 @@ export default class Actor extends foundry.documents.Actor
 	 */
 	findTriggeredEffects(macroType, parameters = {})
 	{
-		return this.findTriggeredItems(macroType, parameters).map(item => {
-			return item.effects.find(effect => effect.system.macro.type === macroType)
+		const effects = this.appliedEffects.filter(effect => {
+			return effect.system.macro.type === macroType
+				&& !effect.isSuppressed
+				&& effect.checkConditionalScript(parameters)
 		});
+
+		for(const item of this.items) {
+			const effect = item.effects.find(effect => {
+				return effect.system.macro.type === macroType
+					&& !effect.transfer
+					&& !effect.isSuppressed
+					&& effect.checkConditionalScript(parameters)
+			});
+			if(effect)
+				effects.push(effect);
+		}
+
+		return effects;
 	}
 
 	//#region Character methods
@@ -597,6 +589,9 @@ export default class Actor extends foundry.documents.Actor
 		if(changed.system?.members)
 			this.#onPartyMembersChange(changed.system.members);
 
+		if(changed.system?.fortunePool)
+			this.#onPartyFortunePoolChange(changed.system.fortunePool);
+
 		if(changed.system?.sockets)
 			this.#onPartySocketsChange(changed.system.sockets);
 	}
@@ -612,6 +607,17 @@ export default class Actor extends foundry.documents.Actor
 		for(const member of this.system.members)
 			if(!newMemberList.includes(member))
 				fromUuidSync(member).resetSockets(this.uuid);
+	}
+
+	/**
+	 * Upon change to the party's fortune pool, if its number of tokens equals the number of members, triggers fortune refresh.
+	 * @param {number} value The new value of the party's fortune pool'.
+	 * @private
+	 */
+	#onPartyFortunePoolChange(value)
+	{
+		if(value >= this.system.members.length)
+			this.refreshFortune();
 	}
 
 	/**
@@ -699,6 +705,78 @@ export default class Actor extends foundry.documents.Actor
 				await this.update({"system.members": members});
 			}
 		}
+	}
+
+	/**
+	 * Allows party members to either recover one fortune token or remove one recharge token from one of their recharging cards.
+	 * @returns {Promise<void>}
+	 */
+	async refreshFortune()
+	{
+		if(game.user.isGM)
+			for(const member of this.system.members) {
+				const memberActor = await fromUuid(member);
+				let owningUser = null, backupUser = null;
+
+				for(const [userId, ownershipLevel] of Object.entries(memberActor.ownership))
+					if(userId !== "default" && ownershipLevel === 3) {
+						const user = game.users.get(userId);
+						if(user.active) {
+							user.isGM ? backupUser = user : owningUser = user;
+							if(owningUser)
+								break;
+						}
+					}
+
+				if(owningUser || backupUser) {
+					const buttons = [{
+						action: "fortuneToken",
+						label: "PARTY.DIALOG.fortuneRefresh.BUTTONS.recoverFortuneToken"
+					}, {
+						action: "removeRechargeToken",
+						label: "PARTY.DIALOG.fortuneRefresh.BUTTONS.removeRechargeToken"
+					}];
+
+					if(memberActor.system.fortune.value >= memberActor.system.fortune.max)
+						buttons[0].disabled = true;
+
+					const rechargingItems = memberActor.items.search({
+						filters: [{
+							field: "system.rechargeTokens",
+							operator: "gt",
+							value: 0
+						}]
+					});
+					if(rechargingItems.length <= 0)
+						buttons[1].disabled = true;
+
+					foundry.applications.api.DialogV2.query(
+						owningUser ?? backupUser,
+						"wait", {
+						buttons,
+						content: game.i18n.localize("PARTY.DIALOG.fortuneRefresh.description"),
+						window: {title: "PARTY.DIALOG.fortuneRefresh.title"},
+						submit: async (result) => {
+							if(result === "fortuneToken")
+								await memberActor.adjustFortune(1);
+							else if(result === "removeRechargeToken") {
+								const itemUuids = await wfrp3e.applications.apps.selectors.ItemSelector.wait({
+										  items: rechargingItems
+									  }),
+									  item = await fromUuid(itemUuids[0]);
+								await item.adjustRechargeTokens(-1);
+							}
+							else
+								throw new Error(`Invalid result: ${result}`);
+
+							await this.adjustFortune(-1);
+						}
+					});
+
+					for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.FortuneRefreshMacro.TYPE))
+						await effect.triggerMacro({actor: memberActor, party: this});
+				}
+			}
 	}
 
 	//#endregion

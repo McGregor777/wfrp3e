@@ -8,7 +8,6 @@
  */
 
 import * as wfrp3e from "./modules/_module.mjs";
-import {initialiseHandlebars} from "./modules/applications/_module.mjs";
 globalThis.wfrp3e = wfrp3e;
 
 Hooks.once("init", async () => {
@@ -52,22 +51,8 @@ Hooks.once("init", async () => {
 	console.log("WFRP3e | Game System initialised | Welcome to the grim and perilous world of Warhammer Fantasy Roleplay - 3rd Edition!");
 });
 
-//#TODO Transfer this behaviour into a WFRP3eChatLog (if possible).
-Hooks.on("renderChatMessage", (message, html, context) => {
-	html.find(".dice-rolls .add-dice-pool").click(async (event) => {
-		event.stopPropagation();
-		message.rolls[0].addDicePool(await wfrp3e.applications.dice.CheckBuilder.wait(), {chatMessage: message});
-	});
-
-	html.find(".roll-effects:not(.disabled) .effect-toggle").click((event) => {
-		event.stopPropagation();
-
-		wfrp3e.dice.CheckRoll.toggleActionEffect(
-			$(event.currentTarget).parents(".chat-message").data("messageId"),
-			event.currentTarget.dataset.symbol,
-			event.currentTarget.dataset.index
-		);
-	});
+Hooks.on("applyActiveEffect", (actor, change, current, delta, object) => {
+	foundry.utils.setProperty(actor, change.key, current - Math.sign(current) * delta);
 });
 
 // Register all WFRP3e special dice to Dice So Nice!

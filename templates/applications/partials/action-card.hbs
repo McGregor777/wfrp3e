@@ -96,7 +96,10 @@
 							   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}">
 								<img src="systems/wfrp3e/assets/images/token-black.webp"
 									 alt="{{localize 'ACTOR.ACTIONS.adjustRechargeTokens'}}" />
-								<span class="recharge-token-counter">{{../../item.system.rechargeTokens}}</span>
+
+								<span class="recharge-token-counter">
+									{{../../item.system.rechargeTokens}}
+								</span>
 							</a>
 
 							<div>
@@ -115,7 +118,7 @@
 									 alt="{{localize 'TALENT.FIELDS.rechargeTokens.label'}}" />
 
 								<span class="recharge-token-counter">
-									{{{talent.system.rechargeTokens}}}
+									{{{../../item.system.rechargeTokens}}}
 								</span>
 							</span>
 

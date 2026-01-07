@@ -8,11 +8,11 @@
 			<div class="impairments">
 				{{>systems/wfrp3e/templates/applications/sheets/actors/partials/impairment.hbs
 						impairment=fields.impairments.fields.fatigue
-						token="systems/wfrp3e/assets/images/token-red.webp"}}
+						token="systems/wfrp3e/assets/images/fatigue.webp"}}
 
 				{{>systems/wfrp3e/templates/applications/sheets/actors/partials/impairment.hbs
 						impairment=fields.impairments.fields.stress
-						token="systems/wfrp3e/assets/images/token-blue.webp"}}
+						token="systems/wfrp3e/assets/images/stress.webp"}}
 			</div>
 
 			<div class="characteristics">
@@ -70,6 +70,20 @@
 			{{>systems/wfrp3e/templates/applications/sheets/actors/partials/attribute.hbs attribute=fields.fortune}}
 		</div>
 
+		<div class="attributes-subdivision">
+			<fieldset class="attribute {{attribute.name}}">
+				<legend>{{localize "ACTOR.FIELDS.defenceValue.label"}}</legend>
+
+				<p>{{system.totalDefence}}</p>
+			</fieldset>
+
+			<fieldset class="attribute {{attribute.name}}">
+				<legend>{{localize "ACTOR.FIELDS.soakValue.label"}}</legend>
+
+				<p>{{system.totalSoak}}</p>
+			</fieldset>
+		</div>
+
 		<div class="stance-meter">
 			<h2 class="sheet-title">
 				<a class="stance-meter-segment"
@@ -97,7 +111,7 @@
 
 			<div class="stance-meter-segment-container">
 				{{#for system.stanceMeter.conservative (increment system.stanceMeter.reckless 1) 1}}
-					<label class="stance-meter-segment{{#if (eq @root.system.stance.current this)}} active{{/if}}"
+					<label class="stance-meter-segment{{#if (eq @root.source.system.stance.current this)}} selected{{else if (eq @root.system.stance.current this)}} active{{/if}}"
 						   data-tooltip="{{localize 'ACTOR.ACTIONS.adjustStance'}}">
 						<img class="stance-{{#if (lt this 0)}}conservative{{else if (gt this 0)}}reckless{{else}}neutral{{/if}}"
 							 src="systems/wfrp3e/assets/images/stance-{{#if (lt this 0)}}conservative{{else if (gt this 0)}}reckless{{else}}neutral{{/if}}.webp" height="27" />
@@ -105,7 +119,7 @@
 						<input name="system.stance.current"
 							   value="{{this}}"
 							   type="radio"
-							   {{checked (eq @root.system.stance.current this)}}/>
+							   {{checked (eq @root.source.system.stance.current this)}}/>
 					</label>
 				{{/for}}
 			</div>

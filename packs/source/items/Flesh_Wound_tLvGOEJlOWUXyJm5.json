@@ -2,33 +2,49 @@
   "folder": "VUMz1tBRkXXXUVEt",
   "name": "Flesh Wound",
   "type": "criticalWound",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/wounds/injury-stapled-flesh-tan.webp",
   "system": {
     "description": "<p>The Severity Rating of this critical wound is equal to the number of Flesh Wounds affecting you.</p>",
     "severityRating": 1
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Flesh Wound",
+      "img": "icons/skills/wounds/injury-stapled-flesh-tan.webp",
+      "_id": "zQpuYw9Zrsnhw0ua",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>The Severity Rating of this critical wound is equal to the number of Flesh Wounds affecting you.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!tLvGOEJlOWUXyJm5.zQpuYw9Zrsnhw0ua"
+    }
+  ],
   "sort": 0,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
-  "flags": {
-    "scene-packer": {
-      "hash": "f86a88f187a1ca5307489957c82965192e217a56"
-    }
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.341",
-    "createdTime": 1682264544162,
-    "modifiedTime": 1715380997987,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
-  },
+  "flags": {},
   "_id": "tLvGOEJlOWUXyJm5",
   "_key": "!items!tLvGOEJlOWUXyJm5"
 }

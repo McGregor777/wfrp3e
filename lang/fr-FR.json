@@ -2,7 +2,7 @@
 	"ABILITY": {
 		"ACTIONS": {
 			"update": "Enregistrer l'aptitude",
-			"trigger": "Déclencher l'aptitude'"
+			"trigger": "Déclencher l'aptitude"
 		},
 		"FIELDS": {
 			"cooldown.label": "En rechargement",
@@ -122,15 +122,18 @@
 			"adjustRechargeTokens": "Ajouter/retirer un jeton de rechargement",
 			"adjustRecklessSegment": "Ajouter/retirer un segment de témérité",
 			"adjustStance": "Ajuster l'attitude",
+			"disableEffect": "Désactiver l'effet",
 			"editEffect": "Éditer l'effet",
 			"editItem": "Éditer l'objet",
+			"enableEffect": "Activer l'effet",
 			"flip": "Retourner",
 			"openFilters": "Ouvrir les filtres",
-			"useItem": "Utiliser",
 			"rollActionCheck": "Faire un test d'action",
 			"rollCharacteristicCheck": "Faire un test de caractéristique",
 			"rollItem": "Faire un test",
-			"rollSkillCheck": "Faire un test de compétence"
+			"rollSkillCheck": "Faire un test de compétence",
+			"toggleActiveEffect": "Activer/désactiver l'effet actif",
+			"useItem": "Utiliser"
 		},
 		"CONTROLS": {
 			"switchDisplayMode": "Basculer le mode d'affichage"
@@ -171,6 +174,7 @@
 				},
 				"label": "Caractéristiques"
 			},
+			"defenceValue.label": "Défense",
 			"impairments": {
 				"fatigue": {
 					"label": "Fatigue",
@@ -182,6 +186,7 @@
 				},
 				"label": "Impairments"
 			},
+			"soakValue.label": "Encaissement",
 			"stance": {
 				"FIELDS": {
 					"conservative.label": "Segments de prudence",
@@ -537,7 +542,8 @@
 		},
 		"WARNINGS": {
 			"convert": "Il n'y a pas de {type} à convertir.",
-			"convertBack": "Il n'y a plus de {type} à reconvertir."
+			"convertBack": "Il n'y a plus de {type} à reconvertir.",
+			"notEnoughFortune": "L'acteur ne dispose pas d'assez de points de fortune."
 		},
 		"dicePool": "Réserve de dés",
 		"options": "Options",
@@ -680,6 +686,10 @@
 	"CRITICALWOUND": {
 		"ACTIONS.uodate": "Enregistrer la blessure critique",
 		"DIALOG": {
+			"bloodInTheEyes": {
+				"description": "You may place {number} recharge tokens on any combination of {actor}'s action cards.",
+				"title": "Blood in the Eyes"
+			},
 			"choose": {
 				"description": "Vous devez choisir quelle blessure critique infliger entre ces deux suivantes : {links}",
 				"title": "Choisir une blessure critique"
@@ -825,6 +835,13 @@
 				},
 				"label": "Utilisation d'une action"
 			},
+			"actorPreparation": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté à chaque préparation d'un acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur en cours de préparation.",
+					"label": "Script"
+				},
+				"label": "Préparation d'un acteur"
+			},
 			"careerSocket": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté chaque fois que l'objet est placé sur un emplacement de talent de carrière.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.",
@@ -838,6 +855,13 @@
 					"label": "Script"
 				},
 				"label": "Transition de carrière"
+			},
+			"checkOutcome": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté durant le calcul du résultat d'un test.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur ayant accompli le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le test concerné dont le résultat est calculé.\n\t- {CheckOutcome} outcome: L'addition de tous les changements à appliquer à l'acteur et à la cible.\n\t- {Actor} target: L'acteur ciblé par le test.",
+					"label": "Script"
+				},
+				"label": "Calcul du résultat d'un test"
 			},
 			"checkPreparation": {
 				"FIELDS.script": {
@@ -874,6 +898,13 @@
 				},
 				"label": "Ajustement de la fatigue"
 			},
+			"fortuneRefresh": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que le groupe d'aventuriers dont l'acteur fait partie voit la fortune se rafraîchir.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont le groupe d'aventuriers voit la fortune se rafraîchir.\n\t- {number} party: Le groupe d'aventuriers dont la fortune se rafraîchit.",
+					"label": "Script"
+				},
+				"label": "Rafraîchissement de la fortune"
+			},
 			"itemAddition": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté dès que l'objet contenant cet effet actif est ajouté à un acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur recevant l'objet.\n\t- {Item} item: L'objet ajouté.",
@@ -908,7 +939,7 @@
 						"label": "Script conditionnel"
 					},
 					"postRollScript": {
-						"hint": "Ce script est exécuté une fois que le test a été lancé afin d'accomplir des opérations consécutives sur l'objet concerné.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur ayant accompli le test.\n\t- {DiePool} diePool: La réserve de dé lancé pour le test.\n\t- {CheckData} checkData: Diverses données concernant le test.",
+						"hint": "Ce script est exécuté une fois que le test a été lancé afin d'accomplir des opérations consécutives sur l'objet concerné.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur ayant accompli le test.\n\t- {DiePool} diePool: La réserve de dé lancé pour le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le résultat du jet de dés.",
 						"label": "Script post-lancer"
 					},
 					"script": {
@@ -931,6 +962,13 @@
 					"label": "Script"
 				},
 				"label": "Vérification des conditions"
+			},
+			"stanceAdjustment": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois que l'attitude d'un acteur est ajustée en dehors de la feuille de l'acteur.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur dont l'attitude est sur le point d'être ajustée.\n\t- {number} current: L'attitude actuelle de l'acteur.\n\t- {number} value: La nouvelle valeur de l'attitude.",
+					"label": "Script"
+				},
+				"label": "Ajustement de l'attitude"
 			},
 			"startingSkillTrainingSelection": {
 				"FIELDS.script": {
@@ -1071,6 +1109,12 @@
 		}
 	},
 
+	"ITEMSELECTOR": {
+		"ACTIONS.chooseItem": "Choisir l'objet",
+		"selectedItem": "Objet sélectionné :",
+		"title": "Sélecteur d'objet"
+	},
+
 	"INSANITY": {
 		"ACTIONS.update": "Enregistrer la folie",
 		"FIELDS": {
@@ -1173,6 +1217,14 @@
 			"editEvent": "Éditer l'évènement",
 			"increaseTensionMeter": "Augmenter la Jauge de Tension",
 			"removeMember": "Retirer le membre du groupe"
+		},
+		"DIALOG.fortuneRefresh": {
+			"BUTTONS": {
+				"recoverFortuneToken": "Récupérer un point de fortune",
+				"removeRechargeToken": "Retirer un jeton de rechargement"
+			},
+			"description": "Les points de fortune de votre groupe viennent d'être rafraîchis. Vous pouvez récupérer un point de fortune ou retirer un jeton de l'une de vos cartes en cours de rechargement.",
+			"title": "Rafraîchissement des points de fortune du groupe"
 		},
 		"FIELDS": {
 			"fortunePool.label": "Réserve de Fortune",
@@ -1565,6 +1617,7 @@
 		"rhya": "Rhya",
 		"shallya": "Shallya",
 		"sigmar": "Sigmar",
+		"slayer": "Tueur",
 		"social": "Social",
 		"taal": "Taal",
 		"ulric": "Ulric",

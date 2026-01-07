@@ -87,7 +87,8 @@ export default class CharacterSheet extends ActorSheet
 					characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
 					enrichment,
 					fields: this.actor.system.schema.fields,
-					tabs: this._prepareTabs(partId)
+					tabs: this._prepareTabs(partId),
+					types: wfrp3e.data.items.Talent.TYPES
 				};
 				break;
 			case "background":

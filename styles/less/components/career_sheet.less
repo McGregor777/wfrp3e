@@ -110,6 +110,18 @@
 				flex: auto;
 				text-align: center;
 			}
+
+			& > label {
+				line-height: normal;
+			}
+
+			& > .form-fields {
+				flex: min-content;
+
+				& > input[type="radio"] {
+					margin: 0;
+				}
+			}
 		}
 	}
 
@@ -177,6 +189,77 @@
 	& .race-restrictions {
 		font-size: var(--font-size-16);
 		font-variant-caps: small-caps;
+	}
+
+	& .socket-container {
+		color: white;
+		font: small-caps bold var(--font-size-18) var(--font-primary);
+		text-align: center;
+		text-shadow: var(--outline-black);
+
+		& .socket {
+			background-color: saddlebrown;
+			height: 150px;
+			margin: 8px auto;
+			padding: 0 8px 0 4px;
+			position: absolute;
+			transform: rotate(180deg);
+			writing-mode: vertical-rl;
+
+			&.focus {
+				background-color: blue;
+			}
+
+			&.reputation {
+				background-color: purple;
+			}
+
+			&.tactic {
+				background-color: red;
+			}
+
+			&:first-of-type {
+				top: 20px;
+				right: 0;
+			}
+
+			&:nth-of-type(2) {
+				bottom: 20px;
+				right: 0;
+			}
+
+			&:nth-of-type(3) {
+				right: 0;
+				transform: translateY(-50%) rotate(180deg);
+				top: calc(50% - 10px);
+			}
+
+			&:nth-of-type(4) {
+				bottom: 0;
+				height: initial;
+				left: 40px;
+				margin: auto 8px;
+				padding: 8px 0 4px 0;
+				transform: initial;
+				width: 150px;
+				writing-mode: initial;
+			}
+
+			&:nth-of-type(5) {
+				bottom: 0;
+				height: initial;
+				margin: auto 8px;
+				padding: 8px 0 4px 0;
+				right: 40px;
+				transform: initial;
+				width: 150px;
+				writing-mode: initial;
+			}
+
+			& > span {
+				transform: rotate(180deg);
+			}
+		}
 	}
 
 	& .starting-stance {

@@ -28,21 +28,10 @@
       "description": "<p>Spellcraft checks for Rank 1 or lower spells gain {Df}</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "13.351",
-        "systemId": "wfrp3e",
-        "systemVersion": "1.3.2",
-        "createdTime": 1761212325319,
-        "modifiedTime": 1764772827582,
-        "lastModifiedBy": "Bq3CTOvANoOneedB",
-        "exportSource": null
-      },
       "_key": "!items.effects!H5UFKTDpDN9gdFVp.zTujMF5uWbaeEXUK"
     },
     {
@@ -70,21 +59,10 @@
       "description": "<p>Wizard characters have a slot devoted to their Order of Magic</p>",
       "origin": null,
       "tint": "#ffffff",
-      "transfer": false,
+      "transfer": true,
       "statuses": [],
       "sort": 0,
       "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.351",
-        "systemId": "wfrp3e",
-        "systemVersion": "1.3.2",
-        "createdTime": 1761039593993,
-        "modifiedTime": 1764772821353,
-        "lastModifiedBy": "Bq3CTOvANoOneedB"
-      },
       "_key": "!items.effects!H5UFKTDpDN9gdFVp.XK61rnPFXztCewPr"
     }
   ],
@@ -199,17 +177,6 @@
         "item": null
       }
     ]
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
-    "coreVersion": "13.350",
-    "createdTime": 1699549807472,
-    "modifiedTime": 1764321760894,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
   },
   "_id": "H5UFKTDpDN9gdFVp",
   "sort": 2300000,

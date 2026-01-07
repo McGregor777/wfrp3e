@@ -225,7 +225,7 @@
 
 				& .sheet-title {
 					padding: 0 2px 0 4px;
-					writing-mode: vertical-lr;
+					writing-mode: vertical-rl;
 				}
 			}
 
@@ -237,6 +237,10 @@
 					height: 27px;
 
 					&.active {
+						filter: drop-shadow(red 0px 0px 4px);
+					}
+
+					&.selected {
 						filter: drop-shadow(gold 0px 0px 4px);
 					}
 

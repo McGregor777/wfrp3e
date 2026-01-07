@@ -9,7 +9,7 @@ export default class ActiveEffect extends foundry.documents.ActiveEffect
 	async triggerMacro(parameters = {}, script = "script")
 	{
 		try {
-			const fn = new foundry.utils.AsyncFunction(...Object.keys(parameters), this.system[script]);
+			const fn = new foundry.utils.AsyncFunction(...Object.keys(parameters), this.system.macro[script]);
 			return await fn.call(this, ...Object.values(parameters));
 		}
 		catch(error) {
@@ -24,11 +24,11 @@ export default class ActiveEffect extends foundry.documents.ActiveEffect
 	 */
 	checkConditionalScript(parameters = {})
 	{
-		if(!this.system.conditionalScript)
+		if(!this.system.macro.conditionalScript)
 			return true;
 
 		try {
-			const fn = new Function(...Object.keys(parameters), this.system.conditionalScript);
+			const fn = new Function(...Object.keys(parameters), this.system.macro.conditionalScript);
 			return fn.call(this, ...Object.values(parameters));
 		}
 		catch(error) {

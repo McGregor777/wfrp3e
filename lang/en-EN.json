@@ -122,15 +122,18 @@
 			"adjustRechargeTokens": "Adjust Recharge Tokens",
 			"adjustRecklessSegment": "Add/Remove Reckless Segment",
 			"adjustStance": "Adjust Stance",
+			"disableEffect": "Disable Effect",
 			"editEffect": "Edit Effect",
 			"editItem": "Edit Item",
+			"enableEffect": "Enable Effect",
 			"flip": "Flip",
 			"openFilters": "Open Filters",
-			"useItem": "Use",
 			"rollActionCheck": "Roll Action Check",
 			"rollCharacteristicCheck": "Roll Characteristic Check",
 			"rollItem": "Roll Item",
-			"rollSkillCheck": "Roll Skill Check"
+			"rollSkillCheck": "Roll Skill Check",
+			"toggleActiveEffect": "Toggle Active Effect",
+			"useItem": "Use"
 		},
 		"CONTROLS": {
 			"switchDisplayMode": "Switch Display Mode"
@@ -171,6 +174,7 @@
 				},
 				"label": "Characteristics"
 			},
+			"defenceValue.label": "Defence",
 			"impairments": {
 				"fatigue": {
 					"label": "Fatigue",
@@ -182,6 +186,7 @@
 				},
 				"label": "Impairments"
 			},
+			"soakValue.label": "Soak Value",
 			"stance": {
 				"FIELDS": {
 					"conservative.label": "Conservative Segments",
@@ -537,7 +542,8 @@
 		},
 		"WARNINGS": {
 			"convert": "There is no {type} to convert.",
-			"convertBack": "There is no {type} left to convert back."
+			"convertBack": "There is no {type} left to convert back.",
+			"notEnoughFortune": "The actor has not enough fortune tokens."
 		},
 		"dicePool": "Dice Pool",
 		"options": "Options",
@@ -680,6 +686,10 @@
 	"CRITICALWOUND": {
 		"ACTIONS.update": "Save Critical Wound",
 		"DIALOG": {
+			"bloodInTheEyes": {
+				"description": "You may place {number} recharge tokens on any combination of {actor}'s action cards.",
+				"title": "Blood in the Eyes"
+			},
 			"choose": {
 				"description": "You must choose which critical wound to inflict between these two: {links}",
 				"title": "Choose A Critical Wound"
@@ -825,6 +835,13 @@
 				},
 				"label": "Action Usage"
 			},
+			"actorPreparation": {
+				"FIELDS.script": {
+					"hint": "This script is executed each time an Actor is being prepared.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor being prepared.",
+					"label": "Script"
+				},
+				"label": "Actor Preparation"
+			},
 			"careerSocket": {
 				"FIELDS.script": {
 					"hint": "This script is executed each time the related Item is socketed onto a Career.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.",
@@ -838,6 +855,13 @@
 					"label": "Script"
 				},
 				"label": "Career Transition"
+			},
+			"checkOutcome": {
+				"FIELDS.script": {
+					"hint": "This script is executed during a check outcome calculation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The concerned Check Roll which outcome is being calculated.\n\t- {CheckOutcome} outcome: The sum-up of the changes to be applied to both the actor and the target.\n\t- {Actor} target: The Actor targeted by the check.",
+					"label": "Script"
+				},
+				"label": "Check Outcome"
 			},
 			"checkPreparation": {
 				"FIELDS.script": {
@@ -874,6 +898,13 @@
 				},
 				"label": "Fatigue Adjustment"
 			},
+			"fortuneRefresh": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the fortune of the Actor's party refreshes.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose party has its fortune refreshing.\n\t- {number} party: The party which fortune is refreshing.",
+					"label": "Script"
+				},
+				"label": "Fortune Refresh"
+			},
 			"itemAddition": {
 				"FIELDS.script": {
 					"hint": "This script is executed whenever the item owning this Active Effect is added to an Actor.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor receiving the item.\n\t- {Item} item: The added item.",
@@ -908,7 +939,7 @@
 						"label": "Conditional Script"
 					},
 					"postRollScript": {
-						"hint": "This script is executed once the check has been rolled in order to perform follow-up operations on the related Item.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {DiePool} diePool: The die pool of the rolled check.\n\t- {CheckData} checkData: Various data related to the check.",
+						"hint": "This script is executed once the check has been rolled in order to perform follow-up operations on the related Item.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that performed the check.\n\t- {DiePool} diePool: The die pool of the rolled check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The resulting check roll.",
 						"label": "Post-Roll Script"
 					},
 					"script": {
@@ -931,6 +962,13 @@
 					"label": "Script"
 				},
 				"label": "Requirement"
+			},
+			"stanceAdjustment": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time the Actor's stance is adjusted.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor whose stance is being adjusted.\n\t- {number} current: The current stance of the Actor.\n\t- {number} value: The new stance value of the Actor.",
+					"label": "Script"
+				},
+				"label": "Stance Adjustment"
 			},
 			"startingSkillTrainingSelection": {
 				"FIELDS.script": {
@@ -1086,6 +1124,12 @@
 		}
 	},
 
+	"ITEMSELECTOR": {
+		"ACTIONS.chooseItem": "Choose Item",
+		"selectedItem": "Selected Item",
+		"title": "Item Selector"
+	},
+
 	"MISCAST": {
 		"ACTIONS.update": "Save Miscast",
 		"FIELDS": {
@@ -1173,6 +1217,14 @@
 			"editEvent": "Edit Event",
 			"increaseTensionMeter": "Increase Tension Meter",
 			"removeMember": "Remove Member From Party"
+		},
+		"DIALOG.fortuneRefresh": {
+			"BUTTONS": {
+				"recoverFortuneToken": "Recover Fortune Token",
+				"removeRechargeToken": "Remove Recharge Token"
+			},
+			"description": "Your party's fortune have just refreshed. You can recover one fortune token or remove a recharge token from one of your cards currently on cooldown.",
+			"title": "Party Fortune Refreshed"
 		},
 		"FIELDS": {
 			"fortunePool.label": "Fortune Pool",
@@ -1565,6 +1617,7 @@
 		"rhya": "Rhya",
 		"shallya": "Shallya",
 		"sigmar": "Sigmar",
+		"slayer": "Slayer",
 		"social": "Social",
 		"taal": "Taal",
 		"ulric": "Ulric",

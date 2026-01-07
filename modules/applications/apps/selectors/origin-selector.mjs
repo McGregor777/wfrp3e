@@ -18,14 +18,14 @@ export default class OriginSelector extends Selector
 		footer: {template: "templates/generic/form-footer.hbs"}
 	};
 
+	/** @inheritDoc */
+	static type = "origin";
+
 	/**
 	 * The currently selected race.
 	 * @type {string}
 	 */
 	race = null;
-
-	/** @inheritDoc */
-	type = "origin";
 
 	/** @inheritDoc */
 	async _prepareContext(options)

@@ -12,7 +12,7 @@
 	{{/if}}
 
 	<div class="content">
-		{{{lookup @root.enrichment item.uuid }}}
+		{{{lookup @root.enrichment item.uuid}}}
 	</div>
 
 	<div class="bottom-line">
@@ -30,7 +30,7 @@
 				</a>
 
 				{{#each item.effects as |effect|}}
-					{{#if (eq effect.system.macro.type "manualTrigger")}}
+					{{#if (and (eq effect.system.macro.type "manual") effect.system.macro.script (not effect.isSuppressed))}}
 						<a data-action="useItem"
 						   data-effect-uuid="{{effect.uuid}}"
 						   data-tooltip="{{localize 'TALENT.ACTIONS.trigger'}}" >

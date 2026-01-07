@@ -37,41 +37,14 @@
       "statuses": [],
       "sort": 0,
       "flags": {},
-      "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "exportSource": null,
-        "coreVersion": "13.351",
-        "systemId": "wfrp3e",
-        "systemVersion": "1.3.4",
-        "createdTime": 1764842111558,
-        "modifiedTime": 1767017151730,
-        "lastModifiedBy": "Bq3CTOvANoOneedB"
-      },
       "_key": "!items.effects!sIyc96d59QRi6oJO.YQobjHCXelAlHM1F"
     }
   ],
   "sort": 0,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
-  "flags": {
-    "scene-packer": {
-      "hash": "6222b9436132810bb336f8a714f37236415f451d"
-    }
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.351",
-    "createdTime": 1682264544162,
-    "modifiedTime": 1764842105360,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
-  },
+  "flags": {},
   "_id": "sIyc96d59QRi6oJO",
   "_key": "!items!sIyc96d59QRi6oJO"
 }

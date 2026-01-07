@@ -14,11 +14,11 @@
 
 	<div class="characteristic-container">
 		{{formInput characteristic.fields.rating
-					value=(getProperty @root.source characteristic.fields.rating.fieldPath)
+					value=(getProperty @root.system characteristic.fields.rating.fieldPath)
 					id=(concat @root.rootId "-" characteristic.fields.rating.fieldPath)}}
 
 		{{formInput characteristic.fields.fortune
-					value=(getProperty @root.source characteristic.fields.fortune.fieldPath)
+					value=(getProperty @root.system characteristic.fields.fortune.fieldPath)
 					id=(concat @root.rootId "-" characteristic.fields.fortune.fieldPath)}}
 	</div>
 </div>

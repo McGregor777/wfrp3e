@@ -1,4 +1,4 @@
-import Selector from "./selector.mjs";
+import ItemSelector from "./item-selector.mjs";
 import {capitalize} from "../../../helpers.mjs";
 
 /**
@@ -13,30 +13,8 @@ import {capitalize} from "../../../helpers.mjs";
  */
 
 /** @inheritDoc */
-export default class TalentSelector extends Selector
+export default class TalentSelector extends ItemSelector
 {
-	/** @inheritDoc */
-	constructor(options = {})
-	{
-		super(options);
-
-		for(const [key, type] of Object.entries(wfrp3e.data.items.Talent.TYPES))
-			if(options.items.find(item => item.system.type === key)){
-				this.types[key] = type;
-				this.regularTypes.push(key);
-			}
-			else if(options.freeItemTypes?.includes(key))
-				this.types[key] = type;
-
-		if(Array.isArray(options.freeItemTypes))
-			for(const type of options.freeItemTypes) {
-				this.freeItems[type] = null;
-
-				if(type === "insanity")
-					this.types.insanity = "INSANITY.plural";
-			}
-	}
-
 	/** @inheritDoc */
 	static DEFAULT_OPTIONS = {
 		id: "talent-selector-{id}",
@@ -45,15 +23,11 @@ export default class TalentSelector extends Selector
 	};
 
 	/** @inheritDoc */
-	static PARTS = {
-		search: {template: "systems/wfrp3e/templates/applications/apps/selectors/search.hbs"},
-		main: {
-			template: "systems/wfrp3e/templates/applications/apps/selectors/main.hbs",
-			scrollable: [".item-container"]
-		},
-		selection: {template: "systems/wfrp3e/templates/applications/apps/selectors/talent-selector/selection.hbs"},
-		footer: {template: "templates/generic/form-footer.hbs"}
-	};
+	static type = "talent";
+
+	static {
+		Object.defineProperty(this.PARTS.selection, "template", {value: "systems/wfrp3e/templates/applications/apps/selectors/talent-selector/selection.hbs"});
+	}
 
 	/**
 	 * The currently selected free items.
@@ -68,9 +42,6 @@ export default class TalentSelector extends Selector
 		tricks: false,
 		insanity: false
 	};
-
-	/** @inheritDoc */
-	type = "talent";
 
 	/**
 	 * The talent types that are present among the selectable items.
@@ -109,21 +80,11 @@ export default class TalentSelector extends Selector
 
 		switch(partId) {
 			case "main":
-				const enrichment = {};
-				for(const item of this.items)
-					enrichment[item.uuid] = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
-						item.system.description
-					);
-				partContext.enrichment = enrichment;
-
 				const freeItems = [];
 				for(const uuid of Object.values(this.freeItems))
 					if(uuid)
 						freeItems.push(await fromUuid(uuid));
 				partContext.selection.push(...freeItems);
-				break;
-			case "search":
-				partContext.types = {all: "SELECTOR.all", ...this.types};
 				break;
 			case "selection":
 				partContext.freeItems = {};
@@ -214,6 +175,29 @@ export default class TalentSelector extends Selector
 			return [...selection, ...freeItems];
 
 		return selection;
+	}
+
+	/**
+	 * Prepares the talent types that are present among the selectable items.
+	 * @protected
+	 */
+	_prepareTypes()
+	{
+		for(const [key, type] of Object.entries(wfrp3e.data.items.Talent.TYPES))
+			if(options.items.find(item => item.system.type === key)){
+				this.types[key] = type;
+				this.regularTypes.push(key);
+			}
+			else if(options.freeItemTypes?.includes(key))
+				this.types[key] = type;
+
+		if(Array.isArray(options.freeItemTypes))
+			for(const type of options.freeItemTypes) {
+				this.freeItems[type] = null;
+
+				if(type === "insanity")
+					this.types.insanity = "INSANITY.plural";
+			}
 	}
 
 	/**
