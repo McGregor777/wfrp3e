@@ -80,8 +80,10 @@
 		"flags": {}
 	}],
 	"socket": true,
-	"gridDistance": 1,
-	"gridUnits": "ft",
+	"grid": {
+		"distance": 1,
+		"units": "ft"
+	},
 	"primaryTokenAttribute": "wounds",
 	"secondaryTokenAttribute": "fortune",
 	"url": "https://github.com/McGregor777/wfrp3e",
