@@ -16,7 +16,10 @@
 					{{#if effects}}
 						<tr><td>
 							{{#each effects as |effect ef|}}
-								<a class="effect-toggle{{#if effect.active}} active{{/if}}" data-symbol="{{sym}}" data-index="{{@index}}">
+								<a {{#if effect.active}}class="active"{{/if}}
+								   data-action="toggleEffect"
+								   data-symbol="{{sym}}"
+								   data-index="{{@index}}">
 									{{#for 0 effect.symbolAmount 1}}
 										{{#unless (and (or (eq sym "delay") (eq sym "exertion")) (gt this 0))}}
 											<span class="wfrp3e-font symbol {{symbol.cssClass}}"></span>

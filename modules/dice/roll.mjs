@@ -473,17 +473,15 @@ export default class CheckRoll extends foundry.dice.Roll
 	}
 
 	/**
-	 * Toggles an action effect from a check roll, depending on the symbols remaining, and execute scripts if necessary.
-	 * @param {string} chatMessageId The id of the chat message containing the check roll.
-	 * @param {string} symbol The symbol of the effect to toggle.
-	 * @param {number} index The index of the effect to toggle.
+	 * Toggles an Action Effect from a Check Roll, depending on the symbols remaining, and execute scripts if necessary.
+	 * @param {ChatMessage} chatMessage The Chat Message containing the Check Roll.
+	 * @param {string} symbol The symbol of the Action Effect to toggle.
+	 * @param {number} index The index of the Action Effect to toggle.
 	 * @returns {Promise<void>}
 	 * @protected
 	 */
-	static async toggleActionEffect(chatMessageId, symbol, index)
+	static async toggleActionEffect(chatMessage, symbol, index)
 	{
-		const chatMessage = game.messages.get(chatMessageId);
-
 		if(!chatMessage.isOwner) {
 			ui.notifications.warn(game.i18n.localize("ROLL.WARNINGS.notAllowed"));
 			return;
