@@ -2,33 +2,49 @@
   "folder": "VUMz1tBRkXXXUVEt",
   "name": "Blood in the Eyes",
   "type": "criticalWound",
-  "img": "icons/svg/item-bag.svg",
+  "img": "icons/skills/wounds/injury-eyes-blood-red-pink.webp",
   "system": {
     "description": "<p>When you receive this wound, the GM may place a number of recharge tokens equal to the number of critical wounds you have on any combination of your action cards.</p>",
     "severityRating": 3
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Blood in the Eyes",
+      "img": "icons/skills/wounds/injury-eyes-blood-red-pink.webp",
+      "_id": "Hke0TVqs09oJi8Da",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "await foundry.applications.api.DialogV2.query(\n\tgame.users.activeGM,\n\t\"prompt\", {\n\t\tcontent: game.i18n.format(\"CRITICALWOUND.DIALOG.bloodInTheEyes.description\", {\n\t\t\tactor: actor.toAnchor().innerHTML,\n\t\t\tnumber: actor.itemTypes.criticalWound.length\n\t\t}),\n\t\twindow: {title: \"CRITICALWOUND.DIALOG.bloodInTheEyes.title\"}\n\t}\n);",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When you receive this wound, the GM may place a number of recharge tokens equal to the number of critical wounds you have on any combination of your action cards.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!OtSLwkhE0fWCU2vd.Hke0TVqs09oJi8Da"
+    }
+  ],
   "sort": 0,
   "ownership": {
-    "default": 0,
-    "Bq3CTOvANoOneedB": 3
+    "default": 0
   },
-  "flags": {
-    "scene-packer": {
-      "hash": "548f609385c1ec9b9b91f98b8b61bec55d5b0f35"
-    }
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.0.1-alpha",
-    "coreVersion": "13.341",
-    "createdTime": 1682264486561,
-    "modifiedTime": 1715380997987,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
-  },
+  "flags": {},
   "_id": "OtSLwkhE0fWCU2vd",
   "_key": "!items!OtSLwkhE0fWCU2vd"
 }

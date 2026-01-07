@@ -686,6 +686,10 @@
 	"CRITICALWOUND": {
 		"ACTIONS.uodate": "Enregistrer la blessure critique",
 		"DIALOG": {
+			"bloodInTheEyes": {
+				"description": "You may place {number} recharge tokens on any combination of {actor}'s action cards.",
+				"title": "Blood in the Eyes"
+			},
 			"choose": {
 				"description": "Vous devez choisir quelle blessure critique infliger entre ces deux suivantes : {links}",
 				"title": "Choisir une blessure critique"
