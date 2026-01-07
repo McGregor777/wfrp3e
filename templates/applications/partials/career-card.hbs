@@ -190,7 +190,7 @@
 		</div>
 
 		<div class="description">
-			{{{lookup @root.enrichment item.uuid }}}
+			{{{lookup @root.enrichment item.uuid}}}
 		</div>
 	</div>
 
@@ -202,13 +202,18 @@
 		</div>
 
 		{{#if @root.editable}}
-			<div class="form-group slim stacked">
-				<label>{{localize "CAREER.FIELDS.current.label"}}</label>
+			<div class="form-group">
+				<label for="{{concat @root.rootId '-Item-' item._id '-' item.system.schema.fields.fieldPath}}">
+					{{item.system.schema.fields.current.label}}
+				</label>
 
-				<input name="system.current"
-					   type="radio"
-					   {{checked item.system.current}}
-					   {{#unless @root.editable}}disabled{{/unless}} />
+				<div class="form-fields">
+					<input id="{{concat @root.rootId '-Item-' item._id '-' item.system.schema.fields.fieldPath}}"
+						   name="{{item.system.schema.fields.fieldPath}}"
+						   type="radio"
+						   {{checked item.system.current}}
+						   {{#unless @root.editable}}disabled{{/unless}} />
+				</div>
 			</div>
 		{{/if}}
 
