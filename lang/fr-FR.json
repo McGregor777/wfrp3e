@@ -2,7 +2,7 @@
 	"ABILITY": {
 		"ACTIONS": {
 			"update": "Enregistrer l'aptitude",
-			"trigger": "Déclencher l'aptitude'"
+			"trigger": "Déclencher l'aptitude"
 		},
 		"FIELDS": {
 			"cooldown.label": "En rechargement",
@@ -122,15 +122,18 @@
 			"adjustRechargeTokens": "Ajouter/retirer un jeton de rechargement",
 			"adjustRecklessSegment": "Ajouter/retirer un segment de témérité",
 			"adjustStance": "Ajuster l'attitude",
+			"disableEffect": "Désactiver l'effet",
 			"editEffect": "Éditer l'effet",
 			"editItem": "Éditer l'objet",
+			"enableEffect": "Activer l'effet",
 			"flip": "Retourner",
 			"openFilters": "Ouvrir les filtres",
-			"useItem": "Utiliser",
 			"rollActionCheck": "Faire un test d'action",
 			"rollCharacteristicCheck": "Faire un test de caractéristique",
 			"rollItem": "Faire un test",
-			"rollSkillCheck": "Faire un test de compétence"
+			"rollSkillCheck": "Faire un test de compétence",
+			"toggleActiveEffect": "Activer/désactiver l'effet actif",
+			"useItem": "Utiliser"
 		},
 		"CONTROLS": {
 			"switchDisplayMode": "Basculer le mode d'affichage"

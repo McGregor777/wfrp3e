@@ -20,14 +20,13 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			adjustQuantity: {handler: this.#adjustQuantity, buttons: [0, 2]},
 			adjustRechargeTokens: {handler: this.#adjustRechargeTokens, buttons: [0, 2]},
 			adjustStanceMeter: {handler: this.#adjustStanceMeter, buttons: [0, 2]},
-			deleteEffect: this.#deleteEffect,
 			deleteItem: this.#deleteItem,
-			editEffect: this.#editEffect,
 			editItem: this.#editItem,
 			flip: this.#flip,
 			openFilters: this.#openFilters,
 			rollCharacteristicCheck: this.#rollCharacteristicCheck,
 			rollItem: this.#rollItem,
+			toggleActiveEffect: this.#toggleActiveEffect,
 			useItem: {handler:  this.#useItem, buttons: [0, 2]},
 			switchDisplayMode: this.#switchItemsDisplayMode,
 			toggleItemDetails: this.#toggleItemDetails
@@ -189,10 +188,18 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 				};
 				break;
 			case "effects":
+				const effects = [...this.actor.effects];
+
+				for(const item of this.actor.items) {
+					const effect = item.effects.find(effect => effect.transfer && !effect.isSuppressed);
+					if(effect)
+						effects.push(effect);
+				}
+
 				partContext = {
 					...partContext,
 					durations: wfrp3e.data.items.Condition.DURATIONS,
-					effects: this.actor.effects,
+					effects,
 					items: [
 						...this.actor.itemTypes.condition,
 						...this.actor.itemTypes.criticalWound,
@@ -245,7 +252,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	{
 		await super._onFirstRender(context, options);
 
-		this._createContextMenu(this._getContextMenuOptions, ".item", {fixed: true});
+		this._createContextMenu(this._getContextMenuOptions, ".item, .active-effect", {fixed: true});
 		this._createContextMenu(this._getContextMenuOptions, ".context-menu", {eventName : "click", fixed: true});
 	}
 
@@ -292,10 +299,10 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			name: "ACTOR.ACTIONS.rollItem",
 			icon: '<i class="fa-solid fa-dice-d20"></i>',
 			condition: html => {
-				const item = this.actor.items.get(html.closest("[data-item-id]").dataset.itemId);
+				const item = this.actor.items.get(html.closest("[data-item-id]")?.dataset.itemId);
 				return this.isEditable
-					&& item.canUserModify(game.user, "update")
-					&& ["action", "skill", "weapon"].includes(item.type)
+					&& item?.canUserModify(game.user, "update")
+					&& ["action", "skill", "weapon"].includes(item.type);
 			},
 			callback: async html => {
 				const itemElement = html.closest("[data-item-id]"),
@@ -307,6 +314,22 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 
 				await this.actor.items.get(itemElement.dataset.itemId).use(options);
 			}
+		}, {
+			name: "ACTOR.ACTIONS.enableEffect",
+			icon: '<i class="fa-solid fa-circle-check"></i>',
+			condition: html => {
+				const effect = fromUuidSync(html.closest("[data-effect-uuid]")?.dataset.effectUuid);
+				return this.isEditable && effect?.canUserModify(game.user, "update") && effect.disabled;
+			},
+			callback: async html => await ActorSheet.#toggleActiveEffect(null, html)
+		}, {
+			name: "ACTOR.ACTIONS.disableEffect",
+			icon: '<i class="fa-solid fa-circle"></i>',
+			condition: html => {
+				const effect = fromUuidSync(html.closest("[data-effect-uuid]")?.dataset.effectUuid);
+				return this.isEditable && effect?.canUserModify(game.user, "update") && !effect.disabled;
+			},
+			callback: async html => await ActorSheet.#toggleActiveEffect(null, html)
 		}, {
 			name: "Expand",
 			icon: '<i class="fa-solid fa-chevron-down"></i>',
@@ -326,15 +349,26 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			name: "ACTOR.ACTIONS.editItem",
 			icon: '<i class="fa-solid fa-pen-to-square"></i>',
 			condition: html => this.isEditable
-				&& this.actor.items.get(html.closest("[data-item-id]").dataset.itemId).canUserModify(game.user, "update"),
+				&& this.actor.items.get(html.closest("[data-item-id]")?.dataset.itemId)?.canUserModify(game.user, "update"),
 			callback: async html => {
 				await this.actor.items.get(html.closest("[data-item-id]").dataset.itemId).sheet.render({force: true});
+			}
+		}, {
+			name: "ACTOR.ACTIONS.editEffect",
+			icon: '<i class="fa-solid fa-pen-to-square"></i>',
+			condition: html => {
+				const effect = fromUuidSync(html.closest("[data-effect-uuid]")?.dataset.effectUuid);
+				return this.isEditable && effect?.canUserModify(game.user, "update");
+			},
+			callback: async html => {
+				const effect = await fromUuid(html.closest("[data-effect-uuid]").dataset.effectUuid);
+				await effect.sheet.render({force: true});
 			}
 		}, {
 			name: "Delete",
 			icon: '<i class="fa-solid fa-trash"></i>',
 			condition: html => this.isEditable
-				&& this.actor.items.get(html.closest("[data-item-id]").dataset.itemId).canUserModify(game.user, "update"),
+				&& this.actor.items.get(html.closest("[data-item-id]")?.dataset.itemId)?.canUserModify(game.user, "update"),
 			callback: async html => {
 				const item = this.actor.items.get(html.closest("[data-item-id]").dataset.itemId);
 
@@ -345,6 +379,26 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 					submit: async (result) => {
 						if(result)
 							await this.actor.deleteEmbeddedDocuments("Item", [item._id]);
+					}
+				});
+			}
+		}, {
+			name: "Delete",
+			icon: '<i class="fa-solid fa-trash"></i>',
+			condition: html => {
+				const effect = fromUuidSync(html.closest("[data-effect-uuid]")?.dataset.effectUuid);
+				return this.isEditable && effect?.canUserModify(game.user, "update") && effect.parent === this.actor;
+			},
+			callback: async html => {
+				const effect = await fromUuid(html.closest("[data-effect-uuid]").dataset.effectUuid);
+
+				await foundry.applications.api.DialogV2.confirm({
+					window: {title: game.i18n.localize("DIALOG.deleteEffect.title")},
+					modal: true,
+					content: `<p>${game.i18n.format("DIALOG.deleteEffect.description", {effect: effect.name})}</p>`,
+					submit: async (result) => {
+						if(result)
+							await this.actor.deleteEmbeddedDocuments("ActiveEffect", [effect._id]);
 					}
 				});
 			}
@@ -489,27 +543,6 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	}
 
 	/**
-	 * Asks for confirmation for a specific active effect definitive removal.
-	 * @param {PointerEvent} event
-	 * @returns {Promise<void>}
-	 * @private
-	 */
-	static async #deleteEffect(event)
-	{
-		const effect = this.actor.effects.get(event.target.closest("[data-effect-id]").dataset.effectId);
-
-		await foundry.applications.api.DialogV2.confirm({
-			window: {title: game.i18n.localize("DIALOG.deleteEffect.title")},
-			modal: true,
-			content: `<p>${game.i18n.format("DIALOG.deleteEffect.description", {effect: effect.name})}</p>`,
-			submit: async (result) => {
-				if(result)
-					await this.actor.deleteEmbeddedDocuments("ActiveEffect", [effect._id]);
-			}
-		});
-	}
-
-	/**
 	 * Asks for confirmation for a specific item definitive removal.
 	 * @param {PointerEvent} event
 	 * @returns {Promise<void>}
@@ -531,18 +564,6 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	}
 
 	/**
-	 * Opens an active effect's sheet.
-	 * @param {PointerEvent} event
-	 * @returns {Promise<void>}
-	 * @private
-	 */
-	static async #editEffect(event)
-	{
-		await this.actor.effects.get(event.target.closest("[data-effect-id]").dataset.effectId)
-			.sheet.render({force: true});
-	}
-
-	/**
 	 * Opens an item's sheet.
 	 * @param {PointerEvent} event
 	 * @returns {Promise<void>}
@@ -552,54 +573,6 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	{
 		await this.actor.items.get(event.target.closest("[data-item-id]").dataset.itemId)
 			.sheet.render({force: true});
-	}
-
-	/**
-	 * Appends an element with additional details about an item, or removes the element if it already exists.
-	 * @param {PointerEvent} event
-	 * @param {HTMLElement} target
-	 * @param {Actor} actor The actor owning the embedded item.
-	 * @returns {Promise<void>}
-	 * @private
-	 */
-	static async #toggleItemDetails(event, target, actor = null)
-	{
-		if(!actor)
-			actor = this.actor;
-
-		const itemElement = target.closest(".item[data-item-id]"),
-			  toggleLinks = itemElement.querySelectorAll('a[data-action="#toggleItemDetails"]');
-
-		if(itemElement.classList.contains("expanded")) {
-			// Toggle expansion for an item
-			const detailsElement = itemElement.querySelector(".details");
-			$(detailsElement).slideUp(200, () => detailsElement.remove());
-
-			for(const element of toggleLinks)
-				element.dataset.tooltip = game.i18n.localize("Expand");
-		}
-		else {
-			// Add the item details below the row.
-			const item = actor.items.get(itemElement.dataset.itemId),
-				  detailsElement = document.createElement("div"),
-				  options = {},
-				  activeFace = itemElement.querySelector(".active[data-face]")?.dataset.face;
-
-			if(activeFace)
-				options.face = activeFace;
-
-			detailsElement.classList.add("details");
-			detailsElement.innerHTML = await item.getDetails(options);
-
-			itemElement.append(detailsElement);
-			$(detailsElement).hide();
-			$(detailsElement).slideDown(200);
-
-			for(const element of toggleLinks)
-				element.dataset.tooltip = game.i18n.localize("Collapse");
-		}
-
-		itemElement.classList.toggle("expanded");
 	}
 
 	/**
@@ -671,6 +644,67 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 			"embeddedItemsDisplayMode",
 			this.actor.getFlag("wfrp3e", "embeddedItemsDisplayMode") !== "tables" ? "tables" : "cards"
 		);
+	}
+
+	/**
+	 * Appends an element with additional details about an item, or removes the element if it already exists.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @param {Actor} actor The actor owning the embedded item.
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #toggleItemDetails(event, target, actor = null)
+	{
+		if(!actor)
+			actor = this.actor;
+
+		const itemElement = target.closest(".item[data-item-id]"),
+			  toggleLinks = itemElement.querySelectorAll('a[data-action="#toggleItemDetails"]');
+
+		if(itemElement.classList.contains("expanded")) {
+			// Toggle expansion for an item
+			const detailsElement = itemElement.querySelector(".details");
+			$(detailsElement).slideUp(200, () => detailsElement.remove());
+
+			for(const element of toggleLinks)
+				element.dataset.tooltip = game.i18n.localize("Expand");
+		}
+		else {
+			// Add the item details below the row.
+			const item = actor.items.get(itemElement.dataset.itemId),
+				  detailsElement = document.createElement("div"),
+				  options = {},
+				  activeFace = itemElement.querySelector(".active[data-face]")?.dataset.face;
+
+			if(activeFace)
+				options.face = activeFace;
+
+			detailsElement.classList.add("details");
+			detailsElement.innerHTML = await item.getDetails(options);
+
+			itemElement.append(detailsElement);
+			$(detailsElement).hide();
+			$(detailsElement).slideDown(200);
+
+			for(const element of toggleLinks)
+				element.dataset.tooltip = game.i18n.localize("Collapse");
+		}
+
+		itemElement.classList.toggle("expanded");
+	}
+
+	/**
+	 * Either enables or disables an Active Effect depending on its current state.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #toggleActiveEffect(event, target)
+	{
+		const effect = await fromUuid(target.closest("[data-effect-uuid]")?.dataset.effectUuid);
+		await effect.update({disabled: !effect.disabled});
 	}
 
 	/**

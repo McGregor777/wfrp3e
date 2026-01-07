@@ -122,15 +122,18 @@
 			"adjustRechargeTokens": "Adjust Recharge Tokens",
 			"adjustRecklessSegment": "Add/Remove Reckless Segment",
 			"adjustStance": "Adjust Stance",
+			"disableEffect": "Disable Effect",
 			"editEffect": "Edit Effect",
 			"editItem": "Edit Item",
+			"enableEffect": "Enable Effect",
 			"flip": "Flip",
 			"openFilters": "Open Filters",
-			"useItem": "Use",
 			"rollActionCheck": "Roll Action Check",
 			"rollCharacteristicCheck": "Roll Characteristic Check",
 			"rollItem": "Roll Item",
-			"rollSkillCheck": "Roll Skill Check"
+			"rollSkillCheck": "Roll Skill Check",
+			"toggleActiveEffect": "Toggle Active Effect",
+			"useItem": "Use"
 		},
 		"CONTROLS": {
 			"switchDisplayMode": "Switch Display Mode"
