@@ -178,21 +178,23 @@ export default class TalentSelector extends ItemSelector
 	}
 
 	/**
-	 * Prepares the talent types that are present among the selectable items.
+	 * Prepares the Talent types that are present among the selectable Items.
 	 * @protected
 	 */
 	_prepareTypes()
 	{
+		this.regularTypes = [];
+
 		for(const [key, type] of Object.entries(wfrp3e.data.items.Talent.TYPES))
-			if(options.items.find(item => item.system.type === key)){
+			if(this.items.some(item => item.system.type === key)){
 				this.types[key] = type;
 				this.regularTypes.push(key);
 			}
-			else if(options.freeItemTypes?.includes(key))
+			else if(this.freeItemTypes?.includes(key))
 				this.types[key] = type;
 
-		if(Array.isArray(options.freeItemTypes))
-			for(const type of options.freeItemTypes) {
+		if(Array.isArray(this.freeItemTypes))
+			for(const type of this.freeItemTypes) {
 				this.freeItems[type] = null;
 
 				if(type === "insanity")

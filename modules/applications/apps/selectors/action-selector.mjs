@@ -31,13 +31,13 @@ export default class ActionSelector extends ItemSelector
 	}
 
 	/**
-	 * Prepares the action types that are present among the selectable items.
+	 * Prepares the Action types that are present among the selectable Items.
 	 * @protected
 	 */
 	_prepareTypes()
 	{
 		for(const [key, type] of Object.entries(wfrp3e.data.items.Action.TYPES))
-			if(options.items.find(action => action.system.type === key))
+			if(this.items.some(action => action.system.type === key))
 				this.types[key] = type;
 	}
 
