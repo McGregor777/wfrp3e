@@ -283,10 +283,10 @@ export default class SkillUpgrader extends Selector
 	async _getSelectedItems()
 	{
 		return await Promise.all(
-			this.selection.map(selection => {
+			this.selection.map(async selection => {
 				return {
 					...selection,
-					item: fromUuidSync(selection.uuid)
+					item: await fromUuid(selection.uuid)
 				};
 			})
 		);
