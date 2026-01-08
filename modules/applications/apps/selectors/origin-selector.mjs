@@ -7,7 +7,8 @@ export default class OriginSelector extends Selector
 	static DEFAULT_OPTIONS = {
 		id: "origin-selector-{id}",
 		classes: ["origin-selector"],
-		window: {title: "ORIGINSELECTOR.title"}
+		window: {title: "ORIGINSELECTOR.title"},
+		position: {top: 40}
 	};
 
 	/** @inheritDoc */
