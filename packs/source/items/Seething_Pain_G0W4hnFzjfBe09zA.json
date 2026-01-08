@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "itemAddition",
           "script": "if(actor.wizard || actor.priest) {\n  const seethingPainEffect = await fromUuid(\".ActiveEffect.38PqYKyOccPNozpZ\", {relative: this.parent});\n  await seethingPainEffect.update({\"active\": true});;\n}\nelse\n  await actor.adjustFatigue(1);"
         }
@@ -46,6 +47,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "powerFavourAdjustment",
           "script": "if(value > 0)\n  value--;"
         }

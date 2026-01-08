@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkPreparation",
           "script": "if(checkData.characteristic === \"fellowship\")\n  diePool.dice.misfortune++;\nconst skill = await fromUuid(checkData.skill);\nif(skill.name === game.i18n.localize(\"SKILL.NAMES.intimidate\")\n  diePool.dice.fortune++;"
         }

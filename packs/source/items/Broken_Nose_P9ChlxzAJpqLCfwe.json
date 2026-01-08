@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkPreparation",
           "script": "const action = await fromUuid(checkData.action);\nif(action?.system[checkData.face].traits.includes(\"TRAITS.social\"))\n  diePool.dice.misfortune++;"
         }

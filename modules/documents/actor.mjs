@@ -528,7 +528,7 @@ export default class Actor extends foundry.documents.Actor
 				effects.push(effect);
 		}
 
-		return effects;
+		return effects.sort((a, b) => b.system.priority - a.system.priority);
 	}
 
 	//#region Character methods

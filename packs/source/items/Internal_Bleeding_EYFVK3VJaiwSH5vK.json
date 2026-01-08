@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkRoll",
           "script": "const action = await fromUuid(checkData.action);\nif([\"melee\", \"ranged\"].includes(action.system.type))\n  checkRoll.effects?.chaosStar.push({\n    description: \"<p>Suffer 1 wound</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"await actor.adjustWounds(-1);\",\n    symbolAmount: 1\n  });"
         }

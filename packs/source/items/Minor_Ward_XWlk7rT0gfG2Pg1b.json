@@ -103,6 +103,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "return actor.system.priest;",
           "type": "requirement"
         }

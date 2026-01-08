@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkOutcome",
           "script": "if(target.system.traits.includes(\"Henchman\") || actor.system.characteristic.strength.rating > target.system.characteristic.strength.rating)\n  outcome.targetDamages++;"
         }

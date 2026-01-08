@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "actionUsage",
           "script": "if(action.system[face].traits.includes(\"TRAITS.activeDefence\"))\n  await action.adjustRechargeTokens(1);"
         }

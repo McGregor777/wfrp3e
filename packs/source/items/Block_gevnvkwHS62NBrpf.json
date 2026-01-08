@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "return actor.system.characteristics.toughness.rating >= 3;",
           "type": "requirement"
         }

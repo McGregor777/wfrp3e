@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkRoll",
           "script": "const action = await fromUuid(checkData.action);\nif([\"melee\", \"ranged\"].includes(action.system.type))\n  checkRoll.effects?.bane.push({\n    description: \"<p>Suffer 1 fatigue</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"await actor.adjustFatigue(-1);\",\n    symbolAmount: 1\n  });"
         }

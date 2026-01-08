@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "await foundry.applications.api.DialogV2.query(\n\tgame.users.activeGM,\n\t\"prompt\", {\n\t\tcontent: game.i18n.format(\"CRITICALWOUND.DIALOG.bloodInTheEyes.description\", {\n\t\t\tactor: actor.toAnchor().innerHTML,\n\t\t\tnumber: actor.itemTypes.criticalWound.length\n\t\t}),\n\t\twindow: {title: \"CRITICALWOUND.DIALOG.bloodInTheEyes.title\"}\n\t}\n);",
           "type": "manual"
         }

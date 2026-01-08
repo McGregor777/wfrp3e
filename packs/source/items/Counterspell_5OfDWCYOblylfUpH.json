@@ -63,6 +63,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "return actor.system.wizard;",
           "type": "requirement"
         }

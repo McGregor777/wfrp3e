@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "for(const criticalWound of actor.itemTypes.criticalWound) {\n\tcriticalWound.system.severityRating++;\n\tfoundry.utils.mergeObject(criticalWound, {\"overrides.system.severityRating\": criticalWound.system.severityRating});\n}",
           "type": "actorPreparation"
         }

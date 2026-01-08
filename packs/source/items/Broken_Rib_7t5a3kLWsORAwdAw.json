@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "embeddedItemCreation",
           "script": "const criticalWoundsAmount = items.filter(item => item.type === \"criticalWound\").length;\nif(criticalWoundsAmount > 0)\n  await actor.adjustWounds(criticalWoundsAmount);"
         }

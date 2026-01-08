@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "if(game.user.targets.length !== 1)\n  return ui.notifications.warn(game.i18n.localize(\"ABILITY.WARNINGS.oneTargetRequired\"));\n\nconst attackQuarryEffect = await fromUuid(\".ActiveEffect.OeEnLPUpOBN6E1EY\", {relative: this.parent});\n\nawait attackQuarryEffect.setFlag(\"wfrp3e\", \"quarry\", game.user.targets[0].document.actor.uuid);\nawait attackQuarryEffect.update({\"active\": true});\n\nawait this.parent.exhaust();",
           "type": "manual"
         }
@@ -41,6 +42,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkPreparation",
           "script": "if(checkData.action && [\"melee\", \"ranged\"].includes(fromUuidSync(checkData.action)?.system.type) && checkData.targets[0] === this.getFlag(\"wfrp3e\", \"quarry\"))\n   diePool.dice.expertise++;"
         }

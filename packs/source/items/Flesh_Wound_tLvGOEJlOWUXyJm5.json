@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 1,
           "script": "const item = this.parent,\n      severityRating = actor.itemTypes.criticalWound.filter(criticalWound => criticalWound.name === item.name).length;\nitem.system.severityRating = severityRating;\nfoundry.utils.mergeObject(item, {\"overrides.system.severityRating\": severityRating});",
           "type": "actorPreparation"
         }

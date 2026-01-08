@@ -1,6 +1,7 @@
 /**
  * A data model intended to be used as an inner EmbeddedDataField which defines an Active Effect Macro.
  * @abstract
+ * @property {number} priority The higher the value, the sooner the script is executed compared to the lower values.
  * @property {string} script The script that is executed upon trigger, which depends on the script type.
  * @property {string} type The type of Active Effect Macro, a value in ActiveEffectMacro.TYPES.
  */
@@ -8,12 +9,13 @@ export default class ActiveEffectMacro extends foundry.abstract.DataModel
 {
 	/**
 	 * The default values for an Active Effect Macro.
-	 * @returns {{script: string, type: string}}
+	 * @returns {{priority: number, script: string, type: string}}
 	 * @protected
 	 */
 	static get _defaults()
 	{
 		return {
+			priority: 0,
 			script: "",
 			type: this.TYPES[wfrp3e.data.macros.ManualMacro.TYPE]
 		};
@@ -74,6 +76,7 @@ export default class ActiveEffectMacro extends foundry.abstract.DataModel
 			types[key] = `EFFECT.MACROS.${key}.label`;
 
 		return {
+			priority: new fields.NumberField({initial: 0, integer: true, min: 0, nullable: false, required: true}),
 			script: new fields.JavaScriptField({async: true}),
 			type: new fields.StringField({
 				choices: types,
