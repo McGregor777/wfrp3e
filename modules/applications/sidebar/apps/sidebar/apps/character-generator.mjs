@@ -263,7 +263,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 		for(const [characteristic, rating] of Object.entries(race.defaultRatings)) {
 			characteristics[characteristic] = {rating};
-			this.creationPointInvestments[characteristic] = rating;
+			this.creationPointInvestments.characteristics[characteristic] = rating;
 		}
 
 		await character.update({
