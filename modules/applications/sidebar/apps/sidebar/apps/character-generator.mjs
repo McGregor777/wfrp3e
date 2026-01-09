@@ -28,11 +28,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			contentClasses: ["standard-form"],
 			title: "CHARACTERGENERATOR.title"
 		},
-		form: {
-			handler: this.#onCharacterGeneratorSubmit,
-			submitOnChange: false,
-			closeOnSubmit: true
-		},
+		form: {handler: this.#onCharacterGeneratorSubmit},
 		position: {
 			height: 860,
 			width: 920
@@ -389,17 +385,19 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	 */
 	static async #onCharacterGeneratorSubmit(event, form, formData)
 	{
-		let proceed = true;
+		let submit = false;
 
 		if(Object.values(this.steps).includes(false))
-			proceed = await foundry.applications.api.DialogV2.confirm({
+			submit = await foundry.applications.api.DialogV2.confirm({
 				window: {title: game.i18n.localize("CHARACTERGENERATOR.WARNINGS.unfinishedGeneration.title")},
 				modal: true,
 				content: game.i18n.localize("CHARACTERGENERATOR.WARNINGS.unfinishedGeneration.description")
 			});
 
-		if(proceed)
-			await this.character.render({force: true});
+		if(submit) {
+			this.options.submit(foundry.utils.expandObject(formData.object).currentInvestments);
+			await this.close({submitted: true});
+		}
 	}
 
 	/**
