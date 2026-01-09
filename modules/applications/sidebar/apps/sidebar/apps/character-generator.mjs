@@ -137,17 +137,29 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		if(partContext.tabs && partId in partContext.tabs)
 			partContext.tab = partContext.tabs[partId];
 
-		const character = this.character;
+		const character = this.character,
+			  textEditor = foundry.applications.ux.TextEditor.implementation;
+
 		switch(partId) {
 			case "buttons":
 				partContext.steps = this.steps;
 				break;
 			case "origin":
-				const originData = character.system.originData;
+				const originData = character.system.originData,
+					  originAbilities = [],
+					  enrichment = {};
+
+				for(const uuid of originData.abilities) {
+					const ability = await fromUuid(uuid);
+					originAbilities.push(ability);
+					enrichment[uuid] = await textEditor.enrichHTML(ability.system.description);
+				}
+
 				partContext = {
 					...partContext,
+					enrichment,
 					origin: originData,
-					originAbilities: await Promise.all(originData.abilities.map(async uuid => await fromUuid(uuid))),
+					originAbilities,
 					race: character.system.race,
 					step: this.steps.chooseOrigin
 				};
@@ -194,13 +206,9 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			case "background":
 				partContext = {
 					...partContext,
-					enriched: {
-						campaignNotes: await foundry.applications.ux.TextEditor.enrichHTML(
-							character.system.background.campaignNotes
-						),
-						biography: await foundry.applications.ux.TextEditor.enrichHTML(
-							character.system.background.biography
-						)
+					enrichment: {
+						campaignNotes: await textEditor.enrichHTML(character.system.background.campaignNotes),
+						biography: await textEditor.enrichHTML(character.system.background.biography)
 					},
 					fields: character.system.schema.fields.background.fields,
 					system: character.system.background
