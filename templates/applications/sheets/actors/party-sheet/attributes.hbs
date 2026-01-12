@@ -10,7 +10,8 @@
 					{{#if (or (eq @root.system.tension.events.0.threshold this)
 							  (eq @root.system.tension.events.1.threshold this))}}threshold{{/if}}">
 					{{#if (eq @root.system.tension.value this)}}
-						<img src="systems/wfrp3e/assets/images/token-grey.webp"/>
+						<img src="systems/wfrp3e/assets/images/token-grey.webp"
+							 alt="{{localize 'PARTY.FIELDS.tension.label'}}" />
 					{{else}}
 						{{this}}
 					{{/if}}
@@ -55,7 +56,7 @@
 		{{#each members as |member m|}}
 			<div class="member" data-uuid="{{member.uuid}}" data-index="{{m}}">
 				<a class="portrait" data-action="editDocument" data-tooltip="{{member.name}}">
-					<img src="{{member.img}}" width="50" height="50" />
+					<img src="{{member.img}}" width="50" height="50" alt="{{localize 'PARTY.FIELDS.members.label'}}" />
 				</a>
 
 				<a data-action="removeMember" data-tooltip="{{localize 'PARTY.ACTIONS.removeMember'}}">
