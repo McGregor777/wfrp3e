@@ -18,6 +18,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			acquireTalents: this.#acquireTalents,
 			chooseStartingCareer: this.#chooseStartingCareer,
 			chooseOrigin: this.#chooseOrigin,
+			flip: this.#flip,
 			investCreationPoints: this.#investCreationPoints,
 			playGameOfTenQuestions: this.#playGameOfTenQuestions
 		},
@@ -723,5 +724,22 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		}
 
 		await this.render();
+	}
+
+	/**
+	 * Switches between two faces of a document.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #flip(event, target)
+	{
+		const itemElement = target.closest(".item"),
+			  activeFace = itemElement.querySelector(".face.active"),
+			  inactiveFace = itemElement.querySelector(".face:not(.active)");
+
+		activeFace.classList.remove("active");
+		inactiveFace.classList.add("active");
 	}
 }
