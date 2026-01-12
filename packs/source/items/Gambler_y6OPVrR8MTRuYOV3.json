@@ -10,8 +10,9 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "manualPostCheckRoll",
-          "script": "await checkRoll.rerollDice([\"characteristic\", \"fortune\", \"expertise\", \"conservative\", \"reckless\", \"challenge\", \"misfortune\"], {chatMessage});\n// Make so that the Check Roll cannot be altered any more. \nawait this.parent.exhaust();",
+          "script": "await checkRoll.rerollDice([\"characteristic\", \"fortune\", \"expertise\", \"conservative\", \"reckless\", \"challenge\", \"misfortune\"], {chatMessage, immutable: true});\nawait this.parent.exhaust();",
           "conditionalScript": ""
         }
       },

@@ -26,6 +26,7 @@ export default class ChatLog extends foundry.applications.sidebar.tabs.ChatLog
 				return message.rolls.length > 0
 					&& message.rolls[0].options.checkData
 					&& !message.rolls[0].options.checkData.disabled
+					&& !message.rolls[0].options.checkData.immutable
 					&& ("outcome" in message.rolls[0].options.checkData || game.user.isGM);
 			},
 			callback: li => wfrp3e.dice.CheckRoll.useTalentOrAbility(game.messages.get(li.dataset.messageId))

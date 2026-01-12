@@ -190,6 +190,9 @@ export default class CheckRoll extends foundry.dice.Roll
 			if(checkData.disabled)
 				context.disabled = checkData.disabled;
 
+			if(checkData.immutable)
+				context.immutable = checkData.immutable;
+
 			if(checkData.action) {
 				const textEditor = foundry.applications.ux.TextEditor.implementation,
 					  action = await fromUuid(checkData.action),
@@ -378,6 +381,9 @@ export default class CheckRoll extends foundry.dice.Roll
 
 		const newCheckRoll = await CheckRoll.fromTerms(terms, this.options);
 		newCheckRoll.effects = this.effects;
+
+		if(immutable)
+			newCheckRoll.options.checkData.immutable = true;
 
 		// If Dice So Nice! module is enabled, hide irrelevant dice from the 3D roll.
 		for(const diceTerm of newCheckRoll.dice)

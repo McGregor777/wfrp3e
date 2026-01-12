@@ -17,9 +17,11 @@
 						<li class="roll">{{{this}}}</li>
 					{{/each}}
 
-					<li class="roll">
-						<a data-action="addDiePool" data-tooltip="{{localize 'ROLL.ACTIONS.addDiePool'}}"></a>
-					</li>
+					{{#unless (or disabled immutable outcome)}}
+						<li class="roll">
+							<a data-action="addDiePool" data-tooltip="{{localize 'ROLL.ACTIONS.addDiePool'}}"></a>
+						</li>
+					{{/unless}}
 				</ol>
 			</div>
 		{{/if}}
@@ -41,7 +43,8 @@
 								{{localize symbol.result nb=this}}
 
 								{{#if (and (eq sym "success") (gt @root.totalSymbols.righteousSuccesses 0))}}
-									{{localize @root.symbols.righteousSuccess.result nb=@root.totalSymbols.righteousSuccesses}}
+									{{localize @root.symbols.righteousSuccess.result
+											   nb=@root.totalSymbols.righteousSuccesses}}
 								{{/if}}
 
 								{{#for 0 (lookup @root.remainingSymbols symbol.plural) 1}}
@@ -64,7 +67,10 @@
 	<ul class="outcome">
 		{{#if (gt outcome.targetDamages 0)}}
 			<li>
-				{{localize "ROLL.OUTCOMES.targetDamages" actor=actorName target=targetActorName amount=outcome.targetDamages}}
+				{{localize "ROLL.OUTCOMES.targetDamages"
+						   actor=actorName
+						   target=targetActorName
+						   amount=outcome.targetDamages}}
 			</li>
 		{{/if}}
 
