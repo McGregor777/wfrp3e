@@ -568,15 +568,13 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		for(const effect of onStartingTalentSelectionEffects)
 			await effect.triggerMacro({options});
 
-		options.items = await TalentSelector.buildNewCharacterOptionsList(character, {
+		let talentUuids = await TalentSelector.wait({
 			...options,
 			actor: character,
+			items: await TalentSelector.buildNewCharacterOptionsList(character, options),
 			modal: true,
-			size: investment.size,
-			freeItemTypes: []
+			size: investment.size
 		});
-
-		let talentUuids = await TalentSelector.wait(options);
 
 		if(talentUuids) {
 			if(!Array.isArray(talentUuids))

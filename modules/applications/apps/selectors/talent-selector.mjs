@@ -30,32 +30,6 @@ export default class TalentSelector extends ItemSelector
 	}
 
 	/**
-	 * The currently selected free items.
-	 * @type {FreeItems}
-	 */
-	freeItems = {
-		focus: false,
-		reputation: false,
-		tactic: false,
-		faith: false,
-		order: false,
-		tricks: false,
-		insanity: false
-	};
-
-	/**
-	 * The talent types that are present among the selectable items.
-	 * @type {Object}
-	 */
-	types = {};
-
-	/**
-	 * An array of talent types that are available for regular selection.
-	 * @type {Array}
-	 */
-	regularTypes = [];
-
-	/**
 	 * Return the number of items to select, including potential free items.
 	 * @type {number}
 	 */
@@ -179,22 +153,33 @@ export default class TalentSelector extends ItemSelector
 
 	/**
 	 * Prepares the Talent types that are present among the selectable Items.
+	 * @param {Object} options
 	 * @protected
 	 */
-	_prepareTypes()
+	_prepareTypes(options)
 	{
 		this.regularTypes = [];
+		/** @var {FreeItems} freeItems */
+		this.freeItems = {
+			focus: false,
+			reputation: false,
+			tactic: false,
+			faith: false,
+			order: false,
+			tricks: false,
+			insanity: false
+		};
 
 		for(const [key, type] of Object.entries(wfrp3e.data.items.Talent.TYPES))
 			if(this.items.some(item => item.system.type === key)){
 				this.types[key] = type;
 				this.regularTypes.push(key);
 			}
-			else if(this.freeItemTypes?.includes(key))
+			else if(options.freeItemTypes?.includes(key))
 				this.types[key] = type;
 
-		if(Array.isArray(this.freeItemTypes))
-			for(const type of this.freeItemTypes) {
+		if(Array.isArray(options.freeItemTypes))
+			for(const type of options.freeItemTypes) {
 				this.freeItems[type] = null;
 
 				if(type === "insanity")
