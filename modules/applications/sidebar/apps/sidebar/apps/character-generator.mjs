@@ -174,12 +174,15 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 				};
 				break;
 			case "career":
-				partContext = {
-					...partContext,
-					career: character.system.currentCareer,
-					characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
-					fields: character.system.schema.fields
-				};
+				const career = character.system.currentCareer;
+				if(career)
+					partContext = {
+						...partContext,
+						career,
+						characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
+						fields: character.system.schema.fields,
+						types: wfrp3e.data.items.Talent.TYPES
+					};
 				break;
 			case "talents":
 				partContext = {

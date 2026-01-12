@@ -142,7 +142,7 @@
 		</div>
 
 		<div class="socket-container">
-			{{#each system.sockets as |socket sckt|}}
+			{{#each item.system.sockets as |socket sckt|}}
 				{{#if socket.item}}
 					{{#with (fromUuid socket.item) as |socketedItem|}}
 						<a class="socket {{socketedItem.system.type}}"
