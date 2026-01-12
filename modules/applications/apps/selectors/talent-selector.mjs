@@ -79,13 +79,7 @@ export default class TalentSelector extends ItemSelector
 			  isOfRegularType = this.regularTypes.includes(type),
 			  freeItem = this.freeItems[type];
 
-		if(freeItem === false || freeItem !== null) {
-			if(!isOfRegularType)
-				throw new Error(`No ${item.system.type ? capitalize(item.system.type) + " " + item.type : item.type} is expected to be selected.`);
-			else
-				await super._handleNewSelection(value, formConfig, event);
-		}
-		else if(freeItem === value) {
+		if(freeItem === value) {
 			if(!isOfRegularType)
 				ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.alreadySelected"));
 			else {
@@ -111,6 +105,12 @@ export default class TalentSelector extends ItemSelector
 				else
 					this.freeItems[type] = null;
 			}
+		}
+		else if(freeItem === false || freeItem !== null) {
+			if(!isOfRegularType)
+				throw new Error(`No ${item.system.type ? capitalize(item.system.type) + " " + item.type : item.type} is expected to be selected.`);
+			else
+				await super._handleNewSelection(value, formConfig, event);
 		}
 		else
 			this.freeItems[type] = value;
