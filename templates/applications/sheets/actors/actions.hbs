@@ -1,13 +1,16 @@
 <section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
 	<nav class="search-bar">
 		<div class="form-group expanded">
-			<label>{{localize "ACTOR.SHEET.search"}}</label>
+			<label for="{{concat rootId '-searchFilter.actions.text'}}">
+				{{localize "ACTOR.SHEET.search"}}
+			</label>
 
 			<div class="form-fields">
-				<input class="search-filter"
+				<input id="{{concat rootId '-searchFilter.actions.text'}}"
+					   class="search-filter"
 					   name="searchFilters.actions.text"
 					   value="{{searchFilters.text}}"
-					   type="text">
+					   type="text" />
 
 				<a data-action="openFilters" data-tooltip="{{localize 'ACTOR.ACTIONS.openFilters'}}">
 					<span class="fas fa-filter"></span>
@@ -20,10 +23,13 @@
 
 			{{#each types as |type t|}}
 				<div class="form-group">
-					<label>{{localize type}}</label>
+					<label for="{{concat @root.rootId '-searchFilter.actions.type'}}">
+						{{localize type}}
+					</label>
 
 					<div class="form-fields">
-						<input class="search-filter"
+						<input id="{{concat @root.rootId '-searchFilter.actions.type'}}"
+							   class="search-filter"
 							   name="searchFilters.actions.type"
 							   value="{{t}}"
 							   type="radio"
