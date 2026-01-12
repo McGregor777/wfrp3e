@@ -1286,7 +1286,7 @@
 		"ACTIONS": {
 			"applyToggledEffects": "Appliquer les effets activés",
 			"performAFreeCheck": "Effectuer un test libre",
-			"useTalent": "Utiliser un talent"
+			"useTalent": "Utiliser une aptitude/un talent"
 		},
 		"EFFECTS": {
 			"critical": "+{amount} critique",

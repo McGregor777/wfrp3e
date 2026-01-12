@@ -1286,7 +1286,7 @@
 		"ACTIONS": {
 			"applyToggledEffects": "Apply Toggled Effects",
 			"performAFreeCheck": "Perform a Free Check",
-			"useTalent": "Use Talent"
+			"useTalent": "Use Ability/Talent"
 		},
 		"EFFECTS": {
 			"critical": "+{amount} critical",

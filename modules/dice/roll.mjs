@@ -711,7 +711,7 @@ export default class CheckRoll extends foundry.dice.Roll
 			  );
 
 		if(triggeredItems.length > 0) {
-			const selectedItemUuids = await wfrp3e.applications.apps.selectors.TalentSelector.wait({items: triggeredItems});
+			const selectedItemUuids = await wfrp3e.applications.apps.selectors.ItemSelector.wait({items: triggeredItems});
 
 			if(selectedItemUuids[0]) {
 				const selectedTalent = await fromUuid(selectedItemUuids[0]);
