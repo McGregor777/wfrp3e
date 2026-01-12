@@ -179,7 +179,7 @@
 					{{#if (and (eq @first true) (eq @last true) (ne this "any"))}}
 						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." this))}}
 					{{else}}
-						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
+						{{localize (concat "RACE." this)}}{{#unless @last}}, {{/unless}}
 					{{/if}}
 				{{/each}}
 			</div>
