@@ -17,18 +17,19 @@
 			{{localize (lookup @root.types item.system.type)}}
 		</label>
 
-		<div class="socket">
-			<select id="{{concat @root.rootId '-Item-' item._id '-' item.system.schema.fields.socket.fieldPath}}"
-					class="socket-select"
-					name="system.socket"
-					data-item-id="{{item._id}}"
-					{{#unless @root.editable}}disabled{{/unless}}>
-				{{selectOptions
-						(lookup @root.socketsByType item.system.type)
-						selected=item.system.socket
-						blank=(localize "TALENT.SOCKET.none")}}
-			</select>
-		</div>
+		{{#if @root.socketsByType}}
+			<div class="socket">
+				<select id="{{concat @root.rootId '-Item-' item._id '-' item.system.schema.fields.socket.fieldPath}}"
+						class="socket-select"
+						name="system.socket"
+						data-item-id="{{item._id}}"
+						{{#unless @root.editable}}disabled{{/unless}}>
+					{{selectOptions (lookup @root.socketsByType item.system.type)
+									selected=item.system.socket
+									blank=(localize "TALENT.SOCKET.none")}}
+				</select>
+			</div>
+		{{/if}}
 
 		<div class="recharge-tokens">
 			{{#if @root.editable}}
