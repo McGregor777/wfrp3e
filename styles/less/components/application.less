@@ -442,12 +442,18 @@
 					& .content > div {
 						flex: 3;
 
-						&:not(.buttons) * {
-							vertical-align: sub;
+						&:not(.buttons) {
+							& * {
+								vertical-align: sub;
+							}
+
+							& .fa-solid, & .fas {
+								vertical-align: -5px;
+							}
 						}
 
 						&.buttons * {
-							vertical-align: middle;
+							vertical-align: -3px;
 						}
 					}
 				}
