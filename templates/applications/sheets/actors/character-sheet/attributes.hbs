@@ -23,9 +23,14 @@
 		</div>
 	</div>
 
-	<div class="skills">
+	<div class="skills" data-item-type="skill">
 		<h2 class="sheet-title">
 			{{localize "SKILL.plural"}}
+
+			<a data-action="addItem"
+			   data-tooltip="{{localize 'ACTOR.ACTIONS.addItem' type=(localize "TYPES.Item.skill")}}">
+				<span class="fa-solid fa-plus"></span>
+			</a>
 		</h2>
 
 		{{#if skills}}

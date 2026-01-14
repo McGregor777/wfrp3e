@@ -1,10 +1,15 @@
 <section class="tab scrollable {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
-	{{#if weapons}}
-		<section class="weapon table">
-			<div class="table-header title">
-				<div><span>{{localize "WEAPON.plural"}}</span></div>
-			</div>
+	<section class="weapon table" data-item-type="weapon">
+		<div class="table-header title">
+			<span>{{localize "WEAPON.plural"}}</span>
 
+			<a data-action="addItem"
+			   data-tooltip="{{localize 'ACTOR.ACTIONS.addItem' type=(localize "TYPES.Item.weapon")}}">
+				<span class="fa-solid fa-plus"></span>
+			</a>
+		</div>
+
+		{{#if weapons}}
 			<div class="table-header">
 				<div class="image"></div>
 
@@ -58,15 +63,20 @@
 					{{>systems/wfrp3e/templates/applications/sheets/actors/partials/weapon-row.hbs weapon=weapon}}
 				{{/each}}
 			</div>
-		</section>
-	{{/if}}
+		{{/if}}
+	</section>
 
-	{{#if armours}}
-		<section class="armour table">
-			<div class="table-header title">
-				{{localize "ARMOUR.plural"}}
-			</div>
+	<section class="armour table" data-item-type="armour">
+		<div class="table-header title">
+			{{localize "ARMOUR.plural"}}
 
+			<a data-action="addItem"
+			   data-tooltip="{{localize 'ACTOR.ACTIONS.addItem' type=(localize "TYPES.Item.armour")}}">
+				<span class="fa-solid fa-plus"></span>
+			</a>
+		</div>
+
+		{{#if armours}}
 			<div class="table-header">
 				<div class="image"></div>
 
@@ -102,15 +112,20 @@
 					{{>systems/wfrp3e/templates/applications/sheets/actors/partials/armour-row.hbs armour=armour}}
 				{{/each}}
 			</div>
-		</section>
-	{{/if}}
+		{{/if}}
+	</section>
 
-	{{#if trappings}}
-		<section class="trapping table">
-			<div class="table-header title">
-				{{localize "TRAPPING.plural"}}
-			</div>
+	<section class="trapping table" data-item-type="trapping">
+		<div class="table-header title">
+			{{localize "TRAPPING.plural"}}
 
+			<a data-action="addItem"
+			   data-tooltip="{{localize 'ACTOR.ACTIONS.addItem' type=(localize "TYPES.Item.trapping")}}">
+				<span class="fa-solid fa-plus"></span>
+			</a>
+		</div>
+
+		{{#if trappings}}
 			<div class="table-header">
 				<div class="image"></div>
 
@@ -134,15 +149,20 @@
 					{{>systems/wfrp3e/templates/applications/sheets/actors/partials/trapping-row.hbs trapping=trapping}}
 				{{/each}}
 			</div>
-		</section>
-	{{/if}}
+		{{/if}}
+	</section>
 
-	{{#if money}}
-		<section class="money table">
-			<div class="table-header title">
-				{{localize "MONEY.plural"}}
-			</div>
+	<section class="money table" data-item-type="money">
+		<div class="table-header title">
+			{{localize "MONEY.plural"}}
 
+			<a data-action="addItem"
+			   data-tooltip="{{localize 'ACTOR.ACTIONS.addItem' type=(localize "TYPES.Item.money")}}">
+				<span class="fa-solid fa-plus"></span>
+			</a>
+		</div>
+
+		{{#if money}}
 			<div class="money table-header">
 				<div class="image"></div>
 
@@ -178,6 +198,6 @@
 					{{>systems/wfrp3e/templates/applications/sheets/actors/partials/money-row.hbs money=money}}
 				{{/each}}
 			</div>
-		</section>
-	{{/if}}
+		{{/if}}
+	</section>
 </section>

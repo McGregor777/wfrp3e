@@ -1,4 +1,4 @@
-<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}" data-item-type="action">
 	<nav class="search-bar">
 		<div class="form-group expanded">
 			<label for="{{concat rootId '-searchFilter.actions.text'}}">
@@ -14,6 +14,11 @@
 
 				<a data-action="openFilters" data-tooltip="{{localize 'ACTOR.ACTIONS.openFilters'}}">
 					<span class="fas fa-filter"></span>
+				</a>
+
+				<a data-action="addItem"
+				   data-tooltip="{{localize 'ACTOR.ACTIONS.addItem' type=(localize "TYPES.Item.action")}}">
+					<span class="fa-solid fa-plus"></span>
 				</a>
 			</div>
 		</div>

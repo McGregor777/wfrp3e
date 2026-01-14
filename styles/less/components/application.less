@@ -466,12 +466,16 @@
 					&.title {
 						background: #3F0B0CFF;
 						display: block;
+
+						& .fa-solid, & .fas {
+							vertical-align: top;
+						}
 					}
 
 					& > div {
 						flex: 3;
 
-						&:not(.buttons) *:not(.fa-solid) {
+						&:not(.buttons) {
 							vertical-align: sub;
 						}
 					}
@@ -484,8 +488,13 @@
 
 			& .sheet-title {
 				font: small-caps bold var(--font-size-18) var(--font-primary);
+				line-height: 100%;
 				margin: 0;
 				text-align: center;
+
+				& > a {
+					vertical-align: middle;
+				}
 			}
 		}
 
@@ -668,6 +677,7 @@ body.theme-light .application.wfrp3e.sheet .window-content {
 		& > .form-fields {
 			& > a {
 				flex: 0;
+				line-height: 100%;
 			}
 
 			& > input, & select  {
@@ -693,5 +703,9 @@ nav.tabs {
 		font-size: var(--font-size-18);
 		font-weight: bold;
 		font-variant-caps: small-caps;
+	}
+
+	& > a:not([data-action="tab"]) {
+		line-height: 100%;
 	}
 }

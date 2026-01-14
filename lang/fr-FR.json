@@ -118,6 +118,7 @@
 	"ACTOR": {
 		"ACTIONS": {
 			"addActiveEffect": "Ajouter un effet actif",
+			"addItem": "Ajouter un(e) {type}",
 			"adjustConservativeSegment": "Ajouter/retirer un segment de prudence",
 			"adjustRechargeTokens": "Ajouter/retirer un jeton de rechargement",
 			"adjustRecklessSegment": "Ajouter/retirer un segment de témérité",

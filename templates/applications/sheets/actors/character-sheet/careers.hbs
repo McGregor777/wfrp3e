@@ -1,4 +1,4 @@
-<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+<section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}" data-item-type="career">
 	<nav class="tabs" aria-roledescription="{{localize 'SHEETS.FormNavLabel'}}">
 		{{#each tabs as |tab|}}
 			<a data-action="tab" data-group="{{tab.group}}" data-tab="{{tab.id}}"
@@ -8,6 +8,11 @@
 			   {{#if tab.label}}<span>{{localize tab.label}}</span>{{/if}}
 			</a>
 		{{/each}}
+
+		<a data-action="addItem"
+		   data-tooltip="{{localize 'ACTOR.ACTIONS.addItem' type=(localize "TYPES.Item.career")}}">
+			<span class="fa-solid fa-plus"></span>
+		</a>
 	</nav>
 
 	{{#each tabs as |tab|}}

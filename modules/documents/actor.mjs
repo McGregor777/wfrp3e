@@ -98,17 +98,28 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Creates a new active effect for the actor.
-	 * @param {Object} [data] An Object of optional data for the new active effect.
+	 * Creates a new embedded Active Effect for the Actor.
+	 * @param {Object} [data] An Object of optional data for the new embedded Active Effect.
 	 * @returns {Promise<void>}
 	 */
-	async createEffect(data = {})
+	async createEmbeddedEffect(data = {})
 	{
-		await wfrp3e.documents.ActiveEffect.create({
-			name: game.i18n.localize("DOCUMENT.ActiveEffect"),
-			img: "icons/svg/dice-target.svg",
+		await this.createEmbeddedDocuments("ActiveEffect", [{name: this.name, img: this.img, ...data}]);
+	}
+
+	/**
+	 * Creates a new embedded Item for the Actor.
+	 * @param {string} type The type of embedded Item to create.
+	 * @param {Object} [data] An Object of optional data for the new embedded Item.
+	 * @returns {Promise<void>}
+	 */
+	async createEmbeddedItem(type, data = {})
+	{
+		await this.createEmbeddedDocuments("Item", [{
+			name: game.i18n.localize(CONFIG.Item.typeLabels[type]),
+			type,
 			...data
-		}, {parent: this});
+		}]);
 	}
 
 	/**

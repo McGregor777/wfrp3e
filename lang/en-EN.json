@@ -118,6 +118,7 @@
 	"ACTOR": {
 		"ACTIONS": {
 			"addActiveEffect": "Add Active Effect",
+			"addItem": "Add {type}",
 			"adjustConservativeSegment": "Add/Remove Conservative Segment",
 			"adjustRechargeTokens": "Adjust Recharge Tokens",
 			"adjustRecklessSegment": "Add/Remove Reckless Segment",
