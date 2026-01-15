@@ -105,17 +105,13 @@ export default class Item extends foundry.documents.Item
 	}
 
 	/**
-	 * Creates a new active effect for the item.
-	 * @param {Object} [data] An Object of optional data for the new active effect.
+	 * Creates a new embedded Active Effect for the Actor.
+	 * @param {Object} [data] An Object of optional data for the new embedded Active Effect.
 	 * @returns {Promise<void>}
 	 */
-	async createEffect(data = {})
+	async createEmbeddedEffect(data = {})
 	{
-		await ActiveEffect.create({
-			name: this.name,
-			img: "icons/svg/dice-target.svg",
-			...data
-		}, {parent: this});
+		await this.createEmbeddedDocuments("ActiveEffect", [{name: this.name, img: this.img, ...data}]);
 	}
 
 	/**

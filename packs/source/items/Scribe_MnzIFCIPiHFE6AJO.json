@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkRoll",
           "script": "const skill = await fromUuid(checkData.skill);\nif(skill?.name === game.i18n.localize(\"SKILL.NAMES.education\"))\n  checkRoll.effects?.boon.push({\n    description: '<p>Add 1 fortune to the party fortune pool</p>',\n    immediate: false,\n    reverseScript: \"\",\n    script: \"await actor.system.currentParty?.adjustFortune(1);\",\n    symbolAmount: 2\n  });"
         }

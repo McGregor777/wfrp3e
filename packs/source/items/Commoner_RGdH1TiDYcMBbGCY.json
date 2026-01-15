@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "await this.target.adjustFatigue(-1);",
           "type": "manual"
         }

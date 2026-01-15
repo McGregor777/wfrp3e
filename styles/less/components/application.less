@@ -74,7 +74,7 @@
 			}
 
 			& > p {
-				font-size: var(--font-size-28);
+				font-size: var(--font-size-18);
 				text-align: center;
 
 				& > span {
@@ -442,12 +442,18 @@
 					& .content > div {
 						flex: 3;
 
-						&:not(.buttons) * {
-							vertical-align: sub;
+						&:not(.buttons) {
+							& * {
+								vertical-align: sub;
+							}
+
+							& .fa-solid, & .fas {
+								vertical-align: -5px;
+							}
 						}
 
 						&.buttons * {
-							vertical-align: middle;
+							vertical-align: -3px;
 						}
 					}
 				}
@@ -466,12 +472,16 @@
 					&.title {
 						background: #3F0B0CFF;
 						display: block;
+
+						& .fa-solid, & .fas {
+							vertical-align: top;
+						}
 					}
 
 					& > div {
 						flex: 3;
 
-						&:not(.buttons) * {
+						&:not(.buttons) {
 							vertical-align: sub;
 						}
 					}
@@ -484,8 +494,13 @@
 
 			& .sheet-title {
 				font: small-caps bold var(--font-size-18) var(--font-primary);
+				line-height: 100%;
 				margin: 0;
 				text-align: center;
+
+				& > a {
+					vertical-align: middle;
+				}
 			}
 		}
 
@@ -501,34 +516,6 @@
 
 			&.career {
 				flex-wrap: nowrap;
-			}
-
-			&.origin {
-				flex-wrap: nowrap;
-
-				& > * {
-					font: var(--font-size-16) var(--font-title) small-caps;
-					text-align: center;
-					width: 100px;
-
-					& img {
-						margin-bottom: 16px;
-					}
-				}
-			}
-
-			&.race {
-				flex-wrap: nowrap;
-
-				& > * {
-					font: var(--font-size-24) var(--font-title) small-caps;
-					text-align: center;
-					width: 200px;
-
-					& img {
-						margin-bottom: 16px;
-					}
-				}
 			}
 
 			& label {
@@ -696,6 +683,7 @@ body.theme-light .application.wfrp3e.sheet .window-content {
 		& > .form-fields {
 			& > a {
 				flex: 0;
+				line-height: 100%;
 			}
 
 			& > input, & select  {
@@ -721,5 +709,9 @@ nav.tabs {
 		font-size: var(--font-size-18);
 		font-weight: bold;
 		font-variant-caps: small-caps;
+	}
+
+	& > a:not([data-action="tab"]) {
+		line-height: 100%;
 	}
 }

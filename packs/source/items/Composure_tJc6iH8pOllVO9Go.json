@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "options.freeItemTypes.push(\"focus\");",
           "type": "startingTalentSelection"
         }

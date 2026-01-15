@@ -118,6 +118,7 @@
 	"ACTOR": {
 		"ACTIONS": {
 			"addActiveEffect": "Add Active Effect",
+			"addItem": "Add {type}",
 			"adjustConservativeSegment": "Add/Remove Conservative Segment",
 			"adjustRechargeTokens": "Adjust Recharge Tokens",
 			"adjustRecklessSegment": "Add/Remove Reckless Segment",
@@ -827,7 +828,13 @@
 
 	"EFFECT": {
 		"MACROS": {
-			"FIELDS.type.label": "Macro Type",
+			"FIELDS": {
+				"priority": {
+					"hint": "The higher the value, the sooner the script will be executed compared to the lower values.",
+					"label": "Priority"
+				},
+				"type.label": "Macro Type"
+			},
 			"actionUsage": {
 				"FIELDS.script": {
 					"hint": "This script is executed whenever an Action is used, either after a check roll or a simple activation.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Item} action: The Action that has been used.\n\t- {Actor} actor: The Actor that used the Action.\n\t- {string} face: Which face of the Action card was used, either \"conservative\" or \"reckless\".",
@@ -1280,7 +1287,7 @@
 		"ACTIONS": {
 			"applyToggledEffects": "Apply Toggled Effects",
 			"performAFreeCheck": "Perform a Free Check",
-			"useTalent": "Use Talent"
+			"useTalent": "Use Ability/Talent"
 		},
 		"EFFECTS": {
 			"critical": "+{amount} critical",

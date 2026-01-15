@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkRoll",
           "script": "if(wfrp3e.data.actors.Actor.CHARACTERISTICS[checkData.characteristic].type === \"physical\")\n  checkRoll.effects?.bane.push({\n    description: \"<p>The GM may add or remove one recharge token from one of your recharging cards</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"\",\n    symbolAmount: 1\n  });"
         }

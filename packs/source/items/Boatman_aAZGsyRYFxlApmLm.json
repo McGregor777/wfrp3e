@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "manualPreCheckRoll",
           "script": "diePool.dice.misfortune--;",
           "conditionalScript": "return checkData.skill && [\"SKILL.NAMES.athletics\", \"SKILL.NAMES.coordination\", \"SKILL.NAMES.discipline\", \"SKILL.NAMES.stealth\"].map(key => game.i18n.localize(key)).includes(fromUuidSync(checkData.skill)?.name);",

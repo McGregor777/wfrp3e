@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "options.startingCreationPoints = 25;",
           "type": "creationPointInvestment"
         }

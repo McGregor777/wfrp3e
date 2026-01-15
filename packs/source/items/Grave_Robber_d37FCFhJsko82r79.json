@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "manualPreCheckRoll",
           "script": "",
           "conditionalScript": "return checkData.skill;",

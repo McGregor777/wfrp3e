@@ -39,7 +39,7 @@ export default class WeaponSheet extends TrappingSheet
 	{
 		const data = foundry.utils.expandObject(formData.object);
 
-		if(data.system.qualities.element.name) {
+		if(data.system.qualities?.element.name) {
 			const qualityData = data.system.qualities.element;
 			const qualities = [];
 

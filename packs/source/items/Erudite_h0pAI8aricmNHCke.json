@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "options.freeAcquisitions.push(\"Compendium.wfrp3e.items.Item.zkAmp7J3kXPnrGDE\");",
           "type": "startingSkillTrainingSelection"
         }

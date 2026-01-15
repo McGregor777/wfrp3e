@@ -30,32 +30,6 @@ export default class TalentSelector extends ItemSelector
 	}
 
 	/**
-	 * The currently selected free items.
-	 * @type {FreeItems}
-	 */
-	freeItems = {
-		focus: false,
-		reputation: false,
-		tactic: false,
-		faith: false,
-		order: false,
-		tricks: false,
-		insanity: false
-	};
-
-	/**
-	 * The talent types that are present among the selectable items.
-	 * @type {Object}
-	 */
-	types = {};
-
-	/**
-	 * An array of talent types that are available for regular selection.
-	 * @type {Array}
-	 */
-	regularTypes = [];
-
-	/**
 	 * Return the number of items to select, including potential free items.
 	 * @type {number}
 	 */
@@ -105,13 +79,7 @@ export default class TalentSelector extends ItemSelector
 			  isOfRegularType = this.regularTypes.includes(type),
 			  freeItem = this.freeItems[type];
 
-		if(freeItem === false || freeItem !== null) {
-			if(!isOfRegularType)
-				throw new Error(`No ${item.system.type ? capitalize(item.system.type) + " " + item.type : item.type} is expected to be selected.`);
-			else
-				await super._handleNewSelection(value, formConfig, event);
-		}
-		else if(freeItem === value) {
+		if(freeItem === value) {
 			if(!isOfRegularType)
 				ui.notifications.warn(game.i18n.localize("SELECTOR.WARNINGS.alreadySelected"));
 			else {
@@ -137,6 +105,12 @@ export default class TalentSelector extends ItemSelector
 				else
 					this.freeItems[type] = null;
 			}
+		}
+		else if(freeItem === false || freeItem !== null) {
+			if(!isOfRegularType)
+				throw new Error(`No ${item.system.type ? capitalize(item.system.type) + " " + item.type : item.type} is expected to be selected.`);
+			else
+				await super._handleNewSelection(value, formConfig, event);
 		}
 		else
 			this.freeItems[type] = value;
@@ -178,13 +152,26 @@ export default class TalentSelector extends ItemSelector
 	}
 
 	/**
-	 * Prepares the talent types that are present among the selectable items.
+	 * Prepares the Talent types that are present among the selectable Items.
+	 * @param {Object} options
 	 * @protected
 	 */
-	_prepareTypes()
+	_prepareTypes(options)
 	{
+		this.regularTypes = [];
+		/** @var {FreeItems} freeItems */
+		this.freeItems = {
+			focus: false,
+			reputation: false,
+			tactic: false,
+			faith: false,
+			order: false,
+			tricks: false,
+			insanity: false
+		};
+
 		for(const [key, type] of Object.entries(wfrp3e.data.items.Talent.TYPES))
-			if(options.items.find(item => item.system.type === key)){
+			if(this.items.some(item => item.system.type === key)){
 				this.types[key] = type;
 				this.regularTypes.push(key);
 			}

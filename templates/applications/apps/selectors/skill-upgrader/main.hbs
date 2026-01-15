@@ -29,7 +29,8 @@
 				{{#with (lookup @root.characteristics item.system.characteristic) as |characteristic|}}
 					<tr>
 						<td class="left-aligned shrinked skill-acquired">
-							<input name="selection"
+							<input id="{{concat @root.rootId '-' item.uuid '-selection.acquisition'}}"
+								   name="selection"
 								   value="0"
 								   type="checkbox"
 								   data-type="acquisition"
@@ -44,7 +45,9 @@
 						</td>
 
 						<td class="left-aligned skill-name">
-							{{item.name}}
+							<label for="{{concat @root.rootId '-' item.uuid '-selection.acquisition'}}">
+								{{item.name}}
+							</label>
 						</td>
 
 						<td class="center-aligned skill-characteristic">

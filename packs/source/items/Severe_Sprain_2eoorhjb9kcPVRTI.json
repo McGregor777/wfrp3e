@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkRoll",
           "script": "if(wfrp3e.data.actors.Actor.CHARACTERISTICS[checkData.characteristic].type === \"physical\")\n  checkRoll.effects?.bane.push({\n    description: \"<p>Suffer 1 fatigue</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"await actor.adjustFatigue(1);\",\n    symbolAmount: 1\n  });"
         }

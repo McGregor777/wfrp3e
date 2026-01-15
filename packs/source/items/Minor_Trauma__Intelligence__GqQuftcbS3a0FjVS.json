@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkPreparation",
           "script": "if(checkData.characteristic === \"intelligence\")\n  diePool.dice.misfortune++;"
         }

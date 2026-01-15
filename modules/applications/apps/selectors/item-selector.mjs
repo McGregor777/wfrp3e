@@ -8,7 +8,7 @@ export default class ItemSelector extends Selector
 	{
 		super(options);
 
-		this._prepareTypes();
+		this._prepareTypes(options);
 	}
 
 	/** @inheritDoc */

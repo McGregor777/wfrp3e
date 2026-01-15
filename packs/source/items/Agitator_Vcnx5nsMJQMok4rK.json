@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkPreparation",
           "script": "if(checkData.combat?.system.type === \"social\")\n  diePool.dice.fortune += 2;"
         }

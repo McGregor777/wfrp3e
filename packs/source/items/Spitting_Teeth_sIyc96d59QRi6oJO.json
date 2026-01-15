@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "itemAddition",
           "script": "let mostSevereCriticalWound = null;\nfor(const criticalWound of actor.itemTypes.criticalWound)\n  if(!mostSevereCriticalWound || criticalWound.system.severityRating > mostSevereRating.system.severityRating)\n    mostSevereCriticalWound = criticalWound;\nawait actor.adjustWounds(mostSevereCriticalWound.system.severityRating);"
         }

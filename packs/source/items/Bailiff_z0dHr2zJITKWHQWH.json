@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "if(game.combats.active && this.getFlag(\"wfrp3e\", \"encounter\") !== game.combats.active.uuid) {\n  await actor.system.currentParty.adjustFortune(1);\n  await this.setFlag(\"wfrp3e\", \"encounter\", game.combats.active.uuid);\n}",
           "type": "stressAdjustment"
         }

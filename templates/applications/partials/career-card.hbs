@@ -142,7 +142,7 @@
 		</div>
 
 		<div class="socket-container">
-			{{#each system.sockets as |socket sckt|}}
+			{{#each item.system.sockets as |socket sckt|}}
 				{{#if socket.item}}
 					{{#with (fromUuid socket.item) as |socketedItem|}}
 						<a class="socket {{socketedItem.system.type}}"
@@ -179,7 +179,7 @@
 					{{#if (and (eq @first true) (eq @last true) (ne this "any"))}}
 						{{localize "CAREER.SHEET.oneRaceOnly" race=(localize (concat "RACE." this))}}
 					{{else}}
-						{{localize (concat "RACE." (capitalize this))}}{{#unless @last}}, {{/unless}}
+						{{localize (concat "RACE." this)}}{{#unless @last}}, {{/unless}}
 					{{/if}}
 				{{/each}}
 			</div>

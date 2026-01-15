@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "const skills = await Promise.all([\n      await fromUuid(\"Compendium.wfrp3e.items.Item.0BSYtxTPqR72Tfuq\"),\n      await fromUuid(\"Compendium.wfrp3e.items.Item.LjSfvJxmSzqkU7NV\"),\n      await fromUuid(\"Compendium.wfrp3e.items.Item.xIkIYMUHDtUrqjY8\")\n]),\n      buttons = [];\n\nfor(const skill of skills)\n  buttons.push({\n    action: skill._id,\n    label: skill.name,\n    callback: (event, button, dialog) => skill.uuid\n  });\n\noptions.freeTrainings.push(\n  await foundry.applications.api.DialogV2.wait({\n    window: {title: this.name},\n    modal: true,\n    content: this.parent.system.description,\n    buttons\n  })\n);",
           "type": "startingSkillTrainingSelection"
         }

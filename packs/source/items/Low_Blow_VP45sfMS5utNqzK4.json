@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "woundsAdjustment",
           "script": "await foundry.applications.api.DialogV2.query(\n\tgame.users.activeGM,\n\t\"prompt\", {\n\t\tcontent: game.i18n.format(\"CRITICALWOUND.DIALOG.lowBlow.description\", {actor: actor.toAnchor().innerHTML}),\n\t\twindow: {title: \"CRITICALWOUND.DIALOG.lowBlow.title\"}\n\t}\n);"
         }

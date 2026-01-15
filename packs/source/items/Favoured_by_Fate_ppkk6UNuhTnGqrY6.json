@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "diePool.dice.fortune += 2;",
           "type": "manualPreCheckRoll",
           "conditionalScript": "",

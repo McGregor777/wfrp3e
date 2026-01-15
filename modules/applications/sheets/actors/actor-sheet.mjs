@@ -16,6 +16,7 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	static DEFAULT_OPTIONS = {
 		actions: {
 			addActiveEffect: this.#addActiveEffect,
+			addItem: this.#addItem,
 			adjustImpairment: {handler: this.#adjustImpairment, buttons: [0, 2]},
 			adjustQuantity: {handler: this.#adjustQuantity, buttons: [0, 2]},
 			adjustRechargeTokens: {handler: this.#adjustRechargeTokens, buttons: [0, 2]},
@@ -101,7 +102,6 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 					fields: this.actor.system.schema.fields,
 					items: items.sort((a, b) => a.name.localeCompare(b.name)),
 					searchFilters: this.searchFilters?.talents,
-					socketsByType: await this.actor.buildSocketList(),
 					types: {
 						all: "ACTOR.SHEET.all",
 						ability: "ABILITY.plural",
@@ -443,13 +443,25 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 	}
 
 	/**
-	 * Adds a new effect to the actor.
+	 * Creates a new embedded Active Effect to the Actor.
 	 * @returns {Promise<void>}
 	 * @private
 	 */
 	static async #addActiveEffect()
 	{
-		await this.actor.createEffect();
+		await this.actor.createEmbeddedEffect();
+	}
+
+	/**
+	 * Creates a new embedded Item to the Actor.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #addItem(event, target)
+	{
+		await this.actor.createEmbeddedItem(target.closest("[data-item-type]").dataset.itemType);
 	}
 
 	/**

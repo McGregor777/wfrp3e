@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "diePool.dice.fortune++;",
           "type": "manualPreCheckRoll",
           "conditionalScript": "return checkData.action && [\"melee\", \"ranged\"].includes(fromUuidSync(checkData.action)?.system.type);",

@@ -118,6 +118,7 @@
 	"ACTOR": {
 		"ACTIONS": {
 			"addActiveEffect": "Ajouter un effet actif",
+			"addItem": "Ajouter un(e) {type}",
 			"adjustConservativeSegment": "Ajouter/retirer un segment de prudence",
 			"adjustRechargeTokens": "Ajouter/retirer un jeton de rechargement",
 			"adjustRecklessSegment": "Ajouter/retirer un segment de témérité",
@@ -827,7 +828,13 @@
 
 	"EFFECT": {
 		"MACROS": {
-			"FIELDS.type.label": "Type de macro",
+			"FIELDS": {
+				"priority": {
+					"hint": "Plus la valeur est haute, plus tôt le script sera executé en comparaison aux valeurs plus faibles",
+					"label": "Priorité"
+				},
+				"type.label": "Type de macro"
+			},
 			"actionUsage": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté chaque fois qu'une action est utilisée, lors d'un test ou d'une simple activation.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Item} action: L'action ayant été utilisée.\n\t- {Actor} actor: L'acteur ayant utilisé l'action.\n\t- {string} face: Quel côté de l'action a été utilisé, soit \"conservative\" pour le côté prudence, soit \"reckless\" pour le côté témérité.",
@@ -1280,7 +1287,7 @@
 		"ACTIONS": {
 			"applyToggledEffects": "Appliquer les effets activés",
 			"performAFreeCheck": "Effectuer un test libre",
-			"useTalent": "Utiliser un talent"
+			"useTalent": "Utiliser une aptitude/un talent"
 		},
 		"EFFECTS": {
 			"critical": "+{amount} critique",

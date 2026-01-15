@@ -18,6 +18,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			acquireTalents: this.#acquireTalents,
 			chooseStartingCareer: this.#chooseStartingCareer,
 			chooseOrigin: this.#chooseOrigin,
+			flip: this.#flip,
 			investCreationPoints: this.#investCreationPoints,
 			playGameOfTenQuestions: this.#playGameOfTenQuestions
 		},
@@ -28,11 +29,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			contentClasses: ["standard-form"],
 			title: "CHARACTERGENERATOR.title"
 		},
-		form: {
-			handler: this.#onCharacterGeneratorSubmit,
-			submitOnChange: false,
-			closeOnSubmit: true
-		},
+		form: {handler: this.#onCharacterGeneratorSubmit},
 		position: {
 			height: 860,
 			width: 920
@@ -137,17 +134,29 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		if(partContext.tabs && partId in partContext.tabs)
 			partContext.tab = partContext.tabs[partId];
 
-		const character = this.character;
+		const character = this.character,
+			  textEditor = foundry.applications.ux.TextEditor.implementation;
+
 		switch(partId) {
 			case "buttons":
 				partContext.steps = this.steps;
 				break;
 			case "origin":
-				const originData = character.system.originData;
+				const originData = character.system.originData,
+					  originAbilities = [],
+					  enrichment = {};
+
+				for(const uuid of originData.abilities) {
+					const ability = await fromUuid(uuid);
+					originAbilities.push(ability);
+					enrichment[uuid] = await textEditor.enrichHTML(ability.system.description);
+				}
+
 				partContext = {
 					...partContext,
+					enrichment,
 					origin: originData,
-					originAbilities: await Promise.all(originData.abilities.map(async uuid => await fromUuid(uuid))),
+					originAbilities,
 					race: character.system.race,
 					step: this.steps.chooseOrigin
 				};
@@ -166,12 +175,16 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 				};
 				break;
 			case "career":
-				partContext = {
-					...partContext,
-					career: character.system.currentCareer,
-					characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
-					fields: character.system.schema.fields
-				};
+				const career = character.system.currentCareer;
+				if(career)
+					partContext = {
+						...partContext,
+						career,
+						characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
+						enrichment: {[career.uuid]: await foundry.applications.ux.TextEditor.implementation.enrichHTML(career.system.description)},
+						fields: character.system.schema.fields,
+						types: wfrp3e.data.items.Talent.TYPES
+					};
 				break;
 			case "talents":
 				partContext = {
@@ -194,13 +207,9 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			case "background":
 				partContext = {
 					...partContext,
-					enriched: {
-						campaignNotes: await foundry.applications.ux.TextEditor.enrichHTML(
-							character.system.background.campaignNotes
-						),
-						biography: await foundry.applications.ux.TextEditor.enrichHTML(
-							character.system.background.biography
-						)
+					enrichment: {
+						campaignNotes: await textEditor.enrichHTML(character.system.background.campaignNotes),
+						biography: await textEditor.enrichHTML(character.system.background.biography)
 					},
 					fields: character.system.schema.fields.background.fields,
 					system: character.system.background
@@ -263,7 +272,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 
 		for(const [characteristic, rating] of Object.entries(race.defaultRatings)) {
 			characteristics[characteristic] = {rating};
-			this.creationPointInvestments[characteristic] = rating;
+			this.creationPointInvestments.characteristics[characteristic] = rating;
 		}
 
 		await character.update({
@@ -381,17 +390,19 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 	 */
 	static async #onCharacterGeneratorSubmit(event, form, formData)
 	{
-		let proceed = true;
+		let submit = false;
 
 		if(Object.values(this.steps).includes(false))
-			proceed = await foundry.applications.api.DialogV2.confirm({
+			submit = await foundry.applications.api.DialogV2.confirm({
 				window: {title: game.i18n.localize("CHARACTERGENERATOR.WARNINGS.unfinishedGeneration.title")},
 				modal: true,
 				content: game.i18n.localize("CHARACTERGENERATOR.WARNINGS.unfinishedGeneration.description")
 			});
 
-		if(proceed)
-			await this.character.render({force: true});
+		if(submit) {
+			this.options.submit(foundry.utils.expandObject(formData.object).currentInvestments);
+			await this.close({submitted: true});
+		}
 	}
 
 	/**
@@ -562,15 +573,13 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		for(const effect of onStartingTalentSelectionEffects)
 			await effect.triggerMacro({options});
 
-		options.items = await TalentSelector.buildNewCharacterOptionsList(character, {
+		let talentUuids = await TalentSelector.wait({
 			...options,
 			actor: character,
+			items: await TalentSelector.buildNewCharacterOptionsList(character, options),
 			modal: true,
-			size: investment.size,
-			freeItemTypes: []
+			size: investment.size
 		});
-
-		let talentUuids = await TalentSelector.wait(options);
 
 		if(talentUuids) {
 			if(!Array.isArray(talentUuids))
@@ -716,5 +725,22 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 		}
 
 		await this.render();
+	}
+
+	/**
+	 * Switches between two faces of a document.
+	 * @param {PointerEvent} event
+	 * @param {HTMLElement} target
+	 * @returns {Promise<void>}
+	 * @private
+	 */
+	static async #flip(event, target)
+	{
+		const itemElement = target.closest(".item"),
+			  activeFace = itemElement.querySelector(".face.active"),
+			  inactiveFace = itemElement.querySelector(".face:not(.active)");
+
+		activeFace.classList.remove("active");
+		inactiveFace.classList.add("active");
 	}
 }

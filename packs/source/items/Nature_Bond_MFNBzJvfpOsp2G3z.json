@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "manualPreCheckRoll",
           "script": "diePool.dice.fortune++;",
           "conditionalScript": "if(checkData.combat?.system.type === \"combat\")\n  return true;\n\nreturn checkData.skill && [\"SKILL.NAMES.observation\", \"SKILL.NAMES.stealth\"].map(key => game.i18n.localize(key)).includes(fromUuidSync(checkData.skill)?.name);",

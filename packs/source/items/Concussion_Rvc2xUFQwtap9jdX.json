@@ -15,6 +15,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "type": "checkPreparation",
           "script": "const rechargingItems = actor?.items.search({\n  filters: [{\n    field: \"system.rechargeTokens\",\n    operator: \"gt\",\n    value: 0\n  }]\n});\n\nif(rechargingItems.length > 0)\n  diePool.dice.misfortune++;"
         }

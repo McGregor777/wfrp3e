@@ -1,9 +1,9 @@
 <section class="tab {{tab.id}} {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
 	<div class="form-group slim">
-		<label>{{localize "ACTION.FIELDS.effects.symbolType.label"}}</label>
+		<label for="{{concat rootId '-symbol'}}">{{localize "ACTION.FIELDS.effects.symbolType.label"}}</label>
 
 		<div class="form-fields">
-			<select name="symbol" {{#if index}}disabled{{/if}}>
+			<select id="{{concat rootId '-symbol'}}" name="symbol" {{#if index}}disabled{{/if}}>
 				{{selectOptions symbols selected=symbol labelAttr="name" localize=true}}
 			</select>
 		</div>

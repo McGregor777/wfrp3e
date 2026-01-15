@@ -283,10 +283,10 @@ export default class SkillUpgrader extends Selector
 	async _getSelectedItems()
 	{
 		return await Promise.all(
-			this.selection.map(selection => {
+			this.selection.map(async selection => {
 				return {
 					...selection,
-					item: fromUuidSync(selection.uuid)
+					item: await fromUuid(selection.uuid)
 				};
 			})
 		);
@@ -324,7 +324,15 @@ export default class SkillUpgrader extends Selector
 		const selection = super._processSelectionData(event, form, formData);
 
 		if(this.specialisationSelection)
-			return [...selection, ...this.specialisationSelection];
+			selection.push(...this.specialisationSelection);
+
+		if(this.freeAcquisitions.length)
+			for(const uuid of this.freeAcquisitions)
+				selection.push({type: "acquisition", uuid, value: 0});
+
+		if(this.freeTrainings.length)
+			for(const uuid of this.freeTrainings)
+				selection.push({type: "trainingLevel", uuid, value: 1});
 
 		return selection;
 	}

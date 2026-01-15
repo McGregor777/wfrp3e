@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "const slayerTrait = game.i18n.localize(\"TRAITS.slayer\");\nif(actor.system.currentCareer.system.traits.includes(slayerTrait)) {\n\tactor.system.defenceValue = 1;\n\tactor.system.soakValue = 1;\n\tfor(const career of actor.itemTypes.career)\n\t\tif(career.system.traits.includes(slayerTrait) && career.system.dedicationBonus)\n\t\t\tactor.system.soakValue++;\n\n\tfoundry.utils.mergeObject(actor.overrides, {system: {defenceValue: actor.system.defenceValue, soakValue: actor.system.soakValue}});\n}",
           "type": "actorPreparation"
         }

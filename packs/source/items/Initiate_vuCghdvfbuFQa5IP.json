@@ -10,6 +10,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "if(!checkData.action)\n\treturn false;\n\nconst action = await fromUuid(checkData.action),\n\t  traits = action.system[checkData.face].traits;\nif(action.system.type === \"blessing\" && (traits.includes(game.i18n.localize(\"TRAITS.rankZero\")) || traits.includes(game.i18n.localize(\"TRAITS.rankOne\"))))\n\tdiePool.dice.fortune++;",
           "type": "checkPreparation"
         }
@@ -41,6 +42,7 @@
       "type": "base",
       "system": {
         "macro": {
+          "priority": 0,
           "script": "options.freeItemTypes.push(\"faith\");",
           "type": "startingTalentSelection"
         }

@@ -47,11 +47,12 @@
 				grid-template-areas:
 						'race-image race-name race-name'
 						'race-image origin-image origin-name';
-				grid-template-columns: 200px 100px auto;
+				grid-template-columns: 200px max-content auto;
 				grid-template-rows: 100px 100px;
 
 				& .origin-img {
 					grid-area: origin-image;
+					max-height: 100%;
 				}
 
 				& .origin-name {
@@ -62,6 +63,7 @@
 
 				& .race-img {
 					grid-area: race-image;
+					max-height: 100%;
 				}
 
 				& .race-name {

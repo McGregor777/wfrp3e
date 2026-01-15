@@ -68,7 +68,7 @@ export default class ItemSheet extends foundry.applications.api.HandlebarsApplic
 	 */
 	static async #addActiveEffect()
 	{
-		await this.item.createEffect();
+		await this.item.createEmbeddedEffect();
 	}
 
 	/**
