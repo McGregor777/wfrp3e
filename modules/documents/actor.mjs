@@ -341,57 +341,35 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Searches for items sharing the same socket as the one passed as parameter. If any is found, removes its socket value.
+	 * Searches for Items sharing the same socket as the one passed as parameter. If any is found, removes its socket value.
 	 * @param {Item} item The item which socket must be matched.
 	 */
 	preventMultipleItemsOnSameSocket(item)
 	{
 		const actors = this.system.currentParty
 			? this.system.currentParty.system.members.map(member => fromUuidSync(member))
-			: [this];
+			: [this],
+			  foundItems = [];
 
-		for(const actor of actors) {
-			const foundItems = actor.items.search({
-				filters: [{
-					field: "system.socket",
-					operator: "is_empty",
-					negate: true
-				}, {
-					field: "uuid",
-					operator: "equals",
-					negate: true,
-					value: item.uuid
-				}, {
-					field: "system.socket",
-					operator: "equals",
-					negate: false,
-					value: item.system.socket
-				}]
-			});
+		for(const actor of actors)
+			for(const embeddedItem of actor.items)
+				if(embeddedItem !== item && embeddedItem.system.socket === item.system.socket)
+					foundItems.push(embeddedItem)
 
-			for(const foundItem of foundItems)
-				foundItem.update({"system.socket": null});
-		}
+		for(const foundItem of foundItems)
+			foundItem.update({"system.socket": null});
 	}
 
 	/**
-	 * Resets every matching socket available to the actor.
+	 * Resets every matching socket available to the Actor.
 	 * @param {string} uuid The uuid of the Item owning the sockets to reset.
 	 */
 	resetSockets(uuid)
 	{
-		const items = this.items.search({
-			filters: [{
-				field: "system.socket",
-				operator: "is_empty",
-				negate: true
-			}, {
-				field: "system.socket",
-				operator: "starts_with",
-				negate: false,
-				value: uuid
-			}]
-		});
+		const items = [];
+		for(const item of this.items)
+			if(item.system.socket?.startsWith(uuid))
+				items.push(item);
 
 		for(const item of items)
 			item.update({"system.socket": null});
