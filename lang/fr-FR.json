@@ -1680,8 +1680,8 @@
 				},
 				"label": "Attributs"
 			},
-			"range.label": "Range",
-			"special.label": "Special"
+			"range.label": "Portée",
+			"special.label": "Spécial"
 		},
 		"GROUPS": {
 			"blackpowder": "Poudre Noire",
