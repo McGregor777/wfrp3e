@@ -102,7 +102,6 @@ export default class ActorSheet extends foundry.applications.api.HandlebarsAppli
 					fields: this.actor.system.schema.fields,
 					items: items.sort((a, b) => a.name.localeCompare(b.name)),
 					searchFilters: this.searchFilters?.talents,
-					socketsByType: await this.actor.buildSocketList(),
 					types: {
 						all: "ACTOR.SHEET.all",
 						ability: "ABILITY.plural",

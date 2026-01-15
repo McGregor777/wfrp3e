@@ -242,6 +242,77 @@ export default class Character extends Actor
 	}
 
 	/**
+	 * The list of talent sockets available by talent type for the Character.
+	 * @returns {{[p: string]: {}}}
+	 */
+	get socketsByType()
+	{
+		const talentTypes = wfrp3e.data.items.Talent.TYPES,
+			  socketsByType = Object.fromEntries(
+				  ["any", ...Object.keys(talentTypes), "insanity"].map(key => [key, {}])
+			  ),
+			  currentCareer = this.currentCareer,
+			  currentParty = this.currentParty;
+
+		const socketedItems = [];
+		if(currentCareer) {
+			for(const item of this.parent.items)
+				if(item.system.socket)
+					socketedItems.push(item);
+
+			for(const index in currentCareer.system.sockets) {
+				const socket = currentCareer.system.sockets[index],
+					  // Find a potential Item that would be socketed in that socket.
+					  item   = socketedItems.find(item => item.system.socket === `${currentCareer.uuid}_${index}`);
+
+				socketsByType[socket.type][currentCareer.uuid + "_" + index] = `${currentCareer.name} - ${item
+					? game.i18n.format("TALENT.SOCKET.taken", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
+						talent: item.name
+					})
+					: game.i18n.format("TALENT.SOCKET.available", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
+					})}`;
+			}
+		}
+
+		if(currentParty)
+			for(const socketIndex in currentParty.system.sockets) {
+				const socket = currentParty.system.sockets[socketIndex];
+				let item = null;
+
+				for(const member of currentParty.system.members) {
+					// Find a potential Item that would be socketed in that socket.
+					const actor = fromUuidSync(member),
+						  value = `${currentParty.uuid}_${socketIndex}`;
+
+					for(const embeddedItem of actor?.items ?? [])
+						if(embeddedItem.system.socket === value) {
+							item = embeddedItem;
+							break;
+						}
+
+					if(item)
+						break;
+				}
+
+				socketsByType[socket.type][currentParty.uuid + "_" + socketIndex] = `${currentParty.name} - ${item
+					? game.i18n.format("TALENT.SOCKET.taken", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`),
+						talent: item.name
+					})
+					: game.i18n.format("TALENT.SOCKET.available", {
+						type: game.i18n.localize(`TALENT.TYPES.${socket.type}`)
+					})}`;
+			}
+
+		for(const itemType of Object.keys(talentTypes))
+			Object.assign(socketsByType[itemType], socketsByType["any"]);
+
+		return socketsByType;
+	}
+
+	/**
 	 * The sum of the encumbrance of every armour, trapping and weapon owned by the character.
 	 * @returns {number} The total of the encumbrance.
 	 */

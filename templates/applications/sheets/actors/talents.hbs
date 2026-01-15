@@ -52,12 +52,12 @@
 					<div class="talent-container">
 						{{>systems/wfrp3e/templates/applications/partials/talent-card.hbs item=item}}
 
-						{{#if @root.socketsByType}}
+						{{#if @root.system.socketsByType}}
 							<select class="item-input socket-select"
 									name="system.socket"
 									data-item-id="{{item._id}}"
 									{{#unless @root.editable}}disabled{{/unless}}>
-								{{selectOptions (lookup @root.socketsByType item.system.type)
+								{{selectOptions (lookup @root.system.socketsByType item.system.type)
 												selected=item.system.socket
 												blank=(localize "TALENT.SOCKET.none")}}
 							</select>
