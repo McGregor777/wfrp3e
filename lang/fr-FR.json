@@ -879,7 +879,7 @@
 			},
 			"checkRoll": {
 				"FIELDS.script": {
-					"hint": "Ce script est exécuté après qu'un test ne soit lancé.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur accomplissant le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le test concerné.",
+					"hint": "Ce script est exécuté après qu'un test ne soit lancé.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur accomplissant le test.\n\t- {ChatMessage} chatMessage: Le message contenant le résultat du test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le test concerné.",
 					"label": "Script"
 				},
 				"label": "Réalisation d'un test"

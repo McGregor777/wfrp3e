@@ -879,7 +879,7 @@
 			},
 			"checkRoll": {
 				"FIELDS.script": {
-					"hint": "This script is executed at the creation of a Check Roll.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that is performing the check.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The concerned Check Roll.",
+					"hint": "This script is executed at the creation of a Check Roll.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that is performing the check.\n\t- {ChatMessage} chatMessage: The Chat Message containing the Check Roll.\n\t- {CheckData} checkData: Various data related to the check.\n\t- {CheckRoll} checkRoll: The concerned Check Roll.",
 					"label": "Script"
 				},
 				"label": "Check Roll"

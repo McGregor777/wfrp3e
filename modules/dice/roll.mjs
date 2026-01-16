@@ -34,6 +34,13 @@ export default class CheckRoll extends foundry.dice.Roll
 	}
 
 	/**
+	 * The Chat Message containing this Check Roll.
+	 * @type {ChatMessage}
+	 * @internal
+	 */
+	_message;
+
+	/**
 	 * The number of each symbol obtained by the check roll.
 	 * @returns {{success: number, righteousSuccess: number, boon: number, sigmarsComet: number, challenge: number, bane: number, chaosStar: number, delay: number, exertion: number}}
 	 */
@@ -231,15 +238,31 @@ export default class CheckRoll extends foundry.dice.Roll
 	}
 
 	/** @inheritDoc */
+	async toMessage(messageData = {}, {rollMode, create = true} = {})
+	{
+		const message = await super.toMessage(messageData, {rollMode, create});
+
+		if(message instanceof foundry.documents.ChatMessage) {
+			this._message = message;
+			await message.update({rolls: [this]});
+		}
+
+		return message;
+	}
+
+	/** @inheritDoc */
 	toJSON()
 	{
-		return {...super.toJSON(), effects: this.effects};
+		return {...super.toJSON(), effects: this.effects, message: this._message?.uuid};
 	}
 
 	/** @inheritDoc */
 	static fromData(data)
 	{
-		return foundry.utils.mergeObject(super.fromData(data), {effects: data.effects});
+		return foundry.utils.mergeObject(super.fromData(data), {
+			effects: data.effects,
+			_message: fromUuidSync(data.message)
+		});
 	}
 
 	/**
@@ -272,7 +295,7 @@ export default class CheckRoll extends foundry.dice.Roll
 		}
 
 		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.CheckRollMacro.TYPE))
-			await effect.triggerMacro({actor, checkData, checkRoll: this});
+			await effect.triggerMacro({actor, checkData, chatMessage: this.message, checkRoll: this});
 
 		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.ActionUsageMacro.TYPE))
 			await effect.triggerMacro({action, actor, face: checkData.face});
