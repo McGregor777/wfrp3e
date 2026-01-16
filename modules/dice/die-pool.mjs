@@ -256,7 +256,7 @@ export default class DiePool
 		});
 
 		// Execute the effects from all selected items.
-		const triggeredEffects = this.checkData.triggeredEffects;
+		const triggeredEffects = this.checkData?.triggeredEffects;
 		if(triggeredEffects != null) {
 			if(Array.isArray(triggeredEffects))
 				for(const effectUuid of triggeredEffects)
