@@ -1,0 +1,54 @@
+{
+  "name": "Confident",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Confident",
+      "img": "icons/svg/statue.svg",
+      "_id": "nnXTfpMPCCDuFzlU",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPostCheckRoll",
+          "script": "await checkRoll.adjustSymbols(chatMessage, {banes: 2});\nawait this.parent.exhaust();",
+          "conditionalScript": "return [\"intelligence\", \"willpower\", \"fellowship\"].includes(checkData.characteristic) && checkRoll.totalSymbols.banes > 0;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to negate up to {Sba}{Sba} generated during an Intelligence, Willpower, or Fellowship check</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!xNUkk8DozOIA1ohg.nnXTfpMPCCDuFzlU"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 1700000,
+  "flags": {},
+  "_id": "xNUkk8DozOIA1ohg",
+  "system": {
+    "description": "<p>Exhaust this card to negate up to {Sba}{Sba} generated during an Intelligence, Willpower, or Fellowship check</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!xNUkk8DozOIA1ohg"
+}
