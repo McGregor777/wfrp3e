@@ -1390,6 +1390,7 @@
 		"NAMES": {
 			"channeling": "Focalisation",
 			"charm": "Charisme",
+			"discipline": "Discipline",
 			"education": "Éducation",
 			"firstAid": "Premiers soins",
 			"folklore": "Folklore",
@@ -1400,6 +1401,7 @@
 			"medicine": "Médecine",
 			"observation": "Observation",
 			"piety": "Piété",
+			"resilience": "Résistance",
 			"ride": "Équitation",
 			"skulduggery": "Forfaits",
 			"stealth": "Furtivité",
