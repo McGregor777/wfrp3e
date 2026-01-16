@@ -921,7 +921,7 @@
 			},
 			"manual": {
 				"FIELDS.script": {
-					"hint": "This script is executed on the User action only.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.",
+					"hint": "This script is executed on the User action only.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor owning the triggered item.",
 					"label": "Script"
 				},
 				"label": "Manual Trigger"

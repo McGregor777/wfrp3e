@@ -921,7 +921,7 @@
 			},
 			"manual": {
 				"FIELDS.script": {
-					"hint": "Ce script est exécuté sur commande de l'utilisateur uniquement.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.",
+					"hint": "Ce script est exécuté sur commande de l'utilisateur uniquement.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur détenant l'objet activé.",
 					"label": "Script"
 				},
 				"label": "Déclenchement manuel"

@@ -149,7 +149,7 @@ export default class Item extends foundry.documents.Item
 		if(this.system.cooldown)
 			ui.notifications.warn(game.i18n.localize("ABILITY.WARNINGS.cooldown"));
 		else
-			await this.effects.get(options.id).triggerMacro();
+			await this.effects.get(options.id).triggerMacro({actor: this.actor});
 	}
 
 	//#endregion
@@ -571,7 +571,7 @@ export default class Item extends foundry.documents.Item
 		else if(this.system.socket == null)
 			ui.notifications.warn(game.i18n.localize("TALENT.WARNINGS.notSocketed"));
 		else
-			await this.effects.get(options.id).triggerMacro();
+			await this.effects.get(options.id).triggerMacro({actor: this.actor});
 	}
 
 	//#endregion
