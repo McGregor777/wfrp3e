@@ -249,6 +249,17 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
+	 * Adjusts the Actor's stance towards conservative or reckless.
+	 * @param {number} number The number of steps change, positive means towards reckless, negative towards conservative.
+	 * @returns {Promise<void>}
+	 */
+	async adjustStance(number)
+	{
+		const propertyPath = "system.stance.current";
+		await this.update({[propertyPath]: foundry.utils.getProperty(this, propertyPath) + number});
+	}
+
+	/**
 	 * Adds or removes a specified number of segments on either side on the stance meter.
 	 * @param {string} stance The name of the stance meter part that is getting adjusted.
 	 * @param {number} number The number of segments added or removed.
