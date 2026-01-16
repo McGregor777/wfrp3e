@@ -557,6 +557,17 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
+	 * Adjusts the Party's tension.
+	 * @param {number} number The number of steps change.
+	 * @returns {Promise<void>}
+	 */
+	async adjustPartyTension(number)
+	{
+		const propertyPath = "system.tension.value";
+		await this.update({[propertyPath]: foundry.utils.getProperty(this, propertyPath) + number});
+	}
+
+	/**
 	 * Adds a character as a new member of the party.
 	 * @param {Actor} actor
 	 * @returns {Promise<void>}
