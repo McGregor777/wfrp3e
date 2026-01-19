@@ -1,0 +1,51 @@
+{
+  "name": "Strong Willed",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Strong Willed",
+      "img": "icons/svg/statue.svg",
+      "_id": "7MHdg1Kaqjzc0hnf",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "await actor.adjustFatigue(-1);\nawait actor.adjustStress(-1);",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to recover 1 fatigue and 1 stress</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!m2BulfrAAgM2Zweu.7MHdg1Kaqjzc0hnf"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 101563,
+  "_id": "m2BulfrAAgM2Zweu",
+  "system": {
+    "description": "<p>Exhaust this card to recover 1 fatigue and 1 stress</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!m2BulfrAAgM2Zweu"
+}

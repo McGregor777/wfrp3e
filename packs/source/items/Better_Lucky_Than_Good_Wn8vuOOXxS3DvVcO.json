@@ -1,0 +1,51 @@
+{
+  "_id": "Wn8vuOOXxS3DvVcO",
+  "name": "Better Lucky Than Good",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Better Lucky Than Good",
+      "img": "icons/svg/statue.svg",
+      "_id": "RvEtwzkHZRn92C4A",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const skill = await fromUuid(checkData.skill);\nif(skill && !skill.system.advanced && skill.system.trainingLevel === 0 && checkData.fortunePoints > 0)\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When you spend a fortune point to add a die to a check using a basic skill you do not have training in, you may add {Df} {Df} instead of {Df}</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!Wn8vuOOXxS3DvVcO.RvEtwzkHZRn92C4A"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 1900000,
+  "system": {
+    "description": "<p>When you spend a fortune point to add a die to a check using a basic skill you do not have training in, you may add {Df} {Df} instead of {Df}</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!Wn8vuOOXxS3DvVcO"
+}

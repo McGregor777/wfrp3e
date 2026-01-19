@@ -1,0 +1,51 @@
+{
+  "name": "Pious",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Pious",
+      "img": "icons/svg/statue.svg",
+      "_id": "rwV1Fmu7CeTHmXnh",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const target = await fromUuid(checkData.targets[0]),\n      action = await fromUuid(checkData.action);\nif(target.system?.priest && (checkData.characteristic === \"fellowship\"\n  || action?.system[checkData.face].traits.includes(game.i18n.localize(\"TRAITS.social\"))))\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Gain {Df} to Fellowship checks or Social actions targeting a priest or devoutly religious character</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!WexUeGbjk0crwK0F.rwV1Fmu7CeTHmXnh"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 400000,
+  "_id": "WexUeGbjk0crwK0F",
+  "system": {
+    "description": "<p>Gain {Df} to Fellowship checks or Social actions targeting a priest or devoutly religious character</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!WexUeGbjk0crwK0F"
+}

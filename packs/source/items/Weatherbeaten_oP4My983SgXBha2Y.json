@@ -1,0 +1,84 @@
+{
+  "name": "Weatherbeaten",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Weatherbeaten",
+      "img": "icons/svg/statue.svg",
+      "_id": "5BYPDHZa1abc1gqf",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When you suffer fatigue, stress, or wounds due to inclement weather or environmental effects, reduce the fatigue, stress, or wounds you suffer by 1 to a minimum of 1</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!oP4My983SgXBha2Y.5BYPDHZa1abc1gqf"
+    },
+    {
+      "name": "Misfortune Removal",
+      "img": "icons/svg/statue.svg",
+      "_id": "tJgu1ROMqekFLP0T",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.misfortune--;",
+          "conditionalScript": "return diePool.dice.misfortune > 0;",
+          "postRollScript": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You suffer 1 fewer {Dm} from weather effects</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!oP4My983SgXBha2Y.tJgu1ROMqekFLP0T"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 100196,
+  "_id": "oP4My983SgXBha2Y",
+  "system": {
+    "description": "<p>When you suffer fatigue, stress, or wounds due to inclement weather or environmental effects, reduce the fatigue, stress, or wounds you suffer by 1 to a minimum of 1. You also suffer 1 fewer {Dm} from weather effects</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!oP4My983SgXBha2Y"
+}
