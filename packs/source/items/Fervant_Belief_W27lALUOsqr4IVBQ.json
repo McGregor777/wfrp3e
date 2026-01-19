@@ -1,0 +1,51 @@
+{
+  "name": "Fervant Belief",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Fervant Belief",
+      "img": "icons/svg/eye.svg",
+      "_id": "XWx7L4q7SppwWc7J",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const skill = await fromUuid(checkData.skill);\nif([game.i18n.localize(\"SKILL.NAMES.leadership\"), game.i18n.localize(\"SKILL.NAMES.piety\")].includes(skill?.name))\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your Leadership and Piety checks gain {Df}</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!W27lALUOsqr4IVBQ.XWx7L4q7SppwWc7J"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 1000000,
+  "_id": "W27lALUOsqr4IVBQ",
+  "system": {
+    "description": "<p>Your Leadership and Piety checks gain {Df}</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!W27lALUOsqr4IVBQ"
+}

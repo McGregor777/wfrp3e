@@ -1,0 +1,51 @@
+{
+  "name": "Foresight",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Foresight",
+      "img": "icons/svg/eye.svg",
+      "_id": "5L2BI4em5nvdd9fv",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "if(checkData.combat)\n  await checkRoll.adjustSymbols({boons: -1, successes: 1});",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your Initiative checks gain:</p><p>{Sbo} Add {Ssu} to the results pool</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!2sda7EW4Ghe3koXY.5L2BI4em5nvdd9fv"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 900000,
+  "_id": "2sda7EW4Ghe3koXY",
+  "system": {
+    "description": "<p>Your Initiative checks gain:</p><p>{Sbo} Add {Ssu} to the results pool</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!2sda7EW4Ghe3koXY"
+}

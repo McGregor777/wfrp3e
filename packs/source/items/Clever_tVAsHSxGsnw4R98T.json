@@ -1,0 +1,51 @@
+{
+  "name": "Clever",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Clever",
+      "img": "icons/svg/dice-target.svg",
+      "_id": "EeSCnBNN8HLpOhT0",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "if(checkData.characteristic === \"intelligence\" && checkData.fortunePoints > 0)\n\tcheckRoll.effects?.boon.push({\n\t\tdescription: \"<p>Add {Ssu} to the results</p>\",\n\t\timmediate: true,\n\t\treverseScript: \"checkRoll.options.startingSymbols.successes--;\",\n\t\tscript: \"checkRoll.options.startingSymbols.successes++\",\n\t\tsymbolAmount: 2\n\t});",
+          "type": "checkRoll",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When spending fortune points on an Intelligence check, the check gains:</p><p>{Sbo}{Sbo} Add {Ssu} to the results</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!tVAsHSxGsnw4R98T.EeSCnBNN8HLpOhT0"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "system": {
+    "description": "<p>When spending fortune points on an Intelligence check, the check gains:</p><p>{Sbo}{Sbo} Add {Ssu} to the results</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "_id": "tVAsHSxGsnw4R98T",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!tVAsHSxGsnw4R98T"
+}

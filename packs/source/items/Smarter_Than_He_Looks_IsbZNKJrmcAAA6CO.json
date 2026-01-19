@@ -1,0 +1,53 @@
+{
+  "name": "Smarter Than He Looks",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Smarter Than He Looks",
+      "img": "icons/svg/eye.svg",
+      "_id": "nCfxEImX14Gxnz1d",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.characteristic++;",
+          "conditionalScript": "return checkData.characteristic === \"intelligence\" && checkData.skill;",
+          "postRollScript": "await this.parent.exhaust();\nawait actor.adjustStress(1);",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card and suffer 1 stress to treat your Intelligence 1 point higher for a skill check, or when the target of an opposed check against your Intelligence</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!IsbZNKJrmcAAA6CO.nCfxEImX14Gxnz1d"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 101563,
+  "_id": "IsbZNKJrmcAAA6CO",
+  "system": {
+    "description": "<p>Exhaust this card and suffer 1 stress to treat your Intelligence 1 point higher for a skill check, or when the target of an opposed check against your Intelligence</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!IsbZNKJrmcAAA6CO"
+}

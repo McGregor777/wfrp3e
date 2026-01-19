@@ -1,0 +1,51 @@
+{
+  "name": "Determined",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Determined",
+      "_id": "jEyhZgTbJPrFvu3x",
+      "img": "icons/svg/eye.svg",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "if(checkData.characteristic === \"willpower\" && checkData.fortunePoints > 0)\n\tcheckRoll.effects?.boon.push({\n\t\tdescription: '<p>Add {Ssu} to the results</p>',\n\t\timmediate: true,\n\t\treverseScript: \"checkRoll.options.startingSymbols.successes--;\",\n\t\tscript: \"checkRoll.options.startingSymbols.successes++;\",\n\t\tsymbolAmount: 2\n\t});",
+          "type": "checkRoll",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When spending fortune points on a Willpower check, the check gains:</p><p>{Sbo}{Sbo} Add {Ssu} to the results</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!dD1gMWbD7P5QEh1O.jEyhZgTbJPrFvu3x"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "system": {
+    "description": "<p>When spending fortune points on a Willpower check, the check gains:</p><p>{Sbo}{Sbo} Add {Ssu} to the results</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "_id": "dD1gMWbD7P5QEh1O",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!dD1gMWbD7P5QEh1O"
+}

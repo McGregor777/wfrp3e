@@ -1,0 +1,53 @@
+{
+  "name": "Keen Eyes",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Keen Eyes",
+      "img": "icons/svg/eye.svg",
+      "_id": "V2cU3ZaxIxYabCdo",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune++;",
+          "conditionalScript": "return fromUuidSync(checkData.skill)?.name === game.i18n.localize(\"SKILL.NAMES.observation\");",
+          "postRollScript": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Gain {Df} to Observation checks where vision is relevant</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!xOfhyjSgEwY2N7Kd.V2cU3ZaxIxYabCdo"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 400000,
+  "_id": "xOfhyjSgEwY2N7Kd",
+  "system": {
+    "description": "<p>Gain {Df} to Observation checks where vision is relevant</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!xOfhyjSgEwY2N7Kd"
+}

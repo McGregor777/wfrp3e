@@ -1,0 +1,52 @@
+{
+  "name": "Deductive Reasoning",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Deductive Reasoning",
+      "img": "icons/svg/eye.svg",
+      "_id": "uL9m36ktTBPWNLq3",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "if(checkData.characteristic === \"intelligence\" && checkRoll.totalSymbols.successes >= 3)\n  await checkRoll.adjustSymbols(chatMessage, {boons: 1});",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Intelligence checks gain {Sbo} to the results pool if at least {Ssu}{Ssu}{Ssu} are generated</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!4mWRQPQsHQWXoxYp.uL9m36ktTBPWNLq3"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 1300000,
+  "flags": {},
+  "_id": "4mWRQPQsHQWXoxYp",
+  "system": {
+    "description": "<p>Intelligence checks gain {Sbo} to the results pool if at least {Ssu}{Ssu}{Ssu} are generated</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!4mWRQPQsHQWXoxYp"
+}
