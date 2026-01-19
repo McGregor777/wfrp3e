@@ -1,0 +1,51 @@
+{
+  "name": "Coordinated Efforts",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Coordinated Efforts",
+      "img": "icons/svg/combat.svg",
+      "_id": "ZkPolyhHHiJ618Q9",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "if(checkData.characteristic === \"agility\" && checkData.fortunePoints > 0)\n\tcheckRoll.effects?.boon.push({\n\t\tdescription: \"<p>Add {Ssu} to the results</p>\",\n\t\timmediate: true,\n\t\treverseScript: \"checkRoll.options.startingSymbols.successes--;\",\n\t\tscript: \"checkRoll.options.startingSymbols.successes++\",\n\t\tsymbolAmount: 2\n\t});",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When spending fortune points on an Agility check, the check gains:</p><p>{Sbo}{Sbo} Add {Ssu} to the results</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!8X68DQuBvTy5gwPV.ZkPolyhHHiJ618Q9"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 1700000,
+  "_id": "8X68DQuBvTy5gwPV",
+  "system": {
+    "description": "<p>When spending fortune points on an Agility check, the check gains:</p><p>{Sbo}{Sbo} Add {Ssu} to the results</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!8X68DQuBvTy5gwPV"
+}

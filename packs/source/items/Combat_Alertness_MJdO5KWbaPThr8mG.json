@@ -1,0 +1,51 @@
+{
+  "name": "Combat Alertness",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Combat Alertness",
+      "img": "icons/svg/combat.svg",
+      "_id": "qu4Ldh10Fli8a8Fk",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "actorPreparation",
+          "script": "if(!actor.itemTypes.action.some(action => action.system.reckless.traits.includes(game.i18n.localize(\"TRAITS.activeDefence\")))) {\n\tactor.system.defenceModifier++;\n\tfoundry.utils.mergeObject(actor, {\"overrides.system.defenceModifier\": actor.system.defenceModifier});\n}",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Gain +1 Defence against Melee Attacks while you have no Active Defence actions recharging</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!MJdO5KWbaPThr8mG.qu4Ldh10Fli8a8Fk"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 1800000,
+  "_id": "MJdO5KWbaPThr8mG",
+  "system": {
+    "description": "<p>Gain +1 Defence against Melee Attacks while you have no Active Defence actions recharging</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!MJdO5KWbaPThr8mG"
+}

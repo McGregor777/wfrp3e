@@ -1,0 +1,53 @@
+{
+  "name": "Relentless Approach",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Relentless Approach",
+      "img": "icons/svg/combat.svg",
+      "_id": "NVHXgIxw0CaWNgQ5",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPostCheckRoll",
+          "script": "await checkRoll.rerollDice([\"fortune\", \"misfortune\"], chatMessage);\nawait this.parent.exhaust();",
+          "conditionalScript": "return [\"strength\", \"toughness\", \"agility\"].includes(checkData.characteristic);",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>After rolling a Strength, Toughness, or Agility check, exhaust this card to re-roll all {Df} and {Dm} in the current dice pool</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!1lgoGJdMLGFJAR6z.NVHXgIxw0CaWNgQ5"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 700000,
+  "_id": "1lgoGJdMLGFJAR6z",
+  "system": {
+    "description": "<p>After rolling a Strength, Toughness, or Agility check, exhaust this card to re-roll all {Df} and {Dm} in the current dice pool</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!1lgoGJdMLGFJAR6z"
+}
