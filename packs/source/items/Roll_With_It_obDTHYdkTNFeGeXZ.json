@@ -11,7 +11,7 @@
       "system": {
         "macro": {
           "type": "damageInfliction",
-          "script": "await foundry.applications.api.DialogV2.confirm({\n  content: item.system.description,\n  window: {title: item.name},\n  submit: async result => {\n    if(result) {\n      actor.system.soakModifier += 2;\n\tfoundry.utils.mergeObject(actor, {\"overrides.system.soakModifier\": actor.system.soakModifier});\n      await this.parent.exhaust();\n    }\n  }\n});",
+          "script": "await foundry.applications.api.DialogV2.confirm({\n  content: item.system.description,\n  window: {title: item.name},\n  submit: async result => {\n    if(result) {\n      soak += 2;\n      await this.parent.exhaust();\n    }\n  }\n});",
           "priority": 0
         }
       },

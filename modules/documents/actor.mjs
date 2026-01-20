@@ -308,18 +308,23 @@ export default class Actor extends foundry.documents.Actor
 	 * Adds a certain number of damages to the Actor, converted into wounds, even adding Critical Wounds if too many damages are inflicted.
 	 * @param {number} damages The damages inflicted.
 	 * @param {number} criticalDamages The critical damages inflicted.
+	 * @param {Item} [weapon] The weapon used to inflict the damages.
 	 * @returns {Promise<{damages: number, criticalWounds: Item[]|number}>} The total number of damages inflicted, alongside the Critical Wounds.
 	 */
-	async sufferDamages(damages, criticalDamages)
+	async sufferDamages(damages, criticalDamages, weapon = null)
 	{
 		const propertyPath = "system.wounds.value",
 			  wounds = foundry.utils.getProperty(this, propertyPath);
-		let criticalWounds = null;
+		let soak = Math.max(
+			this.system.totalSoak - (weapon?.system.qualities.find(quality => quality.name === "pierce")?.rating ?? 0),
+				0
+			),
+			criticalWounds = null;
 
 		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.DamageInflictionMacro.TYPE))
-			await effect.triggerMacro({actor: this, wounds, number: damages});
+			await effect.triggerMacro({actor: this, damages, soak, weapon, wounds});
 
-		damages -= this.system.damageReduction;
+		damages -= this.system.characteristics.toughness.rating + soak;
 
 		// If the attack inflicts 0 damages in spite of hitting the Actor, the target still suffers one damage
 		// plus the initial number of critical damages that was supposed to be inflicted

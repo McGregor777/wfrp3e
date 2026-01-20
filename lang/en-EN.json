@@ -893,7 +893,7 @@
 			},
 			"damageInfliction": {
 				"FIELDS.script": {
-					"hint": "This script is executed every time damages are inflicted to the Actor.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor suffering wounds.\n\t- {number} stress: The Actor's current number of wounds.\n\t- {number} value: The currently calculated amount of damages.",
+					"hint": "This script is executed every time damages are inflicted to the Actor.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor suffering wounds.\n\t- {number} damages: The currently calculated amount of damages.\n\t- {number} soak: The currently calculated soak value.\n\t- {Item} weapon: The weapon used to inflict damages.\n\t- {number} wounds: The Actor's current number of wounds.",
 					"label": "Script"
 				},
 				"label": "Damage Infliction"

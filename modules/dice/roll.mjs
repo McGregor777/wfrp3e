@@ -838,7 +838,11 @@ export default class CheckRoll extends foundry.dice.Roll
 			}
 
 			if(outcome.targetDamages > 0) {
-				const {damages, criticalWounds} = await targetActor.sufferDamages(outcome.targetDamages, outcome.targetCriticalWounds);
+				const {damages, criticalWounds} = await targetActor.sufferDamages(
+					outcome.targetDamages,
+					outcome.targetCriticalWounds,
+					await fromUuid(checkData.weapon)
+				);
 				outcome.targetDamages = damages;
 				outcome.targetCriticalWounds = criticalWounds;
 			}

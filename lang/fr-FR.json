@@ -893,7 +893,7 @@
 			},
 			"damageInfliction": {
 				"FIELDS.script": {
-					"hint": "Ce script est exécuté chaque fois qu'un acteur subit des dégâts.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur subissant des dégâts.\n\t- {number} stress: Le nombre de blessures actuel de l'acteur.\n\t- {number} value: Le nombre de dégâts actuellement calculé.",
+					"hint": "Ce script est exécuté chaque fois qu'un acteur subit des dégâts.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur subissant des dégâts.\n\t- {number} damages: Le nombre de dégâts actuellement calculé.\n\t- {number} soak: La valeur d'encaissement actuellement calculée.\n\t- {Item} weapon: L'arme utilisée pour infliger des dégâts.\n\t- {number} wounds: Le nombre de blessures actuel de l'acteur.",
 					"label": "Script"
 				},
 				"label": "Infliction de dégâts"
