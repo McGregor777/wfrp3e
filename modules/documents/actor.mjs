@@ -123,9 +123,9 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Prepares a characteristic check and shows a Check Builder to edit it. Rolls the check once edition is finished.
+	 * Prepares a characteristic check and shows a Check Builder to edit it. Rolls the check once editing is finished.
 	 * @param {string} characteristic The name of the checked characteristic.
-	 * @returns {Promise<void>}
+	 * @returns {Promise<{checkRoll: CheckRoll, diePool: DiePool}>}
 	 */
 	async performCharacteristicCheck(characteristic)
 	{
@@ -135,7 +135,22 @@ export default class Actor extends foundry.documents.Actor
 				{name: characteristic, ...this.system.characteristics[characteristic]}
 			)
 		});
-		await diePool.roll();
+
+		return {checkRoll: await diePool.roll(), diePool};
+	}
+
+	/**
+	 * Prepares a skill check and shows a Check Builder to edit it. Rolls the check once editing is finished.
+	 * @param {Item} skill The Skill to check.
+	 * @returns {Promise<{checkRoll: CheckRoll, diePool: DiePool}>}
+	 */
+	async performSkillCheck(skill)
+	{
+		const diePool = await wfrp3e.applications.dice.CheckBuilder.wait({
+			diePool: await wfrp3e.dice.DiePool.createFromSkill(this, skill)
+		});
+
+		return {checkRoll: await diePool.roll(), diePool};
 	}
 
 	/**
