@@ -300,6 +300,10 @@ export default class Actor extends foundry.documents.Actor
 		const propertyPath = "system.wounds.value",
 			  wounds = foundry.utils.getProperty(this, propertyPath);
 		let criticalWounds = null;
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.DamageInflictionMacro.TYPE))
+			await effect.triggerMacro({actor: this, wounds, number: damages});
+
 		damages -= this.system.damageReduction;
 
 		// If the attack inflicts 0 damages in spite of hitting the Actor, the target still suffers one damage

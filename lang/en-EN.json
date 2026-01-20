@@ -891,6 +891,13 @@
 				},
 				"label": "Creation Point Investment"
 			},
+			"damageInfliction": {
+				"FIELDS.script": {
+					"hint": "This script is executed every time damages are inflicted to the Actor.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor suffering wounds.\n\t- {number} stress: The Actor's current number of wounds.\n\t- {number} value: The currently calculated amount of damages.",
+					"label": "Script"
+				},
+				"label": "Damage Infliction"
+			},
 			"embeddedItemCreation": {
 				"FIELDS.script": {
 					"hint": "This script is executed every time one or several new item(s) are either added to an Actor or directly created for him/her.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor receiving new item(s).\n\t- {Array} items: The new item(s).",

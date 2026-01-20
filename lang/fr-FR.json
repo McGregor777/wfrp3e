@@ -891,6 +891,13 @@
 				},
 				"label": "Investissement des points de création"
 			},
+			"damageInfliction": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois qu'un acteur subit des dégâts.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur subissant des dégâts.\n\t- {number} stress: Le nombre de blessures actuel de l'acteur.\n\t- {number} value: Le nombre de dégâts actuellement calculé.",
+					"label": "Script"
+				},
+				"label": "Infliction de dégâts"
+			},
 			"embeddedItemCreation": {
 				"FIELDS.script": {
 					"hint": "Ce script est exécuté chaque fois qu'un ou plusieurs objet(s) sont soit ajoutés à un acteur, soit directement créés pour lui/elle.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur recevant les nouveaux objet(s).\n\t- {Array} items: Les nouveaux objet(s).",
