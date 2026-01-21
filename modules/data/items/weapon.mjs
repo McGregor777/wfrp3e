@@ -165,6 +165,17 @@ export default class Weapon extends Trapping
 		extreme: "WEAPON.RANGES.extreme"
 	};
 
+	static get fastEffect()
+	{
+		return {
+			description: "<p>Place one fewer recharge token on this action</p>",
+			immediate: false,
+			reverseScript: "",
+			script: "outcome.rechargeTokens--;",
+			symbolAmount: 1
+		};
+	}
+
 	/** @inheritDoc */
 	static migrateData(source)
 	{

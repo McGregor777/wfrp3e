@@ -284,15 +284,18 @@ export default class CheckRoll extends foundry.dice.Roll
 			for(const effect of effects)
 				effect.active = false;
 
-		this.effects.boon.push(this.constructor.getUniversalBoonEffect(isCharacteristicMental));
-		this.effects.bane.push(this.constructor.getUniversalBaneEffect(isCharacteristicMental));
+		this.effects.boon.push(CheckRoll.getUniversalBoonEffect(isCharacteristicMental));
+		this.effects.bane.push(CheckRoll.getUniversalBaneEffect(isCharacteristicMental));
 
 		if(["melee", "ranged"].includes(action.system.type)) {
 			if(weapon)
-				this.effects.boon.push(this.constructor.getCriticalRatingEffect(weapon));
+				this.effects.boon.push(CheckRoll.getCriticalRatingEffect(weapon));
 
-			this.effects.sigmarsComet.push(this.constructor.getUniversalSigmarsCometEffect());
+			this.effects.sigmarsComet.push(CheckRoll.getUniversalSigmarsCometEffect());
 		}
+
+		if(weapon)
+			this.effects.boon.push(wfrp3e.data.items.Weapon.fastEffect);
 
 		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.CheckRollMacro.TYPE))
 			await effect.triggerMacro({actor, checkData, chatMessage: this.message, checkRoll: this});
@@ -805,7 +808,8 @@ export default class CheckRoll extends foundry.dice.Roll
 					  ? roll.remainingSymbols.exertions
 					  : 0,
 				  favour: 0,
-				  power: 0
+				  power: 0,
+				  rechargeTokens: 0
 			  },
 			  actorUpdates = {system: {}},
 			  targetUpdates = {system: {}},
@@ -884,7 +888,7 @@ export default class CheckRoll extends foundry.dice.Roll
 		if(roll.totalSymbols.successes && checkData?.action) {
 			/** @type {Item} action */
 			const action = await fromUuid(checkData.action);
-			await action.exhaust({face: checkData.face, weapon});
+			await action.exhaust({face: checkData.face, rechargeTokens: outcome.rechargeTokens, weapon});
 		}
 	}
 
