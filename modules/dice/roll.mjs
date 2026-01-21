@@ -790,6 +790,7 @@ export default class CheckRoll extends foundry.dice.Roll
 			  actor = await fromUuid(checkData.actor),
 			  /** @var {Actor} targetActor */
 			  targetActor = checkData.targets?.length > 0 ? await fromUuid(checkData.targets[0]) : null,
+			  weapon = await fromUuid(checkData.weapon),
 			  outcome = {
 				  targetDamages: 0,
 				  targetCriticalWounds: 0,
@@ -841,7 +842,7 @@ export default class CheckRoll extends foundry.dice.Roll
 				const {damages, criticalWounds} = await targetActor.sufferDamages(
 					outcome.targetDamages,
 					outcome.targetCriticalWounds,
-					await fromUuid(checkData.weapon)
+					weapon
 				);
 				outcome.targetDamages = damages;
 				outcome.targetCriticalWounds = criticalWounds;
@@ -883,7 +884,7 @@ export default class CheckRoll extends foundry.dice.Roll
 		if(roll.totalSymbols.successes && checkData?.action) {
 			/** @type {Item} action */
 			const action = await fromUuid(checkData.action);
-			await action.exhaust({face: checkData.face});
+			await action.exhaust({face: checkData.face, weapon});
 		}
 	}
 

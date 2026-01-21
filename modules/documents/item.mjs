@@ -221,7 +221,11 @@ export default class Item extends foundry.documents.Item
 		if(!options.face)
 			throw ui.notifications.error("Exhausting an Action requires to know which face is concerned.");
 
-		await this.update({"system.rechargeTokens": this.system[options.face].rechargeRating});
+		let rechargeTokens = this.system[options.face].rechargeRating;
+		if(options.weapon?.system.qualities.some(quality => quality.name === "slow"))
+			rechargeTokens++;
+
+		await this.update({"system.rechargeTokens": rechargeTokens});
 	}
 
 	/**
