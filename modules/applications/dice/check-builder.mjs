@@ -139,7 +139,8 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 			case "quickSettings":
 				if(this.diePool.checkData?.actor) {
 					const checkData = this.diePool.checkData,
-						  actor = await fromUuid(checkData.actor);
+						  actor = await fromUuid(checkData.actor),
+						  characteristics = wfrp3e.data.actors.Actor.CHARACTERISTICS;
 
 					partContext = {
 						...partContext,
@@ -147,7 +148,7 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 						challengeLevel: checkData.challengeLevel,
 						challengeLevels: wfrp3e.dice.CheckRoll.CHALLENGE_LEVELS,
 						characteristic: checkData.characteristic,
-						characteristics: wfrp3e.data.actors.Actor.CHARACTERISTICS,
+						characteristics,
 						fortunePoints: checkData.fortunePoints || 0,
 						skill: await fromUuid(checkData.skill),
 						skills: actor.itemTypes.skill,
@@ -206,6 +207,19 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 
 							if(!checkData.weapon && partContext.availableWeapons?.length)
 								checkData.weapon = partContext.availableWeapons[0]?.uuid;
+
+							if(checkData.weapon) {
+								const weapon = await fromUuid(checkData.weapon);
+								if(weapon.system.qualities.some(quality => quality.name === "thrown"))
+									partContext = {
+										...partContext,
+										throwingCharacteristic: checkData.throwingCharacteristic ?? "strength",
+										throwingCharacteristics: [
+											characteristics.strength,
+											characteristics.agility
+										]
+									};
+							}
 						}
 					}
 				}

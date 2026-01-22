@@ -527,6 +527,7 @@
 			"fortunePoints.label": "Points de Fortune",
 			"specialisations.label": "Spécialisations",
 			"skill.label": "Compétence",
+			"throwingCharacteristic.label": "Caractéristique du jet",
 			"triggeredEffects.label": "Effets activés",
 			"weapon.label": "Arme"
 		},

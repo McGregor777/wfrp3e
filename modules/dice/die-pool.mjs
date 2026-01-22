@@ -11,6 +11,7 @@
  * @property {Array} [specialisations]
  * @property {string} [skill]
  * @property {Array} [targets]
+ * @property {string} [throwingCharacteristic]
  * @property {Array} [triggeredEffects]
  * @property {string} [weapon]
  */
@@ -186,7 +187,7 @@ export default class DiePool
 
 			this.dice = {
 				characteristic: characteristic.rating - Math.abs(stance),
-				fortune: characteristic.fortune
+				fortune: (checkData.throwingCharacteristic?.fortune || characteristic.fortune)
 					+ (checkData.fortunePoints || 0)
 					+ (checkData.specialisations?.length || 0)
 					+ (checkData.creatureDice?.aggression || 0)
