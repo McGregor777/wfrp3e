@@ -210,14 +210,14 @@ export default class CheckRoll extends foundry.dice.Roll
 			}
 
 			if(Array.isArray(checkData.outcome?.criticalWounds))
-				context.criticalWoundLinks = this._prepareCriticalWoundLinks(checkData.outcome.criticalWounds);
+				context.criticalWoundLinks = await this._prepareCriticalWoundLinks(checkData.outcome.criticalWounds);
 
 			if(checkData.targets && checkData.targets.length > 0) {
 				const targetActor = await fromUuid(checkData.targets[0]);
 				context.targetActorName = targetActor.token ? targetActor.token.name : targetActor.prototypeToken.name;
 
 				if(Array.isArray(checkData.outcome?.targetCriticalWounds))
-					context.targetCriticalWoundLinks = this._prepareCriticalWoundLinks(checkData.outcome.targetCriticalWounds);
+					context.targetCriticalWoundLinks = await this._prepareCriticalWoundLinks(checkData.outcome.targetCriticalWounds);
 			}
 		}
 
@@ -852,7 +852,7 @@ export default class CheckRoll extends foundry.dice.Roll
 					weapon
 				);
 				outcome.targetDamages = damages;
-				outcome.targetCriticalWounds = criticalWounds;
+				outcome.targetCriticalWounds = criticalWounds.map(criticalWound => criticalWound.uuid);
 			}
 
 			await targetActor.update(targetUpdates);
