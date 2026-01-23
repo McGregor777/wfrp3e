@@ -863,9 +863,9 @@ export default class CheckRoll extends foundry.dice.Roll
 				await actor.adjustWounds(outcome.wounds);
 
 			if(outcome.criticalWounds > 0) {
-				const criticalWounds = await this.createEmbeddedDocuments(
+				const criticalWounds = await actor.createEmbeddedDocuments(
 					"Item",
-					await this.drawCriticalWoundsRandomly(outcome.criticalWounds)
+					await wfrp3e.documents.Actor.drawCriticalWoundsRandomly(outcome.criticalWounds)
 				);
 				outcome.criticalWounds = criticalWounds.map(criticalWound => criticalWound.uuid);
 			}
