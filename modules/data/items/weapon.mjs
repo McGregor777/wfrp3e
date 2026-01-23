@@ -7,38 +7,42 @@ export default class Weapon extends Trapping
 	static defineSchema()
 	{
 		const fields = foundry.data.fields,
-			  groups = {};
+			  groups = {},
+			  qualities = {};
 
-		for(const [key, group] of Object.entries(this.GROUPS))
+		for(const [key, group] of Object.entries(Weapon.GROUPS))
 			groups[key] = group.name;
+
+		for(const [key, quality] of Object.entries(Weapon.QUALITIES))
+			qualities[key] = quality.name;
 
 		return Object.assign({
 			criticalRating: new fields.NumberField({initial: 5, integer: true, min: 0, nullable: false, required: true}),
 			damageRating: new fields.NumberField({initial: 3, integer: true, min: 0, nullable: false, required: true}),
 			group: new fields.StringField({
 				choices: groups,
-				initial: Object.keys(this.GROUPS)[0],
+				initial: Object.keys(Weapon.GROUPS)[0],
 				required: true
 			}),
 			qualities: new fields.ArrayField(
 				new fields.SchemaField({
 					name: new fields.StringField({
-						choices: this.QUALITIES,
-						initial: Object.keys(this.QUALITIES)[0],
-						label: "WEAPON.FIELDS.qualities.FIELDS.name.label",
+						choices: qualities,
+						initial: Object.keys(Weapon.QUALITIES)[0],
+						label: "Weapon.FIELDS.qualities.FIELDS.name.label",
 						required: true
 					}),
 					rating: new fields.NumberField({
 						initial: 1,
 						integer: true,
-						label: "WEAPON.FIELDS.qualities.FIELDS.rating.label",
+						label: "Weapon.FIELDS.qualities.FIELDS.rating.label",
 						min: 1
 					})
 				})
 			),
 			range: new fields.StringField({
-				choices: this.RANGES,
-				initial: Object.keys(this.RANGES)[0],
+				choices: Weapon.RANGES,
+				initial: Object.keys(Weapon.RANGES)[0],
 				required: true
 			}),
 			special: new fields.HTMLField()
@@ -144,18 +148,54 @@ export default class Weapon extends Trapping
 	};
 	
 	static QUALITIES = {
-		attuned: "WEAPON.QUALITIES.attuned",
-		blast: "WEAPON.QUALITIES.blast",
-		defensive: "WEAPON.QUALITIES.defensive",
-		entangling: "WEAPON.QUALITIES.entangling",
-		fast: "WEAPON.QUALITIES.fast",
-		pierce: "WEAPON.QUALITIES.pierce",
-		reload: "WEAPON.QUALITIES.reload",
-		slow: "WEAPON.QUALITIES.slow",
-		thrown: "WEAPON.QUALITIES.thrown",
-		twoHanded: "WEAPON.QUALITIES.twoHanded",
-		unreliable: "WEAPON.QUALITIES.unreliable",
-		vicious: "WEAPON.QUALITIES.vicious"
+		attuned: {
+			description: "WEAPON.QUALITIES.attuned.description",
+			name: "WEAPON.QUALITIES.attuned.name"
+		},
+		blast: {
+			description: "WEAPON.QUALITIES.blast.description",
+			name: "WEAPON.QUALITIES.blast.name"
+		},
+		defensive: {
+			description: "WEAPON.QUALITIES.defensive.description",
+			name: "WEAPON.QUALITIES.defensive.name"
+		},
+		entangling: {
+			description: "WEAPON.QUALITIES.entangling.description",
+			name: "WEAPON.QUALITIES.entangling.name"
+		},
+		fast: {
+			description: "WEAPON.QUALITIES.fast.description",
+			name: "WEAPON.QUALITIES.fast.name"
+		},
+		pierce: {
+			description: "WEAPON.QUALITIES.pierce.description",
+			name: "WEAPON.QUALITIES.pierce.name"
+		},
+		reload: {
+			description: "WEAPON.QUALITIES.reload.description",
+			name: "WEAPON.QUALITIES.reload.name"
+		},
+		slow: {
+			description: "WEAPON.QUALITIES.slow.description",
+			name: "WEAPON.QUALITIES.slow.name"
+		},
+		thrown: {
+			description: "WEAPON.QUALITIES.thrown.description",
+			name: "WEAPON.QUALITIES.thrown.name"
+		},
+		twoHanded: {
+			description: "WEAPON.QUALITIES.twoHanded.description",
+			name: "WEAPON.QUALITIES.twoHanded.name"
+		},
+		unreliable: {
+			description: "WEAPON.QUALITIES.unreliable.description",
+			name: "WEAPON.QUALITIES.unreliable.name"
+		},
+		vicious: {
+			description: "WEAPON.QUALITIES.vicious.description",
+			name: "WEAPON.QUALITIES.vicious.name"
+		}
 	};
 	
 	static RANGES = {
