@@ -1729,6 +1729,7 @@
 			},
 			"fast": {
 				"description": "<p>These weapons are generally easy to wield and agile. Attacks made with weapons with the fast quality gain: “{Sbo} Place one fewer recharge token on this action”</p>",
+				"effect": "Place one fewer recharge token on this action",
 				"name": "Fast"
 			},
 			"pierce": {
