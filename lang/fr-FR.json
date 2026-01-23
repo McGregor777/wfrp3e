@@ -1293,6 +1293,7 @@
 
 	"ROLL": {
 		"ACTIONS": {
+			"addDiePool": "Ajouter une réserve de dés",
 			"applyToggledEffects": "Appliquer les effets activés",
 			"performAFreeCheck": "Effectuer un test libre",
 			"useTalent": "Utiliser une aptitude/un talent"
