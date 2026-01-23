@@ -188,16 +188,8 @@ export default class CheckBuilder extends foundry.applications.api.HandlebarsApp
 								if(weaponGroup.type === action.system.type)
 									validWeaponGroups.push(key);
 
-							partContext.availableWeapons = action.actor.items.search({
-								filters: [{
-									field: "type",
-									operator: "equals",
-									value: "weapon"
-								}, {
-									field: "system.group",
-									operator: "contains",
-									value: validWeaponGroups
-								}]
+							partContext.availableWeapons = action.actor.itemTypes.weapon.filter(weapon => {
+								return validWeaponGroups.includes(weapon.system.group);
 							});
 
 							if(actor.type === "character")
