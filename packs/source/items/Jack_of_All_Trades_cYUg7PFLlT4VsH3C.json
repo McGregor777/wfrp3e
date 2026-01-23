@@ -1,0 +1,53 @@
+{
+  "name": "Jack of All Trades",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Jack of All Trades",
+      "img": "icons/svg/eye.svg",
+      "_id": "NhJAvy94ji4d7f3k",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune++;",
+          "conditionalScript": "return checkData.skill;",
+          "postRollScript": "await actor.adjustStress(1);",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You may suffer 1 stress to add {Df} to any skill check</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!cYUg7PFLlT4VsH3C.NhJAvy94ji4d7f3k"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 500000,
+  "_id": "cYUg7PFLlT4VsH3C",
+  "system": {
+    "description": "<p>You may suffer 1 stress to add {Df} to any skill check</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!cYUg7PFLlT4VsH3C"
+}

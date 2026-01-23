@@ -1,0 +1,52 @@
+{
+  "name": "Voice of Reason",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Voice of Reason",
+      "img": "icons/svg/statue.svg",
+      "_id": "7U34EdQnvoufUuZg",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "checkData.characteristic = \"intelligence\";",
+          "conditionalScript": "return checkData.skill && checkData.characteristic === \"fellowship\";",
+          "postRollScript": "roll.effects?.bane.push({\n\t\tdescription: '<p>Add {Sch} to the results pool</p>',\n\t\timmediate: true,\n\t\treverseScript: \"roll.options.startingSymbols.challenges--;\",\n\t\tscript: \"roll.options.startingSymbols.challenges++\",\n\t\tsymbolAmount: 1\n\t});",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to use Intelligence rather than Fellowship for a skill check. The check gains:</p><p>{Sba} Add {Sch} to the results pool</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!cvB2apAlG5KkedU5.7U34EdQnvoufUuZg"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 100391,
+  "_id": "cvB2apAlG5KkedU5",
+  "system": {
+    "description": "<p>Exhaust this card to use Intelligence rather than Fellowship for a skill check. The check gains:</p><p>{Sba} Add {Sch} to the results pool</p>",
+    "rechargeTokens": 0,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!cvB2apAlG5KkedU5"
+}

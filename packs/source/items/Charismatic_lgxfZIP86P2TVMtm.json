@@ -1,0 +1,51 @@
+{
+  "name": "Charismatic",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Charismatic",
+      "img": "icons/svg/statue.svg",
+      "_id": "95H3QHwCydajypU8",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "if(checkData.characteristic === \"fellowship\" && checkData.fortunePoints > 0)\n\troll.effects?.boon.push({\n\t\tdescription: \"<p>Add {Ssu} to the results</p>\",\n\t\timmediate: true,\n\t\treverseScript: \"roll.options.startingSymbols.successes--;\",\n\t\tscript: \"roll.options.startingSymbols.successes++\",\n\t\tsymbolAmount: 2\n\t});",
+          "type": "checkRoll",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When you spend fortune points on a Fellowship check, the check gains:</p><p>{Sbo}{Sbo} Add {Ssu} to the results</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!lgxfZIP86P2TVMtm.95H3QHwCydajypU8"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "system": {
+    "description": "<p>When you spend fortune points on a Fellowship check, the check gains:</p><p>{Sbo}{Sbo} Add {Ssu} to the results</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "_id": "lgxfZIP86P2TVMtm",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!lgxfZIP86P2TVMtm"
+}

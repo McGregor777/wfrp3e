@@ -1,0 +1,51 @@
+{
+  "name": "Might Makes Right",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Might Makes Right",
+      "img": "icons/svg/combat.svg",
+      "_id": "0V0z9aKkA9Y2UZBF",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "if(checkData.characteristic === \"strength\" && checkData.fortunePoints > 0)\n\tcheckRoll.effects?.boon.push({\n\t\tdescription: \"<p>Add {Ssu} to the results</p>\",\n\t\timmediate: true,\n\t\treverseScript: \"checkRoll.options.startingSymbols.successes--;\",\n\t\tscript: \"checkRoll.options.startingSymbols.successes++\",\n\t\tsymbolAmount: 2\n\t});",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When spending fortune points on a Strength check, the check gains:</p><p>{Sbo}{Sbo} Add {Ssu} to the results</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!jFelk1OnArrnkI5H.0V0z9aKkA9Y2UZBF"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 800000,
+  "_id": "jFelk1OnArrnkI5H",
+  "system": {
+    "description": "<p>When spending fortune points on a Strength check, the check gains:</p><p>{Sbo}{Sbo} Add {Ssu} to the results</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!jFelk1OnArrnkI5H"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Instinctive",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Instinctive",
+      "img": "icons/svg/eye.svg",
+      "_id": "Dli6KZbk1OxBBnNC",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const skill = await fromUuid(checkData.skill);\nif(skill?.name === game.i18n.localize(\"SKILL.NAMES.intuition\"))\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add {Df} to Intuition checks</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!0V0J71ExFLtEssCu.Dli6KZbk1OxBBnNC"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 600000,
+  "_id": "0V0J71ExFLtEssCu",
+  "system": {
+    "description": "<p>Add {Df} to Intuition checks</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!0V0J71ExFLtEssCu"
+}

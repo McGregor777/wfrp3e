@@ -1,0 +1,51 @@
+{
+  "name": "Roll With It",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Roll With It",
+      "img": "icons/svg/combat.svg",
+      "_id": "Ikq3GfXjo6iO6s7c",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "damageInfliction",
+          "script": "await foundry.applications.api.DialogV2.confirm({\n  content: item.system.description,\n  window: {title: item.name},\n  submit: async result => {\n    if(result) {\n      soak += 2;\n      await this.parent.exhaust();\n    }\n  }\n});",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card when you take damage to increase your Soak Value by 2 against that source of damage</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!obDTHYdkTNFeGeXZ.Ikq3GfXjo6iO6s7c"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 500000,
+  "_id": "obDTHYdkTNFeGeXZ",
+  "system": {
+    "description": "<p>Exhaust this card when you take damage to increase your Soak Value by 2 against that source of damage</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!obDTHYdkTNFeGeXZ"
+}

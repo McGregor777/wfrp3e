@@ -1,0 +1,53 @@
+{
+  "_id": "LweAS5QY4fNPOZTN",
+  "name": "I've Seen Worse…",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "I've Seen Worse…",
+      "img": "icons/svg/eye.svg",
+      "_id": "xdADS1dD9DQ9XMEX",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune += 2;",
+          "conditionalScript": "return checkData.characteristic === \"willpower\";",
+          "postRollScript": "await this.parent.exhaust();",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to add {Df} {Df} to any Willpower check</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!LweAS5QY4fNPOZTN.xdADS1dD9DQ9XMEX"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 700000,
+  "system": {
+    "description": "<p>Exhaust this card to add {Df} {Df} to any Willpower check</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!LweAS5QY4fNPOZTN"
+}

@@ -11,6 +11,7 @@
  * @property {Array} [specialisations]
  * @property {string} [skill]
  * @property {Array} [targets]
+ * @property {string} [throwingCharacteristic]
  * @property {Array} [triggeredEffects]
  * @property {string} [weapon]
  */
@@ -186,7 +187,7 @@ export default class DiePool
 
 			this.dice = {
 				characteristic: characteristic.rating - Math.abs(stance),
-				fortune: characteristic.fortune
+				fortune: (checkData.throwingCharacteristic?.fortune || characteristic.fortune)
 					+ (checkData.fortunePoints || 0)
 					+ (checkData.specialisations?.length || 0)
 					+ (checkData.creatureDice?.aggression || 0)
@@ -256,7 +257,7 @@ export default class DiePool
 		});
 
 		// Execute the effects from all selected items.
-		const triggeredEffects = this.checkData.triggeredEffects;
+		const triggeredEffects = this.checkData?.triggeredEffects;
 		if(triggeredEffects != null) {
 			if(Array.isArray(triggeredEffects))
 				for(const effectUuid of triggeredEffects)

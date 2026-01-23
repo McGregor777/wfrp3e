@@ -1,0 +1,53 @@
+{
+  "name": "Ambitious",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Ambitious",
+      "img": "icons/svg/statue.svg",
+      "_id": "XzCTrLtzmacQkrSK",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.convertCharacteristicDie(checkData.face ?? actor.system.currentStanceName);",
+          "conditionalScript": "return diePool.dice.characteristic > 0 && (checkData.fortunePoints ?? 0) < actor.system.fortune.value;",
+          "postRollScript": "await actor.adjustFortune(-1);",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You may spend a fortune point to convert one additional characteristic die into a stance die</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!zN0NupBHfe1tlMj2.XzCTrLtzmacQkrSK"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 200000,
+  "_id": "zN0NupBHfe1tlMj2",
+  "system": {
+    "description": "<p>You may spend a fortune point to convert one additional characteristic die into a stance die</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!zN0NupBHfe1tlMj2"
+}

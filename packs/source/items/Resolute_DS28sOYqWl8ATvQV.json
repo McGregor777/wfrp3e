@@ -1,0 +1,51 @@
+{
+  "name": "Resolute",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Resolute",
+      "img": "icons/svg/eye.svg",
+      "_id": "H1XJs35JCfjBbTzR",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "await actor.adjustStress(-2);\nawait this.parent.exhaust();",
+          "type": "manual",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to recover 2 stress</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!DS28sOYqWl8ATvQV.H1XJs35JCfjBbTzR"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "system": {
+    "description": "<p>Exhaust this card to recover 2 stress</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "_id": "DS28sOYqWl8ATvQV",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!DS28sOYqWl8ATvQV"
+}

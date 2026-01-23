@@ -1,0 +1,85 @@
+{
+  "name": "Air of Authority",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Air of Authority",
+      "img": "icons/svg/eye.svg",
+      "_id": "syujhtgKxUlhPDQh",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const skill = await fromUuid(checkData.skill);\nif(skill?.name === game.i18n.localize(\"SKILL.NAMES.intimidate\"))\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add {Df} to Intimidate checks</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!3t3upfGk2Px7BsDH.syujhtgKxUlhPDQh"
+    },
+    {
+      "name": "Intelligence Intimidate",
+      "img": "icons/svg/eye.svg",
+      "_id": "VyMYkSFv5SsWBxpi",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "checkData.characteristic === \"strength\"",
+          "conditionalScript": "return skill.name === game.i18n.localize(\"SKILL.NAMES.intimidate\") && checkData.characteristic === \"intelligence\";",
+          "postRollScript": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You may choose to base your Intimidation skill on your Intelligence rather than Strength</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!3t3upfGk2Px7BsDH.VyMYkSFv5SsWBxpi"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 1800000,
+  "flags": {},
+  "_id": "3t3upfGk2Px7BsDH",
+  "system": {
+    "description": "<p>Add {Df} to Intimidate checks, and you may choose to base your Intimidation skill on your Intelligence rather than Strength</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!3t3upfGk2Px7BsDH"
+}

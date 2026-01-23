@@ -1,0 +1,51 @@
+{
+  "name": "Icy Stare",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Icy Stare",
+      "img": "icons/svg/statue.svg",
+      "_id": "cuOMJUsYB5YJ026Q",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "const action = await fromUuid(checkData.action),\n      skill = await fromUuid(checkData.skill);\nif(skill?.name === game.i18n.localize(\"SKILL.NAMES.guile\") && action?.system[checkData.face].traits.includes(game.i18n.localize(\"TRAITS.social\")))\n  checkRoll.effects?.boon.push({\n    description: \"<p>The target must make an Average (2d) Discipline (WP) check or gain the Rattled condition for 2 rounds</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"const discipline = targetActor.itemTypes.skill.find(skill => skill.name === game.i18n.localize(\\\"SKILL.NAMES.discipline\\\")),\\n      check = discipline\\n\\t? await targetActor.prepareSkillCheck(discipline)\\n\\t: await targetActor.prepareCharacteristicCheck(\\\"willpower\\\");\\nif(!check.checkRoll.totalSymbols.successes)\\n\\tawait targetActor.createEmbeddedDocuments(\\\"Item\\\", [await fromUuid(\\\"Compendium.wfrp3e.items.Item.CSck5rRPkGyRad5B\\\")])\",\n    symbolAmount: 2\n  });",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your Social actions using Guile gain:</p><p>{Sbo}{Sbo} The target must make an <strong>Average (2d) Discipline (WP) check</strong> or gain the Rattled condition for 2 rounds</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!quuDtybQrdpUtubZ.cuOMJUsYB5YJ026Q"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 900000,
+  "_id": "quuDtybQrdpUtubZ",
+  "system": {
+    "description": "<p>Your Social actions using Guile gain:</p><p>{Sbo}{Sbo} The target must make an <strong>Average (2d) Discipline (WP) check</strong> or gain the Rattled condition for 2 rounds</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!quuDtybQrdpUtubZ"
+}

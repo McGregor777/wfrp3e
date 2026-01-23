@@ -1,0 +1,51 @@
+{
+  "name": "Well-Read",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Well-Read",
+      "img": "icons/svg/eye.svg",
+      "_id": "4oWSwhLyshKhQKzT",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const skill = await fromUuid(checkData.skill);\nif([game.i18n.localize(\"SKILL.NAMES.folklore\"), game.i18n.localize(\"SKILL.NAMES.education\")].includes(skill?.name))\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Gain {Df} on Folklore and Education tests</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!63a0vqKgv5pmzDA6.4oWSwhLyshKhQKzT"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 100391,
+  "_id": "63a0vqKgv5pmzDA6",
+  "system": {
+    "description": "<p>Gain {Df} on Folklore and Education tests</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!63a0vqKgv5pmzDA6"
+}

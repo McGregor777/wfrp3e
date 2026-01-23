@@ -1,0 +1,53 @@
+{
+  "name": "Aethyric Attunement",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Aethyric Attunement",
+      "img": "icons/svg/eye.svg",
+      "_id": "lPtNrFk6yvFlkK3X",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune++;",
+          "conditionalScript": "return [game.i18n.localize(\"SKILL.NAMES.channeling\"), game.i18n.localize(\"SKILL.NAMES.piety\"), game.i18n.localize(\"SKILL.NAMES.observation\"), game.i18n.localize(\"SKILL.NAMES.folklore\"), game.i18n.localize(\"SKILL.NAMES.education\"), game.i18n.localize(\"SKILL.NAMES.intuition\")].includes(fromUuidSync(checkData.skill)?.name);",
+          "postRollScript": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your Channeling, Piety, Observation, Folklore, Education, and Intuition checks gain {Dm} when magic is involved</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!QaOkt5J5lPzx7lWP.lPtNrFk6yvFlkK3X"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 2000000,
+  "_id": "QaOkt5J5lPzx7lWP",
+  "system": {
+    "description": "<p>Your Channeling, Piety, Observation, Folklore, Education, and Intuition checks gain {Dm} when magic is involved</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!QaOkt5J5lPzx7lWP"
+}

@@ -31,6 +31,25 @@
 			</div>
 		</div>
 
+		{{#if throwingCharacteristics}}
+			<div class="form-group">
+				<label for="{{concat @root.rootId '-checkData.throwingCharacteristic'}}">
+					{{localize "CHECKBUILDER.FIELDS.throwingCharacteristic.label"}}
+				</label>
+
+				<div class="form-fields">
+					<select id="{{concat @root.rootId '-checkData.throwingCharacteristic'}}"
+							class="characteristic-select"
+							name="checkData.throwingCharacteristic">
+						{{selectOptions throwingCharacteristics
+										selected=checkData.throwingCharacteristic
+										labelAttr="name"
+										localize=true}}
+					</select>
+				</div>
+			</div>
+		{{/if}}
+
 		<div class="form-group">
 			<label for="{{concat @root.rootId '-checkData.challengeLevel'}}">
 				{{localize "CHECKBUILDER.FIELDS.challengeLevel.label"}}

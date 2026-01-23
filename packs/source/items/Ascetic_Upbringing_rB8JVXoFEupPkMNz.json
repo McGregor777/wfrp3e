@@ -1,0 +1,53 @@
+{
+  "name": "Ascetic Upbringing",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Ascetic Upbringing",
+      "img": "icons/svg/statue.svg",
+      "_id": "pWYRCpUOpVeDLQ8a",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const skill = await fromUuid(checkData.skill);\nif([game.i18n.localize(\"SKILL.NAMES.resilience\"), game.i18n.localize(\"SKILL.NAMES.discipline\")].includes(skill?.name))\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your Resilience and Discipline checks gain {Df}</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!rB8JVXoFEupPkMNz.pWYRCpUOpVeDLQ8a"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 2000000,
+  "flags": {},
+  "_id": "rB8JVXoFEupPkMNz",
+  "system": {
+    "description": "<p>Your Resilience and Discipline checks gain {Df}</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!rB8JVXoFEupPkMNz"
+}

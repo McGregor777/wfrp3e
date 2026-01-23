@@ -1,0 +1,51 @@
+{
+  "name": "Social Butterfly",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Social Butterfly",
+      "img": "icons/svg/statue.svg",
+      "_id": "aTmZfkMwr6rbFBeG",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "const skill = await fromUuid(checkData.skill);\nif([game.i18n.localize(\"SKILL.NAMES.charm\"), game.i18n.localize(\"SKILL.NAMES.guile\")].includes(skill.name)\n   && checkRoll.dice.some(dice => dice instanceof wfrp3e.dice.terms.ChallengeDie && dice.number >= 1))\n  await actor.adjustStress(-1);",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Recover 1 stress whenever you succeed at a Charm or Guile check of at least Easy (1d) difficulty</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!FQMhM0EMItwq2ZAf.aTmZfkMwr6rbFBeG"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 106250,
+  "_id": "FQMhM0EMItwq2ZAf",
+  "system": {
+    "description": "<p>Recover 1 stress whenever you succeed at a Charm or Guile check of at least Easy (1d) difficulty</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!FQMhM0EMItwq2ZAf"
+}

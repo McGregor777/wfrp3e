@@ -12,7 +12,13 @@
 	</fieldset>
 
 	<fieldset class="qualities">
-		<legend>{{localize "WEAPON.FIELDS.qualities.label"}}</legend>
+		<legend>
+			{{localize "WEAPON.FIELDS.qualities.label"}}
+
+			<a data-action="addQuality" data-tooltip="{{localize 'WEAPON.ACTIONS.addQuality'}}">
+				<span class="fas fa-plus"></span>
+			</a>
+		</legend>
 
 		{{#if (gt system.qualities.length 0)}}
 			<div class="container scrollable">
@@ -43,10 +49,6 @@
 				{{/each}}
 			</div>
 		{{/if}}
-
-		<a data-action="addQuality" data-tooltip="{{localize 'WEAPON.ACTIONS.addQuality'}}">
-			<span class="fas fa-plus"></span>
-		</a>
 	</fieldset>
 
 	{{formGroup fields.special value=system.special rootId=rootId}}

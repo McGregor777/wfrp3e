@@ -1,0 +1,54 @@
+{
+  "name": "Skygazer",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Skygazer",
+      "img": "icons/svg/eye.svg",
+      "_id": "hFcZgmSgT17Le9FO",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune++;",
+          "conditionalScript": "return checkData.characteristic === \"intelligence\";",
+          "postRollScript": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your Intelligence checks gain {Df} so long as you are under the open sky</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!tottyICGa3AL9Ohn.hFcZgmSgT17Le9FO"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 103125,
+  "_id": "tottyICGa3AL9Ohn",
+  "system": {
+    "description": "<p>Your Intelligence checks gain {Df} so long as you are under the open sky</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!tottyICGa3AL9Ohn"
+}

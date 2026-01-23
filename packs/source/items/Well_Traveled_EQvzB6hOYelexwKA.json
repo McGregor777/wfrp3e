@@ -1,0 +1,86 @@
+{
+  "name": "Well-Traveled",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Well-Traveled",
+      "img": "icons/svg/statue.svg",
+      "_id": "AxgGhzc8wbfWnr3r",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune++;",
+          "conditionalScript": "return [game.i18n.localize(\"SKILL.NAMES.charm\"), game.i18n.localize(\"SKILL.NAMES.education\"), game.i18n.localize(\"SKILL.NAMES.folklore\")].includes(fromUuidSync(checkData.skill).name)",
+          "postRollScript": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You gain {Df} to Charm, Education, and Folklore checks pertaining to exotic people and places</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!EQvzB6hOYelexwKA.AxgGhzc8wbfWnr3r"
+    },
+    {
+      "name": "Penalty Removal",
+      "img": "icons/svg/statue.svg",
+      "_id": "u1S1jpe7zo1OA8iN",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "",
+          "conditionalScript": "return fromUuidSync(checkData.action).system[checkData.face].traits.includes(game.i18n.localize(\"TRAITS.social\"));",
+          "postRollScript": "await this.parent.exhaust();",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to ignore a penalty on a Social action based on cultural differences</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!EQvzB6hOYelexwKA.u1S1jpe7zo1OA8iN"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 100098,
+  "_id": "EQvzB6hOYelexwKA",
+  "system": {
+    "description": "<p>You gain {Df} to Charm, Education, and Folklore checks pertaining to exotic people and places. Exhaust this card to ignore a penalty on a Social action based on cultural differences</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!EQvzB6hOYelexwKA"
+}

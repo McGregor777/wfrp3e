@@ -1,0 +1,51 @@
+{
+  "name": "Stiff Upper Lip",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Stiff Upper Lip",
+      "img": "icons/svg/statue.svg",
+      "_id": "mWiRjk12f6hMFzOh",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "embeddedItemCreation",
+          "script": "for(const item of items)\n  if(item.type === \"condition\")\n    for(const effect of item.effects)\n      if(effect.duration.rounds > 0)\n        await foundry.applications.api.DialogV2.confirm({\n          content: item.system.description,\n          window: {title: item.name},\n          submit: async result => {\n            if(result) {\n              await effect.update({\"duration.rounds\": effect.duration.rounds - 2});\n              await actor.adjustFortune(-1);\n            }\n          }\n        });",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When you receive a condition card for a limited number of rounds, you may spend a Fortune point to reduce the duration of the effect by 2 rounds</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!E3Iok4qz3GSbwJPI.mWiRjk12f6hMFzOh"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 103125,
+  "_id": "E3Iok4qz3GSbwJPI",
+  "system": {
+    "description": "<p>When you receive a condition card for a limited number of rounds, you may spend a Fortune point to reduce the duration of the effect by 2 rounds</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!E3Iok4qz3GSbwJPI"
+}

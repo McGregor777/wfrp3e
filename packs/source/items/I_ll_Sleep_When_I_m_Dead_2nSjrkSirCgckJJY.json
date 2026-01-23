@@ -1,0 +1,51 @@
+{
+  "name": "I’ll Sleep When I’m Dead",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "I’ll Sleep When I’m Dead",
+      "img": "icons/svg/combat.svg",
+      "_id": "KtLrSkzs7mOytYpr",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "await actor.adjustFatigue(-2);\nawait this.parent.exhaust();",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to recover 2 fatigue</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!2nSjrkSirCgckJJY.KtLrSkzs7mOytYpr"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 1100000,
+  "_id": "2nSjrkSirCgckJJY",
+  "system": {
+    "description": "<p>Exhaust this card to recover 2 fatigue</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!2nSjrkSirCgckJJY"
+}

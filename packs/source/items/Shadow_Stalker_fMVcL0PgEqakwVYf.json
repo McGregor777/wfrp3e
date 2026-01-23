@@ -1,0 +1,51 @@
+{
+  "name": "Shadow Stalker",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Shadow Stalker",
+      "img": "icons/svg/eye.svg",
+      "_id": "Cyk8aJjtRrxXoA9K",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const skill = await fromUuid(checkData.skill);\nif(skill?.name === game.i18n.localize(\"SKILL.NAMES.stealth\"))\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add {Df} to Stealth checks</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!fMVcL0PgEqakwVYf.Cyk8aJjtRrxXoA9K"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 112500,
+  "_id": "fMVcL0PgEqakwVYf",
+  "system": {
+    "description": "<p>Add {Df} to Stealth checks</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!fMVcL0PgEqakwVYf"
+}

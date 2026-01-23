@@ -1,0 +1,51 @@
+{
+  "name": "Protective",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Protective",
+      "img": "icons/svg/statue.svg",
+      "_id": "coSt5p2hOC9l80vt",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "for(const uuid of actor.system.currentParty.members) {\n  const member = await fromUuid(uuid);\n  if(member.itemTypes.criticalWound.length) {\n    diePool.dice.fortune++;\n    break;\n  }\n}",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add {Df} to skill checks if a member of your party within medium range is critically wounded</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!MfMT0XulCX2IbN93.coSt5p2hOC9l80vt"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 100000,
+  "_id": "MfMT0XulCX2IbN93",
+  "system": {
+    "description": "<p>Add {Df} to skill checks if a member of your party within medium range is critically wounded</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!MfMT0XulCX2IbN93"
+}

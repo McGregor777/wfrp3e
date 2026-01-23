@@ -1,0 +1,51 @@
+{
+  "name": "Quick Wits",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Quick Wits",
+      "img": "icons/svg/eye.svg",
+      "_id": "UiiklKXexkJU4r5l",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "const rechargingItems = actor.items.filter(item => item.system.rechargeTokens > 0);\nif(rechargingItems.length) {\n  const uuids = await wfrp3e.applications.apps.selectors.ItemSelector.wait({items: rechargingItems});\n  if(uuids.length) {\n    const item = await fromUuid(uuids[0]);\n    await item.adjustRechargeTokens(-2);\n  }\n}",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to remove 2 recharge tokens from one of your currently recharging cards</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!zZ65Mm0jgKyofWD3.UiiklKXexkJU4r5l"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 300000,
+  "_id": "zZ65Mm0jgKyofWD3",
+  "system": {
+    "description": "<p>Exhaust this card to remove 2 recharge tokens from one of your currently recharging cards</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!zZ65Mm0jgKyofWD3"
+}

@@ -26,14 +26,14 @@
             "description": "<p>You hit the target for normal damage</p>",
             "immediate": false,
             "reverseScript": "",
-            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0);",
+            "script": "outcome.targetDamages = await checkRoll.calculateDamages();",
             "symbolAmount": 1
           },
           {
             "description": "<p>You hit the target for +2 damage</p>",
             "immediate": false,
             "reverseScript": "",
-            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0) + 2;",
+            "script": "outcome.targetDamages = await checkRoll.calculateDamages(2);",
             "symbolAmount": 3
           }
         ],
@@ -77,14 +77,14 @@
             "description": "<p>You hit the target for normal damage</p>",
             "immediate": false,
             "reverseScript": "",
-            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0);",
+            "script": "outcome.targetDamages = await checkRoll.calculateDamages();",
             "symbolAmount": 1
           },
           {
             "description": "<p>You hit the target for +2 damage</p>",
             "immediate": false,
             "reverseScript": "",
-            "script": "outcome.targetDamages = actor.system.characteristics[checkData.characteristic].rating + (checkData.weapon ? fromUuidSync(checkData.weapon)?.system.damageRating : actor.system.damageRating ?? 0) + 2;",
+            "script": "outcome.targetDamages = await checkRoll.calculateDamages(2);",
             "symbolAmount": 3
           }
         ],

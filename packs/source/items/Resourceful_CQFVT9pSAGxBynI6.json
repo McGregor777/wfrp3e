@@ -1,0 +1,53 @@
+{
+  "name": "Resourceful",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Resourceful",
+      "img": "icons/svg/statue.svg",
+      "_id": "BiWsXbYmpPBWovTu",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.expertise++;",
+          "conditionalScript": "return checkData.characteristic === \"intelligence\";",
+          "postRollScript": "await this.parent.exhaust();",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to add {De} to an Intelligence check</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!CQFVT9pSAGxBynI6.BiWsXbYmpPBWovTu"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 150000,
+  "_id": "CQFVT9pSAGxBynI6",
+  "system": {
+    "description": "<p>Exhaust this card to add {De} to an Intelligence check</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!CQFVT9pSAGxBynI6"
+}

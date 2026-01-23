@@ -1,0 +1,53 @@
+{
+  "name": "Outgoing",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Outgoing",
+      "img": "icons/svg/statue.svg",
+      "_id": "UDqwI1dTO4dkBOHb",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "const actionUuids = await ActionSelector.wait({items: actor.itemTypes.action.filter(action => action.system.reckless.traits.includes(game.i18n.localize(\"TRAITS.social\")))});\nif(actionUuids) {\n  await actionUuids[0].update({\"system.rechargeTokens\": 0});\n  await this.parent.exhaust();\n}",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to completely recharge a Social action</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!dCl4R2QviafQgUiW.UDqwI1dTO4dkBOHb"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 500000,
+  "flags": {},
+  "_id": "dCl4R2QviafQgUiW",
+  "system": {
+    "description": "<p>Exhaust this card to completely recharge a Social action</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!dCl4R2QviafQgUiW"
+}

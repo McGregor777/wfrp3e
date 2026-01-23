@@ -1,0 +1,53 @@
+{
+  "name": "Foul-Mouthed",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Foul-Mouthed",
+      "img": "icons/svg/statue.svg",
+      "_id": "hotfeNAFP6xvu505",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "const action = await fromUuid(checkData.action);\nif(action?.system[checkData.face].traits.includes(game.i18n.localize(\"TRAITS.social\")))\n  checkRoll.effects?.boon.push({\n    description: \"<p>Your target moves 1 step to a more reckless stance</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"await targetActor.adjustStance(1);\",\n    symbolAmount: 2\n  });",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your Social actions gain:</p><p>{Sbo}{Sbo} Your target moves 1 step to a more reckless stance</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!ZaqKaPelf3xjMM0H.hotfeNAFP6xvu505"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 1300000,
+  "flags": {},
+  "_id": "ZaqKaPelf3xjMM0H",
+  "system": {
+    "description": "<p>Your Social actions gain:</p><p>{Sbo}{Sbo} Your target moves 1 step to a more reckless stance</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!ZaqKaPelf3xjMM0H"
+}

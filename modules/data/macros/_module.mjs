@@ -7,6 +7,7 @@ export {default as CheckOutcomeMacro} from "./check-outcome-macro.mjs";
 export {default as CheckPreparationMacro} from "./check-preparation-macro.mjs";
 export {default as CheckRollMacro} from "./check-roll-macro.mjs";
 export {default as CreationPointInvestmentMacro} from "./creation-point-investment-macro.mjs";
+export {default as DamageInflictionMacro} from "./damage-infliction-macro.mjs";
 export {default as EmbeddedItemCreationMacro} from "./embedded-item-creation-macro.mjs";
 export {default as FatigueAdjustmentMacro} from "./fatigue-adjustment-macro.mjs";
 export {default as FortuneRefreshMacro} from "./fortune-refresh-macro.mjs";

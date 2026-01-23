@@ -1,0 +1,52 @@
+{
+  "name": "Favoured by Fortune",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Favoured by Fortune",
+      "img": "icons/svg/statue.svg",
+      "_id": "dBbrpv0BTYrBXp8P",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPostCheckRoll",
+          "script": "await checkRoll.rerollDice([\"fortune\", \"misfortune\"], chatMessage);\nawait this.parent.exhaust();",
+          "conditionalScript": "return [\"intelligence\", \"willpower\", \"fellowship\"].includes(checkData.characteristic);",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>After rolling an Intelligence, Willpower, or Fellowship check, exhaust this card to reroll all {Df} and {Dm} dice in the current dice pool</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!gQrlhjepxyjkCQ0S.dBbrpv0BTYrBXp8P"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 1500000,
+  "_id": "gQrlhjepxyjkCQ0S",
+  "system": {
+    "description": "<p>After rolling an Intelligence, Willpower, or Fellowship check, exhaust this card to reroll all {Df} and {Dm} dice in the current dice pool</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!gQrlhjepxyjkCQ0S"
+}

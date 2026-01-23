@@ -1,0 +1,53 @@
+{
+  "_id": "C2DdCzL6K2xMcdEJ",
+  "name": "I Seem to Recall…",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "I Seem to Recall…",
+      "img": "icons/svg/eye.svg",
+      "_id": "9shzxC312Ut4MxLJ",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune += 2;",
+          "conditionalScript": "return checkData.characteristic === \"intelligence\";",
+          "postRollScript": "await this.parent.exhaust();",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to add {Df} {Df} to any Intelligence check</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!C2DdCzL6K2xMcdEJ.9shzxC312Ut4MxLJ"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 800000,
+  "system": {
+    "description": "<p>Exhaust this card to add {Df} {Df} to any Intelligence check</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!C2DdCzL6K2xMcdEJ"
+}

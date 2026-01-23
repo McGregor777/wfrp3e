@@ -1,0 +1,54 @@
+{
+  "_id": "2wrreBA2yRijliTG",
+  "name": "Vigilant",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Vigilant",
+      "img": "icons/svg/combat.svg",
+      "_id": "nUK9ca9AZ6I02W07",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune += 2;",
+          "conditionalScript": "return check.combat;",
+          "postRollScript": "await this.parent.exhaust();",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to add {Df} {Df} to an Initiative check</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!2wrreBA2yRijliTG.nUK9ca9AZ6I02W07"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 112500,
+  "flags": {},
+  "system": {
+    "description": "<p>Exhaust this card to add {Df} {Df} to an Initiative check</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!2wrreBA2yRijliTG"
+}

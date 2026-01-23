@@ -1,0 +1,52 @@
+{
+  "name": "Skeptical",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Skeptical",
+      "img": "icons/svg/eye.svg",
+      "_id": "ic8NPGTtvsI9CLmm",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "targetingCheckPreparation",
+          "script": "const skill = await fromUuid(checkData.skill);\nif(skill?.name === game.i18n.localize(\"SKILL.NAMES.guile\"))\n  diePool.dice.misfortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add {Dm} to any dice pools targeting you that are based on Guile checks</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!eB1X78kVRhdHvvPe.ic8NPGTtvsI9CLmm"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 106250,
+  "_id": "eB1X78kVRhdHvvPe",
+  "system": {
+    "description": "<p>Add {Dm} to any dice pools targeting you that are based on Guile checks</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!eB1X78kVRhdHvvPe"
+}
