@@ -137,25 +137,12 @@ export default class CheckRoll extends foundry.dice.Roll
 	/** @inheritDoc */
 	async evaluate({minimize = false, maximize = false, allowStrings = false, allowInteractive = true, ...options} = {})
 	{
-		if(this._evaluated)
-			throw new Error(`The ${this.constructor.name} has already been evaluated and is now immutable`);
-
-		this._evaluated = true;
-
-		if(CONFIG.debug.dice)
-			console.debug(`Evaluating roll with formula "${this.formula}"`);
-
-		// Migration path for async rolls
-		if("async" in options)
-			foundry.utils.logCompatibilityWarning("The async option for Roll#evaluate has been removed. "
-				+ "Use Roll#evaluateSync for synchronous roll evaluation.");
-
-		await this._evaluate({minimize, maximize, allowStrings, allowInteractive});
+		const roll = await super.evaluate({minimize, maximize, allowStrings, allowInteractive, ...options});
 
 		if(this.options.checkData?.action)
-			return this._finishCheckRoll();
+			await roll._finishCheckRoll();
 
-		return this;
+		return roll;
 	}
 
 	/** @inheritDoc */
