@@ -319,7 +319,7 @@ export default class Actor extends foundry.documents.Actor
 			this.system.totalSoak - (weapon?.system.qualities.find(quality => quality.name === "pierce")?.rating ?? 0),
 				0
 			),
-			criticalWounds = null;
+			criticalWounds = [];
 
 		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.DamageInflictionMacro.TYPE))
 			await effect.triggerMacro({actor: this, damages, soak, weapon, wounds});
@@ -336,11 +336,61 @@ export default class Actor extends foundry.documents.Actor
 			if(damages > this.system.wounds.value)
 				criticalDamages++;
 
-			if(criticalDamages > 0)
-				criticalWounds = await this.createEmbeddedDocuments(
-					"Item",
-					await this.drawCriticalWoundsRandomly(criticalDamages)
-				);
+			if(criticalDamages > 0) {
+				if(weapon?.system.qualities.some(quality => quality.name === "vicious"))
+					for(let i = 0; i < criticalDamages; i++) {
+						let mostSevereCriticalWound = null;
+						const selection = [];
+
+						for(let j = 0; j < 2; j++) {
+							const results = await Actor.drawCriticalWoundsRandomly(1);
+							if(results.length > 1)
+								criticalWounds.push(results.slice(1));
+							selection.push(results[0]);
+						}
+
+						for(const criticalWound of selection)
+							if(!mostSevereCriticalWound
+								|| criticalWound.system.severityRating < mostSevereCriticalWound.system.severityRating)
+								mostSevereCriticalWound = criticalWound;
+
+						if(selection.length === 2 && selection[0] !== selection[1]
+							&& selection[0].system.severityRating === selection[1].system.severityRating) {
+							let criticalWoundLinks = null;
+							const buttons = [];
+
+							for(const criticalWound of selection) {
+								criticalWoundLinks = criticalWoundLinks
+									? `${criticalWoundLinks} ${criticalWound.toAnchor().outerHTML}`
+									: criticalWound.toAnchor().outerHTML;
+
+								buttons.push({
+									action: criticalWound.uuid,
+									label: criticalWound.name,
+									callback: async (event, button, dialog) => criticalWound
+								});
+							}
+
+							await foundry.applications.api.DialogV2.wait({
+								title: game.i18n.localize("CRITICALWOUND.DIALOG.choose.title"),
+								content: `<p>${game.i18n.format(
+									"CRITICALWOUND.DIALOG.choose.description",
+									{links: criticalWoundLinks}
+								)}</p>`,
+								buttons,
+								submit: async criticalWound => {
+									criticalWounds.push(criticalWound);
+								}
+							});
+						}
+						else
+							criticalWounds.push(mostSevereCriticalWound);
+					}
+				else
+					criticalWounds.push(...await Actor.drawCriticalWoundsRandomly(criticalDamages));
+
+				criticalWounds = await this.createEmbeddedDocuments("Item", criticalWounds);
+			}
 		}
 
 		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.WoundsAdjustmentMacro.TYPE))
