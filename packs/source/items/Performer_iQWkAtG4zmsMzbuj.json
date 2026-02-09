@@ -13,7 +13,7 @@
           "priority": 0,
           "type": "manualPreCheckRoll",
           "script": "diePool.dice.fortune -= checkData.fortunePoints;\ndiePool.dice.expertise += checkData.fortunePoints;",
-          "conditionalScript": "return checkData.skill && [\"SKILL.NAMES.intuition\", \"SKILL.NAMES.observation\"].map(key => game.i18n.localize(key)).includes(fromUuidSync(checkData.skill)?.name);",
+          "conditionalScript": "return [\"SKILL.NAMES.intuition\", \"SKILL.NAMES.observation\"].map(key => game.i18n.localize(key)).includes(fromUuidSync(checkData.skill)?.name);",
           "postRollScript": ""
         }
       },

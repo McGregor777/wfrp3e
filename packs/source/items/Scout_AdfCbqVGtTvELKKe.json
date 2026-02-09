@@ -13,7 +13,7 @@
           "priority": 0,
           "type": "manualPreCheckRoll",
           "script": "diePool.dice.expertise++;",
-          "conditionalScript": "return checkData.skill && [\"SKILL.NAMES.observation\", \"SKILL.NAMES.stealth\"].map(key => game.i18n.localize(key)).includes(fromUuidSync(checkData.skill)?.name);",
+          "conditionalScript": "return [\"SKILL.NAMES.observation\", \"SKILL.NAMES.stealth\"].map(key => game.i18n.localize(key)).includes(fromUuidSync(checkData.skill)?.name);",
           "postRollScript": "await this.parent.exhaust();"
         }
       },
