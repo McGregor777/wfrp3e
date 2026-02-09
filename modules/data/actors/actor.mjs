@@ -61,10 +61,12 @@ export default class Actor extends foundry.abstract.TypeDataModel
 
 		return {
 			characteristics: new fields.SchemaField(characteristics),
+			defenceValue: new fields.NumberField(requiredNonNullablePositiveInteger),
 			impairments: new fields.SchemaField({
 				fatigue: new fields.NumberField(requiredNonNullablePositiveInteger),
 				stress: new fields.NumberField(requiredNonNullablePositiveInteger)
 			}),
+			soakValue: new fields.NumberField(requiredNonNullablePositiveInteger),
 			stance: new fields.SchemaField({
 				...stance,
 				current: new fields.NumberField({...requiredNonNullablePositiveInteger, min: undefined})
@@ -77,11 +79,6 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	}
 
 	/**
-	 * @type {number} The defence value of the Actor.
-	 */
-	defenceValue = 0;
-
-	/**
 	 * @type {number} The defence modifier for the Actor.
 	 */
 	defenceModifier = 0;
@@ -90,11 +87,6 @@ export default class Actor extends foundry.abstract.TypeDataModel
 	 * @type {number} The encumbrance limit modifier for the Actor.
 	 */
 	encumbranceLimitModifier = 0;
-
-	/**
-	 * @type {number} The soak value of the Actor.
-	 */
-	soakValue = 0;
 
 	/**
 	 * @type {number} The soak modifier for the Actor.

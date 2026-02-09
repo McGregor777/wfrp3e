@@ -3,9 +3,9 @@
 		<legend>{{localize attribute.label}}</legend>
 
 		{{#each attribute.fields}}
-			{{formGroup this value=(getProperty @root.source this.fieldPath) rootId=@root.rootId}}
+			{{formGroup this value=(getProperty @root.document this.fieldPath) rootId=@root.rootId}}
 		{{/each}}
 	{{else}}
-		{{formGroup attribute value=(getProperty source attribute.fieldPath) rootId=@root.rootId}}
+		{{formGroup attribute value=(getProperty document attribute.fieldPath) rootId=rootId}}
 	{{/if}}
 </fieldset>
