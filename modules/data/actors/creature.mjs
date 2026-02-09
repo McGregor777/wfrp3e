@@ -64,10 +64,11 @@ export default class Creature extends Actor
 
 	/**
 	 * Whether the creature is a Nemesis.
+	 * @returns {boolean}
 	 * @protected
 	 */
 	get nemesis()
 	{
-		return this.category.includes(game.i18n.localize("CREATURE.nemesis"));
+		return this.category?.includes(game.i18n.localize("CREATURE.nemesis")) ?? false;
 	}
 }
