@@ -54,7 +54,7 @@
 
 						{{#if @root.system.socketsByType}}
 							<select class="item-input socket-select"
-									name="system.socket"
+									name="{{item.system.schema.fields.socket.fieldPath}}"
 									data-item-id="{{item._id}}"
 									{{#unless @root.editable}}disabled{{/unless}}>
 								{{selectOptions (lookup @root.system.socketsByType item.system.type)

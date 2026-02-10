@@ -343,8 +343,9 @@ export default class Actor extends foundry.documents.Actor
 	/**
 	 * Searches for Items sharing the same socket as the one passed as parameter. If any is found, removes its socket value.
 	 * @param {Item} item The item which socket must be matched.
+	 * @returns {Promise<void>}
 	 */
-	preventMultipleItemsOnSameSocket(item)
+	async preventMultipleItemsOnSameSocket(item)
 	{
 		const actors = this.system.currentParty
 			? this.system.currentParty.system.members.map(member => fromUuidSync(member))
@@ -354,17 +355,18 @@ export default class Actor extends foundry.documents.Actor
 		for(const actor of actors)
 			for(const embeddedItem of actor.items)
 				if(embeddedItem !== item && embeddedItem.system.socket === item.system.socket)
-					foundItems.push(embeddedItem)
+					foundItems.push(embeddedItem);
 
 		for(const foundItem of foundItems)
-			foundItem.update({"system.socket": null});
+			await foundItem.update({"system.socket": null});
 	}
 
 	/**
 	 * Resets every matching socket available to the Actor.
 	 * @param {string} uuid The uuid of the Item owning the sockets to reset.
+	 * @returns {Promise<void>}
 	 */
-	resetSockets(uuid)
+	async resetSockets(uuid)
 	{
 		const items = [];
 		for(const item of this.items)
@@ -372,7 +374,7 @@ export default class Actor extends foundry.documents.Actor
 				items.push(item);
 
 		for(const item of items)
-			item.update({"system.socket": null});
+			await item.update({"system.socket": null});
 	}
 
 	/**
