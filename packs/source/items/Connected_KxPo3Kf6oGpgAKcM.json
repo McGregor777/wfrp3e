@@ -1,0 +1,53 @@
+{
+  "_id": "KxPo3Kf6oGpgAKcM",
+  "name": "Connected",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Connected",
+      "img": "icons/svg/statue.svg",
+      "_id": "NxWUQ8bkqMSmIKB2",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune += 2;",
+          "conditionalScript": "const action = fromUuidSync(checkData.action);\nreturn action && action.system[checkData.face].traits.includes(\"TRAITS.social\");",
+          "postRollScript": "await this.parent.exhaust();",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!KxPo3Kf6oGpgAKcM.NxWUQ8bkqMSmIKB2"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 1600000,
+  "system": {
+    "description": "<p>Exhaust this card to add {Df} {Df} to your dice pool when using a Social action</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!KxPo3Kf6oGpgAKcM"
+}

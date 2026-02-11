@@ -1,0 +1,51 @@
+{
+  "name": "Gregarious",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Gregarious",
+      "img": "icons/svg/statue.svg",
+      "_id": "VrNELj43h0J16x25",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const skill = await fromUuid(checkData.skill);\nif(skill?.name === game.i18n.localize(\"SKILL.NAMES.charm\"))\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add {Df} to Charm checks</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!xau3IhIlOTMItKLc.VrNELj43h0J16x25"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 1100000,
+  "_id": "xau3IhIlOTMItKLc",
+  "system": {
+    "description": "<p>Add {Df} to Charm checks</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!xau3IhIlOTMItKLc"
+}

@@ -527,6 +527,7 @@
 			"fortunePoints.label": "Points de Fortune",
 			"specialisations.label": "Spécialisations",
 			"skill.label": "Compétence",
+			"throwingCharacteristic.label": "Caractéristique du jet",
 			"triggeredEffects.label": "Effets activés",
 			"weapon.label": "Arme"
 		},
@@ -879,7 +880,7 @@
 			},
 			"checkRoll": {
 				"FIELDS.script": {
-					"hint": "Ce script est exécuté après qu'un test ne soit lancé.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur accomplissant le test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le test concerné.",
+					"hint": "Ce script est exécuté après qu'un test ne soit lancé.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur accomplissant le test.\n\t- {ChatMessage} chatMessage: Le message contenant le résultat du test.\n\t- {CheckData} checkData: Diverses données concernant le test.\n\t- {CheckRoll} checkRoll: Le test concerné.",
 					"label": "Script"
 				},
 				"label": "Réalisation d'un test"
@@ -890,6 +891,13 @@
 					"label": "Script"
 				},
 				"label": "Investissement des points de création"
+			},
+			"damageInfliction": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté chaque fois qu'un acteur subit des dégâts.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur subissant des dégâts.\n\t- {number} damages: Le nombre de dégâts actuellement calculé.\n\t- {number} soak: La valeur d'encaissement actuellement calculée.\n\t- {Item} weapon: L'arme utilisée pour infliger des dégâts.\n\t- {number} wounds: Le nombre de blessures actuel de l'acteur.",
+					"label": "Script"
+				},
+				"label": "Infliction de dégâts"
 			},
 			"embeddedItemCreation": {
 				"FIELDS.script": {
@@ -921,7 +929,7 @@
 			},
 			"manual": {
 				"FIELDS.script": {
-					"hint": "Ce script est exécuté sur commande de l'utilisateur uniquement.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.",
+					"hint": "Ce script est exécuté sur commande de l'utilisateur uniquement.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur détenant l'objet activé.",
 					"label": "Script"
 				},
 				"label": "Déclenchement manuel"
@@ -1285,6 +1293,7 @@
 
 	"ROLL": {
 		"ACTIONS": {
+			"addDiePool": "Ajouter une réserve de dés",
 			"applyToggledEffects": "Appliquer les effets activés",
 			"performAFreeCheck": "Effectuer un test libre",
 			"useTalent": "Utiliser une aptitude/un talent"
@@ -1390,6 +1399,7 @@
 		"NAMES": {
 			"channeling": "Focalisation",
 			"charm": "Charisme",
+			"discipline": "Discipline",
 			"education": "Éducation",
 			"firstAid": "Premiers soins",
 			"folklore": "Folklore",
@@ -1400,6 +1410,7 @@
 			"medicine": "Médecine",
 			"observation": "Observation",
 			"piety": "Piété",
+			"resilience": "Résistance",
 			"ride": "Équitation",
 			"skulduggery": "Forfaits",
 			"stealth": "Furtivité",
@@ -1680,8 +1691,8 @@
 				},
 				"label": "Attributs"
 			},
-			"range.label": "Range",
-			"special.label": "Special"
+			"range.label": "Portée",
+			"special.label": "Spécial"
 		},
 		"GROUPS": {
 			"blackpowder": "Poudre Noire",
@@ -1700,19 +1711,59 @@
 			"unarmed": "Mains Nues"
 		},
 		"QUALITIES": {
-			"attuned": "Harmonisé" ,
-			"blast": "Déflagration",
-			"defensive": "Défensive",
-			"entangling": "Paralysante",
-			"fast": "Rapide",
-			"pierce": "Perforante",
-			"reload": "Rechargement",
-			"slow": "Lente",
-			"thrown": "Jet",
-			"twoHanded": "Lourde",
-			"unreliable": "Peu Fiable",
-			"vicious": "Haineuse",
-			"special": "Spéciale"
+			"attuned": {
+				"description": "<p>An attuned item has a special connection to one of the eight Winds of Magic. When an arcane spellcaster is holding an item attuned to his proficient Wind of Magic, he adds one fortune die to Channelling checks for each level of attunement.</p>",
+				"name": "Harmonisé"
+			},
+			"blast": {
+				"description": "<p>This weapon is not so much aimed as simply pointed towards a group of enemies and unleashed. A weapon with the blast quality targets one engagement up to the weapon’s range. Everyone in the targeted engagement is subject to the effects of the attack.</p><p>Blast attacks cannot be parried or blocked, but targets may choose to dodge. Rather than the normal dodge effect, each die an individual defender would normally contribute to the pool for dodging increases his soak value by 1 against the blast attack.</p>",
+				"name": "Déflagration"
+			},
+			"defensive": {
+				"description": "<p>When wielded in the off-hand, these weapons assist in parrying incoming blows. A defensive weapon adds an additional misfortune die to an incoming melee attack when the wielding character parries.</p>",
+				"name": "Défensive"
+			},
+			"entangling": {
+				"description": "<p>A successful hit removes the target’s free manoeuvre on its next action. The target may still perform manoeuvres by suffering fatigue.</p>",
+				"name": "Paralysante"
+			},
+			"fast": {
+				"description": "<p>These weapons are generally easy to wield and agile. Attacks made with weapons with the fast quality gain: “{Sbo} Place one fewer recharge token on this action”</p>",
+				"effect": "Place one fewer recharge token on this action",
+				"name": "Rapide"
+			},
+			"pierce": {
+				"description": "<p>Weapons with this quality are designed to punch through the target’s protection. When struck by a piercing weapon, the target’s soak value is reduced by the weapon’s pierce rating, to a minimum soak value of zero.</p>",
+				"name": "Perforante"
+			},
+			"reload": {
+				"description": "<p>A weapon with the reload quality requires extra time to load and fire. The character must perform a special reload manoeuvre with this weapon before using it for an action or else the action check suffers an additional {Dchal} challenge die.</p>",
+				"name": "Rechargement"
+			},
+			"slow": {
+				"description": "<p>These weapons are generally bulky and unwieldy. When an attack action with a slow weapon hits, one additional recharge token is placed on the action card.</p>",
+				"name": "Lente"
+			},
+			"thrown": {
+				"description": "<p>When used to make a ranged attack, these weapons may have fortune dice associated with the attacker’s Strength added to the action pool instead of fortune dice associated with the attacker’s Agility. The attacker may also choose to use his Strength instead of Agility when determining damage with a thrown weapon.</p>",
+				"name": "Jet"
+			},
+			"twoHanded": {
+				"description": "<p>These weapons need to be wielded with two hands to be effective. A character attempting to use a two-handed weapon with just one hand suffers an additional {Dchal} challenge die on all actions using that weapon, inflicts two fewer points of damage, and adds one additional recharge token to any related actions performed.</p>",
+				"name": "Lourde"
+			},
+			"unreliable": {
+				"description": "<p>These weapons are often experimental or otherwise not to be trusted. If the weapon is a blackpowder weapon, it backfires or explodes if at least as many {Schao} Chaos Star symbols are rolled equal to the item’s Unreliable rating. When this is triggered, the item inflicts wounds equal to its Unreliable rating to the wielder, bypassing the wielder’s soak value and Toughness. The weapon is unusable until repaired. If the weapon is not a blackpowder weapon, when a number of {Schao} Chaos Stars equal to its Unreliable rating are generated, it breaks or jams and is rendered unusable until it can be repaired. This is in addition to any other effects.</p><p>Poor-quality weapons that are also unreliable are even more dangerous! Whenever a ¿ Chaos Star is rolled on an attack with a poor-quality Unreliable weapon, add {Schao} to the results pool before checking for failure. (So an Unreliable 2 weapon would malfunction on a roll of a single {Schao} Chaos Star.)</p>",
+				"name": "Peu Fiable"
+			},
+			"vicious": {
+				"description": "<p>These weapons leave particularly grisly wounds. For each critical wound this weapon inflicts, draw two critical wound cards and select the one with the higher severity rating. If both cards have the same severity rating, the attacker chooses which critical wound to apply.</p>",
+				"name": "Haineuse"
+			},
+			"special": {
+				"description": "The “special” quality is explained in the individual item descriptions.",
+				"name": "Spéciale"
+			}
 		},
 		"RANGES": {
 			"close": "Proche",

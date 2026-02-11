@@ -1,0 +1,51 @@
+{
+  "name": "Notorious",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Notorious",
+      "img": "icons/svg/statue.svg",
+      "_id": "6GARhjiPuIbShYpD",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const skill = await fromUuid(checkData.skill);\nif(skill?.name === game.i18n.localize(\"SKILL.NAMES.guile\"))\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add {Df} to Guile checks</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!vXoxbNCihIF1skyh.6GARhjiPuIbShYpD"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 600000,
+  "_id": "vXoxbNCihIF1skyh",
+  "system": {
+    "description": "<p>Add {Df} to Guile checks</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!vXoxbNCihIF1skyh"
+}

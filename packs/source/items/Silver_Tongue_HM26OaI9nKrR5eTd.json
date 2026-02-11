@@ -1,0 +1,53 @@
+{
+  "name": "Silver Tongue",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Silver Tongue",
+      "img": "icons/svg/statue.svg",
+      "_id": "OWqal2iWxuVVkZxG",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "if(checkData.characteristic === \"fellowship\" && checkRoll.totalSymbols.successes >= 3)\n  await checkRoll.adjustSymbols(chatMessage, {boons: 1});",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Fellowship checks add {Sbo} to the results pool if at least {Ssu}{Ssu}{Ssu} are generated</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!HM26OaI9nKrR5eTd.OWqal2iWxuVVkZxG"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 112500,
+  "flags": {},
+  "_id": "HM26OaI9nKrR5eTd",
+  "system": {
+    "description": "<p>Fellowship checks add {Sbo} to the results pool if at least {Ssu}{Ssu}{Ssu} are generated</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!HM26OaI9nKrR5eTd"
+}

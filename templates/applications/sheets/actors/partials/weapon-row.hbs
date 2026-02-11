@@ -42,7 +42,7 @@
 			<span>
 				{{#if weapon.system.qualities}}
 					{{#each weapon.system.qualities}}
-						{{localize (lookup @root.weaponQualities this.name) "name"}}{{#unless @last}}, {{else}}{{#if ../weapon.system.special}}, {{/if}}{{/unless}}
+						{{localize (lookup (lookup @root.weaponQualities this.name) "name")}}{{#unless @last}}, {{else}}{{#if ../weapon.system.special}}, {{/if}}{{/unless}}
 					{{/each}}
 				{{else}}
 					—

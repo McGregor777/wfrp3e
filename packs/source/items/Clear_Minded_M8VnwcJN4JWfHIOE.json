@@ -1,0 +1,51 @@
+{
+  "name": "Clear Minded",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Clear Minded",
+      "img": "icons/svg/eye.svg",
+      "_id": "H4pYnOb4rooFTMM8",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "if(checkData.action && checkData.characteristic === \"willpower\")\n  checkRoll.effects?.boon.push({\n\t\tdescription: \"<p>Recover 1 stress</p>\",\n\t\timmediate: false,\n\t\treverseScript: \"\",\n\t\tscript: \"outcome.stress--;\",\n\t\tsymbolAmount: 1\n\t});",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Actions using Willpower checks gain:</p><p>{Sbo} Recover 1 stress</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!M8VnwcJN4JWfHIOE.H4pYnOb4rooFTMM8"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 1700000,
+  "_id": "M8VnwcJN4JWfHIOE",
+  "system": {
+    "description": "<p>Actions using Willpower checks gain:</p><p>{Sbo} Recover 1 stress</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!M8VnwcJN4JWfHIOE"
+}

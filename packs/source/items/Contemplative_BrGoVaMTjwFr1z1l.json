@@ -1,0 +1,53 @@
+{
+  "name": "Contemplative",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Contemplative",
+      "img": "icons/svg/eye.svg",
+      "_id": "dUWOGLqCisK9OCnC",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.convertCharacteristicDie(\"conservative\");",
+          "conditionalScript": "return actor.currentStanceName === \"conservative\" && (checkData.fortunePoints ?? 0) < actor.system.fortune.value;",
+          "postRollScript": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>If you are in a conservative stance, you may spend 1 fortune point to convert one more characteristic die into a conservative die than your stance would normally allow</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!BrGoVaMTjwFr1z1l.dUWOGLqCisK9OCnC"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 1500000,
+  "_id": "BrGoVaMTjwFr1z1l",
+  "system": {
+    "description": "<p>If you are in a conservative stance, you may spend 1 fortune point to convert one more characteristic die into a conservative die than your stance would normally allow</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!BrGoVaMTjwFr1z1l"
+}

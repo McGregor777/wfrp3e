@@ -34,6 +34,13 @@ export default class CheckRoll extends foundry.dice.Roll
 	}
 
 	/**
+	 * The Chat Message containing this Check Roll.
+	 * @type {ChatMessage}
+	 * @internal
+	 */
+	_message;
+
+	/**
 	 * The number of each symbol obtained by the check roll.
 	 * @returns {{success: number, righteousSuccess: number, boon: number, sigmarsComet: number, challenge: number, bane: number, chaosStar: number, delay: number, exertion: number}}
 	 */
@@ -130,25 +137,12 @@ export default class CheckRoll extends foundry.dice.Roll
 	/** @inheritDoc */
 	async evaluate({minimize = false, maximize = false, allowStrings = false, allowInteractive = true, ...options} = {})
 	{
-		if(this._evaluated)
-			throw new Error(`The ${this.constructor.name} has already been evaluated and is now immutable`);
-
-		this._evaluated = true;
-
-		if(CONFIG.debug.dice)
-			console.debug(`Evaluating roll with formula "${this.formula}"`);
-
-		// Migration path for async rolls
-		if("async" in options)
-			foundry.utils.logCompatibilityWarning("The async option for Roll#evaluate has been removed. "
-				+ "Use Roll#evaluateSync for synchronous roll evaluation.");
-
-		await this._evaluate({minimize, maximize, allowStrings, allowInteractive});
+		const roll = await super.evaluate({minimize, maximize, allowStrings, allowInteractive, ...options});
 
 		if(this.options.checkData?.action)
-			return this._finishCheckRoll();
+			await roll._finishCheckRoll();
 
-		return this;
+		return roll;
 	}
 
 	/** @inheritDoc */
@@ -216,14 +210,14 @@ export default class CheckRoll extends foundry.dice.Roll
 			}
 
 			if(Array.isArray(checkData.outcome?.criticalWounds))
-				context.criticalWoundLinks = this._prepareCriticalWoundLinks(checkData.outcome.criticalWounds);
+				context.criticalWoundLinks = await this._prepareCriticalWoundLinks(checkData.outcome.criticalWounds);
 
 			if(checkData.targets && checkData.targets.length > 0) {
 				const targetActor = await fromUuid(checkData.targets[0]);
 				context.targetActorName = targetActor.token ? targetActor.token.name : targetActor.prototypeToken.name;
 
 				if(Array.isArray(checkData.outcome?.targetCriticalWounds))
-					context.targetCriticalWoundLinks = this._prepareCriticalWoundLinks(checkData.outcome.targetCriticalWounds);
+					context.targetCriticalWoundLinks = await this._prepareCriticalWoundLinks(checkData.outcome.targetCriticalWounds);
 			}
 		}
 
@@ -231,15 +225,31 @@ export default class CheckRoll extends foundry.dice.Roll
 	}
 
 	/** @inheritDoc */
+	async toMessage(messageData = {}, {rollMode, create = true} = {})
+	{
+		const message = await super.toMessage(messageData, {rollMode, create});
+
+		if(message instanceof foundry.documents.ChatMessage) {
+			this._message = message;
+			await message.update({rolls: [this]});
+		}
+
+		return message;
+	}
+
+	/** @inheritDoc */
 	toJSON()
 	{
-		return {...super.toJSON(), effects: this.effects};
+		return {...super.toJSON(), effects: this.effects, message: this._message?.uuid};
 	}
 
 	/** @inheritDoc */
 	static fromData(data)
 	{
-		return foundry.utils.mergeObject(super.fromData(data), {effects: data.effects});
+		return foundry.utils.mergeObject(super.fromData(data), {
+			effects: data.effects,
+			_message: fromUuidSync(data.message)
+		});
 	}
 
 	/**
@@ -261,18 +271,21 @@ export default class CheckRoll extends foundry.dice.Roll
 			for(const effect of effects)
 				effect.active = false;
 
-		this.effects.boon.push(this.constructor.getUniversalBoonEffect(isCharacteristicMental));
-		this.effects.bane.push(this.constructor.getUniversalBaneEffect(isCharacteristicMental));
+		this.effects.boon.push(CheckRoll.getUniversalBoonEffect(isCharacteristicMental));
+		this.effects.bane.push(CheckRoll.getUniversalBaneEffect(isCharacteristicMental));
 
 		if(["melee", "ranged"].includes(action.system.type)) {
 			if(weapon)
-				this.effects.boon.push(this.constructor.getCriticalRatingEffect(weapon));
+				this.effects.boon.push(CheckRoll.getCriticalRatingEffect(weapon));
 
-			this.effects.sigmarsComet.push(this.constructor.getUniversalSigmarsCometEffect());
+			this.effects.sigmarsComet.push(CheckRoll.getUniversalSigmarsCometEffect());
 		}
 
+		if(weapon)
+			this.effects.boon.push(wfrp3e.data.items.Weapon.fastEffect);
+
 		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.CheckRollMacro.TYPE))
-			await effect.triggerMacro({actor, checkData, checkRoll: this});
+			await effect.triggerMacro({actor, checkData, chatMessage: this.message, checkRoll: this});
 
 		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.ActionUsageMacro.TYPE))
 			await effect.triggerMacro({action, actor, face: checkData.face});
@@ -402,6 +415,38 @@ export default class CheckRoll extends foundry.dice.Roll
 		}
 
 		return newCheckRoll;
+	}
+
+	/**
+	 * Calculates the normal damages from a check depending on its parameters.
+	 * @param {number} [bonus] Bonus damages to add to the total.
+	 * @return {Promise<number>}
+	 */
+	async calculateDamages(bonus = 0)
+	{
+		const checkData = this.options.checkData,
+			  actor = await fromUuid(checkData.actor),
+			  weapon = await fromUuid(checkData.weapon);
+
+		return actor.system.characteristics[checkData.throwingCharacteristic ?? checkData.characteristic].rating
+			+ (weapon?.system.damageRating ?? actor.system.damageRating ?? 0)
+			+ bonus;
+	}
+
+	/**
+	 * Adds or negates symbols generated by the Check Roll.
+	 * @param {ChatMessage} chatMessage The Chat Message containing the Check Roll.
+	 * @param {{[p: string]: number}} symbols
+	 * @return {Promise<void>}
+	 */
+	async adjustSymbols(chatMessage, symbols)
+	{
+		for(const [key, amount] of Object.entries(symbols))
+			this.options.startingSymbols[key]
+				? this.options.startingSymbols[key] += amount
+				: this.options.startingSymbols[key] = amount;
+
+		await chatMessage.update({rolls: chatMessage.rolls});
 	}
 
 	/**
@@ -751,6 +796,7 @@ export default class CheckRoll extends foundry.dice.Roll
 			  actor = await fromUuid(checkData.actor),
 			  /** @var {Actor} targetActor */
 			  targetActor = checkData.targets?.length > 0 ? await fromUuid(checkData.targets[0]) : null,
+			  weapon = await fromUuid(checkData.weapon),
 			  outcome = {
 				  targetDamages: 0,
 				  targetCriticalWounds: 0,
@@ -765,7 +811,8 @@ export default class CheckRoll extends foundry.dice.Roll
 					  ? roll.remainingSymbols.exertions
 					  : 0,
 				  favour: 0,
-				  power: 0
+				  power: 0,
+				  rechargeTokens: 0
 			  },
 			  actorUpdates = {system: {}},
 			  targetUpdates = {system: {}},
@@ -799,9 +846,13 @@ export default class CheckRoll extends foundry.dice.Roll
 			}
 
 			if(outcome.targetDamages > 0) {
-				const {damages, criticalWounds} = await targetActor.sufferDamages(outcome.targetDamages, outcome.targetCriticalWounds);
+				const {damages, criticalWounds} = await targetActor.sufferDamages(
+					outcome.targetDamages,
+					outcome.targetCriticalWounds,
+					weapon
+				);
 				outcome.targetDamages = damages;
-				outcome.targetCriticalWounds = criticalWounds;
+				outcome.targetCriticalWounds = criticalWounds.map(criticalWound => criticalWound.uuid);
 			}
 
 			await targetActor.update(targetUpdates);
@@ -812,9 +863,9 @@ export default class CheckRoll extends foundry.dice.Roll
 				await actor.adjustWounds(outcome.wounds);
 
 			if(outcome.criticalWounds > 0) {
-				const criticalWounds = await this.createEmbeddedDocuments(
+				const criticalWounds = await actor.createEmbeddedDocuments(
 					"Item",
-					await this.drawCriticalWoundsRandomly(outcome.criticalWounds)
+					await wfrp3e.documents.Actor.drawCriticalWoundsRandomly(outcome.criticalWounds)
 				);
 				outcome.criticalWounds = criticalWounds.map(criticalWound => criticalWound.uuid);
 			}
@@ -840,7 +891,7 @@ export default class CheckRoll extends foundry.dice.Roll
 		if(roll.totalSymbols.successes && checkData?.action) {
 			/** @type {Item} action */
 			const action = await fromUuid(checkData.action);
-			await action.exhaust({face: checkData.face});
+			await action.exhaust({face: checkData.face, rechargeTokens: outcome.rechargeTokens, weapon});
 		}
 	}
 

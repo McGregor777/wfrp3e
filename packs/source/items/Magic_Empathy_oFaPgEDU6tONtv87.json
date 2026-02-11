@@ -1,0 +1,51 @@
+{
+  "name": "Magic Empathy",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Magic Empathy",
+      "img": "icons/svg/statue.svg",
+      "_id": "VtIWsZ0yc9SZWZus",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "const target = await fromUuid(checkData.targets[0]),\n      action = await fromUuid(checkData.action);\nif(target.system?.wizard && (checkData.characteristic === \"fellowship\"\n  || action?.system[checkData.face].traits.includes(game.i18n.localize(\"TRAITS.social\"))))\n  diePool.dice.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Gain {Df} to Fellowship checks or Social actions targeting a wizard</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!oFaPgEDU6tONtv87.VtIWsZ0yc9SZWZus"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 800000,
+  "_id": "oFaPgEDU6tONtv87",
+  "system": {
+    "description": "<p>Gain {Df} to Fellowship checks or Social actions targeting a wizard</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!oFaPgEDU6tONtv87"
+}

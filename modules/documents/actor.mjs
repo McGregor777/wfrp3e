@@ -123,9 +123,9 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
-	 * Prepares a characteristic check and shows a Check Builder to edit it. Rolls the check once edition is finished.
+	 * Prepares a characteristic check and shows a Check Builder to edit it. Rolls the check once editing is finished.
 	 * @param {string} characteristic The name of the checked characteristic.
-	 * @returns {Promise<void>}
+	 * @returns {Promise<{checkRoll: CheckRoll, diePool: DiePool}>}
 	 */
 	async performCharacteristicCheck(characteristic)
 	{
@@ -135,7 +135,22 @@ export default class Actor extends foundry.documents.Actor
 				{name: characteristic, ...this.system.characteristics[characteristic]}
 			)
 		});
-		await diePool.roll();
+
+		return {checkRoll: await diePool.roll(), diePool};
+	}
+
+	/**
+	 * Prepares a skill check and shows a Check Builder to edit it. Rolls the check once editing is finished.
+	 * @param {Item} skill The Skill to check.
+	 * @returns {Promise<{checkRoll: CheckRoll, diePool: DiePool}>}
+	 */
+	async performSkillCheck(skill)
+	{
+		const diePool = await wfrp3e.applications.dice.CheckBuilder.wait({
+			diePool: await wfrp3e.dice.DiePool.createFromSkill(this, skill)
+		});
+
+		return {checkRoll: await diePool.roll(), diePool};
 	}
 
 	/**
@@ -249,6 +264,17 @@ export default class Actor extends foundry.documents.Actor
 	}
 
 	/**
+	 * Adjusts the Actor's stance towards conservative or reckless.
+	 * @param {number} number The number of steps change, positive means towards reckless, negative towards conservative.
+	 * @returns {Promise<void>}
+	 */
+	async adjustStance(number)
+	{
+		const propertyPath = "system.stance.current";
+		await this.update({[propertyPath]: foundry.utils.getProperty(this, propertyPath) + number});
+	}
+
+	/**
 	 * Adds or removes a specified number of segments on either side on the stance meter.
 	 * @param {string} stance The name of the stance meter part that is getting adjusted.
 	 * @param {number} number The number of segments added or removed.
@@ -282,14 +308,23 @@ export default class Actor extends foundry.documents.Actor
 	 * Adds a certain number of damages to the Actor, converted into wounds, even adding Critical Wounds if too many damages are inflicted.
 	 * @param {number} damages The damages inflicted.
 	 * @param {number} criticalDamages The critical damages inflicted.
+	 * @param {Item} [weapon] The weapon used to inflict the damages.
 	 * @returns {Promise<{damages: number, criticalWounds: Item[]|number}>} The total number of damages inflicted, alongside the Critical Wounds.
 	 */
-	async sufferDamages(damages, criticalDamages)
+	async sufferDamages(damages, criticalDamages, weapon = null)
 	{
 		const propertyPath = "system.wounds.value",
 			  wounds = foundry.utils.getProperty(this, propertyPath);
-		let criticalWounds = null;
-		damages -= this.system.damageReduction;
+		let soak = Math.max(
+			this.system.totalSoak - (weapon?.system.qualities.find(quality => quality.name === "pierce")?.rating ?? 0),
+				0
+			),
+			criticalWounds = [];
+
+		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.DamageInflictionMacro.TYPE))
+			await effect.triggerMacro({actor: this, damages, soak, weapon, wounds});
+
+		damages -= this.system.characteristics.toughness.rating + soak;
 
 		// If the attack inflicts 0 damages in spite of hitting the Actor, the target still suffers one damage
 		// plus the initial number of critical damages that was supposed to be inflicted
@@ -301,11 +336,61 @@ export default class Actor extends foundry.documents.Actor
 			if(damages > this.system.wounds.value)
 				criticalDamages++;
 
-			if(criticalDamages > 0)
-				criticalWounds = await this.createEmbeddedDocuments(
-					"Item",
-					await this.drawCriticalWoundsRandomly(criticalDamages)
-				);
+			if(criticalDamages > 0) {
+				if(weapon?.system.qualities.some(quality => quality.name === "vicious"))
+					for(let i = 0; i < criticalDamages; i++) {
+						let mostSevereCriticalWound = null;
+						const selection = [];
+
+						for(let j = 0; j < 2; j++) {
+							const results = await Actor.drawCriticalWoundsRandomly(1);
+							if(results.length > 1)
+								criticalWounds.push(results.slice(1));
+							selection.push(results[0]);
+						}
+
+						for(const criticalWound of selection)
+							if(!mostSevereCriticalWound
+								|| criticalWound.system.severityRating < mostSevereCriticalWound.system.severityRating)
+								mostSevereCriticalWound = criticalWound;
+
+						if(selection.length === 2 && selection[0] !== selection[1]
+							&& selection[0].system.severityRating === selection[1].system.severityRating) {
+							let criticalWoundLinks = null;
+							const buttons = [];
+
+							for(const criticalWound of selection) {
+								criticalWoundLinks = criticalWoundLinks
+									? `${criticalWoundLinks} ${criticalWound.toAnchor().outerHTML}`
+									: criticalWound.toAnchor().outerHTML;
+
+								buttons.push({
+									action: criticalWound.uuid,
+									label: criticalWound.name,
+									callback: async (event, button, dialog) => criticalWound
+								});
+							}
+
+							await foundry.applications.api.DialogV2.wait({
+								title: game.i18n.localize("CRITICALWOUND.DIALOG.choose.title"),
+								content: `<p>${game.i18n.format(
+									"CRITICALWOUND.DIALOG.choose.description",
+									{links: criticalWoundLinks}
+								)}</p>`,
+								buttons,
+								submit: async criticalWound => {
+									criticalWounds.push(criticalWound);
+								}
+							});
+						}
+						else
+							criticalWounds.push(mostSevereCriticalWound);
+					}
+				else
+					criticalWounds.push(...await Actor.drawCriticalWoundsRandomly(criticalDamages));
+
+				criticalWounds = await this.createEmbeddedDocuments("Item", criticalWounds);
+			}
 		}
 
 		for(const effect of this.findTriggeredEffects(wfrp3e.data.macros.WoundsAdjustmentMacro.TYPE))
@@ -545,6 +630,17 @@ export default class Actor extends foundry.documents.Actor
 				for(const member of this.system.members)
 					fromUuidSync(member).resetSockets(this.uuid);
 		}
+	}
+
+	/**
+	 * Adjusts the Party's tension.
+	 * @param {number} number The number of steps change.
+	 * @returns {Promise<void>}
+	 */
+	async adjustPartyTension(number)
+	{
+		const propertyPath = "system.tension.value";
+		await this.update({[propertyPath]: foundry.utils.getProperty(this, propertyPath) + number});
 	}
 
 	/**

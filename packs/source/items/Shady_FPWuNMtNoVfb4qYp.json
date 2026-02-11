@@ -1,0 +1,53 @@
+{
+  "name": "Shady",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Shady",
+      "img": "icons/svg/statue.svg",
+      "_id": "K7XP5mWkR9xXfQ64",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune++;",
+          "conditionalScript": "return formUuidSync(checkData.skill)?.name === game.i18n.localize(\"SKILL.NAMES.guile\");",
+          "postRollScript": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your Skulduggery checks gain {Df}</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!FPWuNMtNoVfb4qYp.K7XP5mWkR9xXfQ64"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 125000,
+  "_id": "FPWuNMtNoVfb4qYp",
+  "system": {
+    "description": "<p>Your Skulduggery checks gain {Df}</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!FPWuNMtNoVfb4qYp"
+}

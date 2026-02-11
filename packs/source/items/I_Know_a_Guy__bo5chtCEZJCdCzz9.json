@@ -1,0 +1,53 @@
+{
+  "_id": "bo5chtCEZJCdCzz9",
+  "name": "I Know a Guy…",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "I Know a Guy…",
+      "img": "icons/svg/statue.svg",
+      "_id": "4WOeVr4oVyCHWDfg",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune += 2;",
+          "conditionalScript": "return checkData.characteristic === \"fellowship\";",
+          "postRollScript": "await this.parent.exhaust();\nif(!checkRoll.totalSymbols.successes)\n  await actor.adjustStress(1);",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to add {Df} {Df} to a Fellowship check. If the check fails, suffer 1 stress</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!bo5chtCEZJCdCzz9.4WOeVr4oVyCHWDfg"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 1000000,
+  "system": {
+    "description": "<p>Exhaust this card to add {Df} {Df} to a Fellowship check. If the check fails, suffer 1 stress</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!bo5chtCEZJCdCzz9"
+}

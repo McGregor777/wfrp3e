@@ -1,0 +1,54 @@
+{
+  "name": "Great Sense of Humour",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "Great Sense of Humour",
+      "img": "icons/svg/statue.svg",
+      "_id": "gU0gdFfb2v4WdrWd",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkRoll",
+          "script": "if(checkData.characteristic === \"fellowship\")\n  checkRoll.effects?.boon.push({\n    description: \"<p>Move the party tension meter one space to the left</p>\",\n    immediate: false,\n    reverseScript: \"\",\n    script: \"await actor.system.currentParty?.adjustPartyTension(-1);\",\n    symbolAmount: 2\n  });",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Your Fellowship checks gain:</p><p>{Sbo}{Sbo} Move the party tension meter one space to the left</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!iaRhVZOKB7jYJgsf.gU0gdFfb2v4WdrWd"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 1200000,
+  "flags": {},
+  "_id": "iaRhVZOKB7jYJgsf",
+  "system": {
+    "description": "<p>Your Fellowship checks gain:</p><p>{Sbo}{Sbo} Move the party tension meter one space to the left</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "_key": "!items!iaRhVZOKB7jYJgsf"
+}

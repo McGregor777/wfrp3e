@@ -1,0 +1,51 @@
+{
+  "name": "Unshakable",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Unshakable",
+      "img": "icons/svg/eye.svg",
+      "_id": "D4Le3g8YzS6bEYuc",
+      "type": "base",
+      "system": {
+        "macro": {
+          "script": "const skill = await fromUuid(checkData.skill);\nif(skill?.name === game.i18n.localize(\"SKILL.NAMES.intimidate\"))\n\tdiePool.dice.misfortune += 2;",
+          "type": "targetingCheckPreparation",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Add {Dm} {Dm} to any Intimidation checks targeting you</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "statuses": [],
+      "sort": 0,
+      "_key": "!items.effects!jltYhRqnPUWXm7LZ.D4Le3g8YzS6bEYuc"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "system": {
+    "description": "<p>Add {Dm} {Dm} to any Intimidation checks targeting you</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "_id": "jltYhRqnPUWXm7LZ",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!jltYhRqnPUWXm7LZ"
+}
