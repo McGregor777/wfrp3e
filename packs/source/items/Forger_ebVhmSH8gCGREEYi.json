@@ -2,7 +2,40 @@
   "name": "Forger",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/forger.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Forger",
+      "img": "systems/wfrp3e/assets/images/careers/forger.webp",
+      "_id": "67tDt3D9XJIaa6NE",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "for(const [key, value] of Object.entries(actor.system.socketsByType.focus))\n\tif(key.startsWith(actor.system.currentCareer.uuid)) {\n\t\tactor.system.socketsByType.reputation[key] = value;\n\t\tbreak;\n\t}",
+          "type": "actorPreparation"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You may choose to socket one Reputation talent in one of your Focus talent slots</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!ebVhmSH8gCGREEYi.67tDt3D9XJIaa6NE"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -116,17 +149,6 @@
         "item": null
       }
     ]
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
-    "coreVersion": "13.350",
-    "createdTime": 1699549830644,
-    "modifiedTime": 1764321760894,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
   },
   "_id": "ebVhmSH8gCGREEYi",
   "sort": 1500000,

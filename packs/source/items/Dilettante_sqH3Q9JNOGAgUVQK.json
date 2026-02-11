@@ -2,7 +2,42 @@
   "name": "Dilettante",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/dilettante.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Dilettante",
+      "img": "systems/wfrp3e/assets/images/careers/dilettante.webp",
+      "_id": "LYSD8XPkKDzFSECx",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "const skill = await fromUuid(checkData.skill);\nif(skill && skill.system.advanced === false && skill.system.trainingLevel === 0)\n\tdiePool.dice.expertise++;",
+          "type": "manualPreCheckRoll",
+          "conditionalScript": "const skill = fromUuidSync(checkData.skill);\nreturn skill && skill.system.advanced === false && skill.system.trainingLevel === 0;",
+          "postRollScript": "await this.parent.exhaust();"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Once per session, you may treat any one untrained basic skill as if it were trained, or you may attempt one advanced skill as if you had acquired it</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!sqH3Q9JNOGAgUVQK.LYSD8XPkKDzFSECx"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -117,17 +152,6 @@
         "item": null
       }
     ]
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
-    "coreVersion": "13.350",
-    "createdTime": 1699549826386,
-    "modifiedTime": 1764321760894,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
   },
   "_id": "sqH3Q9JNOGAgUVQK",
   "sort": 1900000,

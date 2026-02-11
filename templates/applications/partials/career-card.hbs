@@ -203,13 +203,13 @@
 
 		{{#if @root.editable}}
 			<div class="form-group">
-				<label for="{{concat @root.rootId '-Item-' item._id '-' item.system.schema.fields.fieldPath}}">
+				<label for="{{concat @root.rootId '-Item-' item._id '-' item.system.schema.fields.current.fieldPath}}">
 					{{item.system.schema.fields.current.label}}
 				</label>
 
 				<div class="form-fields">
-					<input id="{{concat @root.rootId '-Item-' item._id '-' item.system.schema.fields.fieldPath}}"
-						   name="{{item.system.schema.fields.fieldPath}}"
+					<input id="{{concat @root.rootId '-Item-' item._id '-' item.system.schema.fields.current.fieldPath}}"
+						   name="{{item.system.schema.fields.current.fieldPath}}"
 						   type="radio"
 						   {{checked item.system.current}}
 						   {{#unless @root.editable}}disabled{{/unless}} />

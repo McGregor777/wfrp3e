@@ -40,10 +40,8 @@ export default class Creature extends Actor
 			attributes: new fields.SchemaField(attributes),
 			category: new fields.StringField({nullable: true}),
 			damageRating: new fields.NumberField(requiredNonNullablePositiveInteger),
-			defenceValue: new fields.NumberField(requiredNonNullablePositiveInteger),
 			description: new fields.HTMLField({nullable: true}),
 			specialRuleSummary: new fields.HTMLField({nullable: true}),
-			soakValue: new fields.NumberField(requiredNonNullablePositiveInteger),
 			threatRating: new fields.NumberField({...requiredNonNullablePositiveInteger, initial: 1})
 		};
 	}
@@ -66,10 +64,11 @@ export default class Creature extends Actor
 
 	/**
 	 * Whether the creature is a Nemesis.
+	 * @returns {boolean}
 	 * @protected
 	 */
 	get nemesis()
 	{
-		return this.category.includes(game.i18n.localize("CREATURE.nemesis"));
+		return this.category?.includes(game.i18n.localize("CREATURE.nemesis")) ?? false;
 	}
 }

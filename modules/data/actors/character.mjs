@@ -242,10 +242,40 @@ export default class Character extends Actor
 	}
 
 	/**
-	 * The list of talent sockets available by talent type for the Character.
+	 * The sum of the encumbrance of every armour, trapping and weapon owned by the character.
+	 * @returns {number} The total of the encumbrance.
+	 */
+	get totalEncumbrance()
+	{
+		let totalEncumbrance = 0;
+
+		for(const item of this.parent.items)
+			if(["armour", "trapping", "weapon"].includes(item.type))
+				totalEncumbrance += item.system.encumbrance;
+
+		return totalEncumbrance;
+	}
+
+	/**
+	 * Whether the character owns an Order talent.
+	 * @returns {boolean}
+	 */
+	get wizard() {
+		return this.parent.itemTypes.talent.find(talent => talent.system.type === "order") != null;
+	}
+
+	/** @inheritDoc */
+	prepareDerivedData()
+	{
+		this._buildSocketsByType();
+		this._calculateCurrentExperience();
+	}
+
+	/**
+	 * Builds the list of talent sockets available by talent type for the Character.
 	 * @returns {{[p: string]: {}}}
 	 */
-	get socketsByType()
+	_buildSocketsByType()
 	{
 		const talentTypes = wfrp3e.data.items.Talent.TYPES,
 			  socketsByType = Object.fromEntries(
@@ -263,7 +293,7 @@ export default class Character extends Actor
 			for(const index in currentCareer.system.sockets) {
 				const socket = currentCareer.system.sockets[index],
 					  // Find a potential Item that would be socketed in that socket.
-					  item   = socketedItems.find(item => item.system.socket === `${currentCareer.uuid}_${index}`);
+					  item = socketedItems.find(item => item.system.socket === `${currentCareer.uuid}_${index}`);
 
 				socketsByType[socket.type][currentCareer.uuid + "_" + index] = `${currentCareer.name} - ${item
 					? game.i18n.format("TALENT.SOCKET.taken", {
@@ -309,36 +339,7 @@ export default class Character extends Actor
 		for(const itemType of Object.keys(talentTypes))
 			Object.assign(socketsByType[itemType], socketsByType["any"]);
 
-		return socketsByType;
-	}
-
-	/**
-	 * The sum of the encumbrance of every armour, trapping and weapon owned by the character.
-	 * @returns {number} The total of the encumbrance.
-	 */
-	get totalEncumbrance()
-	{
-		let totalEncumbrance = 0;
-
-		for(const item of this.parent.items)
-			if(["armour", "trapping", "weapon"].includes(item.type))
-				totalEncumbrance += item.system.encumbrance;
-
-		return totalEncumbrance;
-	}
-
-	/**
-	 * Whether the character owns an Order talent.
-	 * @returns {boolean}
-	 */
-	get wizard() {
-		return this.parent.itemTypes.talent.find(talent => talent.system.type === "order") != null;
-	}
-
-	/** @inheritDoc */
-	prepareDerivedData()
-	{
-		this._calculateCurrentExperience();
+		this.socketsByType = socketsByType;
 	}
 
 	/**

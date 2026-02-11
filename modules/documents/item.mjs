@@ -452,13 +452,18 @@ export default class Item extends foundry.documents.Item
 	/**
 	 * Upon change to any of the career socket's type, ensures that the sockets of the character are reset.
 	 * @param {Object} sockets The current career sockets.
+	 * @returns {Promise<void>}
 	 * @private
 	 */
-	#onCareerSocketChange(sockets)
+	async #onCareerSocketChange(sockets)
 	{
-		for(const socket of sockets)
-			if(fromUuidSync(socket.item)?.system.type !== socket.type)
-				this.actor.resetSockets(this.uuid);
+		for(let i = 0; i < sockets.length; i++) {
+			const itemType = fromUuidSync(socket.item)?.system.type;
+			// Rather than compare the socket type with its contained item type, check if the socket exists in the
+			// Actor's socket lists to take sockets that can contain multiple types of items into account.
+			if(!(`${this.uuid}_i` in this.actor.system.socketsByType[itemType]))
+				await this.actor.resetSockets(this.uuid);
+		}
 	}
 
 	/**

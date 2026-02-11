@@ -6,13 +6,13 @@
 
 	<div class="form-fields">
 		{{formInput attribute.fields.value
-					value=(getProperty @root.system attribute.fields.value.fieldPath)
+					value=(getProperty @root.document attribute.fields.value.fieldPath)
 					id=(concat @root.rootId "-" attribute.fields.value.fieldPath)}}
 
 		<span>/</span>
 
 		{{formInput attribute.fields.max
-					value=(getProperty @root.system attribute.fields.max.fieldPath)
+					value=(getProperty @root.document attribute.fields.max.fieldPath)
 					id=(concat @root.rootId "-" attribute.fields.max.fieldPath)}}
 	</div>
 </div>
