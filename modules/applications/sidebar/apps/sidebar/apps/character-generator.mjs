@@ -400,7 +400,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			});
 
 		if(submit) {
-			this.options.submit(foundry.utils.expandObject(formData.object).currentInvestments);
+			this.submit(foundry.utils.expandObject(formData.object).currentInvestments);
 			await this.close({submitted: true});
 		}
 	}
