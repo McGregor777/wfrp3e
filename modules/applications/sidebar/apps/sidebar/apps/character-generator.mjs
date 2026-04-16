@@ -441,7 +441,7 @@ export default class CharacterGenerator extends foundry.applications.api.Handleb
 			  investment = wfrp3e.applications.apps.CreationPointInvestor.INVESTMENTS.actionCards[this.creationPointInvestments.actionCards];
 		let actionUuids = await ActionSelector.wait({
 			actor: character,
-			items: await ActionSelector.buildOptionsList(character, {basic: false}),
+			items: await ActionSelector.buildOptionsList(character, {basic: true}),
 			modal: true,
 			size: investment.size
 		});
