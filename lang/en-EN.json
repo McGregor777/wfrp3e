@@ -985,6 +985,13 @@
 				},
 				"label": "Power or Favour Adjustment"
 			},
+			"reaction": {
+				"FIELDS.script": {
+					"hint": "This script is executed when the Item is activated as a Reaction.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that may (or may not) acquire the Item.",
+					"label": "Script"
+				},
+				"label": "Reaction"
+			},
 			"requirement": {
 				"FIELDS.script": {
 					"hint": "This script verifies whether the Item can be acquired during Character Generation or as part of Career Advances.\nArguments:\n\t- {ActiveEffect} this: The Active Effect owning this macro.\n\t- {Actor} actor: The Actor that may (or may not) acquire the Item.",
