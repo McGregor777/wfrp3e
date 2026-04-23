@@ -136,27 +136,31 @@ export default class Career extends Item
 					: source.sockets[index].type = oldSocket;
 			}
 
-		const {ActionAdvance, CareerAdvance, NonCareerAdvance, NonPrimaryCharacteristicAdvance} = wfrp3e.data.items.career;
+		const {ActionAdvance, NonPrimaryCharacteristicAdvance} = wfrp3e.data.items.career;
+
+		if(!Array.isArray(source.advances?.nonCareer))
+			source.advances.nonCareer = [];
 
 		for(const index in source.advances.nonCareer) {
 			const nonCareerAdvance = source.advances.nonCareer[index];
-			if(!nonCareerAdvance || !(nonCareerAdvance instanceof NonCareerAdvance))
+			if(!nonCareerAdvance || !nonCareerAdvance.type)
 				source.advances.nonCareer[index] = new NonPrimaryCharacteristicAdvance();
 		}
 
-		if(source.advances.nonCareer?.length < 2)
-			for(let i = 0; i < 2 - source.advances.nonCareer.length; i++)
-				source.advances.nonCareer.push(new NonPrimaryCharacteristicAdvance());
+		while(source.advances.nonCareer.length < 2)
+			source.advances.nonCareer.push(new NonPrimaryCharacteristicAdvance());
+
+		if(!Array.isArray(source.advances?.open))
+			source.advances.open = [];
 
 		for(const index in source.advances.open) {
 			const openAdvance = source.advances.open[index];
-			if(!openAdvance || !(openAdvance instanceof CareerAdvance))
+			if(!openAdvance || !openAdvance.type)
 				source.advances.open[index] = new ActionAdvance();
 		}
 
-		if(source.advances.open?.length < 6)
-			for(let i = 0; i < 6 - source.advances.open.length; i++)
-				source.advances.open.push(new ActionAdvance());
+		while(source.advances.open.length < 6)
+			source.advances.open.push(new ActionAdvance());
 
 		return super.migrateData(source);
 	}
@@ -223,7 +227,7 @@ export default class Career extends Item
 	{
 		const nonCareerAdvances = [];
 		for(const advance of this.advances.nonCareer)
-			nonCareerAdvances.push({...advance._source});
+			nonCareerAdvances.push({type: advance.type, ...advance._source});
 
 		return nonCareerAdvances;
 	}
@@ -236,7 +240,7 @@ export default class Career extends Item
 	{
 		const openAdvances = [];
 		for(const advance of this.advances.open)
-			openAdvances.push({...advance._source});
+			openAdvances.push({type: advance.type, ...advance._source});
 
 		return openAdvances;
 	}

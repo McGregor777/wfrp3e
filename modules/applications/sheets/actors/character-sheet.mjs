@@ -180,7 +180,7 @@ export default class CharacterSheet extends ActorSheet
 
 		if(input.defaultChecked) {
 			const matches = input.name.match(new RegExp(/^(system.advances.\w+).?(\d+)?/)),
-				  advance = foundry.utils.getProperty(career, matches[1]);
+				  advance = foundry.utils.getProperty(career, matches[0]);
 			await advance.cancelAdvance(matches[2]);
 		}
 		else {
