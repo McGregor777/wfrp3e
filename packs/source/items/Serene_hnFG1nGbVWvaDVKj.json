@@ -1,0 +1,19 @@
+{
+  "name": "Serene",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 125000,
+  "_id": "hnFG1nGbVWvaDVKj",
+  "system": {
+    "description": "<p>When you succeed at a Willpower check to recover stress, you may recover one additional stress</p>",
+    "rechargeTokens": 0,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!hnFG1nGbVWvaDVKj"
+}

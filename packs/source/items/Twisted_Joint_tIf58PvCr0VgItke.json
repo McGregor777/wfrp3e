@@ -7,7 +7,40 @@
     "description": "<p>You do not gain a free manoeuvre on your turn.</p>",
     "severityRating": 2
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Twisted Joint",
+      "img": "icons/skills/wounds/anatomy-bone-joint.webp",
+      "_id": "tS78woDI3m3ZC0IS",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You do not gain a free manoeuvre on your turn.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!tIf58PvCr0VgItke.tS78woDI3m3ZC0IS"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0

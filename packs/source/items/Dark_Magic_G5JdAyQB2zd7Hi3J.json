@@ -1,0 +1,19 @@
+{
+  "name": "Dark Magic",
+  "type": "talent",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": "z1ETmQwdQEGQHZnb",
+  "sort": -50000,
+  "_id": "G5JdAyQB2zd7Hi3J",
+  "system": {
+    "description": "<p>You can learn and cast Dark Magic and Chaos spells. When channelling power or casting a spell, add {De} to your dice pool. If one or more {Se} or {Sd} are generated, add to the results.</p><p>Channelling and Spellcraft checks gain:</p><p>{Sba}{Sba} Add {Schao} to the results pool</p>",
+    "rechargeTokens": 0,
+    "type": "order"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!G5JdAyQB2zd7Hi3J"
+}

@@ -1,0 +1,55 @@
+{
+  "name": "More Money Than Sense",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [
+    {
+      "name": "More Money Than Sense",
+      "img": "icons/svg/statue.svg",
+      "_id": "rIT0d8CgQwMTJt7E",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.expertise++;",
+          "conditionalScript": "const action = fromUuidSync(checkData.action);\n  return actor.itemTypes.money && (checkData.characteristic === \"fellowship\"\n  || action?.system[checkData.face].traits.includes(game.i18n.localize(\"TRAITS.social\")));",
+          "postRollScript": "await actor.itemTypes.money;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When performing a Social action or skill check using Fellowship, you may make a conspicuous show of wealth by spending at least 1 gold coin during the resolution of the task. If you do, add {De} to the dice pool</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!lQgnHj8i01OXSNd3.rIT0d8CgQwMTJt7E"
+    }
+  ],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 700000,
+  "_id": "lQgnHj8i01OXSNd3",
+  "system": {
+    "description": "<p>When performing a Social action or skill check using Fellowship, you may make a conspicuous show of wealth by spending at least 1 gold coin during the resolution of the task. If you do, add {De} to the dice pool</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!lQgnHj8i01OXSNd3"
+}

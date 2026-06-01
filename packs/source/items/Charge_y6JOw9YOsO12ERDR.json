@@ -1,0 +1,53 @@
+{
+  "name": "Charge",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Charge",
+      "img": "icons/svg/combat.svg",
+      "_id": "XJ35A8RUHcs8sJgk",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>On the turn in which you first enter an engagement with an enemy, gain {Df} to all your Melee Attack actions</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!y6JOw9YOsO12ERDR.XJ35A8RUHcs8sJgk"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 1900000,
+  "_id": "y6JOw9YOsO12ERDR",
+  "system": {
+    "description": "<p>On the turn in which you first enter an engagement with an enemy, gain {Df} to all your Melee Attack actions</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!y6JOw9YOsO12ERDR"
+}

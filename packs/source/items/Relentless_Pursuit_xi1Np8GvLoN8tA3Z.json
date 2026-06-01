@@ -1,0 +1,53 @@
+{
+  "name": "Relentless Pursuit",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Relentless Pursuit",
+      "img": "icons/svg/combat.svg",
+      "_id": "kkjeC8KgSLDXGfqm",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When you defeat the last enemy in your engagement, you may immediately perform a free manouevre</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!xi1Np8GvLoN8tA3Z.kkjeC8KgSLDXGfqm"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 2100000,
+  "_id": "xi1Np8GvLoN8tA3Z",
+  "system": {
+    "description": "<p>When you defeat the last enemy in your engagement, you may immediately perform a free manouevre</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!xi1Np8GvLoN8tA3Z"
+}

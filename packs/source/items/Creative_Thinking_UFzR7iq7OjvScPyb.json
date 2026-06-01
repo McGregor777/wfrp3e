@@ -1,0 +1,53 @@
+{
+  "name": "Creative Thinking",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Creative Thinking",
+      "img": "icons/svg/eye.svg",
+      "_id": "JF7f4mEacvcUiohq",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this talent to choose and equip a new talent that you possess of any type in this slot; that talent remains equipped until Creative Thinking recharges</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!UFzR7iq7OjvScPyb.JF7f4mEacvcUiohq"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 1400000,
+  "_id": "UFzR7iq7OjvScPyb",
+  "system": {
+    "description": "<p>Exhaust this talent to choose and equip a new talent that you possess of any type in this slot; that talent remains equipped until Creative Thinking recharges</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!UFzR7iq7OjvScPyb"
+}

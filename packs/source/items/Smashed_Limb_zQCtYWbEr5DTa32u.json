@@ -7,7 +7,40 @@
     "description": "<p>Suffer 1 additional fatigue each time you perform a movement manoeuvre.</p>",
     "severityRating": 2
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Smashed Limb",
+      "img": "icons/skills/wounds/bone-broken-marrow-red.webp",
+      "_id": "QXiABAj0wisI11VQ",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Suffer 1 additional fatigue each time you perform a movement manoeuvre.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!zQCtYWbEr5DTa32u.QXiABAj0wisI11VQ"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0

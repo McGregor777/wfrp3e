@@ -1,0 +1,53 @@
+{
+  "name": "Footwork",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Footwork",
+      "img": "icons/svg/combat.svg",
+      "_id": "dbUBWrqWTJRl8HhP",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You may spend 1 manoeuvre to gain +1 Defence until your next turn or +1 damage on your next attack this turn. Do this only once per turn.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!w3WmNA3qyHF2AK8m.dbUBWrqWTJRl8HhP"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "system": {
+    "description": "<p>You may spend 1 manoeuvre to gain +1 Defence until your next turn or +1 damage on your next attack this turn. Do this only once per turn.</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "_id": "w3WmNA3qyHF2AK8m",
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!w3WmNA3qyHF2AK8m"
+}

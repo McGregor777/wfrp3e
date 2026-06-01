@@ -1,0 +1,53 @@
+{
+  "name": "Untouchable",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Untouchable",
+      "img": "icons/svg/combat.svg",
+      "_id": "TQkx6aBri7JxoK25",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You may suffer 1 fatigue to use the Parry active defense against a Ranged Attack</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!SUKXspXD1LjbXBYr.TQkx6aBri7JxoK25"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 150000,
+  "_id": "SUKXspXD1LjbXBYr",
+  "system": {
+    "description": "<p>You may suffer 1 fatigue to use the Parry active defense against a Ranged Attack</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!SUKXspXD1LjbXBYr"
+}

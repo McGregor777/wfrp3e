@@ -88,7 +88,7 @@ export default class CareerAdvance extends foundry.abstract.DataModel
 	}
 
 	/**
-	 * Asks the user for specific selection if needed, then activates the advance and operate the changes it implies.
+	 * Asks the user for specific selection if needed, then activates the advance, and operate the changes it implies.
 	 * @param {Career} career The career containing the new advance.
 	 * @param {boolean} open Whether the advance is an open or regular one.
 	 * @returns {Promise<void>}
@@ -100,7 +100,7 @@ export default class CareerAdvance extends foundry.abstract.DataModel
 	}
 
 	/**
-	 * Asks the user for specific selection if needed, then activates the advance and operate the changes it implies.
+	 * Asks the user for specific selection if needed, then activates the advance, and operate the changes it implies.
 	 * @param {Career} career The career containing the new advance.
 	 * @returns {Promise<void>}
 	 */
@@ -115,7 +115,7 @@ export default class CareerAdvance extends foundry.abstract.DataModel
 	}
 
 	/**
-	 * Asks the user for specific selection if needed, then activates the advance and operate the changes it implies.
+	 * Asks the user for specific selection if needed, then activates the advance, and operate the changes it implies.
 	 * @param {Career} career The career containing the new advance.
 	 * @returns {Promise<void>}
 	 */
@@ -138,7 +138,7 @@ export default class CareerAdvance extends foundry.abstract.DataModel
 	/**
 	 * Asks the user for specific selection if needed, then builds an object of changes that may be used to activate an advance.
 	 * @param {Career} career The career containing the advance.
-	 * @param {number} [index] The index of the concerned advance if it is an open one.
+	 * @param {number} [index] The index of the concerned advance if it is open.
 	 * @returns {Object} An object of relevant changes for the advance.
 	 * @protected
 	 */
@@ -151,7 +151,7 @@ export default class CareerAdvance extends foundry.abstract.DataModel
 	 * Checks for any error before making definitive changes.
 	 * @param {Career} career The career containing the advance.
 	 * @param {Object} [options]
-	 * @param {number} [options.index] The index of the advance if it is an open one.
+	 * @param {number} [options.index] The index of the advance if it is open.
 	 * @returns {string|false} Returns an error if any found, false otherwise.
 	 */
 	static _checkForError(career, {index = null} = {})

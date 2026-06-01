@@ -656,7 +656,7 @@ export default class Actor extends foundry.documents.Actor
 
 	/**
 	 * Upon change to the party's fortune pool, if its number of tokens equals the number of members, triggers fortune refresh.
-	 * @param {number} value The new value of the party's fortune pool'.
+	 * @param {number} value The new value of the party's fortune pool.
 	 * @private
 	 */
 	#onPartyFortunePoolChange(value)

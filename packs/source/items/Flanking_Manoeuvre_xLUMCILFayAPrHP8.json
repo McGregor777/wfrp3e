@@ -1,0 +1,64 @@
+{
+  "name": "Flanking Manoeuvre",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Flanking Manoeuvre",
+      "img": "icons/svg/combat.svg",
+      "_id": "Xmv6Rg6wQaz2QUnA",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When in an engagement with at least 1 ally, you and your allies add {Df} to Melee Attack dice pools against the engaged foes</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "#{VERSION}#",
+        "createdTime": 1768832279572,
+        "modifiedTime": 1768832291129,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!xLUMCILFayAPrHP8.Xmv6Rg6wQaz2QUnA"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 1300000,
+  "_id": "xLUMCILFayAPrHP8",
+  "system": {
+    "description": "<p>When in an engagement with at least 1 ally, you and your allies add {Df} to Melee Attack dice pools against the engaged foes</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!xLUMCILFayAPrHP8"
+}

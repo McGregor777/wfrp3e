@@ -1,0 +1,53 @@
+{
+  "name": "Up Close and Personal",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Up Close and Personal",
+      "img": "icons/svg/combat.svg",
+      "_id": "RPggS1b3v9OrkZj6",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When you make a Melee Attack against a target you are engaged with and they attempt to use the Dodge Active Defence, if your attack still hits, add 1 additional recharge token to their Dodge action</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!mxx8sJhpjbSxgVHZ.RPggS1b3v9OrkZj6"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 125000,
+  "_id": "mxx8sJhpjbSxgVHZ",
+  "system": {
+    "description": "<p>When you make a Melee Attack against a target you are engaged with and they attempt to use the Dodge Active Defence, if your attack still hits, add 1 additional recharge token to their Dodge action</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!mxx8sJhpjbSxgVHZ"
+}

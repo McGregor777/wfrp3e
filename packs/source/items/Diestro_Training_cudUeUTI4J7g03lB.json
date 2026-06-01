@@ -1,0 +1,53 @@
+{
+  "name": "Diestro Training",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Diestro Training",
+      "img": "icons/svg/combat.svg",
+      "_id": "I4drL5cFm44pzSR1",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>While armed with a single fencing weapon, or a fencing weapon and dagger, gain +1 Defence</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!cudUeUTI4J7g03lB.I4drL5cFm44pzSR1"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 1600000,
+  "_id": "cudUeUTI4J7g03lB",
+  "system": {
+    "description": "<p>While armed with a single fencing weapon, or a fencing weapon and dagger, gain +1 Defence</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!cudUeUTI4J7g03lB"
+}

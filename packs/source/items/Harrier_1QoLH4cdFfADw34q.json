@@ -1,0 +1,19 @@
+{
+  "name": "Harrier",
+  "type": "talent",
+  "img": "icons/svg/pawprint.svg",
+  "effects": [],
+  "folder": "fl9EzONDto6oBUDW",
+  "sort": 150000,
+  "_id": "1QoLH4cdFfADw34q",
+  "system": {
+    "description": "<p>Enemies engaged with your pet suffer {Dm} to all Melee Attack, Ranged Attack, Spell, and Blessing actions</p>",
+    "rechargeTokens": 0,
+    "type": "tricks"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!1QoLH4cdFfADw34q"
+}

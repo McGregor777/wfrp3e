@@ -1,0 +1,19 @@
+{
+  "_id": "J8QjuG6TfNyoe4dN",
+  "name": "Ghyran, Lore of Life, Jade Order",
+  "type": "talent",
+  "img": "systems/wfrp3e/assets/images/magic/ghyran.svg",
+  "effects": [],
+  "folder": "z1ETmQwdQEGQHZnb",
+  "sort": -75000,
+  "system": {
+    "description": "<p>When casting a Jade Order spell whose season trait matches the current season, add {Df} to your dice pool. When casting a Jade Order spell whose season trait is the opposite of the current season, add to your dice pool.</p><div class=\"stance-meter\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-neutral\" src=\"systems/wfrp3e/assets/images/stance-neutral.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"></div>",
+    "rechargeTokens": 0,
+    "type": "order"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!J8QjuG6TfNyoe4dN"
+}

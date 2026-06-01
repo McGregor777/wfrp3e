@@ -1,0 +1,91 @@
+{
+  "folder": "wCqreVowARbBcAZy",
+  "name": "Gromril Armour",
+  "type": "armour",
+  "_id": "ScFZbkZata7noJSu",
+  "img": "systems/wfrp3e/assets/images/armours/gromril_armour.webp",
+  "system": {
+    "defenceValue": 2,
+    "soakValue": 5,
+    "cost": {
+      "brass": 0,
+      "silver": 0,
+      "gold": 0
+    },
+    "description": "<p><em>Variously called silverstone, meteoric iron, or hammernaught, gromril is a rare metal much valued by dwarfs. Suits of gromril plate are prized possessions, reserved for the finest warriors of a karak.</em></p><p>When worn by anyone but an Ironbreaker, this Gromril Armour’s encumbrance is doubled and it offers no other benefit.</p><p>Once per session, when you would suffer a critical wound you may instead suffer fatigue equal to that wound’s severity rating to convert the critical wound into a normal wound.</p>",
+    "encumbrance": 7,
+    "rarity": "exotic"
+  },
+  "effects": [
+    {
+      "name": "Encumbrance Malus",
+      "img": "icons/svg/dice-target.svg",
+      "_id": "7OzUZ95rIuJUj6IF",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "actorPreparation",
+          "script": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When worn by anyone but an Ironbreaker, this Gromril Armour’s encumbrance is doubled and it offers no other benefit.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!ScFZbkZata7noJSu.7OzUZ95rIuJUj6IF"
+    },
+    {
+      "name": "Gromril Armour",
+      "img": "icons/svg/dice-target.svg",
+      "_id": "Ahksq4Hykdj0kdjJ",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkOutcome",
+          "script": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Once per session, when you would suffer a critical wound you may instead suffer fatigue equal to that wound’s severity rating to convert the critical wound into a normal wound.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!ScFZbkZata7noJSu.Ahksq4Hykdj0kdjJ"
+    }
+  ],
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!ScFZbkZata7noJSu"
+}

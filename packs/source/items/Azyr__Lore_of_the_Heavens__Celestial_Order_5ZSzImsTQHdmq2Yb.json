@@ -1,0 +1,19 @@
+{
+  "name": "Azyr, Lore of the Heavens, Celestial Order",
+  "type": "talent",
+  "img": "systems/wfrp3e/assets/images/magic/azyr.svg",
+  "effects": [],
+  "folder": "z1ETmQwdQEGQHZnb",
+  "sort": 0,
+  "_id": "5ZSzImsTQHdmq2Yb",
+  "system": {
+    "description": "<p>Whenever you perform a Celestial Order Spell action, you may spend 1 additional power to add {Df} to your check to cast that spell</p><div class=\"stance-meter\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-neutral\" src=\"systems/wfrp3e/assets/images/stance-neutral.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"></div>",
+    "rechargeTokens": 0,
+    "type": "order"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!5ZSzImsTQHdmq2Yb"
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Righteous Servants",
+  "type": "talent",
+  "img": "icons/svg/eye.svg",
+  "effects": [
+    {
+      "name": "Righteous Servants",
+      "img": "icons/svg/eye.svg",
+      "_id": "dxMo39fD4CWZGNqm",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "<p>When you recover or lose favour during your End of Turn phase due to not being at equilibrium, you recover or lose 1 additional favour (unless this would take you past equilibrium)</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!9Xaz8HJPc7j4U4UW.dxMo39fD4CWZGNqm"
+    }
+  ],
+  "folder": "jX2YnPE4LkK3FT25",
+  "sort": 150000,
+  "_id": "9Xaz8HJPc7j4U4UW",
+  "system": {
+    "description": "<p>When you recover or lose favour during your End of Turn phase due to not being at equilibrium, you recover or lose 1 additional favour (unless this would take you past equilibrium)</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "focus"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!9Xaz8HJPc7j4U4UW"
+}

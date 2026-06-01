@@ -7,7 +7,40 @@
     "description": "<p>During your End of Turn phase: The GM must add or remove one recharge token from one of your recharging action cards. Lose 1 power. Lose 1 favour.</p>",
     "severityRating": 3
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Ringing Skull (SR: 3)",
+      "img": "icons/skills/wounds/injury-face-impact-orange.webp",
+      "_id": "U5oDPPqanqYJTByT",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>During your End of Turn phase: The GM must add or remove one recharge token from one of your recharging action cards. Lose 1 power. Lose 1 favour.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!CV7UEzfTxwoJ2wzy.U5oDPPqanqYJTByT"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0

@@ -1,0 +1,19 @@
+{
+  "name": "Good Dog",
+  "type": "talent",
+  "img": "icons/svg/pawprint.svg",
+  "effects": [],
+  "folder": "fl9EzONDto6oBUDW",
+  "sort": 200000,
+  "_id": "Oxn5YjnvHoumxzcm",
+  "system": {
+    "description": "<p>Your Animal Training (Fel) checks gain:</p><p>{Sbo}{Sbo} Your pet gains 1 Obedience</p>",
+    "rechargeTokens": 0,
+    "type": "tricks"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!Oxn5YjnvHoumxzcm"
+}

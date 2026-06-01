@@ -6,7 +6,40 @@
     "description": "<p>At the end of each encounter, or after a full night’s rest, you recover 1 less stress and 1 less fatigue than normal.</p>",
     "severityRating": 3
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Aches and Pains",
+      "img": "icons/skills/wounds/injury-pain-body-orange.webp",
+      "_id": "ZH7VHdlmF4pejtQT",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>At the end of each encounter, or after a full night’s rest, you recover 1 less stress and 1 less fatigue than normal.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!4tCUpnZUREiDmAt4.ZH7VHdlmF4pejtQT"
+    }
+  ],
   "folder": "VUMz1tBRkXXXUVEt",
   "sort": 100000,
   "ownership": {

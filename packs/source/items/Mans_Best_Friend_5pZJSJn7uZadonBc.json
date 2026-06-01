@@ -1,0 +1,19 @@
+{
+  "name": "Mans Best Friend",
+  "type": "talent",
+  "img": "icons/svg/pawprint.svg",
+  "effects": [],
+  "folder": "fl9EzONDto6oBUDW",
+  "sort": 125000,
+  "_id": "5pZJSJn7uZadonBc",
+  "system": {
+    "description": "<p>While you are engaged with your pet, gain +1 Defence against all Melee Attack and Ranged Attack actions targeting you</p>",
+    "rechargeTokens": 0,
+    "type": "tricks"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!5pZJSJn7uZadonBc"
+}
