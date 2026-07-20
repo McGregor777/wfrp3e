@@ -136,27 +136,31 @@ export default class Career extends Item
 					: source.sockets[index].type = oldSocket;
 			}
 
-		const {ActionAdvance, CareerAdvance, NonCareerAdvance, NonPrimaryCharacteristicAdvance} = wfrp3e.data.items.career;
+		const {ActionAdvance, NonPrimaryCharacteristicAdvance} = wfrp3e.data.items.career;
+
+		if(!Array.isArray(source.advances?.nonCareer))
+			source.advances.nonCareer = [];
 
 		for(const index in source.advances.nonCareer) {
 			const nonCareerAdvance = source.advances.nonCareer[index];
-			if(!nonCareerAdvance || !(nonCareerAdvance instanceof NonCareerAdvance))
+			if(!nonCareerAdvance || !nonCareerAdvance.type)
 				source.advances.nonCareer[index] = new NonPrimaryCharacteristicAdvance();
 		}
 
-		if(source.advances.nonCareer?.length < 2)
-			for(let i = 0; i < 2 - source.advances.nonCareer.length; i++)
-				source.advances.nonCareer.push(new NonPrimaryCharacteristicAdvance());
+		while(source.advances.nonCareer.length < 2)
+			source.advances.nonCareer.push(new NonPrimaryCharacteristicAdvance());
+
+		if(!Array.isArray(source.advances?.open))
+			source.advances.open = [];
 
 		for(const index in source.advances.open) {
 			const openAdvance = source.advances.open[index];
-			if(!openAdvance || !(openAdvance instanceof CareerAdvance))
+			if(!openAdvance || !openAdvance.type)
 				source.advances.open[index] = new ActionAdvance();
 		}
 
-		if(source.advances.open?.length < 6)
-			for(let i = 0; i < 6 - source.advances.open.length; i++)
-				source.advances.open.push(new ActionAdvance());
+		while(source.advances.open.length < 6)
+			source.advances.open.push(new ActionAdvance());
 
 		return super.migrateData(source);
 	}
@@ -223,7 +227,7 @@ export default class Career extends Item
 	{
 		const nonCareerAdvances = [];
 		for(const advance of this.advances.nonCareer)
-			nonCareerAdvances.push({...advance._source});
+			nonCareerAdvances.push({type: advance.type, ...advance._source});
 
 		return nonCareerAdvances;
 	}
@@ -236,7 +240,7 @@ export default class Career extends Item
 	{
 		const openAdvances = [];
 		for(const advance of this.advances.open)
-			openAdvances.push({...advance._source});
+			openAdvances.push({type: advance.type, ...advance._source});
 
 		return openAdvances;
 	}
@@ -396,39 +400,5 @@ export default class Career extends Item
 		}
 
 		return cost;
-	}
-
-	/**
-	 * Reassigns proper uuids upon cloning a career to have them pointing to the cloned actor embedded items instead of the old actor ones.
-	 * @param {Object} career The career data.
-	 * @param {string} newOwnerId The id of the new actor owning the career.
-	 */
-	static postCloningCleanup(career, newOwnerId)
-	{
-		this.checkAdvanceUuids(Object.values(career.system.advances), career, newOwnerId);
-	}
-
-	/**
-	 * Checks the uuid value of a list of advances and replaces the uuid if required.
-	 * @param advances A list of advances to check up.
-	 * @param {Object} career The career data.
-	 * @param {string} newOwnerId The id of the new actor owning the career.
-	 * @param {string|null} [formerOwnerId] The id of the former actor owning the career.
-	 */
-	static checkAdvanceUuids(advances, career, newOwnerId, formerOwnerId = null)
-	{
-		for(const advance of advances)
-			if(Array.isArray(advance))
-				this.checkAdvanceUuids(advance, career, newOwnerId, formerOwnerId);
-			else if((advance.active || advance.cost) && advance.uuid) {
-				if(formerOwnerId === null) {
-					formerOwnerId = advance.uuid.match(/^Actor.([\d\w]{16}).Item.[\d\w]{16}$/)[1];
-
-					if(newOwnerId === formerOwnerId)
-						return;
-				}
-
-				advance.uuid = advance.uuid.replace(formerOwnerId, newOwnerId);
-			}
 	}
 }

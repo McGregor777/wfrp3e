@@ -70,7 +70,7 @@
 
 		{{#each system.open as |openAdvance opa|}}
 			<div class="form-group" data-index="{{opa}}">
-				<label for="{{../rootId}}-{{openAdvance.schema.fields.active.fieldPath}}.{{opa}}.active">
+				<label for="{{../rootId}}-{{replace openAdvance.schema.fields.active.fieldPath "/element.\w+/" opa}}">
 					{{localize ../fields.open.label}}
 				</label>
 
@@ -78,9 +78,9 @@
 					{{#each openAdvance.schema.fields as |field f|}}
 						{{formInput field
 									classes=(ifThen (and (gt (length openAdvance.schema.fields) 3) (eq f "value")) "slim" "")
-									id=(concat rootId "-" ../../fields.open.fieldPath "." opa "." f)
+									id=(concat @root.rootId "-" (replace field.fieldPath "/element.\w+/" opa))
 									localize=true
-									name=(concat ../../fields.open.fieldPath ".element." f)
+									name=field.fieldPath
 									value=(lookup openAdvance f)}}
 					{{/each}}
 				</div>

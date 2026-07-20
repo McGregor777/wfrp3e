@@ -1461,7 +1461,7 @@
 			"tooManySpecialisationSelected": "Too many selected specialisations. Please deselect some."
 		},
 		"noUpgradeSelected": "None",
-		"selectedUpgrade": "Selected Upgrade(s):",
+		"selectedUpgrades": "Selected Upgrade(s):",
 		"selectedSpecialisations": "Selected Specialisation(s):",
 		"title": "Skill Upgrader"
 	},

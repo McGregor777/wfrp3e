@@ -135,7 +135,7 @@ export default class NonCareerAdvance extends foundry.abstract.DataModel
 			const openAdvances = this.parent.simpleOpenAdvances;
 			openAdvances[index] = this.constructor._defaults;
 
-			await this.parent.parent.update({"system.advances.open": openAdvances});
+			await this.parent.parent.update({"system.advances.nonCareer": openAdvances});
 		}
 	}
 
