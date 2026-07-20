@@ -1,0 +1,64 @@
+{
+  "name": "Lead from the Front",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Lead from the Front",
+      "img": "icons/svg/combat.svg",
+      "_id": "F2gqFeBWgzjYCJrh",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>In combat, if no enemies have acted yet during the current round, gain {Df} to one skill check you attempt on your turn</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "13.351",
+        "systemId": "wfrp3e",
+        "systemVersion": "#{VERSION}#",
+        "createdTime": 1768832474826,
+        "modifiedTime": 1768832511929,
+        "lastModifiedBy": "Bq3CTOvANoOneedB"
+      },
+      "_key": "!items.effects!MhwndulPUQCMEb2h.F2gqFeBWgzjYCJrh"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 1000000,
+  "_id": "MhwndulPUQCMEb2h",
+  "system": {
+    "description": "<p>In combat, if no enemies have acted yet during the current round, gain {Df} to one skill check you attempt on your turn</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!MhwndulPUQCMEb2h"
+}

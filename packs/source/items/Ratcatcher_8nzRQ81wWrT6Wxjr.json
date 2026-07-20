@@ -2,7 +2,40 @@
   "name": "Ratcatcher",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/ratcatcher.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Ratcatcher",
+      "img": "systems/wfrp3e/assets/images/careers/ratcatcher.webp",
+      "_id": "batCfT3qm11XQ47t",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You have a small but vicious dog. Take the small but vicious dog follower sheet. You can teach your dog Trick talents and attach them to its sheet</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!8nzRQ81wWrT6Wxjr.batCfT3qm11XQ47t"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -116,17 +149,6 @@
         "item": null
       }
     ]
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
-    "coreVersion": "13.350",
-    "createdTime": 1699549862849,
-    "modifiedTime": 1764321760894,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
   },
   "_id": "8nzRQ81wWrT6Wxjr",
   "sort": 525000,

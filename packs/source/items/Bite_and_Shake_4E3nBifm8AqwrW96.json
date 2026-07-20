@@ -1,0 +1,19 @@
+{
+  "name": "Bite and Shake",
+  "type": "talent",
+  "img": "icons/svg/pawprint.svg",
+  "effects": [],
+  "folder": "fl9EzONDto6oBUDW",
+  "sort": 100000,
+  "_id": "4E3nBifm8AqwrW96",
+  "system": {
+    "description": "<p>While your pet is engaged with an enemy, Melee Attack and Ranged: Attack actions from you and your allies that target the enemy gain {Df}.</p>",
+    "rechargeTokens": 0,
+    "type": "tricks"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!4E3nBifm8AqwrW96"
+}

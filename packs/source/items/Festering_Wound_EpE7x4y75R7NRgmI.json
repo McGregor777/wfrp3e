@@ -7,7 +7,40 @@
     "description": "<p>Until this critical wound is healed, its Severity Rating increases by 1 each day, to a maximum Severity of 5.</p>",
     "severityRating": 1
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Festering Wound",
+      "img": "icons/skills/wounds/blood-cells-disease-green.webp",
+      "_id": "2jO8tf3i2k7wMvol",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Until this critical wound is healed, its Severity Rating increases by 1 each day, to a maximum Severity of 5.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!EpE7x4y75R7NRgmI.2jO8tf3i2k7wMvol"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0

@@ -1,0 +1,87 @@
+{
+  "name": "Cavalry Specialist",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Cavalry Specialist",
+      "img": "icons/svg/combat.svg",
+      "_id": "0NkBeuoI2g83Gp5r",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune++;",
+          "conditionalScript": "",
+          "postRollScript": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>All attacks made while riding a mount gain {Df}</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!0ADCL4io9sdUFRnJ.0NkBeuoI2g83Gp5r"
+    },
+    {
+      "name": "Cavalry Specialist",
+      "img": "icons/svg/combat.svg",
+      "_id": "3pacW56KKhiqVwgI",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>All all active defenses used while riding a horse contribute an additional {Dm} to incoming attacks</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!0ADCL4io9sdUFRnJ.3pacW56KKhiqVwgI"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 2000000,
+  "_id": "0ADCL4io9sdUFRnJ",
+  "system": {
+    "description": "<p>All attacks made while riding a mount gain {Df}. All all active defenses used while riding a horse contribute an additional {Dm} to incoming attacks</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!0ADCL4io9sdUFRnJ"
+}

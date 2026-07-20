@@ -1,0 +1,19 @@
+{
+  "_id": "apGfc7YduCLnAgdu",
+  "name": "Morr, God of Dreams & Death",
+  "type": "talent",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": "WGcUEiIF4kD2jGbr",
+  "sort": 200000,
+  "system": {
+    "description": "<p>Once per turn, you may perform Morr’s Last Rites over a dead or dying person within close range to gain 1 favour. Performing the rites is a prepare manoeuvre</p><div class=\"stance-meter\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-neutral\" src=\"systems/wfrp3e/assets/images/stance-neutral.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"></div>",
+    "rechargeTokens": 0,
+    "type": "faith"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!apGfc7YduCLnAgdu"
+}

@@ -42,14 +42,14 @@
           {
             "symbolAmount": 2,
             "description": "<p>Suffer 1 stress. If, after resolving this action, you have more power than twice your Willpower, suffer 1 additional stress</p>",
-            "script": "outcome.stress++;\nif(actor.system.power > actor.system.characteristics.willpower.rating * 2)\n\toutcome.stress++;"
+            "script": "outcome.stress++;\nif(actor.system.power + outcome.power > actor.system.characteristics.willpower.rating * 2)\n\toutcome.stress++;"
           }
         ],
         "chaosStar": [
           {
             "symbolAmount": 1,
             "description": "<p>After resolving this action, lose all power in excess of twice your Willpower and suffer 1 stress per power lost this way</p>",
-            "script": "outcome.stress += actor.system.power - actor.system.characteristics.willpower.rating;"
+            "script": "const totalPower = actor.system.power + outcome.power,\n      ceiling = actor.system.characteristics.willpower.rating * 2;\nif(totalPower > ceiling) {\n  outcome.stress += totalPower - ceiling;\n  outcome.power = Math.min(totalPower, ceiling) - actor.system.power;\n}"
           }
         ],
         "delay": [],
@@ -99,14 +99,14 @@
           {
             "symbolAmount": 2,
             "description": "<p>Suffer 1 wound. If, after resolving this action, you have more power than twice your Willpower, suffer 1 additional stress</p>",
-            "script": "outcome.wounds++;\nif(actor.system.power > actor.system.characteristics.willpower.rating * 2)\n\toutcome.stress++;"
+            "script": "Suffer 1 wound. If, after resolving this action, you have more power than twice your Willpower, suffer 1 additional stress"
           }
         ],
         "chaosStar": [
           {
             "symbolAmount": 1,
             "description": "<p>At the end of your turn, lose all power in excess of your Willpower and suffer 1 stress per power lost this way</p>",
-            "script": "outcome.stress += actor.system.power - actor.system.characteristics.willpower.rating;"
+            "script": "const totalPower = actor.system.power + outcome.power;\nif(totalPower > actor.system.characteristics.willpower.rating) {\n  outcome.stress += totalPower - actor.system.characteristics.willpower.rating;\n  outcome.power = Math.min(totalPower, actor.system.characteristics.willpower.rating) - actor.system.power;\n}"
           }
         ],
         "delay": [],

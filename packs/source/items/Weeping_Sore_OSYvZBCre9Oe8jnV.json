@@ -7,7 +7,40 @@
     "description": "<p>You may not recover fatigue or stress during the rally step. If left untreated for a day, this wound’s severity increases to 3.</p>",
     "severityRating": 2
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Weeping Sore",
+      "img": "icons/skills/wounds/blood-cells-disease-green.webp",
+      "_id": "qEJKbcNKbEWXTlSr",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You may not recover fatigue or stress during the rally step. If left untreated for a day, this wound’s severity increases to 3.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!OSYvZBCre9Oe8jnV.qEJKbcNKbEWXTlSr"
+    }
+  ],
   "sort": 0,
   "ownership": {
     "default": 0

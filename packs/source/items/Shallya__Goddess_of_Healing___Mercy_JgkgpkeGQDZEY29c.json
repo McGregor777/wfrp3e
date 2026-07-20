@@ -1,0 +1,19 @@
+{
+  "_id": "JgkgpkeGQDZEY29c",
+  "name": "Shallya, Goddess of Healing & Mercy",
+  "type": "talent",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": "WGcUEiIF4kD2jGbr",
+  "sort": -100000,
+  "system": {
+    "description": "<p>Each time an ally within close range (other than you) is critically wounded, gain 1 favour</p><div class=\"stance-meter\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-neutral\" src=\"systems/wfrp3e/assets/images/stance-neutral.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"></div>",
+    "rechargeTokens": 0,
+    "type": "faith"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!JgkgpkeGQDZEY29c"
+}

@@ -1,0 +1,19 @@
+{
+  "_id": "XxJm55w0MJSFPESJ",
+  "name": "Aqshy, Lore of Fire, Bright Order",
+  "type": "talent",
+  "img": "systems/wfrp3e/assets/images/magic/aqshy.svg",
+  "effects": [],
+  "folder": "z1ETmQwdQEGQHZnb",
+  "sort": 100000,
+  "system": {
+    "description": "<p>When you perform a Bright Order Spell action that deals damage, for each 1 additional power you spend you may increase the damage caused by that Spell action by 1</p><div class=\"stance-meter\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-neutral\" src=\"systems/wfrp3e/assets/images/stance-neutral.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"></div>",
+    "rechargeTokens": 0,
+    "type": "order"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!XxJm55w0MJSFPESJ"
+}

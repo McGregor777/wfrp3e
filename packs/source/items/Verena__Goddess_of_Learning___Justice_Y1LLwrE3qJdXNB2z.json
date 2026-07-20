@@ -1,0 +1,19 @@
+{
+  "_id": "Y1LLwrE3qJdXNB2z",
+  "name": "Verena, Goddess of Learning & Justice",
+  "type": "talent",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": "WGcUEiIF4kD2jGbr",
+  "sort": -200000,
+  "system": {
+    "description": "<p>You may attach a Focus talent to your Faith card as if it were a talent socket on your career sheet. While an active talent is socketed here, gain {Df} to Education checks</p><div class=\"stance-meter\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-neutral\" src=\"systems/wfrp3e/assets/images/stance-neutral.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"></div>",
+    "rechargeTokens": 0,
+    "type": "faith"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!Y1LLwrE3qJdXNB2z"
+}

@@ -8,6 +8,7 @@
  * @property {string} [face]
  * @property {string} [fortunePoints]
  * @property {CheckOutcome} [outcome]
+ * @property {ActiveEffect[]} [reactions]
  * @property {Array} [specialisations]
  * @property {string} [skill]
  * @property {Array} [targets]
@@ -23,7 +24,7 @@
 /**
  * Die pool utility helps prepare WFRP3e's special die pools.
  * @property {Object} dice The various dice that will be rolled.
- * @property {Object} symbols The various symbols that will be added to the results of the check once the rolled.
+ * @property {Object} symbols The various symbols that will be added to the results of the check once it is rolled.
  * @property {CheckData} [checkData] Contains various data concerning the check of the die pool.
  * @property {string} [flavor] A flavor text.
  * @property {string} [sound] An audio file path.
@@ -207,6 +208,57 @@ export default class DiePool
 	}
 
 	/**
+	 * Checks if any Reaction is available for any player, then lets them select any of them.
+	 * @returns {Promise<void>}
+	 */
+	async askForReactions()
+	{
+		const items = [];
+		const playerCharacterUuids = [];
+
+		// Ask a Player for Reactions if they are connected and their Player Character has at least one Wound left.
+		for(const user of game.users) {
+			const actor = user.character;
+
+			if(user.active && actor?.system.wounds?.value > 0) {
+				const parameters = {actor, checkData: this.checkData};
+
+				for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.ReactionMacro.TYPE))
+					if(effect.checkConditionalScript(parameters))
+						items.add(effect.parent);
+
+				//try {
+				this.checkData.reactions = await wfrp3e.applications.apps.selectors.ActionSelector.wait({items});
+				/*}
+				catch(error) {
+
+				}*/
+
+				playerCharacterUuids.push(actor.uuid);
+			}
+		}
+
+		// Ask the GM for Reactions if the Actor is in the active Scene and has at least one Wound left.
+		for(const actor of game.scenes.active) {
+			if(!playerCharacterUuids.includes(actor.uuid) && actor.system.wounds?.value > 0) {
+				const parameters = {actor, checkData: this.checkData};
+
+				for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.ReactionMacro.TYPE))
+					if(effect.checkConditionalScript(parameters))
+						items.add(effect.parent);
+			}
+
+			this.checkData.reactions = await wfrp3e.applications.apps.selectors.ActionSelector.wait({items});
+		}
+
+
+
+		// #TODO Ensure each Actor with available Reactions gets an Action Selector.
+		this.checkData.reactions = await wfrp3e.applications.apps.selectors.ActionSelector.wait({items});
+		// #TODO Ensure that Reaction Macros and every cascading Macros are executed prior to rolling dice.
+	}
+
+	/**
 	 * Rolls the die pool, then shows the results in a message.
 	 * @returns {Promise<{CheckRoll}>}
 	 */
@@ -246,6 +298,8 @@ export default class DiePool
 				}
 			}
 		}
+
+		await this.askForReactions();
 
 		const checkRoll = await wfrp3e.dice.CheckRoll.create(
 			this.formula,
@@ -287,7 +341,6 @@ export default class DiePool
 
 		await effect.triggerMacro({actor, checkData: this.checkData, diePool: this, ...options}, script);
 	}
-
 
 	/**
 	 * Prepares a die pool for a characteristic check.

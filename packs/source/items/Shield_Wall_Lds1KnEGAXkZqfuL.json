@@ -1,0 +1,19 @@
+{
+  "name": "Shield Wall",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 400000,
+  "_id": "Lds1KnEGAXkZqfuL",
+  "system": {
+    "description": "<p>When in an engagement where at least two allies are equipped with shields, gain +1 Defence</p>",
+    "rechargeTokens": 0,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!Lds1KnEGAXkZqfuL"
+}

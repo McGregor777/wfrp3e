@@ -957,12 +957,14 @@ export default class CheckRoll extends foundry.dice.Roll
 	 */
 	static async triggerCheckPreparationEffects(actor, checkData, diePool)
 	{
-		for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.CheckPreparationMacro.TYPE))
+		const {CheckPreparationMacro, TargetingCheckPreparationMacro} = wfrp3e.data.macros;
+
+		for(const effect of actor.findTriggeredEffects(CheckPreparationMacro.TYPE))
 			await effect.triggerMacro({actor, checkData, diePool});
 
 		if(checkData.targets?.length > 0) {
 			const actor = await fromUuid(checkData.targets[0]);
-			for(const effect of actor.findTriggeredEffects(wfrp3e.data.macros.TargetingCheckPreparationMacro.TYPE))
+			for(const effect of actor.findTriggeredEffects(TargetingCheckPreparationMacro.TYPE))
 				await effect.triggerMacro({actor, checkData, diePool});
 		}
 	}

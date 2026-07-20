@@ -11,6 +11,7 @@ export default class RollTable extends foundry.documents.RollTable
 
 		return drawnResult;
 	}
+
 	/** @inheritDoc */
 	async drawMany(number, {roll, recursive = true, displayChat = true, rollMode} = {})
 	{

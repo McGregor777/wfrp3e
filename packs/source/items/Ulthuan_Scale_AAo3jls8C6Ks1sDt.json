@@ -1,0 +1,26 @@
+{
+  "name": "Ulthuan Scale",
+  "type": "armour",
+  "img": "icons/equipment/chest/breastplate-metal-scaled-grey.webp",
+  "system": {
+    "defenceValue": 1,
+    "soakValue": 3,
+    "cost": {
+      "brass": 0,
+      "silver": 0,
+      "gold": 6
+    },
+    "description": "<p>This is more refined, elegantly crafted, and sturdier than the style of scale armour generally found in the Empire. Ulthuan scale armour is custom crafted for the high elf physique, offering the wearer greater flexibility, and the armour is much lighter than one would expect. Ulthuan scale armour has an encumbrance of 7 if worn by someone other than a high elf.</p>",
+    "encumbrance": 5,
+    "rarity": "exotic"
+  },
+  "effects": [],
+  "folder": "wCqreVowARbBcAZy",
+  "ownership": {
+    "default": 0
+  },
+  "sort": 0,
+  "_id": "AAo3jls8C6Ks1sDt",
+  "flags": {},
+  "_key": "!items!AAo3jls8C6Ks1sDt"
+}

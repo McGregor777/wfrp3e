@@ -1,0 +1,48 @@
+{
+  "name": "Robust",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Robust",
+      "img": "icons/svg/combat.svg",
+      "_id": "NU9W5KczZqLrKJ6d",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!zcufl8H6pUfh4Hu6.NU9W5KczZqLrKJ6d"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 600000,
+  "_id": "zcufl8H6pUfh4Hu6",
+  "system": {
+    "description": "<p>When your critical wounds are being treated or healed, the severity of each critical wound is reduced by 1 to a minimum of 1. Critical wounds that are already severity 0 are unaffected</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!zcufl8H6pUfh4Hu6"
+}

@@ -1,0 +1,19 @@
+{
+  "_id": "sEAVYffLKJI2Ulwk",
+  "name": "Ulgu, Lore of Shadows, Grey Order",
+  "type": "talent",
+  "img": "systems/wfrp3e/assets/images/magic/ulgu.svg",
+  "effects": [],
+  "folder": "z1ETmQwdQEGQHZnb",
+  "sort": -225000,
+  "system": {
+    "description": "<p>When you perform a Grey Order Spell action, you may spend 1 additional power to add or remove 1 recharge token to or from that action</p><div class=\"stance-meter\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-neutral\" src=\"systems/wfrp3e/assets/images/stance-neutral.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"></div>",
+    "rechargeTokens": 0,
+    "type": "order"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!sEAVYffLKJI2Ulwk"
+}

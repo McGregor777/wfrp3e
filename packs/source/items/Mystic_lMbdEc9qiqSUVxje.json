@@ -2,7 +2,40 @@
   "name": "Mystic",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/mystic.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Mystic",
+      "img": "systems/wfrp3e/assets/images/careers/mystic.webp",
+      "_id": "bNr8j9kxPY6P0HaL",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You may spend your fortune points to add {Df} to the dice pool of any ally within close range</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!lMbdEc9qiqSUVxje.bNr8j9kxPY6P0HaL"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -116,17 +149,6 @@
         "item": null
       }
     ]
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
-    "coreVersion": "13.350",
-    "createdTime": 1699549849301,
-    "modifiedTime": 1764321760894,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
   },
   "_id": "lMbdEc9qiqSUVxje",
   "sort": 900000,

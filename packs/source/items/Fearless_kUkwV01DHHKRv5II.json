@@ -1,0 +1,20 @@
+{
+  "name": "Fearless",
+  "type": "talent",
+  "img": "icons/svg/statue.svg",
+  "effects": [],
+  "folder": "I6SS4Peqcj8NycTO",
+  "sort": 1400000,
+  "_id": "kUkwV01DHHKRv5II",
+  "system": {
+    "description": "<p>Add {Df} to all Discipline checks to resist Fear or Terror. Exhaust this card to reroll a failed Discipline check against a Fear or Terror rating</p>",
+    "rechargeTokens": 0,
+    "type": "reputation"
+  },
+  "ownership": {
+    "default": 0,
+    "Bq3CTOvANoOneedB": 3
+  },
+  "flags": {},
+  "_key": "!items!kUkwV01DHHKRv5II"
+}

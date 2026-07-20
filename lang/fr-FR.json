@@ -985,6 +985,13 @@
 				},
 				"label": "Ajustement de l'énergie ou de la faveur"
 			},
+			"reaction": {
+				"FIELDS.script": {
+					"hint": "Ce script est exécuté lorsque l'objet est activé en tant que Réaction.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur pouvant potentiellement acquérir l'objet.\n\tValeur de retour: Doit être un booléen, true si les conditions sont vérifiées, sinon false.",
+					"label": "Script"
+				},
+				"label": "Réaction"
+			},
 			"requirement": {
 				"FIELDS.script": {
 					"hint": "Ce script vérifie si l'objet peut être acquis durant la génération de personnage ou durant une augmentation de carrière.\nArguments:\n\t- {ActiveEffect} this: L'effet actif contenant cette macro.\n\t- {Actor} actor: L'acteur pouvant potentiellement acquérir l'objet.\n\tValeur de retour: Doit être un booléen, true si les conditions sont vérifiées, sinon false.",

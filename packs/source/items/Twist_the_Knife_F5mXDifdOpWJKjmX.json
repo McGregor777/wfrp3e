@@ -1,0 +1,53 @@
+{
+  "name": "Twist the Knife",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Twist the Knife",
+      "img": "icons/svg/combat.svg",
+      "_id": "CGpzJLB3hlVfPLpu",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>After you hit a target with a Melee Attack, you may perform a manoeuvre to cause the target to suffer 1 fatigue</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!F5mXDifdOpWJKjmX.CGpzJLB3hlVfPLpu"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 100000,
+  "_id": "F5mXDifdOpWJKjmX",
+  "system": {
+    "description": "<p>After you hit a target with a Melee Attack, you may perform a manoeuvre to cause the target to suffer 1 fatigue</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!F5mXDifdOpWJKjmX"
+}

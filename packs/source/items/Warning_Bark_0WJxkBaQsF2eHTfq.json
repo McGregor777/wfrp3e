@@ -1,0 +1,19 @@
+{
+  "name": "Warning Bark",
+  "type": "talent",
+  "img": "icons/svg/pawprint.svg",
+  "effects": [],
+  "folder": "fl9EzONDto6oBUDW",
+  "sort": 106250,
+  "_id": "0WJxkBaQsF2eHTfq",
+  "system": {
+    "description": "<p>You and your allies within medium range of your pet gain {Df} to Observation (Int) and Initiative checks</p>",
+    "rechargeTokens": 0,
+    "type": "tricks"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!0WJxkBaQsF2eHTfq"
+}

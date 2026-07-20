@@ -1,0 +1,19 @@
+{
+  "_id": "6v0QyklUdDCJYr7N",
+  "name": "Shyish, Lore of Death, Amethyst Order",
+  "type": "talent",
+  "img": "systems/wfrp3e/assets/images/magic/shyish.svg",
+  "effects": [],
+  "folder": "z1ETmQwdQEGQHZnb",
+  "sort": -250000,
+  "system": {
+    "description": "<p>If a living creature dies on your turn after casting one of your Amethyst Order spells, you may immediately spend 1 power to add or remove a recharge token from any one of your Amethyst Order spells.</p><div class=\"stance-meter\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-neutral\" src=\"systems/wfrp3e/assets/images/stance-neutral.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"></div>",
+    "rechargeTokens": 0,
+    "type": "order"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!6v0QyklUdDCJYr7N"
+}

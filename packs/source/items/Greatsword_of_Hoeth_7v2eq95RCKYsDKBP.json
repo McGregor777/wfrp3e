@@ -1,0 +1,100 @@
+{
+  "folder": "szoRh3PsaCvrXXf2",
+  "name": "Greatsword of Hoeth",
+  "type": "weapon",
+  "_id": "7v2eq95RCKYsDKBP",
+  "img": "systems/wfrp3e/assets/images/weapons/greatsword_of_hoeth.webp",
+  "system": {
+    "criticalRating": 2,
+    "damageRating": 6,
+    "group": "greatWeapon",
+    "qualities": [
+      {
+        "name": "twoHanded",
+        "rating": 1
+      }
+    ],
+    "range": "close",
+    "special": "<p>The Greatsword of Hoeth is a superior elf-crafted weapon; it grants {Df} to the dice pool of all attacks made while a Sword Master is wielding it.</p><p>When the Greatsword of Hoeth deals critical damage, reveal two critical wounds (from amongst the total wounds inflicted) per critical inflicted and choose one to apply as a critical. Turn the other back facedown as a normal wound.</p><p>If fewer wounds are inflicted than necessary to allow the player to reveal enough critical wounds, then the player may draw additional wounds from the wound deck and discard the cards not chosen. This ability does not increase total wounds inflicted; it merely allows the Sword Master greater choice when inflicting criticals.</p>",
+    "cost": {
+      "brass": 0,
+      "silver": 0,
+      "gold": 0
+    },
+    "description": "<p><em>This mighty sword is seven feet long from pommel to razor-sharp tip, and of inhumanly elegant manufacture.</em></p>",
+    "encumbrance": 7,
+    "rarity": "exotic"
+  },
+  "effects": [
+    {
+      "name": "Attack Bonus",
+      "img": "icons/svg/dice-target.svg",
+      "_id": "EnuErK9SSwbT3euq",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkPreparation",
+          "script": "if(checkData.weapon === this.parent.uuid)\n  diePool.fortune++;",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>The Greatsword of Hoeth is a superior elf-crafted weapon; it grants {Df} to the dice pool of all attacks made while a Sword Master is wielding it.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!7v2eq95RCKYsDKBP.EnuErK9SSwbT3euq"
+    },
+    {
+      "name": "Greatsword of Hoeth",
+      "img": "icons/svg/dice-target.svg",
+      "_id": "3EyjrZBOrdzDP5kU",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "checkOutcome",
+          "script": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>When the Greatsword of Hoeth deals critical damage, reveal two critical wounds (from amongst the total wounds inflicted) per critical inflicted and choose one to apply as a critical. Turn the other back facedown as a normal wound.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!7v2eq95RCKYsDKBP.3EyjrZBOrdzDP5kU"
+    }
+  ],
+  "sort": 200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!7v2eq95RCKYsDKBP"
+}

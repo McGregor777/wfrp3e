@@ -1,0 +1,87 @@
+{
+  "_id": "TZttDOfcTWcbXCm3",
+  "name": "Catlike Reflexes",
+  "type": "talent",
+  "img": "icons/svg/combat.svg",
+  "effects": [
+    {
+      "name": "Catlike Reflexes",
+      "img": "icons/svg/combat.svg",
+      "_id": "PRYBeywFrKlGO80S",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "manualPreCheckRoll",
+          "script": "diePool.dice.fortune += 2;",
+          "conditionalScript": "return checkData.characteristic === \"agility\";",
+          "postRollScript": "await this.parent.exhaust();\nif(!checkRoll.totalSymbols.successes)\n\tawait actor.adjustFatigue(1);",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to add {Df} {Df} to any Agility check. If the check fails, suffer 1 fatigue</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!TZttDOfcTWcbXCm3.PRYBeywFrKlGO80S"
+    },
+    {
+      "name": "Catlike Reflexes",
+      "img": "icons/svg/combat.svg",
+      "_id": "7guDMdIHOmTHjld3",
+      "type": "base",
+      "system": {
+        "macro": {
+          "type": "actionUsage",
+          "script": "",
+          "priority": 0
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Exhaust this card to add {Dm} {Dm} to a Dodge attempt</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!TZttDOfcTWcbXCm3.7guDMdIHOmTHjld3"
+    }
+  ],
+  "folder": "ML2iOCiV37M4otTd",
+  "sort": 200000,
+  "system": {
+    "description": "<p>Exhaust this card to add {Df} {Df} to any Agility check, or {Dm} {Dm} to a Dodge attempt. If your Agility check fails, suffer 1 fatigue</p>",
+    "rechargeTokens": 0,
+    "socket": null,
+    "type": "tactic"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!TZttDOfcTWcbXCm3"
+}

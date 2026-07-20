@@ -1,0 +1,19 @@
+{
+  "_id": "Hh1xtnOn4j6tIlcv",
+  "name": "Chamon, Lore of Metal, Gold Order",
+  "type": "talent",
+  "img": "systems/wfrp3e/assets/images/magic/chamon.svg",
+  "effects": [],
+  "folder": "z1ETmQwdQEGQHZnb",
+  "sort": -100000,
+  "system": {
+    "description": "<p>When casting a Gold Order spell you may spend 1 power to convert one of your characteristic dice {Dchal} to a conservative die {Dco} regardless of your current stance.</p><div class=\"stance-meter\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-neutral\" src=\"systems/wfrp3e/assets/images/stance-neutral.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"></div>",
+    "rechargeTokens": 0,
+    "type": "order"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!Hh1xtnOn4j6tIlcv"
+}

@@ -2,7 +2,40 @@
   "name": "Watchman",
   "type": "career",
   "img": "systems/wfrp3e/assets/images/careers/watchman.webp",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Watchman",
+      "img": "systems/wfrp3e/assets/images/careers/watchman.webp",
+      "_id": "9Dbw7k5qDny51RSH",
+      "type": "base",
+      "system": {
+        "macro": {
+          "priority": 0,
+          "script": "",
+          "type": "manual"
+        }
+      },
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>During a Rally Step, you may remove 1 recharge token from any one of your currently recharging action cards, or from an action of any character engaged with you</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_key": "!items.effects!i79jYXdfgZmfUJ9a.9Dbw7k5qDny51RSH"
+    }
+  ],
   "folder": "m8G9zWMGUYpKI5Hg",
   "flags": {},
   "system": {
@@ -116,17 +149,6 @@
         "item": null
       }
     ]
-  },
-  "_stats": {
-    "systemId": "wfrp3e",
-    "systemVersion": "1.3.2",
-    "coreVersion": "13.350",
-    "createdTime": 1699549884186,
-    "modifiedTime": 1764321760894,
-    "lastModifiedBy": "Bq3CTOvANoOneedB",
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "exportSource": null
   },
   "_id": "i79jYXdfgZmfUJ9a",
   "sort": 3700000,

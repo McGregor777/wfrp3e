@@ -1,0 +1,19 @@
+{
+  "_id": "BOpc7mDWPGm2gKvE",
+  "name": "Myrmidia, Goddess of Warfare",
+  "type": "talent",
+  "img": "icons/svg/item-bag.svg",
+  "effects": [],
+  "folder": "WGcUEiIF4kD2jGbr",
+  "sort": 0,
+  "system": {
+    "description": "<p>Gain 1 favour each time you generate one or more when performing a Melee Attack</p><div class=\"stance-meter\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-conservative\" src=\"systems/wfrp3e/assets/images/stance-conservative.webp\" height=\"27\"><img class=\"stance-neutral\" src=\"systems/wfrp3e/assets/images/stance-neutral.webp\" height=\"27\"><img class=\"stance-reckless\" src=\"systems/wfrp3e/assets/images/stance-reckless.webp\" height=\"27\"></div>",
+    "rechargeTokens": 0,
+    "type": "faith"
+  },
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_key": "!items!BOpc7mDWPGm2gKvE"
+}
